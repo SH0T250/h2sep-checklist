@@ -195,6 +195,30 @@ export async function requireAdmin() {
   return pinSheet();
 }
 
+// ---- original paper-sheet photo viewer ----
+export function paperSheetOverlay(roomNumber) {
+  closeSheets();
+  const scrim = document.createElement('div');
+  scrim.className = 'scrim';
+  scrim.innerHTML = `
+    <div class="paper-view" role="dialog" aria-modal="true" aria-label="Paper sheet — Room ${esc(roomNumber)}">
+      <div class="paper-bar"><span>Room ${esc(roomNumber)} — original paper sheet</span>
+        <button class="paper-close" aria-label="Close">✕</button></div>
+      <div class="paper-scroll"><img src="./sheets/${esc(roomNumber)}.jpg" alt="Paper checklist for room ${esc(roomNumber)}"></div>
+    </div>`;
+  const img = scrim.querySelector('img');
+  img.addEventListener('error', () => {
+    scrim.querySelector('.paper-scroll').innerHTML =
+      `<div class="paper-none">No paper sheet on file for Room ${esc(roomNumber)} yet.<br>
+       <span class="muted">Send a photo of the page to Claude and it'll show up here.</span></div>`;
+  });
+  img.addEventListener('click', () => img.classList.toggle('zoomed'));
+  scrim.querySelector('.paper-close').addEventListener('click', () => scrim.remove());
+  scrim.addEventListener('click', (e) => { if (e.target === scrim) scrim.remove(); });
+  document.body.appendChild(scrim);
+  requestAnimationFrame(() => scrim.classList.add('open'));
+}
+
 // ---- go-to-room keypad ----
 export function goToRoomSheet() {
   const s = sheet(`

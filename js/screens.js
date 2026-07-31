@@ -243,7 +243,8 @@ export function renderRoom(el, number) {
     <section class="room-head card">
       <div class="rh-top">
         <span class="rh-num">Room ${esc(room.number)}</span>
-        <span class="rh-type">${esc((room.typeLabel || '').toUpperCase())}</span>
+        <span class="rh-right"><button class="sheet-btn hidden" data-paper aria-label="View original paper sheet">📄</button>
+        <span class="rh-type">${esc((room.typeLabel || '').toUpperCase())}</span></span>
       </div>
       <div class="bar rh-bar"><div class="bar-fill" style="width:${s.pct}%"></div></div>
       <div class="rh-line">${s.done}/${s.total} checked · ${s.pct}%
@@ -299,10 +300,12 @@ export function renderRoom(el, number) {
 
   el.querySelector('[data-more]').addEventListener('click', () => {
     const sh = sheets.sheet(`
+      <button class="btn ghost full" data-act="paper">📄 Original paper sheet</button>
       <button class="btn ghost full" data-act="add-item">+ Add item to this room</button>
       <button class="btn ghost full" data-act="edit">Room settings (admin)</button>
       <button class="btn ghost full danger-text" data-act="delete">Delete room (admin)</button>`,
       { title: 'Room ' + room.number });
+    sh.querySelector('[data-act=paper]').addEventListener('click', () => { sh.remove(); sheets.paperSheetOverlay(room.number); });
     sh.querySelector('[data-act=add-item]').addEventListener('click', () => { sh.remove(); addItemFlow(room); });
     sh.querySelector('[data-act=edit]').addEventListener('click', async () => {
       sh.remove();
@@ -317,6 +320,13 @@ export function renderRoom(el, number) {
       }
     });
   });
+
+  // Show the 📄 button only when this room has a paper sheet on file.
+  const sheetBtn = el.querySelector('[data-paper]');
+  const probe = new Image();
+  probe.onload = () => sheetBtn && sheetBtn.classList.remove('hidden');
+  probe.src = './sheets/' + encodeURIComponent(room.number) + '.jpg';
+  sheetBtn.addEventListener('click', () => sheets.paperSheetOverlay(room.number));
 
   const jump = el.querySelector('[data-jump]');
   if (jump) jump.addEventListener('click', () => {

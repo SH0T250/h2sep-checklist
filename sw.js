@@ -2,7 +2,7 @@
 // app cold-boots with zero network. Data offline-ness is Firestore's job.
 // Bump VERSION on every deploy — it busts the old cache and triggers the
 // in-app "Update available" banner.
-const VERSION = 'h2sep-v1.2.0';
+const VERSION = 'h2sep-v1.3.0';
 
 const SHELL = [
   './',
@@ -55,7 +55,13 @@ self.addEventListener('fetch', (e) => {
     const cached = await caches.match(e.request, { ignoreSearch: url.pathname.endsWith('/') });
     if (cached) return cached;
     try {
-      return await fetch(e.request);
+      const resp = await fetch(e.request);
+      // Runtime-cache paper-sheet photos so viewed sheets work offline.
+      if (resp.ok && url.pathname.includes('/sheets/')) {
+        const c = await caches.open(VERSION);
+        c.put(e.request, resp.clone());
+      }
+      return resp;
     } catch (err) {
       // Offline navigation to an uncached URL -> serve the app shell.
       if (e.request.mode === 'navigate') {

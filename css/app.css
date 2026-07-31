@@ -219,6 +219,25 @@ b, .code { font-weight: 700; }
 .foot-arrow.dim { color: transparent; }
 .foot-mid { flex: 1; height: 100%; font-size: 14px; color: var(--text-2); font-variant-numeric: tabular-nums; }
 
+/* ---------- paper-sheet viewer ---------- */
+.rh-right { display: inline-flex; align-items: center; gap: 8px; }
+.sheet-btn { font-size: 20px; min-width: 40px; height: 40px; border-radius: 8px; }
+.sheet-btn:active { background: rgba(2,169,224,.12); }
+.paper-view {
+  width: 100%; max-width: 720px; height: 100%; background: #fff;
+  display: flex; flex-direction: column;
+}
+.paper-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; padding-top: calc(12px + env(safe-area-inset-top));
+  background: var(--black); color: #fff; font-weight: 700; font-size: 15px;
+}
+.paper-close { color: #fff; font-size: 18px; min-width: 44px; height: 44px; }
+.paper-scroll { flex: 1; overflow: auto; -webkit-overflow-scrolling: touch; }
+.paper-scroll img { width: 100%; display: block; }
+.paper-scroll img.zoomed { width: 200%; max-width: none; }
+.paper-none { text-align: center; color: var(--text-2); padding: 60px 24px; font-size: 15px; }
+
 /* ---------- sheets & dialogs ---------- */
 .scrim {
   position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.4);
