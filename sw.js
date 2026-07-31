@@ -2,7 +2,10 @@
 // app cold-boots with zero network. Data offline-ness is Firestore's job.
 // Bump VERSION on every deploy — it busts the old cache and triggers the
 // in-app "Update available" banner.
-const VERSION = 'h2sep-v1.4.0';
+const VERSION = 'h2sep-v1.5.0';
+// Paper-sheet photos live in their own PERMANENT cache — never wiped by app
+// updates (that wipe is exactly what lost the Room 101 sheet in v1.4.0).
+const SHEETS_CACHE = 'h2sep-sheets';
 
 const SHELL = [
   './',
@@ -23,6 +26,7 @@ const SHELL = [
   './img/logo-full-light.png',
   './img/logo-full-white.png',
   './img/logo-full-dark.png',
+  './sheets/index.json',
   './icons/favicon-48.png',
   './icons/icon-180.png',
   './icons/icon-192.png',
@@ -37,8 +41,23 @@ self.addEventListener('install', (e) => {
 self.addEventListener('activate', (e) => {
   e.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.filter((k) => k !== VERSION).map((k) => caches.delete(k)));
+    await Promise.all(keys.filter((k) => k !== VERSION && k !== SHEETS_CACHE).map((k) => caches.delete(k)));
     await self.clients.claim();
+    // Best-effort: download every known paper sheet into the permanent cache
+    // so they're viewable offline forever after (new sheets arrive on update).
+    try {
+      const idx = await (await fetch('./sheets/index.json', { cache: 'no-cache' })).json();
+      const c = await caches.open(SHEETS_CACHE);
+      for (const room of idx) {
+        const req = new Request('./sheets/' + room + '.jpg');
+        if (!(await c.match(req))) {
+          try {
+            const resp = await fetch(req);
+            if (resp.ok) await c.put(req, resp);
+          } catch (_) { /* no signal — next activation retries */ }
+        }
+      }
+    } catch (_) { /* index unavailable offline — precached copy serves the UI */ }
   })());
 });
 
@@ -56,9 +75,9 @@ self.addEventListener('fetch', (e) => {
     if (cached) return cached;
     try {
       const resp = await fetch(e.request);
-      // Runtime-cache paper-sheet photos so viewed sheets work offline.
+      // Paper-sheet photos go into the permanent sheets cache.
       if (resp.ok && url.pathname.includes('/sheets/')) {
-        const c = await caches.open(VERSION);
+        const c = await caches.open(SHEETS_CACHE);
         c.put(e.request, resp.clone());
       }
       return resp;

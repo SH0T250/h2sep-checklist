@@ -321,12 +321,13 @@ export function renderRoom(el, number) {
     });
   });
 
-  // Show the 📄 button only when this room has a paper sheet on file.
+  // Show the 📄 button from the bundled sheet list — works offline, no probing.
   const sheetBtn = el.querySelector('[data-paper]');
-  const probe = new Image();
-  probe.onload = () => sheetBtn && sheetBtn.classList.remove('hidden');
-  probe.src = './sheets/' + encodeURIComponent(room.number) + '.jpg';
   sheetBtn.addEventListener('click', () => sheets.paperSheetOverlay(room.number));
+  fetch('./sheets/index.json')
+    .then(r => (r.ok ? r.json() : []))
+    .then(list => { if (Array.isArray(list) && list.includes(room.number)) sheetBtn.classList.remove('hidden'); })
+    .catch(() => { /* even the precached index missing -> leave menu entry as the path */ });
 
   const jump = el.querySelector('[data-jump]');
   if (jump) jump.addEventListener('click', () => {
