@@ -95,17 +95,13 @@ export function checkedItemSheet(room, itemId, { canWrite }) {
       const ok = await confirmDialog(`Remove ${item.initials || 'this'} check?`, { danger: true, okLabel: 'Un-check' });
       if (!ok) return;
     }
-    const prev = { ...item };
-    await store.uncheckItem(room.number, itemId);
+    // fire-and-forget: the local un-check is instant; awaiting server ack
+    // would keep the Undo toast from ever appearing in a dead zone.
+    store.uncheckItem(room.number, itemId).catch(() => {});
     const { toast } = await import('./util.js');
     toast('Un-checked', {
       action: 'Undo',
-      onAction: () => store.checkItem(room.number, itemId).then(() => {
-        // restore original initials if it wasn't ours
-        if (prev.initials && me && prev.initials !== me.initials) {
-          // best effort: original stamp can't be forged back; leave ours
-        }
-      }),
+      onAction: () => store.checkItem(room.number, itemId).catch(() => {}),
     });
   });
   s.querySelector('[data-act=flag]').addEventListener('click', () => { s.remove(); issueSheet(room, itemId); });
@@ -164,7 +160,8 @@ export function noteSheet(room, noteId, { canWrite }) {
   `, { title: `★ Room ${room.number} note` });
   if (!canWrite) return;
   s.querySelector('[data-act=toggle]').addEventListener('click', () => {
-    store.setRoomNoteResolved(room.number, noteId, !note.resolved); s.remove();
+    // toggle from live state, not this sheet's snapshot (two-people race)
+    store.toggleRoomNote(room.number, noteId); s.remove();
   });
 }
 
@@ -207,10 +204,19 @@ export function paperSheetOverlay(roomNumber) {
       <div class="paper-scroll"><img src="./sheets/${esc(roomNumber)}.jpg" alt="Paper checklist for room ${esc(roomNumber)}"></div>
     </div>`;
   const img = scrim.querySelector('img');
-  img.addEventListener('error', () => {
-    scrim.querySelector('.paper-scroll').innerHTML =
-      `<div class="paper-none">No paper sheet on file for Room ${esc(roomNumber)} yet.<br>
-       <span class="muted">Send a photo of the page to Claude and it'll show up here.</span></div>`;
+  img.addEventListener('error', async () => {
+    // Distinguish "no sheet exists" from "sheet exists but not downloaded yet"
+    // using the bundled index (works offline).
+    let exists = false;
+    try {
+      const idx = await (await fetch('./sheets/index.json')).json();
+      exists = Array.isArray(idx) && idx.includes(String(roomNumber));
+    } catch (_) { /* index unavailable — fall through to generic message */ }
+    scrim.querySelector('.paper-scroll').innerHTML = exists
+      ? `<div class="paper-none">Room ${esc(roomNumber)}'s sheet is on file but not downloaded to this phone yet.<br>
+         <span class="muted">It downloads automatically the next time you have signal.</span></div>`
+      : `<div class="paper-none">No paper sheet on file for Room ${esc(roomNumber)} yet.<br>
+         <span class="muted">Send a photo of the page to Claude and it'll show up here.</span></div>`;
   });
   img.addEventListener('click', () => img.classList.toggle('zoomed'));
   scrim.querySelector('.paper-close').addEventListener('click', () => scrim.remove());

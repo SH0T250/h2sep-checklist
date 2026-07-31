@@ -27,11 +27,12 @@ const state = {
   online: navigator.onLine,
   rooms: new Map(),          // number -> room object
   pendingRooms: new Set(),   // rooms with unacked local writes (live mode)
-  recentLocal: new Set(),    // `${room}/${itemId}` touched locally this session
+  recentLocal: new Map(),    // `${room}/${itemId}` -> last local-touch timestamp
   floors: { ...FLOORS },
   templates: null,           // slug -> {name, items}
   pinMeta: null,             // {pinSalt, pinHash} (live) — demo uses DEMO_PIN
   subscribedFloors: new Set(),
+  pendingFloors: new Set(),  // floors requested before Firestore finished loading
 };
 
 const subscribers = new Set();
@@ -93,9 +94,12 @@ export function isRoomPending(number) { return state.pendingRooms.has(String(num
 export function isItemRecentLocal(number, itemId) { return state.recentLocal.has(number + '/' + itemId); }
 export function pendingCount() { return state.pendingRooms.size; }
 export function getTemplates() { return state.templates || {}; }
+// Live mode needs one successful (invisible) sign-in before writes are legal —
+// otherwise queued check-offs would be REJECTED at sync time and vanish.
+export function isWriteReady() { return state.mode === 'demo' || !!state.uid; }
 
 function markLocal(number, itemId) {
-  state.recentLocal.add(String(number) + '/' + itemId);
+  state.recentLocal.set(String(number) + '/' + itemId, Date.now());
 }
 
 // Detect remote surprises: item flipped checked->unchecked or initials changed
@@ -105,7 +109,10 @@ function diffForSurprises(prev, next) {
   for (const [id, before] of Object.entries(prev.items || {})) {
     const after = (next.items || {})[id];
     if (!after || !before.checked) continue;
-    if (state.recentLocal.has(next.number + '/' + id)) continue;
+    // Suppress the heads-up only for items I touched in the last 5 minutes —
+    // an item I checked this morning still warns me if it flips this afternoon.
+    const touched = state.recentLocal.get(next.number + '/' + id);
+    if (touched && Date.now() - touched < 300_000) continue;
     if (!after.checked) {
       remoteChangeHandlers.forEach(fn => fn({ room: next.number, itemId: id, kind: 'unchecked', before, after }));
     } else if (after.initials !== before.initials) {
@@ -164,10 +171,29 @@ async function liveInit() {
     }),
   });
   const auth = authm.getAuth(app);
+  // Sign-in with RETRY: a phone that boots in a dead zone must keep trying,
+  // because queued writes made without auth would be rejected (and rolled
+  // back) when signal returns. Writes are blocked until uid exists.
+  let signInDelay = 2000;
+  const trySignIn = () => {
+    if (auth.currentUser) return;
+    authm.signInAnonymously(auth).catch((e) => {
+      console.warn('anon sign-in failed — retrying', e.code || e);
+      signInDelay = Math.min(signInDelay * 2, 60_000);
+      setTimeout(trySignIn, signInDelay);
+    });
+  };
   authm.onAuthStateChanged(auth, (u) => {
-    if (u) { state.uid = u.uid; notify(); }
-    else authm.signInAnonymously(auth).catch(e => console.error('anon sign-in failed', e));
+    if (u) { state.uid = u.uid; signInDelay = 2000; notify(); }
+    else trySignIn();
   });
+  window.addEventListener('online', () => { if (!auth.currentUser) trySignIn(); });
+
+  // SDK ready: attach any floor listeners requested during startup.
+  for (const f of state.pendingFloors) {
+    state.pendingFloors.delete(f);
+    ensureFloorSubscribed(f);
+  }
 
   // config doc: floors + pin metadata
   fs.onSnapshot(fs.doc(db, 'projects', PROJECT_ID, 'config', 'app'), (snap) => {
@@ -185,6 +211,13 @@ function roomRef(number) { return fs.doc(db, 'projects', PROJECT_ID, 'rooms', St
 
 function liveSubscribeFloor(floor) {
   const q = fs.query(roomsCol(), fs.where('floor', '==', Number(floor)));
+  const retry = (e) => {
+    // A dead listener must never look "subscribed" — unmark and retry, or a
+    // whole floor would silently show empty for the rest of the session.
+    console.error('rooms listener floor ' + floor, e);
+    state.subscribedFloors.delete(String(floor));
+    setTimeout(() => ensureFloorSubscribed(floor), 10_000);
+  };
   fs.onSnapshot(q, { includeMetadataChanges: true }, (snap) => {
     snap.docChanges().forEach(ch => {
       const data = ch.doc.data();
@@ -198,7 +231,7 @@ function liveSubscribeFloor(floor) {
     });
     state.ready = true;
     notify();
-  }, e => console.error('rooms listener floor ' + floor, e));
+  }, retry);
 }
 
 async function liveSubscribeTemplates() {
@@ -226,7 +259,9 @@ async function claimAdminRole(pin) {
 
 function auditAppend(action, number, itemId, extra = {}) {
   if (state.mode !== 'live' || !db) return;
-  const day = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  // Sharded per hour so a single doc can never hit Firestore's 1 MiB ceiling.
+  const now = new Date().toISOString();
+  const day = now.slice(0, 10).replace(/-/g, '') + '-' + now.slice(11, 13);
   const entryId = (state.uid || 'anon').slice(-6) + '_' + Date.now().toString(36);
   const u = getUser() || {};
   fs.setDoc(fs.doc(db, 'projects', PROJECT_ID, 'activity', day), {
@@ -311,6 +346,10 @@ export async function setIssue(number, itemId, note) {
 // resolveIssue(..., {check:true}) = the "fixed it, checking it off" one-tap.
 export async function resolveIssue(number, itemId, { check = false, clear = false } = {}) {
   const u = getUser();
+  // Guard against a stale open sheet: if a teammate already checked this item
+  // while the sheet sat open, resolve the issue but do NOT restamp their mark.
+  const fresh = getRoom(number)?.items?.[itemId];
+  if (check && fresh && fresh.checked) check = false;
   markLocal(number, itemId);
   if (state.mode === 'demo') {
     const patch = clear ? { issue: '', issueResolved: false } : { issueResolved: true };
@@ -354,6 +393,14 @@ export async function addRoomNote(number, text, flag = 'issue') {
     },
     updatedAt: fs.serverTimestamp(),
   });
+}
+
+// Toggle from CURRENT state (not the caller's snapshot) so two people racing
+// can't accidentally re-open a note the other just resolved.
+export async function toggleRoomNote(number, noteId) {
+  const fresh = getRoom(number)?.notes?.[noteId];
+  if (!fresh) return;
+  return setRoomNoteResolved(number, noteId, !fresh.resolved);
 }
 
 export async function setRoomNoteResolved(number, noteId, resolved) {
@@ -467,8 +514,17 @@ export async function addFloor(n, label) {
 export function ensureFloorSubscribed(floor) {
   const f = String(floor);
   if (state.subscribedFloors.has(f)) return;
-  state.subscribedFloors.add(f);
-  if (state.mode === 'live') liveSubscribeFloor(f);
+  if (state.mode === 'live') {
+    // Screens can render before Firestore's dynamic import resolves (cold
+    // start with a returning user). Queue the request instead of crashing —
+    // liveInit flushes the queue the moment the SDK is ready. Marking a floor
+    // "subscribed" without a live listener is how Floor 1 went dark.
+    if (!fs || !db) { state.pendingFloors.add(f); return; }
+    state.subscribedFloors.add(f);
+    liveSubscribeFloor(f);
+  } else {
+    state.subscribedFloors.add(f);
+  }
 }
 export function ensureAllFloorsSubscribed() {
   Object.keys(state.floors).forEach(ensureFloorSubscribed);

@@ -1,10 +1,12 @@
 // Service worker: precache the full app shell (incl. vendored Firebase) so the
 // app cold-boots with zero network. Data offline-ness is Firestore's job.
 // Bump VERSION on every deploy — it busts the old cache and triggers the
-// in-app "Update available" banner.
-const VERSION = 'h2sep-v1.5.0';
+// in-app "Update available" banner. VERSION must equal 'h2sep-v' + APP_VERSION
+// in js/config.js — install verifies this to defeat CDN mixed-version races.
+const VERSION = 'h2sep-v1.6.0';
 // Paper-sheet photos live in their own PERMANENT cache — never wiped by app
-// updates (that wipe is exactly what lost the Room 101 sheet in v1.4.0).
+// updates. Only room JPGs under /sheets/ may enter it (index.json stays in the
+// versioned shell cache so it can never be shadowed by a stale copy).
 const SHEETS_CACHE = 'h2sep-sheets';
 
 const SHELL = [
@@ -35,56 +37,81 @@ const SHELL = [
 ];
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(VERSION).then((c) => c.addAll(SHELL)));
+  e.waitUntil((async () => {
+    const c = await caches.open(VERSION);
+    // cache:'no-cache' revalidates at the CDN so a phone's HTTP cache can't
+    // assemble a mixed-version shell (old JS under a new version name).
+    await c.addAll(SHELL.map((u) => new Request(u, { cache: 'no-cache' })));
+    // Version-stamp check: if the CDN is mid-deploy and served an old
+    // js/config.js, abort install — the browser retries later and gets a
+    // consistent build. Never ship a Frankenstein cache.
+    const cfg = await (await c.match('./js/config.js')).text();
+    const want = "APP_VERSION = '" + VERSION.replace('h2sep-v', '') + "'";
+    if (!cfg.includes(want)) {
+      await caches.delete(VERSION);
+      throw new Error('mixed-version deploy detected — install retried later');
+    }
+  })());
 });
 
 self.addEventListener('activate', (e) => {
+  // Keep activation INSTANT — never block navigations behind downloads.
   e.waitUntil((async () => {
     const keys = await caches.keys();
     await Promise.all(keys.filter((k) => k !== VERSION && k !== SHEETS_CACHE).map((k) => caches.delete(k)));
     await self.clients.claim();
-    // Best-effort: download every known paper sheet into the permanent cache
-    // so they're viewable offline forever after (new sheets arrive on update).
-    try {
-      const idx = await (await fetch('./sheets/index.json', { cache: 'no-cache' })).json();
-      const c = await caches.open(SHEETS_CACHE);
-      for (const room of idx) {
-        const req = new Request('./sheets/' + room + '.jpg');
-        if (!(await c.match(req))) {
-          try {
-            const resp = await fetch(req);
-            if (resp.ok) await c.put(req, resp);
-          } catch (_) { /* no signal — next activation retries */ }
-        }
-      }
-    } catch (_) { /* index unavailable offline — precached copy serves the UI */ }
   })());
 });
 
+// Best-effort download of all known paper sheets into the permanent cache.
+// Triggered by the page (on load and on regaining signal) — NOT by activate.
+async function prefetchSheets() {
+  const shell = await caches.open(VERSION);
+  const idxResp = (await shell.match('./sheets/index.json')) || (await fetch('./sheets/index.json').catch(() => null));
+  if (!idxResp) return;
+  let idx;
+  try { idx = await idxResp.clone().json(); } catch { return; }
+  const c = await caches.open(SHEETS_CACHE);
+  for (const room of idx) {
+    const req = new Request('./sheets/' + room + '.jpg');
+    if (await c.match(req)) continue;
+    try {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 10_000); // weak signal: give up fast
+      const resp = await fetch(req, { signal: ctrl.signal });
+      clearTimeout(timer);
+      if (resp.ok && resp.status === 200) await c.put(req, resp);
+    } catch (_) { /* no/weak signal — page retriggers when back online */ }
+  }
+}
+
 self.addEventListener('message', (e) => {
-  if (e.data && e.data.type === 'SKIP_WAITING') self.skipWaiting();
+  if (!e.data) return;
+  if (e.data.type === 'SKIP_WAITING') self.skipWaiting();
+  if (e.data.type === 'PREFETCH_SHEETS') e.waitUntil(prefetchSheets().catch(() => {}));
 });
 
-// Cache-first for same-origin shell files; network for everything else
-// (Firestore/auth traffic never touches the SW cache).
+// Fetch: shell files from THIS version's cache; sheet JPGs from the permanent
+// cache; everything else network (Firestore/auth traffic never touches us).
 self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== 'GET' || url.origin !== location.origin) return;
+  const isSheetJpg = /\/sheets\/[^/]+\.jpg$/.test(url.pathname);
   e.respondWith((async () => {
-    const cached = await caches.match(e.request, { ignoreSearch: url.pathname.endsWith('/') });
+    const cacheName = isSheetJpg ? SHEETS_CACHE : VERSION;
+    const c = await caches.open(cacheName);
+    const cached = await c.match(e.request, { ignoreSearch: !isSheetJpg });
     if (cached) return cached;
     try {
       const resp = await fetch(e.request);
-      // Paper-sheet photos go into the permanent sheets cache.
-      if (resp.ok && url.pathname.includes('/sheets/')) {
-        const c = await caches.open(SHEETS_CACHE);
-        c.put(e.request, resp.clone());
+      if (isSheetJpg && resp.ok && resp.status === 200) {
+        try { await c.put(e.request, resp.clone()); } catch (_) { /* quota — still serve */ }
       }
       return resp;
     } catch (err) {
       // Offline navigation to an uncached URL -> serve the app shell.
       if (e.request.mode === 'navigate') {
-        const shell = await caches.match('./index.html');
+        const shell = await c.match('./index.html');
         if (shell) return shell;
       }
       throw err;

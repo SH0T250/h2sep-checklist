@@ -89,30 +89,56 @@ store.subscribe(() => {
 async function initSW() {
   if (!('serviceWorker' in navigator)) return;
   try {
+    // First-ever install has no controller; its claim must NOT reload the page
+    // (it would wipe a half-typed onboarding form).
+    const hadController = !!navigator.serviceWorker.controller;
     const reg = await navigator.serviceWorker.register('./sw.js');
-    function showUpdateBanner(worker) {
+
+    function askPrefetch() {
+      navigator.serviceWorker.controller?.postMessage({ type: 'PREFETCH_SHEETS' });
+    }
+    function showUpdateBanner() {
       let b = document.getElementById('update-banner');
       if (b) return;
       b = document.createElement('button');
       b.id = 'update-banner';
       b.textContent = 'Update available — tap to refresh';
-      b.addEventListener('click', () => worker.postMessage({ type: 'SKIP_WAITING' }));
+      // Resolve the waiting worker AT CLICK TIME (a newer one may have landed).
+      b.addEventListener('click', () => reg.waiting?.postMessage({ type: 'SKIP_WAITING' }));
       document.body.appendChild(b);
     }
-    if (reg.waiting && navigator.serviceWorker.controller) showUpdateBanner(reg.waiting);
+    if (reg.waiting && navigator.serviceWorker.controller) showUpdateBanner();
     reg.addEventListener('updatefound', () => {
       const nw = reg.installing;
       if (!nw) return;
       nw.addEventListener('statechange', () => {
-        if (nw.state === 'installed' && navigator.serviceWorker.controller) showUpdateBanner(nw);
+        if (nw.state === 'installed' && navigator.serviceWorker.controller) showUpdateBanner();
+        // A failed download must not be silent — the fleet would freeze on an
+        // old version with everyone believing they're current.
+        if (nw.state === 'redundant' && navigator.serviceWorker.controller && !reg.waiting) {
+          toast('Update failed to download — will retry automatically');
+        }
       });
     });
     let reloading = false;
     navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (reloading) return;
+      if (!hadController || reloading) { askPrefetch(); return; }
       reloading = true;
       location.reload();
     });
+
+    // Long-resident standalone apps never navigate — check for updates when
+    // the app comes back to the foreground or back into signal.
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') reg.update().catch(() => {});
+    });
+    window.addEventListener('online', () => {
+      reg.update().catch(() => {});
+      askPrefetch();
+    });
+    // Kick a sheet download pass now (no-op if everything's already cached).
+    if (navigator.serviceWorker.controller) askPrefetch();
+    else navigator.serviceWorker.ready.then(askPrefetch);
   } catch (e) { console.warn('SW registration failed', e); }
 }
 

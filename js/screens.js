@@ -10,6 +10,9 @@ import { APP_VERSION } from './config.js';
 export function canWrite() {
   if (!store.getUser()) return false;
   if (platform.isIOS && !platform.standalone) return false;
+  // Live mode: one successful invisible sign-in is required before check-offs
+  // count (otherwise queued writes would be rejected at sync and vanish).
+  if (!store.isWriteReady()) return false;
   return true;
 }
 
@@ -294,7 +297,10 @@ export function renderRoom(el, number) {
     ${next ? `<a class="foot-arrow" href="#/room/${esc(next)}">${esc(next)} ›</a>` : `<span class="foot-arrow dim"></span>`}
   </footer>
   ${!w && store.getUser() ? `<div class="readonly-strip">View only — ${platform.isIOS && !platform.standalone
-    ? 'install the app to check items (Settings → install steps)' : 'set your initials in Settings'}</div>` : ''}`;
+    ? 'install the app to check items (Settings → install steps)'
+    : (!store.isWriteReady()
+      ? 'connecting this phone… needs one moment of signal before check-offs count'
+      : 'set your initials in Settings')}</div>` : ''}`;
 
   wireCommon(el);
 
@@ -315,7 +321,9 @@ export function renderRoom(el, number) {
       sh.remove();
       if (!(await sheets.requireAdmin())) return;
       if (await sheets.confirmDialog(`Delete Room ${room.number}? It disappears from every phone (recoverable by admin/Claude).`, { danger: true, okLabel: 'Delete' })) {
-        await store.softDeleteRoom(room.number);
+        // fire-and-forget: offline, the write promise won't resolve until
+        // sync — but the local change is already live. Never block the UI on it.
+        store.softDeleteRoom(room.number).catch(e => toast('Could not save: ' + e.message));
         location.hash = '#/floor/' + room.floor;
       }
     });
@@ -379,7 +387,9 @@ export function renderRoom(el, number) {
   function readOnlyNudge() {
     toast(platform.isIOS && !platform.standalone
       ? 'Install the app first — Share → Add to Home Screen'
-      : 'Set your name & initials in Settings first');
+      : (!store.isWriteReady()
+        ? 'Almost ready — this phone needs a moment of signal first'
+        : 'Set your name & initials in Settings first'));
   }
 
   async function addItemFlow(room) {
@@ -460,7 +470,10 @@ export function renderRoomNew(el, floorN, editNumber = null) {
       if (!(await sheets.confirmDialog(`Room ${number} already exists. Merge the template into it?`))) return;
     }
     const fl = number.length >= 3 ? Number(number[0]) : Number(floorN);
-    await store.createRoom({ number, floor: fl, typeSlug: form.type.value });
+    // fire-and-forget: latency compensation creates the room locally at once;
+    // awaiting server ack would hang this button in a dead zone.
+    store.createRoom({ number, floor: fl, typeSlug: form.type.value })
+      .catch(e => toast('Could not save: ' + e.message));
     toast((editing ? 'Saved' : 'Created') + ' room ' + number);
     location.hash = '#/room/' + number;
   });
