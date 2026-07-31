@@ -183,27 +183,33 @@ async function liveInit() {
       setTimeout(trySignIn, signInDelay);
     });
   };
+  let coreAttached = false;
   authm.onAuthStateChanged(auth, (u) => {
-    if (u) { state.uid = u.uid; signInDelay = 2000; notify(); }
-    else trySignIn();
+    if (u) {
+      state.uid = u.uid; signInDelay = 2000;
+      // Attach listeners only AFTER the first successful sign-in — rules
+      // reject unauthenticated listens, which would strand dead listeners.
+      // (Persisted auth resolves offline, so offline cold starts still work.)
+      if (!coreAttached) {
+        coreAttached = true;
+        fs.onSnapshot(fs.doc(db, 'projects', PROJECT_ID, 'config', 'app'), (snap) => {
+          const d = snap.data();
+          if (d) {
+            if (d.floors) state.floors = d.floors;
+            state.pinMeta = { pinSalt: d.pinSalt || '', pinHash: d.pinHash || '' };
+            notify();
+          }
+        }, e => console.warn('config listener', e.code || e));
+        liveSubscribeTemplates();
+      }
+      for (const f of state.pendingFloors) {
+        state.pendingFloors.delete(f);
+        ensureFloorSubscribed(f);
+      }
+      notify();
+    } else trySignIn();
   });
   window.addEventListener('online', () => { if (!auth.currentUser) trySignIn(); });
-
-  // SDK ready: attach any floor listeners requested during startup.
-  for (const f of state.pendingFloors) {
-    state.pendingFloors.delete(f);
-    ensureFloorSubscribed(f);
-  }
-
-  // config doc: floors + pin metadata
-  fs.onSnapshot(fs.doc(db, 'projects', PROJECT_ID, 'config', 'app'), (snap) => {
-    const d = snap.data();
-    if (d) {
-      if (d.floors) state.floors = d.floors;
-      state.pinMeta = { pinSalt: d.pinSalt || '', pinHash: d.pinHash || '' };
-      notify();
-    }
-  }, e => console.error('config listener', e));
 }
 
 function roomsCol() { return fs.collection(db, 'projects', PROJECT_ID, 'rooms'); }
@@ -515,11 +521,11 @@ export function ensureFloorSubscribed(floor) {
   const f = String(floor);
   if (state.subscribedFloors.has(f)) return;
   if (state.mode === 'live') {
-    // Screens can render before Firestore's dynamic import resolves (cold
-    // start with a returning user). Queue the request instead of crashing —
-    // liveInit flushes the queue the moment the SDK is ready. Marking a floor
-    // "subscribed" without a live listener is how Floor 1 went dark.
-    if (!fs || !db) { state.pendingFloors.add(f); return; }
+    // Screens can render before Firestore's dynamic import resolves OR before
+    // the first sign-in completes (rules reject unauthenticated listens).
+    // Queue the request — liveInit's auth callback flushes the queue. Marking
+    // a floor "subscribed" without a live listener is how Floor 1 went dark.
+    if (!fs || !db || !state.uid) { state.pendingFloors.add(f); return; }
     state.subscribedFloors.add(f);
     liveSubscribeFloor(f);
   } else {
@@ -542,7 +548,8 @@ export async function init() {
     notify();
   } else {
     await liveInit();
-    liveSubscribeTemplates();
+    // Floors queue in pendingFloors until the first sign-in completes;
+    // templates + config listeners attach in the auth callback.
     ensureAllFloorsSubscribed();
   }
   return state.mode;

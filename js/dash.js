@@ -44,21 +44,46 @@ async function start() {
     const app = initializeApp(firebaseConfig);
     const db = fs.getFirestore(app);
     const auth = authm.getAuth(app);
-    authm.onAuthStateChanged(auth, (u) => { if (!u) authm.signInAnonymously(auth).catch(console.error); });
 
-    fs.onSnapshot(fs.doc(db, 'projects', PROJECT_ID, 'config', 'app'), (snap) => {
-      const d = snap.data();
-      if (d && d.floors) { floors = d.floors; render(); }
+    // SIGN IN FIRST. Rules require auth; attaching listeners before the
+    // invisible sign-in completes gets permission-denied and a dead OFFLINE
+    // dashboard. Retry sign-in forever (backoff + on regaining network).
+    await new Promise((resolve) => {
+      let delay = 2000;
+      const attempt = () => {
+        if (auth.currentUser) return;
+        authm.signInAnonymously(auth).catch((e) => {
+          console.warn('sign-in failed — retrying', e.code || e);
+          setLive('authfail');
+          delay = Math.min(delay * 2, 30_000);
+          setTimeout(attempt, delay);
+        });
+      };
+      authm.onAuthStateChanged(auth, (u) => { if (u) resolve(); else attempt(); });
+      window.addEventListener('online', () => { if (!auth.currentUser) { delay = 2000; attempt(); } });
     });
-    fs.onSnapshot(fs.collection(db, 'projects', PROJECT_ID, 'rooms'), (snap) => {
-      snap.docChanges().forEach((ch) => {
-        if (ch.type === 'removed') rooms.delete(ch.doc.id);
-        else rooms.set(ch.doc.id, { ...ch.doc.data(), number: ch.doc.id });
+
+    const attachListeners = () => {
+      fs.onSnapshot(fs.doc(db, 'projects', PROJECT_ID, 'config', 'app'), (snap) => {
+        const d = snap.data();
+        if (d && d.floors) { floors = d.floors; render(); }
+      }, (e) => console.warn('config listener', e.code || e));
+      fs.onSnapshot(fs.collection(db, 'projects', PROJECT_ID, 'rooms'), (snap) => {
+        snap.docChanges().forEach((ch) => {
+          if (ch.type === 'removed') rooms.delete(ch.doc.id);
+          else rooms.set(ch.doc.id, { ...ch.doc.data(), number: ch.doc.id });
+        });
+        lastUpdate = new Date();
+        setLive(snap.metadata.fromCache ? 'cache' : 'on');
+        render();
+      }, (e) => {
+        // Never die silently — drop the dead listener and re-attach.
+        console.warn('rooms listener error — re-attaching in 10s', e.code || e);
+        setLive('cache');
+        setTimeout(attachListeners, 10_000);
       });
-      lastUpdate = new Date();
-      setLive(snap.metadata.fromCache ? 'cache' : 'on');
-      render();
-    }, (e) => { console.error(e); setLive('off'); });
+    };
+    attachListeners();
   } catch (e) {
     console.error(e);
     setLive('off');
@@ -70,6 +95,7 @@ function setLive(state) {
   if (state === 'on') { pill.className = 'live-pill on'; pill.innerHTML = '<span class="live-dot"></span>LIVE'; }
   else if (state === 'demo') { pill.className = 'live-pill off'; pill.innerHTML = '<span class="live-dot"></span>DEMO DATA'; }
   else if (state === 'cache') { pill.className = 'live-pill off'; pill.innerHTML = '<span class="live-dot"></span>RECONNECTING…'; }
+  else if (state === 'authfail') { pill.className = 'live-pill off'; pill.innerHTML = '<span class="live-dot"></span>SIGN-IN BLOCKED — RETRYING (network filter?)'; }
   else { pill.className = 'live-pill off'; pill.innerHTML = '<span class="live-dot"></span>OFFLINE'; }
 }
 
