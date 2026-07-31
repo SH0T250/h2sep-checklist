@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>H2SEP Live Dashboard — Triūn</title>
+  <meta name="description" content="Live FF&E install dashboard — Home2 Suites Eagle Pass (Triūn Construction & Engineering)">
+  <meta name="theme-color" content="#0B0D10">
+  <link rel="icon" href="./icons/favicon-48.png">
+  <link rel="stylesheet" href="./css/dash.css">
+</head>
+<body>
+  <header class="dh">
+    <img class="dh-logo" src="./img/logo-full-dark.png" alt="TRIŪN Construction | Engineering">
+    <div class="dh-title">H2SEP · LIVE DASHBOARD<span class="dh-sub">Home2 Suites · Eagle Pass TX</span></div>
+    <div class="dh-status">
+      <span class="live-pill" id="live-pill"><span class="live-dot"></span>CONNECTING…</span>
+      <span class="dh-clock" id="clock">—</span>
+    </div>
+  </header>
+
+  <main class="dash">
+    <!-- KPI tiles -->
+    <section class="kpis">
+      <div class="tile">
+        <div class="tile-label">OVERALL COMPLETE</div>
+        <div class="tile-ring" id="ring"></div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">ITEMS CHECKED</div>
+        <div class="tile-big" id="k-items">—</div>
+        <div class="tile-foot" id="k-items-foot">&nbsp;</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">ROOMS COMPLETE</div>
+        <div class="tile-big" id="k-rooms">—</div>
+        <div class="tile-foot" id="k-rooms-foot">&nbsp;</div>
+      </div>
+      <div class="tile tile-issue">
+        <div class="tile-label">⚠ OPEN ISSUES</div>
+        <div class="tile-big issue-ink" id="k-issues">—</div>
+        <div class="tile-foot" id="k-issues-foot">&nbsp;</div>
+      </div>
+    </section>
+
+    <!-- middle panels -->
+    <section class="panels">
+      <div class="panel">
+        <h2>FLOOR PROGRESS</h2>
+        <div id="floors" class="floor-rows"></div>
+      </div>
+      <div class="panel">
+        <h2>OPEN ISSUES BY TYPE</h2>
+        <div id="issue-types" class="hbars"></div>
+      </div>
+      <div class="panel">
+        <h2>CHECK-OFFS BY PERSON</h2>
+        <div id="crew" class="hbars"></div>
+      </div>
+    </section>
+
+    <!-- bottom panels -->
+    <section class="panels bottom">
+      <div class="panel wide">
+        <h2>OPEN ISSUE LIST</h2>
+        <div class="tbl-wrap">
+          <table class="tbl" id="issue-table">
+            <thead><tr><th>Room</th><th>Code</th><th>Item</th><th>Problem</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>RECENT CHECK-OFFS</h2>
+        <div id="feed" class="feed"></div>
+      </div>
+      <div class="panel">
+        <h2>ACTIVITY — LAST 14 DAYS</h2>
+        <div id="spark" class="spark"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="dfoot">TRIŪN CONSTRUCTION | ENGINEERING — live from the H2SEP Room Checklists app · <span id="updated">waiting for data…</span></footer>
+  <div id="tip" class="tip" hidden></div>
+  <script type="module" src="./js/dash.js"></script>
+</body>
+</html>

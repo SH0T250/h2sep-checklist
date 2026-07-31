@@ -15,7 +15,7 @@ export const firebaseConfig = {
 };
 
 export const PROJECT_ID = 'h2sep';
-export const APP_VERSION = '1.3.0';
+export const APP_VERSION = '1.4.0';
 
 // Demo-mode admin PIN (live mode verifies against Firestore config doc).
 export const DEMO_PIN = '6621';

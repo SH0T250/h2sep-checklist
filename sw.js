@@ -2,7 +2,7 @@
 // app cold-boots with zero network. Data offline-ness is Firestore's job.
 // Bump VERSION on every deploy — it busts the old cache and triggers the
 // in-app "Update available" banner.
-const VERSION = 'h2sep-v1.3.0';
+const VERSION = 'h2sep-v1.4.0';
 
 const SHELL = [
   './',
