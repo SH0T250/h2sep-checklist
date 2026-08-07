@@ -4,6 +4,23 @@ import * as store from './store.js';
 
 const QUICK_PICKS = ['NEED INSTALL', 'NEED PROPER PLACE', 'IN BOX', 'DAMAGED', 'MISSING', 'WRONG ITEM'];
 
+// Sheet title — full-trade imports can have untagged items (code ''), which
+// must not render as "· Label".
+function itemTitle(item) {
+  return (item.code ? item.code + ' · ' : '') + item.label;
+}
+
+// Muted provenance line for full-trade imports: category · trade · sheet <src>
+// (+ package origin when derived). Legacy items carry none of these -> ''.
+function provLine(item) {
+  const bits = [];
+  if (item.category) bits.push(esc(item.category));
+  if (item.trade) bits.push(esc(item.trade));
+  if (item.src) bits.push('sheet ' + esc(item.src));
+  if (item.derived) bits.push('from room-type package');
+  return bits.length ? `<div class="prov-line muted">${bits.join(' · ')}</div>` : '';
+}
+
 export function closeSheets() {
   document.querySelectorAll('.scrim').forEach(el => el.remove());
 }
@@ -49,8 +66,9 @@ export function issueSheet(room, itemId) {
       <input type="text" name="note" placeholder="Type the problem…" maxlength="120" autocomplete="off">
       <button class="btn primary" type="submit">Save</button>
     </form>
-    ${item.issue ? `<button class="btn ghost full" data-clear>Clear current flag (“${esc(item.issue)}”)</button>` : ''}`,
-    { title: `${item.code} · ${item.label} — flag issue` });
+    ${item.issue ? `<button class="btn ghost full" data-clear>Clear current flag (“${esc(item.issue)}”)</button>` : ''}
+    ${provLine(item)}`,
+    { title: `${itemTitle(item)} — flag issue` });
 
   s.querySelectorAll('.chip-pick[data-note]').forEach(b => b.addEventListener('click', () => {
     store.setIssue(room.number, itemId, b.dataset.note);
@@ -84,10 +102,11 @@ export function checkedItemSheet(room, itemId, { canWrite }) {
     ? `checked ${whenLocal}${whenSync && whenSync !== whenLocal ? ` · synced ${whenSync}` : ''}` : '';
   const s = sheet(`
     <div class="who-line">${whoLine}${whenLine ? `<br><span class="muted">${esc(whenLine)}</span>` : ''}</div>
+    ${provLine(item)}
     ${canWrite ? `
       <button class="btn ghost full" data-act="uncheck">Un-check</button>
       <button class="btn ghost full" data-act="flag">Flag issue…</button>` : ''}
-  `, { title: `${item.code} · ${item.label}` });
+  `, { title: itemTitle(item) });
   if (!canWrite) return;
   s.querySelector('[data-act=uncheck]').addEventListener('click', async () => {
     s.remove();
@@ -112,12 +131,13 @@ export function issueItemSheet(room, itemId, { canWrite }) {
   const item = room.items[itemId];
   const s = sheet(`
     <div class="issue-note-line">— ${esc(item.issue)}</div>
+    ${provLine(item)}
     ${canWrite ? `
       <button class="btn primary full" data-act="resolve-check">Resolve &amp; check ✓</button>
       <button class="btn ghost full" data-act="resolve">Resolve only</button>
       <button class="btn ghost full" data-act="edit">Edit note…</button>
       <button class="btn ghost full" data-act="clear">Clear flag (mistake)</button>` : ''}
-  `, { title: `${item.code} · ${item.label}` });
+  `, { title: itemTitle(item) });
   if (!canWrite) return;
   s.querySelector('[data-act=resolve-check]').addEventListener('click', () => {
     store.resolveIssue(room.number, itemId, { check: true }); vibrate(); s.remove();

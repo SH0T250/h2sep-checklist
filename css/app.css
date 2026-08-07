@@ -337,6 +337,38 @@ b, .code { font-weight: 700; }
   padding: 10px 16px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,.25);
 }
 
+/* ---------- full-trade category mode ---------- */
+.trade-chips { margin-bottom: 2px; }
+.trade-chips .chip { height: 44px; } /* 44px touch target for the filter row */
+
+.item-groups { display: flex; flex-direction: column; }
+.cat-group { margin-bottom: 12px; }
+.cat-head {
+  /* Slim per-trade header that sticks just under the app bar (which is sticky
+     at top and includes the safe-area inset in its height). The demo strip is
+     non-sticky and scrolls away, so no extra offset for it. */
+  position: sticky; top: calc(56px + env(safe-area-inset-top)); z-index: 5;
+  background: var(--bg);
+  font-size: 12.5px; font-weight: 700; letter-spacing: .6px; color: var(--text-2);
+  padding: 10px 4px 6px; font-variant-numeric: tabular-nums;
+}
+
+.item-row.flagged { border-left: 3px solid var(--warn); padding-left: 9px; }
+.verify-chip {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .3px;
+  color: var(--text-2); border: 1px solid var(--hairline); border-radius: 6px;
+  padding: 1px 6px; margin-top: 3px;
+}
+.verify-chip.warn { color: var(--warn); background: var(--warn-tint); border-color: var(--warn-tint); }
+.inst.inst-note { white-space: normal; max-width: 110px; text-align: right; }
+
+.flag-line {
+  display: flex; align-items: center; width: 100%; min-height: 44px; text-align: left;
+  color: var(--warn); font-weight: 700; font-size: 13.5px; padding: 6px 0 0;
+}
+.derived-note { font-size: 12px; color: var(--text-2); margin-top: 10px; }
+.prov-line { padding: 0 0 2px; }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }

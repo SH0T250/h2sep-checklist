@@ -207,6 +207,22 @@ export function renderFloor(el, floorN) {
 let lastScrollEnd = 0;
 document.addEventListener('scroll', () => { lastScrollEnd = Date.now(); }, { capture: true, passive: true });
 
+// Canonical trade/category order for full-trade rooms: crew work top of wall
+// down, trades first, then FF&E. Exact string match; unknown categories are
+// appended alphabetically after these; uncategorized (ad-hoc adds) go last.
+const CATEGORY_ORDER = [
+  'Drywall', 'Paint', 'Wall Covering', 'Flooring', 'Stone / Surround', 'Doors',
+  'Electrical', 'Mechanical', 'Plumbing', 'Fire Sprinkler', 'Fire Alarm',
+  'Low Voltage', 'Bath Accessory', 'Appliance', 'FF&E - Casegoods',
+  'FF&E - Bedding', 'FF&E - Seating', 'FF&E - Lighting', 'FF&E - Window',
+  'FF&E - Art / Mirror', 'FF&E - Misc',
+];
+
+// Trade-filter selection (null = All). Per-visit only: any navigation resets
+// it, so every room opens on All; re-renders from data changes keep it.
+let tradeFilter = null;
+window.addEventListener('hashchange', () => { tradeFilter = null; });
+
 export function renderRoom(el, number) {
   const room = store.getRoom(number);
   if (!room) {
@@ -227,6 +243,72 @@ export function renderRoom(el, number) {
   // duplicate-instance chips
   const codeCount = {}, codeSeen = {};
   items.forEach(([, it]) => { codeCount[it.code] = (codeCount[it.code] || 0) + 1; });
+
+  // Full-trade rooms carry item.category — group + chip-filter those.
+  // Legacy rooms (no category on any item) keep the flat list untouched.
+  const catMode = items.some(([, it]) => it.category);
+  let groups = null;
+  if (catMode) {
+    const byCat = new Map();
+    for (const row of items) {
+      const cat = row[1].category || '';
+      if (!byCat.has(cat)) byCat.set(cat, []);
+      byCat.get(cat).push(row);
+    }
+    const known = [], unknown = [];
+    for (const cat of byCat.keys()) {
+      if (!cat) continue;
+      (CATEGORY_ORDER.indexOf(cat) >= 0 ? known : unknown).push(cat);
+    }
+    known.sort((a, b) => CATEGORY_ORDER.indexOf(a) - CATEGORY_ORDER.indexOf(b));
+    unknown.sort((a, b) => a.localeCompare(b));
+    const order = known.concat(unknown);
+    if (byCat.has('')) order.push(''); // ad-hoc/uncategorized items last
+    groups = order.map(cat => ({ cat, label: cat || 'Other', rows: byCat.get(cat) }));
+    // Stale per-visit selection (e.g. category vanished in a remote update).
+    if (tradeFilter !== null && !byCat.has(tradeFilter)) tradeFilter = null;
+  } else {
+    tradeFilter = null;
+  }
+  const flaggedCount = catMode ? items.filter(([, it]) => it.reliability === 'FLAGGED').length : 0;
+  const mostlyDerived = catMode && items.length > 0 &&
+    items.filter(([, it]) => it.derived).length / items.length >= 0.9;
+
+  // One row renderer for both modes — identical markup to the original flat
+  // list when the new fields (category/reliability/instanceNote/'' code) are
+  // absent, so legacy rooms render exactly as before.
+  const rowHTML = ([id, it]) => {
+    codeSeen[it.code] = (codeSeen[it.code] || 0) + 1;
+    // Duplicate-tag ordinal always shows so siblings never look like missing
+    // rows; the db's instanceNote rides along with it when present.
+    const ordinal = it.code && codeCount[it.code] > 1 ? `${codeSeen[it.code]} of ${codeCount[it.code]}` : '';
+    const inst = it.instanceNote && ordinal && !/\d+\s+of\s+\d+/.test(it.instanceNote)
+      ? `${it.instanceNote} · ${ordinal}`
+      : (it.instanceNote || ordinal);
+    const openIssue = it.issue && !it.issueResolved;
+    const flagged = it.reliability === 'FLAGGED';
+    const pendingDot = store.isRoomPending(room.number) && store.isItemRecentLocal(room.number, id);
+    return `
+        <div class="item-row ${it.checked ? 'checked' : ''} ${openIssue ? 'issue' : ''}${flagged ? ' flagged' : ''}" role="listitem"
+             data-item="${esc(id)}" ${openIssue ? 'data-has-issue' : ''}>
+          <button class="box" role="checkbox" aria-checked="${it.checked}"
+            aria-label="${esc((it.code ? it.code + ' ' : '') + it.label + (it.checked ? ', checked by ' + (it.initials || 'unknown') : ''))}"
+            data-box="${esc(id)}">
+            ${it.checked ? `<span class="ink">${esc(it.initials || '✓')}</span>` : ''}
+            ${openIssue ? `<span class="box-flag">⚑</span>` : ''}
+            ${pendingDot ? `<span class="pend-dot" title="Waiting to sync"></span>` : ''}
+          </button>
+          <div class="item-main" data-rowtap="${esc(id)}">
+            <div class="item-line1">${it.code ? `<b class="code">${esc(it.code)}</b> ` : ''}<span class="lbl">${esc(it.label)}</span></div>
+            ${flagged ? `<div class="verify-chip warn">⚠ VERIFY — sources disagree</div>` : ''}
+            ${it.reliability === 'MEDIUM' || it.reliability === 'LOW' ? `<div class="verify-chip">verify${it.reliability === 'LOW' ? ' — scaled source' : ''}</div>` : ''}
+            ${openIssue ? `<div class="item-note">— ${esc(it.issue.toUpperCase())}</div>` : ''}
+            ${it.issue && it.issueResolved ? `<div class="item-note resolved"><s>— ${esc(it.issue.toUpperCase())}</s></div>` : ''}
+          </div>
+          ${inst ? `<span class="inst${it.instanceNote ? ' inst-note' : ''}">${esc(inst)}</span>` : ''}
+          <button class="flag-btn ${openIssue ? 'on' : ''}" data-flag="${esc(id)}" aria-label="Flag issue">⚑</button>
+        </div>`;
+  };
 
   const siblings = store.getRooms(room.floor).map(r => r.number);
   const idx = siblings.indexOf(room.number);
@@ -253,6 +335,7 @@ export function renderRoom(el, number) {
       <div class="rh-line">${s.done}/${s.total} checked · ${s.pct}%
         ${s.openIssues ? `<button class="issue-jump" data-jump>⚠ ${s.openIssues} issue${s.openIssues === 1 ? '' : 's'}</button>` : ''}
       </div>
+      ${flaggedCount ? `<button class="flag-line" data-jump-flagged>⚠ ${flaggedCount} flagged — two sources disagree; verify both before ordering</button>` : ''}
       ${openNotes.map(([id, n]) => `
         <button class="note-row ${n.flag === 'issue' ? 'red' : ''}" data-note="${esc(id)}">
           <span class="star">★</span> ${esc(n.flag === 'issue' ? n.text.toUpperCase() : n.text)}
@@ -261,35 +344,31 @@ export function renderRoom(el, number) {
         ${resolvedNotes.map(([id, n]) => `<button class="note-row muted" data-note="${esc(id)}"><span class="star">★</span> <s>${esc(n.text)}</s></button>`).join('')}
       </details>` : ''}
       ${w ? `<button class="add-note-btn" data-add-note>+ ★ Add room note</button>` : ''}
+      ${mostlyDerived ? `<div class="derived-note">Lines come from the room-type package (typicals), not per-room walk.</div>` : ''}
     </section>
 
-    <section class="item-list" role="list">
-      ${items.map(([id, it]) => {
-        codeSeen[it.code] = (codeSeen[it.code] || 0) + 1;
-        const inst = codeCount[it.code] > 1 ? `${codeSeen[it.code]} of ${codeCount[it.code]}` : '';
-        const openIssue = it.issue && !it.issueResolved;
-        const pendingDot = store.isRoomPending(room.number) && store.isItemRecentLocal(room.number, id);
+    ${catMode ? `
+    <div class="chips trade-chips">
+      <button class="chip tchip ${tradeFilter === null ? 'on' : ''}" data-trade-all>All · ${items.length}</button>
+      ${groups.map(g => `<button class="chip tchip ${tradeFilter === g.cat ? 'on' : ''}"
+        data-trade="${esc(g.cat)}">${esc(g.label)} · ${g.rows.length}</button>`).join('')}
+    </div>
+    <section class="item-groups">
+      ${groups.map(g => {
+        const done = g.rows.filter(([, it]) => it.checked).length;
+        const hide = tradeFilter !== null && tradeFilter !== g.cat;
         return `
-        <div class="item-row ${it.checked ? 'checked' : ''} ${openIssue ? 'issue' : ''}" role="listitem"
-             data-item="${esc(id)}" ${openIssue ? 'data-has-issue' : ''}>
-          <button class="box" role="checkbox" aria-checked="${it.checked}"
-            aria-label="${esc(it.code + ' ' + it.label + (it.checked ? ', checked by ' + (it.initials || 'unknown') : ''))}"
-            data-box="${esc(id)}">
-            ${it.checked ? `<span class="ink">${esc(it.initials || '✓')}</span>` : ''}
-            ${openIssue ? `<span class="box-flag">⚑</span>` : ''}
-            ${pendingDot ? `<span class="pend-dot" title="Waiting to sync"></span>` : ''}
-          </button>
-          <div class="item-main" data-rowtap="${esc(id)}">
-            <div class="item-line1"><b class="code">${esc(it.code)}</b> <span class="lbl">${esc(it.label)}</span></div>
-            ${openIssue ? `<div class="item-note">— ${esc(it.issue.toUpperCase())}</div>` : ''}
-            ${it.issue && it.issueResolved ? `<div class="item-note resolved"><s>— ${esc(it.issue.toUpperCase())}</s></div>` : ''}
-          </div>
-          ${inst ? `<span class="inst">${esc(inst)}</span>` : ''}
-          <button class="flag-btn ${openIssue ? 'on' : ''}" data-flag="${esc(id)}" aria-label="Flag issue">⚑</button>
-        </div>`;
+      <section class="cat-group ${hide ? 'hidden' : ''}" data-cat="${esc(g.cat)}">
+        <div class="cat-head">${esc(g.label.toUpperCase())} · ${done}/${g.rows.length}</div>
+        <div class="item-list" role="list">${g.rows.map(rowHTML).join('')}</div>
+      </section>`;
       }).join('')}
       ${w ? `<button class="add-ghost" data-add-item>+ Add item</button>` : ''}
-    </section>
+    </section>` : `
+    <section class="item-list" role="list">
+      ${items.map(rowHTML).join('')}
+      ${w ? `<button class="add-ghost" data-add-item>+ Add item</button>` : ''}
+    </section>`}
   </main>
   <footer class="room-foot">
     ${prev ? `<a class="foot-arrow" href="#/room/${esc(prev)}">‹ ${esc(prev)}</a>` : `<span class="foot-arrow dim"></span>`}
@@ -337,11 +416,25 @@ export function renderRoom(el, number) {
     .then(list => { if (Array.isArray(list) && list.includes(room.number)) sheetBtn.classList.remove('hidden'); })
     .catch(() => { /* even the precached index missing -> leave menu entry as the path */ });
 
-  const jump = el.querySelector('[data-jump]');
-  if (jump) jump.addEventListener('click', () => {
-    const t = el.querySelector('.item-row.issue');
+  // Jump targets always come from ALL items — if the trade filter hides the
+  // first match, drop back to All (re-render) so the row is reachable.
+  function revealAndScroll(sel) {
+    let t = el.querySelector(sel);
+    if (t && t.offsetParent === null && tradeFilter !== null) {
+      tradeFilter = null;
+      renderRoom(el, number);
+      t = el.querySelector(sel);
+    }
     if (t) t.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  });
+  }
+  const jump = el.querySelector('[data-jump]');
+  if (jump) jump.addEventListener('click', () => revealAndScroll('.item-row.issue'));
+  const jumpFlagged = el.querySelector('[data-jump-flagged]');
+  if (jumpFlagged) jumpFlagged.addEventListener('click', () => revealAndScroll('.item-row.flagged'));
+  el.querySelectorAll('.tchip').forEach(b => b.addEventListener('click', () => {
+    tradeFilter = ('tradeAll' in b.dataset) ? null : b.dataset.trade;
+    renderRoom(el, number);
+  }));
 
   el.querySelectorAll('[data-note]').forEach(b => b.addEventListener('click', () =>
     sheets.noteSheet(room, b.dataset.note, { canWrite: w })));
@@ -363,7 +456,7 @@ export function renderRoom(el, number) {
     store.checkItem(room.number, id).catch(e => toast('Could not save: ' + e.message));
     vibrate();
     if (scrollAdjacent) {
-      toast('Checked ' + it.code, { action: 'Undo', onAction: () => store.uncheckItem(room.number, id) });
+      toast('Checked ' + (it.code || it.label.slice(0, 40)), { action: 'Undo', onAction: () => store.uncheckItem(room.number, id) });
     }
   }
   el.querySelectorAll('[data-box]').forEach(b => b.addEventListener('click', () => tapItem(b.dataset.box)));

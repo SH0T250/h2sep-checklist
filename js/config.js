@@ -17,7 +17,7 @@ export const firebaseConfig = {
 export const PROJECT_ID = 'h2sep';
 // Must match sw.js VERSION ('h2sep-v' + this) — the service worker verifies
 // the pair at install time and refuses mismatched (mid-deploy) builds.
-export const APP_VERSION = '1.6.1';
+export const APP_VERSION = '1.7.0';
 
 // Demo-mode admin PIN (live mode verifies against Firestore config doc).
 export const DEMO_PIN = '6621';
