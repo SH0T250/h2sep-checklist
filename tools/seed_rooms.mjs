@@ -134,7 +134,14 @@ for (const file of files) {
   const stamp = new Date().toISOString();
 
   // ---- create-only commit ----
-  const payload = { ...room, createdAt: { __ts: stamp }, updatedAt: { __ts: stamp } };
+  // Firestore rules whitelist room-doc top-level keys (hasOnly). Fields the
+  // rules don't know (accessible/connecting) stay in the JSON artifact but are
+  // stripped from the transport payload — the app derives ADA/connecting from
+  // typeLabel. If the rules whitelist ever widens, add the keys here.
+  const RULES_TOP_KEYS = ['number', 'floor', 'type', 'typeLabel', 'items', 'notes', 'deleted', 'schemaV'];
+  const payload = Object.fromEntries(Object.entries(room).filter(([k]) => RULES_TOP_KEYS.includes(k)));
+  payload.createdAt = { __ts: stamp };
+  payload.updatedAt = { __ts: stamp };
   const commit = await req('POST', `${BASE.replace('/documents', '')}/documents:commit`, {
     writes: [{ update: { name: docName, fields: fields(payload) }, currentDocument: { exists: false } }],
   }, idToken);
