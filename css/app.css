@@ -274,9 +274,15 @@ b, .code { font-weight: 700; }
 .foot-mid { flex: 1; height: 100%; font-size: 14px; color: var(--text-2); font-variant-numeric: tabular-nums; }
 
 /* ---------- paper-sheet viewer ---------- */
-.rh-right { display: inline-flex; align-items: center; gap: 8px; }
-.sheet-btn { font-size: 20px; min-width: 40px; height: 40px; border-radius: 8px; }
-.sheet-btn:active { background: rgba(2,169,224,.12); }
+.rh-right { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+/* Sheet / 3D shortcuts: chip-shaped so they read as tappable next to the type
+   label, and a full 44px target since they sit in the header's tight row. */
+.sheet-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 19px; min-width: 44px; height: 44px; border-radius: 10px;
+  border: 1px solid var(--hairline); background: var(--bg); text-decoration: none;
+}
+.sheet-btn:active { background: rgba(2,169,224,.12); border-color: var(--brand); }
 .paper-view {
   width: 100%; max-width: 720px; height: 100%; background: #fff;
   display: flex; flex-direction: column;
