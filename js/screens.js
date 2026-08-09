@@ -306,7 +306,7 @@ export function renderRoom(el, number) {
             ${it.reliability === 'MEDIUM' || it.reliability === 'LOW' ? `<div class="verify-chip">verify${it.reliability === 'LOW' ? ' — scaled source' : ''}</div>` : ''}
             ${openIssue ? `<div class="item-note">— ${esc(it.issue.toUpperCase())}</div>` : ''}
             ${it.issue && it.issueResolved ? `<div class="item-note resolved"><s>— ${esc(it.issue.toUpperCase())}</s></div>` : ''}
-            ${(n => n ? `<button class="ref-count" data-refchip="${esc(id)}" aria-label="References">📎 ${n} ref${n > 1 ? 's' : ''}</button>` : '')(refsFor(room.number, it).length)}
+            ${(n => n ? `<button class="ref-count" data-refchip="${esc(id)}" aria-label="References">📎 ${n} ref${n > 1 ? 's' : ''}</button>` : '')(refsFor(room.number, it, id).length)}
           </div>
           ${inst ? `<span class="inst${it.instanceNote ? ' inst-note' : ''}">${esc(inst)}</span>` : ''}
           <button class="flag-btn ${openIssue ? 'on' : ''}" data-flag="${esc(id)}" aria-label="Flag issue">⚑</button>

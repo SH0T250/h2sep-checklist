@@ -55,7 +55,13 @@ function render() {
   if (sameScreen) window.scrollTo(0, scrollY);
 }
 
-window.addEventListener('hashchange', () => { closeSheets(); render(); });
+window.addEventListener('hashchange', () => {
+  closeSheets();
+  // Lingering toasts (e.g. un-check Undo) don't belong to the new screen and
+  // can overlap fresh sheets/PIN pads — dismiss on every route change.
+  document.getElementById('toast')?.classList.remove('show');
+  render();
+});
 
 // Re-render on data changes; coalesce bursts.
 let renderQueued = false;

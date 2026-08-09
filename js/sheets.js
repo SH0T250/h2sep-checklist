@@ -25,8 +25,8 @@ function provLine(item) {
 // ---- item references (submittals / plan snippets) ----
 // Renders under the provenance line of every item detail sheet. Buttons only
 // appear when the item actually has refs; the sheet id is always shown.
-function refsSection(room, item) {
-  const refs = refsFor(room.number, item);
+function refsSection(room, item, itemId = '') {
+  const refs = refsFor(room.number, item, itemId);
   if (!refs.length) return '';
   return `<div class="ref-section-head">References</div>` + refs.map((r, i) => `
     <button class="ref-link" data-refi="${i}">
@@ -37,8 +37,8 @@ function refsSection(room, item) {
     </button>`).join('');
 }
 
-function wireRefs(s, room, item) {
-  const refs = refsFor(room.number, item);
+function wireRefs(s, room, item, itemId = '') {
+  const refs = refsFor(room.number, item, itemId);
   s.querySelectorAll('[data-refi]').forEach(b => b.addEventListener('click', (e) => {
     e.stopPropagation();
     const r = refs[Number(b.dataset.refi)];
@@ -52,8 +52,8 @@ export function itemRefsSheet(room, itemId) {
   const item = room.items[itemId];
   const s = sheet(`
     ${provLine(item)}
-    ${refsSection(room, item)}`, { title: itemTitle(item) });
-  wireRefs(s, room, item);
+    ${refsSection(room, item, itemId)}`, { title: itemTitle(item) });
+  wireRefs(s, room, item, itemId);
 }
 
 // Full-screen reference popup. Two flavors:
@@ -192,10 +192,10 @@ export function issueSheet(room, itemId) {
     </form>
     ${item.issue ? `<button class="btn ghost full" data-clear>Clear current flag (“${esc(item.issue)}”)</button>` : ''}
     ${provLine(item)}
-    ${refsSection(room, item)}`,
+    ${refsSection(room, item, itemId)}`,
     { title: `${itemTitle(item)} — flag issue` });
 
-  wireRefs(s, room, item);
+  wireRefs(s, room, item, itemId);
   s.querySelectorAll('.chip-pick[data-note]').forEach(b => b.addEventListener('click', () => {
     store.setIssue(room.number, itemId, b.dataset.note);
     vibrate(); s.remove();
@@ -229,12 +229,12 @@ export function checkedItemSheet(room, itemId, { canWrite }) {
   const s = sheet(`
     <div class="who-line">${whoLine}${whenLine ? `<br><span class="muted">${esc(whenLine)}</span>` : ''}</div>
     ${provLine(item)}
-    ${refsSection(room, item)}
+    ${refsSection(room, item, itemId)}
     ${canWrite ? `
       <button class="btn ghost full" data-act="uncheck">Un-check</button>
       <button class="btn ghost full" data-act="flag">Flag issue…</button>` : ''}
   `, { title: itemTitle(item) });
-  wireRefs(s, room, item);
+  wireRefs(s, room, item, itemId);
   if (!canWrite) return;
   s.querySelector('[data-act=uncheck]').addEventListener('click', async () => {
     s.remove();
@@ -260,14 +260,14 @@ export function issueItemSheet(room, itemId, { canWrite }) {
   const s = sheet(`
     <div class="issue-note-line">— ${esc(item.issue)}</div>
     ${provLine(item)}
-    ${refsSection(room, item)}
+    ${refsSection(room, item, itemId)}
     ${canWrite ? `
       <button class="btn primary full" data-act="resolve-check">Resolve &amp; check ✓</button>
       <button class="btn ghost full" data-act="resolve">Resolve only</button>
       <button class="btn ghost full" data-act="edit">Edit note…</button>
       <button class="btn ghost full" data-act="clear">Clear flag (mistake)</button>` : ''}
   `, { title: itemTitle(item) });
-  wireRefs(s, room, item);
+  wireRefs(s, room, item, itemId);
   if (!canWrite) return;
   s.querySelector('[data-act=resolve-check]').addEventListener('click', () => {
     store.resolveIssue(room.number, itemId, { check: true }); vibrate(); s.remove();
