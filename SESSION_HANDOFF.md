@@ -20,15 +20,16 @@ trust the live systems over this prose where they differ.
 | **Admin PIN** | not recorded in this repo — ask Austin. (It is also `DEMO_PIN` in `js/config.js`, which is public; see the security note in §Deploy.) |
 | **Reference dataset** | `data/project.sqlite` in the app repo — 115 rooms, 17,635 item rows, 21 categories. THE source of truth for item lists. |
 
-**Versions: v1.14.0 BUILT + TESTED, PR #2 open (app code NOT yet deployed).** Room DATA for
-floors 1 and 2 is already LIVE in Firestore (58 rooms) — no deploy needed for it. The pending
-deploy carries the app-code fixes from the v1.13.0 audit, and one of them is CRITICAL: until it
-ships, the printable door sheet on a King room still offers a 3D button that shows room 101's
-QQ geometry relabelled with the King room's number. v1.13.0/v1.12.0 LIVE (deployed 2026-08-09).
-Earlier: 3D on all QQ Studio Connectors (v1.11.0); refs page + build-out tooling (v1.10.0);
-theme, reference popups, ×qty badges (v1.8.0); refs joinability (v1.8.1); collapsible
-categories, live printable sheet, in-app 3D (v1.9.0). `js/config.js APP_VERSION` must equal
-`sw.js VERSION` minus the `h2sep-v` prefix; the service worker REFUSES mismatched builds.
+**Versions: v1.14.0 LIVE (deployed + verified 2026-08-09).** Floors 1 and 2 complete —
+58 rooms live under Austin's room names. Shipped the fixes from the 148-agent adversarial
+audit: the print sheet no longer offers the 3D exhibit on rooms that have no model (it did,
+and the exhibit answered with room 101's QQ geometry under the requested room's number), a
+room with no geometry now says so, dashboard.html is precached, and every FLAGGED/MEDIUM
+line carries its reason (0 bare flags across all 58 rooms, was 49). Live bytes sha256-verified
+identical to the tested tree; all 33 shell files 200. Earlier: v1.12/1.13 per-room 3D geometry;
+v1.11 3D on all QQ Studio Connectors; v1.10 refs page + build-out tooling; v1.9 collapsible
+categories, printable sheet, in-app 3D; v1.8 theme, reference popups, ×qty badges.
+`js/config.js APP_VERSION` must equal `sw.js VERSION` minus the `h2sep-v` prefix; the service worker REFUSES mismatched builds.
 
 **Deploy runbook:** edit the app IN THIS REPO (there is no mirror to copy from any more) → run
 the suites: `node tests/smoke.mjs`, `tests/geom-check.mjs`, `tests/floor1-verify.mjs`,
