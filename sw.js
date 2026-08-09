@@ -3,11 +3,15 @@
 // Bump VERSION on every deploy — it busts the old cache and triggers the
 // in-app "Update available" banner. VERSION must equal 'h2sep-v' + APP_VERSION
 // in js/config.js — install verifies this to defeat CDN mixed-version races.
-const VERSION = 'h2sep-v1.7.0';
+const VERSION = 'h2sep-v1.8.0';
 // Paper-sheet photos live in their own PERMANENT cache — never wiped by app
 // updates. Only room JPGs under /sheets/ may enter it (index.json stays in the
 // versioned shell cache so it can never be shadowed by a stale copy).
 const SHEETS_CACHE = 'h2sep-sheets';
+// Plan-snippet reference images (./refs/*.png) get the same permanent-cache
+// treatment — they must survive app updates so refs work in dead zones.
+// refs-101.json itself stays in the versioned shell cache (never shadowed).
+const REFS_CACHE = 'h2sep-refs';
 
 const SHELL = [
   './',
@@ -16,11 +20,14 @@ const SHELL = [
   './css/app.css',
   './js/app.js',
   './js/config.js',
+  './js/refs.js',
   './js/screens.js',
   './js/seed.js',
   './js/sheets.js',
   './js/store.js',
+  './js/theme.js',
   './js/util.js',
+  './refs/refs-101.json',
   './firebase/firebase-app.js',
   './firebase/firebase-auth.js',
   './firebase/firebase-firestore.js',
@@ -58,7 +65,7 @@ self.addEventListener('activate', (e) => {
   // Keep activation INSTANT — never block navigations behind downloads.
   e.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.filter((k) => k !== VERSION && k !== SHEETS_CACHE).map((k) => caches.delete(k)));
+    await Promise.all(keys.filter((k) => k !== VERSION && k !== SHEETS_CACHE && k !== REFS_CACHE).map((k) => caches.delete(k)));
     await self.clients.claim();
   })());
 });
@@ -85,10 +92,44 @@ async function prefetchSheets() {
   }
 }
 
+// Best-effort download of every plan-snippet image named in refs-101.json
+// into the permanent refs cache. Same trigger discipline as sheets.
+async function prefetchRefs() {
+  const shell = await caches.open(VERSION);
+  const idxResp = (await shell.match('./refs/refs-101.json')) || (await fetch('./refs/refs-101.json').catch(() => null));
+  if (!idxResp) return;
+  let idx;
+  try { idx = await idxResp.clone().json(); } catch { return; }
+  // Walk the whole index for `snippet` file names — resilient to the exact
+  // nesting the refs pipeline emits (room->code->refs[] or flat code map).
+  const files = new Set();
+  (function walk(v) {
+    if (Array.isArray(v)) { v.forEach(walk); return; }
+    if (!v || typeof v !== 'object') return;
+    if (typeof v.snippet === 'string' && v.snippet) files.add(v.snippet.replace(/^(\.\/)?(refs\/)?/, ''));
+    Object.values(v).forEach(walk);
+  })(idx);
+  const c = await caches.open(REFS_CACHE);
+  for (const f of files) {
+    const req = new Request('./refs/' + f);
+    if (await c.match(req)) continue;
+    try {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 10_000); // weak signal: give up fast
+      const resp = await fetch(req, { signal: ctrl.signal });
+      clearTimeout(timer);
+      if (resp.ok && resp.status === 200) await c.put(req, resp);
+    } catch (_) { /* no/weak signal — page retriggers when back online */ }
+  }
+}
+
 self.addEventListener('message', (e) => {
   if (!e.data) return;
   if (e.data.type === 'SKIP_WAITING') self.skipWaiting();
-  if (e.data.type === 'PREFETCH_SHEETS') e.waitUntil(prefetchSheets().catch(() => {}));
+  if (e.data.type === 'PREFETCH_SHEETS') {
+    e.waitUntil(prefetchSheets().catch(() => {}));
+    e.waitUntil(prefetchRefs().catch(() => {}));
+  }
 });
 
 // Fetch: shell files from THIS version's cache; sheet JPGs from the permanent
@@ -97,14 +138,17 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== 'GET' || url.origin !== location.origin) return;
   const isSheetJpg = /\/sheets\/[^/]+\.jpg$/.test(url.pathname);
+  // Snippet images only — ./refs/refs-101.json stays in the versioned shell.
+  const isRefImg = /\/refs\/[^/]+\.(png|jpe?g|webp)$/.test(url.pathname);
+  const isPermanent = isSheetJpg || isRefImg;
   e.respondWith((async () => {
-    const cacheName = isSheetJpg ? SHEETS_CACHE : VERSION;
+    const cacheName = isSheetJpg ? SHEETS_CACHE : (isRefImg ? REFS_CACHE : VERSION);
     const c = await caches.open(cacheName);
-    const cached = await c.match(e.request, { ignoreSearch: !isSheetJpg });
+    const cached = await c.match(e.request, { ignoreSearch: !isPermanent });
     if (cached) return cached;
     try {
       const resp = await fetch(e.request);
-      if (isSheetJpg && resp.ok && resp.status === 200) {
+      if (isPermanent && resp.ok && resp.status === 200) {
         try { await c.put(e.request, resp.clone()); } catch (_) { /* quota — still serve */ }
       }
       return resp;

@@ -10,6 +10,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="H2SEP Rooms">
+  <script>/* apply saved theme before first paint (default light) */
+    try { document.documentElement.setAttribute('data-theme',
+      localStorage.getItem('h2sep-theme') === 'dark' ? 'dark' : 'light'); } catch (e) {}
+  </script>
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./icons/favicon-48.png">
   <link rel="apple-touch-icon" href="./icons/icon-180.png">

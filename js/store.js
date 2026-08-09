@@ -129,10 +129,19 @@ let demoDB = null;
 
 function demoLoad() {
   try { demoDB = JSON.parse(localStorage.getItem(LS_DEMO_DB)); } catch { demoDB = null; }
-  if (!demoDB || !demoDB.rooms) {
-    demoDB = { rooms: seedRooms(), floors: { ...FLOORS } };
-    demoSave();
-  }
+  const fresh = !demoDB || !demoDB.rooms;
+  if (fresh) demoDB = { rooms: seedRooms(), floors: { ...FLOORS } };
+  // Demo-only ×qty fixtures: the paper sheet lists every line singly, so
+  // stamp one pack quantity (and one explicit qty of 1) on Room 101 here
+  // purely so the ×qty badge path is visible in demo mode. Live rooms get
+  // qty from the room-package pipeline — never from this seed. Stamped
+  // idempotently OUTSIDE the fresh-seed branch so demo DBs seeded before
+  // v1.8.0 pick the fixtures up too.
+  const it = demoDB.rooms['101'] && demoDB.rooms['101'].items;
+  let stamped = false;
+  if (it && it.gr100_a && it.gr100_a.qty === undefined) { it.gr100_a.qty = 2; stamped = true; }
+  if (it && it.gr318_a && it.gr318_a.qty === undefined) { it.gr318_a.qty = 1; stamped = true; }
+  if (fresh || stamped) demoSave();
 }
 function demoSave() { localStorage.setItem(LS_DEMO_DB, JSON.stringify(demoDB)); }
 function demoRefresh() {

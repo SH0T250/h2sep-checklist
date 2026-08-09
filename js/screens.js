@@ -3,6 +3,8 @@
 import { esc, fmtWhen, roomStats, typeAbbrev, platform, vibrate, toast, roomSort } from './util.js';
 import * as store from './store.js';
 import * as sheets from './sheets.js';
+import { refsFor } from './refs.js';
+import { getTheme, setTheme, toggleTheme } from './theme.js';
 import { APP_VERSION } from './config.js';
 
 // Writing is allowed once initials exist; on iOS it additionally requires the
@@ -299,11 +301,12 @@ export function renderRoom(el, number) {
             ${pendingDot ? `<span class="pend-dot" title="Waiting to sync"></span>` : ''}
           </button>
           <div class="item-main" data-rowtap="${esc(id)}">
-            <div class="item-line1">${it.code ? `<b class="code">${esc(it.code)}</b> ` : ''}<span class="lbl">${esc(it.label)}</span></div>
+            <div class="item-line1">${it.code ? `<b class="code">${esc(it.code)}</b> ` : ''}${Number(it.qty) > 1 ? `<span class="qtyb" aria-label="quantity ${Number(it.qty)}">×${Number(it.qty)}</span>` : ''}<span class="lbl">${esc(it.label)}</span></div>
             ${flagged ? `<div class="verify-chip warn">⚠ VERIFY — sources disagree</div>` : ''}
             ${it.reliability === 'MEDIUM' || it.reliability === 'LOW' ? `<div class="verify-chip">verify${it.reliability === 'LOW' ? ' — scaled source' : ''}</div>` : ''}
             ${openIssue ? `<div class="item-note">— ${esc(it.issue.toUpperCase())}</div>` : ''}
             ${it.issue && it.issueResolved ? `<div class="item-note resolved"><s>— ${esc(it.issue.toUpperCase())}</s></div>` : ''}
+            ${(n => n ? `<button class="ref-count" data-refchip="${esc(id)}" aria-label="References">📎 ${n} ref${n > 1 ? 's' : ''}</button>` : '')(refsFor(room.number, it).length)}
           </div>
           ${inst ? `<span class="inst${it.instanceNote ? ' inst-note' : ''}">${esc(inst)}</span>` : ''}
           <button class="flag-btn ${openIssue ? 'on' : ''}" data-flag="${esc(id)}" aria-label="Flag issue">⚑</button>
@@ -387,10 +390,12 @@ export function renderRoom(el, number) {
     const sh = sheets.sheet(`
       <button class="btn ghost full" data-act="paper">📄 Original paper sheet</button>
       <button class="btn ghost full" data-act="add-item">+ Add item to this room</button>
+      <button class="btn ghost full" data-act="theme">${getTheme() === 'dark' ? '☀ Light mode' : '🌙 Dark mode'}</button>
       <button class="btn ghost full" data-act="edit">Room settings (admin)</button>
       <button class="btn ghost full danger-text" data-act="delete">Delete room (admin)</button>`,
       { title: 'Room ' + room.number });
     sh.querySelector('[data-act=paper]').addEventListener('click', () => { sh.remove(); sheets.paperSheetOverlay(room.number); });
+    sh.querySelector('[data-act=theme]').addEventListener('click', () => { sh.remove(); toggleTheme(); });
     sh.querySelector('[data-act=add-item]').addEventListener('click', () => { sh.remove(); addItemFlow(room); });
     sh.querySelector('[data-act=edit]').addEventListener('click', async () => {
       sh.remove();
@@ -459,6 +464,12 @@ export function renderRoom(el, number) {
       toast('Checked ' + (it.code || it.label.slice(0, 40)), { action: 'Undo', onAction: () => store.uncheckItem(room.number, id) });
     }
   }
+  // 📎 chip opens the references sheet without checking the row (field speed:
+  // a plain row tap still checks — refs never get in the way of checking).
+  el.querySelectorAll('[data-refchip]').forEach(b => b.addEventListener('click', (e) => {
+    e.stopPropagation();
+    sheets.itemRefsSheet(room, b.dataset.refchip);
+  }));
   el.querySelectorAll('[data-box]').forEach(b => b.addEventListener('click', () => tapItem(b.dataset.box)));
   el.querySelectorAll('[data-rowtap]').forEach(r => r.addEventListener('click', () => tapItem(r.dataset.rowtap)));
   el.querySelectorAll('[data-flag]').forEach(b => b.addEventListener('click', (e) => {
@@ -590,6 +601,14 @@ export function renderSettings(el) {
       <button class="btn primary" id="save-user">Save</button>
     </section>
     <section class="card form">
+      <h2>Appearance</h2>
+      <div class="seg theme-seg">
+        <button class="seg-btn ${getTheme() === 'light' ? 'on' : ''}" data-theme-set="light">☀ Light</button>
+        <button class="seg-btn ${getTheme() === 'dark' ? 'on' : ''}" data-theme-set="dark">🌙 Dark</button>
+      </div>
+      <div class="field-hint">Saved on this phone only.</div>
+    </section>
+    <section class="card form">
       <h2>Admin</h2>
       ${store.isAdmin()
         ? `<div class="admin-on">Admin mode on</div><button class="btn ghost" id="lock-admin">Lock</button>`
@@ -612,6 +631,11 @@ export function renderSettings(el) {
   </main>`;
 
   wireCommon(el);
+  el.querySelectorAll('[data-theme-set]').forEach(b => b.addEventListener('click', () => {
+    setTheme(b.dataset.themeSet);
+    el.querySelectorAll('[data-theme-set]').forEach(x =>
+      x.classList.toggle('on', x.dataset.themeSet === getTheme()));
+  }));
   const nameI = el.querySelector('#set-name'), initI = el.querySelector('#set-initials');
   initI.addEventListener('input', () => {
     el.querySelector('#ink-preview').textContent = initI.value.toUpperCase() || 'AB';

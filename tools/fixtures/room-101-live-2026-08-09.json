@@ -1,0 +1,1327 @@
+{
+  "name": "projects/h2sep-checklist/databases/(default)/documents/projects/h2sep/rooms/101",
+  "fields": {
+    "items": {
+      "mapValue": {
+        "fields": {
+          "gr300_a": {
+            "mapValue": {
+              "fields": {
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": "paper"
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "code": {
+                  "stringValue": "GR-300"
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "label": {
+                  "stringValue": "Queen Headboard"
+                },
+                "sort": {
+                  "integerValue": "40"
+                },
+                "initials": {
+                  "stringValue": "CC"
+                },
+                "checked": {
+                  "booleanValue": true
+                }
+              }
+            }
+          },
+          "gr500_a": {
+            "mapValue": {
+              "fields": {
+                "code": {
+                  "stringValue": "GR-500"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": "paper"
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checked": {
+                  "booleanValue": true
+                },
+                "initials": {
+                  "stringValue": "CC"
+                },
+                "sort": {
+                  "integerValue": "200"
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "label": {
+                  "stringValue": "Art Above Sofa"
+                }
+              }
+            }
+          },
+          "gr308r_b": {
+            "mapValue": {
+              "fields": {
+                "checkedByUid": {
+                  "stringValue": "paper"
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "code": {
+                  "stringValue": "GR-308R"
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "sort": {
+                  "integerValue": "270"
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "label": {
+                  "stringValue": "Working Wall @ QQ Connector"
+                },
+                "checked": {
+                  "booleanValue": true
+                },
+                "initials": {
+                  "stringValue": "CC"
+                }
+              }
+            }
+          },
+          "gr6001_a": {
+            "mapValue": {
+              "fields": {
+                "sort": {
+                  "integerValue": "60"
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "label": {
+                  "stringValue": "Q Bedwrap"
+                },
+                "checked": {
+                  "booleanValue": false
+                },
+                "initials": {
+                  "stringValue": ""
+                },
+                "checkedByUid": {
+                  "stringValue": ""
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "code": {
+                  "stringValue": "GR-600.1"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": "NEED PROPER PLACE"
+                }
+              }
+            }
+          },
+          "gr400_a": {
+            "mapValue": {
+              "fields": {
+                "code": {
+                  "stringValue": "GR-400"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": "paper"
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checked": {
+                  "booleanValue": true
+                },
+                "initials": {
+                  "stringValue": "CC"
+                },
+                "sort": {
+                  "integerValue": "10"
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "label": {
+                  "stringValue": "Window Treatment"
+                }
+              }
+            }
+          },
+          "gr101_a": {
+            "mapValue": {
+              "fields": {
+                "sort": {
+                  "integerValue": "190"
+                },
+                "label": {
+                  "stringValue": "Sleeper Sofa"
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checked": {
+                  "booleanValue": true
+                },
+                "initials": {
+                  "stringValue": "CC"
+                },
+                "checkedByUid": {
+                  "stringValue": "paper"
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "code": {
+                  "stringValue": "GR-101"
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                }
+              }
+            }
+          },
+          "gr202_a": {
+            "mapValue": {
+              "fields": {
+                "checked": {
+                  "booleanValue": false
+                },
+                "initials": {
+                  "stringValue": ""
+                },
+                "sort": {
+                  "integerValue": "20"
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "label": {
+                  "stringValue": "Nightstand Sconce"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "code": {
+                  "stringValue": "GR-202"
+                },
+                "issue": {
+                  "stringValue": "NEED INSTALL"
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": ""
+                },
+                "deleted": {
+                  "booleanValue": false
+                }
+              }
+            }
+          },
+          "gr207_a": {
+            "mapValue": {
+              "fields": {
+                "initials": {
+                  "stringValue": ""
+                },
+                "checked": {
+                  "booleanValue": false
+                },
+                "label": {
+                  "stringValue": "Nightstand Sconce @ QQ Center"
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "sort": {
+                  "integerValue": "80"
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": "?"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "code": {
+                  "stringValue": "GR-207"
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": ""
+                }
+              }
+            }
+          },
+          "gr319_a": {
+            "mapValue": {
+              "fields": {
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": "paper"
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "code": {
+                  "stringValue": "GR-319"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "label": {
+                  "stringValue": "Nightstand @ R"
+                },
+                "sort": {
+                  "integerValue": "30"
+                },
+                "initials": {
+                  "stringValue": "CC"
+                },
+                "checked": {
+                  "booleanValue": true
+                }
+              }
+            }
+          },
+          "gr4021_a": {
+            "mapValue": {
+              "fields": {
+                "checked": {
+                  "booleanValue": false
+                },
+                "initials": {
+                  "stringValue": ""
+                },
+                "sort": {
+                  "integerValue": "170"
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "label": {
+                  "stringValue": "Divider Drapery Hardware"
+                },
+                "code": {
+                  "stringValue": "GR-402.1"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": ""
+                },
+                "deleted": {
+                  "booleanValue": false
+                }
+              }
+            }
+          },
+          "gr103_a": {
+            "mapValue": {
+              "fields": {
+                "checked": {
+                  "booleanValue": false
+                },
+                "initials": {
+                  "stringValue": ""
+                },
+                "sort": {
+                  "integerValue": "280"
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "label": {
+                  "stringValue": "Task Chair"
+                },
+                "code": {
+                  "stringValue": "GR-103"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": "IN BOX"
+                },
+                "checkedByUid": {
+                  "stringValue": ""
+                },
+                "deleted": {
+                  "booleanValue": false
+                }
+              }
+            }
+          },
+          "gr300_b": {
+            "mapValue": {
+              "fields": {
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "code": {
+                  "stringValue": "GR-300"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": "paper"
+                },
+                "initials": {
+                  "stringValue": "CC"
+                },
+                "checked": {
+                  "booleanValue": true
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "label": {
+                  "stringValue": "Queen Headboard"
+                },
+                "sort": {
+                  "integerValue": "100"
+                }
+              }
+            }
+          },
+          "gr403_a": {
+            "mapValue": {
+              "fields": {
+                "sort": {
+                  "integerValue": "240"
+                },
+                "label": {
+                  "stringValue": "Closet Drapery"
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checked": {
+                  "booleanValue": false
+                },
+                "initials": {
+                  "stringValue": ""
+                },
+                "checkedByUid": {
+                  "stringValue": ""
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "code": {
+                  "stringValue": "GR-403"
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                }
+              }
+            }
+          },
+          "gr323_a": {
+            "mapValue": {
+              "fields": {
+                "label": {
+                  "stringValue": "Nightstand @ L"
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "sort": {
+                  "integerValue": "140"
+                },
+                "initials": {
+                  "stringValue": "CC"
+                },
+                "checked": {
+                  "booleanValue": true
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": "paper"
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "code": {
+                  "stringValue": "GR-323"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                }
+              }
+            }
+          },
+          "gr202_b": {
+            "mapValue": {
+              "fields": {
+                "checked": {
+                  "booleanValue": false
+                },
+                "initials": {
+                  "stringValue": ""
+                },
+                "sort": {
+                  "integerValue": "150"
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "label": {
+                  "stringValue": "Nightstand Sconce"
+                },
+                "code": {
+                  "stringValue": "GR-202"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "issue": {
+                  "stringValue": "NEED INSTALL"
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": ""
+                },
+                "deleted": {
+                  "booleanValue": false
+                }
+              }
+            }
+          },
+          "gr204_a": {
+            "mapValue": {
+              "fields": {
+                "sort": {
+                  "integerValue": "300"
+                },
+                "label": {
+                  "stringValue": "Sconce @ Wall Hook"
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checked": {
+                  "booleanValue": true
+                },
+                "initials": {
+                  "stringValue": "CC"
+                },
+                "checkedByUid": {
+                  "stringValue": "paper"
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "code": {
+                  "stringValue": "GR-204"
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": ""
+                }
+              }
+            }
+          },
+          "gr600_b": {
+            "mapValue": {
+              "fields": {
+                "code": {
+                  "stringValue": "GR-600"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": "NEED PROPER PLACE"
+                },
+                "checkedByUid": {
+                  "stringValue": ""
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checked": {
+                  "booleanValue": false
+                },
+                "initials": {
+                  "stringValue": ""
+                },
+                "sort": {
+                  "integerValue": "110"
+                },
+                "label": {
+                  "stringValue": "Q Mattress"
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                }
+              }
+            }
+          },
+          "gr201_a": {
+            "mapValue": {
+              "fields": {
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": "paper"
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "code": {
+                  "stringValue": "GR-201"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "label": {
+                  "stringValue": "Desk Lamp"
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "sort": {
+                  "integerValue": "290"
+                },
+                "initials": {
+                  "stringValue": "CC"
+                },
+                "checked": {
+                  "booleanValue": true
+                }
+              }
+            }
+          },
+          "gr600_a": {
+            "mapValue": {
+              "fields": {
+                "initials": {
+                  "stringValue": ""
+                },
+                "checked": {
+                  "booleanValue": false
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "label": {
+                  "stringValue": "Q Mattress"
+                },
+                "sort": {
+                  "integerValue": "50"
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": "NEED PROPER PLACE"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "code": {
+                  "stringValue": "GR-600"
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": ""
+                }
+              }
+            }
+          },
+          "gr6001_b": {
+            "mapValue": {
+              "fields": {
+                "sort": {
+                  "integerValue": "120"
+                },
+                "label": {
+                  "stringValue": "Q Bedwrap"
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checked": {
+                  "booleanValue": false
+                },
+                "initials": {
+                  "stringValue": ""
+                },
+                "checkedByUid": {
+                  "stringValue": ""
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "code": {
+                  "stringValue": "GR-600.1"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": "NEED PROPER PLACE"
+                }
+              }
+            }
+          },
+          "gr402_a": {
+            "mapValue": {
+              "fields": {
+                "checkedByUid": {
+                  "stringValue": "uid-redacted-fixture"
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "code": {
+                  "stringValue": "GR-402"
+                },
+                "checkedAt": {
+                  "timestampValue": "2026-08-09T00:13:46.991Z"
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "sort": {
+                  "integerValue": "160"
+                },
+                "checkedAtLocal": {
+                  "timestampValue": "2026-08-09T00:13:45.887Z"
+                },
+                "checkedByName": {
+                  "stringValue": "AJ (name redacted in fixture)"
+                },
+                "label": {
+                  "stringValue": "Divider Drapery"
+                },
+                "checked": {
+                  "booleanValue": true
+                },
+                "initials": {
+                  "stringValue": "AJ"
+                }
+              }
+            }
+          },
+          "gr602_b": {
+            "mapValue": {
+              "fields": {
+                "label": {
+                  "stringValue": "Q Bed Base"
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "sort": {
+                  "integerValue": "130"
+                },
+                "initials": {
+                  "stringValue": ""
+                },
+                "checked": {
+                  "booleanValue": false
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": ""
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": "NEED PROPER PLACE"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "code": {
+                  "stringValue": "GR-602"
+                }
+              }
+            }
+          },
+          "gr308r_a": {
+            "mapValue": {
+              "fields": {
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "code": {
+                  "stringValue": "GR-308R"
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": "paper"
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checked": {
+                  "booleanValue": true
+                },
+                "initials": {
+                  "stringValue": "CC"
+                },
+                "sort": {
+                  "integerValue": "260"
+                },
+                "label": {
+                  "stringValue": "Working Wall @ QQ Connector"
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                }
+              }
+            }
+          },
+          "gr502_a": {
+            "mapValue": {
+              "fields": {
+                "initials": {
+                  "stringValue": "CC"
+                },
+                "checked": {
+                  "booleanValue": true
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "label": {
+                  "stringValue": "Full Length Mirror"
+                },
+                "sort": {
+                  "integerValue": "230"
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "code": {
+                  "stringValue": "GR-502"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": "paper"
+                }
+              }
+            }
+          },
+          "gr200_a": {
+            "mapValue": {
+              "fields": {
+                "sort": {
+                  "integerValue": "210"
+                },
+                "label": {
+                  "stringValue": "Side Table Lamp"
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checked": {
+                  "booleanValue": true
+                },
+                "initials": {
+                  "stringValue": "CC"
+                },
+                "checkedByUid": {
+                  "stringValue": "paper"
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "code": {
+                  "stringValue": "GR-200"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": ""
+                }
+              }
+            }
+          },
+          "gr318_a": {
+            "mapValue": {
+              "fields": {
+                "checkedByUid": {
+                  "stringValue": "paper"
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "code": {
+                  "stringValue": "GR-318"
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "sort": {
+                  "integerValue": "220"
+                },
+                "label": {
+                  "stringValue": "Side Table @ Sofa"
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checked": {
+                  "booleanValue": true
+                },
+                "initials": {
+                  "stringValue": "CC"
+                }
+              }
+            }
+          },
+          "gr322_a": {
+            "mapValue": {
+              "fields": {
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "label": {
+                  "stringValue": "Nightstand @ QQ"
+                },
+                "sort": {
+                  "integerValue": "90"
+                },
+                "initials": {
+                  "stringValue": "CC"
+                },
+                "checked": {
+                  "booleanValue": true
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": "paper"
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "code": {
+                  "stringValue": "GR-322"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                }
+              }
+            }
+          },
+          "gr602_a": {
+            "mapValue": {
+              "fields": {
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": ""
+                },
+                "issue": {
+                  "stringValue": "NEED PROPER PLACE"
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "code": {
+                  "stringValue": "GR-602"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "label": {
+                  "stringValue": "Q Bed Base"
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "sort": {
+                  "integerValue": "70"
+                },
+                "initials": {
+                  "stringValue": ""
+                },
+                "checked": {
+                  "booleanValue": false
+                }
+              }
+            }
+          },
+          "gr100_a": {
+            "mapValue": {
+              "fields": {
+                "initials": {
+                  "stringValue": "CC"
+                },
+                "checked": {
+                  "booleanValue": true
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "label": {
+                  "stringValue": "Ottoman"
+                },
+                "sort": {
+                  "integerValue": "250"
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "code": {
+                  "stringValue": "GR-100"
+                },
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": "paper"
+                }
+              }
+            }
+          },
+          "gr205_a": {
+            "mapValue": {
+              "fields": {
+                "checkedAt": {
+                  "nullValue": null
+                },
+                "code": {
+                  "stringValue": "GR-205"
+                },
+                "issue": {
+                  "stringValue": ""
+                },
+                "issueResolved": {
+                  "booleanValue": false
+                },
+                "checkedByUid": {
+                  "stringValue": "paper"
+                },
+                "deleted": {
+                  "booleanValue": false
+                },
+                "checked": {
+                  "booleanValue": true
+                },
+                "initials": {
+                  "stringValue": "CC"
+                },
+                "sort": {
+                  "integerValue": "180"
+                },
+                "checkedAtLocal": {
+                  "nullValue": null
+                },
+                "checkedByName": {
+                  "stringValue": ""
+                },
+                "label": {
+                  "stringValue": "Floor Lamp"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "updatedAt": {
+      "timestampValue": "2026-08-09T00:13:51.407Z"
+    },
+    "typeLabel": {
+      "stringValue": "QQ STUDIO Connector"
+    },
+    "floor": {
+      "integerValue": "1"
+    },
+    "number": {
+      "stringValue": "101"
+    },
+    "notes": {
+      "mapValue": {
+        "fields": {
+          "n_doorlock": {
+            "mapValue": {
+              "fields": {
+                "createdBy": {
+                  "stringValue": "paper import"
+                },
+                "createdByUid": {
+                  "stringValue": ""
+                },
+                "text": {
+                  "stringValue": "CONNECTING DOOR LOCK – NOT LOCKING"
+                },
+                "createdAt": {
+                  "timestampValue": "2026-07-31T06:04:19.909Z"
+                },
+                "flag": {
+                  "stringValue": "issue"
+                },
+                "resolved": {
+                  "booleanValue": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "type": {
+      "stringValue": "qq-studio-connector"
+    },
+    "deleted": {
+      "booleanValue": false
+    },
+    "createdAt": {
+      "timestampValue": "2026-07-31T06:04:19.909Z"
+    },
+    "schemaV": {
+      "integerValue": "1"
+    }
+  },
+  "createTime": "2026-07-31T06:04:21.269665Z",
+  "updateTime": "2026-08-09T00:13:51.447490Z"
+}

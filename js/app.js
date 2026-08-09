@@ -2,7 +2,11 @@
 import * as store from './store.js';
 import * as screens from './screens.js';
 import { closeSheets } from './sheets.js';
+import { initRefs } from './refs.js';
+import { applyTheme } from './theme.js';
 import { toast, platform } from './util.js';
+
+applyTheme(); // index.html applied it pre-paint; re-assert for module reloads
 
 const root = document.getElementById('app');
 
@@ -143,4 +147,6 @@ async function initSW() {
 }
 
 store.init().then(() => { render(); initSW(); });
+// Reference index loads in parallel; re-render once so 📎 chips appear.
+initRefs().then(() => render());
 render(); // first paint immediately (loading state)
