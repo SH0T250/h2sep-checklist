@@ -3,7 +3,7 @@
 // Bump VERSION on every deploy — it busts the old cache and triggers the
 // in-app "Update available" banner. VERSION must equal 'h2sep-v' + APP_VERSION
 // in js/config.js — install verifies this to defeat CDN mixed-version races.
-const VERSION = 'h2sep-v1.11.0';
+const VERSION = 'h2sep-v1.12.0';
 // Paper-sheet photos live in their own PERMANENT cache — never wiped by app
 // updates. Only room JPGs under /sheets/ may enter it (index.json stays in the
 // versioned shell cache so it can never be shadowed by a stale copy).
@@ -22,7 +22,7 @@ const REFS_CACHE = 'h2sep-refs';
 // serving the old build forever otherwise; renaming it makes activate() drop
 // the previous one and the next open re-downloads exactly once. (v2: the
 // exhibit became room-aware for every QQ Studio Connector.)
-const MODEL_CACHE = 'h2sep-model-2';
+const MODEL_CACHE = 'h2sep-model-3';
 
 const SHELL = [
   './',

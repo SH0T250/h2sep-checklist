@@ -17,7 +17,7 @@ export const firebaseConfig = {
 export const PROJECT_ID = 'h2sep';
 // Must match sw.js VERSION ('h2sep-v' + this) — the service worker verifies
 // the pair at install time and refuses mismatched (mid-deploy) builds.
-export const APP_VERSION = '1.11.0';
+export const APP_VERSION = '1.12.0';
 
 // Rooms that offer the 3D exhibit. The geometry is Room 101's (QQ Wide
 // Connecting) and every QQ Studio Connector shares the same 40-line package,

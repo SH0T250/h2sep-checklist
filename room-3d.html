@@ -1440,10 +1440,50 @@ var FREEZE  = qs.get('freeze') === '1';
 var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 var V3 = function(x,y,z){ return new THREE.Vector3(x,y,z); };
+/* Reflect a world x across the room centreline (no-op when not mirrored). */
+function MX(x){ return MIRROR ? W - x : x; }
+/* Reflect a Y-rotation to match. */
+function MRY(r){ return MIRROR ? -r : r; }
 
 /* room envelope (feet). x = across the 13'-10" width, z = 0 at corridor wall
    running negative to the window wall. y up. */
-var W = 13.17, D = 36.4, H = 9.0, T = 0.35;
+/* ---- PER-ROOM GEOMETRY ----------------------------------------------------
+   Dimensions are the architect's, off A555 ("Enl. Guest Room Plans & Elevs -
+   QQ Std., QQ Ext., & QQ Std. Conn."), which dimensions the QQ family once and
+   tags the variants in the dimension strings themselves:
+
+     QQ standard   12'-8"  bay ·  12'-0"      CLEAR  x  37'-6 1/2" · 36'-5" CLEAR
+     QQ Wide       13'-10" bay ·  12'-11 3/8" CLEAR  @QQ WIDE
+
+   So the six QQ Connecting rooms are ELEVEN INCHES narrower than the two Wide
+   ones — they are not the same room. Depth is common to both.
+
+   `mirror` flips the plan left-for-right about the room centreline. Which side
+   of the double-loaded corridor a room sits on is certain (odd numbers one
+   side, even the other, per A100-A103); `basis` records how each room's
+   handedness was arrived at so nothing here reads as more certain than it is. */
+var ROOM_GEOM = {
+  '101': {w: 12.948, mirror: false, variant: 'QQ Wide Connecting',
+          basis: 'as modelled from A555 @QQ WIDE + the 101 field sheet'},
+  '401': {w: 12.948, mirror: false, variant: 'QQ Wide Connecting',
+          basis: 'same wide bay as 101; A103 labels it QUEEN QUEEN WIDE, adjoins 403'},
+  '103': {w: 12.0, mirror: true,  variant: 'QQ Connecting',
+          basis: 'pairs with 101 — the connecting door is on their shared wall, so the plan reads opposite-hand'},
+  '403': {w: 12.0, mirror: true,  variant: 'QQ Connecting',
+          basis: 'pairs with 401, same relationship as 103 to 101'},
+  '215': {w: 12.0, mirror: false, variant: 'QQ Connecting',
+          basis: 'odd side of the corridor like 101; A101 does not name its connecting partner — HANDEDNESS UNCONFIRMED'},
+  '236': {w: 12.0, mirror: true,  variant: 'QQ Connecting',
+          basis: 'even side of the corridor (opposite hand to the odd side); connects to 238 — CONFIRM ON PLAN'},
+  '336': {w: 12.0, mirror: true,  variant: 'QQ Connecting',
+          basis: 'even side; A102 draws the connecting door in the 336/338 demising wall — CONFIRM ON PLAN'},
+  '436': {w: 12.0, mirror: true,  variant: 'QQ Connecting',
+          basis: 'even side; adjoins 438 — CONFIRM ON PLAN'},
+};
+var ROOM_NO = (new URLSearchParams(location.search).get('room') || '101').trim();
+var GEOM = ROOM_GEOM[ROOM_NO] || ROOM_GEOM['101'];
+var MIRROR = !!GEOM.mirror;
+var W = GEOM.w, D = 36.417, H = 9.0, T = 0.35;
 var BATHX = 6.55, BATHZ = -11.5;              /* bath partition planes */
 var CX = W/2, CZ = -D/2;                      /* room centre */
 
@@ -1580,13 +1620,14 @@ function box(x1,y1,z1, x2,y2,z2, mat, noShadow){
   var m = new THREE.Mesh(BOX, mat);
   m.scale.set(Math.abs(x2-x1), Math.abs(y2-y1), Math.abs(z2-z1));
   m.position.set((x1+x2)/2, (y1+y2)/2, (z1+z2)/2);
+  if (MIRROR) m.position.x = W - m.position.x;
   if (!noShadow){ m.castShadow = true; m.receiveShadow = true; }
   return m;
 }
 function cyl(cx,cz, r, y1,y2, mat){
   var m = new THREE.Mesh(CYL, mat);
   m.scale.set(r, y2-y1, r);
-  m.position.set(cx, (y1+y2)/2, cz);
+  m.position.set(MIRROR ? W - cx : cx, (y1+y2)/2, cz);
   m.castShadow = true;
   return m;
 }
@@ -1663,7 +1704,7 @@ scenery(box(8.6,7.0,-T/2, 11.6,7.35,T/2, MAT.frame));
   slab.position.set(0,3.45,0);
   var g = new THREE.Group();
   g.add(slab); slab.position.set(1.3,3.45,0);
-  g.position.set(8.85,0,-0.1); g.rotation.y = -0.62;
+  g.position.set(MX(8.85),0,-0.1); g.rotation.y = MRY(-0.62);
   g.traverse(function(o){ if(o.isMesh){o.castShadow=true;} });
   scenery(g);
 })();
@@ -1699,7 +1740,7 @@ attach(pDoor, box(W+0.02,0.05,-5.55, W+0.18,6.85,-7.85, cloneMat(MAT.cyanDr))); 
   slab.scale.set(0.16, 6.8, 2.35); slab.position.set(-0.08, 3.45, -1.175);
   slab.castShadow = true; slab.userData.pid = 'GR-3';
   g.add(slab); pickables.push(slab); pDoor.mats.push(slab.material);
-  g.position.set(W-0.12, 0, -5.55); g.rotation.y = -0.1;
+  g.position.set(MX(W-0.12), 0, -5.55); g.rotation.y = MRY(-0.1);
   scenery(g);
 })();
 
@@ -1761,7 +1802,7 @@ function sconce(part, x, y, z, rotY){
   sh.scale.set(0.26,0.5,0.26); sh.position.set(0.44,0.25,0);
   sh.userData.pid = part.id; pickables.push(sh); part.mats.push(sh.material);
   g.add(back); g.add(arm); g.add(sh);
-  g.position.set(x,y,z); g.rotation.y = rotY||0;
+  g.position.set(MX(x),y,z); g.rotation.y = MRY(rotY||0);
   scenery(g);
 }
 var PANELX = 0.28;   /* headboard feature-panel face */
@@ -1799,7 +1840,7 @@ attach(pWW, box(W-2.05,0,-14.35, W-0.5,2.9,-16.55, cloneMat(MAT.woodDk)));      
 attach(pWW, box(W-2.0,6.0,-22.7, W-0.5,6.15,-25.45, cloneMat(MAT.counter)));
 (function(){ var rod = new THREE.Mesh(CYL, MAT.chrome);
   rod.scale.set(0.06, 2.6, 0.06); rod.rotation.x = Math.PI/2;
-  rod.position.set(W-1.25, 5.5, -24.05); scenery(rod); })();
+  rod.position.set(MX(W-1.25), 5.5, -24.05); scenery(rod); })();
 
 /* kitchenette appliances */
 var pFr = reg({id:'901', tag:'901', grp:'app', name:'Refrigerator — Danby 10.1 cu ft', qty:1,
@@ -1965,7 +2006,7 @@ scenery(box(SHX1+0.02,0.42,SHZ2+0.1, SHX1+2.6,6.1,SHZ2+0.05, MAT.glass, true));
 scenery(box(SHX1+2.4,0.42,SHZ2-0.01, SHX2-0.02,6.1,SHZ2-0.06, MAT.glass, true));
 (function(){ var pull = new THREE.Mesh(CYL, MAT.chrome);                     /* 24″ bar pull */
   pull.scale.set(0.05, 2.0, 0.05); pull.rotation.z = Math.PI/2;
-  pull.position.set(SHX1+1.35, 3.4, SHZ2+0.16); pull.castShadow = true;
+  pull.position.set(MX(SHX1+1.35), 3.4, SHZ2+0.16); pull.castShadow = true;
   scenery(pull); })();
 var pSoapD = reg({id:'HD-16', tag:'HD-16', grp:'bath', name:'Shower Soap Dispenser', qty:1, ada:true,
   cat:'Bath Accessory',
@@ -1995,7 +2036,7 @@ attach(pGrab, cyl(5.36, -2.1, 0.09, 3.0, 5.0, cloneMat(MAT.chrome)));
 scenery(box(0.175,0.45,-3.35, 0.24,6.6,-11.3, MAT.tile));
 scenery(box(0.3,0.4,-3.9, 0.95,2.6,-5.3, MAT.porc));
 (function(){ var b = new THREE.Mesh(SPH, MAT.porc);
-  b.scale.set(0.85,0.55,0.72); b.position.set(1.45,1.15,-4.6); b.castShadow=true; scenery(b); })();
+  b.scale.set(0.85,0.55,0.72); b.position.set(MX(1.45),1.15,-4.6); b.castShadow=true; scenery(b); })();
 scenery(cyl(1.45,-4.6,0.62,1.35,1.45,MAT.porc));
 var pTP = reg({id:'HD-03', tag:'HD-03', grp:'bath', name:'Toilet Tissue Dispenser', qty:1, flag:true, ada:true,
   cat:'Bath Accessory',
@@ -2042,13 +2083,13 @@ var pTB = reg({id:'HD-22', tag:'HD-22', grp:'bath', name:'Towel Bar 24″', qty:
   focus:V3(4.0,3.6,-10.9), dist:9});
 (function(){ var bar = new THREE.Mesh(CYL, cloneMat(MAT.chrome));
   bar.scale.set(0.07, 2.0, 0.07); bar.rotation.z = Math.PI/2;
-  bar.position.set(4.0, 3.8, -11.1); bar.castShadow = true;
+  bar.position.set(MX(4.0), 3.8, -11.1); bar.castShadow = true;
   bar.userData.pid = 'HD-22'; pickables.push(bar); pTB.mats.push(bar.material);
   scenery(bar);
   [3.1, 4.9].forEach(function(px){
     var post = new THREE.Mesh(CYL, cloneMat(MAT.chrome));
     post.scale.set(0.05, 0.18, 0.05); post.rotation.x = Math.PI/2;
-    post.position.set(px, 3.8, -11.19);
+    post.position.set(MX(px), 3.8, -11.19);
     post.userData.pid = 'HD-22'; pickables.push(post); pTB.mats.push(post.material);
     scenery(post);
   }); })();
@@ -2084,7 +2125,8 @@ function addLabel(o){
     dot.setAttribute('fill', 'rgba(143,160,173,.8)');
     svg.appendChild(dot);
   }
-  var L = {el:el, line:line, dot:dot, anchor:o.anchor, dx:o.dx, dy:o.dy, w:0, h:0,
+  if (MIRROR && o.anchor) { o.anchor = o.anchor.clone(); o.anchor.x = W - o.anchor.x; }
+  var L = {el:el, line:line, dot:dot, anchor:o.anchor, dx:(MIRROR ? -o.dx : o.dx), dy:o.dy, w:0, h:0,
            part:o.part||null, pri:(o.pri != null ? o.pri : 4), vis:false,
            sx:0, sy:0, lx:0, ly:0};
   labels.push(L);
@@ -2464,6 +2506,9 @@ controls.addEventListener('start', function(){ tween = null; activePreset = null
 function applyView(name, animate){
   var v = VIEWS[name] || VIEWS.iso;
   if (name === 'iso' && isPortrait()) v = ISO_PORTRAIT;
+  // Presets are composed against the un-mirrored plan, so reflect them too or
+  // BATH/KITCH would aim at the wrong end of a mirrored room.
+  if (MIRROR) v = {pos:[MX(v.pos[0]), v.pos[1], v.pos[2]], tgt:[MX(v.tgt[0]), v.tgt[1], v.tgt[2]]};
   activePreset = PRESET_FOCUS[name] ? name : null;
   var pos = V3(v.pos[0], v.pos[1], v.pos[2]), tgt = V3(v.tgt[0], v.tgt[1], v.tgt[2]);
   // Pull back along the view direction so a narrow screen still holds the
@@ -2665,18 +2710,64 @@ if (!FREEZE && !REDUCED && !qs.has('view')){
   if (refs) refs.href = './refs.html?room=' + encodeURIComponent(qsRoom) + '&from=3d' + (demo ? '&demo=1' : '');
   var pr = document.getElementById('bb-print');
   if (pr) pr.href = './print.html' + suffix;
+  /* Connecting partners, off the floor plans: A100 (101/103), A101 (236->238),
+     A102 (336/338 demising wall), A103 (401/403, 436->438). 215's partner is
+     not named on A101 — left blank rather than guessed. */
+  var PARTNER = {'101':'103','103':'101','401':'403','403':'401',
+                 '236':'238','336':'338','436':'438','215':''};
+  var partner = PARTNER[qsRoom] || '';
+  var wide = GEOM.w > 12.5;
+  var typeLine = wide
+    ? 'QQ WIDE CONNECTING &middot; 13&prime;-10&Prime; BAY &middot; 12&prime;-11⅜&Prime; CLEAR'
+    : 'QQ CONNECTING &middot; 12&prime;-8&Prime; BAY &middot; 12&prime;-0&Prime; CLEAR';
+
   if (qsRoom !== '101') {
     document.title = document.title.replace('Room 101', 'Room ' + qsRoom);
     document.querySelectorAll('#ministrip b, #drawerbar b, .tb h1').forEach(function(el){
       el.innerHTML = el.innerHTML.replace(/ROOM 101/g, 'ROOM ' + qsRoom);
     });
-    var cav = document.getElementById('caveat');
-    if (cav) cav.innerHTML = 'TYPICAL LAYOUT MODELED FROM ROOM 101 &middot; SAME 40-LINE PACKAGE &middot; ' + cav.innerHTML;
+  }
+  /* The sidebar TYPE / CONNECTS rows and the two in-scene labels are written
+     for 101; rewrite them for whichever room is actually being shown rather
+     than let a 12-foot room claim to be the 13'-10" wide one. */
+  var metaB = document.querySelectorAll('.meta b');
+  if (metaB[2]) metaB[2].innerHTML = typeLine;
+  if (metaB[3]) metaB[3].innerHTML = partner
+    ? 'ROOM ' + partner + ' &middot; GR-3 PAIR &middot; 1 LEAF/RM'
+    : 'CONNECTING &middot; PARTNER NOT NAMED ON THE FLOOR PLAN';
+  /* Plain split/join, never a regex: this replacement lives inside a template
+     literal in the build script, which silently eats regex backslashes. */
+  function swapText(nodes, from, to){
+    nodes.forEach(function(el){
+      if (el.innerHTML.indexOf(from) !== -1) el.innerHTML = el.innerHTML.split(from).join(to);
+    });
+  }
+  var lbls = [].slice.call(document.querySelectorAll('.lbl'));
+  var legend = [].slice.call(document.querySelectorAll('.legend div'));
+  var rows = [].slice.call(document.querySelectorAll('#sb-scroll .nm'));
+  if (partner) {
+    swapText(lbls, 'ROOM 103 (CONNECTING)', 'ROOM ' + partner + ' (CONNECTING)');
+    swapText(lbls, 'CONN. → 103', 'CONN. → ' + partner);
+    swapText(legend, 'ROOM 103', 'ROOM ' + partner);
+    swapText(rows, 'Room 103', 'Room ' + partner);
+  }
+  /* The in-scene dimension label is written for the wide bay. */
+  if (!wide) swapText(lbls, '13′-10″ WIDE · QQ WIDE CONNECTING',
+                            '12′-0″ CLEAR · QQ CONNECTING');
+
+  var cav = document.getElementById('caveat');
+  if (cav) {
+    cav.innerHTML = (wide ? 'QQ WIDE CONNECTING &middot; 12&prime;-11⅜&Prime; CLEAR'
+                          : 'QQ CONNECTING &middot; 12&prime;-0&Prime; CLEAR')
+      + ' &middot; ' + (GEOM.mirror ? 'MIRRORED PER FLOOR PLAN &middot; ' : '')
+      + 'ITEM LOCATIONS STYLIZED &middot; EXHIBIT ONLY';
   }
 })();
 
 window.__h2sep3d = {
   camera: camera, controls: controls, applyView: applyView,
+  W: W, D: D, mirror: MIRROR, variant: GEOM.variant, basis: GEOM.basis,
+  bathX: MX(BATHX),
   frame: function(){ return {
     aspect: window.innerWidth / window.innerHeight,
     fov: camera.fov,
