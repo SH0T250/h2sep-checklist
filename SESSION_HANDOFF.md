@@ -15,26 +15,27 @@ trust the live systems over this prose where they differ.
 | **Live dashboard** | https://sh0t250.github.io/h2sep-checklist/dashboard.html |
 | **Preview package** | https://sh0t250.github.io/h2sep-checklist/preview101/ (marked SHIPPED, kept for reference) |
 | **App repo (public)** | `SH0T250/h2sep-checklist` — app at root; **deploys = push to `main` AND `main:gh-pages`** (Pages serves gh-pages) |
-| **Private repo** | `SH0T250/Claude` — plans, design docs, tests, backups, tool copies; app source mirror in `app/` (branch `claude/hotel-checklist-app-gqtitq`, PR #25 open) |
+| **Private archive** | `SH0T250/Claude` — ONLY the Firestore backups + the completion-schedule PDF. Everything else moved here in v1.14.0; there is no app mirror and no tools copy any more. |
 | **Database** | Firebase project `h2sep-checklist`, Firestore under `projects/h2sep/…`, anonymous auth, rules enforce shape + PIN-gated admin |
 | **Admin PIN** | not recorded in this repo — ask Austin. (It is also `DEMO_PIN` in `js/config.js`, which is public; see the security note in §Deploy.) |
 | **Reference dataset** | `data/project.sqlite` in the app repo — 115 rooms, 17,635 item rows, 21 categories. THE source of truth for item lists. |
 
-**Versions: v1.13.0 BUILT + TESTED, PR open (not yet deployed).** Floor 1 complete
-under Austin's room names + QQ-family 3D (see §3 rulings 7 and 12). Room DATA is already
-LIVE in Firestore — no deploy needed for it; the pending deploy only affects app code
-(MODEL_ROOMS, sw.js, room-3d.html). v1.12.0 LIVE (deployed + verified 2026-08-09): PER-ROOM
-3D geometry (see §3 ruling 7). v1.11.0: 3D exhibit on all 8 QQ Studio Connectors, room-aware. v1.10.0: submittal/plan reference page (`refs.html`),
-zoom-reveal tags, room-type build-out tooling. Earlier: Dark/light theme, reference
-popups w/ plan snippets, permanent refs cache, ×qty badges (v1.8.0); refs joinability + fidelity
-(v1.8.1); collapsible categories, tap/long-hold hint, live printable door sheet, in-app 3D
-exhibit (v1.9.0). `js/config.js APP_VERSION` must equal `sw.js VERSION` minus the `h2sep-v`
-prefix; the service worker REFUSES mismatched builds.
+**Versions: v1.14.0 BUILT + TESTED, PR #2 open (app code NOT yet deployed).** Room DATA for
+floors 1 and 2 is already LIVE in Firestore (58 rooms) — no deploy needed for it. The pending
+deploy carries the app-code fixes from the v1.13.0 audit, and one of them is CRITICAL: until it
+ships, the printable door sheet on a King room still offers a 3D button that shows room 101's
+QQ geometry relabelled with the King room's number. v1.13.0/v1.12.0 LIVE (deployed 2026-08-09).
+Earlier: 3D on all QQ Studio Connectors (v1.11.0); refs page + build-out tooling (v1.10.0);
+theme, reference popups, ×qty badges (v1.8.0); refs joinability (v1.8.1); collapsible
+categories, live printable sheet, in-app 3D (v1.9.0). `js/config.js APP_VERSION` must equal
+`sw.js VERSION` minus the `h2sep-v` prefix; the service worker REFUSES mismatched builds.
 
-**Deploy runbook:** edit `/app` in private repo → run tests (smoke 87 checks + lifecycle 31 + geom-check 10 + floor1-verify,
-Playwright chromium at `/opt/pw-browsers/chromium`, executablePath is the `/opt/pw-browsers/chromium`
-path itself; suites expect the app served at localhost:8321) → copy into the public repo clone →
-commit → `git push origin main && git push origin main:gh-pages` → wait ~30s → curl the live
+**Deploy runbook:** edit the app IN THIS REPO (there is no mirror to copy from any more) → run
+the suites: `node tests/smoke.mjs`, `tests/geom-check.mjs`, `tests/floor1-verify.mjs`,
+`tests/lifecycle-test.mjs` (Playwright chromium at `/opt/pw-browsers/chromium` — executablePath is
+that path itself; smoke/geom/floor1 expect the app served at localhost:8322, lifecycle spins up its
+OWN server on 8329 so it can never kill the shared one) → commit →
+`git push origin main && git push origin main:gh-pages` → wait ~30s → curl the live
 `sw.js` + `js/config.js` to confirm version; HEAD-check every shell file incl. `refs/` (64 URLs;
 an occasional 503 from Pages is transient — re-curl before believing it), then sha256-compare the
 live bytes against the tested tree.
