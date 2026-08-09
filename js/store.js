@@ -129,19 +129,14 @@ let demoDB = null;
 
 function demoLoad() {
   try { demoDB = JSON.parse(localStorage.getItem(LS_DEMO_DB)); } catch { demoDB = null; }
-  const fresh = !demoDB || !demoDB.rooms;
-  if (fresh) demoDB = { rooms: seedRooms(), floors: { ...FLOORS } };
-  // Demo-only ×qty fixtures: the paper sheet lists every line singly, so
-  // stamp one pack quantity (and one explicit qty of 1) on Room 101 here
-  // purely so the ×qty badge path is visible in demo mode. Live rooms get
-  // qty from the room-package pipeline — never from this seed. Stamped
-  // idempotently OUTSIDE the fresh-seed branch so demo DBs seeded before
-  // v1.8.0 pick the fixtures up too.
-  const it = demoDB.rooms['101'] && demoDB.rooms['101'].items;
-  let stamped = false;
-  if (it && it.gr100_a && it.gr100_a.qty === undefined) { it.gr100_a.qty = 2; stamped = true; }
-  if (it && it.gr318_a && it.gr318_a.qty === undefined) { it.gr318_a.qty = 1; stamped = true; }
-  if (fresh || stamped) demoSave();
+  // The demo fixture now mirrors the live room (40 categorized lines with real
+  // qty), so a DB seeded from an older, differently-shaped fixture has to be
+  // re-seeded or demo mode would keep showing the retired layout.
+  const stale = demoDB && demoDB.rooms && (demoDB.rooms['101'] || {}).schemaV !== 3;
+  if (!demoDB || !demoDB.rooms || stale) {
+    demoDB = { rooms: seedRooms(), floors: { ...FLOORS } };
+    demoSave();
+  }
 }
 function demoSave() { localStorage.setItem(LS_DEMO_DB, JSON.stringify(demoDB)); }
 function demoRefresh() {

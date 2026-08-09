@@ -5,7 +5,7 @@ import * as store from './store.js';
 import * as sheets from './sheets.js';
 import { refsFor } from './refs.js';
 import { getTheme, setTheme, toggleTheme } from './theme.js';
-import { APP_VERSION } from './config.js';
+import { APP_VERSION, MODEL_ROOMS } from './config.js';
 
 // Writing is allowed once initials exist; on iOS it additionally requires the
 // installed (standalone) app — Safari-tab check-offs can be stranded by install.
@@ -225,6 +225,22 @@ const CATEGORY_ORDER = [
 let tradeFilter = null;
 window.addEventListener('hashchange', () => { tradeFilter = null; });
 
+// Collapsed category sections, per room, remembered on this device so a crew
+// member working one trade doesn't re-open the others on every visit. Storage
+// failures (private mode) degrade to "everything open" rather than throwing.
+const LS_COLLAPSED = 'h2sep-collapsed';
+function collapsedSet() {
+  try { return new Set(JSON.parse(localStorage.getItem(LS_COLLAPSED)) || []); }
+  catch { return new Set(); }
+}
+function catKey(roomNumber, cat) { return roomNumber + ' ' + cat; }
+function isCatCollapsed(roomNumber, cat) { return collapsedSet().has(catKey(roomNumber, cat)); }
+function setCatCollapsed(roomNumber, cat, shut) {
+  const s = collapsedSet();
+  s[shut ? 'add' : 'delete'](catKey(roomNumber, cat));
+  try { localStorage.setItem(LS_COLLAPSED, JSON.stringify([...s])); } catch (_) { /* session-only */ }
+}
+
 export function renderRoom(el, number) {
   const room = store.getRoom(number);
   if (!room) {
@@ -331,7 +347,9 @@ export function renderRoom(el, number) {
     <section class="room-head card">
       <div class="rh-top">
         <span class="rh-num">Room ${esc(room.number)}</span>
-        <span class="rh-right"><button class="sheet-btn hidden" data-paper aria-label="View original paper sheet">📄</button>
+        <span class="rh-right">
+        <a class="sheet-btn" href="./print.html?room=${encodeURIComponent(room.number)}" aria-label="Printable checklist sheet">🖨</a>
+        ${MODEL_ROOMS.includes(room.number) ? `<a class="sheet-btn" href="./room-3d.html?room=${encodeURIComponent(room.number)}" aria-label="3D room model">🧊</a>` : ''}
         <span class="rh-type">${esc((room.typeLabel || '').toUpperCase())}</span></span>
       </div>
       <div class="bar rh-bar"><div class="bar-fill" style="width:${s.pct}%"></div></div>
@@ -348,6 +366,7 @@ export function renderRoom(el, number) {
       </details>` : ''}
       ${w ? `<button class="add-note-btn" data-add-note>+ ★ Add room note</button>` : ''}
       ${mostlyDerived ? `<div class="derived-note">Lines come from the room-type package (typicals), not per-room walk.</div>` : ''}
+      <div class="how-line">👆 <b>Tap</b> a line to initial &amp; complete · <b>long-hold</b> for options (issue, notes, refs)</div>
     </section>
 
     ${catMode ? `
@@ -360,9 +379,13 @@ export function renderRoom(el, number) {
       ${groups.map(g => {
         const done = g.rows.filter(([, it]) => it.checked).length;
         const hide = tradeFilter !== null && tradeFilter !== g.cat;
+        const shut = isCatCollapsed(room.number, g.cat);
         return `
-      <section class="cat-group ${hide ? 'hidden' : ''}" data-cat="${esc(g.cat)}">
-        <div class="cat-head">${esc(g.label.toUpperCase())} · ${done}/${g.rows.length}</div>
+      <section class="cat-group ${hide ? 'hidden' : ''}${shut ? ' collapsed' : ''}" data-cat="${esc(g.cat)}">
+        <button class="cat-head" data-cattoggle="${esc(g.cat)}" aria-expanded="${!shut}">
+          <span class="cat-caret" aria-hidden="true">▾</span>
+          <span class="cat-name">${esc(g.label.toUpperCase())} · ${done}/${g.rows.length}</span>
+        </button>
         <div class="item-list" role="list">${g.rows.map(rowHTML).join('')}</div>
       </section>`;
       }).join('')}
@@ -388,13 +411,23 @@ export function renderRoom(el, number) {
 
   el.querySelector('[data-more]').addEventListener('click', () => {
     const sh = sheets.sheet(`
-      <button class="btn ghost full" data-act="paper">📄 Original paper sheet</button>
+      <a class="btn ghost full" href="./print.html?room=${encodeURIComponent(room.number)}">🖨 Printable sheet (for the door)</a>
+      ${MODEL_ROOMS.includes(room.number) ? `<a class="btn ghost full" href="./room-3d.html?room=${encodeURIComponent(room.number)}">🧊 3D room model</a>` : ''}
+      <button class="btn ghost full hidden" data-act="paper">📄 Original paper sheet (photo)</button>
       <button class="btn ghost full" data-act="add-item">+ Add item to this room</button>
       <button class="btn ghost full" data-act="theme">${getTheme() === 'dark' ? '☀ Light mode' : '🌙 Dark mode'}</button>
       <button class="btn ghost full" data-act="edit">Room settings (admin)</button>
       <button class="btn ghost full danger-text" data-act="delete">Delete room (admin)</button>`,
       { title: 'Room ' + room.number });
-    sh.querySelector('[data-act=paper]').addEventListener('click', () => { sh.remove(); sheets.paperSheetOverlay(room.number); });
+    // The original paper photo is history now that the printable sheet is
+    // generated from live data — still reachable, but only for rooms that
+    // actually have a scan. Revealed from the bundled index (offline-safe).
+    const paperBtn = sh.querySelector('[data-act=paper]');
+    paperBtn.addEventListener('click', () => { sh.remove(); sheets.paperSheetOverlay(room.number); });
+    fetch('./sheets/index.json')
+      .then(r => (r.ok ? r.json() : []))
+      .then(list => { if (Array.isArray(list) && list.includes(room.number)) paperBtn.classList.remove('hidden'); })
+      .catch(() => { /* no index cached -> leave it hidden rather than dead */ });
     sh.querySelector('[data-act=theme]').addEventListener('click', () => { sh.remove(); toggleTheme(); });
     sh.querySelector('[data-act=add-item]').addEventListener('click', () => { sh.remove(); addItemFlow(room); });
     sh.querySelector('[data-act=edit]').addEventListener('click', async () => {
@@ -413,14 +446,6 @@ export function renderRoom(el, number) {
     });
   });
 
-  // Show the 📄 button from the bundled sheet list — works offline, no probing.
-  const sheetBtn = el.querySelector('[data-paper]');
-  sheetBtn.addEventListener('click', () => sheets.paperSheetOverlay(room.number));
-  fetch('./sheets/index.json')
-    .then(r => (r.ok ? r.json() : []))
-    .then(list => { if (Array.isArray(list) && list.includes(room.number)) sheetBtn.classList.remove('hidden'); })
-    .catch(() => { /* even the precached index missing -> leave menu entry as the path */ });
-
   // Jump targets always come from ALL items — if the trade filter hides the
   // first match, drop back to All (re-render) so the row is reachable.
   function revealAndScroll(sel) {
@@ -430,6 +455,15 @@ export function renderRoom(el, number) {
       renderRoom(el, number);
       t = el.querySelector(sel);
     }
+    // A collapsed category hides its rows — open the one holding the target,
+    // otherwise the jump silently lands nowhere.
+    const group = t && t.closest('.cat-group.collapsed');
+    if (group) {
+      group.classList.remove('collapsed');
+      const head = group.querySelector('[data-cattoggle]');
+      if (head) head.setAttribute('aria-expanded', 'true');
+      setCatCollapsed(room.number, group.dataset.cat, false);
+    }
     if (t) t.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
   const jump = el.querySelector('[data-jump]');
@@ -438,7 +472,18 @@ export function renderRoom(el, number) {
   if (jumpFlagged) jumpFlagged.addEventListener('click', () => revealAndScroll('.item-row.flagged'));
   el.querySelectorAll('.tchip').forEach(b => b.addEventListener('click', () => {
     tradeFilter = ('tradeAll' in b.dataset) ? null : b.dataset.trade;
+    // Picking a trade means "show me this" — never leave it collapsed-empty.
+    if (tradeFilter !== null) setCatCollapsed(room.number, tradeFilter, false);
     renderRoom(el, number);
+  }));
+
+  // Category collapse: toggle in place (no re-render) so the crew's scroll
+  // position survives, and the header they just tapped stays under the thumb.
+  el.querySelectorAll('[data-cattoggle]').forEach(b => b.addEventListener('click', () => {
+    const group = b.closest('.cat-group');
+    const shut = group.classList.toggle('collapsed');
+    b.setAttribute('aria-expanded', String(!shut));
+    setCatCollapsed(room.number, b.dataset.cattoggle, shut);
   }));
 
   el.querySelectorAll('[data-note]').forEach(b => b.addEventListener('click', () =>
@@ -450,6 +495,14 @@ export function renderRoom(el, number) {
   if (addItem) addItem.addEventListener('click', () => addItemFlow(room));
 
   el.querySelector('[data-top]').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Hand the room over to print.html before navigating. That page is a cold
+  // load with no store behind it, so without this a crew member in a dead
+  // zone would watch it spin — with it, the sheet paints from what this phone
+  // already knows and only refreshes if there is signal.
+  el.querySelectorAll('a[href*="print.html"]').forEach(a => a.addEventListener('click', () => {
+    try { sessionStorage.setItem('h2sep-print-room', JSON.stringify(room)); } catch (_) { /* full/blocked — page falls back to a live read */ }
+  }));
 
   // ---- item interactions ----
   function tapItem(id) {

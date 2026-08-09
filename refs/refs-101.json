@@ -1,4 +1,59 @@
 {
+  "901": [
+    {
+      "kind": "plan",
+      "sheetId": "A550",
+      "title": null,
+      "snippet": null,
+      "note": "callout not found on available sheets"
+    },
+    {
+      "kind": "submittal",
+      "title": "Refridgerator.pdf (Guestroom Appliance PD & Cutsheets)",
+      "driveId": "1tnaLKRKzoqaigwVWmbbmWCV6UwiXOYs9"
+    },
+    {
+      "kind": "submittal",
+      "title": "Danby Refrigerator DFF101B1BSSDB.pdf (Food Service Kitchen Appliance PD & Cutsheet) - same model, Danby-branded duplicate",
+      "driveId": "11UUrE446TshGMdj25qdwkKU_AoZ5JpJl"
+    }
+  ],
+  "902": [
+    {
+      "kind": "plan",
+      "sheetId": "A550",
+      "title": null,
+      "snippet": null,
+      "note": "callout not found on available sheets; per ruling no submittal refs - both 18\" and 24\" dishwasher cutsheets remain FLAGGED, nobody has picked a model"
+    }
+  ],
+  "903": [
+    {
+      "kind": "plan",
+      "sheetId": "A555",
+      "title": null,
+      "snippet": null,
+      "note": "callout not found on available sheets"
+    }
+  ],
+  "904": [
+    {
+      "kind": "plan",
+      "sheetId": "A550",
+      "title": null,
+      "snippet": null,
+      "note": "callout not found on available sheets"
+    }
+  ],
+  "905": [
+    {
+      "kind": "plan",
+      "sheetId": "A550",
+      "title": null,
+      "snippet": null,
+      "note": "callout not found on available sheets"
+    }
+  ],
   "GR-100": [
     {
       "kind": "plan",
@@ -345,72 +400,12 @@
       "title": "Enlarged Bathroom - King Std., Std. Conn., QQ Std., Std Conn., QQ Ext. & QQ Wide (RK Hospitality FF&E Locations ID set)",
       "driveId": "1x5SK_dlzsnm7I4vaE3FTRHNUN1a0K62Z",
       "snippet": "refs/GR-302-ID-5.10.png",
-      "note": "Discrepancy: Austin's bathroom checklist page prints 'GR-302L'; the ID-5.10 plan callout prints 'GR-302'. The FF&E spec describes GR-302 as 'Vanity @ Guest Bath (Left & Right)' - L/R are handing variants of the same vanity; the connector bath takes the left-hand unit per the field sheet. Recorded as printed on the plan."
+      "note": "Discrepancy: Austin's bathroom checklist page prints 'GR-302L'; the ID-5.10 plan callout prints 'GR-302'. The FF&E spec describes GR-302 as 'Vanity @ Guest Bath (Left & Right)' - L/R are handing variants of the same vanity; the connector bath takes the left-hand unit per the field sheet. Recorded as printed on the plan. Submittal check 8/9: the 'Moen Bathroom Vanity Faucet.pdf' cutsheet was REMOVED from this item - the file is a M-Dura single-handle LAVATORY FAUCET (models 9417F12/9419F12), i.e. plumbing trim, not the vanity casegood. Its Drive folder is named 'Bathroom Vanity & Kitchenette Sink & Facuet - PD & Cutsheets' and all 4 files in it are sinks/faucets (MEP scope) - the folder name is what mis-matched it. GR-302's casegood submittal is the RK Hospitality FF&E shop drawing package (vanity: 36in high, 52/76in wide, Wilsonart 5th Ave Elm, Daltile One Quartz top)."
     },
     {
       "kind": "submittal",
       "title": "RK Hospitality FF&E Guest Room - Shop Drawings, Specs & Product Data.pdf",
       "driveId": "1yWG61b5tTRk9a37npjB8gil0JH-0-k-J"
-    },
-    {
-      "kind": "submittal",
-      "title": "Moen Bathroom Vanity Faucet.pdf (Bathroom Vanity & Kitchenette Sink & Facuet)",
-      "driveId": "1cJVzmAEPWJPpKAN9Gm9GemcC1ktzPhdE"
-    }
-  ],
-  "901": [
-    {
-      "kind": "plan",
-      "sheetId": "A550",
-      "title": null,
-      "snippet": null,
-      "note": "callout not found on available sheets"
-    },
-    {
-      "kind": "submittal",
-      "title": "Refridgerator.pdf (Guestroom Appliance PD & Cutsheets)",
-      "driveId": "1tnaLKRKzoqaigwVWmbbmWCV6UwiXOYs9"
-    },
-    {
-      "kind": "submittal",
-      "title": "Danby Refrigerator DFF101B1BSSDB.pdf (Food Service Kitchen Appliance PD & Cutsheet) - same model, Danby-branded duplicate",
-      "driveId": "11UUrE446TshGMdj25qdwkKU_AoZ5JpJl"
-    }
-  ],
-  "902": [
-    {
-      "kind": "plan",
-      "sheetId": "A550",
-      "title": null,
-      "snippet": null,
-      "note": "callout not found on available sheets; per ruling no submittal refs - both 18\" and 24\" dishwasher cutsheets remain FLAGGED, nobody has picked a model"
-    }
-  ],
-  "903": [
-    {
-      "kind": "plan",
-      "sheetId": "A555",
-      "title": null,
-      "snippet": null,
-      "note": "callout not found on available sheets"
-    }
-  ],
-  "904": [
-    {
-      "kind": "plan",
-      "sheetId": "A550",
-      "title": null,
-      "snippet": null,
-      "note": "callout not found on available sheets"
-    }
-  ],
-  "905": [
-    {
-      "kind": "plan",
-      "sheetId": "A550",
-      "title": null,
-      "snippet": null,
-      "note": "callout not found on available sheets"
     }
   ],
   "kn 11": [

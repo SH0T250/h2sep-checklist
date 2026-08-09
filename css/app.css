@@ -461,12 +461,23 @@ b, .code { font-weight: 700; }
 .cat-head {
   /* Slim per-trade header that sticks just under the app bar (which is sticky
      at top and includes the safe-area inset in its height). The demo strip is
-     non-sticky and scrolls away, so no extra offset for it. */
+     non-sticky and scrolls away, so no extra offset for it. It is the
+     collapse control too, so it carries a full-width 44px touch target. */
   position: sticky; top: calc(56px + env(safe-area-inset-top)); z-index: 5;
   background: var(--bg);
+  display: flex; align-items: center; gap: 7px; width: 100%; min-height: 44px; text-align: left;
   font-size: 12.5px; font-weight: 700; letter-spacing: .6px; color: var(--text-2);
   padding: 10px 4px 6px; font-variant-numeric: tabular-nums;
 }
+.cat-caret { font-size: 11px; transition: transform .15s ease; }
+.cat-group.collapsed .cat-caret { transform: rotate(-90deg); }
+.cat-group.collapsed .item-list { display: none; }
+
+.how-line {
+  font-size: 12.5px; color: var(--text-2); line-height: 1.45;
+  margin-top: 10px; padding-top: 9px; border-top: 1px solid var(--hairline);
+}
+.how-line b { color: var(--text); font-weight: 700; }
 
 .item-row.flagged { border-left: 3px solid var(--warn); padding-left: 9px; }
 .verify-chip {

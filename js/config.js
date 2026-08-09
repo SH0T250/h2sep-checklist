@@ -17,7 +17,11 @@ export const firebaseConfig = {
 export const PROJECT_ID = 'h2sep';
 // Must match sw.js VERSION ('h2sep-v' + this) — the service worker verifies
 // the pair at install time and refuses mismatched (mid-deploy) builds.
-export const APP_VERSION = '1.8.0';
+export const APP_VERSION = '1.9.0';
+
+// Rooms that have a built 3D exhibit (room-3d.html). Room 101 only, by
+// standing ruling — the 🧊 button stays hidden everywhere else.
+export const MODEL_ROOMS = ['101'];
 
 // Demo-mode admin PIN (live mode verifies against Firestore config doc).
 export const DEMO_PIN = '6621';

@@ -3,7 +3,7 @@
 // Bump VERSION on every deploy — it busts the old cache and triggers the
 // in-app "Update available" banner. VERSION must equal 'h2sep-v' + APP_VERSION
 // in js/config.js — install verifies this to defeat CDN mixed-version races.
-const VERSION = 'h2sep-v1.8.0';
+const VERSION = 'h2sep-v1.9.0';
 // Paper-sheet photos live in their own PERMANENT cache — never wiped by app
 // updates. Only room JPGs under /sheets/ may enter it (index.json stays in the
 // versioned shell cache so it can never be shadowed by a stale copy).
@@ -12,14 +12,22 @@ const SHEETS_CACHE = 'h2sep-sheets';
 // treatment — they must survive app updates so refs work in dead zones.
 // refs-101.json itself stays in the versioned shell cache (never shadowed).
 const REFS_CACHE = 'h2sep-refs';
+// The 3D exhibit carries an inlined three.js (~590 KB). Precaching that on
+// every version bump would re-download it over cell data for a page most
+// crew open occasionally — so it gets a PERMANENT cache filled on first open
+// instead, and survives app updates like sheets and refs do.
+const MODEL_CACHE = 'h2sep-model';
 
 const SHELL = [
   './',
   './index.html',
   './manifest.webmanifest',
+  './print.html',
   './css/app.css',
+  './css/print.css',
   './js/app.js',
   './js/config.js',
+  './js/print.js',
   './js/refs.js',
   './js/screens.js',
   './js/seed.js',
@@ -65,7 +73,8 @@ self.addEventListener('activate', (e) => {
   // Keep activation INSTANT — never block navigations behind downloads.
   e.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.filter((k) => k !== VERSION && k !== SHEETS_CACHE && k !== REFS_CACHE).map((k) => caches.delete(k)));
+    const keep = [VERSION, SHEETS_CACHE, REFS_CACHE, MODEL_CACHE];
+    await Promise.all(keys.filter((k) => !keep.includes(k)).map((k) => caches.delete(k)));
     await self.clients.claim();
   })());
 });
@@ -140,11 +149,17 @@ self.addEventListener('fetch', (e) => {
   const isSheetJpg = /\/sheets\/[^/]+\.jpg$/.test(url.pathname);
   // Snippet images only — ./refs/refs-101.json stays in the versioned shell.
   const isRefImg = /\/refs\/[^/]+\.(png|jpe?g|webp)$/.test(url.pathname);
-  const isPermanent = isSheetJpg || isRefImg;
+  // The 3D exhibit: cached on first open, then served from the permanent
+  // cache forever (a new build lands under a new file name if it ever needs
+  // to bust). Ignores the ?room= query so one copy serves every entry point.
+  const isModel = /\/room-3d\.html$/.test(url.pathname);
+  const isPermanent = isSheetJpg || isRefImg || isModel;
   e.respondWith((async () => {
-    const cacheName = isSheetJpg ? SHEETS_CACHE : (isRefImg ? REFS_CACHE : VERSION);
+    const cacheName = isSheetJpg ? SHEETS_CACHE : (isRefImg ? REFS_CACHE : (isModel ? MODEL_CACHE : VERSION));
     const c = await caches.open(cacheName);
-    const cached = await c.match(e.request, { ignoreSearch: !isPermanent });
+    // Sheets/refs are exact file URLs; the model is one document reached with
+    // different ?room= values, so it matches ignoring the query.
+    const cached = await c.match(e.request, { ignoreSearch: !isPermanent || isModel });
     if (cached) return cached;
     try {
       const resp = await fetch(e.request);
@@ -153,9 +168,11 @@ self.addEventListener('fetch', (e) => {
       }
       return resp;
     } catch (err) {
-      // Offline navigation to an uncached URL -> serve the app shell.
+      // Offline navigation to an uncached URL -> serve the app shell. The
+      // shell always lives in the VERSION cache, never in a permanent one.
       if (e.request.mode === 'navigate') {
-        const shell = await c.match('./index.html');
+        const shellCache = await caches.open(VERSION);
+        const shell = await shellCache.match('./index.html');
         if (shell) return shell;
       }
       throw err;
