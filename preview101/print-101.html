@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Room 101 — QQ Studio Connector · H2SEP Punch Sheet</title>
+<style>
+  :root {
+    --ink: #111;
+    --red: #C00000;
+    --cyan: #02A9E0;
+    --rule: #d8d8d8;
+    --muted: #6b6b6b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: Calibri, Carlito, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: #e9ebee;
+    font-size: 15px;
+    line-height: 1.25;
+  }
+  .sheet {
+    background: #fff;
+    width: 8.5in;
+    max-width: 100%;
+    margin: 24px auto;
+    padding: 0.55in 0.6in 0.5in;
+    box-shadow: 0 2px 14px rgba(0,0,0,.18);
+  }
+
+  /* ---- header ---- */
+  .hdr {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid #000;
+    position: relative;
+  }
+  .hdr::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -6px;
+    border-bottom: 1.5px solid var(--cyan);
+  }
+  .hdr img { height: 44px; display: block; }
+  .hdr .proj {
+    text-align: right;
+    font-size: 11.5px;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+  .hdr .proj b { font-size: 12.5px; letter-spacing: .02em; }
+  .hdr .proj .mut { color: var(--muted); }
+
+  /* ---- title block: the paper's centered two-line bold heading ---- */
+  .title {
+    text-align: center;
+    margin: 22px 0 6px;
+  }
+  .title h1 {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: .01em;
+  }
+  .title h2 {
+    font-size: 29px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .title .meta {
+    margin-top: 7px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: .03em;
+  }
+  .title .meta b { color: var(--ink); }
+
+  /* ---- two-column item area, paper-style ---- */
+  .items {
+    margin-top: 14px;
+    column-count: 2;
+    column-gap: 0.42in;
+  }
+  .cat { break-inside: avoid-column; margin-bottom: 10px; }
+  .cat-head {
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--ink);
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: 2px;
+    margin-bottom: 6px;
+    break-after: avoid;
+  }
+  .cat-head::before {
+    content: "";
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--cyan);
+    margin-right: 6px;
+  }
+  .item {
+    display: grid;
+    grid-template-columns: 1fr 44px;
+    align-items: center;
+    column-gap: 10px;
+    padding: 2.5px 0;
+    break-inside: avoid;
+  }
+  .item-text { font-size: 15px; }
+  .tag  { font-weight: 700; }
+  .dash { font-weight: 400; }
+  .qty {
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 2px 5px 2.5px;
+    border: 1.25px solid var(--ink);
+    border-radius: 9px;
+    vertical-align: 1px;
+  }
+  .issue {
+    color: var(--red);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .nw { white-space: nowrap; }   /* unbreakable chips: short issues, ⚑ FLAGGED */
+  .flag {
+    color: var(--red);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    vertical-align: 1px;
+  }
+  .inote {
+    font-size: 11px;
+    font-style: italic;
+    color: var(--muted);
+    margin-top: 1px;
+  }
+  .box {
+    width: 44px;
+    height: 32px;
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--red);
+    justify-self: end;
+  }
+
+  /* ---- room note (the paper's red star line) — page-1 headline position ---- */
+  .room-note {
+    font-size: 15.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--red);
+    break-inside: avoid;
+  }
+  .room-note.top {
+    text-align: center;
+    margin: 9px 0 0;
+  }
+  /* page-2 repeat is print-only; on screen the sheet is continuous and the
+     top note is already in view */
+  .room-note.cont { display: none; }
+
+  /* ---- footer ---- */
+  .ftr {
+    margin-top: 18px;
+    padding-top: 6px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-size: 10.5px;
+    color: var(--muted);
+    letter-spacing: .03em;
+  }
+
+  /* ---- print-only continuation header (page 2) ---- */
+  .cont-head { display: none; }
+
+  @media print {
+    body { background: #fff; font-size: 15px; }
+    .sheet {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+    a { color: inherit; text-decoration: none; }
+    .p2 { break-before: page; }
+    .cont-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 3px solid #000;
+      padding-bottom: 5px;
+      margin-bottom: 12px;
+    }
+    .cont-head b { font-size: 16px; letter-spacing: .01em; }
+    .cont-head span { font-size: 11.5px; color: var(--muted); }
+    .room-note.cont { display: block; margin: 0 0 10px; }
+  }
+  @page { size: Letter portrait; margin: 0.5in 0.55in; }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header class="hdr">
+    <img src="data:image/png;base64,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" alt="Triun Construction &amp; Engineering">
+    <div class="proj">
+      <b>H2SEP · Home2 Suites by Hilton — Eagle Pass, TX</b><br>
+      Triun Job 24030 · 115 Keys<br>
+      <span class="mut">Room Turnover Checklist · FF&amp;E / Appliance / Bath Accessory scope</span>
+    </div>
+  </header>
+
+  <div class="title">
+    <h1>ROOM #101</h1>
+    <h2>QQ STUDIO Connector</h2>
+    <div class="meta">Floor 1 &nbsp;·&nbsp; QQ Wide Connecting (13&#8242;-10&#8243; wide · 535 SF) &nbsp;·&nbsp; <b>Connects to Room 103</b></div>
+<div class="room-note top">★ CONNECTING DOOR LOCK – NOT LOCKING</div>
+  </div>
+
+  <div class="items">
+<section class="cat">
+<h3 class="cat-head">Casegoods</h3>
+<div class="item"><div class="item-text"><b class="tag">GR-300</b><span class="dash"> – </span><span class="lbl">Queen <span class="nw">Headboard&nbsp;<span class="qty">×2</span></span></span></div><div class="box done">CC</div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-302</b><span class="dash"> – </span><span class="lbl">Vanity @ Guest Bath</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-308</b><span class="dash"> – </span><span class="lbl">Working Wall @ Queen Queen Studio Suite Connector</span>&nbsp;<span class="flag nw">⚑&nbsp;FLAGGED</span><div class="inote">one continuous run</div></div><div class="box done">CC</div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-318</b><span class="dash"> – </span><span class="lbl">Sofa Table @ Sofa</span></div><div class="box done">CC</div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-321</b><span class="dash"> – </span><span class="lbl">Wall Shelf @ Bathroom</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-322</b><span class="dash"> – </span><span class="lbl">Nightstand @ Queen Queen</span>&nbsp;<span class="flag nw">⚑&nbsp;FLAGGED</span><div class="inote">paper sheet counted 3: GR-319 @ R / GR-322 / GR-323 @ L — DB carries 1 (tagged once on A555); confirm count on A555</div></div><div class="box done">CC</div></div>
+</section>
+<section class="cat">
+<h3 class="cat-head">Bedding</h3>
+<div class="item"><div class="item-text"><b class="tag">GR-600</b><span class="dash"> – </span><span class="lbl">Queen Mattress <span class="nw">Set&nbsp;<span class="qty">×2</span></span></span> <span class="issue">&#8212;&nbsp;NEED PROPER PLACE</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-600.1</b><span class="dash"> – </span><span class="lbl">Queen Box Spring <span class="nw">Cover&nbsp;<span class="qty">×2</span></span></span> <span class="issue">&#8212;&nbsp;NEED PROPER PLACE</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-602</b><span class="dash"> – </span><span class="lbl">Queen Bed <span class="nw">Base&nbsp;<span class="qty">×2</span></span></span> <span class="issue">&#8212;&nbsp;NEED PROPER PLACE</span></div><div class="box"></div></div>
+</section>
+<section class="cat">
+<h3 class="cat-head">Seating</h3>
+<div class="item"><div class="item-text"><b class="tag">GR-100</b><span class="dash"> – </span><span class="lbl">Ottoman</span></div><div class="box done">CC</div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-101</b><span class="dash"> – </span><span class="lbl">Sleeper Sofa</span></div><div class="box done">CC</div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-103</b><span class="dash"> – </span><span class="lbl">Ergonomic Task Chair</span>&nbsp;<span class="issue nw">&#8212;&nbsp;IN BOX</span></div><div class="box"></div></div>
+</section>
+<section class="cat">
+<h3 class="cat-head">Lighting</h3>
+<div class="item"><div class="item-text"><b class="tag">GR-200</b><span class="dash"> – </span><span class="lbl">Side Table Lamp</span></div><div class="box done">CC</div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-201</b><span class="dash"> – </span><span class="lbl">Desk Lamp</span></div><div class="box done">CC</div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-203</b><span class="dash"> – </span><span class="lbl">Vanity Sconce</span><div class="inote">legend prints &#x27;VANITY SCONE&#x27; sic</div></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-204</b><span class="dash"> – </span><span class="lbl">Sconce @ Wall Hook</span></div><div class="box done">CC</div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-205</b><span class="dash"> – </span><span class="lbl">Floor Lamp</span></div><div class="box done">CC</div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-207</b><span class="dash"> – </span><span class="lbl">Nightstand Sconce @ QUEEN QUEEN CENTER, between the beds</span>&nbsp;<span class="issue nw">&#8212;&nbsp;?</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-208</b><span class="dash"> – </span><span class="lbl">Nightstand Sconce @ QUEEN QUEEN <span class="nw">SIDE&nbsp;<span class="qty">×2</span></span></span> <span class="issue">&#8212;&nbsp;NEED INSTALL</span></div><div class="box"></div></div>
+</section>
+<section class="cat">
+<h3 class="cat-head">Window Treatments</h3>
+<div class="item"><div class="item-text"><b class="tag">GR-400</b><span class="dash"> – </span><span class="lbl">Blackout &amp; Sheer Roller Shade, MANUAL</span></div><div class="box done">CC</div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-402</b><span class="dash"> – </span><span class="lbl">Divider Drapery</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-402.1</b><span class="dash"> – </span><span class="lbl">Divider Drapery Hardware</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-403</b><span class="dash"> – </span><span class="lbl">Closet Drapery @ Guest Suite</span></div><div class="box"></div></div>
+</section>
+<section class="cat">
+<h3 class="cat-head">Art / Mirror</h3>
+<div class="item"><div class="item-text"><b class="tag">GR-500</b><span class="dash"> – </span><span class="lbl">Art Above Sofa</span></div><div class="box done">CC</div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-501</b><span class="dash"> – </span><span class="lbl">Vanity Mirror</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">GR-502</b><span class="dash"> – </span><span class="lbl">Full Length Mirror</span></div><div class="box done">CC</div></div>
+</section>
+  </div>
+
+  <div class="p2">
+    <div class="cont-head">
+      <b>ROOM #101 &nbsp;·&nbsp; QQ STUDIO Connector</b>
+      <span>H2SEP · Triun Job 24030 &nbsp;·&nbsp; page 2 — Appliances &amp; Bath Accessories</span>
+    </div>
+<div class="room-note cont">★ CONNECTING DOOR LOCK – NOT LOCKING</div>
+    <div class="items">
+<section class="cat">
+<h3 class="cat-head">Appliances</h3>
+<div class="item"><div class="item-text"><b class="tag">901</b><span class="dash"> – </span><span class="lbl">Refrigerator - Danby DFF101B1BSSDB, 10.1 cu ft apartment-size top-mount, stainless, 115 V / 160 W, R600a, ENERGY STAR</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">902</b><span class="dash"> – </span><span class="lbl">Dishwasher - Danby DDW18D1ESS (18&quot;, 10 place settings) or DDW2404EBSS (24&quot;, 12 place settings)</span>&nbsp;<span class="flag nw">⚑&nbsp;FLAGGED</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">903</b><span class="dash"> – </span><span class="lbl">Television</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">904</b><span class="dash"> – </span><span class="lbl">Clock / radio</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">905</b><span class="dash"> – </span><span class="lbl">Telephone</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">kn 11</b><span class="dash"> – </span><span class="lbl">Over-the-range microwave, wall-affixed - Danby DOM16A2SSDB, 1.6 cu ft, 1000 W, 300 CFM, mounting brackets included</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><span class="lbl">Garbage disposer</span>&nbsp;<span class="flag nw">⚑&nbsp;FLAGGED</span></div><div class="box"></div></div>
+</section>
+<section class="cat">
+<h3 class="cat-head">Bath Accessories</h3>
+<div class="item"><div class="item-text"><b class="tag">HD-03</b><span class="dash"> – </span><span class="lbl">Toilet Tissue Dispenser</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">HD-08</b><span class="dash"> – </span><span class="lbl">Grab Bar ADA 24&quot; VERTICAL MOUNT</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">HD-12</b><span class="dash"> – </span><span class="lbl">Robe / Coat <span class="nw">Hook&nbsp;<span class="qty">×2</span></span></span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">HD-16</b><span class="dash"> – </span><span class="lbl">Shower Soap Dispenser, surface mounted, guestroom</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">HD-18</b><span class="dash"> – </span><span class="lbl">Shower Footrest, surface mounted</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">HD-21</b><span class="dash"> – </span><span class="lbl">Soap Dish, surface mounted</span></div><div class="box"></div></div>
+<div class="item"><div class="item-text"><b class="tag">HD-22</b><span class="dash"> – </span><span class="lbl">Towel Bar 24&quot;</span></div><div class="box"></div></div>
+</section>
+    </div>
+  </div>
+
+  <footer class="ftr">
+    <span>Template v3 · 40 lines / 46 units · sources A550 · A555 · A530</span>
+    <span>Initials in box = verified in room · red = open issue</span>
+  </footer>
+</div>
+</body>
+</html>

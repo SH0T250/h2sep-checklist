@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>H2SEP — Level 1 WBS mock</title>
+<meta name="theme-color" content="#0B0D10">
+<style>
+/* ===== Triun brand theme — copied from the live app's css/app.css ===== */
+:root {
+  --brand: #02A9E0; --brand-dark: #027FA8; --black: #0B0D10;
+  --app-bar-bg: #0B0D10; --app-bar-fg: #FFFFFF;
+  --bg: #F0F3F6; --surface: #FFFFFF; --text: #14181D; --text-2: #5C6B78;
+  --accent: #027FA8; --done: #1E7A34; --done-tint: #C6EFCE;
+  --issue: #C00000; --issue-tint: #FFC7CE; --warn: #9C6500; --warn-tint: #FFEB9C;
+  --ink: #C00000; --hairline: #DAE1E7; --radius: 12px;
+  --shadow: 0 1px 2px rgba(0,0,0,.06);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.4; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+a { color: inherit; text-decoration: none; }
+.muted { color: var(--text-2); font-size: 13px; }
+.appbar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 4px;
+  height: 56px; padding: 0 4px; background: var(--app-bar-bg); color: var(--app-bar-fg); }
+.ab-btn { min-width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 22px; color: var(--app-bar-fg); border-radius: 8px; }
+.ab-title { font-size: 17px; font-weight: 700; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 4px; }
+.content { max-width: 640px; margin: 0 auto; padding: 16px 16px 96px; }
+.card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); }
+.seg { display: flex; background: var(--surface); border-radius: 10px; overflow: hidden; margin-bottom: 12px; box-shadow: var(--shadow); }
+.seg-btn { flex: 1; height: 40px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text-2); }
+.seg-btn.on { background: var(--brand); color: var(--black); }
+.bar { height: 8px; background: var(--hairline); border-radius: 999px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--done); border-radius: 999px; }
+.badge { min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: var(--issue);
+  color: #fff; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+.done-glyph { color: var(--done); font-weight: 800; }
+.room-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; }
+.room-card { position: relative; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow);
+  min-height: 96px; padding: 10px 10px 12px; display: flex; flex-direction: column; gap: 2px; }
+.room-card.done { background: #EAF7EE; }
+.room-card.issues { border-left: 3px solid var(--issue); }
+.rc-num { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.rc-type { font-size: 10.5px; text-transform: uppercase; letter-spacing: .4px; color: var(--text-2); flex: 1; }
+.ada { border: 1px solid var(--text-2); border-radius: 4px; padding: 0 3px; font-size: 9px; }
+.rc-bar { height: 6px; margin-top: 4px; }
+.tr { position: absolute; top: 8px; right: 8px; }
+
+/* ===== NEW: WBS group shells (proposed) ===== */
+.wbs-group { margin-bottom: 14px; }
+.wbs-head {
+  width: 100%; display: flex; align-items: center; gap: 12px; text-align: left;
+  padding: 14px 16px; min-height: 64px;
+  background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow);
+  border-top: 3px solid var(--brand);
+}
+.wbs-head:active { background: #F7FBFD; }
+.wbs-chev { flex: 0 0 auto; font-size: 15px; color: var(--text-2); transition: transform .18s ease-out; }
+.wbs-group.open .wbs-chev { transform: rotate(90deg); }
+.wbs-name { font-size: 17px; font-weight: 700; }
+.wbs-sub { font-size: 13px; color: var(--text-2); }
+.wbs-left { flex: 1; min-width: 0; }
+.wbs-right { display: flex; align-items: center; gap: 8px; }
+.wbs-pct { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.wbs-bar { height: 6px; margin-top: 8px; }
+.wbs-body { display: none; padding-top: 10px; }
+.wbs-group.open .wbs-body { display: block; }
+
+/* space cards — Common Areas list */
+.space-list { display: flex; flex-direction: column; gap: 8px; }
+.space-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; min-height: 60px;
+  background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); position: relative; }
+.space-card.issues { border-left: 3px solid var(--issue); }
+.space-card.done { background: #EAF7EE; }
+.sc-no { flex: 0 0 46px; font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.sc-main { flex: 1; min-width: 0; }
+.sc-name { font-size: 15px; font-weight: 600; }
+.sc-sub { font-size: 12px; color: var(--text-2); }
+.sc-bar { height: 5px; margin-top: 5px; max-width: 180px; }
+.sc-right { display: flex; align-items: center; gap: 8px; }
+.sc-pct { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--text-2); }
+.space-card.soon { opacity: .55; }
+.soon-chip { font-size: 10.5px; font-weight: 700; letter-spacing: .4px; color: var(--text-2);
+  border: 1px solid var(--hairline); border-radius: 6px; padding: 2px 6px; text-transform: uppercase; }
+.sub-head { font-size: 12.5px; font-weight: 700; letter-spacing: .6px; color: var(--text-2);
+  padding: 12px 4px 6px; text-transform: uppercase; }
+.mock-strip { background: var(--warn-tint); color: var(--warn); font-size: 12.5px; font-weight: 600;
+  text-align: center; padding: 6px 12px; }
+</style>
+</head>
+<body>
+  <header class="appbar">
+    <a class="ab-btn" href="#" aria-label="Back">‹</a>
+    <h1 class="ab-title">Level 1</h1>
+    <button class="ab-btn" aria-label="Go to room">⌕</button>
+  </header>
+  <div class="mock-strip">DESIGN MOCK — WBS floor view · not live data</div>
+  <main class="content">
+    <div class="seg">
+      <a class="seg-btn on" href="#">1</a><a class="seg-btn" href="#">2</a>
+      <a class="seg-btn" href="#">3</a><a class="seg-btn" href="#">4</a>
+    </div>
+
+    <!-- ========== WBS: Level 1 > Guestrooms ========== -->
+    <section class="wbs-group open" id="g-rooms">
+      <button class="wbs-head" data-toggle="g-rooms" aria-expanded="true">
+        <span class="wbs-chev">▶</span>
+        <span class="wbs-left">
+          <span class="wbs-name">Guestrooms</span>
+          <div class="wbs-sub">16 rooms · 101–118</div>
+          <!-- % / bar / badge are computed from the room cards by the script below -->
+          <div class="bar wbs-bar"><div class="bar-fill" style="width:28%"></div></div>
+        </span>
+        <span class="wbs-right"><span class="wbs-pct">28%</span><span class="badge">3</span></span>
+      </button>
+      <div class="wbs-body">
+        <div class="room-grid">
+          <a class="room-card issues" href="#"><span class="badge tr">1</span>
+            <div class="rc-num">101</div><div class="rc-type">QQ STU CONN</div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:78%"></div></div></a>
+          <a class="room-card" href="#"><div class="rc-num">103</div><div class="rc-type">QQ CONN</div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:55%"></div></div></a>
+          <a class="room-card done" href="#"><span class="done-glyph tr">✓</span>
+            <div class="rc-num">104</div><div class="rc-type">K STU</div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:100%"></div></div></a>
+          <a class="room-card" href="#"><div class="rc-num">105</div><div class="rc-type">QQ</div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:40%"></div></div></a>
+          <a class="room-card done" href="#"><span class="done-glyph tr">✓</span>
+            <div class="rc-num">106</div><div class="rc-type">K STU</div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:100%"></div></div></a>
+          <a class="room-card issues" href="#"><span class="badge tr">2</span>
+            <div class="rc-num">107</div><div class="rc-type">QQ</div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:62%"></div></div></a>
+          <a class="room-card" href="#"><div class="rc-num">108</div><div class="rc-type">K STU</div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:15%"></div></div></a>
+          <a class="room-card" href="#"><div class="rc-num">109</div><div class="rc-type">QQ</div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:0%"></div></div></a>
+          <a class="room-card" href="#"><div class="rc-num">110</div><div class="rc-type">K STU</div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:0%"></div></div></a>
+          <a class="room-card" href="#"><div class="rc-num">111</div><div class="rc-type">QQ</div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:0%"></div></div></a>
+          <a class="room-card" href="#"><div class="rc-num">112</div><div class="rc-type">K STU</div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:0%"></div></div></a>
+          <a class="room-card" href="#"><div class="rc-num">113</div><div class="rc-type">QQ</div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:0%"></div></div></a>
+          <a class="room-card" href="#"><div class="rc-num">114</div><div class="rc-type">K STU</div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:0%"></div></div></a>
+          <a class="room-card" href="#"><div class="rc-num">115</div><div class="rc-type">QQ</div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:0%"></div></div></a>
+          <a class="room-card" href="#"><div class="rc-num">116</div><div class="rc-type">K STU CONN</div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:0%"></div></div></a>
+          <a class="room-card" href="#"><div class="rc-num">118</div><div class="rc-type">K STU CONN <span class="ada">ADA</span></div>
+            <div class="bar rc-bar"><div class="bar-fill" style="width:0%"></div></div></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== WBS: Level 1 > Common Areas ========== -->
+    <section class="wbs-group open" id="g-common">
+      <button class="wbs-head" data-toggle="g-common" aria-expanded="true">
+        <span class="wbs-chev">▶</span>
+        <span class="wbs-left">
+          <span class="wbs-name">Common Areas</span>
+          <div class="wbs-sub">39 spaces · public + back of house</div>
+          <!-- % / bar / badge are computed from the space cards by the script below -->
+          <div class="bar wbs-bar"><div class="bar-fill" style="width:2%"></div></div>
+        </span>
+        <span class="wbs-right"><span class="wbs-pct">2%</span><span class="badge">1</span></span>
+      </button>
+      <div class="wbs-body">
+        <div class="sub-head">Public</div>
+        <div class="space-list">
+          <a class="space-card" href="#"><span class="sc-no">003</span>
+            <span class="sc-main"><span class="sc-name">Lobby</span>
+              <div class="sc-sub">131 items · FF&amp;E + finishes</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:31%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">31%</span></span></a>
+          <a class="space-card issues" href="#"><span class="sc-no">121</span>
+            <span class="sc-main"><span class="sc-name">Guest Corridor</span>
+              <div class="sc-sub">12 items · doors 121A/121B</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:42%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">42%</span><span class="badge">1</span></span></a>
+          <a class="space-card" href="#"><span class="sc-no">004</span>
+            <span class="sc-main"><span class="sc-name">Reception</span>
+              <div class="sc-sub">18 items · open to lobby</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:0%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">0%</span></span></a>
+          <a class="space-card" href="#"><span class="sc-no">005</span>
+            <span class="sc-main"><span class="sc-name">Market</span>
+              <div class="sc-sub">24 items · Home2 Market, open</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:0%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">0%</span></span></a>
+          <a class="space-card" href="#"><span class="sc-no">001</span>
+            <span class="sc-main"><span class="sc-name">Vestibule</span>
+              <div class="sc-sub">7 items · doors 001A/001B</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:0%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">0%</span></span></a>
+          <a class="space-card" href="#"><span class="sc-no">006</span>
+            <span class="sc-main"><span class="sc-name">Breakfast</span>
+              <div class="sc-sub">28 items</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:18%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">18%</span></span></a>
+          <a class="space-card" href="#"><span class="sc-no">023</span>
+            <span class="sc-main"><span class="sc-name">Fitness Room</span>
+              <div class="sc-sub">41 items · equipment by others</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:0%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">0%</span></span></a>
+          <a class="space-card" href="#"><span class="sc-no">024</span>
+            <span class="sc-main"><span class="sc-name">Guest Laundry</span>
+              <div class="sc-sub">24 items</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:0%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">0%</span></span></a>
+          <a class="space-card" href="#"><span class="sc-no">018</span>
+            <span class="sc-main"><span class="sc-name">Meeting Room</span>
+              <div class="sc-sub">17 items · doors 018A/018B</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:0%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">0%</span></span></a>
+          <a class="space-card" href="#"><span class="sc-no">019</span>
+            <span class="sc-main"><span class="sc-name">Womens</span>
+              <div class="sc-sub">36 items · public RR</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:0%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">0%</span></span></a>
+          <a class="space-card" href="#"><span class="sc-no">020</span>
+            <span class="sc-main"><span class="sc-name">Men's</span>
+              <div class="sc-sub">36 items · public RR</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:0%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">0%</span></span></a>
+          <a class="space-card" href="#"><span class="sc-no">027</span>
+            <span class="sc-main"><span class="sc-name">Unisex</span>
+              <div class="sc-sub">39 items · public RR</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:0%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">0%</span></span></a>
+          <a class="space-card" href="#"><span class="sc-no">137</span>
+            <span class="sc-main"><span class="sc-name">Elev. Lobby</span>
+              <div class="sc-sub">10 items</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:0%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">0%</span></span></a>
+          <a class="space-card" href="#"><span class="sc-no">139</span>
+            <span class="sc-main"><span class="sc-name">Ice Machine</span>
+              <div class="sc-sub">5 items · alcove</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:0%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">0%</span></span></a>
+          <a class="space-card" href="#"><span class="sc-no">A</span>
+            <span class="sc-main"><span class="sc-name">Entry / Porte-Cochere Lounge</span>
+              <div class="sc-sub">Zone A · 45 items · exterior FF&amp;E</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:0%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">0%</span></span></a>
+          <a class="space-card" href="#"><span class="sc-no">B</span>
+            <span class="sc-main"><span class="sc-name">Pool Deck / Patio</span>
+              <div class="sc-sub">Zone B · 58 items · exterior FF&amp;E</div>
+              <div class="bar sc-bar"><div class="bar-fill" style="width:0%"></div></div></span>
+            <span class="sc-right"><span class="sc-pct">0%</span></span></a>
+        </div>
+
+        <div class="sub-head">Back of house</div>
+        <div class="space-list">
+          <div class="space-card soon"><span class="sc-no">007</span>
+            <span class="sc-main"><span class="sc-name">Food Prep</span><div class="sc-sub">46 items</div></span>
+            <span class="sc-right"><span class="soon-chip">Coming soon</span></span></div>
+          <div class="space-card soon"><span class="sc-no">015</span>
+            <span class="sc-main"><span class="sc-name">Laundry</span><div class="sc-sub">10 items</div></span>
+            <span class="sc-right"><span class="soon-chip">Coming soon</span></span></div>
+          <div class="space-card soon"><span class="sc-no">032</span>
+            <span class="sc-main"><span class="sc-name">Housekeeping</span><div class="sc-sub">7 items</div></span>
+            <span class="sc-right"><span class="soon-chip">Coming soon</span></span></div>
+          <div class="space-card soon" data-count="20"><span class="sc-no">…</span>
+            <span class="sc-main"><span class="sc-name">+ 20 more BOH spaces</span>
+              <div class="sc-sub">Servery, offices, storage, mech/elec, stairs…</div></span>
+            <span class="sc-right"><span class="soon-chip">Coming soon</span></span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+<script>
+document.querySelectorAll('[data-toggle]').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var g = document.getElementById(b.dataset.toggle);
+    var open = g.classList.toggle('open');
+    b.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+
+// Group headers are COMPUTED from their child cards (never hand-typed):
+// weighted average of card progress (cards without a bar = 0%; the "+ N more"
+// summary card carries data-count) and a sum of the card issue badges.
+document.querySelectorAll('.wbs-group').forEach(function (g) {
+  var wsum = 0, psum = 0, issues = 0;
+  g.querySelectorAll('.wbs-body .room-card, .wbs-body .space-card').forEach(function (c) {
+    var w = Number(c.dataset.count || 1);
+    var f = c.querySelector('.rc-bar .bar-fill, .sc-bar .bar-fill');
+    psum += (f ? parseFloat(f.style.width) || 0 : 0) * w;
+    wsum += w;
+    var bdg = c.querySelector('.badge');
+    if (bdg) issues += Number(bdg.textContent) || 0;
+  });
+  var pct = wsum ? Math.round(psum / wsum) : 0;
+  g.querySelector('.wbs-pct').textContent = pct + '%';
+  g.querySelector('.wbs-bar .bar-fill').style.width = pct + '%';
+  var hb = g.querySelector('.wbs-head .badge');
+  if (hb) {
+    hb.textContent = issues;
+    if (!issues) hb.style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>

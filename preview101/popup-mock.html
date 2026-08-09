@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Room 101 — reference popup mock</title>
+<meta name="theme-color" content="#0B0D10">
+<style>
+/* ===== Triun brand theme — copied from the live app's css/app.css ===== */
+:root {
+  --brand: #02A9E0; --brand-dark: #027FA8; --black: #0B0D10;
+  --app-bar-bg: #0B0D10; --app-bar-fg: #FFFFFF;
+  --bg: #F0F3F6; --surface: #FFFFFF; --text: #14181D; --text-2: #5C6B78;
+  --accent: #027FA8; --done: #1E7A34; --done-tint: #C6EFCE;
+  --issue: #C00000; --issue-tint: #FFC7CE; --warn: #9C6500; --warn-tint: #FFEB9C;
+  --ink: #C00000; --hairline: #DAE1E7; --radius: 12px;
+  --shadow: 0 1px 2px rgba(0,0,0,.06);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.4; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+a { color: inherit; text-decoration: none; }
+.hidden { display: none !important; }
+.appbar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 4px;
+  height: 56px; padding: 0 4px; background: var(--app-bar-bg); color: var(--app-bar-fg); }
+.ab-btn { min-width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 22px; color: var(--app-bar-fg); border-radius: 8px; }
+.ab-title { font-size: 17px; font-weight: 700; flex: 1; padding: 0 4px; }
+.content { max-width: 640px; margin: 0 auto; padding: 16px 16px 96px; }
+.card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); }
+.bar { height: 8px; background: var(--hairline); border-radius: 999px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--done); border-radius: 999px; }
+.room-head { padding: 14px 16px; margin-bottom: 12px; border-top: 3px solid var(--brand); }
+.rh-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.rh-num { font-size: 24px; font-weight: 700; }
+.rh-type { font-size: 12px; text-transform: uppercase; letter-spacing: .5px; color: var(--text-2); font-weight: 600; }
+.rh-bar { height: 10px; margin: 10px 0 6px; }
+.rh-line { font-size: 14px; color: var(--text-2); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.issue-jump { color: var(--issue); font-weight: 700; font-size: 14px; }
+.note-row { display: flex; gap: 8px; width: 100%; text-align: left; align-items: flex-start;
+  min-height: 44px; padding: 10px 0 0; font-size: 15px; }
+.note-row.red { color: var(--issue); font-weight: 700; }
+.note-row .star { color: var(--issue); }
+.chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: 0 0 auto; height: 44px; padding: 0 14px; border-radius: 999px; font-size: 13.5px; font-weight: 600;
+  background: var(--surface); color: var(--text-2); box-shadow: var(--shadow); white-space: nowrap; }
+.chip.on { background: var(--brand); color: var(--black); font-weight: 700; }
+.cat-head { position: sticky; top: 56px; z-index: 5; background: var(--bg);
+  font-size: 12.5px; font-weight: 700; letter-spacing: .6px; color: var(--text-2);
+  padding: 10px 4px 6px; font-variant-numeric: tabular-nums; }
+.cat-group { margin-bottom: 12px; }
+.item-list { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.item-row { display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 8px 6px 8px 12px;
+  border-bottom: 1px solid var(--hairline); position: relative; }
+.item-row:last-child { border-bottom: none; }
+.item-row.checked { background: rgba(30,122,52,.05); }
+.item-row.flagged { border-left: 3px solid var(--warn); padding-left: 9px; }
+.box { flex: 0 0 44px; width: 44px; height: 44px; border: 2px solid var(--text-2); border-radius: 6px;
+  position: relative; display: flex; align-items: center; justify-content: center; background: var(--surface); }
+.item-row.checked .box { border-color: var(--done); }
+.item-row.issue .box { border-color: var(--issue); }
+.ink { color: var(--ink); font-weight: 700; font-size: 16px; text-transform: uppercase; transform: rotate(-3deg); }
+.box-flag { position: absolute; top: -2px; right: 0; font-size: 11px; color: var(--issue); }
+.item-main { flex: 1; min-width: 0; padding: 4px 0; }
+.item-line1 { display: flex; gap: 6px; flex-wrap: wrap; align-items: baseline; }
+.item-line1 .lbl { overflow-wrap: anywhere; }
+.code { font-weight: 700; }
+.item-note { font-size: 13px; font-weight: 700; letter-spacing: .3px; color: var(--issue); text-transform: uppercase; margin-top: 2px; }
+.inst { font-size: 11px; color: var(--text-2); white-space: nowrap; }
+.flag-btn { flex: 0 0 44px; width: 44px; height: 44px; margin-left: 8px; font-size: 20px; color: var(--hairline);
+  display: flex; align-items: center; justify-content: center; }
+.flag-btn.on { color: var(--issue); }
+.verify-chip { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .3px;
+  color: var(--text-2); border: 1px solid var(--hairline); border-radius: 6px; padding: 1px 6px; margin-top: 3px; }
+.verify-chip.warn { color: var(--warn); background: var(--warn-tint); border-color: var(--warn-tint); }
+.mock-strip { background: var(--warn-tint); color: var(--warn); font-size: 12.5px; font-weight: 600;
+  text-align: center; padding: 6px 12px; }
+
+/* ===== NEW: qty badge (dedupe rule — one line per tag) ===== */
+.qty { display: inline-flex; align-items: center; height: 18px; padding: 0 7px; border-radius: 999px;
+  background: var(--brand); color: var(--black); font-size: 11.5px; font-weight: 800;
+  font-variant-numeric: tabular-nums; }
+/* ===== NEW: reference chip on rows ===== */
+.ref-count { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700;
+  color: var(--accent); border: 1px solid var(--hairline); border-radius: 6px; padding: 1px 6px; margin-top: 3px; }
+
+/* ===== bottom sheet (matches live .scrim/.sheet) ===== */
+.scrim { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.4);
+  display: flex; align-items: flex-end; justify-content: center; opacity: 0; transition: opacity .2s; }
+.scrim.open { opacity: 1; }
+.sheet { width: 100%; max-width: 640px; background: var(--surface); border-radius: 16px 16px 0 0;
+  box-shadow: 0 -4px 24px rgba(0,0,0,.18); padding: 8px 16px 20px;
+  transform: translateY(24px); transition: transform .2s ease-out; max-height: 80vh; overflow-y: auto; }
+.scrim.open .sheet { transform: translateY(0); }
+.sheet-grab { width: 36px; height: 4px; border-radius: 2px; background: var(--hairline); margin: 4px auto 10px; }
+.sheet-title { font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+.sheet-sub { font-size: 13px; color: var(--text-2); margin-bottom: 12px; }
+.sheet-body { display: flex; flex-direction: column; gap: 10px; }
+.ref-section-head { font-size: 12.5px; font-weight: 700; letter-spacing: .6px; color: var(--text-2);
+  text-transform: uppercase; margin-top: 6px; }
+.ref-link { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
+  min-height: 56px; padding: 8px 12px; border: 1.5px solid var(--hairline); border-radius: 10px; }
+.ref-link:active { background: rgba(2,169,224,.08); border-color: var(--brand); }
+.ref-link.disabled { opacity: .55; border-style: dashed; cursor: default; }
+.ref-link.disabled:active { background: none; border-color: var(--hairline); }
+.ref-tag { flex: 0 0 auto; font-size: 10px; font-weight: 700; letter-spacing: .4px; color: var(--warn);
+  background: var(--warn-tint); border-radius: 6px; padding: 2px 6px; text-transform: uppercase; }
+.paper-note { font-size: 11.5px; color: var(--text-2); font-style: italic; margin-top: 2px; }
+.ref-ico { flex: 0 0 36px; height: 36px; border-radius: 8px; background: var(--bg);
+  display: flex; align-items: center; justify-content: center; font-size: 17px; }
+.ref-main { flex: 1; min-width: 0; }
+.ref-name { font-size: 14px; font-weight: 700; }
+.ref-path { font-size: 12px; color: var(--text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ref-open { color: var(--accent); font-size: 18px; }
+.no-refs { color: var(--text-2); font-size: 14px; padding: 6px 0; }
+
+/* ===== NEW: full-screen Drive preview popup (matches live .paper-view) ===== */
+.pop-scrim { position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,.65);
+  display: flex; align-items: center; justify-content: center; }
+.paper-view { width: 100%; max-width: 720px; height: 100%; background: #fff; display: flex; flex-direction: column; }
+.paper-bar { display: flex; align-items: center; gap: 8px; padding: 10px 12px;
+  background: var(--black); color: #fff; font-weight: 700; font-size: 14px; }
+.paper-bar .t { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.paper-close { color: #fff; font-size: 18px; min-width: 44px; height: 44px; }
+.pop-frame { flex: 1; border: none; width: 100%; background: #E8EBEF; }
+/* offline / load-failure fallback: cached-metadata card (plan §2 Offline behavior) */
+.pop-fallback { flex: 1; background: #E8EBEF; display: flex; align-items: center; justify-content: center; padding: 24px 20px; }
+.fb-card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow);
+  border-top: 3px solid var(--brand); padding: 20px 18px; max-width: 380px; width: 100%; text-align: center; }
+.fb-ico { font-size: 34px; margin-bottom: 8px; }
+.fb-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.fb-meta { font-size: 12px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
+  color: var(--text-2); margin-bottom: 6px; }
+.fb-path { font-size: 12.5px; color: var(--text-2); margin-bottom: 12px; overflow-wrap: anywhere; }
+.fb-msg { font-size: 13.5px; color: var(--text); background: var(--warn-tint); color: var(--warn);
+  font-weight: 600; border-radius: 8px; padding: 10px 12px; }
+.pop-foot { display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+  border-top: 1px solid var(--hairline); background: var(--surface); }
+.pop-hint { flex: 1; font-size: 12px; color: var(--text-2); }
+.btn { min-height: 44px; border-radius: 10px; font-weight: 700; font-size: 14px; padding: 0 16px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.btn.primary { background: var(--black); color: #fff; }
+</style>
+</head>
+<body>
+  <header class="appbar">
+    <a class="ab-btn" href="#" aria-label="Back">‹</a>
+    <h1 class="ab-title">Room 101</h1>
+    <button class="ab-btn" aria-label="More">⋮</button>
+  </header>
+  <div class="mock-strip">DESIGN MOCK — FF&amp;E template + tap a row → references popup</div>
+  <main class="content">
+    <section class="room-head card">
+      <div class="rh-top">
+        <span class="rh-num">Room 101</span>
+        <span class="rh-type">QQ STUDIO CONNECTOR</span>
+      </div>
+      <div class="bar rh-bar"><div class="bar-fill" id="rh-fill" style="width:0%"></div></div>
+      <div class="rh-line"><span id="rh-count"></span> <button class="issue-jump" id="rh-issues"></button></div>
+      <div class="rh-line" style="margin-top:4px">QQ Wide Connecting · 13'-10" wide · 535 sqft · connects to 103</div>
+      <button class="note-row red"><span class="star">★</span> CONNECTING DOOR LOCK — NOT LOCKING</button>
+    </section>
+    <div class="chips" id="chips"></div>
+    <div id="groups"></div>
+  </main>
+
+  <!-- item detail bottom sheet -->
+  <div class="scrim hidden" id="item-scrim">
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-grab"></div>
+      <div class="sheet-title" id="sh-title"></div>
+      <div class="sheet-sub" id="sh-sub"></div>
+      <div class="sheet-body" id="sh-body"></div>
+    </div>
+  </div>
+
+  <!-- Drive preview popup -->
+  <div class="pop-scrim hidden" id="pop">
+    <div class="paper-view">
+      <div class="paper-bar">
+        <span class="t" id="pop-title"></span>
+        <button class="paper-close" id="pop-close" aria-label="Close">✕</button>
+      </div>
+      <iframe class="pop-frame" id="pop-frame" src="about:blank" allow="autoplay" referrerpolicy="no-referrer"></iframe>
+      <!-- cached-metadata fallback — shown when offline / Drive unreachable / ~6 s load timeout -->
+      <div class="pop-fallback hidden" id="pop-fb">
+        <div class="fb-card">
+          <div class="fb-ico" id="fb-ico"></div>
+          <div class="fb-name" id="fb-name"></div>
+          <div class="fb-meta" id="fb-meta"></div>
+          <div class="fb-path" id="fb-path"></div>
+          <div class="fb-msg" id="fb-msg"></div>
+        </div>
+      </div>
+      <div class="pop-foot">
+        <span class="pop-hint">Preview needs signal &amp; Drive access. If it doesn't load —</span>
+        <a class="btn primary" id="pop-open" href="#" target="_blank" rel="noopener">Open in Drive ↗</a>
+      </div>
+    </div>
+  </div>
+
+<script>
+// ---- REAL Drive references (fetched from Austin's Drive 2026-08-07) ----
+// These mirror links-101.json 1:1: every mapped submittal for a tag renders as
+// a ref row (including Danby-branded duplicate cutsheets — Austin sees those
+// browsing either folder), every empty submittals[] renders "No submittal…".
+var REFS = {
+  moen:   { name: 'Submittal — Moen Bathroom Vanity Faucet', ico: '📄', kind: 'submittal', size: '783 KB',
+            path: 'Submittals / Bathroom Vanity & Kitchenette Sink & Faucet', id: '1cJVzmAEPWJPpKAN9Gm9GemcC1ktzPhdE' },
+  rkGuest:{ name: 'Shop Drawings — RK Hospitality Guest Room FF&E', ico: '📐', kind: 'shop drawings', size: '35.6 MB',
+            path: 'Submittals / RK Hospitality FF&E Guest Room.pdf (35.6 MB)', id: '1yWG61b5tTRk9a37npjB8gil0JH-0-k-J' },
+  id54:   { name: 'ID-5.4 — Interior detail (sheet extract)', ico: '🗒',
+            path: 'Not wired: plotted ID-5.4 PDF not in Drive yet — .txt extract only', id: '1Afmu-SX0TYX0aL770gDWbWAnIFWjJkiD',
+            disabled: true },
+  fridge: { name: 'Cutsheet — Danby Refrigerator DFF101B1BSSDB', ico: '📄', kind: 'cutsheet',
+            path: 'Submittals / Guestroom Appliance PD & Cutsheets', id: '1tnaLKRKzoqaigwVWmbbmWCV6UwiXOYs9' },
+  fridgeD:{ name: 'Cutsheet — Danby Refrigerator (Danby-branded duplicate, same model)', ico: '📄', kind: 'cutsheet',
+            path: 'Submittals / Food Service Kitchen Appliance PD & Cutsheet', id: '11UUrE446TshGMdj25qdwkKU_AoZ5JpJl' },
+  dw18:   { name: 'Cutsheet — 18" Dishwasher (Danby DDW18D1ESS)', ico: '📄', kind: 'cutsheet',
+            path: 'Submittals / Guestroom Appliance PD & Cutsheets', id: '1lJpWa3JJrU2hzNO28UKU4ZBNUPU6i_qt' },
+  dw24:   { name: 'Cutsheet — 24" Dishwasher (Danby DDW2404EBSS)', ico: '📄', kind: 'cutsheet',
+            path: 'Submittals / Guestroom Appliance PD & Cutsheets', id: '1_SA9AFa9FUR1A8jM8tYDwdUVDRTm1T6-' },
+  dw24d:  { name: 'Cutsheet — Danby Dishwasher DDW2404EBSS (duplicate of the 24" only — NOT a selection signal)', ico: '📄', kind: 'cutsheet',
+            path: 'Submittals / Food Service Kitchen Appliance PD & Cutsheet', id: '1lvwLfJQPcD_qRPyv4MNT_hl7_UpDXtUc' },
+  micro:  { name: 'Cutsheet — Over-the-Range Microwave DOM16A2SSDB', ico: '📄', kind: 'cutsheet',
+            path: 'Submittals / Guestroom Appliance PD & Cutsheets', id: '1rso_P1-kO2fpSXrAmYb6-y_Udt7TDNpw' },
+  microD: { name: 'Cutsheet — Danby OTR DOM16A2SSDB (Danby-branded duplicate, same model)', ico: '📄', kind: 'cutsheet',
+            path: 'Submittals / Food Service Kitchen Appliance PD & Cutsheet', id: '1KrnAUpZLbxVzQy7abn9YlsszQd-7mqSE' },
+  disposer:{ name: 'Cutsheet — Moen Garbage Disposal MGXP33C (candidate)', ico: '📄', kind: 'cutsheet',
+            path: 'Submittals / Food Service Kitchen Appliance PD & Cutsheet', id: '1vBFDnZIwHDKtPj0q6b3U5zXaorDdnZGx' },
+  kal:    { name: 'Submittal — Kalisher Art Imagery', ico: '🖼', kind: 'submittal',
+            path: 'Submittals / Kalisher - Art Imagrey Submittal.pdf', id: '1nat4040zyhiVEI1ZIlB4f-5iUrzGj95D' },
+  divider:{ name: 'Spec Sheet — RK Guest Room Divider', ico: '📄', kind: 'spec sheet',
+            path: 'Submittals / RK Hospitality Room Divider Spec Sheet.pdf', id: '1qSz_8IPYyxxsiIwHorKKVRHcUYfrbWFE' }
+};
+
+// ---- Room 101 template scope (FF&E + Appliance + Bath Accessory), DEDUPED:
+// one line per tag with a qty badge; distinct-meaning instances keep their line.
+var ITEMS = [
+ { cat:'Bath Accessory', tag:'HD-03', lbl:'Toilet Tissue Dispenser', rel:'MEDIUM' },
+ { cat:'Bath Accessory', tag:'HD-08', lbl:'Grab Bar ADA 24" VERTICAL MOUNT', rel:'MEDIUM' },
+ { cat:'Bath Accessory', tag:'HD-12', lbl:'Robe / Coat Hook', qty:2, chk:'CC' },
+ { cat:'Bath Accessory', tag:'HD-16', lbl:'Shower Soap Dispenser, surface mounted', chk:'CC' },
+ { cat:'Bath Accessory', tag:'HD-18', lbl:'Shower Footrest, surface mounted', chk:'CC' },
+ { cat:'Bath Accessory', tag:'HD-21', lbl:'Soap Dish, surface mounted', chk:'CC' },
+ { cat:'Bath Accessory', tag:'HD-22', lbl:'Towel Bar 24"', chk:'CC' },
+ { cat:'Appliance', tag:'901', lbl:'Refrigerator — Danby DFF101B1BSSDB, 10.1 cu ft, stainless', chk:'CC', refs:['fridge','fridgeD'] },
+ { cat:'Appliance', tag:'902', lbl:'Dishwasher — Danby DDW18D1ESS (18") or DDW2404EBSS (24")', rel:'FLAGGED', refs:['dw18','dw24','dw24d'] },
+ { cat:'Appliance', tag:'903', lbl:'Television' },
+ { cat:'Appliance', tag:'904', lbl:'Clock / radio' },
+ { cat:'Appliance', tag:'905', lbl:'Telephone' },
+ { cat:'Appliance', tag:'kn 11', lbl:'Over-the-range microwave, wall-affixed — Danby DOM16A2SSDB', refs:['micro','microD'] },
+ { cat:'Appliance', tag:'', lbl:'Garbage disposer', rel:'FLAGGED', refs:['disposer'] },
+ { cat:'FF&E - Casegoods', tag:'GR-300', lbl:'Queen Headboard', qty:2, chk:'CC', refs:['rkGuest','id54'] },
+ { cat:'FF&E - Casegoods', tag:'GR-302', lbl:'Vanity @ Guest Bath', refs:['rkGuest','moen','id54'] },
+ { cat:'FF&E - Casegoods', tag:'GR-308', lbl:'Working Wall @ QQ Studio Suite Connector', inst:'one continuous run', rel:'FLAGGED', refs:['rkGuest'],
+   pnote:'Paper sheet: GR-308R ×2, both boxes CC — deliberately reset here pending VERIFY (db: one working wall per key; the sheet’s ×2 is unresolved)' },
+ { cat:'FF&E - Casegoods', tag:'GR-318', lbl:'Sofa Table @ Sofa', chk:'CC', refs:['rkGuest'] },
+ { cat:'FF&E - Casegoods', tag:'GR-321', lbl:'Wall Shelf @ Bathroom', refs:['rkGuest'] },
+ { cat:'FF&E - Casegoods', tag:'GR-322', lbl:'Nightstand @ Queen Queen', inst:'tagged once on A555', chk:'CC', refs:['rkGuest'] },
+ { cat:'FF&E - Bedding', tag:'GR-600', lbl:'Queen Mattress Set', qty:2, issue:'NEED PROPER PLACE' },
+ { cat:'FF&E - Bedding', tag:'GR-600.1', lbl:'Queen Box Spring Cover', qty:2, issue:'NEED PROPER PLACE' },
+ { cat:'FF&E - Bedding', tag:'GR-602', lbl:'Queen Bed Base', qty:2, issue:'NEED PROPER PLACE' },
+ { cat:'FF&E - Seating', tag:'GR-100', lbl:'Ottoman', chk:'CC', refs:['rkGuest'] },
+ { cat:'FF&E - Seating', tag:'GR-101', lbl:'Sleeper Sofa', chk:'CC', refs:['rkGuest'] },
+ { cat:'FF&E - Seating', tag:'GR-103', lbl:'Ergonomic Task Chair', issue:'IN BOX' },
+ { cat:'FF&E - Lighting', tag:'GR-200', lbl:'Side Table Lamp', chk:'CC' },
+ { cat:'FF&E - Lighting', tag:'GR-201', lbl:'Desk Lamp', chk:'CC' },
+ { cat:'FF&E - Lighting', tag:'GR-203', lbl:'Vanity Sconce' },
+ { cat:'FF&E - Lighting', tag:'GR-204', lbl:'Sconce @ Wall Hook', chk:'CC' },
+ { cat:'FF&E - Lighting', tag:'GR-205', lbl:'Floor Lamp', chk:'CC' },
+ { cat:'FF&E - Lighting', tag:'GR-207', lbl:'Nightstand Sconce @ QQ CENTER, between the beds' },
+ { cat:'FF&E - Lighting', tag:'GR-208', lbl:'Nightstand Sconce @ QQ SIDE', qty:2, issue:'NEED INSTALL' },
+ { cat:'FF&E - Window', tag:'GR-400', lbl:'Blackout & Sheer Roller Shade, MANUAL', chk:'CC' },
+ { cat:'FF&E - Window', tag:'GR-402', lbl:'Divider Drapery', refs:['divider'] },
+ { cat:'FF&E - Window', tag:'GR-402.1', lbl:'Divider Drapery Hardware', refs:['divider'] },
+ { cat:'FF&E - Window', tag:'GR-403', lbl:'Closet Drapery @ Guest Suite' },
+ { cat:'FF&E - Art / Mirror', tag:'GR-500', lbl:'Art Above Sofa', chk:'CC', refs:['kal'] },
+ { cat:'FF&E - Art / Mirror', tag:'GR-501', lbl:'Vanity Mirror' },
+ { cat:'FF&E - Art / Mirror', tag:'GR-502', lbl:'Full Length Mirror', chk:'CC' }
+];
+
+var CAT_ORDER = ['Bath Accessory','Appliance','FF&E - Casegoods','FF&E - Bedding',
+  'FF&E - Seating','FF&E - Lighting','FF&E - Window','FF&E - Art / Mirror'];
+var filter = null;
+
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+// live (tappable) refs only — disabled refs (e.g. ID-5.4 text extract) don't count as wired
+function liveRefs(it){ return (it.refs||[]).filter(function(k){ return !REFS[k].disabled; }); }
+
+function renderHead(){
+  var done = ITEMS.filter(function(i){return i.chk;}).length;
+  var pct = Math.round(done / ITEMS.length * 100);
+  var issues = ITEMS.filter(function(i){return i.issue;}).length;
+  document.getElementById('rh-fill').style.width = pct + '%';
+  document.getElementById('rh-count').textContent = done + '/' + ITEMS.length + ' checked · ' + pct + '%';
+  document.getElementById('rh-issues').textContent = '⚠ ' + issues + ' issue' + (issues === 1 ? '' : 's');
+}
+
+function render(){
+  renderHead();
+  var chips = '<button class="chip'+(filter===null?' on':'')+'" data-f="">All · '+ITEMS.length+'</button>';
+  CAT_ORDER.forEach(function(c){
+    var n = ITEMS.filter(function(i){return i.cat===c;}).length;
+    chips += '<button class="chip'+(filter===c?' on':'')+'" data-f="'+esc(c)+'">'+esc(c.replace('FF&E - ',''))+' · '+n+'</button>';
+  });
+  document.getElementById('chips').innerHTML = chips;
+
+  var html = '';
+  CAT_ORDER.forEach(function(c){
+    if (filter !== null && filter !== c) return;
+    var rows = ITEMS.filter(function(i){return i.cat===c;});
+    var done = rows.filter(function(i){return i.chk;}).length;
+    html += '<section class="cat-group"><div class="cat-head">'+esc(c.toUpperCase())+' · '+done+'/'+rows.length+'</div><div class="item-list" role="list">';
+    rows.forEach(function(it){
+      var i = ITEMS.indexOf(it);
+      var cls = 'item-row' + (it.chk?' checked':'') + (it.issue?' issue':'') + (it.rel==='FLAGGED'?' flagged':'');
+      html += '<div class="'+cls+'" role="listitem" data-i="'+i+'">'
+        + '<button class="box" aria-label="check">'
+        + (it.chk?'<span class="ink">'+esc(it.chk)+'</span>':'')
+        + (it.issue?'<span class="box-flag">⚑</span>':'') + '</button>'
+        + '<div class="item-main"><div class="item-line1">'
+        + (it.tag?'<b class="code">'+esc(it.tag)+'</b> ':'')
+        + '<span class="lbl">'+esc(it.lbl)+'</span>'
+        + (it.qty>1?'<span class="qty">×'+it.qty+'</span>':'')
+        + '</div>'
+        + (it.rel==='FLAGGED'?'<div class="verify-chip warn">⚠ VERIFY — sources disagree</div>':'')
+        + (it.rel==='MEDIUM'?'<div class="verify-chip">verify</div>':'')
+        + (it.issue?'<div class="item-note">— '+esc(it.issue)+'</div>':'')
+        + (it.pnote?'<div class="paper-note">'+esc(it.pnote)+'</div>':'')
+        + (function(){ var n = liveRefs(it).length;
+            return n ? '<div class="ref-count">📎 '+n+' ref'+(n>1?'s':'')+'</div>' : ''; })()
+        + '</div>'
+        + (it.inst?'<span class="inst">'+esc(it.inst)+'</span>':'')
+        + '<button class="flag-btn'+(it.issue?' on':'')+'" aria-label="Flag">⚑</button>'
+        + '</div>';
+    });
+    html += '</div></section>';
+  });
+  document.getElementById('groups').innerHTML = html;
+
+  document.querySelectorAll('.chip').forEach(function(b){
+    b.addEventListener('click', function(){ filter = b.dataset.f || null; render(); });
+  });
+  document.querySelectorAll('.item-row').forEach(function(r){
+    r.addEventListener('click', function(){ openItem(ITEMS[Number(r.dataset.i)]); });
+  });
+}
+
+// ---- item detail sheet with reference links ----
+var scrim = document.getElementById('item-scrim');
+function openItem(it){
+  document.getElementById('sh-title').textContent = (it.tag?it.tag+' — ':'') + it.lbl + (it.qty>1?'  ×'+it.qty:'');
+  document.getElementById('sh-sub').textContent = it.cat + (it.inst?' · '+it.inst:'') + (it.chk?' · checked by '+it.chk:'');
+  var b = '';
+  if (it.issue) b += '<div class="item-note">— '+esc(it.issue)+'</div>';
+  if (it.pnote) b += '<div class="paper-note">'+esc(it.pnote)+'</div>';
+  b += '<div class="ref-section-head">References</div>';
+  if (it.refs && it.refs.length){
+    it.refs.forEach(function(k){
+      var r = REFS[k];
+      if (r.disabled){
+        // per plan: ID-5.4 "detail" refs are NOT wired until the plotted PDFs
+        // are in Drive — a .txt preview looks broken to a foreman.
+        b += '<div class="ref-link disabled" aria-disabled="true">'
+          + '<span class="ref-ico">'+r.ico+'</span>'
+          + '<span class="ref-main"><span class="ref-name">'+esc(r.name)+'</span>'
+          + '<div class="ref-path">'+esc(r.path)+'</div></span>'
+          + '<span class="ref-tag">Extract only</span></div>';
+        return;
+      }
+      b += '<button class="ref-link" data-ref="'+k+'">'
+        + '<span class="ref-ico">'+r.ico+'</span>'
+        + '<span class="ref-main"><span class="ref-name">'+esc(r.name)+'</span>'
+        + '<div class="ref-path">'+esc(r.path)+'</div></span>'
+        + '<span class="ref-open">›</span></button>';
+    });
+  }
+  if (!it.refs || !it.refs.length){
+    b += '<div class="no-refs">No submittal or detail linked to this item yet.</div>';
+  }
+  document.getElementById('sh-body').innerHTML = b;
+  scrim.classList.remove('hidden');
+  requestAnimationFrame(function(){ scrim.classList.add('open'); });
+  document.querySelectorAll('[data-ref]').forEach(function(el){
+    el.addEventListener('click', function(e){ e.stopPropagation(); openPop(REFS[el.dataset.ref]); });
+  });
+}
+scrim.addEventListener('click', function(e){
+  if (e.target === scrim){ scrim.classList.remove('open'); setTimeout(function(){ scrim.classList.add('hidden'); }, 200); }
+});
+
+// ---- Drive preview popup (with the plan §2 offline / load-failure fallback) ----
+var pop = document.getElementById('pop');
+var popFrame = document.getElementById('pop-frame');
+var popFb = document.getElementById('pop-fb');
+var popTimer = null;
+var POP_TIMEOUT_MS = 6000; // plan §2: ~6 s load timeout → cached-metadata card
+
+function showFallback(r, why){
+  clearTimeout(popTimer);
+  popFrame.classList.add('hidden');
+  popFrame.src = 'about:blank';
+  document.getElementById('fb-ico').textContent = r.ico;
+  document.getElementById('fb-name').textContent = r.name;
+  document.getElementById('fb-meta').textContent = 'PDF' + (r.kind ? ' · ' + r.kind : '') + (r.size ? ' · ' + r.size : '');
+  document.getElementById('fb-path').textContent = r.path;
+  document.getElementById('fb-msg').textContent = (why === 'offline')
+    ? 'You’re offline — this preview opens when you have signal.'
+    : 'Preview didn’t load — no signal, or this network can’t reach Drive. Cached details above; "Open in Drive" may still work from the Drive app.';
+  popFb.classList.remove('hidden');
+}
+
+function openPop(r){
+  document.getElementById('pop-title').textContent = r.name;
+  document.getElementById('pop-open').href = 'https://drive.google.com/file/d/' + r.id + '/view';
+  popFb.classList.add('hidden');
+  popFrame.classList.remove('hidden');
+  pop.classList.remove('hidden');
+  clearTimeout(popTimer);
+  if (!navigator.onLine){ showFallback(r, 'offline'); return; }
+  popFrame.src = 'https://drive.google.com/file/d/' + r.id + '/preview';
+  // Failure detection: the iframe's own load event is NOT a usable signal —
+  // Chromium fires it even when the navigation fails and an error page commits
+  // (verified headlessly). So: a no-cors reachability probe of the same URL
+  // (rejects on network failure/abort, resolves on any reachable response)
+  // plus the ~6 s ceiling from the plan.
+  var settled = false;
+  fetch('https://drive.google.com/file/d/' + r.id + '/preview', { mode: 'no-cors', cache: 'no-store' })
+    .then(function(){ settled = true; clearTimeout(popTimer); })
+    .catch(function(){ if (!settled){ settled = true; showFallback(r, 'unreachable'); } });
+  popTimer = setTimeout(function(){ if (!settled){ settled = true; showFallback(r, 'timeout'); } }, POP_TIMEOUT_MS);
+}
+document.getElementById('pop-close').addEventListener('click', function(){
+  clearTimeout(popTimer);
+  pop.classList.add('hidden');
+  popFrame.src = 'about:blank';
+  popFb.classList.add('hidden');
+  popFrame.classList.remove('hidden');
+});
+render();
+</script>
+</body>
+</html>
