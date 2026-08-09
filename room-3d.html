@@ -2647,6 +2647,34 @@ if (!FREEZE && !REDUCED && !qs.has('view')){
 /* Test hook: the exhibit runs inside an IIFE, so expose just enough for the
    harness (and a console session) to assert framing without shipping the
    whole scope to the page. */
+/* ---- room-aware exhibit -------------------------------------------------
+   The geometry is Room 101's (QQ Wide Connecting), and every QQ Studio
+   Connector shares the same 40-line package — so the exhibit doubles as the
+   typical for its siblings. It must not keep SAYING "Room 101" when it was
+   opened from another room, and its links have to lead back to THAT room, so
+   the number is swapped in at load and a plain-language caveat is added when
+   the room being viewed is not the one that was modeled. */
+(function(){
+  var qsRoom = (new URLSearchParams(location.search).get('room') || '101').trim();
+  var demo = new URLSearchParams(location.search).has('demo');
+  var suffix = '?room=' + encodeURIComponent(qsRoom) + (demo ? '&demo=1' : '');
+  var back = document.getElementById('bb-back');
+  if (back) { back.href = './index.html#/room/' + encodeURIComponent(qsRoom);
+              back.textContent = '‹ ROOM ' + qsRoom; }
+  var refs = document.getElementById('bb-refs');
+  if (refs) refs.href = './refs.html?room=' + encodeURIComponent(qsRoom) + '&from=3d' + (demo ? '&demo=1' : '');
+  var pr = document.getElementById('bb-print');
+  if (pr) pr.href = './print.html' + suffix;
+  if (qsRoom !== '101') {
+    document.title = document.title.replace('Room 101', 'Room ' + qsRoom);
+    document.querySelectorAll('#ministrip b, #drawerbar b, .tb h1').forEach(function(el){
+      el.innerHTML = el.innerHTML.replace(/ROOM 101/g, 'ROOM ' + qsRoom);
+    });
+    var cav = document.getElementById('caveat');
+    if (cav) cav.innerHTML = 'TYPICAL LAYOUT MODELED FROM ROOM 101 &middot; SAME 40-LINE PACKAGE &middot; ' + cav.innerHTML;
+  }
+})();
+
 window.__h2sep3d = {
   camera: camera, controls: controls, applyView: applyView,
   frame: function(){ return {

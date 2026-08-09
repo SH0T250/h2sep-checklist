@@ -3,7 +3,7 @@
 // Bump VERSION on every deploy — it busts the old cache and triggers the
 // in-app "Update available" banner. VERSION must equal 'h2sep-v' + APP_VERSION
 // in js/config.js — install verifies this to defeat CDN mixed-version races.
-const VERSION = 'h2sep-v1.10.0';
+const VERSION = 'h2sep-v1.11.0';
 // Paper-sheet photos live in their own PERMANENT cache — never wiped by app
 // updates. Only room JPGs under /sheets/ may enter it (index.json stays in the
 // versioned shell cache so it can never be shadowed by a stale copy).
@@ -16,7 +16,13 @@ const REFS_CACHE = 'h2sep-refs';
 // every version bump would re-download it over cell data for a page most
 // crew open occasionally — so it gets a PERMANENT cache filled on first open
 // instead, and survives app updates like sheets and refs do.
-const MODEL_CACHE = 'h2sep-model';
+//
+// BUMP THE NUMBER IN THIS NAME WHENEVER room-3d.html CHANGES. The cache is
+// permanent by design, so a phone that already opened the exhibit would keep
+// serving the old build forever otherwise; renaming it makes activate() drop
+// the previous one and the next open re-downloads exactly once. (v2: the
+// exhibit became room-aware for every QQ Studio Connector.)
+const MODEL_CACHE = 'h2sep-model-2';
 
 const SHELL = [
   './',
