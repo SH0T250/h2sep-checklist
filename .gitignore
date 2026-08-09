@@ -1,1 +1,5 @@
 tools/__pycache__/
+
+# Firestore backups carry real crew names and UIDs in the activity log —
+# they are operational safety copies, not source. Keep them local.
+tools/out/backups/

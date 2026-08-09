@@ -17,14 +17,26 @@ export const firebaseConfig = {
 export const PROJECT_ID = 'h2sep';
 // Must match sw.js VERSION ('h2sep-v' + this) — the service worker verifies
 // the pair at install time and refuses mismatched (mid-deploy) builds.
-export const APP_VERSION = '1.12.0';
+export const APP_VERSION = '1.13.0';
 
-// Rooms that offer the 3D exhibit. The geometry is Room 101's (QQ Wide
-// Connecting) and every QQ Studio Connector shares the same 40-line package,
-// so it serves as the typical for its siblings — the exhibit says so on any
-// room other than 101. Other room types get the button when their own model
-// is built.
-export const MODEL_ROOMS = ['101', '103', '215', '236', '336', '401', '403', '436'];
+// Rooms that offer the 3D exhibit. Geometry is per-room off A555 (width,
+// depth, handedness and whether there is a GR-3 connecting door), so a room
+// only appears here once its own dimensions are in ROOM_GEOM — never because a
+// sibling looked close enough.
+//
+//   QQ Studio Connector  101 103 · 215 236 · 336 · 401 403 436
+//   QQ Studio            105 107 109 111 113 115
+//   QQ Wide              201 301
+//   QQ Extended          230 232 · 330 332 · 430 432
+//
+// The King family (King Studio / Connector / Acc Mod) is NOT here: A550 gives
+// it a 29'-0" clear depth against the QQ's 36'-5" and a single king bed, so it
+// needs its own model rather than a relabelled QQ shell.
+export const MODEL_ROOMS = [
+  '101', '103', '105', '107', '109', '111', '113', '115',
+  '201', '215', '230', '232', '236',
+  '301', '330', '332', '336',
+  '401', '403', '430', '432', '436',
+];
 
-// Demo-mode admin PIN (live mode verifies against Firestore config doc).
 export const DEMO_PIN = '6621';
