@@ -66,16 +66,18 @@ export async function initRefs() {
 }
 
 // Refs for one item. item.refs (seeded on the doc) wins over the bundled index.
-export function refsFor(roomNumber, item) {
+// itemId is the optional Firestore map key — it lets UNTAGGED items (code '')
+// join the index by their stable id (e.g. the disposer, u_ce20ab6281).
+export function refsFor(roomNumber, item, itemId = '') {
   const own = cleanList(item && item.refs);
   if (own.length) return own;
-  if (!item || !item.code) return [];
+  if (!item) return [];
   // Exact code first; then the base code with a trailing orientation 'R'
   // stripped (GR-308R is the reversed variant of GR-308 — same product,
-  // same submittal and plan refs).
-  const code = item.code, base = code.replace(/R$/, '');
-  return byRoomCode.get(String(roomNumber) + '/' + code)
-    || byCode.get(code)
-    || (base !== code ? (byRoomCode.get(String(roomNumber) + '/' + base) || byCode.get(base)) : null)
+  // same submittal and plan refs); finally the item id for code-less lines.
+  const code = item.code || '', base = code.replace(/R$/, '');
+  return (code ? (byRoomCode.get(String(roomNumber) + '/' + code) || byCode.get(code)) : null)
+    || (code && base !== code ? (byRoomCode.get(String(roomNumber) + '/' + base) || byCode.get(base)) : null)
+    || (itemId ? (byRoomCode.get(String(roomNumber) + '/' + itemId) || byCode.get(itemId)) : null)
     || [];
 }

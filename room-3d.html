@@ -6,36 +6,51 @@
 <title>H2SEP — Room 101 · QQ Studio Connector — FF&amp;E Exhibit</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%;overflow:hidden;background:#0b0f13;color:#eef3f7;
+  html,body{height:100%;overflow:hidden;background:var(--bg,#0b0f13);color:var(--ink,#eef3f7);
     font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;}
   :root{
     --bg:#0b0f13; --panel:#12181f; --panel2:#0e141a; --ink:#eef3f7; --mut:#8fa0ad;
     --cyan:#02A9E0; --cyanhi:#3fc6f5; --red:#ff5c5c; --redink:#C00000;
-    --wood:#a97c50; --linen:#dfe5ea;
+    --wood:#a97c50; --linen:#dfe5ea; --ada:#4da3ff;
     --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
     --line:rgba(143,160,173,.22);
+    --lblbg:rgba(13,19,25,.85); --lblbd:rgba(143,160,173,.38); --lblink:#c6d1db;
+    --panelbg:linear-gradient(180deg,rgba(18,24,31,.97),rgba(14,20,26,.97));
+    --chipbg:rgba(18,24,31,.9);
+  }
+  body.light{
+    --bg:#f4f2ec; --panel:#ffffff; --panel2:#f7f5ef; --ink:#1c242c; --mut:#5a6a78;
+    --cyan:#0284b3; --cyanhi:#026e96; --red:#c81f1f; --redink:#C00000;
+    --line:rgba(52,66,80,.22);
+    --lblbg:rgba(255,255,255,.88); --lblbd:rgba(52,66,80,.4); --lblink:#33404c;
+    --panelbg:linear-gradient(180deg,rgba(255,255,255,.97),rgba(247,245,239,.97));
+    --chipbg:rgba(255,255,255,.9);
   }
   #stage{position:fixed;inset:0;z-index:0}
-  #stage canvas{display:block}
+  #stage canvas{display:block;touch-action:none}
+  body{overscroll-behavior:none}
   #leaders{position:fixed;inset:0;z-index:2;pointer-events:none;width:100%;height:100%}
   #labels{position:fixed;inset:0;z-index:3;pointer-events:none;overflow:hidden}
 
   /* ---------- 3D labels ---------- */
   .lbl{position:absolute;top:0;left:0;pointer-events:none;white-space:nowrap;
     font:500 11px/1.3 var(--mono);color:var(--ink);letter-spacing:.02em;
-    background:rgba(13,19,25,.85);border:1px solid rgba(143,160,173,.38);
+    background:var(--lblbg);border:1px solid var(--lblbd);
     border-radius:3px;padding:3px 7px;will-change:transform;}
   .lbl .tg{color:var(--cyan);font-weight:700}
   .lbl.flag .tg{color:var(--red)}
-  .lbl.t2{font-size:10px;padding:2px 6px;color:#c6d1db}
+  .lbl.t2{font-size:10px;padding:2px 6px;color:var(--lblink)}
   .lbl.min{background:none;border:none;color:var(--mut);font-size:10px;letter-spacing:.14em;font-weight:600}
   .lbl.hl{border-color:var(--cyan);color:#fff;background:rgba(4,32,44,.94)}
   .lbl.flag.hl{border-color:var(--red);background:rgba(44,10,10,.94)}
+  body.light .lbl.hl{color:#0b2733;background:rgba(214,240,250,.96)}
+  body.light .lbl.flag.hl{color:#5d0f0f;background:rgba(253,226,226,.96)}
   .lbl.note{color:#ff9b9b;border-color:rgba(255,92,92,.45)}
+  body.light .lbl.note{color:#a31d1d}
 
   /* ---------- sidebar / title block ---------- */
   #sidebar{position:fixed;top:0;left:0;bottom:0;width:312px;z-index:10;
-    background:linear-gradient(180deg,rgba(18,24,31,.97),rgba(14,20,26,.97));
+    background:var(--panelbg);
     border-right:1px solid var(--line);display:flex;flex-direction:column;
     transition:transform .25s ease;}
   #sb-scroll{overflow-y:auto;overflow-x:hidden;flex:1;scrollbar-width:thin;scrollbar-color:#3d4a57 transparent}
@@ -45,7 +60,7 @@
   .tb{padding:10px 16px 9px;border-bottom:2px solid rgba(2,169,224,.5);
     box-shadow:0 1px 0 rgba(143,160,173,.14), inset 0 -4px 0 rgba(0,0,0,.12);}
   .wordmark{display:flex;align-items:baseline;gap:7px;margin-bottom:6px}
-  .wordmark b{font-size:15px;font-weight:800;letter-spacing:.34em;color:#fff}
+  .wordmark b{font-size:15px;font-weight:800;letter-spacing:.34em;color:var(--ink)}
   .wordmark b i{font-style:normal;color:var(--cyan)}
   .wordmark span{font:600 8px/1 var(--mono);letter-spacing:.18em;color:var(--mut);text-transform:uppercase}
   .eyebrow{font:600 10px/1 var(--mono);letter-spacing:.16em;color:var(--cyan);
@@ -61,7 +76,7 @@
     text-transform:uppercase;padding-bottom:4px;margin-bottom:4px;
     border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
   .sechead::after{content:"";flex:1}
-  .legend{display:grid;gap:3px;font-size:10.5px;color:#c6d1db;padding-bottom:3px}
+  .legend{display:grid;gap:3px;font-size:10.5px;color:var(--lblink);padding-bottom:3px}
   .legend>div{display:flex;align-items:center;gap:9px;font-family:var(--mono);letter-spacing:.03em}
   .sw{width:12px;height:12px;border-radius:2px;flex:none;display:inline-block}
   .sw.dr{width:6px;height:14px;border-radius:1px;box-shadow:0 0 6px rgba(2,169,224,.8)}
@@ -74,22 +89,27 @@
   .row:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
   .row .tag{font:700 11px var(--mono);color:var(--cyan);letter-spacing:.02em}
   .row.flag .tag{color:var(--red)}
-  .row .nm{font-size:11px;color:#d3dbe4;line-height:1.25}
+  .row .nm{font-size:11px;color:var(--lblink);line-height:1.25}
   .row .nm em{font-style:normal;color:var(--red);font-weight:600}
   .chip{font:700 8.5px var(--mono);letter-spacing:.1em;padding:2.5px 6px;border-radius:2px;flex:none}
   .chips{display:flex;gap:4px;align-items:center;flex:none}
   .chip.q{background:var(--cyan);color:#03181f}
+  body.light .chip.q{color:#fff}
+  .chip.a{color:var(--ada);border:1px solid var(--ada);background:none}
+  body.light{--ada:#155fa8}
   .chip.f{background:var(--redink);color:#fff}
   .chip.n{color:var(--cyan);border:1px solid rgba(2,169,224,.55)}
   .sb-foot{padding:8px 16px 10px;border-top:1px solid var(--line);font-size:10px;
     color:var(--mut);line-height:1.5;position:relative}
   .sb-foot::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:34px;
     pointer-events:none;background:linear-gradient(180deg,rgba(14,20,26,0),rgba(14,20,26,.96));
+    transition:opacity .2s;}
+  body.light .sb-foot::before{background:linear-gradient(180deg,rgba(247,245,239,0),rgba(247,245,239,.96));
     opacity:1;transition:opacity .2s}
   #sidebar.at-end .sb-foot::before{opacity:0}
   #sb-more{position:absolute;left:50%;bottom:calc(100% + 5px);transform:translateX(-50%);
     font:700 8.5px var(--mono);letter-spacing:.12em;color:var(--cyan);
-    background:rgba(14,20,26,.95);border:1px solid rgba(2,169,224,.55);border-radius:9px;
+    background:var(--chipbg);border:1px solid rgba(2,169,224,.55);border-radius:9px;
     padding:3px 10px;pointer-events:none;white-space:nowrap;transition:opacity .2s;opacity:1}
   #sidebar.at-end #sb-more{opacity:0}
 
@@ -100,7 +120,7 @@
   #burger span{display:block;width:16px;height:2px;background:var(--ink);border-radius:1px}
   #burger:focus-visible{outline:2px solid var(--cyan)}
   #ministrip{position:fixed;top:12px;left:58px;z-index:8;display:none;
-    background:rgba(18,24,31,.92);border:1px solid var(--line);border-radius:6px;
+    background:var(--chipbg);border:1px solid var(--line);border-radius:6px;
     padding:4px 12px 5px;max-width:calc(100vw - 330px);overflow:hidden;
     transition:opacity .25s ease}
   #ministrip b{display:block;font-size:11.5px;font-weight:700;letter-spacing:.05em;
@@ -116,71 +136,16 @@
     body.nav-open #ministrip{opacity:0}
   }
 
+
   /* ---------- view chips ---------- */
   #views{position:fixed;top:12px;right:12px;z-index:12;display:flex;gap:6px}
   #views button{font:600 10px var(--mono);letter-spacing:.1em;color:var(--mut);
-    background:rgba(18,24,31,.9);border:1px solid var(--line);border-radius:4px;
+    background:var(--chipbg);border:1px solid var(--line);border-radius:4px;
     padding:6px 10px;cursor:pointer}
   #views button:hover{color:var(--ink);border-color:rgba(143,160,173,.5)}
   #views button.on{color:var(--cyan);border-color:rgba(2,169,224,.6)}
   #views button:focus-visible{outline:2px solid var(--cyan)}
   @media (max-width:900px){#views{top:12px;right:12px}#views button{padding:5px 7px}}
-
-  /* ================= PHONE PASS =================
-     The exhibit ships inside the crew PWA, so on a phone it has to behave
-     like an app screen: thumb-sized controls, nothing under the notch or the
-     home indicator, and the detail card as a bottom sheet instead of a
-     floating desktop panel. */
-  .safe-t { padding-top: env(safe-area-inset-top); }
-  #backbar {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 22; display: none;
-    padding: calc(env(safe-area-inset-top) + 6px) 10px 6px;
-    background: linear-gradient(180deg, rgba(11,15,19,.96), rgba(11,15,19,0));
-    pointer-events: none;
-  }
-  #backbar a {
-    pointer-events: auto; display: inline-flex; align-items: center; gap: 6px;
-    min-height: 40px; padding: 8px 13px; border-radius: 9px; text-decoration: none;
-    font: 700 12px/1 var(--mono); letter-spacing: .06em; color: var(--ink);
-    background: rgba(18,24,31,.94); border: 1px solid var(--line);
-  }
-  #backbar .sp { flex: 1; }
-  #backbar .row { display: flex; gap: 8px; align-items: center; }
-  @media (max-width: 900px) {
-    #backbar { display: block; }
-    /* burger + view chips clear the back bar and the notch */
-    #burger { top: calc(env(safe-area-inset-top) + 56px); left: 10px; width: 46px; height: 46px; }
-    #views { top: calc(env(safe-area-inset-top) + 56px); right: 10px; gap: 5px; }
-    #views button { padding: 11px 10px; min-height: 44px; font-size: 11px; }
-    #ministrip { display: none; }
-
-    /* labels: fewer pixels of chrome so tags stay readable over the model */
-    .lbl { font-size: 10px; padding: 2px 5px; }
-    .lbl.t2 { display: none; }          /* secondary labels are noise on a phone */
-
-    /* detail card becomes a bottom sheet above the home indicator */
-    #card {
-      right: 8px; left: 8px; width: auto; max-width: none;
-      bottom: calc(env(safe-area-inset-bottom) + 34px);
-      border-radius: 14px; padding: 15px 16px 16px;
-    }
-    #c-x { min-width: 44px; min-height: 44px; }
-    #caveat { font-size: 8.5px; padding-bottom: calc(env(safe-area-inset-bottom) + 4px); }
-    #sidebar { width: min(88vw, 340px); padding-top: env(safe-area-inset-top); }
-    .row { min-height: 40px; }          /* list rows are tap targets here */
-  }
-  /* Thirty-five leader labels cannot be legible on a 412px screen at any
-     camera distance, so phones start with tags OFF: the model reads clean and
-     a tap on any piece opens the detail card. The TAGS chip brings them back
-     for anyone who wants the full annotated exhibit. */
-  body.tags-off .lbl,
-  body.tags-off #leaders { display: none; }
-
-  /* Touch devices never get a hover state — kill the sticky highlight look. */
-  @media (hover: none) {
-    #views button:hover { color: var(--mut); border-color: var(--line); }
-    .row:hover { background: none; border-left-color: transparent; }
-  }
 
   /* ---------- info card ---------- */
   #card{position:fixed;right:14px;bottom:40px;z-index:14;width:320px;max-width:calc(100vw - 28px);
@@ -197,30 +162,119 @@
   #c-name{font-size:12.5px;font-weight:700;margin-bottom:6px;line-height:1.3}
   #c-cat{font:600 9px/1 var(--mono);letter-spacing:.14em;color:var(--mut);
     text-transform:uppercase;margin-bottom:7px}
-  #c-desc{font-size:11px;color:#c6d1db;line-height:1.5}
+  #c-desc{font-size:11px;color:var(--lblink);line-height:1.5}
   #c-note{margin-top:8px;padding:7px 9px;border-left:3px solid var(--redink);
     background:rgba(192,0,0,.12);font:600 10px/1.5 var(--mono);color:#ff9b9b;border-radius:0 3px 3px 0}
+  body.light #c-note{color:#a31d1d;background:rgba(192,0,0,.08)}
   #c-note[hidden]{display:none}
 
   /* ---------- caveat strip ---------- */
   #caveat{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:9;
     font:600 9.5px var(--mono);letter-spacing:.14em;color:var(--mut);
-    background:rgba(11,15,19,.8);border:1px solid var(--line);border-radius:3px;
+    background:var(--chipbg);border:1px solid var(--line);border-radius:3px;
     padding:5px 12px;white-space:nowrap}
   @media (max-width:900px){#caveat{font-size:8.5px;letter-spacing:.08em}}
+
+  /* ---------- phone: bottom drawer (<700px) ---------- */
+  #drawerbar{display:none;width:100%;min-height:48px;background:none;border:none;
+    border-bottom:1px solid var(--line);color:var(--ink);cursor:pointer;
+    padding:6px 16px;text-align:left;align-items:center;gap:12px;flex:none}
+  #drawerbar .grip{width:36px;height:4px;border-radius:2px;background:var(--mut);
+    opacity:.6;position:absolute;left:50%;top:5px;transform:translateX(-50%)}
+  #drawerbar b{font-size:12px;font-weight:700;letter-spacing:.05em;display:block;margin-top:6px}
+  #drawerbar span{font:600 8.5px/1.6 var(--mono);letter-spacing:.12em;color:var(--cyan);
+    text-transform:uppercase;display:block}
+  #drawerbar .chev{margin-left:auto;color:var(--mut);font-size:14px;margin-top:6px;
+    transition:transform .25s ease}
+  body.nav-open #drawerbar .chev{transform:rotate(180deg)}
+  #drawerbar:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
+  @media (max-width:700px){
+    #sidebar{top:auto;left:0;right:0;bottom:0;width:100%;
+      height:min(62dvh,520px);max-height:calc(100dvh - 120px);
+      transform:translateY(calc(100% - 49px));box-shadow:0 -10px 30px rgba(0,0,0,.45);
+      border-right:none;border-top:1px solid var(--line);border-radius:12px 12px 0 0}
+    body.nav-open #sidebar{transform:translateY(0)}
+    #drawerbar{display:flex;position:relative}
+    #burger,#ministrip{display:none}
+    body.nav-open #ministrip{opacity:1}
+    .tb{padding-top:6px}
+    .tb h1{font-size:15px}
+    #views{top:10px;left:10px;right:10px;flex-wrap:wrap;justify-content:flex-end}
+    #card{right:10px;left:10px;width:auto;bottom:60px}
+    #caveat{display:none}
+    .sb-foot{display:none}
+  }
+  /* tap targets ≥44px on touch + phone */
+  @media (max-width:700px),(pointer:coarse){
+    .row{min-height:44px;padding-top:6px;padding-bottom:6px}
+    #views button{min-height:44px;min-width:44px;padding:8px 10px}
+    #burger{width:44px;height:44px}
+    #c-x{min-width:44px;min-height:44px}
+    #drawerbar{min-height:49px}
+  }
 
   /* ---------- error overlay ---------- */
   #err{position:fixed;top:0;left:0;right:0;z-index:99;background:#8e1f1f;color:#fff;
     font:600 12px/1.5 var(--mono);padding:10px 16px;border-bottom:2px solid #ff6b6b;
     white-space:pre-wrap;word-break:break-word}
   #err[hidden]{display:none}
+
+  /* ================= IN-APP PASS =================
+     The exhibit already has its own phone layout (bottom drawer, 44px
+     targets, card as a bottom sheet) — this adds only what it cannot know
+     about: that it is now a screen INSIDE the crew PWA, reached from a room
+     and expected to lead back to one. */
+  #backbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 22; display: none;
+    padding: calc(env(safe-area-inset-top) + 6px) 10px 6px;
+    background: linear-gradient(180deg, var(--bg) 45%, transparent);
+    pointer-events: none;
+  }
+  #backbar a {
+    pointer-events: auto; display: inline-flex; align-items: center; gap: 6px;
+    min-height: 44px; padding: 10px 13px; border-radius: 9px; text-decoration: none;
+    font: 700 12px/1 var(--mono); letter-spacing: .06em; color: var(--ink);
+    background: var(--chipbg); border: 1px solid var(--line);
+  }
+  #backbar .sp { flex: 1; }
+  #backbar .row { display: flex; gap: 8px; align-items: center; }
+  @media (max-width: 900px) {
+    #backbar { display: block; }
+    /* Drop the view chips below the back bar, and out from under the notch —
+       the exhibit's own rule pins them to a bare top:10px. */
+    #views { top: calc(env(safe-area-inset-top) + 58px); }
+    #burger { top: calc(env(safe-area-inset-top) + 58px); }
+    .lbl { font-size: 10px; padding: 2px 5px; }
+    .lbl.t2 { display: none; }        /* secondary labels are noise on a phone */
+  }
+  /* Seven chips (LIGHT TAGS ISO TOP BEDS BATH KITCH) overflow a 412px screen
+     by a few pixels and wrap KITCH onto a lonely second row — tighten the
+     tracking rather than let the control bar look broken. Touch height is
+     untouched. */
+  @media (max-width: 430px) {
+    #views { gap: 4px; }
+    #views button { padding-left: 7px; padding-right: 7px; font-size: 10.5px; letter-spacing: .06em; }
+  }
+
+  /* Thirty-plus leader labels cannot be legible on a 412px screen at any
+     camera distance, so phones start with tags OFF: the model reads clean and
+     a tap on any piece opens the detail card. The TAGS chip brings them back
+     for anyone who wants the full annotated exhibit. */
+  body.tags-off .lbl,
+  body.tags-off #leaders { display: none; }
+
+  /* Touch devices never get a hover state — kill the sticky highlight look. */
+  @media (hover: none) {
+    #views button:hover { color: var(--mut); border-color: var(--line); }
+    .row:hover { background: none; border-left-color: transparent; }
+  }
 </style>
 
 <div id="backbar">
   <div class="row">
-    <a id="bb-back" href="./index.html#/room/101">‹ ROOM 101</a>
+    <a id="bb-back" href="./index.html#/room/101">&lsaquo; ROOM 101</a>
     <span class="sp"></span>
-    <a id="bb-print" href="./print.html?room=101">🖨 SHEET</a>
+    <a id="bb-print" href="./print.html?room=101">&#128424; SHEET</a>
   </div>
 </div>
 
@@ -236,6 +290,12 @@
 </div>
 
 <aside id="sidebar">
+  <button id="drawerbar" aria-expanded="false" aria-controls="sb-scroll" aria-label="Toggle item list drawer">
+    <span class="grip"></span>
+    <span><b>ROOM 101 &mdash; QQ STUDIO CONNECTOR</b>
+    <span>H2SEP FF&amp;E EXHIBIT &middot; 42 ITEMS</span></span>
+    <span class="chev">&#9650;</span>
+  </button>
   <div id="sb-scroll">
     <div class="tb">
       <div class="wordmark"><b>TR<i>I</i>UN</b><span>Construction &amp; Engineering</span></div>
@@ -277,7 +337,8 @@
     Hover a row to locate; click to zoom.</div>
 </aside>
 
-<div id="views" role="group" aria-label="Camera views">
+<div id="views" role="group" aria-label="Camera views and color scheme">
+  <button id="themeBtn" aria-label="Switch to light scheme" aria-pressed="false">&#9788; LIGHT</button>
   <button id="tags-btn" aria-pressed="false" title="Show or hide tag labels">TAGS</button>
   <button data-v="iso" class="on">ISO</button>
   <button data-v="top">TOP</button>
@@ -1415,7 +1476,8 @@ controls.maxDistance = 260;
 controls.target.set(CX, 2.5, CZ);
 
 /* ---------------- lights ---------------- */
-scene.add(new THREE.HemisphereLight(0x5f7488, 0x141a21, 0.85));
+var hemi = new THREE.HemisphereLight(0x5f7488, 0x141a21, 0.85);
+scene.add(hemi);
 var sun = new THREE.DirectionalLight(0xf6ecdc, 0.9);
 sun.position.set(46, 60, 30);
 sun.castShadow = true;
@@ -1501,6 +1563,12 @@ grid.position.set(CX, -0.03, CZ);
 grid.material.transparent = true;
 grid.material.opacity = 0.5;
 scene.add(grid);
+var gridLight = new THREE.GridHelper(150, 30, 0x9aa8b2, 0xc3ccd3);
+gridLight.position.copy(grid.position);
+gridLight.material.transparent = true;
+gridLight.material.opacity = 0.55;
+gridLight.visible = false;
+scene.add(gridLight);
 
 /* ---------------- helpers ---------------- */
 var BOX = new THREE.BoxGeometry(1,1,1);
@@ -1802,9 +1870,9 @@ var pFLM = reg({id:'GR-502', tag:'GR-502', grp:'art', name:'Full Length Mirror',
   focus:V3(12.4,3.5,-10.3), dist:12});
 attach(pFLM, box(W-0.3,1.0,-9.6, W-0.18,6.6,-11.0, cloneMat(MAT.glass)));
 attach(pFLM, box(W-0.34,0.9,-9.5, W-0.3,6.7,-11.1, cloneMat(MAT.frame)));
-var pHkE = reg({id:'HD-12', tag:'HD-12', grp:'bath', name:'Robe / Coat Hook', qty:2,
+var pHkE = reg({id:'HD-12', tag:'HD-12', grp:'bath', name:'Robe / Coat Hook', qty:2, ada:true,
   cat:'Bath Accessory',
-  desc:'Robe / coat hook, ×2 — one at the entry wall under its sconce, one at the guest bath.',
+  desc:'Robe / coat hook, ×2 — one at the entry wall under its sconce, one at the guest bath. Blocking required (G402 TA 2 / TA 21; A530: provide blocking for robe/coat hook as needed); max-4″ protrusion rule applies.',
   focus:V3(12.5,5.3,-1.2), dist:10});
 attach(pHkE, box(12.35,5.1,-T/2-0.15, 12.65,5.5,-T/2+0.02, cloneMat(MAT.chrome)));
 var pS204 = reg({id:'GR-204', tag:'GR-204', grp:'light', name:'Sconce @ Wall Hook', qty:1,
@@ -1876,31 +1944,49 @@ attach(pPtac, box(4.9,0.1,-D+0.15, 8.3,1.5,-D+1.05, cloneMat(MAT.ptac)));
 scenery(box(5.1,0.95,-D+1.05, 8.1,1.35,-D+1.1, MAT.applDk));
 
 /* ---- bathroom ---- */
-/* tub + surround */
-scenery(box(0.45,0,-0.4, 5.6,1.55,-2.95, MAT.porc));
-scenery(box(0.75,1.0,-0.7, 5.3,1.56,-2.65, MAT.wrap));
-scenery(box(0.42,0.05,-0.38, 5.62,6.5,-0.52, MAT.tile));       /* surround back */
-scenery(box(0.42,1.55,-0.4, 0.56,6.5,-2.95, MAT.tile));        /* surround end */
-scenery(cyl(5.0, -0.75, 0.07, 1.6, 5.9, MAT.chrome));          /* shower riser */
-scenery(box(4.75,5.9,-0.55, 5.05,6.0,-1.1, MAT.chrome));
-var pSoapD = reg({id:'HD-16', tag:'HD-16', grp:'bath', name:'Shower Soap Dispenser', qty:1,
-  cat:'Bath Accessory', desc:'Surface-mounted shower soap dispenser, guestroom.',
-  focus:V3(1.6,4.2,-1.0), dist:8});
-attach(pSoapD, box(1.4,3.9,-0.52, 1.8,4.55,-0.68, cloneMat(MAT.chrome)));
-var pDish = reg({id:'HD-21', tag:'HD-21', grp:'bath', name:'Soap Dish', qty:1,
-  cat:'Bath Accessory', desc:'Surface-mounted soap dish at the tub.',
+/* shower SH-1 / SH-4 — bath-fixtures.json 08/09/26: Room-101 bath is a SHOWER,
+   not a tub (A530 / DB ITM-0645). Kohler Rely 30″×60″ pan, center drain, 4″
+   threshold (SH-4, standard keys); Mincey Marble TS-VS surround, wall height
+   80″; Delta T24859 trim; bi-pass sliding glass door, brushed aluminium, 24″
+   bar pull (A530 kn28). Head set in the 74–78″ maximize band (G402). */
+var SHX1 = 0.45, SHX2 = 5.45, SHZ1 = -0.4, SHZ2 = -2.9;    /* 60″ × 30″ pan */
+scenery(box(SHX1,0,SHZ1, SHX2,0.12,SHZ2, MAT.porc));                        /* pan */
+scenery(box(SHX1,0.12,SHZ2+0.22, SHX2,0.333,SHZ2, MAT.porc));               /* 4″ threshold */
+scenery(box(0.42,0.05,-0.38, 5.62,6.79,-0.52, MAT.tile));                   /* surround back — 80″ */
+scenery(box(SHX2,0.05,SHZ1, SHX2+0.15,6.79,SHZ2, MAT.tile));                /* surround end — 80″ */
+scenery(cyl(5.36, -0.75, 0.06, 0.4, 6.33, MAT.chrome));                     /* riser — head 76″ AFF */
+scenery(box(5.0,6.23,-0.62, 5.36,6.33,-1.0, MAT.chrome));                   /* head arm */
+scenery(box(5.22,3.4,-0.62, 5.42,3.9,-1.05, MAT.chrome));                   /* T24859 valve trim */
+/* bi-pass sliding glass door — brushed alum tracks + 24″ bar pull */
+scenery(box(SHX1,0.333,SHZ2+0.12, SHX2,0.42,SHZ2-0.02, MAT.metal));         /* bottom track */
+scenery(box(SHX1,6.1,SHZ2+0.12, SHX2,6.25,SHZ2-0.02, MAT.metal));           /* top track */
+scenery(box(SHX1+0.02,0.42,SHZ2+0.1, SHX1+2.6,6.1,SHZ2+0.05, MAT.glass, true));
+scenery(box(SHX1+2.4,0.42,SHZ2-0.01, SHX2-0.02,6.1,SHZ2-0.06, MAT.glass, true));
+(function(){ var pull = new THREE.Mesh(CYL, MAT.chrome);                     /* 24″ bar pull */
+  pull.scale.set(0.05, 2.0, 0.05); pull.rotation.z = Math.PI/2;
+  pull.position.set(SHX1+1.35, 3.4, SHZ2+0.16); pull.castShadow = true;
+  scenery(pull); })();
+var pSoapD = reg({id:'HD-16', tag:'HD-16', grp:'bath', name:'Shower Soap Dispenser', qty:1, ada:true,
+  cat:'Bath Accessory',
+  desc:'Surface-mounted shower soap dispenser, guestroom — set inside the 15–48″ AFF guest-controls reach band (G402 note 11; top of unit at 48″). A530: provide blocking for amenity dispenser as needed.',
+  focus:V3(1.6,3.7,-1.0), dist:8});
+attach(pSoapD, box(1.4,3.35,-0.52, 1.8,4.0,-0.68, cloneMat(MAT.chrome)));
+var pDish = reg({id:'HD-21', tag:'HD-21', grp:'bath', name:'Soap Dish', qty:1, ada:true,
+  cat:'Bath Accessory',
+  desc:'Surface-mounted soap dish at the shower, inside the 15–48″ reach band. (Accessible-key tub band is 17–19″ AFF per G402 det 01; Room 101 is a standard shower key.) One of the few TA items not blocking-checked (G402 TA 14).',
   focus:V3(2.7,3.5,-1.0), dist:8});
 attach(pDish, box(2.5,3.35,-0.52, 2.95,3.6,-0.75, cloneMat(MAT.porc)));
-var pFoot = reg({id:'HD-18', tag:'HD-18', grp:'bath', name:'Shower Footrest', qty:1,
-  cat:'Bath Accessory', desc:'Surface-mounted shower footrest at the tub / shower.',
+var pFoot = reg({id:'HD-18', tag:'HD-18', grp:'bath', name:'Shower Footrest', qty:1, ada:true,
+  cat:'Bath Accessory',
+  desc:'Surface-mounted shower footrest at the shower. Blocking required (G402 TA 14.2); A530: provide blocking for footrest as needed.',
   focus:V3(4.3,1.8,-1.0), dist:8});
 attach(pFoot, box(4.0,1.7,-0.52, 4.65,2.0,-0.95, cloneMat(MAT.chrome)));
-var pGrab = reg({id:'HD-08', tag:'HD-08', grp:'bath', name:'Grab Bar ADA 24″ — Vertical', qty:1, flag:true,
+var pGrab = reg({id:'HD-08', tag:'HD-08', grp:'bath', name:'Grab Bar ADA 24″ — Vertical', qty:1, flag:true, ada:true,
   cat:'Bath Accessory',
-  desc:'24″ vertical-mount ADA grab bar at the tub control end.',
+  desc:'24″ vertical-mount ADA grab bar at the shower control-end wall (length per A530 HD legend). Clearances 12″ above / 1½″ below per A530; blocking rated 250 lbs vertical + horizontal (G402); finish polished/brushed chrome, brushed nickel or stainless (G402 note 2).',
   note:'ELEVATION-SOURCED — A530: “do not treat that as a takeoff”.',
-  focus:V3(5.45,4.0,-1.4), dist:9});
-attach(pGrab, cyl(5.45, -0.75, 0.09, 3.0, 5.0, cloneMat(MAT.chrome)));
+  focus:V3(5.36,4.0,-2.1), dist:9});
+attach(pGrab, cyl(5.36, -2.1, 0.09, 3.0, 5.0, cloneMat(MAT.chrome)));
 /* toilet */
 /* solid tile backer on the x=0 bath wall (WC + vanity run) — gives the wall
    shelf, dispenser, mirror and sconce a real wall face (ghost walls read as
@@ -1910,30 +1996,35 @@ scenery(box(0.3,0.4,-3.9, 0.95,2.6,-5.3, MAT.porc));
 (function(){ var b = new THREE.Mesh(SPH, MAT.porc);
   b.scale.set(0.85,0.55,0.72); b.position.set(1.45,1.15,-4.6); b.castShadow=true; scenery(b); })();
 scenery(cyl(1.45,-4.6,0.62,1.35,1.45,MAT.porc));
-var pTP = reg({id:'HD-03', tag:'HD-03', grp:'bath', name:'Toilet Tissue Dispenser', qty:1, flag:true,
-  cat:'Bath Accessory', desc:'Toilet tissue dispenser beside the water closet.',
+var pTP = reg({id:'HD-03', tag:'HD-03', grp:'bath', name:'Toilet Tissue Dispenser', qty:1, flag:true, ada:true,
+  cat:'Bath Accessory',
+  desc:'Toilet tissue dispenser beside the water closet (shower side — the 68″ vanity run fills the wall on the other side). Blocking required (G402 TA 1.2); items 27–80″ AFF protrude max 4″ from wall (G402 note 10).',
   note:'ELEVATION-SOURCED — A530: “do not treat that as a takeoff”.',
-  focus:V3(1.0,2.2,-6.0), dist:8});
-attach(pTP, box(0.24,2.0,-5.72, 0.46,2.45,-6.22, cloneMat(MAT.chrome)));
+  focus:V3(1.0,2.2,-3.5), dist:8});
+attach(pTP, box(0.24,2.0,-3.25, 0.46,2.45,-3.75, cloneMat(MAT.chrome)));
 /* vanity GR-302 */
-var pVan = reg({id:'GR-302', tag:'GR-302', grp:'case', name:'Vanity @ Guest Bath', qty:1,
-  cat:'FF&E — Casegoods', desc:'Guest bath vanity casework with undermount lavatory.',
-  focus:V3(1.6,2.6,-9.4), dist:13});
-attach(pVan, box(0.15,0,-7.6, 2.0,2.7,-11.2, cloneMat(MAT.woodDk)));
-attach(pVan, box(0.1,2.7,-7.5, 2.15,2.92,-11.3, cloneMat(MAT.counter)));
-(function(){ var b = new THREE.Mesh(SPH, MAT.applDk);
-  b.scale.set(0.6,0.12,0.75); b.position.set(1.2,2.93,-9.4); scenery(b); })();
-scenery(cyl(0.45,-9.4,0.06,2.92,3.6,MAT.chrome));
+var pVan = reg({id:'GR-302', tag:'GR-302', grp:'case', name:'Vanity @ Guest Bath', qty:1, ada:true,
+  cat:'FF&E — Casegoods',
+  desc:'Guest bath vanity casework, 68″W × 25″D × 34″H counter height per G402 details 03/06 (all 115 keys). Undermount rectangular lavatory — spec of record Decolav Callensia 1402-CWH (no cutsheet on Drive); massing shown at the proposed-sub AS Studio 0614.000 cutsheet dims: rim 19¾″ × 13¾″, bowl 6.44″ deep, rim 34″ AFF. ADA per accessible-vanity detail G402 04/05: counter 34″ max, 27″ knee clear, pipe wrap on trap/supplies (TA 24).',
+  focus:V3(1.6,2.6,-8.4), dist:13});
+/* carcass 68″(5.667′) x 25″(2.083′), counter top at 34″ (2.833′) AFF */
+attach(pVan, box(0.15,0,-5.6, 2.23,2.72,-11.27, cloneMat(MAT.woodDk)));
+attach(pVan, box(0.1,2.72,-5.52, 2.31,2.833,-11.35, cloneMat(MAT.counter)));
+/* undermount rect bowl — rim 19.75″(z) x 13.75″(x), 6.44″ deep, rim 34″ AFF */
+scenery(box(0.55,2.29,-7.62, 1.70,2.81,-9.26, MAT.applDk));
+/* faucet — Moen 9417F12 proposed sub: 6.5″ overall H, 4.875″ reach */
+scenery(cyl(0.42,-8.44,0.055,2.833,3.375,MAT.chrome));
+scenery(box(0.42,3.28,-8.5, 0.83,3.375,-8.38, MAT.chrome));
 var pVM = reg({id:'GR-501', tag:'GR-501', grp:'art', name:'Vanity Mirror', qty:1,
   cat:'FF&E — Art / Mirror', desc:'Mirror above the guest bath vanity.',
-  focus:V3(1.2,4.8,-9.4), dist:10});
-attach(pVM, box(0.26,3.5,-8.1, 0.36,6.2,-10.7, cloneMat(MAT.glass)));
-attach(pVM, box(0.24,3.4,-8.0, 0.34,6.3,-10.8, cloneMat(MAT.frame)));
+  focus:V3(1.2,4.8,-8.44), dist:10});
+attach(pVM, box(0.26,3.5,-7.14, 0.36,6.2,-9.74, cloneMat(MAT.glass)));
+attach(pVM, box(0.24,3.4,-7.04, 0.34,6.3,-9.84, cloneMat(MAT.frame)));
 var pVS = reg({id:'GR-203', tag:'GR-203', grp:'light', name:'Vanity Sconce', qty:1, flag:true,
   cat:'FF&E — Lighting', desc:'Sconce at the vanity mirror.',
   note:'LEGEND PRINTS “VANITY SCONE” (SIC). May be the same device as electrical fixture WS03 — equivalence not stated.',
-  focus:V3(1.2,6.4,-9.4), dist:9});
-attach(pVS, box(0.24,6.35,-8.95, 0.46,6.6,-9.85, cloneMat(MAT.lampsh)));
+  focus:V3(1.2,6.4,-8.44), dist:9});
+attach(pVS, box(0.24,6.35,-7.99, 0.46,6.6,-8.89, cloneMat(MAT.lampsh)));
 /* shelf, towel bar, bath hook */
 var pShelf = reg({id:'GR-321', tag:'GR-321', grp:'case', name:'Wall Shelf @ Bathroom', qty:1,
   cat:'FF&E — Casegoods', desc:'Wall-mounted shelf in the guest bath, above the water closet — back edge on the tiled WC wall.',
@@ -1944,8 +2035,9 @@ attach(pShelf, box(0.24,4.3,-5.34, 0.4,4.7,-5.22, cloneMat(MAT.metal)));   /* br
 /* solid tile band on the bath side of the z=-11.5 partition so the towel bar
    mounts on a visible wall face */
 scenery(box(0.2,0.45,-11.325, 6.35,4.9,-11.27, MAT.tile));
-var pTB = reg({id:'HD-22', tag:'HD-22', grp:'bath', name:'Towel Bar 24″', qty:1,
-  cat:'Bath Accessory', desc:'24″ towel bar on the bath partition wall, both posts on the tiled wall face.',
+var pTB = reg({id:'HD-22', tag:'HD-22', grp:'bath', name:'Towel Bar 24″', qty:1, ada:true,
+  cat:'Bath Accessory',
+  desc:'24″ towel bar (length per A530 HD legend) on the bath partition wall, both posts on the tiled wall face. Blocking required (G402 TA 5); protrusion max 4″ between 27–80″ AFF (G402 note 10).',
   focus:V3(4.0,3.6,-10.9), dist:9});
 (function(){ var bar = new THREE.Mesh(CYL, cloneMat(MAT.chrome));
   bar.scale.set(0.07, 2.0, 0.07); bar.rotation.z = Math.PI/2;
@@ -1969,6 +2061,8 @@ scenery(box(BATHX-0.14,0.01,-8.75, BATHX+0.14,0.09,-11.05, MAT.counter));
 /* ---------------- HTML labels + leader lines ---------------- */
 var labelsDiv = document.getElementById('labels');
 var sidebarPanel = document.getElementById('sidebar');
+var viewsRow = document.getElementById('views');
+var coarsePtr = window.matchMedia && window.matchMedia('(pointer:coarse)').matches;
 var svg = document.getElementById('leaders');
 var SVGNS = 'http://www.w3.org/2000/svg';
 var labels = [];
@@ -2011,7 +2105,7 @@ tagLbl('GR-600',   V3(3.5,2.4,-23.4),    30, 16, 3);
 tagLbl('GR-322',   V3(1.05,2.25,-19.8),  -108, 34, 3);
 tagLbl('GR-308',   V3(W-0.9,7.5,-18.4),  30, -24, 4, ' · WORKING WALL');
 tagLbl('GR-101',   V3(1.8,3.0,-32.4),    -110, 22, 4);
-tagLbl('GR-302',   V3(1.1,2.9,-9.4),     -104, 26, 4);
+tagLbl('GR-302',   V3(1.1,2.9,-10.6),    -104, 26, 4);
 tagLbl('901',      V3(W-1.3,5.7,-13.2),  22, -18, 3);
 tagLbl('903',      V3(W-2.2,5.9,-20.5),  -84, -22, 3);
 tagLbl('GR-400',   V3(6.6,7.9,-35.9),    -30, -26, 3);
@@ -2033,17 +2127,17 @@ tagLbl('GR-500',   V3(0.2,6.5,-32.4),    -92, -22, 2);
 tagLbl('GR-502',   V3(W-0.2,6.7,-10.3),  26, -22, 2);
 tagLbl('GR-403',   V3(W-2.2,6.7,-24.1),  -92, -14, 2);
 tagLbl('GR-402.1', V3(1.6,7.7,-27.1),    -104, -18, 2);
-tagLbl('GR-501',   V3(0.32,6.3,-9.4),    -88, -24, 2);
-tagLbl('GR-203',   V3(0.4,6.65,-9.4),    -86, -46, 2);
+tagLbl('GR-501',   V3(0.32,6.3,-8.44),   -88, -24, 2);
+tagLbl('GR-203',   V3(0.4,6.65,-8.44),   -86, -46, 2);
 /* small chips (pri 1 - cull first) */
 tagLbl('904',      V3(0.9,2.7,-19.4),    -56, 8, 1);
 tagLbl('905',      V3(0.95,2.6,-20.3),   16, 18, 1);
 tagLbl('DISP',     V3(W-1.35,2.4,-15.5), 20, 26, 1, ' DISPOSER');
 tagLbl('GR-204',   V3(12.5,6.6,-0.3),    16, -20, 1);
 tagLbl('HD-12',    V3(12.5,5.2,-0.3),    16, 8, 1);
-tagLbl('HD-03',    V3(0.35,2.3,-6.0),    -60, 10, 1);
-tagLbl('HD-08',    V3(5.45,5.1,-0.9),    14, -18, 1);
-tagLbl('HD-16',    V3(1.6,4.6,-0.7),     -58, -16, 1);
+tagLbl('HD-03',    V3(0.35,2.3,-3.5),    -60, 10, 1);
+tagLbl('HD-08',    V3(5.36,5.1,-2.1),    14, -18, 1);
+tagLbl('HD-16',    V3(1.6,4.05,-0.7),    -58, -16, 1);
 tagLbl('HD-18',    V3(4.3,2.0,-0.8),     14, 12, 1);
 tagLbl('HD-21',    V3(2.7,3.7,-0.8),     -20, -26, 1);
 tagLbl('HD-22',    V3(4.0,3.95,-11.05),  12, -14, 1);
@@ -2103,14 +2197,20 @@ function updateLabels(){
     L.ly = sy + L.dy;
   }
   var placed = [];
-  var sbEdge = 0;
+  var sbEdge = 0, botEdge = H2, topEdge = 0;
+  var phone = W2 <= 700;
   var sbr = sidebarPanel.getBoundingClientRect();
-  if (sbr.right > 0) sbEdge = sbr.right;
+  if (!phone && sbr.right > 0) sbEdge = sbr.right;
+  if (phone && sbr.top < H2) botEdge = sbr.top;
+  if (phone || coarsePtr){
+    var vr = viewsRow.getBoundingClientRect();
+    if (vr.bottom > 0 && vr.top < H2) topEdge = vr.bottom + 4;
+  }
   for (i = 0; i < lblOrder.length; i++){
     L = labels[lblOrder[i]];
     if (!L.vis) continue;
     var vw = Math.min(W2, L.lx + L.w) - Math.max(sbEdge, L.lx);
-    var vh = Math.min(H2, L.ly + L.h) - Math.max(0, L.ly);
+    var vh = Math.min(botEdge, L.ly + L.h) - Math.max(topEdge, L.ly);
     var frac = (vw <= 0 || vh <= 0) ? 0 : (vw * vh) / (L.w * L.h);
     if (frac < (L.pri >= 4 ? 0.8 : 0.92)){ L.vis = false; continue; }
     var ok = false, t, s;
@@ -2125,6 +2225,7 @@ function updateLabels(){
       }
     }
     if (!ok && L.pri < 4){ L.vis = false; continue; }
+    if (topEdge > 0 && L.pri < 4 && L.ly < topEdge - L.h * 0.2){ L.vis = false; continue; }
     placed.push([L.lx - 3, L.ly - 3, L.lx + L.w + 3, L.ly + L.h + 3]);
   }
   for (i = 0; i < labels.length; i++){
@@ -2188,6 +2289,7 @@ ORDER.forEach(function(id){
   if (id === 'PTAC') chip = '<span class="chip n">CTX</span>';
   else if (id !== 'GR-308') chip = (p.qty > 1 ? '<span class="chip q">×' + p.qty + '</span>'
                                               : '<span class="chip n">×1</span>');
+  if (p.ada) chip += '<span class="chip a" title="ADA / accessibility note carried">ADA</span>';
   if (p.flag) chip += '<span class="chip f">' + (id==='GR-3' ? '★ DEF' : 'FLAG') + '</span>';
   b.innerHTML = '<span class="tag">' + p.tag + '</span><span class="nm">' + p.name +
                 '</span><span class="chips">' + chip + '</span>';
@@ -2195,7 +2297,13 @@ ORDER.forEach(function(id){
   b.addEventListener('mouseleave', function(){ highlight(id, false); });
   b.addEventListener('focus', function(){ highlight(id, true); });
   b.addEventListener('blur', function(){ highlight(id, false); });
-  b.addEventListener('click', function(){ select(id, true); });
+  b.addEventListener('click', function(){
+    select(id, true);
+    if (window.matchMedia('(max-width:700px)').matches){
+      document.body.classList.remove('nav-open');
+      document.getElementById('drawerbar').setAttribute('aria-expanded', 'false');
+    }
+  });
   GROUP_EL[p.grp].appendChild(b);
   p.row = b;
 });
@@ -2315,6 +2423,7 @@ function applyFov(){
   camera.fov = fovFor(aspectNow());
   camera.updateProjectionMatrix();
 }
+
 var activePreset = null;
 var PRESET_FOCUS = {beds:V3(3.4,2.2,-19.8), bath:V3(3.2,2.5,-5.8), kitch:V3(11.8,3.0,-15.5)};
 var tween = null;
@@ -2353,11 +2462,11 @@ function applyView(name, animate){
   }
   if (animate) tweenTo(pos, tgt, 900);
   else { camera.position.copy(pos); controls.target.copy(tgt); controls.update(); }
-  document.querySelectorAll('#views button').forEach(function(b){
+  document.querySelectorAll('#views button[data-v]').forEach(function(b){
     b.classList.toggle('on', b.getAttribute('data-v') === name);
   });
 }
-document.querySelectorAll('#views button').forEach(function(b){
+document.querySelectorAll('#views button[data-v]').forEach(function(b){
   b.addEventListener('click', function(){ applyView(b.getAttribute('data-v'), true); requestRenderIfFrozen(); });
 });
 
@@ -2421,6 +2530,14 @@ tagsBtn.addEventListener('click', function(){
 document.getElementById('burger').addEventListener('click', function(){
   document.body.classList.toggle('nav-open');
 });
+var drawerbar = document.getElementById('drawerbar');
+function setDrawer(open){
+  document.body.classList.toggle('nav-open', open);
+  drawerbar.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+drawerbar.addEventListener('click', function(){
+  setDrawer(!document.body.classList.contains('nav-open'));
+});
 var sbScroll = document.getElementById('sb-scroll');
 function sbFadeCheck(){
   sidebarPanel.classList.toggle('at-end',
@@ -2435,6 +2552,7 @@ function onResize(){
   camera.aspect = w/h;
   applyFov();               // re-widen/narrow when the phone is rotated
   camera.updateProjectionMatrix();
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.setSize(w, h);
   svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
   svg.setAttribute('width', w); svg.setAttribute('height', h);
@@ -2456,6 +2574,43 @@ function requestRenderIfFrozen(){
   frozenQueued = true;
   requestAnimationFrame(function(){ frozenQueued = false; renderFrame(); });
 }
+
+/* ---------------- light / dark scheme ---------------- */
+var LIGHT = false;
+var SCHEMES = {
+  dark:  {clear:0x0b0f13, ground:0x10161d, groundOp:0.4,  floor:0x1b232c, bathfl:0x27313b,
+          wall:0x41505e, wallOp:0.25, base:0x323d48, ghost:0x5a6672, ghostOp:0.14,
+          edge:0x35485a, hemiSky:0x5f7488, hemiGnd:0x141a21, hemi:0.85},
+  light: {clear:0xf4f2ec, ground:0xe7e3d9, groundOp:0.85, floor:0xd9d4c7, bathfl:0xc6cdd1,
+          wall:0x7e8fa0, wallOp:0.15, base:0x97a2ad, ghost:0x8f99a3, ghostOp:0.16,
+          edge:0x46586a, hemiSky:0xe8eef3, hemiGnd:0xb8b0a1, hemi:1.15}
+};
+function applyScheme(light){
+  LIGHT = light;
+  var t = light ? SCHEMES.light : SCHEMES.dark;
+  document.body.classList.toggle('light', light);
+  renderer.setClearColor(t.clear, 1);
+  scene.fog.color.setHex(t.clear);
+  MAT.ground.color.setHex(t.ground); MAT.ground.opacity = t.groundOp;
+  MAT.floor.color.setHex(t.floor);
+  MAT.bathfl.color.setHex(t.bathfl);
+  MAT.wall.color.setHex(t.wall); MAT.wall.opacity = t.wallOp;
+  MAT.base.color.setHex(t.base);
+  MAT.ghost.color.setHex(t.ghost); MAT.ghost.opacity = t.ghostOp;
+  edgeMat.color.setHex(t.edge);
+  grid.visible = !light; gridLight.visible = light;
+  hemi.color.setHex(t.hemiSky); hemi.groundColor.setHex(t.hemiGnd); hemi.intensity = t.hemi;
+  var tb = document.getElementById('themeBtn');
+  tb.innerHTML = light ? '&#9789; DARK' : '&#9788; LIGHT';
+  tb.setAttribute('aria-label', light ? 'Switch to dark scheme' : 'Switch to light scheme');
+  tb.setAttribute('aria-pressed', light ? 'true' : 'false');
+  requestRenderIfFrozen();
+}
+document.getElementById('themeBtn').addEventListener('click', function(){ applyScheme(!LIGHT); });
+if (qs.get('scheme') === 'light') applyScheme(true);
+
+/* headless-test hook (no console output; harmless in normal use) */
+window.__exhibit = { camera: camera, controls: controls };
 
 applyView(VIEW, false);
 
