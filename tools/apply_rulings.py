@@ -35,8 +35,11 @@ DISHWASHER = ('⚑ no submittal link — model (DDW18D1ESS 18" vs '
 DISPOSER = ('⚑ no submittal link — only the E400 disposer circuit + '
             'E103 480 VA load evidence it; existence unresolved, resolve '
             'before ordering')
-GR302L = ('⚑ the 101 paper sheet tags this GR-302L; DB/legend carries '
-          'GR-302 — L designation stays per ruling, discrepancy documented')
+GR302L = ('⚑ GR-302 vs GR-302L: the ROOM-101 field sheet tags GR-302L while '
+          'the DB and the legend carry GR-302. Austin ruled the L designation '
+          'stands project-wide; the room-101 sheet is the evidence for that '
+          'ruling, NOT for this room — confirm the vanity tag on this room\'s '
+          'own elevation before ordering')
 
 PROJECT_WIDE = {
     "902": {"instanceNote": DISHWASHER},
@@ -69,6 +72,20 @@ QQ_FAMILY = {
                 "Studio Suite Connector' but it is tagged on the BASE QQ plan; "
                 "confirm the correct working wall for a non-connecting QQ Studio"),
         },
+}
+
+CONFIG_A = ("⚑ CONFIGURATION A (TUB) — mutually exclusive with HD-14 + HD-5.1 "
+            "(Config B roll-in). Verify which configuration this room is built "
+            "to; leave the other configuration's lines unchecked and raise an "
+            "issue on them so the sheet records which one is real")
+CONFIG_B = ("⚑ CONFIGURATION B (ROLL-IN SHOWER) — mutually exclusive with HD-05 "
+            "(Config A tub). Verify which configuration this room is built to; "
+            "leave the other configuration's lines unchecked and raise an issue "
+            "on them so the sheet records which one is real")
+ACCESSIBLE_BATH = {
+    "HD-05": {"instanceNote": CONFIG_A},
+    "HD-14": {"instanceNote": CONFIG_B},
+    "HD-5.1": {"instanceNote": CONFIG_B},
 }
 
 RULINGS = {
@@ -127,6 +144,46 @@ RULINGS = {
                 "⚑ the A532 entry reads as a drafting annotation, not a "
                 "product — confirm what GR-503 actually is at the "
                 "accessible-bath vanity mirror"),
+        },
+    },
+    # ---- floor 2 introduces three more types -------------------------------
+    "king-one-bedroom": {
+        **PROJECT_WIDE,
+        "GR-302": {"instanceNote": GR302L},
+        # A tag with no description anywhere in the legend or the spec. Recorded
+        # as printed rather than merged into 905 TELEPHONE, which is a guess.
+        "GR-905": {
+            "reliability": "FLAGGED",
+            "instanceNote": (
+                "⚑ no description in any legend or spec — recorded exactly as "
+                "printed and NOT merged with the 905 TELEPHONE tag. Ask the "
+                "architect what GR-905 is before ordering"),
+        },
+    },
+    "king-one-bedroom-acc": {
+        **PROJECT_WIDE,
+        **ACCESSIBLE_BATH,
+        # No GR-302 ruling here: the accessible One Bedroom carries GR-303
+        # ("ACCESSIBLE Vanity @ Guest Bath"), a different line entirely, so the
+        # GR-302/GR-302L designation question does not arise. apply_rulings
+        # hard-failed when this was assumed — which is the point of the check.
+    },
+    "qq-acc": {
+        **PROJECT_WIDE,
+        **ACCESSIBLE_BATH,
+        # A556 tags BOTH drapery types on one drawing. They are alternates, not
+        # a pair — buying both is buying one too many on every accessible key.
+        "GR-403": {
+            "instanceNote": (
+                "⚑ ALTERNATE to GR-404, not a pair — A556 tags both on the same "
+                "drawing. Confirm which drapery this room takes; DO NOT order "
+                "both"),
+        },
+        "GR-404": {
+            "instanceNote": (
+                "⚑ ALTERNATE to GR-403, not a pair — A556 tags both on the same "
+                "drawing. Confirm which drapery this room takes; DO NOT order "
+                "both"),
         },
     },
 }

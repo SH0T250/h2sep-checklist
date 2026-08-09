@@ -1,0 +1,197 @@
+{
+  "_meta": {
+    "scope": "Room-type restroom (Room 101, QQ Wide Connecting, non-accessible; bath is SHOWER not tub per A530 / DB ITM-0645)",
+    "generated": "2026-08-09",
+    "sources": {
+      "db": "data/project.sqlite (app repo) — src sheets quoted per row",
+      "P104": { "title": "P104.md (Plumbing Fixtures Schedule extract)", "driveId": "18BLFBqeAYdNNj7Pxo8lKHybgKHZTYMBY" },
+      "A530": { "title": "A530.txt (Enlarged Unit Bathroom extract)", "driveId": "1zey5TySJPt0PO8clXOM1rrFFRBSfxiTB" },
+      "G402": { "title": "G402.md (Accessibility for Guestrooms extract)", "driveId": "1zyL4M5_pjJtxKiQx38_3-xKPwrZ-6HeS" }
+    },
+    "bobrick": "NOT CONFIRMED - fullText search for 'Bobrick' across Drive returns zero files; G402 TA schedule names no manufacturer ('REFER TO STANDARDS MANUAL FOR ACCEPTABLE MANUFACTURERS'). Accessory mfr/models: NOT FOUND ON DRIVE - awaiting Austin.",
+    "cad": "No CAD/Revit files anywhere on Drive (cadOnDrive false throughout). Mfr CAD availability for exact SKUs unverified - external sites not fetched per scope.",
+    "units": "inches unless noted"
+  },
+  "fixtures": [
+    {
+      "tag": "WC-3 / WC-4",
+      "item": "Water closet, guestroom, floor outlet, tank type",
+      "mfr": "American Standard",
+      "model": "WC-3 (ADA): Champion Pro 211AA.104; WC-4: Cadet Pro 215CA.104; seat AS 5257A.65C.020 slow-close elongated",
+      "status": "SPECIFIED (P104 schedule) - FLAGGED: which mark lands on which unit type is never assigned (DB ITM-0042, src P401/P402; P104; A530 kn19/kn21)",
+      "adaNotes": "1.28 GPF manual tank; flush lever required on side of tank opposite inside corner of wall (A530 keyed note); blocking required at toilet (G402 TA 15); 60x56 WC clearance at accessible baths (G402 xref G600)",
+      "dims": null,
+      "dimsNote": "NOT FOUND ON DRIVE - awaiting Austin (no toilet cutsheet in Submittals). For 3D massing: floor-outlet tank WC, elongated bowl - no verified depth/height.",
+      "cadOnDrive": false,
+      "driveId": "18BLFBqeAYdNNj7Pxo8lKHybgKHZTYMBY"
+    },
+    {
+      "tag": "L-3 / L-4 (P401/P402 print L-2)",
+      "item": "Lavatory bowl, guestroom, undermount rectangular",
+      "mfr": "Decolav",
+      "model": "Callensia 1402-CWH",
+      "status": "SPECIFIED (P104 schedule; DB ITM-0043 DUAL MARK CARRY)",
+      "adaNotes": "L-3 is the ADA mark per P104; install per accessible-vanity detail G402 04/05: counter 34in max, 27in (2ft-3in) min knee clear, pipe wrap on trap/supplies (TA 24)",
+      "dims": null,
+      "dimsNote": "NOT FOUND ON DRIVE - awaiting Austin (no Decolav cutsheet). Vanity carcass for 3D: 68 W x 25 D x 34 H (G402 details 03/06, all 115 keys).",
+      "cadOnDrive": false,
+      "driveId": "18BLFBqeAYdNNj7Pxo8lKHybgKHZTYMBY"
+    },
+    {
+      "tag": "L-3 / L-4 (proposed substitution)",
+      "item": "Vanity sink - PROPOSED SUBSTITUTION, not approved (DB ITM-0045 FLAGGED: catalogue pages, no model ticked, no stamp)",
+      "mfr": "American Standard",
+      "model": "Studio 0614.000 undercounter (alt 0614.300 glazed underside; 0618.000 larger)",
+      "status": "PROPOSED SUB - cutsheet on Drive: 'American Standard Bathroom Vanity Sink.pdf'",
+      "adaNotes": "Cutsheet printed note: meets ADA + ICC ANSI A117.1 (BARRIER FREE); install rim 34in AFF; 4in min from front edge of countertop gives 27in knee clearance",
+      "dims": { "rimW": 19.75, "rimD": 13.75, "bowlW": 18, "bowlD": 12, "bowlDepth": 6.44, "rimAFF": 34 },
+      "cadOnDrive": false,
+      "driveId": "14O35Dqt2gqUH5QPf51dPY_p5YqmNMf4e"
+    },
+    {
+      "tag": "vanity faucet (spec of record)",
+      "item": "Lavatory faucet, guestroom",
+      "mfr": "Delta",
+      "model": "581LF-GPM-PP, manual, 1.0 GPM, less 3-hole escutcheon",
+      "status": "SPECIFIED (P104 L-3/L-4 remarks; DB ITM-0044 src P104)",
+      "adaNotes": "Manual single-control lav faucet per schedule; guest controls 15-48in AFF, no tight grasping/pinching/twisting (G402 note 11 / A530 note G)",
+      "dims": null,
+      "dimsNote": "NOT FOUND ON DRIVE - awaiting Austin (no Delta cutsheet)",
+      "cadOnDrive": false,
+      "driveId": "18BLFBqeAYdNNj7Pxo8lKHybgKHZTYMBY"
+    },
+    {
+      "tag": "vanity faucet (proposed substitution)",
+      "item": "Single-handle lavatory faucet - PROPOSED SUBSTITUTION, not approved (DB ITM-0045 FLAGGED; if stamped, countertop cutout changes 3-hole to single-hole)",
+      "mfr": "Moen",
+      "model": "M-Dura 9417F12 (1.2 gpm, w/o drain) / 9419F12 (all-metal drain)",
+      "status": "PROPOSED SUB - cutsheet on Drive: 'Moen Bathroom Vanity Faucet.pdf'",
+      "adaNotes": "Cutsheet: 'ADA for lever handle'; lever style, 100-degree arc temperature control; WaterSense; single-hole install 1-1/4in min dia",
+      "dims": { "overallH": 6.5, "spoutTipH": 4.5, "reach": 4.875, "baseDia": 2, "maxDeck": 3.75 },
+      "cadOnDrive": false,
+      "driveId": "1cJVzmAEPWJPpKAN9Gm9GemcC1ktzPhdE"
+    },
+    {
+      "tag": "SK-3 / SK-4",
+      "item": "Kitchenette / wet-bar sink - FLAGGED (DB ITM-0051): P401/P402 restrict to suite/extended units and assign to none of the 7 unit plans; P104 schedules no product for either mark. Room-101 applicability unresolved.",
+      "mfr": "American Standard",
+      "model": "PEKOE 18SB.10231800.075, 18-ga stainless undermount single bowl",
+      "status": "Drive cutsheet only (S4 product data): 'American Standard Kitchenette Sink.pdf'",
+      "adaNotes": "None printed on cutsheet; 26in cabinet required",
+      "dims": { "rimW": 23, "rimD": 18, "bowlW": 21, "bowlD": 16, "bowlDepth": 10 },
+      "cadOnDrive": false,
+      "driveId": "17ckGAqG7vHvhjZmr2Xu9OXuZthF-fgVc"
+    },
+    {
+      "tag": "SK-3 / SK-4 faucet",
+      "item": "Kitchenette faucet - FLAGGED with SK marks (DB ITM-0051): the file is on its face a two-handle 8in widespread LAVATORY faucet",
+      "mfr": "Moen",
+      "model": "M-Dura 8227, chrome, 1.5 gpm, 3-hole 8in widespread",
+      "status": "Drive cutsheet only: 'Moen Kitchenette Faucet.pdf'",
+      "adaNotes": "Cutsheet: 'ADA for lever handles'; 1/4-turn to open; vandal-resistant",
+      "dims": { "centers": 8, "overallW": 14.5, "spoutH": 3.25, "printedCriticalDims": "13-1/4 / 14-1/2 / 3-1/4 / 2 / 3 as printed" },
+      "cadOnDrive": false,
+      "driveId": "12hxybuB0ibfs__1X5RgmrwVvyXAV90Db"
+    },
+    {
+      "tag": "SH-1 / SH-4",
+      "item": "Shower, guestroom (Room 101 bathing fixture - DUAL MARK: P401/P402 print SH-1, P104 schedules SH-4)",
+      "mfr": "Kohler (pan) / Delta (trim) / Mincey Marble (SS-01 surround)",
+      "model": "Kohler Rely series 30x60 pan, center drain, 4in threshold; Delta T24859 supply/trim; Mincey Marble TS-VS 12x24 Vision surround; bi-pass sliding glass door, brushed aluminium, 24in bar pull (A530 kn28)",
+      "status": "SPECIFIED (P104 schedule; DB ITM-0645/0049/0050/0646/0103-0107)",
+      "adaNotes": "SH-4 = 4in threshold (standard rooms); ADA variant SH-3 = same 30x60 pan, NO threshold; on/off pressure-balancing valve (A530 kn14); hand shower requires on/off control w/ non-positive shut-off (A530 keyed note); hose min 59in, controls 15-48in AFF, floor slope max 1:48 (G402)",
+      "dims": { "panW": 60, "panD": 30, "threshold": 4, "surroundWallH": 80, "showerHeadBand": "74-78 (maximize 6ft-2in to 6ft-6in, G402)" },
+      "cadOnDrive": false,
+      "driveId": "18BLFBqeAYdNNj7Pxo8lKHybgKHZTYMBY"
+    },
+    {
+      "tag": "BT-1",
+      "item": "Bathtub, guestroom ADA - NOT IN ROOM-101 SCOPE (accessible keys only; FLAGGED behind open tub-vs-roll-in conflict A11/C-01: 'Do not order the 438 bath package off either matrix')",
+      "mfr": "American Standard (tub) / Delta (valve)",
+      "model": "Princeton 2390.202; supply Delta T14261 / R10000-UNWS; removable tub/shower seat (kn 7)",
+      "status": "SPECIFIED (P104 schedule; DB ITM-0703/0712/0721 FLAGGED)",
+      "adaNotes": "Tub rim band 17in min / 19in max AFF (DB note + G402 det 01); tub depth 2ft-0in, clear floor 30in min/34in clear, grab bars: head 12in TA4 at 33-36, back 24in TA4.2 x2 (lower 8-10in above rim), foot 24in TA4.2 + vertical TA4.9 (G402 det 01)",
+      "dims": { "rimAFFmin": 17, "rimAFFmax": 19, "depthPrinted": 24 },
+      "dimsNote": "Tub body L/W NOT FOUND ON DRIVE - awaiting Austin (no AS Princeton cutsheet)",
+      "cadOnDrive": false,
+      "driveId": "18BLFBqeAYdNNj7Pxo8lKHybgKHZTYMBY"
+    },
+    {
+      "tag": "HD-03",
+      "item": "Toilet Tissue Dispenser (Room 101 qty 1)",
+      "mfr": null,
+      "model": null,
+      "status": "NOT FOUND ON DRIVE - awaiting Austin (no accessory submittal of any brand; Bobrick unconfirmed, zero Drive hits; G402: 'REFER TO STANDARDS MANUAL FOR ACCEPTABLE MANUFACTURERS')",
+      "adaNotes": "Blocking required (G402 TA 1.2); items 27-80in AFF protrude max 4in from wall (G402 note 10)",
+      "dims": null,
+      "dimsNote": "src DB room_items A530:40 (vanity wall elev 02), MEDIUM - elevation-sourced",
+      "cadOnDrive": false
+    },
+    {
+      "tag": "HD-08",
+      "item": "Grab Bar ADA 24in VERTICAL MOUNT (Room 101 qty 1, shower wall)",
+      "mfr": null,
+      "model": null,
+      "status": "NOT FOUND ON DRIVE - awaiting Austin (same as HD-03)",
+      "adaNotes": "A530: wall-mounted grab bars w/ required clearances - 12in above and 1-1/2in below, refer Accessibility Standards & HADG; blocking rated 250 lbs vertical+horizontal (G402); finish polished/brushed chrome, brushed nickel or stainless (G402 note 2)",
+      "dims": { "length": 24, "orientation": "vertical" },
+      "dimsNote": "Length from A530 HD legend; src DB A530:43 (shower wall elev 03), MEDIUM",
+      "cadOnDrive": false
+    },
+    {
+      "tag": "HD-12",
+      "item": "Robe / Coat Hook (Room 101 qty 2)",
+      "mfr": null,
+      "model": null,
+      "status": "NOT FOUND ON DRIVE - awaiting Austin",
+      "adaNotes": "Blocking required (G402 TA 2 / TA 21); A530: 'PROVIDE BLOCKING FOR ROBE/COAT HOOK AS NEEDED'; protrusion max 4in rule applies",
+      "dims": null,
+      "dimsNote": "src DB A530:35, HIGH",
+      "cadOnDrive": false
+    },
+    {
+      "tag": "HD-16",
+      "item": "Shower Soap Dispenser, surface mounted, guestroom (Room 101 qty 1)",
+      "mfr": null,
+      "model": null,
+      "status": "NOT FOUND ON DRIVE - awaiting Austin",
+      "adaNotes": "A530: 'PROVIDE BLOCKING FOR AMENITY DISPENSER AS NEEDED'; guest controls 15-48in AFF reach band (G402 note 11)",
+      "dims": null,
+      "dimsNote": "src DB A530:35; A532.1:30; A533:44, HIGH",
+      "cadOnDrive": false
+    },
+    {
+      "tag": "HD-18",
+      "item": "Shower Footrest, surface mounted (Room 101 qty 1)",
+      "mfr": null,
+      "model": null,
+      "status": "NOT FOUND ON DRIVE - awaiting Austin",
+      "adaNotes": "Blocking required (G402 TA 14.2); A530: 'PROVIDE BLOCKING FOR FOOTREST AS NEEDED'",
+      "dims": null,
+      "dimsNote": "src DB A530:35, HIGH",
+      "cadOnDrive": false
+    },
+    {
+      "tag": "HD-21",
+      "item": "Soap Dish, surface mounted (Room 101 qty 1)",
+      "mfr": null,
+      "model": null,
+      "status": "NOT FOUND ON DRIVE - awaiting Austin",
+      "adaNotes": "One of the few TA items NOT blocking-checked (G402 TA 14); accessible soap-dish band 17-19in AFF at tub walls (G402 det 01)",
+      "dims": null,
+      "dimsNote": "src DB A530:35, HIGH",
+      "cadOnDrive": false
+    },
+    {
+      "tag": "HD-22",
+      "item": "Towel Bar 24in (Room 101 qty 1)",
+      "mfr": null,
+      "model": null,
+      "status": "NOT FOUND ON DRIVE - awaiting Austin",
+      "adaNotes": "Blocking required (G402 TA 5); protrusion max 4in between 27-80in AFF (G402 note 10)",
+      "dims": { "length": 24 },
+      "dimsNote": "Length from A530 HD legend 'TOWEL BAR 24\"'; src DB A530:35, HIGH",
+      "cadOnDrive": false
+    }
+  ]
+}

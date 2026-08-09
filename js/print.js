@@ -7,7 +7,7 @@
 //
 //   print.html?room=101        live Firestore
 //   print.html?room=101&demo=1 bundled demo fixture (no network)
-import { firebaseConfig, PROJECT_ID } from './config.js';
+import { firebaseConfig, PROJECT_ID, MODEL_ROOMS } from './config.js';
 import { seedRooms } from './seed.js';
 import { esc } from './util.js';
 
@@ -171,7 +171,17 @@ ${sectionsHTML(g2)}
 
 // ---------- boot ----------
 $('back-link').href = './index.html#/room/' + encodeURIComponent(ROOM);
-$('model-link').href = './room-3d.html?room=' + encodeURIComponent(ROOM) + (DEMO ? '&demo=1' : '');
+// The 3D button is gated exactly as the room screen gates it (screens.js:353,
+// :417). Without this the sheet offered the exhibit for EVERY room, and
+// room-3d.html would answer with room 101's two-queen-bed QQ geometry wearing
+// the requested room's number — wrong beds, wrong dimensions, and a connecting
+// door that isn't there. A missing button is honest; a relabelled wrong room
+// is not.
+if (MODEL_ROOMS.includes(ROOM)) {
+  $('model-link').href = './room-3d.html?room=' + encodeURIComponent(ROOM) + (DEMO ? '&demo=1' : '');
+} else {
+  $('model-link').remove();
+}
 $('print-btn').addEventListener('click', () => window.print());
 
 // Paint whatever the app handed over first — a sheet on screen beats a spinner.

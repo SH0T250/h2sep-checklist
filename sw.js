@@ -3,7 +3,7 @@
 // Bump VERSION on every deploy — it busts the old cache and triggers the
 // in-app "Update available" banner. VERSION must equal 'h2sep-v' + APP_VERSION
 // in js/config.js — install verifies this to defeat CDN mixed-version races.
-const VERSION = 'h2sep-v1.13.0';
+const VERSION = 'h2sep-v1.14.0';
 // Paper-sheet photos live in their own PERMANENT cache — never wiped by app
 // updates. Only room JPGs under /sheets/ may enter it (index.json stays in the
 // versioned shell cache so it can never be shadowed by a stale copy).
@@ -23,7 +23,7 @@ const REFS_CACHE = 'h2sep-refs';
 // the previous one and the next open re-downloads exactly once. (v2: the
 // exhibit became room-aware for every QQ Studio Connector; v3/v4: per-room
 // width, depth and connecting-door geometry for the whole QQ family.)
-const MODEL_CACHE = 'h2sep-model-4';
+const MODEL_CACHE = 'h2sep-model-5';
 
 const SHELL = [
   './',
@@ -31,10 +31,18 @@ const SHELL = [
   './manifest.webmanifest',
   './print.html',
   './refs.html',
+  // Settings links to the dashboard (screens.js:682). It was never precached,
+  // so on site — where the app is usually offline — it fell through to the
+  // navigate fallback below and silently rendered the CHECKLIST instead of the
+  // dashboard. Austin opening it in front of the client would have got the
+  // wrong screen with no error.
+  './dashboard.html',
   './css/app.css',
+  './css/dash.css',
   './css/print.css',
   './css/refs-page.css',
   './js/app.js',
+  './js/dash.js',
   './js/config.js',
   './js/print.js',
   './js/refs-page.js',
@@ -178,12 +186,33 @@ self.addEventListener('fetch', (e) => {
       }
       return resp;
     } catch (err) {
-      // Offline navigation to an uncached URL -> serve the app shell. The
-      // shell always lives in the VERSION cache, never in a permanent one.
+      // Offline navigation. The app is a hash-router SPA living in index.html,
+      // so serving the shell is right for an APP ROUTE — but it is wrong for a
+      // standalone page. Handing back the checklist when someone asked for the
+      // 3D exhibit or the dashboard is a confidently wrong answer: the crew
+      // sees a working screen and no indication they got a different one.
       if (e.request.mode === 'navigate') {
-        const shellCache = await caches.open(VERSION);
-        const shell = await shellCache.match('./index.html');
-        if (shell) return shell;
+        const isStandalonePage = /\/(print|refs|dashboard|room-3d)\.html$/.test(url.pathname);
+        if (!isStandalonePage) {
+          const shellCache = await caches.open(VERSION);
+          const shell = await shellCache.match('./index.html');
+          if (shell) return shell;
+        }
+        const page = (url.pathname.split('/').pop() || '') + url.search;
+        return new Response(
+          '<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1">'
+          + '<title>Offline</title><body style="margin:0;background:#0b0f13;color:#e8eef4;'
+          + 'font:15px/1.6 system-ui,sans-serif;display:flex;align-items:center;'
+          + 'justify-content:center;min-height:100vh;padding:24px;text-align:center">'
+          + '<div><div style="font-size:34px">\u{1F4F5}</div>'
+          + '<h1 style="font-size:17px">This page isn’t downloaded yet</h1>'
+          + '<p style="color:#8fa3b5;max-width:32em">You’re offline and '
+          + '<code>' + page.replace(/[<&]/g, '') + '</code> hasn’t been opened on this '
+          + 'phone before, so there’s no saved copy. Open it once with signal and it '
+          + 'will work in dead zones after that.</p>'
+          + '<p><a href="./index.html" style="color:#22b8e6">‹ Back to the checklist</a></p>'
+          + '</div></body>',
+          { status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
       }
       throw err;
     }

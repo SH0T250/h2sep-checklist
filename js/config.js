@@ -17,7 +17,7 @@ export const firebaseConfig = {
 export const PROJECT_ID = 'h2sep';
 // Must match sw.js VERSION ('h2sep-v' + this) — the service worker verifies
 // the pair at install time and refuses mismatched (mid-deploy) builds.
-export const APP_VERSION = '1.13.0';
+export const APP_VERSION = '1.14.0';
 
 // Rooms that offer the 3D exhibit. Geometry is per-room off A555 (width,
 // depth, handedness and whether there is a GR-3 connecting door), so a room
@@ -34,9 +34,9 @@ export const APP_VERSION = '1.13.0';
 // needs its own model rather than a relabelled QQ shell.
 export const MODEL_ROOMS = [
   '101', '103', '105', '107', '109', '111', '113', '115',
-  '201', '215', '230', '232', '236',
-  '301', '330', '332', '336',
-  '401', '403', '430', '432', '436',
+  '201', '203', '205', '207', '209', '211', '213', '215',
+  '228', '230', '232', '234', '236', '301', '330', '332',
+  '336', '401', '403', '430', '432', '436',
 ];
 
 export const DEMO_PIN = '6621';

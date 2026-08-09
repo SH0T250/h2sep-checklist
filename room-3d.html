@@ -1506,6 +1506,23 @@ var ROOM_GEOM = {
   '115': {w: QQ_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Studio',
           basis: 'base QQ per A555; odd side of the corridor'},
 
+  /* ---- floor 2 QQ Studios (Queen-Queen, no connecting door) ---- */
+  '203': {w: QQ_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Studio',
+          basis: 'base QQ per A555; odd side of the corridor, same hand as 105'},
+  '205': {w: QQ_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Studio',
+          basis: 'base QQ per A555; odd side of the corridor, same hand as 105'},
+  '207': {w: QQ_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Studio',
+          basis: 'base QQ per A555; odd side of the corridor, same hand as 105'},
+  '209': {w: QQ_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Studio',
+          basis: 'base QQ per A555; odd side of the corridor, same hand as 105'},
+  '211': {w: QQ_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Studio',
+          basis: 'base QQ per A555; odd side of the corridor, same hand as 105'},
+  '213': {w: QQ_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Studio',
+          basis: 'base QQ per A555; odd side of the corridor, same hand as 105'},
+  '228': {w: QQ_W, d: QQ_D, conn: false, mirror: true,  variant: 'QQ Studio',
+          basis: 'base QQ per A555; EVEN side of the corridor so the plan reads opposite-hand — CONFIRM ON PLAN'},
+  '234': {w: QQ_W, d: QQ_D, conn: false, mirror: true,  variant: 'QQ Studio',
+          basis: 'base QQ per A555; EVEN side of the corridor so the plan reads opposite-hand — CONFIRM ON PLAN'},
   /* ---- QQ Wide (the wide bay WITHOUT a connecting door) ---- */
   '201': {w: WIDE_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Wide',
           basis: 'A555 @QQ WIDE width, base (non-connecting) plan; odd side of the corridor'},
@@ -1526,10 +1543,35 @@ var ROOM_GEOM = {
   '432': {w: QQ_W, d: EXT_D, conn: false, mirror: true, variant: 'QQ Extended',
           basis: 'A555 @QQ EXT depth; even side, stacks over 332 — CONFIRM ON PLAN'},
 };
+/* Connecting partners off the floor plans: A100 (101/103), A101 (236->238),
+   A102 (336/338 demising wall), A103 (401/403, 436->438). 215's partner is NOT
+   named on A101 — left blank rather than guessed. */
+var PARTNER_OF = {'101':'103','103':'101','401':'403','403':'401',
+                  '236':'238','336':'338','436':'438','215':''};
 var ROOM_NO = (new URLSearchParams(location.search).get('room') || '101').trim();
-var GEOM = ROOM_GEOM[ROOM_NO] || ROOM_GEOM['101'];
+/* A room with no entry here has NO MODEL. Falling back to room 101 would draw
+   its two queen beds, its 12'-11 3/8" bay and its GR-3 connecting door under
+   the requested room's number — a confidently wrong exhibit, which is worse
+   than none. Say so and stop instead. */
+if (!ROOM_GEOM[ROOM_NO]) {
+  document.documentElement.innerHTML =
+    '<head><meta name="viewport" content="width=device-width,initial-scale=1">'
+    + '<title>No 3D model \u2014 Room ' + ROOM_NO + '</title></head><body style="margin:0;'
+    + 'background:#0b0f13;color:#e8eef4;font:15px/1.6 ui-monospace,Menlo,monospace;'
+    + 'display:flex;align-items:center;justify-content:center;min-height:100vh;'
+    + 'padding:24px;text-align:center"><div><div style="font-size:34px">\uD83E\uDDCA</div>'
+    + '<h1 style="font-size:17px;letter-spacing:.06em">NO 3D MODEL FOR ROOM '
+    + ROOM_NO + ' YET</h1><p style="color:#8fa3b5;max-width:34em">This room type has '
+    + 'not been modelled. Rather than show another room\u2019s geometry with this '
+    + 'number on it, the exhibit stops here.</p><p><a href="./index.html#/room/'
+    + encodeURIComponent(ROOM_NO) + '" style="color:#22b8e6">\u2039 Back to room '
+    + ROOM_NO + '</a></p></div></body>';
+  throw new Error('no ROOM_GEOM entry for room ' + ROOM_NO);
+}
+var GEOM = ROOM_GEOM[ROOM_NO];
 var MIRROR = !!GEOM.mirror;
 var CONN = GEOM.conn !== false;
+var PARTNER = CONN ? (PARTNER_OF[ROOM_NO] || '') : '';
 var W = GEOM.w, D = GEOM.d, H = 9.0, T = 0.35;
 var BATHX = 6.55, BATHZ = -11.5;              /* bath partition planes */
 var CX = W/2, CZ = -D/2;                      /* room centre */
@@ -1774,11 +1816,12 @@ scenery(box(-2,-0.02,1.2, W+9.5,0.06,4.6, MAT.ghost, true));
 
 /* ---- Connecting door GR-3 (room feature, highlighted Triun cyan) ---- */
 if (CONN) {
-var pDoor = reg({id:'GR-3', tag:'GR-3', grp:'door', name:'Connecting Door → Room 103', qty:1,
+var pDoor = reg({id:'GR-3', tag:'GR-3', grp:'door', name:'Connecting Door → ' + (PARTNER ? 'Room ' + PARTNER : 'adjoining room'), qty:1,
   qdisp:'1 — ONE LEAF THIS ROOM (pair spans 101/103)',
-  cat:'Doors · room feature', flag:true,
-  desc:'D1 — SGL 3′-0″×6′-8″×1 3/4″, solid-core wood, F1 HM frame, 45-min rating, hardware set #3. Qty 1 this room: A600 remark a provides (2) doors per communicating location — one leaf hung each side of the demising wall, so Room 101 carries ONE GR-3 leaf and Room 103 carries the other. Both leaves drawn for context.',
-  note:'★ CONNECTING DOOR LOCK — NOT LOCKING. Standing deficiency on the room-101 field sheet; set #3 deadbolt / connecting latch / door guard is the hardware behind it.',
+  cat:'Doors · room feature', flag: ROOM_NO === '101',
+  desc:'D1 — SGL 3′-0″×6′-8″×1 3/4″, solid-core wood, F1 HM frame, 45-min rating, hardware set #3. Qty 1 this room: A600 remark a provides (2) doors per communicating location — one leaf hung each side of the demising wall, so Room ' + ROOM_NO + ' carries ONE GR-3 leaf and ' + (PARTNER ? 'Room ' + PARTNER : 'the adjoining room') + ' carries the other. Both leaves drawn for context.',
+  note: ROOM_NO === '101' ? '★ CONNECTING DOOR LOCK — NOT LOCKING. Standing deficiency on the room-101 field sheet; set #3 deadbolt / connecting latch / door guard is the hardware behind it.' : '',
+  flagIsRoom101Only: true,
   focus:V3(W-1.5,3.4,-6.7), dist:16});
 attach(pDoor, box(W-0.28,0,-5.2, W+0.28,7.0,-5.5, cloneMat(MAT.cyanFr)));
 attach(pDoor, box(W-0.28,0,-7.9, W+0.28,7.0,-8.2, cloneMat(MAT.cyanFr)));
@@ -2796,6 +2839,21 @@ if (!FREEZE && !REDUCED && !qs.has('view')){
       el.innerHTML = el.innerHTML.replace(/ROOM 101/g, 'ROOM ' + qsRoom);
     });
   }
+  /* The <title> also carries the modelled room's TYPE — a QQ Extended room was
+     showing "QQ Studio Connector" in the tab and in any bookmark. */
+  document.title = document.title.split('QQ Studio Connector')
+                                 .join(TYPE_LABEL[GEOM.variant] || GEOM.variant);
+
+  /* The drawer hard-codes "42 ITEMS" (room 101's count). A non-connecting room
+     lists 41 — it has no GR-3. Count what is actually on screen. */
+  (function(){
+    var n = document.querySelectorAll('#sb-scroll .row[data-id]').length;
+    if (!n) return;
+    document.querySelectorAll('#drawerbar span, #ministrip span').forEach(function(el){
+      if (el.innerHTML.indexOf('42 ITEMS') !== -1)
+        el.innerHTML = el.innerHTML.split('42 ITEMS').join(n + ' ITEMS');
+    });
+  })();
   /* Those same headings hard-code the modelled room's TYPE. Leaving it makes a
      QQ Extended room announce itself as a QQ Studio Connector, which is worse
      than showing nothing — rewrite it to the variant actually on screen. */
@@ -2821,12 +2879,22 @@ if (!FREEZE && !REDUCED && !qs.has('view')){
   var lbls = [].slice.call(document.querySelectorAll('.lbl'));
   var legend = [].slice.call(document.querySelectorAll('.legend div'));
   var rows = [].slice.call(document.querySelectorAll('#sb-scroll .nm'));
+  /* These strings all name room 103, room 101's partner. They must be rewritten
+     for EVERY room, not only when a partner is known: room 215 connects to a
+     room A101 never names, and leaving the default made it claim a floor-1
+     room as its neighbour. */
   if (partner) {
     swapText(lbls, 'ROOM 103 (CONNECTING)', 'ROOM ' + partner + ' (CONNECTING)');
     swapText(lbls, 'CONN. → 103', 'CONN. → ' + partner);
     swapText(legend, 'ROOM 103', 'ROOM ' + partner);
     swapText(rows, 'Room 103', 'Room ' + partner);
+  } else if (CONN) {
+    swapText(lbls, 'ROOM 103 (CONNECTING)', 'ADJOINING ROOM (NOT NAMED ON PLAN)');
+    swapText(lbls, 'CONN. → 103', 'CONN. → ?');
+    swapText(legend, 'ROOM 103', 'ADJOINING ROOM');
+    swapText(rows, 'Room 103', 'the adjoining room');
   }
+
   /* The in-scene dimension label is written for the wide connecting bay; every
      other room rewrites it to its own variant (identity swap on 101/401). */
   swapText(lbls, '13′-10″ WIDE · QQ WIDE CONNECTING',
@@ -2842,7 +2910,11 @@ if (!FREEZE && !REDUCED && !qs.has('view')){
     cav.innerHTML = VAR + ' &middot; '
       + (wide ? '12&prime;-11⅜&Prime; CLEAR' : '12&prime;-0&Prime; CLEAR')
       + (ext ? ' &times; 38&prime;-9&Prime; DEEP' : '')
-      + ' &middot; ' + (GEOM.mirror ? 'MIRRORED PER FLOOR PLAN &middot; ' : '')
+      + ' &middot; ' + (GEOM.mirror
+            ? (/CONFIRM ON PLAN|UNCONFIRMED/i.test(GEOM.basis || '')
+                 ? 'MIRRORED — HANDEDNESS NOT YET CONFIRMED &middot; '
+                 : 'MIRRORED PER FLOOR PLAN &middot; ')
+            : '')
       /* A555 draws the QQ family ONCE with alternate dimension strings, so the
          clear dimensions are the architect's but WHERE the extra depth is
          absorbed is not on the sheet. Say so rather than imply it was drawn. */

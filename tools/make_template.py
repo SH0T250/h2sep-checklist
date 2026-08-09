@@ -93,6 +93,42 @@ def main():
             it["instanceNote"] = ""
         items[keep] = {f: it.get(f) for f in ITEM_FIELDS}
 
+    # Carry the DATABASE'S OWN REASON for a downgraded reliability. gen_rooms
+    # selects `instance_note` (the per-instance disambiguator) but not `note`,
+    # which is where the evidence lives -- so a line arrived graded FLAGGED or
+    # MEDIUM with nothing on screen explaining why. A crew member seeing
+    # "VERIFY - sources disagree" with no text cannot act on it, which is worse
+    # than no flag at all. The reason is already recorded; surface it.
+    reasons, sheets = {}, {}
+    for tag, desc, note, rel, sheet in cx.execute(
+            "SELECT tag, description, note, reliability, source_sheet FROM room_items"
+            " WHERE room_no = ?", (a.room,)):
+        if rel not in ("FLAGGED", "MEDIUM"):
+            continue
+        key = tag or ("#" + (desc or ""))
+        if note and note.strip():
+            reasons.setdefault(key, note.strip())
+        if sheet:
+            sheets.setdefault(key, sheet)
+
+    for it in items.values():
+        if it["reliability"] not in ("FLAGGED", "MEDIUM"):
+            continue
+        key = it.get("code") or ("#" + (it.get("label") or ""))
+        why = reasons.get(key) or reasons.get("#" + (it.get("label") or ""))
+        if why:
+            why = "⚑ " + why
+        else:
+            # No reason is recorded for this line. Say THAT, and name where the
+            # line came from — never invent a cause, and never leave a bare
+            # "⚠ VERIFY" the crew cannot act on.
+            src = sheets.get(key) or sheets.get("#" + (it.get("label") or "")) or it.get("src")
+            why = ("⚑ graded %s in the reference set%s — no reason recorded; "
+                   "verify against the sheet before ordering."
+                   % (it["reliability"], " (source: %s)" % src if src else ""))
+        it["instanceNote"] = (it["instanceNote"] + " — " + why).strip(" — ") \
+            if it["instanceNote"] else why
+
     doc = {
         "accessible": bool(int(raw.get("accessible") or 0)) if not isinstance(
             raw.get("accessible"), bool) else raw["accessible"],

@@ -29,6 +29,7 @@ Deterministic: no timestamps (the seeder stamps those), sorted keys.
 
 import argparse
 import json
+import re
 import os
 import sqlite3
 import sys
@@ -41,6 +42,21 @@ DB_PATH = os.path.join(HERE, os.pardir, "data", "project.sqlite")
 
 # Austin's current scope, ruling 9. MEP lands later via --merge-missing, which
 # appends by id and never clobbers a check-off.
+# Austin's controlled vocabulary (his Drive folder names) mapped onto the DB's
+# room_type values. Several types deliberately collapse onto one label; the
+# label is never a join key.
+LABEL_TO_TYPES = {
+    "QQ Studio Connector":   ("QQ Wide Connecting", "QQ Connecting"),
+    "QQ Studio":             ("Queen-Queen", "QQ Wide"),
+    "QQ Extended":           ("QQ Extended",),
+    "QQ ACC":                ("QQ Acc.",),
+    "King Studio":           ("King Studio",),
+    "King Studio Connector": ("King Studio Connecting",),
+    "King Studio Acc Mod":   ("King Studio Acc.",),
+    "King One Bedroom":      ("King One Bedroom",),
+    "King One Bedroom ACC":  ("King One Bedroom Acc.",),
+}
+
 SCOPE_CATEGORIES = (
     "FF&E - Casegoods", "FF&E - Bedding", "FF&E - Seating", "FF&E - Lighting",
     "FF&E - Window", "FF&E - Art / Mirror", "FF&E - Misc",
@@ -113,13 +129,29 @@ def verify(room_no, generated, template):
             % (room_no, "\n  - ".join(problems)))
 
 
+def slug_for(room_type):
+    """Machine slug for a room's OWN DB room_type.
+
+    Taking the slug from the template instead stamped the TEMPLATE's type onto
+    every sibling: six QQ Connecting rooms went live carrying
+    `qq-wide-connecting` because the reviewed template happened to be built from
+    room 101, which is the Wide one. The label is Austin's controlled vocabulary
+    and is meant to collapse several types onto one name; the slug is the join
+    key and must stay faithful to the database.
+    """
+    return re.sub(r"[^a-z0-9]+", "-", (room_type or "").lower()).strip("-")
+
+
 def build(room_no, cx, template):
     generated = scoped_items(cx, room_no)
     verify(room_no, generated, template)
+    row = cx.execute("SELECT room_type FROM rooms WHERE room_no = ?", (room_no,)).fetchone()
     doc = {
         "number": str(room_no),
         "floor": generated["floor"],
-        "type": template["type"],
+        # Slug from THIS room's own type; display label from the approved
+        # template (that is the one Austin ruled on).
+        "type": slug_for(row["room_type"]),
         "typeLabel": template["typeLabel"],
         # Template item content, verified equal to this room's DB rows above,
         # so Austin's rulings ride along to every sibling room.
@@ -153,15 +185,22 @@ def main():
     if a.rooms:
         rooms = [r.strip() for r in a.rooms.split(",") if r.strip()]
     else:
-        # display_label is what the app shows and what Austin names rooms by;
-        # the canonical contract maps several room_type values onto one label,
-        # so select on the label and print the types for the record.
-        rooms = [r[0] for r in cx.execute(
-            "SELECT room_no FROM rooms WHERE display_label = ?"
-            " ORDER BY CAST(room_no AS INTEGER), room_no", (a.label,))]
+        # Selecting on display_label is the join the project rules forbid, and it
+        # breaks the moment a label is renamed to Austin's vocabulary: the DB
+        # says "Queen-Queen" while the app says "QQ Studio", so --label "QQ
+        # Studio" would silently match NOTHING and build nothing. Resolve the
+        # label to room_type values via the canonical map, then select on those.
+        types = LABEL_TO_TYPES.get(a.label)
+        if not types:
+            die('label %r is not in LABEL_TO_TYPES — add it (see '
+                'data/ROOM_TYPE_CANONICAL.md) rather than joining on '
+                'display_label, which is not a stable key' % a.label)
+        q = ("SELECT room_no FROM rooms WHERE room_type IN (%s)"
+             " ORDER BY CAST(room_no AS INTEGER), room_no" % ",".join("?" * len(types)))
+        rooms = [r[0] for r in cx.execute(q, tuple(types))]
         if not rooms:
-            die('no rooms carry display_label %r — check '
-                'data/ROOM_TYPE_CANONICAL.md for the exact string' % a.label)
+            die('no rooms carry room_type in %r for label %r' % (types, a.label))
+        print("label %r -> room_type %s" % (a.label, types))
 
     skip = {s.strip() for s in a.skip.split(",") if s.strip()}
     os.makedirs(a.out_dir, exist_ok=True)

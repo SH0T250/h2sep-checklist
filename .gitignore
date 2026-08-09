@@ -3,3 +3,14 @@ tools/__pycache__/
 # Firestore backups carry real crew names and UIDs in the activity log —
 # they are operational safety copies, not source. Keep them local.
 tools/out/backups/
+
+# Never publish: machine-specific, PII-bearing, or commercially sensitive.
+tests/node_modules
+
+# Redacted Firestore dumps still carry a crew UID, and git history carries a
+# name. This repo is PUBLIC — keep them out entirely.
+backups/
+reference/
+
+# Scratch copy made by tests/lifecycle-test.mjs (now written to TMPDIR).
+lifecycle-app/
