@@ -21,13 +21,15 @@ const KEY = cfg.match(/apiKey\s*:\s*["']([^"']+)["']/)[1];
 const EXPECT_3D = new Set([
   // floor 1 — QQ Studio Connector + QQ Studio
   '101', '103', '105', '107', '109', '111', '113', '115',
-  // floor 2 — QQ Wide, QQ Studio, QQ Connecting, QQ Extended
+  // floor 2
   '201', '203', '205', '207', '209', '211', '213', '215',
   '228', '230', '232', '234', '236',
   // floor 3
-  '301', '330', '332', '336',
+  '301', '303', '305', '307', '309', '311', '313', '315',
+  '328', '330', '332', '334', '336',
   // floor 4
-  '401', '403', '430', '432', '436',
+  '401', '403', '405', '407', '409', '411', '413', '415',
+  '428', '430', '432', '434', '436',
 ]);
 // Still read the shipped list, but only to assert it MATCHES the expectation.
 const MODEL_ROOMS = JSON.parse(

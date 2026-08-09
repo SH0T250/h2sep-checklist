@@ -168,6 +168,14 @@ RULINGS = {
         # GR-302/GR-302L designation question does not arise. apply_rulings
         # hard-failed when this was assumed — which is the point of the check.
     },
+    # Room 438. NOT the same package as room 118 despite sharing room_type
+    # "King Studio Acc." in the database: 438 carries GR-502 (Full Length
+    # Mirror) and no GR-208/GR-320, 118 the reverse. Proved before building, so
+    # it gets its own template rather than inheriting 118's.
+    "king-studio-acc": {
+        **PROJECT_WIDE,
+        **ACCESSIBLE_BATH,
+    },
     "qq-acc": {
         **PROJECT_WIDE,
         **ACCESSIBLE_BATH,
