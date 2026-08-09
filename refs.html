@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Submittals &amp; Plan References · H2SEP</title>
+  <meta name="description" content="Submittal and plan references for a guestroom — Home2 Suites Eagle Pass (Triun Construction & Engineering)">
+  <meta name="theme-color" content="#0B0D10">
+  <link rel="icon" href="./icons/favicon-48.png">
+  <link rel="stylesheet" href="./css/app.css">
+  <link rel="stylesheet" href="./css/refs-page.css">
+  <script>/* apply saved theme before first paint (default light) */
+    try { document.documentElement.setAttribute('data-theme',
+      localStorage.getItem('h2sep-theme') === 'dark' ? 'dark' : 'light'); } catch (e) {}
+  </script>
+</head>
+<body>
+  <header class="appbar">
+    <a class="ab-btn" id="back-link" href="./index.html" aria-label="Back">‹</a>
+    <h1 class="ab-title" id="title">References</h1>
+    <div class="ab-right"><button class="ab-btn" id="expand-btn" aria-label="Expand or collapse all">⤢</button></div>
+  </header>
+  <main class="content" id="body">
+    <div class="empty">Loading references…</div>
+  </main>
+  <noscript><div class="empty">This page needs JavaScript enabled.</div></noscript>
+  <script type="module" src="./js/refs-page.js"></script>
+</body>
+</html>

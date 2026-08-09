@@ -274,6 +274,7 @@
   <div class="row">
     <a id="bb-back" href="./index.html#/room/101">&lsaquo; ROOM 101</a>
     <span class="sp"></span>
+    <a id="bb-refs" href="./refs.html?room=101&amp;from=3d">&#128196; REFS</a>
     <a id="bb-print" href="./print.html?room=101">&#128424; SHEET</a>
   </div>
 </div>
@@ -2167,10 +2168,16 @@ function boxesHit(x, y, w, h, list){
 function updateLabels(){
   var W2 = window.innerWidth, H2 = window.innerHeight;
   var i, L;
-  // Tags off (the phone default): hide every label and skip the whole
-  // projection/collision pass. The loop writes style.display inline each
-  // frame, so a CSS class alone could never hold them down.
-  if (document.body.classList.contains('tags-off')){
+  // Tags off (the phone default) still reveals tags as you ZOOM IN: pull the
+  // camera close and the labels for whatever you are looking at fade in, so
+  // the wide shot stays clean but a close-up is still identifiable. The TAGS
+  // chip forces them all on. Note the loop writes style.display inline every
+  // frame, so a CSS class alone could never hold labels down — the pass
+  // itself has to be gated.
+  var tagsOff = document.body.classList.contains('tags-off');
+  var camDist = camera.position.distanceTo(controls.target);
+  var zoomTags = tagsOff && camDist < ZOOM_TAGS_DIST;
+  if (tagsOff && !zoomTags){
     for (i = 0; i < labels.length; i++){
       L = labels[i];
       L.el.style.display = 'none';
@@ -2188,6 +2195,9 @@ function updateLabels(){
     var sy = (-tmpV.y*0.5 + 0.5) * H2;
     L.sx = sx; L.sy = sy;
     L.vis = !(behind || sx < -260 || sx > W2+260 || sy < -160 || sy > H2+160);
+    // Zoom-reveal keeps only the labels near what the camera is aimed at;
+    // showing all 47 at close range would be worse than showing none.
+    if (L.vis && zoomTags && L.anchor.distanceTo(controls.target) > ZOOM_TAGS_RADIUS) L.vis = false;
     if (!L.vis) continue;
     if (!L.w){
       L.el.style.display = 'block';
@@ -2419,6 +2429,10 @@ function fovFor(a){
    screen — the wider FOV above already recovers most of the lost extent, so
    this stays gentle; overshooting here shrinks the room to a chip. */
 function dollyFor(a){ return Math.max(1, Math.min(0.55 / Math.max(a, 0.3), 1.35)); }
+/* Zoom-reveal for tags (see updateLabels): closer than ZOOM_TAGS_DIST feet and
+   the labels within ZOOM_TAGS_RADIUS of what you're aimed at fade in, so a
+   close-up is identifiable without the wide shot turning into label soup. */
+var ZOOM_TAGS_DIST = 34, ZOOM_TAGS_RADIUS = 14;
 function applyFov(){
   camera.fov = fovFor(aspectNow());
   camera.updateProjectionMatrix();

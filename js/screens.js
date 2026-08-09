@@ -348,6 +348,7 @@ export function renderRoom(el, number) {
       <div class="rh-top">
         <span class="rh-num">Room ${esc(room.number)}</span>
         <span class="rh-right">
+        <a class="sheet-btn" href="./refs.html?room=${encodeURIComponent(room.number)}" aria-label="Submittals and plan references">📄</a>
         <a class="sheet-btn" href="./print.html?room=${encodeURIComponent(room.number)}" aria-label="Printable checklist sheet">🖨</a>
         ${MODEL_ROOMS.includes(room.number) ? `<a class="sheet-btn" href="./room-3d.html?room=${encodeURIComponent(room.number)}" aria-label="3D room model">🧊</a>` : ''}
         <span class="rh-type">${esc((room.typeLabel || '').toUpperCase())}</span></span>
@@ -411,6 +412,7 @@ export function renderRoom(el, number) {
 
   el.querySelector('[data-more]').addEventListener('click', () => {
     const sh = sheets.sheet(`
+      <a class="btn ghost full" href="./refs.html?room=${encodeURIComponent(room.number)}">📄 Submittals &amp; plan references</a>
       <a class="btn ghost full" href="./print.html?room=${encodeURIComponent(room.number)}">🖨 Printable sheet (for the door)</a>
       ${MODEL_ROOMS.includes(room.number) ? `<a class="btn ghost full" href="./room-3d.html?room=${encodeURIComponent(room.number)}">🧊 3D room model</a>` : ''}
       <button class="btn ghost full hidden" data-act="paper">📄 Original paper sheet (photo)</button>
@@ -500,7 +502,7 @@ export function renderRoom(el, number) {
   // load with no store behind it, so without this a crew member in a dead
   // zone would watch it spin — with it, the sheet paints from what this phone
   // already knows and only refreshes if there is signal.
-  el.querySelectorAll('a[href*="print.html"]').forEach(a => a.addEventListener('click', () => {
+  el.querySelectorAll('a[href*="print.html"], a[href*="refs.html"]').forEach(a => a.addEventListener('click', () => {
     try { sessionStorage.setItem('h2sep-print-room', JSON.stringify(room)); } catch (_) { /* full/blocked — page falls back to a live read */ }
   }));
 

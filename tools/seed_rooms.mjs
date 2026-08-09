@@ -49,7 +49,9 @@ const DOCBASE = `projects/${FB_PROJECT}/databases/(default)/documents`;
 // ---- CLI ----
 const args = process.argv.slice(2);
 const mergeMissing = args.includes('--merge-missing');
-const files = args.filter((a) => a !== '--merge-missing');
+// Rebuild an EXISTING room that carries no field work (see the guard below).
+const replaceIfEmpty = args.includes('--replace-if-empty');
+const files = args.filter((a) => !a.startsWith('--'));
 if (files.length === 0) {
   console.error('usage: node tools/seed_rooms.mjs [--merge-missing] tools/out/room-<no>.json [...]');
   process.exit(1);
@@ -149,10 +151,50 @@ for (const file of files) {
   if (commit.status === 200) {
     // fallthrough to verification below
   } else if (isAlreadyExists(commit)) {
-    if (!mergeMissing) {
-      console.log(`room ${no}: room exists — skipped (use --merge-missing to append missing items only)`);
+    // ---- replace-if-empty: rebuild a room NOBODY has worked in yet ----
+    // A room seeded from an earlier, retired package (or soft-deleted before a
+    // rebuild) has to be replaced outright rather than merged. That is only
+    // safe while the doc carries no field work, so the emptiness test is the
+    // gate and it is checked against the LIVE doc, never assumed: no checked
+    // items, no open or resolved issues, no room notes. Anything else and the
+    // room is left exactly as it is.
+    if (replaceIfEmpty) {
+      const live = await req('GET', docUrl, null, idToken);
+      if (live.status !== 200) {
+        console.error(`room ${no}: exists but read-back failed`, live.status);
+        failures++; continue;
+      }
+      const lf = live.body.fields || {};
+      const liveItems = lf.items?.mapValue?.fields || {};
+      const checked = Object.values(liveItems).filter((v) => v.mapValue?.fields?.checked?.booleanValue).length;
+      const issues = Object.values(liveItems).filter((v) => (v.mapValue?.fields?.issue?.stringValue || '') !== '').length;
+      const noteIds = Object.keys(lf.notes?.mapValue?.fields || {});
+      if (checked || issues || noteIds.length) {
+        console.error(`room ${no}: REFUSING to replace — it carries field work ` +
+          `(${checked} checked, ${issues} issue(s), ${noteIds.length} note(s)). Left untouched.`);
+        failures++; continue;
+      }
+      // Preserve the original createdAt; the doc's history is not ours to reset.
+      const born = lf.createdAt?.timestampValue;
+      const repl = { ...payload };
+      if (born) repl.createdAt = { __ts: born };
+      const put = await req('POST', `${BASE.replace('/documents', '')}/documents:commit`, {
+        writes: [{
+          update: { name: docName, fields: fields(repl) },
+          currentDocument: { updateTime: live.body.updateTime },
+        }],
+      }, idToken);
+      if (put.status !== 200) {
+        console.error(`room ${no}: replace FAILED`, put.status, JSON.stringify(put.body).slice(0, 300));
+        failures++; continue;
+      }
+      console.log(`room ${no}: replaced (was ${Object.keys(liveItems).length} items, ` +
+        `deleted=${lf.deleted?.booleanValue === true}, no field work) — createdAt preserved`);
+      // fallthrough to verification below
+    } else if (!mergeMissing) {
+      console.log(`room ${no}: room exists — skipped (use --merge-missing to append missing items only, or --replace-if-empty to rebuild an untouched room)`);
       continue;
-    }
+    } else {
     // ---- merge-missing: PATCH only item ids absent from the live doc ----
     const live = await req('GET', docUrl, null, idToken);
     if (live.status !== 200) {
@@ -176,6 +218,7 @@ for (const file of files) {
         failures++; continue;
       }
       console.log(`room ${no}: merged ${missing.length} missing item(s) into existing doc`);
+    }
     }
   } else {
     console.error(`room ${no}: commit failed`, commit.status, JSON.stringify(commit.body).slice(0, 300));
