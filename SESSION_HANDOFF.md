@@ -7,6 +7,47 @@ trust the live systems over this prose where they differ.
 
 ---
 
+## 0. LATEST — v1.17.0 COMMON AREAS (2026-08-10) · TEST BATCH LIVE, GATE OPEN
+
+**Deployed + verified**: app v1.17.0 (sw h2sep-v1.17.0) — Common Areas as a
+5th top-level card; space docs live in the SAME rooms collection with
+non-numeric-floor ids (`isSpaceDoc` in js/util.js = the one shared filter);
+trade-ordered space screens; print sheets auto-paginate per trade section;
+dashboard has a Common Areas row. All shipped bytes sha256-identical to the
+tested tree; all 38 SHELL files 200; smoke + floor1-verify + lifecycle +
+geom-check + 15/15 live-invariants (incl. 4 new space checks) ALL PASS.
+
+**Live data**: 115 guest rooms (101 untouched at 14/6/1) + SIX test spaces:
+003 Lobby(52) · 006 Breakfast(22) · 019 WOMENS(24) · 023 Fitness(37) · 121
+Corridor(8) · ZONE-B Pool Deck(29). Sixty more spaces generated + reviewed in
+tools/out/spaces/ — NOT seeded. **HARD GATE: Austin has not approved the full
+build-out. Do not seed the remaining 60 without his explicit OK.**
+
+**Content pipeline** (tools/gen_spaces.py): DB rows filtered to FF&E+finishes
+scope -> collapse to one line per tag (provenance UNION — PA-106's 24-vs-26
+split stays visible) -> HD ruling (A530 legend identities; grades untouched)
+-> merge tools/out/space-enrich/*.json (109 sheet-cited lines from 6 audit
+agents: every ceiling system in the building, A510.3 furnishing recoveries
+814/821, PBX head-end racks, restroom vanities kn 43, AS104 Rev 5 pool items)
+-> emit drafts + js/space-meta.js (build-time floor map; the app never parses
+floors from ids).
+
+**For Austin**: research/enrich-reports/RFI-SUMMARY.md — the A120-vs-A510.2
+both-Rev-4 systemic ceiling RFI (two trade-scope flips: Dry Storage 008,
+Breakroom 014); MWT items (PA table, WC-01.1 + T-04/T-05/SF-01 verified
+card-less against the 67-card schedule, now mirrored at
+research/drive/reference/finish_schedule.md); owner items (M11 appliance,
+grill count, elevator cabs, 031/033 head-end split). Six cluster reports
+beside it.
+
+**Watch out**: spaces ride the same rooms-collection rules whitelist
+(schemaV 3). Backup gap FIXED: tools/out/backup-*.json now gitignored (was
+only backups/ subdir — an 11 MB live backup incl. crew names nearly became
+committable in the public repo). print.js space branch keys off
+isSpaceDoc(doc), NOT the number. Dashboard excludes spaces from guest floor
+counts. Phones still on v1.16 code render space docs as extra guest-floor
+cards until their SW updates.
+
 ## 1. The live system ($0/mo, all Austin-owned)
 
 | Thing | Where |
