@@ -20,8 +20,13 @@ geom-check + 15/15 live-invariants (incl. 4 new space checks) ALL PASS.
 **Live data**: 115 guest rooms (101 untouched at 14/6/1) + SIX test spaces:
 003 Lobby(52) · 006 Breakfast(22) · 019 WOMENS(24) · 023 Fitness(37) · 121
 Corridor(8) · ZONE-B Pool Deck(29). Sixty more spaces generated + reviewed in
-tools/out/spaces/ — NOT seeded. **HARD GATE: Austin has not approved the full
-build-out. Do not seed the remaining 60 without his explicit OK.**
+tools/out/spaces/ — and as of 2026-08-10 (later same day) **ALL 66 ARE
+SEEDED LIVE** (Austin approved: "good job keep going", then explicitly ran/
+authorized the seed command after a permission-classifier block). 618 lines
+field-compared against the reviewed drafts post-seed: ALL IDENTICAL. 15/15
+live-invariants pass; room 101 untouched; hero reads 14/4,688 items. The
+four elevator spaces (140/240/340/440) deliberately carry 0-line checklists
+(cab interiors = OTIS Div 14 package; roomStats guards 0/0).
 
 **Content pipeline** (tools/gen_spaces.py): DB rows filtered to FF&E+finishes
 scope -> collapse to one line per tag (provenance UNION — PA-106's 24-vs-26
