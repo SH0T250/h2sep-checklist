@@ -5,7 +5,7 @@ const ctx = await b.newContext({ viewport:{width:412,height:915}, isMobile:true,
 const p = await ctx.newPage();
 const errs=[]; p.on('pageerror',e=>errs.push(e.message));
 p.on('console',m=>{ if(m.type()==='error' && !/404/.test(m.text())) errs.push(m.text()); });
-await p.goto('http://localhost:8321/refs.html?room=101&from=3d&demo=1', { waitUntil:'load' });
+await p.goto('http://localhost:8322/refs.html?room=101&from=3d&demo=1', { waitUntil:'load' });
 await p.waitForTimeout(2000);
 console.log({
   cards: await p.locator('.rp-card').count(),

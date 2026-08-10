@@ -138,12 +138,18 @@ RULINGS = {
                 "suite — tag carried off A552; confirm the correct sconce "
                 "before ordering"),
         },
-        # Reads like a drafting annotation that was captured as a line item.
+        # An earlier version of this ruling called GR-503 "a drafting
+        # annotation, not a product". That was WRONG: GR-503 is a real product
+        # — it appears at HIGH reliability in all six King One Bedroom rooms as
+        # "Art Above Dining Table". The database says precisely what is going on
+        # and it is more useful than the guess was, so quote it.
         "GR-503": {
             "instanceNote": (
-                "⚑ the A532 entry reads as a drafting annotation, not a "
-                "product — confirm what GR-503 actually is at the "
-                "accessible-bath vanity mirror"),
+                "⚑ PROBABLE TAG ERROR — the A530 legend defines GR-503 as ART "
+                "ABOVE DINING TABLE @ ONE BEDROOM SUITE, and the vanity mirror "
+                "is GR-501 on every other bath sheet. Reproduced exactly as "
+                "tagged on A532 view 04 rather than silently corrected; confirm "
+                "with the architect before ordering (A532 flag 3)"),
         },
     },
     # ---- floor 2 introduces three more types -------------------------------

@@ -4,7 +4,7 @@ const DEMO_PIN = _rf(new URL('../js/config.js', import.meta.url), 'utf8')
   .match(/DEMO_PIN\s*=\s*'([^']+)'/)[1];
 import { chromium, devices } from 'playwright';
 
-const BASE = process.env.BASE || 'http://localhost:8321/index.html?demo=1';
+const BASE = process.env.BASE || 'http://localhost:8322/index.html?demo=1';
 let failures = 0;
 const ok = (cond, name) => {
   console.log((cond ? 'PASS' : 'FAIL') + '  ' + name);

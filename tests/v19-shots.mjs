@@ -5,7 +5,7 @@
 import { chromium } from 'playwright';
 import { mkdirSync } from 'node:fs';
 
-const BASE = process.env.BASE || 'http://localhost:8321/';
+const BASE = process.env.BASE || 'http://localhost:8322/';
 const OUT = '/tmp/claude-0/-home-user/e71b2418-bcd4-506a-95ce-32ce7af669ac/scratchpad/shots19';
 mkdirSync(OUT, { recursive: true });
 

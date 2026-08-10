@@ -20,16 +20,23 @@ trust the live systems over this prose where they differ.
 | **Admin PIN** | not recorded in this repo — ask Austin. (It is also `DEMO_PIN` in `js/config.js`, which is public; see the security note in §Deploy.) |
 | **Reference dataset** | `data/project.sqlite` in the app repo — 115 rooms, 17,635 item rows, 21 categories. THE source of truth for item lists. |
 
-**Versions: v1.14.0 LIVE (deployed + verified 2026-08-09).** Floors 1 and 2 complete —
-58 rooms live under Austin's room names. Shipped the fixes from the 148-agent adversarial
-audit: the print sheet no longer offers the 3D exhibit on rooms that have no model (it did,
-and the exhibit answered with room 101's QQ geometry under the requested room's number), a
-room with no geometry now says so, dashboard.html is precached, and every FLAGGED/MEDIUM
-line carries its reason (0 bare flags across all 58 rooms, was 49). Live bytes sha256-verified
-identical to the tested tree; all 33 shell files 200. Earlier: v1.12/1.13 per-room 3D geometry;
-v1.11 3D on all QQ Studio Connectors; v1.10 refs page + build-out tooling; v1.9 collapsible
-categories, printable sheet, in-app 3D; v1.8 theme, reference popups, ×qty badges.
-`js/config.js APP_VERSION` must equal `sw.js VERSION` minus the `h2sep-v` prefix; the service worker REFUSES mismatched builds.
+**Versions: v1.16.0 — ALL 115 ROOMS LIVE, floors 1-4 complete.** 16/33/33/33.
+Room names are Austin's; 47 QQ-family rooms carry the 3D exhibit; 12 room-type
+templates published so "Add room" builds a correct room for every type.
+Fixes from the 108-agent full-hotel audit: geom-check's coverage gate printed FAIL
+but exited 0 (it was advisory for three versions — now mutation-tested); room 118
+carried room 438's slug, so one Save on its settings screen would have renamed it
+and injected a GR-502 mirror that is not in it; the legacy 30-line template was
+still live under a third identical "QQ Studio Connector" name in the Add-room
+picker; the GR-503 ruling asserted the tag was "not a product" when the A530
+legend defines it as ART ABOVE DINING TABLE and it ships at HIGH reliability in
+six One Bedroom rooms; plan placeholders sent every room to room 101's enlarged
+plan; the caveat strip — the only disclosure of unconfirmed handedness — was
+display:none on phones; `node tests/smoke.mjs` crashed on the documented command.
+NEW: tests/live-invariants.mjs asserts what the UI suites cannot see (slug↔template
+agreement, duplicate template names, room 101's field work, bare flags, whitelist).
+`js/config.js APP_VERSION` must equal `sw.js VERSION` minus the `h2sep-v` prefix;
+the service worker REFUSES mismatched builds.
 
 **Deploy runbook:** edit the app IN THIS REPO (there is no mirror to copy from any more) → run
 the suites: `node tests/smoke.mjs`, `tests/geom-check.mjs`, `tests/floor1-verify.mjs`,

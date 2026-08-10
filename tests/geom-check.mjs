@@ -6,17 +6,23 @@ import { chromium } from 'playwright';
 // [room, expected W, expected D, expected mirror, expected connecting]
 const F = 1 / 12;
 const QQ_W = 12.0, WIDE_W = 12 + 11.375 * F, QQ_D = 36 + 5 * F, EXT_D = 38 + 9 * F;
+// [room, W, D, mirror, connecting, EXPECTED VARIANT]. The variant is pinned HERE
+// rather than read back off the page: taking it from window.__h2sep3d meant the
+// expectation moved with the page, so a room claiming the wrong type agreed with
+// itself and the check could never fail.
 const CASES = [
-  ['101', WIDE_W, QQ_D, false, true],   // QQ Wide Connecting (the modelled room)
-  ['103', QQ_W,   QQ_D, true,  true],   // QQ Connecting, opposite hand to 101
-  ['215', QQ_W,   QQ_D, false, true],
-  ['436', QQ_W,   QQ_D, true,  true],
-  ['105', QQ_W,   QQ_D, false, false],  // QQ Studio — no connecting door
-  ['115', QQ_W,   QQ_D, false, false],
-  ['201', WIDE_W, QQ_D, false, false],  // QQ Wide, base plan
-  ['301', WIDE_W, QQ_D, false, false],
-  ['230', QQ_W,   EXT_D, true, false],  // QQ Extended — deeper room
-  ['432', QQ_W,   EXT_D, true, false],
+  ['101', WIDE_W, QQ_D,  false, true,  'QQ Wide Connecting'],
+  ['103', QQ_W,   QQ_D,  true,  true,  'QQ Connecting'],
+  ['215', QQ_W,   QQ_D,  false, true,  'QQ Connecting'],
+  ['436', QQ_W,   QQ_D,  true,  true,  'QQ Connecting'],
+  ['105', QQ_W,   QQ_D,  false, false, 'QQ Studio'],
+  ['115', QQ_W,   QQ_D,  false, false, 'QQ Studio'],
+  ['201', WIDE_W, QQ_D,  false, false, 'QQ Wide'],
+  ['301', WIDE_W, QQ_D,  false, false, 'QQ Wide'],
+  ['230', QQ_W,   EXT_D, true,  false, 'QQ Extended'],
+  ['432', QQ_W,   EXT_D, true,  false, 'QQ Extended'],
+  ['334', QQ_W,   QQ_D,  true,  false, 'QQ Studio'],   // floor 3, even side
+  ['405', QQ_W,   QQ_D,  false, false, 'QQ Studio'],   // floor 4, odd side
 ];
 
 // COVERAGE GATE. The cases below spot-check ten representative rooms, but the
@@ -27,14 +33,14 @@ const CASES = [
 // trusting one of them.
 import { readFileSync } from 'node:fs';
 const CFG = readFileSync(new URL('../js/config.js', import.meta.url), 'utf8');
-const GEOM_SRC = readFileSync(new URL('./build-room3d.mjs', import.meta.url), 'utf8');
+const GEOM_SRC = readFileSync(new URL('../room-3d.html', import.meta.url), 'utf8');
 const modelRooms = JSON.parse(CFG.match(/MODEL_ROOMS = (\[[\s\S]*?\])/)[1]
   .replace(/'/g, '"').replace(/,(\s*])/, '$1'));
 const geomBlock = GEOM_SRC.match(/var ROOM_GEOM = \{([\s\S]*?)\n\};/)[1];
 const geomRooms = new Set([...geomBlock.matchAll(/^\s*'(\d+)':/gm)].map((m) => m[1]));
 const noGeom = modelRooms.filter((r) => !geomRooms.has(r));
 const orphan = [...geomRooms].filter((r) => !modelRooms.includes(r));
-console.log(`coverage: ${modelRooms.length} MODEL_ROOMS · ${geomRooms.size} ROOM_GEOM entries`);
+console.log(`coverage: ${modelRooms.length} MODEL_ROOMS · ${geomRooms.size} ROOM_GEOM entries in the BUILT room-3d.html`);
 if (noGeom.length) console.log('FAIL  MODEL_ROOMS with NO geometry: ' + noGeom.join(', '));
 if (orphan.length) console.log('FAIL  ROOM_GEOM entries not offered in the app: ' + orphan.join(', '));
 let coverageFail = noGeom.length + orphan.length;
@@ -49,7 +55,7 @@ p.on('pageerror', (e) => errs.push(e.message));
 let pass = 0, fail = 0;
 const near = (a, e) => Math.abs(a - e) < 0.01;
 
-for (const [room, wantW, wantD, wantMirror, wantConn] of CASES) {
+for (const [room, wantW, wantD, wantMirror, wantConn, wantVariant] of CASES) {
   await p.goto(`http://localhost:8322/room-3d.html?room=${room}`,
                { waitUntil: 'load', timeout: 90000 });
   await p.waitForTimeout(3500);
@@ -84,7 +90,10 @@ for (const [room, wantW, wantD, wantMirror, wantConn] of CASES) {
     // The defect this guards: a QQ Extended room announcing "QQ STUDIO CONNECTOR".
     const CREW = { 'QQ Wide Connecting': 'QQ STUDIO CONNECTOR', 'QQ Connecting': 'QQ STUDIO CONNECTOR',
                    'QQ Studio': 'QQ STUDIO', 'QQ Wide': 'QQ STUDIO', 'QQ Extended': 'QQ EXTENDED' };
-    const wantName = CREW[g.variant];
+    // Assert the page's OWN variant claim against the pinned expectation first —
+    // everything downstream keys off it, so if this is wrong the rest is theatre.
+    if (g.variant !== wantVariant) problems.push(`variant is "${g.variant}", expected "${wantVariant}"`);
+    const wantName = CREW[wantVariant];
     for (const h of g.headings) {
       if (!h.includes(`ROOM ${room}`)) problems.push(`heading says "${h}", not room ${room}`);
       if (!h.includes(wantName)) problems.push(`heading "${h}" should name ${wantName}`);
@@ -98,4 +107,4 @@ for (const [room, wantW, wantD, wantMirror, wantConn] of CASES) {
 console.log(`\n${pass}/${CASES.length} passed`);
 if (errs.length) console.log('page errors:', errs.slice(0, 3));
 await b.close();
-process.exit(fail || errs.length ? 1 : 0);
+process.exit(fail || coverageFail || errs.length ? 1 : 0);

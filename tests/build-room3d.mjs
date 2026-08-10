@@ -31,6 +31,19 @@ sub(`<meta name="viewport" content="width=device-width, initial-scale=1">`,
 // Appended at the END of the stylesheet on purpose: the exhibit's own phone
 // rules live near the bottom, so anything earlier loses the cascade at equal
 // specificity.
+// The caveat strip is the ONLY place the exhibit discloses that item locations
+// are stylized, that this is an exhibit and not a shop drawing, and — since the
+// per-room geometry work — that a room's handedness is NOT YET CONFIRMED. The
+// exhibit's own phone rules set `#caveat{display:none}`, so every one of those
+// disclosures vanished on the device the crew actually holds. Keep it, compact
+// it, and make it click-through so it can never block a tap.
+sub(`    #caveat{display:none}`,
+`    #caveat{
+      display:block; bottom:6px; left:8px; right:8px; transform:none;
+      font-size:8px; letter-spacing:.05em; line-height:1.35; text-align:center;
+      padding:3px 6px; pointer-events:none; opacity:.92;
+    }`, 'caveat stays visible on phones');
+
 sub(`  #err[hidden]{display:none}`,
 `  #err[hidden]{display:none}
 

@@ -68,16 +68,50 @@ export async function initRefs() {
 // Refs for one item. item.refs (seeded on the doc) wins over the bundled index.
 // itemId is the optional Firestore map key — it lets UNTAGGED items (code '')
 // join the index by their stable id (e.g. the disposer, u_ce20ab6281).
-export function refsFor(roomNumber, item, itemId = '') {
+
+// The enlarged guest-room plan that GOVERNS each room type, taken from the
+// database (the sheet the type's own item rows overwhelmingly cite), not guessed.
+// The bundled index was generated for room 101, so its "no callout found — see
+// A555" placeholders name the QQ family's sheet on EVERY room. A King Studio's
+// television line was telling the crew to look on A555; the King rooms are drawn
+// on A550. The placeholder carries no image, so nothing wrong was ever displayed
+// — but it sent people to the wrong sheet to hunt for a callout that was never
+// there.
+const PLAN_SHEET = {
+  'QQ Studio': 'A555', 'QQ Studio Connector': 'A555', 'QQ Extended': 'A555',
+  'QQ ACC': 'A556',
+  'King Studio': 'A550', 'King Studio Connector': 'A550',
+  'King Studio Acc': 'A551', 'King Studio Acc Mod': 'A551',
+  'King One Bedroom': 'A553', 'King One Bedroom ACC': 'A554',
+};
+
+// Rewrite a snippet-less "see <SHEET>" plan placeholder to name the room's own
+// governing plan. Anything carrying an actual image is left alone: those crops
+// come from the interior-design sheets (ID-5.8 / ID-5.10), which show the
+// PRODUCT and are the same whatever room it lands in.
+function localizePlan(refs, typeLabel) {
+  const want = PLAN_SHEET[typeLabel];
+  if (!want) return refs;
+  return refs.map((r) => {
+    if (r.kind !== 'plan' || r.snippet) return r;
+    const m = /^(A5\d\d(?:\.\d)?)$/.exec(r.sheetId || '');
+    if (!m || r.sheetId === want) return r;
+    return { ...r, sheetId: want,
+             title: String(r.title || '').split(r.sheetId).join(want) };
+  });
+}
+
+export function refsFor(roomNumber, item, itemId = '', typeLabel = '') {
   const own = cleanList(item && item.refs);
-  if (own.length) return own;
+  if (own.length) return localizePlan(own, typeLabel);
   if (!item) return [];
   // Exact code first; then the base code with a trailing orientation 'R'
   // stripped (GR-308R is the reversed variant of GR-308 — same product,
   // same submittal and plan refs); finally the item id for code-less lines.
   const code = item.code || '', base = code.replace(/R$/, '');
-  return (code ? (byRoomCode.get(String(roomNumber) + '/' + code) || byCode.get(code)) : null)
+  const hit = (code ? (byRoomCode.get(String(roomNumber) + '/' + code) || byCode.get(code)) : null)
     || (code && base !== code ? (byRoomCode.get(String(roomNumber) + '/' + base) || byCode.get(base)) : null)
     || (itemId ? (byRoomCode.get(String(roomNumber) + '/' + itemId) || byCode.get(itemId)) : null)
     || [];
+  return localizePlan(hit, typeLabel);
 }

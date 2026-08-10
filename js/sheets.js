@@ -26,7 +26,7 @@ function provLine(item) {
 // Renders under the provenance line of every item detail sheet. Buttons only
 // appear when the item actually has refs; the sheet id is always shown.
 function refsSection(room, item, itemId = '') {
-  const refs = refsFor(room.number, item, itemId);
+  const refs = refsFor(room.number, item, itemId, room.typeLabel || '');
   if (!refs.length) return '';
   return `<div class="ref-section-head">References</div>` + refs.map((r, i) => `
     <button class="ref-link" data-refi="${i}">
@@ -38,7 +38,7 @@ function refsSection(room, item, itemId = '') {
 }
 
 function wireRefs(s, room, item, itemId = '') {
-  const refs = refsFor(room.number, item, itemId);
+  const refs = refsFor(room.number, item, itemId, room.typeLabel || '');
   s.querySelectorAll('[data-refi]').forEach(b => b.addEventListener('click', (e) => {
     e.stopPropagation();
     const r = refs[Number(b.dataset.refi)];

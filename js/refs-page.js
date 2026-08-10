@@ -57,7 +57,7 @@ function groupRefs(room) {
     .filter(([, it]) => !it.deleted)
     .sort((a, b) => (a[1].sort || 0) - (b[1].sort || 0));
   for (const [id, it] of items) {
-    for (const r of refsFor(room.number, it, id)) {
+    for (const r of refsFor(room.number, it, id, room.typeLabel || '')) {
       const key = r.kind + '|' + (r.driveId || r.snippet || r.title);
       if (!docs.has(key)) docs.set(key, { ref: r, tags: new Set() });
       docs.get(key).tags.add(it.code || it.label);

@@ -502,9 +502,19 @@ export function renderRoom(el, number) {
   // load with no store behind it, so without this a crew member in a dead
   // zone would watch it spin — with it, the sheet paints from what this phone
   // already knows and only refreshes if there is signal.
-  el.querySelectorAll('a[href*="print.html"], a[href*="refs.html"]').forEach(a => a.addEventListener('click', () => {
-    try { sessionStorage.setItem('h2sep-print-room', JSON.stringify(room)); } catch (_) { /* full/blocked — page falls back to a live read */ }
-  }));
+  // Write the handoff AS THE ROOM RENDERS, not only when a print/refs link is
+  // clicked. The 3D exhibit is a separate page with no store behind it, and its
+  // back bar links straight to refs.html and print.html — so a crew member who
+  // went room -> 3D -> SHEET in a dead zone arrived with nothing handed over and
+  // watched it spin. Writing it here means whatever room they last opened is
+  // already in sessionStorage, whichever route they take afterwards.
+  const handOff = () => {
+    try { sessionStorage.setItem('h2sep-print-room', JSON.stringify(room)); }
+    catch (_) { /* full/blocked — page falls back to a live read */ }
+  };
+  handOff();
+  el.querySelectorAll('a[href*="print.html"], a[href*="refs.html"], a[href*="room-3d.html"]')
+    .forEach(a => a.addEventListener('click', handOff));
 
   // ---- item interactions ----
   function tapItem(id) {

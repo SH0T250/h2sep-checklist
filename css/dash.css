@@ -30,8 +30,17 @@ h2 {
 
 /* header */
 .dh {
-  display: flex; align-items: center; gap: 24px;
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
   padding: 14px 28px; border-bottom: 1px solid var(--hairline);
+}
+/* Without wrapping, the logo + title + status pill needed ~571px and the
+   LIVE / RECONNECTING / OFFLINE pill — the one thing that tells you whether
+   what you are reading is current — fell off the right edge of every phone. */
+@media (max-width: 600px) {
+  .dh { gap: 10px 14px; padding: 10px 14px; }
+  .dh-logo { height: 32px; }
+  .dh-title { font-size: 15px; letter-spacing: .6px; flex-basis: calc(100% - 120px); }
+  .dh-status { gap: 10px; flex-basis: 100%; justify-content: flex-start; }
 }
 .dh-logo { height: 44px; width: auto; }
 .dh-title { flex: 1; font-size: 18px; font-weight: 800; letter-spacing: 1px; }

@@ -80,7 +80,7 @@ function groupsFor(room, cats) {
     const rows = items.filter(([, it]) => (it.category || '') === cat);
     if (rows.length) out.push({ cat, label: CAT_LABEL[cat] || cat, rows });
   }
-  return out;
+  return out.map((g) => g.label ? g : { ...g, label: 'ADDED ON SITE' });
 }
 // Categories present in the room but not named in either page list — they
 // still have to print, so they ride along at the end of page 2.

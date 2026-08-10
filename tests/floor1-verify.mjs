@@ -77,10 +77,24 @@ check(MODEL_ROOMS.length === EXPECT_3D.size
       `config.js MODEL_ROOMS matches the expected ${EXPECT_3D.size} rooms `
       + `(got ${MODEL_ROOMS.length}: ${MODEL_ROOMS.filter((r) => !EXPECT_3D.has(r)).join(',') || 'no strays'})`);
 
+// The LABEL is what the crew reads; the SLUG is what the app joins on. Checking
+// only the label let room 118 ship carrying room 438's slug — the settings screen
+// preselected the wrong template and one Save would have renamed the room and
+// injected a mirror that is not in it. Assert both.
+const EXPECT_SLUG = {
+  '101': 'qq-wide-connecting', '103': 'qq-connecting',
+  '104': 'king-studio', '106': 'king-studio', '108': 'king-studio',
+  '110': 'king-studio', '112': 'king-studio', '114': 'king-studio',
+  '105': 'queen-queen', '107': 'queen-queen', '109': 'queen-queen',
+  '111': 'queen-queen', '113': 'queen-queen', '115': 'queen-queen',
+  '116': 'king-studio-connecting', '118': 'king-studio-acc-mod',
+};
 for (const [no, label] of Object.entries(EXPECT)) {
   const r = rooms[no];
   if (!r) { check(false, `room ${no} exists live`); continue; }
   check(r.typeLabel === label, `room ${no} label is "${label}" (got "${r.typeLabel}")`);
+  check(r.type === EXPECT_SLUG[no],
+        `room ${no} slug is "${EXPECT_SLUG[no]}" (got "${r.type}")`);
 }
 
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
