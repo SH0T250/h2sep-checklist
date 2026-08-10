@@ -19,7 +19,7 @@
       "label": "CEREAL DISPENSER - SERVER PRODUCTS 88920",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 70,
+      "sort": 90,
       "src": "A514 equipment schedule",
       "trade": "OWN"
     },
@@ -40,7 +40,7 @@
       "label": "UNDERCOUNTER DISPLAY REFRIGERATOR - TRUE TUC-27G-ADA-HC~FGD01",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 80,
+      "sort": 100,
       "src": "A514 equipment schedule",
       "trade": "OWN"
     },
@@ -61,7 +61,7 @@
       "label": "Item tagged on the Breakfast 006 counter and defined in NEITHER schedule on A514",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 90,
+      "sort": 110,
       "src": "A514 plan tag",
       "trade": "OWN"
     },
@@ -82,7 +82,7 @@
       "label": "Item tagged on the Breakfast 006 counter and defined in NEITHER schedule on A514",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 100,
+      "sort": 120,
       "src": "A514 plan tag",
       "trade": "OWN"
     },
@@ -103,7 +103,7 @@
       "label": "Chairs",
       "qty": 6,
       "reliability": "FLAGGED",
-      "sort": 140,
+      "sort": 160,
       "src": "ID-1.7 Breakfast 006 / Servery 009 cluster (6)",
       "trade": "FFE"
     },
@@ -124,7 +124,7 @@
       "label": "Table",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 110,
+      "sort": 130,
       "src": "ID-1.7 Breakfast 006 / Servery 009 cluster",
       "trade": "FFE"
     },
@@ -145,7 +145,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set. Also tagged at Lobby 003 and Market 005.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 160,
+      "sort": 180,
       "src": "ID-1.7; A510.3",
       "trade": "FFE"
     },
@@ -166,7 +166,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 170,
+      "sort": 190,
       "src": "ID-1.7",
       "trade": "FFE"
     },
@@ -187,7 +187,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 2,
       "reliability": "FLAGGED",
-      "sort": 150,
+      "sort": 170,
       "src": "ID-1.7 prints (x2)",
       "trade": "FFE"
     },
@@ -208,7 +208,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 180,
+      "sort": 200,
       "src": "ID-1.7",
       "trade": "FFE"
     },
@@ -229,7 +229,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 190,
+      "sort": 210,
       "src": "ID-1.7",
       "trade": "FFE"
     },
@@ -250,7 +250,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 200,
+      "sort": 220,
       "src": "ID-1.7",
       "trade": "FFE"
     },
@@ -313,7 +313,7 @@
       "label": "Floor tile",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 50,
+      "sort": 60,
       "src": "A510.4",
       "trade": "TILE"
     },
@@ -334,7 +334,7 @@
       "label": "Floor tile, tag as printed T-21",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 60,
+      "sort": 80,
       "src": "ID-1.8",
       "trade": "TILE"
     },
@@ -397,7 +397,7 @@
       "label": "M7 Breakfast bar - 8'-0\" in 2 EQ, 6'-0\"; quartz top and backsplash; PL-01 exposed; black melamine concealed; leg levelers and clips",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 130,
+      "sort": 150,
       "src": "A902",
       "trade": "MW"
     },
@@ -418,9 +418,51 @@
       "label": "M5 Dish recovery / bussing counter - 4'-6\" x 2'-10\" h x 2'-0\" d; 2CM quartz top and backsplash; PL-01 all exposed surfaces and edges; PL bottom; PL base; black melamine interior; adjustable shelves edgebanded all sides; pulls as specified; T-01.1 tile at the wall behind; trash inserts 6\" and 8\" dia, brushed stainless, BY OTHERS",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 120,
+      "sort": 140,
       "src": "A901.1 (governs); ID-4.3 corroborates",
       "trade": "MW"
+    },
+    "x_9da32a85c8": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "\u2691 Height contested between two Rev-4 (08/09/24) sheets: A120 tags Breakfast 006 at 8'-10\" (ID-1.6 agrees, 8'-10\"); A510.2 tags 9'-0\" with the 8'-2\" soffit at the servery edge - the reading the draft PT-07 line carries. System (painted gyp) agrees on all three sheets. Check A120 vs A510.2. Access panel: keyed note 5 (ISC CAP-1818, texture & paint to match adjacent ceiling) is NOT keyed to any location on A120 - confirm product and size with the EOR per the A120 flag.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Painted gyp board ceiling, 8'-10\" AFF; ceiling access panel shown (rev-4 cloud)",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "sort": 50,
+      "src": "A120",
+      "trade": "GC"
+    },
+    "x_f5d7ea31fb": {
+      "category": "Flooring",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "T-01.1",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "Printed tag on the A901.1 elevation (a tag ID-4.3 omits); extent not dimensioned. Sequence tile before the counter sets, or detail the scribe (A901.1 PM note 5). Room association via A100 - A901.1 carries no room number - same basis as the draft's M5 row.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "T-01.1 tile at the wall behind the dish recovery counter (M5)",
+      "qty": 1,
+      "reliability": "HIGH",
+      "sort": 70,
+      "src": "A901.1 elevation 2",
+      "trade": "TILE"
     }
   },
   "notes": {},

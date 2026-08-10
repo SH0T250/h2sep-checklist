@@ -19,7 +19,7 @@
       "label": "COMMERCIAL WASHER",
       "qty": 2,
       "reliability": "HIGH",
-      "sort": 30,
+      "sort": 40,
       "src": "A510.3 furnishing list, 2 tag instances",
       "trade": "OWN"
     },
@@ -40,7 +40,7 @@
       "label": "COMMERCIAL TOP-LOAD WASHER",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 40,
+      "sort": 50,
       "src": "A510.3 furnishing list",
       "trade": "OWN"
     },
@@ -82,7 +82,7 @@
       "label": "SEALED CONCRETE",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 20,
+      "sort": 30,
       "src": "A510.4 keyed note 4",
       "trade": "GC"
     },
@@ -103,9 +103,30 @@
       "label": "M14 House-laundry adjustable wall shelving - 6'-6\" runs, 1'-6\" shelves at 3'-0\" spacing. Shelves 3/4\" WHITE MELAMINE; hardware MFR: KV; standards: 82 STANDARDS; brackets: 182 BRACKETS - WHITE",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 50,
+      "sort": 60,
       "src": "A906",
       "trade": "MW"
+    },
+    "x_e4e1efbdb1": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "System: ACT grid per A120's hatch - the only sheet stating a ceiling SYSTEM for this room. Height: the DB follows A510.2's 10'-0\" (finishes.md SS5.10 audit fix MJ-12 / conflict C-1 - A510.2 governs over ID-1.6's 12'-0\" \"By GC\", which is carried, not emitted). A120 tags 8'-0\" here - a THIRD reading recorded in no register. Also note the draft's PT-07 line implies a painted lid while A120 hatches ACT. Render-check A120 vs A510.2 before any grid/tile order; RFI if the sheets truly disagree.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Acoustic ceiling tile grid ceiling (A120 hatch)",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "sort": 20,
+      "src": "A120",
+      "trade": "GC"
     }
   },
   "notes": {},

@@ -1,0 +1,13 @@
+{
+  "space": "237",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Ceiling height tag 8'-3 3/8\" — no ceiling-system hatch drawn",
+      "src": "A121",
+      "reliability": "FLAGGED",
+      "instanceNote": "8'-3 3/8\" ceiling height tag only — A121 flag: 'No legend hatch is drawn in Elevator Lobby 237 — only a height tag. Ceiling system (gyp lid vs open-to-structure) is undetermined from this sheet. On A120 the equivalent rooms with the underside dimension were open-to-structure, but that is inference, not what this sheet says.' Confirm the system before framing or grid. ID-1.16 prints PT-07 at 8'-3 3/8\" for the typical elevator lobby (the draft's Paint line) — the ID sheet implies a painted gyp lid, but the architectural RCP hatches none. Confirm the system before framing.",
+      "trade": "GC"
+    }
+  ]
+}

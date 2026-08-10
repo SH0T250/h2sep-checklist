@@ -19,7 +19,7 @@
       "label": "Carpet tile at the sales office",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 20,
+      "sort": 30,
       "src": "A510.4",
       "trade": "TILE"
     },
@@ -40,7 +40,7 @@
       "label": "OFFICE FURNITURE BY OWNER AS REQ'D - the ONLY responsibility assignment anywhere on A510.3",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 70,
+      "sort": 80,
       "src": "A510.3 keyed note 4",
       "trade": "OWN"
     },
@@ -61,7 +61,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 50,
+      "sort": 60,
       "src": "A510.3 line 101; keyed note 4",
       "trade": "FFE"
     },
@@ -82,7 +82,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 30,
+      "sort": 40,
       "src": "A510.3 line 101; ID-1.7 prints PA-306 (x2)",
       "trade": "FFE"
     },
@@ -103,7 +103,7 @@
       "label": "Stacking chair - the 4th of ID-1.7's x4",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 60,
+      "sort": 70,
       "src": "A510.3 line 101",
       "trade": "FFE"
     },
@@ -128,6 +128,27 @@
       "src": "A510.2",
       "trade": "PT"
     },
+    "x_945bfff81e": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "A120 hatches Sales 022 as ACT grid at 9'-3\"; A510.2 corroborates 9'-3\". ACT tile size (2'x2' vs 2'x4') is not readable at 3/32\" per A120.md - confirm before ordering grid or tile. Note the draft's PT-07 \"ceiling paint\" line sits against an ACT lid, and no PT code is printed at this space on A510.2 (A510.2.md: no PT codes on that sheet) - see report.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Acoustic ceiling tile grid ceiling, 9'-3\" AFF",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "sort": 20,
+      "src": "A120; A510.2",
+      "trade": "GC"
+    },
     "x_f58ef99727": {
       "category": "FF&E - Casegoods",
       "checked": false,
@@ -145,7 +166,7 @@
       "label": "M17 Sales work surface - 7'-0\" VIF x 2'-0\" d x 2'-7\" h, R2\" corner",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 40,
+      "sort": 50,
       "src": "A906",
       "trade": "MW"
     }

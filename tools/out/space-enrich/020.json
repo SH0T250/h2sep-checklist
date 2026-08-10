@@ -1,0 +1,56 @@
+{
+  "space": "020",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "PAINTED GYP BOARD CEILING (suspended GWB assembly per detail 02/A120), ceiling height 8'-6\" AFF",
+      "src": "A120 + A510.2 + A520 view 2 (all three tag 8'-6\")",
+      "reliability": "HIGH",
+      "trade": "GC"
+    },
+    {
+      "category": "FF&E - Casegoods",
+      "label": "Vanity - A510.1 keyed note 43 verbatim: 'VANITY AND MIRROR (VANITY MUST NOT ENCROACH INTO CLEAR FLOOR SPACE FOR ACCESSIBLE TOILET)'; the A520 vanity elevations carry the lavatory run L-01A / L-01B / L-01C",
+      "src": "A510.1 keyed note 43 (reprinted on A520); A520 view 1 + elevations; A520 blocking elevations 'PROVIDE BLOCKING FOR VANITY AS NEEDED'",
+      "reliability": "MEDIUM",
+      "instanceNote": "⚑ Existence and blocking are sheet-stated; the vanity itself has NO millwork detail in A900-A907 (M1-M18 list omits it) and no counter material tag (no ST / SF / PL code) is printed on A520. Fabricator and spec source unknown - the draft carries the PA-202 mirror half of keyed note 43 but no vanity line existed anywhere in the DB. Lavatories L-01A/B/C are plumbing scope, excluded here.",
+      "trade": "MW"
+    },
+    {
+      "category": "FF&E - Lighting",
+      "code": "R",
+      "label": "Recessed downlight (WET LOCATION)",
+      "src": "A520 view 2 RCP + ceiling-fixtures legend",
+      "reliability": "MEDIUM",
+      "instanceNote": "⚑ Fixture type stated in the A520 view-2 ceiling-fixtures legend, which covers Womens 019 AND Mens 020 together; per-room placement and counts are 'only by inspection of the graphic' per A520. The DB already carries the identical R line for Unisex 027 from A521's matching legend - this is the missing 020 parallel.",
+      "trade": "EC"
+    },
+    {
+      "category": "FF&E - Lighting",
+      "code": "EX",
+      "label": "Emergency exit light",
+      "src": "A520 view 2 RCP + ceiling-fixtures legend",
+      "reliability": "MEDIUM",
+      "instanceNote": "⚑ Fixture type stated in the A520 view-2 ceiling-fixtures legend, which covers Womens 019 AND Mens 020 together; per-room placement and counts are 'only by inspection of the graphic' per A520. The DB already carries the identical EX line for Unisex 027 from A521's matching legend - this is the missing 020 parallel.",
+      "trade": "EC"
+    },
+    {
+      "category": "Appliance",
+      "code": "403",
+      "label": "WALL MOUNTED TELEVISION (A510.3 furnishing list)",
+      "src": "A510.3 furnishing list + space-by-space table",
+      "reliability": "FLAGGED",
+      "instanceNote": "⚑ A510.3's space table lists 403 at Mens 020 'tagged at the adjoining wall' - which room the TV actually serves is NOT stated; the leader could belong to a neighbouring space (019/020/021 sit as a three-door group off the lobby corridor per A100, with Meeting 018 nearby). No other space in the whole draft set carries 403, so the tag is orphaned if it is not recorded here. No multiplier printed. Verify the leader on the A510.3 render before any buy.",
+      "trade": "OWN"
+    },
+    {
+      "category": "Appliance",
+      "code": "820",
+      "label": "HYDRATION STATION (A510.3 furnishing list)",
+      "src": "A510.3 furnishing list + space-by-space table",
+      "reliability": "FLAGGED",
+      "instanceNote": "⚑ A510.3's space table places 820 in the Mens 020 row. A hydration station inside a restroom is doubtful - A510.3 also tags 821 BOTTLE FILLING STATION at the restroom-entry side of the corridor (details 03/A510.1 + 04/A510.1), so the 820 tag may sit at that corridor alcove rather than inside 020. No other draft space carries 820. No multiplier printed; plumbing rough-in implied but not shown here. Verify tag location on the render.",
+      "trade": "OWN"
+    }
+  ]
+}

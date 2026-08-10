@@ -1,0 +1,31 @@
+{
+  "space": "023",
+  "items": [
+    {
+      "category": "Ceiling",
+      "code": "ACT-01",
+      "label": "TECTUM PANEL CEILING 2'x2' GRID SYSTEM at the accent-ceiling zone - metal edge molding, metal framing, over 5/8\" gypsum board (detail 03/A510.2)",
+      "src": "A510.2 detail 03 + A120; ID-1.6; finish schedule p.8",
+      "reliability": "FLAGGED",
+      "instanceNote": "⚑ System agrees, height does not - THREE printed values for the panel zone: A510.2 = 10'-0\" accent zone (in a 9'-3\" perimeter); A120 = 9'-6\" panel field (in a 9'-3\" surround); ID-1.6 = ACT-01 at 10'-2\" for the whole room. OPEN_ITEMS C8 registers only the A510.2-vs-ID-1.6 pair - A120's 9'-6\" is a third, unregistered value on a same-rev (08/09/24) architectural sheet. Code ACT-01 is printed on ID-1.6 and on finish-schedule card p.8 (Armstrong TECTUM Create!/Attach, area Fitness Center), which ties the ID tag to the architect's Tectum; the A-sheets themselves print 'TECTUM', not ACT-01. Panel-zone extent is not dimensioned (A120: only by inspection). A120 GC note: Tectum is a long-lead specialty item - confirm it is bought.",
+      "trade": "GC"
+    },
+    {
+      "category": "Ceiling",
+      "label": "PAINTED GYP BOARD CEILING at the 9'-3\" perimeter, surrounding the Tectum accent zone",
+      "src": "A120 + A510.2 (both tag the surround 9'-3\")",
+      "reliability": "MEDIUM",
+      "instanceNote": "⚑ Both architect RCPs agree on a painted-gyp surround at 9'-3\"; ID-1.6 instead shows the whole room as ACT-01 at 10'-2\" with no gyp surround. A-series governs (ID-0.0 note 3), ID reading carried as the disagreement. Draft PT-07 line covers the ceiling PAINT only - this is the missing ceiling SYSTEM line.",
+      "trade": "GC"
+    },
+    {
+      "category": "FF&E - Misc",
+      "code": "814",
+      "label": "EMERGENCY TELEPHONE - keyed note 7 verbatim: 'AN EMERGENCY TELEPHONE MUST BE PROVIDED. MOUNT WITHIN ACCESSIBLE REACH RANGE. PHONE MUST BE EQUIPPED WITH VOLUME CONTROL & A MIN. 28\" LONG CORD. AN ACCESSIBLE ROUTE MUST BE PROVIDED TO THE EMERGENCY HOUSE PHONE WITH A CLEAR FLOOR SPACE @ THE PHONE.'",
+      "src": "A510.3 furnishing list + space table; A510.3 keyed note 7",
+      "reliability": "HIGH",
+      "instanceNote": "Supply/install responsibility not stated on A510.3 (its only responsibility note, keyed note 4, applies to other rooms). The draft carries every other A510.3 furnishing-list item tagged in 023 (800-813, 816, 817, 819) but dropped 814.",
+      "trade": "OWN"
+    }
+  ]
+}

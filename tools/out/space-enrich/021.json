@@ -1,0 +1,13 @@
+{
+  "space": "021",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Painted gyp board ceiling, 8'-6\" AFF",
+      "src": "A120; A510.2",
+      "reliability": "MEDIUM",
+      "instanceNote": "A120 hatches 021 painted gyp and tags 8'-6\"; A510.2 tags the same 8'-6\" - the two architectural RCPs agree. ID-1.6 gives 8'-0\" (conflict C-1 - architect governs; already flagged on the draft's PT-07 line). This line adds the SYSTEM; height matches the draft.",
+      "trade": "GC"
+    }
+  ]
+}

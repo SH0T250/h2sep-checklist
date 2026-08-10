@@ -19,7 +19,7 @@
       "label": "STORAGE SHELVING",
       "qty": 2,
       "reliability": "FLAGGED",
-      "sort": 30,
+      "sort": 40,
       "src": "A510.3 furnishing list, 2 tag groups",
       "trade": "OWN"
     },
@@ -40,7 +40,7 @@
       "label": "OFFICE FURNITURE BY OWNER AS REQ'D - the ONLY responsibility assignment anywhere on A510.3",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 40,
+      "sort": 50,
       "src": "A510.3 keyed note 4",
       "trade": "OWN"
     },
@@ -82,8 +82,29 @@
       "label": "SEALED CONCRETE",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 20,
+      "sort": 30,
       "src": "A510.4 keyed note 4; independently confirmed by A511.2",
+      "trade": "GC"
+    },
+    "x_ed6d70f918": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "System: ACT grid per A120's hatch (only sheet stating a system here). Height: the DB follows A510.2's 10'-0\" (finishes.md SS5.10 / C-1; ID-1.6's 8'-0\" carried, not emitted). A120 tags 8'-0\" - a third reading recorded in no register, and the draft's PT-07 line implies a painted lid while A120 hatches ACT. Same verification as Laundry 015 before ordering.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Acoustic ceiling tile grid ceiling (A120 hatch)",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "sort": 20,
+      "src": "A120",
       "trade": "GC"
     }
   },

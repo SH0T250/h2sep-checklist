@@ -1,0 +1,13 @@
+{
+  "space": "033",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Open to underside of floor/roof system above - paint all elements (A120 legend); tagged 12'-3 3/8\"",
+      "src": "A120",
+      "reliability": "HIGH",
+      "instanceNote": "A120 hatches Electrical 033 open-to-structure at 12'-3 3/8\". No competing source. The draft carries NO paint line for 033, so the legend's paint-all-elements scope on exposed elements rides on this line. Fills the gap A511.2.md:62 / ffe-public.md recorded (no BOH RCP).",
+      "trade": "GC/PT"
+    }
+  ]
+}

@@ -19,7 +19,7 @@
       "label": "OFFICE FURNITURE BY OWNER AS REQ'D - the ONLY responsibility assignment anywhere on A510.3",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 70,
+      "sort": 80,
       "src": "A510.3 keyed note 4",
       "trade": "OWN"
     },
@@ -82,7 +82,7 @@
       "label": "Resilient base at engineering - Tarkett Traditional Vinyl 1/8\" Type TV, 38 Pewter (Supp A) / Mohawk-Durkan H2D15 (Supp B)",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 30,
+      "sort": 40,
       "src": "ID-3.3 view 9; finish schedule pp.34/35",
       "trade": "TILE"
     },
@@ -103,7 +103,7 @@
       "label": "VCT at the engineer's room - Tarkett (Supp A) / AHF Products (Supp B)",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 40,
+      "sort": 50,
       "src": "A510.4; finish schedule pp.58/59",
       "trade": "TILE"
     },
@@ -124,9 +124,30 @@
       "label": "M16 Engineer's peg board - 6'-0\" VIF x 4'-0\", French-cleat hung",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 60,
+      "sort": 70,
       "src": "A906",
       "trade": "MW"
+    },
+    "x_2bd6903cc1": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "A120 hatches 021 painted gyp and tags 8'-6\"; A510.2 tags the same 8'-6\" - the two architectural RCPs agree. ID-1.6 gives 8'-0\" (conflict C-1 - architect governs; already flagged on the draft's PT-07 line). This line adds the SYSTEM; height matches the draft.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Painted gyp board ceiling, 8'-6\" AFF",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "sort": 30,
+      "src": "A120; A510.2",
+      "trade": "GC"
     },
     "x_f60d737c0f": {
       "category": "FF&E - Casegoods",
@@ -145,7 +166,7 @@
       "label": "M15 Engineer's work surface - 6'-0\" VIF x 2'-0\" d x 2'-7\" h",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 50,
+      "sort": 60,
       "src": "A906",
       "trade": "MW"
     }

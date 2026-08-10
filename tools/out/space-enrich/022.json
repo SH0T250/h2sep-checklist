@@ -1,0 +1,13 @@
+{
+  "space": "022",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Acoustic ceiling tile grid ceiling, 9'-3\" AFF",
+      "src": "A120; A510.2",
+      "reliability": "MEDIUM",
+      "instanceNote": "A120 hatches Sales 022 as ACT grid at 9'-3\"; A510.2 corroborates 9'-3\". ACT tile size (2'x2' vs 2'x4') is not readable at 3/32\" per A120.md - confirm before ordering grid or tile. Note the draft's PT-07 \"ceiling paint\" line sits against an ACT lid, and no PT code is printed at this space on A510.2 (A510.2.md: no PT codes on that sheet) - see report.",
+      "trade": "GC"
+    }
+  ]
+}

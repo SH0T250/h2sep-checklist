@@ -19,7 +19,7 @@
       "label": "TOWEL HAMPER",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 230,
+      "sort": 250,
       "src": "A510.3 furnishing list",
       "trade": "OWN"
     },
@@ -40,7 +40,7 @@
       "label": "WATER & CUP DISPENSER",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 240,
+      "sort": 260,
       "src": "A510.3 furnishing list",
       "trade": "OWN"
     },
@@ -61,7 +61,7 @@
       "label": "GYM WIPES DISPENSER",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 250,
+      "sort": 270,
       "src": "A510.3 furnishing list",
       "trade": "OWN"
     },
@@ -82,7 +82,7 @@
       "label": "TREADMILL",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 110,
+      "sort": 130,
       "src": "A510.3 fitness equipment list",
       "trade": "OWN"
     },
@@ -103,7 +103,7 @@
       "label": "FITNESS TRAINER ELLIPTICAL",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 120,
+      "sort": 140,
       "src": "A510.3 fitness equipment list",
       "trade": "OWN"
     },
@@ -124,7 +124,7 @@
       "label": "RECUMBENT CYCLE",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 130,
+      "sort": 150,
       "src": "A510.3 fitness equipment list",
       "trade": "OWN"
     },
@@ -145,7 +145,7 @@
       "label": "FREE WEIGHTS & RACK",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 260,
+      "sort": 280,
       "src": "A510.3 fitness equipment list",
       "trade": "OWN"
     },
@@ -166,7 +166,7 @@
       "label": "WEIGHT BENCH",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 270,
+      "sort": 290,
       "src": "A510.3 fitness equipment list",
       "trade": "OWN"
     },
@@ -187,7 +187,7 @@
       "label": "STRENGTH SYSTEM",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 140,
+      "sort": 160,
       "src": "A510.3 fitness equipment list",
       "trade": "OWN"
     },
@@ -208,7 +208,7 @@
       "label": "MEDICINE BALLS & RACK",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 280,
+      "sort": 300,
       "src": "A510.3 fitness equipment list",
       "trade": "OWN"
     },
@@ -229,7 +229,7 @@
       "label": "EXERCISE BALL",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 290,
+      "sort": 310,
       "src": "A510.3 fitness equipment list",
       "trade": "OWN"
     },
@@ -250,7 +250,7 @@
       "label": "EXERCISE MAT",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 300,
+      "sort": 320,
       "src": "A510.3 fitness equipment list",
       "trade": "OWN"
     },
@@ -271,7 +271,7 @@
       "label": "RULES SIGN",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 310,
+      "sort": 330,
       "src": "A510.3 furnishing list",
       "trade": "OWN"
     },
@@ -292,7 +292,7 @@
       "label": "WALL MOUNTED TELEVISION",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 150,
+      "sort": 170,
       "src": "A510.3 furnishing list",
       "trade": "OWN"
     },
@@ -313,7 +313,7 @@
       "label": "TOWEL HOOK",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 320,
+      "sort": 350,
       "src": "A510.3 furnishing list",
       "trade": "GC"
     },
@@ -334,7 +334,7 @@
       "label": "WALL MOUNTED MIRROR. A510.3 note 2 verbatim: 'GENERAL CONTRACTOR TO PROVIDE PLATE MIRROR FOR RECEIPT OF DECORATIVE FRAME (REFER TO HOME 2 FITNESS GUIDE FOR ADDITIONAL INFO.'",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 200,
+      "sort": 220,
       "src": "A510.3 note 2; ID-3.2 views 4-7; A700 note 30",
       "trade": "GC"
     },
@@ -355,7 +355,7 @@
       "label": "WALL MOUNTED CLOCK",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 330,
+      "sort": 360,
       "src": "A510.3 furnishing list",
       "trade": "OWN"
     },
@@ -376,7 +376,7 @@
       "label": "Decorative mirror",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 210,
+      "sort": 230,
       "src": "A510.3",
       "trade": "FFE"
     },
@@ -397,7 +397,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 160,
+      "sort": 180,
       "src": "A510.3",
       "trade": "FFE"
     },
@@ -418,7 +418,7 @@
       "label": "Window element - identity contested",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 190,
+      "sort": 210,
       "src": "A510.3",
       "trade": "FFE"
     },
@@ -439,7 +439,7 @@
       "label": "Decorative pendant",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 170,
+      "sort": 190,
       "src": "A510.3",
       "trade": "FFE"
     },
@@ -460,7 +460,7 @@
       "label": "Decorative sconce",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 180,
+      "sort": 200,
       "src": "A510.3",
       "trade": "FFE"
     },
@@ -481,7 +481,7 @@
       "label": "Fitness item, type NOT stated",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 340,
+      "sort": 370,
       "src": "ID-3.2 views 4-7",
       "trade": "FFE"
     },
@@ -544,7 +544,7 @@
       "label": "Resilient base at the fitness room - Tarkett Monument MW-48-S4 (Supp A) / Mohawk-Durkan H2D14 (Supp B)",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 60,
+      "sort": 80,
       "src": "ID-3.2 views 4-7; finish schedule pp.32/33",
       "trade": "TILE"
     },
@@ -565,7 +565,7 @@
       "label": "Rubber flooring at the fitness center - Ecore",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 70,
+      "sort": 90,
       "src": "A510.4; finish schedule p.36",
       "trade": "TILE"
     },
@@ -586,7 +586,7 @@
       "label": "Rubber flooring, tag as printed RF-15",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 80,
+      "sort": 100,
       "src": "ID-1.8",
       "trade": "TILE"
     },
@@ -607,7 +607,7 @@
       "label": "Stone at the window sills (typ.)",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 100,
+      "sort": 120,
       "src": "ID-3.2 view 7; finish schedule p.41",
       "trade": "MW"
     },
@@ -628,7 +628,7 @@
       "label": "Tile base at the fitness entry",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 90,
+      "sort": 110,
       "src": "ID-3.1 view 5",
       "trade": "TILE"
     },
@@ -695,6 +695,27 @@
       "src": "ID-3.2 views 4-7; finish schedule p.66",
       "trade": "WC"
     },
+    "x_10de8e6ac1": {
+      "category": "FF&E - Misc",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "814",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "Supply/install responsibility not stated on A510.3 (its only responsibility note, keyed note 4, applies to other rooms). The draft carries every other A510.3 furnishing-list item tagged in 023 (800-813, 816, 817, 819) but dropped 814.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "EMERGENCY TELEPHONE - keyed note 7 verbatim: 'AN EMERGENCY TELEPHONE MUST BE PROVIDED. MOUNT WITHIN ACCESSIBLE REACH RANGE. PHONE MUST BE EQUIPPED WITH VOLUME CONTROL & A MIN. 28\" LONG CORD. AN ACCESSIBLE ROUTE MUST BE PROVIDED TO THE EMERGENCY HOUSE PHONE WITH A CLEAR FLOOR SPACE @ THE PHONE.'",
+      "qty": 1,
+      "reliability": "HIGH",
+      "sort": 340,
+      "src": "A510.3 furnishing list + space table; A510.3 keyed note 7",
+      "trade": "OWN"
+    },
     "x_170f36bd1a": {
       "category": "FF&E - Art / Mirror",
       "checked": false,
@@ -712,9 +733,51 @@
       "label": "Wall graphics",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 220,
+      "sort": 240,
       "src": "ID-3.2 views 4-7 / A701 elevations 4-7",
       "trade": "FFE"
+    },
+    "x_17bc4192b1": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "ACT-01",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "\u2691 System agrees, height does not - THREE printed values for the panel zone: A510.2 = 10'-0\" accent zone (in a 9'-3\" perimeter); A120 = 9'-6\" panel field (in a 9'-3\" surround); ID-1.6 = ACT-01 at 10'-2\" for the whole room. OPEN_ITEMS C8 registers only the A510.2-vs-ID-1.6 pair - A120's 9'-6\" is a third, unregistered value on a same-rev (08/09/24) architectural sheet. Code ACT-01 is printed on ID-1.6 and on finish-schedule card p.8 (Armstrong TECTUM Create!/Attach, area Fitness Center), which ties the ID tag to the architect's Tectum; the A-sheets themselves print 'TECTUM', not ACT-01. Panel-zone extent is not dimensioned (A120: only by inspection). A120 GC note: Tectum is a long-lead specialty item - confirm it is bought.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "TECTUM PANEL CEILING 2'x2' GRID SYSTEM at the accent-ceiling zone - metal edge molding, metal framing, over 5/8\" gypsum board (detail 03/A510.2)",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "sort": 60,
+      "src": "A510.2 detail 03 + A120; ID-1.6; finish schedule p.8",
+      "trade": "GC"
+    },
+    "x_a327948147": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "\u2691 Both architect RCPs agree on a painted-gyp surround at 9'-3\"; ID-1.6 instead shows the whole room as ACT-01 at 10'-2\" with no gyp surround. A-series governs (ID-0.0 note 3), ID reading carried as the disagreement. Draft PT-07 line covers the ceiling PAINT only - this is the missing ceiling SYSTEM line.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "PAINTED GYP BOARD CEILING at the 9'-3\" perimeter, surrounding the Tectum accent zone",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "sort": 70,
+      "src": "A120 + A510.2 (both tag the surround 9'-3\")",
+      "trade": "GC"
     }
   },
   "notes": {},

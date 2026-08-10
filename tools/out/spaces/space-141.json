@@ -19,7 +19,7 @@
       "label": "Carpet base at the stairwell",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 30,
+      "sort": 40,
       "src": "finish schedule p.17 'BOH & Stairwells'",
       "trade": "TILE"
     },
@@ -40,7 +40,7 @@
       "label": "Carpet at the stairwell - COMPETING base-spec finish",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 20,
+      "sort": 30,
       "src": "finish schedule p.15 'BOH & Stairwells' (Mohawk-Durkan)",
       "trade": "TILE"
     },
@@ -61,7 +61,7 @@
       "label": "ALTERNATE carpet tile at the stairwell",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 40,
+      "sort": 50,
       "src": "finish schedule p.16",
       "trade": "TILE"
     },
@@ -82,7 +82,7 @@
       "label": "Tile base at the ground-floor landing",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 60,
+      "sort": 70,
       "src": "RK ID-1.1 section 4, Change 2 - second red cloud at the south (lower) end adjacent to the door",
       "trade": "TILE"
     },
@@ -103,7 +103,7 @@
       "label": "Floor tile at the GROUND-FLOOR LANDING ONLY - the treads are drawn separately and are NOT hatched",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 50,
+      "sort": 60,
       "src": "RK ID-1.1 clarification section 4, Change 2 - second red cloud at the south (lower) end adjacent to the door",
       "trade": "TILE"
     },
@@ -124,7 +124,7 @@
       "label": "FLOORS 2-4 STAIR LANDINGS - NO SOURCE. No finish rows emitted; do not extrapolate",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 70,
+      "sort": 80,
       "src": "RK ID-1.1 is Floor 1 only",
       "trade": "TILE"
     },
@@ -147,6 +147,27 @@
       "reliability": "HIGH",
       "sort": 10,
       "src": "A510.1 note 58",
+      "trade": "PT"
+    },
+    "x_f01833128f": {
+      "category": "Paint",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "A433 states the same handrail as Stair #1: wall-mounted 1.5\" diameter oak handrail, stained (construction details A434; height per detail 06/A431). FLAGGED: (a) no handrail stain/finish code exists in the 67-card finish schedule and no ID sheet covers the stairs; (b) the sibling extraction A440.md was shown inferential/wrong on the elevator (coordination_issues.md D-02 \u2014 're-read from the source before quoting') and the A43x extractions carry the same summarized style \u2014 confirm the printed A431/A433/A434 wording before buying finish. Applies to the flight serving this floor; no per-floor count stated. A510.1 keyed note 58 separately requires 'PAINT UNDERSIDE OF STAIR TO MATCH STAIR RAILING' at this stair (already a draft line); whether that painted 'railing' and this stained-oak wall handrail are the same element is not reconciled on any sheet.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Wall-mounted 1.5\" diameter oak handrail, stained",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "sort": 20,
+      "src": "A433",
       "trade": "PT"
     }
   },

@@ -1,0 +1,13 @@
+{
+  "space": "437",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Ceiling height tag 8'-0\" — no ceiling-system hatch drawn",
+      "src": "A123",
+      "reliability": "FLAGGED",
+      "instanceNote": "🚩 A123 tags Elevator Lobby 437 at 8'-0\" — 'differs from A121/A122, which are 8'-3 3/8\"' — and A123's own flag says: 'This may be intentional (roof/structure change at the top floor) or a drafting slip. Verify — do not assume.' No legend hatch drawn, so the system (gyp lid vs open-to-structure) is also undetermined. The draft's PT-07 Paint line says 8'-3 3/8\" AFF from ID-1.16 'typical' — height conflict on this floor. A123 is base issue 06/09/23 (empty revision block) vs A120 at Rev 4 — the 08/09/24 wave may not have been carried to the upper-floor RCPs.",
+      "trade": "GC"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "space": "017",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Acoustic ceiling tile grid ceiling (A120 hatch)",
+      "src": "A120",
+      "reliability": "FLAGGED",
+      "instanceNote": "System: ACT grid per A120's hatch (only sheet stating a system here). Height: the DB follows A510.2's 10'-0\" (finishes.md SS5.10 / C-1; ID-1.6's 8'-0\" carried, not emitted). A120 tags 8'-0\" - a third reading recorded in no register, and the draft's PT-07 line implies a painted lid while A120 hatches ACT. Same verification as Laundry 015 before ordering.",
+      "trade": "GC"
+    }
+  ]
+}

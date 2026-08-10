@@ -19,7 +19,7 @@
       "label": "Carpet base at the elevator lobby",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 60,
+      "sort": 70,
       "src": "ID-1.13 view 2; ID-3.2 views 11-14; finish schedule p.13",
       "trade": "TILE"
     },
@@ -40,7 +40,7 @@
       "label": "Carpet tile at the elevator lobby",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 50,
+      "sort": 60,
       "src": "ID-1.13 view 2; ID-3.2 views 11-14; finish schedule p.12",
       "trade": "TILE"
     },
@@ -61,7 +61,7 @@
       "label": "Elevator-lobby console / feature piece",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 100,
+      "sort": 110,
       "src": "ID-1.13 (typical for floors 2-4)",
       "trade": "FFE"
     },
@@ -82,7 +82,7 @@
       "label": "Plastic laminate at the typical elevator lobby",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 90,
+      "sort": 100,
       "src": "ID-3.2 views 11-14",
       "trade": "MW"
     },
@@ -145,7 +145,7 @@
       "label": "Floor tile at the elevator lobby",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 70,
+      "sort": 80,
       "src": "ID-1.13 view 2",
       "trade": "TILE"
     },
@@ -191,6 +191,27 @@
       "src": "A511.3; ID-1.13 view 2; finish schedule p.62 'Elevator Lobby'",
       "trade": "WC"
     },
+    "x_4aa7214781": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "8'-3 3/8\" ceiling height tag only \u2014 A121 flag: 'No legend hatch is drawn in Elevator Lobby 237 \u2014 only a height tag. Ceiling system (gyp lid vs open-to-structure) is undetermined from this sheet. On A120 the equivalent rooms with the underside dimension were open-to-structure, but that is inference, not what this sheet says.' Confirm the system before framing or grid. ID-1.16 prints PT-07 at 8'-3 3/8\" for the typical elevator lobby (the draft's Paint line) \u2014 the ID sheet implies a painted gyp lid, but the architectural RCP hatches none. Confirm the system before framing.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Ceiling height tag 8'-3 3/8\" \u2014 no ceiling-system hatch drawn",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "sort": 50,
+      "src": "A121",
+      "trade": "GC"
+    },
     "x_9fdb92c0bb": {
       "category": "Flooring",
       "checked": false,
@@ -208,7 +229,7 @@
       "label": "Tile field, hatched as tile on the plan but NO numbered floor tag is placed in the room",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 80,
+      "sort": 90,
       "src": "A511.3",
       "trade": "TILE"
     }

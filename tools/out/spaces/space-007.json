@@ -19,7 +19,7 @@
       "label": "WALK-IN COOLER / FREEZER ASSEMBLY - AMERICAN PANEL, CUSTOM",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 40,
+      "sort": 50,
       "src": "A513",
       "trade": "OWN"
     },
@@ -40,7 +40,7 @@
       "label": "WALK-IN COOLER / FREEZER ASSEMBLY - AMERICAN PANEL, CUSTOM",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 50,
+      "sort": 60,
       "src": "A513.1 (qty 2) vs A513 (qty 1)",
       "trade": "OWN"
     },
@@ -61,7 +61,7 @@
       "label": "MOBILE WORK TABLE - CUSTOM FABRICATED",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 150,
+      "sort": 160,
       "src": "A513",
       "trade": "OWN"
     },
@@ -82,7 +82,7 @@
       "label": "UNDERCOUNTER DISHMACHINE (HIGH TEMP) - CHAMPION UH-100B",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 60,
+      "sort": 70,
       "src": "A513",
       "trade": "OWN"
     },
@@ -103,7 +103,7 @@
       "label": "DISHTABLE RACK SHELF - ADVANCE TABCO DT-6R-11",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 160,
+      "sort": 170,
       "src": "A513",
       "trade": "OWN"
     },
@@ -124,7 +124,7 @@
       "label": "WALL SHELF, HIGH MOUNT - METRO 1WD24K3",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 170,
+      "sort": 180,
       "src": "A513",
       "trade": "OWN"
     },
@@ -145,7 +145,7 @@
       "label": "WALL SHELF, HIGH MOUNT - METRO 2WD24K3",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 190,
+      "sort": 200,
       "src": "A513",
       "trade": "OWN"
     },
@@ -166,7 +166,7 @@
       "label": "WALL SHELF, HIGH MOUNT - METRO 2436NK3",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 180,
+      "sort": 190,
       "src": "A513",
       "trade": "OWN"
     },
@@ -187,7 +187,7 @@
       "label": "MOBILE COOLER / FREEZER SHELVING - METRO METROMAX Q",
       "qty": 6,
       "reliability": "HIGH",
-      "sort": 200,
+      "sort": 210,
       "src": "A513",
       "trade": "OWN"
     },
@@ -208,7 +208,7 @@
       "label": "UTENSIL RACK WITH SHELF - ADVANCE TABCO PS-12-60",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 210,
+      "sort": 220,
       "src": "A513",
       "trade": "OWN"
     },
@@ -229,7 +229,7 @@
       "label": "WORKTABLE WITH SINK - CUSTOM FABRICATED",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 220,
+      "sort": 230,
       "src": "A513",
       "trade": "OWN"
     },
@@ -250,7 +250,7 @@
       "label": "COFFEE MAKER (OPERATOR FURNISHED) - FETCO CBS-2152XTS",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 70,
+      "sort": 80,
       "src": "A513",
       "trade": "OWN"
     },
@@ -271,7 +271,7 @@
       "label": "WALL SHELF, HIGH MOUNT - METRO",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 230,
+      "sort": 240,
       "src": "A513",
       "trade": "OWN"
     },
@@ -292,7 +292,7 @@
       "label": "CONVECTION OVEN (VENTLESS) - MOFFAT TURBOFAN E33D5H2",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 80,
+      "sort": 90,
       "src": "A513",
       "trade": "OWN"
     },
@@ -313,7 +313,7 @@
       "label": "CONVECTION OVEN (VENTLESS) - MOFFAT TURBOFAN E33D5H2",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 90,
+      "sort": 100,
       "src": "A513.1 (qty 2) vs A513 (qty 1)",
       "trade": "OWN"
     },
@@ -334,7 +334,7 @@
       "label": "WALL SHELF - CUSTOM FABRICATED",
       "qty": 2,
       "reliability": "HIGH",
-      "sort": 240,
+      "sort": 250,
       "src": "A513",
       "trade": "OWN"
     },
@@ -355,7 +355,7 @@
       "label": "WORKTOP REFRIGERATOR - TRUE TWT-67-HC~SPEC3",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 100,
+      "sort": 110,
       "src": "A513 / A513.1",
       "trade": "OWN"
     },
@@ -376,7 +376,7 @@
       "label": "STORAGE SHELVING - METRO METROMAX Q",
       "qty": 4,
       "reliability": "HIGH",
-      "sort": 250,
+      "sort": 260,
       "src": "A513",
       "trade": "OWN"
     },
@@ -397,7 +397,7 @@
       "label": "CONVECTION OVEN (VENTLESS) - OPTIONAL - MOFFAT E33D5H2",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 110,
+      "sort": 120,
       "src": "A513",
       "trade": "OWN"
     },
@@ -418,7 +418,7 @@
       "label": "SPEED RACK - CRES COR 207-UA-13A",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 260,
+      "sort": 270,
       "src": "A513",
       "trade": "OWN"
     },
@@ -439,7 +439,7 @@
       "label": "MICROWAVE OVEN - AMANA HDC12A2 / BMS2024",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 120,
+      "sort": 130,
       "src": "A513 / A513.1",
       "trade": "OWN"
     },
@@ -460,7 +460,7 @@
       "label": "UNIT COOLER (COOLER) - OMNITEMP KLP106MA-S1D",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 130,
+      "sort": 140,
       "src": "A513",
       "trade": "OWN"
     },
@@ -481,7 +481,7 @@
       "label": "UNIT COOLER (FREEZER) - OMNI KLP106LE-S2D",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 140,
+      "sort": 150,
       "src": "A513",
       "trade": "OWN"
     },
@@ -523,7 +523,7 @@
       "label": "Quarry tile - Daltile Quarry Tile 0942 (Supp A) / Ceramic Technics Essentials Quarry (Supp B)",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 20,
+      "sort": 30,
       "src": "A510.4; ID-1.8; finish schedule pp.54/55",
       "trade": "TILE"
     },
@@ -544,7 +544,7 @@
       "label": "Quarry tile at the walk-in cooler / freezer enclosure floor",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 30,
+      "sort": 40,
       "src": "A510.4",
       "trade": "TILE"
     },
@@ -565,7 +565,7 @@
       "label": "2' x 2' troffer",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 270,
+      "sort": 280,
       "src": "A513 view 2",
       "trade": "EC"
     },
@@ -586,9 +586,30 @@
       "label": "Emergency exit light",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 280,
+      "sort": 290,
       "src": "A513 view 2",
       "trade": "EC"
+    },
+    "x_4aa35c9dde": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "\u2691 Height 8'-0\" agrees on A120 and A510.2 (both Rev 4). MEDIUM because A120's legend carries both 2'x2' and 2'x4' ACT and the hatch is not readable at 3/32\" scale - A120's own flag: confirm tile size before ordering grid or tile. A513 view 2 (Food Prep & Dry Storage RCP) shows 2'x2' troffers over the room. The draft's PT-07 ceiling-paint line (A510.2) sits against this ACT system - see cluster report.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Acoustic ceiling tile (ACT) grid ceiling, 8'-0\" AFF",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "sort": 20,
+      "src": "A120; A510.2",
+      "trade": "GC"
     },
     "x_5aa0aa72ef": {
       "category": "FF&E - Lighting",
@@ -607,7 +628,7 @@
       "label": "Surface linear strip ceiling fixture",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 290,
+      "sort": 300,
       "src": "A513 view 2",
       "trade": "EC"
     }

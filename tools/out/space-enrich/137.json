@@ -1,0 +1,21 @@
+{
+  "space": "137",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Painted gyp board ceiling, 8'-0\" tag",
+      "src": "A120",
+      "reliability": "FLAGGED",
+      "instanceNote": "🚩 Two CURRENT-ISSUE architectural RCPs disagree on this lid's height: A120 (Rev 4, 08/09/24) tags Elev. Lobby 137 at 8'-0\" painted gyp (stipple hatch); A510.2 (also Rev 4, 08/09/24) tabulates 137 at 8'-10\". The draft's PT-07 Paint line carries A510.2's 8'-10\". Also differs from 237/337 (8'-3 3/8\" on base-issue A121/A122) — A120 is Rev 4 while A121–A123 are base issue (06/09/23), so cross-floor comparison rides on that revision skew. RFI before framing the lid.",
+      "trade": "GC"
+    },
+    {
+      "category": "Appliance",
+      "label": "BOTTLE FILLING STATION",
+      "code": "821",
+      "src": "A510.3; details 03/A510.1 & 04/A510.1",
+      "reliability": "HIGH",
+      "instanceNote": "A510.3 furnishing list tags 821 at Elevator Lobby 137; detailed as views 03/A510.1 and 04/A510.1. Plumbing rough-in handoff (ffe-public.md §13.2; OPEN_ITEMS 'bottle-filler rough-ins (821)' still awaiting a receiving package). Supply/install responsibility is NOT stated on A510.3 (its flag 7). A second 821 is tagged at the restroom-entry side of the public-block corridor — separate location, not this space; do not sum."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "space": "018",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Tectum 2'x2' panel ceiling - 10'-0\" center/accent panel in a painted-gyp surround at 9'-3\" (accent grid measured 20'-0\" x 18'-0\" on A510.2)",
+      "src": "A120; A510.2",
+      "reliability": "MEDIUM",
+      "instanceNote": "A120 hatches the 018 center panel Tectum 2'x2' in a painted-gyp surround, and its legend states \"TECTUM CEILING 2' x 2' (AT FITNESS, CONFERENCE ROOM LOCATIONS)\". Heights corroborated by A510.2 (9'-3\" field / 10'-0\" accent - already on the draft's PT-07 line). Cautions: A120's legend lists Tectum TWICE with two hatches (one product or two is not stated - A120.md flag); ID-1.6 gives 10'-2\" for the accent (C-8 - architect governs); the fs ACT-01 card (Armstrong TECTUM Create-Attach) scopes its area to \"Fitness Center\" only. Tectum is a long-lead specialty item - confirm it is bought (A120.md).",
+      "trade": "GC"
+    },
+    {
+      "category": "Ceiling",
+      "label": "Ceiling access panel (A120 legend symbol) in the Meeting Room 018 ceiling area (rev-4 cloud)",
+      "src": "A120",
+      "reliability": "FLAGGED",
+      "instanceNote": "A120 draws the access-panel legend symbol at the Meeting Room 018 area inside a Rev-4 (08/09/24) revision cloud. Keyed note 5 (\"FLUSH ACCESS PANEL WITH DROP IN DOOR - MFR. ISC STYLE MARK MO.#CAP-1818 - CONFIRM SIZE WITH ENGINEER OF RECORD - TEXTURE & PAINT TO MATCH ADJACENT CEILING\") exists in A120's keyed-note list but is NOT placed at any first-floor location - the CAP-1818 product applies by intent only; confirm by RFI and confirm size with the EOR before buying (A120.md flag + GC/PM implications).",
+      "trade": "GC"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "space": "031",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Ceiling height tag 8'-6\" on A120; no legend hatch drawn - ceiling system undetermined",
+      "src": "A120",
+      "reliability": "FLAGGED",
+      "instanceNote": "A120 tags PBX 031 at 8'-6\" but draws no legend hatch - system undetermined (A120.md flag). This corroborates the draft's PT-07 height (8'-6\" from ID-1.6) and corrects that line's premise: its note says no RCP covers the BOH block on A510.2/A511.2, but the whole-floor RCP A120 does tag this room.",
+      "trade": "GC"
+    },
+    {
+      "category": "FF&E - Misc",
+      "label": "OnQ RACK",
+      "src": "A511.1 keyed note 33",
+      "reliability": "FLAGGED",
+      "instanceNote": "A511.1 tags keyed note 33 (\"OnQ RACK\") in the PBX 031 / Electrical 033 cluster - the building's low-voltage head end (A511.1.md PM read; ffe-public.md SS12 keeps the two rooms joint). Which of the two rooms each bubble lands in is only readable on the render. Emitted once, at 031 - do NOT double-count at 033. Confirm room before rough-in.",
+      "code": "KN 33",
+      "trade": "GC"
+    },
+    {
+      "category": "FF&E - Misc",
+      "label": "MATV RACK",
+      "src": "A511.1 keyed note 18",
+      "reliability": "FLAGGED",
+      "instanceNote": "A511.1 tags keyed note 18 (\"MATV RACK\") in the PBX 031 / Electrical 033 cluster (A511.1.md; ffe-public.md SS12). Per-room landing only readable on the render. Emitted once, at 031 - do NOT double-count at 033.",
+      "code": "KN 18",
+      "trade": "GC"
+    },
+    {
+      "category": "FF&E - Misc",
+      "label": "PHONE RACK",
+      "src": "A511.1 keyed note 6 (x2 tags)",
+      "reliability": "FLAGGED",
+      "instanceNote": "A511.1 shows TWO keyed-note-6 tags (\"PHONE RACK\") on the plan, both reading as the PBX 031 / Electrical 033 cluster (A511.1.md: \"6 (phone rack, x2)\"; ffe-public.md SS12: \"phone racks (6, x2)\"). qty 2 = tag instances as printed. Per-room landing only readable on the render. Emitted once, at 031 - do NOT double-count at 033.",
+      "code": "KN 6",
+      "qty": 2,
+      "trade": "GC"
+    },
+    {
+      "category": "FF&E - Misc",
+      "label": "4' X 8' PLYWOOD SHEET (low-voltage backboard)",
+      "src": "A511.1 keyed note 35",
+      "reliability": "FLAGGED",
+      "instanceNote": "A511.1 tags keyed note 35 (\"4' X 8' PLYWOOD SHEET\") in the PBX 031 / Electrical 033 cluster (A511.1.md; ffe-public.md SS12). Per-room landing only readable on the render - emitted once, at 031; do NOT double-count at 033. A511.1.md PM read: confirm the backboard is fire-retardant-treated per the low-voltage vendor (not stated on the sheet).",
+      "code": "KN 35",
+      "trade": "GC"
+    }
+  ]
+}

@@ -19,7 +19,7 @@
       "label": "REFRIGERATION RACK - OMNI, 208V/3ph/19.9A, DIR",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 80,
+      "sort": 90,
       "src": "A514 electrical schedule only",
       "trade": "OWN"
     },
@@ -40,7 +40,7 @@
       "label": "Coffee maker at the breakfast servery - FETCO CBS-2152XTS, OPERATOR FURNISHED",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 90,
+      "sort": 100,
       "src": "A513 / A513.1 / A514",
       "trade": "OWN"
     },
@@ -61,7 +61,7 @@
       "label": "BATTER MIX STARTER KIT (OPERATOR FURNISHED)",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 100,
+      "sort": 110,
       "src": "A514 equipment schedule",
       "trade": "OWN"
     },
@@ -82,7 +82,7 @@
       "label": "WAFFLE MAKER (OPERATOR FURNISHED) - WELLS BWB-1SE",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 110,
+      "sort": 120,
       "src": "A514 equipment schedule",
       "trade": "OWN"
     },
@@ -103,7 +103,7 @@
       "label": "WAFFLE MAKER (FUTURE) (OPERATOR FURNISHED) - WELLS BWB-1SE",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 120,
+      "sort": 130,
       "src": "A514 equipment schedule",
       "trade": "OWN"
     },
@@ -124,7 +124,7 @@
       "label": "CONVEYOR TOASTER - APW WYOTT ECO 4000-350L-HILTON",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 130,
+      "sort": 140,
       "src": "A514 equipment schedule",
       "trade": "OWN"
     },
@@ -145,7 +145,7 @@
       "label": "DISPLAY SHOWCASE - EQUIPEX WD780B-2/1",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 140,
+      "sort": 150,
       "src": "A514 equipment schedule",
       "trade": "OWN"
     },
@@ -166,7 +166,7 @@
       "label": "JUICE DISPENSER (BY VENDOR) - BUNN-O-MATIC JDF-4",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 150,
+      "sort": 160,
       "src": "A514 equipment schedule",
       "trade": "OWN"
     },
@@ -187,7 +187,7 @@
       "label": "WARMING KETTLE - VOLLRATH 72017",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 160,
+      "sort": 170,
       "src": "A514 equipment schedule",
       "trade": "OWN"
     },
@@ -208,7 +208,7 @@
       "label": "REACH-IN DISPLAY FREEZER - TRUE TS-23FG-HC~FGD01",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 170,
+      "sort": 180,
       "src": "A514 electrical schedule only",
       "trade": "OWN"
     },
@@ -229,7 +229,7 @@
       "label": "REACH-IN DISPLAY REFRIGERATOR - TRUE TSD-47G-HC-LD",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 180,
+      "sort": 190,
       "src": "A514 electrical schedule only",
       "trade": "OWN"
     },
@@ -250,7 +250,7 @@
       "label": "WATER DISPENSER - VIVREAU VI-TAP-1H, 120V",
       "qty": 2,
       "reliability": "FLAGGED",
-      "sort": 190,
+      "sort": 200,
       "src": "A514 electrical schedule only",
       "trade": "OWN"
     },
@@ -271,7 +271,7 @@
       "label": "Carpet base at work station and servery",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 40,
+      "sort": 50,
       "src": "ID-3.3 view 8",
       "trade": "TILE"
     },
@@ -313,7 +313,7 @@
       "label": "Tile base at work station and servery",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 60,
+      "sort": 70,
       "src": "ID-3.3 view 8",
       "trade": "TILE"
     },
@@ -334,7 +334,7 @@
       "label": "Floor tile, field continuous with Breakfast 006",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 50,
+      "sort": 60,
       "src": "A510.4",
       "trade": "TILE"
     },
@@ -355,7 +355,7 @@
       "label": "Floor tile, tag as printed T-21",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 70,
+      "sort": 80,
       "src": "ID-1.8",
       "trade": "TILE"
     },
@@ -418,7 +418,7 @@
       "label": "Drop-in equipment at the servery counter - BY OTHERS / food-service vendor",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 200,
+      "sort": 210,
       "src": "A902",
       "trade": "OWN"
     },
@@ -439,9 +439,30 @@
       "label": "Art panel at the servery wall (blue dashed)",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 260,
+      "sort": 270,
       "src": "ID-3.3 view 8",
       "trade": "FFE"
+    },
+    "x_4b6b42d7b9": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "\u2691 Three sheets, three heights: A120 (Rev 4) tags 8'-10\" and 8'-2\" (two levels); A510.2 (same Rev 4) tags 9'-0\" - the draft PT-07 reading; ID-1.6 gives 9'-2\". The 8'-2\" low zone likely corresponds to the soffit A510.2 notes at the breakfast/servery edge, but the field height (8'-10\" vs 9'-0\" vs 9'-2\") is unresolved - check A120 vs A510.2 vs ID-1.6. System (painted gyp) agrees on A120 and ID-1.6 (PT-07).",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Painted gyp board ceiling, two levels - 8'-10\" and 8'-2\"",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "sort": 40,
+      "src": "A120",
+      "trade": "GC"
     },
     "x_5f334dcdd2": {
       "category": "FF&E - Misc",
@@ -460,7 +481,7 @@
       "label": "GRAPHIC (SEE SIGNAGE PACKAGE) - graphic position on servery elevation 13",
       "qty": 7,
       "reliability": "HIGH",
-      "sort": 270,
+      "sort": 280,
       "src": "A902",
       "trade": "GC"
     },
@@ -481,7 +502,7 @@
       "label": "Yoghurt machine, drop-in - BY OTHERS / food-service vendor",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 230,
+      "sort": 240,
       "src": "A902",
       "trade": "OWN"
     },
@@ -502,7 +523,7 @@
       "label": "Panel-ready undercounter refrigerator integrated into the servery millwork - BY OTHERS / food-service vendor. Millwork supplies the plastic laminate refrigerator panel",
       "qty": 2,
       "reliability": "MEDIUM",
-      "sort": 220,
+      "sort": 230,
       "src": "A902",
       "trade": "OWN"
     },
@@ -523,7 +544,7 @@
       "label": "M6 Servery counter, guest side and service side - 20'-5\" overall, 17'-5 3/4\" in 6 EQ, counter 2'-10\"; quartz / 2CM quartz top and backsplash; PL-01 all exposed surfaces UNO; black melamine interior, shroud interior and all concealed surfaces; edgeband all sides of shelves; 'POSITION STANDARDS WITH 6\" CLEAR BETWEEN SHELVES'; 1/2\" MDF fixed panel; 1/2\" signage panel; leg levelers and clips typ.; French cleat mounting bracket; tack wall on plywood substrate; PL end panel; pulls as specified; locking hardware; SCRIBE at the end of the run",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 240,
+      "sort": 250,
       "src": "A902",
       "trade": "MW"
     },
@@ -544,7 +565,7 @@
       "label": "LED tape light, TYP ALL OPEN SHELVES at the servery",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 250,
+      "sort": 260,
       "src": "A902",
       "trade": "EC/MW"
     },
@@ -565,7 +586,7 @@
       "label": "Panel-ready undercabinet fridge integrated into the servery millwork - BY OTHERS",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 210,
+      "sort": 220,
       "src": "A902",
       "trade": "OWN"
     }

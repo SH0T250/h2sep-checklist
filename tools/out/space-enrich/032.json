@@ -1,0 +1,22 @@
+{
+  "space": "032",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Open to underside of floor/roof system above - paint all elements (A120 legend); tagged 12'-3 3/8\"",
+      "src": "A120",
+      "reliability": "HIGH",
+      "instanceNote": "A120 hatches Housekeeping 032 open-to-structure at 12'-3 3/8\" - it corroborates the draft PT-07 line's height (ID-1.6 / ID-1.11, same 12'-3 3/8\") and supplies the SYSTEM the DB lacked. Paint scope is already carried by the draft's PT-07 line; this line is the ceiling condition. Fills the gap A511.2.md:62 / ffe-public.md recorded (no BOH RCP).",
+      "trade": "GC"
+    },
+    {
+      "category": "FF&E - Misc",
+      "label": "36\" X 36\" MOP SINK LOCATION",
+      "src": "A510.1 keyed note 17; placed at Housekeeping 032 per ffe-public.md SS12 (A510.1/A511.2)",
+      "reliability": "MEDIUM",
+      "instanceNote": "Keyed-note text verbatim from A510.1. The per-sheet extraction does not itself state the landing room - placement at 032 is the ffe-public package's render read (its SS12 row: \"17 36x36 mop sink; 14 linen cart storage area\" at Housekeeping 032). Fixture itself is plumbing scope - the P-series schedules MSB-1 mop basin 36\"x36\", Fiat TSB-500 w/ 830AA faucet (concept_wiki/domestic-water.md:185); this line tracks the location/coordination only.",
+      "code": "KN 17",
+      "trade": "GC"
+    }
+  ]
+}

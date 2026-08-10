@@ -19,7 +19,7 @@
       "label": "SHELVING",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 30,
+      "sort": 40,
       "src": "A510.3 furnishing list",
       "trade": "OWN"
     },
@@ -40,7 +40,7 @@
       "label": "OFFICE FURNITURE BY OWNER AS REQ'D - the ONLY responsibility assignment anywhere on A510.3",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 50,
+      "sort": 60,
       "src": "A510.3 keyed note 4",
       "trade": "OWN"
     },
@@ -82,7 +82,7 @@
       "label": "M12 Manager's wall-hung work surface - 7'-0\" x 2'-6\" d x 2'-7\" h",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 40,
+      "sort": 50,
       "src": "A905",
       "trade": "MW"
     },
@@ -103,9 +103,30 @@
       "label": "NO FLOOR-FINISH TAG - A510.4 and A511.2 assign no floor tag to this room",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 20,
+      "sort": 30,
       "src": "A510.4 / A511.2 (absence)",
       "trade": "TILE"
+    },
+    "x_ea8536701e": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "System per A120's hatch only - A120 shows 011 inside the painted-gyp field with NO discrete height tag (legend default 8'-10\" UNO); A510.2 tags a discrete 8'-0\", which the draft's PT-07 line already carries. Discrete tag overrides the UNO default, so no height rival is asserted here - this line adds the SYSTEM only.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Painted gyp board ceiling (A120 stipple field)",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "sort": 20,
+      "src": "A120; A510.2",
+      "trade": "GC"
     }
   },
   "notes": {},

@@ -1,0 +1,13 @@
+{
+  "space": "011",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Painted gyp board ceiling (A120 stipple field)",
+      "src": "A120; A510.2",
+      "reliability": "MEDIUM",
+      "instanceNote": "System per A120's hatch only - A120 shows 011 inside the painted-gyp field with NO discrete height tag (legend default 8'-10\" UNO); A510.2 tags a discrete 8'-0\", which the draft's PT-07 line already carries. Discrete tag overrides the UNO default, so no height rival is asserted here - this line adds the SYSTEM only.",
+      "trade": "GC"
+    }
+  ]
+}

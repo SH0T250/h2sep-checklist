@@ -1,0 +1,13 @@
+{
+  "space": "013",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Acoustic ceiling tile grid ceiling (A120 hatch); laundry chute shaft (A120 keyed note 2: \"LAUNDRY CHUTE - SHAFT OPEN TO VENT AT ROOF\") lands in this room",
+      "src": "A120",
+      "reliability": "FLAGGED",
+      "instanceNote": "A120 hatches 013 as ACT grid with an 8'-0\" tag; A510.2 tags 9'-0\" and the draft's PT-07 line describes a painted ceiling at 9'-0\". SYSTEM (ACT grid vs painted lid) and HEIGHT (8'-0\" vs 9'-0\") both differ between the two architectural RCPs, both Rev 4 - recorded in no register. ACT tile size (2'x2' vs 2'x4') is not readable at 3/32\" per A120.md. Do not order grid or tile for 013 until resolved.",
+      "trade": "GC"
+    }
+  ]
+}

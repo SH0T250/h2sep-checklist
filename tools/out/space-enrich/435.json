@@ -1,0 +1,13 @@
+{
+  "space": "435",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Ceiling height tag 8'-3 3/8\" — no ceiling-system hatch drawn",
+      "src": "A123",
+      "reliability": "FLAGGED",
+      "instanceNote": "8'-3 3/8\" ceiling height tag only — A123 flag: 'No legend hatch is drawn in House Keeping 435 — only a height tag. Ceiling system (gyp lid vs open-to-structure) is undetermined from this sheet. On A120 the equivalent rooms with the underside dimension were open-to-structure, but that is inference, not what this sheet says.' Confirm the system before framing or grid. ID-1.16 corroborates 8'-3 3/8\" at House Keeping 235 (typical-floor sheet). The laundry chute (keyed note 2, shaft open to vent at roof) lands in this block — coordinate the shaft closure per A450 before the lid goes up.",
+      "trade": "GC"
+    }
+  ]
+}

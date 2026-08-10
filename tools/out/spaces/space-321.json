@@ -19,7 +19,7 @@
       "label": "Carpet base at the guest corridor",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 70,
+      "sort": 80,
       "src": "ID-1.13 view 2; ID-3.2 views 11-15; A701; finish schedule p.13",
       "trade": "TILE"
     },
@@ -40,7 +40,7 @@
       "label": "Carpet tile at the guest corridor",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 60,
+      "sort": 70,
       "src": "A511.2 (floor 1) / A511.3 (typical); ID-1.12 / ID-1.13; finish schedule p.12",
       "trade": "TILE"
     },
@@ -61,7 +61,7 @@
       "label": "Decorative corridor ceiling / light fixture, printed '(typ.)'",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 90,
+      "sort": 100,
       "src": "ID-1.11 / ID-1.15 / ID-1.16; A120-A123 keyed note 6 'sconce placement' sits next to the PA-204 tag on every floor",
       "trade": "FFE/EC"
     },
@@ -82,7 +82,7 @@
       "label": "Corridor window element - ID-1.13 verbatim: 'PA-400 - typical at all corridor windows'. Neither the window count nor the item type (perch/bench vs window treatment) is stated",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 100,
+      "sort": 110,
       "src": "ID-1.13 / ID-1.15 / ID-1.16",
       "trade": "FFE"
     },
@@ -208,9 +208,30 @@
       "label": "Tile / transition at the corridor ends - UNTAGGED, no code printed",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 80,
+      "sort": 90,
       "src": "ID-1.12",
       "trade": "TILE"
+    },
+    "x_d2ac052de6": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "\ud83d\udea9 C-05 (coordination_issues.md): the two RCP families disagree on the ceiling SYSTEM, not just height. A122 hatches ACT grid bays at 8'-2\" between painted-gyp bulkheads at 8'-0\"; ID-1.11 / ID-1.15 / ID-1.16 draw the same corridor as PT-07 painted gypsum at 8'-2\" AFF typ. with NO ACT at all \u2014 a different ceiling trade. Blocks grid/tile purchase, the corridor mock-up, and sprinkler head type (A120 gen. note I: concealed heads in public-area ceilings, semi-recessed elsewhere). ACT tile size (2'x2' vs 2'x4') is also not distinguishable at 3/32\" scale. Do not order either system until resolved. The draft's PT-07 Paint line carries the ID reading.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "ACT grid bays at 8'-2\" alternating with painted gyp bulkhead bands at 8'-0\", marked TYP.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "sort": 60,
+      "src": "A122",
+      "trade": "GC"
     }
   },
   "notes": {},

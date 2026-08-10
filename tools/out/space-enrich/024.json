@@ -1,0 +1,20 @@
+{
+  "space": "024",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "PAINTED GYP BOARD CEILING (suspended GWB assembly per detail 02/A120), ceiling height 9'-3\" AFF",
+      "src": "A120 (painted-gyp field hatch, no discrete tag) + A510.2 (9'-3\")",
+      "reliability": "HIGH",
+      "trade": "GC"
+    },
+    {
+      "category": "Ceiling",
+      "label": "Ceiling access panel (A120 RCP legend symbol, drawn inside a rev-4 revision cloud in the Guest Laundry 024 area)",
+      "src": "A120",
+      "reliability": "MEDIUM",
+      "instanceNote": "⚑ The access-panel symbol at 024 is one of ~four added in the 08/09/24 rev-4 wave. Keyed note 5's product spec - 'FLUSH ACCESS PANEL WITH DROP IN DOOR - MFR. ISC STYLE MARK MO.#CAP-1818 - CONFIRM SIZE WITH ENGINEER OF RECORD - TEXTURE & PAINT TO MATCH ADJACENT CEILING' - is NOT keyed to any first-floor location on A120 (note 5 is placed only on A121-A123). Treat CAP-1818 as applying by intent, confirm by RFI; size must be confirmed with the EOR either way. Count not stated.",
+      "trade": "GC"
+    }
+  ]
+}

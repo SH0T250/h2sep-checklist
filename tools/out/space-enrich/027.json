@@ -1,0 +1,21 @@
+{
+  "space": "027",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "PAINTED GYP BOARD CEILING (suspended GWB assembly per detail 02/A120) - height in three-way disagreement: A510.2 8'-0\" / A521 RCP 8'-6\" / A120 tag 12'-3 3/8\"",
+      "src": "A120 vs A510.2 vs A521",
+      "reliability": "FLAGGED",
+      "instanceNote": "⚑ Three architectural readings: A510.2 tags Unisex 027 at 8'-0\"; A521's RCP tags the same room (as UNISEX 121) at 8'-6\"; A120 prints 12'-3 3/8\" over painted-gyp stipple - A120's own flag calls that implausible for a single-occupant restroom (12'-3 3/8\" is the floor-to-underside dimension used for open-to-structure rooms elsewhere on that sheet) and says verify against the enlarged plan / RFI. The SYSTEM (painted gyp) is consistent on the A120 hatch and the A521 RCP legend; only the height is contested. The draft's PT-07 flag covers only the 8'-0\" vs 8'-6\" pair - it does not mention A120. Confirm before grid, sprinkler drops or wallcovering height.",
+      "trade": "GC"
+    },
+    {
+      "category": "FF&E - Casegoods",
+      "label": "Vanity - A510.1 keyed note 43 verbatim: 'VANITY AND MIRROR (VANITY MUST NOT ENCROACH INTO CLEAR FLOOR SPACE FOR ACCESSIBLE TOILET)'; single lavatory L-01 at the vanity, HD-15 soap dispenser with keyed note 46 adjacent",
+      "src": "A510.1 keyed note 43 (reprinted on A521); A521 view 1 + vanity elevation; A521 blocking elevations 'PROVIDE BLOCKING FOR VANITY AS NEEDED'",
+      "reliability": "MEDIUM",
+      "instanceNote": "⚑ Existence and blocking are sheet-stated; the vanity itself has NO millwork detail in A900-A907 (M1-M18 list omits it) and no counter material tag (no ST / SF / PL code) is printed on A521. Fabricator and spec source unknown - the draft carries the PA-202 mirror half of keyed note 43 but no vanity line existed anywhere in the DB. Lavatory L-01 is plumbing scope, excluded here.",
+      "trade": "MW"
+    }
+  ]
+}

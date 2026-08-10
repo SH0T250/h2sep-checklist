@@ -40,7 +40,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set. Also tagged at Lobby 003.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 110,
+      "sort": 120,
       "src": "ID-1.7; A510.3",
       "trade": "FFE"
     },
@@ -61,7 +61,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 120,
+      "sort": 130,
       "src": "ID-1.7; A510.3",
       "trade": "FFE"
     },
@@ -82,7 +82,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 130,
+      "sort": 140,
       "src": "ID-1.7; A510.3",
       "trade": "FFE"
     },
@@ -103,7 +103,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set. Also tagged at Lobby 003 and Breakfast/Servery.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 170,
+      "sort": 180,
       "src": "ID-1.7; A510.3",
       "trade": "FFE"
     },
@@ -124,7 +124,7 @@
       "label": "Plastic laminate - PL-01 'DYNAMIC' OR PL-02 'VIBRANT', printed as an unresolved either/or",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 90,
+      "sort": 100,
       "src": "A903",
       "trade": "MW"
     },
@@ -166,7 +166,7 @@
       "label": "Tile base at the feature wall",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 80,
+      "sort": 90,
       "src": "A903 line 59",
       "trade": "TILE"
     },
@@ -187,7 +187,7 @@
       "label": "Floor tile",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 70,
+      "sort": 80,
       "src": "A510.4; ID-1.8",
       "trade": "TILE"
     },
@@ -292,7 +292,7 @@
       "label": "BRAND PROMISE SIGN, CENTERED BETWEEN TRIM",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 180,
+      "sort": 190,
       "src": "A903",
       "trade": "GC"
     },
@@ -313,7 +313,7 @@
       "label": "Grab-and-go coolers / reach-in refrigerators - the glazed WC-11 / FILM-01 framed units",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 100,
+      "sort": 110,
       "src": "ID-4.5 calls them coolers; A903 draws glazed framed units and never calls them refrigeration",
       "trade": "OWN"
     },
@@ -334,7 +334,7 @@
       "label": "HOME2 BRAND SIGNAGE, CENTERED BETWEEN TRIM",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 190,
+      "sort": 200,
       "src": "A903",
       "trade": "GC"
     },
@@ -355,9 +355,30 @@
       "label": "Adjustable market display shelving",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 140,
+      "sort": 150,
       "src": "A700 / A702 keyed note 12; A700 note 26 (shelving refer to FF&E specs)",
       "trade": "MW"
+    },
+    "x_89698e10a5": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "A510.2 tags Market 005 at 8'-10\"; A120 shows the painted-gyp stipple with no discrete room tag (legend default 8'-10\" UNO) and a 7'-0\" tag whose leader points at the adjacent soffit/bulkhead. ID-1.6 instead shows ACB-01 (acoustical ceiling) at ~8'-10\" here \u2014 system conflict recorded in finishes.md \u00a75.3/\u00a75.4; finish schedule p.7 scopes ACB-01 to the Reception desk ceiling and A900 draws it there. Architectural RCPs govern (painted gyp); confirm no baffles are intended at Market before close-in.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Painted gyp board ceiling, 8'-10\" AFF; 7'-0\" soffit/bulkhead at the market edge; suspended GWB assembly per detail 02/A120",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "sort": 70,
+      "src": "A510.2; A120",
+      "trade": "GC"
     },
     "x_b4248bf428": {
       "category": "FF&E - Casegoods",
@@ -376,7 +397,7 @@
       "label": "RETAIL DISPLAY TABLES - 'SEE FOOD SERVICE DISPLAY SPECIFICATIONS'",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 160,
+      "sort": 170,
       "src": "A903 plan 1",
       "trade": "OWN/MW"
     },
@@ -397,7 +418,7 @@
       "label": "M8 Home2 Market & Reception feature wall - 3/4\" MDF panel with applied WP-10 wall protection, WP-10-wrapped MDF trim including all trim pieces, 3/4\" plywood panel, solid wood trim, view windows in 3/8\" tempered clear glass with FILM-01, mechanical AND adhesive fasteners at glass, fry reglet corner trim to finish edges of opening typ. all sides, painted metal door frame, PT-03 to match back of house finishes. Plan calls 7'-1\" HOLD and 8'-2 1/2\" HOLD; 'ALIGN PANEL WITH BREAKFAST WALL'; 'ALIGN WITH ADJACENT DOOR' (twice)",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 150,
+      "sort": 160,
       "src": "A903 (governs); ID-4.5 corroborates",
       "trade": "MW"
     }

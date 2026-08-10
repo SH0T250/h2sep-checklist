@@ -1,0 +1,21 @@
+{
+  "space": "439",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "ACT grid ceiling, 8'-2\"",
+      "src": "A123",
+      "reliability": "FLAGGED",
+      "instanceNote": "A123 renders 8'-2\" ACT at the ice alcove, but its DWG text layer holds BOTH 8'-0\" and 8'-2\" at identical coordinates (only 8'-2\" renders) and the room tag 439 shows overstrike — A123 flag: 'Read the printed sheet, and confirm the ice machine ceiling height.' A123 is base issue while A120 is Rev 4 (revision skew); the floor-1 alcove (139) is tagged 8'-0\" — whether the 8'-0\"/8'-2\" split across floors is design or skew is unresolved. ACT tile size (2'x2' vs 2'x4') not distinguishable at 3/32\".",
+      "trade": "GC"
+    },
+    {
+      "category": "Ceiling",
+      "label": "Flush access panel with drop-in door — MFR. ISC Style Mark MO.#CAP-1818 — confirm size with Engineer of Record — texture & paint to match adjacent ceiling (keyed note 5 at the ice-machine alcove)",
+      "src": "A123",
+      "reliability": "MEDIUM",
+      "instanceNote": "Keyed note 5 diamond is placed at the ice-machine alcove on A121–A123 only; it is NOT placed anywhere on A120, so the CAP-1818 product is not keyed to the floor-1 alcove (139) — A120.md: treat as intent there and confirm by RFI. Size to be confirmed with the Engineer of Record before the grid is closed. 'Texture & paint to match adjacent ceiling' is the note's verbatim text even though the adjacent lid at this alcove is ACT.",
+      "trade": "GC"
+    }
+  ]
+}

@@ -308,7 +308,7 @@ const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromi
   ok(page.url().includes('#/room/019'), 'space card routes to its doc');
   ok((await page.locator('.rh-num').innerText()) === 'WOMENS', 'space head shows the name');
   ok((await page.locator('.rh-type').innerText()).includes('SPACE 019'), 'space head shows number + level');
-  ok(await page.locator('.item-row').count() === 20, 'WOMENS lists its 20 lines');
+  ok(await page.locator('.item-row').count() === 24, 'WOMENS lists its 24 lines (incl. 4 sheet-enriched)');
   // Trade sections precede FF&E in the crew walk order
   const listText = await page.locator('main').innerText();
   ok(listText.indexOf('Paint') >= 0 && listText.indexOf('Bath Accessory') >= 0
@@ -334,7 +334,7 @@ const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromi
   await page.fill('.note-form input[name=label]', 'Console table (per designer)');
   await page.click('.note-form .btn');
   await page.waitForTimeout(400);
-  ok(await page.locator('.item-row').count() === 21, 'Austin can add a line item to a space');
+  ok(await page.locator('.item-row').count() === 25, 'Austin can add a line item to a space');
 
   // Template-settings deep link bounces off spaces (belt for the hidden menu)
   await page.goto(BASE + '#/room-new/1?edit=019');
@@ -350,7 +350,7 @@ const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromi
   const spSheet = await page.locator('.sheet').innerText();
   ok(spSheet.includes('WOMENS') && spSheet.includes('Space 019'), 'space sheet titled by name + number');
   ok(spSheet.includes('Common Area Turnover Checklist'), 'space sheet says what it is');
-  ok(await page.locator('.item').count() === 21, 'space sheet lists all 21 lines (incl. the added one)');
+  ok(await page.locator('.item').count() === 25, 'space sheet lists all 25 lines (incl. the added one)');
   ok(await page.locator('.box.done').count() === 1, 'space sheet shows the check-off');
   ok(await page.locator('#model-link').count() === 0, 'space sheet offers no 3D model');
   await page.goBack();

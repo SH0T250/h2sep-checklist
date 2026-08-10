@@ -19,7 +19,7 @@
       "label": "Carpet base at the elevator lobby",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 60,
+      "sort": 70,
       "src": "ID-1.13 view 2; ID-3.2 views 11-14; finish schedule p.13",
       "trade": "TILE"
     },
@@ -40,7 +40,7 @@
       "label": "Carpet tile at the elevator lobby",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 50,
+      "sort": 60,
       "src": "ID-1.13 view 2; ID-3.2 views 11-14; finish schedule p.12",
       "trade": "TILE"
     },
@@ -61,7 +61,7 @@
       "label": "Elevator-lobby console / feature piece",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 100,
+      "sort": 110,
       "src": "ID-1.13 (typical for floors 2-4)",
       "trade": "FFE"
     },
@@ -82,7 +82,7 @@
       "label": "Plastic laminate at the typical elevator lobby",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 90,
+      "sort": 100,
       "src": "ID-3.2 views 11-14",
       "trade": "MW"
     },
@@ -145,7 +145,7 @@
       "label": "Floor tile at the elevator lobby",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 70,
+      "sort": 80,
       "src": "ID-1.13 view 2",
       "trade": "TILE"
     },
@@ -208,9 +208,30 @@
       "label": "Tile field, hatched as tile on the plan but NO numbered floor tag is placed in the room",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 80,
+      "sort": 90,
       "src": "A511.3",
       "trade": "TILE"
+    },
+    "x_bd2c992c3e": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "\ud83d\udea9 A123 tags Elevator Lobby 437 at 8'-0\" \u2014 'differs from A121/A122, which are 8'-3 3/8\"' \u2014 and A123's own flag says: 'This may be intentional (roof/structure change at the top floor) or a drafting slip. Verify \u2014 do not assume.' No legend hatch drawn, so the system (gyp lid vs open-to-structure) is also undetermined. The draft's PT-07 Paint line says 8'-3 3/8\" AFF from ID-1.16 'typical' \u2014 height conflict on this floor. A123 is base issue 06/09/23 (empty revision block) vs A120 at Rev 4 \u2014 the 08/09/24 wave may not have been carried to the upper-floor RCPs.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Ceiling height tag 8'-0\" \u2014 no ceiling-system hatch drawn",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "sort": 50,
+      "src": "A123",
+      "trade": "GC"
     }
   },
   "notes": {},

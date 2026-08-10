@@ -1,0 +1,13 @@
+{
+  "space": "025",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Open to underside of floor/roof system above - paint all elements (A120 legend); tagged 12'-3 3/8\" (two tags across the band)",
+      "src": "A120",
+      "reliability": "FLAGGED",
+      "instanceNote": "A120 hatches Mech. 025 open-to-structure (\"OPEN TO UNDERSIDE OF FLOOR / ROOF SYSTEM ABOVE - PAINT ALL ELEMENTS\") with two 12'-3 3/8\" tags. A510.2 tags 025 at 9'-3\" - the draft's PT-07 line carries that. The two architectural RCPs disagree on whether 025 gets a 9'-3\" lid or is open structure painted at 12'-3 3/8\" - recorded in no register. Scope flips with the answer (hung gyp vs exposed-element painting incl. joists, ductwork, hangers). Verify renders / RFI before pricing either.",
+      "trade": "GC"
+    }
+  ]
+}

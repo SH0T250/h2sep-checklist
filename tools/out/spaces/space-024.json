@@ -19,7 +19,7 @@
       "label": "COIN OPERATED WASHER",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 130,
+      "sort": 150,
       "src": "A510.3 furnishing list + space table",
       "trade": "OWN"
     },
@@ -40,7 +40,7 @@
       "label": "COIN OPERATED DRYER",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 140,
+      "sort": 160,
       "src": "A510.3 furnishing list + space table",
       "trade": "OWN"
     },
@@ -61,7 +61,7 @@
       "label": "DECORATIVE TRASH CAN",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 180,
+      "sort": 200,
       "src": "A510.3 furnishing list",
       "trade": "OWN"
     },
@@ -82,7 +82,7 @@
       "label": "PROVIDE AT LEAST ONE ACC WASHING MASHINE AND DRYER; FRONT LOAD WITH OPENING LOCATED 15'' MIN & 36'' MAX AFF (verbatim, sic)",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 190,
+      "sort": 210,
       "src": "A510.1 keyed note 60",
       "trade": "GC/OWN"
     },
@@ -103,7 +103,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 200,
+      "sort": 220,
       "src": "A510.3; ID-1.7",
       "trade": "FFE"
     },
@@ -187,7 +187,7 @@
       "label": "Resilient base at the guest laundry / breakroom run",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 70,
+      "sort": 90,
       "src": "ID-3.3 views 1-3",
       "trade": "TILE"
     },
@@ -208,7 +208,7 @@
       "label": "Resilient base at the guest laundry",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 80,
+      "sort": 100,
       "src": "ID-3.3 views 1-3",
       "trade": "TILE"
     },
@@ -229,7 +229,7 @@
       "label": "Solid-surface counter, tag as printed SF-05",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 110,
+      "sort": 130,
       "src": "ID-3.2 view 8; A904",
       "trade": "MW"
     },
@@ -250,7 +250,7 @@
       "label": "Stone at the window sills (typ.)",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 120,
+      "sort": 140,
       "src": "ID-3.3 views 1-3; finish schedule p.41",
       "trade": "MW"
     },
@@ -271,7 +271,7 @@
       "label": "Tile base",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 100,
+      "sort": 120,
       "src": "ID-3.2 views 8-10",
       "trade": "TILE"
     },
@@ -292,7 +292,7 @@
       "label": "Floor tile",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 90,
+      "sort": 110,
       "src": "A510.4",
       "trade": "TILE"
     },
@@ -376,9 +376,30 @@
       "label": "Stainless steel curtain rod at the folding counter",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 210,
+      "sort": 230,
       "src": "A904",
       "trade": "MW"
+    },
+    "x_84d234fc74": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "\u2691 The access-panel symbol at 024 is one of ~four added in the 08/09/24 rev-4 wave. Keyed note 5's product spec - 'FLUSH ACCESS PANEL WITH DROP IN DOOR - MFR. ISC STYLE MARK MO.#CAP-1818 - CONFIRM SIZE WITH ENGINEER OF RECORD - TEXTURE & PAINT TO MATCH ADJACENT CEILING' - is NOT keyed to any first-floor location on A120 (note 5 is placed only on A121-A123). Treat CAP-1818 as applying by intent, confirm by RFI; size must be confirmed with the EOR either way. Count not stated.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Ceiling access panel (A120 RCP legend symbol, drawn inside a rev-4 revision cloud in the Guest Laundry 024 area)",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "sort": 70,
+      "src": "A120",
+      "trade": "GC"
     },
     "x_a4f9bf65d0": {
       "category": "FF&E - Art / Mirror",
@@ -397,7 +418,7 @@
       "label": "Art panel",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 170,
+      "sort": 190,
       "src": "ID-3.2 view 9",
       "trade": "FFE"
     },
@@ -418,9 +439,30 @@
       "label": "M9 Guest laundry folding counter - 5'-6\" (inner 5'-3 3/4\") x 2'-10\" h x 2'-0\" d, 30\" MIN clearance, EQ bay layout; PL-01 'LAMINATE AT ALL EXPOSED SURFACE UNO'; counter below; scribe to wall; metal bracket install at 48\" O.C. max (two call-outs); 'BLOCKING TO BE PROVIDED FOR ALL WALL MOUNTED SHELVING / BRACKETS'",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 150,
+      "sort": 170,
       "src": "A904 (governs); ID-4.6 corroborates",
       "trade": "MW"
+    },
+    "x_ddeba610cf": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "",
+      "issue": "",
+      "issueResolved": false,
+      "label": "PAINTED GYP BOARD CEILING (suspended GWB assembly per detail 02/A120), ceiling height 9'-3\" AFF",
+      "qty": 1,
+      "reliability": "HIGH",
+      "sort": 80,
+      "src": "A120 (painted-gyp field hatch, no discrete tag) + A510.2 (9'-3\")",
+      "trade": "GC"
     },
     "x_e2d9168780": {
       "category": "FF&E - Casegoods",
@@ -439,7 +481,7 @@
       "label": "Wall-mounted towel storage with undercounter laundry; provide blocking",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 160,
+      "sort": 180,
       "src": "A700 note 36",
       "trade": "MW/GC"
     }

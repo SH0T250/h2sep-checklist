@@ -2,6 +2,27 @@
   "deleted": false,
   "floor": 1,
   "items": {
+    "x_4092da2ad2": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "A120.md flag, verbatim: \"Meeting Rm. Sto. 029 (8'-0\") and PBX 031 (8'-6\") carry a height tag but no legend hatch. Ceiling system undetermined from this sheet.\" This is the only RCP fact for 029 - A511.2.md:62 and ffe-public.md state no RCP exists for the BOH block, but A120 does carry this tag. System (ACT vs gyp vs open) needs the render or an RFI; the draft has no ceiling or paint line at all for 029.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Ceiling height tag 8'-0\" on A120; no legend hatch drawn - ceiling system undetermined",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "sort": 10,
+      "src": "A120",
+      "trade": "GC"
+    },
     "x_76592963e3": {
       "category": "Flooring",
       "checked": false,
@@ -19,7 +40,7 @@
       "label": "SEALED CONCRETE",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 10,
+      "sort": 20,
       "src": "A511.2 keyed note 4",
       "trade": "GC"
     }

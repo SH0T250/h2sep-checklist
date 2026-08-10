@@ -1,0 +1,38 @@
+{
+  "space": "019",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "PAINTED GYP BOARD CEILING (suspended GWB assembly per detail 02/A120), ceiling height 8'-6\" AFF",
+      "src": "A120 + A510.2 + A520 view 2 (all three tag 8'-6\")",
+      "reliability": "HIGH",
+      "trade": "GC"
+    },
+    {
+      "category": "FF&E - Casegoods",
+      "label": "Vanity - A510.1 keyed note 43 verbatim: 'VANITY AND MIRROR (VANITY MUST NOT ENCROACH INTO CLEAR FLOOR SPACE FOR ACCESSIBLE TOILET)'; the A520 vanity elevations carry the lavatory run L-01A / L-01B / L-01C",
+      "src": "A510.1 keyed note 43 (reprinted on A520); A520 view 1 + elevations; A520 blocking elevations 'PROVIDE BLOCKING FOR VANITY AS NEEDED'",
+      "reliability": "MEDIUM",
+      "instanceNote": "⚑ Existence and blocking are sheet-stated; the vanity itself has NO millwork detail in A900-A907 (M1-M18 list omits it) and no counter material tag (no ST / SF / PL code) is printed on A520. Fabricator and spec source unknown - the draft carries the PA-202 mirror half of keyed note 43 but no vanity line existed anywhere in the DB. Lavatories L-01A/B/C are plumbing scope, excluded here.",
+      "trade": "MW"
+    },
+    {
+      "category": "FF&E - Lighting",
+      "code": "R",
+      "label": "Recessed downlight (WET LOCATION)",
+      "src": "A520 view 2 RCP + ceiling-fixtures legend",
+      "reliability": "MEDIUM",
+      "instanceNote": "⚑ Fixture type stated in the A520 view-2 ceiling-fixtures legend, which covers Womens 019 AND Mens 020 together; per-room placement and counts are 'only by inspection of the graphic' per A520. The DB already carries the identical R line for Unisex 027 from A521's matching legend - this is the missing 019 parallel.",
+      "trade": "EC"
+    },
+    {
+      "category": "FF&E - Lighting",
+      "code": "EX",
+      "label": "Emergency exit light",
+      "src": "A520 view 2 RCP + ceiling-fixtures legend",
+      "reliability": "MEDIUM",
+      "instanceNote": "⚑ Fixture type stated in the A520 view-2 ceiling-fixtures legend, which covers Womens 019 AND Mens 020 together; per-room placement and counts are 'only by inspection of the graphic' per A520. The DB already carries the identical EX line for Unisex 027 from A521's matching legend - this is the missing 019 parallel.",
+      "trade": "EC"
+    }
+  ]
+}

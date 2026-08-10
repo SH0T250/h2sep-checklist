@@ -1,0 +1,21 @@
+{
+  "space": "100",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Painted gyp at the stair head — an 8'-0\" ceiling tag sits in the gyp band at the stair head",
+      "src": "A120",
+      "reliability": "FLAGGED",
+      "instanceNote": "A120 (Rev 4) shows an 8'-0\" tag sitting in the gyp band at the stair head, tabulated under Stair 1 (100) in A120.md with '(see Flags)'. Whether the tag governs the stair-enclosure soffit or the adjacent corridor bulkhead band is not distinguishable — no separate ceiling hatch is drawn inside the stair enclosure. Stair 2 (141) and all upper-floor stairs carry no ceiling tag at all (A120–A123 flags).",
+      "trade": "GC"
+    },
+    {
+      "category": "Paint",
+      "label": "Wall-mounted 1.5\" diameter oak handrail, stained",
+      "src": "A431",
+      "reliability": "FLAGGED",
+      "instanceNote": "A431 §B-B and key dimensions state a wall-mounted 1.5\" dia. oak handrail, stained (exact height per detail 06/A431; construction details A434), listed under 'answerable from this sheet'. FLAGGED: (a) no handrail stain/finish code exists in the 67-card finish schedule and no ID sheet covers the stairs; (b) the sibling extraction A440.md was shown inferential/wrong on the elevator (coordination_issues.md D-02 — 're-read from the source before quoting') and the A43x extractions carry the same summarized style — confirm the printed A431/A433/A434 wording before buying finish. Applies to the flight serving this floor; no per-floor count stated.",
+      "trade": "PT"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "space": "121",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "ACT grid bays at 8'-2\" alternating with painted gyp bulkhead bands at 8'-0\"",
+      "src": "A120",
+      "reliability": "FLAGGED",
+      "instanceNote": "🚩 C-05 (coordination_issues.md): the two RCP families disagree on the ceiling SYSTEM, not just height. A120 hatches ACT grid bays at 8'-2\" between painted-gyp bulkheads at 8'-0\"; ID-1.11 / ID-1.15 / ID-1.16 draw the same corridor as PT-07 painted gypsum at 8'-2\" AFF typ. with NO ACT at all — a different ceiling trade. Blocks grid/tile purchase, the corridor mock-up, and sprinkler head type (A120 gen. note I: concealed heads in public-area ceilings, semi-recessed elsewhere). ACT tile size (2'x2' vs 2'x4') is also not distinguishable at 3/32\" scale. Do not order either system until resolved. The draft's PT-07 Paint line carries the ID reading. A510.2 (also Rev 4) separately lists 'first-floor guest corridor / circulation' at 8'-10\" — the scope of that row is unclear (enlarged-LOBBY plan area); it matches neither 8'-2\" nor 8'-0\".",
+      "trade": "GC"
+    }
+  ]
+}

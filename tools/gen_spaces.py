@@ -75,6 +75,72 @@ CLEAN = {
 
 RANK = {"FLAGGED": 0, "MEDIUM": 1, "HIGH": 2}
 
+# ---------------------------------------------------------------------------
+# RULING (2026-08-10) — public-restroom HD tags, spaces 019 / 020 / 027.
+#
+# The extraction graded every HD line "Item identity NOT stated" with a note
+# claiming "No HD legend or description table exists in the set. Codes only,
+# on A520 and A521; both sheets say so explicitly." That claim is scoped to
+# A520/A521 but generalized to the whole set — and it is FALSE for the set:
+# A530 prints a 21-row "BATHROOM ACCESSORIES NOTES (HD tags)" legend verbatim
+# (research/drive/drawings/A530.md). The base-tag identities below are copied
+# from that legend. The legend has NO HD-07 entry, so HD-7B stays undefined.
+#
+# The ruling rewrites LABELS (crew-facing identity) and corrects the NOTES.
+# Reliability grades are deliberately left untouched — the model number is
+# still per the Hilton accessory schedule / brand standard, and downgrading
+# or upgrading a grade is Austin's call, not a text fix.
+# ---------------------------------------------------------------------------
+HD_LEGEND = {                       # A530 legend, verbatim identity per base tag
+    "HD-01": "TOILET PAPER ROLL HOLDER",
+    "HD-06": "GRAB BAR ADA",
+    "HD-09": 'GRAB BAR ADA 24" HORIZONTAL MOUNT',
+    "HD-12": "ROBE/COAT HOOK",
+    "HD-13": "AUTOMATIC PAPER TOWEL DISPENSER SURFACE MOUNTED",
+    "HD-15": "SOAP DISPENSER SURFACE MOUNTED POOL RESTROOMS",
+    "HD-19": "RECESSED WASTE RECEPTACLE PUBLIC & POOL RESTROOM",
+}
+STALE_CLAIM = ("No HD legend or description table exists in the set. "
+               "Codes only, on A520 and A521; both sheets say so explicitly.")
+
+
+def hd_base(code):
+    m = re.match(r"HD-?0?(\d+)", code or "")
+    return "HD-%02d" % int(m.group(1)) if m else None
+
+
+def apply_hd_ruling(items):
+    for it in items.values():
+        code = it.get("code") or ""
+        if not code.startswith("HD"):
+            continue
+        base = hd_base(code)
+        ident = HD_LEGEND.get(base)
+        note = it["instanceNote"]
+
+        if ident:
+            # Label: identity first, the drawn location kept.
+            pretty = ident.capitalize().replace(" ada", " ADA").replace("Ada ", "ADA ")
+            loc = re.sub(r"^Accessory,?\s*", "", it["label"])
+            loc = re.sub(r"\.?\s*Item identity NOT stated\.?$", "", loc, flags=re.I).strip(" .")
+            it["label"] = "%s (%s per the A530 legend)%s" % (
+                pretty, base, " — " + loc if loc else "")
+            if STALE_CLAIM in note:
+                note = note.replace(STALE_CLAIM,
+                    "A520/A521 print the tag without a description, but the A530 "
+                    "BATHROOM ACCESSORIES legend defines the base tag: %s = %s. "
+                    "Model number still per the Hilton accessory schedule / brand "
+                    "standard." % (base, ident))
+            else:
+                note = (note + " · The A530 legend defines %s as %s." % (base, ident)).strip(" ·")
+        elif STALE_CLAIM in note or base == "HD-07":
+            # HD-7B and friends: the set's only HD table has no such entry.
+            note = note.replace(STALE_CLAIM, "")
+            note = (note.rstrip(" ·.") + " · The A530 BATHROOM ACCESSORIES legend "
+                    "(the set's only HD table) has no %s entry — identity genuinely "
+                    "undefined in the set." % (base or code)).strip(" ·")
+        it["instanceNote"] = note
+
 
 def slug(s):
     return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", s.lower())).strip("-")
@@ -164,6 +230,8 @@ def build_space(cx, sp):
                 if it["instanceNote"] else why
 
         items[iid] = it
+
+    apply_hd_ruling(items)
 
     # ---- enrichment lines (Ceiling etc. from the drawing MDs) ----
     epath = os.path.join(ENRICH_DIR, "%s.json" % sp["space_no"])

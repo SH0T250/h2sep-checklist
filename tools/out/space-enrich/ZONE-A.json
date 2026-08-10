@@ -1,0 +1,36 @@
+{
+  "space": "ZONE-A",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Canopy ceiling — extruded aluminum soffit system with a natural wood look paint finish, similar finish to trellis",
+      "src": "AS102; AS103",
+      "reliability": "HIGH",
+      "instanceNote": "Porte-cochere canopy soffit. AS102 view 3 is the CANOPY - RCP PLAN; AS103 details state 'CEILING MATERIAL: ALUM. SOFFIT WITH A NATURAL WOOD LOOK PAINT FINISH' plus aluminum coping/flashing and gutter. Recessed cans, continuous LED strip (notched through wood slats, shield plate) and string lights integrate into this soffit — power rough-in per AS102 keyed notes 52/53 must precede soffit close-up.",
+      "trade": "GC"
+    },
+    {
+      "category": "Paint",
+      "label": "All exposed steel painted with high performance coating at canopy and at trellis; members painted with 3 coats of enamel prior to setting; primed and painted tube steel canopy columns",
+      "src": "AS103; AS102 keyed note 38",
+      "reliability": "HIGH",
+      "instanceNote": "AS103 verbatim (repeated note): 'ALL EXPOSED STEEL TO BE PAINTED WITH HIGH PERFORMANCE COATING AT CANOPY' and '...AT TRELLIS'. '3 coats of enamel prior to setting' = shop-applied — inspect before erection, field damage is punch. Coating is performance-worded, no product named (AS103 flag) — submittal-dependent.",
+      "trade": "GC"
+    },
+    {
+      "category": "Flooring",
+      "label": "Colored concrete with exposed aggregate or sand finish, under the drop-off (AS100 legend PAVING #2)",
+      "src": "AS102; AS100 legend",
+      "reliability": "MEDIUM",
+      "instanceNote": "AS102 states the drop-off paving material in words, but the sheet offers TWO finishes — 'exposed aggregate OR sand finish' — with no selection printed; confirm the accepted finish before checking. Vehicular arrival flatwork: confirm the sitework/GC concrete scope split before carrying it on this checklist. Plaza tolerance printed on the same sheet: 'PLAZA — MAX 2% ALL DIRECTION.'",
+      "trade": "GC"
+    },
+    {
+      "category": "Appliance",
+      "label": "Exterior gas grill — grills require remote emergency shut off (keyed note 40), shown at the outdoor lounge with the fire pit",
+      "src": "AS102",
+      "reliability": "FLAGGED",
+      "instanceNote": "AS102's plan shows the outdoor lounge with fire pit AND grill, and its keyed note 40 states the remote-emergency-shut-off requirement. BUT the grill appears on no FF&E list — absent from ID-1.9's tags and from the A510.3 FURNISHING LIST — so the buy source is unidentified; AND AS104 (Rev 5, 04/09/26, newer, adjoining zone) shows a patio grill at the pool: verify whether the project has TWO grills or ONE before ordering. Gas is an underground line from building gas service with emergency shut-off (AS100/AS102 keyed notes 31/40/51 family)."
+    }
+  ]
+}

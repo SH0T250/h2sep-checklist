@@ -1,0 +1,76 @@
+{
+  "space": "ZONE-B",
+  "items": [
+    {
+      "category": "Paint",
+      "label": "All exposed steel to be painted with high performance coating at trellis; primed and painted tube steel trellis, system to be lighted by linear tube light (keyed note 22)",
+      "src": "AS105; AS104 keyed note 22",
+      "reliability": "HIGH",
+      "instanceNote": "AS105 (Rev 5) trellis details 10/11 carry the note verbatim: 'ALL EXPOSED STEEL TO BE PAINTED WITH HIGH PERFORMANCE COATING AT TRELLIS.' AS104 (Rev 5) keyed note 22: 'PRIMED AND PAINTED TUBE STEEL WITH MODIFIED WOOD TRELLIS INFILL — SYSTEM TO BE LIGHTED BY LINEAR TUBE LIGHT.' Coating is performance-worded, no product named — submittal-dependent.",
+      "trade": "GC"
+    },
+    {
+      "category": "FF&E - Misc",
+      "label": "Pool patio trellis wood infill — thermally modified wood or acetylated wood (possible products: Thermory USA / Accoya), top of slat @ 9'-0\" — specialty long lead, VERIFY NO SUBSTITUTION",
+      "src": "AS105 keyed note 40 / material legend; AS104 keyed note 22",
+      "reliability": "FLAGGED",
+      "instanceNote": "Three descriptions for one element (AS105's own flag — RFI candidate, affects cost AND fire rating): AS105 legend/keyed note 40 says 'thermally modified wood or acetylated wood — Thermory / Accoya'; AS105 details 10/11 label the same members '2x4 vertical / horizontal FIRE RETARDANT TREATED wood'; AS103 shows '2x6 thermally modified or acetylated wood slats.' Slat size also differs between sheets (2x6 vs 2x4 — AS105 flag: do not resolve). Confirm what was actually purchased. Zone A carries its own porte-cochere trellis wood line — separate structures, do not double-count.",
+      "trade": "GC"
+    },
+    {
+      "category": "Stone / Surround",
+      "label": "Brick precast coping at perimeter of pool, non-slip finish, in full mortar bed; expansion joints in coping (keyed notes 17 and 33; coping detail 4)",
+      "src": "AS104",
+      "reliability": "HIGH",
+      "instanceNote": "AS104 (Rev 5) coping detail 4 states it in words; keyed note 35 additionally requires coping-to-deck joints protected from relative deck movement, and note 6 requires deck-to-pool joints watertight. Pool wall below is 'detail by pool subcontractor' and pool design & engineering is BY OTHERS — confirm coping ownership (pool sub vs GC/masonry) before ordering."
+    },
+    {
+      "category": "Ceiling",
+      "label": "Direct attached Tectum ceiling panels over continuous vapor barrier behind pool ceiling finish (keyed notes 44 + 25)",
+      "src": "AS104; AS104.1",
+      "reliability": "FLAGGED",
+      "instanceNote": "Both keyed notes are on the AS104/AS104.1 pool list and AS104.1's RCP lays out real ceiling fixtures (S03 @ 8'-0\" o.c., OTS, wall sconce, surface linear strip). BUT H2SEP's pool is OUTDOOR / open to sky (ID-1.1, ID-1.6; cf. conflict P-4 PT-08 prototype carryover and keyed note 39 'INDOOR POOL RECEIVE TILE' boilerplate) — WHERE this ceiling occurs (pool equipment building vs a covered patio area) is shown only on the AS104.1 RCP graphic. Also version skew: AS104.1 is still 06/09/23 while AS104 is Rev 5 04/09/26 — verify the RCP layout survived Rev 5 before ordering panels or closing the lid (blocking for string lights, note 30, goes in first).",
+      "trade": "GC"
+    },
+    {
+      "category": "Ceiling",
+      "label": "Painted tube steel canopy with wood finished soffit; modified wood canopy with steel support (keyed notes 4 + 5)",
+      "src": "AS105",
+      "reliability": "FLAGGED",
+      "instanceNote": "Keyed notes 4 and 5 are defined on AS105's (Rev 5) own list, and AS104 keyed note 21's 'run exposed supply conduit tight against corner of DECKING AND BEAM' corroborates a covered/soffited condition at this amenity. BUT AS105's keyed list is known to carry prototype notes that do not land on this amenity (its own flags call out kn 11 elevator overrun / kn 13 laundry chute overrun as boilerplate) — confirm a note-4/5 bubble actually lands on AS105 elevations 1-6 before carrying this as a second ceiling system alongside the Tectum line."
+    },
+    {
+      "category": "Flooring",
+      "label": "T-04 — finish code printed on the AS104 pool section; no card in the finish schedule, definition unknown",
+      "src": "AS104",
+      "reliability": "FLAGGED",
+      "code": "T-04",
+      "instanceNote": "Printed on the AS104 (Rev 5, 04/09/26 — governing) pool section alongside T-05 / T-11 / T-12 / SF-01. The finish schedule has NO T-04 card (T-series cards run T-01/T-01.1/T-02/T-10/T-11/T-12/T-13/T-14) and no package in the set carries the code at all. Which surface it tags is shown only on the section graphic — open AS104 views 2/3/4. Resolve identity against the TL-11 / TL-12 / TL-14 lines already on this checklist before ordering — do not double-buy the same tile under two codes.",
+      "trade": "TILE"
+    },
+    {
+      "category": "Flooring",
+      "label": "T-05 (typ.) — finish code printed on the AS104 pool section; no card in the finish schedule, definition unknown",
+      "src": "AS104",
+      "reliability": "FLAGGED",
+      "code": "T-05",
+      "instanceNote": "Printed 'typ.' on the AS104 (Rev 5 — governing) pool section alongside T-04 / T-11 / T-12 / SF-01. The finish schedule has NO T-05 card and no package in the set carries the code. Which surface it tags is shown only on the section graphic — open AS104 views 2/3/4. Possibly the 'decorative tile border — full perimeter' the same sheet states in words — NOT confirmed, do not assume. Resolve against the TL-xx lines before ordering.",
+      "trade": "TILE"
+    },
+    {
+      "category": "Stone / Surround",
+      "label": "SF-01 — solid surface code printed on the AS104 pool section; no SF card in the finish schedule",
+      "src": "AS104",
+      "reliability": "FLAGGED",
+      "code": "SF-01",
+      "instanceNote": "Printed on the AS104 (Rev 5 — governing) pool section. The SF family has no card in the 67-card finish schedule (coordination_issues S-08 lists SF-01/02/05 as card-less); elsewhere in the set SF-01 appears only on guestroom sheets. What surface it tags at the pool is shown only on the section graphic — open AS104 views 2/3/4 and confirm the product before ordering."
+    },
+    {
+      "category": "Appliance",
+      "label": "Exterior gas grill — grills require remote emergency shut off; patio grill elevation and section on AS105 views 7/8",
+      "src": "AS104; AS105",
+      "reliability": "HIGH",
+      "instanceNote": "On the AS104 (Rev 5) plan in words: 'exterior gas grill (grills require remote emergency shut off)'; AS105 (Rev 5) carries two dedicated views — 7 ELEVATION - PATIO GRILL and 8 SECTION - PATIO GRILL (OF-706 is tagged on that elevation). Buy source unidentified — the grill is on no FF&E/furnishing list. AS102 also shows a grill at the entry outdoor lounge (older sheet, adjoining zone): verify the project grill COUNT before purchasing. Gas: underground line from building gas service with remote emergency shut-off."
+    }
+  ]
+}
