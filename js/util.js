@@ -67,6 +67,27 @@ export function roomSort(a, b) {
   return String(a).localeCompare(String(b));
 }
 
+// Common-area spaces live in the same rooms collection as guest rooms (the
+// architect numbers both from one series, so ids never collide) and are told
+// apart by their type slug. This is THE discriminator — every list that means
+// "guest rooms" filters with it, and the Common Areas screens invert it.
+export function isSpaceDoc(r) {
+  return String((r && r.type) || '').startsWith('space-');
+}
+
+// Canonical trade/category order for full-trade sheets: crew work from the
+// ceiling down the walls to the floor, trades before FF&E. Exact string match;
+// unknown categories append alphabetically after these; uncategorized ad-hoc
+// adds go last. Shared by the room screen and the printable sheets — and must
+// stay in step with CAT_SORT in tools/gen_spaces.py.
+export const CATEGORY_ORDER = [
+  'Drywall', 'Paint', 'Wall Covering', 'Ceiling', 'Flooring',
+  'Stone / Surround', 'Doors', 'Electrical', 'Mechanical', 'Plumbing',
+  'Fire Sprinkler', 'Fire Alarm', 'Low Voltage', 'Bath Accessory',
+  'Appliance', 'FF&E - Casegoods', 'FF&E - Bedding', 'FF&E - Seating',
+  'FF&E - Lighting', 'FF&E - Window', 'FF&E - Art / Mirror', 'FF&E - Misc',
+];
+
 export function roomStats(room) {
   const items = Object.entries(room.items || {}).filter(([, it]) => !it.deleted);
   const total = items.length;

@@ -1,0 +1,32 @@
+{
+  "deleted": false,
+  "floor": 2,
+  "items": {
+    "x_76592963e3": {
+      "category": "Flooring",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "",
+      "issue": "",
+      "issueResolved": false,
+      "label": "SEALED CONCRETE",
+      "qty": 1,
+      "reliability": "HIGH",
+      "sort": 10,
+      "src": "A511.3 keyed note 4",
+      "trade": "GC"
+    }
+  },
+  "notes": {},
+  "number": "219",
+  "schemaV": 3,
+  "type": "space-electrical",
+  "typeLabel": "Electrical"
+}

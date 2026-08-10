@@ -1,6 +1,7 @@
 // Screen renderers. Each returns an HTML string and wires events after mount
 // via the returned `wire(el)` function.
-import { esc, fmtWhen, roomStats, typeAbbrev, platform, vibrate, toast, roomSort } from './util.js';
+import { esc, fmtWhen, roomStats, typeAbbrev, platform, vibrate, toast, roomSort, isSpaceDoc, CATEGORY_ORDER } from './util.js';
+import { SPACE_META } from './space-meta.js';
 import * as store from './store.js';
 import * as sheets from './sheets.js';
 import { refsFor } from './refs.js';
@@ -104,6 +105,26 @@ export function renderHome(el) {
             ${iss ? `<span class="badge">${iss}</span>` : ''}</div>
         </a>`;
       }).join('')}
+      ${(() => {
+        // Common areas roll up into ONE card beside the levels — Austin's
+        // call: a facilities walk is its own trip, not a floor's sub-list.
+        const sp = store.getSpaces();
+        if (!sp.length) return '';
+        let items = 0, done = 0, iss = 0;
+        for (const r of sp) {
+          const s = roomStats(r);
+          items += s.total; done += s.done; iss += s.openIssues;
+        }
+        const p = items ? Math.round(done / items * 100) : 0;
+        return `
+        <a class="floor-card card common-card" href="#/common">
+          <div class="fc-left"><div class="fc-name">Common Areas</div>
+            <div class="fc-sub">${sp.length} space${sp.length === 1 ? '' : 's'} · lobby, amenities, BOH</div></div>
+          <div class="fc-bar"><div class="bar"><div class="bar-fill" style="width:${p}%"></div></div></div>
+          <div class="fc-right"><span class="fc-pct">${p}%</span>
+            ${iss ? `<span class="badge">${iss}</span>` : ''}</div>
+        </a>`;
+      })()}
       <button class="add-ghost" data-add-floor>+ Add floor</button>
     </section>
   </main>`;
@@ -204,21 +225,75 @@ export function renderFloor(el, floorN) {
   });
 }
 
+// ============================ S2b COMMON AREAS ============================
+
+// One screen for all 66 non-guest spaces, grouped by level. Name-forward cards
+// ("003 · Lobby") because nobody knows the Fitness Room by its door number.
+export function renderCommon(el) {
+  store.ensureAllFloorsSubscribed();
+  const spaces = store.getSpaces();
+  const filter = sessionStorage.getItem('h2sep-cfilter') || 'All';
+  const withStats = spaces.map(r => ({ r, s: roomStats(r) }));
+  const counts = {
+    All: spaces.length,
+    'In progress': withStats.filter(x => x.s.done > 0 && !x.s.complete).length,
+    Issues: withStats.filter(x => x.s.openIssues > 0).length,
+    Done: withStats.filter(x => x.s.complete).length,
+    'Not started': withStats.filter(x => x.s.done === 0 && x.s.total > 0).length,
+  };
+  const visible = withStats.filter(({ s }) => {
+    if (filter === 'In progress') return s.done > 0 && !s.complete;
+    if (filter === 'Issues') return s.openIssues > 0;
+    if (filter === 'Done') return s.complete;
+    if (filter === 'Not started') return s.done === 0 && s.total > 0;
+    return true;
+  });
+  const byFloor = {};
+  for (const x of visible) (byFloor[x.r.floor] = byFloor[x.r.floor] || []).push(x);
+
+  el.innerHTML = appBar({
+    title: 'Common Areas', back: '#/',
+    icons: `<button class="ab-btn" data-goto aria-label="Go to room">⌕</button>`,
+  }) + `
+  <main class="content">
+    <div class="chips">
+      ${FILTERS.map(x => `<button class="chip ${x === filter ? 'on' : ''}" data-filter="${esc(x)}">
+        ${esc(x)}${counts[x] ? ' · ' + counts[x] : ''}</button>`).join('')}
+    </div>
+    ${Object.entries(byFloor).sort((a, b) => Number(a[0]) - Number(b[0])).map(([fl, xs]) => `
+      <h2 class="common-floor-head">Level ${esc(fl)} <span>· ${xs.length} space${xs.length === 1 ? '' : 's'}</span></h2>
+      <div class="space-list">
+        ${xs.map(({ r, s }) => `
+        <a class="space-card card ${s.complete ? 'done' : ''} ${s.openIssues ? 'issues' : ''}" href="#/room/${esc(r.number)}">
+          <span class="sc-num">${esc(r.number.replace('ZONE-', 'ZONE '))}</span>
+          <span class="sc-main">
+            <span class="sc-name">${esc(r.typeLabel || '—')}</span>
+            <span class="bar sc-bar"><span class="bar-fill" style="width:${s.pct}%"></span></span>
+          </span>
+          <span class="sc-right">
+            ${s.openIssues ? `<span class="badge">${s.openIssues}</span>` : ''}
+            ${s.complete ? `<span class="done-glyph">✓</span>` : `<span class="sc-count">${s.done}/${s.total}</span>`}
+          </span>
+        </a>`).join('')}
+      </div>`).join('')}
+    ${visible.length === 0 ? `<div class="empty">${spaces.length === 0
+      ? (store.isReady() ? 'No common areas yet — they arrive with the next data load.' : 'Loading…')
+      : 'No ' + filter.toLowerCase() + ' spaces.'}</div>` : ''}
+  </main>`;
+
+  wireCommon(el);
+  el.querySelectorAll('[data-filter]').forEach(b => b.addEventListener('click', () => {
+    sessionStorage.setItem('h2sep-cfilter', b.dataset.filter);
+    renderCommon(el);
+  }));
+}
+
 // ============================ S3 ROOM ============================
 
 let lastScrollEnd = 0;
 document.addEventListener('scroll', () => { lastScrollEnd = Date.now(); }, { capture: true, passive: true });
 
-// Canonical trade/category order for full-trade rooms: crew work top of wall
-// down, trades first, then FF&E. Exact string match; unknown categories are
-// appended alphabetically after these; uncategorized (ad-hoc adds) go last.
-const CATEGORY_ORDER = [
-  'Drywall', 'Paint', 'Wall Covering', 'Flooring', 'Stone / Surround', 'Doors',
-  'Electrical', 'Mechanical', 'Plumbing', 'Fire Sprinkler', 'Fire Alarm',
-  'Low Voltage', 'Bath Accessory', 'Appliance', 'FF&E - Casegoods',
-  'FF&E - Bedding', 'FF&E - Seating', 'FF&E - Lighting', 'FF&E - Window',
-  'FF&E - Art / Mirror', 'FF&E - Misc',
-];
+// CATEGORY_ORDER moved to util.js (the printable sheets need it too).
 
 // Trade-filter selection (null = All). Per-visit only: any navigation resets
 // it, so every room opens on All; re-renders from data changes keep it.
@@ -329,7 +404,11 @@ export function renderRoom(el, number) {
         </div>`;
   };
 
-  const siblings = store.getRooms(room.floor).map(r => r.number);
+  // A space's prev/next walks the other common areas, never into guest rooms
+  // (and vice versa) — flipping from "Lobby" to "Room 101" mid-swipe reads as
+  // a bug even when every number is technically adjacent.
+  const isSpace = isSpaceDoc(room);
+  const siblings = (isSpace ? store.getSpaces(room.floor) : store.getRooms(room.floor)).map(r => r.number);
   const idx = siblings.indexOf(room.number);
   const prev = idx > 0 ? siblings[idx - 1] : null;
   const next = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : null;
@@ -337,22 +416,27 @@ export function renderRoom(el, number) {
   const notes = Object.entries(room.notes || {});
   const openNotes = notes.filter(([, n]) => !n.resolved);
   const resolvedNotes = notes.filter(([, n]) => n.resolved);
+  const meta = isSpace ? (SPACE_META[room.number] || {}) : {};
 
   el.innerHTML = appBar({
-    title: 'Room ' + room.number, back: '#/floor/' + room.floor,
+    title: isSpace ? (room.typeLabel || 'Space') + ' · ' + room.number : 'Room ' + room.number,
+    back: isSpace ? '#/common' : '#/floor/' + room.floor,
     icons: `<button class="ab-btn" data-goto aria-label="Go to room">⌕</button>
             <button class="ab-btn" data-more aria-label="More">⋮</button>`,
   }) + `
   <main class="content room-content">
     <section class="room-head card">
       <div class="rh-top">
-        <span class="rh-num">Room ${esc(room.number)}</span>
+        <span class="rh-num">${isSpace ? esc(room.typeLabel || 'Space') : 'Room ' + esc(room.number)}</span>
         <span class="rh-right">
-        <a class="sheet-btn" href="./refs.html?room=${encodeURIComponent(room.number)}" aria-label="Submittals and plan references">📄</a>
+        ${isSpace ? '' : `<a class="sheet-btn" href="./refs.html?room=${encodeURIComponent(room.number)}" aria-label="Submittals and plan references">📄</a>`}
         <a class="sheet-btn" href="./print.html?room=${encodeURIComponent(room.number)}" aria-label="Printable checklist sheet">🖨</a>
         ${MODEL_ROOMS.includes(room.number) ? `<a class="sheet-btn" href="./room-3d.html?room=${encodeURIComponent(room.number)}" aria-label="3D room model">🧊</a>` : ''}
-        <span class="rh-type">${esc((room.typeLabel || '').toUpperCase())}</span></span>
+        <span class="rh-type">${isSpace
+          ? 'SPACE ' + esc(room.number) + ' · LEVEL ' + esc(String(room.floor))
+          : esc((room.typeLabel || '').toUpperCase())}</span></span>
       </div>
+      ${isSpace && meta.note ? `<div class="rh-plan-note">${esc(meta.sheet ? meta.sheet + ' — ' : '')}${esc(meta.note)}</div>` : ''}
       <div class="bar rh-bar"><div class="bar-fill" style="width:${s.pct}%"></div></div>
       <div class="rh-line">${s.done}/${s.total} checked · ${s.pct}%
         ${s.openIssues ? `<button class="issue-jump" data-jump>⚠ ${s.openIssues} issue${s.openIssues === 1 ? '' : 's'}</button>` : ''}
@@ -399,7 +483,7 @@ export function renderRoom(el, number) {
   </main>
   <footer class="room-foot">
     ${prev ? `<a class="foot-arrow" href="#/room/${esc(prev)}">‹ ${esc(prev)}</a>` : `<span class="foot-arrow dim"></span>`}
-    <button class="foot-mid" data-top>Room ${esc(room.number)} — ${s.done}/${s.total}</button>
+    <button class="foot-mid" data-top>${isSpace ? esc(room.typeLabel || room.number) : 'Room ' + esc(room.number)} — ${s.done}/${s.total}</button>
     ${next ? `<a class="foot-arrow" href="#/room/${esc(next)}">${esc(next)} ›</a>` : `<span class="foot-arrow dim"></span>`}
   </footer>
   ${!w && store.getUser() ? `<div class="readonly-strip">View only — ${platform.isIOS && !platform.standalone
@@ -411,16 +495,20 @@ export function renderRoom(el, number) {
   wireCommon(el);
 
   el.querySelector('[data-more]').addEventListener('click', () => {
+    // Spaces skip two entries: refs (submittal refs are guest-room data) and
+    // Room settings (its template picker has nothing valid to offer a space —
+    // restoring the Lobby "from template" could only ever mean a guest-room
+    // package, so the door is closed rather than guarded).
     const sh = sheets.sheet(`
-      <a class="btn ghost full" href="./refs.html?room=${encodeURIComponent(room.number)}">📄 Submittals &amp; plan references</a>
+      ${isSpace ? '' : `<a class="btn ghost full" href="./refs.html?room=${encodeURIComponent(room.number)}">📄 Submittals &amp; plan references</a>`}
       <a class="btn ghost full" href="./print.html?room=${encodeURIComponent(room.number)}">🖨 Printable sheet (for the door)</a>
       ${MODEL_ROOMS.includes(room.number) ? `<a class="btn ghost full" href="./room-3d.html?room=${encodeURIComponent(room.number)}">🧊 3D room model</a>` : ''}
       <button class="btn ghost full hidden" data-act="paper">📄 Original paper sheet (photo)</button>
-      <button class="btn ghost full" data-act="add-item">+ Add item to this room</button>
+      <button class="btn ghost full" data-act="add-item">+ Add item to this ${isSpace ? 'space' : 'room'}</button>
       <button class="btn ghost full" data-act="theme">${getTheme() === 'dark' ? '☀ Light mode' : '🌙 Dark mode'}</button>
-      <button class="btn ghost full" data-act="edit">Room settings (admin)</button>
-      <button class="btn ghost full danger-text" data-act="delete">Delete room (admin)</button>`,
-      { title: 'Room ' + room.number });
+      ${isSpace ? '' : `<button class="btn ghost full" data-act="edit">Room settings (admin)</button>`}
+      <button class="btn ghost full danger-text" data-act="delete">Delete ${isSpace ? 'space' : 'room'} (admin)</button>`,
+      { title: isSpace ? (room.typeLabel || 'Space') + ' · ' + room.number : 'Room ' + room.number });
     // The original paper photo is history now that the printable sheet is
     // generated from live data — still reachable, but only for rooms that
     // actually have a scan. Revealed from the bundled index (offline-safe).
@@ -432,18 +520,19 @@ export function renderRoom(el, number) {
       .catch(() => { /* no index cached -> leave it hidden rather than dead */ });
     sh.querySelector('[data-act=theme]').addEventListener('click', () => { sh.remove(); toggleTheme(); });
     sh.querySelector('[data-act=add-item]').addEventListener('click', () => { sh.remove(); addItemFlow(room); });
-    sh.querySelector('[data-act=edit]').addEventListener('click', async () => {
+    sh.querySelector('[data-act=edit]')?.addEventListener('click', async () => {
       sh.remove();
       if (await sheets.requireAdmin()) location.hash = '#/room-new/' + room.floor + '?edit=' + room.number;
     });
     sh.querySelector('[data-act=delete]').addEventListener('click', async () => {
       sh.remove();
       if (!(await sheets.requireAdmin())) return;
-      if (await sheets.confirmDialog(`Delete Room ${room.number}? It disappears from every phone (recoverable by admin/Claude).`, { danger: true, okLabel: 'Delete' })) {
+      const what = isSpace ? (room.typeLabel || 'space') + ' (' + room.number + ')' : 'Room ' + room.number;
+      if (await sheets.confirmDialog(`Delete ${what}? It disappears from every phone (recoverable by admin/Claude).`, { danger: true, okLabel: 'Delete' })) {
         // fire-and-forget: offline, the write promise won't resolve until
         // sync — but the local change is already live. Never block the UI on it.
         store.softDeleteRoom(room.number).catch(e => toast('Could not save: ' + e.message));
-        location.hash = '#/floor/' + room.floor;
+        location.hash = isSpace ? '#/common' : '#/floor/' + room.floor;
       }
     });
   });
@@ -569,7 +658,7 @@ export function renderRoom(el, number) {
         <input type="text" name="code" placeholder="Code (e.g. GR-700)" maxlength="20" autocomplete="off"
                style="text-transform:uppercase" required>
         <input type="text" name="label" placeholder="Item name (e.g. Luggage Rack)" maxlength="80" autocomplete="off" required>
-        <button class="btn primary full" type="submit">Add to Room ${esc(room.number)}</button>
+        <button class="btn primary full" type="submit">Add to ${isSpaceDoc(room) ? esc(room.typeLabel || room.number) : 'Room ' + esc(room.number)}</button>
       </form>`, { title: '+ Add item' });
     sh.querySelector('form').addEventListener('submit', (e) => {
       e.preventDefault();
@@ -594,6 +683,13 @@ export function renderRoomNew(el, floorN, editNumber = null) {
   }
   const templates = store.getTemplates();
   const editing = editNumber ? store.getRoom(editNumber) : null;
+  // Deep-linked template settings for a SPACE doc: every option in the picker
+  // is a guest-room package, so any Save would be wrong. Bounce to the space.
+  if (editing && isSpaceDoc(editing)) {
+    toast('Spaces have no room template — add items from the space screen.');
+    location.hash = '#/room/' + editing.number;
+    return;
+  }
   el.innerHTML = appBar({ title: editing ? 'Room ' + editNumber + ' settings' : 'New room', back: editing ? '#/room/' + editNumber : '#/floor/' + floorN }) + `
   <main class="content">
     <form class="form card" id="room-form">

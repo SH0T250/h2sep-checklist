@@ -36,9 +36,10 @@ const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromi
 
   // Home
   ok(await page.locator('.hero').count() === 1, 'home hero renders');
-  ok((await page.locator('.floor-card').count()) === 4, '4 floor cards');
+  ok((await page.locator('.floor-card:not(.common-card)').count()) === 4, '4 floor cards');
+  ok((await page.locator('.common-card').count()) === 1, 'Common Areas card on home');
   const heroText = await page.locator('.hero-stats').innerText();
-  ok(/14\s*\/\s*40 items checked/.test(heroText.replace(/\n/g, ' ')), 'hero counts 14/40 (Room 101 post-cutover state)');
+  ok(/14\s*\/\s*40 items checked/.test(heroText.replace(/\n/g, ' ')), 'hero counts 14/40 (Room 101 post-cutover state — spaces NOT mixed in)');
   ok(/7 open issues/.test(heroText), 'hero counts 7 open issues (6 item + 1 room note)');
 
   // Floor 1
@@ -288,6 +289,91 @@ const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromi
      'room note prints on the sheet');
   await page.goBack();
   await page.waitForTimeout(800);
+
+  // ---- v1.17.0: common areas — home card, section, space screen, print ----
+  await page.goto(BASE + '#/');
+  await page.waitForTimeout(400);
+  await page.click('.common-card');
+  await page.waitForTimeout(400);
+  ok(page.url().includes('#/common'), 'home Common Areas card routes to #/common');
+  ok(await page.locator('.space-card').count() === 2, 'common screen lists both demo spaces');
+  ok(/level 1/i.test(await page.locator('.common-floor-head').first().innerText()),
+     'spaces grouped under a Level heading');
+  const womensCard = page.locator('.space-card', { hasText: 'WOMENS' });
+  ok(await womensCard.count() === 1, 'space card shows the NAME, not just a number');
+
+  // Space screen
+  await womensCard.click();
+  await page.waitForTimeout(400);
+  ok(page.url().includes('#/room/019'), 'space card routes to its doc');
+  ok((await page.locator('.rh-num').innerText()) === 'WOMENS', 'space head shows the name');
+  ok((await page.locator('.rh-type').innerText()).includes('SPACE 019'), 'space head shows number + level');
+  ok(await page.locator('.item-row').count() === 20, 'WOMENS lists its 20 lines');
+  // Trade sections precede FF&E in the crew walk order
+  const listText = await page.locator('main').innerText();
+  ok(listText.indexOf('Paint') >= 0 && listText.indexOf('Bath Accessory') >= 0
+     && listText.indexOf('Paint') < listText.indexOf('FF&E'),
+     'trades sort above FF&E on the space screen');
+  ok(await page.locator('.rh-right a[href*="refs.html"]').count() === 0,
+     'space offers no submittal-refs button (guest-room data)');
+
+  // Check-off works on a space doc
+  const spaceRow = page.locator('.item-row').first();
+  await spaceRow.locator('.box').click();
+  await page.waitForTimeout(300);
+  ok(await spaceRow.locator('.ink').count() === 1, 'checking an item works on a space');
+
+  // ⋮ menu: no Room settings for spaces; add-item present and works
+  await page.click('[data-more]');
+  await page.waitForTimeout(300);
+  ok(await page.locator('[data-act=edit]').count() === 0, 'space menu hides Room settings');
+  ok(await page.locator('[data-act=add-item]').count() === 1, 'space menu offers add-item');
+  await page.click('[data-act=add-item]');
+  await page.waitForTimeout(300);
+  await page.fill('.note-form input[name=code]', 'PA-300');
+  await page.fill('.note-form input[name=label]', 'Console table (per designer)');
+  await page.click('.note-form .btn');
+  await page.waitForTimeout(400);
+  ok(await page.locator('.item-row').count() === 21, 'Austin can add a line item to a space');
+
+  // Template-settings deep link bounces off spaces (belt for the hidden menu)
+  await page.goto(BASE + '#/room-new/1?edit=019');
+  await page.waitForTimeout(500);
+  ok(page.url().includes('#/room/019'), 'template settings deep-link bounces back to the space');
+
+  // Space print sheet: flowing trade-ordered layout, name title, live counts
+  const spPrint = page.locator('.rh-right a[href*="print.html"]');
+  await spPrint.click();
+  await page.waitForTimeout(2500);
+  ok(/print\.html\?room=019/.test(page.url()), 'space 🖨 opens its print sheet');
+  ok(await page.locator('.sheet.sp').count() === 1, 'space sheet uses the flow layout');
+  const spSheet = await page.locator('.sheet').innerText();
+  ok(spSheet.includes('WOMENS') && spSheet.includes('Space 019'), 'space sheet titled by name + number');
+  ok(spSheet.includes('Common Area Turnover Checklist'), 'space sheet says what it is');
+  ok(await page.locator('.item').count() === 21, 'space sheet lists all 21 lines (incl. the added one)');
+  ok(await page.locator('.box.done').count() === 1, 'space sheet shows the check-off');
+  ok(await page.locator('#model-link').count() === 0, 'space sheet offers no 3D model');
+  await page.goBack();
+  await page.waitForTimeout(600);
+
+  // Guest floor grids stay guest-only; go-to finds spaces
+  await page.goto(BASE + '#/floor/1');
+  await page.waitForTimeout(400);
+  ok(!(await page.locator('main').innerText()).includes('WOMENS'),
+     'floor 1 guest grid does not leak spaces');
+  await page.click('[data-goto]');
+  await page.fill('.goto-form input[name=num]', '019');
+  await page.click('.goto-form .btn');
+  await page.waitForTimeout(300);
+  ok(page.url().includes('#/room/019'), 'go-to keypad reaches a space by number');
+
+  // Dashboard demo: Common Areas row present, keys metric NOT polluted
+  await page.goto(new URL('dashboard.html?demo=1', BASE).href);
+  await page.waitForTimeout(900);
+  const dashText = await page.locator('body').innerText();
+  ok(dashText.includes('Common Areas'), 'dashboard shows a Common Areas row');
+  const kRooms = (await page.locator('#k-rooms').innerText()).replace(/\s/g, '');
+  ok(!kRooms.includes('/3'), `dashboard keys count excludes the 2 spaces (got ${kRooms})`);
 
   ok(errors.length === 0, 'no console/page errors' + (errors.length ? ' -> ' + errors.join(' | ') : ''));
   await ctx.close();

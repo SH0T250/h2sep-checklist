@@ -117,9 +117,9 @@ if (await inputs.count() >= 2 && await inputs.first().isVisible().catch(() => fa
   await page.waitForTimeout(1200);
 }
 await page.evaluate((live) => {
-  const db = JSON.parse(localStorage.getItem('h2sep-demo-db-v1'));
+  const db = JSON.parse(localStorage.getItem('h2sep-demo-db-v2'));
   db.rooms = live;                       // the whole live floor plan
-  localStorage.setItem('h2sep-demo-db-v1', JSON.stringify(db));
+  localStorage.setItem('h2sep-demo-db-v2', JSON.stringify(db));
   localStorage.setItem('h2sep-theme', 'light');
 }, rooms);
 

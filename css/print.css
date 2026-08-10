@@ -182,6 +182,29 @@
     letter-spacing: .03em;
   }
 
+  /* ---- common-area (space) sheet: one flowing trade-ordered list ---- */
+  /* Guest sheets keep every category whole per column; a space's Seating
+     section can be 9 long lines, so spaces let categories split across
+     columns/pages rather than leave half-empty columns. (The head prints
+     once — CSS multicol does not repeat it on the continuation.) */
+  .sp .cat { break-inside: auto; }
+  .sp .cat-head { break-after: avoid; }
+  .sp .item { break-inside: avoid; }
+  .plan-note {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: .02em;
+  }
+  .empty-space {
+    margin: 26px 0 8px;
+    padding: 18px;
+    border: 1.5px dashed var(--rule);
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
   /* ---- print-only continuation header (page 2) ---- */
   .cont-head { display: none; }
 

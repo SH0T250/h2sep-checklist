@@ -10,10 +10,14 @@
 
 import { firebaseConfig, PROJECT_ID, DEMO_PIN } from './config.js';
 import { FLOORS, TEMPLATES, seedRooms, blankItem } from './seed.js';
-import { sha256Hex, randomId, codeSlug, roomSort } from './util.js';
+import { seedSpaces } from './seed-spaces.js';
+import { sha256Hex, randomId, codeSlug, roomSort, isSpaceDoc } from './util.js';
 
 const LS_USER = 'h2sep-user';
-const LS_DEMO_DB = 'h2sep-demo-db-v1';
+// v2: demo DB gained common-area spaces. Bumping the KEY (not sniffing doc
+// shapes) is what retires stale caches — a v1 blob is simply never read, and
+// tests that inject their own demo DB stay in control of its contents.
+const LS_DEMO_DB = 'h2sep-demo-db-v2';
 const SS_ADMIN = 'h2sep-admin';
 
 // ?demo=1 forces device-local demo mode even when Firebase is configured —
@@ -83,12 +87,20 @@ export function getFloors() { return state.floors; }
 export function getRoom(number) { return state.rooms.get(String(number)) || null; }
 export function getRooms(floor) {
   return [...state.rooms.values()]
-    .filter(r => !r.deleted && r.floor === Number(floor))
+    .filter(r => !r.deleted && !isSpaceDoc(r) && r.floor === Number(floor))
     .sort((a, b) => roomSort(a.number, b.number));
 }
 export function getAllRooms() {
-  return [...state.rooms.values()].filter(r => !r.deleted)
+  return [...state.rooms.values()].filter(r => !r.deleted && !isSpaceDoc(r))
     .sort((a, b) => roomSort(a.number, b.number));
+}
+// Common-area spaces share the collection with guest rooms and are told apart
+// by their `space-` type slug (see util.isSpaceDoc). Same floor listeners feed
+// both, so subscribing floors 1–4 is enough to see every space.
+export function getSpaces(floor = null) {
+  return [...state.rooms.values()]
+    .filter(r => !r.deleted && isSpaceDoc(r) && (floor === null || r.floor === Number(floor)))
+    .sort((a, b) => (a.floor - b.floor) || roomSort(a.number, b.number));
 }
 export function isRoomPending(number) { return state.pendingRooms.has(String(number)); }
 export function isItemRecentLocal(number, itemId) { return state.recentLocal.has(number + '/' + itemId); }
@@ -134,7 +146,7 @@ function demoLoad() {
   // re-seeded or demo mode would keep showing the retired layout.
   const stale = demoDB && demoDB.rooms && (demoDB.rooms['101'] || {}).schemaV !== 3;
   if (!demoDB || !demoDB.rooms || stale) {
-    demoDB = { rooms: seedRooms(), floors: { ...FLOORS } };
+    demoDB = { rooms: { ...seedRooms(), ...seedSpaces() }, floors: { ...FLOORS } };
     demoSave();
   }
 }

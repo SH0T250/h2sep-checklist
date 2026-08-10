@@ -9,7 +9,9 @@
 //   print.html?room=101&demo=1 bundled demo fixture (no network)
 import { firebaseConfig, PROJECT_ID, MODEL_ROOMS } from './config.js';
 import { seedRooms } from './seed.js';
-import { esc } from './util.js';
+import { seedSpaces } from './seed-spaces.js';
+import { esc, isSpaceDoc, CATEGORY_ORDER } from './util.js';
+import { SPACE_META } from './space-meta.js';
 
 const params = new URLSearchParams(location.search);
 const ROOM = (params.get('room') || '101').trim();
@@ -50,7 +52,7 @@ function handoffRoom() {
 
 async function loadRoom() {
   if (DEMO) {
-    const r = seedRooms()[ROOM];
+    const r = seedRooms()[ROOM] || seedSpaces()[ROOM];
     if (!r) throw new Error('Room ' + ROOM + ' is not in the demo fixture');
     return r;
   }
@@ -112,7 +114,67 @@ ${g.rows.map(itemHTML).join('\n')}
 </section>`).join('\n');
 }
 
+// ---- common-area sheet: one flowing trade-ordered list, N pages ----
+// Spaces don't get the guest sheet's fixed two-page split: a 4-line closet and
+// the 48-line Lobby share one layout that flows to as many pages as it needs,
+// categories in crew walk order (ceiling → walls → floor → doors → FF&E).
+function renderSpace(room) {
+  const items = Object.entries(room.items || {}).filter(([, it]) => !it.deleted);
+  const units = items.reduce((n, [, it]) => n + (Number(it.qty) > 0 ? Number(it.qty) : 1), 0);
+  const done = items.filter(([, it]) => it.checked).length;
+  const srcs = [...new Set(items.map(([, it]) => it.src).filter(Boolean))].sort();
+  const srcLine = srcs.length > 6 ? srcs.slice(0, 6).join(' · ') + ` +${srcs.length - 6} more` : srcs.join(' · ');
+  const openNotes = Object.values(room.notes || {}).filter(n => !n.resolved);
+  const noteLine = openNotes.map(n => `★ ${esc(n.text.toUpperCase())}`).join(' &nbsp;·&nbsp; ');
+  const meta = SPACE_META[room.number] || {};
+
+  // Categories present, in canonical order; anything unknown rides at the end.
+  const present = [...new Set(items.map(([, it]) => it.category || ''))];
+  const cats = [
+    ...CATEGORY_ORDER.filter(c => present.includes(c)),
+    ...present.filter(c => c && !CATEGORY_ORDER.includes(c)).sort(),
+    ...(present.includes('') ? [''] : []),
+  ];
+  const groups = groupsFor(room, cats);
+  const stamp = new Date().toLocaleString([], {
+    year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit',
+  });
+
+  $('sheet').innerHTML = `<div class="sheet sp">
+  <header class="hdr">
+    <img src="./img/logo-full-light.png" alt="Triun Construction &amp; Engineering">
+    <div class="proj">
+      <b>H2SEP · Home2 Suites by Hilton — Eagle Pass, TX</b><br>
+      Triun Job 24030 · 115 Keys<br>
+      <span class="mut">Common Area Turnover Checklist · FF&amp;E / Finishes scope</span>
+    </div>
+  </header>
+
+  <div class="title">
+    <h1>${esc((room.typeLabel || 'SPACE').toUpperCase())}</h1>
+    <h2>Space ${esc(room.number.replace('ZONE-', 'Zone '))} · Common Area</h2>
+    <div class="meta">Level ${esc(String(room.floor))} &nbsp;·&nbsp; ${done}/${items.length} verified at print time</div>
+    ${meta.note ? `<div class="plan-note">${esc(meta.sheet ? meta.sheet + ' — ' : '')}${esc(meta.note)}</div>` : ''}
+    ${noteLine ? `<div class="room-note top">${noteLine}</div>` : ''}
+  </div>
+
+  ${items.length === 0 ? `<div class="empty-space">No line items are drawn for this space in the
+    reference set. Items added in the app will appear here.</div>` : `
+  <div class="items sp-items">
+${sectionsHTML(groups)}
+  </div>`}
+
+  <footer class="ftr">
+    <span>${items.length} lines / ${units} units${srcLine ? ` · sources ${esc(srcLine)}` : ''} · printed ${esc(stamp)}</span>
+    <span>Initials in box = verified in space · red = open issue</span>
+  </footer>
+</div>`;
+  document.title = `${room.typeLabel || 'Space'} ${room.number} — Print Sheet · H2SEP`;
+  $('state').textContent = DEMO ? 'Demo data — not live check-offs' : `Live as of ${stamp}`;
+}
+
 function render(room) {
+  if (isSpaceDoc(room)) return renderSpace(room);
   const items = Object.entries(room.items || {}).filter(([, it]) => !it.deleted);
   const units = items.reduce((n, [, it]) => n + (Number(it.qty) > 0 ? Number(it.qty) : 1), 0);
   const done = items.filter(([, it]) => it.checked).length;

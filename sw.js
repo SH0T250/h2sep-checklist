@@ -3,7 +3,7 @@
 // Bump VERSION on every deploy — it busts the old cache and triggers the
 // in-app "Update available" banner. VERSION must equal 'h2sep-v' + APP_VERSION
 // in js/config.js — install verifies this to defeat CDN mixed-version races.
-const VERSION = 'h2sep-v1.16.0';
+const VERSION = 'h2sep-v1.17.0';
 // Paper-sheet photos live in their own PERMANENT cache — never wiped by app
 // updates. Only room JPGs under /sheets/ may enter it (index.json stays in the
 // versioned shell cache so it can never be shadowed by a stale copy).
@@ -49,6 +49,8 @@ const SHELL = [
   './js/refs.js',
   './js/screens.js',
   './js/seed.js',
+  './js/seed-spaces.js',
+  './js/space-meta.js',
   './js/sheets.js',
   './js/store.js',
   './js/theme.js',

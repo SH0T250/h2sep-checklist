@@ -29,6 +29,7 @@ function route() {
   if (parts.length === 0) return { screen: 'home' };
   if (parts[0] === 'welcome') return { screen: 'welcome' };
   if (parts[0] === 'install') return { screen: 'install' };
+  if (parts[0] === 'common') return { screen: 'common' };
   if (parts[0] === 'floor') return { screen: 'floor', floor: parts[1] || '1' };
   if (parts[0] === 'room') return { screen: 'room', number: parts[1] };
   if (parts[0] === 'room-new') return { screen: 'room-new', floor: parts[1] || '1', edit: query.edit || null };
@@ -46,6 +47,7 @@ function render() {
   switch (r.screen) {
     case 'welcome':  screens.renderWelcome(root); break;
     case 'install':  screens.renderWelcome(root, { installOnly: true }); break;
+    case 'common':   screens.renderCommon(root); break;
     case 'floor':    screens.renderFloor(root, r.floor); break;
     case 'room':     screens.renderRoom(root, r.number); break;
     case 'room-new': screens.renderRoomNew(root, r.floor, r.edit); break;

@@ -2,7 +2,8 @@
 // app writes to. ?demo=1 renders from the bundled Room 101 fixture instead.
 import { firebaseConfig, PROJECT_ID } from './config.js';
 import { FLOORS, seedRooms } from './seed.js';
-import { esc, roomStats, roomSort } from './util.js';
+import { seedSpaces } from './seed-spaces.js';
+import { esc, roomStats, roomSort, isSpaceDoc } from './util.js';
 
 const DEMO = new URLSearchParams(location.search).has('demo') || !firebaseConfig;
 const $ = (id) => document.getElementById(id);
@@ -15,7 +16,7 @@ let lastUpdate = null;
 
 async function start() {
   if (DEMO) {
-    const seeded = seedRooms();
+    const seeded = { ...seedRooms(), ...seedSpaces() };
     // Give demo check-offs synthetic times spread over the past week so the
     // feed and activity chart demonstrate themselves (clearly labeled DEMO).
     let i = 0;
@@ -109,12 +110,18 @@ function toDate(ts) {
 }
 
 function compute() {
-  const live = [...rooms.values()].filter(r => !r.deleted);
+  const all = [...rooms.values()].filter(r => !r.deleted);
+  // Guest rooms and common-area spaces split here so "X / 115 rooms" stays a
+  // statement about KEYS. Spaces still feed the crew/issue/feed panels —
+  // an issue in the Lobby is an issue — under their own names.
+  const live = all.filter(r => !isSpaceDoc(r));
+  const spaceDocs = all.filter(isSpaceDoc);
   const m = {
     items: 0, checked: 0, roomsTotal: live.length, roomsDone: 0, roomsGoing: 0, roomsNotStarted: 0,
     issues: 0, roomsWithIssues: 0, checkedToday: 0,
     perFloor: {}, issueTypes: new Map(), crew: new Map(),
     issueRows: [], feed: [], days: [],
+    spaces: { count: spaceDocs.length, items: 0, checked: 0, issues: 0, done: 0 },
   };
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const dayKeys = [];
@@ -124,21 +131,29 @@ function compute() {
   }
   const dayCounts = Object.fromEntries(dayKeys.map(k => [k, 0]));
 
-  for (const r of live) {
+  for (const r of [...live, ...spaceDocs]) {
     const s = roomStats(r);
-    m.items += s.total; m.checked += s.done; m.issues += s.openIssues;
-    if (s.complete) m.roomsDone++;
-    else if (s.done > 0) m.roomsGoing++;
-    else m.roomsNotStarted++;
-    if (s.openIssues > 0) m.roomsWithIssues++;
-    const f = (m.perFloor[r.floor] = m.perFloor[r.floor] || { rooms: 0, items: 0, checked: 0, issues: 0 });
-    f.rooms++; f.items += s.total; f.checked += s.done; f.issues += s.openIssues;
+    const isSp = isSpaceDoc(r);
+    // Where an item lives, as the panels should say it: "Rm 214" / "Lobby 003".
+    const where = isSp ? `${r.typeLabel || 'Space'} ${r.number}` : null;
+    if (isSp) {
+      m.spaces.items += s.total; m.spaces.checked += s.done; m.spaces.issues += s.openIssues;
+      if (s.complete) m.spaces.done++;
+    } else {
+      m.items += s.total; m.checked += s.done; m.issues += s.openIssues;
+      if (s.complete) m.roomsDone++;
+      else if (s.done > 0) m.roomsGoing++;
+      else m.roomsNotStarted++;
+      if (s.openIssues > 0) m.roomsWithIssues++;
+      const f = (m.perFloor[r.floor] = m.perFloor[r.floor] || { rooms: 0, items: 0, checked: 0, issues: 0 });
+      f.rooms++; f.items += s.total; f.checked += s.done; f.issues += s.openIssues;
+    }
 
     const entries = Object.entries(r.items || {}).filter(([, it]) => !it.deleted);
     for (const [, it] of entries.sort((a, b) => (a[1].sort || 0) - (b[1].sort || 0))) {
       if (it.issue && !it.issueResolved) {
         m.issueTypes.set(it.issue, (m.issueTypes.get(it.issue) || 0) + 1);
-        m.issueRows.push({ room: r.number, code: it.code, label: it.label, note: it.issue, isNote: false });
+        m.issueRows.push({ room: r.number, where, code: it.code, label: it.label, note: it.issue, isNote: false });
       }
       if (it.checked) {
         const who = it.initials || '—';
@@ -149,14 +164,14 @@ function compute() {
           if (when >= today) { c.today++; m.checkedToday++; }
           const k = when.toISOString().slice(0, 10);
           if (k in dayCounts) dayCounts[k]++;
-          m.feed.push({ who, code: it.code, room: r.number, when });
+          m.feed.push({ who, code: it.code, room: r.number, where, when });
         }
         m.crew.set(who, c);
       }
     }
     for (const n of Object.values(r.notes || {})) {
       if (n.flag === 'issue' && !n.resolved) {
-        m.issueRows.push({ room: r.number, code: '', label: '', note: n.text, isNote: true });
+        m.issueRows.push({ room: r.number, where, code: '', label: '', note: n.text, isNote: true });
       }
     }
   }
@@ -221,7 +236,16 @@ function render() {
       <div class="bar"><div class="bar-fill" style="width:${pct}%"></div></div>
       <div class="frow-right">${pct}%${d.issues ? ` <span class="ibadge">⚠ ${d.issues}</span>` : ''}</div>
     </div>`;
-  }).join('');
+  }).join('') + (m.spaces.count ? (() => {
+    const sp = m.spaces;
+    const pct = sp.items ? Math.round(sp.checked / sp.items * 100) : 0;
+    return `
+    <div class="frow" data-tip="${esc(`Common areas: ${sp.checked}/${sp.items} items checked · ${sp.count} spaces · ${sp.issues} open issues`)}">
+      <div><div class="frow-name">Common Areas</div><div class="frow-sub">${sp.count} SPACES</div></div>
+      <div class="bar"><div class="bar-fill" style="width:${pct}%"></div></div>
+      <div class="frow-right">${pct}%${sp.issues ? ` <span class="ibadge">⚠ ${sp.issues}</span>` : ''}</div>
+    </div>`;
+  })() : '');
 
   // issue types (single red hue + labels)
   const types = [...m.issueTypes.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8);
@@ -245,7 +269,7 @@ function render() {
   $('issue-table').querySelector('tbody').innerHTML = m.issueRows.length
     ? m.issueRows.map(r => `
       <tr class="${r.isNote ? 'note-row' : ''}">
-        <td class="rm">${esc(r.room)}</td>
+        <td class="rm">${esc(r.where || r.room)}</td>
         <td class="code">${esc(r.code)}</td>
         <td>${esc(r.label)}</td>
         <td class="prob">${esc(r.note.toUpperCase())}</td>
@@ -257,7 +281,7 @@ function render() {
     ? m.feed.slice(0, 14).map(f => `
       <div class="feed-item">
         <span class="feed-who">${esc(f.who)}</span>
-        <span class="feed-what">checked <b>${esc(f.code)}</b> · Rm ${esc(f.room)}</span>
+        <span class="feed-what">checked <b>${esc(f.code)}</b> · ${esc(f.where || 'Rm ' + f.room)}</span>
         <span class="feed-when">${esc(fmtTime(f.when))}</span>
       </div>`).join('')
     : `<div class="empty-line">Check-offs with timestamps will appear here.<br>

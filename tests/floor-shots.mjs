@@ -22,7 +22,7 @@ await p.goto('http://localhost:8322/index.html?demo=1',{waitUntil:'load'});
 await p.waitForTimeout(1500);
 const inp=p.locator('input[type=text]');
 if(await inp.count()>=2){await inp.nth(0).fill('QA Tester');await inp.nth(1).fill('AJ');await p.locator('button:has-text("Start")').first().click();await p.waitForTimeout(900);}
-await p.evaluate((rs)=>{const db=JSON.parse(localStorage.getItem('h2sep-demo-db-v1'));Object.assign(db.rooms,rs);localStorage.setItem('h2sep-demo-db-v1',JSON.stringify(db));localStorage.setItem('h2sep-theme','light');},rooms);
+await p.evaluate((rs)=>{const db=JSON.parse(localStorage.getItem('h2sep-demo-db-v2'));Object.assign(db.rooms,rs);localStorage.setItem('h2sep-demo-db-v2',JSON.stringify(db));localStorage.setItem('h2sep-theme','light');},rooms);
 await p.goto('about:blank');
 await p.goto('http://localhost:8322/index.html?demo=1',{waitUntil:'load'});
 await p.waitForTimeout(1600);

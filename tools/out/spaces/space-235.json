@@ -1,0 +1,53 @@
+{
+  "deleted": false,
+  "floor": 2,
+  "items": {
+    "rb12_a": {
+      "category": "Flooring",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "RB-12",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "\u2691 Schedule area only.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Resilient base at housekeeping",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "sort": 10,
+      "src": "finish schedule pp.34/35",
+      "trade": "TILE"
+    },
+    "vct10_a": {
+      "category": "Flooring",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "VCT-10",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "",
+      "issue": "",
+      "issueResolved": false,
+      "label": "VCT at house keeping. Transition VCT / CPT tagged at the door",
+      "qty": 1,
+      "reliability": "HIGH",
+      "sort": 20,
+      "src": "A511.3; ID-1.13 view 2",
+      "trade": "TILE"
+    }
+  },
+  "notes": {},
+  "number": "235",
+  "schemaV": 3,
+  "type": "space-house-keeping",
+  "typeLabel": "House Keeping"
+}

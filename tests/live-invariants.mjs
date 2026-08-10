@@ -44,11 +44,16 @@ const su = await (await fetch(`https://identitytoolkit.googleapis.com/v1/account
 const H = { Authorization: 'Bearer ' + su.idToken };
 
 const roomsResp = await (await fetch(`${ROOT}/rooms?pageSize=400`, { headers: H })).json();
-const rooms = (roomsResp.documents || []).map(decode);
+const allDocs = (roomsResp.documents || []).map(decode);
+// Common-area spaces share the collection; their `space-` type slug is the
+// discriminator (util.isSpaceDoc). Guest-room invariants must not drift just
+// because spaces arrived — the split IS one of the invariants.
+const rooms = allDocs.filter((r) => !String(r.type || '').startsWith('space-'));
+const spaces = allDocs.filter((r) => String(r.type || '').startsWith('space-'));
 const tplResp = await (await fetch(`${ROOT}/templates?pageSize=50`, { headers: H })).json();
 const templates = Object.fromEntries((tplResp.documents || []).map((d) => [d.name.split('/').pop(), decode(d)]));
 
-console.log(`${rooms.length} rooms · ${Object.keys(templates).length} templates\n`);
+console.log(`${rooms.length} guest rooms · ${spaces.length} spaces · ${Object.keys(templates).length} templates\n`);
 
 // ---- 1. every room's slug must name a template that IS that room's package ----
 // This is the invariant room 118 broke. A slug is a join key: if it points at a
@@ -104,9 +109,9 @@ const nts = Object.keys(r101.notes || {}).length;
 check(ck === 14 && iss === 6 && nts === 1,
   `room 101 still has 14 check-offs / 6 issues / 1 note (got ${ck}/${iss}/${nts})`);
 
-// ---- 5. every FLAGGED or MEDIUM line must explain itself ----
+// ---- 5. every FLAGGED or MEDIUM line must explain itself (rooms AND spaces) ----
 const bare = [];
-for (const r of rooms) {
+for (const r of allDocs) {
   for (const [id, i] of Object.entries(r.items || {})) {
     if ((i.reliability === 'FLAGGED' || i.reliability === 'MEDIUM') && !String(i.instanceNote || '').trim()) {
       bare.push(`${r.number}/${i.code || id}`);
@@ -119,8 +124,8 @@ if (bare.length) console.log('        ' + bare.slice(0, 12).join(', '));
 // ---- 6. top-level keys stay inside what the security rules allow ----
 const ALLOWED = new Set(['number', 'floor', 'type', 'typeLabel', 'items', 'notes',
   'deleted', 'schemaV', 'createdAt', 'updatedAt']);
-const strays = rooms.flatMap((r) => Object.keys(r).filter((k) => !ALLOWED.has(k)).map((k) => `${r.number}.${k}`));
-check(strays.length === 0, `no room carries a field outside the rules whitelist`);
+const strays = allDocs.flatMap((r) => Object.keys(r).filter((k) => !ALLOWED.has(k)).map((k) => `${r.number}.${k}`));
+check(strays.length === 0, `no doc carries a field outside the rules whitelist`);
 if (strays.length) console.log('        ' + strays.slice(0, 10).join(', '));
 
 // ---- 7. the hotel is 115 keys across four floors ----
@@ -140,6 +145,45 @@ const nonQQ = MODEL_ROOMS.filter((n) => {
   return r && !/^QQ /.test(r.typeLabel);
 });
 check(nonQQ.length === 0, `no non-QQ room is offered the QQ exhibit (${nonQQ.join(',') || 'none'})`);
+
+// ---- 9. common-area spaces (once seeded) mirror the app's own metadata ----
+// Zero spaces is legal — the pre-seed era. The moment ANY space doc exists,
+// the whole population has to be coherent with js/space-meta.js: same numbers,
+// same floors, same names. A half-seeded or renamed space is exactly the kind
+// of quiet drift this suite exists to catch.
+if (spaces.length === 0) {
+  console.log('        (no spaces seeded yet — space invariants idle)');
+} else {
+  const metaSrc = readFileSync(new URL('../js/space-meta.js', import.meta.url), 'utf8');
+  const META = JSON.parse(metaSrc.slice(metaSrc.indexOf('{'), metaSrc.lastIndexOf('}') + 1));
+
+  const unknown = spaces.filter((s) => !META[s.number]).map((s) => s.number);
+  check(unknown.length === 0, `every live space is one the app knows (${unknown.join(',') || 'all known'})`);
+
+  const wrong = spaces.flatMap((s) => {
+    const mm = META[s.number];
+    if (!mm) return [];
+    const bad = [];
+    if (s.typeLabel !== mm.name) bad.push(`${s.number}: label "${s.typeLabel}" vs meta "${mm.name}"`);
+    if (Number(s.floor) !== Number(mm.floor)) bad.push(`${s.number}: floor ${s.floor} vs meta ${mm.floor}`);
+    return bad;
+  });
+  check(wrong.length === 0, `every space carries its plan name and true floor`);
+  wrong.forEach((w) => console.log('        ' + w));
+
+  const spaceIds = new Set(spaces.map((s) => s.number));
+  const roomIds = new Set(rooms.map((r) => r.number));
+  const clash = [...spaceIds].filter((n) => roomIds.has(n));
+  check(clash.length === 0, `no space id collides with a guest-room number (${clash.join(',') || 'none'})`);
+
+  // Era check, same spirit as the room-101 check above: until the crew starts
+  // walking common areas, a check-off or note on a space could only have come
+  // from a seeding defect. Loosen this deliberately when that era ends.
+  const dirty = spaces.filter((s) => Object.values(s.items || {}).some((i) => i.checked || i.issue)
+    || Object.keys(s.notes || {}).length);
+  check(dirty.length === 0,
+    `no seeded space carries field work yet (${dirty.map((s) => s.number).join(',') || 'all clean'})`);
+}
 
 console.log(fail ? `\n${fail} FAILURE(S)` : '\nLIVE INVARIANTS: ALL PASS');
 process.exit(fail ? 1 : 0);
