@@ -1,0 +1,13 @@
+{
+  "space": "001",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Painted gyp board ceiling, suspended GWB assembly per detail 02/A120 (hanger / main channel / cross T-bar / furring clip / resilient channel / GWB)",
+      "src": "A120; A510.2",
+      "reliability": "FLAGGED",
+      "instanceNote": "System (painted gyp) agrees on both architectural RCPs; the HEIGHT does not. A120 tags Vestibule 001 at 8'-10\"; A510.2 tags it 9'-0\"; ID-1.6 gives 8'-0\". Three values across three RCPs — the draft PT-07 note records only two of them. Confirm before framing the lid.",
+      "trade": "GC"
+    }
+  ]
+}

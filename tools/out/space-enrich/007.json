@@ -1,0 +1,13 @@
+{
+  "space": "007",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Acoustic ceiling tile (ACT) grid ceiling, 8'-0\" AFF",
+      "src": "A120; A510.2",
+      "reliability": "MEDIUM",
+      "instanceNote": "\u2691 Height 8'-0\" agrees on A120 and A510.2 (both Rev 4). MEDIUM because A120's legend carries both 2'x2' and 2'x4' ACT and the hatch is not readable at 3/32\" scale - A120's own flag: confirm tile size before ordering grid or tile. A513 view 2 (Food Prep & Dry Storage RCP) shows 2'x2' troffers over the room. The draft's PT-07 ceiling-paint line (A510.2) sits against this ACT system - see cluster report.",
+      "trade": "GC"
+    }
+  ]
+}

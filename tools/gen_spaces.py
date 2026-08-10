@@ -124,13 +124,26 @@ def build_space(cx, sp):
         # make_template.py: the ×qty badge carries the count.
         inote = "" if qty > 1 else (r0["instance_note"] or "").strip()
 
+        # A collapse group can span rows with DIFFERENT provenance — Lobby
+        # PA-106 is 24 rows per ID-1.7 plus 2 carried delta rows per A510.3,
+        # and keeping only row 0's src would silently launder the split the
+        # extraction deliberately preserved. Union src and notes instead.
+        srcs, notes = [], []
+        for r in rws:
+            s = (r["source_sheet"] or "").strip()
+            n = (r["note"] or "").strip()
+            if s and s not in srcs:
+                srcs.append(s)
+            if n and n not in notes:
+                notes.append(n)
+
         it = {
             "category": r0["category"],
             "code": r0["tag"] or "",
             "label": (r0["description"] or "").strip(),
             "qty": qty,
             "reliability": r0["reliability"] or "HIGH",
-            "src": r0["source_sheet"] or "",
+            "src": " + ".join(srcs),
             "trade": r0["trade_responsible"] or "",
             "derived": True,
             "instanceNote": inote,
@@ -139,8 +152,7 @@ def build_space(cx, sp):
 
         # FLAGGED/MEDIUM must explain themselves (same contract as rooms).
         if it["reliability"] in ("FLAGGED", "MEDIUM"):
-            why = next(((r["note"] or "").strip() for r in rws
-                        if (r["note"] or "").strip()), "")
+            why = " · ".join(notes)
             if why:
                 why = "⚑ " + why
             else:

@@ -1,0 +1,13 @@
+{
+  "space": "009",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Painted gyp board ceiling, two levels - 8'-10\" and 8'-2\"",
+      "src": "A120",
+      "reliability": "FLAGGED",
+      "instanceNote": "\u2691 Three sheets, three heights: A120 (Rev 4) tags 8'-10\" and 8'-2\" (two levels); A510.2 (same Rev 4) tags 9'-0\" - the draft PT-07 reading; ID-1.6 gives 9'-2\". The 8'-2\" low zone likely corresponds to the soffit A510.2 notes at the breakfast/servery edge, but the field height (8'-10\" vs 9'-0\" vs 9'-2\") is unresolved - check A120 vs A510.2 vs ID-1.6. System (painted gyp) agrees on A120 and ID-1.6 (PT-07).",
+      "trade": "GC"
+    }
+  ]
+}

@@ -19,7 +19,7 @@
       "label": "Carpet tile, lobby inset",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 50,
+      "sort": 90,
       "src": "A510.4 keyed note 12; finish schedule p.14 'Lobby Inset'",
       "trade": "TILE"
     },
@@ -40,7 +40,7 @@
       "label": "LUGGAGE CART STORAGE",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 430,
+      "sort": 470,
       "src": "A510.1 keyed note 16",
       "trade": "GC"
     },
@@ -61,7 +61,7 @@
       "label": "TRASH CAN, RECYCLING BIN & ASH BIN - tagged at many points in Lobby 003",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 420,
+      "sort": 460,
       "src": "A510.3 keyed note 1",
       "trade": "GC/OWN"
     },
@@ -82,7 +82,7 @@
       "label": "FEATURE WALL, lobby / vestibule zone",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 440,
+      "sort": 480,
       "src": "A510.1 keyed note 20",
       "trade": "GC"
     },
@@ -103,7 +103,7 @@
       "label": "HOUSE PHONE",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 450,
+      "sort": 490,
       "src": "A510.1 keyed note 62; A700 keyed note 23; A510.4 keyed note 2 (location)",
       "trade": "GC"
     },
@@ -124,7 +124,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 210,
+      "sort": 250,
       "src": "A510.3 (room); ID-1.7 (qty)",
       "trade": "FFE"
     },
@@ -145,7 +145,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 6,
       "reliability": "FLAGGED",
-      "sort": 220,
+      "sort": 260,
       "src": "A510.3 (room); ID-1.7 (qty)",
       "trade": "FFE"
     },
@@ -160,14 +160,14 @@
       "deleted": false,
       "derived": true,
       "initials": "",
-      "instanceNote": "\u2691 Base qty both sheets support. No PA description table exists (ID-1.7 and A510.3 both say so). Pull the FF&E spec book before any PO.",
+      "instanceNote": "\u2691 Base qty both sheets support. No PA description table exists (ID-1.7 and A510.3 both say so). Pull the FF&E spec book before any PO. \u00b7 Qty delta carried, not resolved.",
       "issue": "",
       "issueResolved": false,
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 8,
       "reliability": "FLAGGED",
-      "sort": 230,
-      "src": "A510.3 x6",
+      "sort": 270,
+      "src": "A510.3 x6 + ID-1.7 prints (8) vs A510.3 x6",
       "trade": "FFE"
     },
     "pa103_a": {
@@ -187,7 +187,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 3,
       "reliability": "FLAGGED",
-      "sort": 240,
+      "sort": 280,
       "src": "A510.3 (room); ID-1.7 (qty)",
       "trade": "FFE"
     },
@@ -208,7 +208,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 4,
       "reliability": "FLAGGED",
-      "sort": 250,
+      "sort": 290,
       "src": "A510.3 (room); ID-1.7 (qty)",
       "trade": "FFE"
     },
@@ -223,14 +223,14 @@
       "deleted": false,
       "derived": true,
       "initials": "",
-      "instanceNote": "\u2691 Base qty per ID-1.7. No PA description table exists (ID-1.7 and A510.3 both say so). Pull the FF&E spec book before any PO.",
+      "instanceNote": "\u2691 Base qty per ID-1.7. No PA description table exists (ID-1.7 and A510.3 both say so). Pull the FF&E spec book before any PO. \u00b7 Third tag instance differs. Carried, not resolved.",
       "issue": "",
       "issueResolved": false,
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 26,
       "reliability": "FLAGGED",
-      "sort": 260,
-      "src": "ID-1.7 8/6/4/6 = 24",
+      "sort": 300,
+      "src": "ID-1.7 8/6/4/6 = 24 + A510.3 8/6/6/6 = 26",
       "trade": "FFE"
     },
     "pa107_a": {
@@ -250,7 +250,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set. Placed at the window counter / perch.",
       "qty": 8,
       "reliability": "FLAGGED",
-      "sort": 270,
+      "sort": 310,
       "src": "A510.3 x8; ID-1.7 (8) agree",
       "trade": "FFE"
     },
@@ -271,7 +271,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 280,
+      "sort": 320,
       "src": "ID-1.7 line 20 lounge cluster",
       "trade": "FFE"
     },
@@ -292,7 +292,7 @@
       "label": "Dashed decorative ceiling / lighting feature zone over Breakfast, the Lobby lounge and near the Market/Servery. The sheet does not say which tag is over which space",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 300,
+      "sort": 340,
       "src": "ID-1.6",
       "trade": "FFE"
     },
@@ -313,7 +313,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 310,
+      "sort": 350,
       "src": "A510.3 (room); ID-1.7 (qty)",
       "trade": "FFE"
     },
@@ -334,7 +334,7 @@
       "label": "Dashed decorative ceiling / lighting feature zone over Breakfast, the Lobby lounge and near the Market/Servery. The sheet does not say which tag is over which space",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 320,
+      "sort": 360,
       "src": "ID-1.6",
       "trade": "FFE"
     },
@@ -355,7 +355,7 @@
       "label": "Dashed decorative ceiling / lighting feature zone over Breakfast, the Lobby lounge and near the Market/Servery. The sheet does not say which tag is over which space",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 330,
+      "sort": 370,
       "src": "ID-1.6",
       "trade": "FFE"
     },
@@ -376,7 +376,7 @@
       "label": "Dashed decorative ceiling / lighting feature zone over Breakfast, the Lobby lounge and near the Market/Servery. The sheet does not say which tag is over which space",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 340,
+      "sort": 380,
       "src": "ID-1.6",
       "trade": "FFE"
     },
@@ -397,7 +397,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 11,
       "reliability": "FLAGGED",
-      "sort": 110,
+      "sort": 150,
       "src": "ID-1.7 5/3/3 = 11",
       "trade": "FFE"
     },
@@ -418,7 +418,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 4,
       "reliability": "FLAGGED",
-      "sort": 120,
+      "sort": 160,
       "src": "A510.3 (room); ID-1.7 (qty)",
       "trade": "FFE"
     },
@@ -439,7 +439,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set. Also tagged at Market 005.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 130,
+      "sort": 170,
       "src": "ID-1.7",
       "trade": "FFE"
     },
@@ -460,7 +460,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 2,
       "reliability": "FLAGGED",
-      "sort": 140,
+      "sort": 180,
       "src": "A510.3 (room); ID-1.7 (qty)",
       "trade": "FFE"
     },
@@ -481,7 +481,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 2,
       "reliability": "FLAGGED",
-      "sort": 150,
+      "sort": 190,
       "src": "A510.3 (room); ID-1.7 (qty)",
       "trade": "FFE"
     },
@@ -502,7 +502,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 3,
       "reliability": "FLAGGED",
-      "sort": 160,
+      "sort": 200,
       "src": "ID-1.7 x3 locations",
       "trade": "FFE"
     },
@@ -523,7 +523,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 170,
+      "sort": 210,
       "src": "ID-1.7 line 22 lounge cluster",
       "trade": "FFE"
     },
@@ -544,7 +544,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 180,
+      "sort": 220,
       "src": "ID-1.7 line 22 lounge cluster",
       "trade": "FFE"
     },
@@ -565,7 +565,7 @@
       "label": "Window element - perch/bench OR window treatment; identity unresolved",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 360,
+      "sort": 400,
       "src": "A510.3 tags PA-400 in Lobby 003; ID-1.13 defines it as the corridor window element",
       "trade": "FFE"
     },
@@ -586,7 +586,7 @@
       "label": "Decorative pendant, printed '(typ.)', over the lounge",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 350,
+      "sort": 390,
       "src": "ID-3.1 view 4; A510.3 places it Vestibule 001 / lobby side",
       "trade": "FFE"
     },
@@ -607,7 +607,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set. Carries a PRINTED quantity of 3.",
       "qty": 3,
       "reliability": "FLAGGED",
-      "sort": 380,
+      "sort": 420,
       "src": "ID-1.7 line 24 lounge cluster",
       "trade": "FFE"
     },
@@ -628,7 +628,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 390,
+      "sort": 430,
       "src": "ID-1.7 line 24 lounge cluster",
       "trade": "FFE"
     },
@@ -649,7 +649,7 @@
       "label": "PA tag placed on the sheet; no description printed anywhere in the set. Also tagged at Market 005 and Breakfast/Servery.",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 460,
+      "sort": 500,
       "src": "ID-1.7 (no multiplier); A510.3",
       "trade": "FFE"
     },
@@ -670,7 +670,7 @@
       "label": "Ceiling paint - 8'-10\" field with a 9'-6\" raised feature zone approx. 22'-0\" x 15'-6\" over the lounge",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 10,
+      "sort": 20,
       "src": "A510.2 (heights); ID-1.6 (code, 'By GC')",
       "trade": "PT"
     },
@@ -691,7 +691,7 @@
       "label": "Quartz, public area",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 90,
+      "sort": 130,
       "src": "finish schedule p.41 'Public Area & Guest Suite'; ID-1.8",
       "trade": "MW"
     },
@@ -712,7 +712,7 @@
       "label": "Tile base",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 70,
+      "sort": 110,
       "src": "RK area statement; ID-3.1 views 5/6",
       "trade": "TILE"
     },
@@ -733,7 +733,7 @@
       "label": "Floor tile, lobby field",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 60,
+      "sort": 100,
       "src": "A510.4; ID-1.8",
       "trade": "TILE"
     },
@@ -754,7 +754,7 @@
       "label": "Wallcovering at the lobby columns",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 20,
+      "sort": 30,
       "src": "A510.1 note 34, cited on A510.4",
       "trade": "WC"
     },
@@ -775,7 +775,7 @@
       "label": "Wallcovering at the lobby",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 30,
+      "sort": 50,
       "src": "ID-3.1 views 3, 4, 6; finish schedule p.63",
       "trade": "WC"
     },
@@ -796,9 +796,30 @@
       "label": "Wallcovering at the lobby lounge",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 40,
+      "sort": 60,
       "src": "ID-3.1 view 1",
       "trade": "WC"
+    },
+    "x_04e035bcfa": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Painted gyp board ceiling \u2014 8'-10\" field, 9'-0\" at the north bay by the restroom corridor; suspended GWB assembly per detail 02/A120",
+      "qty": 1,
+      "reliability": "HIGH",
+      "sort": 80,
+      "src": "A120; A510.2",
+      "trade": "GC"
     },
     "x_0faf6b95fa": {
       "category": "FF&E - Casegoods",
@@ -817,7 +838,7 @@
       "label": "M3 Coffee & hydration bar with media wall - 19'-6\" overall, 15'-5\" in 5 EQ + 5'-2\"; quartz top and backsplash; PL-01 exposed; ST-01 accent; black melamine concealed; 8\" dia brushed stainless trash grommet, insert and trash can BY OTHERS; hydration station per food-service drawings with 2\"x12\" min vent cutout and floor-drain access opening",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 200,
+      "sort": 240,
       "src": "A901 (governs); ID-4.2 corroborates",
       "trade": "MW"
     },
@@ -838,9 +859,30 @@
       "label": "M10 Window perch / communal work ledge - 16'-4\" overall, bay set-out 2'-0 1/2\" + 4'-1\" + 4'-1\" + 4'-1\" + 2'-0 1/2\"; counter height; PL-02 top; 2\"x1\" steel tube legs; laminate modesty panel; WC-11 at the perch wall",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 190,
+      "sort": 230,
       "src": "A904 (governs); ID-4.6 corroborates",
       "trade": "MW"
+    },
+    "x_3b4911cbe3": {
+      "category": "Wall Covering",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "WC-01.1",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "Tag printed on A700 Lounge view 4 (stacked '01.1' over 'WC'). No WC-01.1 card exists in the 67-card finish schedule (finishes.md conflict W-6 \u2014 no product, no supplier; not purchasable as-is), and ID-3.1's corresponding lounge views tag WC-11. Confirm with MWT whether WC-01.1 is a distinct product or a stale/variant tag before ordering.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Wallcovering at the lounge, tag as printed WC-01.1",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "sort": 40,
+      "src": "A700 view 4",
+      "trade": "WC"
     },
     "x_402ac0247c": {
       "category": "FF&E - Seating",
@@ -859,7 +901,7 @@
       "label": "Booth (refer FF&E specs)",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 290,
+      "sort": 330,
       "src": "A700 keyed note 11",
       "trade": "FFE"
     },
@@ -880,9 +922,30 @@
       "label": "M4 Wall-mounted television at the media wall; 'coordinate power location with mounting hardware'",
       "qty": 1,
       "reliability": "HIGH",
-      "sort": 100,
+      "sort": 140,
       "src": "A901",
       "trade": "OWN"
+    },
+    "x_69d1b3725e": {
+      "category": "Paint",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "PT-04",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "A700's two Lounge elevations tag PT-04 (printed as a stacked '04' over 'PT'); ID-3.1's lounge views tag wallcoverings only. Finish-schedule area for PT-04 is the guest-suite door and frame \u2014 public use is not covered by the schedule area (same caveat as the Reception PT-04 draft line). Not carried in finishes.md \u00a75.2.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "Paint at the lounge walls",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "sort": 10,
+      "src": "A700 views 3 and 4",
+      "trade": "PT"
     },
     "x_93eb60340c": {
       "category": "FF&E - Misc",
@@ -901,7 +964,7 @@
       "label": "Complimentary print station",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 480,
+      "sort": 520,
       "src": "A700 keyed note 35",
       "trade": "GC/OWN"
     },
@@ -922,7 +985,7 @@
       "label": "Decorative floor inset / medallion at the lounge - UNTAGGED. No code, no pattern, no material, no supplier",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 80,
+      "sort": 120,
       "src": "ID-1.8 (blue dashed outlines)",
       "trade": "TILE"
     },
@@ -943,9 +1006,30 @@
       "label": "Art panels at the lounge and reception walls - mount 4'-4 1/2\" to centre of art (verbatim)",
       "qty": 1,
       "reliability": "FLAGGED",
-      "sort": 400,
+      "sort": 440,
       "src": "ID-3.1 view 3",
       "trade": "FFE"
+    },
+    "x_cb4586d89a": {
+      "category": "Ceiling",
+      "checked": false,
+      "checkedAt": null,
+      "checkedAtLocal": null,
+      "checkedByName": "",
+      "checkedByUid": "",
+      "code": "",
+      "deleted": false,
+      "derived": true,
+      "initials": "",
+      "instanceNote": "Plank size unresolved between the two RCPs: A120's legend/hatch reads the lobby feature panel as '6x48 ACT'; A510.2's legend lists 'Acoustic ceiling tile 8\" x 48\"' and its table gives the zone only as a raised ceiling. ID-1.6 tags the lobby ceiling 'By GC' at 9'-6\" with no system stated. Note the draft PT-07 line folds this 9'-6\" zone into ceiling PAINT \u2014 if the panel is ACT plank the paint extent is the gyp field only. Confirm system and plank size before ordering grid or plank.",
+      "issue": "",
+      "issueResolved": false,
+      "label": "ACT plank feature ceiling panel at the 9'-6\" raised zone over the lounge seating, zone approx. 22'-0\" x 15'-6\"",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "sort": 70,
+      "src": "A120; A510.2",
+      "trade": "GC"
     },
     "x_d3f95486b8": {
       "category": "FF&E - Art / Mirror",
@@ -964,7 +1048,7 @@
       "label": "Wall graphics / branded signage at the lounge and reception ('GRAPHICS' callouts)",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 410,
+      "sort": 450,
       "src": "ID-3.1 views 1 and 6",
       "trade": "FFE"
     },
@@ -985,7 +1069,7 @@
       "label": "Roller shade (refer FF&E)",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 370,
+      "sort": 410,
       "src": "A700 keyed note 6",
       "trade": "FFE"
     },
@@ -1006,7 +1090,7 @@
       "label": "Complimentary coffee / tea / water station",
       "qty": 1,
       "reliability": "MEDIUM",
-      "sort": 470,
+      "sort": 510,
       "src": "A700 keyed note 34",
       "trade": "GC/OWN"
     }

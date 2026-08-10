@@ -1,0 +1,38 @@
+{
+  "space": "003",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Painted gyp board ceiling — 8'-10\" field, 9'-0\" at the north bay by the restroom corridor; suspended GWB assembly per detail 02/A120",
+      "src": "A120; A510.2",
+      "reliability": "HIGH",
+      "trade": "GC"
+    },
+    {
+      "category": "Ceiling",
+      "label": "ACT plank feature ceiling panel at the 9'-6\" raised zone over the lounge seating, zone approx. 22'-0\" x 15'-6\"",
+      "src": "A120; A510.2",
+      "reliability": "FLAGGED",
+      "instanceNote": "Plank size unresolved between the two RCPs: A120's legend/hatch reads the lobby feature panel as '6x48 ACT'; A510.2's legend lists 'Acoustic ceiling tile 8\" x 48\"' and its table gives the zone only as a raised ceiling. ID-1.6 tags the lobby ceiling 'By GC' at 9'-6\" with no system stated. Note the draft PT-07 line folds this 9'-6\" zone into ceiling PAINT — if the panel is ACT plank the paint extent is the gyp field only. Confirm system and plank size before ordering grid or plank.",
+      "trade": "GC"
+    },
+    {
+      "category": "Paint",
+      "code": "PT-04",
+      "label": "Paint at the lounge walls",
+      "src": "A700 views 3 and 4",
+      "reliability": "MEDIUM",
+      "instanceNote": "A700's two Lounge elevations tag PT-04 (printed as a stacked '04' over 'PT'); ID-3.1's lounge views tag wallcoverings only. Finish-schedule area for PT-04 is the guest-suite door and frame — public use is not covered by the schedule area (same caveat as the Reception PT-04 draft line). Not carried in finishes.md §5.2.",
+      "trade": "PT"
+    },
+    {
+      "category": "Wall Covering",
+      "code": "WC-01.1",
+      "label": "Wallcovering at the lounge, tag as printed WC-01.1",
+      "src": "A700 view 4",
+      "reliability": "FLAGGED",
+      "instanceNote": "Tag printed on A700 Lounge view 4 (stacked '01.1' over 'WC'). No WC-01.1 card exists in the 67-card finish schedule (finishes.md conflict W-6 — no product, no supplier; not purchasable as-is), and ID-3.1's corresponding lounge views tag WC-11. Confirm with MWT whether WC-01.1 is a distinct product or a stale/variant tag before ordering.",
+      "trade": "WC"
+    }
+  ]
+}

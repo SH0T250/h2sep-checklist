@@ -1,0 +1,13 @@
+{
+  "space": "008",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Open to underside of floor system above - paint all elements; height tag 12'-3 3/8\"",
+      "src": "A120",
+      "reliability": "FLAGGED",
+      "instanceNote": "\u2691 System contested between two Rev-4 (08/09/24) sheets: A120 hatches Dry Storage 008 open-to-structure at 12'-3 3/8\" (legend: 'OPEN TO UNDERSIDE OF FLOOR / ROOF SYSTEM ABOVE - PAINT ALL ELEMENTS'); A510.2 tags 008 at 8'-0\" and ID-1.6 shows PT-07 at 8'-0\" - the reading the draft PT-07 line carries - and A513 view 2 draws a ceiling-fixture layout over 008. Whether 008 gets an 8'-0\" lid or exposed painted structure is unresolved - check A120 vs A510.2 / A513 view 2 before pricing either scope.",
+      "trade": "GC"
+    }
+  ]
+}

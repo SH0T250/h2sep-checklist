@@ -1,0 +1,13 @@
+{
+  "space": "005",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Painted gyp board ceiling, 8'-10\" AFF; 7'-0\" soffit/bulkhead at the market edge; suspended GWB assembly per detail 02/A120",
+      "src": "A510.2; A120",
+      "reliability": "MEDIUM",
+      "instanceNote": "A510.2 tags Market 005 at 8'-10\"; A120 shows the painted-gyp stipple with no discrete room tag (legend default 8'-10\" UNO) and a 7'-0\" tag whose leader points at the adjacent soffit/bulkhead. ID-1.6 instead shows ACB-01 (acoustical ceiling) at ~8'-10\" here — system conflict recorded in finishes.md §5.3/§5.4; finish schedule p.7 scopes ACB-01 to the Reception desk ceiling and A900 draws it there. Architectural RCPs govern (painted gyp); confirm no baffles are intended at Market before close-in.",
+      "trade": "GC"
+    }
+  ]
+}

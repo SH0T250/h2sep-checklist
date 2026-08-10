@@ -1,0 +1,22 @@
+{
+  "space": "006",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Painted gyp board ceiling, 8'-10\" AFF; ceiling access panel shown (rev-4 cloud)",
+      "src": "A120",
+      "reliability": "FLAGGED",
+      "instanceNote": "\u2691 Height contested between two Rev-4 (08/09/24) sheets: A120 tags Breakfast 006 at 8'-10\" (ID-1.6 agrees, 8'-10\"); A510.2 tags 9'-0\" with the 8'-2\" soffit at the servery edge - the reading the draft PT-07 line carries. System (painted gyp) agrees on all three sheets. Check A120 vs A510.2. Access panel: keyed note 5 (ISC CAP-1818, texture & paint to match adjacent ceiling) is NOT keyed to any location on A120 - confirm product and size with the EOR per the A120 flag.",
+      "trade": "GC"
+    },
+    {
+      "category": "Flooring",
+      "code": "T-01.1",
+      "label": "T-01.1 tile at the wall behind the dish recovery counter (M5)",
+      "src": "A901.1 elevation 2",
+      "reliability": "HIGH",
+      "instanceNote": "Printed tag on the A901.1 elevation (a tag ID-4.3 omits); extent not dimensioned. Sequence tile before the counter sets, or detail the scribe (A901.1 PM note 5). Room association via A100 - A901.1 carries no room number - same basis as the draft's M5 row.",
+      "trade": "TILE"
+    }
+  ]
+}

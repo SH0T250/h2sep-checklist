@@ -1,0 +1,39 @@
+{
+  "space": "004",
+  "items": [
+    {
+      "category": "Ceiling",
+      "label": "Painted gyp board ceiling, 8'-10\" AFF; suspended GWB assembly per detail 02/A120",
+      "src": "A510.2; A120",
+      "reliability": "HIGH",
+      "trade": "GC"
+    },
+    {
+      "category": "FF&E - Casegoods",
+      "code": "ACB-001",
+      "label": "M2 Acoustic baffle ceiling over the front desk — panel widths 9'-0\" approx. and 4'-0\" approx. (A900 view 07 'Front Desk - RCP Baffle Ceiling')",
+      "src": "A900 (governs); ID-4.1 and ID-3.1 view 3 corroborate; finish schedule p.7",
+      "reliability": "MEDIUM",
+      "instanceNote": "A900 draws the baffle with panel widths but states no material, finish, spacing or suspension (millwork.md gap; sequence framing/blocking > MEP > drywall Level 4 > baffle > desk). Finish schedule p.7 carries the card (MDC Zintra) under 'Reception Desk Ceiling'. Tag digits differ: A900 prints ACB-001, ID-4.1/ID-3.1/ID-1.6 print ACB-01 — carry ACB-001 as drawn. Location scatter recorded in finishes.md §5.3: ID-1.6 places ACB-01 at Market 005 and ID-3.1 view 3 shows it at the Lounge; A900 (architect, governs) draws it over the desk.",
+      "trade": "MW"
+    },
+    {
+      "category": "Paint",
+      "code": "PT-01",
+      "label": "Paint at the reception / desk wall",
+      "src": "A700 view 2",
+      "reliability": "MEDIUM",
+      "instanceNote": "A700 Reception view 2 tags PT-01 alongside PT-04 (tags printed as stacked number-over-abbreviation). Finish-schedule area for PT-01 is the guest-suite window-wall accent (fs p.22) — public use is not covered by the schedule area (same caveat as the draft's PT-04 line). Not carried in finishes.md §5.3.",
+      "trade": "PT"
+    },
+    {
+      "category": "Wall Covering",
+      "code": "WC-01.1",
+      "label": "Wallcovering at reception, tag as printed WC-01.1",
+      "src": "A700 views 2 and 6",
+      "reliability": "FLAGGED",
+      "instanceNote": "Printed on both A700 Reception elevations (stacked '01.1' over 'WC'). No WC-01.1 card exists in the 67-card finish schedule (finishes.md conflict W-6 — no product, no supplier; not purchasable as-is), and ID-3.1 views 2/6 tag WC-11 at the same walls (draft carries WC-11 HIGH). Confirm with MWT whether WC-01.1 is a distinct product or a stale/variant tag before ordering.",
+      "trade": "WC"
+    }
+  ]
+}
