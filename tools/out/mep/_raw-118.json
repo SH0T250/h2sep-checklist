@@ -1,0 +1,1014 @@
+{
+  "lines": [
+    {
+      "category": "Mechanical",
+      "mark": "PTAC-1",
+      "label": "PTAC — G.E. AZ65H12DAB, 11,900 BTU/h cool / 10,400 BTU/h heat, 449/300 CFM hi-lo, OSA 45.0 CFM, 208/1/60, in a through-wall sleeve",
+      "where": "Exterior window wall under the window. 118's window bay splits 3'-4\" / 6'-0\" / 8'-2 1/2\" (asymmetric, A552 plan 01) — the sleeve is NOT on the standard-room centreline. ST-01 quartz stool over it (A552 view 08).",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "M201 PTAC schedule · M301 1st-flr plan · M401 KN3 + detail 05 (King Std. Acc. Mod.) · M501 det.9 · A552 KN1/KN30 view 08 · AS103",
+      "instanceNote": "Mark is SETTLED for the King Studio family: M301 puts PTAC-1 at all 16 first-floor rooms and M401 does not call detail 05 out as PTAC-2 — both sources agree for 118. The composite 'PTAC-2 / PTAC-1' carry-both mark (packages/mechanical.md flag F4) applies ONLY to the 8 QQ rooms, not here. The DB grades this MEDIUM, but its MEDIUM is about sleeve geometry, not the mark. Also: the PTAC is the room's ONLY supply — no ceiling supply diffuser is shown in any guestroom on any mechanical sheet, so if you find one, raise it.",
+      "verifyAtPunch": "Read the nameplate — AZ65H12DAB, 208/1/60; run heat then cool from the wall control, no rattle in the sleeve."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "",
+      "label": "PTAC wall sleeve kit (furnished with the unit) — caulked all around, min 3-1/4\" AFF, plus the drywall closure at the PTAC-to-opening gap",
+      "where": "Through-wall at the exterior window wall.",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "M201 PTAC notes · M501 det.9 · AS103 PTAC through-wall detail",
+      "instanceNote": "AS103 requires a 'DRYWALL ENCLOSURE REQ'D. TO FINISH GAP BETWEEN PTAC AND WALL OPENING' — drywall scope, but it is what the walker actually looks at on the room side and it is a known easy miss at 115 keys.",
+      "verifyAtPunch": "Run a finger around the sleeve perimeter inside and out — continuous caulk, no daylight, no whistle; measure min 3-1/4\" AFF to the bottom of the sleeve."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "",
+      "label": "PTAC exterior louver / architectural wall grille at the window wall",
+      "where": "Exterior face of the PTAC sleeve, visible from outside and from the room through the unit's outdoor section.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "M201 PTAC notes · M501 det.9 · M401 KN1 · A200 keyed note 8 (= AS105 kn 8) · AS103 · size ref 'A-601' (not in the issued set)",
+      "instanceNote": "FIVE STATEMENTS, NO RESOLUTION. M201: 'polypropylene louver kit (color by architect)'. M501 det.9: 'aluminum architectural-style grille factory-painted to match exterior wall'. M401 KN1: 'furnished with unit; painted to match exterior wall'. A200 kn 8: 'ALUMINUM FIXED WINDOW … WITH INTEGRAL ALUMINUM LOUVER AT PTAC UNITS' — i.e. the glazing sub's buy, not a PTAC accessory. AS103: 'integral louver to be installed with window system'. Disagreement spans MATERIAL, FINISH METHOD and WHICH SUB BUYS IT — and polypropylene is moulded in colour so M201's product and M401's paint instruction may be physically incompatible. Compounding: the size reference A-601 does not exist in the issued set (set has A600 Doors, A610 Windows) — RFI R-04. SETTLES IT: one RFI to MWT / the M-EOR on material, finish, colour and scope, plus the A601→A610 correction. Record what is installed; do not write it up as wrong yet.",
+      "verifyAtPunch": "From outside — louver present, seated, fastened, blades straight, colour matching the elevation run; from inside — no daylight, no staining. Record the material actually installed."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "",
+      "label": "Interior architectural wall grille at the PTAC, painted to match the INTERIOR wall (M401 KN5)",
+      "where": "Room-side face of the PTAC / sleeve at the window wall.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "sheets-only",
+      "src": "M401 KN5 vs M401 KN1",
+      "instanceNote": "DB GAP — no row exists for this. M401 prints two nearly identical keyed notes: KN1 'grille painted to match EXTERIOR wall (typical for all PTAC units)' and KN5 'grille painted to match INTERIOR wall'. The sheet does not say whether that is ONE grille whose two faces are painted two colours, or TWO grilles. It decides whether there is a separate painted grille inside the room to inspect, and whose paint scope the room-side face is. SETTLES IT: same RFI as the exterior louver — ask the M-EOR whether KN1 and KN5 are one grille or two, and confirm who paints the room-side face and to which PT code. If no separate interior grille exists, RECORD that — the absence is what closes the flag.",
+      "verifyAtPunch": "Look at the room-side face of the PTAC/sleeve — record whether a separate grille is there; if yes, fastened, undamaged and painted to the adjacent interior wall finish."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "",
+      "label": "PTAC drain kit (furnished with the unit)",
+      "where": "At the PTAC base pan / sleeve, discharging to the condensate drain that runs down the wall.",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "M501 det.9 · M401 KN2 · M301 GN6 · AS103",
+      "instanceNote": "The piping downstream is plumbing scope (M401 KN2) and is concealed in the wall — that run is dropped as rough-in. The kit itself and its performance are testable at the unit, which is why this line is IN.",
+      "verifyAtPunch": "Run cooling long enough to make condensate — water leaves through the kit, none pooling in the pan, weeping into the room, or staining the wall below."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "",
+      "label": "PTAC fresh-air filter, MERV 13 or MERV 8, with bracket and gasket",
+      "where": "At the PTAC fresh-air / return-air path, behind the front grille.",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "M201 PTAC notes · M501 det.9",
+      "instanceNote": "M201 itself offers 'MERV 13 or 8', so either is compliant on its face — do NOT write up a MERV 8 as a deficiency without checking the approved submittal, and do not assume MERV 13.",
+      "verifyAtPunch": "Lift the front panel — filter seated in its bracket with the gasket sealing, clean, not bypassing; record the MERV printed on the frame."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "",
+      "label": "PTAC fresh-air kit (outside-air path delivering the scheduled 45.0 CFM OSA)",
+      "where": "At the PTAC outdoor section, reachable by opening the unit front.",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "origin": "db+sheets",
+      "src": "M201 PTAC notes ('low-ambient + fresh-air kits'); OSA 45.0 CFM from the M201 PTAC schedule",
+      "instanceNote": "M201's accessory sentence names BOTH a 'MERV 13 or 8 fresh-air filter w/ bracket & gasket' AND a 'fresh-air kit'. These may be one deliverable named twice or two separate G.E. accessories — the possible double-count with the filter line above is stated here, not resolved. SETTLES IT: the approved G.E. accessory submittal — is there a separate fresh-air-kit part number?",
+      "verifyAtPunch": "Open the PTAC front — outside-air damper present, moves freely, set OPEN not shut; have T&B read OSA against 45.0 CFM."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "",
+      "label": "PTAC low-ambient kit",
+      "where": "Internal to the PTAC — no sheet locates it.",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "origin": "db+sheets",
+      "src": "M201 PTAC notes; M201 operating range 55–115°F",
+      "instanceNote": "The ITEM is well established (M201 names it plainly) but no sheet says which component it is or where it can be seen, and it cannot be confirmed by sight in a finished room. Carried IN under the arguable-call rule because it is verifiable at a visible point — the accessory/model label inside the front panel. DB grades this HIGH; the sheets do not locate it, hence MEDIUM. SETTLES IT: the approved G.E. PTAC submittal accessory list matched to the installed unit's label.",
+      "verifyAtPunch": "Read the accessory/model label inside the PTAC front panel and write the text down — this is a documentation check, not a sight check."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "",
+      "label": "PTAC louvered access panel",
+      "where": "Not stated by any sheet — M201 names the accessory but does not say whether it is on the unit cabinet or in the wall/enclosure.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "M201 PTAC notes ('louvered access panel')",
+      "instanceNote": "M201 names it in the PTAC accessory sentence and NOTHING else in the mechanical set locates or details it. Whether it is a G.E. accessory on the unit or an architectural wall panel is NOT STATED. The DB carries it at HIGH, which the sheets do not support. Flagged rather than dropped because if it is a wall panel it is a visible, operable item in the finished room. SETTLES IT: the approved G.E. PTAC accessory submittal — if it is a G.E. part number it is a unit accessory; if not, it is an architectural panel nobody has drawn. If absent, RECORD it against the submittal before writing it up.",
+      "verifyAtPunch": "Look for a louvered panel at or around the PTAC — record present or absent; if present, fastened, operable, finished."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "",
+      "label": "PTAC edge above the carpet tiles (KN30) and the ST-01 quartz stool set over the unit",
+      "where": "At the PTAC, window wall — the carpet edge under the unit and the stone stool above it.",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "origin": "db+sheets",
+      "src": "M501 det.9 · A552 KN30 + view 08 (ST-01) · AS103 drywall closure",
+      "instanceNote": "ARGUABLE / SPLIT ROW. The DB row bundles the PTAC field-built sub-base — which is on Austin's explicit OUT list, buried under the unit and behind the drywall closure by the time the room is finished — with two things a walker CAN see: KN30 'EDGE OF PTAC ABOVE CARPET TILES' and the ST-01 stool over the unit. Only the visible part is emitted; the sub-base itself is dropped as rough-in.",
+      "verifyAtPunch": "Confirm the PTAC edge sits ABOVE the carpet tile, not on it; ST-01 stool level and not bearing on the cabinet; drywall closure at the sleeve gap finished and painted."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "T",
+      "label": "PTAC thermostat — 7-day programmable, hardwired (kn24 permits the thermostat-to-PTAC link to be wireless)",
+      "where": "Room wall near the PTAC / window wall; A552 view 04 places kn24. Exact location deferred to the architectural set by M401 KN4 and M301 GN5.",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "origin": "db+sheets",
+      "src": "M401 KN4 · M101 GN28/GN29 · M201 PTAC notes · M301 GN5 · A552 view 04 kn24 · G402 note 11 · G400 det 02 · E101 legend",
+      "instanceNote": "HEIGHT IS OPEN (coordination_issues C-03) but for 118 the accessible sources converge: A552 kn24 'MOUNTED 48\" MAX TO TOP OF DEVICE', M401 KN4 48\" in accessible rooms, G402 note 11 15\"–48\", G400 tops at 4'-0\". M401's 54\" is the NON-accessible value and does not apply here; E101's 60\" legend is the outlier. DO NOT write up a height deficiency — MEASURE AND RECORD to the top of the device. SCOPE: the thermostat is mechanical scope (M101 N28 — mechanical furnishes/installs the control and terminates the wiring, electrical furnishes and routes it), so it is emitted ONCE here and deliberately not repeated on the Electrical or Low Voltage lists.",
+      "verifyAtPunch": "Measure to the TOP of the device and record it; call heat then cool and confirm the PTAC responds; if the link is wireless, cycle twice to prove the pairing holds."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "",
+      "label": "Energy-management wall controller with occupancy sensor",
+      "where": "Wall-mounted at the PTAC / window wall. No mechanical sheet gives it a separate location — A552 view 04 kn24 is the only control device placed in the room.",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "origin": "db+sheets",
+      "src": "M201 PTAC notes · M301 GN5 · M401 KN4 · A552 view 04 kn24 · M602 Final Inspection (setback controls)",
+      "instanceNote": "M201's PTAC sentence names BOTH 'energy-management wall controller w/ occupancy sensor' AND '7-day programmable thermostat' as two phrases in one list. Whether that is ONE wall device (an EMS stat with a built-in sensor) or TWO separate wall devices is NOT STATED anywhere in the mechanical set. The architectural set places only ONE control device in the room (kn24), which leans to one, but that is the architect's sheet and is not conclusive. Do NOT write up a missing second wall device. SETTLES IT: the approved PTAC controls submittal — one part number or two.",
+      "verifyAtPunch": "Count the wall control devices at the PTAC — one or two; leave the room with the door shut, confirm setback, re-enter, confirm recovery."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "EAG-50",
+      "label": "Exhaust air grille, 50 CFM — the toilet/bath ceiling exhaust grille",
+      "where": "Bathroom ceiling, 7'-3\" AFF PT-07 painted gypsum hard lid (A552 view 02). A552 view 02 places keynote 19 'TOILET EXHAUST GRILLE'.",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "origin": "db+sheets",
+      "src": "M401 (EAG-50 with VD and FD) · M305 riser diagrams · A552 view 02 KN19",
+      "instanceNote": "'EAG-50' is a CALLOUT in M101's designation/CFM format (exhaust air grille @ 50 CFM), NOT a schedule mark — M201's Titus grille schedule has NO EAG-50 row; its exhaust-air-grille entry is mark E (Titus PSS-DF, 24×24 face, 6\"Ø neck, no damper). The crosswalk is deliberately left un-made (coordination_issues S-02), so do NOT check the installed grille against the 24×24 / 6\"Ø dimensions as if that were the spec. Tag recorded exactly as printed on M401.",
+      "verifyAtPunch": "Hold a tissue to the face — it holds; read airflow at the grille against 50 CFM and confirm the grille is square, seated and not paint-blinded."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "",
+      "label": "Aldes constant-airflow regulator at the 50 CFM ceiling exhaust inlet",
+      "where": "Immediately behind / above the EAG-50 grille in the bath ceiling.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "M305 exhaust-riser diagrams EV-1…EV-7 ('CEILING GRILLE EXHAUST 50 CFM c/w ALDES CONSTANT AIRFLOW REGULATOR') — the only source",
+      "instanceNote": "The item is real and named verbatim at every inlet M305 draws, but the COUNT is not supported by its only source: M305's seven riser totals sum to 2,450 CFM = exactly 49 inlets at 50 CFM, against roughly 119 needed (115 keys + 4 ice-machine alcoves) — 41% accounted for. Separately, three of four roof fans are scheduled BELOW the riser CFM assigned to them (EF-8 200 vs 350, EF-9 300–350 vs 650, EF-11 400–450 vs 850; only EF-10/EV-6 balances) — 850 CFM aggregate shortfall. Which EV riser serves 118 is also not determinable. qty 1 is the per-inlet reading, not a verified count. SETTLES IT: the M-EOR reconciling the EV riser schedule against room count and roof-fan capacity. Record present/absent — 16 first-floor data points is real evidence for that RFI.",
+      "verifyAtPunch": "Drop the EAG-50 grille — is a constant-airflow regulator behind it, yes or no? Record it; do not call absence a deficiency yet."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "EF-1",
+      "label": "Toilet exhaust fan — M201 schedules Panasonic FV-0511VK2, ceiling type, 50 CFM, 115/1/60, backdraft damper, off-white aluminium grille",
+      "where": "Bathroom ceiling at the toilet exhaust inlet — IF it is a physical in-room fan at all.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "M201 exhaust fan schedule (EF-1, remarks 1,2,3,5,6,9) · M202 · M301–M304 · vs M305 riser diagrams · E400 Panel A/B schedules",
+      "instanceNote": "MUTUALLY EXCLUSIVE READINGS (coordination_issues C-06). M201 schedules EF-1 as a real Panasonic ceiling fan with remark 3 'switch w/ room lights'; M202 and M301–M304 repeat it. M305's riser diagrams show each guestroom inlet as a PLAIN CEILING GRILLE + Aldes regulator on a central riser driven by roof fans EF-8…EF-11 — no in-room fan anywhere. E400's Panel A and Panel B guestroom schedules carry NO exhaust-fan circuit, which leans grille-only but is not conclusive (remark 3 would put a fan on the Lighting circuit and need no breaker). Do NOT order 115 units on this. THIS WALK CLOSES IT.",
+      "verifyAtPunch": "Look behind the bath ceiling grille and record what is there — fan housing, or bare duct to a riser. If a fan, operate it and confirm which switch runs it."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "VD",
+      "label": "Volume damper with locking quadrant at the toilet exhaust",
+      "where": "At the toilet exhaust branch. M401 does not dimension its position; M301 GN11 requires a balancing damper at each branch/runout.",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "origin": "db+sheets",
+      "src": "M401 (EAG-50 with VD and FD) · M101 legend + GN25/GN26 · M301 GN11 · M101 GN7",
+      "instanceNote": "ARGUABLE SCOPE, stated openly. If the VD sits at the grille neck it is reachable by dropping the EAG-50 and is plainly IN; if it sits further up the branch it is above the 7'-3\" hard PT-07 lid with NO access panel drawn on A552 view 02, and it becomes unreachable rough-in. No sheet says which. Carried IN because its EFFECT is tested at a visible point — the airflow reading at the grille — and because M101 GN7 requires access to it either way.",
+      "verifyAtPunch": "Drop the EAG-50 and look up the neck — damper with locking quadrant, set and locked, not wired shut or fully closed."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "WAG-30",
+      "label": "Wall air grille / make-up air diffuser, 30 CFM — the transfer/make-up air path to the bathroom",
+      "where": "CONTESTED. M401 says it makes up air to the bath. A552 places keynote 20 'MAKE-UP AIR DIFFUSER' NOWHERE — not on plan 01, RCP 02, finish plan 03, electrical plan 04 or elevations 05–08.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "M401 (WAG-30, 30 CFM, make-up to the bath; detail 05 = King Std. Acc. Mod.) · M301 GN13 · M101 legend · A552 — keynote 20 NOT placed · A550 KN20 and A555 KN20 (placed)",
+      "instanceNote": "ROOM 118 IS THE ROOM THAT TESTS THIS. M401 gives WAG-30 on the guestroom details including detail 05, the King Studio Acc. Mod., so the device IS sourced for 118 — but A552, 118's own architectural sheet, never places keynote 20 anywhere, while A550 (King Studio) and A555 (QQ) both carry it. Whether 118 genuinely has no make-up air diffuser or the keynote was simply omitted is NOT STATED. Also 'WAG-30' is a callout, not a schedule mark — no WAG-30 row exists in M201's Titus schedule (S-02), and A55x keynote 20 carries no tag. M301 GN13 permits a lined transfer duct OR a door undercut for make-up air under 50 CFM (M101 legend: UC 1/2\"), but no sheet places an undercut at a guestroom bath door. SETTLES IT: this walk plus the M-EOR confirming location and whether A552 omitted it.",
+      "verifyAtPunch": "Record whether a make-up air diffuser exists in 118 at all, and WHERE (bath wall vs bed/sofa wall); read airflow against 30 CFM."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "FD",
+      "label": "Ceiling fire / radiation damper at the rated floor-ceiling penetration — Ruskin CFD4, UL 555C, ceramic-fibre shroud, 3\"×3\" continuous angle to sleeve four sides",
+      "where": "In the bath ceiling directly above the EAG-50 grille, on the 4\"Ø toilet exhaust to the EV riser.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "M401 detail 05 · M301 GN3 · M501 det.2 · M101 GN7, GN31, GN32",
+      "instanceNote": "ARGUABLE — TWO EXTRACTORS SPLIT ON IT, so it is emitted rather than dropped. AGAINST (OUT): the damper body sits above the bath's 7'-3\" hard PT-07 gyp lid with NO access panel drawn on A552 view 02, which matches Austin's OUT example 'in-wall dampers with no access'. FOR (IN): M101 GN7 requires min 12\"×12\" access to dampers, M301 KN4 requires an access panel above the ceiling for HVAC maintenance, and M501 requires approved access plus a permanent exterior label in ≥1/2\" letters reading FIRE DAMPER — the drawings themselves require it to be reachable. If there is no access, the ABSENCE is the finding and it belongs on the access-panel line below. NOTE: E500 FA note 7 says fire dampers connect to an FA relay, but M501 det.2 shows the CFD4 as FUSIBLE-LINK with no actuator — do NOT write up a missing wire at the guestroom damper.",
+      "verifyAtPunch": "If access exists — CFD4 present, fusible link intact and not painted/taped/wired open, ceramic shroud in place, and HARD sheet metal at the damper (M501 det.2 forbids flex duct here)."
+    },
+    {
+      "category": "Mechanical",
+      "mark": "",
+      "label": "Access panel in the bath ceiling to the fire damper and volume damper — min 12\"×12\", with the permanent damper label required by M101 GN31/GN32",
+      "where": "Would be in the 7'-3\" PT-07 painted-gypsum bath lid at the FD/VD above it.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "sheets-only",
+      "src": "M101 GN7 · M301 Key Note 4 · M501 (fire/smoke damper access + permanent exterior label ≥1/2\" letters) · M101 GN31/GN32 · against A552 view 02 (keynotes 31, 18, 19, 8, 4, 1 — no access panel)",
+      "instanceNote": "DB GAP — no access-panel row exists on 118 or on any room. The REQUIREMENT is printed; only the PLACEMENT is missing. None of the ten A550–A556 guestroom RCPs draws an access panel, A552 view 02 included; the only flush-access-panel keynote anywhere in the A12x/A55x set is A121 keynote 5, at the ICE-MACHINE alcove. This is a real, repeating, 115-room omission, an RFI candidate, and a CO-inspection exposure — an inspector cannot verify a damper he cannot reach. qty 1 is the requirement, not a drawn count. SETTLES IT: RFI to the M-EOR/MWT asking where the guestroom bath damper access panel goes and who provides it; this walk supplies the 16-room evidence.",
+      "verifyAtPunch": "Look at the bath ceiling — access panel yes or no? If no, photograph the intact lid and write it up. Cut nothing."
+    },
+    {
+      "category": "Electrical",
+      "mark": "PNL \"B\"",
+      "label": "Guestroom panelboard PANEL \"B\" — 100 A MCB, 120/208 V 1Ø 3W, NEMA 1, COPPER bus, Square D / GE / Cutler-Hammer",
+      "where": "Bedroom (E400 prints 'Location: Bedroom'); A552 view 04 places kn51 'ELECTRICAL PANEL'. Fed from first-floor distribution Panel 1G.",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "E400 Panel \"B\" schedule + panel notes 1–4 · E103 Typical Guest Rooms Load Analysis · E101 spec #10 · A552 view 04 kn51 · E103.2 (Panel 1G)",
+      "instanceNote": "118 is a Panel \"B\" room — Panel B is the accessible / motorized-shade guestroom, adding the 114 VA Motorized Shade circuit and splitting the microwave/hood into 700 VA + 300 VA range hood (E103). The DB carries all thirteen branch circuits plus the feeder as separate rows; those are concealed rough-in and are NOT emitted as their own lines — the walker verifies every one of them HERE, at the breaker. A load center is a rejection (E101 spec #10).",
+      "verifyAtPunch": "Open the panel — 100 A main, copper bus, directory legible; confirm Lighting, Conv. Receptacles, Bath GFCI, Refrigerator, Disposer, Dishwasher, Microwave/Hood 700+300, PTAC, Small Appliance #1/#2, MOTORIZED SHADE and a spare are all present; trip and reset every AFCI and the GFCI breaker; NEC 110.26 clearance not blocked by FF&E."
+    },
+    {
+      "category": "Electrical",
+      "mark": "",
+      "label": "Bathroom light switch with integrated LED night light — top of switch 48\" MAX AFF (kn3)",
+      "where": "Bath, at the door. May share a common 4\"x4\" box and one cover plate with the bath GFCI (G402 GN1; E400 GN2).",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "A552 view 04 kn3 · E400 Keyed Note 1 · A530 elev 03 kn24 · G402 GN1",
+      "instanceNote": "kn3 IS in A552 view 04's placed keynote list, so this is sourced for 118. Note that A532.1 — the roll-in-shower elevation set 118's bath bubble points at — carries NO kn24 'LED NIGHT LIGHT' and no kn13 GFCI; the requirement survives through A552 kn3, G402 GN6 and the Panel B bath-GFCI circuit, but the elevation that would locate them does not exist for the roll-in configuration. 48\" is the one height the drawings state as a hard MAX, and it is an accessibility item.",
+      "verifyAtPunch": "Switch off — the night-light LED glows; measure the top of the switch, must be ≤48\" AFF."
+    },
+    {
+      "category": "Electrical",
+      "mark": "",
+      "label": "Bathroom GFCI duplex receptacle, tamper-resistant, 20 A — on a SIDEWALL of the water basin",
+      "where": "Bath, on a SIDEWALL of the lavatory (G402 GN6 verbatim: 'A GFCI/ELCB/RCCB OR EQUAL DUPLEX OUTLET MUST BE LOCATED ON A SIDEWALL OF THE WATER BASIN') — not on the wall behind the basin.",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "origin": "db+sheets",
+      "src": "G402 GN6 + G400 schedule note 6 · A532 elev 03 kn13 · E400 Panel B 'Bathroom GFCI' + panel note (4) · E101 legend + spec #25",
+      "instanceNote": "The REQUIREMENT is HIGH (G402 GN6 plus the Panel B bathroom-GFCI circuit). The LOCATION on 118 is MEDIUM: A532 places kn13 on elevation 03, which belongs to the TUB plan, while A552's bath bubble points at plan 01.1 ROLL-IN SHOWER whose elevations are A532.1 views 01/02/03 — and A532.1 carries NO kn13. HEIGHT IS OPEN — 12\" (A530–A533 General Note D, byte-identical on five bath sheets) vs 18\" (E101 spec #18, E101 legend, G400 det 02). RECORD the height, do not judge it. Do not accept a GFCI breaker as a substitute for the device without an EOR answer.",
+      "verifyAtPunch": "Press TEST then RESET — it trips, resets and actually kills the receptacle; confirm it is on a SIDEWALL of the basin; record the mounting height."
+    },
+    {
+      "category": "Electrical",
+      "mark": "",
+      "label": "Garbage-disposal switch ganged with a duplex receptacle (kn14) — accessible reach per HADG",
+      "where": "Kitchenette / working wall at the sink. On 118 the switch must sit inside the 15\"–48\" guest-control band (G402 note 11 / A530 GN F).",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "A552 view 04 kn14 + kn15 · E400 Panel B 'Disposer' circuit · E103 (Disposer 480 VA)",
+      "instanceNote": "kn14 IS in A552 view 04's placed list and its own text points at the HADG for accessible-room requirements — that is the 118-specific part. kn15 (dedicated disposer circuit) is verified at the panel line, not here.",
+      "verifyAtPunch": "One gang, one plate; the switch kills the disposer; measure the switch centreline against 15\"–48\" AFF."
+    },
+    {
+      "category": "Electrical",
+      "mark": "",
+      "label": "3-way \"welcome\" light switch at the bed location — centreline 2'-5\" (29\") AFF",
+      "where": "Bed wall / bed location, centreline 2'-5\" AFF, reachable from the bed.",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "G400 detail 02 ('3-WAY WELCOME LIGHT SWITCH — ACCESSIBLE GUESTROOMS @ BED LOCATION')",
+      "instanceNote": "ACCESSIBLE KEYS ONLY. On floor 1 this is ROOM 118 AND NOWHERE ELSE — it is not printed for the other 15 rooms, so do not look for it there and do not write them up for missing it.",
+      "verifyAtPunch": "Both 3-way locations operate the same load from either point; measure the centreline at 2'-5\" AFF; reachable from the bed."
+    },
+    {
+      "category": "Electrical",
+      "mark": "",
+      "label": "Accessible-reach check — at least one guest OUTLET and one DATA connection between 15\" and 48\" AFF with compliant clear floor area",
+      "where": "Guest circulation area of 118, with a 30\"x48\" clear floor space at each. A552 plan 01 draws TWO required accessible clear-floor circles (bath and main room).",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "A530–A533 GENERAL NOTES note G (verbatim) · G402 note 11 · A530 GN F and GN H · E400 GN #7",
+      "instanceNote": "ACCESSIBLE KEYS ONLY — room 118 is the only floor-1 key this applies to. Walk it AFTER the FF&E is set: the sleeper sofa (GR-101) and the ottoman (GR-100) are what usually kill the clear floor area, and A552 draws two clear-floor circles that constrain the furniture footprint.",
+      "verifyAtPunch": "Measure — one outlet AND one data jack with centrelines inside 15\"–48\" AFF, each with 30\"x48\" clear floor, walked with the furniture in place; nothing in the circulation path 27\"–80\" AFF protrudes more than 4\"."
+    },
+    {
+      "category": "Electrical",
+      "mark": "",
+      "label": "Outlet for undercabinet lighting (kn50) — the light fixture itself is BY OTHERS",
+      "where": "Accessible working wall, under the upper cabinet/shelf.",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "A552 view 04 kn50 (placed) · A550 line 165 (legend only) · packages/electrical.md §5.1.1 repair CR-2",
+      "instanceNote": "kn50 IS in A552 view 04's placed keynote list. ACCESSIBLE KEYS ONLY — repair CR-2 restricts kn50 to the 7 accessible keys after it had wrongly been booked on all 115, so on floor 1 this is room 118 alone. Only the OUTLET is in scope; the undercabinet fixture is by others and must not be charged to the EC. Note the DB still carries this outlet on room 104 (King Studio) at HIGH, which the drawings never placed — do not punch the other 15 first-floor rooms for it.",
+      "verifyAtPunch": "Outlet present under the accessible working-wall cabinet and powered; confirm the fixture is by others."
+    },
+    {
+      "category": "Electrical",
+      "mark": "",
+      "label": "Hardwired blackout roller shade — NO exposed wires at the head (kn49), on the Panel B 114 VA motorized-shade circuit",
+      "where": "Window wall head, over the PTAC/window. GR-401 is the motorized (ADA) shade; A552 view 08 shows 6\" shade overrun each side.",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "A552 view 04 kn49 (placed, verbatim 'HARDWIRED BLACK OUT ROLLER SHADE WITH NO EXPOSES WIRES' [sic]) · E400 Panel \"B\" motorized-shade circuit · E103 rows 4/5/8/9/11 (114 VA) · A550 kn4 (GR-400 manual / GR-401 motorized)",
+      "instanceNote": "The shade fabric and hardware are FF&E (GR-401); only the hardwired connection and the no-exposed-wires requirement are electrical. The motorized-shade circuit exists ONLY on Panel B, i.e. only on the accessible keys — the other 15 first-floor rooms carry manual GR-400 shades and no shade circuit.",
+      "verifyAtPunch": "Drive the shade fully up and down from its control; NO exposed wires anywhere at the head; power terminated in a box, not a lamp cord."
+    },
+    {
+      "category": "Electrical",
+      "mark": "",
+      "label": "Switch controlling the mechanical (motorized) shade (kn35)",
+      "where": "Not dimensioned on A552. If it is a wall switch it must sit inside the 15\"–48\" guest-control band on 118.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db-only",
+      "src": "A550 keynote legend line 152 (kn35 'SWITCHES CONTROLLING MECHANICAL SHADES - REFER TO FFE MANUAL') — legend printed on A552 but kn35 NOT in A552 view 04's placed list",
+      "instanceNote": "DB-ONLY. The DB carries this at HIGH, but A552 view 04's placed keynote list is 3, 10, 14, 15, 16, 24, 25, 28, 45, 46, 47, 49, 50, 51 — kn35 is NOT in it, although kn35 is defined in the legend printed on A552 and is placed on the other accessible sheets. kn35 itself defers to the FFE manual, so the control may be an FF&E handheld rather than a wall switch. SETTLES IT: read A552 view 04 on the source PDF, or the FFE manual kn35 points to. Do not write up a missing wall switch until then.",
+      "verifyAtPunch": "Record what actually controls the shade — wall switch or handheld; if a wall switch, measure it against the 15\"–48\" band."
+    },
+    {
+      "category": "Electrical",
+      "mark": "",
+      "label": "Receptacle above for the microwave — mounted HORIZONTALLY, WHITE face plate (kn36)",
+      "where": "Working wall above the microwave, concealed by the appliance per the room elevation.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db-only",
+      "src": "A550 kn36 + elevs 05/09 and A555 views 04/04.1 (placed) — NOT in A552 view 04's placed list · A552 view 01 kn11 (range-top microwave affixed to wall, PLACED) · E103 accessible 700+300 VA split",
+      "instanceNote": "DB-ONLY AND THE SHEETS TELL TWO STORIES. The DB carries kn36 on 118 at HIGH, but A552 view 04's placed keynote list does not include kn36 (A550 and A555 both do). Cutting the other way, A552 view 01 DOES place kn11 'RANGE TOP STYLE MICROWAVE AFFIXED TO WALL', which argues an outlet above it exists. Cutting back again, E103 gives accessible keys a 700 VA microwave/hood + 300 VA range-hood split consistent with a COUNTERTOP microwave (kn40), and the DB's own Appliance row for 118 is a countertop Danby DBMW1126BBS at FLAGGED (PH-GU-023). SETTLES IT: read A552 view 04 and elevation 05 on the source PDF plus the appliance transmittal. WHITE is the only device colour the drawings state anywhere in the set.",
+      "verifyAtPunch": "Is there an outlet above the microwave? If yes — mounted HORIZONTALLY, WHITE plate, cord hidden. Record whether the microwave is wall-affixed or countertop."
+    },
+    {
+      "category": "Electrical",
+      "mark": "",
+      "label": "Convenience duplex receptacles throughout the room — tamper-resistant, 20 A, Hubbell or approved equal",
+      "where": "Per A552 view 04's device-spacing string: 8'-1\", 7'-2\", 6'-5\", 3'-3\", 2'-10\", 1'-10 1/2\", 1'-10\", 1'-6\", 1'-4\", 1'-2\", 1'-1\", 10\"/10\", 10\"/1'-0\", 9\", 6\", 4\". Heights per the room elevations.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "E400 (device layout, counts on PDF only) · E101 spec #18, #25, #14, GN #6/#10 · G400 det 02 · A552 view 04 · A530 GENERAL NOTES note D",
+      "instanceNote": "COUNT IS NOT STATED ANYWHERE — qty 1 is the no-guessing placeholder, NOT a count. E400 and A552 view 04 are the only device layouts and their counts live on the source PDFs (PH-GU-015; packages/electrical.md open item 14, 'no takeoff attempted'). Somebody must pull the count off those PDFs before the walk or the walker has no baseline. HEIGHT IS ALSO OPEN — 12\" (A530–A533 note D, byte-identical on five bath sheets) vs 18\" (E101 spec #18, E101 legend, G400 det 02 'ALL RECEPTACLES SHALL BE 18\" A.F.F. UNLESS NOTED OTHERWISE'). Record the as-built height; do not call 12\" or 18\" a defect until the EOR answers (C-03).",
+      "verifyAtPunch": "Plug-test every outlet for polarity and ground; tamper-resistant shutters visible and 20 A rated; trip the AFCI at the panel and confirm it kills the circuit; RECORD the count and the height."
+    },
+    {
+      "category": "Electrical",
+      "mark": "S21",
+      "label": "S21 — surface-mount ceiling downlight, guest bathroom — Cooper Halo SMD6R69SWH LED (or architect-approved equal)",
+      "where": "Bath ceiling, 7'-3\" AFF PT-07 on moisture-resistant rated board (A552 view 02; G402 GN8; E400 GN6).",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "E101 Lighting Fixture Schedule row S21 (verbatim) · E400 · E201",
+      "instanceNote": "Fixture IDENTITY is HIGH — the E101 row is verbatim. COUNT is NOT STATED: E101's per-type Qty column was not transcribed and A552 view 02's RCP shows ceiling fixtures graphically only (its transcribed keynotes are 31, 18, 19, 8, 4, 1). qty 1 is the placeholder. S21 is SURFACE mount and CANNOT satisfy the separate recessed wet-location shower fixture (kn18) — confirm it was not installed in its place. Every fixture is 'or approved equal' verified by architect/owner before install, and a substitution also requires a COMcheck re-run (E800/E801).",
+      "verifyAtPunch": "Operates from the bath switch; canopy tight to the moisture-resistant board with no light leak; count and record."
+    },
+    {
+      "category": "Electrical",
+      "mark": "",
+      "label": "Recessed WET-LOCATION ceiling light at the shower, with shatter-proof lens (kn18) — no fixture mark, make or model exists anywhere in the set",
+      "where": "Bath ceiling directly over the shower compartment, 7'-3\" AFF. A552 view 02 places kn18.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "A552 view 02 kn18 (verbatim 'RECESSED CEILING LIGHT FOR WET LOCATIONS W/ SHATTER PROOF LENS') · E101 spec Note (1) NEC 550.14(D) · E400 GN #5 · G402 general note 5",
+      "instanceNote": "FLAGGED ON TYPE, NOT EXISTENCE. kn18 is placed on 118's own RCP, but E101's 22-row Lighting Fixture Schedule contains NO recessed wet-location guestroom-bath type — S21 is the only guest-bath row and it is surface mount, so nothing on the schedule can satisfy kn18 (packages/electrical.md open item 3 — RFI to the EOR). WHAT IS ENFORCEABLE TODAY: wet-location listed per NEC 550.14(D), damp-rated over wet areas, shatterproof lens. WRITE DOWN the installed make/model — that observation is what closes the RFI, since the drawings never name one.",
+      "verifyAtPunch": "Fixture over the shower operates; lens shatter-proof and gasketed, trim sealed to the ceiling board; UL WET-location listing legible; record the make/model."
+    },
+    {
+      "category": "Electrical",
+      "mark": "WS03",
+      "label": "WS03 — wall sconce at the guest-bath vanity — Arkansas Lighting 3550V LED (or architect-approved equal)",
+      "where": "Bath, on the vanity/mirror wall above the accessible vanity. A532 kn12 'VANITY MIRROR AND LIGHT FIXTURE'; blocking called out on A530 view 02i.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "E101 Lighting Fixture Schedule row WS03 (verbatim) · E400 · A532 kn12 on plan and elev 04 · A530 blocking view 02i",
+      "instanceNote": "Fixture IDENTITY is HIGH; COUNT is never printed (kn12 is placed once on plan and once on the vanity elevation, which reads as one, but no sheet states it) — qty 1 is the placeholder. OPEN BUYOUT CONFLICT: E101 schedules WS03 as a base-build ELECTRICAL fixture while the FF&E set schedules GR-203 'VANITY SCONE' [sic] on every bath sheet — almost certainly ONE physical fixture carried in two packages (packages/electrical.md open item 4; concept_wiki LC-6). Make sure the FF&E punch list and this one do not both write it up.",
+      "verifyAtPunch": "Level and centred on the vanity/mirror; lamps operate from the bath switch; canopy tight to the wallcovering, no exposed fasteners."
+    },
+    {
+      "category": "Electrical",
+      "mark": "",
+      "label": "Entry / closet / general room lighting fixture(s) — NO type, mark, make or model is named on ANY sheet",
+      "where": "Entry / kitchenette leg (7'-3\" ceiling) and the closet. Not dimensioned on any transcribed view.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "E400 (fixtures present, untyped) · E201 ('entry/closet lights') · A555 view 04 printed note 'CENTER OVER CLOSET' · E101 Lighting Fixture Schedule (no guestroom entry/closet/general row)",
+      "instanceNote": "The fixture is REAL — E400 shows it, E201 names it, and A555's own electrical plan prints 'CENTER OVER CLOSET' — but its TYPE IS NEVER NAMED anywhere, and E101's schedule carries only two guestroom rows (S21 bath, WS03 vanity). Count is also not stated; qty 1 is the placeholder. packages/electrical.md open item 2 — RFI to the EOR. Do NOT guess a type and do NOT write it up as missing. Note G402 GN3 requires a ceiling light and a fan to be switched SEPARATELY.",
+      "verifyAtPunch": "Walk entry, kitchenette leg and closet — record how many fixtures, what type, and the make/model off the label; each operates from a switch."
+    },
+    {
+      "category": "Electrical",
+      "mark": "",
+      "label": "Extended J-box with device and cover plate FLUSH with the millwork back panel (kn25)",
+      "where": "Working wall at the GR-307 accessible working-wall millwork back panel. Elevation note governs: 'ALIGN WALL DEVICES (CT OF SOFIT) (TYP.)'.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "A552 view 04 kn25 (placed) · A550 keynote legend line 145 · A550 POWER & SIGNAL LEGEND 'J BOX (J)'",
+      "instanceNote": "The ITEM is HIGH — kn25 is in A552 view 04's placed list. QUANTITY IS NOT STATED: the J symbol is a graphic on the plan and elevations, and A550's own extraction records that which device symbol sits at each dimensioned point is readable only by inspecting the PDF. qty 1 is the placeholder — count them off A552 view 04 and elevation 05 before the walk. What the J-box feeds is also not stated (candidates on the working wall: the GR-204 sconce at the wall hook, the TV, the desk) — record it.",
+      "verifyAtPunch": "Device and cover plate finish FLUSH with the millwork back panel, aligned on the soffit centreline; box supported off blocking, not the millwork; whatever it feeds is live."
+    },
+    {
+      "category": "Electrical",
+      "mark": "",
+      "label": "Wiring devices and cover plates generally — Hubbell or approved equal, 20 A, colour/style coordinated with the architect",
+      "where": "Every device in the room and bath.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "sheets-only",
+      "src": "E101 spec #14, #20, GN #2, GN #10 · A550 kn36 (WHITE plate at the microwave outlet) · G402 GN1 and E400 GN #2 (switch + GFCI may share one 4x4 box and one plate)",
+      "instanceNote": "DB GAP — no row exists for devices/plates as a set, yet mismatched plates is the classic guestroom punch item. The ONLY device colour printed anywhere in the set is WHITE, and only at the microwave outlet (kn36); everywhere else E101 spec #14 says 'coordinated with architect' and E101 GN #2 says clarify the brand with the franchise/owner before ordering, with no colour, series or plate style named. There is nothing to punch a colour against until Triun produces the approved wiring-device submittal — that submittal is what settles it.",
+      "verifyAtPunch": "One consistent colour and series across room, bath and down the corridor; plates flat, square and tight with no drywall gaps or paint bridging; ganged devices under a single plate; devices marked 20 A."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "WC-3 / WC-4",
+      "label": "Water closet, floor outlet, tank type, 1.28 GPF — WC-3 American Standard Champion Pro 211AA.104 ('Guestroom, Floor Outlet, ADA') / WC-4 Cadet Pro 215CA.104; seat AS 5257A.65C.020 slow-close elongated",
+      "where": "Bath, toilet wall. A530 plan 01 dimensions the toilet centreline 1'-6\" off the wall; A532 elevation 03 prints 17\" MIN / 19\" MAX side clearances at 118.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "P104 rows WC-3 and WC-4 · P401/P402 unit plans (both marks printed together) · A530/A532 kn 19 TOILET and kn 21 tank lever",
+      "instanceNote": "WHICH MARK GOES WHERE IS NEVER ASSIGNED — P401/P402 print 'WC-3 / WC-4' as a pair and no source says which room type gets which; P104's descriptions imply the ADA key gets WC-3 (Champion Pro) but no sheet states it (PH-GU-004). ALSO: NO SHEET IN THE SET STATES A GUESTROOM WATER-CLOSET SEAT HEIGHT — A530 prints only the 1'-6\" centreline and A532's 17\" MIN / 19\" MAX is toilet side clearance, not seat height. Do NOT write a seat-height dimension on the punch sheet. 118-SPECIFIC: kn 21 applies — 'LEVER REQUIRED ON THE SIDE OF TANK OPPOSITE INSIDE CORNER OF WALL'.",
+      "verifyAtPunch": "Flush and refill — full flush, clean refill, no run-on; lever on the side of the tank OPPOSITE the inside wall corner; bowl does not rock; record the model actually installed."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "L-2 / L-3 / L-4",
+      "label": "Lavatory bowl, undermount rectangular — Decolav Callensia 1402-CWH (marks carried both ways: P401/P402 print L-2, P104 schedules L-3 / L-4)",
+      "where": "Bath, undermount in the ACCESSIBLE vanity top at 118 (A532/A532.1 kn 6 accessible vanity unit, kn 8 clear area of sink/vanity; mirror at 3'-4\" to reflective surface). Vanity top 2'-10\" MAX.",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "P104 rows L-3 and L-4 · P401/P402 unit plans mark L-2 · A532 / A532.1 kn 6 and kn 8",
+      "instanceNote": "MANDATORY DUAL MARK CARRY (conflicts.md B3.1, OPEN). P104's own L-2 is the EMPLOYEE/POOL wall-hung lav (Decolav Lilac 1819W-1P-CWH with a battery Delta faucet) — order off the plan mark and the wrong lavatory arrives. The PRODUCT is HIGH (P104 vector text); only the mark is contested. The vanity casework itself is FF&E (GR-303 accessible vanity, which is defined in the legend but never actually placed on A532/A532.1 — PH-GU-007), not this line.",
+      "verifyAtPunch": "Bowl level and flush to the underside of the top, no chips; continuous silicone bead with no gaps at the corners; fill and drain, then wipe the trap and both stops with tissue for weep."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "",
+      "label": "Lavatory faucet — Delta 581LF-GPM-PP, manual, 1.0 GPM, less 3-hole escutcheon",
+      "where": "Accessible vanity deck, 3-hole spread; vanity top 2'-10\" MAX AFF.",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "P104 REMARKS on rows L-3 and L-4",
+      "instanceNote": "Scheduled as trim on the L-3/L-4 rows; it carries no mark of its own. THE DECK HOLE COUNT IS THE TELL for the unapproved substitution on the next line — P104's Delta is a 3-HOLE trim, the proposed Moen is SINGLE-hole. On 118 the accessible-control rules apply (A530 GN F: 15\"–48\" AFF, 30\"x48\" clear floor, ≤46\" over an obstruction deeper than 10\", no tight grasping/pinching/twisting).",
+      "verifyAtPunch": "Full handle travel, hot on the left, no drip at the spout or under the deck after 60 s; aerator reads 1.0 GPM; COUNT THE DECK HOLES — 3 = as designed, 1 = the unapproved substitution."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "",
+      "label": "WATCH — NOT-APPROVED substitution: American Standard Studio undercounter bowl 0614.000 / 0614.300 / 0618.000 + Moen M·Dura 9417F12 / 9419F12 single-handle, single-hole, 1.2 gpm",
+      "where": "n/a — carried so a walker who finds a single-hole Moen deck knows it is not the approved fixture.",
+      "qty": 0,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "S4 product data (American Standard Bathroom Vanity Sink.pdf; Moen Bathroom Vanity Faucet.pdf) — superseded by nothing; the row of record stays P104 L-3/L-4",
+      "instanceNote": "qty 0 — NOTHING on this row is approved for installation in any room. The fixture of record is P104: Decolav Callensia 1402-CWH + Delta 581LF-GPM-PP. The American Standard sheet offers THREE models with none ticked; the Moen sheet offers TWO with neither ticked; there is no transmittal, no stamp and no completed 'To Be Specified' block. Under the precedence chain a catalogue page with no selection and no stamp is not a submittal, so it does not enter the chain and supersedes nothing. If it is ever ticked and stamped it changes the countertop cutout from 3-hole to 1-hole on 115 vanity tops (OPEN_ITEMS A3).",
+      "verifyAtPunch": "If you see an American Standard Studio bowl or a single-handle single-hole Moen — STOP, photograph the deck hole pattern and log it as an unapproved substitution."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "SH-1 / SH-3",
+      "label": "CONFIGURATION B — ROLL-IN SHOWER, guestroom ADA — Kohler Rely, 30\"x60\" pan, CENTRE drain, NO threshold, Delta T24859 supply; roll-in geometry 5'-0\" clear x 2'-6\" min, entry lip 1-1/2\" / 6-1/2\" MAX; curbless slab depression",
+      "where": "Bath of 118. A552 plan 01 gives 9'-3\" clear at the bath and its bath bubble reads 01.1 / A-532 = PLAN - ROLL IN SHOWER, whose elevations are A532.1 views 01/02/03. Finish plan 03 tags T-02 'ROLL-IN SHOWER TILE'.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "P401/P402 mark SH-1 · P104 row SH-3 · A532 plan 01.1 · A532.1 views 01/02/03 · A552 plan 01 kn 5 + kn 6 and finish plan T-02",
+      "instanceNote": "MUTUALLY EXCLUSIVE with the BT-1 tub line below — only ONE gets built at 118 and the set does not say which. OPEN on all 7 accessible keys: conflicts.md A11 / B4.4 and coordination_issues C-01. POSITION B (roll-in): A552 plan 01 draws it with THREE independent agreeing callouts — kn 5 tempered-glass enclosure, kn 6 floor drain and finish-plan T-02 'ROLL-IN SHOWER TILE' — and 118 is the ONE key where the enlarged plan is internally consistent for a roll-in. COMPOUNDING: coordination_issues C-02 / PH-GU-016 — plumbing NEVER DREW a King Studio Acc. Mod. unit plan; P401/P402 carry seven views and none is the Mod., so which of views 02 or 04 governs 118 is not stated and 118's rough-in is unsourced on the plumbing side. Dual mark carry per B3.1: the plans print SH-1, P104 schedules SH-3, and P104's own SH-1 is the 36\"x36\" EMPLOYEE shower. Only Austin closes this — RECORDING WHICH CONFIGURATION WAS BUILT IS THE POINT OF THIS LINE.",
+      "verifyAtPunch": "FIRST record and photograph which configuration was built. If roll-in — 30\"x60\" pan, CENTRE drain, NO threshold; measure 5'-0\" clear x 2'-6\" min and the entry lip against 1-1/2\" / 6-1/2\" MAX; flood the pan, no ponding, no water escaping, and the curbless transition rolls flush."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "BT-1",
+      "label": "CONFIGURATION A — BATHTUB, guestroom ADA — American Standard Princeton 2390.202, Delta T14261 / R10000-UNWS trim, removable wall-mounted tub/shower seat (kn 7); tub-rim band 17\" MIN / 19\" MAX",
+      "where": "Bath of 118, tub wall. A532 plan 01 (PLAN - TUB) gives 5'-6 3/4\" and 5'-0\" CLEAR at the tub; grab-bar band MIN 33\" / MAX 36\"; shower controls MIN 8\" / MAX 10\" above the rim (elevation 05).",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "P104 row BT-1 · A100 Guestroom Matrix :85 (118 = T) · G001 Guestroom Matrix :91 (118 = T) · A100 footer :99 / G001 footer :105 (5 tub / 2 shower provided) · G100.2 §1107 · A532 plan 01 + elevations 02/03/04/05 · A533 · P401/P402 accessible plans 02/04/07",
+      "instanceNote": "MUTUALLY EXCLUSIVE with the roll-in line above. POSITION A (tub): BOTH unit matrices mark 118 'T' — A100 `King Studio ACC MOD, CD` 1st = 1 T and G001's same row = T — and both footers plus G100.2 §1107 provide 5 tub + 2 roll-in across the 7 accessible keys, with P401/P402's accessible plans generally showing a tub. conflicts.md A11 verbatim: 'Do not order the 438 bath package off either matrix.' Neither position is adopted here; both are emitted so neither is silently dropped. Under Config A the trim set changes: HD-05 BOWED shower rod (not the straight HD-5.1), NO diverter and NO hand shower. NOTE THE HISTORY: this conflict has been silently closed by a package twice already, both times the same wrong way.",
+      "verifyAtPunch": "If a tub was built — confirm Princeton 2390.202 with Delta T14261 / R10000-UNWS; measure the rim against 17\" MIN / 19\" MAX; removable tub/shower seat present and wall-mounted; fill and drain, overflow does not leak, stopper holds."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "kn 9",
+      "label": "Shower head — trim Delta T24859",
+      "where": "Shower/tub wall. A530 elevation 05 prints wall heights 6'-8\" / 5'-0\" / 3'-5\" on this wall; kn 9 is placed on A532 plan 01 and 01.1 and on the elevations.",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "A530–A533 BATHROOM KEYED NOTE 9 · A532 / A532.1 · P104 REMARKS on SH-3 / SH-4 (Delta T24859)",
+      "instanceNote": "Do NOT put a GPM number on the punch sheet for the guestroom head — P104's 2.5 GPM is printed on the SH-1 row, which is the 36\"x36\" EMPLOYEE shower; the guestroom rows SH-3/SH-4 reference the same Delta T24859 supply but do not repeat a flow figure.",
+      "verifyAtPunch": "Secure to the arm, escutcheon tight to SS-01, even spray with no blocked jets, swivels and holds; run 60 s and check for weeping at the arm penetration."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "kn 14",
+      "label": "On/off PRESSURE-BALANCING (anti-scald) valve — Delta T24859 / R22000-WS family",
+      "where": "Shower/tub control wall. On 118 A532.1 view 02 prints MAX 6\" at the control location and A532 elevation 05 prints the shower-control band MIN 8\" / MAX 10\" above the rim.",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "A530 kn 14 · A532 elevation 02 (tub config) · A532.1 view 02 (roll-in config) · A533 elevation 04 · P104 REMARKS",
+      "instanceNote": "THE SINGLE MOST IMPORTANT OPERATING TEST IN THE BATHROOM — it is the anti-scald device. Guestroom HWS is distributed at 120°F (P202/P305) and there is NO guestroom thermostatic mixing valve scheduled (P301/P305's ≤110°F TMV note is scoped to PUBLIC lavatories and hand sinks), so this valve is the only temperature protection at the shower. On 118 the control heights ARE dimensioned and are pass/fail on an accessibility walk.",
+      "verifyAtPunch": "Run the shower, then flush the water closet in the same room — the temperature must not spike. Full valve travel, positive off, no drip at the spindle; measure the control height."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "kn 10",
+      "label": "CONFIGURATION B ONLY — shower diverter valve",
+      "where": "Roll-in shower control wall at 118, alongside the pressure-balancing valve. Tagged on A532 elevation 02 and A532.1 views 01 and 02.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "A532 elevation 02 · A532.1 views 01 and 02 · A530 BATHROOM KEYED NOTE 10",
+      "instanceNote": "CONFIG-B-ONLY — this line exists only if the roll-in shower is what got built at 118; if a tub was built it does not apply. Same open conflicts.md A11 / coordination_issues C-01 question as the two bathing-fixture lines. ZERO in the 15 standard first-floor rooms — A530's standard-bath elevations tag kn 9 and kn 14 only, no diverter. Carried, not resolved; settled by the same MWT CA RFI.",
+      "verifyAtPunch": "If the roll-in was built — diverter moves positively between fixed head and hand shower and holds under flow; with it on the hand shower the fixed head STOPS (no cross-flow)."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "kn 11",
+      "label": "CONFIGURATION B ONLY — hand shower and side bar; the handset's on/off control MUST be NON-POSITIVE shut-off",
+      "where": "Roll-in shower wall at 118 on a slide bar. A532.1 view 02 prints 3'-6\", 2'-10\", 2'-8\", 1'-5\", 1'-3\", 1'-0\" and MAX 6\" at the control zone; grab-bar band MIN 33\" / MAX 36\". Also carried on view 03, the folding-seat wall.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "A532.1 views 02 and 03 keyed note 11 · A530 BATHROOM KEYED NOTE 11 (verbatim: 'HAND SHOWER AND SIDE BAR. HAND-HELD SHOWER UNIT REQUIRED TO HAVE ON/OFF CONTROL WITH NON-POSITIVE SHUT OFF.')",
+      "instanceNote": "CONFIG-B-ONLY, same open A11 / C-01 question — zero in the 15 standard first-floor rooms. THE 'NON-POSITIVE SHUT OFF' WORDING IS THE PART THAT GETS MISSED: the handset's on/off must NOT be a positive shut-off, so the valve upstream still governs. A hand shower supplied with a positive shut-off trigger is the WRONG unit even though it looks right on the wall. The non-positive requirement itself is printed verbatim and is not in doubt; only whether the row applies at all is open.",
+      "verifyAtPunch": "If the roll-in was built — handset slides the full bar and locks at any height, bar solid to the wall; CRITICAL: operate the handset's own on/off and confirm it does NOT fully shut off flow."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "kn 5",
+      "label": "CONFIGURATION B ONLY — shower enclosure with tempered-glass door (GLASS SUB scope, not plumbing)",
+      "where": "Roll-in shower opening at 118. kn 5 is placed on A552 plan 01; A530 kn 27 additionally requires door-stop hardware at the shower glass.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "A552 plan 01 kn 5 ('SHOWER ENCLOSURE W/ TEMPERED GLASS DOOR') · A530 kn 27 (door-stop hardware)",
+      "instanceNote": "CONFIG-B-ONLY, and UNIQUE TO 118 among the accessible sheets — A551, A554 and A556 tag neither kn 5 nor T-02. TRADE: this is the GLASS SUB's scope, listed here only because the walker tests it on the same pass — do NOT bill it to Larry's Plumbing. LIVE CONTRADICTION ON A552 ITSELF (A552 flag 3): the finish plan calls the shower floor T-02 'ROLL-IN SHOWER TILE' while the architectural plan tags the SAME fixture kn 5 'SHOWER ENCLOSURE W/ TEMPERED GLASS DOOR' — a curbless roll-in and a glass-door enclosure are not the same detail. Reproduce what is actually installed; do not reconcile it in the field.",
+      "verifyAtPunch": "Panels move without binding, plumb and parallel, tempered stamp visible; jambs and track sealed to SS-01 — run water at the door and confirm nothing escapes; door-stop hardware present per kn 27."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "FD",
+      "label": "Floor drain, guest bathroom — 2\" (P301 general notes); 'maintain accessible compliant slopes to drain'",
+      "where": "Bath floor at/near the shower. On 118 keynote 6 'FLOOR DRAIN' is drawn TWICE on A552 — on architectural plan 01 and again on finish plan 03.",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "origin": "db+sheets",
+      "src": "A552 plan 01 kn 6 and finish plan 03 kn 6 · A530 kn 20 · P402 ('floor drain in accessible units') · P301 general note (FD 2\")",
+      "instanceNote": "PRESENCE ON 118 IS STRONG — kn 6 is drawn twice on A552 and P402 places the FD in accessible units, so 118 gets one under either reading of the P402-vs-A530 split. What keeps this MEDIUM is the PRODUCT: the guestroom floor drain has NO MARK and NO SCHEDULED PRODUCT — P104's Drain and Drainage Appurtenance Schedule carries FD-1 (Mech/Laundry, Zurn Z550), FD-2 (Unfinished Spaces, Zurn Z415B) and FD-3 (Funnel, Zurn Z514E), none of which is a guestroom drain, so no make, model or strainer finish is specified for the item the walker is standing over. SETTLES IT: the FD submittal naming the guestroom product.",
+      "verifyAtPunch": "Strainer secure and flush with the tile, not proud; pour a cup of water at each corner of the bath floor and watch it reach the drain; trap holds water."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "TP",
+      "label": "Trap guard / trap primer at the bathroom floor drain",
+      "where": "At the guest-bath floor drain. The primer valve body is concealed; P102 requires primers in ACCESSIBLE locations per NPCA / ASSE 1018.",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "origin": "db+sheets",
+      "src": "P301 general note 6 ('All floor drains to be installed with trap guards / primers', repeated P302–P310) · P501 detail 12 · P102 Automatic Trap Primer Valve Schedule (Sioux Chief 695) · P104 Water Appurtenance Schedule TP-1 (PPP SMP-500-115V)",
+      "instanceNote": "TWO DIFFERENT TRAP-PRIMER PRODUCTS ARE SCHEDULED AND NEITHER IS SCOPED TO A GUESTROOM — P102 lists Sioux Chief 695 Series; P104's TP-1 is a PPP SMP-500-115V scoped to a 6\" SUMP PUMP STANDPIPE, not a guest bath. So the general note requires a device at every floor drain while the schedules name two products, neither assigned here. The device body is concealed but it is verified at the visible drain (the trap seal holding), which is why the line is IN. SETTLES IT: the trap-primer submittal naming the guestroom product, plus confirmation of where the accessible primer location is.",
+      "verifyAtPunch": "Lift the strainer — trap guard fitted in the drain body? Pour water and confirm the seal holds; re-check on the next pass for a dry trap or sewer odour."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "GV",
+      "label": "Gate valves at the CWS, HWS and HWR riser take-offs, with unions, behind an 18\"x18\" access panel",
+      "where": "Guestroom wet wall / plumbing stack. WHERE THE PANEL PHYSICALLY LANDS IS THE OPEN QUESTION — see note.",
+      "qty": 3,
+      "reliability": "MEDIUM",
+      "origin": "db+sheets",
+      "src": "P401 Domestic Water Typical Unit (GV at each of the three riser take-offs) · P502 detail 3 Shut-Off Valve Installation Detail · P101 general note 9 and general note 15 · M101 GN7",
+      "instanceNote": "qty 3 = one each at CWS, HWS and HWR per P401; the DB carries them as three separate rows, merged here because the walker opens one panel and checks all three. RULING NEEDED ON REACHABILITY: P502 detail 3 draws the panel IN A SUSPENDED CEILING, and NO guestroom ceiling on 118 is suspended — A552 view 02 reads painted gypsum PT-07 at 8'-3 3/8\" (main room) and 7'-3\" (bath and entry). No access-panel symbol or keyed note is drawn in ANY guestroom. The sheets that would settle it, A425 details 09 and 11, CANNOT be cited — A425.md marks that text unverified, verbatim 'Do not quote any of it.' VALVE TYPE ALSO CONTESTED: P401 and P502 draw a GATE valve; P101 GN15 specifies BALL valves or approved equal, 'located accessibly'. Both readings carried, neither reconciled.",
+      "verifyAtPunch": "Find the 18\"x18\" access panel and RECORD WHERE IT IS (guestroom ceiling / bath ceiling / corridor outside the door); open it, cycle all three valves fully closed and open, no weep at the stems. If there is NO panel anywhere, write that up."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "",
+      "label": "PTAC condensate drain — 1\" VISIBLE drain with 1\" air-gap fitting, 1-1/2\" vent up, Type M copper, to the 4\" condensate main",
+      "where": "At the PTAC on the window wall, running down the wall (M501 det.9). Where the air-gap fitting physically lands is NOT stated by any sheet.",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "origin": "db+sheets",
+      "src": "P301 / P302 ('1\" visible condensate drain for each A/C unit (typ.), provide 1\" air gap fitting') · P501 detail 13 · M401 KN2 · M501 det.9 · P102 material schedule",
+      "instanceNote": "IN SCOPE because the sheets themselves use the word 'VISIBLE' and M501 runs the drain DOWN THE WALL, so the run and the drip are checkable in the finished room. WHAT IS NOT STATED is whether the 1\" AIR-GAP FITTING lands inside the guestroom, in the chase or at the exterior — no sheet places it. TRADE SEAM TO NAME BEFORE THE WALK: PTAC condensate is PLUMBING (Larry's) per M401 KN2 and M501 det.9 while the PTAC itself is HVAC (Iceberg) — M401.md records this as a frequent interface gap, so expect it to be nobody's until you name it. Sheet typo: P301 sends you to 'P502' for the condensate detail; it is on P501 detail 13.",
+      "verifyAtPunch": "Run the PTAC in cooling long enough to make condensate — no water in the pan, no drip inside, no stain at the sleeve, wall, carpet edge or ST-01 stool; trace the visible run and confirm the air-gap fitting is present and not blocked or taped over."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "SK-3 / SK-4",
+      "label": "Kitchenette / wet-bar sink and faucet — NO product scheduled in P104; procured per S4: American Standard PEKOE 23x18 single-bowl stainless undermount 18SB.10231800.075 + Moen 8227",
+      "where": "Entry / kitchenette leg if provided — A552 gives the kitchenette leg 7'-10 1/2\" CLEAR. A552 tags 901 REFRIGERATOR and 902 DISHWASHER on the working wall and tags NO SINK.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "P401 and P402 (mark SK-3 / SK-4, 'in the suite/extended units') · P104 (schedules NO product for either mark) · P201 riser #P2 (an SK on a guestroom stack) · S4 product data",
+      "instanceNote": "PLACEMENT GENUINELY UNKNOWN (PH-GU-003). P401/P402 restrict SK-3/SK-4 to 'the suite/extended units' and assign it to NONE of their seven unit plans; P104 schedules no product for either mark. Floor 1 has no King One Bedroom suites and no QQ Extended rooms, so a literal reading gives ZERO kitchenette sinks on floor 1 while the 'every Home2 key is a suite' reading gives all 16 — the sheets support both and settle neither. P201 riser #P2 does carry an SK on a guestroom stack, proving one exists somewhere. qty 1 is the placeholder; RECORD PRESENT / ABSENT. Also: the S4 file titled 'Moen Kitchenette Faucet' is on its own product sheet a 'Two-Handle LAVATORY Faucet', 8\" widespread 3-HOLE, which will not drop into a single-hole kitchenette deck. An RFI to the MEP EOR is already open — do not raise a second.",
+      "verifyAtPunch": "Record PRESENT or ABSENT in the kitchenette leg. If present — undermount clips tight with no sag, bottom grid fitted, COUNT THE DECK HOLES, run it hot-left with no drip, trap dry after fill-and-drain, dishwasher (902) drain connected."
+    },
+    {
+      "category": "Plumbing",
+      "mark": "",
+      "label": "P-trap cover and supply-line wrap at the ACCESSIBLE lavatory — 'PROTECT DRAIN TRAP AND SUPPLY LINES AGAINST CONTACT PER ACCESSIBILITY GUIDELINES' (G402 det 04; TA-24 / TA-25 P-trap covers)",
+      "where": "In the knee space under the accessible lavatory at 118 (A532/A532.1 kn 8, 'CLEAR AREA OF SINK/VANITY MUST BE ACCESSIBLE').",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "sheets-only",
+      "src": "G402 detail 04 (ACC GUEST VANITY, annotated with a PIPE WRAP callout) · G402 TA schedule TA-24 and TA-25 · coordination_issues C-09 / PH-GU-027",
+      "instanceNote": "DB GAP — no row exists for this on 118, and ROOM 118 IS THE ONLY FLOOR-1 KEY IT APPLIES TO. REQUIRED BY EXACTLY ONE SHEET AND IN NOBODY'S SCOPE: a search for 'pipe wrap' / 'p-trap' / 'trap cover' / supply-line insulation across A532, A532.1, A533, A551, A552, A554, A556, ID-5.12, ID-5.13, P104, P401 and P402 returned ZERO HITS — the requirement appears on G402 and on no other sheet in the set, not on the plumbing schedule, not on the accessible bath sheets, not on the FF&E sheets. Cheap item that fails a TAS/ADA walk on 7 keys after the vanities are set. SETTLES IT: Austin assigning the scope — architectural millwork, plumbing trim or FF&E — before the accessible vanities are ordered. Related and on the same sheet: the accessible vanity is the same 5'-8\"x2'-10\" footprint as the typical one BUT HAS NO DRAWER BAND, so the typical casegood must not be ordered for the accessible keys.",
+      "verifyAtPunch": "Look into the knee space under the lavatory — P-trap wrapped/covered and both supply lines insulated so nothing hot or abrasive can be contacted from a seated position; nothing sharp in the clear area. Bare pipes = write it up."
+    },
+    {
+      "category": "Fire Protection",
+      "mark": "◉ VK430 — ASSUMED, FP-1 was NOT read for room 118",
+      "label": "Guest-room sprinkler heads — expected Viking 'VK430 7/16 FR 155 C PD' on drop, K=4.3, 1/2\" thread. COUNT NOT VERIFIED FOR 118 — COUNT THEM.",
+      "where": "Guest-room ceilings — A552 view 02 gives two ceiling planes, 8'-3 3/8\" main room and 7'-3\" entry/bath, both PT-07. FP-1's verified rooms show branches at elev 12-8 and 10-8 with drop tag 'Drop 0-3', which tracks those two planes.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "sheets-only",
+      "src": "FP-1 Fire Sprinkler Shop Drawings (Texas Fire Services LLC SCR-G-2398977, reviewed Rodney Jackson 03-26-2025, stamped CITY OF EAGLE PASS FIRE DEPARTMENT) — head schedule row ◉, 62 first floor / 437 all floors · A120–A123 General Note I · A530 General Note B · FA-0",
+      "instanceNote": "DB GAP, AND THIS IS THE ANSWER TO THE '36'. The DB carries 36 sprinkler rows across the 16 first-floor rooms = 12 rooms x 3 heads, with ZERO rows on 101, 103, 116 and 118 — room 104 carries three ('head 1 of 3 / 2 of 3 / 3 of 3'), room 118 carries none. That is NOT a per-room-type count variation: FP-1 was read head-by-head on rooms 107 and 108 ONLY (placeholder PH-GU-001). PRESENCE IS NOT IN DOUBT — FP-1's building note types every guestroom light hazard and states 'THERE ARE NO CONCEALED SPACES IN THIS BUILDING', and FA-0 prints 'THIS IS A FULLY SPRINKLERED BUILDING.' qty 1 is the no-guessing placeholder, NOT an expected count — do NOT print 3 for 118: it is the Acc. Mod., a materially different footprint (17'-6\" x 18'-11\", 18'-3 1/2\" clear per A552) from the rooms that were read. Arithmetic consistency only, not proof: 62 first-floor heads less 16 keys x 3 = 48 leaves 14 for corridor and BOH. SECOND OPEN QUESTION ON THE SAME HEADS: concealed (flush cover plate) vs semi-recessed (escutcheon with visible deflector) is unresolved — A120–A123 General Note I requires semi-recessed everywhere outside public areas, which includes every guest room, while packages/fire-appliance.md reads FP-1's 'PD' suffix as concealed pendent (that is a reading, not a printed word). Registered as FS-3; two different looks and two different buys. No cover-plate or escutcheon FINISH is stated anywhere in the set, and the '155' sits inside the model string with no temperature column on FP-1 — do not put a temperature rating or a finish on a purchase document off this row. TO CLOSE THE COUNT: read the FP-1 room region for 118 at 700–800 dpi the same way 107 and 108 were read — a document-reading task, not an RFI.",
+      "verifyAtPunch": "COUNT the heads and write the number down — leave the printed quantity blank. Record flush cover plate (concealed) vs escutcheon with visible deflector (semi-recessed), plus the finish. Each head: plate tight and square, NO paint or texture on plate, deflector or fusible element, clearances honoured, none struck or leaking."
+    },
+    {
+      "category": "Fire Protection",
+      "mark": "",
+      "label": "Sprinkler head in the guest BATHROOM — none drawn (observation, not a ruling)",
+      "where": "Bath ceiling, 7'-3\" AFF PT-07 (A552 view 02).",
+      "qty": 0,
+      "reliability": "FLAGGED",
+      "origin": "sheets-only",
+      "src": "FP-1 room regions 107 and 108 read at 700–800 dpi — no head drawn in either bathroom; 118's bath NOT read · A530 General Note B · conflicts.md B5.3",
+      "instanceNote": "qty 0 is an OBSERVATION ON TWO OTHER ROOMS, not a ruling for 118. No head is drawn in the bath of either room FP-1 was read for (107 Queen-Queen, 108 King Studio) — and 118's bath was NEVER read, and it is the ACCESSIBLE bath (A532 / A532.1), a different layout from both. A530 General Note B reads 'SMOKE DETECTORS, SPRINKLERS, AND OTHER EMERGENCY DEVICES TO BE LOCATED PER LOCAL CODE - INDICATED FOR DESIGN INTENT ONLY', and the governing standard is itself OPEN (conflicts.md B5.3: FP-1 designs to NFPA 13-2021, G100 checks NFPA 13-07 with 13R unchecked and BOTH 'Partial' and 'Yes' ticked, G002 note 8 says NFPA 13 flat, the project's working context says 13R) — and the small-bathroom head-omission allowance rides on that standard. Write 'no head drawn', NOT 'no head required'.",
+      "verifyAtPunch": "Look up in the bath. If a head IS installed, photograph it, log the model off the plate and flag it — it is not on FP-1 as read and belongs on the as-built and in the hydraulic record. Remove nothing."
+    },
+    {
+      "category": "Fire Protection",
+      "mark": "(S)SB",
+      "label": "Addressable photoelectric smoke detector — Silent Knight SKPHOTOW in a System Sensor B200S-LF-WH LOW-FREQUENCY (520 Hz) sounder base, ceiling mounted",
+      "where": "Guest-room ceiling near the entry / sleeping boundary; A552 view 04 draws the SD. NOT in the bath and not in the entry/kitchenette leg.",
+      "qty": 1,
+      "reliability": "HIGH",
+      "origin": "db+sheets",
+      "src": "FA-1 Fire Alarm Equipment Schedule row (S)SB, qty 121/121, 'LOCATE AS SHOWN ON CEILING' (Security Integrated Inc, Hilton A/D&C REVIEWED 04/29/2025) · FA-2 first-floor plan · A552 view 04 · A550 POWER & SIGNAL LEGEND (SD) · E500 riser + FA notes",
+      "instanceNote": "FA-1 schedules 121 heads and 121 low-frequency bases, which reconciles exactly to 115 keys plus the 6 second detectors in the one-bedroom suites — there are NO one-bedroom suites on floor 1, so 118 is a flat 1 with no exception. THE LOW-FREQUENCY BASE IS THE AUDIBLE APPLIANCE FOR A SLEEPING ROOM — a corridor horn does not satisfy it (FA-1 audibility chart: sleeping rooms ambient 35 dBA, design 75 dBA, low frequency, visual required; note E500 FA Note 17's 50 dBA criterion is the less onerous one — test to 75). E500 FA Note 10 requires FA junction boxes and cover plates to be PAINTED RED, so any exposed FA box in the finished room is red or it is a punch item.",
+      "verifyAtPunch": "Put the system in test — the head alarms, the LOW-FREQUENCY base sounds IN THE ROOM at 75 dBA at the sleeping position, and the FACP annunciates room 118; read back both the SLC address (L#-D-##) and the NAC circuit (PS#-#-#)."
+    },
+    {
+      "category": "Fire Protection",
+      "mark": "H",
+      "label": "Fire horn (kn16 — 'FIRE HORN IN STANDARD ROOMS / FIRE HORN/STROBE IN COMMUNICATION FEATURES ROOMS'; 118 is NOT a communication-features room, so this reads as a HORN)",
+      "where": "Guest-room ceiling or wall beside the smoke detector — A550 view 04 draws the (H) 10\" from the SD. Mounting contested: E101 legend 6'-8\" AFF vs FA-1's ceiling-mounted 4\"x4\"x1.5\" units.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "sheets-only",
+      "src": "A552 view 04 kn16 (PLACED) · A550 POWER & SIGNAL LEGEND 'ALARM HORN AND STROBE (H)' · E101 legend · E501–E504 ('per guestroom: smoke detector + notification') · AGAINST: FA-2 / FA-3 draw NO horn and NO strobe in a standard key (verified on 303/305/307/311 and 304/306/308)",
+      "instanceNote": "DB GAP — the DB carries no notification appliance on 118 beyond the smoke detector. STRAIGHT DOCUMENT CONFLICT ON A DEVICE VISIBLE FROM THE DOORWAY. FOR: keynote 16 IS in A552 view 04's placed list, the (H) symbol is drawn beside the SD on five enlarged-guestroom sheets, E501–E504 print notification per guestroom, and FA-1's own audibility chart says sleeping rooms are 'visual required'. AGAINST: the Hilton-reviewed vendor submittal FA-2/FA-3 draws none in a standard key, and precedence (submittal > drawing) points at the submittal — which would make the low-frequency sounder base the entire audible package. DO NOT RESOLVE THIS IN THE FIELD — record present/absent with a photo; either answer closes a live conflict. Also note A530's own keyed note 16 is a DIFFERENT note family (undefined on the bath sheets, probably a bulk amenity dispenser) — do not read a fire horn into the guest bath off that number.",
+      "verifyAtPunch": "Is there a horn or horn-strobe SEPARATE from the smoke detector, yes or no? Photograph it. If present — note horn-only vs horn+strobe, its height, cover on and unpainted, and that it sounds on a system test."
+    },
+    {
+      "category": "Fire Protection",
+      "mark": "⊗ SCWLED",
+      "label": "Visual notification strobes, System Sensor SCWLED (2 @ 177 cd in the room + 1 @ 15 cd in the bath) — communication-features rooms ONLY. EXPECT ZERO IN 118.",
+      "where": "n/a in 118 — ceiling of the room and bath in a hearing-accessible key.",
+      "qty": 0,
+      "reliability": "FLAGGED",
+      "origin": "sheets-only",
+      "src": "FA-1 schedule row ⊗ SCWLED, qty 80 · FA-3 rooms 309 and 313 (2 x 177 cd + 1 x 15 cd bath) · A100 Guestroom Matrix (floor 1: King Studio HI = 1, Queen Queen HI = 0) · G001 Unit Mix · A550 kn43 (NOT in A552's placed list) · coordination_issues C-04 / PH-GU-002",
+      "instanceNote": "MOBILITY-ACCESSIBLE IS NOT HEARING-ACCESSIBLE — this is the single easiest mistake to make on 118 and it is worth three strobes. Both unit matrices type 118 as 'King Studio ACC MOD, CD', a row separate from EVERY HI row; A100's floor-1 column gives King Studio HI = 1 and Queen Queen HI = 0, and that one first-floor communication-features key is a PLAIN King Studio (one of 104/106/108/110/112/114 per A100, or a CONNECTING King Studio i.e. 116 per G001 — the two matrices disagree), NOT 118. Proof the two attributes are independent: C-04 records room 317 (mobility accessible, ISA drawn) with ZERO strobes and room 309 (a plain Queen-Queen) with three. A550 kn43 'ADDITIONAL HORN STROBE: LOCATED IN COMMUNICATION FEATURES BATHROOMS ONLY' is NOT in A552's placed keynote list. STILL OPEN BUILDING-WIDE: 12 hearing keys required, only 8 located (209/213/216/218, 309/313/316/318); floor 1 has NEVER been scanned for the crossed-ear symbol. SETTLES IT: one read of A100 at full scale plus the FA-2 first-floor room regions.",
+      "verifyAtPunch": "Confirm NO strobes in room or bath, and no orphan blank plate or capped box. If strobes ARE installed in 118, that is the finding — photograph and log it, because it contradicts both unit matrices."
+    },
+    {
+      "category": "Fire Protection",
+      "mark": "CO",
+      "label": "Carbon monoxide detector (Silent Knight SKFIRECOW) — NOT scheduled to any guest room. EXPECT ZERO IN 118.",
+      "where": "n/a in the guest room. FA-1's 3 units are 'LOCATE AS SHOWN ON CEILING' and their locations are not extracted.",
+      "qty": 0,
+      "reliability": "FLAGGED",
+      "origin": "sheets-only",
+      "src": "FA-1 Fire Alarm Equipment Schedule (CO / SKFIRECOW / qty 3 for the whole 4-storey 115-key building) · E500 CO detail (places none in a guest room) · A550–A556 POWER & SIGNAL LEGEND (no CO symbol) · fire-alarm conflict FA-8",
+      "instanceNote": "NOTHING IN THE SET PUTS A CO DETECTOR IN A GUEST ROOM, and guest rooms carry no fuel-fired appliance — the PTAC is electric at 208 V. FLAGGED because this is an ABSENCE, not a verified exclusion: no sheet states that guest rooms are exempt, it simply never places one. Three CO detectors on a gas-fired hotel (M301: laundry with 4 dryers at 190 MBH, water-heater room with 2 WH at 1,500 MBH) is a coverage question for the Eagle Pass AHJ under the submittal's 2018 IBC/IFC + 2019 NFPA 72 basis — that is a TCO conversation, not a room-walk one. M101's legend CO/NO2 sensors are the mechanical garage/ventilation control family on M602, not a guest-room life-safety device.",
+      "verifyAtPunch": "Record 'no CO detector' at the ceiling. If one IS installed, log it — it is not scheduled to a guest room and needs an address on the FACP and a line on the as-built."
+    },
+    {
+      "category": "Low Voltage",
+      "mark": "",
+      "label": "Data outlet — CAT6 RJ-45, PANDUIT cable and patch cord with PANDUIT LOCKS on exposed connections, LABELLED, homerun to the floor IDF",
+      "where": "Per A552 view 04's device-spacing string (8'-1\" through 4\"). Height contested — record it.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "A552 view 04 kn45 (placed) · A550 POWER & SIGNAL LEGEND 'DATA' · E101 GN #8 (CAT6, Panduit, labelled) · E101 symbol legend (18\") · G400 det 02 (1'-6\") · A530 GN D (12\")",
+      "instanceNote": "kn45 IS in A552 view 04's placed list. COUNT IS NOT STATED ANYWHERE (gap LV-3) — the DATA symbol is a graphic on A552 view 04 and E400, and no sheet, schedule or note gives a per-room drop count; qty 1 is the placeholder. Compounding: there is NO telecom riser diagram, rack elevation, port count or patch-panel schedule anywhere in this set, so 'correctly terminated' cannot be checked against a design document — the punch reference is the low-voltage integrator's as-built, not the E-series. HEIGHT OPEN — 12\" (A530–A533 note D) vs 18\" (E101 legend, G400 det 02); record it, do not judge it. 118 EXTRA: at least one data connection must land in the 15\"–48\" band with clear floor area (A530 GN G) — see the Electrical accessible-reach line.",
+      "verifyAtPunch": "Count and record the jacks; each terminated and LABELLED; PANDUIT cable and patch cord with PANDUIT LOCKS on exposed connections; plug a laptop in and confirm link; record the height."
+    },
+    {
+      "category": "Low Voltage",
+      "mark": "",
+      "label": "TV outlet behind the television (903) — CAT6 RJ-45 jack always; coax F-connector ONLY if kn47 option A governs",
+      "where": "Behind the TV on the working wall; kn47 requires MIN 6\" CLEARANCE FROM WALL BOXES.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "A552 view 04 kn47 (placed) · A552 plan 01 FF&E tag 903 TELEVISION · A550 POWER & SIGNAL LEGEND 'OUTLET - TV' · E101 symbol legend (TV outlet w/ F, 18\" AFF)",
+      "instanceNote": "kn47 IS in A552 view 04's placed list and tag 903 is placed once, so 1 TV location. But kn47 prints an A/B OPTION and NO SHEET SELECTS ONE: A) no smart TV — COAX behind the TV plus a CAT6 RJ-45 jack in smurf tube to the WAP; B) smart/IPTV — 'COAX NOT REQ'D', CAT6 only. THE DB ROW PRESUMES OPTION A (it lists coax). The CAT6 jack is required under BOTH — punch that unconditionally, and do NOT write up a missing coax until the smart-TV question is answered, which is an owner/FF&E decision, not a drawing one. kn47's second jack is 'IN ONE-BEDROOM TV' and there are no one-bedroom suites on floor 1.",
+      "verifyAtPunch": "Behind the TV — CAT6 RJ-45 jack present in every case; coax only if option A was built (establish which first); smurf tube runs to the WAP under the desk; patch cord lands on the edge controller; min 6\" clear of adjacent boxes."
+    },
+    {
+      "category": "Low Voltage",
+      "mark": "",
+      "label": "Telephone outlet (905) with 3/4\" conduit and pull string",
+      "where": "Nightstand / bed area at the 905 telephone position. Height contested — record it.",
+      "qty": 1,
+      "reliability": "MEDIUM",
+      "origin": "db+sheets",
+      "src": "E101 spec #16 ('Coordinate telephone outlet locations w/owner; 3/4\" conduit w/pull-string') · A550 POWER & SIGNAL LEGEND 'PHONE' · A552 plan 01 tag 905 · E101 symbol legend (18\") · A530 GN D (12\") · G402 general note 9 · E400 GN #1",
+      "instanceNote": "The ITEM is HIGH (E101 spec #16 mandates the outlet plus the conduit and pull string; PHONE is on the legend; tag 905 is placed once on A552). The COUNT of 1 is DERIVED from the FF&E tag, not from a printed drop schedule — no sheet states per-room telephone drop counts. HEIGHT OPEN, 12\" vs 18\". THE NOTE THAT BITES ON AN ACCESSIBLE KEY: G402 general note 9 verbatim — 'PROVIDE AN ELECTRICAL OUTLET WITHIN 48\" OF THE TELEPHONE CONNECTION. THE OUTLET MUST HAVE A CLEAR FLOOR SPACE AND MEET ACCESSIBILITY STANDARDS FOR REACH RANGE.'",
+      "verifyAtPunch": "Plug in the handset — dial tone; confirm an electrical outlet within 48\" with clear floor space and compliant reach; plate offset ~6\" from the adjacent room's box; record the height."
+    },
+    {
+      "category": "Low Voltage",
+      "mark": "WAP",
+      "label": "Wireless access point in a 3-gang box mounted VERTICALLY under the desk, 18\"",
+      "where": "Under the desk on the working wall; kn44 requires ≥6\" between all boxes and coordination with the casegoods.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db-only",
+      "src": "A550 kn44 (verbatim, 'TYP ALL GUESTROOMS') and A550 POWER & SIGNAL LEGEND 'WAP (18\")' · placed on A550, A551, A555 — NOT in A552 view 04's placed keynote list",
+      "instanceNote": "DB-ONLY FOR 118. The DB carries the WAP on 118 at HIGH, but A552 view 04's placed keynote list is 3, 10, 14, 15, 16, 24, 25, 28, 45, 46, 47, 49, 50, 51 — kn44 is NOT in it, while A550, A551 and A555 all carry it and kn44's own text says 'TYP ALL GUESTROOMS'. The keynote text and the sheet's placement list disagree. COMPOUNDING (conflict LV-2): NO WAP appears in ANY E-series schedule — no count, no circuit, no cabling design, no power source; Hilton requires an approved integrator per connectedroom.hilton.com, so the punch reference is the integrator's as-built, not the E-series. SETTLES IT: read A552 view 04 at full scale for the WAP symbol under the desk — a two-minute read. Do not assume 118 has one and do not assume it does not.",
+      "verifyAtPunch": "Is a WAP in a 3-gang box under the desk? Box mounted VERTICALLY, ≥6\" clear of every adjacent box, not covered or overheated by the casegoods, powered, and a phone gets internet with the door shut."
+    },
+    {
+      "category": "Low Voltage",
+      "mark": "",
+      "label": "Optional wired data connection at the desktop grommet (kn46) — either a CAT6 RJ-45 jack and patch cord, or a patch cord from a WAP port",
+      "where": "At the desktop grommet on the working-wall desk, directly above the WAP position.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "A552 view 04 kn46 (placed) · A550 keynote legend line 161 · A550 POWER & SIGNAL LEGEND 'OPTIONAL DATA' (a symbol in its own right)",
+      "instanceNote": "kn46 IS in A552 view 04's placed list and OPTIONAL DATA is its own legend symbol, so something lands at the grommet — 'OPTION' in kn46 describes the two DELIVERY METHODS, not whether to install: A) add a CAT6 RJ-45 jack and patch cord through the grommet, or B) run a patch cord from a WAP port through the grommet. WHICH ONE WAS BOUGHT IS NOT STATED ANYWHERE (packages/electrical.md open item 6 — a x115 cost item: option A is a real jack, option B is near-zero cost). Under either, a guest must get a working wired connection at the desk, so the walker cannot mis-punch it. Do NOT call 'nothing there' a defect until the scope question is answered by the owner/franchise or the low-voltage subcontract. SETTLES IT: the integrator's submittal.",
+      "verifyAtPunch": "Record which you find — a jack (option A), a cord from the WAP (option B), or nothing; plug a laptop in at the desk and confirm link."
+    },
+    {
+      "category": "Low Voltage",
+      "mark": "",
+      "label": "Connected Room edge controller — the in-room head-end the TV data jack patches into. NO mark, NO symbol, NO schedule entry anywhere in the set.",
+      "where": "NOT LOCATED ON ANY SHEET. The only clue is kn47's own cable topology — TV CAT6 in smurf tube to the WAP under the desk, then a patch cord to the edge controller — which puts it at or near the WAP. That is inference from the cable path, not a printed location.",
+      "qty": 1,
+      "reliability": "FLAGGED",
+      "origin": "sheets-only",
+      "src": "A552 kn47 (both options end 'PATCH CORD TO EDGE CONTROLLER FOR CONNECTED ROOM') · E101 GN #8 (names 'connected room' among the exposed connections requiring Panduit locks)",
+      "instanceNote": "DB GAP — no row exists. What the edge controller physically is, where it mounts, who supplies it and whether it is already installed are all UNKNOWN. It is named twice in kn47 and once in E101 GN #8 and appears NOWHERE else — no mark, no symbol on the power & signal legend, no E-series schedule, no count. Consistent with the broader condition: no telecom riser, rack elevation, port count or head-end equipment schedule exists anywhere in this set, so the low-voltage package is effectively owner/vendor-designed. qty 1 is read off kn47's singular 'THE EDGE CONTROLLER'. SETTLES IT: the Hilton-approved integrator's submittal — walk the first room with the integrator and record what and where it is, then punch the rest against that.",
+      "verifyAtPunch": "Locate it and record where it is; confirm the TV CAT6 patch cord lands on it with a Panduit lock, it is powered, and Connected Room features work end to end from a guest device."
+    },
+    {
+      "category": "Low Voltage",
+      "mark": "DB",
+      "label": "Doorbell on/off switch (kn28) — 'COMMUNICATION FEATURES ROOMS ONLY, SIGNAGE AS REQ'D'. EXPECT ZERO IN 118.",
+      "where": "Guest-room entry door (GR-1) in a communication-features key; the on/off switch is an in-room device (kn28 is also carried on the bed-wall elevations of A555/A556).",
+      "qty": 0,
+      "reliability": "FLAGGED",
+      "origin": "db+sheets",
+      "src": "A552 view 04 kn28 (PLACED) · A550 POWER & SIGNAL LEGEND 'DOORBELL (DB)' · A100 Guestroom Matrix and G001 Unit Mix (118 = 'King Studio ACC MOD, CD', separate from every HI row) · coordination_issues C-04 / PH-GU-002",
+      "instanceNote": "EXPECT ZERO — AND THIS IS A TRAP, because the DB carries a row for it AND kn28 IS in A552 view 04's placed keynote list, so a field electrician reading 118's own sheet sees a DB symbol. The keynote TEXT restricts it: 'DOORBELL ON/OFF SWITCH (COMMUNICATION FEATURES ROOMS ONLY)'. 118 is MOBILITY-accessible, not hearing-accessible — both matrices type it 'King Studio ACC MOD, CD', a row separate from every HI row, and C-04 proves the two attributes are independent (317 mobility-accessible has zero strobes; 309 a plain QQ has three). Building-wide the communication-features register DOES NOT EXIST — 12 required, 8 located, floor 1 never scanned — so NO first-floor room can be punched for a doorbell yet. qty 0 = confirm absent, and check specifically for a doorbell that should not be there.",
+      "verifyAtPunch": "Confirm NO doorbell push at the corridor face of the entry door and NO on/off switch inside — and no orphan blank plate or capped box. If one IS installed, log it."
+    }
+  ],
+  "problems": [
+    {
+      "kind": "db-missing-device",
+      "detail": "FIRE SPRINKLER — ROOM 118 HAS ZERO SPRINKLER ROWS. The DB carries 3 head rows on room 104 ('Concealed pendent sprinkler head on drop - Viking VK430, 7/16\" FR, 155 C PD, K=4.3' … 'head 1 of 3 / 2 of 3 / 3 of 3') and NONE on 118 — the same zero applies to 101, 103 and 116. That is the whole explanation for the 36 sprinkler rows across 16 first-floor rooms: 12 rooms x 3, plus 4 rooms carrying no head row at all. It is NOT a per-room-type count variation. Cause: FP-1 was read head-by-head on rooms 107 and 108 only (PH-GU-001). Presence is certain — FP-1 states 'THERE ARE NO CONCEALED SPACES IN THIS BUILDING' and FA-0 prints 'THIS IS A FULLY SPRINKLERED BUILDING'. Emitted here as one sheets-only line at qty 1 FLAGGED with an instruction to COUNT, not to expect 3 — 118 is the Acc. Mod. at 17'-6\" x 18'-11\", a different footprint from the rooms that were read. Closable by reading the FP-1 room region for 118 at 700–800 dpi; this is a document-reading task, not an RFI."
+    },
+    {
+      "kind": "db-missing-device",
+      "detail": "FIRE HORN (kn16) — no notification-appliance row of any kind exists on 118 beyond the smoke detector, yet keynote 16 IS in A552 view 04's placed keynote list and the (H) symbol is drawn beside the SD on five enlarged-guestroom sheets. Against that, the Hilton-reviewed vendor submittal FA-2/FA-3 draws no horn and no strobe in a standard key. Emitted sheets-only at FLAGGED so the walker records present/absent — either answer closes a live conflict. Do not let this fall through the gap between the electrical and fire lists: packages/electrical.md §7 explicitly parks kn16 and kn43 in the fire package."
+    },
+    {
+      "kind": "db-missing-device",
+      "detail": "BATH DAMPER ACCESS PANEL — no row exists on 118 (or on any room) for the min 12\"x12\" access panel that M101 GN7, M301 Key Note 4 and M501 all require to the fire damper and volume damper, with a permanent label in ≥1/2\" letters reading FIRE DAMPER. The requirement is printed; only the placement is missing — none of the ten A550–A556 RCPs draws one, A552 view 02 included (its keynotes are 31, 18, 19, 8, 4, 1), and the only flush-access-panel keynote in the whole A12x/A55x set is A121 keynote 5 at the ice-machine alcove. 115-room omission, RFI candidate and a CO-inspection exposure. Emitted sheets-only."
+    },
+    {
+      "kind": "db-missing-device",
+      "detail": "ACCESSIBLE-VANITY P-TRAP COVER AND SUPPLY-LINE WRAP — no row exists on 118, and 118 is the ONLY floor-1 key it applies to. G402 detail 04 requires it verbatim ('PROTECT DRAIN TRAP AND SUPPLY LINES AGAINST CONTACT PER ACCESSIBILITY GUIDELINES', with a PIPE WRAP callout and TA-24 / TA-25 P-trap covers) and a search across A532, A532.1, A533, A551, A552, A554, A556, ID-5.12, ID-5.13, P104, P401 and P402 returns ZERO HITS — it is required by exactly one sheet and is in nobody's scope (coordination_issues C-09 / PH-GU-027). Cheap item that fails a TAS/ADA walk on 7 keys after the vanities are set. Austin must assign the scope — architectural millwork, plumbing trim or FF&E."
+    },
+    {
+      "kind": "db-missing-device",
+      "detail": "INTERIOR ARCHITECTURAL WALL GRILLE AT THE PTAC (M401 KN5) — the DB carries only the exterior louver (KN1). M401 prints KN1 'painted to match EXTERIOR wall' and KN5 'painted to match INTERIOR wall' as two separate keyed notes and does not say whether that is one grille with two painted faces or two grilles. It decides whether there is a second painted grille inside the finished room to inspect and whose paint scope the room-side face is. Emitted sheets-only at FLAGGED."
+    },
+    {
+      "kind": "db-missing-device",
+      "detail": "CONNECTED ROOM EDGE CONTROLLER — no row exists. It is named twice in kn47 (which IS placed on A552 view 04) and once in E101 GN #8, and appears nowhere else in the set: no mark, no legend symbol, no schedule, no count, no location. It is the device the TV CAT6 patch cord is supposed to land on, so its absence from the list would leave that verification hanging. Emitted sheets-only at FLAGGED."
+    },
+    {
+      "kind": "db-missing-device",
+      "detail": "WIRING DEVICES AND COVER PLATES AS A SET — no row exists, yet mismatched plates is the classic guestroom punch item and the walker will look at every one. The only device colour printed anywhere in the set is WHITE, and only at the microwave outlet (kn36); E101 spec #14 says 'coordinated with architect' and E101 GN #2 says clarify the brand with the franchise/owner before ordering. Nothing to punch a colour against until Triun produces the approved wiring-device submittal. Emitted sheets-only at FLAGGED."
+    },
+    {
+      "kind": "db-rough-in-leak",
+      "detail": "THE 118 DB SET CARRIES ~24 CONCEALED ROUGH-IN ROWS THAT A FINISHED-ROOM WALK CANNOT REACH; none is emitted as a line. ELECTRICAL (14): Lighting, Convenience Receptacle, Bathroom GFCI, Refrigerator 173 VA, Disposer 480 VA, Dishwasher 1068 VA, Microwave/Hood 850 VA, the 700+300 VA accessible split, PTAC 208 V 2080 VA, Small Appliance #1 and #2, Motorized Shade circuit, Spare breaker/space, the Panel-1G feeder, and 'PTAC thermostat power and control wiring rough-in'. MECHANICAL (4): 4\"Ø fresh-air duct above ceiling, 4\"Ø toilet exhaust duct to the EV riser, fire-caulk at duct penetrations of the rated assembly (named on Austin's OUT list explicitly), and the field-built sub-base portion of the PTAC sub-base row. PLUMBING (8): 2\" SS waste branch, WC 3\" SS waste into the 4\" stack, vent piping, vent riser at the wet wall, sanitary riser tie ①, domestic water branch set (1/2\" HWR + 3/4\" HWS @120F + 1\" CWS), fixture runouts, and the Configuration-A '2\" SS tub waste + trap, no curbless slab depression' row. THEIR PUNCH-VISIBLE ENDS ARE ALL COVERED: every branch circuit is verified at the Panel \"B\" line (breaker present, labelled, AFCI/GFCI trip and reset), every waste and water run at its fixture line, the PTAC sub-base at the carpet-edge/stone-stool line, and the ducts at the airflow readings on the EAG-50 and WAG-30 lines."
+    },
+    {
+      "kind": "db-wrong-count",
+      "detail": "NO PER-ROOM DEVICE COUNT EXISTS ANYWHERE IN THE SET, yet the DB carries several count-unknown rows without a count qualifier — S21 bath downlight, WS03 vanity sconce, extended J-box (kn25) and the data outlet are all at HIGH with no quantity, and the duplex receptacle row at MEDIUM says so in its note but the others do not. E400 and A552 view 04 are the only device layouts and their counts live on the source PDFs (PH-GU-015; packages/electrical.md open item 14, verbatim 'no takeoff attempted'). Every such line here is emitted at qty 1 + FLAGGED under the no-guessing rule, with the placeholder called out explicitly. ACTION BEFORE THE WALK: pull the counts off the E400 and A552 view-04 PDFs, or the walker has no baseline to check against. What IS printed is A552 view 04's device-spacing string — 8'-1\", 7'-2\", 6'-5\", 3'-3\", 2'-10\", 1'-10 1/2\", 1'-10\", 1'-6\", 1'-4\", 1'-2\", 1'-1\", 10\"/10\", 10\"/1'-0\", 9\", 6\", 4\"."
+    },
+    {
+      "kind": "other",
+      "detail": "DB-ONLY AT HIGH — WAP ON 118. The DB carries the WAP at HIGH, but A552 view 04's placed keynote list is 3, 10, 14, 15, 16, 24, 25, 28, 45, 46, 47, 49, 50, 51 and kn44 is NOT in it, while A550, A551 and A555 all carry it and kn44's own text reads 'TYP ALL GUESTROOMS'. Compounding: no WAP appears in any E-series schedule at all — no count, no circuit, no cabling design (conflict LV-2). Emitted as origin db-only at FLAGGED. Closable in two minutes by reading A552 view 04 at full scale."
+    },
+    {
+      "kind": "other",
+      "detail": "DB-ONLY AT HIGH — MICROWAVE OUTLET (kn36) ON 118, AND THREE DB ROWS TELLING TWO STORIES. The DB carries kn36 at HIGH but A552 view 04's placed keynote list does not include it (A550 and A555 do). Cutting the other way, A552 view 01 DOES place kn11 'RANGE TOP STYLE MICROWAVE AFFIXED TO WALL', which argues an outlet above it exists. Cutting back again, E103 gives accessible keys a 700 VA microwave/hood + 300 VA range-hood split consistent with a COUNTERTOP unit, and the DB's own Appliance row for 118 is a countertop Danby DBMW1126BBS at FLAGGED (PH-GU-023). So the DB simultaneously carries a wall-outlet-above at HIGH and a countertop microwave at FLAGGED. Emitted as origin db-only at FLAGGED. Settle by reading A552 view 04 and elevation 05 on the source PDF plus the appliance transmittal."
+    },
+    {
+      "kind": "other",
+      "detail": "DB-ONLY AT HIGH — MOTORIZED-SHADE SWITCH (kn35) ON 118. The DB carries it at HIGH but kn35 is not in A552 view 04's placed keynote list, although it IS defined in the legend printed on A552 and IS placed on the other accessible sheets. kn35 itself defers to the FFE manual, so the control may be an FF&E handheld rather than a wall switch. Note the shade CIRCUIT and the hardwired shade (kn49) are both well supported for 118 and are emitted at HIGH — it is only the wall switch that is unsupported. Emitted as origin db-only at FLAGGED."
+    },
+    {
+      "kind": "sheet-conflict",
+      "detail": "WAG-30 MAKE-UP AIR DIFFUSER — 118 IS THE ROOM THAT TESTS IT. M401 gives WAG-30 (30 CFM, make-up to the bath) on the guestroom details including detail 05, the King Studio Acc. Mod., so the device is sourced for 118 — but A552, 118's own architectural sheet, does NOT place keynote 20 'MAKE-UP AIR DIFFUSER' anywhere: not on plan 01, RCP 02, finish plan 03, electrical plan 04 or elevations 05–08. A550 (King Studio) and A555 (QQ) both carry it. Whether 118 genuinely has no make-up air diffuser or the keynote was omitted from that sheet is not stated by anything. Recording present/absent at 118 is the single cheapest way to close it."
+    },
+    {
+      "kind": "sheet-conflict",
+      "detail": "BATHING CONFIGURATION AT 118 IS OPEN AND THIS RECONCILIATION DOES NOT CLOSE IT — conflicts.md A11 / B4.4 and coordination_issues C-01. POSITION A (TUB): BOTH unit matrices mark 118 'T' (A100.md:85 and G001.md:91), both footers plus G100.2 §1107 provide 5 tub + 2 roll-in across the 7 accessible keys, and P401/P402's accessible plans 02/04/07 generally show a tub (BT-1). POSITION B (ROLL-IN): A552 plan 01 draws it with three independent agreeing callouts — kn 5 tempered-glass enclosure, kn 6 floor drain, finish-plan T-02 'ROLL-IN SHOWER TILE' — and its bath bubble reads 01.1 / A-532 = PLAN - ROLL IN SHOWER, making 118 the ONE key where the enlarged plan is internally consistent for a roll-in. Both configurations are emitted as mutually exclusive FLAGGED lines and neither is adopted; five trim lines (SH-1/SH-3, kn10 diverter, kn11 hand shower, kn5 glass enclosure — and on the tub side BT-1 with the bowed HD-05 rod) turn on the answer. COMPOUNDING: coordination_issues C-02 / PH-GU-016 — plumbing NEVER DREW a King Studio Acc. Mod. unit plan; P401/P402 carry seven views and none is the Mod., so which of views 02 or 04 governs 118 is not stated and 118's rough-in is unsourced on the plumbing side. Also A552 flag 3: the sheet contradicts ITSELF, tagging the same fixture T-02 roll-in tile on the finish plan and kn 5 glass-door enclosure on the architectural plan. Only Austin closes this. NOTE THE HISTORY: this conflict has been silently closed by a package twice already, both times the same wrong way. Recording and photographing what was actually built at 118 is the field evidence the RFI is waiting on."
+    },
+    {
+      "kind": "other",
+      "detail": "THERMOSTAT SCOPE OVERLAP — HANDLED, BUT CONFIRM. The thermostat is emitted ONCE, on the Mechanical list, because M101 General Note 28 makes the MECHANICAL contractor (Iceberg) furnish and install the controls, terminate the wiring and provide the thermostats, while the ELECTRICAL contractor (United Electric) furnishes, routes and installs the control wiring. The DB's Electrical row 'PTAC thermostat power and control wiring rough-in' is concealed rough-in and is dropped, and the Low Voltage comms question (kn24 'COMMUNICATION BETWEEN THERMOSTAT AND PTAC MAY BE WIRELESS') is folded into the Mechanical line's verify rather than emitted separately. Make sure no other trade list writes the thermostat up a second time."
+    },
+    {
+      "kind": "other",
+      "detail": "WS03 vs GR-203 DOUBLE-COUNT RISK. E101 schedules WS03 (Arkansas Lighting 3550V) as a base-build ELECTRICAL vanity sconce while the FF&E set schedules GR-203 'VANITY SCONE' [sic] on every bath sheet — almost certainly ONE physical fixture carried in two packages (packages/electrical.md open item 4; concept_wiki LC-6). It is emitted once here, on the Electrical list. The FF&E punch list must not also write it up. Settled by the lighting submittal / architect's fixture approval or the E101 Qty column on the source PDF."
+    },
+    {
+      "kind": "other",
+      "detail": "GUEST-ROOM ENTRY CARD LOCK — DELIBERATELY NOT EMITTED HERE, OVERRULE IF YOU DISAGREE. A600 Door Hardware Set #1 carries '1 Advance Card Lock' plus '1 One Way Viewer ((2) @ Accessible Rooms)' — so 118 gets TWO viewers, not one — and it is the ONLY lock or access-control device drawn in any guest room in the whole set. It is not emitted as a Low Voltage line because the DB already carries it inside the Doors category on row GR-1 ('HW set 1'), and emitting it here would double-count across categories. A600 names no manufacturer or model and does not say whether the lock is standalone-battery or networked, and there is NO security, CCTV or access-control design anywhere in the set (gap LV-5). Say which category owns it and it moves."
+    },
+    {
+      "kind": "other",
+      "detail": "FIRE / CEILING RADIATION DAMPER — EMITTED RATHER THAN DROPPED; OVERRULE IF YOU WANT IT OFF THE SHEET. Two extractors split on it. Austin's OUT list names 'in-wall dampers with no access', and the Ruskin CFD4 sits above 118's 7'-3\" hard PT-07 gyp bath lid with NO access panel drawn on A552 view 02 → OUT. But M101 GN7 (min 12\"x12\" access to dampers), M301 KN4 and M501 (approved access plus a permanent exterior label in ≥1/2\" letters) all REQUIRE it to be reachable and labelled → IN, and if it is not reachable the absence is itself the finding. Emitted at FLAGGED alongside its own access-panel line. Also carried on that line: E500 FA Note 7 says fire dampers connect to an FA relay, but M501 det.2 shows the CFD4 as fusible-link with no actuator, so a walker looking for a wire will not find one and should NOT write it up as missing."
+    },
+    {
+      "kind": "other",
+      "detail": "MINOR DB HYGIENE — the PTAC row on room 118 carries a note whose first clause is about a different room: '438 window bay is asymmetric 3'-10 1/2\"/6'-0\"/7'-0 1/2\"; 118 splits 3'-4\"/6'-0\"/8'-2 1/2\" - the sleeve is NOT on the standard-room centreline.' Both figures are correct and A552 confirms 118's 3'-4\" / 6'-0\" / 8'-2 1/2\" split, so nothing is wrong — but the row reads as if it were written for 438 and someone will eventually take the 438 dimension as 118's. Worth splitting when the row is next touched. Related: the DB grades this row MEDIUM, which is about sleeve geometry, not the mark — the PTAC-1 mark itself is settled for the whole King Studio family because M301 and M401 agree, so the line is emitted at HIGH."
+    }
+  ],
+  "room": "118",
+  "roomType": "King Studio Acc. — A100 prints it verbatim as KING STUDIO ACCESSIBLE MOD CONNECTOR (accessible AND connecting; the unit matrix carries only \"King Studio Acc.\" and drops the connecting attribute). The only accessible key on floor 1, governed by A552 + A532/A532.1, mechanical M401 detail 05, electrical Panel \"B\" — and with NO plumbing unit plan drawn at all (C-02).",
+  "critic": {
+    "defects": [
+      {
+        "severity": "critical",
+        "line": "Plumbing — WC-3 / WC-4 water closet",
+        "problem": "The instanceNote asserts in caps: \"NO SHEET IN THE SET STATES A GUESTROOM WATER-CLOSET SEAT HEIGHT\" and instructs \"Do NOT write a seat-height dimension on the punch sheet.\" That is false, and it suppresses the single most-inspected TAS/ADA dimension on the one accessible key on the floor. G400 detail 07 prints it: TA-15 / TA-16 ACCESSIBLE TOILET (+ toilet seat) — \"17\"-19\" MAX. toilet seat\" — and the schedule those tags belong to is titled PRIVATE BATH & PUBLIC RESTROOM ACCESSORIES SCHEDULE, i.e. it is not public-only. The list already sources a guestroom device (the 3-way welcome switch) off G400 detail 02, so it cannot then treat G400 as silent on guestrooms. Compounding: the line silently RESOLVES an ambiguity in the wrong direction — it declares A532 elevation 03's \"19\" MAX\" and 03i's \"17\" MIN\" to be \"toilet side clearance, not seat height\" as a statement of fact. No sheet says which they are, and 17 MIN / 19 MAX on a toilet wall is the standard seat-height pair. Austin's rule is to record BOTH readings and flag, not to pick one and drop the dimension.",
+        "correction": "Add the seat height to the line and to verifyAtPunch: \"Measure top of seat, record against 17\"-19\" (G400 det 07, TA-15/TA-16).\" Rewrite the note to carry both readings of A532's 17\" MIN / 19\" MAX (seat height vs side clearance) and flag it rather than resolving it. Drop the \"do not write a seat-height dimension\" instruction entirely.",
+        "citation": "drawings/G400.md:36 (detail 07, TA-15/TA-16, \"17\"-19\" MAX. toilet seat; flush valve 17\"-18\"\"); G400.md:9 (schedule title \"PRIVATE BATH & PUBLIC RESTROOM ACCESSORIES SCHEDULE\"); drawings/A532.md:44-45 (elev 03 \"19\" MAX\", 03i \"17\" MIN\")"
+      },
+      {
+        "severity": "critical",
+        "line": "Plumbing — P-trap cover and supply-line wrap at the ACCESSIBLE lavatory",
+        "problem": "The note's load-bearing claim is factually wrong: \"REQUIRED BY EXACTLY ONE SHEET ... a search ... returned ZERO HITS — the requirement appears on G402 and on no other sheet in the set.\" G400 detail 06 (ACCESSIBLE SINK, front view) prints verbatim \"WRAP EXPOSED HOT WATER PIPES AND DRAIN W/ PROTECTIVE PIPE COVER\", and G400 carries the SAME 40-row TA schedule as G402, including TA 24 P-TRAP COVER AT BUILT IN VANITIES and TA 25 P-TRAP COVER AT WALL HUNG SINKS. The proposal inherited this error verbatim from coordination_issues C-09, whose own search list omits G400 — it did not go past the source. Secondary: the verbatim leader \"PROTECT DRAIN TRAP AND SUPPLY LINES AGAINST CONTACT PER ACCESSIBILITY GUIDELINES\" is on G402 detail 05 (front elevation); detail 04 is the section, which carries the \"PIPE WRAP\" callout. The line cites det 04 for the quote.",
+        "correction": "src becomes: G400 detail 06 (\"WRAP EXPOSED HOT WATER PIPES AND DRAIN W/ PROTECTIVE PIPE COVER\") · G400 + G402 TA schedule rows TA 24 / TA 25 · G402 detail 05 (verbatim leader) and detail 04 (PIPE WRAP callout) · coordination_issues C-09 [note: C-09's \"one sheet only\" finding is stale — G400 was not searched]. Change the note from \"exactly one sheet\" to \"two General sheets require it; no discipline sheet picks up the scope.\"",
+        "citation": "drawings/G400.md:62 (detail 06 accessible sink pipe-cover note); G400.md:9 and :100-101 (identical TA schedule); drawings/G402.md:31-32, :157-158 (det 05 leader, det 04 PIPE WRAP, TA 24/25); coordination_issues.md:167-171 (C-09 search list omits G400)"
+      },
+      {
+        "severity": "critical",
+        "line": "Mechanical — EF-1 toilet exhaust fan (and Electrical — bathroom light switch)",
+        "problem": "A live, punch-testable, unflagged contradiction between two sheets is missed entirely. M201's EF-1 remark 3 reads \"switch w/ room lights\" — the bath fan is switched WITH the light. G402's guestroom-bath GENERAL NOTE 3 reads verbatim \"CEILING MOUNTED LIGHT FIXTURE AND FAN TO BE SWITCHED SEPARATELY FROM LIGHT\" — the fan is switched SEPARATELY. Those cannot both be built. The EF-1 line's own note says \"THIS WALK CLOSES IT\" and its verify step says \"confirm which switch runs it\" — but never states that the two sheets disagree, so the walker has no idea that either answer is a finding. Worse, G402 GN3 IS cited in the list, but parked on the Entry/closet/general lighting line, where it does nothing and is out of context.",
+        "correction": "Move G402 general note 3 onto the EF-1 line and the bathroom-switch line, and state the conflict: \"M201 EF-1 remark 3 = switched WITH room lights; G402 guestroom-bath GN3 = fan switched SEPARATELY from light. Record which way it is wired — either answer is a finding.\" Remove it from the entry/closet line.",
+        "citation": "drawings/M201.md:66, :77 (EF-1 remarks 1,2,3,5,6,9; remark code 3 = \"switch w/ room lights\"); drawings/G402.md:167 (bath general note 3, verbatim)"
+      },
+      {
+        "severity": "major",
+        "line": "Electrical — MISSING LINE (kitchenette)",
+        "problem": "No line exists for the dishwasher switch. E101 General Note #4 states \"Dishwasher switches in cabinet under sink,\" and A552 view 04 places keynote 10 (DEDICATED CIRCUIT FOR DISHWASHER). A switch inside the cabinet under the sink is a visible, operable device a walker opens a door and flips — squarely IN under the scope rule — and it is a classic miss because it is behind a cabinet door. The list drops it into the \"branch circuits verified at the breaker\" bucket, which does not test the switch.",
+        "correction": "Add an Electrical line: \"Dishwasher disconnect switch in the cabinet under the sink (E101 GN #4); circuit is dedicated per A552 view 04 kn10.\" verifyAtPunch: \"Open the sink cabinet — switch present and accessible, not buried behind the trap; flip it and confirm it kills the dishwasher (902); cover plate on, no exposed conductors.\" reliability HIGH, origin sheets-only.",
+        "citation": "drawings/E101.md:74 (General Note 4); drawings/A552.md:81 (view 04 keyed notes include 10); drawings/A550.md:131 (kn 10 legend text)"
+      },
+      {
+        "severity": "major",
+        "line": "Electrical — Panel \"B\" / Convenience duplex receptacles",
+        "problem": "Rough-in dodge in reverse. The instanceNote says the thirteen branch circuits \"are concealed rough-in and are NOT emitted as their own lines — the walker verifies every one of them HERE, at the breaker.\" That is true of the wiring, but the DEVICES those circuits land on are visible and are not covered anywhere: the receptacle behind the refrigerator (901), the receptacle/connection at the dishwasher (902), and the two Small Appliance countertop circuits (E103 prints \"Small Appliances 1500VA x 2, NEC 220.52 = 3000\"). Those are dedicated-circuit receptacles, not \"convenience receptacles,\" and a breaker being present proves nothing about the outlet behind the fridge. The generic receptacle line's verify (\"plug-test every outlet\") does not name them, and its own qty is a flagged placeholder, so nothing anchors them.",
+        "correction": "Add a line (or explicitly extend the convenience-receptacle line): \"Dedicated appliance receptacles at the working wall — refrigerator (901, 173 VA), dishwasher (902, 1068 VA), and the two Small Appliance countertop circuits (1500 VA x 2).\" verifyAtPunch: \"Pull the fridge and the DW — receptacle present, correct polarity/ground, cord reaches without a splice or extension; countertop small-appliance receptacles present, TR, 20 A, and split across the two circuits.\" qty FLAGGED placeholder, count off E400/A552 view 04.",
+        "citation": "drawings/E103.md:24 (per-room columns: Small Appliances 1500VA x2, Dishwasher 1068, Disposer 480, Refrigerator 173); drawings/E400.md:35, :39 (Panel A/B circuit list); drawings/A552.md:56 (901 refrigerator, 902 dishwasher tagged on view 01)"
+      },
+      {
+        "severity": "major",
+        "line": "Electrical — Bathroom light switch w/ LED night light (HIGH) and Garbage-disposal switch (HIGH)",
+        "problem": "Both are graded HIGH on a dimension the set contests three ways, and the third printed value is missing from the entire list. G400 detail 02 prints SWITCH = 3'-10\" (UNO) — 46\". E101 spec #18 prints switches at +54\" AFF. E101's symbol legend prints 48\". G400.md itself says \"Three sources, three numbers: resolve before electrical rough-in,\" and conflicts.md B1.5 / coordination_issues C-03 both register it. The bath-switch note claims \"48\" is the one height the drawings state as a hard MAX,\" which is only true if you ignore G400 and E101 #18. The list correctly carried this contest for the thermostat and for receptacles; it drops it for switches.",
+        "correction": "Downgrade both lines to MEDIUM. Add to both notes: \"HEIGHT CONTESTED — G400 det 02 switch 3'-10\" (46\"); E101 spec #18 +54\"; E101 legend 48\"; A552/A550 kn3 48\" MAX to top; G402 note 11 / A530 GN F accessible band 15\"-48\". MEASURE AND RECORD; do not write up a height deficiency. SETTLES IT: the C-03 / B1.5 RFI.\" Add \"G400 det 02\" to both src strings.",
+        "citation": "drawings/G400.md:30 (SWITCH 3'-10\" UNO), :114 (\"Three sources, three numbers\"); drawings/E101.md:70 item 18 (+54\"), :77 (legend 48\"); coordination_issues.md:75-91 (C-03)"
+      },
+      {
+        "severity": "major",
+        "line": "Mechanical — PTAC thermostat (mark T)",
+        "problem": "M101 GN29 is cited in src but its content is thrown away, and the content is punch-verifiable. N29 verbatim substance: \"Thermostats at 4'-0\" AFF unless noted; coordinate final locations w/ architect & owner; NOT ON EXTERIOR WALLS IF INTERIOR AVAILABLE; insulated backing plate if on exterior wall.\" The line places the thermostat on the \"Room wall near the PTAC / window wall\" — the exterior wall — and its verify step checks only height and operation. Whether the stat sits on an exterior wall, and whether it got the required insulated backing plate, is exactly the kind of thing a walker can see and a false PTAC reading is exactly what it causes. N29 also supplies a fifth height value (4'-0\") that the note's height list omits.",
+        "correction": "Add to verifyAtPunch: \"Confirm the thermostat is NOT on an exterior wall if an interior wall was available (M101 N29); if it IS on the exterior wall, confirm the insulated backing plate is present.\" Add 4'-0\" (M101 N29) to the height list in the note alongside M401's 48\"/54\", G402's 15\"-48\", G400's 4'-0\" and E101's 60\".",
+        "citation": "drawings/M101.md:48 (N29 verbatim substance); drawings/M401.md:35 (KN4); coordination_issues.md:75-83 (C-03 height table)"
+      },
+      {
+        "severity": "major",
+        "line": "Plumbing — kn 14 on/off PRESSURE-BALANCING (anti-scald) valve",
+        "problem": "The label imports a model number from the wrong schedule row — the exact error the line itself warns about two lines earlier. It reads \"Delta T24859 / R22000-WS family.\" P104 prints R22000-WS ONLY on the SH-1 row, which is the 36\"x36\" EMPLOYEE shower (\"Supply Delta T24859 / R22000-WS / U4993-PK / RP70175 / 51600 / 59434-18-PK, 2.5 GPM\"). The guestroom rows SH-3 and SH-4 read only \"Delta T24859 supply\" — no valve trim model, no cartridge model. The shower-head line correctly refuses to carry SH-1's 2.5 GPM for this reason; this line carries SH-1's R22000-WS anyway. Marked HIGH.",
+        "correction": "Label becomes: \"On/off PRESSURE-BALANCING (anti-scald) valve — P104 gives the guestroom rows SH-3/SH-4 only 'Delta T24859 supply'; NO valve/cartridge model is printed for the guestroom. R22000-WS appears only on the SH-1 EMPLOYEE shower row and must not be carried here.\" Add to verify: \"Record the valve/cartridge model actually installed.\" Reliability stays HIGH on the requirement, but the model claim is removed.",
+        "citation": "drawings/P104.md:31 (SH-1 Employee 36x36, R22000-WS, 2.5 GPM), :33-34 (SH-3/SH-4 guestroom — \"Delta T24859 supply\" only)"
+      },
+      {
+        "severity": "major",
+        "line": "Electrical — S21 bath downlight; Electrical — Entry/closet/general lighting",
+        "problem": "Both cite E201 as a source for a FIRST-FLOOR room. E201 is the Lighting and Power SECOND Floor Plan. The first-floor lighting sheet is E200, and E200 expressly draws no guestroom lighting at all — the guestroom wing is shaded with two callouts \"Refer to Enlarged Guestroom Plan (E-400).\" So E201's \"entry/closet lights\" phrase describes second-floor rooms, and quoting it for 118 breaks Austin's quote-the-sheet rule on a line whose whole point is that no sheet names the fixture type.",
+        "correction": "Delete E201 from both src strings. Replace with: E200 General Note 6 (\"See E400 for typical guestroom layout\") -> E400 (fixtures present, untyped) -> E101 Lighting Fixture Schedule (no guestroom entry/closet/general row). The evidence survives; only the citation is wrong.",
+        "citation": "drawings/E200.md:1, :16-17 (first floor; guestroom wing shaded, \"Refer to Enlarged Guestroom Plan (E-400)\"); drawings/E201.md:1 (\"Lighting and Power Second Floor Plan\")"
+      },
+      {
+        "severity": "major",
+        "line": "Mechanical — WAG-30 make-up air diffuser",
+        "problem": "Absence of evidence is stated as evidence of absence. The note asserts \"A552 places keynote 20 'MAKE-UP AIR DIFFUSER' NOWHERE — not on plan 01, RCP 02, finish plan 03, electrical plan 04 or elevations 05-08.\" A552.md transcribes placed-keynote lists for views 01, 02, 03 and 04 only. Its elevation table (views 05-08) records finish codes and heights and NO keynotes at all — unlike A550.md, which explicitly enumerates the keynotes carried on its elevations, and which is precisely where A550's kn 20 sits. So on A552, elevations 05-08 are UNTRANSCRIBED, not verified empty. The comparison the whole line rests on (A550/A555 have it, A552 does not) is therefore not established for the elevations. This over-reach recurs on the kn35, kn36 and kn44 lines, though those at least confine the claim to view 04's list.",
+        "correction": "Reword to: \"Keynote 20 is not in A552's transcribed placed-keynote lists for views 01, 02, 03 or 04. A552's elevations 05-08 were never transcribed for keynotes, so absence there is UNRECORDED, not established — A550 carries kn 20 on its elevations, not its plans. SETTLES IT: read A552 elevations 05-08 on the source PDF before treating this as an omission.\"",
+        "citation": "drawings/A552.md:58, :68, :76, :81 (view keynote lists), :85-92 (elevation table — no keynotes); drawings/A550.md:115 (\"Keyed notes carried on the elevations: ... 20 (make-up air diffuser) ...\")"
+      },
+      {
+        "severity": "major",
+        "line": "Electrical — Outlet for undercabinet lighting (kn50)",
+        "problem": "The note mis-states the repair it relies on. It says \"repair CR-2 restricts kn50 to the 7 accessible keys after it had wrongly been booked on all 115, so on floor 1 this is room 118 alone.\" packages/electrical.md sec 5.1.1 actually books the kn50 outlet to rooms 217 / 317 / 417, qty 3, sourced to A554.1 view 08 (King One Bedroom Acc.) — NOT to the 7 accessible keys, and NOT to 118. So the package's repaired row EXCLUDES 118 while A552's own view-04 keynote list INCLUDES 50. That is a package-vs-sheet disagreement on whether this device exists in 118 at all, and the line smooths it into a HIGH-reliability positive. The package also carries two open items (5a and 18) on exactly this keynote's placement.",
+        "correction": "Downgrade to MEDIUM/FLAGGED and record both: \"A552 view 04's placed keynote list includes 50, which sources the outlet for 118. packages/electrical.md sec 5.1.1 (repair CR-2) books the kn50 outlet to 217/317/417 only, qty 3, off A554.1 view 08 — 118 is not on its row. Sheet vs package disagree; open items 5a and 18 are live on this keynote. Record present/absent.\"",
+        "citation": "packages/electrical.md:325, :334 (\"217, 317, 417 ... 3 ... A554.1 view 08\"), :476 (open item 5a), :489 (open item 18); drawings/A552.md:81 (view 04 list includes 50)"
+      },
+      {
+        "severity": "minor",
+        "line": "Fire Protection — (S)SB addressable smoke detector",
+        "problem": "E500 FA Note 17 is misquoted as a printed criterion. The note reads \"Audible notification appliances 15 dBA above average ambient sound level.\" It does not print 50 dBA anywhere. The line writes \"note E500 FA Note 17's 50 dBA criterion is the less onerous one\" as if quoting the sheet; 50 is arithmetic the extractor did (FA-1's 35 dBA sleeping-room ambient + 15). Deriving is fine, presenting the derivation as the sheet's text is not.",
+        "correction": "\"E500 FA Note 17 states 15 dBA above average ambient; against FA-1's 35 dBA sleeping-room ambient that computes to 50 dBA, which is less onerous than FA-1's own 75 dBA design figure — test to 75. The 50 is derived, not printed.\"",
+        "citation": "drawings/E500.md:37 item 17 (verbatim: \"Audible notification appliances 15 dBA above average ambient sound level.\")"
+      },
+      {
+        "severity": "minor",
+        "line": "Fire Protection — Fire horn (mark H)",
+        "problem": "FA-1 schedules an actual ceiling horn/strobe product and the line does not carry it, so a walker who finds a device has nothing to check the plate against. FA-1 row: ⊗▷ SYSTEM SENSOR PC2WLED, HORN STROBE, CEILING, qty 14, \"LOCATE ON CEILING, 4\"x4\"x1.5\"\". The line's mounting-conflict note already cites FA-1's 4\"x4\"x1.5\" ceiling geometry but never names the model it belongs to.",
+        "correction": "Add to the label/src: \"If a horn/strobe is present, the FA-1 ceiling product is System Sensor PC2WLED (qty 14 building-wide, 4\"x4\"x1.5\", ceiling).\" Verify: \"read the model off the plate and record it against PC2WLED.\"",
+        "citation": "packages/fire-appliance.md:161 (FA-1 row ⊗▷ PC2WLED, HORN STROBE CEILING, qty 14)"
+      },
+      {
+        "severity": "minor",
+        "line": "Electrical — Bathroom GFCI duplex receptacle",
+        "problem": "Citation collision. The sidewall requirement is cited as \"G402 GN6.\" G402 carries two separately numbered note blocks: the TA-schedule general notes (1-6, where note 6 IS the GFCI sidewall text) and the guestroom-bath GENERAL NOTES (1-12, where note 3 is fan switching, note 5 is damp-rated fixtures, note 9 is the phone outlet, note 11 is 15\"-48\"). The list cites the bath-block numbering as \"G402 GN1/GN3/GN5/GN8/GN9/note 11\" and then cites \"G402 GN6\" for the schedule block. Anyone chasing G402 GN6 lands on \"COORDINATE BATH DOOR SWING WITH MOUNTING LOCATION OF CURVED SHOWER ROD AND STYLE OF DOOR STOP.\"",
+        "correction": "Cite it as \"G400 / G402 TA-schedule general note 6\" (the text is printed identically on both sheets) and reserve \"G402 GN-n\" for the guestroom-bath block only.",
+        "citation": "drawings/G400.md:96 (TA-schedule general note 6, verbatim); drawings/G402.md:162 (same note in the schedule block), :170 (bath-block general note 6 = door swing)"
+      },
+      {
+        "severity": "minor",
+        "line": "Electrical — Panel \"B\" guestroom panelboard",
+        "problem": "Two small provenance slips on an otherwise strong line. (1) The note says \"The DB carries all thirteen branch circuits plus the feeder,\" but the verify step then enumerates twelve. (2) The verify string reads \"Small Appliance #1/#2\" as though those are printed circuit names; E400's Panel A and Panel B schedules print a single \"Small Appliance\" entry. The x2 comes from E103's load column \"Small Appliances (1500VA x 2, NEC 220.52 = 3000)\", which is a load basis, not a printed circuit directory.",
+        "correction": "Reconcile the count to what the verify actually lists, and annotate: \"E400 prints 'Small Appliance' (singular) on both panel schedules; the two-circuit reading comes from E103's 1500 VA x 2 load column. Read the installed directory and record what it says.\"",
+        "citation": "drawings/E400.md:35, :39 (Panel A/B circuit lists — \"Small Appliance\" singular); drawings/E103.md:24 (\"Small Appliances (1500VA x2, NEC 220.52 = 3000)\")"
+      },
+      {
+        "severity": "minor",
+        "line": "Mechanical — Volume damper (mark VD)",
+        "problem": "src cites \"M101 legend + GN25/GN26.\" M101's transcribed general-note list runs N3, N5, N7, N12, N13, N16, N20, N21-N23, N27, N28, N29, N31-N32 — it jumps N23 to N27, so N25 and N26 are not in the indexed sheet at all. The citation cannot be checked against anything in this context set, and the damper substance the line actually needs is already carried by M101 N7 (min 12\"x12\" access), M101's legend (Manual Volume Damper VD) and M301 N11 (balancing damper each branch/runout).",
+        "correction": "Drop GN25/GN26 or mark it unverified. The line stands on M101 legend (VD) + M101 N7 + M301 N11 + M401 without them.",
+        "citation": "drawings/M101.md:24 (legend, Manual Volume Damper VD), :33 (N7), :29-50 (note list — N24, N25, N26 absent); drawings/M301.md:46 (N11)"
+      },
+      {
+        "severity": "minor",
+        "line": "Plumbing — WC-3 / WC-4 water closet (flush lever)",
+        "problem": "The line carries only A530 keyed note 21 (\"LEVER REQUIRED ON THE SIDE OF TANK OPPOSITE INSIDE CORNER OF WALL\") and calls it \"118-SPECIFIC.\" G400 detail 07 prints a second, independent, building-wide rule in a boxed note: \"FLUSH LEVER POSITIONS TO FACE OPEN SIDE OF W.C. TYP.\" They normally agree, but they are two separately stated requirements and the punch record should show both were checked.",
+        "correction": "Add to the note and verify: \"Two rules govern lever side — A530/A532 kn 21 (opposite the inside corner of wall) and G400 det 07 boxed note (facing the open side of the W.C.). Confirm both are satisfied by the as-installed orientation.\"",
+        "citation": "drawings/A530.md:165 (kn 21); drawings/G400.md:52 (boxed note, verbatim)"
+      },
+      {
+        "severity": "minor",
+        "line": "Plumbing — WC-3 / WC-4 water closet (seat model string)",
+        "problem": "The seat description is truncated on what is effectively a purchase-document string. P104 prints \"seat AS 5257A.65C.020 slow-close elongated CLOSED-FRONT W/ COVER\" on both the WC-3 and WC-4 rows. The line drops \"closed-front w/ cover\" — the part that distinguishes it from the public WC-1/WC-2/WC-5 seat (AS 5901.1, elongated OPEN-FRONT LESS COVER). A walker comparing seats between guest and public fixtures has no basis to catch a swap.",
+        "correction": "\"seat AS 5257A.65C.020 slow-close elongated closed-front w/ cover\" — and add to verify: \"confirm the seat is closed-front with cover, not the open-front-less-cover AS 5901.1 public seat.\"",
+        "citation": "drawings/P104.md:23-24 (WC-3/WC-4 remarks), :21-22, :25 (WC-1/WC-2/WC-5 seat AS 5901.1 elongated open-front less cover)"
+      }
+    ],
+    "missingDevices": [
+      "Dishwasher disconnect switch in the cabinet under the sink — E101 General Note #4 (\"Dishwasher switches in cabinet under sink\"); A552 view 04 places kn10 (dedicated circuit for dishwasher). Visible and operable behind a cabinet door; no line exists.",
+      "Dedicated appliance receptacles at the working wall — refrigerator (901, 173 VA), dishwasher (902, 1068 VA), and the two Small Appliance countertop circuits (E103: 1500 VA x 2). The circuits were dropped as concealed rough-in and \"verified at the breaker,\" but the receptacles themselves are visible devices with no line and no verify step.",
+      "Toilet seat height as a measured item on the accessible key — G400 detail 07 TA-15/TA-16, 17\"-19\". Not a device, but the most-inspected ADA dimension in the room, and the list actively instructs the walker NOT to record it."
+    ],
+    "room": "118",
+    "summary": "This is a strong list and I could not break it on the things that usually break these. Every equipment model, capacity and dimension I checked is verbatim-correct against the sheet — AZ65H12DAB / 449-300 CFM / 45.0 OSA / 11,900-10,400 / 208-1-60 (M201), min 3-1/4\\\" AFF + drain kit + caulked sleeve (M501 det 9), Ruskin CFD4 / UL 555C / ceramic shroud / 3\\\"x3\\\" angle / no flex (M501 det 2), MERV 13 or 8 (M201), 4\\\" main condensate + 1\\\" air gap + Type M copper (P501 det 13, P301, P102), 18\\\"x18\\\" access panel in a suspended ceiling with GV+union at three risers (P502 det 3, P401), Sioux Chief 695 vs PPP SMP-500-115V (P102 vs P104), FP-1's \\\"VK430 7/16 FR 155 C PD\\\" 62/437, FA-1's 121/121 and SCWLED 80 and SKFIRECOW 3, A120-A123 GN I semi-recessed. Nothing is invented. The M305 arithmetic is exactly right (2,450 CFM = 49 inlets; EF-8/9/11 short by 850 aggregate, EF-10/EV-6 balances). Marks are carried as printed and not normalised — PTAC-2/PTAC-1 correctly confined to the QQ rooms (M301 puts PTAC-1 at all 16 first-floor keys; M401 shows PTAC-2 only on details 01/02), SH-1/SH-3, L-2/L-3/L-4, WC-3/WC-4 all dual-carried. I found no rough-in leaks: the ~24 dropped rows are correctly dropped and every emitted line lands on a visible test point. Room-type discipline is clean — no standard-room item survived (no HD-05 bowed rod on the roll-in side, no strobes, no doorbell, all correctly qty 0), and the accessible-only items are all present. No verify step is a \\\"verify installed\\\" no-op. Where it fails is narrower and sharper. Three critical items: it declares that no sheet states a guestroom water-closet seat height and tells the walker not to record one — G400 detail 07 prints 17\\\"-19\\\" for TA-15/TA-16 in a schedule titled PRIVATE BATH & PUBLIC RESTROOM, and the same line silently resolves A532's 17\\\" MIN / 19\\\" MAX as side clearance rather than carrying both readings; it asserts the accessible-vanity pipe wrap is required by exactly one sheet with zero other hits, when G400 detail 06 prints \\\"WRAP EXPOSED HOT WATER PIPES AND DRAIN W/ PROTECTIVE PIPE COVER\\\" and G400 carries the same TA 24/TA 25 rows (it inherited coordination_issues C-09's stale search rather than going past it); and it misses a live, punch-testable contradiction between M201 EF-1 remark 3 (\\\"switch w/ room lights\\\") and G402 bath general note 3 (\\\"FAN TO BE SWITCHED SEPARATELY FROM LIGHT\\\") — it even cites G402 GN3, but on the entry/closet lighting line where it does nothing. Two visible kitchenette devices are missing (the under-sink dishwasher switch, and the dedicated appliance receptacles). Two lines are over-confident: both switch lines are HIGH on a height the set contests three ways and the third value, G400's 3'-10\\\", appears nowhere in the list. Two citations import from the wrong row or the wrong sheet: R22000-WS is lifted off P104's SH-1 employee shower onto the guestroom valve (the same error the line warns about for 2.5 GPM), and E201 — the second-floor plan — is cited twice for a first-floor room when E200 expressly defers guestrooms to E400. The WAG-30 line treats A552.md's untranscribed elevations as verified-empty, and the kn50 line mis-states CR-2, which actually books that outlet to 217/317/417 and not to 118. Fix those and it ships.",
+    "verdict": "FIX-THEN-SHIP"
+  }
+}

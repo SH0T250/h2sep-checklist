@@ -1,34 +1,54 @@
 #!/usr/bin/env python3
 """expand_mep.py — carry a VERIFIED MEP punch package to its sibling rooms.
 
-Floor 1 has 16 guest rooms but only THREE substantive MEP packages. What makes
-sibling packages look distinct in the database is the PTAC line, which tracks
-the CORRIDOR SIDE, not the room type: rooms on the odd side take
-`PTAC-2 / PTAC-1` "@ exterior window wall", rooms on the even side take
-`PTAC-1` "@ exterior window wall, under the window". Both the mark AND the
-wording differ. So four rooms were verified line-by-line against the E/M/P
-sheets --
+The hotel's 115 guest rooms carry only SEVEN distinct MEP packages, so a small
+set of rooms verified line-by-line against the E/M/P sheets covers every key.
+What makes sibling packages look distinct in the database is the PTAC line.
 
-    101  connector package        (odd side)
-    105  standard guest room      (odd side)
-    104  standard guest room      (even side)
-    118  accessible room          (even side, dual bath configuration)
+CORRECTED 2026-08-11 by the mechanical sheet extraction. An earlier version of
+this file said the PTAC line tracks the CORRIDOR SIDE. It does not — that was
+an inference from floor 1's odd/even numbering, and it is wrong. What the line
+actually tracks is WHICH SHEET YOU BELIEVE, split along the ROOM FAMILY:
 
--- and the remaining twelve carry those packages with their OWN PTAC line,
-rebuilt from their own schedule row rather than inherited. Carrying that line
-would hang the wrong unit on half the floor; room 116 (a King Studio connector
-on the even side) is exactly the case that proves it, since it takes 101's
-connector package but 104's PTAC line.
+    M301            says PTAC-1 at all 16 first-floor guest rooms
+    M401 detail 01  says PTAC-2, and detail 01 covers the QQ family
+                    (Queen-Queen, QQ Ext., QQ Conn.)
+
+The two are mutually exclusive, and the King family reads PTAC-1 on BOTH
+sheets. So the database's 8/8 split on floor 1 is a split of MARK CONVENTION
+along QQ-vs-King — not of hardware — and it lines up with odd/even numbering
+only by coincidence of how floor 1 happens to be laid out. The composite
+string `PTAC-2 / PTAC-1` is printed on NO drawing; it is the carry-both
+convention from packages/mechanical.md flag F4. The location wording differs
+with it ("under the window" appears on the King rows).
+
+Settled on the walk, not in the office — read the nameplate:
+    AZ65H12DAB = PTAC-1        AZ65H15DAB = PTAC-2
+
+VERIFIED SOURCE ROOMS
+
+    101  connector / extended / wide      (QQ family mark)
+    104  standard guest room              (King family mark)
+    105  standard guest room              (QQ family mark)
+    118  King Studio Acc.                 (dual bath configuration)
+    202  King One Bedroom                 (TWO PTAC units, no mark in the set)
+    217  King One Bedroom Acc.            (TWO PTAC units, no mark in the set)
+    238  QQ Acc.
+    438  King Studio Acc. — a DIFFERENT package from 118: it carries a power
+         wheelchair outlet and a closet light switch 118 does not, and lacks
+         118's glass shower enclosure.
+
+Every other room carries one of those packages with its OWN PTAC line, rebuilt
+from its own schedule row rather than inherited. Room 116 is the case that
+proves the line must not be carried: a King Studio connector, it takes 101's
+connector package but the King family's PTAC mark.
 
 The carry happens ONLY after proving it is legitimate: for every target room
 the script re-derives the room's MEP signature from the database and diffs it
 against the source room's. Every non-PTAC line must match exactly. If anything
-else differs, it REFUSES that room rather than shipping a package that was
-never verified for it.
-
-That refusal is the whole point. The failure this prevents is a room quietly
-inheriting a package that does not describe it -- the same class of defect as
-room 118 carrying room 438's slug on the FF&E side, which no screen test saw.
+else differs, the room is REFUSED rather than shipped with a package nobody
+verified for it — the same class of defect as room 118 carrying room 438's
+slug on the FF&E side, which no screen test saw.
 
     python3 tools/expand_mep.py            # verify + write
     python3 tools/expand_mep.py --check    # verify only, write nothing
@@ -54,8 +74,8 @@ MEP_CATEGORIES = ("Electrical", "Plumbing", "Mechanical",
 # typo to hide, and the derivation is itself the proof that the carry is sound.
 #
 #   101  connector / extended / wide package
-#   104  standard guest room, even side
-#   105  standard guest room, odd side
+#   104  standard guest room (King family mark)
+#   105  standard guest room (QQ family mark)
 #   118  King Studio Acc.
 #   202  King One Bedroom            (2 PTAC units per key, no schedule mark)
 #   217  King One Bedroom Acc.       (2 PTAC units per key, no schedule mark)
@@ -65,12 +85,10 @@ MEP_CATEGORIES = ("Electrical", "Plumbing", "Mechanical",
 #        lacks 118's glass shower enclosure.
 VERIFIED_SOURCES = ["101", "104", "105", "118", "202", "217", "238", "438"]
 
-# The PTAC line is NEVER carried. It tracks the corridor side — rooms on the
-# odd side take "PTAC-2 / PTAC-1" at the exterior window wall, rooms on the
-# even side take "PTAC-1" under the window — so both its mark AND its wording
-# differ between siblings. Rebuilding it from the target room's own database
-# row is the only correct move; carrying it would hang the wrong unit on half
-# the floor. Every OTHER line must match the source exactly.
+# The PTAC line is NEVER carried — see the module docstring. Its mark and its
+# wording both vary between siblings (QQ family vs King family, per whichever
+# of M301 / M401 det.01 governs), so it is rebuilt from the target room's own
+# database row. Every OTHER line must match the source exactly.
 def is_ptac(desc):
     return desc.startswith("Packaged terminal")
 
