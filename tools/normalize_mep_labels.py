@@ -46,13 +46,35 @@ ORDINAL_RE = re.compile(r"\b\d+\s+of\s+\d+\b", re.I)
 # room-TYPE attribute. Room 438's lavatory label is the richest in the set and
 # ends "set in the ACCESSIBLE vanity top" — true of 438, false of the 100-odd
 # standard keys, and "richest wins" would have printed it on every one of them.
-# Same trap as the foreign room numbers, one level up: an attribute is a claim
-# about THIS room's type, so a label carrying one may never become canonical
-# for another room, and may never be overwritten by one that lacks it.
+#
+# But an accessibility WORD is not an accessibility CLAIM. Most occurrences in
+# this set are verbatim drawing text that is true everywhere: A530 keynote 20
+# reads "MAINTAIN ACCESSIBLE COMPLIANT SLOPES", the scheduled water closet is
+# named "Champion Pro 211AA.104 ('Guestroom, Floor Outlet, ADA')", and the
+# doorbell keynote says "COMMUNICATION FEATURES ROOMS ONLY" — a condition, not
+# an assertion about the room holding the sheet. Treating the word as the claim
+# blocked 92 legitimate floor-drain normalisations to prevent one real defect.
+#
+# So the rule is about what normalising CHANGES, not about vocabulary:
+# a canonical label may never INTRODUCE an attribute the room's own label did
+# not already carry. 438 keeps its accessible vanity because 101's lavatory
+# label never mentions ACCESSIBLE; the floor drains normalise freely because
+# both labels already quote the same keynote.
 ATTRIBUTE_RE = re.compile(
     r"\b(ACCESSIBLE|ADA|roll-in|rollin|communication[- ]features|hearing[- ]"
     r"(?:impaired|accessible)|mobility[- ]accessible|wheelchair|ambulatory|"
     r"CONFIGURATION [AB])\b", re.I)
+
+
+def attrs(label):
+    """The set of room-type attributes a label asserts, normalised for compare."""
+    return frozenset(re.sub(r"[\s-]+", " ", m.group(0)).lower()
+                     for m in ATTRIBUTE_RE.finditer(label or ""))
+
+
+def adds_attribute(canonical, current):
+    """True when adopting `canonical` would make a claim `current` does not."""
+    return not (attrs(canonical) <= attrs(current))
 
 # THE PLACEHOLDER TRAP. The agents wrote an em-dash for "this device has no
 # schedule mark", not an empty string. Treating that as a real mark makes every
@@ -79,19 +101,31 @@ def word_set(label):
     return {w for w in re.findall(r"[a-z0-9.\-]+", label.lower()) if w not in STOP and len(w) > 2}
 
 
+def _covers(token, vocab):
+    """A token is present if it appears, or elaborates/abbreviates one that does.
+
+    One room cites "P301" and another "P301-series"; one says "kn20", another
+    "kn20-verbatim". Exact set intersection scores those as disagreement and
+    refused all eight floor-drain labels — plainly the same 2" guestroom drain
+    quoting the same keynote — over a suffix.
+    """
+    if token in vocab:
+        return True
+    return any(t.startswith(token) or token.startswith(t) for t in vocab)
+
+
 def same_device(a, b):
     """True when the shorter label's vocabulary is largely inside the longer."""
     wa, wb = word_set(a), word_set(b)
     if not wa or not wb:
         return False
     short, long_ = (wa, wb) if len(wa) <= len(wb) else (wb, wa)
-    return len(short & long_) / len(short) >= 0.6
+    hits = sum(1 for t in short if _covers(t, long_))
+    return hits / len(short) >= 0.6
 
 
 def is_room_specific(label, room):
     if ORDINAL_RE.search(label):
-        return True
-    if ATTRIBUTE_RE.search(label):    # claims a room-TYPE attribute
         return True
     for m in ROOM_RE.findall(label):
         if m == room:                 # names its own room
@@ -133,8 +167,7 @@ def main():
         # wording into 202 and 202's water-closet wording into 104, each
         # carrying the other room's number. Prefer the richest label that
         # names no room at all; if every variant names one, refuse the group.
-        roomless = [l for l in labels
-                    if not ROOM_RE.search(l) and not ATTRIBUTE_RE.search(l)]
+        roomless = [l for l in labels if not ROOM_RE.search(l)]
         if not roomless:
             mismatched.append((key, sorted(labels, key=len)))
             continue
@@ -149,6 +182,8 @@ def main():
             if label == best:
                 continue
             if is_room_specific(label, room):
+                kept.append((room, key, label))
+            elif adds_attribute(best, label):
                 kept.append((room, key, label))
             else:
                 changes.append((room, key, label, best))
@@ -183,7 +218,9 @@ def main():
                 continue
             key = (line["category"], mark.strip())
             best = canon.get(key)
-            if best and line["label"] != best and not is_room_specific(line["label"], room):
+            if (best and line["label"] != best
+                    and not is_room_specific(line["label"], room)
+                    and not adds_attribute(best, line["label"])):
                 line["label"] = best
                 touched = True
                 applied += 1

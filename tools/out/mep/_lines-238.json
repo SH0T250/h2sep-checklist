@@ -125,7 +125,7 @@
     {
       "category": "Mechanical",
       "mark": "T",
-      "label": "PTAC thermostat - 7-day programmable, HARDWIRED (keynote 24 adds that thermostat-to-PTAC communication may be wireless)",
+      "label": "PTAC thermostat — 7-day programmable, HARDWIRED (keynote 24 adds that thermostat-to-PTAC communication may be wireless). ONE PER PTAC, AND THIS ROOM HAS ONE PTAC — M401 states verbatim 'Each guestroom is served by a single PTAC', and A555 places keynote 1 only at the window wall, so expect ONE thermostat here",
       "where": "Room wall at the PTAC / window wall. A556 places keynote 24 TWICE - on view 03 (the ELECTRICAL PLAN) and on elevation 06 (the bed wall + sofa wall). M401 KN7 and M301 GN5 defer the exact location to the architectural set.",
       "qty": 1,
       "reliability": "MEDIUM",
@@ -149,7 +149,7 @@
     {
       "category": "Mechanical",
       "mark": "EAG-50",
-      "label": "Toilet / bath exhaust air grille, 50 CFM - off-white aluminium grille per M201 EF-1 remark 6",
+      "label": "Toilet / bath exhaust air grille, 50 CFM — off-white aluminium grille per the M201 EF-1 remark codes (remark 6)",
       "where": "Bathroom ceiling, in the 7'-3\" AFF PT-07 painted-gypsum hard lid. A556 view 02 (RCP) places keynote 19 'TOILET EXHAUST GRILLE'.",
       "qty": 1,
       "reliability": "MEDIUM",
@@ -185,7 +185,7 @@
     {
       "category": "Mechanical",
       "mark": "VD",
-      "label": "Volume damper at the toilet exhaust, with locking quadrant",
+      "label": "Volume damper at the toilet exhaust, with a locking quadrant",
       "where": "At the toilet exhaust branch above the bath ceiling. M401 detail 02 shows it with the EAG-50 and the FD but does not dimension its position; M301 N11 requires a balancing damper at each branch/runout.",
       "qty": 1,
       "reliability": "MEDIUM",
@@ -197,7 +197,7 @@
     {
       "category": "Mechanical",
       "mark": "WAG-30",
-      "label": "Wall air grille / make-up air diffuser, 30 CFM - the transfer-air path to the bathroom (keynote 20, 'MAKE-UP AIR DIFFUSER')",
+      "label": "Wall air grille / make-up air diffuser, 30 CFM — the transfer/make-up air path to the bathroom (keynote 20, 'MAKE-UP AIR DIFFUSER')",
       "where": "A556 ELEVATION 05 - the entry door / mirror wall - places keynote 20. Note that on the standard QQ sheet A555 the same keynote lands on elevation 07 (bed wall + sofa wall), so do NOT look for it where the standard rooms carry it.",
       "qty": 1,
       "reliability": "MEDIUM",
@@ -209,7 +209,7 @@
     {
       "category": "Mechanical",
       "mark": "FD",
-      "label": "Ceiling fire / radiation damper at the rated floor-ceiling penetration - Ruskin CFD4, UL 555C, fusible link, ceramic-fibre thermal shroud, 3\"x3\" galvanised continuous angle to the sleeve on four sides",
+      "label": "Ceiling fire / radiation damper at the rated floor-ceiling penetration — Ruskin CFD4, UL 555C, fusible link, ceramic-fibre thermal shroud, 3\"x3\" galvanised continuous angle to the sleeve on all four sides, sheet-metal duct throughout (flex NOT allowed)",
       "where": "In the bath ceiling directly above the EAG-50 grille, on the 4\" round toilet exhaust to the EV riser.",
       "qty": 1,
       "reliability": "FLAGGED",
@@ -413,7 +413,7 @@
     {
       "category": "Electrical",
       "mark": "S21",
-      "label": "Bath ceiling surface-mount downlight - Cooper Halo SMD6R69SWH, LED (E101 row verbatim: 'S21 | Surface mount downlight - guestroom restroom')",
+      "label": "Bath ceiling surface-mount downlight — Cooper Halo SMD6R69SWH, LED (E101 row verbatim: \"S21 | Surface mount downlight — guestroom restroom\")",
       "where": "Bath ceiling, 7'-3\" AFF PT-07, on moisture-resistant rated ceiling board (A556 view 02; G402 guestroom-bath GN8; E400 GN6).",
       "qty": 1,
       "reliability": "FLAGGED",
@@ -437,7 +437,7 @@
     {
       "category": "Electrical",
       "mark": "WS03",
-      "label": "Vanity wall sconce - Arkansas Lighting 3550V, LED, wall mounted (E101 row verbatim: 'WS03 | Wall sconce - guestroom vanity | Arkansas Lighting 3550V | Wall | LED')",
+      "label": "Vanity wall sconce — Arkansas Lighting 3550V, LED, wall mounted (E101 row verbatim: \"WS03 | Wall sconce — guestroom vanity | Arkansas Lighting 3550V | Wall | LED\")",
       "where": "Bath, on the vanity / mirror wall above the accessible vanity. A556 view 01 tags GR-203 vanity sconce; A532 elevation 04 and A532.1 view 02 place keynote 12 'VANITY MIRROR AND LIGHT FIXTURE', with blocking called out on A532 view 04i.",
       "qty": 1,
       "reliability": "FLAGGED",
@@ -557,7 +557,7 @@
     {
       "category": "Plumbing",
       "mark": "BT-1",
-      "label": "CONFIGURATION A (TUB) - Bathtub, guestroom ADA, mark BT-1 - American Standard Princeton 2390.202 with Delta T14261 / R10000-UNWS trim; removable wall-mounted tub/shower seat (keyed note 7); tub rim 17\"-19\" AFF; BOWED shower rod HD-05",
+      "label": "CONFIGURATION A (TUB) - Bathtub, guestroom ADA, mark BT-1 — American Standard Princeton 2390.202 with Delta T14261 / R10000-UNWS trim; removable wall-mounted tub/shower seat (keyed note 7); tub rim 17\" MIN / 19\" MAX; BOWED shower rod HD-05; NO diverter and NO hand shower under this configuration",
       "where": "Bath, tub wall. A532 view 01 'PLAN - TUB' gives the accessible tub bath 9'-4 3/4\" x 9'-11\" with 5'-6 3/4\" and 5'-0\" CLEAR at the tub and 5'-5\" CLEAR at the vanity wall; A532 elevation 05 prints the grab-bar band MIN 33\" / MAX 36\" and the shower controls MIN 8\" / MAX 10\" above the rim. G402 detail 01 dimensions the three accessible-tub walls: rim 17\"-19\", clear floor 34\" CLEAR / 30\" MIN, tub 2'-0\" deep, wall 6'-8\", head-wall 12\" grab bar TA 4 at 3'-0\" [33\"-36\"] and 1'-0\" MIN from the tub edge, back-wall TA 4.2 24\" bars upper and lower (lower 8\"-10\" above the rim), foot-wall TA 4.2 plus vertical TA 4.9, shower head 'MAXIMIZE +6'-2\" TO 6'-6\" ABOVE TUB FLR.'",
       "qty": 1,
       "reliability": "FLAGGED",
@@ -569,7 +569,7 @@
     {
       "category": "Plumbing",
       "mark": "SH-1 / SH-3",
-      "label": "CONFIGURATION B (ROLL-IN SHOWER) - Roll-in shower, guestroom ADA, marks SH-1 / SH-3 - Kohler Rely series, 30\"x60\" pan, CENTRE drain, NO threshold, Delta T24859 supply; HD-14 folding rectangular shower seat surface mounted and HD-5.1 STRAIGHT shower rod; CURBLESS SLAB DEPRESSION REQUIRED",
+      "label": "CONFIGURATION B (ROLL-IN SHOWER) - Roll-in shower, guestroom ADA, marks SH-1 / SH-3 — Kohler Rely series, 30\"x60\" pan, CENTRE drain, NO threshold, Delta T24859 supply; roll-in geometry 5'-0\" CLEAR x 2'-6\" MIN, entry 1 1/2\" and 6 1/2\" MAX; STRAIGHT rod HD-5.1 and folding seat HD-14 on this side; CURBLESS SLAB DEPRESSION",
       "where": "Bath. A532 view 01.1 'PLAN - ROLL IN SHOWER' gives the roll-in bath 9'-3\" x 9'-0\" CLEAR with the shower 5'-0\" CLEAR x 2'-6\" MIN, seat depth 1'-3\" MIN / 1'-4\" MAX and curb/threshold dimensions 1 1/2\" and 6 1/2\" MAX at the entry; its elevations are A532.1 views 01, 02 and 03. G402 detail 02 adds: 36\" grab bar TA 4.3 horizontal at 2'-11\" [33\"-36\"] with 6\" MAX return each end, folding seat top at 2'-3\" and 'WHEN FOLDED SHALL EXTENDED MAX. 6\" FROM THE WALL' [sic], compartment 60\".",
       "qty": 1,
       "reliability": "FLAGGED",
@@ -581,7 +581,7 @@
     {
       "category": "Plumbing",
       "mark": "kn 9",
-      "label": "Shower head - trim Delta T24859",
+      "label": "Shower head — trim Delta T24859",
       "where": "Bathing-fixture wall. Keyed note 9 is placed on A532 view 01 (tub plan), view 01.1 (roll-in plan), elevation 02 and elevation 05, so it applies under either configuration.",
       "qty": 1,
       "reliability": "HIGH",
@@ -617,7 +617,7 @@
     {
       "category": "Plumbing",
       "mark": "kn 11",
-      "label": "CONFIGURATION B (ROLL-IN SHOWER) - Hand shower and side bar, keyed note 11 - the handset's on/off control MUST be NON-POSITIVE shut-off",
+      "label": "Hand shower and side bar (keyed note 11) — the handset's on/off control MUST be NON-POSITIVE shut-off. PLACED ON A533's TUB ELEVATION, so it applies under EITHER configuration.",
       "where": "Roll-in shower wall on a slide bar. A532.1 view 02 places keyed note 11 and prints 3'-6\", 3'-4\" to reflective surface, 2'-10\", 2'-8\", 1'-5\", 1'-3\", 1'-0\" and MAX 6\" at the control zone with the grab-bar band MIN 33\" / MAX 36\"; view 03, the folding-seat wall, carries keyed note 11 as well. G402 detail 02 adds 'SHOWER HOSE TO BE MIN. 59\" LONG', a slide-bar top at 4'-0 1/2\" MAX and the controls at 2'-3\" MAX / 1'-4\" MIN from the seat wall.",
       "qty": 1,
       "reliability": "FLAGGED",
@@ -629,7 +629,7 @@
     {
       "category": "Plumbing",
       "mark": "FD",
-      "label": "Floor drain, guest bathroom - 2\" (P301 general notes); keyed note 20 verbatim: 'FLOOR DRAIN LOCATION - MAINTAIN ACCESSIBLE COMPLIANT SLOPES TO DRAIN'",
+      "label": "Floor drain, guest bathroom — 2\" per the P301-series general notes; \"MAINTAIN ACCESSIBLE COMPLIANT SLOPES TO DRAIN\". No guestroom floor drain is scheduled anywhere in P104",
       "where": "Bath floor at or near the bathing fixture. A532 places keyed note 20 on BOTH plans - view 01 (tub) and view 01.1 (roll-in) - so 238 gets one under either configuration; P402 places an FD in accessible units.",
       "qty": 1,
       "reliability": "MEDIUM",
@@ -641,7 +641,7 @@
     {
       "category": "Plumbing",
       "mark": "TP",
-      "label": "Trap guard / trap primer at the bathroom floor drain",
+      "label": "Trap guard / trap primer at the bathroom floor drain — the primer valve body is concealed but the trap guard is visible through the strainer and the seal is testable",
       "where": "At the guest-bath floor drain. The primer valve body is concealed; P102 requires primers in ACCESSIBLE locations per NPCA / ASSE 1018.",
       "qty": 1,
       "reliability": "MEDIUM",
@@ -653,7 +653,7 @@
     {
       "category": "Plumbing",
       "mark": "GV",
-      "label": "Gate valves at the CWS, HWS and HWR riser take-offs - one at each riser, with unions, behind an 18\"x18\" access panel",
+      "label": "Gate valves at the CWS, HWS and HWR riser take-offs — one at each of the three risers, with unions, behind an 18\"x18\" access panel",
       "where": "Guestroom wet wall / plumbing stack. WHERE THE PANEL PHYSICALLY LANDS IS THE OPEN QUESTION - see note.",
       "qty": 3,
       "reliability": "MEDIUM",
@@ -725,7 +725,7 @@
     {
       "category": "Fire Protection",
       "mark": "(S)SB",
-      "label": "Addressable photoelectric smoke detector on a low-frequency sounder base - Silent Knight SKPHOTOW head in a System Sensor B200S-LF-WH 520 Hz low-frequency sounder base, ceiling mounted",
+      "label": "Addressable photoelectric smoke detector on a LOW-FREQUENCY sounder base — Silent Knight SKPHOTOW head in a System Sensor B200S-LF-WH 520 Hz sounder base, ceiling mounted. This base is the audible appliance for a sleeping room; a corridor horn does not satisfy it",
       "where": "Guest-room ceiling near the entry / sleeping boundary. NOT in the bath and not in the entry/kitchenette leg. A550's POWER & SIGNAL LEGEND carries the SD symbol; on the standard QQ sheet A555 the SD and H symbols are drawn together on elevation 06.",
       "qty": 1,
       "reliability": "HIGH",

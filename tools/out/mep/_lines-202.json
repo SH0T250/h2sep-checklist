@@ -137,7 +137,7 @@
     {
       "category": "Mechanical",
       "mark": "T",
-      "label": "PTAC thermostat — 7-day programmable, HARDWIRED (keynote 24 adds that thermostat-to-PTAC communication may be wireless). ONE PER PTAC — expect TWO in this suite, one in the bedroom and one in the living room",
+      "label": "PTAC thermostat — 7-day programmable, HARDWIRED (keynote 24 adds that thermostat-to-PTAC communication may be wireless). ONE PER PTAC, AND THIS ROOM HAS ONE PTAC — M401 states verbatim 'Each guestroom is served by a single PTAC', and A555 places keynote 1 only at the window wall, so expect ONE thermostat here",
       "where": "Bedroom wall and living-room wall, near each PTAC. Exact location is deferred by BOTH mechanical sheets to the architectural set — M401 KN4 'refer architectural plans for exact location', M301 GN5 'refer arch/ID plans for exact thermostat location.' M101 N29 adds: not on an exterior wall if an interior wall is available; insulated backing plate if it must go on an exterior wall.",
       "qty": 2,
       "reliability": "FLAGGED",
@@ -161,7 +161,7 @@
     {
       "category": "Mechanical",
       "mark": "EAG-50",
-      "label": "Toilet / bath exhaust air grille, 50 CFM — off-white aluminium grille per M201 EF-1 remark 6",
+      "label": "Toilet / bath exhaust air grille, 50 CFM — off-white aluminium grille per the M201 EF-1 remark codes (remark 6)",
       "where": "Bathroom ceiling. The bath lid is 7'-3\" AFF PT-07 painted gypsum — a hard lid, not ACT (A553 view 02). ONE bath in this suite, per A531.",
       "qty": 1,
       "reliability": "MEDIUM",
@@ -197,7 +197,7 @@
     {
       "category": "Mechanical",
       "mark": "VD",
-      "label": "Volume damper at the toilet exhaust, with locking quadrant",
+      "label": "Volume damper at the toilet exhaust, with a locking quadrant",
       "where": "At the toilet exhaust branch. M401 does not dimension its position; M101's legend defines VD as a manual volume damper, M101 GN25/GN26 require each outlet to have its own balancing device with a locking quadrant, and M301 GN11 requires a balancing damper at each branch/runout.",
       "qty": 1,
       "reliability": "MEDIUM",
@@ -245,7 +245,7 @@
     {
       "category": "Electrical",
       "mark": "WS03",
-      "label": "Vanity wall sconce — Arkansas Lighting 3550V, LED, wall mounted (E101 row verbatim: 'WS03 | Wall sconce — guestroom vanity | Arkansas Lighting 3550V | Wall | LED')",
+      "label": "Vanity wall sconce — Arkansas Lighting 3550V, LED, wall mounted (E101 row verbatim: \"WS03 | Wall sconce — guestroom vanity | Arkansas Lighting 3550V | Wall | LED\")",
       "where": "Bathroom vanity wall, at the vanity mirror. A531 view 05 is the vanity wall and carries keynote 12 'vanity mirror & light fixture'; the plan tags GR-203 vanity sconce.",
       "qty": 1,
       "reliability": "MEDIUM",
@@ -269,7 +269,7 @@
     {
       "category": "Electrical",
       "mark": "S21",
-      "label": "Bath ceiling surface-mount downlight — Cooper Halo SMD6R69SWH, LED (E101 row verbatim: 'S21 | Surface mount downlight — guestroom restroom')",
+      "label": "Bath ceiling surface-mount downlight — Cooper Halo SMD6R69SWH, LED (E101 row verbatim: \"S21 | Surface mount downlight — guestroom restroom\")",
       "where": "Bathroom ceiling, 7'-3\" PT-07 gyp lid",
       "qty": 1,
       "reliability": "MEDIUM",
@@ -521,7 +521,7 @@
     {
       "category": "Plumbing",
       "mark": "WC-3 / WC-4",
-      "label": "Water closet, floor outlet, tank type, 1.28 GPF — WC-3 American Standard Champion Pro 211AA.104 ('Guestroom, Floor Outlet, ADA') / WC-4 Cadet Pro 215CA.104; seat AS 5257A.65C.020 slow-close elongated CLOSED-FRONT W/ COVER. ADA seat height 17\"-19\" (G400 det 07)",
+      "label": "Water closet, guestroom, floor outlet, tank type, 1.28 GPF - WC-3 American Standard Champion Pro 211AA.104 ('Guestroom, Floor Outlet, ADA') / WC-4 Cadet Pro 215CA.104; seat AS 5257A.65C.020 slow-close elongated CLOSED-FRONT W/ COVER. ADA seat height 17\"-19\" (G400 detail 07)",
       "where": "Bathroom, on the toilet/towel-bar wall (A531 view 04)",
       "qty": 1,
       "reliability": "FLAGGED",
@@ -593,7 +593,7 @@
     {
       "category": "Plumbing",
       "mark": "kn 14",
-      "label": "On/off PRESSURE-BALANCING (anti-scald) valve — P104 gives the guestroom rows SH-3 / SH-4 only 'Delta T24859 supply'; NO valve or cartridge model is printed for the guestroom",
+      "label": "On/off PRESSURE-BALANCING (anti-scald) valve - P104 gives the guestroom rows SH-3 / SH-4 only 'Delta T24859 supply'; NO valve or cartridge model is printed for the guestroom",
       "where": "Shower control wall",
       "qty": 1,
       "reliability": "MEDIUM",
@@ -617,7 +617,7 @@
     {
       "category": "Plumbing",
       "mark": "FD",
-      "label": "Bathroom floor drain — A530/A531 keyed note 20 verbatim: 'FLOOR DRAIN LOCATION - MAINTAIN ACCESSIBLE COMPLIANT SLOPES TO DRAIN'",
+      "label": "Floor drain, guest bathroom — 2\" per the P301-series general notes; \"MAINTAIN ACCESSIBLE COMPLIANT SLOPES TO DRAIN\". No guestroom floor drain is scheduled anywhere in P104",
       "where": "Bath floor. Keyed note 20 is placed on the A531 plan; A553 view 01's keynote legend also defines keynote 6 as FLOOR DRAIN.",
       "qty": 1,
       "reliability": "MEDIUM",
@@ -629,7 +629,7 @@
     {
       "category": "Plumbing",
       "mark": "TP",
-      "label": "Trap guard / trap primer at the bathroom floor drain",
+      "label": "Trap guard / trap primer at the bathroom floor drain — the primer valve body is concealed but the trap guard is visible through the strainer and the seal is testable",
       "where": "At the bath floor drain — reachable by lifting the strainer",
       "qty": 1,
       "reliability": "MEDIUM",
@@ -653,7 +653,7 @@
     {
       "category": "Plumbing",
       "mark": "GV",
-      "label": "Gate valves at the CWS, HWS and HWR riser take-offs — one at each riser, with unions, behind an 18\"x18\" access panel",
+      "label": "Gate valves at the CWS, HWS and HWR riser take-offs — one at each of the three risers, with unions, behind an 18\"x18\" access panel",
       "where": "Guestroom wet wall / plumbing stack. WHERE THE PANEL PHYSICALLY LANDS IS THE OPEN QUESTION — P502 det.3 draws it in a SUSPENDED ceiling and no ceiling in this suite is suspended (A553 view 02: PT-07 painted gypsum at 8'-3 3/8\" in both rooms and 7'-3\" at bath and entry).",
       "qty": 3,
       "reliability": "MEDIUM",

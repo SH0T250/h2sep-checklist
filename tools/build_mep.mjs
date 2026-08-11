@@ -15,6 +15,7 @@
 //
 //   node tools/build_mep.mjs
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -23,17 +24,18 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const OUT = join(HERE, 'out', 'mep');
 if (!existsSync(OUT)) mkdirSync(OUT, { recursive: true });
 
-// Room type labels come from the room map, not from the reconciler — the punch
-// doc must call room 118 exactly what the FF&E doc calls it or the two screens
-// disagree on the same room's name.
-const TYPE_LABEL = {
-  '101': 'QQ Studio Connector', '103': 'QQ Studio Connector',
-  '104': 'King Studio', '105': 'QQ Studio', '106': 'King Studio',
-  '107': 'QQ Studio', '108': 'King Studio', '109': 'QQ Studio',
-  '110': 'King Studio', '111': 'QQ Studio', '112': 'King Studio',
-  '113': 'QQ Studio', '114': 'King Studio', '115': 'QQ Studio',
-  '116': 'King Studio Connector', '118': 'King Studio Acc Mod',
-};
+// Floor and room-type label come from the SAME room table the FF&E side reads,
+// never from a table written here. A hand-kept dict covered floor 1 only, so
+// every 2xx/3xx/4xx punch doc built with an empty typeLabel — and `floor` was
+// hardcoded to 1, which would have stacked all 115 punch lists onto floor 1's
+// screen and left floors 2-4 showing none. The punch doc must call room 302
+// exactly what the FF&E doc calls it, and sit on the same floor.
+const ROOM_META = JSON.parse(execFileSync('python3', ['-c', `
+import sqlite3, json
+cx = sqlite3.connect(${JSON.stringify(join(HERE, '..', 'data', 'project.sqlite'))})
+rows = cx.execute("SELECT room_no, floor, display_label FROM rooms")
+print(json.dumps({r[0]: {"floor": int(r[1]), "label": r[2] or ""} for r in rows}))
+`], { encoding: 'utf8' }));
 
 const CAT_SORT = {
   'Mechanical': 1000, 'Electrical': 2000, 'Plumbing': 3000,
@@ -156,11 +158,16 @@ for (const f of readdirSync(OUT).filter((x) => /^_lines-.+\.json$/.test(x)).sort
     };
   }
 
+  const meta = ROOM_META[room];
+  if (!meta) {
+    console.error(`${room}: NOT IN THE ROOM TABLE — refusing to guess its floor or type`);
+    problems++; continue;
+  }
   const doc = {
     number: `${room}-MEP`,
-    floor: 1,
+    floor: meta.floor,
     type: 'mep-punch',
-    typeLabel: TYPE_LABEL[room] || '',
+    typeLabel: meta.label,
     items,
     notes: {},
     deleted: false,
