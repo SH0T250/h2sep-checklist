@@ -1,6 +1,6 @@
 // Screen renderers. Each returns an HTML string and wires events after mount
 // via the returned `wire(el)` function.
-import { esc, fmtWhen, roomStats, typeAbbrev, platform, vibrate, toast, roomSort, isSpaceDoc, CATEGORY_ORDER } from './util.js';
+import { esc, fmtWhen, roomStats, typeAbbrev, platform, vibrate, toast, roomSort, isSpaceDoc, isMepDoc, mepParent, mepIdFor, CATEGORY_ORDER, MEP_CATEGORY_ORDER, MEP_LETTER } from './util.js';
 import { SPACE_META } from './space-meta.js';
 import * as store from './store.js';
 import * as sheets from './sheets.js';
@@ -168,7 +168,12 @@ export function renderFloor(el, floorN) {
   const floors = Object.entries(store.getFloors()).sort((a, b) => a[1].sort - b[1].sort);
   const f = store.getFloors()[floorN] || { label: 'Level ' + floorN };
   const filter = sessionStorage.getItem('h2sep-filter') || 'All';
-  const rooms = store.getRooms(floorN);
+  // Which checklist family this floor is showing. MEP punch lists are a
+  // separate body of work on the same rooms — a different crew, a different
+  // day — so the floor shows one or the other, never a mixed grid.
+  const mepDocs = store.getMepDocs(floorN);
+  const view = mepDocs.length && sessionStorage.getItem('h2sep-floorview') === 'mep' ? 'mep' : 'ffe';
+  const rooms = view === 'mep' ? mepDocs : store.getRooms(floorN);
   const withStats = rooms.map(r => ({ r, s: roomStats(r) }));
   const counts = {
     All: rooms.length,
@@ -194,6 +199,13 @@ export function renderFloor(el, floorN) {
       ${floors.map(([n, fl]) => `<a class="seg-btn ${String(n) === String(floorN) ? 'on' : ''}"
         href="#/floor/${esc(n)}">${esc(String(fl.sort))}</a>`).join('')}
     </div>
+    ${mepDocs.length ? `
+    <div class="doc-switch floor-switch" role="tablist" aria-label="Checklist type">
+      <button class="ds-btn ${view === 'ffe' ? 'on' : ''}" role="tab" aria-selected="${view === 'ffe'}"
+        data-floorview="ffe">FF&amp;E · ${store.getRooms(floorN).length}</button>
+      <button class="ds-btn ${view === 'mep' ? 'on' : ''}" role="tab" aria-selected="${view === 'mep'}"
+        data-floorview="mep">MEP PUNCH · ${mepDocs.length}</button>
+    </div>` : ''}
     <div class="chips">
       ${FILTERS.map(x => `<button class="chip ${x === filter ? 'on' : ''}" data-filter="${esc(x)}">
         ${esc(x)}${counts[x] ? ' · ' + counts[x] : ''}</button>`).join('')}
@@ -201,15 +213,16 @@ export function renderFloor(el, floorN) {
     <div class="room-grid">
       ${visible.map(({ r, s }) => {
         const t = typeAbbrev(r.typeLabel);
+        const base = view === 'mep' ? (mepParent(r.number) || r.number) : r.number;
         return `
-        <a class="room-card ${s.complete ? 'done' : ''} ${s.openIssues ? 'issues' : ''}" href="#/room/${esc(r.number)}">
+        <a class="room-card ${view === 'mep' ? 'mep-card ' : ''}${s.complete ? 'done' : ''} ${s.openIssues ? 'issues' : ''}" href="#/room/${esc(r.number)}">
           ${s.openIssues ? `<span class="badge tr">${s.openIssues}</span>` : (s.complete ? `<span class="done-glyph tr">✓</span>` : '')}
-          <div class="rc-num">${esc(r.number)}</div>
-          <div class="rc-type">${esc(t.abbrev)}${t.ada ? ' <span class="ada">ADA</span>' : ''}</div>
+          <div class="rc-num">${esc(base)}</div>
+          <div class="rc-type">${view === 'mep' ? 'MEP · ' + s.total : esc(t.abbrev) + (t.ada ? ' <span class="ada">ADA</span>' : '')}</div>
           <div class="bar rc-bar"><div class="bar-fill" style="width:${s.pct}%"></div></div>
         </a>`;
       }).join('')}
-      <button class="room-card add-ghost" data-add-room>+ Add<br>room</button>
+      ${view === 'mep' ? '' : `<button class="room-card add-ghost" data-add-room>+ Add<br>room</button>`}
     </div>
     ${visible.length === 0 ? `<div class="empty">No ${filter === 'All' ? '' : filter.toLowerCase() + ' '}rooms on this floor yet.</div>` : ''}
   </main>`;
@@ -219,7 +232,12 @@ export function renderFloor(el, floorN) {
     sessionStorage.setItem('h2sep-filter', b.dataset.filter);
     renderFloor(el, floorN);
   }));
-  el.querySelector('[data-add-room]').addEventListener('click', async () => {
+  el.querySelectorAll('[data-floorview]').forEach(b => b.addEventListener('click', () => {
+    sessionStorage.setItem('h2sep-floorview', b.dataset.floorview);
+    renderFloor(el, floorN);
+  }));
+  const addBtn = el.querySelector('[data-add-room]');
+  if (addBtn) addBtn.addEventListener('click', async () => {
     if (!(await sheets.requireAdmin())) return;
     location.hash = '#/room-new/' + floorN;
   });
@@ -348,16 +366,23 @@ export function renderRoom(el, number) {
       if (!byCat.has(cat)) byCat.set(cat, []);
       byCat.get(cat).push(row);
     }
+    // An MEP punch sheet orders itself by TRADE (M · E · P · FP · LV), not by
+    // the FF&E build sequence — a punch walker works one trade at a time and
+    // the plumber never wants to scroll past the sconces.
+    const ORDER = isMepDoc(room) ? MEP_CATEGORY_ORDER : CATEGORY_ORDER;
     const known = [], unknown = [];
     for (const cat of byCat.keys()) {
       if (!cat) continue;
-      (CATEGORY_ORDER.indexOf(cat) >= 0 ? known : unknown).push(cat);
+      (ORDER.indexOf(cat) >= 0 ? known : unknown).push(cat);
     }
-    known.sort((a, b) => CATEGORY_ORDER.indexOf(a) - CATEGORY_ORDER.indexOf(b));
+    known.sort((a, b) => ORDER.indexOf(a) - ORDER.indexOf(b));
     unknown.sort((a, b) => a.localeCompare(b));
     const order = known.concat(unknown);
     if (byCat.has('')) order.push(''); // ad-hoc/uncategorized items last
-    groups = order.map(cat => ({ cat, label: cat || 'Other', rows: byCat.get(cat) }));
+    groups = order.map(cat => ({
+      cat, label: cat || 'Other', rows: byCat.get(cat),
+      letter: isMepDoc(room) ? (MEP_LETTER[cat] || '') : '',
+    }));
     // Stale per-visit selection (e.g. category vanished in a remote update).
     if (tradeFilter !== null && !byCat.has(tradeFilter)) tradeFilter = null;
   } else {
@@ -408,7 +433,12 @@ export function renderRoom(el, number) {
   // (and vice versa) — flipping from "Lobby" to "Room 101" mid-swipe reads as
   // a bug even when every number is technically adjacent.
   const isSpace = isSpaceDoc(room);
-  const siblings = (isSpace ? store.getSpaces(room.floor) : store.getRooms(room.floor)).map(r => r.number);
+  // An MEP punch doc walks the other MEP docs on its floor — swiping from the
+  // 105 punch list into the 107 FF&E list would be a different trade's work.
+  const isMep = isMepDoc(room);
+  const mepBase = isMep ? (mepParent(room.number) || room.number) : null;
+  const siblings = (isMep ? store.getMepDocs(room.floor)
+    : isSpace ? store.getSpaces(room.floor) : store.getRooms(room.floor)).map(r => r.number);
   const idx = siblings.indexOf(room.number);
   const prev = idx > 0 ? siblings[idx - 1] : null;
   const next = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : null;
@@ -419,7 +449,8 @@ export function renderRoom(el, number) {
   const meta = isSpace ? (SPACE_META[room.number] || {}) : {};
 
   el.innerHTML = appBar({
-    title: isSpace ? (room.typeLabel || 'Space') + ' · ' + room.number : 'Room ' + room.number,
+    title: isMep ? 'MEP Punch · ' + mepBase
+      : isSpace ? (room.typeLabel || 'Space') + ' · ' + room.number : 'Room ' + room.number,
     back: isSpace ? '#/common' : '#/floor/' + room.floor,
     icons: `<button class="ab-btn" data-goto aria-label="Go to room">⌕</button>
             <button class="ab-btn" data-more aria-label="More">⋮</button>`,
@@ -427,15 +458,33 @@ export function renderRoom(el, number) {
   <main class="content room-content">
     <section class="room-head card">
       <div class="rh-top">
-        <span class="rh-num">${isSpace ? esc(room.typeLabel || 'Space') : 'Room ' + esc(room.number)}</span>
+        <span class="rh-num">${isMep ? 'MEP ' + esc(mepBase)
+          : isSpace ? esc(room.typeLabel || 'Space') : 'Room ' + esc(room.number)}</span>
         <span class="rh-right">
-        ${isSpace ? '' : `<a class="sheet-btn" href="./refs.html?room=${encodeURIComponent(room.number)}" aria-label="Submittals and plan references">📄</a>`}
+        ${isSpace || isMep ? '' : `<a class="sheet-btn" href="./refs.html?room=${encodeURIComponent(room.number)}" aria-label="Submittals and plan references">📄</a>`}
         <a class="sheet-btn" href="./print.html?room=${encodeURIComponent(room.number)}" aria-label="Printable checklist sheet">🖨</a>
-        ${MODEL_ROOMS.includes(room.number) ? `<a class="sheet-btn" href="./room-3d.html?room=${encodeURIComponent(room.number)}" aria-label="3D room model">🧊</a>` : ''}
-        <span class="rh-type">${isSpace
+        ${!isMep && MODEL_ROOMS.includes(room.number) ? `<a class="sheet-btn" href="./room-3d.html?room=${encodeURIComponent(room.number)}" aria-label="3D room model">🧊</a>` : ''}
+        <span class="rh-type">${isMep
+          ? 'PUNCH · ' + esc((room.typeLabel || '').toUpperCase())
+          : isSpace
           ? 'SPACE ' + esc(room.number) + ' · LEVEL ' + esc(String(room.floor))
           : esc((room.typeLabel || '').toUpperCase())}</span></span>
       </div>
+      ${(() => {
+        // FF&E ⇄ MEP toggle. Only drawn when the counterpart doc actually
+        // exists, so a room with no punch list never offers a dead tab.
+        if (isSpace) return '';
+        const base = isMep ? mepBase : room.number;
+        const hasMep = !!store.getMepFor(base);
+        const hasFfe = !!store.getRoom(base);
+        if (!hasMep || !hasFfe) return '';
+        return `<div class="doc-switch" role="tablist" aria-label="Checklist type">
+          <a class="ds-btn ${isMep ? '' : 'on'}" role="tab" aria-selected="${!isMep}"
+             href="#/room/${encodeURIComponent(base)}">FF&amp;E</a>
+          <a class="ds-btn ${isMep ? 'on' : ''}" role="tab" aria-selected="${isMep}"
+             href="#/room/${encodeURIComponent(mepIdFor(base))}">MEP PUNCH</a>
+        </div>`;
+      })()}
       ${isSpace && meta.note ? `<div class="rh-plan-note">${esc(meta.sheet ? meta.sheet + ' — ' : '')}${esc(meta.note)}</div>` : ''}
       <div class="bar rh-bar"><div class="bar-fill" style="width:${s.pct}%"></div></div>
       <div class="rh-line">${s.done}/${s.total} checked · ${s.pct}%
@@ -469,6 +518,7 @@ export function renderRoom(el, number) {
       <section class="cat-group ${hide ? 'hidden' : ''}${shut ? ' collapsed' : ''}" data-cat="${esc(g.cat)}">
         <button class="cat-head" data-cattoggle="${esc(g.cat)}" aria-expanded="${!shut}">
           <span class="cat-caret" aria-hidden="true">▾</span>
+          ${g.letter ? `<span class="cat-letter" aria-hidden="true">${esc(g.letter)}</span>` : ''}
           <span class="cat-name">${esc(g.label.toUpperCase())} · ${done}/${g.rows.length}</span>
         </button>
         <div class="item-list" role="list">${g.rows.map(rowHTML).join('')}</div>

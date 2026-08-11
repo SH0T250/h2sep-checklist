@@ -11,7 +11,7 @@
 import { firebaseConfig, PROJECT_ID, DEMO_PIN } from './config.js';
 import { FLOORS, TEMPLATES, seedRooms, blankItem } from './seed.js';
 import { seedSpaces } from './seed-spaces.js';
-import { sha256Hex, randomId, codeSlug, roomSort, isSpaceDoc } from './util.js';
+import { sha256Hex, randomId, codeSlug, roomSort, isSpaceDoc, isMepDoc, mepParent, mepIdFor } from './util.js';
 
 const LS_USER = 'h2sep-user';
 // v2: demo DB gained common-area spaces. Bumping the KEY (not sniffing doc
@@ -87,12 +87,26 @@ export function getFloors() { return state.floors; }
 export function getRoom(number) { return state.rooms.get(String(number)) || null; }
 export function getRooms(floor) {
   return [...state.rooms.values()]
-    .filter(r => !r.deleted && !isSpaceDoc(r) && r.floor === Number(floor))
+    .filter(r => !r.deleted && !isSpaceDoc(r) && !isMepDoc(r) && r.floor === Number(floor))
     .sort((a, b) => roomSort(a.number, b.number));
 }
 export function getAllRooms() {
-  return [...state.rooms.values()].filter(r => !r.deleted && !isSpaceDoc(r))
+  return [...state.rooms.values()].filter(r => !r.deleted && !isSpaceDoc(r) && !isMepDoc(r))
     .sort((a, b) => roomSort(a.number, b.number));
+}
+// MEP punch docs, same collection, told apart by their `mep-punch` type slug.
+// EXCLUDED from getRooms/getAllRooms above so a room's FF&E progress, the floor
+// grid, the hero counters and the dashboard never absorb punch check-offs.
+export function getMepDocs(floor = null) {
+  return [...state.rooms.values()]
+    .filter(r => !r.deleted && isMepDoc(r) && (floor === null || r.floor === Number(floor)))
+    .sort((a, b) => roomSort(a.number, b.number));
+}
+// The MEP doc for a guest room, or null. Takes either "105" or "105-MEP".
+export function getMepFor(roomNumber) {
+  const base = mepParent(roomNumber) || String(roomNumber);
+  const d = state.rooms.get(mepIdFor(base));
+  return d && !d.deleted ? d : null;
 }
 // Common-area spaces share the collection with guest rooms and are told apart
 // by their `space-` type slug (see util.isSpaceDoc). Same floor listeners feed

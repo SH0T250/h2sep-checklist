@@ -10,7 +10,7 @@
 import { firebaseConfig, PROJECT_ID, MODEL_ROOMS } from './config.js';
 import { seedRooms } from './seed.js';
 import { seedSpaces } from './seed-spaces.js';
-import { esc, isSpaceDoc, CATEGORY_ORDER } from './util.js';
+import { esc, isSpaceDoc, isMepDoc, mepParent, CATEGORY_ORDER, MEP_CATEGORY_ORDER, MEP_LETTER } from './util.js';
 import { SPACE_META } from './space-meta.js';
 
 const params = new URLSearchParams(location.search);
@@ -173,7 +173,82 @@ ${sectionsHTML(groups)}
   $('state').textContent = DEMO ? 'Demo data — not live check-offs' : `Live as of ${stamp}`;
 }
 
+// MEP PUNCH SHEET. Same paper as the turnover sheets, different job: every
+// line is an action a walker performs, so the verify step prints under the
+// item and each trade starts its own page — the plumber gets a page that is
+// only plumbing, and can sign it without carrying the electrician's work.
+function renderMep(room) {
+  const base = mepParent(room.number) || room.number;
+  const items = Object.entries(room.items || {}).filter(([, it]) => !it.deleted);
+  const units = items.reduce((n, [, it]) => n + (Number(it.qty) > 0 ? Number(it.qty) : 1), 0);
+  const done = items.filter(([, it]) => it.checked).length;
+  const srcs = [...new Set(items.map(([, it]) => it.src).filter(Boolean))].sort();
+  const srcLine = srcs.length > 6 ? srcs.slice(0, 6).join(' · ') + ` +${srcs.length - 6} more` : srcs.join(' · ');
+  const openNotes = Object.values(room.notes || {}).filter(n => !n.resolved);
+  const noteLine = openNotes.map(n => `★ ${esc(n.text.toUpperCase())}`).join(' &nbsp;·&nbsp; ');
+
+  const present = [...new Set(items.map(([, it]) => it.category || ''))];
+  const cats = [
+    ...MEP_CATEGORY_ORDER.filter(c => present.includes(c)),
+    ...present.filter(c => c && !MEP_CATEGORY_ORDER.includes(c)).sort(),
+    ...(present.includes('') ? [''] : []),
+  ];
+  const groups = groupsFor(room, cats);
+  const stamp = new Date().toLocaleString([], {
+    year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit',
+  });
+
+  const mepItemHTML = ([, it]) => {
+    const openIssue = it.issue && !it.issueResolved;
+    const qty = Number(it.qty) > 1 ? ` <span class="qty">×${Number(it.qty)}</span>` : '';
+    const flag = it.reliability === 'FLAGGED' ? '&nbsp;<span class="flag nw">⚑&nbsp;FLAGGED</span>' : '';
+    const issue = openIssue ? ` <span class="issue">&#8212;&nbsp;${esc(it.issue.toUpperCase())}</span>` : '';
+    const note = it.instanceNote ? `<div class="inote">${esc(it.instanceNote)}</div>` : '';
+    const tag = it.code ? `<b class="tag">${esc(it.code)}</b><span class="dash"> – </span>` : '';
+    const step = it.verifyAtPunch ? `<div class="vstep">▸ ${esc(it.verifyAtPunch)}</div>` : '';
+    return `<div class="item"><div class="item-text">${tag}<span class="lbl">${esc(it.label)}${qty}</span>${issue}${flag}${step}${note}</div>` +
+      `<div class="box${it.checked ? ' done' : ''}">${it.checked ? esc(it.initials || '✓') : ''}</div></div>`;
+  };
+  const mepSections = (gs) => gs.map((g, i) => `<section class="cat mep-cat${i ? ' brk' : ''}">
+<h3 class="cat-head">${esc((MEP_LETTER[g.cat] || '').toUpperCase())}${MEP_LETTER[g.cat] ? ' · ' : ''}${esc(g.label.toUpperCase())} <span class="cat-n">${g.rows.length} item${g.rows.length === 1 ? '' : 's'}</span></h3>
+${g.rows.map(mepItemHTML).join('\n')}
+<div class="signoff">Trade: ______________________ &nbsp; Signed: ______________________ &nbsp; Date: ____________</div>
+</section>`).join('\n');
+
+  $('sheet').innerHTML = `<div class="sheet mep">
+  <header class="hdr">
+    <img src="./img/logo-full-light.png" alt="Triun Construction &amp; Engineering">
+    <div class="proj">
+      <b>H2SEP · Home2 Suites by Hilton — Eagle Pass, TX</b><br>
+      Triun Job 24030 · 115 Keys<br>
+      <span class="mut">MEP Punch List · Mechanical / Electrical / Plumbing / Fire Protection / Low Voltage</span>
+    </div>
+  </header>
+
+  <div class="title">
+    <h1>MEP PUNCH — ROOM #${esc(base)}</h1>
+    <h2>${esc((room.typeLabel || '').trim())}</h2>
+    <div class="meta">Floor ${esc(String(room.floor))} &nbsp;·&nbsp; ${done}/${items.length} verified at print time
+      &nbsp;·&nbsp; installed &amp; verifiable scope (concealed rough-in not listed)</div>
+    ${noteLine ? `<div class="room-note top">${noteLine}</div>` : ''}
+  </div>
+
+  ${items.length === 0 ? `<div class="empty-space">No MEP punch lines for this room yet.</div>` : `
+  <div class="items mep-items">
+${mepSections(groups)}
+  </div>`}
+
+  <footer class="ftr">
+    <span>${items.length} lines / ${units} units${srcLine ? ` · sheets ${esc(srcLine)}` : ''} · printed ${esc(stamp)}</span>
+    <span>Initials in box = verified in room · red = open issue · ⚑ = drawings disagree, confirm before sign-off</span>
+  </footer>
+</div>`;
+  document.title = `MEP Punch ${base} — Print Sheet · H2SEP`;
+  $('state').textContent = DEMO ? 'Demo data — not live check-offs' : `Live as of ${stamp}`;
+}
+
 function render(room) {
+  if (isMepDoc(room)) return renderMep(room);
   if (isSpaceDoc(room)) return renderSpace(room);
   const items = Object.entries(room.items || {}).filter(([, it]) => !it.deleted);
   const units = items.reduce((n, [, it]) => n + (Number(it.qty) > 0 ? Number(it.qty) : 1), 0);

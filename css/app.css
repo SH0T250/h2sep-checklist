@@ -198,6 +198,30 @@ b, .code { font-weight: 700; }
 .rc-bar { height: 6px; margin-top: 4px; }
 .tr { position: absolute; top: 8px; right: 8px; }
 
+/* ---------- MEP punch ---------- */
+/* FF&E ⇄ MEP PUNCH switch. Same visual language as .seg (the floor selector)
+   so it reads as "which list am I on", not as a filter chip. */
+.doc-switch {
+  display: flex; background: var(--surface); border-radius: 10px; overflow: hidden;
+  box-shadow: var(--shadow); margin: 10px 0 2px;
+}
+.doc-switch.floor-switch { margin: 0 0 10px; }
+.ds-btn {
+  flex: 1; min-height: 40px; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 12.5px; letter-spacing: .5px; color: var(--text-2);
+  text-transform: uppercase; padding: 0 8px; text-align: center;
+}
+.ds-btn.on { background: var(--brand); color: var(--black); }
+/* Austin's "it has a letter that says Mechanical, Electrical and Plumbing" —
+   the trade initial rides in the collapsible group header. */
+.cat-letter {
+  flex: 0 0 auto; min-width: 20px; height: 20px; padding: 0 4px; border-radius: 5px;
+  background: var(--accent); color: var(--black);
+  font-size: 11px; font-weight: 800; letter-spacing: .3px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.mep-card { border-top: 2px solid var(--accent); }
+
 /* ---------- common areas ---------- */
 .common-card { border-top: 2px solid var(--accent); }
 .common-floor-head {

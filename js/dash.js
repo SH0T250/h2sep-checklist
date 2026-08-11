@@ -3,7 +3,7 @@
 import { firebaseConfig, PROJECT_ID } from './config.js';
 import { FLOORS, seedRooms } from './seed.js';
 import { seedSpaces } from './seed-spaces.js';
-import { esc, roomStats, roomSort, isSpaceDoc } from './util.js';
+import { esc, roomStats, roomSort, isSpaceDoc, isMepDoc, mepParent } from './util.js';
 
 const DEMO = new URLSearchParams(location.search).has('demo') || !firebaseConfig;
 const $ = (id) => document.getElementById(id);
@@ -114,14 +114,19 @@ function compute() {
   // Guest rooms and common-area spaces split here so "X / 115 rooms" stays a
   // statement about KEYS. Spaces still feed the crew/issue/feed panels —
   // an issue in the Lobby is an issue — under their own names.
-  const live = all.filter(r => !isSpaceDoc(r));
+  const live = all.filter(r => !isSpaceDoc(r) && !isMepDoc(r));
   const spaceDocs = all.filter(isSpaceDoc);
+  // MEP punch docs are a THIRD population. They must never land in `live` — a
+  // toilet checked off in 105-MEP would otherwise move "X / 115 rooms complete"
+  // and the 4,688-item hero, which count FF&E turnover only.
+  const mepDocs = all.filter(isMepDoc);
   const m = {
     items: 0, checked: 0, roomsTotal: live.length, roomsDone: 0, roomsGoing: 0, roomsNotStarted: 0,
     issues: 0, roomsWithIssues: 0, checkedToday: 0,
     perFloor: {}, issueTypes: new Map(), crew: new Map(),
     issueRows: [], feed: [], days: [],
     spaces: { count: spaceDocs.length, items: 0, checked: 0, issues: 0, done: 0 },
+    mep: { count: mepDocs.length, items: 0, checked: 0, issues: 0, done: 0 },
   };
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const dayKeys = [];
@@ -131,12 +136,19 @@ function compute() {
   }
   const dayCounts = Object.fromEntries(dayKeys.map(k => [k, 0]));
 
-  for (const r of [...live, ...spaceDocs]) {
+  for (const r of [...live, ...spaceDocs, ...mepDocs]) {
     const s = roomStats(r);
     const isSp = isSpaceDoc(r);
-    // Where an item lives, as the panels should say it: "Rm 214" / "Lobby 003".
-    const where = isSp ? `${r.typeLabel || 'Space'} ${r.number}` : null;
-    if (isSp) {
+    const isMep = isMepDoc(r);
+    // Where an item lives, as the panels should say it: "Rm 214" / "Lobby 003"
+    // / "MEP 105". An MEP issue is still an issue and still belongs in the
+    // feed and the issue table — under a name that says which list it is on.
+    const where = isSp ? `${r.typeLabel || 'Space'} ${r.number}`
+      : (isMep ? `MEP ${mepParent(r.number) || r.number}` : null);
+    if (isMep) {
+      m.mep.items += s.total; m.mep.checked += s.done; m.mep.issues += s.openIssues;
+      if (s.complete) m.mep.done++;
+    } else if (isSp) {
       m.spaces.items += s.total; m.spaces.checked += s.done; m.spaces.issues += s.openIssues;
       if (s.complete) m.spaces.done++;
     } else {

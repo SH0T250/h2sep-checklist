@@ -48,12 +48,18 @@ const allDocs = (roomsResp.documents || []).map(decode);
 // Common-area spaces share the collection; their `space-` type slug is the
 // discriminator (util.isSpaceDoc). Guest-room invariants must not drift just
 // because spaces arrived — the split IS one of the invariants.
-const rooms = allDocs.filter((r) => !String(r.type || '').startsWith('space-'));
+// THREE populations, one collection. Guest rooms carry FF&E turnover, spaces
+// carry common-area turnover, MEP docs carry the punch list for a guest room.
+// `rooms` must exclude BOTH others or the 115-key invariants below start
+// counting punch lists as keys.
+const mepDocs = allDocs.filter((r) => String(r.type || '') === 'mep-punch');
+const rooms = allDocs.filter((r) => !String(r.type || '').startsWith('space-')
+  && String(r.type || '') !== 'mep-punch');
 const spaces = allDocs.filter((r) => String(r.type || '').startsWith('space-'));
 const tplResp = await (await fetch(`${ROOT}/templates?pageSize=50`, { headers: H })).json();
 const templates = Object.fromEntries((tplResp.documents || []).map((d) => [d.name.split('/').pop(), decode(d)]));
 
-console.log(`${rooms.length} guest rooms · ${spaces.length} spaces · ${Object.keys(templates).length} templates\n`);
+console.log(`${rooms.length} guest rooms · ${spaces.length} spaces · ${mepDocs.length} MEP punch · ${Object.keys(templates).length} templates\n`);
 
 // ---- 1. every room's slug must name a template that IS that room's package ----
 // This is the invariant room 118 broke. A slug is a join key: if it points at a
@@ -66,11 +72,18 @@ for (const r of rooms) {
   const rk = new Set(Object.keys(r.items || {}));
   const tk = new Set(Object.keys(t.items || {}));
   const missing = [...tk].filter((k) => !rk.has(k));
-  const extra = [...rk].filter((k) => !tk.has(k));
+  // A line the room has and the template lacks is only a defect if it came
+  // from a PACKAGE (derived). A crew member adding "Lamp shades are in the
+  // room in a box" on site is the app working — room 201 carries exactly
+  // that — and must never fail the build.
+  const extra = [...rk].filter((k) => !tk.has(k) && r.items[k].derived);
+  const added = [...rk].filter((k) => !tk.has(k) && !r.items[k].derived).length;
   if (missing.length || extra.length) {
     slugProblems.push(`${r.number} (${r.typeLabel}) vs template "${r.type}": `
       + `${missing.length} line(s) the template would ADD [${missing.slice(0, 4).join(',')}], `
-      + `${extra.length} the room has and the template does not [${extra.slice(0, 4).join(',')}]`);
+      + `${extra.length} derived line(s) the template does not have [${extra.slice(0, 4).join(',')}]`);
+  } else if (added) {
+    console.log(`        (${r.number}: ${added} line(s) added on site — expected, not a defect)`);
   }
 }
 check(slugProblems.length === 0, `every room's type slug names a template with that room's exact package`);
@@ -96,18 +109,49 @@ const dirtyTpl = Object.entries(templates).filter(([, t]) =>
 check(dirtyTpl.length === 0, `no template carries a check-off, initials or an issue`);
 dirtyTpl.forEach(([s]) => console.log('        ' + s));
 
-// ---- 4. only room 101 may carry field work; nothing else was ever worked ----
+// ---- 4. FIELD WORK IS LIVE (era changed 2026-08-10) ----------------------
+// Until 2026-08-10 only room 101 carried work — the 14 check-offs carried from
+// the paper sheet at cutover — so this asserted "exactly one worked room". The
+// crew then started walking: ~960 check-offs appeared across 47 rooms in a day
+// (two crew accounts, plus the 13 'paper' marks carried at cutover).
+// Asserting an empty hotel now would fail on SUCCESS, so the invariant flips
+// from "nothing is worked" to "nothing that was worked can rot":
+//   * the paper-carried marks must never disappear (they cannot be re-derived)
+//   * every check-off must be attributable and time-stamped
 const worked = rooms.filter((r) => Object.values(r.items || {}).some((i) => i.checked || i.issue)
   || Object.keys(r.notes || {}).length);
-check(worked.length === 1 && worked[0].number === '101',
-  `exactly one room carries field work, and it is 101 (got ${worked.map((r) => r.number).join(',') || 'none'})`);
+console.log(`        field work live in ${worked.length} room(s) — the crew is walking`);
 
 const r101 = rooms.find((r) => r.number === '101');
 const ck = Object.values(r101.items).filter((i) => i.checked).length;
 const iss = Object.values(r101.items).filter((i) => i.issue).length;
 const nts = Object.keys(r101.notes || {}).length;
-check(ck === 14 && iss === 6 && nts === 1,
-  `room 101 still has 14 check-offs / 6 issues / 1 note (got ${ck}/${iss}/${nts})`);
+// A FLOOR, not an equality: work only ever accumulates. A drop means loss.
+check(ck >= 14 && iss >= 6 && nts >= 1,
+  `room 101 never lost its carried paper work — ≥14 check-offs / ≥6 issues / ≥1 note (got ${ck}/${iss}/${nts})`);
+
+// The 13 'paper' check-offs migrated at cutover carry checkedByUid 'paper' and
+// exist in no other source. If they vanish, they are gone for good.
+const paperMarks = rooms.reduce((n, r) =>
+  n + Object.values(r.items || {}).filter((i) => i.checked && i.checkedByUid === 'paper').length, 0);
+check(paperMarks >= 13, `the cutover's paper check-offs survive (${paperMarks} found, expected ≥13)`);
+
+// Every check-off must say WHO and WHEN, or the record is not defensible in a
+// turnover meeting. 'paper' marks predate app auth and are exempt from uid.
+const orphanChecks = [];
+for (const r of allDocs) {
+  for (const [id, i] of Object.entries(r.items || {})) {
+    if (!i.checked) continue;
+    if (!String(i.initials || '').trim()) { orphanChecks.push(`${r.number}/${i.code || id}: no initials`); continue; }
+    // The cutover's paper marks legitimately have no timestamp — the paper
+    // sheet recorded WHO but never WHEN. Requiring one would mean inventing it.
+    if (i.checkedByUid === 'paper') continue;
+    if (!i.checkedAtLocal && !i.checkedAt) orphanChecks.push(`${r.number}/${i.code || id}: no timestamp`);
+  }
+}
+check(orphanChecks.length === 0,
+  `every check-off carries initials and a timestamp (${orphanChecks.length} orphaned)`);
+if (orphanChecks.length) console.log('        ' + orphanChecks.slice(0, 8).join(', '));
 
 // ---- 5. every FLAGGED or MEDIUM line must explain itself (rooms AND spaces) ----
 const bare = [];
@@ -183,6 +227,71 @@ if (spaces.length === 0) {
     || Object.keys(s.notes || {}).length);
   check(dirty.length === 0,
     `no seeded space carries field work yet (${dirty.map((s) => s.number).join(',') || 'all clean'})`);
+}
+
+// ---- MEP punch docs ----------------------------------------------------
+// The failure this guards against: an MEP doc that looks fine on screen but
+// is joined to the wrong room, or one whose punch lines have no punch step —
+// a "checklist" the crew cannot act on. Neither is visible from the DOM.
+if (!mepDocs.length) {
+  console.log('        (no MEP punch docs seeded yet — MEP invariants idle)');
+} else {
+  const roomIds = new Set(rooms.map((r) => r.number));
+
+  const orphan = mepDocs.filter((d) => {
+    const m = /^(\d+)-MEP$/.exec(d.number);
+    return !m || !roomIds.has(m[1]);
+  }).map((d) => d.number);
+  check(orphan.length === 0,
+    `every MEP punch doc names a live guest room (${orphan.join(',') || 'all joined'})`);
+
+  const badFloor = mepDocs.filter((d) => {
+    const base = (/^(\d+)-MEP$/.exec(d.number) || [])[1];
+    const parent = rooms.find((r) => r.number === base);
+    return parent && Number(parent.floor) !== Number(d.floor);
+  }).map((d) => d.number);
+  check(badFloor.length === 0,
+    `every MEP doc sits on its room's floor (${badFloor.join(',') || 'all agree'})`);
+
+  const badLabel = mepDocs.filter((d) => {
+    const base = (/^(\d+)-MEP$/.exec(d.number) || [])[1];
+    const parent = rooms.find((r) => r.number === base);
+    return parent && parent.typeLabel !== d.typeLabel;
+  }).map((d) => d.number);
+  check(badLabel.length === 0,
+    `every MEP doc calls its room what the FF&E doc calls it (${badLabel.join(',') || 'all agree'})`);
+
+  const MEP_CATS = new Set(['Mechanical', 'Electrical', 'Plumbing', 'Fire Protection', 'Low Voltage']);
+  const strayCat = [];
+  const noStep = [];
+  const bareFlag = [];
+  for (const d of mepDocs) {
+    for (const [id, i] of Object.entries(d.items || {})) {
+      if (!MEP_CATS.has(i.category)) strayCat.push(`${d.number}/${i.code || id}:"${i.category}"`);
+      if (!String(i.verifyAtPunch || '').trim()) noStep.push(`${d.number}/${i.code || id}`);
+      if ((i.reliability === 'FLAGGED' || i.reliability === 'MEDIUM') && !String(i.instanceNote || '').trim()) {
+        bareFlag.push(`${d.number}/${i.code || id}`);
+      }
+    }
+  }
+  check(strayCat.length === 0, `every MEP line sits in one of the five trade groups (${strayCat.length} stray)`);
+  if (strayCat.length) console.log('        ' + strayCat.slice(0, 8).join(', '));
+  // A punch line with no action is not a punch line. This is the invariant that
+  // separates this list from a parts inventory.
+  check(noStep.length === 0, `every MEP line carries a punch step the walker performs (${noStep.length} without)`);
+  if (noStep.length) console.log('        ' + noStep.slice(0, 8).join(', '));
+  check(bareFlag.length === 0, `no MEP line is left FLAGGED/MEDIUM without an explanation (${bareFlag.length} bare)`);
+  if (bareFlag.length) console.log('        ' + bareFlag.slice(0, 8).join(', '));
+
+  // Same era check as rooms/spaces: nothing has been punched yet, so a
+  // check-off could only be a seeding defect. Loosen when the walk starts.
+  const dirty = mepDocs.filter((d) => Object.values(d.items || {}).some((i) => i.checked || i.issue));
+  check(dirty.length === 0,
+    `no seeded MEP doc carries field work yet (${dirty.map((d) => d.number).join(',') || 'all clean'})`);
+
+  const byFloor = mepDocs.reduce((a, d) => ((a[d.floor] = (a[d.floor] || 0) + 1), a), {});
+  console.log(`        ${mepDocs.length} MEP punch docs · by floor ${JSON.stringify(byFloor)} · `
+    + `${mepDocs.reduce((n, d) => n + Object.keys(d.items || {}).length, 0)} punch lines`);
 }
 
 console.log(fail ? `\n${fail} FAILURE(S)` : '\nLIVE INVARIANTS: ALL PASS');

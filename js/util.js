@@ -75,6 +75,38 @@ export function isSpaceDoc(r) {
   return String((r && r.type) || '').startsWith('space-');
 }
 
+// MEP PUNCH docs. A guest room carries TWO checklists that must never mix: the
+// FF&E turnover list (doc id "105") and the MEP punch list (doc id "105-MEP").
+// Different trades, different days, different progress — one crew checking off
+// a toilet must not move the FF&E bar, and re-seeding one must never touch the
+// other. They live in the same collection because the floor listeners, the
+// offline cache and the security rules already work there; the type slug is
+// what keeps them apart, exactly as it does for common-area spaces.
+export function isMepDoc(r) {
+  return String((r && r.type) || '') === 'mep-punch';
+}
+// "105-MEP" -> "105". Returns null for anything that is not an MEP doc id, so
+// callers can use it as both a test and a conversion.
+export function mepParent(number) {
+  const m = /^(\d+)-MEP$/.exec(String(number || ''));
+  return m ? m[1] : null;
+}
+export function mepIdFor(roomNumber) { return String(roomNumber) + '-MEP'; }
+
+// The five punch groups, in the order a walker moves through a room: the box
+// on the wall first, then what is wired, then what is piped, then life safety,
+// then the jacks. Mirrors CATEGORY_ORDER's spirit but is its own list — an MEP
+// sheet must never inherit FF&E ordering.
+export const MEP_CATEGORY_ORDER = [
+  'Mechanical', 'Electrical', 'Plumbing', 'Fire Protection', 'Low Voltage',
+];
+// Single-letter chips for the collapsed group headers (Austin's "it has a
+// letter that says Mechanical, Electrical, and Plumbing").
+export const MEP_LETTER = {
+  'Mechanical': 'M', 'Electrical': 'E', 'Plumbing': 'P',
+  'Fire Protection': 'FP', 'Low Voltage': 'LV',
+};
+
 // Canonical trade/category order for full-trade sheets: crew work from the
 // ceiling down the walls to the floor, trades before FF&E. Exact string match;
 // unknown categories append alphabetically after these; uncategorized ad-hoc
