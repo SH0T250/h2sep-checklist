@@ -47,15 +47,23 @@ DB = os.environ.get("H2SEP_DB") or os.path.join(HERE, "..", "data", "project.sql
 MEP_CATEGORIES = ("Electrical", "Plumbing", "Mechanical",
                   "Low Voltage", "Fire Sprinkler", "Fire Alarm")
 
-# target room -> source room whose VERIFIED package it inherits.
-CARRY = {
-    "103": "101",                                   # QQ connector
-    "106": "104", "108": "104", "110": "104",       # King Studio
-    "112": "104", "114": "104",
-    "107": "105", "109": "105", "111": "105",       # Queen-Queen
-    "113": "105", "115": "105",
-    "116": "101",                                   # King Studio connector
-}
+# The rooms whose packages are verified line-by-line against the E/M/P sheets.
+# Every other room in the hotel must map onto one of these by having an
+# IDENTICAL database signature (PTAC line excluded — see below). The mapping is
+# DERIVED, not hand-written: a hand-written list of 115 rooms is a place for a
+# typo to hide, and the derivation is itself the proof that the carry is sound.
+#
+#   101  connector / extended / wide package
+#   104  standard guest room, even side
+#   105  standard guest room, odd side
+#   118  King Studio Acc.
+#   202  King One Bedroom            (2 PTAC units per key, no schedule mark)
+#   217  King One Bedroom Acc.       (2 PTAC units per key, no schedule mark)
+#   238  QQ Acc.
+#   438  King Studio Acc. — a DIFFERENT package from 118: it carries a power
+#        wheelchair outlet and a closet light switch that 118 does not, and
+#        lacks 118's glass shower enclosure.
+VERIFIED_SOURCES = ["101", "104", "105", "118", "202", "217", "238", "438"]
 
 # The PTAC line is NEVER carried. It tracks the corridor side — rooms on the
 # odd side take "PTAC-2 / PTAC-1" at the exterior window wall, rooms on the
@@ -73,12 +81,49 @@ def mep_rows(cx, room):
     return {(r[0], r[1] or "", r[2] or "") for r in cx.execute(q, [room] + list(MEP_CATEGORIES))}
 
 
-def ptac_row(cx, room):
-    """(mark, description) for this room's own PTAC unit, or None."""
+def ptac_rows(cx, room):
+    """Every PTAC unit row for this room. The One Bedroom types carry TWO."""
     q = ("SELECT tag, description FROM room_items WHERE room_no = ? AND category = 'Mechanical' "
-         "AND description LIKE 'Packaged terminal%'")
-    rows = list(cx.execute(q, (room,)))
-    return (rows[0][0] or "", rows[0][1] or "") if rows else None
+         "AND description LIKE 'Packaged terminal%' ORDER BY tag, description")
+    return [(r[0] or "", r[1] or "") for r in cx.execute(q, (room,))]
+
+
+def ptac_row(cx, room):
+    """The room's PTAC identity for carry purposes.
+
+    Returns (mark, description, count). Count matters: the King One Bedroom
+    types get two units per key, and a punch list that says "1 PTAC" for a
+    two-unit suite sends the crew home having tested half the heating.
+    """
+    rows = ptac_rows(cx, room)
+    if not rows:
+        return None
+    distinct = set(rows)
+    if len(distinct) > 1:
+        return None            # two DIFFERENT units — carry cannot represent it
+    return (rows[0][0], rows[0][1], len(rows))
+
+
+def build_carry_map(cx):
+    """room -> verified source room with an identical non-PTAC signature.
+
+    Refuses to invent a mapping: a room whose signature matches no verified
+    source is reported as uncovered rather than attached to the closest thing.
+    """
+    src_sig = {}
+    for s in VERIFIED_SOURCES:
+        src_sig[s] = frozenset(x for x in mep_rows(cx, s) if not is_ptac(x[2]))
+    carry, uncovered = {}, []
+    for (room,) in cx.execute("SELECT room_no FROM rooms ORDER BY CAST(room_no AS INTEGER)"):
+        if room in VERIFIED_SOURCES:
+            continue
+        sig = frozenset(x for x in mep_rows(cx, room) if not is_ptac(x[2]))
+        match = next((s for s in VERIFIED_SOURCES if src_sig[s] == sig), None)
+        if match:
+            carry[room] = match
+        else:
+            uncovered.append(room)
+    return carry, uncovered
 
 
 def compare(cx, target, source):
@@ -89,12 +134,14 @@ def compare(cx, target, source):
     msgs = []
 
     tp, sp = ptac_row(cx, target), ptac_row(cx, source)
-    if tp and sp and tp != sp:
-        msgs.append("PTAC line rebuilt from %s's own row: [%s] %s" % (target, tp[0], tp[1][:60]))
-    elif tp == sp:
-        msgs.append("identical PTAC line")
-    if not tp:
-        msgs.append("UNEXPLAINED — %s has no PTAC row in the database" % target)
+    if tp is None:
+        msgs.append("UNEXPLAINED — %s has no single PTAC identity in the database "
+                    "(none, or two different units)" % target)
+    elif sp and tp != sp:
+        msgs.append("PTAC line rebuilt from %s's own row: [%s] x%d %s"
+                    % (target, tp[0] or "no mark", tp[2], tp[1][:52]))
+    else:
+        msgs.append("identical PTAC line (x%d)" % tp[2])
 
     if not only_t and not only_s:
         msgs.insert(0, "every non-PTAC line matches %s exactly" % source)
@@ -113,6 +160,14 @@ def main():
 
     cx = sqlite3.connect(DB)
     written = refused = 0
+    CARRY, uncovered = build_carry_map(cx)
+    print("carry map: %d room(s) map onto %d verified package(s)"
+          % (len(CARRY), len(VERIFIED_SOURCES)))
+    if uncovered:
+        print("UNCOVERED — no verified package matches these rooms, they will NOT be built:")
+        for r in uncovered:
+            print("      %s" % r)
+        refused += len(uncovered)
 
     for target in sorted(CARRY, key=lambda x: int(x)):
         source = CARRY[target]

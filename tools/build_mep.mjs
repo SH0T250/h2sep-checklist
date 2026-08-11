@@ -49,6 +49,65 @@ const CLEAN = {
 const idFor = (cat, mark, label) =>
   createHash('md5').update(`${cat}|${mark}|${label}`).digest('hex').slice(0, 12);
 
+// ---------------------------------------------------------------------------
+// ACCESSIBLE-ROOM BATHROOM CONFIGURATION (room 118 and its six siblings)
+//
+// The drawings carry TWO complete, mutually exclusive accessible bathrooms —
+// Configuration A (ADA tub, bowed shower rod) and Configuration B (roll-in
+// shower, straight rod, diverter valve, hand shower, glass enclosure) — and
+// the conflict is OPEN in the set (conflicts.md A11 / B4.4,
+// coordination_issues.md C-01, all seven accessible keys).
+//
+// On a materials list that ambiguity is survivable. On a PUNCH LIST it is a
+// hazard: a walker can tick "bathtub installed" AND "roll-in shower installed"
+// for one bathroom, and the room reports complete having verified a fixture
+// that is not in it. So when both configurations appear, the builder injects
+// ONE decision line ahead of them. That line is not invented scope — it is a
+// procedural instruction that quotes the open conflict — and every config line
+// is stamped with which set it belongs to and what to do with the other.
+// ---------------------------------------------------------------------------
+const CONFIG_RE = /^CONFIGURATION\s+([AB])\b/i;
+
+function applyConfigRule(lines, room) {
+  const tagged = lines.filter((l) => CONFIG_RE.test(l.label || ''));
+  if (!tagged.length) return lines;
+  const sets = new Set(tagged.map((l) => CONFIG_RE.exec(l.label)[1].toUpperCase()));
+  if (sets.size < 2) return lines;           // only one configuration drawn — nothing to decide
+
+  const nA = tagged.filter((l) => /^CONFIGURATION\s+A/i.test(l.label)).length;
+  const nB = tagged.filter((l) => /^CONFIGURATION\s+B/i.test(l.label)).length;
+
+  for (const l of tagged) {
+    const which = CONFIG_RE.exec(l.label)[1].toUpperCase();
+    const other = which === 'A' ? 'B' : 'A';
+    l.reliability = 'FLAGGED';
+    l.instanceNote = (l.instanceNote ? l.instanceNote + ' · ' : '')
+      + `Belongs to CONFIGURATION ${which} only. If this room was built to `
+      + `configuration ${other}, mark this line N/A — do not punch both sets.`;
+    l.verifyAtPunch = `[CONFIG ${which}] ${l.verifyAtPunch}`;
+  }
+
+  const decision = {
+    category: 'Plumbing',
+    mark: '',
+    label: 'BATHROOM CONFIGURATION — confirm which one was built before punching anything below',
+    qty: 1,
+    reliability: 'FLAGGED',
+    instanceNote: `⚑ The drawings show room ${room} BOTH ways and the conflict is open: `
+      + `CONFIGURATION A is an ADA tub (BT-1) with a bowed rod (${nA} line${nA === 1 ? '' : 's'}); `
+      + `CONFIGURATION B is a roll-in shower (SH-1 / SH-3) with a straight rod, diverter valve, `
+      + `hand shower and glass enclosure (${nB} line${nB === 1 ? '' : 's'}). `
+      + `Recorded open in conflicts.md A11 / B4.4 and coordination_issues.md C-01 across all seven `
+      + `accessible keys. Only one is in the room — punch that set and mark the other N/A.`,
+    src: 'conflicts.md A11 / B4.4 · coordination_issues.md C-01',
+    where: 'guest bathroom',
+    verifyAtPunch: 'Look in the bathroom: tub or roll-in shower? Write it here, then punch only that set',
+    origin: 'sheets-only',
+  };
+  // Ahead of every plumbing line so the decision is made before the fixtures.
+  return [decision, ...lines];
+}
+
 let built = 0, problems = 0;
 for (const f of readdirSync(OUT).filter((x) => /^_lines-.+\.json$/.test(x)).sort()) {
   const room = f.replace(/^_lines-/, '').replace(/\.json$/, '');
