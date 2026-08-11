@@ -52,6 +52,14 @@ function handoffRoom() {
 
 async function loadRoom() {
   if (DEMO) {
+    // Read the SAME demo database the app writes to, not just the pristine
+    // fixtures. Two reasons: MEP punch docs only ever exist in that database,
+    // and a demo user who checks a line or adds an item was previously handed
+    // a sheet that silently omitted their own work.
+    try {
+      const db = JSON.parse(localStorage.getItem('h2sep-demo-db-v2'));
+      if (db && db.rooms && db.rooms[ROOM]) return db.rooms[ROOM];
+    } catch (_) { /* fall through to the bundled fixtures */ }
     const r = seedRooms()[ROOM] || seedSpaces()[ROOM];
     if (!r) throw new Error('Room ' + ROOM + ' is not in the demo fixture');
     return r;
