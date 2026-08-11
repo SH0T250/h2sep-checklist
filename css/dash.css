@@ -439,7 +439,12 @@ body:not(.edit-mode) .inv-tbl th:last-child { display: none; }
   opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
   max-width: calc(100vw - 32px); box-shadow: 0 8px 32px rgba(0,0,0,.5);
 }
-#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+/* The toast floats over the checklist near the thumb. It must NEVER eat a
+   tap meant for a row underneath — a swallowed check-off in the crew's
+   scroll-tap-scroll loop just looks like the app ignored them. Only the
+   Undo button inside it is clickable. */
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: none; }
+#toast.show .toast-action { pointer-events: auto; }
 .toast-action {
   font: inherit; font-weight: 800; cursor: pointer; color: var(--brand);
   background: none; border: none; padding: 2px 4px;
