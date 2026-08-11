@@ -105,7 +105,7 @@ function compute() {
     perFloor: {}, issueTypes: new Map(), crew: new Map(),
     issueRows: [], feed: [], days: [],
     spaces: { count: spaceDocs.length, items: 0, checked: 0, issues: 0, done: 0 },
-    mep: { count: mepDocs.length, items: 0, checked: 0, issues: 0, done: 0 },
+    mep: { count: mepDocs.length, items: 0, checked: 0, issues: 0, done: 0, docsWithIssues: 0 },
   };
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const dayKeys = [];
@@ -124,18 +124,24 @@ function compute() {
     // feed and the issue table — under a name that says which list it is on.
     const where = isSp ? `${r.typeLabel || 'Space'} ${r.number}`
       : (isMep ? `MEP ${mepParent(r.number) || r.number}` : null);
-    // The headline tiles count the WHOLE BUILDING — the by-type bars, issue
-    // table and feed below them include common areas, and two panels that
-    // disagree about one number is how a wall board loses the room's trust.
-    // MEP punch docs are the ONE exception: they are a parallel punch list
-    // over the same rooms, so folding them into the FF&E turnover totals
-    // would double-count the building against itself.
-    if (!isMep) {
-      m.items += s.total; m.checked += s.done; m.issues += s.openIssues;
-      if (s.openIssues > 0) m.docsWithIssues = (m.docsWithIssues || 0) + 1;
-    }
+    // Which population feeds which number — the rule, stated once:
+    //
+    //   PROGRESS (items checked, the ring, rooms complete, "+N today") counts
+    //   FF&E turnover only: guest rooms + common areas. MEP punch lines are a
+    //   parallel list over the same rooms with their own 7,500-line
+    //   denominator, so folding them in would count the building against
+    //   itself and move a percentage that means "ready to hand over".
+    //
+    //   PROBLEMS (the issue tile, the by-type bars, the issue table, the feed)
+    //   count EVERYTHING, MEP included. A flagged toilet is a real problem on
+    //   a real wall, and the table already lists it as "MEP 105". A tile that
+    //   disagreed with the table under it is how a wall board loses trust.
+    m.issues += s.openIssues;
+    if (s.openIssues > 0) m.docsWithIssues = (m.docsWithIssues || 0) + 1;
+    if (!isMep) { m.items += s.total; m.checked += s.done; }
     if (isMep) {
       m.mep.items += s.total; m.mep.checked += s.done; m.mep.issues += s.openIssues;
+      if (s.openIssues > 0) m.mep.docsWithIssues++;
       if (s.complete) m.mep.done++;
     } else if (isSp) {
       m.spaces.items += s.total; m.spaces.checked += s.done; m.spaces.issues += s.openIssues;
@@ -153,7 +159,11 @@ function compute() {
     for (const [itemId, it] of entries.sort((a, b) => (a[1].sort || 0) - (b[1].sort || 0))) {
       if (it.issue && !it.issueResolved) {
         m.issueTypes.set(it.issue, (m.issueTypes.get(it.issue) || 0) + 1);
-        m.issueRows.push({ room: r.number, where, code: it.code, label: it.label, note: it.issue, isNote: false, itemId });
+        // isMep keeps the row VISIBLE (a punch problem is a problem) but not
+        // editable from here: the crew app owns those lists, and this board's
+        // item sheet would mislabel "105-MEP" as a guest room and let one tap
+        // un-check finished mechanical work with no PIN in the way.
+        m.issueRows.push({ room: r.number, where, code: it.code, label: it.label, note: it.issue, isNote: false, itemId, isMep });
       }
       if (it.checked) {
         const who = it.initials || '—';
@@ -161,7 +171,9 @@ function compute() {
         c.total++;
         const when = toDate(it.checkedAtLocal) || toDate(it.checkedAt);
         if (when) {
-          if (when >= today) { c.today++; m.checkedToday++; }
+          // c.today is the PEOPLE panel (all work counts). m.checkedToday is
+          // the foot of the ITEMS CHECKED tile, so it follows that tile.
+          if (when >= today) { c.today++; if (!isMep) m.checkedToday++; }
           const k = when.toISOString().slice(0, 10);
           if (k in dayCounts) dayCounts[k]++;
           m.feed.push({ who, code: it.code, room: r.number, where, when });
@@ -238,9 +250,14 @@ function render() {
   $('k-rooms').innerHTML = `${m.roomsDone}<span class="of"> / ${m.roomsTotal}</span>`;
   $('k-rooms-foot').textContent = `${m.roomsGoing} in progress · ${m.roomsNotStarted} not started`;
   $('k-issues').textContent = m.issues;
-  const spIss = (m.docsWithIssues || 0) - m.roomsWithIssues;
+  // docsWithIssues spans all three populations, so name them separately
+  // rather than letting MEP masquerade as a common-area space.
+  const mepIssueDocs = m.mep.docsWithIssues || 0;
+  const spIss = (m.docsWithIssues || 0) - m.roomsWithIssues - mepIssueDocs;
   $('k-issues-foot').textContent = m.issues
-    ? `across ${m.roomsWithIssues} room${m.roomsWithIssues === 1 ? '' : 's'}${spIss ? ` + ${spIss} space${spIss === 1 ? '' : 's'}` : ''}`
+    ? `across ${m.roomsWithIssues} room${m.roomsWithIssues === 1 ? '' : 's'}` +
+      (spIss ? ` + ${spIss} space${spIss === 1 ? '' : 's'}` : '') +
+      (mepIssueDocs ? ` + ${mepIssueDocs} MEP punch list${mepIssueDocs === 1 ? '' : 's'}` : '')
     : 'nothing open';
 
   // floors — in edit mode each row opens the floor's room browser
@@ -328,8 +345,8 @@ function render() {
   // issue table — in edit mode a row opens the item's resolve sheet
   $('issue-table').querySelector('tbody').innerHTML = m.issueRows.length
     ? m.issueRows.map(r => `
-      <tr class="${r.isNote ? 'note-row' : ''} ${editing && !r.isNote ? 'clickable' : ''}"
-          ${!r.isNote ? `data-room="${esc(r.room)}" data-item="${esc(r.itemId)}"` : ''}>
+      <tr class="${r.isNote ? 'note-row' : ''} ${editing && !r.isNote && !r.isMep ? 'clickable' : ''}"
+          ${!r.isNote && !r.isMep ? `data-room="${esc(r.room)}" data-item="${esc(r.itemId)}"` : ''}>
         <td class="rm">${esc(r.where || r.room)}</td>
         <td class="code">${esc(r.code)}</td>
         <td>${esc(r.label)}</td>

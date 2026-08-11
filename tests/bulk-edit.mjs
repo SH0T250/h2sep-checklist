@@ -217,6 +217,61 @@ ok((await page.textContent('.dpin-err')).includes('Wrong PIN'), 'wrong-PIN messa
 await page.click('.dscrim:last-of-type .dsheet-x');
 await page.click('.dsheet-x');
 
+// ---------- MEP punch lists are reported, never edited, from this board -----
+// Regression: MEP punch docs share the rooms collection with guest rooms and
+// are told apart only by their type slug. A verifier reproduced a one-click
+// erasure of finished mechanical work via the issue table, with no PIN.
+await page.evaluate(() => {
+  const db = JSON.parse(localStorage.getItem('h2sep-demo-db-v2'));
+  db.rooms['105-MEP'] = {
+    number: '105-MEP', floor: 1, type: 'mep-punch', typeLabel: 'MEP Punch',
+    items: {
+      mp1: { code: 'PTAC-2', label: 'Packaged terminal A/C unit', category: 'Mechanical',
+        checked: true, initials: 'MP', checkedByName: 'Mech Pete', checkedByUid: 'u_mp',
+        checkedAt: null, checkedAtLocal: new Date().toISOString(),
+        issue: 'DAMAGED', issueResolved: false, deleted: false, sort: 1 },
+    },
+    notes: {}, deleted: false, schemaV: 3,
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
+  };
+  localStorage.setItem('h2sep-demo-db-v2', JSON.stringify(db));
+});
+await page.goto('about:blank');
+await page.goto(BASE);
+await page.waitForTimeout(900);
+await page.click('#edit-toggle');
+await waitFor(async () => (await page.textContent('#edit-toggle')).includes('EDITING'));
+
+const mepRow = page.locator('#issue-table tr', { hasText: 'PTAC-2' });
+ok(await mepRow.count() === 1, 'an MEP punch problem still SHOWS on the board');
+ok(await mepRow.getAttribute('data-room') === null,
+  'the MEP row is not wired as an editable item (no data-room)');
+ok(!(await mepRow.getAttribute('class') || '').includes('clickable'),
+  'the MEP row is not presented as clickable in edit mode');
+
+// The exported entry point refuses it even when called directly.
+await page.evaluate(async () => {
+  const e = await import('./js/dash-edit.js');
+  e.openItemSheet('105-MEP', 'mp1');
+});
+await page.waitForTimeout(300);
+ok(await page.locator('.dscrim').count() === 0, 'openItemSheet refuses an MEP doc outright');
+const mepAfter = await page.evaluate(() =>
+  JSON.parse(localStorage.getItem('h2sep-demo-db-v2')).rooms['105-MEP'].items.mp1);
+ok(mepAfter.checked === true && mepAfter.initials === 'MP',
+  "the mechanic's check-off survives untouched");
+
+// It is invisible to the FF&E inventory and to bulk scope.
+ok(await page.locator('#inventory [data-bulk]', { hasText: 'PTAC-2' }).count() === 0,
+  'MEP items stay out of the FF&E inventory');
+await page.click('#bulk-open');
+// "PTAC" alone also matches "recepTACle" on a real common-area line, so
+// filter on the full MEP code.
+await page.fill('#bd-q', 'PTAC-2');
+ok(await page.locator('.bd-code:not(.all)').count() === 0,
+  'MEP items are unreachable from the bulk drawer');
+await page.click('.dsheet [data-act=cancel]');
+
 ok(errors.length === 0, 'no page errors' + (errors.length ? ':\n' + errors.join('\n') : ''));
 
 await browser.close();

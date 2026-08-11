@@ -349,8 +349,20 @@ function wireRefs(s, room, item, itemId) {
   }));
 }
 
+// The crew app owns the MEP punch lists. This board reports their totals but
+// must never write them: store.getRoom() resolves by id with no type filter, so
+// every EXPORTED entry point that takes a room number guards here — otherwise a
+// caller passing "105-MEP" gets a sheet that calls it "Rm 105-MEP" and can
+// un-check finished mechanical work with no PIN in the way.
+function refuseMep(room) {
+  if (!room || !isMepDoc(room)) return false;
+  toast('MEP punch lists are edited in the app, not on the dashboard.');
+  return true;
+}
+
 export function openItemSheet(roomNumber, itemId, opts = {}) {
   const room = store.getRoom(roomNumber);
+  if (refuseMep(room)) return;
   const it = room && room.items && room.items[itemId];
   if (!it) { toast('Item not found (removed?)'); return; }
   if (it.checked) return checkedSheet(room, itemId, opts);
@@ -497,6 +509,7 @@ export function openFloorSheet(floorKey, floorLabel) {
 
 export function openRoomSheet(roomNumber) {
   if (!store.getRoom(roomNumber)) { toast('Room not loaded yet'); return; }
+  if (refuseMep(store.getRoom(roomNumber))) return;
   let scrim = null;
   const paint = () => {
     const room = store.getRoom(roomNumber);
