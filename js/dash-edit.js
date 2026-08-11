@@ -94,14 +94,25 @@ function changeSetKey(plan) {
     .join('\u0001');
 }
 
-// TRUE when a bulk plan cannot be trusted to reflect the building. navigator
-// .onLine alone is not enough: on site wifi that filters Firebase it reports
-// TRUE while every listener quietly serves cache — the exact condition the
-// RECONNECTING pill already shows the operator. Both the apply and the undo
-// path gate on this one helper so the two can never drift apart again.
-function onStaleData() {
-  if (store.getMode() !== 'live') return false;
-  return !store.isOnline() || store.isFromCache();
+// How much a bulk plan can be trusted to reflect the building, in two grades,
+// because the two signals do not deserve equal confidence.
+//
+//   'offline'  navigator.onLine is false. Unambiguous, so destructive actions
+//              are refused outright.
+//   'cache'    the browser claims to be online but every floor listener is
+//              serving cache — site wifi that filters Firebase, the exact
+//              condition the RECONNECTING pill already shows. Real, but it can
+//              also be momentarily true around normal write latency, so this
+//              grade WARNS in the strongest terms rather than hard-blocking:
+//              a false positive must never strand the operator with a refusal
+//              they cannot get past.
+//
+// Apply and undo both read this one helper, so they cannot drift apart again.
+function dataTrust() {
+  if (store.getMode() !== 'live') return 'live';
+  if (!store.isOnline()) return 'offline';
+  if (store.isFromCache()) return 'cache';
+  return 'live';
 }
 
 // ---------------------------------------------------------------- identity
@@ -1005,16 +1016,24 @@ export function openBulkDrawer(preset = {}) {
     if (!currentPlan || !currentPlan.counts.changing) return;
     if (!canWrite()) { writeNudge(); return; }
     // Stale-data interlock: every guard in the plan evaluates against a cache
-    // that stops being true the moment the connection does. Destructive
-    // actions are refused outright; the rest need an eyes-open confirm.
-    if (onStaleData()) {
-      if (bulk.ACTIONS[action].destructive) {
-        toast('No live connection — un-check and clear-issue can erase crew work you can\u2019t see. Reconnect first.');
-        return;
-      }
+    // that stops being true the moment the connection does.
+    const trust = dataTrust();
+    if (trust === 'offline' && bulk.ACTIONS[action].destructive) {
+      toast('You\u2019re offline — un-check and clear-issue can erase crew work you can\u2019t see. Reconnect first.');
+      return;
+    }
+    if (trust !== 'live') {
+      const cached = trust === 'cache';
       const goOn = await confirmDialog(
-        'This screen is running on CACHED data — offline, or not reaching the server. Crew check-offs made since the last sync are invisible here and could be skipped or double-stamped. Apply anyway (it syncs when the connection returns)?',
-        { danger: true, okLabel: 'Apply anyway', stack: true, title: 'No live connection' });
+        (cached
+          ? 'This screen is NOT reaching the server — it is showing the last data it received. '
+          : 'You\u2019re OFFLINE. This plan was computed from the last data this screen saw. ') +
+        (bulk.ACTIONS[action].destructive
+          ? 'Un-checking or clearing issues now can erase crew work made since then that is invisible here. '
+          : 'Crew check-offs made since then are invisible here and could be skipped or double-stamped. ') +
+        'Apply anyway (it syncs when the connection returns)?',
+        { danger: true, okLabel: 'Apply anyway', stack: true,
+          title: cached ? 'No server contact' : 'Offline — cached data' });
       if (!goOn) return;
     }
     if (!(await requireAdmin())) return;
@@ -1135,10 +1154,15 @@ async function performUndo() {
     // on cached data it can clobber crew work this screen cannot see: the
     // "touched since" test that makes undo safe is only as good as the data
     // it reads.
-    if (onStaleData()) {
+    const trust = dataTrust();
+    if (trust !== 'live') {
       const goOn = await confirmDialog(
-        'This screen is running on CACHED data — offline, or not reaching the server. Anything the crew changed since the last sync is invisible here, so this undo could overwrite their work. Undo anyway?',
-        { danger: true, okLabel: 'Undo anyway', stack: true, title: 'No live connection' });
+        (trust === 'cache'
+          ? 'This screen is NOT reaching the server — it is showing the last data it received. '
+          : 'You\u2019re OFFLINE. ') +
+        'Anything the crew changed since then is invisible here, so this undo could overwrite their work. Undo anyway?',
+        { danger: true, okLabel: 'Undo anyway', stack: true,
+          title: trust === 'cache' ? 'No server contact' : 'Offline — cached data' });
       if (!goOn) { undoStack.push(entry); return; }
     }
     // Undo is NOT a blind write: re-derive against current state so anything
