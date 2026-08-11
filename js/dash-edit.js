@@ -850,12 +850,12 @@ export function openBulkDrawer(preset = {}) {
       const wasNarrowed = scope.keys.size > 0;
       if (e.target.checked) scope.keys.clear();
       if (wasNarrowed) arm();
-      renderCodes(); refresh();
+      renderCodes(); renderIssueFilter(); refresh();
     });
     codesEl.querySelectorAll('[data-key]').forEach(cb => cb.addEventListener('change', () => {
       if (cb.checked) scope.keys.add(cb.dataset.key); else scope.keys.delete(cb.dataset.key);
       codesEl.querySelector('#bd-allcodes').checked = scope.keys.size === 0;
-      arm(); refresh();
+      arm(); renderIssueFilter(); refresh();
     }));
   };
   s.querySelector('#bd-q').addEventListener('input', (e) => { codeQ = e.target.value; renderCodes(); });
@@ -872,7 +872,7 @@ export function openBulkDrawer(preset = {}) {
       x.classList.toggle('on', on);
       x.setAttribute('aria-pressed', String(on));
     });
-    arm(); refresh();
+    arm(); renderIssueFilter(); refresh();
   });
   const guestBtn = s.querySelector('#bd-guest'), spacesBtn = s.querySelector('#bd-spaces');
   const reflectDocTypes = () => {
@@ -885,43 +885,60 @@ export function openBulkDrawer(preset = {}) {
   guestBtn.addEventListener('click', () => {
     scope.includeGuest = !scope.includeGuest;
     if (!scope.includeGuest && !scope.includeSpaces) scope.includeSpaces = true;
-    reflectDocTypes(); arm(); refresh();
+    reflectDocTypes(); arm(); renderIssueFilter(); refresh();
   });
   spacesBtn.addEventListener('click', () => {
     scope.includeSpaces = !scope.includeSpaces;
     if (!scope.includeGuest && !scope.includeSpaces) scope.includeGuest = true;
-    reflectDocTypes(); arm(); refresh();
+    reflectDocTypes(); arm(); renderIssueFilter(); refresh();
   });
   const issListEl = s.querySelector('#bd-isslist');
-  s.querySelector('#bd-state').addEventListener('click', (e) => {
-    const b = e.target.closest('[data-state]'); if (!b) return;
-    scope.state = b.dataset.state;
-    scope.issueText = '';
+  const reflectState = () => {
     s.querySelectorAll('#bd-state [data-state]').forEach(x => {
       const on = x.dataset.state === scope.state;
       x.classList.toggle('on', on);
       x.setAttribute('aria-pressed', String(on));
     });
+  };
+  s.querySelector('#bd-state').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-state]'); if (!b) return;
+    scope.state = b.dataset.state;
+    scope.issueText = '';
+    reflectState();
     arm(); renderIssueFilter();
     refresh();
   });
   const renderIssueFilter = () => {
-    if (scope.state !== 'issue') { issListEl.hidden = true; return; }
+    // The wordings are the vocabulary the crew actually flags in — MISSING, IN
+    // BOX, DAMAGED — and picking one is the most common way to say what a bulk
+    // is FOR. Gating this behind the "Open issue" chip hid it: the operator saw
+    // no way to say "the missing ones" and had no reason to guess that another
+    // chip would reveal it. So the list is shown whenever the current scope
+    // contains flagged items, and picking a wording narrows to open issues on
+    // its own — you cannot be flagged MISSING without having an open issue.
     const counts = new Map();
     for (const t of bulk.resolveTargets(editableDocs(), { ...scope, state: 'issue', issueText: '' })) {
       counts.set(t.item.issue, (counts.get(t.item.issue) || 0) + 1);
     }
     const top = [...counts.entries()].sort((a, b) => b[1] - a[1]);
+    if (!top.length) { issListEl.hidden = true; return; }
+    const total = top.reduce((n, [, c]) => n + c, 0);
+    const anyOn = scope.state !== 'issue' || !scope.issueText;
     issListEl.hidden = false;
-    issListEl.innerHTML = `<div class="bd-sub">…with this wording (optional)</div>
+    issListEl.innerHTML = `<div class="bd-sub">…flagged with this problem</div>
       <div class="dchips">
-        <button class="dchip small ${!scope.issueText ? 'on' : ''}" data-iss="">Any</button>
-        ${top.slice(0, 10).map(([t, n]) => `<button class="dchip small ${scope.issueText === t ? 'on' : ''}" data-iss="${esc(t)}">${esc(t.length > 26 ? t.slice(0, 24) + '…' : t)} · ${n}</button>`).join('')}
+        <button class="dchip small ${anyOn ? 'on' : ''}" data-iss="">${
+          scope.state === 'issue' ? `Any problem · ${total}` : 'Don\u2019t filter'}</button>
+        ${top.slice(0, 12).map(([t, n]) => `<button class="dchip small ${scope.state === 'issue' && scope.issueText === t ? 'on' : ''}" data-iss="${esc(t)}">${esc(t.length > 26 ? t.slice(0, 24) + '\u2026' : t)} · ${n}</button>`).join('')}
       </div>`;
     issListEl.querySelectorAll('[data-iss]').forEach(b => {
       b.setAttribute('aria-pressed', String(b.classList.contains('on')));
       b.addEventListener('click', () => {
         scope.issueText = b.dataset.iss;
+        // Naming a problem IS asking for the flagged ones. Move the state with
+        // it so the chips never contradict the filter above them.
+        if (scope.issueText) scope.state = 'issue';
+        reflectState();
         arm(); renderIssueFilter();
         refresh();
       });

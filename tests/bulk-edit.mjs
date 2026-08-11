@@ -217,6 +217,27 @@ ok((await page.textContent('.dpin-err')).includes('Wrong PIN'), 'wrong-PIN messa
 await page.click('.dscrim:last-of-type .dsheet-x');
 await page.click('.dsheet-x');
 
+// ---------- the problem wordings are reachable without a guessing game ------
+// Regression: the wording chips (MISSING / IN BOX / DAMAGED — the vocabulary
+// the crew actually flags in) only rendered once "Open issue" was chosen, so an
+// operator sitting on "Any state" saw no way to say "the missing ones" and no
+// hint that another chip would reveal one.
+await page.click('#bulk-open');
+ok(await page.$eval('#bd-state .dchip.on', e => e.textContent.trim()) === 'Any state',
+  'drawer opens on Any state');
+const wordings = await page.$$eval('#bd-isslist [data-iss]', els => els.map(e => e.dataset.iss).filter(Boolean));
+ok(wordings.length > 0, `problem wordings are offered without changing state (got ${wordings.length})`);
+ok(wordings.includes('MISSING'), 'MISSING is one of them');
+await page.click('#bd-isslist [data-iss="MISSING"]');
+await page.waitForTimeout(250);
+ok(await page.$eval('#bd-state .dchip.on', e => e.textContent.trim()) === 'Open issue',
+  'picking a wording moves the state chip with it (chips never contradict the filter)');
+ok(await page.$eval('#bd-isslist [data-iss].on', e => e.dataset.iss) === 'MISSING',
+  'the picked wording stays lit');
+const wPrev = (await page.textContent('#bd-preview')).replace(/\s+/g, ' ');
+ok(/\d+ items? will change/.test(wPrev), `preview narrows to the picked problem (got "${wPrev.trim().slice(0, 70)}")`);
+await page.click('.dsheet [data-act=cancel]');
+
 // ---------- MEP punch lists are reported, never edited, from this board -----
 // Regression: MEP punch docs share the rooms collection with guest rooms and
 // are told apart only by their type slug. A verifier reproduced a one-click
