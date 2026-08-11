@@ -14,7 +14,7 @@
 
 import * as store from './store.js';
 import * as bulk from './bulk.js';
-import { esc, toast, vibrate, isSpaceDoc, CATEGORY_ORDER, fmtWhen } from './util.js';
+import { esc, toast, vibrate, isSpaceDoc, isMepDoc, CATEGORY_ORDER, fmtWhen } from './util.js';
 import { refsFor } from './refs.js';
 
 let editMode = false;
@@ -73,6 +73,17 @@ function reflect() {
   }
   if (bulkBtn) bulkBtn.hidden = !editMode;
   document.body.classList.toggle('edit-mode', editMode);
+}
+
+// THE editing surface's population. MEP punch docs live in the same rooms
+// collection as guest rooms and common areas, told apart only by their
+// `mep-punch` type slug — so without this filter the bulk engine would class
+// them as guest rooms and a scope of "Guest rooms · un-check" would silently
+// reach into the mechanical punch lists, which this dashboard's editing surface
+// was never designed to touch. The app owns those lists; the board reports
+// their totals (dash.js compute()) but does not edit them.
+function editableDocs() {
+  return store.getAllDocs().filter(r => !isMepDoc(r));
 }
 
 function canWrite() {
@@ -681,7 +692,7 @@ export function renderInventory(container, docs) {
   qEl.addEventListener('input', () => {
     invSearch = qEl.value;
     invCaret = [qEl.selectionStart, qEl.selectionEnd];
-    renderInventory(container, store.getAllDocs());
+    renderInventory(container, editableDocs());
   });
   if (hadFocus) {
     qEl.focus();
@@ -692,7 +703,7 @@ export function renderInventory(container, docs) {
   container.querySelector('.inv-scroll').scrollTop = prevScroll;
   container.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', () => {
     invCat = b.dataset.cat || null;
-    renderInventory(container, store.getAllDocs());
+    renderInventory(container, editableDocs());
   }));
   container.querySelectorAll('[data-bulk]').forEach(b => b.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -719,7 +730,7 @@ const DRAWER_ACTIONS = [
 ];
 
 export function openBulkDrawer(preset = {}) {
-  const docs = store.getAllDocs();
+  const docs = editableDocs();
   let inv = bulk.buildInventory(docs);
   const scope = bulk.emptyScope();
   if (preset.keys) preset.keys.forEach(k => scope.keys.add(k));
@@ -884,7 +895,7 @@ export function openBulkDrawer(preset = {}) {
   const renderIssueFilter = () => {
     if (scope.state !== 'issue') { issListEl.hidden = true; return; }
     const counts = new Map();
-    for (const t of bulk.resolveTargets(store.getAllDocs(), { ...scope, state: 'issue', issueText: '' })) {
+    for (const t of bulk.resolveTargets(editableDocs(), { ...scope, state: 'issue', issueText: '' })) {
       counts.set(t.item.issue, (counts.get(t.item.issue) || 0) + 1);
     }
     const top = [...counts.entries()].sort((a, b) => b[1] - a[1]);
@@ -929,7 +940,7 @@ export function openBulkDrawer(preset = {}) {
 
   const renderRenameList = () => {
     const counts = new Map();   // wording -> {open, resolved}
-    for (const t of bulk.resolveTargets(store.getAllDocs(), { ...scope, state: 'any' })) {
+    for (const t of bulk.resolveTargets(editableDocs(), { ...scope, state: 'any' })) {
       if (!t.item.issue) continue;
       const c = counts.get(t.item.issue) || { open: 0, resolved: 0 };
       if (t.item.issueResolved) c.resolved++; else c.open++;
@@ -970,7 +981,7 @@ export function openBulkDrawer(preset = {}) {
       if (!applying) { applyBtn.disabled = true; applyBtn.textContent = 'Apply'; }
       return;
     }
-    currentPlan = bulk.planAction(store.getAllDocs(), scope, action, opts);
+    currentPlan = bulk.planAction(editableDocs(), scope, action, opts);
     const c = currentPlan.counts;
     // Checking off an item does not close its issue — say so up front rather
     // than letting 40 red rows silently survive a "checked everything" pass.
@@ -1134,7 +1145,7 @@ export function openBulkDrawer(preset = {}) {
     // An item code added from a phone while this drawer sits open must become
     // selectable, and the ⚠N open badges must stay honest — rebuild the
     // inventory, keeping the operator's typed filter and ticked codes.
-    inv = bulk.buildInventory(store.getAllDocs());
+    inv = bulk.buildInventory(editableDocs());
     renderCodes();
     refresh();
   });
@@ -1167,7 +1178,7 @@ async function performUndo() {
     }
     // Undo is NOT a blind write: re-derive against current state so anything
     // a crew member touched after the bulk is left alone, with a reason.
-    const derived = bulk.deriveUndoPlan(entry.inverse, store.getAllDocs());
+    const derived = bulk.deriveUndoPlan(entry.inverse, editableDocs());
     if (!derived.counts.changing) {
       toast('Nothing left to undo — every item has been touched since the bulk edit.');
       return;

@@ -63,6 +63,12 @@ export function blankItem(tpl) {
     category: tpl.category || '', qty: tpl.qty || 1,
     reliability: tpl.reliability || 'HIGH', derived: tpl.derived || 0, src: tpl.src || '',
     instanceNote: tpl.instanceNote || '',
+    // MEP punch lines carry the ACTION the walker performs ("Fill and flush,
+    // check for rock"). Without this in blankItem the field would be dropped
+    // on every template-driven create and the punch sheet would print a
+    // shopping list instead of a test procedure. Empty for FF&E lines.
+    verifyAtPunch: tpl.verifyAtPunch || '',
+    where: tpl.where || '',
     checked: false, initials: '', checkedByName: '', checkedByUid: '',
     checkedAt: null, checkedAtLocal: null,
     issue: '', issueResolved: false, deleted: false,

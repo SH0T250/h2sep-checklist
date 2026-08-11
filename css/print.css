@@ -267,3 +267,20 @@
   .box { width: 52px; height: 38px; }
   .ftr { flex-direction: column; gap: 4px; }
 }
+
+/* ---------- MEP punch sheet ---------- */
+/* Each trade starts a fresh page: a plumber signs a page that is only
+   plumbing, and nobody signs for another trade's work. */
+.sheet.mep .mep-cat.brk { break-before: page; page-break-before: always; }
+.sheet.mep .cat-head { display: flex; align-items: baseline; gap: 8px; }
+.sheet.mep .cat-n { font-weight: 400; font-size: 8.5pt; color: #555; letter-spacing: 0; }
+/* The action the walker performs — the point of a punch sheet. */
+.sheet.mep .vstep {
+  font-size: 8.5pt; color: #1a1a1a; margin-top: 1pt; padding-left: 2pt;
+  page-break-inside: avoid; break-inside: avoid;
+}
+.sheet.mep .item { page-break-inside: avoid; break-inside: avoid; }
+.signoff {
+  margin-top: 10pt; padding-top: 6pt; border-top: 1px solid #000;
+  font-size: 8.5pt; letter-spacing: .2px; page-break-inside: avoid; break-inside: avoid;
+}
