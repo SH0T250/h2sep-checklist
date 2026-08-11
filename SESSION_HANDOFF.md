@@ -7,6 +7,114 @@ trust the live systems over this prose where they differ.
 
 ---
 
+## 0. LATEST — DASHBOARD EDITING (2026-08-11) · PR #4 OPEN, NOT DEPLOYED, WORK PAUSED MID-REVIEW
+
+**State: paused deliberately at Austin's request ("stop where you are, create a save
+point") to conserve tokens. Nothing is half-written — the tree is clean, every suite is
+green, and all work is pushed. Resume from "What's left" below.**
+
+**Where the work is**: branch `claude/dashboard-editing-inventory-f69y7b`, PR #4
+(https://github.com/SH0T250/h2sep-checklist/pull/4), ready for review, 2 commits
+(`d94fee1` feature, `e1d18e3` connection-signal refinement). **`gh-pages` is UNTOUCHED
+and must stay that way** — Austin chose "Branch + PR, you review, I hold". Do not deploy
+without him saying so.
+
+**What it does**: makes the read-only wall dashboard editable, so a whole product line
+landing (all the dividers, their hardware, the closet hardware) no longer means opening
+181 room docs on a phone to clear the same MISSING flag 181 times.
+- **Per-item parity with the crew app**: floor -> room -> item browsing, tap-to-check with
+  initials in the box, the four-option issue flow (resolve & check / resolve / edit /
+  clear), the app's issue vocabulary, per-row flagging without checking, room notes,
+  ordinals, and the reference cutsheets/plan snippets in every item sheet.
+- **Bulk editing**: scope by item code / floor / doc type / state -> preview the exact
+  count with honest skip reasons -> PIN -> confirm -> apply in chunked batches -> undo.
+- **New INVENTORY panel**: every item code in the building with live counts, each row
+  carrying its own BULK EDIT button that pre-scopes the drawer to that code's open issues.
+
+**New files**: `js/bulk.js` (pure engine — no DOM, no Firebase, node-testable),
+`js/dash-edit.js` (the edit layer), `tests/bulk-unit.mjs`, `tests/bulk-edit.mjs`.
+`js/dash.js` was rewritten to ride store.js. Version 1.18.1 (sw.js VERSION and
+APP_VERSION in step; both new files in the SHELL array).
+
+**Write safety — the invariants to preserve if you touch this**:
+- The plan that EXECUTES is re-derived at the moment of commitment, after the confirm
+  dialog. A crew check-off landing during that human-paced pause must survive. If the
+  change set moved, it aborts and makes the operator look. Drift is detected by change-set
+  IDENTITY (sorted room+itemId), not by count — equal counts can hide swapped membership.
+- Undo is NOT a blind inverse. `deriveUndoPlan` re-derives against current state, leaves
+  alone anything touched since, and says how many it is skipping.
+- `dataTrust()` in dash-edit.js is the single gate both apply and undo read, deliberately
+  graded: `offline` (navigator.onLine false — unambiguous, refuses destructive actions
+  outright) vs `cache` (browser claims online but every listener serves cache — real, it is
+  how filtered site wifi presents, but ALSO briefly true around normal write latency, so it
+  warns in the strongest terms rather than hard-blocking. A false positive must never
+  strand the operator behind a refusal they cannot pass.)
+- Every bulk writes a full per-item recovery record at `activity/bulk_<id>[_pN]`, sharded
+  at RECOVERY_PAGE_ITEMS=800 so the largest and most dangerous operations cannot silently
+  exceed Firestore's 1 MiB document cap. Audit failures toast; they never throw.
+- Standard app invariants still hold: complete check-field groups, soft deletes only,
+  never overwrite another person's initials.
+
+**Two behavior changes beyond the new feature (called out in the PR)**:
+1. Headline tiles now count the WHOLE BUILDING. They previously disagreed with the panels
+   beneath them (tiles counted guest rooms, panels counted everything). ROOMS COMPLETE
+   stays guest-rooms-only; the issue tile says "across N rooms + M spaces".
+2. Toasts carrying an Undo action last 8s instead of 3s, app-wide. Three seconds is enough
+   to read "saved" and not enough to reverse a decision.
+
+**Also fixes a PRE-EXISTING PRODUCTION BUG**: the magnitude bars in OPEN ISSUES BY TYPE and
+CHECK-OFFS BY PERSON were inline `<span>`s, which ignore width — their fills never painted
+at any value. Visible on the live board today; not introduced by this branch.
+
+**Review history — three adversarial critic passes, each finding verified before fixing**:
+- Round 1 (5 critics, 33 agents): 6 / 7.5 / 7.5 / 6.5 / 4. 27 confirmed + 20 minors, all
+  fixed (stale-plan race, blind undo, thin audit, offline apply, focus trap + inert, 44px
+  phone targets, building-wide tiles, the hbar production bug).
+- Round 2 (3 critics; a11y and visual died on a rate limit): 7 / 6.5 / 8.3. Two blockers,
+  both in drawer chrome rather than the write engine, both caught only by driving a real
+  browser: (a) the drawer's footer Close called `s.remove()`, skipping the `inert`
+  teardown — afterward every click on the dashboard was swallowed, and a touch-only wall
+  screen has no keypress to self-heal, so the board was dead until reload; (b) `.bd` grid
+  items lacked `min-width:0`, so long ceiling labels stretched column 1 to 1370px inside a
+  1060px sheet and pushed WHERE/DO WHAT and the Apply button off-screen on EVERY unfiltered
+  open — every existing test typed a filter first, which is exactly why they all passed.
+  Plus: References were dead on arrival (`initRefs()` was wired into app.js but never
+  dash.js, so the panel rendered empty on a board that had the data on disk — now 41/72
+  demo items resolve refs). All round-2 findings are fixed.
+- Round 3 (all 5 critics, visual + a11y reviewing two rounds at once): **LAUNCHED THEN
+  STOPPED at Austin's request before any critic returned.** No results to salvage. The
+  script is saved and re-runnable — see below.
+
+**Tests — all green at the pause point**: `node tests/bulk-unit.mjs` (engine: scope
+resolution, skip semantics, plan inversion, derived-undo rules) and `node tests/
+bulk-edit.mjs` (26 Playwright asserts in demo mode, including three regressions written
+for the round-2 blockers: drawer column geometry measured against the sheet box, footer
+Close clearing inert followed by a real click, and an item sheet rendering reference rows).
+Existing `smoke`, `lifecycle-test`, `geom-check` (12/12) re-run green; mobile flow clean.
+
+**What's left (resume here)**:
+1. Re-run round 3: `Workflow({scriptPath: '<scratchpad>/r3.js'})` — the script is written
+   and syntax-checked, and its FIXES block already describes every round-2 fix. NOTE the
+   scratchpad is session-scoped and will be gone; the script is reproducible from this
+   file's description if lost. Fix whatever survives adversarial refutation, push to the
+   same branch (the PR is live, so pushes flow straight to it).
+2. Austin's bar, in his words: "Don't stop until each critic is utterly wowed" = 9+ from
+   all five. Current best is 8.3 (field usability).
+3. Deployment stays HELD until Austin says otherwise.
+
+**Live progress board** (artifact, updates in place on republish — pass the URL to keep
+it): https://claude.ai/code/artifact/65308dd5-b89a-44c9-a2ca-35723a2be371 — every build
+piece with its latest screenshot, the round log, inventory vs cutsheets, and the critic
+panel's current verdict. Generated by `gen_progress.py` from `verdicts.json` in the
+session scratchpad (both session-scoped, not in the repo).
+
+**Watch out**: the demo PIN is 6621 and is public by design (its sha256 matches the
+deployed rules hash). Playwright lives at `/opt/pw-browsers/chromium`; the shared HTTP
+server on port 8322 must never be killed or rebound. `tests/node_modules` is a gitignored
+symlink to /opt/node22/lib/node_modules. Firestore rules whitelist dotted `items.<id>.*`
+paths plus `updatedAt` only, and `activity/{day}` accepts any doc id (which is what lets
+the recovery docs land).
+
 ## 0. LATEST — v1.17.0 COMMON AREAS (2026-08-10) · TEST BATCH LIVE, GATE OPEN
 
 **Deployed + verified**: app v1.17.0 (sw h2sep-v1.17.0) — Common Areas as a

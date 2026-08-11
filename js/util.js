@@ -37,6 +37,8 @@ export function toast(msg, opts = {}) {
   if (!el) {
     el = document.createElement('div');
     el.id = 'toast';
+    // Status region: screen readers announce confirmations they cannot see.
+    el.setAttribute('role', 'status');
     document.body.appendChild(el);
   }
   el.innerHTML = `<span>${esc(msg)}</span>` +
@@ -49,10 +51,17 @@ export function toast(msg, opts = {}) {
     }, { once: true });
   }
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('show'), opts.ms || 3000);
+  // A toast carrying an ACTION (Undo) must live long enough to actually use —
+  // 3 s is fine for "saved", not for reversing a decision.
+  toastTimer = setTimeout(() => el.classList.remove('show'), opts.ms || (opts.action ? 8000 : 3000));
 }
 
 export const platform = (() => {
+  // Node (unit tests) has no window/matchMedia — report a neutral platform
+  // rather than crashing every module that transitively imports util.js.
+  if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+    return { isIOS: false, standalone: false, inAppBrowser: false };
+  }
   const ua = navigator.userAgent || '';
   const isIOS = /iPhone|iPad|iPod/.test(ua) || (ua.includes('Mac') && navigator.maxTouchPoints > 1);
   const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;

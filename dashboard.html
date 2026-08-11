@@ -14,6 +14,8 @@
     <img class="dh-logo" src="./img/logo-full-dark.png" alt="TRIŪN Construction | Engineering">
     <div class="dh-title">H2SEP · LIVE DASHBOARD<span class="dh-sub">Home2 Suites · Eagle Pass TX</span></div>
     <div class="dh-status">
+      <button class="edit-pill" id="bulk-open" hidden>⚡ BULK EDIT</button>
+      <button class="edit-pill" id="edit-toggle" aria-pressed="false">✎ EDIT</button>
       <span class="live-pill" id="live-pill"><span class="live-dot"></span>CONNECTING…</span>
       <span class="dh-clock" id="clock">—</span>
     </div>
@@ -46,11 +48,11 @@
     <!-- middle panels -->
     <section class="panels">
       <div class="panel">
-        <h2>FLOOR PROGRESS</h2>
+        <h2>FLOOR PROGRESS <span class="h2-hint" id="floors-hint"></span></h2>
         <div id="floors" class="floor-rows"></div>
       </div>
       <div class="panel">
-        <h2>OPEN ISSUES BY TYPE</h2>
+        <h2>OPEN ISSUES BY TYPE <span class="h2-hint" id="issues-hint"></span></h2>
         <div id="issue-types" class="hbars"></div>
       </div>
       <div class="panel">
@@ -59,10 +61,18 @@
       </div>
     </section>
 
+    <!-- inventory: every item code across the building -->
+    <section class="panels inv-row">
+      <div class="panel wide">
+        <h2>INVENTORY — BY ITEM <span class="h2-hint" id="inv-hint"></span></h2>
+        <div id="inventory"></div>
+      </div>
+    </section>
+
     <!-- bottom panels -->
     <section class="panels bottom">
       <div class="panel wide">
-        <h2>OPEN ISSUE LIST</h2>
+        <h2>OPEN ISSUE LIST <span class="h2-hint" id="issuelist-hint"></span></h2>
         <div class="tbl-wrap">
           <table class="tbl" id="issue-table">
             <thead><tr><th>Room</th><th>Code</th><th>Item</th><th>Problem</th></tr></thead>
