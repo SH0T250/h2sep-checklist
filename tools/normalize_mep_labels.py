@@ -42,6 +42,18 @@ OUT = os.path.join(HERE, "out", "mep")
 ROOM_RE = re.compile(r"(?<![\w.])[1-4][0-9]{2}(?![\w.])")
 ORDINAL_RE = re.compile(r"\b\d+\s+of\s+\d+\b", re.I)
 
+# A label can be room-specific WITHOUT naming a room number, by asserting a
+# room-TYPE attribute. Room 438's lavatory label is the richest in the set and
+# ends "set in the ACCESSIBLE vanity top" — true of 438, false of the 100-odd
+# standard keys, and "richest wins" would have printed it on every one of them.
+# Same trap as the foreign room numbers, one level up: an attribute is a claim
+# about THIS room's type, so a label carrying one may never become canonical
+# for another room, and may never be overwritten by one that lacks it.
+ATTRIBUTE_RE = re.compile(
+    r"\b(ACCESSIBLE|ADA|roll-in|rollin|communication[- ]features|hearing[- ]"
+    r"(?:impaired|accessible)|mobility[- ]accessible|wheelchair|ambulatory|"
+    r"CONFIGURATION [AB])\b", re.I)
+
 # THE PLACEHOLDER TRAP. The agents wrote an em-dash for "this device has no
 # schedule mark", not an empty string. Treating that as a real mark makes every
 # untagged device in a room look like the same device — the first dry run of
@@ -78,6 +90,8 @@ def same_device(a, b):
 
 def is_room_specific(label, room):
     if ORDINAL_RE.search(label):
+        return True
+    if ATTRIBUTE_RE.search(label):    # claims a room-TYPE attribute
         return True
     for m in ROOM_RE.findall(label):
         if m == room:                 # names its own room
@@ -119,7 +133,8 @@ def main():
         # wording into 202 and 202's water-closet wording into 104, each
         # carrying the other room's number. Prefer the richest label that
         # names no room at all; if every variant names one, refuse the group.
-        roomless = [l for l in labels if not ROOM_RE.search(l)]
+        roomless = [l for l in labels
+                    if not ROOM_RE.search(l) and not ATTRIBUTE_RE.search(l)]
         if not roomless:
             mismatched.append((key, sorted(labels, key=len)))
             continue

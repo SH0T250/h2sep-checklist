@@ -216,7 +216,23 @@ def main():
             for line in doc.get("lines", []):
                 if line.get("category") != "Mechanical":
                     continue
-                if "ackaged terminal" not in line.get("label", "") and "PTAC" not in line.get("label", ""):
+                # ONLY the scheduled unit itself. Matching "PTAC" anywhere in
+                # the label swept in all eleven accessory lines — the wall
+                # sleeve, the louver, the filter, the drain kit — and stamped
+                # an air-conditioner's schedule mark on each of them. It also
+                # OVERWROTE the thermostat's own mark, "T", with the PTAC's.
+                # A punch sheet printing "PTAC-2 / PTAC-1" in the mark column
+                # beside "exterior louver" tells the crew the louver is a
+                # scheduled unit, and loses the one mark the thermostat had.
+                #
+                # In every verified package the unit line carries EXACTLY the
+                # source room's scheduled mark and no accessory ever does, so
+                # that is the identity test. The label test is a fallback only
+                # — room 118's unit reads "PTAC — G.E. AZ65H12DAB, 11,900
+                # BTU/h cooling" and never says "packaged terminal".
+                is_unit = (have[0] and line.get("mark", "") == have[0]) \
+                    or "packaged terminal" in line.get("label", "").lower()
+                if not is_unit:
                     continue
                 # Correct the MARK, which is per-room. Leave the label alone —
                 # it is the verified description of the device — and put the
@@ -229,6 +245,17 @@ def main():
                         target, ("[%s] " % want[0]) if want[0] else "no mark stated — ",
                         want[1], source)).strip(" ·")
                 swapped += 1
+        # If this room's schedule row differs but nothing matched, the doc would
+        # ship carrying the SOURCE room's mark with no sign anything was wrong.
+        # That is the silent-wrong-data class, so it refuses instead.
+        if want and have and want != have and not swapped:
+            print("%s <- %s: REFUSED" % (target, source))
+            print("      UNEXPLAINED — this room's PTAC row differs from %s's (%s vs %s) but no "
+                  "packaged-terminal unit line was found to correct, so the doc would carry %s's mark"
+                  % (source, want[0] or "no mark", have[0] or "no mark", source))
+            refused += 1
+            continue
+
         doc["room"] = target
         doc["carriedFrom"] = source
         doc["carryEvidence"] = msgs

@@ -39,6 +39,10 @@ const REQUIRED = ['category', 'mark', 'label', 'qty', 'reliability', 'src', 'ver
 const SHEETS = new Set(readdirSync(DRAWINGS).filter((f) => f.endsWith('.md')).map((f) => f.slice(0, -3)));
 const NON_SHEET = /^(conflicts|coordination_issues|OPEN_ITEMS|RFI_register|packages|finish_schedule|reference|fs|FP-\d|FA-\d|S\d|NEC|TAS|ADA|nameplate|field)/i;
 
+// Placeholders meaning "no schedule mark is stated for this device" — NOT a
+// device identity. Kept in step with normalize_mep_labels.py NO_MARK.
+const NO_MARK = new Set(['', '-', '--', '—', '–', 'n/a', 'na', 'none', 'no mark', '?']);
+
 // A punch step must start with a verb the crew performs.
 const LIMP = /^(verify installed|verify present|check installed|confirm installed|installed|present|verify|check|confirm)\.?$/i;
 
@@ -153,8 +157,14 @@ for (const f of files) {
     const roomSpecific = /(?<![\w.])[1-4][0-9]{2}(?![\w.])/.test(String(l.label))
       || /\b\d+\s+of\s+\d+\b/i.test(String(l.label))
       || /\b(NONE|ZERO|EXPECT|not scheduled|NOT (placed|printed|shown|drawn|scheduled)|absent|PHANTOM|WATCH|CONFIGURATION [AB])\b/i.test(String(l.label));
+    // A mark is only a join key when it actually identifies something. The
+    // agents wrote an em-dash for "this device carries no schedule mark", and
+    // treating that as a real mark makes every untagged device in the hotel
+    // look like the same device — it produced 761 warnings, all false, which
+    // is worse than none because it trains everyone to skip this list. Same
+    // trap normalize_mep_labels.py guards with NO_MARK.
     const key = `${l.category}|${l.mark}`;
-    if (l.mark && !roomSpecific) {
+    if (l.mark && !NO_MARK.has(String(l.mark).trim().toLowerCase()) && !roomSpecific) {
       const prev = labelByDevice.get(key);
       if (prev && prev.label !== l.label && prev.room !== room) {
         // Only flag when the labels are materially different, not a suffix.
