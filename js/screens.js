@@ -395,6 +395,13 @@ export function renderRoom(el, number) {
   // One row renderer for both modes — identical markup to the original flat
   // list when the new fields (category/reliability/instanceNote/'' code) are
   // absent, so legacy rooms render exactly as before.
+  // A punch row is shaped differently from an FF&E row. FF&E instance notes are
+  // a few words, so they sit in a narrow right-hand rail; MEP notes are whole
+  // paragraphs of drawing evidence and collapse that rail into an unreadable
+  // ribbon. And the punch STEP — the action the walker performs, the entire
+  // point of a punch list — was rendering on the printed sheet only, so the
+  // crew working off a phone could not see what to do.
+  const isMepRow = isMepDoc(room);
   const rowHTML = ([id, it]) => {
     codeSeen[it.code] = (codeSeen[it.code] || 0) + 1;
     // Duplicate-tag ordinal always shows so siblings never look like missing
@@ -423,8 +430,10 @@ export function renderRoom(el, number) {
             ${openIssue ? `<div class="item-note">— ${esc(it.issue.toUpperCase())}</div>` : ''}
             ${it.issue && it.issueResolved ? `<div class="item-note resolved"><s>— ${esc(it.issue.toUpperCase())}</s></div>` : ''}
             ${(n => n ? `<button class="ref-count" data-refchip="${esc(id)}" aria-label="References">📎 ${n} ref${n > 1 ? 's' : ''}</button>` : '')(refsFor(room.number, it, id).length)}
+            ${isMepRow && it.verifyAtPunch ? `<div class="punch-step"><span class="punch-do">DO</span> ${esc(it.verifyAtPunch)}</div>` : ''}
+            ${isMepRow && inst ? `<div class="punch-note">${esc(inst)}</div>` : ''}
           </div>
-          ${inst ? `<span class="inst${it.instanceNote ? ' inst-note' : ''}">${esc(inst)}</span>` : ''}
+          ${!isMepRow && inst ? `<span class="inst${it.instanceNote ? ' inst-note' : ''}">${esc(inst)}</span>` : ''}
           <button class="flag-btn ${openIssue ? 'on' : ''}" data-flag="${esc(id)}" aria-label="Flag issue">⚑</button>
         </div>`;
   };

@@ -234,10 +234,10 @@
       "issueResolved": false,
       "deleted": false
     },
-    "21a14a59ed1d": {
+    "85abf129c49f": {
       "category": "Mechanical",
       "code": "T",
-      "label": "PTAC thermostat — 7-day programmable, HARDWIRED (keynote 24 adds that thermostat-to-PTAC communication may be wireless). ONE PER PTAC, AND THIS ROOM HAS ONE PTAC — M401 states verbatim 'Each guestroom is served by a single PTAC', and A555 places keynote 1 only at the window wall, so expect ONE thermostat here",
+      "label": "PTAC thermostat — 7-day programmable, HARDWIRED (keynote 24 adds that thermostat-to-PTAC communication may be wireless). ONE PER PTAC, AND THIS ROOM HAS ONE PTAC — M401 states verbatim 'Each guestroom is served by a single PTAC', and A550 — the KING STUDIO sheet, the one that governs 104 — places keynote 1 (PTAC) only at the window wall on views 01, 02 and 08, so expect ONE thermostat here. SHEET CORRECTED THIS PASS: this label previously cited A555, which is the QUEEN-QUEEN sheet ('ENL. GUEST ROOM PLANS & ELEVS - QQ STD., QQ EXT., & QQ STD. CONN.') and is not a source for a King Studio — the same wrong-sheet citation struck elsewhere on this list",
       "qty": 1,
       "reliability": "FLAGGED",
       "instanceNote": "THE DEVICE IS SETTLED — it exists, is 7-day programmable, is hardwired, and the MECHANICAL contractor (Iceberg) furnishes and installs it while the ELECTRICAL contractor (United Electric) furnishes and routes the control wiring (M101 N28). THE HEIGHT IS NOT — three values across five sources: 48\" (A550 kn24 verbatim 'MOUNTED 48\" MAX TO TOP OF DEVICE'; M101 N29's 4'-0\"; G402 note 11's 15\"-48\" band; G400 det.02's 4'-0\") vs 54\" for non-accessible (M401 KN4, the ONLY source for it, and 104 IS non-accessible) vs 60\" (E101 symbol legend). coordination_issues C-03, live across all 115 rooms. DO NOT WRITE UP A HEIGHT DEFICIENCY ON THIS WALK — measure and record. ONE LINE ONLY: the low-voltage comms path and the electrical thermostat-wiring row (ITM-0018) are folded in here — do not punch this device three times. SETTLES IT: one RFI to MWT / the M-EOR covering switch AND thermostat height, guestroom and accessible guestroom, naming G402 note 11 against M401 KN4 and E101's legend.",
@@ -1223,13 +1223,13 @@
       "issueResolved": false,
       "deleted": false
     },
-    "e620bc987e48": {
+    "b0119abed788": {
       "category": "Fire Protection",
       "code": "(S)SB",
-      "label": "Addressable photoelectric smoke detector on a LOW-FREQUENCY sounder base — Silent Knight SKPHOTOW head in a System Sensor B200S-LF-WH 520 Hz sounder base, ceiling mounted. This base is the audible appliance for a sleeping room; a corridor horn does not satisfy it",
+      "label": "Addressable photoelectric smoke detector on a LOW-FREQUENCY sounder base — Silent Knight SKPHOTOW head in a System Sensor B200S-LF-WH sounder base, ceiling mounted. This base is the audible appliance for a sleeping room; a corridor horn does not satisfy it",
       "qty": 1,
       "reliability": "HIGH",
-      "instanceNote": "Qty is solid: FA-1 schedules 121 detectors and 121 bases, which reconciles exactly to 115 keys + the 6 second detectors in the 6 one-bedroom suites — and there are NO one-bedroom suites on floor 1, so floor 1 is a flat 1 per key with no exceptions. THE SOUNDER BASE IS THE AUDIBLE APPLIANCE FOR THIS SLEEPING ROOM — a corridor horn does not satisfy it.",
+      "instanceNote": "FREQUENCY NOT ASSERTED, STRUCK THIS PASS: the label decoded the base as '520 Hz'. NO SHEET IN THIS SET PRINTS A Hz VALUE — FA-1's Description column reads 'SMOKE DET. LF SOUNDER BASE' and the audibility chart says 'low frequency'. 520 Hz is a decode of the B200S-LF model string and of NFPA 72, exactly the class of inference this same sheet refuses on 'VK' = Viking. Record the frequency off the base label or the approved submittal; do not put a number on a punch document off this row. Qty is solid: FA-1 schedules 121 detectors and 121 bases, which reconciles exactly to 115 keys + the 6 second detectors in the 6 one-bedroom suites — and there are NO one-bedroom suites on floor 1, so floor 1 is a flat 1 per key with no exceptions. THE SOUNDER BASE IS THE AUDIBLE APPLIANCE FOR THIS SLEEPING ROOM — a corridor horn does not satisfy it.",
       "src": "FA-1 Fire Alarm Equipment Schedule row (S)SB, qty 121/121, 'LOCATE AS SHOWN ON CEILING' (Security Integrated Inc, Hilton A/D&C REVIEWED 04/29/2025) · FA-2 first-floor plan · FA-3 verified rooms 303/305/307/311 and 304/306/308 · A550 view 04 SD symbol · E500 FA note 10",
       "where": "Guest-room ceiling near the entry / sleeping boundary; A550 view 04 prints 10\" 10\" spacing at the SD / fire-horn pair. Not in the bath, not in the entry leg.",
       "verifyAtPunch": "Head seated in its base, no shipping cap, LED normal, no paint or drywall dust on head, base or chamber; then with the FA vendor put it in test — head alarms, the LOW-FREQUENCY base sounds IN THE ROOM and is read at 75 dBA at the sleeping position (FA-1 audibility chart: sleeping rooms ambient 35 dBA, design 75 dBA, low frequency), and the FACP annunciates ROOM 104 with both its SLC and NAC addresses read back; any exposed emergency-system junction box or cover plate must be PAINTED RED (E500 note 10).",

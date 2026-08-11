@@ -546,6 +546,24 @@ b, .code { font-weight: 700; }
 .verify-chip.warn { color: var(--warn); background: var(--warn-tint); border-color: var(--warn-tint); }
 .inst.inst-note { white-space: normal; max-width: 110px; text-align: right; }
 
+/* Punch rows: the action first, the evidence under it, both full width. The
+   110px right-hand rail above is right for a two-word FF&E note and wrong for
+   a paragraph of drawing evidence — it turned every MEP line into a tall thin
+   ribbon of text with the label pushed off the bottom. */
+.punch-step {
+  display: block; margin-top: 6px; font-size: 13.5px; line-height: 1.45;
+  color: var(--text); text-align: left;
+}
+.punch-do {
+  display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .6px;
+  color: var(--bg); background: var(--accent); border-radius: 4px;
+  padding: 1px 5px; margin-right: 5px; vertical-align: 1px;
+}
+.punch-note {
+  display: block; margin-top: 5px; font-size: 12px; line-height: 1.45;
+  color: var(--text-2); text-align: left;
+}
+
 .flag-line {
   display: flex; align-items: center; width: 100%; min-height: 44px; text-align: left;
   color: var(--warn); font-weight: 700; font-size: 13.5px; padding: 6px 0 0;
