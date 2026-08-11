@@ -46,8 +46,13 @@ const CLEAN = {
   issue: '', issueResolved: false, deleted: false,
 };
 
-const idFor = (cat, mark, label) =>
-  createHash('md5').update(`${cat}|${mark}|${label}`).digest('hex').slice(0, 12);
+// The LOCATION is part of a line's identity. Three sprinkler heads on one FP-1
+// model at the bed, the sofa and the entry leg are three devices; so are the
+// two PTAC units in a One Bedroom suite, one in the bedroom and one in the
+// living room. Hashing without `where` collided them into a single id and the
+// second unit vanished from the punch list.
+const idFor = (cat, mark, label, where) =>
+  createHash('md5').update(`${cat}|${mark}|${label}|${where || ''}`).digest('hex').slice(0, 12);
 
 // ---------------------------------------------------------------------------
 // ACCESSIBLE-ROOM BATHROOM CONFIGURATION (room 118 and its six siblings)
@@ -131,7 +136,7 @@ for (const f of readdirSync(OUT).filter((x) => /^_lines-.+\.json$/.test(x)).sort
       problems++; continue;
     }
     const mark = l.mark || '';
-    const id = idFor(cat, mark, l.label);
+    const id = idFor(cat, mark, l.label, l.where);
     if (items[id]) { console.error(`${room}: DUPLICATE line id for "${l.label}"`); problems++; continue; }
     perCat[cat] = (perCat[cat] || 0) + 1;
     items[id] = {

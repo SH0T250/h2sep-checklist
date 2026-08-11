@@ -204,18 +204,31 @@ def main():
             continue
 
         doc = json.load(open(src_path, encoding="utf-8"))
-        want = ptac_row(cx, target)
+        want, have = ptac_row(cx, target), ptac_row(cx, source)
         swapped = 0
-        for line in doc.get("lines", []):
-            # Rebuild the PTAC line from THIS room's own row — mark and the
-            # location wording both, since they differ by corridor side.
-            if line.get("category") == "Mechanical" and "ackaged terminal" in line.get("label", ""):
-                if want and (line.get("mark") != want[0] or want[1] not in line.get("label", "")):
-                    line["mark"] = want[0]
-                    line["label"] = want[1]
-                    line["instanceNote"] = ((line.get("instanceNote", "") + " · ").lstrip(" ·")
-                        + "PTAC mark and location taken from room %s's own schedule row, not carried." % target).strip(" ·")
-                    swapped += 1
+        # ONLY touch the PTAC line when this room's schedule row actually
+        # differs from the source room's. Rewriting it unconditionally was a
+        # bug with two heads: it replaced the verified label (which for the
+        # suites says "NO SCHEDULE MARK IS STATED FOR THIS TYPE" — a real
+        # finding) with the database's generic wording, and it collapsed the
+        # suites' TWO units into two identical lines, losing a PTAC.
+        if want and have and want != have:
+            for line in doc.get("lines", []):
+                if line.get("category") != "Mechanical":
+                    continue
+                if "ackaged terminal" not in line.get("label", "") and "PTAC" not in line.get("label", ""):
+                    continue
+                # Correct the MARK, which is per-room. Leave the label alone —
+                # it is the verified description of the device — and put the
+                # room's own schedule wording in the note where it cannot
+                # overwrite anything.
+                line["mark"] = want[0]
+                line["instanceNote"] = ((line.get("instanceNote", "") + " · ").lstrip(" ·")
+                    + "PTAC schedule row for room %s reads: %s%s. Taken from this room's own row, "
+                      "not carried from room %s." % (
+                        target, ("[%s] " % want[0]) if want[0] else "no mark stated — ",
+                        want[1], source)).strip(" ·")
+                swapped += 1
         doc["room"] = target
         doc["carriedFrom"] = source
         doc["carryEvidence"] = msgs

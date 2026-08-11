@@ -91,14 +91,18 @@ for (const f of files) {
     // crew hunting for something never designed, and catches something
     // installed that shouldn't be. It has to earn it, though: the label must
     // say so and the step must handle the found-one case.
-    const isAbsence = /\b(NONE|NO\s|ZERO|not scheduled|NOT placed|confirm-absence|zero-quantity|PHANTOM|WATCH|NOT[- ]APPROVED|ROOMS ONLY|drawn on NO)/i
+    const isAbsence = /\b(NONE|NO\s|ZERO|not scheduled|NOT (placed|printed|shown|drawn|scheduled)|confirm-absence|zero-quantity|PHANTOM|WATCH|NOT[- ]APPROVED|(ROOMS|KEYS) ONLY|drawn on NO)/i
       .test(String(l.label));
     if (!Number.isInteger(l.qty) || l.qty < 0) {
       bad(room, `line "${String(l.label).slice(0, 40)}" qty=${l.qty}`);
     } else if (l.qty === 0 && !isAbsence) {
       bad(room, `line "${String(l.label).slice(0, 40)}" has qty 0 but does not read as a confirm-absence row`);
-    } else if (l.qty === 0 && !/\bif\b/i.test(String(l.verifyAtPunch))) {
-      bad(room, `absence row "${String(l.label).slice(0, 40)}" must tell the walker what to do IF one is found`);
+    } else if (l.qty === 0 && !/\b(if\b|either way|yes or no|record the answer|photograph)/i.test(String(l.verifyAtPunch))) {
+      // The step must handle the found-one case, but it may say so in any
+      // reasonable way — "RECORD THE ANSWER either way, because a doorbell in
+      // 202 means 202 is a communication-features key" does the job without
+      // ever using the word "if".
+      bad(room, `absence row "${String(l.label).slice(0, 40)}" must tell the walker what to do if one IS found`);
     }
 
     // `where` is part of a line's identity: three sprinkler heads on the same
@@ -148,7 +152,7 @@ for (const f of files) {
     // Flagging those trains everyone to ignore this check.
     const roomSpecific = /(?<![\w.])[1-4][0-9]{2}(?![\w.])/.test(String(l.label))
       || /\b\d+\s+of\s+\d+\b/i.test(String(l.label))
-      || /\b(NONE|ZERO|EXPECT|not scheduled|NOT placed|absent|PHANTOM|WATCH|CONFIGURATION [AB])\b/i.test(String(l.label));
+      || /\b(NONE|ZERO|EXPECT|not scheduled|NOT (placed|printed|shown|drawn|scheduled)|absent|PHANTOM|WATCH|CONFIGURATION [AB])\b/i.test(String(l.label));
     const key = `${l.category}|${l.mark}`;
     if (l.mark && !roomSpecific) {
       const prev = labelByDevice.get(key);
