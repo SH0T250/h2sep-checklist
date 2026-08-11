@@ -30,12 +30,42 @@ if (!existsSync(OUT)) mkdirSync(OUT, { recursive: true });
 // hardcoded to 1, which would have stacked all 115 punch lists onto floor 1's
 // screen and left floors 2-4 showing none. The punch doc must call room 302
 // exactly what the FF&E doc calls it, and sit on the same floor.
-const ROOM_META = JSON.parse(execFileSync('python3', ['-c', `
+const DB_META = JSON.parse(execFileSync('python3', ['-c', `
 import sqlite3, json
 cx = sqlite3.connect(${JSON.stringify(join(HERE, '..', 'data', 'project.sqlite'))})
 rows = cx.execute("SELECT room_no, floor, display_label FROM rooms")
 print(json.dumps({r[0]: {"floor": int(r[1]), "label": r[2] or ""} for r in rows}))
 `], { encoding: 'utf8' }));
+
+// The DB is not the authority on what a room is CALLED — the live FF&E doc is,
+// because that is the name the crew reads on the room screen. They disagree:
+// the DB calls 105 "Queen-Queen" where the live doc says "QQ Studio", and calls
+// 103 "QQ Connecting" where the live doc says "QQ Studio Connector". Building
+// from the DB put six punch docs under a name their own FF&E doc never uses.
+// So live wins, from the newest backup (local, and literally the shipped
+// data); the DB fills gaps and says so.
+function liveMeta() {
+  const files = readdirSync(OUT.replace(/\/mep$/, ''))
+    .filter((f) => /^backup-.*\.json$/.test(f)).sort();
+  if (!files.length) return {};
+  const raw = JSON.parse(readFileSync(join(OUT.replace(/\/mep$/, ''), files[files.length - 1]), 'utf8'));
+  const out = {};
+  for (const d of (raw.collections && raw.collections.rooms) || []) {
+    const id = d.name.split('/').pop();
+    const f = d.fields || {};
+    const type = (f.type && f.type.stringValue) || '';
+    if (type.startsWith('space-') || type === 'mep-punch') continue;
+    out[id] = {
+      floor: Number((f.floor && f.floor.integerValue) || 0),
+      label: (f.typeLabel && f.typeLabel.stringValue) || '',
+    };
+  }
+  return out;
+}
+const LIVE_META = liveMeta();
+const ROOM_META = { ...DB_META, ...LIVE_META };
+console.log(`room names: ${Object.keys(LIVE_META).length} from the live FF&E docs, `
+  + `${Object.keys(DB_META).filter((k) => !LIVE_META[k]).length} from the drawing database\n`);
 
 const CAT_SORT = {
   'Mechanical': 1000, 'Electrical': 2000, 'Plumbing': 3000,

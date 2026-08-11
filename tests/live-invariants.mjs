@@ -43,8 +43,26 @@ const su = await (await fetch(`https://identitytoolkit.googleapis.com/v1/account
   { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{"returnSecureToken":true}' })).json();
 const H = { Authorization: 'Bearer ' + su.idToken };
 
-const roomsResp = await (await fetch(`${ROOT}/rooms?pageSize=400`, { headers: H })).json();
-const allDocs = (roomsResp.documents || []).map(decode);
+// Firestore caps a list response by BYTES, not just by pageSize, and hands
+// back a nextPageToken when it truncates. Reading one page was fine while the
+// collection was small; once the 115 punch docs landed it returned 13 rooms
+// out of 296 and the count invariants "failed" against data that was actually
+// correct — the far more dangerous version of which is a partial page that
+// still LOOKS plausible and lets a real break through. Always drain it.
+async function listAll(collection) {
+  const out = [];
+  let token = '';
+  do {
+    const url = `${ROOT}/${collection}?pageSize=300${token ? `&pageToken=${encodeURIComponent(token)}` : ''}`;
+    const resp = await (await fetch(url, { headers: H })).json();
+    if (resp.error) throw new Error(`${collection}: ${resp.error.message}`);
+    out.push(...(resp.documents || []));
+    token = resp.nextPageToken || '';
+  } while (token);
+  return out;
+}
+
+const allDocs = (await listAll('rooms')).map(decode);
 // Common-area spaces share the collection; their `space-` type slug is the
 // discriminator (util.isSpaceDoc). Guest-room invariants must not drift just
 // because spaces arrived — the split IS one of the invariants.
@@ -56,8 +74,7 @@ const mepDocs = allDocs.filter((r) => String(r.type || '') === 'mep-punch');
 const rooms = allDocs.filter((r) => !String(r.type || '').startsWith('space-')
   && String(r.type || '') !== 'mep-punch');
 const spaces = allDocs.filter((r) => String(r.type || '').startsWith('space-'));
-const tplResp = await (await fetch(`${ROOT}/templates?pageSize=50`, { headers: H })).json();
-const templates = Object.fromEntries((tplResp.documents || []).map((d) => [d.name.split('/').pop(), decode(d)]));
+const templates = Object.fromEntries((await listAll('templates')).map((d) => [d.name.split('/').pop(), decode(d)]));
 
 console.log(`${rooms.length} guest rooms · ${spaces.length} spaces · ${mepDocs.length} MEP punch · ${Object.keys(templates).length} templates\n`);
 

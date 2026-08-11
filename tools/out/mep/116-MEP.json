@@ -2,7 +2,7 @@
   "number": "116-MEP",
   "floor": 1,
   "type": "mep-punch",
-  "typeLabel": "King Studio Connecting",
+  "typeLabel": "King Studio Connector",
   "items": {
     "784d339596dd": {
       "category": "Mechanical",
