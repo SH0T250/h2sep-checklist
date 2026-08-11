@@ -37,6 +37,7 @@ const state = {
   pinMeta: null,             // {pinSalt, pinHash} (live) — demo uses DEMO_PIN
   subscribedFloors: new Set(),
   pendingFloors: new Set(),  // floors requested before Firestore finished loading
+  floorFromCache: new Map(), // floor -> last snapshot's fromCache (server contact)
 };
 
 const subscribers = new Set();
@@ -60,6 +61,12 @@ export function setUser(name, initials) {
   notify();
 }
 export function isAdmin() { return sessionStorage.getItem(SS_ADMIN) === '1'; }
+// Live mode can only verify a PIN after the config/app snapshot delivers
+// pinSalt/pinHash — before that, every PIN reads as wrong. UI must gate on
+// this or an admin typing the RIGHT PIN gets told it's wrong.
+export function canVerifyPin() {
+  return state.mode === 'demo' || !!(state.pinMeta && state.pinMeta.pinHash);
+}
 export function lockAdmin() { sessionStorage.removeItem(SS_ADMIN); notify(); }
 
 export async function verifyPin(pin) {
@@ -109,6 +116,12 @@ export function getTemplates() { return state.templates || {}; }
 // Live mode needs one successful (invisible) sign-in before writes are legal —
 // otherwise queued check-offs would be REJECTED at sync time and vanish.
 export function isWriteReady() { return state.mode === 'demo' || !!state.uid; }
+// True while any floor listener is serving from cache (no server contact) —
+// the dashboard pill uses this to say RECONNECTING instead of a false LIVE.
+export function isFromCache() {
+  for (const v of state.floorFromCache.values()) if (v) return true;
+  return false;
+}
 
 function markLocal(number, itemId) {
   state.recentLocal.set(String(number) + '/' + itemId, Date.now());
@@ -241,6 +254,7 @@ function liveSubscribeFloor(floor) {
     setTimeout(() => ensureFloorSubscribed(floor), 10_000);
   };
   fs.onSnapshot(q, { includeMetadataChanges: true }, (snap) => {
+    state.floorFromCache.set(String(floor), snap.metadata.fromCache);
     snap.docChanges().forEach(ch => {
       const data = ch.doc.data();
       const number = ch.doc.id;
@@ -529,6 +543,38 @@ export async function addFloor(n, label) {
   await fs.setDoc(fs.doc(db, 'projects', PROJECT_ID, 'config', 'app'), {
     floors: { [String(n)]: { label, sort: Number(n) } },
   }, { merge: true });
+}
+
+// ---------- bulk (dashboard) ----------
+
+// Everything the bulk engine (js/bulk.js) needs to write through THIS store's
+// backend without owning a second Firebase app instance. Demo applies are
+// buffered: applyDemo mutates in place, commitDemo persists + notifies once —
+// a 500-item bulk must not stringify the whole DB 500 times.
+export function getBulkContext() {
+  if (state.mode === 'demo') {
+    return {
+      mode: 'demo',
+      uid: 'demo',
+      user: getUser(),
+      applyDemo(number, itemId, fields) {
+        const room = demoDB.rooms[number];
+        if (!room || !room.items[itemId]) return;
+        for (const [k, v] of Object.entries(fields)) {
+          if (v === undefined) delete room.items[itemId][k];   // exact-inverse restore of an absent field
+          else room.items[itemId][k] = v;
+        }
+        room.updatedAt = new Date().toISOString();
+      },
+      commitDemo() { demoSave(); demoRefresh(); },
+    };
+  }
+  return { mode: 'live', fs, db, projectId: PROJECT_ID, uid: state.uid, user: getUser() };
+}
+
+// All live docs — guest rooms AND common-area spaces — for inventory building.
+export function getAllDocs() {
+  return [...state.rooms.values()].filter(r => !r.deleted);
 }
 
 // ---------- subscriptions ----------
