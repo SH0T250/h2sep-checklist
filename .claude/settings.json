@@ -11,10 +11,17 @@
         "source": "github",
         "repo": "mksglu/context-mode"
       }
+    },
+    "thedotmack": {
+      "source": {
+        "source": "github",
+        "repo": "thedotmack/claude-mem"
+      }
     }
   },
   "enabledPlugins": {
     "caveman@caveman": true,
-    "context-mode@context-mode": true
+    "context-mode@context-mode": true,
+    "claude-mem@thedotmack": true
   }
 }
