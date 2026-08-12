@@ -122,3 +122,18 @@ export function refsFor(roomNumber, item, itemId = '', typeLabel = '') {
     || [];
   return localizePlan(hit, typeLabel);
 }
+
+// Does this room resolve ANY reference? Used to gate the 📄 entry points, so
+// a crew member is never offered a references page that can only come up
+// empty. Data-driven on purpose: the guest-room index is a flat code map that
+// covers every room, while refs-spaces.json is room-scoped and currently holds
+// floor 1 only — as later floors are published their buttons light up on their
+// own, with no floor list here to forget to update.
+export function roomHasRefs(room) {
+  if (!room || !room.items) return false;
+  for (const [itemId, item] of Object.entries(room.items)) {
+    if (!item || item.deleted) continue;
+    if (refsFor(room.number, item, itemId, room.typeLabel || '').length) return true;
+  }
+  return false;
+}

@@ -102,5 +102,32 @@ for (const [k, v] of Object.entries(idx)) {
   ok(!Array.isArray(v), `top-level key ${k} is not a flat refs array`);
 }
 
-console.log(`\nspace-refs-unit: ${pass} passed, ${failn} failed`);
+
+// ---- the 📄 entry-point gate ----
+// A references page that can only come up empty is a dead action, so the
+// button is gated on the room actually resolving refs. This pins both
+// directions: floor-1 spaces (published) offer it, upper-floor spaces
+// (not yet published, but carrying real checklist items) do not.
+const { roomHasRefs } = await import('../js/refs.js');
+const readDoc = (n) => {
+  const p = join(ROOT, 'tools', 'out', 'spaces', `space-${n}.json`);
+  return existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : null;
+};
+for (const n of ['003', '019', '007']) {
+  const d = readDoc(n);
+  if (d) ok(roomHasRefs(d) === true, `floor-1 space ${n} offers the references page`);
+}
+for (const n of ['221', '237', '239', '321', '421']) {
+  const d = readDoc(n);
+  if (d) {
+    const items = Object.values(d.items || {}).filter(i => !i.deleted).length;
+    ok(roomHasRefs(d) === false,
+      `unpublished floor-${d.floor} space ${n} (${items} items) hides the references page`);
+  }
+}
+// A doc with no items at all must never claim refs.
+ok(roomHasRefs({ number: '999', items: {} }) === false, 'empty room resolves no refs');
+ok(roomHasRefs(null) === false, 'null room resolves no refs');
+
+console.log(`\nspace-refs-unit (with gate): ${pass} passed, ${failn} failed`);
 process.exit(failn ? 1 : 0);

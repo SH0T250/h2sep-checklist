@@ -14,6 +14,7 @@ import { initRefs, refsFor } from './refs.js';
 import { refPopup } from './sheets.js';
 import { firebaseConfig, PROJECT_ID } from './config.js';
 import { seedRooms } from './seed.js';
+import { seedSpaces } from './seed-spaces.js';
 
 const params = new URLSearchParams(location.search);
 const ROOM = (params.get('room') || '101').trim();
@@ -112,7 +113,13 @@ function render(room) {
 // ---------- boot ----------
 (async () => {
   await initRefs();
-  if (DEMO) { render(seedRooms()[ROOM] || { number: ROOM, items: {} }); return; }
+  // Common-area spaces live in their own fixture file — same lookup the
+  // print sheet does, or refs.html?room=019&demo=1 renders an empty room
+  // and reports no references for a space that has plenty.
+  if (DEMO) {
+    render(seedRooms()[ROOM] || seedSpaces()[ROOM] || { number: ROOM, items: {} });
+    return;
+  }
   const handed = handoffRoom();
   if (handed) render(handed);
   try {
