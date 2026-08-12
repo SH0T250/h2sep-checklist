@@ -5,9 +5,16 @@
         "source": "github",
         "repo": "JuliusBrussee/caveman"
       }
+    },
+    "context-mode": {
+      "source": {
+        "source": "github",
+        "repo": "mksglu/context-mode"
+      }
     }
   },
   "enabledPlugins": {
-    "caveman@caveman": true
+    "caveman@caveman": true,
+    "context-mode@context-mode": true
   }
 }
