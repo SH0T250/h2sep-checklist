@@ -1,19 +1,43 @@
 ---
 name: codeburn
-description: Track and cut AI coding spend with CodeBurn, a local-first CLI that reads the session files Claude Code, Codex, Cursor, Gemini and ~40 other tools already write to disk, then breaks the spend down by model, project, task and tool. Use whenever Austin asks what he is spending on AI, where his tokens went, why a session or a day was expensive, whether he is wasting tokens, which model he should be using, how to spend less, or asks to set a budget cap or a spend alert — "what did Claude cost me this month", "where is my money going", "why is this burning so much", "am I wasting tokens", "cap me at $50 a day", "compare Opus vs Sonnet on my actual work". Also use when the numbers look wrong and need auditing against the raw provider fields.
+description: Analyze AI coding usage with CodeBurn, a local-first CLI that reads session files from Claude Code, Codex, Cursor, Gemini and other tools, then estimates API-equivalent cost by model, project, task and tool. Use when Austin asks about AI usage, modeled cost, token waste, model choice, or usage caps. Never present CodeBurn estimates as provider-billed spend or subscription fees; check the user's billing arrangement and label every dollar figure.
 ---
 
-# CodeBurn — where the AI spend actually went
+# CodeBurn — where the AI usage went
 
 ## What this is
 
 [CodeBurn](https://github.com/getagentseal/codeburn) (MIT, `npm i -g codeburn`) reads the
-session logs your AI tools already write to disk and turns them into a cost breakdown by
-**task, model, tool, and project**. No proxy, no API keys, no wrapper — nothing leaves the
-machine. Pricing comes from LiteLLM, refreshed daily.
+session logs your AI tools already write to disk and turns them into a usage breakdown and
+modeled cost by **task, model, tool, and project**. No proxy, no API keys, no wrapper —
+nothing leaves the machine. Pricing comes from LiteLLM, refreshed daily.
 
-The bill tells you the total. CodeBurn tells you that half of it went to conversation
-instead of code, or that Opus burned the budget on work Sonnet would have one-shot.
+CodeBurn can show that half of the modeled cost went to conversation instead of code, or
+that Opus used more API-equivalent value than work Sonnet might have handled. It does not,
+by itself, show what the provider charged.
+
+## Cost means an estimate, not necessarily spend
+
+**Treat every CodeBurn dollar value as an estimated API-equivalent cost unless a provider
+bill independently confirms it.** CodeBurn applies model/token prices to locally recorded
+usage. For fixed-price Claude Code, Codex, Cursor, Gemini, or similar subscriptions, that
+usage does not record the subscription fee or the amount actually charged. A $2,795
+CodeBurn result can therefore coexist with a much smaller fixed monthly subscription bill.
+
+Before answering with dollars, ask or establish whether the usage was API-billed,
+subscription-based, employer-paid, credit-funded, or mixed:
+
+- For subscription, bundled, employer-paid, or unknown billing, say **"estimated
+  API-equivalent cost"** (or **"modeled cost"**), never "spent," "charged," "bill," or
+  "actual burn."
+- For direct API usage, still label the result **"CodeBurn estimate"** until it is
+  reconciled against the provider invoice or billing export. Only the provider's billing
+  record may be described as billed spend.
+- For mixed usage, split the report by billing arrangement when possible. Do not add a
+  subscription fee to modeled API-equivalent cost and call the sum total spend.
+- If actual spend is requested, report known subscription fees and provider-billed amounts
+  separately from CodeBurn's modeled figure. If those records are unavailable, say that
+  actual spend cannot be determined from session logs alone.
 
 **Requires Node.js 22.13+.** Verify with `node --version` before blaming the tool.
 
@@ -21,11 +45,12 @@ instead of code, or that Opus burned the budget on work Sonnet would have one-sh
 
 **CodeBurn only sees the session files on the machine it runs on.** Run it inside a Claude
 Code web/remote container and it reports that container's few sessions — not Austin's real
-spend. The numbers will look absurdly low and they are not wrong, they are just local.
+usage. The numbers will look absurdly low and they are not wrong, they are just local.
 
 So: if you are running in a remote/ephemeral container, say so and hand Austin the command
-to run on his own laptop instead of reporting the container's figure as his spend. Only
-treat the output as his actual burn when you are running on his machine.
+to run on his own laptop instead of reporting the container's figure as his usage. Running
+on his machine makes the usage scope relevant; it does **not** turn modeled cost into billed
+spend.
 
 ## Install
 
@@ -39,16 +64,16 @@ npm install -g codeburn        # or: brew install codeburn   (macOS)
 ```
 
 To let Claude answer spend questions mid-conversation without shelling out, add the MCP
-server **at user scope** — his spend is global, not per-repo, so this should be available in
+server **at user scope** — his usage is global, not per-repo, so this should be available in
 every project, not just this one:
 
 ```bash
 claude mcp add -s user codeburn -- npx -y codeburn mcp
 ```
 
-That exposes two tools: `get_usage` (spend + breakdowns, fast) and `get_savings` (waste
-findings, retry tax, routing waste — slower, deeper). Project names come back pseudonymized
-unless the caller passes `include_project_names: true`.
+That exposes two tools: `get_usage` (modeled cost + breakdowns, fast) and `get_savings`
+(estimated findings, retry tax, routing waste — slower, deeper). Project names come back
+pseudonymized unless the caller passes `include_project_names: true`.
 
 To make this skill available in every repo instead of just this one:
 `cp -r .claude/skills/codeburn ~/.claude/skills/`.
@@ -73,10 +98,14 @@ Reach for the narrowest command that answers it. Most accept `--provider`, `--pr
 | "these numbers look wrong" | `codeburn doctor` first, then `codeburn audit` |
 | a table for a PR or Slack | add `--format markdown` (models) or `--format json` (most) |
 
+The command names and output fields may call these values "cost," "spend," or "savings."
+That does not change their provenance: relabel them as modeled/estimated in the answer and
+state the billing basis. Never repeat an unqualified dollar total from CLI or MCP output.
+
 When you are scripting or summarizing rather than showing him a terminal, prefer
 `--format json` and read the fields — do not scrape the pretty tables.
 
-## Cutting the spend
+## Cutting modeled cost and usage
 
 `codeburn optimize` scans sessions and the `~/.claude/` setup for waste patterns — files
 re-read across sessions, a low Read:Edit ratio, retry tax, expensive-model routing — and
@@ -102,10 +131,12 @@ codeburn act undo --last   # roll back the most recent
 codeburn act report        # realized vs estimated savings
 ```
 
-## Budget caps
+## Modeled-cost budget caps
 
 Two halves: `budget` sets the numbers, `guard` enforces them at session time. Setting a
 budget alone does not stop anything — it only gives `--check` something to compare against.
+These thresholds use CodeBurn's modeled cost; they do not cap a subscription invoice or
+guarantee a matching provider-billing limit.
 
 ```bash
 codeburn budget --daily 50 --monthly 800   # in the active display currency
@@ -136,7 +167,9 @@ later, `codeburn guard allow` is the escape hatch, not reinstalling.
    with only `--list` or `--check` is a read — just run it.)
 3. **Don't push his usage anywhere.** `codeburn sync` ships telemetry to a remote endpoint.
    It is preview-grade and it is his call — never run it on your own initiative.
-4. **Lead with the number.** He wants "you're at $2,795 this month, 95% of it Claude, and
-   $340 of that was re-reading the same six files" — not a tour of the dashboard.
+4. **Lead with provenance, then the number.** For example: "CodeBurn estimates $2,795 in
+   API-equivalent usage this month; this is not your subscription bill. 95% was Claude,
+   with an estimated $340 attributable to re-reading the same six files." If provider
+   billing records are available, report billed spend as a separate figure.
 5. **Empty output is a detection problem, not a zero.** Run `codeburn doctor` before
    telling him he spent nothing; it prints every path probed and what parsed.
