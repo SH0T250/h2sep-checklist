@@ -692,6 +692,14 @@ function buildRowRefs(docs) {
   return agg;
 }
 
+// Untagged rows have no short code — their "label" is the full item sentence
+// (e.g. a procedural paint note), which would otherwise balloon the dialog
+// title into a multi-line paragraph. Codes are always short; only labels get
+// clipped.
+function titleClip(s, max = 60) {
+  return s.length > max ? s.slice(0, max - 1).trimEnd() + '…' : s;
+}
+
 function attachmentsSheet(row, entries) {
   const list = [...entries.values()];
   const s = sheet(list.map((e, i) => {
@@ -702,7 +710,7 @@ function attachmentsSheet(row, entries) {
       <span class="dref-main">${esc(e.ref.title)}<em>${e.ref.kind === 'plan' ? 'Plan detail' : 'Submittal'}${e.ref.sheetId ? ' · sheet ' + esc(e.ref.sheetId) : ''}${esc(where)}</em></span>
       <span aria-hidden="true">›</span>
     </button>`;
-  }).join(''), { title: (row.code || row.label) + ' — attachments' });
+  }).join(''), { title: titleClip(row.code || row.label) + ' — attachments' });
   s.querySelectorAll('[data-refi]').forEach(b => b.addEventListener('click', (e) => {
     e.stopPropagation();
     const en = list[Number(b.dataset.refi)];

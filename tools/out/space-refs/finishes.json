@@ -1099,7 +1099,7 @@
   {
    "room": "005",
    "kind": "submittal",
-   "evidence": "Finish tag WC-15 appears in the Home2-Dynamic finish specification book (extracted tag set includes it); labels' Supp A/B manufacturer notes trace to the same schedule family.",
+   "evidence": "Finish book indexes WC-15 as a placeholder only (Delta-2, 'Wallcovering @ Breakfast Servery Entry Wall', revision log 'Coming Soon' — no spec card). Nadia Hayek's ruling (5/7) governs: continue with WC-11, never install from a WC-15 card.",
    "note": "Nadia Hayek (RK, 5/7): WC-15 on ID4.5 detail 2 is a TYPO — WC-15 was removed from Hilton specs; continue with WC-11.",
    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites",
@@ -1132,8 +1132,8 @@
   {
    "room": "100",
    "kind": "submittal",
-   "evidence": "CPT-12 and CPT-12.1 are in the finish book's tag set; the .ALT marking is the sheet's alternate designation.",
-   "note": "ALTERNATE stairwell carpet — base card CPT-12; the base-spec-vs-alternate conflict is already flagged on the item.",
+   "evidence": "CPT-12.ALT is a registered book tag with its own spec card (p.16); its scope is BOH, not stairwells — flagged as a mismatch rather than a clean match.",
+   "note": "Book scopes CPT-12.ALT to BOH ONLY (p.16, 'Alternate Carpet Tile @ BOH') — this room is a stairwell tagged with the same code on the plan. Verify with RK/Austin whether the stairwell alternate is really this BOH product or a different, undocumented alternate before ordering.",
    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites",
    "code": "CPT-12.ALT"
@@ -1141,8 +1141,8 @@
   {
    "room": "141",
    "kind": "submittal",
-   "evidence": "CPT-12 and CPT-12.1 are in the finish book's tag set; the .ALT marking is the sheet's alternate designation.",
-   "note": "ALTERNATE stairwell carpet — base card CPT-12; the base-spec-vs-alternate conflict is already flagged on the item.",
+   "evidence": "CPT-12.ALT is a registered book tag with its own spec card (p.16); its scope is BOH, not stairwells — flagged as a mismatch rather than a clean match.",
+   "note": "Book scopes CPT-12.ALT to BOH ONLY (p.16, 'Alternate Carpet Tile @ BOH') — this room is a stairwell tagged with the same code on the plan. Verify with RK/Austin whether the stairwell alternate is really this BOH product or a different, undocumented alternate before ordering.",
    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites",
    "code": "CPT-12.ALT"
@@ -1156,17 +1156,9 @@
    "code": "PT-03"
   },
   {
-   "room": "004",
-   "kind": "submittal",
-   "evidence": "Ruling covers PT-03 at back-of-house finish matching; 004's PT-03 line is the market/reception view-window painted finish 'to match back of house finishes'.",
-   "driveId": "102hEP4Ij99oEEaxpJYj6KMLidiSiF57c",
-   "title": "RK Finish Plan Snippet Corrections.pdf (Nadia Hayek ruling, 5/7)",
-   "code": "PT-03"
-  },
-  {
    "room": "100",
    "kind": "submittal",
-   "evidence": "Ruling attachment: floor tile at the FIRST-FLOOR stair landings/exits instead of carpet (landing only, not the stairs) — this is the ground-floor-landing tile line.",
+   "evidence": "Ruling + attachment rule floor tile in lieu of carpet at 1st-floor stair landings/exits only (not treads). The email body itself does not name T-01 (book's T-01 area is Lobby/Guest Suite Entry/Bath) — the code is recorded on the referenced field-markup attachment ('26.05.07 Home2 EaglePass 1st FL Stairwell Floor finish.pdf'), not verbatim in the email text.",
    "driveId": "102hEP4Ij99oEEaxpJYj6KMLidiSiF57c",
    "title": "RK Finish Plan Snippet Corrections.pdf (Nadia Hayek ruling, 5/7)",
    "code": "T-01"
@@ -1174,7 +1166,7 @@
   {
    "room": "141",
    "kind": "submittal",
-   "evidence": "Same first-floor stair-landing tile ruling.",
+   "evidence": "Same first-floor stair-landing tile ruling and same attachment caveat.",
    "driveId": "102hEP4Ij99oEEaxpJYj6KMLidiSiF57c",
    "title": "RK Finish Plan Snippet Corrections.pdf (Nadia Hayek ruling, 5/7)",
    "code": "T-01"
@@ -1198,7 +1190,7 @@
   {
    "room": "023",
    "kind": "submittal",
-   "evidence": "Ruling: 'Lobby side and wall area before entering Fitness room - WC-11' — this is the fitness ENTRY wallcovering line.",
+   "evidence": "Ruling: 'Lobby side and wall area before entering Fitness room - WC-11' — covers the LOBBY-SIDE entry wall only. Do not extend WC-11 inside room 023 itself — the book specifies WC-14 (Fitness Center, still 'Coming Soon' with no card) for the interior fitness walls.",
    "driveId": "102hEP4Ij99oEEaxpJYj6KMLidiSiF57c",
    "title": "RK Finish Plan Snippet Corrections.pdf (Nadia Hayek ruling, 5/7)",
    "code": "WC-11"

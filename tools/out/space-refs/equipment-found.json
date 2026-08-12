@@ -1,0 +1,294 @@
+{
+ "matches": [
+  {
+   "room": "015",
+   "kind": "submittal",
+   "evidence": "Schedule mark LAU-1 'Commercial Washer (Laundry)' = Unimac UWN065T, 9.7 cu.ft front load.",
+   "driveId": "1QzVFDBVbxfFxK7KwolAisq035s8Z75om",
+   "title": "P104 — Plumbing Fixtures Schedule (mfr + model for laundry equipment)",
+   "code": "401"
+  },
+  {
+   "room": "016",
+   "kind": "submittal",
+   "evidence": "Schedule mark DRY-1 'Commercial Dryer (Laundry)' = Unimac UTT45 stack double, 2×95 MBH, 240V/3/60.",
+   "driveId": "1QzVFDBVbxfFxK7KwolAisq035s8Z75om",
+   "title": "P104 — Plumbing Fixtures Schedule (mfr + model for laundry equipment)",
+   "code": "402"
+  },
+  {
+   "room": "024",
+   "kind": "submittal",
+   "evidence": "Schedule mark LAU-2 'Guest Washer (Laundry)' = Maytag MHN33PR with smart-card pay — the guest/coin-op washer.",
+   "driveId": "1QzVFDBVbxfFxK7KwolAisq035s8Z75om",
+   "title": "P104 — Plumbing Fixtures Schedule (mfr + model for laundry equipment)",
+   "code": "406"
+  },
+  {
+   "room": "024",
+   "kind": "submittal",
+   "evidence": "Schedule mark DRY-2 'Guest Dryer (Laundry)' = Maytag MDE28PR, 240V/1/60 30A.",
+   "driveId": "1QzVFDBVbxfFxK7KwolAisq035s8Z75om",
+   "title": "P104 — Plumbing Fixtures Schedule (mfr + model for laundry equipment)",
+   "code": "407"
+  },
+  {
+   "room": "015",
+   "kind": "submittal",
+   "evidence": "P104 specs only a FRONT-load commercial washer (LAU-1 Unimac UWN065T).",
+   "note": "CONFIGURATION CONFLICT — A510.3 calls this line a TOP-LOAD washer, but P104 schedules only a front-load unit and A510.1 keyed note 60 requires front load. RFI the configuration before buying.",
+   "driveId": "1QzVFDBVbxfFxK7KwolAisq035s8Z75om",
+   "title": "P104 — Plumbing Fixtures Schedule (mfr + model for laundry equipment)",
+   "code": "409"
+  },
+  {
+   "room": "008",
+   "kind": "submittal",
+   "evidence": "Equipment schedule (DRY STORAGE): '01  1  MOBILE REACH-IN FREEZER  TRUE T-49F-HC' — exact model match.",
+   "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+   "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)",
+   "code": "01"
+  },
+  {
+   "room": "008",
+   "kind": "submittal",
+   "evidence": "Equipment schedule (DRY STORAGE): '01  1  MOBILE REACH-IN FREEZER  TRUE T-49F-HC' — exact model match.",
+   "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+   "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)",
+   "code": "01"
+  },
+  {
+   "room": "008",
+   "kind": "submittal",
+   "evidence": "Equipment schedule: '02  2  MOBILE REACH-IN REFRIGERATOR  TRUE T-49-HC'; the End-Load plumbing schedule prints TRUE TS-49-HC — same unit family as the item label.",
+   "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+   "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)",
+   "code": "02"
+  },
+  {
+   "room": "008",
+   "kind": "submittal",
+   "evidence": "Equipment schedule: '02  2  MOBILE REACH-IN REFRIGERATOR  TRUE T-49-HC'; the End-Load plumbing schedule prints TRUE TS-49-HC — same unit family as the item label.",
+   "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+   "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)",
+   "code": "02"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "'32  1  UNIT COOLER (COOLER)  OMNITEMP KLP106MA-S1D' — exact model match, with 120V/1.4A JBOX rough-in (wiring detail 5/FS-2).",
+   "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+   "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)",
+   "code": "32"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "'32  1  UNIT COOLER (COOLER)  OMNITEMP KLP106MA-S1D' — exact model match, with 120V/1.4A JBOX rough-in (wiring detail 5/FS-2).",
+   "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+   "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)",
+   "code": "32"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "'33  1  UNIT COOLER (FREEZER)  OMNI KLP106LE-S2D' — exact model match, 208V/4.6A JBOX.",
+   "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+   "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)",
+   "code": "33"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "'33  1  UNIT COOLER (FREEZER)  OMNI KLP106LE-S2D' — exact model match, 208V/4.6A JBOX.",
+   "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+   "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)",
+   "code": "33"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "'27  1  DISPLAY SHOWCASE  EQUIPEX WD780B-2/1' — exact model match, 120V/15.0A dedicated circuit.",
+   "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+   "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)",
+   "code": "27"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "'27  1  DISPLAY SHOWCASE  EQUIPEX WD780B-2/1' — exact model match, 120V/15.0A dedicated circuit.",
+   "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+   "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)",
+   "code": "27"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "'29  1  WARMING KETTLE (OPTIONAL)  VOLLRATH 72017' — exact model match, 120V/6.7A.",
+   "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+   "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)",
+   "code": "29"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "'29  1  WARMING KETTLE (OPTIONAL)  VOLLRATH 72017' — exact model match, 120V/6.7A.",
+   "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+   "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)",
+   "code": "29"
+  },
+  {
+   "room": "006",
+   "kind": "submittal",
+   "evidence": "'34  1  YOGURT DISPENSER (BY VENDOR)  PERFECT PARFAIT PPHG1BK', 120V/1.4A.",
+   "note": "Identity resolved here: this tag is printed on A513/A514 with no description — the Clevenger equipment schedule is the only document that defines it.",
+   "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+   "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)",
+   "code": "34"
+  },
+  {
+   "room": "006",
+   "kind": "submittal",
+   "evidence": "'34  1  YOGURT DISPENSER (BY VENDOR)  PERFECT PARFAIT PPHG1BK', 120V/1.4A.",
+   "note": "Identity resolved here: this tag is printed on A513/A514 with no description — the Clevenger equipment schedule is the only document that defines it.",
+   "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+   "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)",
+   "code": "34"
+  },
+  {
+   "room": "006",
+   "kind": "submittal",
+   "evidence": "'39  1  WARMING KETTLE (DROP-IN)  VOLLRATH 74701D'.",
+   "note": "Identity resolved here: tag printed with no description on A513/A514; the Clevenger equipment schedule defines it.",
+   "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+   "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)",
+   "code": "39"
+  },
+  {
+   "room": "006",
+   "kind": "submittal",
+   "evidence": "'39  1  WARMING KETTLE (DROP-IN)  VOLLRATH 74701D'.",
+   "note": "Identity resolved here: tag printed with no description on A513/A514; the Clevenger equipment schedule defines it.",
+   "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+   "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)",
+   "code": "39"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "'28  1  JUICE DISPENSER (BY VENDOR)  NESTLE VITALITY EXPRESS'.",
+   "note": "MODEL CONFLICT — A513 says Bunn JDF-4, this schedule says Nestle Vitality Express. Vendor-furnished either way; confirm which schedule governs before rough-in.",
+   "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+   "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)",
+   "code": "28"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "'28  1  JUICE DISPENSER (BY VENDOR)  NESTLE VITALITY EXPRESS'.",
+   "note": "MODEL CONFLICT — A513 says Bunn JDF-4, this schedule says Nestle Vitality Express. Vendor-furnished either way; confirm which schedule governs before rough-in.",
+   "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+   "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)",
+   "code": "28"
+  },
+  {
+   "room": "006",
+   "kind": "submittal",
+   "evidence": "'30  1  CEREAL DISPENSER  CAL MIL 22067-1-110'.",
+   "note": "MODEL CONFLICT — A513 says Server Products 88920, this schedule says Cal-Mil 22067-1-110. Confirm which governs.",
+   "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+   "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)",
+   "code": "30"
+  },
+  {
+   "room": "006",
+   "kind": "submittal",
+   "evidence": "'30  1  CEREAL DISPENSER  CAL MIL 22067-1-110'.",
+   "note": "MODEL CONFLICT — A513 says Server Products 88920, this schedule says Cal-Mil 22067-1-110. Confirm which governs.",
+   "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+   "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)",
+   "code": "30"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "'35  1  REACH-IN DISPLAY FREEZER  TRUE GDM-23F-HC-TSL01-SS'.",
+   "note": "MODEL CONFLICT — A513 says True TS-23FG-HC. Confirm which governs before ordering.",
+   "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+   "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)",
+   "code": "35"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "'35  1  REACH-IN DISPLAY FREEZER  TRUE GDM-23F-HC-TSL01-SS'.",
+   "note": "MODEL CONFLICT — A513 says True TS-23FG-HC. Confirm which governs before ordering.",
+   "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+   "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)",
+   "code": "35"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "'36  1  REACH-IN DISPLAY REFRIGERATOR  TRUE GDM-49-HC-TSL01'.",
+   "note": "MODEL CONFLICT — A513 says True TSD-47G-HC-LD. Confirm which governs before ordering.",
+   "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+   "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)",
+   "code": "36"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "'36  1  REACH-IN DISPLAY REFRIGERATOR  TRUE GDM-49-HC-TSL01'.",
+   "note": "MODEL CONFLICT — A513 says True TSD-47G-HC-LD. Confirm which governs before ordering.",
+   "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+   "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)",
+   "code": "36"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "'37  1  WATER DISPENSER  MARCO FRIIA HCS'.",
+   "note": "MODEL CONFLICT — A513 says Vivreau VI-TAP-1H. Also dimension-critical: the PA-803 millwork cutout is sized for a 32⅝\"W dispenser — check the winning unit fits before fabrication.",
+   "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+   "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)",
+   "code": "37"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "'37  1  WATER DISPENSER  MARCO FRIIA HCS'.",
+   "note": "MODEL CONFLICT — A513 says Vivreau VI-TAP-1H. Also dimension-critical: the PA-803 millwork cutout is sized for a 32⅝\"W dispenser — check the winning unit fits before fabrication.",
+   "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+   "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)",
+   "code": "37"
+  },
+  {
+   "room": "004",
+   "kind": "submittal",
+   "evidence": "Finish book page 7 IS an ACB-01 card: 'Acoustic Ceiling Baffles', Area 'Reception Desk Ceiling' — matches the M2 baffle ceiling over the front desk.",
+   "note": "Card names the product outright: MDC Interior Solutions Zintra Standard Baffle System, HLTN3212 Pebble, 4\"W × 108\"L × ½\" thick, Class A, NRC 0.45–0.95.",
+   "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+   "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites",
+   "code": "ACB-001"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Kalisher submittal covers PA-503 (Meeting Space Artwork) as PA-503A/B/C with image codes K-621349 / K-620614 / KFS-983140-h2epM1C1.",
+   "driveId": "1nat4040zyhiVEI1ZIlB4f-5iUrzGj95D",
+   "title": "Kalisher — Art Imagery Submittal.pdf (per-piece image codes)",
+   "code": "PA-503"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Kalisher submittal covers PA-505 (Guest Engagement Wall) as PA-505A–H, incl. the KLC-021860pu and KFS-370101-121 series.",
+   "driveId": "1nat4040zyhiVEI1ZIlB4f-5iUrzGj95D",
+   "title": "Kalisher — Art Imagery Submittal.pdf (per-piece image codes)",
+   "code": "PA-505"
+  }
+ ],
+ "gaps": [],
+ "cluster": "equipment-found"
+}

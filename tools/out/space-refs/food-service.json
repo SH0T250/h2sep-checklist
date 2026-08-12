@@ -27,7 +27,7 @@
   {
    "room": "007",
    "kind": "submittal",
-   "evidence": "Header ITEM# 05 UNDERCOUNTER DISHMACHINE + model UH-100B present in the book text — matches Champion UH-100B label.",
+   "evidence": "Header ITEM# 05 UNDERCOUNTER DISHMACHINE header itself specs Champion UH-230B; the crew label UH-100B matches only a separate tab line, not the header — in-book model conflict, confirm the governing dishmachine model with Clevenger before rough-in.",
    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
    "code": "05"
@@ -99,7 +99,7 @@
   {
    "room": "007",
    "kind": "submittal",
-   "evidence": "Header ITEM# 16 CONVECTION OVEN (label: Moffat Turbofan E33D5H2 per A513/A514; brochure page is a scan — model not in the text layer).",
+   "evidence": "Header ITEM# 16 CONVECTION OVEN — text layer has 'Moffat E33D5 Item #16' and 'USE33D5-H2' repeated on the Revised 03/2025 pages, consistent with the Moffat Turbofan E33D5H2 label on A513/A514.",
    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
    "code": "16"
@@ -171,7 +171,7 @@
   {
    "room": "009",
    "kind": "submittal",
-   "evidence": "Header ITEM# 24 WAFFLE MAKER + 'BWB-1SE' in text — Wells BWB-1SE.",
+   "evidence": "Header ITEM# 24 WAFFLE MAKER — the book's own header/body pages spec 'Golden Malted RRT Series (BY VENDOR)' (Carbon's Golden Malted spec pages); the crew label 'Wells BWB-1SE' matches only a tab line, conflicting with the book's specified vendor unit. Confirm the governing unit with Clevenger/the operator before ordering.",
    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
    "code": "24"
@@ -179,7 +179,7 @@
   {
    "room": "009",
    "kind": "submittal",
-   "evidence": "Header ITEM# 25 WAFFLE MAKER (FUTURE) — same Wells BWB-1SE brochure.",
+   "evidence": "Header ITEM# 25 WAFFLE MAKER (FUTURE) — same Golden Malted RRT Series vs. Wells BWB-1SE tab-line conflict as item 24.",
    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
    "code": "25"
@@ -191,81 +191,13 @@
    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
    "code": "26"
-  },
-  {
-   "room": "006",
-   "kind": "submittal",
-   "evidence": "Model 'TUC-27G' present in the book text — True TUC-27G-ADA-HC undercounter display refrigerator.",
-   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
-   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
-   "code": "31"
   }
  ],
  "gaps": [
   {
-   "room": "008",
-   "code": "01",
-   "why": "Schedule code 01 at Dry Storage is the True T-49F-HC mobile reach-in freezer, but the Clevenger brochure's ITEM 01 is the refrigeration rack and 'T-49F' appears nowhere in the book's text layer (scan?). Two numbering schemes (End Load vs Center Load) exist on the Drive — needs Austin/Clevenger to confirm which sheet governs."
-  },
-  {
-   "room": "008",
-   "code": "02",
-   "why": "Code 02 at Dry Storage is the True TS-49-HC reach-in; brochure ITEM 02 is the walk-in assembly and 'TS-49' is absent from the text layer. Same numbering-scheme question."
-  },
-  {
-   "room": "007",
-   "code": "32",
-   "why": "UNIT COOLER OmniTemp KLP106MA-S1D — not in the brochure text layer; likely inside the walk-in assembly scope (ITEM 02) or a scanned page. Verify."
-  },
-  {
-   "room": "007",
-   "code": "33",
-   "why": "UNIT COOLER (FREEZER) OMNI KLP106LE-S2D — same as 32."
-  },
-  {
-   "room": "009",
-   "code": "27",
-   "why": "DISPLAY SHOWCASE Equipex WD780B-2/1 — not in the brochure text layer."
-  },
-  {
-   "room": "009",
-   "code": "28",
-   "why": "JUICE DISPENSER Bunn JDF-4 (BY VENDOR) — not in the brochure text layer; vendor-furnished."
-  },
-  {
-   "room": "009",
-   "code": "29",
-   "why": "WARMING KETTLE Vollrath 72017 — not in the brochure text layer."
-  },
-  {
    "room": "006",
-   "code": "30",
-   "why": "CEREAL DISPENSER Server Products 88920 — not in the brochure text layer."
-  },
-  {
-   "room": "009",
-   "code": "35",
-   "why": "REACH-IN DISPLAY FREEZER True TS-23FG-HC — not in the brochure text layer."
-  },
-  {
-   "room": "009",
-   "code": "36",
-   "why": "REACH-IN DISPLAY REFRIGERATOR True TSD-47G-HC-LD — not in the brochure text layer."
-  },
-  {
-   "room": "009",
-   "code": "37",
-   "why": "WATER DISPENSER Vivreau VI-TAP-1H — not in the brochure text layer."
-  },
-  {
-   "room": "006",
-   "code": "34",
-   "why": "Tag 34 defined in NEITHER A513 nor A514 schedule (pre-existing flag); no cutsheet can be tied to an undefined tag."
-  },
-  {
-   "room": "006",
-   "code": "39",
-   "why": "Tag 39 defined in NEITHER schedule — same as 34."
+   "code": "31",
+   "why": "UNDERCOUNTER DISPLAY REFRIGERATOR True TUC-27G-ADA-HC — the brochure book has NO Item 31 (items stop at 26); the only 'TUC-27G' hit is 'TUC-27G-HC~SPEC3' inside a ~30-model family list printed on the ITEM# 18 True TWT-67 worktop-refrigerator brochure, and 'TUC-27G-ADA-HC' itself never appears. Neither Clevenger floor plan carries a 31 either. Austin to supply the real cut sheet."
   }
  ],
  "cluster": "food-service"

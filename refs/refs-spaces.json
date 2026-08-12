@@ -300,12 +300,6 @@
     "kind": "plan",
     "sheetId": "ID-1.7",
     "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
-   },
-   {
-    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
-    "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Task Light @ Central Banquette",
-    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
   "PA-201": [
@@ -322,12 +316,6 @@
     "kind": "plan",
     "sheetId": "ID-1.6",
     "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
-   },
-   {
-    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
-    "kind": "submittal",
-    "note": "TAG COLLISION — RK sheets use PA-202 as the DECORATIVE MIRROR above the restroom vanity (ID-3.4); the brand spec book card PA-202 is 'Bathroom Vanity Light' and PA-502 is 'Bathroom Mirror' — the two numbering systems swap the pair. Confirm which card governs before ordering.",
-    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
   "PA-205": [
@@ -522,9 +510,14 @@
     "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
    },
    {
+    "driveId": "1nat4040zyhiVEI1ZIlB4f-5iUrzGj95D",
+    "kind": "submittal",
+    "title": "Kalisher — Art Imagery Submittal.pdf (per-piece image codes)"
+   },
+   {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Meeting Space Artwork",
+    "note": "Brand spec book identifies this tag: Meeting Space Artwork Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -536,9 +529,14 @@
     "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
    },
    {
+    "driveId": "1nat4040zyhiVEI1ZIlB4f-5iUrzGj95D",
+    "kind": "submittal",
+    "title": "Kalisher — Art Imagery Submittal.pdf (per-piece image codes)"
+   },
+   {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Guest Engagement Wall Artwork",
+    "note": "Brand spec book identifies this tag: Guest Engagement Wall Artwork Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -564,11 +562,13 @@
    {
     "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
     "kind": "submittal",
+    "note": "Drawing note: \"table is sandwiched between two walls, clearance space need to be verified on site\" — field-verify the 197\" wall-to-wall opening before this ships.",
     "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
    },
    {
     "driveId": "1zqme1S1N1hYuwCgCbAcBpgU9GqvJcVfS",
     "kind": "submittal",
+    "note": "Drawing note: \"table is sandwiched between two walls, clearance space need to be verified on site\" — field-verify the 197\" wall-to-wall opening before this ships.",
     "title": "PA-800_Perch Table.pdf (individual shop drawing)"
    }
   ],
@@ -850,6 +850,12 @@
     "kind": "plan",
     "sheetId": "ID-3.1",
     "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "note": "Card names the product outright: MDC Interior Solutions Zintra Standard Baffle System, HLTN3212 Pebble, 4\"W × 108\"L × ½\" thick, Class A, NRC 0.45–0.95.",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
    }
   ],
   "FILM-01": [
@@ -922,11 +928,6 @@
     "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
     "kind": "submittal",
     "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
-   },
-   {
-    "driveId": "102hEP4Ij99oEEaxpJYj6KMLidiSiF57c",
-    "kind": "submittal",
-    "title": "RK Finish Plan Snippet Corrections.pdf (Nadia Hayek ruling, 5/7)"
    }
   ],
   "PT-04": [
@@ -1049,7 +1050,7 @@
    {
     "driveId": "1BnLY7XQz5Lum-0rT34_QevrGgFfEjBf4",
     "kind": "submittal",
-    "note": "Shop drawing prints 138\"W×90\"D×42\"H; the plan's M1 desk reads 11'-6\" (=138\") × 10'-1\" — depth differs from the drawing's 90\" (7'-6\"). Verify overall footprint on site.",
+    "note": "Title-block prints 138\"W×90\"D×42\"H, but the drawing's own plan view prints a 121\" [3073mm] overall dimension — the 90\"D title-block figure reads as a leg depth, not the footprint. The plan's M1 desk reads 11'-6\" (=138\") × 10'-1\" (=121\"), matching the drawing's own plan view — treat that as the governing L-shaped footprint and field-verify on site. RK also has an open question on-sheet about clearance for 2 printers + 2 CPUs at the desk, unanswered as of the drawing.",
     "title": "PA-801_Reception Desk.pdf (individual shop drawing)"
    }
   ],
@@ -1164,11 +1165,13 @@
    {
     "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
     "kind": "submittal",
+    "note": "Drawing note: \"table is sandwiched between two walls, clearance space need to be verified on site\" — field-verify the 197\" wall-to-wall opening before this ships.",
     "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
    },
    {
     "driveId": "1zqme1S1N1hYuwCgCbAcBpgU9GqvJcVfS",
     "kind": "submittal",
+    "note": "Drawing note: \"table is sandwiched between two walls, clearance space need to be verified on site\" — field-verify the 197\" wall-to-wall opening before this ships.",
     "title": "PA-800_Perch Table.pdf (individual shop drawing)"
    }
   ],
@@ -1377,6 +1380,18 @@
     "kind": "plan",
     "sheetId": "A514",
     "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+    "kind": "submittal",
+    "note": "MODEL CONFLICT — A513 says Server Products 88920, this schedule says Cal-Mil 22067-1-110. Confirm which governs.",
+    "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)"
+   },
+   {
+    "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+    "kind": "submittal",
+    "note": "MODEL CONFLICT — A513 says Server Products 88920, this schedule says Cal-Mil 22067-1-110. Confirm which governs.",
+    "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)"
    }
   ],
   "31": [
@@ -1385,11 +1400,6 @@
     "kind": "plan",
     "sheetId": "A514",
     "title": "Enlarged Breakfast & Servery (Architectural set)"
-   },
-   {
-    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
-    "kind": "submittal",
-    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
    }
   ],
   "34": [
@@ -1398,6 +1408,18 @@
     "kind": "plan",
     "sheetId": "A514",
     "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+    "kind": "submittal",
+    "note": "Identity resolved here: this tag is printed on A513/A514 with no description — the Clevenger equipment schedule is the only document that defines it.",
+    "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)"
+   },
+   {
+    "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+    "kind": "submittal",
+    "note": "Identity resolved here: this tag is printed on A513/A514 with no description — the Clevenger equipment schedule is the only document that defines it.",
+    "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)"
    }
   ],
   "39": [
@@ -1406,6 +1428,18 @@
     "kind": "plan",
     "sheetId": "A514",
     "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+    "kind": "submittal",
+    "note": "Identity resolved here: tag printed with no description on A513/A514; the Clevenger equipment schedule defines it.",
+    "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)"
+   },
+   {
+    "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+    "kind": "submittal",
+    "note": "Identity resolved here: tag printed with no description on A513/A514; the Clevenger equipment schedule defines it.",
+    "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)"
    }
   ],
   "PA-110": [
@@ -1458,11 +1492,13 @@
    {
     "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
     "kind": "submittal",
+    "note": "Drawing note: \"table is sandwiched between two walls, clearance space need to be verified on site\" — field-verify the 197\" wall-to-wall opening before this ships.",
     "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
    },
    {
     "driveId": "1zqme1S1N1hYuwCgCbAcBpgU9GqvJcVfS",
     "kind": "submittal",
+    "note": "Drawing note: \"table is sandwiched between two walls, clearance space need to be verified on site\" — field-verify the 197\" wall-to-wall opening before this ships.",
     "title": "PA-800_Perch Table.pdf (individual shop drawing)"
    }
   ],
@@ -1482,11 +1518,13 @@
    {
     "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
     "kind": "submittal",
+    "note": "Drawing's own plan view prints 121\" [3073mm] overall — the 90\"D title-block figure reads as a leg depth, not the footprint; treat 138\"W×121\"D (=11'-6\"×10'-1\", matching the plan) as governing and field-verify. RK also has an open question on-sheet about clearance for 2 printers + 2 CPUs at the desk — unanswered as of the drawing.",
     "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
    },
    {
     "driveId": "1BnLY7XQz5Lum-0rT34_QevrGgFfEjBf4",
     "kind": "submittal",
+    "note": "Drawing's own plan view prints 121\" [3073mm] overall — the 90\"D title-block figure reads as a leg depth, not the footprint; treat 138\"W×121\"D (=11'-6\"×10'-1\", matching the plan) as governing and field-verify. RK also has an open question on-sheet about clearance for 2 printers + 2 CPUs at the desk — unanswered as of the drawing.",
     "title": "PA-801_Reception Desk.pdf (individual shop drawing)"
    }
   ],
@@ -1537,11 +1575,13 @@
    {
     "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
     "kind": "submittal",
+    "note": "Title block is self-contradictory: page P35 prints 220¾\"W, page P36 (same item) prints 234\"W — confirm the real width with RK before ordering.",
     "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
    },
    {
     "driveId": "1HZ3A9kI74xyyiBt6_Iuf3Y_VTIQ_yJa_",
     "kind": "submittal",
+    "note": "Title block is self-contradictory: page P35 prints 220¾\"W, page P36 (same item) prints 234\"W — confirm the real width with RK before ordering.",
     "title": "PA-803_Coffee & Hydration Station.pdf (individual shop drawing)"
    }
   ],
@@ -1555,7 +1595,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Trash & Recycling",
+    "note": "Brand spec book identifies this tag: Trash & Recycling Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -1569,7 +1609,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Guest Laundry Table",
+    "note": "Brand spec book identifies this tag: Guest Laundry Table Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -1942,6 +1982,16 @@
     "kind": "plan",
     "sheetId": "A513",
     "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+    "kind": "submittal",
+    "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)"
+   },
+   {
+    "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+    "kind": "submittal",
+    "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)"
    }
   ],
   "33": [
@@ -1950,6 +2000,16 @@
     "kind": "plan",
     "sheetId": "A513",
     "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+    "kind": "submittal",
+    "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)"
+   },
+   {
+    "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+    "kind": "submittal",
+    "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)"
    }
   ],
   "PT-07": [
@@ -2030,6 +2090,16 @@
     "kind": "plan",
     "sheetId": "A513",
     "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+    "kind": "submittal",
+    "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)"
+   },
+   {
+    "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+    "kind": "submittal",
+    "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)"
    }
   ],
   "02": [
@@ -2038,6 +2108,16 @@
     "kind": "plan",
     "sheetId": "A513",
     "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+    "kind": "submittal",
+    "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)"
+   },
+   {
+    "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+    "kind": "submittal",
+    "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)"
    }
   ],
   "19": [
@@ -2185,6 +2265,16 @@
     "kind": "plan",
     "sheetId": "A514",
     "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+    "kind": "submittal",
+    "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)"
+   },
+   {
+    "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+    "kind": "submittal",
+    "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)"
    }
   ],
   "28": [
@@ -2193,6 +2283,18 @@
     "kind": "plan",
     "sheetId": "A514",
     "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+    "kind": "submittal",
+    "note": "MODEL CONFLICT — A513 says Bunn JDF-4, this schedule says Nestle Vitality Express. Vendor-furnished either way; confirm which schedule governs before rough-in.",
+    "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)"
+   },
+   {
+    "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+    "kind": "submittal",
+    "note": "MODEL CONFLICT — A513 says Bunn JDF-4, this schedule says Nestle Vitality Express. Vendor-furnished either way; confirm which schedule governs before rough-in.",
+    "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)"
    }
   ],
   "29": [
@@ -2201,6 +2303,16 @@
     "kind": "plan",
     "sheetId": "A514",
     "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+    "kind": "submittal",
+    "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)"
+   },
+   {
+    "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+    "kind": "submittal",
+    "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)"
    }
   ],
   "35": [
@@ -2209,6 +2321,18 @@
     "kind": "plan",
     "sheetId": "A514",
     "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+    "kind": "submittal",
+    "note": "MODEL CONFLICT — A513 says True TS-23FG-HC. Confirm which governs before ordering.",
+    "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)"
+   },
+   {
+    "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+    "kind": "submittal",
+    "note": "MODEL CONFLICT — A513 says True TS-23FG-HC. Confirm which governs before ordering.",
+    "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)"
    }
   ],
   "36": [
@@ -2217,6 +2341,18 @@
     "kind": "plan",
     "sheetId": "A514",
     "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+    "kind": "submittal",
+    "note": "MODEL CONFLICT — A513 says True TSD-47G-HC-LD. Confirm which governs before ordering.",
+    "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)"
+   },
+   {
+    "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+    "kind": "submittal",
+    "note": "MODEL CONFLICT — A513 says True TSD-47G-HC-LD. Confirm which governs before ordering.",
+    "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)"
    }
   ],
   "37": [
@@ -2225,6 +2361,18 @@
     "kind": "plan",
     "sheetId": "A514",
     "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "10pYlvp8hekjqqfpJHiWqQkZpQ-FHrG6d",
+    "kind": "submittal",
+    "note": "MODEL CONFLICT — A513 says Vivreau VI-TAP-1H. Also dimension-critical: the PA-803 millwork cutout is sized for a 32⅝\"W dispenser — check the winning unit fits before fabrication.",
+    "title": "Clevenger FS Equipment Floor Plan — Standard / End Load (equipment schedule w/ models + rough-ins)"
+   },
+   {
+    "driveId": "1HLDH5AT6lDZHbYIkcxmPHd7xnuJHi0UE",
+    "kind": "submittal",
+    "note": "MODEL CONFLICT — A513 says Vivreau VI-TAP-1H. Also dimension-critical: the PA-803 millwork cutout is sized for a 32⅝\"W dispenser — check the winning unit fits before fabrication.",
+    "title": "Clevenger FS Equipment Floor Plan — Optional Center Load (equipment schedule w/ models + rough-ins)"
    }
   ],
   "CPT-12.1": [
@@ -2817,6 +2965,11 @@
     "kind": "plan",
     "sheetId": "A510.3",
     "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1QzVFDBVbxfFxK7KwolAisq035s8Z75om",
+    "kind": "submittal",
+    "title": "P104 — Plumbing Fixtures Schedule (mfr + model for laundry equipment)"
    }
   ],
   "409": [
@@ -2825,6 +2978,12 @@
     "kind": "plan",
     "sheetId": "A510.3",
     "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1QzVFDBVbxfFxK7KwolAisq035s8Z75om",
+    "kind": "submittal",
+    "note": "CONFIGURATION CONFLICT — A510.3 calls this line a TOP-LOAD washer, but P104 schedules only a front-load unit and A510.1 keyed note 60 requires front load. RFI the configuration before buying.",
+    "title": "P104 — Plumbing Fixtures Schedule (mfr + model for laundry equipment)"
    }
   ],
   "PT-07": [
@@ -2878,6 +3037,11 @@
     "kind": "plan",
     "sheetId": "A510.3",
     "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1QzVFDBVbxfFxK7KwolAisq035s8Z75om",
+    "kind": "submittal",
+    "title": "P104 — Plumbing Fixtures Schedule (mfr + model for laundry equipment)"
    }
   ],
   "PT-07": [
@@ -3073,7 +3237,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Three Bay Meeting Room Casework",
+    "note": "Brand spec book identifies this tag: Three Bay Meeting Room Casework Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -3440,12 +3604,13 @@
    {
     "driveId": "1v6EonTmD3dGLAjMoOUUbswcAJjxO23tw",
     "kind": "submittal",
-    "note": "Quantity 3 PCS on the drawing — one per public restroom (Womens 019 / Mens 020 / Unisex 027). Sheet note: 'NEED SPLASH ALL 3 SIDES'.",
+    "note": "Quantity 3 PCS on the drawing — one per public restroom (Womens 019 / Mens 020 / Unisex 027), but A520's own vanity elevations carry a lavatory run L-01A/L-01B/L-01C — verify vanity count/length per restroom against A520 before ordering, a single 36\" unit each may not be the full run. Unresolved fabricator questions still on the sheet: drawn 'only splash back' vs. a handwritten note 'NEED SPLASH ALL 3 SIDES'; 'if sink the same with Vanity's OK?'; and 'QUARTZ TOP WILSONART TBD' — get splash config, sink model, and top spec answered before fabrication.",
     "title": "PV-36_Public Restroom Vanities 36IN.pdf (individual shop drawing)"
    },
    {
     "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
     "kind": "submittal",
+    "note": "Quantity 3 PCS on the drawing — one per public restroom (Womens 019 / Mens 020 / Unisex 027), but A520's own vanity elevations carry a lavatory run L-01A/L-01B/L-01C — verify vanity count/length per restroom against A520 before ordering, a single 36\" unit each may not be the full run. Unresolved fabricator questions still on the sheet: drawn 'only splash back' vs. a handwritten note 'NEED SPLASH ALL 3 SIDES'; 'if sink the same with Vanity's OK?'; and 'QUARTZ TOP WILSONART TBD' — get splash config, sink model, and top spec answered before fabrication.",
     "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
    }
   ],
@@ -3743,12 +3908,13 @@
    {
     "driveId": "1v6EonTmD3dGLAjMoOUUbswcAJjxO23tw",
     "kind": "submittal",
-    "note": "Quantity 3 PCS on the drawing — one per public restroom (Womens 019 / Mens 020 / Unisex 027). Sheet note: 'NEED SPLASH ALL 3 SIDES'.",
+    "note": "Quantity 3 PCS on the drawing — one per public restroom (Womens 019 / Mens 020 / Unisex 027), but A520's own vanity elevations carry a lavatory run L-01A/L-01B/L-01C — verify vanity count/length per restroom against A520 before ordering, a single 36\" unit each may not be the full run. Unresolved fabricator questions still on the sheet: drawn 'only splash back' vs. a handwritten note 'NEED SPLASH ALL 3 SIDES'; 'if sink the same with Vanity's OK?'; and 'QUARTZ TOP WILSONART TBD' — get splash config, sink model, and top spec answered before fabrication.",
     "title": "PV-36_Public Restroom Vanities 36IN.pdf (individual shop drawing)"
    },
    {
     "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
     "kind": "submittal",
+    "note": "Quantity 3 PCS on the drawing — one per public restroom (Womens 019 / Mens 020 / Unisex 027), but A520's own vanity elevations carry a lavatory run L-01A/L-01B/L-01C — verify vanity count/length per restroom against A520 before ordering, a single 36\" unit each may not be the full run. Unresolved fabricator questions still on the sheet: drawn 'only splash back' vs. a handwritten note 'NEED SPLASH ALL 3 SIDES'; 'if sink the same with Vanity's OK?'; and 'QUARTZ TOP WILSONART TBD' — get splash config, sink model, and top spec answered before fabrication.",
     "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
    }
   ],
@@ -4239,7 +4405,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Fitness Wall Hooks",
+    "note": "Brand spec book identifies this tag: Fitness Wall Hooks Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -4409,6 +4575,11 @@
     "kind": "plan",
     "sheetId": "A510.3",
     "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1QzVFDBVbxfFxK7KwolAisq035s8Z75om",
+    "kind": "submittal",
+    "title": "P104 — Plumbing Fixtures Schedule (mfr + model for laundry equipment)"
    }
   ],
   "407": [
@@ -4417,6 +4588,11 @@
     "kind": "plan",
     "sheetId": "A510.3",
     "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1QzVFDBVbxfFxK7KwolAisq035s8Z75om",
+    "kind": "submittal",
+    "title": "P104 — Plumbing Fixtures Schedule (mfr + model for laundry equipment)"
    }
   ],
   "408": [
@@ -5005,12 +5181,13 @@
    {
     "driveId": "1v6EonTmD3dGLAjMoOUUbswcAJjxO23tw",
     "kind": "submittal",
-    "note": "Quantity 3 PCS on the drawing — one per public restroom (Womens 019 / Mens 020 / Unisex 027). Sheet note: 'NEED SPLASH ALL 3 SIDES'.",
+    "note": "Quantity 3 PCS on the drawing — one per public restroom (Womens 019 / Mens 020 / Unisex 027), but A520's own vanity elevations carry a lavatory run L-01A/L-01B/L-01C — verify vanity count/length per restroom against A520 before ordering, a single 36\" unit each may not be the full run. Unresolved fabricator questions still on the sheet: drawn 'only splash back' vs. a handwritten note 'NEED SPLASH ALL 3 SIDES'; 'if sink the same with Vanity's OK?'; and 'QUARTZ TOP WILSONART TBD' — get splash config, sink model, and top spec answered before fabrication.",
     "title": "PV-36_Public Restroom Vanities 36IN.pdf (individual shop drawing)"
    },
    {
     "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
     "kind": "submittal",
+    "note": "Quantity 3 PCS on the drawing — one per public restroom (Womens 019 / Mens 020 / Unisex 027), but A520's own vanity elevations carry a lavatory run L-01A/L-01B/L-01C — verify vanity count/length per restroom against A520 before ordering, a single 36\" unit each may not be the full run. Unresolved fabricator questions still on the sheet: drawn 'only splash back' vs. a handwritten note 'NEED SPLASH ALL 3 SIDES'; 'if sink the same with Vanity's OK?'; and 'QUARTZ TOP WILSONART TBD' — get splash config, sink model, and top spec answered before fabrication.",
     "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
    }
   ]
@@ -5289,7 +5466,7 @@
    {
     "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
     "kind": "submittal",
-    "note": "ALTERNATE stairwell carpet — base card CPT-12; the base-spec-vs-alternate conflict is already flagged on the item.",
+    "note": "Book scopes CPT-12.ALT to BOH ONLY (p.16, 'Alternate Carpet Tile @ BOH') — this room is a stairwell tagged with the same code on the plan. Verify with RK/Austin whether the stairwell alternate is really this BOH product or a different, undocumented alternate before ordering.",
     "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
    }
   ],
@@ -5422,7 +5599,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Wall Sconce @ Guest Corridor",
+    "note": "Brand spec book identifies this tag: Wall Sconce @ Guest Corridor Book names it a WALL sconce; verify against the drawn ceiling mount before install.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -5736,7 +5913,7 @@
    {
     "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
     "kind": "submittal",
-    "note": "ALTERNATE stairwell carpet — base card CPT-12; the base-spec-vs-alternate conflict is already flagged on the item.",
+    "note": "Book scopes CPT-12.ALT to BOH ONLY (p.16, 'Alternate Carpet Tile @ BOH') — this room is a stairwell tagged with the same code on the plan. Verify with RK/Austin whether the stairwell alternate is really this BOH product or a different, undocumented alternate before ordering.",
     "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
    }
   ],
@@ -5821,7 +5998,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Bench Seating @ Outdoor Lounge",
+    "note": "Brand spec book identifies this tag: Bench Seating @ Outdoor Lounge Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -5841,7 +6018,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Bench Seating @ Outdoor Lounge Firepit",
+    "note": "Brand spec book identifies this tag: Bench Seating @ Outdoor Lounge Firepit Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -5861,7 +6038,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Arm Chair @ Outdoor Lounge",
+    "note": "Brand spec book identifies this tag: Arm Chair @ Outdoor Lounge Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -5881,7 +6058,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Lounge Chair @ Outdoor Lounge Firepit",
+    "note": "Brand spec book identifies this tag: Lounge Chair @ Outdoor Lounge Firepit Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -5901,7 +6078,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Ottoman @ Outdoor Lounge Firepit",
+    "note": "Brand spec book identifies this tag: Ottoman @ Outdoor Lounge Firepit Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -5921,7 +6098,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: 2 Top Table @ Outdoor Lounge & Grilling Patio",
+    "note": "Brand spec book identifies this tag: 2 Top Table @ Outdoor Lounge & Grilling Patio Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -5941,7 +6118,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Cocktail Table @ Outdoor Lounge",
+    "note": "Brand spec book identifies this tag: Cocktail Table @ Outdoor Lounge Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -5961,7 +6138,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Lounge Chair @ Outdoor Lounge",
+    "note": "Brand spec book identifies this tag: Lounge Chair @ Outdoor Lounge Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -5981,7 +6158,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Round Side Table @ Outdoor Lounge",
+    "note": "Brand spec book identifies this tag: Round Side Table @ Outdoor Lounge Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -6001,7 +6178,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Dining Chair @ Outdoor Lounge, Grilling Patio, & Pool",
+    "note": "Brand spec book identifies this tag: Dining Chair @ Outdoor Lounge, Grilling Patio, & Pool Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -6021,7 +6198,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Planter",
+    "note": "Brand spec book identifies this tag: Planter Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -6121,7 +6298,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: 2 Top Table @ Outdoor Lounge & Grilling Patio",
+    "note": "Brand spec book identifies this tag: 2 Top Table @ Outdoor Lounge & Grilling Patio Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -6141,7 +6318,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Accessible variant; brand card OF-705 \"2 Top Table\" — ADA variant tag printed on AS104. See also OF-719 4 Top ADA Dining Table.",
+    "note": "Brand book index: \"OF-705-ADA  ADA Table @ Grilling Patio\" — its own line item, not a variant of the OF-705 \"2 Top Table\" card. Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -6167,7 +6344,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Food Prep Table @ Grilling Patio",
+    "note": "Brand spec book identifies this tag: Food Prep Table @ Grilling Patio Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -6187,7 +6364,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Counter Stool @ Grilling Patio",
+    "note": "Brand spec book identifies this tag: Counter Stool @ Grilling Patio Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -6207,7 +6384,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Dining Chair @ Outdoor Lounge, Grilling Patio, & Pool",
+    "note": "Brand spec book identifies this tag: Dining Chair @ Outdoor Lounge, Grilling Patio, & Pool Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -6227,7 +6404,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Counter Height Table @ Grilling Patio",
+    "note": "Brand spec book identifies this tag: Counter Height Table @ Grilling Patio Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -6247,7 +6424,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Chaise Lounge @ Pool",
+    "note": "Brand spec book identifies this tag: Chaise Lounge @ Pool Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -6267,7 +6444,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Round Side Table @ Pool",
+    "note": "Brand spec book identifies this tag: Round Side Table @ Pool Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -6287,7 +6464,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Round 2 Top Table @ Pool",
+    "note": "Brand spec book identifies this tag: Round 2 Top Table @ Pool Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -6307,7 +6484,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: Bench Seating @ Grilling Patio",
+    "note": "Brand spec book identifies this tag: Bench Seating @ Grilling Patio Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],
@@ -6327,7 +6504,7 @@
    {
     "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
     "kind": "submittal",
-    "note": "Brand spec book identifies this tag: 4 Top ADA Dining Table",
+    "note": "Brand spec book identifies this tag: 4 Top ADA Dining Table Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
     "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
    }
   ],

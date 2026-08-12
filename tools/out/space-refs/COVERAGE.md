@@ -1,20 +1,20 @@
 # Common-area refs coverage — floor 1
 
 - **001 Vestibule** — 5 lines · submittal 3 · plan 5
-- **003 Lobby** — 52 lines · submittal 33 · plan 52
-- **004 Reception** — 16 lines · submittal 12 · plan 16
+- **003 Lobby** — 52 lines · submittal 31 · plan 52
+- **004 Reception** — 16 lines · submittal 13 · plan 16
 - **005 Market** — 20 lines · submittal 12 · plan 20
-- **006 Breakfast** — 22 lines · submittal 15 · plan 22
-- **007 Food Prep** — 30 lines · submittal 24 · plan 30
-- **008 Dry Storage** — 6 lines · submittal 3 · plan 6
-- **009 Servery** — 28 lines · submittal 12 · plan 28
+- **006 Breakfast** — 22 lines · submittal 17 · plan 22
+- **007 Food Prep** — 30 lines · submittal 26 · plan 30
+- **008 Dry Storage** — 6 lines · submittal 5 · plan 6
+- **009 Servery** — 28 lines · submittal 18 · plan 28
 - **010 Work Stations** — 6 lines · submittal 4 · plan 6
 - **011 Managers Office** — 6 lines · submittal 1 · plan 6
 - **012 Closet** — 3 lines · submittal 1 · plan 3
 - **013 Laundry Discharge** — 5 lines · submittal 2 · plan 5
 - **014 Employee Breakroom** — 15 lines · submittal 10 · plan 14
-- **015 Laundry** — 6 lines · submittal 1 · plan 6
-- **016 Dryer Room** — 4 lines · submittal 1 · plan 4
+- **015 Laundry** — 6 lines · submittal 3 · plan 6
+- **016 Dryer Room** — 4 lines · submittal 2 · plan 4
 - **017 Open Storage** — 5 lines · submittal 1 · plan 5
 - **018 Meeting Room** — 14 lines · submittal 8 · plan 14
 - **019 WOMENS** — 24 lines · submittal 9 · plan 24
@@ -22,7 +22,7 @@
 - **021 Engineer** — 8 lines · submittal 4 · plan 8
 - **022 Sales** — 8 lines · submittal 5 · plan 8
 - **023 Fitness Room** — 37 lines · submittal 15 · plan 37
-- **024 Guest Laundry** — 23 lines · submittal 12 · plan 23
+- **024 Guest Laundry** — 23 lines · submittal 14 · plan 23
 - **025 Mech.** — 3 lines · submittal 1 · plan 3
 - **027 Unisex** — 26 lines · submittal 9 · plan 26
 - **028 Elev. Eq.** — 3 lines · submittal 1 · plan 3
@@ -40,11 +40,13 @@
 - **ZONE-A Entry / Porte-Cochere Outdoor Lounge** — 17 lines · submittal 11 · plan 17
 - **ZONE-B Pool Deck / Patio** — 29 lines · submittal 16 · plan 27
 
-**Totals: 504 lines · 264 with a submittal · 494 with a plan ref**
+**Totals: 504 lines · 280 with a submittal · 494 with a plan ref**
 
 ## Gaps (no document found — honest misses, Austin supplies)
 
 - 003 · `PA-117` — Tag absent from the brand spec book index AND from ID-1.7; identity unknown. Austin to identify. _(from ffe-brand-spec.json)_
+- 003 · `PA-200` — Brand book Summary of Changes: 'PA-200 Product Deleted' (May-23); no spec card exists (cards run PA-113 then PA-201). Identity unresolved — do not order from the stale index row. Austin to identify the replacement/current product. _(from ffe-brand-spec.json)_
+- 003 · `PA-202` — Brand book PA-202 = 'Bathroom Vanity Light' (a restroom fixture — that identity governs at 019/020/023/027 instead, as a documented tag-numbering collision with PA-502). At Lobby 003 the same code tags something else entirely — a dashed decorative ceiling/lighting feature zone over Breakfast/the Lobby lounge/near Market — that identity is in neither the book nor ID-1.7. Austin to identify the 003 fixture. _(from ffe-brand-spec.json)_
 - 003 · `PA-300` — RK package title includes 'Tables' but its table pages (P1-P20) are image-encoded — coverage of PA-300 not verifiable from text. Brand spec card attached instead; shop-drawing confirmation pending. _(from ffe-shop-drawings.json)_
 - 003 · `PA-301` — RK package title includes 'Tables' but its table pages (P1-P20) are image-encoded — coverage of PA-301 not verifiable from text. Brand spec card attached instead; shop-drawing confirmation pending. _(from ffe-shop-drawings.json)_
 - 003 · `PA-302` — RK package title includes 'Tables' but its table pages (P1-P20) are image-encoded — coverage of PA-302 not verifiable from text. Brand spec card attached instead; shop-drawing confirmation pending. _(from ffe-shop-drawings.json)_
@@ -60,30 +62,15 @@
 - 005 · `PA-314` — RK package title includes 'Tables' but its table pages (P1-P20) are image-encoded — coverage of PA-314 not verifiable from text. Brand spec card attached instead; shop-drawing confirmation pending. _(from ffe-shop-drawings.json)_
 - 005 · `PA-315` — RK package title includes 'Tables' but its table pages (P1-P20) are image-encoded — coverage of PA-315 not verifiable from text. Brand spec card attached instead; shop-drawing confirmation pending. _(from ffe-shop-drawings.json)_
 - 005 · `WC-04` — Tag printed stacked under WC-11 at identical position (pre-existing flag) — book carries WC-02 but the placement is suspect; verify before ordering. _(from finishes.json)_
-- 006 · `30` — CEREAL DISPENSER Server Products 88920 — not in the brochure text layer. _(from food-service.json)_
-- 006 · `34` — Tag 34 defined in NEITHER A513 nor A514 schedule (pre-existing flag); no cutsheet can be tied to an undefined tag. _(from food-service.json)_
-- 006 · `39` — Tag 39 defined in NEITHER schedule — same as 34. _(from food-service.json)_
+- 006 · `31` — UNDERCOUNTER DISPLAY REFRIGERATOR True TUC-27G-ADA-HC — the brochure book has NO Item 31 (items stop at 26); the only 'TUC-27G' hit is 'TUC-27G-HC~SPEC3' inside a ~30-model family list printed on the ITEM# 18 True TWT-67 worktop-refrigerator brochure, and 'TUC-27G-ADA-HC' itself never appears. Neither Clevenger floor plan carries a 31 either. Austin to supply the real cut sheet. _(from food-service.json)_
 - 006 · `PA-309` — RK package title includes 'Tables' but its table pages (P1-P20) are image-encoded — coverage of PA-309 not verifiable from text. Brand spec card attached instead; shop-drawing confirmation pending. _(from ffe-shop-drawings.json)_
 - 006 · `T-21` — Not in the finish book's tag set — Austin to supply. _(from finishes.json)_
-- 007 · `32` — UNIT COOLER OmniTemp KLP106MA-S1D — not in the brochure text layer; likely inside the walk-in assembly scope (ITEM 02) or a scanned page. Verify. _(from food-service.json)_
-- 007 · `33` — UNIT COOLER (FREEZER) OMNI KLP106LE-S2D — same as 32. _(from food-service.json)_
-- 008 · `01` — Schedule code 01 at Dry Storage is the True T-49F-HC mobile reach-in freezer, but the Clevenger brochure's ITEM 01 is the refrigeration rack and 'T-49F' appears nowhere in the book's text layer (scan?). Two numbering schemes (End Load vs Center Load) exist on the Drive — needs Austin/Clevenger to confirm which sheet governs. _(from food-service.json)_
-- 008 · `02` — Code 02 at Dry Storage is the True TS-49-HC reach-in; brochure ITEM 02 is the walk-in assembly and 'TS-49' is absent from the text layer. Same numbering-scheme question. _(from food-service.json)_
-- 009 · `27` — DISPLAY SHOWCASE Equipex WD780B-2/1 — not in the brochure text layer. _(from food-service.json)_
-- 009 · `28` — JUICE DISPENSER Bunn JDF-4 (BY VENDOR) — not in the brochure text layer; vendor-furnished. _(from food-service.json)_
-- 009 · `29` — WARMING KETTLE Vollrath 72017 — not in the brochure text layer. _(from food-service.json)_
-- 009 · `35` — REACH-IN DISPLAY FREEZER True TS-23FG-HC — not in the brochure text layer. _(from food-service.json)_
-- 009 · `36` — REACH-IN DISPLAY REFRIGERATOR True TSD-47G-HC-LD — not in the brochure text layer. _(from food-service.json)_
-- 009 · `37` — WATER DISPENSER Vivreau VI-TAP-1H — not in the brochure text layer. _(from food-service.json)_
 - 009 · `T-21` — Not in the finish book's tag set — Austin to supply. _(from finishes.json)_
 - 011 · `300` — SHELVING (011) — no document. _(from equipment-nodoc.json)_
 - 013 · `304` — LOCKER (013) — accessible-locker compliance noted on A510.3; no submittal on Drive. _(from equipment-nodoc.json)_
 - 014 · `408` — DECORATIVE TRASH CAN (014/024) — brand PA-804 Trash & Recycling card exists for 006; these BOH cans have no document. _(from equipment-nodoc.json)_
 - 014 · `431` — WALL-MOUNTED TV (014) — none. _(from equipment-nodoc.json)_
 - 014 · `PA-309` — RK package title includes 'Tables' but its table pages (P1-P20) are image-encoded — coverage of PA-309 not verifiable from text. Brand spec card attached instead; shop-drawing confirmation pending. _(from ffe-shop-drawings.json)_
-- 015 · `401` — COMMERCIAL WASHER (015) — no laundry-equipment submittal anywhere on the Drive. _(from equipment-nodoc.json)_
-- 015 · `409` — COMMERCIAL TOP-LOAD WASHER (015) — none on Drive. _(from equipment-nodoc.json)_
-- 016 · `402` — COMMERCIAL DRYER (016) — none on Drive. _(from equipment-nodoc.json)_
 - 017 · `404` — STORAGE SHELVING (017) — no document. _(from equipment-nodoc.json)_
 - 018 · `CPT-13` — Not in the Home2-Dynamic finish book's tag set — RK project-added carpet; Austin to supply the spec/submittal. _(from finishes.json)_
 - 018 · `VCT-15` — Not in the finish book's tag set (VCT-10 is) — verify tag. _(from finishes.json)_
@@ -104,27 +91,25 @@
 - 020 · `HD-13` — Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule. _(from equipment-nodoc.json)_
 - 020 · `HD-19` — Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule. _(from equipment-nodoc.json)_
 - 022 · `PA-306` — RK package title includes 'Tables' but its table pages (P1-P20) are image-encoded — coverage of PA-306 not verifiable from text. Brand spec card attached instead; shop-drawing confirmation pending. _(from ffe-shop-drawings.json)_
-- 023 · `800` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
-- 023 · `801` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
-- 023 · `802` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
-- 023 · `803` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
-- 023 · `804` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
-- 023 · `805` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
-- 023 · `806` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
-- 023 · `807` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
-- 023 · `808` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
-- 023 · `809` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
-- 023 · `810` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
-- 023 · `811` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
-- 023 · `812` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
+- 023 · `800` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. Possible lead: the brand PA-310 "Towel Station @ Fitness" card (Elkay Interior Systems, 72"W×18"D×64"H) is specified "to Accommodate Required Accessory Items: Laundry Basket" — this hamper may be that basket rather than a separate buy. Confirm with RK. _(from equipment-nodoc.json)_
+- 023 · `801` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. _(from equipment-nodoc.json)_
+- 023 · `802` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. _(from equipment-nodoc.json)_
+- 023 · `803` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. _(from equipment-nodoc.json)_
+- 023 · `804` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. _(from equipment-nodoc.json)_
+- 023 · `805` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. _(from equipment-nodoc.json)_
+- 023 · `806` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. _(from equipment-nodoc.json)_
+- 023 · `807` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. _(from equipment-nodoc.json)_
+- 023 · `808` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. _(from equipment-nodoc.json)_
+- 023 · `809` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. _(from equipment-nodoc.json)_
+- 023 · `810` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. _(from equipment-nodoc.json)_
+- 023 · `811` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. _(from equipment-nodoc.json)_
+- 023 · `812` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. _(from equipment-nodoc.json)_
 - 023 · `813` — WALL MOUNTED TELEVISION (023) — none. _(from equipment-nodoc.json)_
-- 023 · `814` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
-- 023 · `816` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
-- 023 · `817` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
-- 023 · `819` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; typically an owner-direct package (Precor/Matrix etc.). Austin to supply. _(from equipment-nodoc.json)_
+- 023 · `814` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. _(from equipment-nodoc.json)_
+- 023 · `816` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. Possible lead: the brand book indexes "PA-506 Fitness Wall Hooks" (added Jun-23) and ID-3.2 places PA-506 in Fitness, but the card body is an image page that could not be read — pull that page to confirm before ordering separately. _(from equipment-nodoc.json)_
+- 023 · `817` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. _(from equipment-nodoc.json)_
+- 023 · `819` — Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. _(from equipment-nodoc.json)_
 - 023 · `RF-15` — Not in the finish book's tag set (RF-10/RF-11 are) — tag as printed at Fitness; verify whether RF-15 is a misprint of RF-10. _(from finishes.json)_
-- 024 · `406` — COIN OPERATED WASHER (024) — none on Drive. _(from equipment-nodoc.json)_
-- 024 · `407` — COIN OPERATED DRYER (024) — none on Drive. _(from equipment-nodoc.json)_
 - 024 · `408` — DECORATIVE TRASH CAN (014/024) — brand PA-804 Trash & Recycling card exists for 006; these BOH cans have no document. _(from equipment-nodoc.json)_
 - 027 · `HD-01` — Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule. _(from equipment-nodoc.json)_
 - 027 · `HD-06A` — Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule. _(from equipment-nodoc.json)_
@@ -135,6 +120,6 @@
 - 027 · `HD-15` — Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule. _(from equipment-nodoc.json)_
 - 027 · `HD-19` — Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule. _(from equipment-nodoc.json)_
 - 137 · `821` — BOTTLE FILLING STATION (137) — none. _(from equipment-nodoc.json)_
-- 139 · `432` — ICE DISPENSER (139) — no ice-machine submittal on Drive. _(from equipment-nodoc.json)_
+- 139 · `432` — ICE DISPENSER (139) — no ice-machine submittal on Drive; outside both Clevenger schemes (their scope is Food Prep / Dry Storage / Servery), and P501's "ice box" detail is plumbing rough-in only, not an equipment spec. _(from equipment-nodoc.json)_
 - ZONE-A · `400` — FIRE PIT WITH FITTED SCREEN (ZONE-A) — not in the brand OF index; no cutsheet on Drive. _(from equipment-nodoc.json)_
 - ZONE-B · `T-05` — Not in the finish book's tag set — Austin to supply. _(from finishes.json)_
