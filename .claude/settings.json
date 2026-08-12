@@ -1,5 +1,17 @@
 {
   "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "context-mode": {
+      "source": {
+        "source": "github",
+        "repo": "mksglu/context-mode"
+      }
+    },
     "thedotmack": {
       "source": {
         "source": "github",
@@ -8,6 +20,8 @@
     }
   },
   "enabledPlugins": {
+    "caveman@caveman": true,
+    "context-mode@context-mode": true,
     "claude-mem@thedotmack": true
   }
 }
