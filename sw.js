@@ -3,7 +3,7 @@
 // Bump VERSION on every deploy — it busts the old cache and triggers the
 // in-app "Update available" banner. VERSION must equal 'h2sep-v' + APP_VERSION
 // in js/config.js — install verifies this to defeat CDN mixed-version races.
-const VERSION = 'h2sep-v1.18.3';
+const VERSION = 'h2sep-v1.19.0';
 // Paper-sheet photos live in their own PERMANENT cache — never wiped by app
 // updates. Only room JPGs under /sheets/ may enter it (index.json stays in the
 // versioned shell cache so it can never be shadowed by a stale copy).
@@ -58,6 +58,7 @@ const SHELL = [
   './js/theme.js',
   './js/util.js',
   './refs/refs-101.json',
+  './refs/refs-spaces.json',
   './firebase/firebase-app.js',
   './firebase/firebase-auth.js',
   './firebase/firebase-firestore.js',
@@ -123,23 +124,26 @@ async function prefetchSheets() {
   }
 }
 
-// Best-effort download of every plan-snippet image named in refs-101.json
-// into the permanent refs cache. Same trigger discipline as sheets.
+// Best-effort download of every plan-snippet image named in the refs index
+// files into the permanent refs cache. Same trigger discipline as sheets.
+const REF_INDEXES = ['./refs/refs-101.json', './refs/refs-spaces.json'];
 async function prefetchRefs() {
   const shell = await caches.open(VERSION);
-  const idxResp = (await shell.match('./refs/refs-101.json')) || (await fetch('./refs/refs-101.json').catch(() => null));
-  if (!idxResp) return;
-  let idx;
-  try { idx = await idxResp.clone().json(); } catch { return; }
-  // Walk the whole index for `snippet` file names — resilient to the exact
-  // nesting the refs pipeline emits (room->code->refs[] or flat code map).
   const files = new Set();
-  (function walk(v) {
-    if (Array.isArray(v)) { v.forEach(walk); return; }
-    if (!v || typeof v !== 'object') return;
-    if (typeof v.snippet === 'string' && v.snippet) files.add(v.snippet.replace(/^(\.\/)?(refs\/)?/, ''));
-    Object.values(v).forEach(walk);
-  })(idx);
+  for (const path of REF_INDEXES) {
+    const idxResp = (await shell.match(path)) || (await fetch(path).catch(() => null));
+    if (!idxResp) continue;
+    let idx;
+    try { idx = await idxResp.clone().json(); } catch { continue; }
+    // Walk the whole index for `snippet` file names — resilient to the exact
+    // nesting the refs pipeline emits (room->code->refs[] or flat code map).
+    (function walk(v) {
+      if (Array.isArray(v)) { v.forEach(walk); return; }
+      if (!v || typeof v !== 'object') return;
+      if (typeof v.snippet === 'string' && v.snippet) files.add(v.snippet.replace(/^(\.\/)?(refs\/)?/, ''));
+      Object.values(v).forEach(walk);
+    })(idx);
+  }
   const c = await caches.open(REFS_CACHE);
   for (const f of files) {
     const req = new Request('./refs/' + f);

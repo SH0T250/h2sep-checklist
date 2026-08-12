@@ -2,8 +2,11 @@
 //
 // Source of truth at runtime is either:
 //   a) refs[] already on the item (seeded into the room doc), or
-//   b) the bundled ./refs/refs-101.json emitted by the refs pipeline,
-//      joined here by room number + item code.
+//   b) the bundled index files emitted by the refs pipeline —
+//      refs-101.json (guest-room codes, flat) and refs-spaces.json
+//      (common-area spaces, room-scoped: the kitchen-equipment numbering
+//      reuses codes like "01" for DIFFERENT products in different spaces,
+//      so space refs always join on room number + item code).
 //
 // A single ref is:
 //   { kind: 'submittal'|'plan', title, sheetId?, driveId?, snippet? }
@@ -14,7 +17,7 @@
 // The index file may be missing entirely (pipeline not run yet) or list
 // snippet files that aren't deployed — every consumer tolerates both.
 
-const INDEX_URL = './refs/refs-101.json';
+const INDEX_URLS = ['./refs/refs-101.json', './refs/refs-spaces.json'];
 
 const byRoomCode = new Map(); // 'room/code' -> refs[]
 const byCode = new Map();     // 'code' -> refs[] (index not room-scoped)
@@ -59,10 +62,14 @@ function ingest(idx) {
 export async function initRefs() {
   if (loadStarted) return;
   loadStarted = true;
-  try {
-    const r = await fetch(INDEX_URL);
-    if (r.ok) ingest(await r.json());
-  } catch (_) { /* offline & uncached, or not generated yet — no refs shown */ }
+  // Each index is independent — a missing or unparseable one (offline &
+  // uncached, or not generated yet) must never block the others.
+  await Promise.all(INDEX_URLS.map(async (url) => {
+    try {
+      const r = await fetch(url);
+      if (r.ok) ingest(await r.json());
+    } catch (_) { /* no refs from this index */ }
+  }));
 }
 
 // Refs for one item. item.refs (seeded on the doc) wins over the bundled index.

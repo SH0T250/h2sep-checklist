@@ -37,9 +37,18 @@ const MODEL_ROOMS = JSON.parse(
 
 const su = await (await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${KEY}`,
   { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{"returnSecureToken":true}' })).json();
-const list = await (await fetch(
-  'https://firestore.googleapis.com/v1/projects/h2sep-checklist/databases/(default)/documents/projects/h2sep/rooms?pageSize=300',
-  { headers: { Authorization: 'Bearer ' + su.idToken } })).json();
+// Firestore may return FEWER documents than pageSize (it did once the MEP
+// punch docs pushed the collection past ~290) — always follow nextPageToken.
+const list = { documents: [] };
+let pageToken = '';
+do {
+  const r = await (await fetch(
+    'https://firestore.googleapis.com/v1/projects/h2sep-checklist/databases/(default)/documents/projects/h2sep/rooms?pageSize=300'
+      + (pageToken ? '&pageToken=' + encodeURIComponent(pageToken) : ''),
+    { headers: { Authorization: 'Bearer ' + su.idToken } })).json();
+  list.documents.push(...(r.documents || []));
+  pageToken = r.nextPageToken || '';
+} while (pageToken);
 
 const dv = (v) => {
   if ('stringValue' in v) return v.stringValue;
@@ -116,12 +125,17 @@ if (await inputs.count() >= 2 && await inputs.first().isVisible().catch(() => fa
   await page.locator('button:has-text("Start")').first().tap();
   await page.waitForTimeout(1200);
 }
+// Only floor 1 goes in: the full building (296 docs with the MEP punch lists)
+// no longer fits the browser's localStorage quota, and this suite asserts
+// nothing beyond floor 1.
+const floor1 = Object.fromEntries(Object.entries(rooms)
+  .filter(([, r]) => String(r.floor) === '1').map(([n, r]) => [n, r]));
 await page.evaluate((live) => {
   const db = JSON.parse(localStorage.getItem('h2sep-demo-db-v2'));
-  db.rooms = live;                       // the whole live floor plan
+  db.rooms = live;                       // the whole live floor
   localStorage.setItem('h2sep-demo-db-v2', JSON.stringify(db));
   localStorage.setItem('h2sep-theme', 'light');
-}, rooms);
+}, floor1);
 
 // ---- floor 1 list ----
 await page.goto('about:blank');

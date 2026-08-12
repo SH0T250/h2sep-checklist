@@ -470,7 +470,7 @@ export function renderRoom(el, number) {
         <span class="rh-num">${isMep ? 'MEP ' + esc(mepBase)
           : isSpace ? esc(room.typeLabel || 'Space') : 'Room ' + esc(room.number)}</span>
         <span class="rh-right">
-        ${isSpace || isMep ? '' : `<a class="sheet-btn" href="./refs.html?room=${encodeURIComponent(room.number)}" aria-label="Submittals and plan references">📄</a>`}
+        ${isMep ? '' : `<a class="sheet-btn" href="./refs.html?room=${encodeURIComponent(room.number)}" aria-label="Submittals and plan references">📄</a>`}
         <a class="sheet-btn" href="./print.html?room=${encodeURIComponent(room.number)}" aria-label="Printable checklist sheet">🖨</a>
         ${!isMep && MODEL_ROOMS.includes(room.number) ? `<a class="sheet-btn" href="./room-3d.html?room=${encodeURIComponent(room.number)}" aria-label="3D room model">🧊</a>` : ''}
         <span class="rh-type">${isMep
@@ -554,12 +554,12 @@ export function renderRoom(el, number) {
   wireCommon(el);
 
   el.querySelector('[data-more]').addEventListener('click', () => {
-    // Spaces skip two entries: refs (submittal refs are guest-room data) and
-    // Room settings (its template picker has nothing valid to offer a space —
-    // restoring the Lobby "from template" could only ever mean a guest-room
-    // package, so the door is closed rather than guarded).
+    // Spaces skip one entry: Room settings (its template picker has nothing
+    // valid to offer a space — restoring the Lobby "from template" could only
+    // ever mean a guest-room package, so the door is closed rather than
+    // guarded). Refs are space data too since refs-spaces.json shipped.
     const sh = sheets.sheet(`
-      ${isSpace ? '' : `<a class="btn ghost full" href="./refs.html?room=${encodeURIComponent(room.number)}">📄 Submittals &amp; plan references</a>`}
+      <a class="btn ghost full" href="./refs.html?room=${encodeURIComponent(room.number)}">📄 Submittals &amp; plan references</a>
       <a class="btn ghost full" href="./print.html?room=${encodeURIComponent(room.number)}">🖨 Printable sheet (for the door)</a>
       ${MODEL_ROOMS.includes(room.number) ? `<a class="btn ghost full" href="./room-3d.html?room=${encodeURIComponent(room.number)}">🧊 3D room model</a>` : ''}
       <button class="btn ghost full hidden" data-act="paper">📄 Original paper sheet (photo)</button>
