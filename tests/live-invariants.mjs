@@ -237,13 +237,25 @@ if (spaces.length === 0) {
   const clash = [...spaceIds].filter((n) => roomIds.has(n));
   check(clash.length === 0, `no space id collides with a guest-room number (${clash.join(',') || 'none'})`);
 
-  // Era check, same spirit as the room-101 check above: until the crew starts
-  // walking common areas, a check-off or note on a space could only have come
-  // from a seeding defect. Loosen this deliberately when that era ends.
-  const dirty = spaces.filter((s) => Object.values(s.items || {}).some((i) => i.checked || i.issue)
+  // That era has ended — the crew is walking common areas now. This used to
+  // assert no space carried field work, which was right while spaces were
+  // freshly seeded and is wrong the moment someone ticks a box: it turns real
+  // work into a red test, and a suite that goes red for doing the right thing
+  // is a suite people stop reading. So it protects the work instead of
+  // forbidding it — every space check-off must be attributable, the same bar
+  // the guest rooms are held to.
+  const walked = spaces.filter((s) => Object.values(s.items || {}).some((i) => i.checked || i.issue)
     || Object.keys(s.notes || {}).length);
-  check(dirty.length === 0,
-    `no seeded space carries field work yet (${dirty.map((s) => s.number).join(',') || 'all clean'})`);
+  const orphanSpace = [];
+  for (const s of walked) {
+    for (const [id, i] of Object.entries(s.items || {})) {
+      if (i.checked && (!String(i.initials || '').trim() || !i.checkedAt)) orphanSpace.push(`${s.number}/${id}`);
+    }
+  }
+  check(orphanSpace.length === 0,
+    `every common-area check-off is attributable (${orphanSpace.length} orphaned)`);
+  console.log(`        field work live in ${walked.length} common area(s)`
+    + (walked.length ? ` — ${walked.map((s) => s.number).join(', ')}` : ''));
 }
 
 // ---- MEP punch docs ----------------------------------------------------
