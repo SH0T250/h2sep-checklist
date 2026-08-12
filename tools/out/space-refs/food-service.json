@@ -1,0 +1,272 @@
+{
+ "matches": [
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "Brochure header 'ITEM# 01 - REFRIGERATION RACK (1 EA REQ'D) OmniTemp OTA1-AC-H-2-0-3-4' — matches the 009 rack line (OMNI, 208V).",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "01"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Brochure header 'ITEM# 02 - WALK-IN COOLER / FREEZER ASSEMBLY' American Panel CUSTOM — matches both 007 walk-in lines.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "02"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Brochure header 'ITEM# 04 - MOBILE WORK TABLE' — custom fabricated, as the item label says.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "04"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 05 UNDERCOUNTER DISHMACHINE + model UH-100B present in the book text — matches Champion UH-100B label.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "05"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 06 DISHTABLE RACK SHELF + 'DT-6R-11' ×4 in book text — matches Advance Tabco DT-6R-11.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "06"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 07 WALL SHELF + Metro model '2436NK3' ×4 in text — the three 007 wall-shelf variants are Metro K3-series.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "07"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 11 MOBILE COOLER/FREEZER SHELVING + 'METROMAX' ×61 in text — Metro MetroMax Q.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "11"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 12 UTENSIL RACK W/ SHELF + 'PS-12-60' ×5 — Advance Tabco PS-12-60.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "12"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 13 WORKTABLE WITH SINK — custom fabricated.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "13"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 14 COFFEE MAKER + model 'CBS-2152XTS' in text — FETCO CBS-2152XTS (operator furnished).",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "14"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "Same ITEM# 14 COFFEE MAKER FETCO CBS-2152XTS brochure — the servery placement of the same schedule item.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "14"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 15 WALL SHELF — Metro, high mount.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "15"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 16 CONVECTION OVEN (label: Moffat Turbofan E33D5H2 per A513/A514; brochure page is a scan — model not in the text layer).",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "16"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 17 WALL SHELF — custom fabricated.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "17"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 18 WORKTOP REFRIGERATOR + True models TWT-67-HC / TWT-67D-2-HC / TWT-67D-4-HC / TWT-67F-HC in text. NOTE: A514 prints TWT-67~SPEC1 vs A513/A513.1 TWT-67-HC~SPEC3 (model-variance flag D7).",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "18"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 19 STORAGE SHELVING - WALK IN PLAN + METROMAX — Metro MetroMax Q.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "19"
+  },
+  {
+   "room": "008",
+   "kind": "submittal",
+   "evidence": "Same ITEM# 19 STORAGE SHELVING brochure — dry-storage placement.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "19"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 20 CONVECTION OVEN — optional second oven, same Moffat basis as item 16.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "20"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 21 SPEED RACK - DRY STORAGE PLAN + '207-UA' ×5 — Cres Cor 207-UA-13A.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "21"
+  },
+  {
+   "room": "007",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 22 MICROWAVE OVEN WITH SHELF + 'HDC12A2' ×10 and 'BMS2024' ×10 — Amana HDC12A2 with BMS2024 shelf (variance note D7 on record).",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "22"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 23 BATTER MIX STARTER KIT — operator furnished.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "23"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 24 WAFFLE MAKER + 'BWB-1SE' in text — Wells BWB-1SE.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "24"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 25 WAFFLE MAKER (FUTURE) — same Wells BWB-1SE brochure.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "25"
+  },
+  {
+   "room": "009",
+   "kind": "submittal",
+   "evidence": "Header ITEM# 26 CONVEYOR TOASTER + 'ECO 4000' ×3 — APW Wyott ECO 4000-350L-HILTON.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "26"
+  },
+  {
+   "room": "006",
+   "kind": "submittal",
+   "evidence": "Model 'TUC-27G' present in the book text — True TUC-27G-ADA-HC undercounter display refrigerator.",
+   "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+   "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf",
+   "code": "31"
+  }
+ ],
+ "gaps": [
+  {
+   "room": "008",
+   "code": "01",
+   "why": "Schedule code 01 at Dry Storage is the True T-49F-HC mobile reach-in freezer, but the Clevenger brochure's ITEM 01 is the refrigeration rack and 'T-49F' appears nowhere in the book's text layer (scan?). Two numbering schemes (End Load vs Center Load) exist on the Drive — needs Austin/Clevenger to confirm which sheet governs."
+  },
+  {
+   "room": "008",
+   "code": "02",
+   "why": "Code 02 at Dry Storage is the True TS-49-HC reach-in; brochure ITEM 02 is the walk-in assembly and 'TS-49' is absent from the text layer. Same numbering-scheme question."
+  },
+  {
+   "room": "007",
+   "code": "32",
+   "why": "UNIT COOLER OmniTemp KLP106MA-S1D — not in the brochure text layer; likely inside the walk-in assembly scope (ITEM 02) or a scanned page. Verify."
+  },
+  {
+   "room": "007",
+   "code": "33",
+   "why": "UNIT COOLER (FREEZER) OMNI KLP106LE-S2D — same as 32."
+  },
+  {
+   "room": "009",
+   "code": "27",
+   "why": "DISPLAY SHOWCASE Equipex WD780B-2/1 — not in the brochure text layer."
+  },
+  {
+   "room": "009",
+   "code": "28",
+   "why": "JUICE DISPENSER Bunn JDF-4 (BY VENDOR) — not in the brochure text layer; vendor-furnished."
+  },
+  {
+   "room": "009",
+   "code": "29",
+   "why": "WARMING KETTLE Vollrath 72017 — not in the brochure text layer."
+  },
+  {
+   "room": "006",
+   "code": "30",
+   "why": "CEREAL DISPENSER Server Products 88920 — not in the brochure text layer."
+  },
+  {
+   "room": "009",
+   "code": "35",
+   "why": "REACH-IN DISPLAY FREEZER True TS-23FG-HC — not in the brochure text layer."
+  },
+  {
+   "room": "009",
+   "code": "36",
+   "why": "REACH-IN DISPLAY REFRIGERATOR True TSD-47G-HC-LD — not in the brochure text layer."
+  },
+  {
+   "room": "009",
+   "code": "37",
+   "why": "WATER DISPENSER Vivreau VI-TAP-1H — not in the brochure text layer."
+  },
+  {
+   "room": "006",
+   "code": "34",
+   "why": "Tag 34 defined in NEITHER A513 nor A514 schedule (pre-existing flag); no cutsheet can be tied to an undefined tag."
+  },
+  {
+   "room": "006",
+   "code": "39",
+   "why": "Tag 39 defined in NEITHER schedule — same as 34."
+  }
+ ],
+ "cluster": "food-service"
+}

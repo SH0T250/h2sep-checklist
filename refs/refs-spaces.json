@@ -1,0 +1,6486 @@
+{
+ "001": {
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+    "kind": "plan",
+    "sheetId": "ID-1.6",
+    "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "ST-01": [
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_457d11b58f": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   },
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   }
+  ],
+  "x_9b6923ca8e": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   }
+  ]
+ },
+ "003": {
+  "CPT-11": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "KN 1": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "KN 16": [
+   {
+    "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+    "kind": "plan",
+    "sheetId": "A510.1",
+    "title": "Enlarged Lobby – Const. Plan (Architectural set)"
+   }
+  ],
+  "KN 20": [
+   {
+    "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+    "kind": "plan",
+    "sheetId": "A510.1",
+    "title": "Enlarged Lobby – Const. Plan (Architectural set)"
+   }
+  ],
+  "KN 62": [
+   {
+    "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+    "kind": "plan",
+    "sheetId": "A510.1",
+    "title": "Enlarged Lobby – Const. Plan (Architectural set)"
+   },
+   {
+    "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+    "kind": "plan",
+    "sheetId": "A700",
+    "title": "Interior Elevations (Architectural set)"
+   },
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   }
+  ],
+  "PA-100": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Central Banquette - REQUIRED VENDOR/DESIGN",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-101": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Dining Chair @ 2 Top Square Table",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-102": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Dining Chair @ Banquette",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-103": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Lounge Chair @ Banquette",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-104": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: High Back Lounge Chair",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-106": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Dining Chair @ 4 Top Table",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-107": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Counter Stool @ Perch Table",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-111": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Meeting Room Stack Chair — Brand card says Meeting Room Stack Chair; ID-1.7 tags it in the Lobby.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-117": [
+   {
+    "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+    "kind": "plan",
+    "sheetId": "ID-1.6",
+    "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
+   }
+  ],
+  "PA-200": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Task Light @ Central Banquette",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-201": [
+   {
+    "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+    "kind": "plan",
+    "sheetId": "ID-1.6",
+    "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
+   }
+  ],
+  "PA-202": [
+   {
+    "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+    "kind": "plan",
+    "sheetId": "ID-1.6",
+    "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — RK sheets use PA-202 as the DECORATIVE MIRROR above the restroom vanity (ID-3.4); the brand spec book card PA-202 is 'Bathroom Vanity Light' and PA-502 is 'Bathroom Mirror' — the two numbering systems swap the pair. Confirm which card governs before ordering.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-205": [
+   {
+    "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+    "kind": "plan",
+    "sheetId": "ID-1.6",
+    "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Pendant Lighting @ Reception",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-300": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Square 2 Top Dining Table",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-301": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Round 2 Top Dining Table",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-302": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Rectangular 4 Top Dining Table",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-303": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Tea Height Round Table @ High Back Lounge Chair",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-304": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Laptop Table",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-307": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: ADA Dining Table",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-313": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Meeting Room Training Table",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-316": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Retail Display System",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-400": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1U_tNsW8hkCOvVODovNol8kKmo2zkeZfE",
+    "kind": "plan",
+    "sheetId": "ID-1.13",
+    "title": "Typical Corridor & Elevator Lobby — Finish/FF&E (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — Brand book PA-400 = 'Roller Shade @ Lobby & Fitness Room (Curtain Wall)'. ID-1.13 prints 'PA-400 - typical at all corridor windows' with no description — identity was recorded as unresolved. The brand card resolves the PRODUCT (roller shade); the corridor placement is RK's.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-401": [
+   {
+    "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+    "kind": "plan",
+    "sheetId": "ID-3.1",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — Item drawn as a decorative pendant (ID-3.1); brand book PA-401 = 'Roller Shade @ Fitness (Framed Windows) & Breakroom' — tag numbering diverges. Confirm which governs.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-503": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Meeting Space Artwork",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-505": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Guest Engagement Wall Artwork",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-800": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Perch Table",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   },
+   {
+    "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
+    "kind": "submittal",
+    "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
+   },
+   {
+    "driveId": "1zqme1S1N1hYuwCgCbAcBpgU9GqvJcVfS",
+    "kind": "submittal",
+    "title": "PA-800_Perch Table.pdf (individual shop drawing)"
+   }
+  ],
+  "PT-04": [
+   {
+    "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+    "kind": "plan",
+    "sheetId": "A700",
+    "title": "Interior Elevations (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+    "kind": "plan",
+    "sheetId": "ID-1.6",
+    "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "ST-01": [
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01.1": [
+   {
+    "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+    "kind": "plan",
+    "sheetId": "ID-3.1",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-01": [
+   {
+    "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+    "kind": "plan",
+    "sheetId": "A510.1",
+    "title": "Enlarged Lobby – Const. Plan (Architectural set)"
+   },
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-01.1": [
+   {
+    "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+    "kind": "plan",
+    "sheetId": "A700",
+    "title": "Interior Elevations (Architectural set)"
+   }
+  ],
+  "WC-11": [
+   {
+    "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+    "kind": "plan",
+    "sheetId": "ID-3.1",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-12": [
+   {
+    "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+    "kind": "plan",
+    "sheetId": "ID-3.1",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_04e035bcfa": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   },
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   }
+  ],
+  "x_0faf6b95fa": [
+   {
+    "driveId": "1EEb7yH2tTtQp5OjNctxpqxCRQNMO874M",
+    "kind": "plan",
+    "sheetId": "A901",
+    "title": "Millwork – Media Wall, Coffee Bar & Bussing Station (Architectural set)"
+   },
+   {
+    "driveId": "13-MJczExTRp7RRK1xaHAyR4GZpWxMmYq",
+    "kind": "plan",
+    "sheetId": "ID-4.2",
+    "title": "Millwork — Media Wall, Coffee Bar & Bussing (RK FF&E Locations ID set)"
+   }
+  ],
+  "x_21907420de": [
+   {
+    "driveId": "1DqwsYfF8gBQksKXG0iZRDGZSKG9b94fI",
+    "kind": "plan",
+    "sheetId": "A904",
+    "title": "Millwork – Guest Laundry & Window Perch (Architectural set)"
+   },
+   {
+    "driveId": "1jmQ00HRJm6GDY5rvJL0ZYxMiGnnLXinU",
+    "kind": "plan",
+    "sheetId": "ID-4.6",
+    "title": "Millwork — Guest Laundry & Window Perch (RK FF&E Locations ID set)"
+   }
+  ],
+  "x_402ac0247c": [
+   {
+    "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+    "kind": "plan",
+    "sheetId": "A700",
+    "title": "Interior Elevations (Architectural set)"
+   }
+  ],
+  "x_5d1b56117e": [
+   {
+    "driveId": "1EEb7yH2tTtQp5OjNctxpqxCRQNMO874M",
+    "kind": "plan",
+    "sheetId": "A901",
+    "title": "Millwork – Media Wall, Coffee Bar & Bussing Station (Architectural set)"
+   }
+  ],
+  "x_93eb60340c": [
+   {
+    "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+    "kind": "plan",
+    "sheetId": "A700",
+    "title": "Interior Elevations (Architectural set)"
+   }
+  ],
+  "x_96aba63b6e": [
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   }
+  ],
+  "x_b48c799d27": [
+   {
+    "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+    "kind": "plan",
+    "sheetId": "ID-3.1",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   }
+  ],
+  "x_cb4586d89a": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   },
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   }
+  ],
+  "x_d3f95486b8": [
+   {
+    "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+    "kind": "plan",
+    "sheetId": "ID-3.1",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   }
+  ],
+  "x_e17dfeabf6": [
+   {
+    "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+    "kind": "plan",
+    "sheetId": "A700",
+    "title": "Interior Elevations (Architectural set)"
+   }
+  ],
+  "x_f6907ecafe": [
+   {
+    "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+    "kind": "plan",
+    "sheetId": "A700",
+    "title": "Interior Elevations (Architectural set)"
+   }
+  ]
+ },
+ "004": {
+  "303": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "ACB-001": [
+   {
+    "driveId": "137ZTwoIoRVYPOni6K-LWZ49UUrEG192N",
+    "kind": "plan",
+    "sheetId": "A900",
+    "title": "Millwork – Front Desk (Architectural set)"
+   },
+   {
+    "driveId": "1_xSHAlK3C8ytim55trU4lBhItDc2rBZn",
+    "kind": "plan",
+    "sheetId": "ID-4.1",
+    "title": "Millwork — Front Desk (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+    "kind": "plan",
+    "sheetId": "ID-3.1",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   }
+  ],
+  "FILM-01": [
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "KN 9": [
+   {
+    "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+    "kind": "plan",
+    "sheetId": "A510.1",
+    "title": "Enlarged Lobby – Const. Plan (Architectural set)"
+   },
+   {
+    "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
+    "kind": "submittal",
+    "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
+   }
+  ],
+  "PA-501": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1U_tNsW8hkCOvVODovNol8kKmo2zkeZfE",
+    "kind": "plan",
+    "sheetId": "ID-1.13",
+    "title": "Typical Corridor & Elevator Lobby — Finish/FF&E (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — ID-1.13 calls PA-501 the elevator-lobby console/feature piece; brand book PA-501 = 'Decorative Mirror @ Guest Elevator Lobbies'. Same location, different product family — confirm which card governs.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PT-01": [
+   {
+    "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+    "kind": "plan",
+    "sheetId": "A700",
+    "title": "Interior Elevations (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PT-03": [
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   },
+   {
+    "driveId": "102hEP4Ij99oEEaxpJYj6KMLidiSiF57c",
+    "kind": "submittal",
+    "title": "RK Finish Plan Snippet Corrections.pdf (Nadia Hayek ruling, 5/7)"
+   }
+  ],
+  "PT-04": [
+   {
+    "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+    "kind": "plan",
+    "sheetId": "ID-3.1",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+    "kind": "plan",
+    "sheetId": "ID-1.6",
+    "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01.1": [
+   {
+    "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+    "kind": "plan",
+    "sheetId": "ID-3.1",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-01.1": [
+   {
+    "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+    "kind": "plan",
+    "sheetId": "A700",
+    "title": "Interior Elevations (Architectural set)"
+   }
+  ],
+  "WC-11": [
+   {
+    "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+    "kind": "plan",
+    "sheetId": "ID-3.1",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WP-10": [
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_0ceab1a614": [
+   {
+    "driveId": "137ZTwoIoRVYPOni6K-LWZ49UUrEG192N",
+    "kind": "plan",
+    "sheetId": "A900",
+    "title": "Millwork – Front Desk (Architectural set)"
+   },
+   {
+    "driveId": "1_xSHAlK3C8ytim55trU4lBhItDc2rBZn",
+    "kind": "plan",
+    "sheetId": "ID-4.1",
+    "title": "Millwork — Front Desk (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1BnLY7XQz5Lum-0rT34_QevrGgFfEjBf4",
+    "kind": "submittal",
+    "note": "Shop drawing prints 138\"W×90\"D×42\"H; the plan's M1 desk reads 11'-6\" (=138\") × 10'-1\" — depth differs from the drawing's 90\" (7'-6\"). Verify overall footprint on site.",
+    "title": "PA-801_Reception Desk.pdf (individual shop drawing)"
+   }
+  ],
+  "x_93b36e5bc9": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "005": {
+  "FILM-01": [
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PA-302": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Rectangular 4 Top Dining Table",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-314": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Retail Table - Large (Market Table)",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-315": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Retail Table - Small (Market Table)",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-800": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Perch Table",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   },
+   {
+    "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
+    "kind": "submittal",
+    "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
+   },
+   {
+    "driveId": "1zqme1S1N1hYuwCgCbAcBpgU9GqvJcVfS",
+    "kind": "submittal",
+    "title": "PA-800_Perch Table.pdf (individual shop drawing)"
+   }
+  ],
+  "PL-01": [
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01.1": [
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-04": [
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   }
+  ],
+  "WC-11": [
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-15": [
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "note": "Nadia Hayek (RK, 5/7): WC-15 on ID4.5 detail 2 is a TYPO — WC-15 was removed from Hilton specs; continue with WC-11.",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   },
+   {
+    "driveId": "102hEP4Ij99oEEaxpJYj6KMLidiSiF57c",
+    "kind": "submittal",
+    "title": "RK Finish Plan Snippet Corrections.pdf (Nadia Hayek ruling, 5/7)"
+   }
+  ],
+  "WP-10": [
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_18f888db8d": [
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   }
+  ],
+  "x_1cd8048d12": [
+   {
+    "driveId": "15dL5hpS5hrS53yAQvH2LDUbE45h6-Myb",
+    "kind": "plan",
+    "sheetId": "ID-4.5",
+    "title": "Millwork — Home2 Market & Reception Wall (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   }
+  ],
+  "x_38db56baa1": [
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   }
+  ],
+  "x_4c50298a1c": [
+   {
+    "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+    "kind": "plan",
+    "sheetId": "A700",
+    "title": "Interior Elevations (Architectural set)"
+   },
+   {
+    "driveId": "1QAf_n4tUxUEljiUMlxqcvP2MnudhJTxh",
+    "kind": "plan",
+    "sheetId": "A702",
+    "title": "Interior Elevations (Architectural set)"
+   }
+  ],
+  "x_89698e10a5": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ],
+  "x_b4248bf428": [
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   }
+  ],
+  "x_da5d7b251e": [
+   {
+    "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+    "kind": "plan",
+    "sheetId": "A903",
+    "title": "Millwork – Home2 Market & Reception Wall (Architectural set)"
+   },
+   {
+    "driveId": "15dL5hpS5hrS53yAQvH2LDUbE45h6-Myb",
+    "kind": "plan",
+    "sheetId": "ID-4.5",
+    "title": "Millwork — Home2 Market & Reception Wall (RK FF&E Locations ID set)"
+   }
+  ]
+ },
+ "006": {
+  "30": [
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   }
+  ],
+  "31": [
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "34": [
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   }
+  ],
+  "39": [
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   }
+  ],
+  "PA-110": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Employee Breakroom Chair — Brand card is the Employee Breakroom chair; also tagged at Breakfast 006.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-309": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Breakroom Dining Table @ Employee Breakroom — Brand card is the Employee Breakroom table; ID-1.7 also tags it at Breakfast.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-800": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Perch Table",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   },
+   {
+    "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
+    "kind": "submittal",
+    "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
+   },
+   {
+    "driveId": "1zqme1S1N1hYuwCgCbAcBpgU9GqvJcVfS",
+    "kind": "submittal",
+    "title": "PA-800_Perch Table.pdf (individual shop drawing)"
+   }
+  ],
+  "PA-801": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Reception Desk",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   },
+   {
+    "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
+    "kind": "submittal",
+    "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
+   },
+   {
+    "driveId": "1BnLY7XQz5Lum-0rT34_QevrGgFfEjBf4",
+    "kind": "submittal",
+    "title": "PA-801_Reception Desk.pdf (individual shop drawing)"
+   }
+  ],
+  "PA-802": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Breakfast Servery",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   },
+   {
+    "driveId": "19ip3WifJOHMGJeNdje-ZY3FuDgNxOtcc",
+    "kind": "submittal",
+    "note": "Two servery variants exist (Large 245\"W / Small 96\"W) — verify which one ID-4.4/A902 shows for this breakfast bar before fabrication.",
+    "title": "PA-802.1_Breakfast Large Servery.pdf (individual shop drawing)"
+   },
+   {
+    "driveId": "1UCFoZxK981v5NDp_r_QUDdhuO2LJ1m2w",
+    "kind": "submittal",
+    "note": "Two servery variants exist (Large 245\"W / Small 96\"W) — verify which one ID-4.4/A902 shows for this breakfast bar before fabrication.",
+    "title": "PA-802.2_Breakfast Small Servery.pdf (individual shop drawing)"
+   },
+   {
+    "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
+    "kind": "submittal",
+    "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
+   }
+  ],
+  "PA-803": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Coffee & Hydration Station",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   },
+   {
+    "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
+    "kind": "submittal",
+    "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
+   },
+   {
+    "driveId": "1HZ3A9kI74xyyiBt6_Iuf3Y_VTIQ_yJa_",
+    "kind": "submittal",
+    "title": "PA-803_Coffee & Hydration Station.pdf (individual shop drawing)"
+   }
+  ],
+  "PA-804": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Trash & Recycling",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-805": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Guest Laundry Table",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PT-04": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01.1": [
+   {
+    "driveId": "1RaIAJXNVShGoBUiBlXYZJpW7w393xGda",
+    "kind": "plan",
+    "sheetId": "A901.1",
+    "title": "Millwork – Media Wall, Coffee Bar & Bussing Station (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-21": [
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   }
+  ],
+  "WC-11": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-12": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_24efc6c7a0": [
+   {
+    "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+    "kind": "plan",
+    "sheetId": "A902",
+    "title": "Millwork – Breakfast Serving Counter (Architectural set)"
+   }
+  ],
+  "x_4057ca4d3c": [
+   {
+    "driveId": "1RaIAJXNVShGoBUiBlXYZJpW7w393xGda",
+    "kind": "plan",
+    "sheetId": "A901.1",
+    "title": "Millwork – Media Wall, Coffee Bar & Bussing Station (Architectural set)"
+   },
+   {
+    "driveId": "1h4cbqyW5ffF9KQ9XoHxPdt7xIts5rAXT",
+    "kind": "plan",
+    "sheetId": "ID-4.3",
+    "title": "Millwork — Bussing (Dish Recovery) (RK FF&E Locations ID set)"
+   }
+  ],
+  "x_9da32a85c8": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "007": {
+  "02": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "10xWCbiZ7fj8_M19Ox1vaa5YTS6_SD3SZ",
+    "kind": "plan",
+    "sheetId": "A513.1",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "04": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "05": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "06": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "07": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "11": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "12": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "13": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "14": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "15": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "16": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "10xWCbiZ7fj8_M19Ox1vaa5YTS6_SD3SZ",
+    "kind": "plan",
+    "sheetId": "A513.1",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "17": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "18": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "10xWCbiZ7fj8_M19Ox1vaa5YTS6_SD3SZ",
+    "kind": "plan",
+    "sheetId": "A513.1",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "19": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "20": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "21": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "22": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "10xWCbiZ7fj8_M19Ox1vaa5YTS6_SD3SZ",
+    "kind": "plan",
+    "sheetId": "A513.1",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "32": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   }
+  ],
+  "33": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-13": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_3bc41e72b0": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   }
+  ],
+  "x_4194428374": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   }
+  ],
+  "x_4aa35c9dde": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   },
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   }
+  ],
+  "x_5aa0aa72ef": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   }
+  ]
+ },
+ "008": {
+  "01": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   }
+  ],
+  "02": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   }
+  ],
+  "19": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-13": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_56950faa89": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "009": {
+  "01": [
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "14": [
+   {
+    "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+    "kind": "plan",
+    "sheetId": "A513",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "10xWCbiZ7fj8_M19Ox1vaa5YTS6_SD3SZ",
+    "kind": "plan",
+    "sheetId": "A513.1",
+    "title": "Enlarged Food Prep & Dry Storage (Architectural set)"
+   },
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "23": [
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "24": [
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "25": [
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "26": [
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   },
+   {
+    "driveId": "1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE",
+    "kind": "submittal",
+    "title": "Clevenger - Food Prep-Service Kitchen Equipment Cut Sheets & PD.pdf"
+   }
+  ],
+  "27": [
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   }
+  ],
+  "28": [
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   }
+  ],
+  "29": [
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   }
+  ],
+  "35": [
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   }
+  ],
+  "36": [
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   }
+  ],
+  "37": [
+   {
+    "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+    "kind": "plan",
+    "sheetId": "A514",
+    "title": "Enlarged Breakfast & Servery (Architectural set)"
+   }
+  ],
+  "CPT-12.1": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01.1": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-21": [
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   }
+  ],
+  "WC-11": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-12": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_2577488987": [
+   {
+    "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+    "kind": "plan",
+    "sheetId": "A902",
+    "title": "Millwork – Breakfast Serving Counter (Architectural set)"
+   }
+  ],
+  "x_4423c9b59b": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   }
+  ],
+  "x_4b6b42d7b9": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ],
+  "x_5f334dcdd2": [
+   {
+    "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+    "kind": "plan",
+    "sheetId": "A902",
+    "title": "Millwork – Breakfast Serving Counter (Architectural set)"
+   }
+  ],
+  "x_67e35d7d04": [
+   {
+    "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+    "kind": "plan",
+    "sheetId": "A902",
+    "title": "Millwork – Breakfast Serving Counter (Architectural set)"
+   }
+  ],
+  "x_70fba9a7a9": [
+   {
+    "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+    "kind": "plan",
+    "sheetId": "A902",
+    "title": "Millwork – Breakfast Serving Counter (Architectural set)"
+   }
+  ],
+  "x_7d8abeb0a6": [
+   {
+    "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+    "kind": "plan",
+    "sheetId": "A902",
+    "title": "Millwork – Breakfast Serving Counter (Architectural set)"
+   }
+  ],
+  "x_a71c95a90f": [
+   {
+    "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+    "kind": "plan",
+    "sheetId": "A902",
+    "title": "Millwork – Breakfast Serving Counter (Architectural set)"
+   }
+  ],
+  "x_cb989abf5e": [
+   {
+    "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+    "kind": "plan",
+    "sheetId": "A902",
+    "title": "Millwork – Breakfast Serving Counter (Architectural set)"
+   }
+  ]
+ },
+ "010": {
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01.1": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-12": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_137333df8b": [
+   {
+    "driveId": "1vXFU1HPeq0tsjAPg_MAlNv62vQa9e2Ir",
+    "kind": "plan",
+    "sheetId": "A905",
+    "title": "Millwork – Work Station, Mng's Work Surface & Emp. Break Room (Architectural set)"
+   }
+  ],
+  "x_22b3d22cf6": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   },
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   }
+  ]
+ },
+ "011": {
+  "300": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "KN 4": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_95610fa254": [
+   {
+    "driveId": "1vXFU1HPeq0tsjAPg_MAlNv62vQa9e2Ir",
+    "kind": "plan",
+    "sheetId": "A905",
+    "title": "Millwork – Work Station, Mng's Work Surface & Emp. Break Room (Architectural set)"
+   }
+  ],
+  "x_a4ca94a09c": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   }
+  ],
+  "x_ea8536701e": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   },
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   }
+  ]
+ },
+ "012": {
+  "KN 19": [
+   {
+    "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+    "kind": "plan",
+    "sheetId": "A510.1",
+    "title": "Enlarged Lobby – Const. Plan (Architectural set)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_0d9bc68780": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   }
+  ]
+ },
+ "013": {
+  "304": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "ST-01": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_b33d3581bf": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+    "kind": "plan",
+    "sheetId": "A510.1",
+    "title": "Enlarged Lobby – Const. Plan (Architectural set)"
+   },
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   }
+  ],
+  "x_df047756c1": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "014": {
+  "408": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "431": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "CPT-10.1": [
+   {
+    "driveId": "1QAf_n4tUxUEljiUMlxqcvP2MnudhJTxh",
+    "kind": "plan",
+    "sheetId": "A702",
+    "title": "Interior Elevations (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PA-110": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Employee Breakroom Chair — Brand card is the Employee Breakroom chair; also tagged at Breakfast 006.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-309": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Breakroom Dining Table @ Employee Breakroom — Brand card is the Employee Breakroom table; ID-1.7 also tags it at Breakfast.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PT-03": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PT-05": [
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "RB-10": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "RF-11": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "ST-01": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-10": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_245947392c": [
+   {
+    "driveId": "1vXFU1HPeq0tsjAPg_MAlNv62vQa9e2Ir",
+    "kind": "plan",
+    "sheetId": "A905",
+    "title": "Millwork – Work Station, Mng's Work Surface & Emp. Break Room (Architectural set)"
+   }
+  ],
+  "x_f618d064f2": [
+   {
+    "driveId": "1vXFU1HPeq0tsjAPg_MAlNv62vQa9e2Ir",
+    "kind": "plan",
+    "sheetId": "A905",
+    "title": "Millwork – Work Station, Mng's Work Surface & Emp. Break Room (Architectural set)"
+   }
+  ],
+  "x_f89aad8f9c": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "015": {
+  "401": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "409": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+    "kind": "plan",
+    "sheetId": "ID-1.6",
+    "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_313e77bd20": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   }
+  ],
+  "x_d9338d8ce6": [
+   {
+    "driveId": "1ekRs-QaCW4LLuCbFgCADLYouD8XSqk5U",
+    "kind": "plan",
+    "sheetId": "A906",
+    "title": "Millwork – House Laundry, Engineer's Office & Sales Office (Architectural set)"
+   }
+  ],
+  "x_e4e1efbdb1": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "016": {
+  "402": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+    "kind": "plan",
+    "sheetId": "ID-1.6",
+    "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_6f78a9900e": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ],
+  "x_76592963e3": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   }
+  ]
+ },
+ "017": {
+  "404": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "KN 4": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+    "kind": "plan",
+    "sheetId": "ID-1.6",
+    "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_e1163f464d": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   }
+  ],
+  "x_ed6d70f918": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "018": {
+  "CPT-10": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "CPT-13": [
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   }
+  ],
+  "PA-310": [
+   {
+    "driveId": "1S5kLmk5W2ONJKG5pEUmICv-bH9Mi5TQL",
+    "kind": "plan",
+    "sheetId": "A907",
+    "title": "Millwork – Meeting Room (Architectural set)"
+   },
+   {
+    "driveId": "1hkSlfEoGAo95duYc_EqYK56Gk51YLkNX",
+    "kind": "plan",
+    "sheetId": "ID-4.7",
+    "title": "Millwork — Meeting Room (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — ID-4.7 keys PA-310 to the meeting-room credenza (M18); brand book PA-310 = 'Towel Station @ Fitness' — collision. Confirm.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-400": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — Brand book PA-400 = 'Roller Shade @ Lobby & Fitness Room (Curtain Wall)'. ID-1.13 prints 'PA-400 - typical at all corridor windows' with no description — identity was recorded as unresolved. The brand card resolves the PRODUCT (roller shade); the corridor placement is RK's.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-402": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — Item drawn as the meeting-room stacking chair (ID-1.7 x4); brand book PA-402 = 'Roller Shade @ Sales, Boardroom, & Meeting Room' — collision; brand PA-111 is the stack chair. Confirm.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-807": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Three Bay Meeting Room Casework",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PT-04": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+    "kind": "plan",
+    "sheetId": "ID-1.6",
+    "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "VCT-15": [
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   }
+  ],
+  "WC-10": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_8a54cc8a3f": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   }
+  ],
+  "x_a550b728f8": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   },
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   }
+  ],
+  "x_b3f4933bcf": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ],
+  "x_bb6c7453af": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   }
+  ]
+ },
+ "019": {
+  "EX": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-01": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-06A": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-06B": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-06C": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-09A": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   }
+  ],
+  "HD-09B": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   }
+  ],
+  "HD-09C": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   }
+  ],
+  "HD-12": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-13": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-19": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-7B": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   }
+  ],
+  "KN 8": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "PA-202": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — RK sheets use PA-202 as the DECORATIVE MIRROR above the restroom vanity (ID-3.4); the brand spec book card PA-202 is 'Bathroom Vanity Light' and PA-502 is 'Bathroom Mirror' — the two numbering systems swap the pair. Confirm which card governs before ordering.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-502": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — RK sheets use PA-502 as the DECORATIVE SCONCE above the vanity; brand book PA-502 is 'Bathroom Mirror' (PA-202 is the vanity light) — swapped pair. Confirm before ordering.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "R": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "T-01": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01.1": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-10": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-02": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-11": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_3c0fa3ac74": [
+   {
+    "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+    "kind": "plan",
+    "sheetId": "A510.1",
+    "title": "Enlarged Lobby – Const. Plan (Architectural set)"
+   },
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "1v6EonTmD3dGLAjMoOUUbswcAJjxO23tw",
+    "kind": "submittal",
+    "note": "Quantity 3 PCS on the drawing — one per public restroom (Womens 019 / Mens 020 / Unisex 027). Sheet note: 'NEED SPLASH ALL 3 SIDES'.",
+    "title": "PV-36_Public Restroom Vanities 36IN.pdf (individual shop drawing)"
+   },
+   {
+    "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
+    "kind": "submittal",
+    "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
+   }
+  ],
+  "x_a1d1d2cdd3": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   },
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ]
+ },
+ "020": {
+  "403": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "820": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "EX": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-01": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-06A": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-06B": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-06C": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-09A": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   }
+  ],
+  "HD-09B": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   }
+  ],
+  "HD-09C": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   }
+  ],
+  "HD-12": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-13": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-19": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-7B": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   }
+  ],
+  "PA-202": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — RK sheets use PA-202 as the DECORATIVE MIRROR above the restroom vanity (ID-3.4); the brand spec book card PA-202 is 'Bathroom Vanity Light' and PA-502 is 'Bathroom Mirror' — the two numbering systems swap the pair. Confirm which card governs before ordering.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-502": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — RK sheets use PA-502 as the DECORATIVE SCONCE above the vanity; brand book PA-502 is 'Bathroom Mirror' (PA-202 is the vanity light) — swapped pair. Confirm before ordering.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "R": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "T-01": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01.1": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-10": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-02": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-11": [
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_3c0fa3ac74": [
+   {
+    "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+    "kind": "plan",
+    "sheetId": "A510.1",
+    "title": "Enlarged Lobby – Const. Plan (Architectural set)"
+   },
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "1v6EonTmD3dGLAjMoOUUbswcAJjxO23tw",
+    "kind": "submittal",
+    "note": "Quantity 3 PCS on the drawing — one per public restroom (Womens 019 / Mens 020 / Unisex 027). Sheet note: 'NEED SPLASH ALL 3 SIDES'.",
+    "title": "PV-36_Public Restroom Vanities 36IN.pdf (individual shop drawing)"
+   },
+   {
+    "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
+    "kind": "submittal",
+    "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
+   }
+  ],
+  "x_a1d1d2cdd3": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   },
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+    "kind": "plan",
+    "sheetId": "A520",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ]
+ },
+ "021": {
+  "KN 4": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "PT-03": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   },
+   {
+    "driveId": "102hEP4Ij99oEEaxpJYj6KMLidiSiF57c",
+    "kind": "submittal",
+    "title": "RK Finish Plan Snippet Corrections.pdf (Nadia Hayek ruling, 5/7)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+    "kind": "plan",
+    "sheetId": "ID-1.6",
+    "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "RB-12": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "VCT-10": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_0cc08a312e": [
+   {
+    "driveId": "1ekRs-QaCW4LLuCbFgCADLYouD8XSqk5U",
+    "kind": "plan",
+    "sheetId": "A906",
+    "title": "Millwork – House Laundry, Engineer's Office & Sales Office (Architectural set)"
+   }
+  ],
+  "x_2bd6903cc1": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   },
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   }
+  ],
+  "x_f60d737c0f": [
+   {
+    "driveId": "1ekRs-QaCW4LLuCbFgCADLYouD8XSqk5U",
+    "kind": "plan",
+    "sheetId": "A906",
+    "title": "Millwork – House Laundry, Engineer's Office & Sales Office (Architectural set)"
+   }
+  ]
+ },
+ "022": {
+  "CPT-12": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "KN 4": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "PA-105": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Focus Booth",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-306": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Dining Table @ Booth",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-402": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — Item drawn as the meeting-room stacking chair (ID-1.7 x4); brand book PA-402 = 'Roller Shade @ Sales, Boardroom, & Meeting Room' — collision; brand PA-111 is the stack chair. Confirm.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_945bfff81e": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   },
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   }
+  ],
+  "x_f58ef99727": [
+   {
+    "driveId": "1ekRs-QaCW4LLuCbFgCADLYouD8XSqk5U",
+    "kind": "plan",
+    "sheetId": "A906",
+    "title": "Millwork – House Laundry, Engineer's Office & Sales Office (Architectural set)"
+   }
+  ]
+ },
+ "023": {
+  "800": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "801": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "802": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "803": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "804": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "805": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "806": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "807": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "808": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "809": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "810": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "811": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "812": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "813": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "814": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "816": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "817": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+    "kind": "plan",
+    "sheetId": "A700",
+    "title": "Interior Elevations (Architectural set)"
+   }
+  ],
+  "819": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "ACT-01": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   },
+   {
+    "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+    "kind": "plan",
+    "sheetId": "ID-1.6",
+    "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
+   }
+  ],
+  "PA-202": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — RK sheets use PA-202 as the DECORATIVE MIRROR above the restroom vanity (ID-3.4); the brand spec book card PA-202 is 'Bathroom Vanity Light' and PA-502 is 'Bathroom Mirror' — the two numbering systems swap the pair. Confirm which card governs before ordering.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-311": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Food Delivery Pick-Up Console — Brand card says Food Delivery Pick-Up Console; A510.3 places the tag at Fitness 023.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-400": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — Brand book PA-400 = 'Roller Shade @ Lobby & Fitness Room (Curtain Wall)'. ID-1.13 prints 'PA-400 - typical at all corridor windows' with no description — identity was recorded as unresolved. The brand card resolves the PRODUCT (roller shade); the corridor placement is RK's.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-401": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — Item drawn as a decorative pendant (ID-3.1); brand book PA-401 = 'Roller Shade @ Fitness (Framed Windows) & Breakroom' — tag numbering diverges. Confirm which governs.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-502": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — RK sheets use PA-502 as the DECORATIVE SCONCE above the vanity; brand book PA-502 is 'Bathroom Mirror' (PA-202 is the vanity light) — swapped pair. Confirm before ordering.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-506": [
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Fitness Wall Hooks",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PT-04": [
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "RB-11": [
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "RF-10": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "RF-15": [
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   }
+  ],
+  "ST-01": [
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01.1": [
+   {
+    "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+    "kind": "plan",
+    "sheetId": "ID-3.1",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-10": [
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-11": [
+   {
+    "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+    "kind": "plan",
+    "sheetId": "ID-3.1",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   },
+   {
+    "driveId": "102hEP4Ij99oEEaxpJYj6KMLidiSiF57c",
+    "kind": "submittal",
+    "title": "RK Finish Plan Snippet Corrections.pdf (Nadia Hayek ruling, 5/7)"
+   }
+  ],
+  "WC-14": [
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_170f36bd1a": [
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1nUiICOJzVKofUezG6x2jSjHhi97StqRY",
+    "kind": "plan",
+    "sheetId": "A701",
+    "title": "Interior Elevations (Architectural set)"
+   }
+  ],
+  "x_a327948147": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   },
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   }
+  ]
+ },
+ "024": {
+  "406": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "407": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "408": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "KN 60": [
+   {
+    "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+    "kind": "plan",
+    "sheetId": "A510.1",
+    "title": "Enlarged Lobby – Const. Plan (Architectural set)"
+   }
+  ],
+  "PA-109": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Counter Stool @ Laundry Room",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PT-03": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PT-04": [
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "RB-10": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "RB-12": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "SF-05": [
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1DqwsYfF8gBQksKXG0iZRDGZSKG9b94fI",
+    "kind": "plan",
+    "sheetId": "A904",
+    "title": "Millwork – Guest Laundry & Window Perch (Architectural set)"
+   }
+  ],
+  "ST-01": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01.1": [
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-10": [
+   {
+    "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+    "kind": "plan",
+    "sheetId": "ID-3.3",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-11": [
+   {
+    "driveId": "1DqwsYfF8gBQksKXG0iZRDGZSKG9b94fI",
+    "kind": "plan",
+    "sheetId": "A904",
+    "title": "Millwork – Guest Laundry & Window Perch (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-13": [
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_4a473fc5a9": [
+   {
+    "driveId": "1DqwsYfF8gBQksKXG0iZRDGZSKG9b94fI",
+    "kind": "plan",
+    "sheetId": "A904",
+    "title": "Millwork – Guest Laundry & Window Perch (Architectural set)"
+   }
+  ],
+  "x_84d234fc74": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ],
+  "x_a4f9bf65d0": [
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   }
+  ],
+  "x_b2a4a88c41": [
+   {
+    "driveId": "1DqwsYfF8gBQksKXG0iZRDGZSKG9b94fI",
+    "kind": "plan",
+    "sheetId": "A904",
+    "title": "Millwork – Guest Laundry & Window Perch (Architectural set)"
+   },
+   {
+    "driveId": "1jmQ00HRJm6GDY5rvJL0ZYxMiGnnLXinU",
+    "kind": "plan",
+    "sheetId": "ID-4.6",
+    "title": "Millwork — Guest Laundry & Window Perch (RK FF&E Locations ID set)"
+   }
+  ],
+  "x_ddeba610cf": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   },
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   }
+  ],
+  "x_e2d9168780": [
+   {
+    "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+    "kind": "plan",
+    "sheetId": "A700",
+    "title": "Interior Elevations (Architectural set)"
+   }
+  ]
+ },
+ "025": {
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_0d9bc68780": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   }
+  ],
+  "x_ce80761f08": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "027": {
+  "EX": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-01": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-06": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-06A": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-06B": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-06C": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-09A": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   }
+  ],
+  "HD-09B": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   }
+  ],
+  "HD-09C": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   }
+  ],
+  "HD-12": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-13": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-15": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-19": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "HD-7B": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   }
+  ],
+  "PA-202": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — RK sheets use PA-202 as the DECORATIVE MIRROR above the restroom vanity (ID-3.4); the brand spec book card PA-202 is 'Bathroom Vanity Light' and PA-502 is 'Bathroom Mirror' — the two numbering systems swap the pair. Confirm which card governs before ordering.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-502": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — RK sheets use PA-502 as the DECORATIVE SCONCE above the vanity; brand book PA-502 is 'Bathroom Mirror' (PA-202 is the vanity light) — swapped pair. Confirm before ordering.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "R": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "T-01": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01.1": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-10": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "W": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "WC-02": [
+   {
+    "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+    "kind": "plan",
+    "sheetId": "ID-3.4",
+    "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-11": [
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_47eeb03433": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   },
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   }
+  ],
+  "x_7763127bea": [
+   {
+    "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+    "kind": "plan",
+    "sheetId": "A510.1",
+    "title": "Enlarged Lobby – Const. Plan (Architectural set)"
+   },
+   {
+    "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+    "kind": "plan",
+    "sheetId": "A521",
+    "title": "Enlarged Public Restroom (Architectural set)"
+   },
+   {
+    "driveId": "1v6EonTmD3dGLAjMoOUUbswcAJjxO23tw",
+    "kind": "submittal",
+    "note": "Quantity 3 PCS on the drawing — one per public restroom (Womens 019 / Mens 020 / Unisex 027). Sheet note: 'NEED SPLASH ALL 3 SIDES'.",
+    "title": "PV-36_Public Restroom Vanities 36IN.pdf (individual shop drawing)"
+   },
+   {
+    "driveId": "1L9WZOhjThhINv-T-nxdIAK8gjT7w-sk5",
+    "kind": "submittal",
+    "title": "RK Hospitality Shop Drawings & PD - Tables, Reception Desk, Breakfast & Public RR Vanities.pdf"
+   }
+  ]
+ },
+ "028": {
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_0d9bc68780": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   }
+  ],
+  "x_4c6a64cef8": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "029": {
+  "x_4092da2ad2": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ],
+  "x_76592963e3": [
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   }
+  ]
+ },
+ "030": {
+  "x_76592963e3": [
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   }
+  ],
+  "x_814c39c64b": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "031": {
+  "32": [
+   {
+    "driveId": "1Ut5azBua2hNCpkLf5-IqqV-w8Byhb7k4",
+    "kind": "plan",
+    "sheetId": "A511.1",
+    "title": "Enlarged Public Area – Const. Plan (Architectural set)"
+   },
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   }
+  ],
+  "KN 18": [
+   {
+    "driveId": "1Ut5azBua2hNCpkLf5-IqqV-w8Byhb7k4",
+    "kind": "plan",
+    "sheetId": "A511.1",
+    "title": "Enlarged Public Area – Const. Plan (Architectural set)"
+   }
+  ],
+  "KN 33": [
+   {
+    "driveId": "1Ut5azBua2hNCpkLf5-IqqV-w8Byhb7k4",
+    "kind": "plan",
+    "sheetId": "A511.1",
+    "title": "Enlarged Public Area – Const. Plan (Architectural set)"
+   }
+  ],
+  "KN 35": [
+   {
+    "driveId": "1Ut5azBua2hNCpkLf5-IqqV-w8Byhb7k4",
+    "kind": "plan",
+    "sheetId": "A511.1",
+    "title": "Enlarged Public Area – Const. Plan (Architectural set)"
+   }
+  ],
+  "KN 6": [
+   {
+    "driveId": "1Ut5azBua2hNCpkLf5-IqqV-w8Byhb7k4",
+    "kind": "plan",
+    "sheetId": "A511.1",
+    "title": "Enlarged Public Area – Const. Plan (Architectural set)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+    "kind": "plan",
+    "sheetId": "ID-1.6",
+    "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "VCT-10": [
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_9f9686629b": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "032": {
+  "14": [
+   {
+    "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+    "kind": "plan",
+    "sheetId": "A510.1",
+    "title": "Enlarged Lobby – Const. Plan (Architectural set)"
+   },
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   }
+  ],
+  "KN 17": [
+   {
+    "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+    "kind": "plan",
+    "sheetId": "A510.1",
+    "title": "Enlarged Lobby – Const. Plan (Architectural set)"
+   },
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+    "kind": "plan",
+    "sheetId": "ID-1.6",
+    "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1JJhMfJ3o7L_4ZVc9Ph2E83d0BTqN7DTp",
+    "kind": "plan",
+    "sheetId": "ID-1.11",
+    "title": "Enlarged Public Area RCP (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "RB-12": [
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "VCT-10": [
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_7a0ee13839": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "033": {
+  "x_76592963e3": [
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   }
+  ],
+  "x_a271ff0b92": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "100": {
+  "CPT-12": [
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   },
+   {
+    "driveId": "102hEP4Ij99oEEaxpJYj6KMLidiSiF57c",
+    "kind": "submittal",
+    "title": "RK Finish Plan Snippet Corrections.pdf (Nadia Hayek ruling, 5/7)"
+   }
+  ],
+  "CPT-12.1": [
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "CPT-12.ALT": [
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "note": "ALTERNATE stairwell carpet — base card CPT-12; the base-spec-vs-alternate conflict is already flagged on the item.",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01": [
+   {
+    "driveId": "1M4s0tMdUD4L89clif8R9-3-kQYyC_XWi",
+    "kind": "plan",
+    "sheetId": "ID-1.1",
+    "title": "First Floor Overall Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   },
+   {
+    "driveId": "102hEP4Ij99oEEaxpJYj6KMLidiSiF57c",
+    "kind": "submittal",
+    "title": "RK Finish Plan Snippet Corrections.pdf (Nadia Hayek ruling, 5/7)"
+   }
+  ],
+  "T-01.1": [
+   {
+    "driveId": "1M4s0tMdUD4L89clif8R9-3-kQYyC_XWi",
+    "kind": "plan",
+    "sheetId": "ID-1.1",
+    "title": "First Floor Overall Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_7e004f43fb": [
+   {
+    "driveId": "160S5G0KO-9-u6Vc_u9htmRHTXdoBK6dy",
+    "kind": "plan",
+    "sheetId": "A431",
+    "title": "Stair #1 Plans / Sections (Architectural set)"
+   }
+  ],
+  "x_a6b4fb8b08": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ],
+  "x_d742fa366d": [
+   {
+    "driveId": "1M4s0tMdUD4L89clif8R9-3-kQYyC_XWi",
+    "kind": "plan",
+    "sheetId": "ID-1.1",
+    "title": "First Floor Overall Plan (RK FF&E Locations ID set)"
+   }
+  ]
+ },
+ "121": {
+  "CPT-10": [
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "1-ZQJyAz2_TE-0Ar_GmA0ng0heV71VOp_",
+    "kind": "plan",
+    "sheetId": "A511.3",
+    "title": "Enlarged Public & Typ. Fl Finish & Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "1hg5M7fTi780pI76i93FqsuMSiQCjsEHr",
+    "kind": "plan",
+    "sheetId": "ID-1.12",
+    "title": "Enlarged Public Area Finish Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "CPT-10.1": [
+   {
+    "driveId": "1U_tNsW8hkCOvVODovNol8kKmo2zkeZfE",
+    "kind": "plan",
+    "sheetId": "ID-1.13",
+    "title": "Typical Corridor & Elevator Lobby — Finish/FF&E (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1nUiICOJzVKofUezG6x2jSjHhi97StqRY",
+    "kind": "plan",
+    "sheetId": "A701",
+    "title": "Interior Elevations (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PA-204": [
+   {
+    "driveId": "1JJhMfJ3o7L_4ZVc9Ph2E83d0BTqN7DTp",
+    "kind": "plan",
+    "sheetId": "ID-1.11",
+    "title": "Enlarged Public Area RCP (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1sKWNLQLS57J-EI0R_UHnqtxvb2VN_5wD",
+    "kind": "plan",
+    "sheetId": "ID-1.15",
+    "title": "Typical Corridor RCP — West (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1ESjkIiM6_iTPVb2MnfeuLwWF3Isj2rEt",
+    "kind": "plan",
+    "sheetId": "ID-1.16",
+    "title": "Typical Corridor RCP — East + Elevator Lobby (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Wall Sconce @ Guest Corridor",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PA-400": [
+   {
+    "driveId": "1U_tNsW8hkCOvVODovNol8kKmo2zkeZfE",
+    "kind": "plan",
+    "sheetId": "ID-1.13",
+    "title": "Typical Corridor & Elevator Lobby — Finish/FF&E (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1sKWNLQLS57J-EI0R_UHnqtxvb2VN_5wD",
+    "kind": "plan",
+    "sheetId": "ID-1.15",
+    "title": "Typical Corridor RCP — West (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1ESjkIiM6_iTPVb2MnfeuLwWF3Isj2rEt",
+    "kind": "plan",
+    "sheetId": "ID-1.16",
+    "title": "Typical Corridor RCP — East + Elevator Lobby (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — Brand book PA-400 = 'Roller Shade @ Lobby & Fitness Room (Curtain Wall)'. ID-1.13 prints 'PA-400 - typical at all corridor windows' with no description — identity was recorded as unresolved. The brand card resolves the PRODUCT (roller shade); the corridor placement is RK's.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "1JJhMfJ3o7L_4ZVc9Ph2E83d0BTqN7DTp",
+    "kind": "plan",
+    "sheetId": "ID-1.11",
+    "title": "Enlarged Public Area RCP (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1sKWNLQLS57J-EI0R_UHnqtxvb2VN_5wD",
+    "kind": "plan",
+    "sheetId": "ID-1.15",
+    "title": "Typical Corridor RCP — West (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1ESjkIiM6_iTPVb2MnfeuLwWF3Isj2rEt",
+    "kind": "plan",
+    "sheetId": "ID-1.16",
+    "title": "Typical Corridor RCP — East + Elevator Lobby (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-10": [
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "1-ZQJyAz2_TE-0Ar_GmA0ng0heV71VOp_",
+    "kind": "plan",
+    "sheetId": "A511.3",
+    "title": "Enlarged Public & Typ. Fl Finish & Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "1hg5M7fTi780pI76i93FqsuMSiQCjsEHr",
+    "kind": "plan",
+    "sheetId": "ID-1.12",
+    "title": "Enlarged Public Area Finish Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_70e2792cf2": [
+   {
+    "driveId": "1hg5M7fTi780pI76i93FqsuMSiQCjsEHr",
+    "kind": "plan",
+    "sheetId": "ID-1.12",
+    "title": "Enlarged Public Area Finish Plan (RK FF&E Locations ID set)"
+   }
+  ],
+  "x_abad68b9d3": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "137": {
+  "821": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+    "kind": "plan",
+    "sheetId": "A510.1",
+    "title": "Enlarged Lobby – Const. Plan (Architectural set)"
+   }
+  ],
+  "PA-501": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   },
+   {
+    "driveId": "1U_tNsW8hkCOvVODovNol8kKmo2zkeZfE",
+    "kind": "plan",
+    "sheetId": "ID-1.13",
+    "title": "Typical Corridor & Elevator Lobby — Finish/FF&E (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "TAG COLLISION — ID-1.13 calls PA-501 the elevator-lobby console/feature piece; brand book PA-501 = 'Decorative Mirror @ Guest Elevator Lobbies'. Same location, different product family — confirm which card governs.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PT-04": [
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1nUiICOJzVKofUezG6x2jSjHhi97StqRY",
+    "kind": "plan",
+    "sheetId": "A701",
+    "title": "Interior Elevations (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01.1": [
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-10": [
+   {
+    "driveId": "1-ZQJyAz2_TE-0Ar_GmA0ng0heV71VOp_",
+    "kind": "plan",
+    "sheetId": "A511.3",
+    "title": "Enlarged Public & Typ. Fl Finish & Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1U_tNsW8hkCOvVODovNol8kKmo2zkeZfE",
+    "kind": "plan",
+    "sheetId": "ID-1.13",
+    "title": "Typical Corridor & Elevator Lobby — Finish/FF&E (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "WC-11": [
+   {
+    "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+    "kind": "plan",
+    "sheetId": "ID-3.2",
+    "title": "Public Space Interior Elevations (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_227ff49017": [
+   {
+    "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+    "kind": "plan",
+    "sheetId": "A700",
+    "title": "Interior Elevations (Architectural set)"
+   }
+  ],
+  "x_5fe6f58ba3": [
+   {
+    "driveId": "1nUiICOJzVKofUezG6x2jSjHhi97StqRY",
+    "kind": "plan",
+    "sheetId": "A701",
+    "title": "Interior Elevations (Architectural set)"
+   }
+  ],
+  "x_f8f7ae2520": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "139": {
+  "432": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "PT-07": [
+   {
+    "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+    "kind": "plan",
+    "sheetId": "A510.2",
+    "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01": [
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+    "kind": "plan",
+    "sheetId": "A511.2",
+    "title": "Enlarged Public – Finish & Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_473d4f985f": [
+   {
+    "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+    "kind": "plan",
+    "sheetId": "A120",
+    "title": "Reflected Ceiling Plan – First Floor (Architectural set)"
+   }
+  ]
+ },
+ "141": {
+  "CPT-12": [
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   },
+   {
+    "driveId": "102hEP4Ij99oEEaxpJYj6KMLidiSiF57c",
+    "kind": "submittal",
+    "title": "RK Finish Plan Snippet Corrections.pdf (Nadia Hayek ruling, 5/7)"
+   }
+  ],
+  "CPT-12.1": [
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "CPT-12.ALT": [
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "note": "ALTERNATE stairwell carpet — base card CPT-12; the base-spec-vs-alternate conflict is already flagged on the item.",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-01": [
+   {
+    "driveId": "1M4s0tMdUD4L89clif8R9-3-kQYyC_XWi",
+    "kind": "plan",
+    "sheetId": "ID-1.1",
+    "title": "First Floor Overall Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   },
+   {
+    "driveId": "102hEP4Ij99oEEaxpJYj6KMLidiSiF57c",
+    "kind": "submittal",
+    "title": "RK Finish Plan Snippet Corrections.pdf (Nadia Hayek ruling, 5/7)"
+   }
+  ],
+  "T-01.1": [
+   {
+    "driveId": "1M4s0tMdUD4L89clif8R9-3-kQYyC_XWi",
+    "kind": "plan",
+    "sheetId": "ID-1.1",
+    "title": "First Floor Overall Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "x_2fdd636083": [
+   {
+    "driveId": "1M4s0tMdUD4L89clif8R9-3-kQYyC_XWi",
+    "kind": "plan",
+    "sheetId": "ID-1.1",
+    "title": "First Floor Overall Plan (RK FF&E Locations ID set)"
+   }
+  ],
+  "x_41fb946a1e": [
+   {
+    "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+    "kind": "plan",
+    "sheetId": "A510.1",
+    "title": "Enlarged Lobby – Const. Plan (Architectural set)"
+   }
+  ],
+  "x_f01833128f": [
+   {
+    "driveId": "18hj9wTWerusWGZOwr6X2G1PajGRUgqhm",
+    "kind": "plan",
+    "sheetId": "A433",
+    "title": "Stair #2 Plans / Sections (Architectural set)"
+   }
+  ]
+ },
+ "ZONE-A": {
+  "400": [
+   {
+    "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+    "kind": "plan",
+    "sheetId": "A510.3",
+    "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)"
+   }
+  ],
+  "OF-700": [
+   {
+    "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+    "kind": "plan",
+    "sheetId": "ID-1.9",
+    "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Bench Seating @ Outdoor Lounge",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-701": [
+   {
+    "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+    "kind": "plan",
+    "sheetId": "ID-1.9",
+    "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Bench Seating @ Outdoor Lounge Firepit",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-702": [
+   {
+    "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+    "kind": "plan",
+    "sheetId": "ID-1.9",
+    "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Arm Chair @ Outdoor Lounge",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-703": [
+   {
+    "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+    "kind": "plan",
+    "sheetId": "ID-1.9",
+    "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Lounge Chair @ Outdoor Lounge Firepit",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-704": [
+   {
+    "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+    "kind": "plan",
+    "sheetId": "ID-1.9",
+    "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Ottoman @ Outdoor Lounge Firepit",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-705": [
+   {
+    "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+    "kind": "plan",
+    "sheetId": "ID-1.9",
+    "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: 2 Top Table @ Outdoor Lounge & Grilling Patio",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-707": [
+   {
+    "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+    "kind": "plan",
+    "sheetId": "ID-1.9",
+    "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Cocktail Table @ Outdoor Lounge",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-708": [
+   {
+    "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+    "kind": "plan",
+    "sheetId": "ID-1.9",
+    "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Lounge Chair @ Outdoor Lounge",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-709": [
+   {
+    "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+    "kind": "plan",
+    "sheetId": "ID-1.9",
+    "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Round Side Table @ Outdoor Lounge",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-711": [
+   {
+    "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+    "kind": "plan",
+    "sheetId": "ID-1.9",
+    "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Dining Chair @ Outdoor Lounge, Grilling Patio, & Pool",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-716": [
+   {
+    "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+    "kind": "plan",
+    "sheetId": "ID-1.9",
+    "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Planter",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "x_00af97bf2a": [
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   },
+   {
+    "driveId": "1_pU83H311K35wPSlqkFrCJ1GnIn86YIZ",
+    "kind": "plan",
+    "sheetId": "AS100",
+    "title": "Site Plan (Architectural set)"
+   }
+  ],
+  "x_3d8d3f39ff": [
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   }
+  ],
+  "x_7b93a30816": [
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   },
+   {
+    "driveId": "1u_0DezOvS54KnUT4UMTyPlGhe-CusQJi",
+    "kind": "plan",
+    "sheetId": "AS103",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   }
+  ],
+  "x_e42aa928dc": [
+   {
+    "driveId": "1u_0DezOvS54KnUT4UMTyPlGhe-CusQJi",
+    "kind": "plan",
+    "sheetId": "AS103",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   },
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   }
+  ],
+  "x_eb7a3fa3bd": [
+   {
+    "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+    "kind": "plan",
+    "sheetId": "AS102",
+    "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)"
+   },
+   {
+    "driveId": "1pAe2H2xSusx9DCJ4gH7a_qREfk0LGKPE",
+    "kind": "plan",
+    "sheetId": "AS105",
+    "title": "Enlarged Outdoor Pool & Patio – Elev. & Sections (Rev 04/09/26) (Architectural set)"
+   }
+  ]
+ },
+ "ZONE-B": {
+  "CUST-OF-720": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   }
+  ],
+  "OF-705": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: 2 Top Table @ Outdoor Lounge & Grilling Patio",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-705.ADA": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Accessible variant; brand card OF-705 \"2 Top Table\" — ADA variant tag printed on AS104. See also OF-719 4 Top ADA Dining Table.",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-706": [
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1pAe2H2xSusx9DCJ4gH7a_qREfk0LGKPE",
+    "kind": "plan",
+    "sheetId": "AS105",
+    "title": "Enlarged Outdoor Pool & Patio – Elev. & Sections (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Food Prep Table @ Grilling Patio",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-710": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Counter Stool @ Grilling Patio",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-711": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Dining Chair @ Outdoor Lounge, Grilling Patio, & Pool",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-712": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Counter Height Table @ Grilling Patio",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-713": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Chaise Lounge @ Pool",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-714": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Round Side Table @ Pool",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-715": [
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Round 2 Top Table @ Pool",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-718": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: Bench Seating @ Grilling Patio",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "OF-719": [
+   {
+    "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+    "kind": "plan",
+    "sheetId": "ID-1.7",
+    "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+    "kind": "submittal",
+    "note": "Brand spec book identifies this tag: 4 Top ADA Dining Table",
+    "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)"
+   }
+  ],
+  "PT-08": [
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "SF-01": [
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   }
+  ],
+  "ST-01": [
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   },
+   {
+    "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+    "kind": "plan",
+    "sheetId": "A510.4",
+    "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-04": [
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "183MQYdOKoX2-yxqsoDnG1DpUvadmDSgY",
+    "kind": "submittal",
+    "title": "Home2-Dynamic Finish Specifications - Public Areas & Guest Suites"
+   }
+  ],
+  "T-05": [
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   }
+  ],
+  "TL-11": [
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   }
+  ],
+  "TL-12": [
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   }
+  ],
+  "TL-14": [
+   {
+    "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+    "kind": "plan",
+    "sheetId": "ID-1.8",
+    "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)"
+   }
+  ],
+  "x_2d00e7dd42": [
+   {
+    "driveId": "1pAe2H2xSusx9DCJ4gH7a_qREfk0LGKPE",
+    "kind": "plan",
+    "sheetId": "AS105",
+    "title": "Enlarged Outdoor Pool & Patio – Elev. & Sections (Rev 04/09/26) (Architectural set)"
+   }
+  ],
+  "x_3f9098c5aa": [
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   }
+  ],
+  "x_4cb07f303f": [
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1pAe2H2xSusx9DCJ4gH7a_qREfk0LGKPE",
+    "kind": "plan",
+    "sheetId": "AS105",
+    "title": "Enlarged Outdoor Pool & Patio – Elev. & Sections (Rev 04/09/26) (Architectural set)"
+   }
+  ],
+  "x_5dadc5caf0": [
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1HQRTr0XrgvDFh6rdTnBIDxSDTTW4khcd",
+    "kind": "plan",
+    "sheetId": "AS104.1",
+    "title": "Enlarged Outdoor Pool & Patio – Power & R.C. Plan (Architectural set)"
+   }
+  ],
+  "x_5fd8a3db15": [
+   {
+    "driveId": "1pAe2H2xSusx9DCJ4gH7a_qREfk0LGKPE",
+    "kind": "plan",
+    "sheetId": "AS105",
+    "title": "Enlarged Outdoor Pool & Patio – Elev. & Sections (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   }
+  ],
+  "x_84406b9d6c": [
+   {
+    "driveId": "1pAe2H2xSusx9DCJ4gH7a_qREfk0LGKPE",
+    "kind": "plan",
+    "sheetId": "AS105",
+    "title": "Enlarged Outdoor Pool & Patio – Elev. & Sections (Rev 04/09/26) (Architectural set)"
+   },
+   {
+    "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+    "kind": "plan",
+    "sheetId": "AS104",
+    "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)"
+   }
+  ]
+ }
+}
