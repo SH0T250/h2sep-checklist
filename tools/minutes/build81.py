@@ -164,7 +164,7 @@ def build(src: dict) -> dict:
           "Begin window sealant - pending - sealed 2nd & 3rd & 4th level at loading "
           "areas - south end.")
     p.sub("Stairwells - pending T/F and paint.",
-          "Stairwells - pending T/F and paint - scheduled.")
+          "Stairwells - pending T/F and paint - Scheduled.")
     p.sub("VCT installation - ongoing.", "VCT installation - Completed.")
 
     # Montecito
@@ -175,9 +175,9 @@ def build(src: dict) -> dict:
     # Triun
     p.after("Completed last Week-", 3, "FF&E delivery to building ongoing.", "Triun:")
     p.sub("Continue staging of FF&E on 4th floor.",
-          "Continue staging of FF&E on 4th floor - ongoing.")
+          "Continue staging of FF&E on 4th floor - Ongoing.")
     p.sub("Installation of doors on 2nd through 4th floors.",
-          "Installation of doors on 2nd through 4th floors - ongoing.")
+          "Installation of doors on 2nd through 4th floors - Ongoing.")
 
     # Alex's Crew
     p.after("Completed last Week-", 3,
@@ -202,9 +202,9 @@ def build(src: dict) -> dict:
     # Wallpaper
     p.after("Anticipated Progress for this Week-", 3, "4th floor Corridor.", "Wallpaper:")
     p.sub("4th floor - 15 guestrooms completed out of 33.",
-          "4th floor - 15 guestrooms completed out of 33 - completed.")
+          "4th floor - 15 guestrooms completed out of 33 - Completed.")
     p.sub("Wallpaper installation 2nd and 3rd floor - pending loading rooms.",
-          "Wallpaper installation 2nd and 3rd floor - pending loading rooms - ongoing.")
+          "Wallpaper installation 2nd and 3rd floor - pending loading rooms - Ongoing.")
     p.sub("1st floor - ongoing.", "1st floor - Completed.", "Wallpaper:")
     p.sub("2nd - 4th - pending.", "2nd - 3rd - Completed.")
     p.after("2nd - 3rd - Completed.", 4, "4th - Ongoing.")
@@ -222,8 +222,8 @@ def build(src: dict) -> dict:
     p.sub("2nd floor trim out - pending ETA - corridor has ACT.",
           "2nd floor trim out - Completed - corridor has ACT.")
     p.sub("4th floor- pending ceiling tiles - order pending CO approval.",
-          "4th floor- pending ceiling tiles - order pending CO approval - ongoing.")
-    p.after("4th floor- pending ceiling tiles - order pending CO approval - ongoing.", 3,
+          "4th floor- pending ceiling tiles - order pending CO approval - Ongoing.")
+    p.after("4th floor- pending ceiling tiles - order pending CO approval - Ongoing.", 3,
             "Ready to test 8/12.")
 
     # Texas Fire Services
@@ -239,9 +239,9 @@ def build(src: dict) -> dict:
     p.sub("Delivery of materials- window treatment, room dividers, closet draperies, "
           "and cornices.",
           "Delivery of materials- window treatment, room dividers, closet draperies, "
-          "and cornices - ongoing.")
+          "and cornices - Ongoing.")
     p.sub("Pending installation date for window treatment.",
-          "Pending installation date for window treatment - ongoing.")
+          "Pending installation date for window treatment - Ongoing.")
 
     # Velasquez Pools
     p.sub("TBD - Plaster - pending completion of Pool Equipment Room and Storage.",
@@ -250,16 +250,17 @@ def build(src: dict) -> dict:
     p.sub("Begin installation of pool equipment this week 7/13/2026.",
           "Begin installation of pool equipment this week 8/17.")
 
-    # Eo3 - a single brace over the whole block reading "pending to continue"
+    # Eo3 - a single brace over the whole block reading "pending to continue".
+    # Nothing on this line was struck, so all of the typed text survives.
     p.sub("Ongoing - electrical connections of solar canopies - pending remobilization "
           "date - Last.",
           "Ongoing - electrical connections of solar canopies - pending remobilization "
-          "date - pending to continue.")
+          "date - Last - Pending to continue.")
 
     # Tormax
     p.sub("Door has gap when closed - will not lock - onsite 7/21/2026.",
-          "Door has gap when closed - will not lock - Completed.")
-    p.after("Door has gap when closed - will not lock - Completed.", 3,
+          "Door has gap when closed - will not lock - onsite - Completed.")
+    p.after("Door has gap when closed - will not lock - onsite - Completed.", 3,
             "Door closing slow.")
 
     # -- 8.1 NEXT MEETING --------------------------------------------------

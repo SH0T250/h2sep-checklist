@@ -4,6 +4,10 @@
   "meeting_time": "11:00 am - 12:00 pm Central Time (US & Canada)",
   "meeting_location": "3386 E. Main St. Eagle Pass TX 78852",
   "video_link": "Join Meeting",
+  "video_uri": "https://us06web.zoom.us/j/86069404177?pwd=fGxaTcm8qNlqs7FDKGbX1mDMz4Xhbb.1&from=addon",
+  "attachment_uris": [
+    "https://storage.procore.com/api/v5/files/us-east-1/pro-core.com/506634359949265-c/511108459949265-p/01KWA05FJ79478TBYT2JHCHSZ9?companyId=562949953436605&projectId=562949954801115&sig=2aad47277cfabaa84d810a95149c53d85651d5db362e89b08fce49ab53620c9a"
+  ],
   "overview": "Objective: Construction of the Home 2 Suites project to all interested parties, confirm the project objectives, goals, and deliverables.",
   "notes": "",
   "attachments": [

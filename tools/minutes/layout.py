@@ -76,6 +76,32 @@ def _outlined(path: str) -> frozenset[int]:
     )
 
 
+def _kern_pairs(role: str) -> dict[tuple[str, str], float]:
+    """Pair-kerning values in em fractions, keyed by character pair.
+
+    The source export kerns its text.  The faces embedded in it have had their
+    kern table stripped by the subsetter, so the values are read from the
+    metric-compatible Liberation face of the same weight.
+    """
+    try:
+        from fontTools.ttLib import TTFont
+    except ImportError:
+        return {}
+    font = TTFont(_fallback(role))
+    if "kern" not in font:
+        return {}
+    reverse: dict[str, int] = {}
+    for cp, glyph in font.getBestCmap().items():
+        reverse.setdefault(glyph, cp)
+    upem = font["head"].unitsPerEm
+    pairs = {}
+    for (left, right), value in font["kern"].kernTables[0].kernTable.items():
+        a, b = reverse.get(left), reverse.get(right)
+        if a is not None and b is not None:
+            pairs[(chr(a), chr(b))] = value / upem
+    return pairs
+
+
 FONTS = {role: _fallback(role) for role in _FALLBACK}
 
 BODY = 8.0
@@ -251,6 +277,8 @@ class Minutes:
     project_line: str = "Project: 24030 Home2Suites EP Phase II"
     address: tuple[str, str] = ("3386 E. Main Street", "Eagle Pass, Texas 78852")
     video_link: str = "Join Meeting"
+    video_uri: str | None = None
+    attachment_uris: list[str] = field(default_factory=list)
     notes: str = ""
     printed_on: str | None = None
     logo: str | None = None
@@ -290,10 +318,13 @@ class Renderer:
                 self._paths[role] = path
                 self._coverage[role] = _outlined(path)
         self._fonts: dict[str, pymupdf.Font] = {}
+        self._kern: dict[str, dict[tuple[str, str], float]] = {}
         for role, path in self._paths.items():
             self._fonts[role] = pymupdf.Font(fontfile=path)
+            self._kern[role] = _kern_pairs(role)
             if role in self._coverage:
                 self._fonts[role + "~fb"] = pymupdf.Font(fontfile=_fallback(role))
+                self._kern[role + "~fb"] = self._kern[role]
         # Header row to repeat at the top of every continuation page.  Switches
         # between the attendee table and the item table as the flow proceeds.
         self._cont: str = "attendees"
@@ -312,9 +343,21 @@ class Renderer:
     def font(self, name: str) -> pymupdf.Font:
         return self._fonts[name]
 
+    def kerning(self, text: str, role: str, size: float) -> list[float]:
+        """Per-character leading adjustment, in points."""
+        pairs = self._kern.get(role) or {}
+        if not pairs:
+            return [0.0] * len(text)
+        out = [0.0]
+        for i in range(1, len(text)):
+            out.append(pairs.get((text[i - 1], text[i]), 0.0) * size)
+        return out
+
     def width(self, text: str, name: str = "sans", size: float = BODY) -> float:
         key, _ = self.resolve(name, text)
-        return self.font(key).text_length(text, size)
+        return self.font(key).text_length(text, size) + sum(
+            self.kerning(text, key, size)
+        )
 
     def text(
         self,
@@ -335,14 +378,23 @@ class Renderer:
         elif align == "center":
             x -= self.width(s, name, size) / 2.0
         key, path = self.resolve(name, s)
-        self.page.insert_text(
-            (x, y_top + size * BASELINE_RATIO),
-            s,
-            fontname=key,
-            fontfile=path,
-            fontsize=size,
-            color=color,
-        )
+        baseline = y_top + size * BASELINE_RATIO
+        # Draw as kerned runs: the text is split only where a pair carries a
+        # kern value, and each run is placed at its adjusted offset.
+        adjust = self.kerning(s, key, size)
+        run_start, pen = 0, x
+        for i in range(1, len(s) + 1):
+            if i < len(s) and adjust[i] == 0.0:
+                continue
+            run = s[run_start:i]
+            self.page.insert_text(
+                (pen, baseline), run, fontname=key, fontfile=path,
+                fontsize=size, color=color,
+            )
+            pen += self.font(key).text_length(run, size)
+            if i < len(s):
+                pen += adjust[i]
+            run_start = i
 
     def hline(self, x0: float, y: float, x1: float) -> None:
         self.page.draw_line((x0, y), (x1, y), color=RULE, width=RULE_W)
@@ -401,13 +453,26 @@ class Renderer:
         self.text(LEFT, y + 9.97, "Scheduled Attendees", name="sans-bold", size=HEADING)
         return y + 24.78
 
-    def _hyperlink(self, x: float, y_top: float, s: str) -> None:
-        """Blue label with the thin underline the source export draws."""
+    LINK_RECT_TOP = 0.39     # text bbox top -> clickable rect top
+    LINK_RECT_BOTTOM = 7.90  # text bbox top -> clickable rect bottom
+
+    def _hyperlink(self, x: float, y_top: float, s: str, uri: str | None = None) -> None:
+        """Blue label with the thin underline the source export draws.
+
+        The label is only half the job: without a link annotation the text looks
+        clickable and does nothing.
+        """
         self.text(x, y_top, s, color=LINK)
+        w = self.width(s)
         yy = y_top + BODY * BASELINE_RATIO + 1.03
-        self.page.draw_line(
-            (x, yy), (x + self.width(s), yy), color=LINK, width=LINK_W
-        )
+        self.page.draw_line((x, yy), (x + w, yy), color=LINK, width=LINK_W)
+        if uri:
+            self.page.insert_link({
+                "kind": pymupdf.LINK_URI,
+                "from": pymupdf.Rect(x, y_top + self.LINK_RECT_TOP,
+                                     x + w, y_top + self.LINK_RECT_BOTTOM),
+                "uri": uri,
+            })
 
     def info_grid(self) -> float:
         """The Meeting Date / Location / Overview / Notes / Attachments block.
@@ -430,14 +495,17 @@ class Renderer:
                 self.text(INFO_LABEL_X, y + i * INFO_LINE_ADV, part, name="sans-bold")
             for i, part in enumerate(value):
                 if link == "link1":
-                    self._hyperlink(INFO_VALUE_X, y + i * INFO_LINE_ADV, part)
+                    uris = self.m.attachment_uris
+                    self._hyperlink(INFO_VALUE_X, y + i * INFO_LINE_ADV, part,
+                                    uris[i] if i < len(uris) else None)
                 else:
                     self.text(INFO_VALUE_X, y + i * INFO_LINE_ADV, part)
             for i, part in enumerate(label2):
                 self.text(INFO_LABEL2_X, y + i * INFO_LINE_ADV, part, name="sans-bold")
             for i, part in enumerate(value2):
                 if link == "link2":
-                    self._hyperlink(INFO_VALUE2_X, y + i * INFO_LINE_ADV, part)
+                    self._hyperlink(INFO_VALUE2_X, y + i * INFO_LINE_ADV, part,
+                                    self.m.video_uri)
                 else:
                     self.text(INFO_VALUE2_X, y + i * INFO_LINE_ADV, part)
             y += (lines - 1) * INFO_LINE_ADV + INFO_ROW_ADV
@@ -506,9 +574,10 @@ class Renderer:
         for i, v in enumerate(vals):
             if v.strip():
                 self.text(ITEM_BODY_X[i], y + BASE_IN_ROW - BODY * BASELINE_RATIO, v)
-        # the row is fractionally shorter when a Description cell hangs below it
+        # the row is fractionally shorter when a Description cell hangs below it,
+        # and its rule then starts past the No. column so that cell stays merged
         h = 19.762 if has_desc else ROW_H
-        self.hline(LEFT, y + h, RIGHT)
+        self.hline(ITEM_EDGES[1] + 0.5 if has_desc else LEFT, y + h, RIGHT)
         for x in (ITEM_EDGES[0], ITEM_EDGES[1], ITEM_EDGES[-1]):
             self.vline(x, y, y + h)
         return y + h
@@ -642,6 +711,7 @@ class Renderer:
         last_drawn = baseline
         prev_level = 0
         prev = None
+        first_line = True
         for cur in lines:
             if prev is not None:
                 baseline += self._advance(prev, cur)
@@ -652,6 +722,11 @@ class Renderer:
                 y = self.item_header(y)
                 cell_top = y
                 baseline = y + self.DESC_TOP_PAD
+            if cur["bold"] and not first_line:
+                # the source rules off above each bold sub-heading, starting at
+                # the No. column boundary
+                self.hline(ITEM_EDGES[1] + 0.5, baseline - BASE_IN_ROW, RIGHT)
+            first_line = False
             top = baseline - BODY * BASELINE_RATIO
             if cur["marker"]:
                 mx, mfont, msize, glyph, _, dy = BULLETS[cur["marker"]]

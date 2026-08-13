@@ -111,6 +111,8 @@ def extract(path: str) -> dict:
         "meeting_time": "",
         "meeting_location": "",
         "video_link": "Join Meeting",
+        "video_uri": None,
+        "attachment_uris": [],
         "overview": "",
         "notes": "",
         "attachments": [],
@@ -147,6 +149,17 @@ def extract(path: str) -> dict:
     out["overview"] = " ".join(x["text"].strip() for x in ov).strip()
     att = [r for r in p1 if near(r["x"], 119.0) and not r["blank"] and r["y"] > 244 and r["y"] < 262]
     out["attachments"] = [a["text"].strip() for a in att]
+
+    # --- link targets ------------------------------------------------------
+    # Without these the blue labels render but click through to nothing.
+    for link in doc[0].get_links():
+        uri = link.get("uri")
+        if not uri:
+            continue
+        if near(link["from"].x0, 389.0, 2.0):
+            out["video_uri"] = uri
+        elif near(link["from"].x0, 119.0, 2.0):
+            out["attachment_uris"].append(uri)
 
     # --- Scheduled Attendees ---------------------------------------------
     att_rows: dict[float, dict] = {}
