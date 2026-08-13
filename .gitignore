@@ -20,3 +20,4 @@ research/drive/
 # Python
 __pycache__/
 *.pyc
+tools/minutes/fonts/

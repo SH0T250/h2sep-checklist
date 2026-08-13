@@ -12,6 +12,7 @@ the page.
 from __future__ import annotations
 
 import datetime as _dt
+import pathlib as _pathlib
 from dataclasses import dataclass, field
 
 import pymupdf
@@ -29,15 +30,29 @@ RIGHT = 576.0
 # Type
 # --------------------------------------------------------------------------
 
-FONT_DIR = "/usr/share/fonts/truetype/liberation"
-FONTS = {
-    # Liberation Sans / Serif / Mono are metric-compatible clones of
-    # Arial / Times New Roman / Courier New, which is what the original uses.
-    "sans": f"{FONT_DIR}/LiberationSans-Regular.ttf",
-    "sans-bold": f"{FONT_DIR}/LiberationSans-Bold.ttf",
-    "serif": f"{FONT_DIR}/LiberationSerif-Regular.ttf",
-    "mono": f"{FONT_DIR}/LiberationMono-Regular.ttf",
+# The source export embeds Arial, Arial Bold, Times New Roman and Courier New.
+# Those faces are licensed and are not kept in the repository; extract_fonts.py
+# lifts them out of a minutes PDF into ./fonts.  Failing that, the Liberation
+# clones match on metrics and line breaking and differ only in letterform.
+_VENDORED = _pathlib.Path(__file__).parent / "fonts"
+_LIBERATION = _pathlib.Path("/usr/share/fonts/truetype/liberation")
+_FALLBACK = {
+    "sans": "LiberationSans-Regular.ttf",
+    "sans-bold": "LiberationSans-Bold.ttf",
+    "serif": "LiberationSerif-Regular.ttf",
+    "mono": "LiberationMono-Regular.ttf",
 }
+
+
+def _face(role: str) -> str:
+    vendored = _VENDORED / f"{role}.ttf"
+    if vendored.exists():
+        return str(vendored)
+    return str(_LIBERATION / _FALLBACK[role])
+
+
+FONTS = {role: _face(role) for role in _FALLBACK}
+USING_ORIGINAL_FACES = all((_VENDORED / f"{r}.ttf").exists() for r in _FALLBACK)
 
 BODY = 8.0
 TITLE = 14.0

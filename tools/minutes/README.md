@@ -11,6 +11,23 @@ minutes is visually indistinguishable from the ones already in circulation.
 | `render.py` | Renders a JSON content model to PDF. |
 | `build81.py` | Applies Cesar's marked-up agenda to turn Meeting #80 into #81. |
 | `diffpdf.py` | Compares two minutes PDFs span-by-span and reports positional drift. |
+| `extract_fonts.py` | Lifts the document's own typefaces out of a reference PDF. |
+| `progress_page.py` | Builds the verification page showing each piece against its source. |
+
+## Typefaces
+
+The export embeds Arial, Arial Bold, Times New Roman and Courier New. Those
+faces are licensed and are **not** committed here; run `extract_fonts.py`
+against a minutes PDF you already hold to populate `tools/minutes/fonts/`
+(gitignored):
+
+```sh
+python3 extract_fonts.py /path/to/Meeting80.pdf
+```
+
+Without them the renderer falls back to Liberation Sans / Serif / Mono, which
+are metric-compatible — line breaking and every position stay identical, only
+the letterforms differ slightly.
 
 ## Regenerating Meeting #81
 
