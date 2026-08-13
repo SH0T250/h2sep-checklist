@@ -1,0 +1,1299 @@
+{
+  "meeting_no": 81,
+  "meeting_date": "Aug 10, 2026",
+  "meeting_time": "11:00 am - 12:00 pm Central Time (US & Canada)",
+  "meeting_location": "3386 E. Main St. Eagle Pass TX 78852",
+  "video_link": "Join Meeting",
+  "overview": "Objective: Construction of the Home 2 Suites project to all interested parties, confirm the project objectives, goals, and deliverables.",
+  "notes": "",
+  "attachments": [
+    "H2SEP PII - June 2026 UPDATE_06.29.2026.pdf"
+  ],
+  "attendees": [
+    {
+      "name": "Christopher Hiller",
+      "company": "AE Hiller and Sons, LLC",
+      "phone": "",
+      "email": "cw_hiller@yahoo.com",
+      "attendance": ""
+    },
+    {
+      "name": "Ramon Aguirre",
+      "company": "APM Services, LLC",
+      "phone": "",
+      "email": "ram@hospitalityffne.com",
+      "attendance": ""
+    },
+    {
+      "name": "Justin Gage",
+      "company": "GageCo, Inc",
+      "phone": "",
+      "email": "justin@gagecoinc.com",
+      "attendance": ""
+    },
+    {
+      "name": "Jorge Garcia",
+      "company": "Iceberg Heating & Air Conditioning",
+      "phone": "",
+      "email": "icebergair1@gmail.com",
+      "attendance": "Present"
+    },
+    {
+      "name": "Johnny Pina",
+      "company": "IronTek",
+      "phone": "",
+      "email": "irontekmetalworks@gmail.com",
+      "attendance": ""
+    },
+    {
+      "name": "Isaac Chapa",
+      "company": "JC Enterprises",
+      "phone": "",
+      "email": "jcenterprisesp@yahoo.com",
+      "attendance": ""
+    },
+    {
+      "name": "Joe Wilkinson",
+      "company": "Keen Glass Solutions",
+      "phone": "",
+      "email": "sales@keen-glass.org",
+      "attendance": ""
+    },
+    {
+      "name": "Justin Allen Perez",
+      "company": "Keepers Construction",
+      "phone": "",
+      "email": "keepersconst@gmail.com",
+      "attendance": ""
+    },
+    {
+      "name": "Larry Sanchez",
+      "company": "Larry's Commercial & Residential Plumbing, LLC",
+      "phone": "",
+      "email": "larrysplumbing@live.com",
+      "attendance": "Present"
+    },
+    {
+      "name": "Randall Jasik",
+      "company": "Security Integrated, Inc.",
+      "phone": "",
+      "email": "randy@siinc.systems",
+      "attendance": "Present"
+    },
+    {
+      "name": "Todd Zeitler",
+      "company": "Security Integrated, Inc.",
+      "phone": "",
+      "email": "team@siinc.systems",
+      "attendance": ""
+    },
+    {
+      "name": "Mark Smyth",
+      "company": "Smyth Surveyors Inc.",
+      "phone": "",
+      "email": "mark@smythsurveyors.com",
+      "attendance": ""
+    },
+    {
+      "name": "Yalcin Kucukkomurler",
+      "company": "Steel Tech USA",
+      "phone": "",
+      "email": "yalcin@steeltechusa.com",
+      "attendance": ""
+    },
+    {
+      "name": "Rod Jackson",
+      "company": "Texas Fire Service",
+      "phone": "",
+      "email": "rod@texasfireservices.net",
+      "attendance": ""
+    },
+    {
+      "name": "Victor A. Rodriguez",
+      "company": "The Montecito",
+      "phone": "",
+      "email": "plasteringstuccoirdallas@gmail.com",
+      "attendance": ""
+    },
+    {
+      "name": "Quinton Rockwell",
+      "company": "Thermal Guard Roofing",
+      "phone": "",
+      "email": "quinton@thermalguardroofing.com",
+      "attendance": ""
+    },
+    {
+      "name": "Cristina Cardona",
+      "company": "Triun, LLC",
+      "phone": "",
+      "email": "ccardona@triunco.com",
+      "attendance": "Present"
+    },
+    {
+      "name": "Morgan Davis",
+      "company": "Triun, LLC",
+      "phone": "",
+      "email": "mdavis@triunco.com",
+      "attendance": ""
+    },
+    {
+      "name": "Edward De La Garza",
+      "company": "Triun, LLC",
+      "phone": "",
+      "email": "edelagarza@triunco.com",
+      "attendance": ""
+    },
+    {
+      "name": "Cesar Esquivel",
+      "company": "Triun, LLC",
+      "phone": "",
+      "email": "cesquivel@triunco.com",
+      "attendance": "Present"
+    },
+    {
+      "name": "Joaquin Gomez Carrillo",
+      "company": "Triun, LLC",
+      "phone": "",
+      "email": "jcarrillo@triunco.com",
+      "attendance": "Present"
+    },
+    {
+      "name": "Austin Jones",
+      "company": "Triun, LLC",
+      "phone": "",
+      "email": "ajones@triunco.com",
+      "attendance": ""
+    },
+    {
+      "name": "Manuel Hernandez",
+      "company": "United Electric",
+      "phone": "",
+      "email": "manuel@unitedelectricrgv.com",
+      "attendance": "Present"
+    },
+    {
+      "name": "Marcos Hernandez",
+      "company": "United Electric",
+      "phone": "",
+      "email": "marcos@unitedelectricrgv.com",
+      "attendance": ""
+    }
+  ],
+  "sections": [
+    {
+      "heading": "SAFETY",
+      "items": [
+        {
+          "no": "1.1",
+          "origin": "9",
+          "title": "Safety",
+          "assignment": "",
+          "due": "",
+          "priority": "",
+          "status": "Open",
+          "description": [
+            {
+              "text": "Safety meeting will be held every Monday morning at 8:00 AM (CST) before going onsite.",
+              "level": 0,
+              "bold": false
+            },
+            {
+              "text": "",
+              "level": 0,
+              "spacer": true
+            },
+            {
+              "text": "All Subcontractors must turn in a Tool Box Talk weekly.",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Eye Protection.",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Official Documented Meeting Minutes",
+              "level": 0,
+              "bold": true
+            },
+            {
+              "text": "Always acknowledge safety signs around property/jobsite.",
+              "level": 1,
+              "bold": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Action Items",
+      "items": [
+        {
+          "no": "2.1",
+          "origin": "10",
+          "title": "Action Items",
+          "assignment": "",
+          "due": "",
+          "priority": "",
+          "status": "Open",
+          "description": [
+            {
+              "text": "Old Action Items:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "New Action Items:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Elevator Installation - standby Electrical / Plumbing.",
+              "level": 2,
+              "bold": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "CONSTRUCTION PROGRESS",
+      "items": [
+        {
+          "no": "3.1",
+          "origin": "9",
+          "title": "Progress",
+          "assignment": "",
+          "due": "",
+          "priority": "",
+          "status": "Open",
+          "description": [
+            {
+              "text": "Discussion of Work in Progress:",
+              "level": 0,
+              "bold": false
+            },
+            {
+              "text": "A/E Hiller:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Completed Last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Sweep south end of property.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Rock install north side of property.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Clean all trash and materials- Ongoing - 90% cleared out.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Clean pool decking and coping- Completed.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Inspect east side driveway cracks.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "United Electric:",
+              "level": 1,
+              "bold": false,
+              "extra": 8.0053
+            },
+            {
+              "text": "Completed Last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Trim-out 2nd, 3rd & 4th floor.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "3rd and 4th floor trim out - Completed.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Check plug height on 3rd and 4th floor for FF&E- Completed.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Check \"by Hilton\" sign - working - Completed.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Larry's Plumbing:",
+              "level": 1,
+              "bold": false,
+              "extra": 7.9953
+            },
+            {
+              "text": "Completed Last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Trim out ongoing on 3rd & 4th floors.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Trim out on 3rd and 4th floor - sinks, faucets, and shower heads - Completed.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Installation of storage tank, back flow, water heaters, water softener in Mechanical area - Completed.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Water pressure low.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Connect water softener.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Iceberg HVAC:",
+              "level": 1,
+              "bold": false,
+              "extra": 8.0085
+            },
+            {
+              "text": "Completed last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Thermostat installation ongoing.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Installation of PTAC - pending loading rooms",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Access panels and vents installation - vent at reception area - Completed.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Painting outside vents - Completed.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Continue with thermostat installation & install speed sensor to RTU.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Keepers Construction:",
+              "level": 1,
+              "bold": false,
+              "extra": 8.0053
+            },
+            {
+              "text": "Completed last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Loading rooms carpet install on 2nd & 3rd level.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Begin window sealant - pending - sealed 2nd & 3rd & 4th level at loading areas - south end.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Elevator lobby area 2nd - 4th floor - ongoing.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Stairwells - pending T/F and paint - scheduled.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "VCT installation - Completed.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Montecito:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Completed last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Dumpster Enclosure - EIFS and masonry - Completed & North end of building by Lobby area.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Triun:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Completed last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "FF&E delivery to building ongoing.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Housekeeping - ongoing.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Continue staging of FF&E on 4th floor - ongoing.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Installation of doors on 2nd through 4th floors - ongoing.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Alex's Crew:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Completed last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Close all electrical & plumbing openings.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Continue 4th floor door framing - pending door frames - need to order - ongoing - pending delivery 8/13.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Installation of 1st floor doors - 100% completed.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Install wall dividers.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Tape/Float and Paint:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Completed last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "4th floor Tape/Float/Paint.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "2nd - 4th floor loading rooms - Completed.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "3rd and 4th floor door frame paint - pending door frames - pending delivery 8/13.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Stairwells paint - Completed.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Wallpaper:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Completed last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "4th floor Corridor.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "4th floor - 15 guestrooms completed out of 33 - completed.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Wallpaper installation 2nd and 3rd floor - pending loading rooms - ongoing.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Corridor:",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "1st floor - Completed.",
+              "level": 4,
+              "bold": false
+            },
+            {
+              "text": "2nd - 3rd - Completed.",
+              "level": 4,
+              "bold": false
+            },
+            {
+              "text": "4th - Ongoing.",
+              "level": 4,
+              "bold": false
+            },
+            {
+              "text": "Thermal Guard:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Completed last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Installation of porte cochere and dumpster enclosure roofing system - Completed.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Coming back to work on porte cochere above entrance - we can see light.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Systems Integrated:",
+              "level": 1,
+              "bold": false,
+              "extra": 7.9953
+            },
+            {
+              "text": "Competed last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Trim-out ongoing 3rd & 4th floor.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "2nd floor trim out - Completed - corridor has ACT.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "3rd floor - ongoing.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "4th floor- pending ceiling tiles - order pending CO approval - ongoing.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Ready to test 8/12.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Texas Fire Services:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Competed last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Changed out leaking sprinkler heads 2nd floor.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Schedule Fire Sprinkler test for 2nd through 4th floor - week of 8/14.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Spectrum:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Competed last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Completed trim out on 3rd and 4th floor.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Complete.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "RK Hospitality:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Competed last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Delivery of materials- window treatment, room dividers, closet draperies, and cornices - ongoing.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Pending installation date for window treatment - ongoing.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Velasquez Pools:",
+              "level": 1,
+              "bold": false,
+              "extra": 7.9953
+            },
+            {
+              "text": "Completed last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "TBD - Plaster - pending completion of Pool Equipment Room and Storage - schedule 8/17.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Begin installation of pool equipment this week 8/17.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Eo3 :",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Completed last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Ongoing - electrical connections of solar canopies - pending remobilization date - pending to continue.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Tormax :",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Completed last Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Anticipated Progress for this Week-",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Door has gap when closed - will not lock - Completed.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Door closing slow.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Official Documented Meeting Minutes",
+              "level": 0,
+              "bold": true,
+              "extra": -0.4515
+            },
+            {
+              "text": "A/E Hiller:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Everyone must park outside after lunch. Parking lot must be cleared for cleaning.",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Larry's Plumbing:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Storage tank - install only one per Vipal",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Sump pump - one is defected - Jay send picture and serial number to Cristina",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Missing parts for water softener - Jay to give list to Cristina",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Iron Tek: Completed Scope of Work - 100%",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Alex's Crew:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Installation of 1st floor doors - 90% complete",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Elevator room - patchwork",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "T/F and Paint:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Porte coche, trellis, and iron gates begin this week",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Texas Fire Services:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Adjust mechanical room pump",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Spectrum: Completed Scope of Work - 100%",
+              "level": 1,
+              "bold": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "RFI/ SUBMITTALS/ PAY APPS",
+      "items": [
+        {
+          "no": "4.1",
+          "origin": "9",
+          "title": "Project Approach",
+          "assignment": "",
+          "due": "",
+          "priority": "",
+          "status": "Open",
+          "description": [
+            {
+              "text": "",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Submittals:",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "A.E Hiller: All",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "GageCo: All",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "United Electric: Piping - Accepted",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Larry's Plumbing:",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Pipe/Tubing - Accepted",
+              "level": 4,
+              "bold": false
+            },
+            {
+              "text": "Water Fountains - Accepted",
+              "level": 4,
+              "bold": false
+            },
+            {
+              "text": "Water Heaters - Accepted",
+              "level": 4,
+              "bold": false
+            },
+            {
+              "text": "Fountains- Accepted",
+              "level": 4,
+              "bold": false
+            },
+            {
+              "text": "IronTek:",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Steel Tech: All",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "TK Elevators: Under Review",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Claymex- Accepted",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Thermal Guard: Accepted",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Texas Fire Services: Pending updated plans",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Iceberg Heating and Air: Accepted with comments.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Velasquez Pools- Accepted with comments.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "Pool coping- accepted.",
+              "level": 4,
+              "bold": false
+            },
+            {
+              "text": "Pool decking- accepted.",
+              "level": 4,
+              "bold": false
+            },
+            {
+              "text": "Security Integrated- Fire Alarm- Accepted with comments",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "L&W Supply- Drywall- Accepted.",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "RFI's:",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Open:",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "RFI#82- FF&E Drawings",
+              "level": 4,
+              "bold": false
+            },
+            {
+              "text": "RFI#84- Security Camera & Panic Button Location",
+              "level": 4,
+              "bold": false
+            },
+            {
+              "text": "Closed: 88",
+              "level": 3,
+              "bold": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "SCHEDULE & COORDINATION",
+      "items": [
+        {
+          "no": "5.1",
+          "origin": "9",
+          "title": "Look Ahead",
+          "assignment": "",
+          "due": "",
+          "priority": "",
+          "status": "Open",
+          "description": [
+            {
+              "text": "Schedule:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Schedule attach to the agenda",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Coordination:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Weekly coordination rough in meetings Tuesday, January 27, 2026.",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Framers and MEPS subcontractors to have rough-in coordination meetings.",
+              "level": 2,
+              "bold": false
+            }
+          ]
+        },
+        {
+          "no": "5.2",
+          "origin": "16",
+          "title": "Material Delivery",
+          "assignment": "",
+          "due": "",
+          "priority": "",
+          "status": "Open",
+          "description": []
+        }
+      ]
+    },
+    {
+      "heading": "DELAY/ IMPACTS",
+      "items": [
+        {
+          "no": "6.1",
+          "origin": "9",
+          "title": "Delays/ Impacts",
+          "assignment": "",
+          "due": "",
+          "priority": "",
+          "status": "Open",
+          "description": [
+            {
+              "text": "Tracking Weather Days:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "04/20/2026 - Weather Day for all exterior work - Rain - Muddy",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "",
+              "level": 0,
+              "spacer": true
+            },
+            {
+              "text": "Delays:",
+              "level": 1,
+              "bold": false
+            },
+            {
+              "text": "Iceberg updating license and insurance. Scheduling partial mechanical inspection tomorrow of 1st floor",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "1 wind day- sheathing delay.",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Valdez Builders- 1 day 5/30/2025.",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "Exterior rain and mud delay.",
+              "level": 2,
+              "bold": false
+            },
+            {
+              "text": "7/1/2025",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "7/2/2025",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "7/3/2025",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "7/4/2025",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "7/5/2025",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "7/7/7025",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "7/8/2025",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "8/21/2025",
+              "level": 3,
+              "bold": false
+            },
+            {
+              "text": "1/26/2026- late start- opened at 10 am-3 hours lost.",
+              "level": 3,
+              "bold": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "QUESTIONS/ COMMENTS",
+      "items": [
+        {
+          "no": "7.1",
+          "origin": "77",
+          "title": "Comments",
+          "assignment": "",
+          "due": "",
+          "priority": "",
+          "status": "Open",
+          "description": []
+        }
+      ]
+    },
+    {
+      "heading": "NEXT MEETING",
+      "items": [
+        {
+          "no": "8.1",
+          "origin": "9",
+          "title": "Next Meeting",
+          "assignment": "",
+          "due": "",
+          "priority": "",
+          "status": "Open",
+          "description": [
+            {
+              "text": "Next Meeting is scheduled for August 17, 2026, at 11:00 am (CST).",
+              "level": 0,
+              "bold": false
+            }
+          ]
+        },
+        {
+          "no": "8.2",
+          "origin": "11",
+          "title": "Action Items",
+          "assignment": "",
+          "due": "",
+          "priority": "",
+          "status": "Open",
+          "description": []
+        }
+      ]
+    }
+  ],
+  "printed_on": "Aug 12, 2026 05:09 PM CDT"
+}
