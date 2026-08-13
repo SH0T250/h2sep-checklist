@@ -29,6 +29,22 @@ Without them the renderer falls back to Liberation Sans / Serif / Mono, which
 are metric-compatible — line breaking and every position stay identical, only
 the letterforms differ slightly.
 
+**They are true subsets.** They carry a full cmap but an outline only for the
+characters Meeting #80 happened to use: Arial Bold, for instance, has no `1`,
+because no bold `1` appears anywhere in #80. A glyph with no contours renders
+as nothing at all, so the renderer checks outline coverage per string and falls
+back to Liberation for any string the subset cannot draw. It reports what it
+substituted:
+
+```
+typefaces: document's own faces for mono, sans, sans-bold, serif
+  sans-bold: fell back to Liberation for strings containing 1 (absent from the embedded subset)
+```
+
+Because the two families share metrics, substituting mid-document shifts
+nothing. Read that line after every render — it is the warning that a new
+meeting number or a new word has reached past what the subset covers.
+
 ## Regenerating Meeting #81
 
 ```sh

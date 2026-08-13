@@ -64,6 +64,7 @@ def main() -> None:
     r.render()
     r.save(dst)
     print(f"{dst}: {len(r.pages)} pages")
+    print(r.font_report())
 
 
 if __name__ == "__main__":

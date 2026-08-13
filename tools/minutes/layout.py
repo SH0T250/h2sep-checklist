@@ -35,7 +35,7 @@ RIGHT = 576.0
 # lifts them out of a minutes PDF into ./fonts.  Failing that, the Liberation
 # clones match on metrics and line breaking and differ only in letterform.
 _VENDORED = _pathlib.Path(__file__).parent / "fonts"
-_LIBERATION = _pathlib.Path("/usr/share/fonts/truetype/liberation")
+_FALLBACK_DIR = _pathlib.Path("/usr/share/fonts/truetype/liberation")
 _FALLBACK = {
     "sans": "LiberationSans-Regular.ttf",
     "sans-bold": "LiberationSans-Bold.ttf",
@@ -44,15 +44,39 @@ _FALLBACK = {
 }
 
 
-def _face(role: str) -> str:
-    vendored = _VENDORED / f"{role}.ttf"
-    if vendored.exists():
-        return str(vendored)
-    return str(_LIBERATION / _FALLBACK[role])
+def _fallback(role: str) -> str:
+    return str(_FALLBACK_DIR / _FALLBACK[role])
 
 
-FONTS = {role: _face(role) for role in _FALLBACK}
-USING_ORIGINAL_FACES = all((_VENDORED / f"{r}.ttf").exists() for r in _FALLBACK)
+def _vendored(role: str) -> str | None:
+    path = _VENDORED / f"{role}.ttf"
+    return str(path) if path.exists() else None
+
+
+def _outlined(path: str) -> frozenset[int]:
+    """Codepoints the face can actually draw.
+
+    The faces embedded in the source PDF are true subsets: they carry a full
+    cmap but an outline only for the characters that document happened to use.
+    A glyph with no contours renders as nothing at all, so coverage has to be
+    judged on the outlines, not on the cmap.
+    """
+    try:
+        from fontTools.ttLib import TTFont
+    except ImportError:
+        return frozenset()
+    font = TTFont(path)
+    glyf = font.get("glyf")
+    if glyf is None:
+        return frozenset(font.getBestCmap())
+    return frozenset(
+        cp
+        for cp, name in font.getBestCmap().items()
+        if cp == 0x20 or glyf[name].numberOfContours != 0
+    )
+
+
+FONTS = {role: _fallback(role) for role in _FALLBACK}
 
 BODY = 8.0
 TITLE = 14.0
@@ -254,20 +278,43 @@ class Renderer:
         self.doc = pymupdf.open()
         self.page: pymupdf.Page | None = None
         self.pages: list[int] = []
-        self._fonts: dict[str, pymupdf.Font] = {
-            k: pymupdf.Font(fontfile=v) for k, v in FONTS.items()
-        }
+        # Prefer the document's own typefaces where they are available, but
+        # only for strings they can actually draw; the Liberation clones are
+        # metric-compatible, so falling back mid-document shifts nothing.
+        self._paths: dict[str, str] = dict(FONTS)
+        self._coverage: dict[str, frozenset[int]] = {}
+        self.substituted: dict[str, set[str]] = {}
+        for role in FONTS:
+            path = _vendored(role)
+            if path:
+                self._paths[role] = path
+                self._coverage[role] = _outlined(path)
+        self._fonts: dict[str, pymupdf.Font] = {}
+        for role, path in self._paths.items():
+            self._fonts[role] = pymupdf.Font(fontfile=path)
+            if role in self._coverage:
+                self._fonts[role + "~fb"] = pymupdf.Font(fontfile=_fallback(role))
         # Header row to repeat at the top of every continuation page.  Switches
         # between the attendee table and the item table as the flow proceeds.
         self._cont: str = "attendees"
 
     # -- primitives --------------------------------------------------------
 
+    def resolve(self, role: str, text: str) -> tuple[str, str]:
+        """Pick the face for one string: (font key, font file path)."""
+        cover = self._coverage.get(role)
+        if cover is not None and not all(ord(c) in cover for c in text):
+            missing = {c for c in text if ord(c) not in cover}
+            self.substituted.setdefault(role, set()).update(missing)
+            return role + "~fb", _fallback(role)
+        return role, self._paths[role]
+
     def font(self, name: str) -> pymupdf.Font:
         return self._fonts[name]
 
     def width(self, text: str, name: str = "sans", size: float = BODY) -> float:
-        return self.font(name).text_length(text, size)
+        key, _ = self.resolve(name, text)
+        return self.font(key).text_length(text, size)
 
     def text(
         self,
@@ -287,11 +334,12 @@ class Renderer:
             x -= self.width(s, name, size)
         elif align == "center":
             x -= self.width(s, name, size) / 2.0
+        key, path = self.resolve(name, s)
         self.page.insert_text(
             (x, y_top + size * BASELINE_RATIO),
             s,
-            fontname=name,
-            fontfile=FONTS[name],
+            fontname=key,
+            fontfile=path,
             fontsize=size,
             color=color,
         )
@@ -504,6 +552,19 @@ class Renderer:
         self.stamp_disclaimer()
         self.stamp_footers()
         self.doc.save(path, deflate=True)
+
+    def font_report(self) -> str:
+        used = [r for r in FONTS if r in self._coverage]
+        if not used:
+            return "typefaces: Liberation throughout (no vendored faces found)"
+        lines = [f"typefaces: document's own faces for {', '.join(sorted(used))}"]
+        for role, chars in sorted(self.substituted.items()):
+            glyphs = " ".join(sorted(chars))
+            lines.append(
+                f"  {role}: fell back to Liberation for strings containing {glyphs}"
+                " (absent from the embedded subset)"
+            )
+        return "\n".join(lines)
 
     # -- description cell --------------------------------------------------
 
