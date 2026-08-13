@@ -44,12 +44,12 @@ A span's baseline sits `0.77625 × size` below the top of its bounding box.
 |---|---|
 | Text | `#000000` |
 | Hyperlinks (Join Meeting, attachments) | `#0000FF`, underlined at 0.195 pt |
+| Table rules and separators | `#D8D8D8` at 0.99975 pt |
+| Table header shading | `#F2F2F2` |
 
 Hyperlinks also carry a `/URI` link annotation covering the label, inset 0.39
 below and 7.90 above its bbox top. Without it the blue text looks clickable and
 does nothing.
-| Table rules and separators | `#D8D8D8` at 0.99975 pt |
-| Table header shading | `#F2F2F2` |
 
 ## Frame
 

@@ -57,28 +57,63 @@ SHEETS = [
       "Tormax door completed, new slow-closing item"]),
 ]
 
-OPEN_QUESTIONS = [
-    ("Meeting date", "high",
-     "Meeting #80 was Jul 20 and its minutes name Jul 27 as the next meeting, but Cesar's notes "
-     "reference 8/12 through 8/17. Dated Mon Aug 10, 2026, with the next meeting Aug 17."),
-    ("Iceberg PTAC bullet", "high",
-     "Only the words “2nd through 4th floors” were struck, with no replacement floor range "
-     "written. Rendered as “Installation of PTAC - pending loading rooms” rather than inventing "
-     "a range."),
-    ("1st floor doors: 100% vs 90%", "medium",
+# Calls made to finish the document; each is one line in build81.py.
+DECISIONS = [
+    ("Meeting dated Mon 10 Aug 2026", "high",
+     "Meeting #80 was 20 Jul and its minutes name 27 Jul as the next meeting, but the markup "
+     "references 8/12 through 8/17. Next meeting set to 17 Aug. This is the one to confirm first — "
+     "it moves every date in the document."),
+    ("Iceberg PTAC bullet left without a floor range", "high",
+     "Only the words “2nd through 4th floors” were struck, and no replacement was written. "
+     "Rendered as “Installation of PTAC - pending loading rooms” rather than inventing a range."),
+    ("Status words set in the document's own form", "low",
+     "Where the markup added or changed a status, it is typeset “Completed.”, “Ongoing.”, "
+     "“Pending.”, “Scheduled.” — the form the minutes already use — rather than the writer's "
+     "lowercase. Carried-over lines are untouched."),
+    ("Eo3 brace applied to one bullet", "low",
+     "The brace spans all three Eo3 lines, two of which are empty headers. “Pending to continue” "
+     "sits on the one substantive bullet."),
+    ("Pool equipment date carried without a year", "low",
+     "The replacement date was written as 8/17 with no year. Left as written."),
+    ("Unmarked sections carried forward verbatim", "low",
+     "Including the coordination date “Tuesday, January 27, 2026” and the weather-day typo "
+     "“7/7/7025”, both inherited from #80. Nothing was silently tidied."),
+]
+
+# Places where the markup and the carried-over text now say two different things.
+# All are faithful to the paper — they need a decision, not a fix.
+CONFLICTS = [
+    ("Stairwells: booked and finished at once", "high",
+     "Keepers Construction reads <em>Stairwells - pending T/F and paint - Scheduled.</em> while "
+     "Tape/Float and Paint reads <em>Stairwells paint - Completed.</em> Keepers is being told to "
+     "wait on a scope the painter has already closed out. A sub will call about this one, because "
+     "it decides whether they mobilise."),
+    ("Door frames both unordered and out for delivery", "high",
+     "<em>Continue 4th floor door framing - pending door frames - need to order - ongoing - "
+     "pending delivery 8/13.</em> “Need to order” and “pending delivery 8/13” cannot both hold, "
+     "and a second trade is scheduled against that same date on the door-frame paint line."),
+    ("Roof signed off directly above “we can see light”", "medium",
+     "<em>Installation of porte cochere and dumpster enclosure roofing system - Completed.</em> "
+     "sits immediately above the new bullet <em>Coming back to work on porte cochere above "
+     "entrance - we can see light.</em> The most quotable pair in the document if it ever reaches "
+     "an owner or a claim."),
+    ("1st floor doors: 100% against 90%", "medium",
      "Construction Progress now reads 100% completed. The Official Documented Meeting Minutes "
-     "block, which carries no red mark, still reads 90% complete."),
-    ("Wallpaper 4th floor count", "medium",
-     "“completed” was written beside “15 guestrooms completed out of 33” without updating "
-     "the count. Both are carried."),
-    ("Eo3 brace", "medium",
-     "The brace spans all three Eo3 lines. “pending to continue” is applied to the one substantive "
-     "bullet rather than repeated on the two empty headers."),
-    ("Pool equipment year", "low",
-     "The replacement date was written as 8/17 with no year. Carried as written."),
-    ("Carried-over stale text", "low",
-     "Untouched sections keep #80 wording, including the coordination date “Tuesday, January 27, "
-     "2026” and the weather day typo “7/7/7025”."),
+     "block carries no red mark and still reads 90% complete — and #80 had 80% and 90%, so the "
+     "top number moved and the bottom one did not."),
+    ("Wallpaper: 15 of 33 called completed", "medium",
+     "<em>4th floor - 15 guestrooms completed out of 33 - Completed.</em> The count was not "
+     "updated when the status was. It reads as 45% and 100% in one sentence."),
+    ("Water softener installed, unconnected, missing parts", "medium",
+     "Installation is marked Completed, a new bullet says <em>Connect water softener</em>, and the "
+     "Official block still carries <em>Missing parts for water softener</em>. The storage tank has "
+     "the same split."),
+    ("Window sealant both pending and sealed", "medium",
+     "<em>Begin window sealant - pending - sealed 2nd &amp; 3rd &amp; 4th level at loading areas - "
+     "south end.</em> The note was written beside the bullet without striking “pending”."),
+    ("“This week 8/17” is next week", "low",
+     "Only the date was struck on the pool-equipment bullet, so the words “this week” survived "
+     "beside a date that falls in the following week."),
 ]
 
 SPELLING = [
@@ -268,7 +303,8 @@ def build(scratch: pathlib.Path) -> str:
          "source PDF", True),
         ("Red annotations applied", "79", "Transcribed by three independent readers, then "
          "adjudicated", False),
-        ("Open questions", str(len(OPEN_QUESTIONS)), "Listed at the foot of this page", False),
+        ("Horizontal rules matched", "92 / 92", "Same y, same span of x, across all 8 pages", True),
+        ("Needs your call", str(len(CONFLICTS)), "Places the source now says two things", False),
     ]
     for k, v, n, good in tiles:
         A(f'<div class="metric{" good" if good else ""}"><div class="k">{k}</div>'
@@ -278,7 +314,7 @@ def build(scratch: pathlib.Path) -> str:
     # ---------------- nav ----------------
     A('<nav><div class="wrap">'
       '<a href="#format">Format</a><a href="#markup">Markup</a>'
-      '<a href="#evidence">Evidence</a><a href="#questions">Open questions</a>'
+      '<a href="#evidence">Evidence</a><a href="#questions">Needs your call</a>'
       "</div></nav>")
 
     # ---------------- format ----------------
@@ -395,11 +431,20 @@ def build(scratch: pathlib.Path) -> str:
 
     # ---------------- questions ----------------
     A('<section id="questions"><div class="wrap"><div class="shead">')
-    A("<h2>Open questions</h2><p>Judgement calls made to finish the document, "
-      "each reversible in one line of the build script.</p>")
-    A("<p>None of these blocked the rebuild. They are the places where the paper was "
-      "ambiguous or silent, and where a different call is defensible.</p></div>")
-    for title, sev, body in OPEN_QUESTIONS:
+    A("<h2>Needs your call</h2><p>Eight places where the updated document now says "
+      "two different things.</p>")
+    A("<p>Every one is faithful to the paper — they are what the markup produces when it is "
+      "applied literally to text that was left standing. None of them is a transcription error, "
+      "and none was quietly reconciled.</p></div>")
+    for title, sev, body in CONFLICTS:
+        A(f'<div class="q {sev}"><div class="qt">{html.escape(title)}'
+          f'{pill("flag" if sev == "high" else ("info" if sev == "medium" else "wait"), sev)}'
+          f"</div><p>{body}</p></div>")
+
+    A('<div class="shead" style="margin-top:44px">')
+    A("<h2>Judgement calls</h2><p>Decisions taken to finish the document.</p>")
+    A("<p>Each is one line in the build script and reversible on request.</p></div>")
+    for title, sev, body in DECISIONS:
         A(f'<div class="q {sev}"><div class="qt">{html.escape(title)}'
           f'{pill("flag" if sev == "high" else ("info" if sev == "medium" else "wait"), sev)}'
           f"</div><p>{body}</p></div>")
