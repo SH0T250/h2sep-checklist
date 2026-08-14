@@ -8,8 +8,9 @@ unknown and what settles it. Austin answers with photos/notes; RFI-grade items g
 | # | Item | What's unknown | What settles it |
 |---|---|---|---|
 | L1 | ~~Lamps included with FF&E lamp fixtures?~~ **ANSWERED (Austin, 2026-08-14): fixtures do NOT ship with lamps — buy all 454 bulbs outright.** | — | — |
-| L2 | Public-area decorative fixture counts (PA-201/203/205/206) | Bulb specs printed; fixture quantities are not | Symbol takeoff on ID-1.6/ID-1.7 + lobby RCP (in progress), or MWT/RK confirmation |
-| L3 | Corridor sconce count, floors 1–4 | Printed "(typ.)" only, never a per-floor count | Symbol takeoff on E200–E203 / ID-1.11–1.16 (in progress) |
+| L2 | ~~Public-area fixture counts~~ **PARTIALLY ANSWERED (takeoff 2026-08-14): PA-201 = 2, PA-205 = 3 pendants (visual counts, ID-1.6 + A120 cross-check) → 11 bulbs. STILL OPEN: PA-203 and PA-206 are placed on NO location plan in the entire 41-sheet FF&E set** | PA-203/PA-206 quantities | RK / purchasing order list |
+| L3 | ~~Corridor sconce count~~ **ANSWERED (takeoff 2026-08-14): 120 as drawn — 16/35/34/35 by floor, dual-method (symbols + tag text). Floor 3 likely 35 (see L16)** | — (bulb impact still gated by L4) | — |
+| L16 | Floor-3 ice-alcove sconce missing from E202 | Floors 2 & 4 both draw a sconce at that station; E202 omits it — likely drafting miss (true total 121?) | RFI to MWT or field-verify floor 3 |
 | L4 | WS01 (electrical, Arkansas 4093C integrated LED) vs PA-204 (FF&E, E26 ×2 lamps) — same corridor sconce? | Two specs, different light sources, different buyers | MWT/RK: which governs + whose scope |
 | L5 | WS03 (electrical, Arkansas 3550V) vs GR-203 (FF&E LED-board) — same vanity sconce? | Risk of a 115-unit double-buy | Confirm who furnishes the guest-bath vanity sconce |
 | L6 | WS02 lobby-restroom sconce | E101 prints NO manufacturer/model; may collide with FF&E PA-202 vanity light | RFI to MWT |
