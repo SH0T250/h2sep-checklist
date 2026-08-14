@@ -22,7 +22,7 @@
 // one way on the phone and another way on the board is a defect here.
 
 import * as store from './store.js';
-import { esc, isMepDoc, mepParent, roomStats, MEP_CATEGORY_ORDER, MEP_LETTER } from './util.js';
+import { esc, isMepDoc, mepParent, roomStats, hasMark, MEP_CATEGORY_ORDER, MEP_LETTER } from './util.js';
 import { refsFor } from './refs.js';
 import { sheet, refsSection, wireRefs } from './dash-edit.js';
 
@@ -70,7 +70,7 @@ function lineHTML([id, it], room, counts, seen) {
         ${openIssue ? `<span class="mbox-flag">⚑</span>` : ''}
       </span>
       <div class="mrow-main">
-        <div class="mrow-l1">${it.code ? `<b class="mcode">${esc(it.code)}</b> ` : ''}${
+        <div class="mrow-l1">${hasMark(it.code) ? `<b class="mcode">${esc(it.code)}</b> ` : ''}${
           Number(it.qty) > 1 ? `<span class="mqty" aria-label="quantity ${Number(it.qty)}">×${Number(it.qty)}</span> ` : ''
         }<span class="mlbl">${esc(it.label)}</span></div>
         ${flagged ? `<div class="mverify warn">⚠ VERIFY — sources disagree</div>` : ''}
@@ -112,6 +112,13 @@ function tradeGroups(items) {
   }));
 }
 
+// Which trade the open room sheet is filtered to, or null for all. Per-open
+// rather than persisted: the app resets its filter on every navigation
+// (screens.js clears tradeFilter on hashchange) and a board that remembered
+// "Plumbing" from three rooms ago would show a punch list with 41 lines
+// silently missing.
+let tradeFilter = null;
+
 function sortedItems(room) {
   return Object.entries(room.items || {})
     .filter(([, it]) => !it.deleted)
@@ -134,8 +141,9 @@ export function openMepRoomSheet(roomNumber) {
   const body = groups.map(g => {
     const done = g.rows.filter(([, it]) => it.checked).length;
     const open = g.rows.filter(([, it]) => it.issue && !it.issueResolved).length;
+    const hide = tradeFilter !== null && tradeFilter !== g.cat;
     return `
-      <section class="mcat">
+      <section class="mcat" ${hide ? 'hidden' : ''}>
         <div class="mcat-head">
           ${g.letter ? `<span class="mcat-letter">${esc(g.letter)}</span>` : ''}
           <span class="mcat-name">${esc(g.label.toUpperCase())}</span>
@@ -153,9 +161,23 @@ export function openMepRoomSheet(roomNumber) {
   const prev = idx > 0 ? siblings[idx - 1] : null;
   const next = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : null;
 
+  // The FLAGGED count is the number the app leads with on a punch screen, and
+  // for good reason: 30 of room 101's 60 lines have two sources that disagree.
+  // A board that showed only "4/60 checked" would read as a nearly-untouched
+  // list rather than a list half of which needs a decision before it can be
+  // walked at all.
+  const flagged = items.filter(([, it]) => it.reliability === 'FLAGGED').length;
+
   const html = `
     <div class="mroom-sub">${esc(room.typeLabel || '')} · ${items.length} punch line${items.length === 1 ? '' : 's'}
       across ${groups.length} trade${groups.length === 1 ? '' : 's'}${s.openIssues ? ` · <b class="issue-ink">${s.openIssues} open</b>` : ''}</div>
+    ${flagged ? `<div class="mflag-line">⚠ ${flagged} flagged — two sources disagree; verify both before ordering</div>` : ''}
+    <div class="mchips" role="tablist" aria-label="Filter by trade">
+      <button class="mchip ${tradeFilter === null ? 'on' : ''}" role="tab"
+        aria-selected="${tradeFilter === null}" data-trade-all>All · ${items.length}</button>
+      ${groups.map(g => `<button class="mchip ${tradeFilter === g.cat ? 'on' : ''}" role="tab"
+        aria-selected="${tradeFilter === g.cat}" data-trade="${esc(g.cat)}">${esc(g.label)} · ${g.rows.length}</button>`).join('')}
+    </div>
     <div class="mroom-list">${body || '<div class="dempty">No punch lines on this doc.</div>'}</div>
     <div class="dhint">📎 opens the cutsheet or plan detail · punch lines are checked off in the crew app, not here.</div>
     <div class="dbtn-row droom-nav">
@@ -181,7 +203,18 @@ export function openMepRoomSheet(roomNumber) {
     wireRefs(rs, room, it, id);
   }));
 
+  scrim.querySelectorAll('[data-trade], [data-trade-all]').forEach(b => b.addEventListener('click', () => {
+    tradeFilter = ('tradeAll' in b.dataset) ? null : b.dataset.trade;
+    const keep = scrim.querySelector('.dsheet-body').scrollTop;
+    scrim.closeSheet();
+    const next = openMepRoomSheet(roomNumber);
+    if (next) next.querySelector('.dsheet-body').scrollTop = keep;
+  }));
+
   scrim.querySelectorAll('[data-mnav]').forEach(b => b.addEventListener('click', () => {
+    // A filter belongs to the list you are looking at, not to the next one —
+    // the app drops it on every navigation and so does this.
+    tradeFilter = null;
     openMepRoomSheet(b.dataset.mnav);
   }));
   const back = scrim.querySelector('[data-mback]');
@@ -267,6 +300,7 @@ export function renderMep(container, allDocs) {
     renderMep(container, allDocs);
   }));
   container.querySelectorAll('[data-mroom]').forEach(b => b.addEventListener('click', () => {
+    tradeFilter = null;
     openMepRoomSheet(b.dataset.mroom);
   }));
 }

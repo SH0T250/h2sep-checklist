@@ -596,3 +596,14 @@ body:not(.edit-mode) .inv-tbl th:last-child { display: none; }
 }
 
 .dref-note { display: block; margin-top: 4px; color: var(--ink-2); font-style: normal; font-size: 11.5px; line-height: 1.5; }
+.mflag-line { color: var(--warn); font-weight: 700; font-size: 12.5px; padding: 10px 0 0; }
+.mchips { display: flex; gap: 8px; flex-wrap: wrap; padding: 12px 0 2px; }
+.mchip {
+  font: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
+  color: var(--ink-2); background: var(--panel-2); border: 1px solid var(--hairline);
+  border-radius: 999px; padding: 7px 14px; min-height: 34px;
+}
+.mchip:hover { color: var(--ink); border-color: var(--ink-3); }
+.mchip.on { background: var(--brand); border-color: var(--brand); color: #00232F; }
+.mchip:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.mcat[hidden] { display: none; }

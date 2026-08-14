@@ -1,6 +1,6 @@
 // Screen renderers. Each returns an HTML string and wires events after mount
 // via the returned `wire(el)` function.
-import { esc, fmtWhen, roomStats, typeAbbrev, platform, vibrate, toast, roomSort, isSpaceDoc, isMepDoc, mepParent, mepIdFor, CATEGORY_ORDER, MEP_CATEGORY_ORDER, MEP_LETTER } from './util.js';
+import { esc, fmtWhen, roomStats, typeAbbrev, platform, vibrate, toast, roomSort, isSpaceDoc, isMepDoc, mepParent, mepIdFor, hasMark, CATEGORY_ORDER, MEP_CATEGORY_ORDER, MEP_LETTER } from './util.js';
 import { SPACE_META } from './space-meta.js';
 import * as store from './store.js';
 import * as sheets from './sheets.js';
@@ -424,7 +424,7 @@ export function renderRoom(el, number) {
             ${pendingDot ? `<span class="pend-dot" title="Waiting to sync"></span>` : ''}
           </button>
           <div class="item-main" data-rowtap="${esc(id)}">
-            <div class="item-line1">${it.code ? `<b class="code">${esc(it.code)}</b> ` : ''}${Number(it.qty) > 1 ? `<span class="qtyb" aria-label="quantity ${Number(it.qty)}">×${Number(it.qty)}</span>` : ''}<span class="lbl">${esc(it.label)}</span></div>
+            <div class="item-line1">${hasMark(it.code) ? `<b class="code">${esc(it.code)}</b> ` : ''}${Number(it.qty) > 1 ? `<span class="qtyb" aria-label="quantity ${Number(it.qty)}">×${Number(it.qty)}</span>` : ''}<span class="lbl">${esc(it.label)}</span></div>
             ${flagged ? `<div class="verify-chip warn">⚠ VERIFY — sources disagree</div>` : ''}
             ${it.reliability === 'MEDIUM' || it.reliability === 'LOW' ? `<div class="verify-chip">verify${it.reliability === 'LOW' ? ' — scaled source' : ''}</div>` : ''}
             ${openIssue ? `<div class="item-note">— ${esc(it.issue.toUpperCase())}</div>` : ''}
@@ -543,7 +543,8 @@ export function renderRoom(el, number) {
   </main>
   <footer class="room-foot">
     ${prev ? `<a class="foot-arrow" href="#/room/${esc(prev)}">‹ ${esc(prev)}</a>` : `<span class="foot-arrow dim"></span>`}
-    <button class="foot-mid" data-top>${isSpace ? esc(room.typeLabel || room.number) : 'Room ' + esc(room.number)} — ${s.done}/${s.total}</button>
+    <button class="foot-mid" data-top>${isSpace ? esc(room.typeLabel || room.number)
+      : isMep ? 'MEP ' + esc(mepBase) : 'Room ' + esc(room.number)} — ${s.done}/${s.total}</button>
     ${next ? `<a class="foot-arrow" href="#/room/${esc(next)}">${esc(next)} ›</a>` : `<span class="foot-arrow dim"></span>`}
   </footer>
   ${!w && store.getUser() ? `<div class="readonly-strip">View only — ${platform.isIOS && !platform.standalone
