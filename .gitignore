@@ -21,3 +21,12 @@ research/drive/
 __pycache__/
 *.pyc
 tools/minutes/fonts/
+
+# Subcontractor meeting minutes carry attendee EMAIL ADDRESSES — including
+# personal Yahoo/Gmail accounts, not just company aliases — and this repo is
+# PUBLIC. The rendered PDF is named PII for a reason. Same standing rule as
+# backups/ and reference/: the toolchain in tools/minutes/ is public, the data
+# it reads is not. Keep these beside the repo, not in it.
+data/minutes-*.json
+out/*.pdf
+docs/meeting-*-markup-ledger.txt
