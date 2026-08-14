@@ -7,7 +7,7 @@ unknown and what settles it. Austin answers with photos/notes; RFI-grade items g
 
 | # | Item | What's unknown | What settles it |
 |---|---|---|---|
-| L1 | Lamps included with FF&E lamp fixtures? | Hilton spec pages give bulb specs, never say bulbs ship installed; E101 excludes lamps from the electrician's guarantee | One email to Arkansas / Illumination / Trinity Lighting (contacts on spec pages) or RK |
+| L1 | ~~Lamps included with FF&E lamp fixtures?~~ **ANSWERED (Austin, 2026-08-14): fixtures do NOT ship with lamps — buy all 454 bulbs outright.** | — | — |
 | L2 | Public-area decorative fixture counts (PA-201/203/205/206) | Bulb specs printed; fixture quantities are not | Symbol takeoff on ID-1.6/ID-1.7 + lobby RCP (in progress), or MWT/RK confirmation |
 | L3 | Corridor sconce count, floors 1–4 | Printed "(typ.)" only, never a per-floor count | Symbol takeoff on E200–E203 / ID-1.11–1.16 (in progress) |
 | L4 | WS01 (electrical, Arkansas 4093C integrated LED) vs PA-204 (FF&E, E26 ×2 lamps) — same corridor sconce? | Two specs, different light sources, different buyers | MWT/RK: which governs + whose scope |
