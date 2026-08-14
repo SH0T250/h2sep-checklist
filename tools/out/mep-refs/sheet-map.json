@@ -1,0 +1,174 @@
+{
+ "sheets": [
+  {
+   "sheetId": "M101",
+   "title": "Mechanical General Notes",
+   "pdfDriveId": "1PnJPCoQOyxd1Uglbc6SXBVfg_iwFriho",
+   "folderName": "09-H2SEP-Mechanical",
+   "howConfirmed": "mech_sheet1.pdf. Folder manifest.json title_block_candidates records \"M101\" at 39.9pt inside the title zone (bbox 2411,1632-2506,1672) alongside MECHANICAL/GENERAL/NOTES and dwg name \"22-014 M101.DWG\"; page text opens with the printed sheet list \"M101 - MECHANICAL GENERAL NOTES\"."
+  },
+  {
+   "sheetId": "M201",
+   "title": "Mechanical Technical Schedules",
+   "pdfDriveId": "11StlwBb1wSWSD-NP3yAkzmk889i7lirq",
+   "folderName": "09-H2SEP-Mechanical",
+   "howConfirmed": "mech_sheet2.pdf. manifest.json title_block_candidates records \"M201\" at 39.9pt in the title zone with MECHANICAL/TECHNICAL/SCHEDULES at 19.9pt and dwg name \"22-014 M201.DWG\"."
+  },
+  {
+   "sheetId": "M301",
+   "title": "Mechanical First Floor Plan",
+   "pdfDriveId": "1M0lnimNI6IAULBcxBra8vy-GmOiVKq8Q",
+   "folderName": "09-H2SEP-Mechanical",
+   "howConfirmed": "mech_sheet4.pdf \u2014 ordinal 4, NOT 3. Opened the PDF: title block reads \"MECHANICAL FIRST FLOOR PLAN M301\" and dwg \"22-014 M301-M305 Mechanical Floor Plan.dwg\". Corroborated by first-floor room numbers on the sheet (101-118, STAIR 2 141, ELECTRICAL 033)."
+  },
+  {
+   "sheetId": "M401",
+   "title": "Mechanical Typical Guestroom",
+   "pdfDriveId": "1bfAM7ZE_qsOLcTEpmPDDyJ4zxllGke64",
+   "folderName": "09-H2SEP-Mechanical",
+   "howConfirmed": "mech_sheet9.pdf \u2014 ordinal 9, NOT 4. Opened the PDF: title block prints \"M401\" with drawing title \"MECHANICAL TYPICAL GUESTROOM\" and dwg \"22-014 M401 Mechanical Typical Unit.dwg\". Sheet carries the 7 PTAC guestroom-type details (QQ, QQ ACC, KING STD, KING STD ACC, KING STD ACC MOD, KING ONE BDR, KING ONE BDR ACC)."
+  },
+  {
+   "sheetId": "M501",
+   "title": "Mechanical Installation Details",
+   "pdfDriveId": "14TpVProGY-it_KUYZsBad6GfjlbMtR7y",
+   "folderName": "09-H2SEP-Mechanical",
+   "howConfirmed": "mech_sheet10.pdf \u2014 ordinal 10, NOT 5. Opened the PDF: title block prints \"M501\" with \"MECHANICAL / INSTALLATION / DETAILS\". Contains the PACKAGED TERMINAL A/C UNIT DETAIL that M401 keyed note 3 points to."
+  },
+  {
+   "sheetId": "M502",
+   "title": "Mechanical Installation Details",
+   "pdfDriveId": "1dqoQ0nbYu-vlYFL3gYir1SJ-HUhFjjFC",
+   "folderName": "09-H2SEP-Mechanical",
+   "howConfirmed": "mech_sheet11.pdf \u2014 ordinal 11, NOT 6. manifest.json title_block_candidates records \"M502\" at 39.9pt in the title zone with MECHANICAL/INSTALLATION/DETAILS; page text opens \"M502\\nMECHANICAL\\nINSTALLATION\\nDETAILS\"."
+  },
+  {
+   "sheetId": "E101",
+   "title": "Electrical Notes & Legends of Symbols",
+   "pdfDriveId": "1WvxIJxqhQ2FUQHode3XYMUsjcZ3ef32Z",
+   "folderName": "10-H2S-Electrical-Pages",
+   "howConfirmed": "E101_p02.pdf. Opened the PDF: title block prints drawing title \"ELECTRICAL NOTES & LEGENDS OF SYMBOLS\" and sheet number \"E101\". Sheet carries the symbol legend and 31 electrical specifications (switches +54\" AFF, receptacles +18\" AFF, Lutron Nova dimmers, Panduit CAT6)."
+  },
+  {
+   "sheetId": "E103.2",
+   "title": "Electrical Panels",
+   "pdfDriveId": "1gt4Eq4zPa0nTZ5u1e4b7z4y3mzuGM0of",
+   "folderName": "10-H2S-Electrical-Pages",
+   "howConfirmed": "E103.2_p06.pdf. Opened the PDF: title block prints drawing title \"ELECTRICAL PANELS\" and sheet number \"E103.2\" (dotted sheet id confirmed on the sheet, not inferred). Revision block shows Rev 8 REVISED PER RFI 04/10/25."
+  },
+  {
+   "sheetId": "E200",
+   "title": "Lighting First Floor Plan",
+   "pdfDriveId": "1ujzTWN0htQs1oN_y1Jve-M6ztigFd1PV",
+   "folderName": "10-H2S-Electrical-Pages",
+   "howConfirmed": "E200_p12.pdf. Opened the PDF: title block prints \"LIGHTING FIRST FLOOR PLAN\" and \"E200\", dwg \"22-014 E200~E204 Electrical Floor Plan.dwg\". First-floor rooms 101-118/141 present; guestrooms carry \"REFER TO ENLARGED GUESTROOM PLAN (E-400)\"."
+  },
+  {
+   "sheetId": "E300",
+   "title": "Power First Floor Plan",
+   "pdfDriveId": "1GUXxXgpFDXkfceIFdKhhdhXMjDKPEPnQ",
+   "folderName": "10-H2S-Electrical-Pages",
+   "howConfirmed": "E300_p17.pdf. Opened the PDF: title block prints \"POWER FIRST FLOOR PLAN\" and \"SHEET E300\", dwg \"22-014 E300 Power First Floor Plan.dwg\". Shows first-floor panels 1A-1G/PK/EV/MDP and rooms 101-118."
+  },
+  {
+   "sheetId": "E400",
+   "title": "Enlarged Typical Guestroom Plan",
+   "pdfDriveId": "1R6bOsliAf35l7C-Pb4oA7IPKpxwuyiqf",
+   "folderName": "10-H2S-Electrical-Pages",
+   "howConfirmed": "E400_p19.pdf. Opened the PDF: title block prints \"ENLARGED TYPICAL GUESTROOM PLAN\" and \"E400\", dwg \"22-014 E400 Enlarged Typical Guest Room Plan.dwg\". Carries the 6 room-type details plus Panel A / Panel B (100A, 120/208V 1PH 3W) schedules."
+  },
+  {
+   "sheetId": "E500",
+   "title": "Fire Alarm Notes and One Line Diagram",
+   "pdfDriveId": "1xm1Nfs4E9GfEWMgDIbwNCimJ4PeCVW8O",
+   "folderName": "10-H2S-Electrical-Pages",
+   "howConfirmed": "E500_p20.pdf. Opened the PDF: title block prints \"FIRE ALARM NOTES AND ONE LINE DIAGRAM\" and \"E500\", dwg \"22-014 E500~E504 Fire Alarm.dwg\"."
+  },
+  {
+   "sheetId": "E501",
+   "title": "Fire Alarm First Floor Plan",
+   "pdfDriveId": "1Qrle6D4PCeEQggnxetX9GWWcUKHckLMz",
+   "folderName": "10-H2S-Electrical-Pages",
+   "howConfirmed": "E501_p21.pdf. Opened the PDF: title block prints \"FIRE ALARM FIRST FLOOR PLAN\" and \"E501\", dwg \"22-014 E500~E504 Fire Alarm.dwg\". FACP shown at first floor; guestrooms note \"REFER TO ENLARGED GUESTROOM PLAN (E-400)\"."
+  },
+  {
+   "sheetId": "E700",
+   "title": "Electrical Details",
+   "pdfDriveId": "172jzc3SLzQ66waFLJcbV4GnXSgU6vaGs",
+   "folderName": "10-H2S-Electrical-Pages",
+   "howConfirmed": "E700_p27.pdf. Opened the PDF: title block prints \"ELECTRICAL DETAILS\" and \"E700\". Contains the 8 install details (device mounting heights, box offset, rated-wall penetration, firestop)."
+  },
+  {
+   "sheetId": "P101",
+   "title": "Plumbing Notes and Legend",
+   "pdfDriveId": "1YeiIsJLkYpw5BM5Dvv3Pm2pN3lO0L5K4",
+   "pngDriveId": "1l8cCL9WzUzTsvuNVYAxM-qB2g3SyuwGu",
+   "folderName": "08-H2S-Plumbing-Pages",
+   "howConfirmed": "08-H2S - Plumbing Pages_sheet1.pdf. Opened the PDF: title block prints \"PLUMBING NOTES AND LEGEND\" / \"P101\", dwg \"22-014 P101 Plumbing Notes and Legend.dwg\". This sheet also carries the printed PLUMBING DRAWING LIST (items 1-24, P101 through P503) used to cross-check the other plumbing ordinals."
+  },
+  {
+   "sheetId": "P104",
+   "title": "Plumbing Fixtures Schedule",
+   "pdfDriveId": "13J3yQ1-c19uiTnEN-QhCWmX9qINVUEZn",
+   "pngDriveId": "1DAzA-uayiCJ02NVq0kTneIzEP2Cztcee",
+   "folderName": "08-H2S-Plumbing-Pages",
+   "howConfirmed": "08-H2S - Plumbing Pages_sheet4.pdf. Opened the PDF: title block prints \"PLUMBING FIXTURES SCHEDULE\" / \"P104\". Note the schedule table itself has no extractable text layer (raster/vector), so fixture model numbers cannot be text-searched off this sheet."
+  },
+  {
+   "sheetId": "P301",
+   "title": "Sanitary Sewer First Floor Plan",
+   "pdfDriveId": "1M8L2IQ8QIHVg3rzDUnhk99Np1UkWwcS1",
+   "pngDriveId": "1AElq9Hp4WTiMa0qrGXU0-k6cp9cqv9Uv",
+   "folderName": "08-H2S-Plumbing-Pages",
+   "howConfirmed": "08-H2S - Plumbing Pages_sheet8.pdf. Opened the PDF: title block prints \"SANITARY SEWER FIRST FLOOR PLAN\" / \"P301\", dwg \"22-014 P301-P304 & P310 Sanitary Sewer Floor Plan.dwg\". First-floor rooms 101-118/141 present; guestrooms note \"SEE ENLARGED GUESTROOM PLANS FOR DETAILS\"."
+  },
+  {
+   "sheetId": "P305",
+   "title": "Domestic Water and Gas First Floor Plan",
+   "pdfDriveId": "1QsIi1NUqGE6WLDU1KBYqIm8hVm543bLx",
+   "pngDriveId": "1FwahdgGdrlUnR1YzW_siNaB6820v_qjk",
+   "folderName": "08-H2S-Plumbing-Pages",
+   "howConfirmed": "08-H2S - Plumbing Pages_sheet12.pdf. Opened the PDF: title block prints \"DOMESTIC WATER AND GAS FIRST FLOOR PLAN\" / \"P305\", dwg \"22-014 P305-P309 Domestic Water & Gas Floor Plan.dwg\"."
+  },
+  {
+   "sheetId": "P401",
+   "title": "Domestic Water Typical Unit (Typical Guestroom)",
+   "pdfDriveId": "14R7dvJdsAELYMl-th0Z_-mIUdvV23rL0",
+   "pngDriveId": "18vSMjo_RiofPUU3Fqg2CSMx4j9xPXgJN",
+   "folderName": "08-H2S-Plumbing-Pages",
+   "howConfirmed": "08-H2S - Plumbing Pages_sheet18.pdf. Opened the PDF: title block prints \"DOMESTIC WATER TYPICAL UNIT\" / \"P401\", dwg \"22-014 P401-P402 Typical Unit.dwg\". Seven guestroom-type details; fixture tags WC-3, WC-4, L-2, L-3, SK-3, SK-4, SH-1, BT-1 read directly off the sheet."
+  },
+  {
+   "sheetId": "P402",
+   "title": "Sanitary Sewer Typical Unit (Typical Guestroom)",
+   "pdfDriveId": "1aqyfsZoby2h7hiIPECkmLdIxXVAYdP6V",
+   "pngDriveId": "1rc5l62LjzGjliMvBAPfy2cUtP5vjlwna",
+   "folderName": "08-H2S-Plumbing-Pages",
+   "howConfirmed": "08-H2S - Plumbing Pages_sheet19.pdf. Opened the PDF: title block prints \"SANITARY SEWER TYPICAL UNIT\" / \"P402\", dwg \"22-014 P401-P402 Typical Unit.dwg\". Same seven guestroom types with SS/vent sizing."
+  },
+  {
+   "sheetId": "P501",
+   "title": "Installation Plumbing Details",
+   "pdfDriveId": "16gS3dhvvkhhCrCd69_iZGL8wd5bW_4-t",
+   "pngDriveId": "1ajnOrf4aykQfnmnCDso4NjEkDqFgtbRa",
+   "folderName": "08-H2S-Plumbing-Pages",
+   "howConfirmed": "08-H2S - Plumbing Pages_sheet22.pdf. Opened the PDF: title block prints \"INSTALLATION PLUMBING DETAILS\" and \"P501 SHEET\". Contains the PTAC condensate drain detail, floor drain / trap primer detail, lint interceptor, backflow preventer."
+  },
+  {
+   "sheetId": "FP-1",
+   "title": "Automatic Sprinkler Installation Plan - Home2Suites, Eagle Pass, Texas, 1st Floor (PDF page 1 of 4)",
+   "pdfDriveId": "1yRFIkqpD3Td-jdjQpsXbw6u7qDz2O98-",
+   "folderName": "Submittals",
+   "howConfirmed": "Read the Fire Sprinkler Shop Drawings PDF itself. It is a 4-page Texas Fire Services LLC submittal, sheets FP-1..FP-4 in page order. PAGE 1 = FP-1, printed title \"AUTOMATIC SPRINKLER INSTALLATION PLAN HOME2SUITES, EAGLE PASS, TEXAS, 1ST FLOOR\" with \"1ST FLOOR PROTECTION 18,183 SQFT / TOTAL AREA PROTECTED 72,732 SQFT\", sheet stamp \"FP-1\", City of Eagle Pass Fire Department stamp, Triun Construction/Engineering title block. So first-floor guestroom sprinkler heads are on PAGE 1. Remaining pages: p2=FP-2 (2nd floor + pump room cross-section), p3=FP-3 (3rd floor), p4=FP-4 (4th floor + the two 6\" standpipes). CAVEAT: this PDF's text layer is poor-quality OCR of a scanned shop drawing - the sheet titles and area callouts are legible but individual head tags/room numbers are not text-extractable, so per-room head counts must be read visually off page 1."
+  },
+  {
+   "sheetId": "FA-2",
+   "title": "Fire Alarm System Layout, 1st & 2nd Floor Plan (PDF page 3 of 4)",
+   "pdfDriveId": "1Ke8C15Au-7A8XpQWlSKTaM6w0o2PCN2o",
+   "folderName": "Submittals",
+   "howConfirmed": "Read the Fire Alarm Shop Drawings PDF itself. It is a 4-page Security Integrated, Inc. submittal. Page 1 (FA-0) carries a printed SHEET / DRAWING TITLE schedule: FA0 = cover/project info/sheet schedule; FA1 = installation notes, scope, equipment schedule, operation matrix, calcs; FA2 = \"FIRE ALARM SYSTEM LAYOUT, 1ST & 2ND FLOOR PLAN\"; FA3 = \"FIRE ALARM SYSTEM LAYOUT, 3RD & 4TH FLOOR PLAN\". PAGE 3 is the FA-2 sheet and its own page text contains both \"FIRE ALARM FLOOR PLAN - 1st Floor\" (rooms 101-118, 141, STAIR 1 100, GUEST CORRIDOR 121, plus \"Provide smoke detector, typ.\") and \"FIRE ALARM FLOOR PLAN - 2nd Floor\" (rooms 201-241). So first-floor guestroom fire alarm devices are on PAGE 3, sheet FA-2 - note that one sheet covers floors 1 AND 2. Page 4 = FA-3 (3rd floor 301-341 and 4th floor 401-440)."
+  }
+ ],
+ "missing": [],
+ "notes": "ALL 21 named MEP sheets found and confirmed off the printed title block, plus both fire shop-drawing sets page-mapped. Nothing missing.\n\nWHERE THINGS ACTUALLY LIVE (the prompt's assumption needed correcting). The `drawings_split` tree the prompt anchored on (parent 1cHHALYSd_FTywmy5KqRcvbIVPsLfz7uv, and its `textdirs` twin 1InMm_kvGksX28vGjW-nJtoMmm1Au0pW7) contains ONLY four sets: 04-H2SEP-General-Pages, 05-H2SEP-Architectural-Pages, 08-H2S-Plumbing-Pages, FFE-Locations. There are NO Mechanical, Electrical or Fire \"Pages\" folders there - `_map_report.json` (1nbqziyCI_oCAyp5vQ707prRvYpO5zlnW) confirms only those four sets were ever split into that tree. Mechanical and Electrical live in a separate, older per-discipline tree:\n  - Mechanical: folder \"09-H2SEP-Mechanical\" = 15Wv0FMBtsXzMmS58wmlCxB60LiKE8HFL (under Mechanical / AI Context - Mechanical). 13 sheets, files named mech_sheetN.pdf + .json, plus manifest.json (1QtkcakBgCzCFhtmaqdduTKXODA0fRl-A). Source PDF \"09-H2SEP - Mechanical Pages.pdf\" = 1XuO8O8qwTPl4mc7zhkqjp6WUJwdyn15v.\n  - Electrical: folder \"10-H2S-Electrical-Pages\" = 1SDIs6PAtD0VEkyVJXsBmERcf1_E9nE0Z (under Electrical / H2SEP_Electrical_AI_Context / 0. AI Context / drawings_split). 29 sheets, files named <sheetid>_p<ordinal>.pdf. Source PDF \"10-H2S - Electrical Pages.pdf\" = 1owA4DyBZIW6ecX9208BDNgLMbkbTy-SW.\n\nPNG SIBLINGS: only the Plumbing set has them. Mechanical and Electrical have NO .png files in Drive (the mechanical manifest references image_path values that were never uploaded), so pngDriveId is legitimately absent for all 14 M/E sheets - not an oversight.\n\nORDINAL != SHEET ID - CONFIRMED REAL FOR MECHANICAL. M301 is mech_sheet4, M401 is mech_sheet9, M501 is mech_sheet10, M502 is mech_sheet11. Anyone assuming M301=sheet3 or M401=sheet4 would pull the wrong drawing. The mechanical set runs M101, M201, M202, M301, M302, M303, M304, M305, M401, M501, M502, M601, M602 across ordinals 1-13.\n\nPLUMBING: ordinals 1-24 happen to line up with the printed PLUMBING DRAWING LIST on P101, but I did not rely on that - I opened and read the title block of every one of the seven requested sheets individually. Mapping: 1=P101, 4=P104, 8=P301, 12=P305, 18=P401, 19=P402, 22=P501.\n\nELECTRICAL: filenames already carry the sheet id, but I opened all eight and read the printed title block anyway; 8/8 matched. The folder also has a derived register, drawings.md (1_Nr-AA79u35VptaoS54s4NmjzG1TBmoM), whose titles agreed with every sheet I opened.\n\nDISCREPANCIES WORTH FLAGGING TO THE PUNCH-LIST OWNER:\n1. The plumbing split has 25 sheets (P101...P504) but the drawing list printed on P101 enumerates only 24, ending at P503. P504 exists as sheet25 (pdf 1ESmkakaot4YUIDzuRhEqdLoKCSSfvgo8) but is not on the printed index.\n2. provenance_report_08-H2S-Plumbing-Pages.json (1qg_l8aLobyXXZhzSX6OQ9gKjk74ZCL8v) flags 15 guestroom fixture tags - WC-3/WC-4, L-2/L-3/L-4, SK-3/SK-4, SH-1/SH-3/SH-4, cited to P401/P402 - as \"tag not found on any sheet in this folder\". That report is WRONG. I read WC-3, WC-4, L-2, L-3, SK-3, SK-4, SH-1 and BT-1 directly off P401 (sheet18) and P402 (sheet19) as vector text. The tags are there; the earlier scan missed them. Do not treat those items as undocumented.\n3. E103.2 is the guestroom-relevant panel sheet: it holds panel 1G (1st-floor guestroom feeder, 300A) plus PK and EV. Its sheet id genuinely prints as \"E103.2\" on the sheet, so the dotted id is not a filename artifact.\n4. Fire sprinkler FP-1 vs FP-2 note: the project's own fire-sprinkler wiki (1C7meOUumUDHFK3jbCWDj5nWlDZT9hUZx) records that first-floor guestroom head layouts (rooms 107 and 108 verified head-by-head, 3 heads each, VK430 concealed pendent K=4.3, no head in the guest bathroom) were read off FP-1 - consistent with FP-1 being PDF page 1. It also flags an open NFPA 13 vs 13R conflict and that the F-series permit sheets (F101, F102, F301-F304, F401) are NOT in Drive at all.\n5. Fire alarm FA-2 covers floors 1 AND 2 on a single sheet - when citing a first-floor guestroom FA device, cite \"FA-2, page 3, 1st Floor plan\" so the field crew does not read the 2nd-floor half of the sheet.\n\nDuplicate folder caution: a second \"08-H2S-Plumbing-Pages\" exists at 1qimXc1gbVN209-YnMKAHRfiP7zLbOqcf (the textdirs mirror). All plumbing driveIds above come from the drawings_split copy the prompt anchored, 1r9nrjq8xuSSfGLfC1pKuf2jy8frtMe8E."
+}

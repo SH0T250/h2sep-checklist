@@ -32,7 +32,8 @@ function refsSection(room, item, itemId = '') {
     <button class="ref-link" data-refi="${i}">
       <span class="ref-ico">${r.kind === 'plan' ? '📐' : '📄'}</span>
       <span class="ref-main"><span class="ref-name">${esc(r.title)}</span>
-        <div class="ref-path">${r.kind === 'plan' ? 'Plan detail' : 'Submittal'}${r.sheetId ? ' · sheet ' + esc(r.sheetId) : ''}</div></span>
+        <div class="ref-path">${r.kind === 'plan' ? 'Plan detail' : 'Submittal'}${r.sheetId ? ' · sheet ' + esc(r.sheetId) : ''}</div>
+        ${r.note ? `<div class="ref-note">${esc(r.note)}</div>` : ''}</span>
       <span class="ref-open">›</span>
     </button>`).join('');
 }

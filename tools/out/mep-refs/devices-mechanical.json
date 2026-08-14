@@ -1,0 +1,1349 @@
+[
+ {
+  "itemId": "766dc7c04c13",
+  "category": "Mechanical",
+  "code": "",
+  "label": "Interior architectural wall grille at the PTAC, painted to match the INTERIOR wall (M401 KN5)",
+  "where": "Room-side face of the PTAC / sleeve at the window wall",
+  "qtyMax": 1,
+  "src": "M401 KN5 ('grille painted to match INTERIOR wall') against M401 KN1 (same wording, 'EXTERIOR wall')",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look at the room-side face of the PTAC/sleeve \u2014 if a separate grille is there, confirm it is fastened, undamaged and painted to the adjacent wall colour (not mill or white); if there is NO separate interior grille, write 'none installed', because that observation is the evidence that closes the flag.",
+  "rooms": [
+   "104",
+   "105",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 12
+ },
+ {
+  "itemId": "bb685dcff842",
+  "category": "Mechanical",
+  "code": "",
+  "label": "Access panel in the bath ceiling to the fire damper and volume damper \u2014 min 12\"x12\", with the permanent damper label",
+  "where": "Would be in the 7'-3\" PT-07 painted-gypsum bath lid, at the FD/VD above it",
+  "qtyMax": 1,
+  "src": "M101 N7 (min 12\"x12\" access to valves, traps, dampers, cleanouts, controls) \u00b7 M301 Key Note 4 \u00b7 M501 det.2/det.5 (fire/smoke damper access + permanent exterior label) \u00b7 M101 GN31/GN32 \u2014 AGAINST A550 view 02, which draws no access panel",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look at the bath ceiling \u2014 is there an access panel, YES or NO? If yes: measure it against the M101 N7 minimum 12\"x12\", confirm flush, latching and painted, and confirm it carries the permanent FIRE DAMPER label in letters at least 1/2\" high. If no: photograph the intact lid. Cut nothing.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "af2139615453",
+  "category": "Mechanical",
+  "code": "",
+  "label": "Aldes constant-airflow regulator at the 50 CFM ceiling exhaust inlet",
+  "where": "Immediately behind/above the EAG-50 grille at the toilet exhaust inlet",
+  "qtyMax": 1,
+  "src": "M305 exhaust-riser diagrams EV-1 to EV-7 ('CEILING GRILLE EXHAUST 50 CFM c/w ALDES CONSTANT AIRFLOW REGULATOR' at each inlet) \u2014 the ONLY source",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Drop the EAG-50 grille and look \u2014 is a constant-airflow regulator installed behind it, YES or NO? Record per room; if absent, log it and do NOT write it as a deficiency until the EOR answers.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "470fcd06bb19",
+  "category": "Mechanical",
+  "code": "",
+  "label": "Energy-management wall controller with occupancy sensor",
+  "where": "Wall-mounted in the guest room; no mechanical sheet gives a separate location \u2014 M301 GN5 and M401 KN4 both defer to the architectural / ID plans",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes \u00b7 M301 GN5 \u00b7 M401 KN4 \u00b7 A550 KN24",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "COUNT the wall control devices at the PTAC / window wall \u2014 one or two \u2014 then leave the room with the door shut and confirm the unit sets back, re-enter and confirm it recovers; record whether occupancy setback is ENABLED (a disabled EMS is an energy-code item at final).",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "f6bf42a588ec",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC drain kit (furnished with the unit; M501 det.9 calls it out for 1st/2nd/3rd/4th-floor units \u2014 i.e. all floors)",
+  "where": "PTAC base pan / sleeve, discharging to the condensate drain that runs down the wall",
+  "qtyMax": 1,
+  "src": "M501 det.9 verbatim 'drain kit for 1st/2nd/3rd/4th-floor units (furnished with unit)' \u00b7 M401 KN2 \u00b7 M301 GN6 \u00b7 AS103 PTAC detail",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Run the unit in cooling long enough to make condensate \u2014 water leaves through the drain kit and does not pool in the base pan, weep into the room, back up onto the stone stool, or stain the wall or carpet below.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "485c4147dfc5",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC exterior louver / architectural wall grille at the window wall",
+  "where": "Exterior face of the PTAC sleeve, visible from outside and through the unit's outdoor section",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes \u00b7 M501 det.9 \u00b7 M401 KN1 \u00b7 A200 keyed note 8 (= AS105 kn 8) \u00b7 AS103 PTAC detail \u00b7 size ref 'A-601' (sheet not in the issued set \u2014 RFI R-04 / coordination_issues R-01)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "From outside: louver present, straight, seated, fastened, blades undamaged, sealant continuous; RECORD the material actually installed (plastic vs aluminium) and the colour, and compare against the approved submittal before writing anything up.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "d1b9f60d4cd5",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC fresh-air filter, MERV 13 or MERV 8, with bracket and gasket",
+  "where": "Behind the PTAC front grille, at the fresh-air / return-air path",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes \u00b7 M501 det.9 (air filter + return-air path shown)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Lift the front grille \u2014 filter present, seated in the bracket with the gasket sealing (not bypassing), clean of construction dust; record the MERV rating printed on the frame.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "fa825bd92456",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC fresh-air kit (outside-air path delivering the scheduled OSA 45.0 CFM)",
+  "where": "PTAC outdoor section, reachable by opening the unit front",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes ('low-ambient + fresh-air kits') \u00b7 OSA 45.0 CFM from the M201 PTAC schedule",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Open the PTAC front \u2014 outside-air vent/damper present, moves freely, and is set OPEN not shut; if T&B is on site have OSA read and recorded against the scheduled 45.0 CFM, otherwise flag it for the T&B report.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "67670b92d867",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC louvered access panel",
+  "where": "Not stated by any sheet \u2014 either a G.E. accessory on the unit cabinet or a panel in the adjacent wall/enclosure",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes ('louvered access panel') \u2014 the only source in the mechanical set",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look for a louvered panel at or around the PTAC \u2014 on the cabinet or in the adjacent wall; if present, confirm it is fastened, operable, undamaged and finished, and record which it is (unit part vs wall panel); if absent, record that against the approved G.E. submittal before writing it up.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "84d2ebbf4760",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC low-ambient kit",
+  "where": "Internal to the PTAC \u2014 no sheet locates it",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes ('low-ambient + fresh-air kits'); M201 also states PTAC operating range 55-115 F",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Read the accessory/model label inside the PTAC front panel and write the text down VERBATIM so the office can reconcile all 16 first-floor rooms at once rather than pulling covers twice.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "86e3c3a09395",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC wall sleeve kit (furnished with the unit) \u2014 caulked all round, drywall closure at the PTAC-to-opening gap finished and painted",
+  "where": "Through-wall at the exterior window wall, under the window",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes \u00b7 M501 det.9 (min 3-1/4\" AFF) \u00b7 AS103 PTAC through-wall detail",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Run a finger round the sleeve inside and out \u2014 caulk continuous, no gaps or shiners, no daylight, no air whistle; MEASURE and RECORD the height AFF at the bottom of the PTAC/sleeve against M501 det.9's 'min 3-1/4\" AFF' \u2014 but RECORD, DO NOT JUDGE: det.9 prints that dimension in a string with the field-built sub-base and the condensate run and never says which element it dimensions, so nothing on this drawing set makes it a sleeve-bottom criterion. NOTE: no sheet in this set specifies sleeve PITCH \u2014 if the sleeve reads flat or pitched in, record it against the G.E. installation instructions in the approved submittal, do not write it up against a drawing.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "07081dd42d97",
+  "category": "Mechanical",
+  "code": "EAG-50",
+  "label": "Toilet / bath exhaust air grille, 50 CFM \u2014 off-white aluminium grille per the M201 EF-1 remark codes (remark 6)",
+  "where": "Bathroom ceiling \u2014 7'-3\" AFF PT-07 painted gypsum hard lid (A550 view 02)",
+  "qtyMax": 1,
+  "src": "M401 (EAG-50 with VD and FD) \u00b7 M305 riser diagrams EV-1 to EV-7 \u00b7 A550 KN19 on view 02 ('TOILET EXHAUST GRILLE')",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Grille square and tight to the gyp lid, screws set, no paint blinding the blades \u2014 hold a tissue to the face and it should hold; read airflow at the grille and record it against the scheduled 50 CFM.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "94eebe662e95",
+  "category": "Mechanical",
+  "code": "EF-1",
+  "label": "Toilet exhaust fan \u2014 M201 schedules Panasonic FV-0511VK2, ceiling type, 50 CFM, 0.10 in. s.p., 115/1/60, with backdraft damper (remark 5) and off-white aluminium grille (remark 6)",
+  "where": "Bathroom ceiling at the toilet exhaust inlet \u2014 if it is a physical in-room fan at all",
+  "qtyMax": 1,
+  "src": "M201 exhaust fan schedule (EF-1, remarks 1,2,3,5,6,9; remark code 3 = 'switch w/ room lights') \u00b7 M202 \u00b7 M301-M304 \u00b7 against M305 riser diagrams \u00b7 E400 Panel A/B schedules \u00b7 G402 general note 3 (guestroom bath block) verbatim 'CEILING MOUNTED LIGHT FIXTURE AND FAN TO BE SWITCHED SEPARATELY FROM LIGHT'",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look behind the bath ceiling grille and record what is actually there \u2014 FAN HOUSING or BARE DUCT to a riser; that one observation closes C-06. If a fan: operate it, record WHICH switch controls it and whether the fan and the light are on the SAME switch or SEPARATE switches, and confirm the backdraft damper is audible.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "85abf129c49f",
+  "category": "Mechanical",
+  "code": "T",
+  "label": "PTAC thermostat \u2014 7-day programmable, HARDWIRED (keynote 24 adds that thermostat-to-PTAC communication may be wireless). ONE PER PTAC, AND THIS ROOM HAS ONE PTAC \u2014 M401 states verbatim 'Each guestroom is served by a single PTAC', and A550 \u2014 the KING STUDIO sheet, the one that governs 104 \u2014 places keynote 1 (PTAC) only at the window wall on views 01, 02 and 08, so expect ONE thermostat here. SHEET CORRECTED THIS PASS: this label previously cited A555, which is the QUEEN-QUEEN sheet ('ENL. GUEST ROOM PLANS & ELEVS - QQ STD., QQ EXT., & QQ STD. CONN.') and is not a source for a King Studio \u2014 the same wrong-sheet citation struck elsewhere on this list",
+  "where": "Guest-room wall near the PTAC / window wall; exact location deferred by BOTH mechanical sheets to the architectural set",
+  "qtyMax": 1,
+  "src": "M401 KN4 \u00b7 M101 N28 (trade split) + N29 (height, 4'-0\" AFF, not on an exterior wall if an interior wall is available) \u00b7 M201 PTAC notes \u00b7 M301 GN5 \u00b7 A550 KN24 (placed on view 04) \u00b7 E101 symbol legend (60\" AFF) \u00b7 G400 detail 02 \u00b7 G402 note 11",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "MEASURE and RECORD the height to the TOP of the device \u2014 do not judge it; confirm hardwired and live, clock set and the 7-day schedule programmable; call for heat then cool and confirm the PTAC responds \u2014 cycle it TWICE if the link is wireless, to prove the pairing holds; confirm it is not on an exterior wall where an interior wall was available (M101 N29).",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "728c9f3f32ea",
+  "category": "Mechanical",
+  "code": "VD",
+  "label": "Volume damper at the toilet exhaust, with a locking quadrant",
+  "where": "At the toilet exhaust branch \u2014 M401 does not dimension its position",
+  "qtyMax": 1,
+  "src": "M401 (EAG-50 with VD and FD) \u00b7 M101 legend + GN25/GN26 \u00b7 M301 GN11 \u00b7 M101 N7 (access panels min 12\"x12\" to dampers)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Drop the EAG-50 and look up the neck for a damper with a locking quadrant \u2014 set and locked, not wired shut or fully closed; if it is not visible at the neck, record that it is above the hard lid with no access (that is the access-panel finding, not a damper finding).",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "49ee8c137159",
+  "category": "Mechanical",
+  "code": "WAG-30",
+  "label": "Wall air grille / make-up air diffuser, 30 CFM \u2014 the transfer/make-up air path to the bathroom (keynote 20, 'MAKE-UP AIR DIFFUSER')",
+  "where": "CONTESTED \u2014 M401 says it makes up air to the BATH; A550 carries keynote 20 ('MAKE-UP AIR DIFFUSER') somewhere in its elevation set without naming which elevation",
+  "qtyMax": 1,
+  "src": "M401 (WAG-30, 30 CFM) \u00b7 M301 GN13 \u00b7 M101 legend \u00b7 A550 KN20 (listed among the keynotes carried on A550's elevations) \u00b7 cross-type reference only: A555 elevation 07 (bed wall + sofa wall) carries keynote 20",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Find the grille and RECORD WHERE IT IS \u2014 bath wall, bed/sofa wall or elsewhere; confirm fastened, square, painted to its wall and not overspray-blinded; read airflow and record it against 30 CFM.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "57f980eab5d6",
+  "category": "Mechanical",
+  "code": "PTAC-1",
+  "label": "PTAC \u2014 G.E. AZ65H12DAB packaged terminal A/C, 11,900 BTU/h cool (EER 11.9) / 10,400 BTU/h heat, 449/300 CFM hi-lo, OSA 45.0 CFM, 208/1/60, in through-wall sleeve",
+  "where": "Exterior window wall, under the window, in the through-wall sleeve; ST-01 quartz stool set over it",
+  "qtyMax": 1,
+  "src": "M201 PTAC schedule \u00b7 M401 KN3 + detail 03 (King Std.) \u00b7 M301 first-floor plan \u00b7 M501 det.9 \u00b7 A550 KN1 (placed on views 01 and 08) / KN30 (placed on view 03, the FINISH plan) / view 08 window-wall elevation",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Read the nameplate and record it \u2014 AZ65H12DAB is expected (AZ65H15DAB = PTAC-2 and is the finding); run heat then cool from the wall control, both cycle, no rattle in the sleeve, unit level and seated; carpet edge tucked UNDER the PTAC per KN30 and the ST-01 stool not bearing on the cabinet.",
+  "rooms": [
+   "104",
+   "106",
+   "108",
+   "110",
+   "112",
+   "114"
+  ],
+  "roomCount": 6
+ },
+ {
+  "itemId": "a065cd3d8534",
+  "category": "Mechanical",
+  "code": "PTAC-2 / PTAC-1",
+  "label": "PTAC \u2014 G.E. AZ65H12DAB packaged terminal A/C, 11,900 BTU/h cool (EER 11.9) / 10,400 BTU/h heat, 449/300 CFM hi-lo, OSA 45.0 CFM, 208/1/60, in through-wall sleeve",
+  "where": "Exterior window wall, under the window, in the through-wall sleeve; ST-01 quartz stool set over it",
+  "qtyMax": 1,
+  "src": "M201 PTAC schedule \u00b7 M401 KN3 + detail 03 (King Std.) \u00b7 M301 first-floor plan \u00b7 M501 det.9 \u00b7 A550 KN1 (placed on views 01 and 08) / KN30 (placed on view 03, the FINISH plan) / view 08 window-wall elevation",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Read the nameplate and record it \u2014 AZ65H12DAB is expected (AZ65H15DAB = PTAC-2 and is the finding); run heat then cool from the wall control, both cycle, no rattle in the sleeve, unit level and seated; carpet edge tucked UNDER the PTAC per KN30 and the ST-01 stool not bearing on the cabinet.",
+  "rooms": [
+   "107",
+   "109",
+   "111",
+   "113",
+   "115"
+  ],
+  "roomCount": 5
+ },
+ {
+  "itemId": "7d7be6b8d127",
+  "category": "Mechanical",
+  "code": "EAG-50",
+  "label": "Toilet / bath exhaust air grille, 50 CFM \u2014 off-white aluminium grille per the M201 EF-1 remark codes (remark 6)",
+  "where": "Bathroom ceiling, 7'-3\" AFF PT-07 painted gyp hard lid (A555 view 02, keynote 19 'TOILET EXHAUST GRILLE')",
+  "qtyMax": 1,
+  "src": "M401 (EAG-50 with VD and FD); M305 EV riser diagrams ('CEILING GRILLE EXHAUST 50 CFM'); A555 keynote 19 view 02; M201 EF remark 6",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Hold a tissue flat to the face with the fan/riser running \u2014 it must hold unaided; take an airflow reading and record it against 50 CFM for the T&B report (M101 GN30); record the grille colour and that the face is clean and square to the lid.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "121591af18d1",
+  "category": "Mechanical",
+  "code": "EF-1",
+  "label": "Toilet exhaust fan \u2014 M201 schedules Panasonic FV-0511VK2, ceiling, 50 CFM, 115/1/60, with backdraft damper",
+  "where": "Bathroom ceiling at the exhaust inlet \u2014 if it is a physical in-room fan at all",
+  "qtyMax": 1,
+  "src": "M201 EF-1 row + remark codes 1/2/3/5/6/9; M202; M301-M304; against M305 EV riser diagrams; E400 Panel A/B circuit list; G402 guestroom-bath general note 3; coordination_issues C-06",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Drop the bath grille and look \u2014 record 'fan housing' or 'bare duct to riser', with a photo. Then flip the bath light switch and record whether the fan runs with the light or on a separate switch. That single observation closes C-06.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "a54e7f995b12",
+  "category": "Mechanical",
+  "code": "FD",
+  "label": "Ceiling fire / radiation damper at the rated floor-ceiling penetration \u2014 Ruskin CFD4, UL 555C, fusible link, ceramic-fibre thermal shroud, 3\"x3\" galvanised continuous angle to the sleeve on all four sides, sheet-metal duct throughout (flex NOT allowed)",
+  "where": "Bath ceiling directly above the EAG-50 grille, on the 4\" toilet exhaust",
+  "qtyMax": 1,
+  "src": "M401 (FD at the EAG-50); M301 GN3 (UL555 ceiling fire dampers at rated ceiling penetrations); M501 det.2 (Ruskin CFD4, UL 555C, fusible link, sheet metal throughout \u2014 flex not allowed); M101 GN7 and GN31/GN32 (access + permanent 0.5\" label)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Through the grille or the access panel: confirm the fusible link is intact and unpainted and that the duct at the damper is hard sheet metal, not flex; read back the permanent damper label and confirm the letters are at least 1/2\" high.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "69cd7cdb36b3",
+  "category": "Mechanical",
+  "code": "T",
+  "label": "PTAC thermostat \u2014 7-day programmable, HARDWIRED (keynote 24 adds that thermostat-to-PTAC communication may be wireless). ONE PER PTAC, AND THIS ROOM HAS ONE PTAC \u2014 M401 states verbatim 'Each guestroom is served by a single PTAC', and A555 places keynote 1 only at the window wall, so expect ONE thermostat here",
+  "where": "Bed wall / sofa wall \u2014 A555 view 07 carries KN24; exact location deferred by M401 KN4 and M301 GN5 to the architectural set",
+  "qtyMax": 1,
+  "src": "A555 KN24 view 07; M401 KN4; M101 GN28/GN29; M201 PTAC notes; M301 GN5; A530 GENERAL NOTES - GUESTROOMS note F (unqualified); G402 note 11; G400 detail 02; E101 symbol legend; coordination_issues C-03",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Measure to the TOP of the device and write the number down against 48\" / 54\" / 60\" / 46\"-over-obstruction; then call heat and call cool and confirm the PTAC responds to each within a minute.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "67f2c0e6e772",
+  "category": "Mechanical",
+  "code": "VD",
+  "label": "Volume damper at the toilet exhaust, with a locking quadrant",
+  "where": "At the toilet exhaust branch \u2014 position not dimensioned by M401",
+  "qtyMax": 1,
+  "src": "M401 (EAG-50 shown with VD and FD); M101 legend (Manual Volume Damper VD) + GN26 (locking quadrant); M301 GN11 (balancing damper each branch/runout); M101 GN7 (min 12\"x12\" access to dampers)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Drop the grille and look up the neck for a damper with a locking quadrant \u2014 record present/absent and whether the quadrant is set and locked rather than wired or taped shut.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "e79e427b7d54",
+  "category": "Mechanical",
+  "code": "WAG-30",
+  "label": "Wall air grille / make-up air diffuser, 30 CFM \u2014 the transfer/make-up air path to the bathroom (keynote 20, 'MAKE-UP AIR DIFFUSER')",
+  "where": "CONTESTED \u2014 M401 says it makes up air to the BATH; A555 places keynote 20 ('MAKE-UP AIR DIFFUSER') on view 07, the BED WALL + SOFA WALL elevation. Not the same wall",
+  "qtyMax": 1,
+  "src": "M401 (WAG-30, 30 CFM, make-up to bath); A555 keynote 20 on view 07; M301 GN13; M101 legend + grille callout format",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Find the grille and write down WHICH WALL it is on \u2014 bath wall or bed/sofa wall; take an airflow reading and record it against 30 CFM.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "0da06fc3d565",
+  "category": "Mechanical",
+  "code": "\u2014",
+  "label": "Access panel in the bath ceiling to the fire damper and volume damper, min 12\"x12\", with permanent damper label",
+  "where": "Bathroom ceiling, 7'-3\" PT-07 painted gyp lid, at the FD/VD above it",
+  "qtyMax": 1,
+  "src": "M101 GN7; M301 Key Note 4; M101 GN31/GN32 (permanent 0.5\" label); against A555 view 02 (keynotes 18, 19, 7, 4, 1 \u2014 no access panel) and the other nine A550-A556 RCPs",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look at the bath ceiling and record 'access panel present, size ___, labelled ___' or 'ABSENT'; if absent photograph the intact lid and log it as an RFI item. Cut nothing.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "187dd7a81054",
+  "category": "Mechanical",
+  "code": "\u2014",
+  "label": "Aldes constant-airflow regulator at the 50 CFM ceiling exhaust inlet",
+  "where": "Immediately behind/above the EAG-50 grille in the bath ceiling",
+  "qtyMax": 1,
+  "src": "M305 exhaust-riser diagrams EV-1...EV-7 (the ONLY source); M201 EF-8/EF-9/EF-10/EF-11 roof-fan capacities",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Drop the EAG-50 grille and look up the neck \u2014 record regulator present or absent, and photograph what you see.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "bbdd4f07afcd",
+  "category": "Mechanical",
+  "code": "\u2014",
+  "label": "Energy-management wall controller with occupancy sensor",
+  "where": "Bed wall / sofa wall \u2014 the ONLY control device any sheet places is A555 KN24 on view 07 (bed wall + sofa wall). No sheet places a control device on the window wall: view 08 carries keynotes 1 and 4 only",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes; M301 GN5 (location deferred to arch/ID); M401 KN4; A555 KN24 view 07",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Count the wall control devices on the bed/sofa wall \u2014 write down one or two, and the make/model of each; then leave the room with the door shut long enough to trigger setback, re-enter and confirm the unit recovers.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "f29d3ea005ac",
+  "category": "Mechanical",
+  "code": "\u2014",
+  "label": "Interior architectural wall grille at the PTAC, painted to match the interior wall",
+  "where": "Room-side face of the PTAC / sleeve at the window wall",
+  "qtyMax": 1,
+  "src": "M401 KN5 (vs M401 KN1); A555 view 08 (ST-01 tagged, no PT code)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look at the room-side face of the PTAC \u2014 record whether a separate grille exists there, and if so whether it is painted and to what colour. Record; do not write up.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "79df518611ea",
+  "category": "Mechanical",
+  "code": "\u2014",
+  "label": "PTAC drain kit \u2014 condensate leaves the unit and does not pool or stain",
+  "where": "PTAC base pan / sleeve, discharging to the condensate drain down the wall",
+  "qtyMax": 1,
+  "src": "M501 det.9; M401 KN2; M301 GN6; M101 GN8 (trap w/ cleanout + unions, slope min 1/8\" per ft away from equipment)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Run the unit in cooling long enough to make condensate \u2014 confirm water leaves the unit, no pooling in the base pan, no drip or stain on the wall or carpet below.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "f038346d0ff0",
+  "category": "Mechanical",
+  "code": "\u2014",
+  "label": "PTAC exterior louver / architectural wall grille at the window wall",
+  "where": "Exterior face of the PTAC sleeve \u2014 read from outside and by looking through the unit",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes; M501 det.9; M401 KN1; A200 kn8; AS103; AS105 (A-601 reference)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Record the material actually installed (moulded plastic or aluminium) and the colour; confirm it is seated, fastened, blades undamaged, sealant continuous at the head and jambs.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "34c46bbd4a77",
+  "category": "Mechanical",
+  "code": "\u2014",
+  "label": "PTAC fresh-air filter, MERV 13 or MERV 8, with bracket and gasket",
+  "where": "Behind the PTAC front grille, at the fresh-air / return-air path",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes ('MERV 13 or 8 fresh-air filter w/ bracket & gasket'); M501 det.9 (air filter shown)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Lift the front panel \u2014 confirm the filter is seated in its bracket with the gasket sealing and is clean; write down the MERV rating printed on the frame.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "dc3eb5874308",
+  "category": "Mechanical",
+  "code": "\u2014",
+  "label": "PTAC fresh-air kit (outside-air damper delivering the scheduled 45.0 CFM OSA)",
+  "where": "PTAC outdoor section, reached by opening the front panel",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes; M201 PTAC schedule OSA column = 45.0 CFM for both PTAC-1 and PTAC-2",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Open the PTAC front \u2014 confirm the outside-air damper is present, moves freely and is set OPEN not shut; note the position for the T&B report (M101 GN30 requires airflow at each diffuser and grille in the T&B deliverable).",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "08edfa4078d6",
+  "category": "Mechanical",
+  "code": "\u2014",
+  "label": "PTAC louvered access panel",
+  "where": "NOT LOCATED BY ANY SHEET \u2014 look at or around the PTAC, on the cabinet or in the adjacent wall",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes only",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look at and around the PTAC for a louvered panel \u2014 record present or absent, and if present record whether it is on the unit cabinet or in the wall.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "2de7f1086545",
+  "category": "Mechanical",
+  "code": "\u2014",
+  "label": "PTAC low-ambient kit",
+  "where": "Internal to the PTAC \u2014 verified at the accessory/model label inside the front panel",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes (low-ambient + fresh-air kits; operating range 55-115 F)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Read the accessory/model label inside the front panel and write the full text down for the office to reconcile against the approved G.E. submittal.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "bc0a9e142c6e",
+  "category": "Mechanical",
+  "code": "\u2014",
+  "label": "PTAC mounting condition \u2014 min 3-1/4\" AFF to bottom of sleeve; carpet-tile edge relationship at the unit; ST-01 stool clear of the cabinet",
+  "where": "At the PTAC, window wall / carpet edge",
+  "qtyMax": 1,
+  "src": "M501 det.9 (min 3-1/4\" AFF, field-built sub-base, condensate down wall); A550 legend keynote 30 \u2014 DEFINED IN THE LEGEND ONLY, NOT PLACED ON A555; A555 view 03 (keynote 22 only) and view 08 (keynotes 1, 4)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Measure clear to the bottom of the sleeve and write the number down \u2014 min 3-1/4\" AFF per M501 det.9; record whether the carpet stops under the unit edge or runs over it, and whether the stone stool bears on the cabinet. Record only \u2014 no write-up on the carpet relationship.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "e2c4854bc117",
+  "category": "Mechanical",
+  "code": "\u2014",
+  "label": "PTAC wall sleeve kit \u2014 caulked all around, drywall closure at the PTAC-to-opening gap",
+  "where": "Through-wall at the exterior window wall, under the window",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes (wall sleeve kit); M501 det.9 ('wall sleeve furnished with unit, caulked all around'); AS103",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Run a finger round the whole perimeter \u2014 continuous caulk, no daylight, no air whistle with the unit running; drywall closure finished and painted.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "c6d0d5e83883",
+  "category": "Mechanical",
+  "code": "PTAC-2 / PTAC-1",
+  "label": "Packaged terminal A/C unit, G.E., 208/1/60, in through-wall sleeve \u2014 PTAC-1 = AZ65H12DAB (11,900 BTU/h cool) / PTAC-2 = AZ65H15DAB (14,200 BTU/h cool)",
+  "where": "Exterior window wall, under the window, ST-01 quartz stool over it (A555 view 08)",
+  "qtyMax": 1,
+  "src": "M201 PTAC schedule (PTAC-1 AZ65H12DAB / PTAC-2 AZ65H15DAB, OSA 45.0 CFM both); M401 det.01 + KN3 + KN7; M301 line 30; M501 det.9; A555 KN1 view 08",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Read the nameplate model off the unit and write it down; run heat and then cool from the wall control and confirm discharge changes temperature at the grille.",
+  "rooms": [
+   "101",
+   "103"
+  ],
+  "roomCount": 2
+ },
+ {
+  "itemId": "3ddedae0b788",
+  "category": "Mechanical",
+  "code": "",
+  "label": "Access panel (min 12\"x12\") to the bathroom fire damper and volume damper, with the permanent 1/2\" FIRE DAMPER label",
+  "where": "Would be in the 7'-3\" PT-07 painted-gypsum bath lid, at the FD/VD above it",
+  "qtyMax": 1,
+  "src": "M101 N7 \u00b7 M301 Key Note 4 \u00b7 M101 N31/N32 \u00b7 M501 det.2 \u00b7 AGAINST A555 view 02 (placed keynotes 18, 19, 7, 4, 1 \u2014 no access-panel keynote on any A550\u2013A556 RCP)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look at the bath ceiling and write down YES or NO \u2014 is there an access panel, and does it carry a permanent exterior label in 1/2\" letters reading FIRE DAMPER? Do not cut anything open.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "11f53248cca7",
+  "category": "Mechanical",
+  "code": "",
+  "label": "Access panel in the bath ceiling to the fire damper and volume damper \u2014 min 12\"\u00d712\", with the permanent damper label required by M101 GN31/GN32",
+  "where": "Would be in the 7'-3\" PT-07 painted-gypsum bath lid at the FD/VD above it.",
+  "qtyMax": 1,
+  "src": "M101 GN7 \u00b7 M301 Key Note 4 \u00b7 M501 (fire/smoke damper access + permanent exterior label \u22651/2\" letters) \u00b7 M101 GN31/GN32 \u00b7 against A552 view 02 (keynotes 31, 18, 19, 8, 4, 1 \u2014 no access panel)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look at the bath ceiling \u2014 access panel yes or no? If no, photograph the intact lid and write it up. Cut nothing.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "eb62c086d38e",
+  "category": "Mechanical",
+  "code": "",
+  "label": "Aldes constant-airflow regulator at the 50 CFM ceiling exhaust inlet",
+  "where": "Immediately behind / above the EAG-50 grille at the bath ceiling",
+  "qtyMax": 1,
+  "src": "M305 exhaust-riser diagrams EV-1\u2026EV-7 (\"CEILING GRILLE EXHAUST 50 CFM c/w ALDES CONSTANT AIRFLOW REGULATOR\") \u2014 the only source in the set",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Drop the EAG-50 grille, look up the neck and write down YES or NO \u2014 is a constant-airflow regulator fitted behind it? Photograph whatever is there.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "6804fc7ed430",
+  "category": "Mechanical",
+  "code": "",
+  "label": "Aldes constant-airflow regulator at the 50 CFM ceiling exhaust inlet",
+  "where": "Immediately behind / above the EAG-50 grille in the bath ceiling.",
+  "qtyMax": 1,
+  "src": "M305 exhaust-riser diagrams EV-1\u2026EV-7 ('CEILING GRILLE EXHAUST 50 CFM c/w ALDES CONSTANT AIRFLOW REGULATOR') \u2014 the only source",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Drop the EAG-50 grille and look up the neck: is a constant-airflow regulator fitted, yes or no? Write the answer down with a photo. Do NOT call an absence a deficiency yet \u2014 16 first-floor data points is the evidence the M-EOR's riser-vs-room-count reconciliation is waiting on.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "2672bd855d6f",
+  "category": "Mechanical",
+  "code": "",
+  "label": "Ceiling supply air diffuser \u2014 NONE drawn in any guestroom on any mechanical sheet (zero-quantity confirm line)",
+  "where": "n/a in 105 \u2014 the PTAC is the room's supply air. M201's Titus supply-diffuser marks A / B / C / D (TDV-AA) carry NO room assignment on the schedule, and no supply diffuser is drawn in a guestroom on M401 or M301",
+  "qtyMax": 1,
+  "src": "M401 (per-guestroom systems: PTAC, 4\"\u00d8 fresh-air duct, EAG-50, WAG-30 \u2014 no supply diffuser on any of details 01\u201307) \u00b7 M201 Grille & Diffuser Schedule (Titus marks A/B/C/D supply, E exhaust, R return) \u00b7 M301 first-floor plan",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Look at the ceiling of the room, the entry leg and the bath and confirm there is NO supply diffuser; if one IS installed, photograph it, record the neck size and raise it \u2014 it is unaccounted for.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "64847292e20f",
+  "category": "Mechanical",
+  "code": "",
+  "label": "Energy-management wall controller with occupancy sensor",
+  "where": "Wall-mounted at the PTAC / window wall. No mechanical sheet gives it a separate location \u2014 A552 view 04 kn24 is the only control device placed in the room.",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes \u00b7 M301 GN5 \u00b7 M401 KN4 \u00b7 A552 view 04 kn24 \u00b7 M602 Final Inspection (setback controls)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Count the wall control devices at the PTAC \u2014 one or two; leave the room with the door shut, confirm setback, re-enter, confirm recovery.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "0355f9a0ad94",
+  "category": "Mechanical",
+  "code": "",
+  "label": "Energy-management wall controller with occupancy sensor (PTAC)",
+  "where": "Guest-room wall at the PTAC / window wall",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes \u00b7 M301 GN5 \u00b7 M401 KN4 \u00b7 A555 keynote 24 (placed on views 04/04.1 and elevation 07)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Count the wall control devices at the PTAC and write down one or two; then leave the room with the door shut for the sensor's delay, come back in and confirm the unit set back and then recovered.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "dd0b5113d460",
+  "category": "Mechanical",
+  "code": "",
+  "label": "Interior architectural wall grille at the PTAC, painted to match the INTERIOR wall (M401 KN5)",
+  "where": "Room-side face of the PTAC / sleeve at the window wall.",
+  "qtyMax": 1,
+  "src": "M401 KN5 vs M401 KN1",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look at the room-side face of the PTAC/sleeve \u2014 record whether a separate grille is there; if yes, fastened, undamaged and painted to the adjacent interior wall finish.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "c596a6ffa948",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC drain kit (furnished with the unit)",
+  "where": "At the PTAC base pan / sleeve, discharging to the condensate drain that runs down the wall.",
+  "qtyMax": 1,
+  "src": "M501 det.9 \u00b7 M401 KN2 \u00b7 M301 GN6 \u00b7 AS103",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Run cooling long enough to make condensate \u2014 water leaves through the kit, none pooling in the pan, weeping into the room, or staining the wall below.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "156e48ddb4ec",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC drain kit (furnished with the unit; M501 det.9 calls it out for 1st-, 2nd-, 3rd- and 4th-floor units)",
+  "where": "PTAC base pan / sleeve, discharging to the condensate drain that runs down the wall",
+  "qtyMax": 1,
+  "src": "M501 det.9 (\"drain kit for 1st/2nd/3rd/4th-floor units (furnished with unit)\") \u00b7 M401 KN2 \u00b7 M301 GN6 \u00b7 AS103 PTAC detail",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Run the unit in cooling long enough to make condensate, then confirm water leaves the drain kit and does NOT pool in the base pan, weep into the room or stain the wall, carpet edge or ST-01 stool below.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "3460278feb97",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC edge above the carpet tiles (KN30) and the ST-01 quartz stool set over the unit",
+  "where": "At the PTAC, window wall \u2014 the carpet edge under the unit and the stone stool above it.",
+  "qtyMax": 1,
+  "src": "M501 det.9 \u00b7 A552 KN30 + view 08 (ST-01) \u00b7 AS103 drywall closure",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Confirm the PTAC edge sits ABOVE the carpet tile, not on it; ST-01 stool level and not bearing on the cabinet; drywall closure at the sleeve gap finished and painted.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "297c51c36107",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC exterior louver / architectural wall grille at the window wall",
+  "where": "Exterior face of the PTAC sleeve, visible from outside and from the room through the unit's outdoor section.",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes \u00b7 M501 det.9 \u00b7 M401 KN1 \u00b7 A200 keyed note 8 (= AS105 kn 8) \u00b7 AS103 \u00b7 size ref 'A-601' (not in the issued set)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "From outside \u2014 louver present, seated, fastened, blades straight, colour matching the elevation run; from inside \u2014 no daylight, no staining. Record the material actually installed.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "29ce21b5138e",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC exterior louver / architectural wall grille \u2014 material NOT settled (polypropylene kit vs aluminium architectural grille vs aluminium louver integral to the window system)",
+  "where": "Exterior face of the PTAC sleeve at the window wall. 105 is a FIRST-FLOOR room, so this face is at grade directly outside this room's window \u2014 a few steps from the door, not a lift-and-facade exercise",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes \u00b7 M501 det.9 \u00b7 M401 KN1 \u00b7 A200 keyed note 8 (= AS105 kn 8) \u00b7 AS103 PTAC detail \u00b7 packages/mechanical.md \u00a76 and F3 \u00b7 RFI R-04",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Step outside to this room's window at grade and write down what is actually installed \u2014 plastic or aluminium \u2014 then confirm the louver is seated, fastened, undamaged and the same colour as the units either side of it.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "a2d1d1b798f8",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC fresh-air filter, MERV 13 or MERV 8, with bracket and gasket",
+  "where": "Behind the PTAC front panel, at the fresh-air / return-air path",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes (\"MERV 13 or 8 fresh-air filter w/ bracket & gasket\") \u00b7 M501 det.9 (air filter + return-air path shown)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Lift the front panel \u2014 filter seated in its bracket with the gasket sealing all round and clean \u2014 and write down the MERV rating printed on the filter frame.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "0f58a2afa2c3",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC fresh-air filter, MERV 13 or MERV 8, with bracket and gasket",
+  "where": "At the PTAC fresh-air / return-air path, behind the front grille.",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes \u00b7 M501 det.9",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Lift the front panel \u2014 filter seated in its bracket with the gasket sealing, clean, not bypassing; record the MERV printed on the frame.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "f8e06e543061",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC fresh-air kit (outside-air path delivering the scheduled 45.0 CFM OSA)",
+  "where": "At the PTAC outdoor section, reachable by opening the unit front.",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes ('low-ambient + fresh-air kits'); OSA 45.0 CFM from the M201 PTAC schedule",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Open the PTAC front \u2014 outside-air damper present, moves freely, set OPEN not shut; have T&B read OSA against 45.0 CFM.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "899576d1b17c",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC fresh-air kit (the outside-air path delivering the scheduled 45.0 CFM OSA)",
+  "where": "PTAC outdoor section, reachable by opening the unit front",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes (\"low-ambient + fresh-air kits\") \u00b7 M201 PTAC schedule OSA column (45.0 CFM, both rows) \u00b7 packages/mechanical.md audit item 2",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Open the PTAC front and work the outside-air damper by hand \u2014 it must move freely and be left OPEN, not shut or taped; write down the position you found it in.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "d66363d50c0f",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC louvered access panel",
+  "where": "Not stated by any sheet \u2014 M201 names the accessory but does not say whether it is on the unit cabinet or in the wall/enclosure.",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes ('louvered access panel')",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look for a louvered panel at or around the PTAC \u2014 record present or absent; if present, fastened, operable, finished.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "2281dfdc6090",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC louvered access panel (named in M201's PTAC accessory sentence)",
+  "where": "NOT STATED ON ANY SHEET \u2014 either a G.E. accessory on the unit cabinet or an architectural panel in the adjacent wall",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes (\"louvered access panel\") \u2014 the only source in the set \u00b7 packages/mechanical.md A8",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look at and around the PTAC for a louvered panel and write down PRESENT or ABSENT plus any part number on it \u2014 do not write it up as missing until the G.E. accessory submittal comes back.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "36b973369740",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC low-ambient kit",
+  "where": "Internal to the PTAC \u2014 no sheet locates it; the only visible evidence is the accessory/model label inside the front panel",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes (\"low-ambient + fresh-air kits\") \u00b7 M201 PTAC operating range 55\u2013115\u00b0F",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Open the front panel, photograph the accessory/model label and write the text down verbatim for the office to reconcile against the G.E. accessory list.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "776e6d2c4e0c",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC low-ambient kit",
+  "where": "Internal to the PTAC \u2014 no sheet locates it.",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes; M201 operating range 55\u2013115\u00b0F",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Read the accessory/model label inside the PTAC front panel and write the text down \u2014 this is a documentation check, not a sight check.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "8f4fcd629e61",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC set above the finished carpet with the ST-01 quartz window stool over it",
+  "where": "Window wall at the PTAC \u2014 carpet tile edge below the unit, ST-01 quartz stool above it (A555 elevation 08)",
+  "qtyMax": 1,
+  "src": "A555 elevation 08 (ST-01 quartz window stool over the PTAC; placed keynotes 1 and 4 only) \u00b7 M501 det.9 (min 3-1/4\" AFF; field-built sub-base 'see arch') \u00b7 A550 view 03 keynote 30 (King Studio finish plan) \u00b7 A550 KEY NOTES: DESIGN DEVELOPMENT note 30 \"EDGE OF PTAC ABOVE CARPET TILES\" (legend text printed on A555 but not placed there)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Run a hand along the joint: confirm the ST-01 stool is level, fully bedded and NOT bearing on the PTAC cabinet, and record how the carpet tile edge meets the unit \u2014 tucked under, butted, or cut short.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "66b66dc30159",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC wall sleeve kit (furnished with the unit) \u2014 caulked all around, min 3-1/4\" AFF, plus the drywall closure at the PTAC-to-opening gap",
+  "where": "Through-wall at the exterior window wall.",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes \u00b7 M501 det.9 \u00b7 AS103 PTAC through-wall detail",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Run a finger around the sleeve perimeter inside and out \u2014 continuous caulk, no daylight, no whistle; measure min 3-1/4\" AFF to the bottom of the sleeve.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "d4a6e475d8fa",
+  "category": "Mechanical",
+  "code": "",
+  "label": "PTAC wall sleeve kit (furnished with the unit) \u2014 caulked all around, unit min 3-1/4\" AFF, with the drywall closure finishing the gap between PTAC and wall opening",
+  "where": "Through-wall at the exterior window wall, under the window",
+  "qtyMax": 1,
+  "src": "M201 PTAC notes (\"wall sleeve kit\") \u00b7 M501 det.9 (\"wall sleeve furnished with unit, caulked all around \u2026 min 3-1/4\\\" AFF\") \u00b7 AS103 PTAC through-wall detail",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Run a finger round the whole sleeve perimeter inside and out \u2014 continuous caulk, no gaps, no daylight \u2014 and measure the underside of the unit against 3-1/4\" minimum AFF.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "8b6719ec2977",
+  "category": "Mechanical",
+  "code": "EAG-50",
+  "label": "Toilet / bath exhaust air grille, 50 CFM \u2014 off-white aluminium grille per the M201 EF-1 remark codes (remark 6)",
+  "where": "Bathroom ceiling, 7'-3\" AFF PT-07 painted-gypsum hard lid (A555 view 02)",
+  "qtyMax": 1,
+  "src": "M401 detail 01 (EAG-50 with VD and FD) \u00b7 M201 Exhaust Fan Schedule EF-1 row, Remarks \"1,2,3,5,6,9\" with remark codes \"2=ceiling radiation damper; 5=backdraft damper; 6=off-white aluminum grille\" \u00b7 M305 riser diagrams \u00b7 A555 keynote 19 on view 02 (\"TOILET EXHAUST GRILLE\") \u00b7 coordination_issues S-02",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Hold a tissue flat to the face \u2014 it must hold \u2014 read airflow at the grille against 50 CFM, and confirm the grille is OFF-WHITE ALUMINIUM (M201 EF-1 remark 6), not white steel or plastic.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "bcf514c8505c",
+  "category": "Mechanical",
+  "code": "EAG-50",
+  "label": "Toilet / bath exhaust air grille, 50 CFM \u2014 off-white aluminium grille per the M201 EF-1 remark codes (remark 6)",
+  "where": "Bathroom ceiling, 7'-3\" AFF PT-07 painted gypsum hard lid (A552 view 02). A552 view 02 places keynote 19 'TOILET EXHAUST GRILLE'.",
+  "qtyMax": 1,
+  "src": "M401 (EAG-50 with VD and FD) \u00b7 M305 riser diagrams \u00b7 A552 view 02 KN19",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Hold a tissue to the face \u2014 it must hold against the grille unaided. Have T&B read the airflow at the face and record it against 50 CFM. Grille square to the ceiling grid lines, seated tight to the PT-07 lid with no gap, screws set, and the face NOT paint-blinded or fouled with joint compound.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "36a52a3ebb93",
+  "category": "Mechanical",
+  "code": "EF-1",
+  "label": "Toilet exhaust fan \u2014 M201 schedules Panasonic FV-0511VK2, ceiling type, 50 CFM, 0.10 in. s.p., 115/1/60, area served \"Toilet, ice machine\"",
+  "where": "Bathroom ceiling at the toilet exhaust inlet \u2014 if there is a physical in-room fan at all",
+  "qtyMax": 1,
+  "src": "M201 Exhaust Fan Schedule EF-1 row (Panasonic FV-0511VK2, remarks 1,2,3,5,6,9) \u00b7 M202 \u00b7 M301\u2013M304 \u00b7 AGAINST M305 riser diagrams \u00b7 E400 Panel \"A\" schedule (no exhaust-fan circuit) \u00b7 AGAINST M201 remark 3: G402 GENERAL NOTES (guestroom bath block) note 3 \u00b7 coordination_issues C-06",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Drop the bath ceiling grille and write down exactly what is above it \u2014 a fan housing (record the model off it) or bare duct running to a riser \u2014 then switch the bath light and record whether anything runs.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "f76a5244aa93",
+  "category": "Mechanical",
+  "code": "EF-1",
+  "label": "Toilet exhaust fan \u2014 M201 schedules Panasonic FV-0511VK2, ceiling type, 50 CFM, 115/1/60, backdraft damper, off-white aluminium grille",
+  "where": "Bathroom ceiling at the toilet exhaust inlet \u2014 IF it is a physical in-room fan at all.",
+  "qtyMax": 1,
+  "src": "M201 exhaust fan schedule (EF-1, Panasonic FV-0511VK2, 50 CFM, 115/1/60, remarks 1,2,3,5,6,9; remark code 3 = 'switch w/ room lights') \u00b7 M202 \u00b7 M301-M304 \u00b7 vs M305 riser diagrams (plain ceiling grille + Aldes regulator, no in-room fan) \u00b7 E400 Panel A/B schedules (no exhaust-fan circuit) \u00b7 G402 guestroom-bath general note 3 (fan switched SEPARATELY from light) \u00b7 coordination_issues C-06",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Drop the bath ceiling grille and record what is behind it \u2014 a fan housing, or bare duct running to a riser. If it is a fan: run it and identify WHICH switch runs it, then write down whether the fan is on the light switch (M201 EF-1 remark 3) or on its own separate switch (G402 bath GN3). Those two sheets disagree; either answer is a finding. Confirm the backdraft damper flaps open under flow and falls shut when the fan stops, and read airflow against 50 CFM.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "2a45061ec98e",
+  "category": "Mechanical",
+  "code": "FD",
+  "label": "Ceiling fire / radiation damper at the rated floor-ceiling penetration \u2014 Ruskin CFD4, UL 555C, fusible link, ceramic-fibre thermal shroud, 3\"x3\" galvanised continuous angle to the sleeve on all four sides, sheet-metal duct throughout (flex NOT allowed)",
+  "where": "Bath ceiling directly above the EAG-50 toilet exhaust grille, on the 4\" exhaust to the EV riser",
+  "qtyMax": 1,
+  "src": "M401 detail 01 (QQ) \u00b7 M301 GN3 \u00b7 M501 det.2 (Ruskin CFD4, UL 555C, fusible link, ceramic-fibre shroud, 3\"x3\" angle four sides, sheet-metal duct throughout \u2014 flex not allowed) \u00b7 M101 N7 \u00b7 M101 N31/N32 \u00b7 M201 EF-1 remark 2 (\"ceiling radiation damper\") \u00b7 AGAINST E500 FA Note 7",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Through the dropped grille or the required access, confirm the fusible link is intact, unpainted and unobstructed and that the duct at the damper is hard sheet metal, not flex \u2014 photograph the link.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "cc1d394da7d0",
+  "category": "Mechanical",
+  "code": "FD",
+  "label": "Ceiling fire / radiation damper at the rated floor-ceiling penetration \u2014 Ruskin CFD4, UL 555C, fusible link, ceramic-fibre thermal shroud, 3\"x3\" galvanised continuous angle to the sleeve on all four sides, sheet-metal duct throughout (flex NOT allowed)",
+  "where": "In the bath ceiling directly above the EAG-50 grille, on the 4\"\u00d8 toilet exhaust to the EV riser.",
+  "qtyMax": 1,
+  "src": "M401 detail 05 \u00b7 M301 GN3 \u00b7 M501 det.2 \u00b7 M101 GN7, GN31, GN32",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "If access exists \u2014 read the label and confirm a Ruskin CFD4; fusible link intact and NOT painted, taped, wired or screwed open; ceramic-fibre shroud in place; 3\"x3\" angle continuous on all four sides of the sleeve; and HARD sheet metal at the damper, not flex (M501 det.2 forbids flex here). Do NOT write up a missing actuator wire \u2014 M501 det.2 shows the CFD4 as fusible-link only, notwithstanding E500 FA note 7. If there is NO access, stop and record that on the access-panel line below; cut nothing.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "7bcda323dd33",
+  "category": "Mechanical",
+  "code": "PTAC-1",
+  "label": "PTAC \u2014 G.E. AZ65H12DAB, 11,900 BTU/h cool / 10,400 BTU/h heat, 449/300 CFM hi-lo, OSA 45.0 CFM, 208/1/60, in a through-wall sleeve",
+  "where": "Exterior window wall under the window. 118's window bay splits 3'-4\" / 6'-0\" / 8'-2 1/2\" (asymmetric, A552 plan 01) \u2014 the sleeve is NOT on the standard-room centreline. ST-01 quartz stool over it (A552 view 08).",
+  "qtyMax": 1,
+  "src": "M201 PTAC schedule \u00b7 M301 1st-flr plan \u00b7 M401 KN3 + detail 05 (King Std. Acc. Mod.) \u00b7 M501 det.9 \u00b7 A552 KN1/KN30 view 08 \u00b7 AS103",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Read the nameplate \u2014 AZ65H12DAB, 208/1/60; run heat then cool from the wall control, no rattle in the sleeve.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "784d339596dd",
+  "category": "Mechanical",
+  "code": "PTAC-1",
+  "label": "Packaged terminal A/C unit, G.E., 208/1/60, in through-wall sleeve \u2014 PTAC-1 = AZ65H12DAB (11,900 BTU/h cool) / PTAC-2 = AZ65H15DAB (14,200 BTU/h cool)",
+  "where": "Exterior window wall, under the window, ST-01 quartz stool over it (A555 view 08)",
+  "qtyMax": 1,
+  "src": "M201 PTAC schedule (PTAC-1 AZ65H12DAB / PTAC-2 AZ65H15DAB, OSA 45.0 CFM both); M401 det.01 + KN3 + KN7; M301 line 30; M501 det.9; A555 KN1 view 08",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Read the nameplate model off the unit and write it down; run heat and then cool from the wall control and confirm discharge changes temperature at the grille.",
+  "rooms": [
+   "116"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "b5bdc23c9068",
+  "category": "Mechanical",
+  "code": "PTAC-2 / PTAC-1",
+  "label": "Packaged terminal A/C unit, G.E., 208/1/60, in a through-wall sleeve \u2014 PTAC-1 = AZ65H12DAB (11,900 BTU/h cool, 449/300 CFM) or PTAC-2 = AZ65H15DAB (14,200 BTU/h cool, 449/290 CFM); 45.0 CFM OSA on both rows",
+  "where": "Exterior window wall, under the window, in the through-wall sleeve; ST-01 quartz stool set over the unit (A555 elevation 08)",
+  "qtyMax": 1,
+  "src": "M201 PTAC schedule (two rows) \u00b7 M401 detail 01 + KN3 + KN7 \u00b7 M301 (PTAC-1 at all 16 first-floor guestrooms) \u00b7 M501 det.9 \u00b7 A555 keynote 1 (placed on view 01, elevations 05/08/09) \u00b7 packages/mechanical.md F4",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Read the nameplate and write down the model and the 208/1/60 rating, then run the unit in HEAT and in COOL from the wall control and confirm it changes over.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "26626762ac9f",
+  "category": "Mechanical",
+  "code": "T",
+  "label": "PTAC thermostat \u2014 7-day programmable, HARDWIRED (keynote 24 adds that thermostat-to-PTAC communication may be wireless). ONE PER PTAC, AND THIS ROOM HAS ONE PTAC \u2014 M401 states verbatim 'Each guestroom is served by a single PTAC', and A555 places keynote 1 only at the window wall, so expect ONE thermostat here",
+  "where": "Guest-room wall near the PTAC; exact location deferred by M401 KN4 and M301 GN5 to the architectural set",
+  "qtyMax": 1,
+  "src": "A555 keynote 24 (placed views 04/04.1, elevation 07) \u00b7 M401 KN4 (48\" accessible / 54\" non-accessible) \u00b7 M101 GN28/GN29 \u00b7 M201 PTAC notes \u00b7 M301 GN5 \u00b7 G400 detail 02 \u00b7 E101 symbol legend (thermostat 60\" AFF) \u00b7 coordination_issues C-03",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Measure to the TOP of the device and write the number down against 48\" / 54\" / 60\" \u2014 record, do not write up \u2014 then call for heat and call for cool and confirm the PTAC responds to each.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "2f57a3fae699",
+  "category": "Mechanical",
+  "code": "T",
+  "label": "PTAC thermostat \u2014 7-day programmable, HARDWIRED (keynote 24 adds that thermostat-to-PTAC communication may be wireless). ONE PER PTAC, AND THIS ROOM HAS ONE PTAC \u2014 M401 states verbatim 'Each guestroom is served by a single PTAC', and A555 places keynote 1 only at the window wall, so expect ONE thermostat here",
+  "where": "Room wall near the PTAC / window wall; A552 view 04 places kn24. Exact location deferred to the architectural set by M401 KN4 and M301 GN5.",
+  "qtyMax": 1,
+  "src": "M401 KN4 (48\" accessible / 54\" non-accessible) \u00b7 M101 GN28 (controls split) \u00b7 M101 GN29 (4'-0\" AFF, not on exterior walls if interior available, insulated backing plate if on exterior wall) \u00b7 M201 PTAC notes \u00b7 M301 GN5 \u00b7 A552 view 04 kn24 (48\" MAX to top of device) \u00b7 G402 note 11 (15\"-48\") \u00b7 G400 det 02 (thermostat 4'-0\") \u00b7 E101 symbol legend (60\") \u00b7 coordination_issues C-03",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Measure to the TOP of the device and write the number down (do not judge it \u2014 five printed values are live). Confirm the stat is NOT on an exterior wall if an interior wall was available (M101 N29); if it IS on the exterior wall, confirm the insulated backing plate is present behind it. Call heat, then call cool, and confirm the PTAC responds each time; if the thermostat-to-PTAC link is wireless (permitted by kn24), cycle it twice to prove the pairing holds.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "407a2879979e",
+  "category": "Mechanical",
+  "code": "VD",
+  "label": "Volume damper at the toilet exhaust, with a locking quadrant",
+  "where": "On the toilet exhaust branch \u2014 position not dimensioned on any sheet; may be at the grille neck or above the hard lid",
+  "qtyMax": 1,
+  "src": "M401 detail 01 (EAG-50 shown with VD and FD) \u00b7 M101 damper legend + GN25/GN26 \u00b7 M301 GN11 (balancing damper each branch/runout) \u00b7 M101 N7 (min 12\"x12\" access to dampers)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Drop the EAG-50 and look up the neck \u2014 confirm the damper is present, set part-open and LOCKED at its quadrant, not wired shut, screwed shut or fully closed; record the position.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "39a904058873",
+  "category": "Mechanical",
+  "code": "VD",
+  "label": "Volume damper at the toilet exhaust, with a locking quadrant",
+  "where": "At the toilet exhaust branch. M401 does not dimension its position; M301 GN11 requires a balancing damper at each branch/runout.",
+  "qtyMax": 1,
+  "src": "M401 detail 05 (EAG-50 with VD and FD) \u00b7 M101 legend (Manual Volume Damper VD) \u00b7 M101 N25-N26 (own balancing device per outlet; manual balancing dampers have locking quadrant) \u00b7 M301 N11 (balancing damper each branch/runout) \u00b7 M101 N7 (min 12\"x12\" access to dampers)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Drop the EAG-50 and look up the neck \u2014 damper present with a LOCKING QUADRANT, set at a balanced position and the quadrant locked; not wired shut, taped, screwed hard open or fully closed. If no damper is visible at the neck, record that it is further up the branch and note there is no access panel to reach it.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "0c57f6412284",
+  "category": "Mechanical",
+  "code": "WAG-30",
+  "label": "Wall air grille / make-up air diffuser, 30 CFM \u2014 the transfer/make-up air path to the bathroom (keynote 20, 'MAKE-UP AIR DIFFUSER')",
+  "where": "CONTESTED \u2014 M401 says it makes up air to the BATH, but A555 places keynote 20 (\"MAKE-UP AIR DIFFUSER\") on view 07, the BED WALL + SOFA WALL elevation, not a bath wall",
+  "qtyMax": 1,
+  "src": "M401 detail 01 (WAG-30, 30 CFM, make-up to the bath) \u00b7 A555 keynote 20 placed on elevation 07 \u00b7 A550 keynote legend 20 \"MAKE-UP AIR DIFFUSER\" \u00b7 M301 GN13 \u00b7 M101 legend \u00b7 coordination_issues S-02",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Find the grille, write down WHICH wall it is on, read airflow against 30 CFM, and if there is no grille measure the bath door undercut and record it.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "08b7a1bf9432",
+  "category": "Mechanical",
+  "code": "WAG-30",
+  "label": "Wall air grille / make-up air diffuser, 30 CFM \u2014 the transfer/make-up air path to the bathroom (keynote 20, 'MAKE-UP AIR DIFFUSER')",
+  "where": "CONTESTED. M401 detail 05 gives WAG-30 as make-up air to the bath. A552's transcribed placed-keynote lists for view 01 (plan), 02 (RCP), 03 (finish) and 04 (electrical) do NOT include keynote 20 'MAKE-UP AIR DIFFUSER'; A552's elevations 05-08 were never transcribed for keynotes at all, so nothing is established there either way.",
+  "qtyMax": 1,
+  "src": "M401 detail 05 (WAG-30, 30 CFM, make-up to the bath; detail 05 = King Std. Acc. Mod.) \u00b7 M301 N13 \u00b7 M101 legend (UC 1/2\") \u00b7 A552 views 01/02/03/04 placed-keynote lists (no kn 20) and A552 elevation table views 05-08 (finishes and heights only \u2014 keynotes NOT transcribed) \u00b7 A550 (kn 20 carried on the ELEVATIONS) \u00b7 A555 kn 20",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Record whether a make-up air diffuser exists in 118 at all, and exactly WHERE (bath wall / bed wall / sofa wall / over the door), with a photo. If present, have T&B read it against 30 CFM. If absent, also check the bath door for an undercut and measure it (M301 N13 allows a 1/2\" undercut as the alternative under 50 CFM) \u2014 'no diffuser AND no undercut' is a different finding from 'no diffuser'.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ }
+]

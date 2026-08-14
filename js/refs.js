@@ -13,11 +13,28 @@
 //
 // The index file may be missing entirely (pipeline not run yet) or list
 // snippet files that aren't deployed — every consumer tolerates both.
+//
+// MEP PUNCH lists get their OWN index, ./refs/refs-mep.json, and their own
+// join key. The FF&E index joins on the printed tag (GR-318, kn 11) because
+// FF&E lines all carry one. Punch lines mostly do not: 439 of the 762 lines on
+// floor 1 print their code as an em dash, and the ones that do print a mark
+// print composites the drawings never print as a single string
+// ("PTAC-2 / PTAC-1", "L-2 / L-3 (P401, P402) · L-3 / L-4 (P104)"). Joining
+// those on `code` would hang one document off 439 unrelated devices.
+//
+// So the punch index joins on the ITEM ID — md5(category|mark|label|where),
+// built by tools/build_mep.mjs deliberately WITHOUT the room number, so the
+// same physical device carries the same id in all 115 rooms. One entry covers
+// the whole hotel; a code map rides alongside it as a fallback for the marks
+// that really are unique (PTAC-1, EAG-50, WAP).
 
 const INDEX_URL = './refs/refs-101.json';
+const MEP_INDEX_URL = './refs/refs-mep.json';
 
 const byRoomCode = new Map(); // 'room/code' -> refs[]
 const byCode = new Map();     // 'code' -> refs[] (index not room-scoped)
+const mepByItemId = new Map(); // '<12-hex item id>' -> refs[]
+const mepByCode = new Map();   // 'code' -> refs[] (fallback for unique marks)
 let loadStarted = false;
 
 function validRef(r) {
@@ -56,13 +73,54 @@ function ingest(idx) {
   }
 }
 
+// The punch index is its own file with its own explicit shape — it is NOT run
+// through ingest(). ingest() guesses (an object of arrays means "room -> code
+// map"), and guessing on this envelope would file every device under a room
+// literally called "byItemId". Shape:
+//
+//   { schema: 'h2sep-mep-refs/1', generated, byItemId: {...}, byCode: {...} }
+//
+// Unknown top-level keys are ignored, so the builder can add provenance fields
+// later without a client change.
+function ingestMep(idx) {
+  if (!idx || typeof idx !== 'object') return;
+  for (const [id, refs] of Object.entries(idx.byItemId || {})) {
+    const list = cleanList(Array.isArray(refs) ? refs : (refs && refs.refs));
+    if (list.length) mepByItemId.set(String(id), list);
+  }
+  for (const [code, refs] of Object.entries(idx.byCode || {})) {
+    const list = cleanList(Array.isArray(refs) ? refs : (refs && refs.refs));
+    if (list.length) mepByCode.set(String(code), list);
+  }
+}
+
 export async function initRefs() {
   if (loadStarted) return;
   loadStarted = true;
-  try {
-    const r = await fetch(INDEX_URL);
-    if (r.ok) ingest(await r.json());
-  } catch (_) { /* offline & uncached, or not generated yet — no refs shown */ }
+  // Two independent fetches, each swallowing its own failure. One index being
+  // absent (or a phone still on a service worker that never cached it) must
+  // never cost the other its refs.
+  await Promise.all([
+    (async () => {
+      try {
+        const r = await fetch(INDEX_URL);
+        if (r.ok) ingest(await r.json());
+      } catch (_) { /* offline & uncached, or not generated yet — no refs shown */ }
+    })(),
+    (async () => {
+      try {
+        const r = await fetch(MEP_INDEX_URL);
+        if (r.ok) ingestMep(await r.json());
+      } catch (_) { /* same tolerance for the punch index */ }
+    })(),
+  ]);
+}
+
+// "101-MEP" -> true. Kept local rather than imported from util.js so this
+// module stays dependency-free; the doc-id convention is asserted by
+// tests/mep-content-check.mjs on both sides.
+function isMepRoomId(roomNumber) {
+  return /^\d+-MEP$/.test(String(roomNumber || ''));
 }
 
 // Refs for one item. item.refs (seeded on the doc) wins over the bundled index.
@@ -103,8 +161,21 @@ function localizePlan(refs, typeLabel) {
 
 export function refsFor(roomNumber, item, itemId = '', typeLabel = '') {
   const own = cleanList(item && item.refs);
-  if (own.length) return localizePlan(own, typeLabel);
+  if (own.length) return isMepRoomId(roomNumber) ? own : localizePlan(own, typeLabel);
   if (!item) return [];
+
+  // PUNCH LINES take the punch index, and only the punch index. Falling
+  // through to the FF&E maps would let a bare mark collide across families —
+  // "H" is a fire-alarm horn on the punch list and nothing at all on the FF&E
+  // side today, but the next tag added to refs-101.json could change that
+  // silently. localizePlan() is skipped too: it rewrites A5xx architectural
+  // sheet ids per room type, which has no meaning for an M401 or a P402.
+  if (isMepRoomId(roomNumber)) {
+    const mcode = (item.code || '').trim();
+    return (itemId ? mepByItemId.get(String(itemId)) : null)
+      || (mcode ? mepByCode.get(mcode) : null)
+      || [];
+  }
   // Exact code first; then the base code with a trailing orientation 'R'
   // stripped (GR-308R is the reversed variant of GR-308 — same product,
   // same submittal and plan refs); finally the item id for code-less lines.

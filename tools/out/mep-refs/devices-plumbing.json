@@ -1,0 +1,905 @@
+[
+ {
+  "itemId": "bf4820953a28",
+  "category": "Plumbing",
+  "code": "kn 28 / kn 5",
+  "label": "Shower enclosure \u2014 BI-PASS SLIDING GLASS DOOR, BRUSHED ALUMINUM FINISH, CLEAR GLASS, 24\" BAR PULL, with door-stop hardware",
+  "where": "Shower opening, 5'-0\" CLEAR per A530 plan 01",
+  "qtyMax": 1,
+  "src": "A530 keyed note 28 (elevation 04) and keyed note 27 (plan 01); A555 keynote 5 (view 01)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Slide both panels the full width of the opening \u2014 no binding, no jumping the track, rollers quiet; run water at the door and confirm nothing escapes onto the tile; swing the bath door fully open and confirm its hardware cannot reach the glass.",
+  "rooms": [
+   "101",
+   "103",
+   "104",
+   "105",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115",
+   "116"
+  ],
+  "roomCount": 15
+ },
+ {
+  "itemId": "704ab2dce0e2",
+  "category": "Plumbing",
+  "code": "SH-1 / SH-4",
+  "label": "Shower, guestroom \u2014 30\"x60\" pan, CENTRE drain, 4\" threshold, Kohler Rely series, Delta T24859 supply, SS-01 solid surround (Mincey Marble)",
+  "where": "Bath, shower compartment opposite the vanity; A530 plan 01 dimensions it 5'-0\" CLEAR wide x 3'-7 1/4\" deep",
+  "qtyMax": 1,
+  "src": "P401/P402 mark SH-1; P104 rows SH-3 and SH-4; A530 plan 01 dimensions and bathing configuration; A555 view 03 printed note 'NO FINISHES UNDER SHOWER'; A550/A555 keynote 26; conflicts.md B3.1",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Measure the pan both ways and write both numbers down against 30\"x60\" and against A530's 5'-0\" x 3'-7 1/4\"; confirm a 4\" THRESHOLD is present (a curbless pan here is the wrong pan); pond the pan and confirm it drains fully with no standing water at any corner.",
+  "rooms": [
+   "101",
+   "103",
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115",
+   "116"
+  ],
+  "roomCount": 14
+ },
+ {
+  "itemId": "179dbad51b99",
+  "category": "Plumbing",
+  "code": "WC-3 / WC-4",
+  "label": "Water closet, guestroom, floor outlet, tank type, 1.28 GPF - WC-3 American Standard Champion Pro 211AA.104 ('Guestroom, Floor Outlet, ADA') / WC-4 Cadet Pro 215CA.104; seat AS 5257A.65C.020 slow-close elongated CLOSED-FRONT W/ COVER. ADA seat height 17\"-19\" (G400 detail 07)",
+  "where": "Bath, toilet wall; A530 plan 01 dimensions the toilet centreline 1'-6\" off the wall",
+  "qtyMax": 1,
+  "src": "P104 rows WC-3 and WC-4; P401/P402 (both marks printed together on the unit plans); A530 keyed note 19 (placed on plan 01); A530 placed-keynote lists by view; A100 Guestroom Matrix; G400 detail 07 (TA-15/TA-16, accessible toilet only)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Flush and refill twice \u2014 full flush, clean refill, no run-on and no ghost fill; rock the bowl at the closet flange, it must not move; measure the top of the seat and write the number down (G400 detail 07's 17\"-19\" is the ACCESSIBLE range and does not govern here \u2014 record only); write down the model off the tank label.",
+  "rooms": [
+   "101",
+   "103",
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115",
+   "116"
+  ],
+  "roomCount": 14
+ },
+ {
+  "itemId": "24bab0002794",
+  "category": "Plumbing",
+  "code": "kn 14",
+  "label": "On/off PRESSURE-BALANCING (anti-scald) valve - P104 gives the guestroom rows SH-3 / SH-4 only 'Delta T24859 supply'; NO valve or cartridge model is printed for the guestroom",
+  "where": "Shower control wall",
+  "qtyMax": 1,
+  "src": "A530 keyed note 14 (placed on views 04 and 05); P104 REMARKS rows SH-3/SH-4; P202/P305 (120 F HWS distribution); P301/P305 (TMV scoped to public lavs)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Run the shower at a comfortable setting, then flush the toilet in the same room while it runs \u2014 the shower temperature must not spike; then run the lavatory hot and confirm the same. Confirm the trim is the pressure-balancing model, not a plain mixer.",
+  "rooms": [
+   "101",
+   "103",
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115",
+   "116"
+  ],
+  "roomCount": 14
+ },
+ {
+  "itemId": "c527692240cc",
+  "category": "Plumbing",
+  "code": "",
+  "label": "Lavatory faucet \u2014 Delta 581LF-GPM-PP, manual, 1.0 GPM, 'less 3-hole escutcheon' (P104 remarks, verbatim; scheduled as trim on the L-3 / L-4 rows, carries no mark of its own)",
+  "where": "Vanity deck; A530 elevation 02: vanity top 2'-10\" MAX AFF",
+  "qtyMax": 1,
+  "src": "P104 Plumbing Fixture Schedule, REMARKS column on rows L-3 and L-4 \u00b7 S4 product data (the unapproved substitution) \u00b7 packages/OPEN_ITEMS A3",
+  "reliability": "HIGH",
+  "verifyAtPunch": "RECORD the make and model stamped on the faucet \u2014 Delta 581LF-GPM-PP is the fixture of record; an American Standard bowl or a Moen M-Dura faucet is the finding: STOP and log it with a photo. RECORD the deck drilling you find (number of holes, deck plate fitted or not) as an observation for the file. Then run it: hot on the left, full travel, no drip at the spout or under the deck after 60 seconds, aerator flow reads against the scheduled 1.0 GPM, body does not spin on the deck, pop-up seats and holds water.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "6715386fcd3f",
+  "category": "Plumbing",
+  "code": "",
+  "label": "PTAC condensate drain \u2014 1\" VISIBLE drain with 1\" AIR-GAP FITTING, Type M copper, insulated, to the condensate main",
+  "where": "At the PTAC on the window wall, running DOWN THE WALL per M501 det.9",
+  "qtyMax": 1,
+  "src": "P301 / P302 ('1\" visible condensate drain for each A/C unit (typ.), provide 1\" air gap fitting; 1\" condensate line with 1-1/2\" vent up') \u00b7 P501 detail 13 \u00b7 M401 KN2 \u00b7 M501 det.9 \u00b7 P102 material schedule",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Run the PTAC in cooling long enough to make condensate \u2014 no water in the pan, no drip inside the room, no stain or damp at the sleeve, the wall below, the carpet edge or the ST-01 stool; trace the visible run down the wall and confirm the air-gap fitting is present, RECORD WHERE IT IS, and confirm it is not blocked, taped over or painted shut.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "d14d32c5442e",
+  "category": "Plumbing",
+  "code": "FD",
+  "label": "Floor drain, guest bathroom \u2014 2\" per the P301-series general notes; \"MAINTAIN ACCESSIBLE COMPLIANT SLOPES TO DRAIN\". No guestroom floor drain is scheduled anywhere in P104",
+  "where": "Bath floor, at/near the shower per A530 plan 01",
+  "qtyMax": 1,
+  "src": "A530 kn20, placed on plan 01 (the STANDARD guest-bath plan that governs 104) \u00b7 P402 ('floor drain (FD)' listed in ACCESSIBLE units) \u00b7 P301 general note (floor drain 2\") \u00b7 A550 keynote legend kn6 ('FLOOR DRAIN')",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Record PRESENT or ABSENT; if present, pour a cup of water at each corner of the bath floor and watch it reach the drain \u2014 that is the 'accessible compliant slopes' test, and E400 GN #4 caps the slope at 1:48 in any direction; strainer secure and the drain flush with the tile, not proud.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "9743640322b3",
+  "category": "Plumbing",
+  "code": "GV",
+  "label": "Gate valves at the CWS, HWS and HWR riser take-offs \u2014 one at each of the three risers, with unions, behind an 18\"x18\" access panel",
+  "where": "Guestroom wet wall / plumbing stack; WHERE THE PANEL PHYSICALLY LANDS IS THE OPEN QUESTION",
+  "qtyMax": 3,
+  "src": "P401 Domestic Water Typical Unit (a GV at each of the three riser take-offs) \u00b7 P502 detail 3 Shut-Off Valve Installation Detail (18\"x18\" access panel) \u00b7 P101 general note 9 verbatim 'Furnish access panels (installed by GC) as required' \u00b7 P101 note 15 ('Valves (domestic water): ball valves or approved equal, located accessibly') \u00b7 M101 N7 (min 12\"x12\" access to valves)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Find the 18\"x18\" access panel and RECORD WHERE IT IS (guestroom ceiling / bath ceiling / corridor outside the door); open it, confirm three valves with unions, cycle each fully closed and fully open \u2014 a valve that will not turn is the classic finding \u2014 no weep at stems or unions after cycling; RECORD GATE vs BALL. If there is NO panel anywhere, write that up against P101 note 15.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "fe6bb4283bfa",
+  "category": "Plumbing",
+  "code": "L-2 / L-3 (P401, P402) \u00b7 L-3 / L-4 (P104)",
+  "label": "Lavatory bowl, guestroom, undermount rectangular \u2014 Decolav Callensia 1402-CWH",
+  "where": "Bath vanity, undermount in the GR-302 vanity top; A530 plan 01: vanity wall 5'-4 3/4\" CLEAR, A530 elevation 02: vanity top 2'-10\" MAX",
+  "qtyMax": 1,
+  "src": "P104 rows L-3 ('Lavatory (Guestrooms, Undermount, Rect, ADA)') and L-4 ('Lavatory (Guestrooms, Undermount, Rect)') \u00b7 P401 line 29 verbatim 'lavatory (L-2 / L-3)' \u00b7 P402 line 22 verbatim 'L-2 / L-3 (lavatory)'",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Bowl set level and flush to the underside of the top, no chips or crazing; continuous silicone bead at the bowl-to-top joint with no gaps at the corners; MEASURE the vanity top height and record against A530 elevation 02's 2'-10\" MAX; fill and drain, then wipe the tailpiece, P-trap and both stops with tissue \u2014 any weep is a write-up.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "2bf216d1bf9e",
+  "category": "Plumbing",
+  "code": "SK-3 / SK-4",
+  "label": "Kitchenette / wet-bar sink and faucet \u2014 NO product is scheduled in P104 for either mark; procured per S4 product data as American Standard PEKOE 23x18 single-bowl stainless undermount 18SB.10231800.075 + Moen 8227 faucet",
+  "where": "Entry / kitchenette leg if provided \u2014 A550 dimensions the King Studio entry/kitchenette leg 6'-0\" CLEAR",
+  "qtyMax": 1,
+  "src": "P401 verbatim ('a kitchenette/wet-bar sink (SK-3 / SK-4) in the suite/extended units') \u00b7 P402 (same marks) \u00b7 P201 riser #P2 (an SK on a guestroom stack, 2\" waste / 1-1/4\" vent) \u00b7 P104 (schedules NO product for SK-3 or SK-4) \u00b7 S4 product data",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Record PRESENT or ABSENT in the entry/kitchenette leg \u2014 that yes/no across all 16 first-floor rooms is the field evidence that closes the open RFI; if present, RECORD the deck drilling and hole count and compare it against the Moen 8227's own printed configuration (8\" widespread, 3-hole) before anyone orders more; confirm the undermount clips are tight with no sag; run it hot and cold, check the trap and the stops with tissue; check the 902 dishwasher drain connection at the same time.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "900ba729c686",
+  "category": "Plumbing",
+  "code": "TG-1 (P104, trap guard) \u00b7 TP-1 (P104, trap primer) \u00b7 TP (P101 legend)",
+  "label": "Trap guard / trap primer at the bathroom floor drain",
+  "where": "At the guestroom bath floor drain; the primer valve body is concealed but P102 requires primers in ACCESSIBLE locations (NPCA / ASSE 1018)",
+  "qtyMax": 1,
+  "src": "P301 general note 6 ('All floor drains to be installed with trap guards / primers'), repeated P302-P310 \u00b7 P501 detail 12 \u00b7 P102 section 5 Automatic Trap Primer Valve Schedule (Sioux Chief 695 Series, 30-250 PSIG) \u00b7 P104 Water Appurtenance Schedule TP-1 (PPP SMP-500-115V) \u00b7 P104 Drain schedule rows FD-1, FD-2 and FS, each 'w/ trap guard TG-1'",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Lift the strainer and look for a trap guard fitted in the drain body \u2014 record PRESENT or ABSENT and any manufacturer marking on it; pour water, confirm the seal holds, then re-check on the next pass for evaporation or sewer odour \u2014 a dry trap in a finished room is the failure this note exists to prevent.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "d812f75b23df",
+  "category": "Plumbing",
+  "code": "kn 9",
+  "label": "Shower head \u2014 trim Delta T24859",
+  "where": "Shower wall; A530 elevation 05 prints wall heights 6'-8\", 5'-0\" and 3'-5\" on this wall without assigning which dimension is the head",
+  "qtyMax": 1,
+  "src": "A530 BATHROOM KEYED NOTE 9 ('SHOWER HEAD'), placed on plan 01 and elevation 05 \u00b7 P104 REMARKS on rows SH-3 / SH-4 (Delta T24859 supply)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Head secure to the arm with the escutcheon tight to the SS-01 surround; run 60 seconds \u2014 no leak at the ball joint or where the arm penetrates SS-01, spray pattern even, head swivels and holds position; MEASURE and RECORD the head height off the pan floor (see note \u2014 no standard-key dimension exists to judge it against).",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "1249c956c231",
+  "category": "Plumbing",
+  "code": "FD",
+  "label": "Floor drain, guest bathroom \u2014 2\" per the P301-series general notes; \"MAINTAIN ACCESSIBLE COMPLIANT SLOPES TO DRAIN\". No guestroom floor drain is scheduled anywhere in P104",
+  "where": "Bath floor at/near the shower (A530 plan 01, keyed note 20)",
+  "qtyMax": 1,
+  "src": "A530 keyed note 20 (placed on plan 01, standard guest bath); E400 General Note 4; G402 bath general note 4; against P402 (FD in accessible units); P104 Drain and Drainage Appurtenance Schedule (no guestroom FD row); P301 note 9 (floor drain 2\")",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Record present or ABSENT, with a photo either way; if present, pour a cup of water at each corner of the bath floor and watch it reach the drain, and confirm no ponding at the shower threshold.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "798695c2b046",
+  "category": "Plumbing",
+  "code": "GV",
+  "label": "Gate valves at the CWS, HWS and HWR riser take-offs \u2014 one at each of the three risers, with unions, behind an 18\"x18\" access panel",
+  "where": "ACCESS PANEL LOCATION IS THE OPEN QUESTION \u2014 P502 detail 3 draws it in a SUSPENDED ceiling, and no guestroom ceiling in this room is suspended",
+  "qtyMax": 3,
+  "src": "P401 (GV at each of the three riser take-offs); P502 detail 3 (gate valve + union, 18\"x18\" access panel, suspended ceiling); P101 General Notes 9 and 15; M101 GN7; A555 view 02 (ceiling types); A425 details 09/11 \u2014 NOT QUOTABLE, file marked unverified",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Find and open the 18\"x18\" panel and write down WHERE it is; cycle all three valves fully shut and fully open and confirm each shuts its line off at the fixture; record whether they are GATE or BALL valves and whether unions are fitted.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "034e2f755f65",
+  "category": "Plumbing",
+  "code": "L-2 / L-3 / L-4",
+  "label": "Lavatory bowl, undermount rectangular \u2014 Decolav Callensia 1402-CWH (marks carried both ways: P401/P402 print L-2, P104 schedules L-3 / L-4)",
+  "where": "Bath vanity, undermount in the GR-302 vanity top; A530 view 02 dimensions the vanity top 2'-10\" MAX",
+  "qtyMax": 1,
+  "src": "P104 rows L-3 and L-4; P401 ('lavatory (L-2 / L-3)'); P402 ('L-2 / L-3 (lavatory)'); conflicts.md B3.1",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Fill the bowl and drain it \u2014 wipe the trap, the tailpiece and both stops with dry tissue and look for weep; confirm the bowl is level and pulled tight and flush to the underside of the top with no gap in the sealant; write down what is actually installed.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "76c7a39e2de0",
+  "category": "Plumbing",
+  "code": "SK-3 / SK-4",
+  "label": "Kitchenette / wet-bar sink and faucet \u2014 American Standard PEKOE 23x18 single-bowl stainless undermount 18SB.10231800.075 + Moen 8227",
+  "where": "Entry / kitchenette leg, if provided \u2014 note A555 view 01 tags 901 REFRIGERATOR and 902 DISHWASHER on the working wall and tags NO SINK",
+  "qtyMax": 1,
+  "src": "P401/P402 (marks SK-3/SK-4, 'suite/extended units', assigned to no unit plan); P104 (schedules no product for either mark); S4 product data (American Standard 18SB.10231800.075; Moen 8227)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Record PRESENT or ABSENT in the kitchenette leg with a photo; if present, count the deck holes, write down which faucet was installed, run it hot and cold for 60 seconds and wipe the trap and both stops for weep.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "837531a6539e",
+  "category": "Plumbing",
+  "code": "TP",
+  "label": "Trap guard / trap primer at the bathroom floor drain \u2014 the primer valve body is concealed but the trap guard is visible through the strainer and the seal is testable",
+  "where": "In/at the bath floor drain body; primer valve body concealed and required to be in an accessible location",
+  "qtyMax": 1,
+  "src": "P301 note 6 ('All floor drains to be installed with trap guards / primers'); P501 detail 12 ('trap primers required at all floor drains' \u2014 primer valve, 2\" vent, 1\" CW primer connection); P102 (Sioux Chief 695 Series); P104 TP-1 (PPP SMP-500-115V, sump standpipe) and TG-1 (on FD-1, FD-2, FS)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Lift the strainer \u2014 record whether a trap guard is fitted and what make it is; pour water and confirm the seal holds; note the room and re-check on the next pass for a dry trap or sewer odour.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "d0deb2b3c741",
+  "category": "Plumbing",
+  "code": "kn 9",
+  "label": "Shower head \u2014 trim Delta T24859",
+  "where": "Shower wall; A530 elevation 05 prints wall heights 6'-8\" / 5'-0\" / 3'-5\"",
+  "qtyMax": 1,
+  "src": "A530 keyed note 9 (placed on plan 01 and elevation 05); P104 REMARKS rows SH-3/SH-4 \u2014 which print 'Delta T24859 supply' and NOTHING MORE. The full trim string Delta T24859 / R22000-WS / U4993-PK / RP70175 / 51600 / 59434-18-PK is printed on the SH-1 EMPLOYEE-shower row only and must not be attributed to the guestroom, for the same reason its 2.5 GPM must not be",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Run it 60 seconds \u2014 even spray across the face, no weep at the ball joint and none where the arm penetrates the SS-01 surround; confirm the escutcheon is sealed to the surround.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "a141d66a3655",
+  "category": "Plumbing",
+  "code": "\u2014",
+  "label": "Lavatory faucet \u2014 Delta 581LF-GPM-PP, manual, 1.0 GPM, less 3-hole escutcheon",
+  "where": "Vanity deck; A530 view 02 dimensions the vanity top 2'-10\" MAX AFF",
+  "qtyMax": 1,
+  "src": "P104 REMARKS column on rows L-3 and L-4, verbatim: 'Faucet Delta 581LF-GPM-PP manual 1.0 GPM, less 3-hole escutcheon'",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Read the make and model off the trim and write down the deck hole count as data; run it 60 seconds hot and cold \u2014 no drip at the spout, no weep under the deck, aerator clean and stream straight.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "6dac5f386c71",
+  "category": "Plumbing",
+  "code": "\u2014",
+  "label": "PTAC condensate drain \u2014 1\" VISIBLE drain with 1\" air-gap fitting and 1\" P-trap, run down the wall",
+  "where": "At the PTAC on the window wall, running down the wall to the condensate main",
+  "qtyMax": 1,
+  "src": "P301 and P302 ('1\" visible condensate drain... provide 1\" air gap fitting; 1\" condensate line with 1-1/2\" vent up'); P501 detail 13 (air gap, 1\" P-trap, 1\" vent, 1\" riser to 4\" main); M401 KN2; M501 det.9; M101 GN8",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Run the PTAC in cooling until it makes water \u2014 trace the visible drain down the wall, confirm the air-gap fitting is present and not taped or plugged, confirm a trap is formed and holding water, and confirm no stain or drip on the wall, stool or carpet.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "fe528f002e3e",
+  "category": "Plumbing",
+  "code": "\u2014",
+  "label": "REJECT CHECK \u2014 unapproved lav substitution (American Standard Studio bowl 0614.000/0614.300/0618.000 + Moen M-Dura 9417F12/9419F12)",
+  "where": "At the vanity \u2014 this is a verification, not a device",
+  "qtyMax": 1,
+  "src": "S4 product data (American Standard Studio under-counter sinks; Moen M-Dura 9417F12/9419F12) \u2014 superseded by NOTHING; the row of record stays P104 rows L-3/L-4; packages/plumbing.md \u00a74; packages/fire-appliance.md \u00a74.2 (retraction)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Read the brand off the bowl and off the faucet \u2014 if you see an American Standard Studio bowl or a Moen M-Dura faucet instead of the Decolav Callensia bowl and the Delta 581LF, STOP, photograph the deck and the branding, and log it as an unapproved substitution.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "2c3c3501dce4",
+  "category": "Plumbing",
+  "code": "\u2014",
+  "label": "Water-closet supply stop and riser at the tank",
+  "where": "Bath, on the wall below and behind the toilet tank",
+  "qtyMax": 1,
+  "src": "P104 rows WC-3/WC-4 (CW 1/2\"); P401 (1/2\" CWS runout to fixture); P101 General Note 15",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Wipe the stop, the supply riser nut and the tank inlet with dry tissue and look for damp; open and close the stop fully and confirm it shuts the tank off and reseats without weeping; confirm the escutcheon is tight to the wall.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "1effded5cff2",
+  "category": "Plumbing",
+  "code": "",
+  "label": "Lavatory faucet \u2014 Delta 581LF-GPM-PP, manual, 1.0 GPM, scheduled \"less 3-hole escutcheon\"",
+  "where": "Accessible vanity deck, 3-hole spread; vanity top 2'-10\" MAX AFF.",
+  "qtyMax": 1,
+  "src": "P104 REMARKS on rows L-3 and L-4 (verbatim: 'Faucet Delta 581LF-GPM-PP manual 1.0 GPM, less 3-hole escutcheon')",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Read the model off the faucet or its paperwork and record it against Delta 581LF-GPM-PP. Full handle travel, hot on the left, positive shut-off, no drip at the spout and nothing wet under the deck after 60 s of running. Confirm the aerator is the 1.0 GPM unit. Operate the handle with a closed fist \u2014 no tight grasping, pinching or twisting (A530 GN F). RECORD the deck hole pattern and whether an escutcheon is fitted; do not judge it \u2014 the sheet says 'less 3-hole escutcheon' and does not state the deck configuration.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "e1b51b595feb",
+  "category": "Plumbing",
+  "code": "",
+  "label": "Lavatory faucet \u2014 Delta 581LF-GPM-PP, manual, 1.0 GPM; P104 REMARKS reads verbatim \"less 3-hole escutcheon\"",
+  "where": "Vanity deck at the lavatory; vanity top 2'-10\" MAX AFF",
+  "qtyMax": 1,
+  "src": "P104 REMARKS column on rows L-3 and L-4 (verbatim: \"Faucet Delta 581LF-GPM-PP manual 1.0 GPM, less 3-hole escutcheon\") \u00b7 S4 product data (American Standard / Moen, unstamped catalogue pages, not a submittal) \u00b7 packages/plumbing.md \u00a74 \u00b7 OPEN_ITEMS A3",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Read the model number off the faucet body or its packaging and WRITE IT DOWN \u2014 it must be the Delta 581LF-GPM-PP of record, anything else goes straight to the office as an unapproved substitution \u2014 record whether a 3-hole deck plate is fitted (P104 supplies this faucet LESS that escutcheon), then run it 60 seconds hot and cold and check for drip at the spout and weep under the deck.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "c57544a0de24",
+  "category": "Plumbing",
+  "code": "",
+  "label": "P-trap cover and supply-line wrap at the ACCESSIBLE lavatory \u2014 G400 det 06: 'WRAP EXPOSED HOT WATER PIPES AND DRAIN W/ PROTECTIVE PIPE COVER'; G402 det 05: 'PROTECT DRAIN TRAP AND SUPPLY LINES AGAINST CONTACT PER ACCESSIBILITY GUIDELINES'; TA 24 / TA 25 P-trap covers",
+  "where": "In the knee space under the accessible lavatory at 118 (A532/A532.1 kn 8, 'CLEAR AREA OF SINK/VANITY MUST BE ACCESSIBLE').",
+  "qtyMax": 1,
+  "src": "G400 detail 06 (ACCESSIBLE SINK front view: 'WRAP EXPOSED HOT WATER PIPES AND DRAIN W/ PROTECTIVE PIPE COVER') \u00b7 G400 and G402 TA schedule rows TA 24 (P-TRAP COVER AT BUILT IN VANITIES) and TA 25 (P-TRAP COVER AT WALL HUNG SINKS) \u2014 identical 40-row schedule printed on both sheets \u00b7 G402 detail 05 (verbatim leader 'PROTECT DRAIN TRAP AND SUPPLY LINES AGAINST CONTACT PER ACCESSIBILITY GUIDELINES') and detail 04 (section, PIPE WRAP callout, 2'-3\" MIN CLEAR knee, 8\" MIN knee depth, 11\" MIN toe depth) \u00b7 A532 / A532.1 kn 8 (clear area of sink/vanity must be accessible) \u00b7 coordination_issues C-09 [note: C-09's 'one sheet only' finding is stale \u2014 G400 was not in its search list]",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Reach into the knee space under the lavatory the way a seated guest would: the P-trap must be wrapped or covered and BOTH supply lines insulated so nothing hot or abrasive can be touched. Run the tap hot for 60 s and then put the back of your hand on each covered line \u2014 you must not feel heat through the wrap. Confirm nothing sharp or unfinished projects into the clear area. Bare pipes, or wrap on the drain only, is a write-up.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "dd96279eb449",
+  "category": "Plumbing",
+  "code": "",
+  "label": "PTAC condensate drain \u2014 1\" VISIBLE condensate drain with 1\" air-gap fitting and 1-1/2\" vent up, Type M copper, to the condensate main",
+  "where": "At the PTAC on the window wall, running down the wall (M501 det.9) to the condensate riser",
+  "qtyMax": 1,
+  "src": "P301 / P302 (\"1\\\" visible condensate drain for each A/C unit (typ.), provide 1\\\" air gap fitting\") \u00b7 P501 detail 13 Condensate Drain Detail \u00b7 M401 KN2 \u00b7 M501 det.9 \u00b7 M301 GN6 \u00b7 P102 material schedule",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Run the PTAC in cooling long enough to make condensate, then find the visible drain and confirm water is actually moving through it \u2014 and check for pooling in the base pan, drips in the room and staining at the sleeve, carpet edge and ST-01 stool.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "aae7f2ad28d7",
+  "category": "Plumbing",
+  "code": "",
+  "label": "PTAC condensate drain \u2014 1\" VISIBLE drain with 1\" air-gap fitting, 1-1/2\" vent up, Type M copper, to the 4\" condensate main",
+  "where": "At the PTAC on the window wall, running down the wall (M501 det.9). Where the air-gap fitting physically lands is NOT stated by any sheet.",
+  "qtyMax": 1,
+  "src": "P301 / P302 ('1\" visible condensate drain for each A/C unit (typ.), provide 1\" air gap fitting') \u00b7 P501 detail 13 \u00b7 M401 KN2 \u00b7 M501 det.9 \u00b7 P102 material schedule",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Run the PTAC in cooling long enough to make condensate (15-20 min on a warm day), then look: no standing water in the base pan, no drip inside the room, no stain at the sleeve, wall, carpet edge or the ST-01 stool. Trace the visible 1\" drain down the wall and confirm the 1\" air-gap fitting is present, open and not taped, painted or packed shut; RECORD where the air-gap fitting physically lands (in the room / in the chase / at the exterior) \u2014 no sheet places it. Confirm the visible piping is copper, not PVC glued into a copper run. Name the trade before you walk: condensate is plumbing (M401 KN2, M501 det.9), the PTAC is HVAC.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "cfa393435f6c",
+  "category": "Plumbing",
+  "code": "",
+  "label": "WATCH \u2014 NOT-APPROVED substitution: American Standard Studio undercounter bowl 0614.000 / 0614.300 / 0618.000 + Moen M\u00b7Dura 9417F12 / 9419F12 single-handle, single-hole, 1.2 gpm",
+  "where": "n/a \u2014 carried so a walker who finds a single-hole Moen deck knows it is not the approved fixture.",
+  "qtyMax": 1,
+  "src": "S4 product data (American Standard Bathroom Vanity Sink.pdf; Moen Bathroom Vanity Faucet.pdf) \u2014 superseded by nothing; the row of record stays P104 L-3/L-4",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Read the brand and model off the bowl and off the faucet. If you find an American Standard Studio undercounter bowl (0614.000 / 0614.300 / 0618.000) or a Moen M-Dura 9417F12 / 9419F12 \u2014 STOP, photograph the fixture, the faucet and the deck hole pattern, and log it as an unapproved substitution against P104 L-3/L-4. Do not accept it and do not sign the room off.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "d0bb3b9584ec",
+  "category": "Plumbing",
+  "code": "BT-1",
+  "label": "CONFIGURATION A (TUB) - Bathtub, guestroom ADA, mark BT-1 \u2014 American Standard Princeton 2390.202 with Delta T14261 / R10000-UNWS trim; removable wall-mounted tub/shower seat (keyed note 7); tub rim 17\" MIN / 19\" MAX; BOWED shower rod HD-05; NO diverter and NO hand shower under this configuration",
+  "where": "Bath of 118, tub wall. A532 plan 01 (PLAN - TUB) gives 5'-6 3/4\" and 5'-0\" CLEAR at the tub; grab-bar band MIN 33\" / MAX 36\"; shower controls MIN 8\" / MAX 10\" above the rim (elevation 05).",
+  "qtyMax": 1,
+  "src": "P104 row BT-1 \u00b7 A100 Guestroom Matrix :85 (118 = T) \u00b7 G001 Guestroom Matrix :91 (118 = T) \u00b7 A100 footer :99 / G001 footer :105 (5 tub / 2 shower provided) \u00b7 G100.2 \u00a71107 \u00b7 A532 plan 01 + elevations 02/03/04/05 \u00b7 A533 elevation 03i (tub-rim band 'MIN 17\" / MAX 19\"') \u00b7 G402 detail 01 ACCESSIBLE TUB ELEVATIONS (tub rim '17\"-19\" A.F.F.' printed on both the head wall and the foot wall; tub depth 2'-0\"; clear floor 34\" CLEAR / 30\" MIN; TA 4 12\" grab bar at 3'-0\" [33\"-36\"] and 1'-0\" MIN from tub edge; TA 4.2 24\" grab bars, upper bar on the 48\" A.F.F. line, lower bar 8\"-10\" above the tub rim; shower head/rod 'MAXIMIZE +6'-2\" TO 6'-6\" ABOVE TUB FLR.') \u00b7 P401/P402 accessible plans 02/04/07",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "FIRST record and photograph WHICH configuration was actually built. If it is the tub: read the model and confirm an American Standard Princeton 2390.202 with Delta T14261 / R10000-UNWS trim; MEASURE the rim and record against 17\" MIN / 19\" MAX (G402 det 01, A533 elev 03i) and record the tub depth against 2'-0\"; measure the grab bars and record against MIN 33\" / MAX 36\" (A532 elevs 02/05) AND against G402 det 01's tub set \u2014 12\" head-wall bar at 3'-0\" and 1'-0\" MIN off the tub edge, 24\" back-wall UPPER bar on the 48\" A.F.F. line, LOWER bar 8\"-10\" above the rim \u2014 the two sheets do not give one band, so record the numbers and judge none; measure the shower controls against MIN 8\" / MAX 10\" above the rim (A532 elevation 05); measure the shower head and record it against 'MAXIMIZE +6'-2\" TO 6'-6\" ABOVE TUB FLR.' (G402 det 01); confirm the removable tub/shower seat is present, wall-mounted and takes weight; confirm the rod is the BOWED HD-05 (not the straight HD-5.1) and record whether a diverter and a hand shower are present \u2014 A532's tub elevations show neither, A533's tub elevation shows both. Fill to the overflow and drain \u2014 overflow does not leak behind the wall, the stopper holds, and the tub does not flex or creak underfoot.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "d5eb3b3705d7",
+  "category": "Plumbing",
+  "code": "FD",
+  "label": "Floor drain, guest bathroom \u2014 2\" per the P301-series general notes; \"MAINTAIN ACCESSIBLE COMPLIANT SLOPES TO DRAIN\". No guestroom floor drain is scheduled anywhere in P104",
+  "where": "Bath floor at/near the shower. On 118 keynote 6 'FLOOR DRAIN' is drawn TWICE on A552 \u2014 on architectural plan 01 and again on finish plan 03.",
+  "qtyMax": 1,
+  "src": "A552 plan 01 kn 6 and finish plan 03 kn 6 \u00b7 A530 kn 20 \u00b7 P402 ('floor drain in accessible units') \u00b7 P301 general note (FD 2\")",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Strainer secure and flush with the tile, not proud and not dished \u2014 run a straightedge across it. Pour a cup of water at each corner of the bath floor in turn and watch each reach the drain; nothing may pond. Confirm the floor slope does not exceed 1:48 in any direction (G402 bath GN4). Pour water into the drain and confirm the trap holds a seal. RECORD the make, model and strainer finish you find \u2014 no guestroom floor drain is scheduled anywhere in P104 (FD-1/FD-2/FD-3 are Mech/Laundry, Unfinished and Funnel), so your record is the product answer.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "51a07596d3e9",
+  "category": "Plumbing",
+  "code": "FD",
+  "label": "Floor drain, guestroom bathroom \u2014 2\" per P301; no mark and NO scheduled product exists for a guestroom drain",
+  "where": "Bathroom floor at/near the shower, per A530 plan 01 keyed note 20",
+  "qtyMax": 1,
+  "src": "A530 keyed note 20 (placed on plan 01, verbatim) \u00b7 AGAINST P402 (floor drain in accessible units) \u00b7 P301 general notes (FD 2\") \u00b7 P104 Drain and Drainage Appurtenance Schedule (FD-1 / FD-2 / FD-3 \u2014 no guestroom drain) \u00b7 G402 bath general note 4 (slope not to exceed 1:48)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Write down PRESENT or ABSENT; if present, pour a cup of water at each corner of the bath floor and watch every one of them reach the drain with no pooling, and record any make or finish stamped on the strainer.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "775395537b0e",
+  "category": "Plumbing",
+  "code": "GV",
+  "label": "Gate valves at the CWS, HWS and HWR riser take-offs \u2014 one at each of the three risers, with unions, behind an 18\"x18\" access panel",
+  "where": "Guestroom wet wall / plumbing stack \u2014 WHERE THE PANEL PHYSICALLY LANDS IS THE OPEN QUESTION",
+  "qtyMax": 3,
+  "src": "P401 Domestic Water Typical Unit (a GV at each of the three riser take-offs) \u00b7 P502 detail 3 Shut-Off Valve Installation Detail (18\"x18\" access panel) \u00b7 P101 GN9 verbatim (\"Furnish access panels (installed by GC) as required\") \u00b7 P101 GN15 (valves located accessibly; ball valves) \u00b7 M101 N7",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Find and open the 18\"x18\" panel, write down WHERE it is, cycle all three valves fully closed and fully open and confirm each one actually shuts its service off at a fixture, and record whether they are gate or ball valves.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "95b3dd80a99e",
+  "category": "Plumbing",
+  "code": "GV",
+  "label": "Gate valves at the CWS, HWS and HWR riser take-offs \u2014 one at each of the three risers, with unions, behind an 18\"x18\" access panel",
+  "where": "Guestroom wet wall / plumbing stack. WHERE THE PANEL PHYSICALLY LANDS IS THE OPEN QUESTION \u2014 see note.",
+  "qtyMax": 3,
+  "src": "P401 Domestic Water Typical Unit (GV at each of the three riser take-offs) \u00b7 P502 detail 3 Shut-Off Valve Installation Detail \u00b7 P101 general note 9 and general note 15 \u00b7 M101 GN7",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Find the 18\"x18\" access panel and RECORD WHERE IT IS (guestroom ceiling / bath ceiling / corridor outside the door) with a photo. Open it and cycle all three valves \u2014 CWS, HWS and HWR \u2014 fully closed and fully open, confirming each actually stops flow at the fixture it serves; no weep at any stem afterwards. RECORD whether the valves are GATE (P401 / P502 det 3) or BALL (P101 GN15) \u2014 both are drawn and the sheets do not agree. Confirm a union at each. If there is NO panel anywhere, write that up as the finding.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "00c633b408bf",
+  "category": "Plumbing",
+  "code": "L-2 / L-3 / L-4",
+  "label": "Lavatory bowl, undermount rectangular \u2014 Decolav Callensia 1402-CWH (marks carried both ways: P401/P402 print L-2, P104 schedules L-3 / L-4)",
+  "where": "Bathroom vanity, undermount in the GR-302 vanity top; A530 plan 01: vanity wall 5'-4 3/4\" CLEAR, vanity top 2'-10\" MAX (G402 details 03/06 give the same 2'-10\" MAX for the typical guest vanity)",
+  "qtyMax": 1,
+  "src": "P104 rows L-3 and L-4 (Guestrooms, Undermount, Rect \u2014 Decolav Callensia 1402-CWH) \u00b7 P401 / P402 unit plans, fixtures served, printed \"L-2 / L-3\" \u00b7 P104 row L-2 (Employee/Pool, wall hung) \u00b7 A530 plan 01 and elevation 02 \u00b7 G402 details 03/06 (typical guest vanity, 2'-10\" MAX counter) \u00b7 conflicts.md B3.1",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Fill the bowl and let it drain, then wipe the tailpiece, the trap and both stops with dry tissue \u2014 any damp mark is a write-up \u2014 and measure the counter height against 2'-10\" MAX.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "19785b9d3e03",
+  "category": "Plumbing",
+  "code": "L-2 / L-3 / L-4",
+  "label": "Lavatory bowl, undermount rectangular \u2014 Decolav Callensia 1402-CWH (marks carried both ways: P401/P402 print L-2, P104 schedules L-3 / L-4)",
+  "where": "Bath, undermount in the ACCESSIBLE vanity top at 118 (A532 / A532.1 kn 6 accessible vanity unit, kn 8 clear area of sink/vanity). G402 details 04/05 dimension the accessible vanity: top 2'-10\" MAX, 2'-3\" MIN CLEAR knee height, 8\" MIN knee depth at the upper clear zone, 11\" MIN toe depth at the floor. Mirror bottom of reflective surface 3'-4\" (A532 elevs 04/05) and no higher than 40\" AFF over a lav (G402 GN12).",
+  "qtyMax": 1,
+  "src": "P104 rows L-3 and L-4 \u00b7 P401/P402 unit plans mark L-2 \u00b7 A532 / A532.1 kn 6 and kn 8",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Measure and record: top of counter against 2'-10\" MAX; clear knee height under the counter against 2'-3\" MIN; knee depth against 8\" MIN and toe depth against 11\" MIN (G402 det 04/05); bottom of the mirror's reflective surface against 3'-4\" / 40\" MAX. Bowl level and flush to the underside of the top with no chips; continuous silicone bead with no gaps at the corners. Fill the bowl, then drain it, then wipe the trap joint and both angle stops with tissue \u2014 dry tissue or it is a weep. Record which mark is printed on the fixture paperwork (L-2 vs L-3/L-4).",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "7848e27bf3f3",
+  "category": "Plumbing",
+  "code": "SH-1 / SH-3",
+  "label": "CONFIGURATION B (ROLL-IN SHOWER) - Roll-in shower, guestroom ADA, marks SH-1 / SH-3 \u2014 Kohler Rely series, 30\"x60\" pan, CENTRE drain, NO threshold, Delta T24859 supply; roll-in geometry 5'-0\" CLEAR x 2'-6\" MIN, entry 1 1/2\" and 6 1/2\" MAX; STRAIGHT rod HD-5.1 and folding seat HD-14 on this side; CURBLESS SLAB DEPRESSION",
+  "where": "Bath of 118. A552 plan 01 gives 9'-3\" clear at the bath and its bath bubble reads 01.1 / A-532 = PLAN - ROLL IN SHOWER, whose elevations are A532.1 views 01/02/03. Finish plan 03 tags T-02 'ROLL-IN SHOWER TILE'.",
+  "qtyMax": 1,
+  "src": "P401/P402 mark SH-1 \u00b7 P104 row SH-3 (verbatim '30\"x60\" shower pan w/ center drain, no threshold; Delta T24859 supply') \u00b7 A532 plan 01.1 (5'-0\" CLEAR x 2'-6\" MIN; seat depth 1'-3\" MIN / 1'-4\" MAX; entry 1 1/2\" and 6 1/2\" MAX) \u00b7 A532.1 views 01/02/03 (HD-5.1 straight rod, HD-14 folding seat, grab bar MIN 33\" / MAX 36\") \u00b7 A552 plan 01 kn 5 + kn 6 and finish plan T-02 \u00b7 G402 detail 02 ACCESSIBLE SHOWER (TA 10 folding seat: seat top 2'-3\", 3\" MAX gap at wall, 1 1/2\" MAX at compartment edge, 'WHEN FOLDED SHALL EXTENDED MAX. 6\" FROM THE WALL' [typo as printed]) \u00b7 G400 detail 07 TA-20.1 SHOWER SEAT AT ACCESSIBLE SHOWER ('17\"-19\" MAX.' seat)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "FIRST record and photograph WHICH configuration was actually built \u2014 that photograph is the field evidence the open RFI is waiting on. If it is the roll-in: confirm a 30\"x60\" pan with a CENTRE drain and NO threshold; measure 5'-0\" clear x 2'-6\" MIN and measure the entry lip against 1-1/2\" and 6-1/2\" MAX; measure the grab bar against MIN 33\" / MAX 36\"; confirm the rod is the STRAIGHT HD-5.1 (not the bowed HD-05 that belongs to the tub). At the folding seat HD-14: confirm it is solid and takes weight, then MEASURE AND RECORD (a) top of seat against BOTH printed bands \u2014 17\"-19\" MAX (G400 det 07 TA-20.1) and 2'-3\" seat top (G402 det 02 TA 10) \u2014 the sheets do not agree, so record the number against both and judge neither; (b) seat depth against 1'-3\" MIN / 1'-4\" MAX (A532 plan 01.1); (c) folded projection against MAX 6\" from the wall, plus the 3\" MAX gap at the wall and 1 1/2\" MAX at the compartment edge (G402 det 02). Flood the pan and hold water for 5 minutes \u2014 no ponding away from the drain, nothing escaping past the curbless transition, and a wheelchair-width roll across the transition without a lip.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "2c9ebccdda6f",
+  "category": "Plumbing",
+  "code": "SH-1 / SH-4",
+  "label": "Shower, guestroom \u2014 30\"x60\" pan, CENTRE drain, 4\" threshold, Kohler Rely series, Delta T24859 supply, SS-01 solid surround (Mincey Marble)",
+  "where": "Bathroom, shower compartment; A530 plan 01 dimensions it 5'-0\" CLEAR x 3'-7 1/4\" deep; A555 finish plan prints \"NO FINISHES UNDER SHOWER\"",
+  "qtyMax": 1,
+  "src": "P104 row SH-4 (Guestroom, Kohler Rely Series, 30\"x60\" pan, centre drain, 4\" threshold, Delta T24859 supply) \u00b7 P401 / P402 unit plans mark SH-1 \u00b7 P104 row SH-1 (Employee 36\"x36\") \u00b7 A530 (standard guest bath is a shower; plan 01 5'-0\" CLEAR x 3'-7 1/4\") \u00b7 A555 view 01 keynote 5 \u00b7 A100 Guestroom Matrix floor-1 \"Queen Queen | 6 S\" \u00b7 AGAINST A555 view 02 placed keynote 7 = \"BATHTUB\" (A550 keynote legend note 7) \u00b7 conflicts.md B3.1",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Measure the pan and the curb \u2014 record against 30\"x60\" with a 4\" threshold and a centre drain \u2014 then plug the drain, pond an inch of water across the pan, and confirm it drains clean with no standing water and no weep at the SS-01 joints.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "b354ca084166",
+  "category": "Plumbing",
+  "code": "SK-3 / SK-4",
+  "label": "Kitchenette / wet-bar sink and faucet \u2014 NO product scheduled in P104; procured per S4: American Standard PEKOE 23x18 single-bowl stainless undermount 18SB.10231800.075 + Moen 8227",
+  "where": "Entry / kitchenette leg if provided \u2014 A552 gives the kitchenette leg 7'-10 1/2\" CLEAR. A552 tags 901 REFRIGERATOR and 902 DISHWASHER on the working wall and tags NO SINK.",
+  "qtyMax": 1,
+  "src": "P401 and P402 (mark SK-3 / SK-4, 'in the suite/extended units') \u00b7 P104 (schedules NO product for either mark) \u00b7 P201 riser #P2 (an SK on a guestroom stack) \u00b7 S4 product data",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Record PRESENT or ABSENT in the kitchenette leg \u2014 that answer alone closes half the open question. If present: undermount clips tight with no sag along the front edge, bottom grid fitted, faucet hot-left with full travel and no drip. Fill the bowl and drain it, then wipe the trap and both stops with tissue \u2014 dry or it is a weep. Confirm the dishwasher (902) drain is connected and there is a high loop or air gap. RECORD the faucet make, model and the deck hole pattern: the S4 file titled 'Moen Kitchenette Faucet' is on its own product sheet an 8\" widespread 3-HOLE LAVATORY faucet, which will not drop into a single-hole kitchenette deck \u2014 if that is what arrived, photograph it. Do not raise a second RFI; one is already open.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "f63ee9599a5a",
+  "category": "Plumbing",
+  "code": "SK-3 / SK-4",
+  "label": "Kitchenette / wet-bar sink and faucet \u2014 NO product scheduled in P104; procured per the S4 catalogue data as an American Standard PEKOE 23x18 undermount 18SB.10231800.075 with a Moen 8227 faucet",
+  "where": "Entry / kitchenette leg if provided \u2014 note A555 view 01 tags 901 REFRIGERATOR and 902 DISHWASHER on the working wall and TAGS NO SINK",
+  "qtyMax": 1,
+  "src": "P401 and P402 (mark SK-3 / SK-4 plus the \"suite/extended units\" wording) \u00b7 P201 riser #P2 (an SK on a guestroom stack, 2\" waste / 1-1/4\" vent) \u00b7 P104 (schedules NO product for SK-3 or SK-4) \u00b7 S4 product data (unstamped catalogue pages) \u00b7 packages/plumbing.md \u00a74 \u00b7 placeholder PH-GU-003",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Write down PRESENT or ABSENT in the entry-kitchenette leg; if present, record the sink and faucet models actually installed and the number of deck holes as an observation, then fill and drain it and wipe the trap and stops for weeps.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "aa68a32ca797",
+  "category": "Plumbing",
+  "code": "TP",
+  "label": "Trap guard / trap primer at the bathroom floor drain \u2014 the primer valve body is concealed but the trap guard is visible through the strainer and the seal is testable",
+  "where": "At the guest-bath floor drain. The primer valve body is concealed; P102 requires primers in ACCESSIBLE locations per NPCA / ASSE 1018.",
+  "qtyMax": 1,
+  "src": "P301 general note 6 ('All floor drains to be installed with trap guards / primers', repeated P302\u2013P310) \u00b7 P501 detail 12 \u00b7 P102 Automatic Trap Primer Valve Schedule (Sioux Chief 695) \u00b7 P104 Water Appurtenance Schedule TP-1 (PPP SMP-500-115V)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Lift the strainer and look into the drain body: is a trap guard fitted, yes or no? Record it. Pour water in, then confirm the seal holds. Ask housekeeping to leave the room unused and re-check on the next pass for a dry trap or sewer odour \u2014 a dry trap on the second pass is the finding. If a primer line is visible, trace it and record whether its valve is reachable (P102 requires primers in ACCESSIBLE locations per NPCA / ASSE 1018).",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "6b28d04e18a0",
+  "category": "Plumbing",
+  "code": "TP / TG-1",
+  "label": "Trap guard / trap primer at the bathroom floor drain",
+  "where": "At the guestroom bathroom floor drain; the primer valve body is concealed but is required to be in an ACCESSIBLE location per P102 (ASSE 1018)",
+  "qtyMax": 1,
+  "src": "P104 Drain and Drainage Appurtenance Schedule, FD-1 / FD-2 / FS rows, Notes column \"w/ trap guard TG-1\" (TG-1 has no schedule row) \u00b7 P301 general note 6, repeated P302\u2013P310 (\"All floor drains to be installed with trap guards / primers\") \u00b7 P501 detail 12 \u00b7 P102 Automatic Trap Primer Valve Schedule (Sioux Chief 695 Series) \u00b7 P104 TP-1 (PPP SMP-500-115V, sump-pump standpipe)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Lift the strainer and write down whether a trap guard insert is fitted and any marking on it, then pour water in, wait, and confirm the trap seal is holding with no sewer odour at the drain.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "b451e9b3ec9d",
+  "category": "Plumbing",
+  "code": "WC-3 / WC-4",
+  "label": "Water closet, guestroom, floor outlet, tank type, 1.28 GPF - WC-3 American Standard Champion Pro 211AA.104 ('Guestroom, Floor Outlet, ADA') / WC-4 Cadet Pro 215CA.104; seat AS 5257A.65C.020 slow-close elongated CLOSED-FRONT W/ COVER. ADA seat height 17\"-19\" (G400 detail 07)",
+  "where": "Bathroom toilet wall; A530 plan 01 dimensions the toilet centreline at 1'-6\" off the wall",
+  "qtyMax": 1,
+  "src": "P104 Plumbing Fixture Schedule rows WC-3 and WC-4 (verbatim) \u00b7 P401 / P402 unit plans (both marks printed together) \u00b7 A530 keyed note 19 TOILET (placed plan 01) \u00b7 A530 keyed note 21 (legend only, not placed; verbatim) \u00b7 A530 view 01 placed keynotes 12, 22, 30, 19, 9, 20, 23, 27 \u00b7 G400 detail 07 (TA-15/TA-16 accessible toilet seat 17\"-19\" MAX; boxed note \"FLUSH LEVER POSITIONS TO FACE OPEN SIDE OF W.C. TYP.\") \u00b7 placeholder PH-GU-004",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Flush and refill twice \u2014 full flush, clean refill, no run-on \u2014 rock the bowl by hand to confirm it is solid at the closet flange with no weep, then WRITE DOWN the model installed, the measured height to the top of the seat (against G400 det 07's 17\"-19\") and which side of the tank the flush lever is on relative to the inside corner.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "99d5eec7f808",
+  "category": "Plumbing",
+  "code": "WC-3 / WC-4",
+  "label": "Water closet, guestroom, floor outlet, tank type, 1.28 GPF - WC-3 American Standard Champion Pro 211AA.104 ('Guestroom, Floor Outlet, ADA') / WC-4 Cadet Pro 215CA.104; seat AS 5257A.65C.020 slow-close elongated CLOSED-FRONT W/ COVER. ADA seat height 17\"-19\" (G400 detail 07)",
+  "where": "Bath, toilet wall. A530 plan 01 dimensions the toilet centreline 1'-6\" off the wall; A532 elevation 03 prints 19\" MAX and elevation 03i prints 17\" MIN at 118.",
+  "qtyMax": 1,
+  "src": "P104 row WC-3 (Champion Pro 211AA.104, 'Guestroom, Floor Outlet, ADA'; flush tank manual 1.28 GPF; seat AS 5257A.65C.020 slow-close elongated closed-front w/ cover) and row WC-4 (Cadet Pro 215CA.104; same seat model number) \u00b7 P104 rows WC-1 / WC-2 / WC-5 (seat AS 5901.1 elongated open-front less cover) \u00b7 P401/P402 unit plans (both marks printed together, neither assigned) \u00b7 G400 detail 07 TA-15/TA-16 ('17\"-19\" MAX. toilet seat; flush valve 17\"-18\"'), TA-4/TA-4.4 (33\"-38\" AFF) and the boxed note 'FLUSH LEVER POSITIONS TO FACE OPEN SIDE OF W.C. TYP.' \u00b7 G400 schedule title 'PRIVATE BATH & PUBLIC RESTROOM ACCESSORIES SCHEDULE' \u00b7 A530/A532 keyed note 19 TOILET and keyed note 21 tank lever \u00b7 A532 elevation 03 (19\" MAX) and 03i (17\" MIN) \u00b7 G402 detail 01 and A532 elevations 02/05 (grab bar MIN 33\" / MAX 36\")",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "MEASURE TOP OF SEAT and record it against 17\"-19\" (G400 det 07, TA-15/TA-16). Separately measure and record the side clearances at A532's 17\" MIN / 19\" MAX dimension lines \u2014 the sheets do not say which of the two the 17/19 pair is, so record both. Measure the side-wall grab bar and record against BOTH printed bands (33\"-36\" per A532/G402, 33\"-38\" per G400 det 07). Fill and flush twice \u2014 full flush, clean refill, no run-on, no ghost fill; no rock at the base and no weep at the closet flange or the supply stop. Confirm the tank lever is BOTH on the side opposite the inside wall corner (kn 21) AND facing the open side of the bowl (G400 det 07). Read the seat underside and confirm it is the closed-front-WITH-cover AS 5257A.65C.020, not the AS 5901.1 open-front-less-cover public seat. Record the water-closet model actually installed (Champion Pro 211AA.104 vs Cadet Pro 215CA.104).",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "0be823148c0d",
+  "category": "Plumbing",
+  "code": "kn 10",
+  "label": "CONFIGURATION B (ROLL-IN SHOWER) - Shower diverter valve (kn 10) \u2014 applies only if the roll-in was built",
+  "where": "Roll-in shower control wall at 118, alongside the pressure-balancing valve. Tagged on A532 elevation 02 and A532.1 views 01 and 02.",
+  "qtyMax": 1,
+  "src": "A532 elevation 02 \u00b7 A532.1 views 01 and 02 \u00b7 A530 BATHROOM KEYED NOTE 10",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Only if the roll-in was built. Move the diverter through its full travel: it must move positively between the fixed head and the hand shower and HOLD there under full flow without creeping back. With it set to the hand shower, confirm the fixed head STOPS completely \u2014 any dribble from the head is cross-flow and is the finding. Measure the diverter height and record it with the other controls.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "e2f6e9cafdce",
+  "category": "Plumbing",
+  "code": "kn 11",
+  "label": "CONFIGURATION B (ROLL-IN SHOWER) - Hand shower and side bar (keyed note 11) \u2014 the handset's on/off control MUST be NON-POSITIVE shut-off; hose MIN 59\" long and slide-bar top 4'-0 1/2\" MAX (G402 det 02)",
+  "where": "Roll-in shower wall at 118 on a slide bar. A532.1 view 02 prints 3'-6\", 2'-10\", 2'-8\", 1'-5\", 1'-3\", 1'-0\" and MAX 6\" at the control zone; grab-bar band MIN 33\" / MAX 36\". Also carried on view 03, the folding-seat wall.",
+  "qtyMax": 1,
+  "src": "A532.1 views 02 and 03 keyed note 11 \u00b7 A530 BATHROOM KEYED NOTE 11 (verbatim: 'HAND SHOWER AND SIDE BAR. HAND-HELD SHOWER UNIT REQUIRED TO HAVE ON/OFF CONTROL WITH NON-POSITIVE SHUT OFF.') \u00b7 G402 detail 02 ACCESSIBLE SHOWER, 'BACK' wall (verbatim 'SHOWER HOSE TO BE MIN. 59\" LONG'; slide-bar top 4'-0 1/2\" MAX; controls in the hatched zone 2'-3\" MAX / 1'-4\" MIN off the seat wall) \u00b7 A533 view 04 keyed note 11 (a TUB elevation, on a different room type \u2014 see note)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "If the roll-in was built: slide the handset the full length of the bar and confirm it locks at any height and does not slip under the weight of the hose; push and pull on the bar \u2014 solid to blocking, no movement. MEASURE and record the hose length against MIN 59\" and the top of the slide bar against 4'-0 1/2\" MAX (G402 det 02). CRITICAL: operate the handset's OWN on/off control and confirm it does NOT fully shut off flow (A530 kn 11 requires NON-POSITIVE shut-off). A handset that shuts flow off dead is the wrong unit even though it looks right on the wall \u2014 photograph it and log the model. Confirm the hose reaches the seat position. IF A TUB WAS BUILT INSTEAD: still record present or absent with a photo \u2014 A532's tub elevations omit kn 11 but A533's tub elevation carries it, so an absence here is evidence for the open RFI, not yet a defect.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "46f1cd44921b",
+  "category": "Plumbing",
+  "code": "kn 14",
+  "label": "On/off PRESSURE-BALANCING (anti-scald) valve - P104 gives the guestroom rows SH-3 / SH-4 only 'Delta T24859 supply'; NO valve or cartridge model is printed for the guestroom",
+  "where": "Shower control wall (A530 elevations 04 and 05)",
+  "qtyMax": 1,
+  "src": "A530 keyed note 14 (\"ON/OFF - PRESSURE BALANCING VALVE\", placed elevations 04 and 05) \u00b7 A530 elevation 05 printed heights 6'-8\" / 5'-0\" / 3'-5\" (unassigned) \u00b7 P104 REMARKS rows SH-3/SH-4 (\"Delta T24859 supply\" only \u2014 the R22000-WS string is on the SH-1 EMPLOYEE row, not on a guestroom row) \u00b7 P202 / P305 (120\u00b0F guestroom HWS; \u2264110\u00b0F TMV scoped to public lavatories)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Run the shower at a comfortable setting, then flush the water closet in the same bathroom and hold your hand in the spray \u2014 the temperature must not spike; repeat with the lavatory hot tap wide open, then measure and write down the valve centreline height.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "69547bcd3a2c",
+  "category": "Plumbing",
+  "code": "kn 14",
+  "label": "On/off PRESSURE-BALANCING (anti-scald) valve - P104 gives the guestroom rows SH-3 / SH-4 only 'Delta T24859 supply'; NO valve or cartridge model is printed for the guestroom",
+  "where": "Shower/tub control wall. On 118 A532.1 view 02 prints MAX 6\" at the control location and A532 elevation 05 prints the shower-control band MIN 8\" / MAX 10\" above the rim.",
+  "qtyMax": 1,
+  "src": "A530 BATHROOM KEYED NOTE 14 ('ON/OFF - PRESSURE BALANCING VALVE') \u00b7 A532 elevation 02 (tub configuration) \u00b7 A532.1 view 02 (roll-in configuration, MAX 6\" at the control location) \u00b7 A532 elevation 05 (shower controls MIN 8\" / MAX 10\" above the tub rim) \u00b7 A533 elevation 04 \u00b7 P104 rows SH-3 / SH-4 REMARKS ('Delta T24859 supply' only) \u2014 NOT P104 row SH-1, which is the 36\"x36\" employee shower carrying R22000-WS and 2.5 GPM",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Run the shower at a comfortable mixed setting, then flush the water closet in the same room and hold it \u2014 the shower temperature must not spike or drop. Repeat with the lavatory run full hot. Confirm full valve travel with a positive OFF and no drip at the spindle after shut-off. Measure the control height and record it against the printed band (MAX 6\" at the control location per A532.1 view 02; MIN 8\" / MAX 10\" above the rim per A532 elevation 05, tub configuration). Read and WRITE DOWN the valve and cartridge model actually installed \u2014 the guestroom rows name none.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "a2ac1b6f7221",
+  "category": "Plumbing",
+  "code": "kn 5",
+  "label": "CONFIGURATION B (ROLL-IN SHOWER) - Shower enclosure with tempered-glass door (kn 5) \u2014 GLASS SUB scope, not plumbing",
+  "where": "Roll-in shower opening at 118. kn 5 is placed on A552 plan 01; A530 kn 27 additionally requires door-stop hardware at the shower glass.",
+  "qtyMax": 1,
+  "src": "A552 plan 01 kn 5 ('SHOWER ENCLOSURE W/ TEMPERED GLASS DOOR') \u00b7 A530 kn 27 (door-stop hardware)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Only if the roll-in was built. Panels move through their full travel without binding; check plumb and parallel with a level at both jambs. Find and photograph the tempered stamp on the glass. Run water at the door for two minutes and confirm nothing escapes at the jambs, track or sill. Confirm the door-stop hardware required by A530 kn 27 is fitted so the back-of-door hardware cannot strike the glass when fully ajar. Bill this to the glass sub, not to Larry's Plumbing.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "b4f5c3fbeaf0",
+  "category": "Plumbing",
+  "code": "kn 9",
+  "label": "Shower head \u2014 trim Delta T24859",
+  "where": "Shower wall; A530 elevation 05 prints wall heights 6'-8\" / 5'-0\" / 3'-5\" on this wall",
+  "qtyMax": 1,
+  "src": "A530 keyed note 9 (placed plan 01 and elevation 05) \u00b7 P104 REMARKS rows SH-3/SH-4 (Delta T24859 supply) \u00b7 P104 row SH-1 (2.5 GPM \u2014 employee shower, not this fixture) \u00b7 G402 detail 01 (accessible tub, not applicable)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Run it 60 seconds \u2014 even spray with no blocked or spitting jets, head holds the position you set it to, and no weep where the arm penetrates the SS-01 surround.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "b981c85ffe38",
+  "category": "Plumbing",
+  "code": "kn 9",
+  "label": "Shower head \u2014 trim Delta T24859",
+  "where": "Shower/tub wall. kn 9 is placed on A532 plan 01 (tub) and plan 01.1 (roll-in) and on the elevations; A532.1 view 01i carries the shower-head blocking on the roll-in end wall.",
+  "qtyMax": 1,
+  "src": "A530\u2013A533 BATHROOM KEYED NOTE 9 \u00b7 A532 plan 01 / plan 01.1 and elevation 05 \u00b7 A532.1 views 01 / 01i \u00b7 P104 REMARKS on SH-3 / SH-4 (Delta T24859) \u00b7 G402 detail 01 ACCESSIBLE TUB, back wall (verbatim 'MAXIMIZE +6'-2\" TO 6'-6\" ABOVE TUB FLR.')",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Secure to the arm with no wobble, escutcheon tight to SS-01. Run it 60 s: even spray with no blocked or cross-firing jets, and nothing weeping at the arm penetration or running down the surround. Swivel it through its full range and confirm it holds position. MEASURE the head height and WRITE THE NUMBER DOWN: if a tub was built, record it against 'MAXIMIZE +6'-2\" TO 6'-6\" ABOVE TUB FLR.' (G402 det 01); if the roll-in was built, record the number bare \u2014 no sheet prints a height for that configuration, so your measurement is the record. Do NOT record a GPM figure against 2.5 \u2014 that number is printed on P104's SH-1 EMPLOYEE shower row, not on the guestroom rows.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ }
+]

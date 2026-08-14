@@ -430,6 +430,7 @@ export function renderRoom(el, number) {
             ${openIssue ? `<div class="item-note">— ${esc(it.issue.toUpperCase())}</div>` : ''}
             ${it.issue && it.issueResolved ? `<div class="item-note resolved"><s>— ${esc(it.issue.toUpperCase())}</s></div>` : ''}
             ${(n => n ? `<button class="ref-count" data-refchip="${esc(id)}" aria-label="References">📎 ${n} ref${n > 1 ? 's' : ''}</button>` : '')(refsFor(room.number, it, id).length)}
+            ${isMepRow && it.where ? `<div class="punch-where"><span class="punch-at">AT</span> ${esc(it.where)}</div>` : ''}
             ${isMepRow && it.verifyAtPunch ? `<div class="punch-step"><span class="punch-do">DO</span> ${esc(it.verifyAtPunch)}</div>` : ''}
             ${isMepRow && inst ? `<div class="punch-note">${esc(inst)}</div>` : ''}
           </div>
@@ -470,7 +471,7 @@ export function renderRoom(el, number) {
         <span class="rh-num">${isMep ? 'MEP ' + esc(mepBase)
           : isSpace ? esc(room.typeLabel || 'Space') : 'Room ' + esc(room.number)}</span>
         <span class="rh-right">
-        ${isSpace || isMep ? '' : `<a class="sheet-btn" href="./refs.html?room=${encodeURIComponent(room.number)}" aria-label="Submittals and plan references">📄</a>`}
+        ${isSpace ? '' : `<a class="sheet-btn" href="./refs.html?room=${encodeURIComponent(room.number)}" aria-label="Submittals and plan references">📄</a>`}
         <a class="sheet-btn" href="./print.html?room=${encodeURIComponent(room.number)}" aria-label="Printable checklist sheet">🖨</a>
         ${!isMep && MODEL_ROOMS.includes(room.number) ? `<a class="sheet-btn" href="./room-3d.html?room=${encodeURIComponent(room.number)}" aria-label="3D room model">🧊</a>` : ''}
         <span class="rh-type">${isMep

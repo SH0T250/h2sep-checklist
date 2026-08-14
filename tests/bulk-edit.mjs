@@ -78,7 +78,11 @@ ok(await page.locator('#bulk-open').isHidden(), 'BULK EDIT hidden until edit mod
 ok(await page.locator('#inventory .inv-tbl').count() === 1, 'inventory panel renders read-only');
 ok(await page.locator('#inventory [data-bulk]').first().isHidden(), 'per-row BULK buttons hidden read-only');
 const issuesBefore = Number((await page.textContent('#k-issues')).trim());
-ok(issuesBefore === 16, `16 open issues seeded (6+1 fixture + 9 injected) — got ${issuesBefore}`);
+// 6 FF&E items + 1 room note + 1 punch line (js/seed-mep.js, since v1.19.0) + 9
+// injected. The punch issue belongs in this total on purpose: dash.js counts
+// MEP issues in the headline tile because a flagged fixture is a real problem
+// on a real wall, even though the board refuses to EDIT punch lines.
+ok(issuesBefore === 17, `17 open issues seeded (6+1+1 fixture + 9 injected) — got ${issuesBefore}`);
 
 // ---------- identity + edit mode ----------
 await page.click('#edit-toggle');

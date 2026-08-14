@@ -1,0 +1,505 @@
+[
+ {
+  "itemId": "dd3456d44f3f",
+  "category": "Fire Protection",
+  "code": "",
+  "label": "Guest bathroom \u2014 NO sprinkler head is drawn. Confirm-absence row.",
+  "where": "Bath ceiling, 7'-3\" AFF",
+  "qtyMax": 1,
+  "src": "FP-1, room regions 107 (QQ) and 108 (King Studio) read at 700-800 dpi \u2014 no head drawn in either bathroom \u00b7 A530 General Note B",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Look up in the bath \u2014 expect none; if a head IS installed, photograph it, log the room and read the model off the plate, because it is not on FP-1 and belongs on the as-built and in the hydraulic record. Remove nothing.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "b0119abed788",
+  "category": "Fire Protection",
+  "code": "(S)SB",
+  "label": "Addressable photoelectric smoke detector on a LOW-FREQUENCY sounder base \u2014 Silent Knight SKPHOTOW head in a System Sensor B200S-LF-WH sounder base, ceiling mounted. This base is the audible appliance for a sleeping room; a corridor horn does not satisfy it",
+  "where": "Guest-room ceiling near the entry / sleeping boundary; A550 view 04 prints 10\" 10\" spacing at the SD / fire-horn pair. Not in the bath, not in the entry leg.",
+  "qtyMax": 1,
+  "src": "FA-1 Fire Alarm Equipment Schedule row (S)SB, qty 121/121, 'LOCATE AS SHOWN ON CEILING' (Security Integrated Inc, Hilton A/D&C REVIEWED 04/29/2025) \u00b7 FA-2 first-floor plan \u00b7 FA-3 verified rooms 303/305/307/311 and 304/306/308 \u00b7 A550 view 04 SD symbol \u00b7 E500 FA note 10",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Head seated in its base, no shipping cap, LED normal, no paint or drywall dust on head, base or chamber; then with the FA vendor put it in test \u2014 head alarms, the LOW-FREQUENCY base sounds IN THE ROOM and is read at 75 dBA at the sleeping position (FA-1 audibility chart: sleeping rooms ambient 35 dBA, design 75 dBA, low frequency), and the FACP annunciates ROOM 104 with both its SLC and NAC addresses read back; any exposed emergency-system junction box or cover plate must be PAINTED RED (E500 note 10).",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "6e585450530d",
+  "category": "Fire Protection",
+  "code": "CO (SKFIRECOW)",
+  "label": "Carbon monoxide detector \u2014 NONE is scheduled to any guest room. Confirm-absence row.",
+  "where": "n/a in the guest room \u2014 FA-1's 3 SKFIRECOW units are 'LOCATE AS SHOWN ON CEILING' and their locations are not extracted",
+  "qtyMax": 1,
+  "src": "FA-1 Fire Alarm Equipment Schedule (CO / Silent Knight SKFIRECOW / qty 3 for the whole 4-storey 115-key building) \u00b7 E500 carbon-monoxide detail (places none in a guest room) \u00b7 A550 POWER & SIGNAL LEGEND has NO CO symbol",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look at the ceiling and record 'no CO detector'; if a CO device IS installed in the guest room, log it and photograph it \u2014 it is not scheduled to one and needs an FACP address and a line on the as-built.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "fcdb3b8f958e",
+  "category": "Fire Protection",
+  "code": "FD",
+  "label": "Ceiling fire / radiation damper above the bath exhaust grille \u2014 Ruskin CFD4, UL 555C, fusible link, ceramic-fibre thermal shroud, 3\"x3\" galvanised continuous angle to sleeve on four sides",
+  "where": "Bath ceiling, immediately above the EAG-50 toilet exhaust grille, on the 4\" exhaust to the EV riser",
+  "qtyMax": 1,
+  "src": "M401 (EAG-50 with VD and FD, details 01-07) \u00b7 M301 General Note N3 (UL555 at rated ceiling penetrations) \u00b7 M501 detail 2 \u00b7 M101 N7 and GN31/GN32 (approved access + permanent label, letters min 1/2\" high) \u00b7 E500 FA note 7 (against M501 det.2)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Drop the EAG-50 face (or open the required access) and confirm: CFD4 installed, fusible link present, intact and NOT painted, taped or wired open; ceramic-fibre shroud in place; and the exhaust duct at the damper is HARD SHEET METAL \u2014 M501 det.2 forbids flex here and flex is a common field substitution. Then from the finished side confirm approved access exists and carries the permanent FIRE DAMPER label in letters at least 1/2\" high.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "17452ed9c122",
+  "category": "Fire Protection",
+  "code": "H (kn 16)",
+  "label": "Fire horn / horn-strobe at the guest room \u2014 kn16 verbatim: 'FIRE HORN IN STANDARD ROOMS / FIRE HORN/STROBE IN COMMUNICATION FEATURES ROOMS'",
+  "where": "Guest-room ceiling or wall beside the smoke detector \u2014 A550 view 04 prints 10\" 10\" spacing at the SD / (H) pair",
+  "qtyMax": 1,
+  "src": "FOR: A550 view 04 kn16 PLACED (confirmed on the view-04 keynote list) + kn16 also carried on A550's elevations + A550 POWER & SIGNAL LEGEND 'ALARM HORN AND STROBE (H)' + E101 symbol legend (combination horn/strobe 6'-8\" AFF) + E501 ('Notification: combination horn/strobes and strobes in corridors, public spaces, and guestrooms'). AGAINST: FA-2 / FA-3 draw NO horn and NO strobe in a standard key (verified 303/305/307/311 and 304/306/308) and FA-1 schedules no horn-strobe to a guestroom.",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Answer one question from the doorway and photograph it: is there a horn or horn-strobe SEPARATE from the smoke detector, YES or NO? If yes \u2014 note horn-only vs horn+strobe, MEASURE and record the mounting height, cover on and unpainted, and confirm it sounds on test. If no \u2014 confirm the LF sounder base is carrying the audible duty at 75 dBA and that there is no orphan capped box or blank plate left beside the SD.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "841d90f3a6c9",
+  "category": "Fire Protection",
+  "code": "VK430 7/16 FR 155 C PD",
+  "label": "Sprinkler head on drop \u2014 FP-1 Description column verbatim 'VK430 7/16 FR 155 C PD'; Thread column 1/2\", K-Factor column 4.3; head 1 of 3",
+  "where": "Bed area; 1-1/4\" branch @ elev 12-8, drop tag 'Drop 0-3'",
+  "qtyMax": 1,
+  "src": "FP-1 Fire Sprinkler Shop Drawings (Texas Fire Services LLC, City of Eagle Pass FD stamped), head schedule row and the room region of rm 108 KING STUDIO read head-by-head at 700-800 dpi \u00b7 A120 General Note I",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "RECORD which trim is installed \u2014 FLUSH COVER PLATE (concealed) or ESCUTCHEON WITH VISIBLE DEFLECTOR (semi-recessed) \u2014 plus the plate finish, and photograph it; confirm seated, square and unpainted, no overspray on plate, deflector or fusible element, and nothing stored or mounted inside the head's clearance.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "ac7e6aa98d11",
+  "category": "Fire Protection",
+  "code": "VK430 7/16 FR 155 C PD",
+  "label": "Sprinkler head on drop \u2014 FP-1 Description column verbatim 'VK430 7/16 FR 155 C PD'; Thread column 1/2\", K-Factor column 4.3; head 2 of 3",
+  "where": "Living / sofa area; 1-1/4\" branch @ elev 12-8, drop tag 'Drop 0-3'",
+  "qtyMax": 1,
+  "src": "FP-1 head schedule + rm 108 KING STUDIO room region read head-by-head at 700-800 dpi \u00b7 A120 General Note I",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Same trim check as head 1 \u2014 record concealed vs semi-recessed and the plate finish; plate seated, square and unpainted, gasket line clean to the ceiling, no ceiling texture run over it.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "55dc1715c341",
+  "category": "Fire Protection",
+  "code": "VK430 7/16 FR 155 C PD",
+  "label": "Sprinkler head on drop \u2014 FP-1 Description column verbatim 'VK430 7/16 FR 155 C PD'; Thread column 1/2\", K-Factor column 4.3; head 3 of 3",
+  "where": "Entry / kitchenette leg, OUTSIDE the bath wall; 1-1/4\" branch @ elev 10-8, drop tag 'Drop 0-3'",
+  "qtyMax": 1,
+  "src": "FP-1 head schedule + rm 108 KING STUDIO room region read head-by-head at 700-800 dpi \u00b7 A550 view 02 (two ceiling planes, 8'-3 3/8\" main room and 7'-3\" entry/bath) \u00b7 A120 General Note I",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Confirm head 3 is in the entry/kitchenette leg and NOT inside the bath; same trim, seating and no-paint checks as heads 1 and 2.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "22372a0f587e",
+  "category": "Fire Protection",
+  "code": "\u2297 SCWLED (kn 43)",
+  "label": "Ceiling strobes \u2014 2 in the room @ 177 cd + 1 in the bath @ 15 cd. COMMUNICATION-FEATURES (HEARING-ACCESSIBLE) KEYS ONLY. The BATH device's TYPE IS CONTESTED: FA-1 schedules System Sensor SCWLED 'STROBE ONLY, CEILING'; A550 kn43 calls for an 'ADDITIONAL HORN STROBE'.",
+  "where": "Bed area and living area ceilings, plus the bath ceiling (the bath unit is drawn with the EOL resistor symbol on FA-3)",
+  "qtyMax": 3,
+  "src": "FA-1 schedule row SCWLED (System Sensor, STROBE ONLY CEILING, qty 80, 'LOCATE ON CEILING, 4\"x4\"x1.5\"') \u00b7 FA-3 rooms 309 and 313 read at 450-500 dpi (2 x 177 cd + 1 x 15 cd bath) \u00b7 A550 view 04 kn43 PLACED ('ADDITIONAL HORN STROBE: LOCATED IN COMMUNICATION FEATURES BATHROOMS ONLY') AGAINST FA-1 row SCWLED 'STROBE ONLY, CEILING' and FA-1 row PC2WLED 'HORN STROBE, CEILING' (qty 14, not drawn in a guest bath on FA-3) \u00b7 A100 Guestroom Matrix floor-1 'King Studio, HI - 1 T' \u00b7 G001 Unit Mix 'King Studio, HI, CD - 1' \u00b7 E103 load analysis rows 2 and 6 \u00b7 conflicts.md A11 \u00b7 coordination_issues C-04",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Record strobes PRESENT/ABSENT, HOW MANY, WHERE, and the CANDELA marking on each lens (expect 177 cd in the room and 15 cd in the bath if they are here at all); at the BATH unit read the model off the plate and record STROBE-ONLY vs HORN-STROBE, and put it in test \u2014 if it is strobe-only it matches FA-1 and not A550 kn43, which is the finding to log, not to write up \u2014 and while you are in 104 also record TUB vs SHOWER and whether a kn28 doorbell switch exists. The King Studio that comes back with 3 strobes IS the floor-1 communication-features key, and that room number exists nowhere in the document set yet. Expect ZERO in 104; absence is not a defect.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "c93e819f19c0",
+  "category": "Fire Protection",
+  "code": "(S)SB",
+  "label": "Addressable photoelectric smoke detector on a LOW-FREQUENCY sounder base \u2014 Silent Knight SKPHOTOW head in a System Sensor B200S-LF-WH 520 Hz sounder base, ceiling mounted. This base is the audible appliance for a sleeping room; a corridor horn does not satisfy it",
+  "where": "Room ceiling near the entry / sleeping boundary \u2014 A555 view 06 (entry door / mirror wall) draws the SD symbol; not in the bath",
+  "qtyMax": 1,
+  "src": "FA-1 schedule row (S)SB \u2014 121 SKPHOTOW + 121 B200S-LF-WH; FA-1 scope of work and audibility chart; FA-2/FA-3 verified on 303/305/307/311 and 304/306/308 (other room types); E501-E504 + E400; A555 view 06 (SD symbol, keynote 16); E500 FA notes 10 and 17; packages/fire-appliance.md \u00a72.4",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "With the FA vendor: alarm the head and confirm the 520 Hz sounder base sounds IN this room and meters at least 75 dBA at the pillow, and that the FACP annunciates room 101; read back both addresses; confirm any exposed FA plate is painted RED.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "fdb3a65a7b2c",
+  "category": "Fire Protection",
+  "code": "CO",
+  "label": "CONFIRM ABSENT - carbon monoxide detector. Silent Knight SKFIRECOW is scheduled qty 3 for the whole building and none is placed in a guest room",
+  "where": "Guest-room ceiling \u2014 expected absent",
+  "qtyMax": 1,
+  "src": "FA-1 schedule (CO / Silent Knight SKFIRECOW / qty 3, whole building, 'locate as shown on ceiling'); E500 CO detail (places none in a guest room); A550/A555 POWER & SIGNAL LEGEND (no CO symbol)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Confirm there is NO CO detector on the guest-room ceiling and note it on the sheet; if one IS installed, photograph it and log it \u2014 it is not scheduled to a room.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "d6db53c5d050",
+  "category": "Fire Protection",
+  "code": "H",
+  "label": "Fire horn (standard rooms) / horn-strobe (communication-features rooms) \u2014 record PRESENT or ABSENT",
+  "where": "Room ceiling or wall beside the smoke detector \u2014 A555 view 06 draws SD and H symbols together and carries keynote 16",
+  "qtyMax": 1,
+  "src": "A555 keynote 16 + view 06 (H symbol drawn); A550 legend keynote 16 and keynote 43; A550/A555 POWER & SIGNAL LEGEND; E101 symbol legend (horn/strobe 6'-8\" AFF); E501-E504; FA-1 audibility chart and device schedule; against FA-2/FA-3 (no horn in a standard key)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Record whether a horn or horn-strobe exists SEPARATE from the smoke detector \u2014 yes or no, with a photo of the ceiling and the wall above the door; if one is present, measure to it and record the mounting height.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "8031be4a8019",
+  "category": "Fire Protection",
+  "code": "\u25c9 VK430 7/16 FR 155 C PD / \u2297 VK462 1/2 QR 155 B CC (BOTH FP-1 rows \u2014 neither read for this room)",
+  "label": "Viking sprinkler heads on drop \u2014 guest-room heads, ceiling AND/OR side-wall",
+  "where": "Guest-room ceilings AND walls \u2014 the A550/A555 POWER & SIGNAL LEGEND prints THREE sprinkler symbols ('SIDE WALL SPRINKLER HEAD', 'SPRINKLER HEAD', 'SIDE WALL SPRINKLER HEAD (D)'), so heads may be wall-mounted. Expect bed/window area, living/sofa area and entry/kitchenette leg; NOT in the bathroom (no head is drawn in either verified room's bath)",
+  "qtyMax": 1,
+  "src": "FP-1 head schedule, both rows (\u25c9 62/437 VK430 7/16 FR 155 C PD K=4.3; \u2297 73/101 VK462 1/2 QR 155 B CC K=5.6; 144 total heads 1st floor); FP-1 design notes block; A550/A555 POWER & SIGNAL LEGEND (three sprinkler symbols); A120/A121 General Note I; conflicts.md B5.3; packages/fire-appliance.md \u00a71.3/\u00a71.4",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "COUNT every head in the room \u2014 CEILING AND WALL \u2014 and write the number and the type of each down; read the model string off each head or its cover plate and record it (expect VK430 or VK462, do not assume); record flush cover plate or escutcheon-with-deflector; confirm NONE in the bath and photograph the bath ceiling.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "eab0fb6887f2",
+  "category": "Fire Protection",
+  "code": "",
+  "label": "Guest bathroom \u2014 NO sprinkler head drawn (zero-quantity confirm line)",
+  "where": "Guest-bath ceiling, 7'-3\" AFF",
+  "qtyMax": 1,
+  "src": "packages/fire-appliance.md \u00a71.3 (FP-1 room regions 107 and 108 read at 700\u2013800 dpi, no head drawn in either bathroom) \u00b7 conflicts.md B5.3 (OPEN) \u00b7 A530 general note B \u00b7 coordination_issues R-05",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Look up in the bath and expect nothing; if a head IS installed, photograph it, read and record the model off the plate or deflector, and flag it for the as-built and the 13-vs-13R question.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "13949f865c4b",
+  "category": "Fire Protection",
+  "code": "",
+  "label": "Sprinkler head in the guest BATHROOM \u2014 none drawn (observation, not a ruling)",
+  "where": "Bath ceiling, 7'-3\" AFF PT-07 (A552 view 02).",
+  "qtyMax": 1,
+  "src": "FP-1 room regions 107 and 108 read at 700\u2013800 dpi \u2014 no head drawn in either bathroom; 118's bath NOT read \u00b7 A530 General Note B \u00b7 conflicts.md B5.3",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look up in the bath and record 'head present' or 'no head drawn and none found'. If a head IS installed: photograph it, read the model off the plate, and flag it \u2014 it is not on FP-1 as read, so it belongs on the as-built and in the hydraulic record. Write 'no head drawn', NOT 'no head required' \u2014 the governing standard is itself open. Remove nothing and cap nothing.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "1f7a8efa930d",
+  "category": "Fire Protection",
+  "code": "(S)SB",
+  "label": "Addressable photoelectric smoke detector on a LOW-FREQUENCY sounder base \u2014 Silent Knight SKPHOTOW head in a System Sensor B200S-LF-WH 520 Hz sounder base, ceiling mounted. This base is the audible appliance for a sleeping room; a corridor horn does not satisfy it",
+  "where": "Guest-room ceiling near the entry / sleeping boundary; A555 elevation 06 draws the SD symbol beside the H symbol. Not in the bath, not in the entry/kitchenette leg",
+  "qtyMax": 1,
+  "src": "FA-1 Fire Alarm Equipment Schedule row (S)SB, qty 121/121 \u00b7 FA-1 audibility chart (\"SLEEPING ROOMS \u2014 ambient 35 dBA, design 75 dBA, low frequency, visual required\") \u00b7 FA-2 (first-floor plan) / FA-3 layout verified on QQ rooms 303/305/307/311 \u00b7 A555 view 04 and elevation 06 SD symbol \u00b7 E500 FA Note 17 (verbatim) \u00b7 E500 FA Note 10",
+  "reliability": "HIGH",
+  "verifyAtPunch": "With the FA vendor in test, alarm this head and confirm three things: the LOW-FREQUENCY base sounds IN THIS ROOM, a meter reads at least 75 dBA at the pillow line, and the panel annunciates room 105 by number.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "bbe91e26abb4",
+  "category": "Fire Protection",
+  "code": "(S)SB",
+  "label": "Addressable photoelectric smoke detector on a LOW-FREQUENCY sounder base \u2014 Silent Knight SKPHOTOW head in a System Sensor B200S-LF-WH 520 Hz sounder base, ceiling mounted. This base is the audible appliance for a sleeping room; a corridor horn does not satisfy it",
+  "where": "Guest-room ceiling near the entry / sleeping boundary; A552 view 04 draws the SD. NOT in the bath and not in the entry/kitchenette leg.",
+  "qtyMax": 1,
+  "src": "FA-1 Fire Alarm Equipment Schedule row (S)SB \u2014 SYSTEM SENSOR B200S-LF-WH smoke det. LF sounder base + SILENT KNIGHT SKPHOTOW addr. photo. smoke det., qty 121 / 121, 'LOCATE AS SHOWN ON CEILING' (Security Integrated Inc, Hilton A/D&C REVIEWED 04/29/2025) \u00b7 FA-1 audibility chart (sleeping rooms: ambient 35 dBA, design 75 dBA, low frequency, visual required) \u00b7 E500 FA Note 17 (verbatim: 'Audible notification appliances 15 dBA above average ambient sound level') \u00b7 E500 FA Note 10 (FA JBs and cover plates painted red) \u00b7 FA-2 first-floor plan \u00b7 A552 view 04 \u00b7 A550 POWER & SIGNAL LEGEND (SD)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Put the system in test. Confirm the head alarms and the LOW-FREQUENCY base sounds IN THE ROOM; take a sound reading at the pillow position and record it against FA-1's 75 dBA design figure (not against the 50 dBA that E500 note 17 computes to \u2014 75 is the more onerous and is what FA-1 designs). Confirm the FACP annunciates room 118, and read back and record BOTH the SLC address (L#-D-##) and the NAC circuit (PS#-#-#). Confirm any exposed FA box or cover plate in the room is painted RED (E500 FA note 10).",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "ea81e427914e",
+  "category": "Fire Protection",
+  "code": "CO",
+  "label": "CONFIRM ABSENT - carbon monoxide detector. Silent Knight SKFIRECOW is scheduled qty 3 for the whole building and none is placed in a guest room",
+  "where": "n/a in the guest room \u2014 FA-1's 3 SKFIRECOW units are noted \"LOCATE AS SHOWN ON CEILING\" and their locations are not extracted",
+  "qtyMax": 1,
+  "src": "FA-1 Fire Alarm Equipment Schedule (CO / Silent Knight SKFIRECOW / qty 3 building-wide) \u00b7 E500 (CO detail present, none placed in a guest room) \u00b7 A550\u2013A556 POWER & SIGNAL LEGEND (no CO symbol) \u00b7 fire-alarm conflict FA-8",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Confirm there is no CO detector on the guest-room ceiling; if one IS installed, photograph it and log it \u2014 it is not scheduled to a guest room and it needs an address and an as-built line.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "6f4ab24a0a8a",
+  "category": "Fire Protection",
+  "code": "CO",
+  "label": "CONFIRM ABSENT - carbon monoxide detector. Silent Knight SKFIRECOW is scheduled qty 3 for the whole building and none is placed in a guest room",
+  "where": "n/a in the guest room. FA-1's 3 units are 'LOCATE AS SHOWN ON CEILING' and their locations are not extracted.",
+  "qtyMax": 1,
+  "src": "FA-1 Fire Alarm Equipment Schedule (CO / SKFIRECOW / qty 3 for the whole 4-storey 115-key building) \u00b7 E500 CO detail (places none in a guest room) \u00b7 A550\u2013A556 POWER & SIGNAL LEGEND (no CO symbol) \u00b7 fire-alarm conflict FA-8",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look at the room and bath ceilings and record 'no CO detector found'. If one IS installed: photograph it, read the model off the plate, and log it \u2014 it is not scheduled to any guest room and it needs an address on the FACP and a line on the as-built. Do not remove it.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "da2f166f18e5",
+  "category": "Fire Protection",
+  "code": "H",
+  "label": "Fire horn (kn16 \u2014 'FIRE HORN IN STANDARD ROOMS / FIRE HORN/STROBE IN COMMUNICATION FEATURES ROOMS'; 118 is NOT a communication-features room, so this reads as a HORN). If a ceiling horn/strobe IS present, the FA-1 ceiling product is System Sensor PC2WLED",
+  "where": "Guest-room ceiling or wall beside the smoke detector \u2014 A550 view 04 draws the (H) 10\" from the SD. Mounting contested: E101 legend 6'-8\" AFF vs FA-1's ceiling-mounted 4\"x4\"x1.5\" units.",
+  "qtyMax": 1,
+  "src": "A552 view 04 kn16 (PLACED) \u00b7 A550 keynote legend kn16 verbatim \u00b7 A550 POWER & SIGNAL LEGEND 'ALARM HORN AND STROBE (H)' \u00b7 FA-1 row (X)(triangle) SYSTEM SENSOR PC2WLED, HORN STROBE, CEILING, qty 14, 'LOCATE ON CEILING, 4\"x4\"x1.5\"' \u00b7 E101 symbol legend (combination horn/strobe 6'-8\" AFF \u2014 conflicts with FA-1's ceiling mounting) \u00b7 E501-E504 (notification per guestroom) \u00b7 AGAINST: FA-2 / FA-3 draw NO horn and NO strobe in a standard key (verified on 303/305/307/311 and 304/306/308)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Is there a horn or horn/strobe SEPARATE from the smoke detector \u2014 yes or no? Photograph the ceiling and the wall beside the SD either way. If present: read the model off the plate and record it against System Sensor PC2WLED; record horn-only vs horn+strobe; record whether it is ceiling-mounted (FA-1) or wall-mounted at 6'-8\" (E101 legend) \u2014 those two sheets disagree; confirm the cover is on and unpainted, and that it sounds on a system test.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "ba43a7e1c2ca",
+  "category": "Fire Protection",
+  "code": "H",
+  "label": "Fire horn (standard rooms) / fire horn-strobe (communication-features rooms) \u2014 A555 keyed note 16",
+  "where": "Guest-room wall or ceiling beside the smoke detector \u2014 A555 elevation 06 (entry door / full-length mirror wall) draws the SD and H symbols together; E101 legend mounts a combination horn/strobe at 6'-8\" AFF while FA-1 schedules its notification appliances as CEILING units 4\"x4\"x1.5\"",
+  "qtyMax": 1,
+  "src": "FOR: A555 keynote 16 placed on views 04/04.1 and drawn on elevation 06 (verbatim text from the A550 shared legend) \u00b7 A550 POWER & SIGNAL LEGEND \"ALARM HORN AND STROBE (H)\" \u00b7 E501\u2013E504 \u00b7 E101 symbol legend (combination horn/strobe 6'-8\" AFF) \u2014 AGAINST: FA-2 / FA-3 (no horn, no strobe in a standard key) \u00b7 FA-1 audibility chart (\"visual required\" in sleeping rooms) \u00b7 packages/electrical.md \u00a77",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Write down PRESENT or ABSENT \u2014 is there a horn or horn-strobe SEPARATE from the smoke detector? If present, record horn-only or horn+strobe, whether it is wall or ceiling mounted, its measured height, and sound it in the vendor's test.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "23284057ee38",
+  "category": "Fire Protection",
+  "code": "SCWLED",
+  "label": "Ceiling strobes (System Sensor SCWLED) \u2014 communication-features rooms only; ZERO in room 105 (zero-quantity confirm line)",
+  "where": "Would be 2 x 177 cd in the room and 1 x 15 cd in the bath, if this were a hearing-accessible key",
+  "qtyMax": 1,
+  "src": "A100 Guestroom Matrix floor-1 column (\"Queen Queen | 6 S\"; \"Queen Queen, HI\" blank; \"King Studio, HI | 1 T\") \u00b7 FA-1 schedule row \u2297 SCWLED \u00b7 FA-3 verified on QQ rooms 309 and 313 \u00b7 A550 keynote 43 \u00b7 coordination_issues C-04 \u00b7 placeholder PH-GU-002",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Confirm there are NO ceiling strobes in the room or the bath and no blanked-off strobe box; if any strobe IS found, record the candela marking off its lens and flag it.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "b7d85421d631",
+  "category": "Fire Protection",
+  "code": "VK430 7/16 FR 155 C PD",
+  "label": "Sprinkler head on drop, head 1 of 3 \u2014 FP-1 prints the description exactly as \"VK430 7/16 FR 155 C PD\"; K-factor 4.3 and 1/2\" thread are printed schedule columns; bed / window area",
+  "where": "Bed / window area ceiling (8'-3 3/8\" main-room plane); branch 1-1/4\" at elevation 12-8, drop tag \"Drop 0-3\"",
+  "qtyMax": 1,
+  "src": "packages/fire-appliance.md \u00a71.1 FP-1 Sprinkler Head Schedule (verbatim columns and description string; symbol \u25c9, note ON DROP) \u00b7 \u00a71.3 room 107 read head-by-head \u00b7 A120 / A121 General Note I \u00b7 flag FS-3 \u00b7 A530 general note B (emergency devices located per local code, design intent only)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Confirm the head is seated square in its ceiling opening and the plate or escutcheon carries NO paint, texture or drywall mud, and write down which trim it is \u2014 flush cover plate, or escutcheon with a visible deflector (A120/A121 GN I calls for semi-recessed outside public areas).",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "3fa5638de633",
+  "category": "Fire Protection",
+  "code": "VK430 7/16 FR 155 C PD",
+  "label": "Sprinkler head on drop, head 2 of 3 \u2014 description as printed on FP-1; K=4.3, 1/2\" thread (printed schedule columns); living / sofa area",
+  "where": "Living / sofa area ceiling (8'-3 3/8\" plane); branch 1-1/4\" at elevation 12-8, drop tag \"Drop 0-3\"",
+  "qtyMax": 1,
+  "src": "packages/fire-appliance.md \u00a71.1 FP-1 head schedule (symbol \u25c9, verbatim description) \u00b7 \u00a71.3 room 107 (Queen-Queen, floor 1) read head-by-head \u00b7 flag FS-3",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Confirm nothing is hung, stored or fixed inside the head's clearance zone and the plate carries no paint or texture; if the ceiling has been touched up, photograph the head.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "00ec01be6ae1",
+  "category": "Fire Protection",
+  "code": "VK430 7/16 FR 155 C PD",
+  "label": "Sprinkler head on drop, head 3 of 3 \u2014 description as printed on FP-1; K=4.3, 1/2\" thread (printed schedule columns); entry / kitchenette leg",
+  "where": "Entry / kitchenette leg, OUTSIDE the bath wall, in the low 7'-3\" ceiling plane; branch 1-1/4\" at elevation 10-8, drop tag \"Drop 0-3\"",
+  "qtyMax": 1,
+  "src": "packages/fire-appliance.md \u00a71.1 FP-1 head schedule (symbol \u25c9) \u00b7 \u00a71.3 room 107 read head-by-head \u00b7 A555 view 02 ceiling heights (8'-3 3/8\" main room, 7'-3\" bath and entry) \u00b7 flag FS-3",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Confirm this head is in the entry/kitchenette leg and NOT inside the bath, that the plate is seated and unpainted, and record its trim type with the other two.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "b0f014792eb7",
+  "category": "Fire Protection",
+  "code": "\u2297 SCWLED",
+  "label": "Visual notification strobes, System Sensor SCWLED (2 @ 177 cd in the room + 1 @ 15 cd in the bath) \u2014 communication-features rooms ONLY. EXPECT ZERO IN 118.",
+  "where": "n/a in 118 \u2014 ceiling of the room and bath in a hearing-accessible key.",
+  "qtyMax": 1,
+  "src": "FA-1 schedule row \u2297 SCWLED, qty 80 \u00b7 FA-3 rooms 309 and 313 (2 x 177 cd + 1 x 15 cd bath) \u00b7 A100 Guestroom Matrix (floor 1: King Studio HI = 1, Queen Queen HI = 0) \u00b7 G001 Unit Mix \u00b7 A550 kn43 (NOT in A552's placed list) \u00b7 coordination_issues C-04 / PH-GU-002",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Confirm there are NO strobes in the room and NO strobe in the bath, and that there is no orphan blank plate, capped box or ring left behind in either ceiling. If strobes ARE installed in 118, that is the finding \u2014 photograph each, read the model off the plate, record the candela marking, and log it, because it contradicts both unit matrices.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "cc24ad011979",
+  "category": "Fire Protection",
+  "code": "\u25c9 VK430 \u2014 ASSUMED, FP-1 was NOT read for room 118",
+  "label": "Guest-room sprinkler heads \u2014 expected Viking 'VK430 7/16 FR 155 C PD' on drop, K=4.3, 1/2\" thread. COUNT NOT VERIFIED FOR 118 \u2014 COUNT THEM.",
+  "where": "Guest-room ceilings \u2014 A552 view 02 gives two ceiling planes, 8'-3 3/8\" main room and 7'-3\" entry/bath, both PT-07. FP-1's verified rooms show branches at elev 12-8 and 10-8 with drop tag 'Drop 0-3', which tracks those two planes.",
+  "qtyMax": 1,
+  "src": "FP-1 Fire Sprinkler Shop Drawings (Texas Fire Services LLC SCR-G-2398977, reviewed Rodney Jackson 03-26-2025, stamped CITY OF EAGLE PASS FIRE DEPARTMENT) \u2014 head schedule row \u25c9, 62 first floor / 437 all floors \u00b7 A120\u2013A123 General Note I \u00b7 A530 General Note B \u00b7 FA-0",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "COUNT the heads in the room and write the number down \u2014 leave the printed quantity blank; there is no verified count for 118. For each head record: flush cover plate (concealed) or escutcheon with a visible deflector (semi-recessed), and the finish. Confirm NO paint, texture or drywall mud on any cover plate, deflector or fusible element \u2014 scrape-test nothing, photograph anything suspect. Confirm no head is struck, bent or weeping and that nothing (FF&E, drapery track, the ceiling divider) sits inside its clearance. Read the model off the head or plate where legible and record it against 'VK430 7/16 FR 155 C PD'; do not carry a temperature rating or finish onto a purchase document off this row.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ }
+]

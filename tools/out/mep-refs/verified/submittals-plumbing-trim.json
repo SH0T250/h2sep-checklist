@@ -1,0 +1,58 @@
+[
+ {
+  "kind": "submittal",
+  "title": "NOT APPROVED — Moen M·Dura 9417F12 / 9419F12 single-handle lavatory faucet (S4 substitution; P104 schedules Delta 581LF-GPM-PP)",
+  "driveId": "1cJVzmAEPWJPpKAN9Gm9GemcC1ktzPhdE",
+  "note": "S4 product data, 'Moen Bathroom Vanity Faucet.pdf'. Cutsheet read 2026-08-14: M·Dura single-handle LAVATORY faucet, models 9417F12 (without drain) / 9419F12 (all metal), 1.2 gpm max at 60 psi, 1255 Duralast cartridge, ADA lever, designed for a SINGLE 1-1/4in hole. P104 REMARKS on rows L-3 / L-4 schedule a Delta 581LF-GPM-PP at 1.0 GPM 'less 3-hole escutcheon' instead. Nothing supersedes P104, so the Delta is the row of record and this document is the substitution to reject on sight.",
+  "evidence": "Drive file text: 'M•Dura™ Single-Handle Lavatory Faucet ... 9417F12 1.2 Without X 9419F12 1.2 All Metal X ... 1.2 gpm max (4.5L/min) at 60 psi ... ADA for lever handle'",
+  "itemIds": [
+   "fe528f002e3e",
+   "cfa393435f6c",
+   "c527692240cc",
+   "a141d66a3655",
+   "1effded5cff2",
+   "e1b51b595feb"
+  ]
+ },
+ {
+  "kind": "submittal",
+  "title": "NOT APPROVED — American Standard Studio undercounter lavatory 0614.000 / 0614.300 / 0618.000 (S4 substitution; P104 schedules Decolav Callensia 1402-CWH)",
+  "driveId": "14O35Dqt2gqUH5QPf51dPY_p5YqmNMf4e",
+  "note": "S4 product data, 'American Standard Bathroom Vanity Sink.pdf'. Cutsheet read 2026-08-14: Studio undercounter vitreous-china sinks, 0614.000 unglazed rim / 0614.300 glazed underside (19-3/4in x 13-3/4in) and 0618.000 (23-5/8in x 16-5/8in), front overflow, ADA at 34in to rim. P104 rows L-3 / L-4 schedule a Decolav Callensia 1402-CWH. Nothing supersedes P104. Rim size differs between the two 0614 variants and the 0618 — if a substitution is ever approved, the countertop cutout is not interchangeable.",
+  "evidence": "Drive file text: 'Studio® Under Counter Sinks VITREOUS CHINA ... 0614.000 Unglazed Rim ... 0614.300 Glazed underside ... 0618.000 Unglazed Rim'",
+  "itemIds": [
+   "fe528f002e3e",
+   "cfa393435f6c",
+   "fe6bb4283bfa",
+   "034e2f755f65",
+   "00c633b408bf",
+   "19785b9d3e03"
+  ]
+ },
+ {
+  "kind": "submittal",
+  "title": "American Standard PEKOE 23x18 single-bowl stainless undermount sink 18SB.10231800.075 — kitchenette / wet bar (SK-3 / SK-4)",
+  "driveId": "17ckGAqG7vHvhjZmr2Xu9OXuZthF-fgVc",
+  "note": "S4 product data, 'American Standard Kitchenette Sink.pdf'. Cutsheet read 2026-08-14 and the model matches the punch line exactly: PEKOE 23 x 18 single-bowl 18-gauge stainless, 18SB.10231800.075, extra-deep 10in bowl, undermount, needs a 26in cabinet, ships with bottom grid 7302282-401.0750A and waste fitting 9028000.075. P104 schedules NO product against SK-3 or SK-4, so this cutsheet IS the specification of record for the kitchenette sink — check the 26in cabinet requirement against what was actually built.",
+  "evidence": "Drive file text: 'PEKOE® 23 x 18 SINGLE BOWL STAINLESS STEEL KITCHEN SINK ... 18SB.10231800.075 ... 26\" (660mm) cabinet required'",
+  "itemIds": [
+   "2bf216d1bf9e",
+   "76c7a39e2de0",
+   "b354ca084166",
+   "f63ee9599a5a"
+  ]
+ },
+ {
+  "kind": "submittal",
+  "title": "Moen M·Dura 8227 two-handle 8in widespread faucet — kitchenette / wet bar (SK-3 / SK-4)",
+  "driveId": "12hxybuB0ibfs__1X5RgmrwVvyXAV90Db",
+  "note": "S4 product data, 'Moen Kitchenette Faucet.pdf'. Cutsheet read 2026-08-14; model 8227 matches the punch line exactly. HEADS UP FOR THE WALKER: the cutsheet titles itself 'M-DURA Two-Handle LAVATORY Faucet with Spout' — that is Moen's own product-line naming, not a filing error. It is the faucet procured for the kitchenette sink. 1.5 gpm aerator, 8in widespread, THREE holes at 1-9/32in minimum — the kitchenette deck has to be drilled for three, not one. P104 schedules no faucet against SK-3 / SK-4, so this cutsheet is the specification of record.",
+  "evidence": "Drive file text: 'M-DURA™ Two-Handle Lavatory Faucet with Spout ... Model: 8227 ... 1/2\" 8\" widespread IPS connections ... Aerator is limited to 1.5 gpm ... Designed to be installed through 3 holes'",
+  "itemIds": [
+   "2bf216d1bf9e",
+   "76c7a39e2de0",
+   "b354ca084166",
+   "f63ee9599a5a"
+  ]
+ }
+]
