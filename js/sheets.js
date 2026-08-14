@@ -88,7 +88,9 @@ export function refPopup(ref) {
         </div>`}
       <div class="pop-foot">
         <span class="pop-hint">${isPlan
-          ? (ref.sheetId ? 'Snippet from sheet ' + esc(ref.sheetId) + ' — stored on this phone.' : 'Plan snippet — stored on this phone.')
+          ? (ref.snippet
+              ? (ref.sheetId ? 'Snippet from sheet ' + esc(ref.sheetId) + ' — stored on this phone.' : 'Plan snippet — stored on this phone.')
+              : 'No snippet published yet.')
           : 'Preview needs signal &amp; Drive access. If it doesn’t load —'}</span>
         ${driveHref ? `<a class="btn primary" href="${driveHref}" target="_blank" rel="noopener">Open in Drive ↗</a>` : ''}
       </div>

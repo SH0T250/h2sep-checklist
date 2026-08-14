@@ -1,0 +1,266 @@
+{
+ "matches": [],
+ "gaps": [
+  {
+   "room": "139",
+   "code": "432",
+   "why": "ICE DISPENSER (139) — no ice-machine submittal on Drive; outside both Clevenger schemes (their scope is Food Prep / Dry Storage / Servery), and P501's \"ice box\" detail is plumbing rough-in only, not an equipment spec."
+  },
+  {
+   "room": "004",
+   "code": "303",
+   "why": "SAFE (004) — owner/operator equipment; no document on Drive."
+  },
+  {
+   "room": "013",
+   "code": "304",
+   "why": "LOCKER (013) — accessible-locker compliance noted on A510.3; no submittal on Drive."
+  },
+  {
+   "room": "011",
+   "code": "300",
+   "why": "SHELVING (011) — no document."
+  },
+  {
+   "room": "017",
+   "code": "404",
+   "why": "STORAGE SHELVING (017) — no document."
+  },
+  {
+   "room": "020",
+   "code": "403",
+   "why": "WALL MOUNTED TELEVISION (020) — no TV submittal on Drive."
+  },
+  {
+   "room": "014",
+   "code": "431",
+   "why": "WALL-MOUNTED TV (014) — none."
+  },
+  {
+   "room": "023",
+   "code": "813",
+   "why": "WALL MOUNTED TELEVISION (023) — none."
+  },
+  {
+   "room": "020",
+   "code": "820",
+   "why": "HYDRATION STATION (020) — plumbing-adjacent; no cutsheet on Drive."
+  },
+  {
+   "room": "137",
+   "code": "821",
+   "why": "BOTTLE FILLING STATION (137) — none."
+  },
+  {
+   "room": "ZONE-A",
+   "code": "400",
+   "why": "FIRE PIT WITH FITTED SCREEN (ZONE-A) — not in the brand OF index; no cutsheet on Drive."
+  },
+  {
+   "room": "014",
+   "code": "408",
+   "why": "DECORATIVE TRASH CAN (014/024) — brand PA-804 Trash & Recycling card exists for 006; these BOH cans have no document."
+  },
+  {
+   "room": "024",
+   "code": "408",
+   "why": "DECORATIVE TRASH CAN (014/024) — brand PA-804 Trash & Recycling card exists for 006; these BOH cans have no document."
+  },
+  {
+   "room": "023",
+   "code": "803",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply."
+  },
+  {
+   "room": "023",
+   "code": "804",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply."
+  },
+  {
+   "room": "023",
+   "code": "805",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply."
+  },
+  {
+   "room": "023",
+   "code": "806",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply."
+  },
+  {
+   "room": "023",
+   "code": "807",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply."
+  },
+  {
+   "room": "023",
+   "code": "808",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply."
+  },
+  {
+   "room": "023",
+   "code": "809",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply."
+  },
+  {
+   "room": "023",
+   "code": "810",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply."
+  },
+  {
+   "room": "023",
+   "code": "811",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply."
+  },
+  {
+   "room": "023",
+   "code": "812",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply."
+  },
+  {
+   "room": "023",
+   "code": "814",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply."
+  },
+  {
+   "room": "023",
+   "code": "816",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. Possible lead: the brand book indexes \"PA-506 Fitness Wall Hooks\" (added Jun-23) and ID-3.2 places PA-506 in Fitness, but the card body is an image page that could not be read — pull that page to confirm before ordering separately."
+  },
+  {
+   "room": "023",
+   "code": "817",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply."
+  },
+  {
+   "room": "023",
+   "code": "819",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply."
+  },
+  {
+   "room": "023",
+   "code": "800",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply. Possible lead: the brand PA-310 \"Towel Station @ Fitness\" card (Elkay Interior Systems, 72\"W×18\"D×64\"H) is specified \"to Accommodate Required Accessory Items: Laundry Basket\" — this hamper may be that basket rather than a separate buy. Confirm with RK."
+  },
+  {
+   "room": "023",
+   "code": "801",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply."
+  },
+  {
+   "room": "023",
+   "code": "802",
+   "why": "Fitness equipment/accessory (A510.3 furnishing list) — no fitness-equipment submittal on the Drive; A510.3 points at fitness.hilton.com approved vendors, i.e. an owner-direct package. Austin to supply."
+  },
+  {
+   "room": "019",
+   "code": "HD-01",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "020",
+   "code": "HD-01",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "027",
+   "code": "HD-01",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "019",
+   "code": "HD-06A",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "020",
+   "code": "HD-06A",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "027",
+   "code": "HD-06A",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "019",
+   "code": "HD-06B",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "020",
+   "code": "HD-06B",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "027",
+   "code": "HD-06B",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "019",
+   "code": "HD-06C",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "020",
+   "code": "HD-06C",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "027",
+   "code": "HD-06C",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "019",
+   "code": "HD-12",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "020",
+   "code": "HD-12",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "027",
+   "code": "HD-12",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "019",
+   "code": "HD-13",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "020",
+   "code": "HD-13",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "027",
+   "code": "HD-13",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "027",
+   "code": "HD-15",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "019",
+   "code": "HD-19",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "020",
+   "code": "HD-19",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  },
+  {
+   "room": "027",
+   "code": "HD-19",
+   "why": "Bath accessory per the A530 legend — manufacturer/model NOT on the drawings and no accessory submittal on Drive (Bobrick unconfirmed; research/bath-research.md). Austin to supply the accessory schedule."
+  }
+ ],
+ "cluster": "equipment-nodoc"
+}

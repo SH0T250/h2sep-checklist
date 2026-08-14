@@ -1,0 +1,765 @@
+{
+ "matches": [
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-100  Central Banquette - REQUIRED VENDOR/DESIGN' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Central Banquette - REQUIRED VENDOR/DESIGN",
+   "code": "PA-100"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-101  Dining Chair @ 2 Top Square Table' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Dining Chair @ 2 Top Square Table",
+   "code": "PA-101"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-102  Dining Chair @ Banquette' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Dining Chair @ Banquette",
+   "code": "PA-102"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-103  Lounge Chair @ Banquette' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Lounge Chair @ Banquette",
+   "code": "PA-103"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-104  High Back Lounge Chair' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: High Back Lounge Chair",
+   "code": "PA-104"
+  },
+  {
+   "room": "022",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-105  Focus Booth' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Focus Booth",
+   "code": "PA-105"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-106  Dining Chair @ 4 Top Table' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Dining Chair @ 4 Top Table",
+   "code": "PA-106"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-107  Counter Stool @ Perch Table' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Counter Stool @ Perch Table",
+   "code": "PA-107"
+  },
+  {
+   "room": "024",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-109  Counter Stool @ Laundry Room' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Counter Stool @ Laundry Room",
+   "code": "PA-109"
+  },
+  {
+   "room": "006",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-110  Employee Breakroom Chair' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Employee Breakroom Chair — Brand card is the Employee Breakroom chair; also tagged at Breakfast 006.",
+   "code": "PA-110"
+  },
+  {
+   "room": "014",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-110  Employee Breakroom Chair' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Employee Breakroom Chair — Brand card is the Employee Breakroom chair; also tagged at Breakfast 006.",
+   "code": "PA-110"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-111  Meeting Room Stack Chair' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Meeting Room Stack Chair — Brand card says Meeting Room Stack Chair; ID-1.7 tags it in the Lobby.",
+   "code": "PA-111"
+  },
+  {
+   "room": "121",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-204  Wall Sconce @ Guest Corridor' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Wall Sconce @ Guest Corridor Book names it a WALL sconce; verify against the drawn ceiling mount before install.",
+   "code": "PA-204"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-205  Pendant Lighting @ Reception' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Pendant Lighting @ Reception",
+   "code": "PA-205"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-300  Square 2 Top Dining Table' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Square 2 Top Dining Table",
+   "code": "PA-300"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-301  Round 2 Top Dining Table' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Round 2 Top Dining Table",
+   "code": "PA-301"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-302  Rectangular 4 Top Dining Table' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Rectangular 4 Top Dining Table",
+   "code": "PA-302"
+  },
+  {
+   "room": "005",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-302  Rectangular 4 Top Dining Table' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Rectangular 4 Top Dining Table",
+   "code": "PA-302"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-303  Tea Height Round Table @ High Back Lounge Chair' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Tea Height Round Table @ High Back Lounge Chair",
+   "code": "PA-303"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-304  Laptop Table' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Laptop Table",
+   "code": "PA-304"
+  },
+  {
+   "room": "022",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-306  Dining Table @ Booth' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Dining Table @ Booth",
+   "code": "PA-306"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-307  ADA Dining Table' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: ADA Dining Table",
+   "code": "PA-307"
+  },
+  {
+   "room": "006",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-309  Breakroom Dining Table @ Employee Breakroom' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Breakroom Dining Table @ Employee Breakroom — Brand card is the Employee Breakroom table; ID-1.7 also tags it at Breakfast.",
+   "code": "PA-309"
+  },
+  {
+   "room": "014",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-309  Breakroom Dining Table @ Employee Breakroom' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Breakroom Dining Table @ Employee Breakroom — Brand card is the Employee Breakroom table; ID-1.7 also tags it at Breakfast.",
+   "code": "PA-309"
+  },
+  {
+   "room": "023",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-311  Food Delivery Pick-Up Console' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Food Delivery Pick-Up Console — Brand card says Food Delivery Pick-Up Console; A510.3 places the tag at Fitness 023.",
+   "code": "PA-311"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-313  Meeting Room Training Table' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Meeting Room Training Table",
+   "code": "PA-313"
+  },
+  {
+   "room": "005",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-314  Retail Table - Large (Market Table)' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Retail Table - Large (Market Table)",
+   "code": "PA-314"
+  },
+  {
+   "room": "005",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-315  Retail Table - Small (Market Table)' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Retail Table - Small (Market Table)",
+   "code": "PA-315"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-316  Retail Display System' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Retail Display System",
+   "code": "PA-316"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-800  Perch Table' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Perch Table",
+   "code": "PA-800"
+  },
+  {
+   "room": "005",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-800  Perch Table' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Perch Table",
+   "code": "PA-800"
+  },
+  {
+   "room": "006",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-800  Perch Table' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Perch Table",
+   "code": "PA-800"
+  },
+  {
+   "room": "006",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-801  Reception Desk' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Reception Desk",
+   "code": "PA-801"
+  },
+  {
+   "room": "006",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-802  Breakfast Servery' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Breakfast Servery",
+   "code": "PA-802"
+  },
+  {
+   "room": "006",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-803  Coffee & Hydration Station' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Coffee & Hydration Station",
+   "code": "PA-803"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-503  Meeting Space Artwork' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Meeting Space Artwork Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "PA-503"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-505  Guest Engagement Wall Artwork' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Guest Engagement Wall Artwork Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "PA-505"
+  },
+  {
+   "room": "023",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-506  Fitness Wall Hooks' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Fitness Wall Hooks Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "PA-506"
+  },
+  {
+   "room": "006",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-804  Trash & Recycling' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Trash & Recycling Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "PA-804"
+  },
+  {
+   "room": "006",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-805  Guest Laundry Table' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Guest Laundry Table Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "PA-805"
+  },
+  {
+   "room": "018",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'PA-807  Three Bay Meeting Room Casework' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Three Bay Meeting Room Casework Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "PA-807"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-700  Bench Seating @ Outdoor Lounge' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Bench Seating @ Outdoor Lounge Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-700"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-701  Bench Seating @ Outdoor Lounge Firepit' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Bench Seating @ Outdoor Lounge Firepit Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-701"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-702  Arm Chair @ Outdoor Lounge' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Arm Chair @ Outdoor Lounge Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-702"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-703  Lounge Chair @ Outdoor Lounge Firepit' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Lounge Chair @ Outdoor Lounge Firepit Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-703"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-704  Ottoman @ Outdoor Lounge Firepit' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Ottoman @ Outdoor Lounge Firepit Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-704"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-705  2 Top Table @ Outdoor Lounge & Grilling Patio' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: 2 Top Table @ Outdoor Lounge & Grilling Patio Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-705"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-705  2 Top Table @ Outdoor Lounge & Grilling Patio' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: 2 Top Table @ Outdoor Lounge & Grilling Patio Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-705"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-706  Food Prep Table @ Grilling Patio' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Food Prep Table @ Grilling Patio Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-706"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-707  Cocktail Table @ Outdoor Lounge' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Cocktail Table @ Outdoor Lounge Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-707"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-708  Lounge Chair @ Outdoor Lounge' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Lounge Chair @ Outdoor Lounge Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-708"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-709  Round Side Table @ Outdoor Lounge' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Round Side Table @ Outdoor Lounge Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-709"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-710  Counter Stool @ Grilling Patio' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Counter Stool @ Grilling Patio Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-710"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-711  Dining Chair @ Outdoor Lounge, Grilling Patio, & Pool' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Dining Chair @ Outdoor Lounge, Grilling Patio, & Pool Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-711"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-711  Dining Chair @ Outdoor Lounge, Grilling Patio, & Pool' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Dining Chair @ Outdoor Lounge, Grilling Patio, & Pool Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-711"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-712  Counter Height Table @ Grilling Patio' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Counter Height Table @ Grilling Patio Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-712"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-713  Chaise Lounge @ Pool' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Chaise Lounge @ Pool Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-713"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-714  Round Side Table @ Pool' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Round Side Table @ Pool Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-714"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-715  Round 2 Top Table @ Pool' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Round 2 Top Table @ Pool Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-715"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-716  Planter' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Planter Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-716"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-718  Bench Seating @ Grilling Patio' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: Bench Seating @ Grilling Patio Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-718"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "submittal",
+   "evidence": "Spec book index lists 'OF-719  4 Top ADA Dining Table' (Dynamic-Scheme B, Public Area); tag and product family match the plan tag placement.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "note": "Brand spec book identifies this tag: 4 Top ADA Dining Table Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "code": "OF-719"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "submittal",
+   "evidence": "Spec book index carries a dedicated 'OF-705-ADA ADA Table @ Grilling Patio' line (distinct from OF-705); tag printed on ID-1.7.",
+   "note": "Brand book index: \"OF-705-ADA  ADA Table @ Grilling Patio\" — its own line item, not a variant of the OF-705 \"2 Top Table\" card. Spec CARD (vendor/dims/finish) not independently re-verified — Drive text export degrades past PA-315; pull the PDF page before a PO.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "OF-705.ADA"
+  },
+  {
+   "room": "019",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-202 Bathroom Vanity Light' / 'PA-502 Bathroom Mirror'; catalog label at this room is the mirror — exact swap documented.",
+   "note": "TAG COLLISION — RK sheets use PA-202 as the DECORATIVE MIRROR above the restroom vanity (ID-3.4); the brand spec book card PA-202 is 'Bathroom Vanity Light' and PA-502 is 'Bathroom Mirror' — the two numbering systems swap the pair. Confirm which card governs before ordering.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-202"
+  },
+  {
+   "room": "020",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-202 Bathroom Vanity Light' / 'PA-502 Bathroom Mirror'; catalog label at this room is the mirror — exact swap documented.",
+   "note": "TAG COLLISION — RK sheets use PA-202 as the DECORATIVE MIRROR above the restroom vanity (ID-3.4); the brand spec book card PA-202 is 'Bathroom Vanity Light' and PA-502 is 'Bathroom Mirror' — the two numbering systems swap the pair. Confirm which card governs before ordering.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-202"
+  },
+  {
+   "room": "023",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-202 Bathroom Vanity Light' / 'PA-502 Bathroom Mirror'; catalog label at this room is the mirror — exact swap documented.",
+   "note": "TAG COLLISION — RK sheets use PA-202 as the DECORATIVE MIRROR above the restroom vanity (ID-3.4); the brand spec book card PA-202 is 'Bathroom Vanity Light' and PA-502 is 'Bathroom Mirror' — the two numbering systems swap the pair. Confirm which card governs before ordering.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-202"
+  },
+  {
+   "room": "027",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-202 Bathroom Vanity Light' / 'PA-502 Bathroom Mirror'; catalog label at this room is the mirror — exact swap documented.",
+   "note": "TAG COLLISION — RK sheets use PA-202 as the DECORATIVE MIRROR above the restroom vanity (ID-3.4); the brand spec book card PA-202 is 'Bathroom Vanity Light' and PA-502 is 'Bathroom Mirror' — the two numbering systems swap the pair. Confirm which card governs before ordering.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-202"
+  },
+  {
+   "room": "019",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-502 Bathroom Mirror'; catalog label is the sconce — swap documented.",
+   "note": "TAG COLLISION — RK sheets use PA-502 as the DECORATIVE SCONCE above the vanity; brand book PA-502 is 'Bathroom Mirror' (PA-202 is the vanity light) — swapped pair. Confirm before ordering.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-502"
+  },
+  {
+   "room": "020",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-502 Bathroom Mirror'; catalog label is the sconce — swap documented.",
+   "note": "TAG COLLISION — RK sheets use PA-502 as the DECORATIVE SCONCE above the vanity; brand book PA-502 is 'Bathroom Mirror' (PA-202 is the vanity light) — swapped pair. Confirm before ordering.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-502"
+  },
+  {
+   "room": "023",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-502 Bathroom Mirror'; catalog label is the sconce — swap documented.",
+   "note": "TAG COLLISION — RK sheets use PA-502 as the DECORATIVE SCONCE above the vanity; brand book PA-502 is 'Bathroom Mirror' (PA-202 is the vanity light) — swapped pair. Confirm before ordering.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-502"
+  },
+  {
+   "room": "027",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-502 Bathroom Mirror'; catalog label is the sconce — swap documented.",
+   "note": "TAG COLLISION — RK sheets use PA-502 as the DECORATIVE SCONCE above the vanity; brand book PA-502 is 'Bathroom Mirror' (PA-202 is the vanity light) — swapped pair. Confirm before ordering.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-502"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-400 Roller Shade @ Lobby & Fitness Room (Curtain Wall)'.",
+   "note": "TAG COLLISION — Brand book PA-400 = 'Roller Shade @ Lobby & Fitness Room (Curtain Wall)'. ID-1.13 prints 'PA-400 - typical at all corridor windows' with no description — identity was recorded as unresolved. The brand card resolves the PRODUCT (roller shade); the corridor placement is RK's.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-400"
+  },
+  {
+   "room": "018",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-400 Roller Shade @ Lobby & Fitness Room (Curtain Wall)'.",
+   "note": "TAG COLLISION — Brand book PA-400 = 'Roller Shade @ Lobby & Fitness Room (Curtain Wall)'. ID-1.13 prints 'PA-400 - typical at all corridor windows' with no description — identity was recorded as unresolved. The brand card resolves the PRODUCT (roller shade); the corridor placement is RK's.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-400"
+  },
+  {
+   "room": "023",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-400 Roller Shade @ Lobby & Fitness Room (Curtain Wall)'.",
+   "note": "TAG COLLISION — Brand book PA-400 = 'Roller Shade @ Lobby & Fitness Room (Curtain Wall)'. ID-1.13 prints 'PA-400 - typical at all corridor windows' with no description — identity was recorded as unresolved. The brand card resolves the PRODUCT (roller shade); the corridor placement is RK's.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-400"
+  },
+  {
+   "room": "121",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-400 Roller Shade @ Lobby & Fitness Room (Curtain Wall)'.",
+   "note": "TAG COLLISION — Brand book PA-400 = 'Roller Shade @ Lobby & Fitness Room (Curtain Wall)'. ID-1.13 prints 'PA-400 - typical at all corridor windows' with no description — identity was recorded as unresolved. The brand card resolves the PRODUCT (roller shade); the corridor placement is RK's.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-400"
+  },
+  {
+   "room": "003",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-401 Roller Shade @ Fitness (Framed Windows) & Breakroom'; plan usage is a pendant — collision documented.",
+   "note": "TAG COLLISION — Item drawn as a decorative pendant (ID-3.1); brand book PA-401 = 'Roller Shade @ Fitness (Framed Windows) & Breakroom' — tag numbering diverges. Confirm which governs.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-401"
+  },
+  {
+   "room": "023",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-401 Roller Shade @ Fitness (Framed Windows) & Breakroom'; plan usage is a pendant — collision documented.",
+   "note": "TAG COLLISION — Item drawn as a decorative pendant (ID-3.1); brand book PA-401 = 'Roller Shade @ Fitness (Framed Windows) & Breakroom' — tag numbering diverges. Confirm which governs.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-401"
+  },
+  {
+   "room": "018",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-402 Roller Shade @ Sales, Boardroom & Meeting Room' vs plan usage stacking chair.",
+   "note": "TAG COLLISION — Item drawn as the meeting-room stacking chair (ID-1.7 x4); brand book PA-402 = 'Roller Shade @ Sales, Boardroom, & Meeting Room' — collision; brand PA-111 is the stack chair. Confirm.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-402"
+  },
+  {
+   "room": "022",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-402 Roller Shade @ Sales, Boardroom & Meeting Room' vs plan usage stacking chair.",
+   "note": "TAG COLLISION — Item drawn as the meeting-room stacking chair (ID-1.7 x4); brand book PA-402 = 'Roller Shade @ Sales, Boardroom, & Meeting Room' — collision; brand PA-111 is the stack chair. Confirm.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-402"
+  },
+  {
+   "room": "004",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-501 Decorative Mirror @ Guest Elevator Lobbies'.",
+   "note": "TAG COLLISION — ID-1.13 calls PA-501 the elevator-lobby console/feature piece; brand book PA-501 = 'Decorative Mirror @ Guest Elevator Lobbies'. Same location, different product family — confirm which card governs.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-501"
+  },
+  {
+   "room": "137",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-501 Decorative Mirror @ Guest Elevator Lobbies'.",
+   "note": "TAG COLLISION — ID-1.13 calls PA-501 the elevator-lobby console/feature piece; brand book PA-501 = 'Decorative Mirror @ Guest Elevator Lobbies'. Same location, different product family — confirm which card governs.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-501"
+  },
+  {
+   "room": "018",
+   "kind": "submittal",
+   "evidence": "Spec book index: 'PA-310 Towel Station @ Fitness' vs ID-4.7 credenza keying.",
+   "note": "TAG COLLISION — ID-4.7 keys PA-310 to the meeting-room credenza (M18); brand book PA-310 = 'Towel Station @ Fitness' — collision. Confirm.",
+   "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_",
+   "title": "Home2-Dynamic FF&E Specifications Public Areas (Scheme B spec book)",
+   "code": "PA-310"
+  }
+ ],
+ "gaps": [
+  {
+   "room": "003",
+   "code": "PA-200",
+   "why": "Brand book Summary of Changes: 'PA-200 Product Deleted' (May-23); no spec card exists (cards run PA-113 then PA-201). Identity unresolved — do not order from the stale index row. Austin to identify the replacement/current product."
+  },
+  {
+   "room": "003",
+   "code": "PA-202",
+   "why": "Brand book PA-202 = 'Bathroom Vanity Light' (a restroom fixture — that identity governs at 019/020/023/027 instead, as a documented tag-numbering collision with PA-502). At Lobby 003 the same code tags something else entirely — a dashed decorative ceiling/lighting feature zone over Breakfast/the Lobby lounge/near Market — that identity is in neither the book nor ID-1.7. Austin to identify the 003 fixture."
+  },
+  {
+   "room": "003",
+   "code": "PA-117",
+   "why": "Tag absent from the brand spec book index AND from ID-1.7; identity unknown. Austin to identify."
+  },
+  {
+   "room": "004",
+   "code": "ACB-001",
+   "why": "Acoustic baffle ceiling over the front desk (ID-4.1). No baffle-ceiling submittal on the Drive; brand spec book does not carry ACB. Austin to supply the baffle submittal."
+  }
+ ],
+ "cluster": "ffe-brand-spec"
+}

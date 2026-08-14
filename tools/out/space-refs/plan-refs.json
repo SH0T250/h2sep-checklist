@@ -1,0 +1,5955 @@
+{
+ "cluster": "plan-refs",
+ "matches": [
+  {
+   "room": "001",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 (height); ID-1.6 (code)",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "001",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 (height); ID-1.6 (code)",
+   "sheetId": "ID-1.6",
+   "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+   "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "001",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.8; finish schedule p.41",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "ST-01"
+  },
+  {
+   "room": "001",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "T-01"
+  },
+  {
+   "room": "001",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_457d11b58f"
+  },
+  {
+   "room": "001",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_457d11b58f"
+  },
+  {
+   "room": "001",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 keyed note 1",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "itemId": "x_9b6923ca8e"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 keyed note 12; finish schedule p.14 'Lobby Inset'",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "CPT-11"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 16",
+   "sheetId": "A510.1",
+   "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+   "title": "Enlarged Lobby – Const. Plan (Architectural set)",
+   "code": "KN 16"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 keyed note 1",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "KN 1"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 20",
+   "sheetId": "A510.1",
+   "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+   "title": "Enlarged Lobby – Const. Plan (Architectural set)",
+   "code": "KN 20"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 62; A700 keyed note 23; A510.4 keyed note 2 (location)",
+   "sheetId": "A510.1",
+   "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+   "title": "Enlarged Lobby – Const. Plan (Architectural set)",
+   "code": "KN 62"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 62; A700 keyed note 23; A510.4 keyed note 2 (location)",
+   "sheetId": "A700",
+   "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+   "title": "Interior Elevations (Architectural set)",
+   "code": "KN 62"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 62; A700 keyed note 23; A510.4 keyed note 2 (location)",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "KN 62"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-100"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-100"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-101"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-101"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 x6 + ID-1.7 prints (8) vs A510.3 x6",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-102"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 x6 + ID-1.7 prints (8) vs A510.3 x6",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-102"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-103"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-103"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-104"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-104"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 8/6/4/6 = 24 + A510.3 8/6/6/6 = 26",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-106"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 8/6/4/6 = 24 + A510.3 8/6/6/6 = 26",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-106"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 x8; ID-1.7 (8) agree",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-107"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 x8; ID-1.7 (8) agree",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-107"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 line 20 lounge cluster",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-111"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.6",
+   "sheetId": "ID-1.6",
+   "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+   "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)",
+   "code": "PA-117"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-200"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-200"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.6",
+   "sheetId": "ID-1.6",
+   "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+   "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)",
+   "code": "PA-201"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.6",
+   "sheetId": "ID-1.6",
+   "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+   "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)",
+   "code": "PA-202"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.6",
+   "sheetId": "ID-1.6",
+   "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+   "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)",
+   "code": "PA-205"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 5/3/3 = 11",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-300"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-301"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-301"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-302"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-303"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-303"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-304"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (room); ID-1.7 (qty)",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-304"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 x3 locations",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-307"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 line 22 lounge cluster",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-313"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 line 22 lounge cluster",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-316"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 tags PA-400 in Lobby 003; ID-1.13 defines it as the corridor window element",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-400"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 tags PA-400 in Lobby 003; ID-1.13 defines it as the corridor window element",
+   "sheetId": "ID-1.13",
+   "driveId": "1U_tNsW8hkCOvVODovNol8kKmo2zkeZfE",
+   "title": "Typical Corridor & Elevator Lobby — Finish/FF&E (RK FF&E Locations ID set)",
+   "code": "PA-400"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.1 view 4; A510.3 places it Vestibule 001 / lobby side",
+   "sheetId": "ID-3.1",
+   "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "PA-401"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.1 view 4; A510.3 places it Vestibule 001 / lobby side",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-401"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 line 24 lounge cluster",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-503"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 line 24 lounge cluster",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-505"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 (no multiplier); A510.3",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-800"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 (no multiplier); A510.3",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-800"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 (heights); ID-1.6 (code, 'By GC')",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 (heights); ID-1.6 (code, 'By GC')",
+   "sheetId": "ID-1.6",
+   "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+   "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: finish schedule p.41 'Public Area & Guest Suite'; ID-1.8",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "ST-01"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: RK area statement; ID-3.1 views 5/6",
+   "sheetId": "ID-3.1",
+   "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "T-01.1"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4; ID-1.8",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "T-01"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4; ID-1.8",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "T-01"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 note 34, cited on A510.4",
+   "sheetId": "A510.1",
+   "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+   "title": "Enlarged Lobby – Const. Plan (Architectural set)",
+   "code": "WC-01"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 note 34, cited on A510.4",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "WC-01"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.1 views 3, 4, 6; finish schedule p.63",
+   "sheetId": "ID-3.1",
+   "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-11"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.1 view 1",
+   "sheetId": "ID-3.1",
+   "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-12"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_04e035bcfa"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_04e035bcfa"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A901 (governs); ID-4.2 corroborates",
+   "sheetId": "A901",
+   "driveId": "1EEb7yH2tTtQp5OjNctxpqxCRQNMO874M",
+   "title": "Millwork – Media Wall, Coffee Bar & Bussing Station (Architectural set)",
+   "itemId": "x_0faf6b95fa"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A901 (governs); ID-4.2 corroborates",
+   "sheetId": "ID-4.2",
+   "driveId": "13-MJczExTRp7RRK1xaHAyR4GZpWxMmYq",
+   "title": "Millwork — Media Wall, Coffee Bar & Bussing (RK FF&E Locations ID set)",
+   "itemId": "x_0faf6b95fa"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A904 (governs); ID-4.6 corroborates",
+   "sheetId": "A904",
+   "driveId": "1DqwsYfF8gBQksKXG0iZRDGZSKG9b94fI",
+   "title": "Millwork – Guest Laundry & Window Perch (Architectural set)",
+   "itemId": "x_21907420de"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A904 (governs); ID-4.6 corroborates",
+   "sheetId": "ID-4.6",
+   "driveId": "1jmQ00HRJm6GDY5rvJL0ZYxMiGnnLXinU",
+   "title": "Millwork — Guest Laundry & Window Perch (RK FF&E Locations ID set)",
+   "itemId": "x_21907420de"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A700 view 4",
+   "sheetId": "A700",
+   "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+   "title": "Interior Elevations (Architectural set)",
+   "code": "WC-01.1"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A700 keyed note 11",
+   "sheetId": "A700",
+   "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+   "title": "Interior Elevations (Architectural set)",
+   "itemId": "x_402ac0247c"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A901",
+   "sheetId": "A901",
+   "driveId": "1EEb7yH2tTtQp5OjNctxpqxCRQNMO874M",
+   "title": "Millwork – Media Wall, Coffee Bar & Bussing Station (Architectural set)",
+   "itemId": "x_5d1b56117e"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A700 views 3 and 4",
+   "sheetId": "A700",
+   "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+   "title": "Interior Elevations (Architectural set)",
+   "code": "PT-04"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A700 keyed note 35",
+   "sheetId": "A700",
+   "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+   "title": "Interior Elevations (Architectural set)",
+   "itemId": "x_93eb60340c"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.8 (blue dashed outlines)",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "itemId": "x_96aba63b6e"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.1 view 3",
+   "sheetId": "ID-3.1",
+   "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "itemId": "x_b48c799d27"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_cb4586d89a"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_cb4586d89a"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.1 views 1 and 6",
+   "sheetId": "ID-3.1",
+   "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "itemId": "x_d3f95486b8"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A700 keyed note 6",
+   "sheetId": "A700",
+   "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+   "title": "Interior Elevations (Architectural set)",
+   "itemId": "x_e17dfeabf6"
+  },
+  {
+   "room": "003",
+   "kind": "plan",
+   "evidence": "src provenance: A700 keyed note 34",
+   "sheetId": "A700",
+   "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+   "title": "Interior Elevations (Architectural set)",
+   "itemId": "x_f6907ecafe"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list + space table",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "303"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A903; finish schedule p.18",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "code": "FILM-01"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 9",
+   "sheetId": "A510.1",
+   "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+   "title": "Enlarged Lobby – Const. Plan (Architectural set)",
+   "code": "KN 9"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3; description from ID-1.13",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-501"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3; description from ID-1.13",
+   "sheetId": "ID-1.13",
+   "driveId": "1U_tNsW8hkCOvVODovNol8kKmo2zkeZfE",
+   "title": "Typical Corridor & Elevator Lobby — Finish/FF&E (RK FF&E Locations ID set)",
+   "code": "PA-501"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A903 detail 4",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "code": "PT-03"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.1 views 2 and 6",
+   "sheetId": "ID-3.1",
+   "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "PT-04"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2; ID-1.6",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2; ID-1.6",
+   "sheetId": "ID-1.6",
+   "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+   "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.1 view 6; A903 (feature-wall base)",
+   "sheetId": "ID-3.1",
+   "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "T-01.1"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.1 view 6; A903 (feature-wall base)",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "code": "T-01.1"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4; ID-1.8",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "T-01"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4; ID-1.8",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "T-01"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.1 views 2 and 6; finish schedule p.63",
+   "sheetId": "ID-3.1",
+   "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-11"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A903 (both elevations, both trim details, both window details); finish schedule p.67",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "code": "WP-10"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A900 (governs); ID-4.1 corroborates",
+   "sheetId": "A900",
+   "driveId": "137ZTwoIoRVYPOni6K-LWZ49UUrEG192N",
+   "title": "Millwork – Front Desk (Architectural set)",
+   "itemId": "x_0ceab1a614"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A900 (governs); ID-4.1 corroborates",
+   "sheetId": "ID-4.1",
+   "driveId": "1_xSHAlK3C8ytim55trU4lBhItDc2rBZn",
+   "title": "Millwork — Front Desk (RK FF&E Locations ID set)",
+   "itemId": "x_0ceab1a614"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A900 (governs); ID-4.1 and ID-3.1 view 3 corroborate; finish schedule p.7",
+   "sheetId": "A900",
+   "driveId": "137ZTwoIoRVYPOni6K-LWZ49UUrEG192N",
+   "title": "Millwork – Front Desk (Architectural set)",
+   "code": "ACB-001"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A900 (governs); ID-4.1 and ID-3.1 view 3 corroborate; finish schedule p.7",
+   "sheetId": "ID-4.1",
+   "driveId": "1_xSHAlK3C8ytim55trU4lBhItDc2rBZn",
+   "title": "Millwork — Front Desk (RK FF&E Locations ID set)",
+   "code": "ACB-001"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A900 (governs); ID-4.1 and ID-3.1 view 3 corroborate; finish schedule p.7",
+   "sheetId": "ID-3.1",
+   "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "ACB-001"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2; A120",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_93b36e5bc9"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2; A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_93b36e5bc9"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A700 views 2 and 6",
+   "sheetId": "A700",
+   "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+   "title": "Interior Elevations (Architectural set)",
+   "code": "WC-01.1"
+  },
+  {
+   "room": "004",
+   "kind": "plan",
+   "evidence": "src provenance: A700 view 2",
+   "sheetId": "A700",
+   "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+   "title": "Interior Elevations (Architectural set)",
+   "code": "PT-01"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A903; finish schedule p.18",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "code": "FILM-01"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7; A510.3",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-302"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7; A510.3",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-302"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7; A510.3",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-314"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7; A510.3",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-314"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7; A510.3",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-315"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7; A510.3",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-315"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7; A510.3",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-800"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7; A510.3",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-800"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A903",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "code": "PL-01"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2; A510.4",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2; A510.4",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A903 line 59",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "code": "T-01.1"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4; ID-1.8",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "T-01"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4; ID-1.8",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "T-01"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A903 elevation 2",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "code": "WC-04"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A903 lines 57-58, verbatim",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "code": "WC-11"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A903 elevation 2, upper left",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "code": "WC-15"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A903; finish schedule p.67",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "code": "WP-10"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A903",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "itemId": "x_18f888db8d"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: ID-4.5 calls them coolers; A903 draws glazed framed units and never calls them refrigeration",
+   "sheetId": "ID-4.5",
+   "driveId": "15dL5hpS5hrS53yAQvH2LDUbE45h6-Myb",
+   "title": "Millwork — Home2 Market & Reception Wall (RK FF&E Locations ID set)",
+   "itemId": "x_1cd8048d12"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: ID-4.5 calls them coolers; A903 draws glazed framed units and never calls them refrigeration",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "itemId": "x_1cd8048d12"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A903",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "itemId": "x_38db56baa1"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A700 / A702 keyed note 12; A700 note 26 (shelving refer to FF&E specs)",
+   "sheetId": "A700",
+   "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+   "title": "Interior Elevations (Architectural set)",
+   "itemId": "x_4c50298a1c"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A700 / A702 keyed note 12; A700 note 26 (shelving refer to FF&E specs)",
+   "sheetId": "A702",
+   "driveId": "1QAf_n4tUxUEljiUMlxqcvP2MnudhJTxh",
+   "title": "Interior Elevations (Architectural set)",
+   "itemId": "x_4c50298a1c"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2; A120",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_89698e10a5"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2; A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_89698e10a5"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A903 plan 1",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "itemId": "x_b4248bf428"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A903 (governs); ID-4.5 corroborates",
+   "sheetId": "A903",
+   "driveId": "1FsT2He4ZQBTBeA_txFRmF_xIw0L0zdUt",
+   "title": "Millwork – Home2 Market & Reception Wall (Architectural set)",
+   "itemId": "x_da5d7b251e"
+  },
+  {
+   "room": "005",
+   "kind": "plan",
+   "evidence": "src provenance: A903 (governs); ID-4.5 corroborates",
+   "sheetId": "ID-4.5",
+   "driveId": "15dL5hpS5hrS53yAQvH2LDUbE45h6-Myb",
+   "title": "Millwork — Home2 Market & Reception Wall (RK FF&E Locations ID set)",
+   "itemId": "x_da5d7b251e"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: A514 equipment schedule",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "30"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: A514 equipment schedule",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "31"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: A514 plan tag",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "34"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: A514 plan tag",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "39"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 Breakfast 006 / Servery 009 cluster (6)",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-110"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 Breakfast 006 / Servery 009 cluster",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-309"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7; A510.3",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-800"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7; A510.3",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-800"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-801"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 prints (x2)",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-802"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-803"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-804"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-805"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 views 6-7",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "PT-04"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "T-01"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.8",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "T-21"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 views 6-7; finish schedule p.63",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-11"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 views 6-7",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-12"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: A902",
+   "sheetId": "A902",
+   "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+   "title": "Millwork – Breakfast Serving Counter (Architectural set)",
+   "itemId": "x_24efc6c7a0"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: A901.1 (governs); ID-4.3 corroborates",
+   "sheetId": "A901.1",
+   "driveId": "1RaIAJXNVShGoBUiBlXYZJpW7w393xGda",
+   "title": "Millwork – Media Wall, Coffee Bar & Bussing Station (Architectural set)",
+   "itemId": "x_4057ca4d3c"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: A901.1 (governs); ID-4.3 corroborates",
+   "sheetId": "ID-4.3",
+   "driveId": "1h4cbqyW5ffF9KQ9XoHxPdt7xIts5rAXT",
+   "title": "Millwork — Bussing (Dish Recovery) (RK FF&E Locations ID set)",
+   "itemId": "x_4057ca4d3c"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_9da32a85c8"
+  },
+  {
+   "room": "006",
+   "kind": "plan",
+   "evidence": "src provenance: A901.1 elevation 2",
+   "sheetId": "A901.1",
+   "driveId": "1RaIAJXNVShGoBUiBlXYZJpW7w393xGda",
+   "title": "Millwork – Media Wall, Coffee Bar & Bussing Station (Architectural set)",
+   "code": "T-01.1"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "02"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513.1 (qty 2) vs A513 (qty 1)",
+   "sheetId": "A513.1",
+   "driveId": "10xWCbiZ7fj8_M19Ox1vaa5YTS6_SD3SZ",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "02"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513.1 (qty 2) vs A513 (qty 1)",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "02"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "04"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "05"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "06"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "07"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "07"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "07"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "11"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "12"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "13"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "14"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "15"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "16"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513.1 (qty 2) vs A513 (qty 1)",
+   "sheetId": "A513.1",
+   "driveId": "10xWCbiZ7fj8_M19Ox1vaa5YTS6_SD3SZ",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "16"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513.1 (qty 2) vs A513 (qty 1)",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "16"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "17"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513 / A513.1",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "18"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513 / A513.1",
+   "sheetId": "A513.1",
+   "driveId": "10xWCbiZ7fj8_M19Ox1vaa5YTS6_SD3SZ",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "18"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "19"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "20"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "21"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513 / A513.1",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "22"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513 / A513.1",
+   "sheetId": "A513.1",
+   "driveId": "10xWCbiZ7fj8_M19Ox1vaa5YTS6_SD3SZ",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "22"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "32"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "33"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4; ID-1.8; finish schedule pp.54/55",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "T-13"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4; ID-1.8; finish schedule pp.54/55",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "T-13"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "T-13"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513 view 2",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "itemId": "x_3bc41e72b0"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513 view 2",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "itemId": "x_4194428374"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_4aa35c9dde"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_4aa35c9dde"
+  },
+  {
+   "room": "007",
+   "kind": "plan",
+   "evidence": "src provenance: A513 view 2",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "itemId": "x_5aa0aa72ef"
+  },
+  {
+   "room": "008",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "01"
+  },
+  {
+   "room": "008",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "02"
+  },
+  {
+   "room": "008",
+   "kind": "plan",
+   "evidence": "src provenance: A513",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "19"
+  },
+  {
+   "room": "008",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "008",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "T-13"
+  },
+  {
+   "room": "008",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_56950faa89"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A514 electrical schedule only",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "01"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A513 / A513.1 / A514",
+   "sheetId": "A513",
+   "driveId": "18hBxo398GmWV0_R7gC0TPC3t3tDYj-1H",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "14"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A513 / A513.1 / A514",
+   "sheetId": "A513.1",
+   "driveId": "10xWCbiZ7fj8_M19Ox1vaa5YTS6_SD3SZ",
+   "title": "Enlarged Food Prep & Dry Storage (Architectural set)",
+   "code": "14"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A513 / A513.1 / A514",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "14"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A514 equipment schedule",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "23"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A514 equipment schedule",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "24"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A514 equipment schedule",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "25"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A514 equipment schedule",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "26"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A514 equipment schedule",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "27"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A514 equipment schedule",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "28"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A514 equipment schedule",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "29"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A514 electrical schedule only",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "35"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A514 electrical schedule only",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "36"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A514 electrical schedule only",
+   "sheetId": "A514",
+   "driveId": "1_U9dmaNluTskwwq8zoNCojHNkLqFd_ok",
+   "title": "Enlarged Breakfast & Servery (Architectural set)",
+   "code": "37"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 view 8",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "CPT-12.1"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 view 8",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "T-01.1"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "T-01"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.8",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "T-21"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 views 6-8; finish schedule p.63",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-11"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 line 30; finish schedule p.64; ID-3.3 view 8",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "WC-12"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 line 30; finish schedule p.64; ID-3.3 view 8",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-12"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A902",
+   "sheetId": "A902",
+   "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+   "title": "Millwork – Breakfast Serving Counter (Architectural set)",
+   "itemId": "x_2577488987"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 view 8",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "itemId": "x_4423c9b59b"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_4b6b42d7b9"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A902",
+   "sheetId": "A902",
+   "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+   "title": "Millwork – Breakfast Serving Counter (Architectural set)",
+   "itemId": "x_5f334dcdd2"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A902",
+   "sheetId": "A902",
+   "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+   "title": "Millwork – Breakfast Serving Counter (Architectural set)",
+   "itemId": "x_67e35d7d04"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A902",
+   "sheetId": "A902",
+   "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+   "title": "Millwork – Breakfast Serving Counter (Architectural set)",
+   "itemId": "x_70fba9a7a9"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A902",
+   "sheetId": "A902",
+   "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+   "title": "Millwork – Breakfast Serving Counter (Architectural set)",
+   "itemId": "x_7d8abeb0a6"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A902",
+   "sheetId": "A902",
+   "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+   "title": "Millwork – Breakfast Serving Counter (Architectural set)",
+   "itemId": "x_a71c95a90f"
+  },
+  {
+   "room": "009",
+   "kind": "plan",
+   "evidence": "src provenance: A902",
+   "sheetId": "A902",
+   "driveId": "1aJSgK7S91Re6vpsnxxpXs-SJpRcpqjqM",
+   "title": "Millwork – Breakfast Serving Counter (Architectural set)",
+   "itemId": "x_cb989abf5e"
+  },
+  {
+   "room": "010",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "010",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 view 8",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "T-01.1"
+  },
+  {
+   "room": "010",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "T-01"
+  },
+  {
+   "room": "010",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 (WC-12 tagged at Work Stations)",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "WC-12"
+  },
+  {
+   "room": "010",
+   "kind": "plan",
+   "evidence": "src provenance: A905",
+   "sheetId": "A905",
+   "driveId": "1vXFU1HPeq0tsjAPg_MAlNv62vQa9e2Ir",
+   "title": "Millwork – Work Station, Mng's Work Surface & Emp. Break Room (Architectural set)",
+   "itemId": "x_137333df8b"
+  },
+  {
+   "room": "010",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_22b3d22cf6"
+  },
+  {
+   "room": "010",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_22b3d22cf6"
+  },
+  {
+   "room": "011",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "300"
+  },
+  {
+   "room": "011",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 keyed note 4",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "KN 4"
+  },
+  {
+   "room": "011",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "011",
+   "kind": "plan",
+   "evidence": "src provenance: A905",
+   "sheetId": "A905",
+   "driveId": "1vXFU1HPeq0tsjAPg_MAlNv62vQa9e2Ir",
+   "title": "Millwork – Work Station, Mng's Work Surface & Emp. Break Room (Architectural set)",
+   "itemId": "x_95610fa254"
+  },
+  {
+   "room": "011",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 / A511.2 (absence)",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "itemId": "x_a4ca94a09c"
+  },
+  {
+   "room": "011",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 / A511.2 (absence)",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "itemId": "x_a4ca94a09c"
+  },
+  {
+   "room": "011",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_ea8536701e"
+  },
+  {
+   "room": "011",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_ea8536701e"
+  },
+  {
+   "room": "012",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 19",
+   "sheetId": "A510.1",
+   "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+   "title": "Enlarged Lobby – Const. Plan (Architectural set)",
+   "code": "KN 19"
+  },
+  {
+   "room": "012",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "012",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 / A511.2 (absence)",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "itemId": "x_0d9bc68780"
+  },
+  {
+   "room": "012",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 / A511.2 (absence)",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "itemId": "x_0d9bc68780"
+  },
+  {
+   "room": "013",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "304"
+  },
+  {
+   "room": "013",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "013",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 line 31",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "ST-01"
+  },
+  {
+   "room": "013",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 / A510.1 / A511.2 (absence)",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "itemId": "x_b33d3581bf"
+  },
+  {
+   "room": "013",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 / A510.1 / A511.2 (absence)",
+   "sheetId": "A510.1",
+   "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+   "title": "Enlarged Lobby – Const. Plan (Architectural set)",
+   "itemId": "x_b33d3581bf"
+  },
+  {
+   "room": "013",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 / A510.1 / A511.2 (absence)",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "itemId": "x_b33d3581bf"
+  },
+  {
+   "room": "013",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_df047756c1"
+  },
+  {
+   "room": "014",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "408"
+  },
+  {
+   "room": "014",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "431"
+  },
+  {
+   "room": "014",
+   "kind": "plan",
+   "evidence": "src provenance: A702 elevation 4",
+   "sheetId": "A702",
+   "driveId": "1QAf_n4tUxUEljiUMlxqcvP2MnudhJTxh",
+   "title": "Interior Elevations (Architectural set)",
+   "code": "CPT-10.1"
+  },
+  {
+   "room": "014",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (tags PA-110 in Employee Breakroom 014)",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-110"
+  },
+  {
+   "room": "014",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (tags PA-309 in Employee Breakroom 014)",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-309"
+  },
+  {
+   "room": "014",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 views 4-5",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "PT-03"
+  },
+  {
+   "room": "014",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "014",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 views 4-5; finish schedule p.31 Supp B",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "RB-10"
+  },
+  {
+   "room": "014",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4; ID-1.8; finish schedule pp.37/38/39",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "RF-11"
+  },
+  {
+   "room": "014",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4; ID-1.8; finish schedule pp.37/38/39",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "RF-11"
+  },
+  {
+   "room": "014",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 line 31",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "ST-01"
+  },
+  {
+   "room": "014",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 views 4-5",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-10"
+  },
+  {
+   "room": "014",
+   "kind": "plan",
+   "evidence": "src provenance: A905",
+   "sheetId": "A905",
+   "driveId": "1vXFU1HPeq0tsjAPg_MAlNv62vQa9e2Ir",
+   "title": "Millwork – Work Station, Mng's Work Surface & Emp. Break Room (Architectural set)",
+   "itemId": "x_245947392c"
+  },
+  {
+   "room": "014",
+   "kind": "plan",
+   "evidence": "src provenance: A905",
+   "sheetId": "A905",
+   "driveId": "1vXFU1HPeq0tsjAPg_MAlNv62vQa9e2Ir",
+   "title": "Millwork – Work Station, Mng's Work Surface & Emp. Break Room (Architectural set)",
+   "itemId": "x_f618d064f2"
+  },
+  {
+   "room": "014",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_f89aad8f9c"
+  },
+  {
+   "room": "015",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list, 2 tag instances",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "401"
+  },
+  {
+   "room": "015",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "409"
+  },
+  {
+   "room": "015",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 vs ID-1.6",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "015",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 vs ID-1.6",
+   "sheetId": "ID-1.6",
+   "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+   "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "015",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 keyed note 4",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "itemId": "x_313e77bd20"
+  },
+  {
+   "room": "015",
+   "kind": "plan",
+   "evidence": "src provenance: A906",
+   "sheetId": "A906",
+   "driveId": "1ekRs-QaCW4LLuCbFgCADLYouD8XSqk5U",
+   "title": "Millwork – House Laundry, Engineer's Office & Sales Office (Architectural set)",
+   "itemId": "x_d9338d8ce6"
+  },
+  {
+   "room": "015",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_e4e1efbdb1"
+  },
+  {
+   "room": "016",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list, 4 tag instances",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "402"
+  },
+  {
+   "room": "016",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 vs ID-1.6",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "016",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 vs ID-1.6",
+   "sheetId": "ID-1.6",
+   "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+   "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "016",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_6f78a9900e"
+  },
+  {
+   "room": "016",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 keyed note 4",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "itemId": "x_76592963e3"
+  },
+  {
+   "room": "017",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list, 2 tag groups",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "404"
+  },
+  {
+   "room": "017",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 keyed note 4",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "KN 4"
+  },
+  {
+   "room": "017",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 vs ID-1.6",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "017",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 vs ID-1.6",
+   "sheetId": "ID-1.6",
+   "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+   "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "017",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 keyed note 4; independently confirmed by A511.2",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "itemId": "x_e1163f464d"
+  },
+  {
+   "room": "017",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 keyed note 4; independently confirmed by A511.2",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "itemId": "x_e1163f464d"
+  },
+  {
+   "room": "017",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_ed6d70f918"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4; ID-1.8; finish schedule p.12 'Corridor, TV Lounge, Boardroom'",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "CPT-10"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4; ID-1.8; finish schedule p.12 'Corridor, TV Lounge, Boardroom'",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "CPT-10"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.8",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "CPT-13"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: A907 (governs); ID-4.7 corroborates",
+   "sheetId": "A907",
+   "driveId": "1S5kLmk5W2ONJKG5pEUmICv-bH9Mi5TQL",
+   "title": "Millwork – Meeting Room (Architectural set)",
+   "code": "PA-310"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: A907 (governs); ID-4.7 corroborates",
+   "sheetId": "ID-4.7",
+   "driveId": "1hkSlfEoGAo95duYc_EqYK56Gk51YLkNX",
+   "title": "Millwork — Meeting Room (RK FF&E Locations ID set)",
+   "code": "PA-310"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 line 33 Meeting Room cluster; ID-1.7 prints PA-400 (x4)",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-400"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 line 97 (3 tags in Meeting Room 018); ID-1.7 (x4 building total)",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-402"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 line 97 (3 tags in Meeting Room 018); ID-1.7 (x4 building total)",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-402"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 tags PA-807 in Meeting Room 018; ID-1.7 groups PA-8xx under Breakfast/Servery",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-807"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 tags PA-807 in Meeting Room 018; ID-1.7 groups PA-8xx under Breakfast/Servery",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-807"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 view 10",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "PT-04"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2; ID-1.6 gives 10'-2\"",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2; ID-1.6 gives 10'-2\"",
+   "sheetId": "ID-1.6",
+   "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+   "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.8",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "VCT-15"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 view 10; finish schedule p.62",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-10"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 view 10",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "itemId": "x_8a54cc8a3f"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_a550b728f8"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_a550b728f8"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_b3f4933bcf"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3; ID-1.7 line 33",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "itemId": "x_bb6c7453af"
+  },
+  {
+   "room": "018",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3; ID-1.7 line 33",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "itemId": "x_bb6c7453af"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A520",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-01"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A520",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-06A"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A520",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-06B"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A520",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-06C"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "HD-09A"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "HD-09B"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "HD-09C"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A520",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-12"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A520",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-13"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A520",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-19"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "HD-7B"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 keyed note 8",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "KN 8"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4 + A510.3 agree; corroborated by A520 vanity elevations",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "PA-202"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4 + A510.3 agree; corroborated by A520 vanity elevations",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-202"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4 + A510.3 agree; corroborated by A520 vanity elevations",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "PA-202"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4 + A510.3; ID-1.7 prints PA-502 (x3) = the three restrooms",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "PA-502"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4 + A510.3; ID-1.7 prints PA-502 (x3) = the three restrooms",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-502"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4 + A510.3; ID-1.7 prints PA-502 (x3) = the three restrooms",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-502"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 and the A520 RCP - the two agree",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 and the A520 RCP - the two agree",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A520 elevations 4-7",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "T-01.1"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "T-01"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A520 elevations; finish schedule pp.48/49",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "T-10"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "WC-02"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A520 elevations; finish schedule p.63",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "WC-11"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A520 view 2 RCP + ceiling-fixtures legend",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "EX"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 43 (reprinted on A520); A520 view 1 + elevations; A520 blocking elevations 'PROVIDE BLOCKING FOR VANITY AS NEEDED'",
+   "sheetId": "A510.1",
+   "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+   "title": "Enlarged Lobby – Const. Plan (Architectural set)",
+   "itemId": "x_3c0fa3ac74"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 43 (reprinted on A520); A520 view 1 + elevations; A520 blocking elevations 'PROVIDE BLOCKING FOR VANITY AS NEEDED'",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "itemId": "x_3c0fa3ac74"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A520 view 2 RCP + ceiling-fixtures legend",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "R"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A120 + A510.2 + A520 view 2 (all three tag 8'-6\")",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_a1d1d2cdd3"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A120 + A510.2 + A520 view 2 (all three tag 8'-6\")",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_a1d1d2cdd3"
+  },
+  {
+   "room": "019",
+   "kind": "plan",
+   "evidence": "src provenance: A120 + A510.2 + A520 view 2 (all three tag 8'-6\")",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "itemId": "x_a1d1d2cdd3"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A520",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-01"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A520",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-06A"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A520",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-06B"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A520",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-06C"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "HD-09A"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "HD-09B"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "HD-09C"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A520",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-12"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A520",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-13"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A520",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-19"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "HD-7B"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4 + A510.3 agree; corroborated by A520 vanity elevations",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "PA-202"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4 + A510.3 agree; corroborated by A520 vanity elevations",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-202"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4 + A510.3 agree; corroborated by A520 vanity elevations",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "PA-202"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4 + A510.3; ID-1.7 prints PA-502 (x3) = the three restrooms",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "PA-502"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4 + A510.3; ID-1.7 prints PA-502 (x3) = the three restrooms",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-502"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4 + A510.3; ID-1.7 prints PA-502 (x3) = the three restrooms",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-502"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 and the A520 RCP - the two agree",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 and the A520 RCP - the two agree",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A520 elevations 4-7",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "T-01.1"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "T-01"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A520 elevations; finish schedule pp.48/49",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "T-10"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "WC-02"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A520 elevations; finish schedule p.63",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "WC-11"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list + space-by-space table",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "403"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 43 (reprinted on A520); A520 view 1 + elevations; A520 blocking elevations 'PROVIDE BLOCKING FOR VANITY AS NEEDED'",
+   "sheetId": "A510.1",
+   "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+   "title": "Enlarged Lobby – Const. Plan (Architectural set)",
+   "itemId": "x_3c0fa3ac74"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 43 (reprinted on A520); A520 view 1 + elevations; A520 blocking elevations 'PROVIDE BLOCKING FOR VANITY AS NEEDED'",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "itemId": "x_3c0fa3ac74"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list + space-by-space table",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "820"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A520 view 2 RCP + ceiling-fixtures legend",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "R"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A120 + A510.2 + A520 view 2 (all three tag 8'-6\")",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_a1d1d2cdd3"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A120 + A510.2 + A520 view 2 (all three tag 8'-6\")",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_a1d1d2cdd3"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A120 + A510.2 + A520 view 2 (all three tag 8'-6\")",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "itemId": "x_a1d1d2cdd3"
+  },
+  {
+   "room": "020",
+   "kind": "plan",
+   "evidence": "src provenance: A520 view 2 RCP + ceiling-fixtures legend",
+   "sheetId": "A520",
+   "driveId": "13B5LPI6_1vZaRZszA41ORXz51dyLyx40",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "EX"
+  },
+  {
+   "room": "021",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 keyed note 4",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "KN 4"
+  },
+  {
+   "room": "021",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 view 9",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "PT-03"
+  },
+  {
+   "room": "021",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 vs ID-1.6",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "021",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 vs ID-1.6",
+   "sheetId": "ID-1.6",
+   "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+   "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "021",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 view 9; finish schedule pp.34/35",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "RB-12"
+  },
+  {
+   "room": "021",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4; finish schedule pp.58/59",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "VCT-10"
+  },
+  {
+   "room": "021",
+   "kind": "plan",
+   "evidence": "src provenance: A906",
+   "sheetId": "A906",
+   "driveId": "1ekRs-QaCW4LLuCbFgCADLYouD8XSqk5U",
+   "title": "Millwork – House Laundry, Engineer's Office & Sales Office (Architectural set)",
+   "itemId": "x_0cc08a312e"
+  },
+  {
+   "room": "021",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_2bd6903cc1"
+  },
+  {
+   "room": "021",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_2bd6903cc1"
+  },
+  {
+   "room": "021",
+   "kind": "plan",
+   "evidence": "src provenance: A906",
+   "sheetId": "A906",
+   "driveId": "1ekRs-QaCW4LLuCbFgCADLYouD8XSqk5U",
+   "title": "Millwork – House Laundry, Engineer's Office & Sales Office (Architectural set)",
+   "itemId": "x_f60d737c0f"
+  },
+  {
+   "room": "022",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "CPT-12"
+  },
+  {
+   "room": "022",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 keyed note 4",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "KN 4"
+  },
+  {
+   "room": "022",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 line 101; keyed note 4",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-105"
+  },
+  {
+   "room": "022",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 line 101; ID-1.7 prints PA-306 (x2)",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-306"
+  },
+  {
+   "room": "022",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 line 101; ID-1.7 prints PA-306 (x2)",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-306"
+  },
+  {
+   "room": "022",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 line 101",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-402"
+  },
+  {
+   "room": "022",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "022",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_945bfff81e"
+  },
+  {
+   "room": "022",
+   "kind": "plan",
+   "evidence": "src provenance: A120; A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_945bfff81e"
+  },
+  {
+   "room": "022",
+   "kind": "plan",
+   "evidence": "src provenance: A906",
+   "sheetId": "A906",
+   "driveId": "1ekRs-QaCW4LLuCbFgCADLYouD8XSqk5U",
+   "title": "Millwork – House Laundry, Engineer's Office & Sales Office (Architectural set)",
+   "itemId": "x_f58ef99727"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "800"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "801"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "802"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 fitness equipment list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "803"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 fitness equipment list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "804"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 fitness equipment list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "805"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 fitness equipment list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "806"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 fitness equipment list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "807"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 fitness equipment list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "808"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 fitness equipment list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "809"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 fitness equipment list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "810"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 fitness equipment list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "811"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "812"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "813"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "816"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 note 2; ID-3.2 views 4-7; A700 note 30",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "817"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 note 2; ID-3.2 views 4-7; A700 note 30",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "817"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 note 2; ID-3.2 views 4-7; A700 note 30",
+   "sheetId": "A700",
+   "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+   "title": "Interior Elevations (Architectural set)",
+   "code": "817"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "819"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-202"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-311"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-400"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-401"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-502"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 views 4-7",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "PA-506"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 views 4-7",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "PT-04"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 detail 03",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 views 4-7; finish schedule pp.32/33",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "RB-11"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4; finish schedule p.36",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "RF-10"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.8",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "RF-15"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 view 7; finish schedule p.41",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "ST-01"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.1 view 5",
+   "sheetId": "ID-3.1",
+   "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "T-01.1"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 views 4-7",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-10"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.1 view 5",
+   "sheetId": "ID-3.1",
+   "driveId": "1316ira7d_X_JGm1w8_beaFsKbYF8m89l",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-11"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 views 4-7; finish schedule p.66",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-14"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list + space table; A510.3 keyed note 7",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "814"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 views 4-7 / A701 elevations 4-7",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "itemId": "x_170f36bd1a"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 views 4-7 / A701 elevations 4-7",
+   "sheetId": "A701",
+   "driveId": "1nUiICOJzVKofUezG6x2jSjHhi97StqRY",
+   "title": "Interior Elevations (Architectural set)",
+   "itemId": "x_170f36bd1a"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 detail 03 + A120; ID-1.6; finish schedule p.8",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "ACT-01"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 detail 03 + A120; ID-1.6; finish schedule p.8",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "code": "ACT-01"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2 detail 03 + A120; ID-1.6; finish schedule p.8",
+   "sheetId": "ID-1.6",
+   "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+   "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)",
+   "code": "ACT-01"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A120 + A510.2 (both tag the surround 9'-3\")",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_a327948147"
+  },
+  {
+   "room": "023",
+   "kind": "plan",
+   "evidence": "src provenance: A120 + A510.2 (both tag the surround 9'-3\")",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_a327948147"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list + space table",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "406"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list + space table",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "407"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "408"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 60",
+   "sheetId": "A510.1",
+   "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+   "title": "Enlarged Lobby – Const. Plan (Architectural set)",
+   "code": "KN 60"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3; ID-1.7",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-109"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3; ID-1.7",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "PA-109"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 views 1-3",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "PT-03"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 views 8-10",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "PT-04"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 views 1-3",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "RB-10"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 views 1-3",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "RB-12"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 view 8; A904",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "SF-05"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 view 8; A904",
+   "sheetId": "A904",
+   "driveId": "1DqwsYfF8gBQksKXG0iZRDGZSKG9b94fI",
+   "title": "Millwork – Guest Laundry & Window Perch (Architectural set)",
+   "code": "SF-05"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 views 1-3; finish schedule p.41",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "ST-01"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 views 8-10",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "T-01.1"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "T-01"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.3 views 1-3; finish schedule p.62",
+   "sheetId": "ID-3.3",
+   "driveId": "11i2T1efMI7sm61sKcJH1gi4nxKrgA6ac",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-10"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A904 line 40",
+   "sheetId": "A904",
+   "driveId": "1DqwsYfF8gBQksKXG0iZRDGZSKG9b94fI",
+   "title": "Millwork – Guest Laundry & Window Perch (Architectural set)",
+   "code": "WC-11"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 views 8-10",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-13"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A904",
+   "sheetId": "A904",
+   "driveId": "1DqwsYfF8gBQksKXG0iZRDGZSKG9b94fI",
+   "title": "Millwork – Guest Laundry & Window Perch (Architectural set)",
+   "itemId": "x_4a473fc5a9"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_84d234fc74"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 view 9",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "itemId": "x_a4f9bf65d0"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A904 (governs); ID-4.6 corroborates",
+   "sheetId": "A904",
+   "driveId": "1DqwsYfF8gBQksKXG0iZRDGZSKG9b94fI",
+   "title": "Millwork – Guest Laundry & Window Perch (Architectural set)",
+   "itemId": "x_b2a4a88c41"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A904 (governs); ID-4.6 corroborates",
+   "sheetId": "ID-4.6",
+   "driveId": "1jmQ00HRJm6GDY5rvJL0ZYxMiGnnLXinU",
+   "title": "Millwork — Guest Laundry & Window Perch (RK FF&E Locations ID set)",
+   "itemId": "x_b2a4a88c41"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A120 (painted-gyp field hatch, no discrete tag) + A510.2 (9'-3\")",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_ddeba610cf"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A120 (painted-gyp field hatch, no discrete tag) + A510.2 (9'-3\")",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_ddeba610cf"
+  },
+  {
+   "room": "024",
+   "kind": "plan",
+   "evidence": "src provenance: A700 note 36",
+   "sheetId": "A700",
+   "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+   "title": "Interior Elevations (Architectural set)",
+   "itemId": "x_e2d9168780"
+  },
+  {
+   "room": "025",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "025",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 / A511.2 (absence)",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "itemId": "x_0d9bc68780"
+  },
+  {
+   "room": "025",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 / A511.2 (absence)",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "itemId": "x_0d9bc68780"
+  },
+  {
+   "room": "025",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_ce80761f08"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521 RCP",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "EX"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-01"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-06"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-06A"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-06B"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-06C"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "HD-09A"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "HD-09B"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "HD-09C"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-12"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-13"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-15"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "HD-19"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "HD-7B"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521 vanity elevation; ID-3.4",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "PA-202"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521 vanity elevation; ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "PA-202"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521 vanity elevation; ID-3.4",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "PA-502"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521 vanity elevation; ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "PA-502"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521 vs A510.2",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521 vs A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521 RCP",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "R"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521 elevations 4-7",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "T-01.1"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 ('tile, see A521')",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "T-01"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 ('tile, see A521')",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "T-01"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521 elevations",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "T-10"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521 RCP",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "W"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.4",
+   "sheetId": "ID-3.4",
+   "driveId": "1Mxi5WFW3IsvCr5rsOsexTYzC1CCeDeb5",
+   "title": "Enlarged Public Restroom Elevation (RK FF&E Locations ID set)",
+   "code": "WC-02"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A521 elevations",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "code": "WC-11"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A120 vs A510.2 vs A521",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_47eeb03433"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A120 vs A510.2 vs A521",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "itemId": "x_47eeb03433"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A120 vs A510.2 vs A521",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "itemId": "x_47eeb03433"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 43 (reprinted on A521); A521 view 1 + vanity elevation; A521 blocking elevations 'PROVIDE BLOCKING FOR VANITY AS NEEDED'",
+   "sheetId": "A510.1",
+   "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+   "title": "Enlarged Lobby – Const. Plan (Architectural set)",
+   "itemId": "x_7763127bea"
+  },
+  {
+   "room": "027",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 43 (reprinted on A521); A521 view 1 + vanity elevation; A521 blocking elevations 'PROVIDE BLOCKING FOR VANITY AS NEEDED'",
+   "sheetId": "A521",
+   "driveId": "11RGPG0D74NMJpbH-EUkzgHYTvO4cfVsR",
+   "title": "Enlarged Public Restroom (Architectural set)",
+   "itemId": "x_7763127bea"
+  },
+  {
+   "room": "028",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "028",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 / A511.2 (absence)",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "itemId": "x_0d9bc68780"
+  },
+  {
+   "room": "028",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 / A511.2 (absence)",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "itemId": "x_0d9bc68780"
+  },
+  {
+   "room": "028",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_4c6a64cef8"
+  },
+  {
+   "room": "029",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_4092da2ad2"
+  },
+  {
+   "room": "029",
+   "kind": "plan",
+   "evidence": "src provenance: A511.2 keyed note 4",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "itemId": "x_76592963e3"
+  },
+  {
+   "room": "030",
+   "kind": "plan",
+   "evidence": "src provenance: A511.2 keyed note 4",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "itemId": "x_76592963e3"
+  },
+  {
+   "room": "030",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_814c39c64b"
+  },
+  {
+   "room": "031",
+   "kind": "plan",
+   "evidence": "src provenance: A511.1 / A511.2",
+   "sheetId": "A511.1",
+   "driveId": "1Ut5azBua2hNCpkLf5-IqqV-w8Byhb7k4",
+   "title": "Enlarged Public Area – Const. Plan (Architectural set)",
+   "code": "32"
+  },
+  {
+   "room": "031",
+   "kind": "plan",
+   "evidence": "src provenance: A511.1 / A511.2",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "code": "32"
+  },
+  {
+   "room": "031",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.6",
+   "sheetId": "ID-1.6",
+   "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+   "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "031",
+   "kind": "plan",
+   "evidence": "src provenance: A511.2",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "code": "VCT-10"
+  },
+  {
+   "room": "031",
+   "kind": "plan",
+   "evidence": "src provenance: A511.1 keyed note 18",
+   "sheetId": "A511.1",
+   "driveId": "1Ut5azBua2hNCpkLf5-IqqV-w8Byhb7k4",
+   "title": "Enlarged Public Area – Const. Plan (Architectural set)",
+   "code": "KN 18"
+  },
+  {
+   "room": "031",
+   "kind": "plan",
+   "evidence": "src provenance: A511.1 keyed note 33",
+   "sheetId": "A511.1",
+   "driveId": "1Ut5azBua2hNCpkLf5-IqqV-w8Byhb7k4",
+   "title": "Enlarged Public Area – Const. Plan (Architectural set)",
+   "code": "KN 33"
+  },
+  {
+   "room": "031",
+   "kind": "plan",
+   "evidence": "src provenance: A511.1 keyed note 6 (x2 tags)",
+   "sheetId": "A511.1",
+   "driveId": "1Ut5azBua2hNCpkLf5-IqqV-w8Byhb7k4",
+   "title": "Enlarged Public Area – Const. Plan (Architectural set)",
+   "code": "KN 6"
+  },
+  {
+   "room": "031",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_9f9686629b"
+  },
+  {
+   "room": "031",
+   "kind": "plan",
+   "evidence": "src provenance: A511.1 keyed note 35",
+   "sheetId": "A511.1",
+   "driveId": "1Ut5azBua2hNCpkLf5-IqqV-w8Byhb7k4",
+   "title": "Enlarged Public Area – Const. Plan (Architectural set)",
+   "code": "KN 35"
+  },
+  {
+   "room": "032",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 / A511.2",
+   "sheetId": "A510.1",
+   "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+   "title": "Enlarged Lobby – Const. Plan (Architectural set)",
+   "code": "14"
+  },
+  {
+   "room": "032",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 / A511.2",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "code": "14"
+  },
+  {
+   "room": "032",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.6 / ID-1.11",
+   "sheetId": "ID-1.6",
+   "driveId": "1XtWjEtctV6s1ssf5U1-9nDadNSxHSUoK",
+   "title": "Enlarged Lobby RCP (RK FF&E Locations ID set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "032",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.6 / ID-1.11",
+   "sheetId": "ID-1.11",
+   "driveId": "1JJhMfJ3o7L_4ZVc9Ph2E83d0BTqN7DTp",
+   "title": "Enlarged Public Area RCP (RK FF&E Locations ID set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "032",
+   "kind": "plan",
+   "evidence": "src provenance: A511.2",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "code": "VCT-10"
+  },
+  {
+   "room": "032",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_7a0ee13839"
+  },
+  {
+   "room": "032",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 17; placed at Housekeeping 032 per ffe-public.md SS12 (A510.1/A511.2)",
+   "sheetId": "A510.1",
+   "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+   "title": "Enlarged Lobby – Const. Plan (Architectural set)",
+   "code": "KN 17"
+  },
+  {
+   "room": "032",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 keyed note 17; placed at Housekeeping 032 per ffe-public.md SS12 (A510.1/A511.2)",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "code": "KN 17"
+  },
+  {
+   "room": "033",
+   "kind": "plan",
+   "evidence": "src provenance: A511.2 keyed note 4",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "itemId": "x_76592963e3"
+  },
+  {
+   "room": "033",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_a271ff0b92"
+  },
+  {
+   "room": "100",
+   "kind": "plan",
+   "evidence": "src provenance: RK ID-1.1 section 4, Change 1 - red revision cloud, hatched landing, red leader to callout",
+   "sheetId": "ID-1.1",
+   "driveId": "1M4s0tMdUD4L89clif8R9-3-kQYyC_XWi",
+   "title": "First Floor Overall Plan (RK FF&E Locations ID set)",
+   "code": "T-01.1"
+  },
+  {
+   "room": "100",
+   "kind": "plan",
+   "evidence": "src provenance: RK ID-1.1 clarification section 4, Change 1 - red revision cloud, hatched landing, red leader to callout",
+   "sheetId": "ID-1.1",
+   "driveId": "1M4s0tMdUD4L89clif8R9-3-kQYyC_XWi",
+   "title": "First Floor Overall Plan (RK FF&E Locations ID set)",
+   "code": "T-01"
+  },
+  {
+   "room": "100",
+   "kind": "plan",
+   "evidence": "src provenance: A431",
+   "sheetId": "A431",
+   "driveId": "160S5G0KO-9-u6Vc_u9htmRHTXdoBK6dy",
+   "title": "Stair #1 Plans / Sections (Architectural set)",
+   "itemId": "x_7e004f43fb"
+  },
+  {
+   "room": "100",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_a6b4fb8b08"
+  },
+  {
+   "room": "100",
+   "kind": "plan",
+   "evidence": "src provenance: RK ID-1.1 is Floor 1 only",
+   "sheetId": "ID-1.1",
+   "driveId": "1M4s0tMdUD4L89clif8R9-3-kQYyC_XWi",
+   "title": "First Floor Overall Plan (RK FF&E Locations ID set)",
+   "itemId": "x_d742fa366d"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.13 view 2; ID-3.2 views 11-15; A701; finish schedule p.13",
+   "sheetId": "ID-1.13",
+   "driveId": "1U_tNsW8hkCOvVODovNol8kKmo2zkeZfE",
+   "title": "Typical Corridor & Elevator Lobby — Finish/FF&E (RK FF&E Locations ID set)",
+   "code": "CPT-10.1"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.13 view 2; ID-3.2 views 11-15; A701; finish schedule p.13",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "CPT-10.1"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.13 view 2; ID-3.2 views 11-15; A701; finish schedule p.13",
+   "sheetId": "A701",
+   "driveId": "1nUiICOJzVKofUezG6x2jSjHhi97StqRY",
+   "title": "Interior Elevations (Architectural set)",
+   "code": "CPT-10.1"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: A511.2 (floor 1) / A511.3 (typical); ID-1.12 / ID-1.13; finish schedule p.12",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "code": "CPT-10"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: A511.2 (floor 1) / A511.3 (typical); ID-1.12 / ID-1.13; finish schedule p.12",
+   "sheetId": "A511.3",
+   "driveId": "1-ZQJyAz2_TE-0Ar_GmA0ng0heV71VOp_",
+   "title": "Enlarged Public & Typ. Fl Finish & Power Plan (Architectural set)",
+   "code": "CPT-10"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: A511.2 (floor 1) / A511.3 (typical); ID-1.12 / ID-1.13; finish schedule p.12",
+   "sheetId": "ID-1.12",
+   "driveId": "1hg5M7fTi780pI76i93FqsuMSiQCjsEHr",
+   "title": "Enlarged Public Area Finish Plan (RK FF&E Locations ID set)",
+   "code": "CPT-10"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.11 / ID-1.15 / ID-1.16; A120-A123 keyed note 6 'sconce placement' sits next to the PA-204 tag on every floor",
+   "sheetId": "ID-1.11",
+   "driveId": "1JJhMfJ3o7L_4ZVc9Ph2E83d0BTqN7DTp",
+   "title": "Enlarged Public Area RCP (RK FF&E Locations ID set)",
+   "code": "PA-204"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.11 / ID-1.15 / ID-1.16; A120-A123 keyed note 6 'sconce placement' sits next to the PA-204 tag on every floor",
+   "sheetId": "ID-1.15",
+   "driveId": "1sKWNLQLS57J-EI0R_UHnqtxvb2VN_5wD",
+   "title": "Typical Corridor RCP — West (RK FF&E Locations ID set)",
+   "code": "PA-204"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.11 / ID-1.15 / ID-1.16; A120-A123 keyed note 6 'sconce placement' sits next to the PA-204 tag on every floor",
+   "sheetId": "ID-1.16",
+   "driveId": "1ESjkIiM6_iTPVb2MnfeuLwWF3Isj2rEt",
+   "title": "Typical Corridor RCP — East + Elevator Lobby (RK FF&E Locations ID set)",
+   "code": "PA-204"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.13 / ID-1.15 / ID-1.16",
+   "sheetId": "ID-1.13",
+   "driveId": "1U_tNsW8hkCOvVODovNol8kKmo2zkeZfE",
+   "title": "Typical Corridor & Elevator Lobby — Finish/FF&E (RK FF&E Locations ID set)",
+   "code": "PA-400"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.13 / ID-1.15 / ID-1.16",
+   "sheetId": "ID-1.15",
+   "driveId": "1sKWNLQLS57J-EI0R_UHnqtxvb2VN_5wD",
+   "title": "Typical Corridor RCP — West (RK FF&E Locations ID set)",
+   "code": "PA-400"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.13 / ID-1.15 / ID-1.16",
+   "sheetId": "ID-1.16",
+   "driveId": "1ESjkIiM6_iTPVb2MnfeuLwWF3Isj2rEt",
+   "title": "Typical Corridor RCP — East + Elevator Lobby (RK FF&E Locations ID set)",
+   "code": "PA-400"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.11 / ID-1.15 / ID-1.16; A120-A123",
+   "sheetId": "ID-1.11",
+   "driveId": "1JJhMfJ3o7L_4ZVc9Ph2E83d0BTqN7DTp",
+   "title": "Enlarged Public Area RCP (RK FF&E Locations ID set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.11 / ID-1.15 / ID-1.16; A120-A123",
+   "sheetId": "ID-1.15",
+   "driveId": "1sKWNLQLS57J-EI0R_UHnqtxvb2VN_5wD",
+   "title": "Typical Corridor RCP — West (RK FF&E Locations ID set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.11 / ID-1.15 / ID-1.16; A120-A123",
+   "sheetId": "ID-1.16",
+   "driveId": "1ESjkIiM6_iTPVb2MnfeuLwWF3Isj2rEt",
+   "title": "Typical Corridor RCP — East + Elevator Lobby (RK FF&E Locations ID set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: A511.2 / A511.3 (tagged repeatedly along the corridor); ID-1.12 / ID-1.13; finish schedule p.62",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "code": "WC-10"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: A511.2 / A511.3 (tagged repeatedly along the corridor); ID-1.12 / ID-1.13; finish schedule p.62",
+   "sheetId": "A511.3",
+   "driveId": "1-ZQJyAz2_TE-0Ar_GmA0ng0heV71VOp_",
+   "title": "Enlarged Public & Typ. Fl Finish & Power Plan (Architectural set)",
+   "code": "WC-10"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: A511.2 / A511.3 (tagged repeatedly along the corridor); ID-1.12 / ID-1.13; finish schedule p.62",
+   "sheetId": "ID-1.12",
+   "driveId": "1hg5M7fTi780pI76i93FqsuMSiQCjsEHr",
+   "title": "Enlarged Public Area Finish Plan (RK FF&E Locations ID set)",
+   "code": "WC-10"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.12",
+   "sheetId": "ID-1.12",
+   "driveId": "1hg5M7fTi780pI76i93FqsuMSiQCjsEHr",
+   "title": "Enlarged Public Area Finish Plan (RK FF&E Locations ID set)",
+   "itemId": "x_70e2792cf2"
+  },
+  {
+   "room": "121",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_abad68b9d3"
+  },
+  {
+   "room": "137",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (137); description from ID-1.13",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "PA-501"
+  },
+  {
+   "room": "137",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 (137); description from ID-1.13",
+   "sheetId": "ID-1.13",
+   "driveId": "1U_tNsW8hkCOvVODovNol8kKmo2zkeZfE",
+   "title": "Typical Corridor & Elevator Lobby — Finish/FF&E (RK FF&E Locations ID set)",
+   "code": "PA-501"
+  },
+  {
+   "room": "137",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 views 1-3; A701",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "PT-04"
+  },
+  {
+   "room": "137",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 views 1-3; A701",
+   "sheetId": "A701",
+   "driveId": "1nUiICOJzVKofUezG6x2jSjHhi97StqRY",
+   "title": "Interior Elevations (Architectural set)",
+   "code": "PT-04"
+  },
+  {
+   "room": "137",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "137",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 views 1-3",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "T-01.1"
+  },
+  {
+   "room": "137",
+   "kind": "plan",
+   "evidence": "src provenance: A511.3; ID-3.2; ID-1.13 view 2; finish schedule p.62 'Elevator Lobby'",
+   "sheetId": "A511.3",
+   "driveId": "1-ZQJyAz2_TE-0Ar_GmA0ng0heV71VOp_",
+   "title": "Enlarged Public & Typ. Fl Finish & Power Plan (Architectural set)",
+   "code": "WC-10"
+  },
+  {
+   "room": "137",
+   "kind": "plan",
+   "evidence": "src provenance: A511.3; ID-3.2; ID-1.13 view 2; finish schedule p.62 'Elevator Lobby'",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-10"
+  },
+  {
+   "room": "137",
+   "kind": "plan",
+   "evidence": "src provenance: A511.3; ID-3.2; ID-1.13 view 2; finish schedule p.62 'Elevator Lobby'",
+   "sheetId": "ID-1.13",
+   "driveId": "1U_tNsW8hkCOvVODovNol8kKmo2zkeZfE",
+   "title": "Typical Corridor & Elevator Lobby — Finish/FF&E (RK FF&E Locations ID set)",
+   "code": "WC-10"
+  },
+  {
+   "room": "137",
+   "kind": "plan",
+   "evidence": "src provenance: ID-3.2 views 1-3; finish schedule p.63",
+   "sheetId": "ID-3.2",
+   "driveId": "18AxUoPTJN7U-fl7N0u6JbTZjUy8b8W88",
+   "title": "Public Space Interior Elevations (RK FF&E Locations ID set)",
+   "code": "WC-11"
+  },
+  {
+   "room": "137",
+   "kind": "plan",
+   "evidence": "src provenance: A700 note 14",
+   "sheetId": "A700",
+   "driveId": "15oFA11Nu6-l5hYef8wnvVIgdbYmqJdts",
+   "title": "Interior Elevations (Architectural set)",
+   "itemId": "x_227ff49017"
+  },
+  {
+   "room": "137",
+   "kind": "plan",
+   "evidence": "src provenance: A701 elevations 1-3",
+   "sheetId": "A701",
+   "driveId": "1nUiICOJzVKofUezG6x2jSjHhi97StqRY",
+   "title": "Interior Elevations (Architectural set)",
+   "itemId": "x_5fe6f58ba3"
+  },
+  {
+   "room": "137",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3; details 03/A510.1 & 04/A510.1",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "821"
+  },
+  {
+   "room": "137",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3; details 03/A510.1 & 04/A510.1",
+   "sheetId": "A510.1",
+   "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+   "title": "Enlarged Lobby – Const. Plan (Architectural set)",
+   "code": "821"
+  },
+  {
+   "room": "137",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_f8f7ae2520"
+  },
+  {
+   "room": "139",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "432"
+  },
+  {
+   "room": "139",
+   "kind": "plan",
+   "evidence": "src provenance: A510.2",
+   "sheetId": "A510.2",
+   "driveId": "121AJubkvvrVJLIcJWWSsN024qCaQbCZO",
+   "title": "Enlarged Lobby – Reflected Ceiling Plan (Architectural set)",
+   "code": "PT-07"
+  },
+  {
+   "room": "139",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 and A511.2 - two architectural sheets agree",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "T-01"
+  },
+  {
+   "room": "139",
+   "kind": "plan",
+   "evidence": "src provenance: A510.4 and A511.2 - two architectural sheets agree",
+   "sheetId": "A511.2",
+   "driveId": "1QrR0t8wyBfrwYKicd3GSF8YZ46KWEK8v",
+   "title": "Enlarged Public – Finish & Power Plan (Architectural set)",
+   "code": "T-01"
+  },
+  {
+   "room": "139",
+   "kind": "plan",
+   "evidence": "src provenance: A120",
+   "sheetId": "A120",
+   "driveId": "1_rVaAzgaqf0QfyfUc83_IXYnrO4eDOpP",
+   "title": "Reflected Ceiling Plan – First Floor (Architectural set)",
+   "itemId": "x_473d4f985f"
+  },
+  {
+   "room": "141",
+   "kind": "plan",
+   "evidence": "src provenance: RK ID-1.1 section 4, Change 2 - second red cloud at the south (lower) end adjacent to the door",
+   "sheetId": "ID-1.1",
+   "driveId": "1M4s0tMdUD4L89clif8R9-3-kQYyC_XWi",
+   "title": "First Floor Overall Plan (RK FF&E Locations ID set)",
+   "code": "T-01.1"
+  },
+  {
+   "room": "141",
+   "kind": "plan",
+   "evidence": "src provenance: RK ID-1.1 clarification section 4, Change 2 - second red cloud at the south (lower) end adjacent to the door",
+   "sheetId": "ID-1.1",
+   "driveId": "1M4s0tMdUD4L89clif8R9-3-kQYyC_XWi",
+   "title": "First Floor Overall Plan (RK FF&E Locations ID set)",
+   "code": "T-01"
+  },
+  {
+   "room": "141",
+   "kind": "plan",
+   "evidence": "src provenance: RK ID-1.1 is Floor 1 only",
+   "sheetId": "ID-1.1",
+   "driveId": "1M4s0tMdUD4L89clif8R9-3-kQYyC_XWi",
+   "title": "First Floor Overall Plan (RK FF&E Locations ID set)",
+   "itemId": "x_2fdd636083"
+  },
+  {
+   "room": "141",
+   "kind": "plan",
+   "evidence": "src provenance: A510.1 note 58",
+   "sheetId": "A510.1",
+   "driveId": "1b4xuAQs5CQOcY4GrOdsjXqE2ViY7fqz6",
+   "title": "Enlarged Lobby – Const. Plan (Architectural set)",
+   "itemId": "x_41fb946a1e"
+  },
+  {
+   "room": "141",
+   "kind": "plan",
+   "evidence": "src provenance: A433",
+   "sheetId": "A433",
+   "driveId": "18hj9wTWerusWGZOwr6X2G1PajGRUgqhm",
+   "title": "Stair #2 Plans / Sections (Architectural set)",
+   "itemId": "x_f01833128f"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: A510.3 furnishing list",
+   "sheetId": "A510.3",
+   "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np",
+   "title": "Enlarged Lobby – Furniture & Equipment Plan (Architectural set)",
+   "code": "400"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "ID-1.9",
+   "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+   "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)",
+   "code": "OF-700"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "code": "OF-700"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "ID-1.9",
+   "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+   "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)",
+   "code": "OF-701"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "code": "OF-701"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "ID-1.9",
+   "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+   "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)",
+   "code": "OF-702"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "code": "OF-702"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "ID-1.9",
+   "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+   "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)",
+   "code": "OF-703"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "code": "OF-703"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "ID-1.9",
+   "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+   "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)",
+   "code": "OF-704"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "code": "OF-704"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "ID-1.9",
+   "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+   "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)",
+   "code": "OF-705"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "code": "OF-705"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "ID-1.9",
+   "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+   "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)",
+   "code": "OF-707"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "code": "OF-707"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "ID-1.9",
+   "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+   "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)",
+   "code": "OF-708"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "code": "OF-708"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "ID-1.9",
+   "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+   "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)",
+   "code": "OF-709"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "code": "OF-709"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "ID-1.9",
+   "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+   "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)",
+   "code": "OF-711"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "code": "OF-711"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "ID-1.9",
+   "driveId": "1Ol90ZteTsw8gDCkTv9RtB813A8CNt563",
+   "title": "Enlarged Outdoor Lounge F&E Plan (RK FF&E Locations ID set)",
+   "code": "OF-716"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.9 (governs); AS102 corroborates",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "code": "OF-716"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: AS102; AS100 legend",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "itemId": "x_00af97bf2a"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: AS102; AS100 legend",
+   "sheetId": "AS100",
+   "driveId": "1_pU83H311K35wPSlqkFrCJ1GnIn86YIZ",
+   "title": "Site Plan (Architectural set)",
+   "itemId": "x_00af97bf2a"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: AS102",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "itemId": "x_3d8d3f39ff"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: AS102; AS103",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "itemId": "x_7b93a30816"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: AS102; AS103",
+   "sheetId": "AS103",
+   "driveId": "1u_0DezOvS54KnUT4UMTyPlGhe-CusQJi",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "itemId": "x_7b93a30816"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: AS103; AS102 keyed note 38",
+   "sheetId": "AS103",
+   "driveId": "1u_0DezOvS54KnUT4UMTyPlGhe-CusQJi",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "itemId": "x_e42aa928dc"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: AS103; AS102 keyed note 38",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "itemId": "x_e42aa928dc"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: AS102 / AS105",
+   "sheetId": "AS102",
+   "driveId": "1HOomICHx4x2uH1jWLHoppW2XzA9Bz8dN",
+   "title": "Enlarged Porte Cochere & Outdoor Lounge (Architectural set)",
+   "itemId": "x_eb7a3fa3bd"
+  },
+  {
+   "room": "ZONE-A",
+   "kind": "plan",
+   "evidence": "src provenance: AS102 / AS105",
+   "sheetId": "AS105",
+   "driveId": "1pAe2H2xSusx9DCJ4gH7a_qREfk0LGKPE",
+   "title": "Enlarged Outdoor Pool & Patio – Elev. & Sections (Rev 04/09/26) (Architectural set)",
+   "itemId": "x_eb7a3fa3bd"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 only; ABSENT from AS104",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "CUST-OF-720"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 only; ABSENT from AS104",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "CUST-OF-720"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 (4) and AS104 (4) agree on the base",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "OF-705"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 (4) and AS104 (4) agree on the base",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "OF-705"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS104 shows 4 + 3 = 7 against ID-1.7's 4",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "OF-705"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS104 shows 4 + 3 = 7 against ID-1.7's 4",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "OF-705"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 only; absent from AS104",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "OF-705.ADA"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 only; absent from AS104",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "OF-705.ADA"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS104 + AS105 only; ABSENT from ID-1.7",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "OF-706"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS104 + AS105 only; ABSENT from ID-1.7",
+   "sheetId": "AS105",
+   "driveId": "1pAe2H2xSusx9DCJ4gH7a_qREfk0LGKPE",
+   "title": "Enlarged Outdoor Pool & Patio – Elev. & Sections (Rev 04/09/26) (Architectural set)",
+   "code": "OF-706"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS104 + AS105 only; ABSENT from ID-1.7",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "OF-706"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 (6); AS104 (x6) agree",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "OF-710"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 (6); AS104 (x6) agree",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "OF-710"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 8/2/4/4 = 18; AS104 8+4+4+2 = 18 - agree on 18",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "OF-711"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 8/2/4/4 = 18; AS104 8+4+4+2 = 18 - agree on 18",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "OF-711"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 and AS104 both tag it; NO multiplier on either sheet",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "OF-712"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 and AS104 both tag it; NO multiplier on either sheet",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "OF-712"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 (4); AS104 (x4) agree",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "OF-713"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 (4); AS104 (x4) agree",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "OF-713"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 (2); AS104 (x2) agree",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "OF-714"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 (2); AS104 (x2) agree",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "OF-714"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS104 2 + 1 = 3 (base)",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "OF-715"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 shows 5 against AS104's 3",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "OF-715"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 shows 5 against AS104's 3",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "OF-715"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 and AS104 both tag it; no multiplier",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "OF-718"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 and AS104 both tag it; no multiplier",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "OF-718"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 only; ABSENT from AS104",
+   "sheetId": "ID-1.7",
+   "driveId": "1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---",
+   "title": "Enlarged Lobby Furniture & Equipment Plan (RK FF&E Locations ID set)",
+   "code": "OF-719"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.7 only; ABSENT from AS104",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "OF-719"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.8; A510.4 line 43 (3 tagged locations along the south storefront wall base / thresholds); finish schedule p.41",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "ST-01"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.8; A510.4 line 43 (3 tagged locations along the south storefront wall base / thresholds); finish schedule p.41",
+   "sheetId": "A510.4",
+   "driveId": "1rqTR47cfydnoupsxnV63YG62CgTv3GhL",
+   "title": "Enlarged Lobby – Finish and Power Plan (Architectural set)",
+   "code": "ST-01"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.8",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "TL-11"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.8",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "TL-12"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: ID-1.8",
+   "sheetId": "ID-1.8",
+   "driveId": "10r860yPcXYRLDKSfxa6Y5NdGgYtiap6h",
+   "title": "Enlarged Lobby Finish Plan (RK FF&E Locations ID set)",
+   "code": "TL-14"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS105",
+   "sheetId": "AS105",
+   "driveId": "1pAe2H2xSusx9DCJ4gH7a_qREfk0LGKPE",
+   "title": "Enlarged Outdoor Pool & Patio – Elev. & Sections (Rev 04/09/26) (Architectural set)",
+   "itemId": "x_2d00e7dd42"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS104",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "T-04"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS104",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "itemId": "x_3f9098c5aa"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS104",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "T-05"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS104; AS105",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "itemId": "x_4cb07f303f"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS104; AS105",
+   "sheetId": "AS105",
+   "driveId": "1pAe2H2xSusx9DCJ4gH7a_qREfk0LGKPE",
+   "title": "Enlarged Outdoor Pool & Patio – Elev. & Sections (Rev 04/09/26) (Architectural set)",
+   "itemId": "x_4cb07f303f"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS104; AS104.1",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "itemId": "x_5dadc5caf0"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS104; AS104.1",
+   "sheetId": "AS104.1",
+   "driveId": "1HQRTr0XrgvDFh6rdTnBIDxSDTTW4khcd",
+   "title": "Enlarged Outdoor Pool & Patio – Power & R.C. Plan (Architectural set)",
+   "itemId": "x_5dadc5caf0"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS105; AS104 keyed note 22",
+   "sheetId": "AS105",
+   "driveId": "1pAe2H2xSusx9DCJ4gH7a_qREfk0LGKPE",
+   "title": "Enlarged Outdoor Pool & Patio – Elev. & Sections (Rev 04/09/26) (Architectural set)",
+   "itemId": "x_5fd8a3db15"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS105; AS104 keyed note 22",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "itemId": "x_5fd8a3db15"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS105 keyed note 40 / material legend; AS104 keyed note 22",
+   "sheetId": "AS105",
+   "driveId": "1pAe2H2xSusx9DCJ4gH7a_qREfk0LGKPE",
+   "title": "Enlarged Outdoor Pool & Patio – Elev. & Sections (Rev 04/09/26) (Architectural set)",
+   "itemId": "x_84406b9d6c"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS105 keyed note 40 / material legend; AS104 keyed note 22",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "itemId": "x_84406b9d6c"
+  },
+  {
+   "room": "ZONE-B",
+   "kind": "plan",
+   "evidence": "src provenance: AS104",
+   "sheetId": "AS104",
+   "driveId": "1SvYWXNyjrl99gkxndPE8GQJvECxReIBY",
+   "title": "Enlarged Outdoor Pool & Patio Plan, Pool Section (Rev 04/09/26) (Architectural set)",
+   "code": "SF-01"
+  }
+ ],
+ "gaps": []
+}

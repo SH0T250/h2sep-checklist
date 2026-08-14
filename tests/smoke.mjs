@@ -314,8 +314,8 @@ const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromi
   ok(listText.indexOf('Paint') >= 0 && listText.indexOf('Bath Accessory') >= 0
      && listText.indexOf('Paint') < listText.indexOf('FF&E'),
      'trades sort above FF&E on the space screen');
-  ok(await page.locator('.rh-right a[href*="refs.html"]').count() === 0,
-     'space offers no submittal-refs button (guest-room data)');
+  ok(await page.locator('.rh-right a[href*="refs.html"]').count() === 1,
+     'space offers the submittal-refs button (spaces have refs since refs-spaces.json)');
 
   // Check-off works on a space doc
   const spaceRow = page.locator('.item-row').first();

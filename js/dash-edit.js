@@ -328,24 +328,29 @@ function refsSection(room, item, itemId) {
     </button>`).join('');
 }
 
+// One opener for every reference on the board — item sheets and the inventory
+// attachments list alike: snippet images stack a viewer, submittals open Drive.
+function openRef(r) {
+  if (!r) return;
+  if (r.kind === 'plan' && r.snippet) {
+    const v = sheet(`<img class="dref-img" src="./refs/${esc(String(r.snippet).replace(/^(\.\/)?(refs\/)?/, ''))}"
+      alt="${esc(r.title + (r.sheetId ? ' — sheet ' + r.sheetId : ''))}">`,
+      { title: r.title + (r.sheetId ? ' · ' + r.sheetId : ''), stack: true, wide: true });
+    v.querySelector('.dref-img').addEventListener('error', () => {
+      v.querySelector('.dsheet-body').innerHTML = `<div class="dempty">Snippet image not available on this device yet.</div>`;
+    });
+  } else if (r.driveId) {
+    window.open('https://drive.google.com/file/d/' + encodeURIComponent(r.driveId) + '/view', '_blank', 'noopener');
+  } else {
+    toast(r.title);
+  }
+}
+
 function wireRefs(s, room, item, itemId) {
   const refs = refsFor(room.number, item, itemId, room.typeLabel || '');
   s.querySelectorAll('[data-refi]').forEach(b => b.addEventListener('click', (e) => {
     e.stopPropagation();
-    const r = refs[Number(b.dataset.refi)];
-    if (!r) return;
-    if (r.kind === 'plan' && r.snippet) {
-      const v = sheet(`<img class="dref-img" src="./refs/${esc(String(r.snippet).replace(/^(\.\/)?(refs\/)?/, ''))}"
-        alt="${esc(r.title + (r.sheetId ? ' — sheet ' + r.sheetId : ''))}">`,
-        { title: r.title + (r.sheetId ? ' · ' + r.sheetId : ''), stack: true, wide: true });
-      v.querySelector('.dref-img').addEventListener('error', () => {
-        v.querySelector('.dsheet-body').innerHTML = `<div class="dempty">Snippet image not available on this device yet.</div>`;
-      });
-    } else if (r.driveId) {
-      window.open('https://drive.google.com/file/d/' + encodeURIComponent(r.driveId) + '/view', '_blank', 'noopener');
-    } else {
-      toast(r.title);
-    }
+    openRef(refs[Number(b.dataset.refi)]);
   }));
 }
 
@@ -660,8 +665,62 @@ export function openRoomSheet(roomNumber) {
 
 // -------------------------------------------------------- inventory panel
 
+// ---- inventory attachments (cut sheets / submittals / plan snippets) ----
+// Aggregated per inventory row from the SAME per-(room, item) join the item
+// sheets use. That per-room join matters: one code can be different products
+// in different spaces (kitchen-equipment "01" is a reach-in freezer in Food
+// Prep and a refrigeration rack in the walk-in), so a ref is only credited to
+// the rooms whose own items carry it — and the list says where each document
+// applies whenever it doesn't cover the whole row.
+function buildRowRefs(docs) {
+  const agg = new Map();  // inventoryKey -> Map(refKey -> { ref, rooms:Set })
+  for (const room of docs) {
+    if (!room || room.deleted) continue;
+    for (const [itemId, item] of Object.entries(room.items || {})) {
+      if (!item || item.deleted) continue;
+      const key = bulk.inventoryKey(item);
+      let m = agg.get(key);
+      if (!m) { m = new Map(); agg.set(key, m); }
+      for (const r of refsFor(room.number, item, itemId, room.typeLabel || '')) {
+        const rk = r.kind + '|' + (r.driveId || r.snippet || '') + '|' + (r.sheetId || '') + '|' + r.title;
+        let e = m.get(rk);
+        if (!e) { e = { ref: r, rooms: new Set() }; m.set(rk, e); }
+        e.rooms.add(room.number);
+      }
+    }
+  }
+  return agg;
+}
+
+// Untagged rows have no short code — their "label" is the full item sentence
+// (e.g. a procedural paint note), which would otherwise balloon the dialog
+// title into a multi-line paragraph. Codes are always short; only labels get
+// clipped.
+function titleClip(s, max = 60) {
+  return s.length > max ? s.slice(0, max - 1).trimEnd() + '…' : s;
+}
+
+function attachmentsSheet(row, entries) {
+  const list = [...entries.values()];
+  const s = sheet(list.map((e, i) => {
+    const where = e.rooms.size < row.rooms.size ? ' · ' + [...e.rooms].sort().join(', ') : '';
+    return `
+    <button class="dref" data-refi="${i}">
+      <span aria-hidden="true">${e.ref.kind === 'plan' ? '📐' : '📄'}</span>
+      <span class="dref-main">${esc(e.ref.title)}<em>${e.ref.kind === 'plan' ? 'Plan detail' : 'Submittal'}${e.ref.sheetId ? ' · sheet ' + esc(e.ref.sheetId) : ''}${esc(where)}</em></span>
+      <span aria-hidden="true">›</span>
+    </button>`;
+  }).join(''), { title: titleClip(row.code || row.label) + ' — attachments' });
+  s.querySelectorAll('[data-refi]').forEach(b => b.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const en = list[Number(b.dataset.refi)];
+    if (en) openRef(en.ref);
+  }));
+}
+
 export function renderInventory(container, docs) {
   const inv = bulk.buildInventory(docs);
+  const rowRefs = buildRowRefs(docs);
   const cats = [...new Set(inv.map(r => r.category || 'Other'))];
   const q = invSearch.trim().toLowerCase();
   const rows = inv.filter(r => {
@@ -683,7 +742,7 @@ export function renderInventory(container, docs) {
     </div>
     <div class="inv-scroll">
       <table class="tbl inv-tbl">
-        <thead><tr><th>Code</th><th>Item</th><th>Progress</th><th>Issues</th><th></th></tr></thead>
+        <thead><tr><th>Code</th><th>Item</th><th>Progress</th><th>Issues</th><th aria-label="Attachments">📎</th><th></th></tr></thead>
         <tbody>
           ${rows.map(r => `
           <tr data-key="${esc(r.key)}">
@@ -694,9 +753,12 @@ export function renderInventory(container, docs) {
               <span class="inv-nums">${r.checked}/${r.total}</span>
             </td>
             <td>${r.openIssues ? `<span class="ibadge">⚠ ${r.openIssues}</span>` : '<span class="inv-zero">—</span>'}</td>
+            <td class="inv-att">${(n => n
+              ? `<button class="dchip small att" data-att="${esc(r.key)}" aria-label="${n} attachment${n === 1 ? '' : 's'} for ${esc(r.code || r.label)}">📎 ${n}</button>`
+              : '<span class="inv-zero">—</span>')((rowRefs.get(r.key) || { size: 0 }).size)}</td>
             <td class="inv-act"><button class="dbtn tiny" data-bulk="${esc(r.key)}" aria-label="Bulk edit ${esc(r.code || r.label)}">BULK EDIT</button></td>
           </tr>`).join('')}
-          ${rows.length ? '' : '<tr><td colspan="5" class="empty-line">No items match.</td></tr>'}
+          ${rows.length ? '' : '<tr><td colspan="6" class="empty-line">No items match.</td></tr>'}
         </tbody>
       </table>
     </div>`;
@@ -717,6 +779,13 @@ export function renderInventory(container, docs) {
   container.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', () => {
     invCat = b.dataset.cat || null;
     renderInventory(container, editableDocs());
+  }));
+  // Attachments are informative — they open in view mode, no edit gate.
+  container.querySelectorAll('[data-att]').forEach(b => b.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const row = inv.find(r => r.key === b.dataset.att);
+    const entries = rowRefs.get(b.dataset.att);
+    if (row && entries && entries.size) attachmentsSheet(row, entries);
   }));
   container.querySelectorAll('[data-bulk]').forEach(b => b.addEventListener('click', (e) => {
     e.stopPropagation();

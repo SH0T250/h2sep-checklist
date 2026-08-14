@@ -4,7 +4,7 @@ import { esc, fmtWhen, roomStats, typeAbbrev, platform, vibrate, toast, roomSort
 import { SPACE_META } from './space-meta.js';
 import * as store from './store.js';
 import * as sheets from './sheets.js';
-import { refsFor } from './refs.js';
+import { refsFor, roomHasRefs } from './refs.js';
 import { getTheme, setTheme, toggleTheme } from './theme.js';
 import { APP_VERSION, MODEL_ROOMS } from './config.js';
 
@@ -456,6 +456,10 @@ export function renderRoom(el, number) {
   const openNotes = notes.filter(([, n]) => !n.resolved);
   const resolvedNotes = notes.filter(([, n]) => n.resolved);
   const meta = isSpace ? (SPACE_META[room.number] || {}) : {};
+  // Offer the references page only where it can actually show something. MEP
+  // punch docs never have refs; common-area spaces have them only on floors
+  // the refs pipeline has published (floor 1 today).
+  const hasRefs = !isMep && roomHasRefs(room);
 
   el.innerHTML = appBar({
     title: isMep ? 'MEP Punch · ' + mepBase
@@ -470,7 +474,7 @@ export function renderRoom(el, number) {
         <span class="rh-num">${isMep ? 'MEP ' + esc(mepBase)
           : isSpace ? esc(room.typeLabel || 'Space') : 'Room ' + esc(room.number)}</span>
         <span class="rh-right">
-        ${isSpace || isMep ? '' : `<a class="sheet-btn" href="./refs.html?room=${encodeURIComponent(room.number)}" aria-label="Submittals and plan references">📄</a>`}
+        ${hasRefs ? `<a class="sheet-btn" href="./refs.html?room=${encodeURIComponent(room.number)}" aria-label="Submittals and plan references">📄</a>` : ''}
         <a class="sheet-btn" href="./print.html?room=${encodeURIComponent(room.number)}" aria-label="Printable checklist sheet">🖨</a>
         ${!isMep && MODEL_ROOMS.includes(room.number) ? `<a class="sheet-btn" href="./room-3d.html?room=${encodeURIComponent(room.number)}" aria-label="3D room model">🧊</a>` : ''}
         <span class="rh-type">${isMep
@@ -554,12 +558,12 @@ export function renderRoom(el, number) {
   wireCommon(el);
 
   el.querySelector('[data-more]').addEventListener('click', () => {
-    // Spaces skip two entries: refs (submittal refs are guest-room data) and
-    // Room settings (its template picker has nothing valid to offer a space —
-    // restoring the Lobby "from template" could only ever mean a guest-room
-    // package, so the door is closed rather than guarded).
+    // Spaces skip one entry: Room settings (its template picker has nothing
+    // valid to offer a space — restoring the Lobby "from template" could only
+    // ever mean a guest-room package, so the door is closed rather than
+    // guarded). Refs are space data too since refs-spaces.json shipped.
     const sh = sheets.sheet(`
-      ${isSpace ? '' : `<a class="btn ghost full" href="./refs.html?room=${encodeURIComponent(room.number)}">📄 Submittals &amp; plan references</a>`}
+      ${hasRefs ? `<a class="btn ghost full" href="./refs.html?room=${encodeURIComponent(room.number)}">📄 Submittals &amp; plan references</a>` : ''}
       <a class="btn ghost full" href="./print.html?room=${encodeURIComponent(room.number)}">🖨 Printable sheet (for the door)</a>
       ${MODEL_ROOMS.includes(room.number) ? `<a class="btn ghost full" href="./room-3d.html?room=${encodeURIComponent(room.number)}">🧊 3D room model</a>` : ''}
       <button class="btn ghost full hidden" data-act="paper">📄 Original paper sheet (photo)</button>
