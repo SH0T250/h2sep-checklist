@@ -17,6 +17,7 @@ OpenConstructionERP (office face) + offline-first field PWA + BIM hub + director
 | `electrical-takeoff-workspace.md` | Contents of the Drive "Electrical Takeoff - 20232102" CAD workspace incl. fire-alarm device counts |
 | `lighting-order-report.html` | Client-ready bulb order report (also published as a private artifact) |
 | `NEEDS-CLARIFICATION.md` | Running list — nothing guessed, every unknown named with what settles it |
+| `feature-parity.md` | Parity contract for the platform rebuild — 140 features of the current app/dashboard/print/refs/3D/tooling; nothing dropped without written OK |
 
 Project contacts analysis is deliberately NOT committed here (public repo); it was delivered
 privately to Austin's Drive.
