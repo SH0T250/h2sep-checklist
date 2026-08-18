@@ -64,8 +64,9 @@ export class Store {
   // ---- reads ----
   getDoc(id) { return this.docs[id] || null; }
   guestRooms() {
-    return Object.values(this.docs)
-      .filter(d => !d.deleted && d.type !== 'mep-punch' && !String(d.type).startsWith('space-'))
+    return Object.entries(this.docs)
+      .filter(([id, d]) => !id.startsWith('_') && !d.deleted && d.type !== 'mep-punch' && !String(d.type).startsWith('space-'))
+      .map(([, d]) => d)
       .sort((a, b) => String(a.number).localeCompare(String(b.number)));
   }
   mepDoc(roomNo) { return this.docs[roomNo + '-MEP'] || null; }
@@ -102,6 +103,21 @@ export class Store {
       this._persist(docId, patch, activity);
     }
     this._emit();
+  }
+
+  // Generic patch entry point for modules that keep their own records (the
+  // directory keeps contacts in _dir and assignments in _asg). Same atomic
+  // field-path write every other call site uses, so offline and sync behave
+  // identically for module data and checklist data.
+  write(docId, patch, activityText) { this._write(docId, patch, activityText); }
+
+  // A module doc may not exist yet on a fresh project. Create it locally, and
+  // in the cloud with merge, so the first write from any device lands.
+  async ensureDoc(docId, data) {
+    if (!this.docs[docId]) { this.docs[docId] = structuredClone(data); this._emit(); }
+    if (this.backend?.isWriteReady?.()) {
+      try { await this.backend.createIfMissing(docId, data); } catch { /* rules or offline: local copy still works */ }
+    }
   }
 
   // Complete check-field group, never partial (parity contract).

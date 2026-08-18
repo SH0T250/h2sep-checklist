@@ -7,6 +7,7 @@ import { Registry, startRouter } from './core/registry.js';
 import { ic, el, esc } from './core/ui.js';
 import { trackingModule, identityGate } from './modules/tracking/module.js';
 import { bimModule } from './modules/bim/module.js';
+import { directoryModule } from './modules/directory/module.js';
 import { firebaseConfig } from './config.js';
 
 const MODEL_ROOMS = ['101', '103', '105']; // slice rooms with their own geometry (all QQ family)
@@ -23,6 +24,7 @@ if (firebaseConfig && !window.__H2SEP_NO_BACKEND) {
 
 const registry = new Registry();
 registry.register(trackingModule());
+registry.register(directoryModule());   // module three: contacts + sub assignments
 registry.register(bimModule());
 
 const ctx = { store, registry, modelRooms: MODEL_ROOMS };
@@ -48,7 +50,7 @@ function renderShell(hash, renderScreen) {
   const entries = registry.navEntries();
   const main = entries.filter(n => !n.section);
   const modelSect = entries.filter(n => n.section === 'Model');
-  const mobilePicks = ['#/', '#/rooms', '#/bim', '#/activity'];
+  const mobilePicks = ['#/', '#/rooms', '#/contacts', '#/bim', '#/activity'];
 
   app.innerHTML = '';
   app.append(el(`<div class="shell">

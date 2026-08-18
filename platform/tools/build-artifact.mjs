@@ -15,6 +15,7 @@ const ORDER = [
   'js/core/store.js',
   'js/core/registry.js',
   'js/modules/tracking/module.js',
+  'js/modules/directory/module.js',
   'js/modules/bim/module.js',
   'js/app.js',
 ];
