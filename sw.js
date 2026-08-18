@@ -3,14 +3,15 @@
 // Bump VERSION on every deploy — it busts the old cache and triggers the
 // in-app "Update available" banner. VERSION must equal 'h2sep-v' + APP_VERSION
 // in js/config.js — install verifies this to defeat CDN mixed-version races.
-const VERSION = 'h2sep-v1.18.3';
+const VERSION = 'h2sep-v1.19.0';
 // Paper-sheet photos live in their own PERMANENT cache — never wiped by app
 // updates. Only room JPGs under /sheets/ may enter it (index.json stays in the
 // versioned shell cache so it can never be shadowed by a stale copy).
 const SHEETS_CACHE = 'h2sep-sheets';
 // Plan-snippet reference images (./refs/*.png) get the same permanent-cache
 // treatment — they must survive app updates so refs work in dead zones.
-// refs-101.json itself stays in the versioned shell cache (never shadowed).
+// The two index files (refs-101.json, refs-mep.json) stay in the versioned
+// shell cache so a stale copy can never shadow a fresh one.
 const REFS_CACHE = 'h2sep-refs';
 // The 3D exhibit carries an inlined three.js (~590 KB). Precaching that on
 // every version bump would re-download it over cell data for a page most
@@ -45,6 +46,7 @@ const SHELL = [
   './js/bulk.js',
   './js/dash.js',
   './js/dash-edit.js',
+  './js/dash-mep.js',
   './js/config.js',
   './js/print.js',
   './js/refs-page.js',
@@ -52,12 +54,14 @@ const SHELL = [
   './js/screens.js',
   './js/seed.js',
   './js/seed-spaces.js',
+  './js/seed-mep.js',
   './js/space-meta.js',
   './js/sheets.js',
   './js/store.js',
   './js/theme.js',
   './js/util.js',
   './refs/refs-101.json',
+  './refs/refs-mep.json',
   './firebase/firebase-app.js',
   './firebase/firebase-auth.js',
   './firebase/firebase-firestore.js',

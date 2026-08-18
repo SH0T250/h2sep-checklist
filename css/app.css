@@ -357,6 +357,13 @@ b, .code { font-weight: 700; }
   color: var(--accent); border: 1px solid var(--hairline); border-radius: 6px;
   padding: 2px 6px; margin-top: 3px;
 }
+/* A ref's note is where a substitution warning lives ("NOT APPROVED — P104
+   schedules a different manufacturer"). It has to be readable where the crew
+   decides, so it renders in the list rather than only in the source data. */
+.ref-note {
+  display: block; margin-top: 4px; font-size: 11.5px; line-height: 1.45;
+  color: var(--text-2); white-space: normal;
+}
 .ref-section-head {
   font-size: 12.5px; font-weight: 700; letter-spacing: .6px; color: var(--text-2);
   text-transform: uppercase; margin-top: 6px;
@@ -555,9 +562,17 @@ b, .code { font-weight: 700; }
    110px right-hand rail above is right for a two-word FF&E note and wrong for
    a paragraph of drawing evidence — it turned every MEP line into a tall thin
    ribbon of text with the label pushed off the bottom. */
-.punch-step {
+/* AT tells the walker where to stand; DO tells them what to perform. Both sit
+   full-width under the label, and the dashboard's punch row (css/dash.css)
+   carries the identical anatomy so a line reads the same in both places. */
+.punch-where, .punch-step {
   display: block; margin-top: 6px; font-size: 13.5px; line-height: 1.45;
   color: var(--text); text-align: left;
+}
+.punch-at {
+  display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .6px;
+  color: var(--bg); background: var(--text-2); border-radius: 4px;
+  padding: 1px 5px; margin-right: 5px; vertical-align: 1px;
 }
 .punch-do {
   display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .6px;

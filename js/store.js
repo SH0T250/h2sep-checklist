@@ -11,6 +11,7 @@
 import { firebaseConfig, PROJECT_ID, DEMO_PIN } from './config.js';
 import { FLOORS, TEMPLATES, seedRooms, blankItem } from './seed.js';
 import { seedSpaces } from './seed-spaces.js';
+import { seedMep } from './seed-mep.js';
 import { sha256Hex, randomId, codeSlug, roomSort, isSpaceDoc, isMepDoc, mepParent, mepIdFor } from './util.js';
 
 const LS_USER = 'h2sep-user';
@@ -171,9 +172,20 @@ function demoLoad() {
   // The demo fixture now mirrors the live room (40 categorized lines with real
   // qty), so a DB seeded from an older, differently-shaped fixture has to be
   // re-seeded or demo mode would keep showing the retired layout.
-  const stale = demoDB && demoDB.rooms && (demoDB.rooms['101'] || {}).schemaV !== 3;
+  // Two staleness tests, and the second one matters as much as the first.
+  // schemaV catches a fixture whose SHAPE changed. But a demo DB saved before a
+  // new POPULATION existed is equally stale and passes the schema check
+  // untouched: every phone that had already opened demo mode kept a rooms map
+  // with no punch docs in it, so the punch surface would have rendered "no
+  // punch lists published" on the exact devices most likely to be shown to
+  // somebody. Any seeded doc id that is missing forces a re-seed.
+  const seeded = { ...seedRooms(), ...seedSpaces(), ...seedMep() };
+  const stale = demoDB && demoDB.rooms && (
+    (demoDB.rooms['101'] || {}).schemaV !== 3
+    || Object.keys(seeded).some(id => !demoDB.rooms[id])
+  );
   if (!demoDB || !demoDB.rooms || stale) {
-    demoDB = { rooms: { ...seedRooms(), ...seedSpaces() }, floors: { ...FLOORS } };
+    demoDB = { rooms: seeded, floors: { ...FLOORS } };
     demoSave();
   }
 }

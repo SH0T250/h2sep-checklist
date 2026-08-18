@@ -8,6 +8,7 @@
 // demo DB (device-local, clearly labeled DEMO).
 import * as store from './store.js';
 import * as edit from './dash-edit.js';
+import * as mep from './dash-mep.js';
 import { esc, roomSort, isSpaceDoc, roomStats, isMepDoc, mepParent } from './util.js';
 import { initRefs } from './refs.js';
 
@@ -326,6 +327,13 @@ function render() {
         tip: `${c.name || ini}: ${c.total} check-off${c.total === 1 ? '' : 's'} total${c.today ? `, ${c.today} today` : ''}`,
       })).join('')
     : `<div class="empty-line">No check-offs yet.</div>`;
+
+  // MEP punch panel — the punch lists, structured room by room, with the
+  // cutsheets and plan details on every line. Fed the WHOLE doc set (it does
+  // its own isMepDoc filter) so it stays correct if the collection grows a
+  // fourth population. Read-only regardless of edit mode: dash-edit.js refuses
+  // punch writes, and this panel must not offer what that refusal forbids.
+  mep.renderMep($('mep'), store.getAllDocs());
 
   // inventory panel — always informative; BULK buttons act only in edit mode
   // MEP punch docs are excluded here for the same reason dash-edit.js filters

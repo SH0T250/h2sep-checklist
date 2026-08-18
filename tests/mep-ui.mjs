@@ -50,15 +50,36 @@ page.on('console', (m) => { if (m.type() === 'error' && !/404/.test(m.text())) e
 await page.goto(BASE);
 await page.waitForTimeout(600);
 
-// Baseline BEFORE the MEP doc exists: the switch must not be offered.
+// Baseline: the switch must not be offered when the counterpart does not exist.
+// Since v1.19.0 the demo fixture SHIPS room 101's real punch list (js/seed-mep.js),
+// so this baseline has to create the no-punch-list condition rather than assume
+// it — delete the doc, look, then let the injection below put one back. Testing
+// it against a room that happens to have no punch doc would stop testing
+// anything the day that room gets one.
 await page.evaluate(() => {
   localStorage.setItem('h2sep-user', JSON.stringify({ name: 'QA Tester', initials: 'QT' }));
   sessionStorage.removeItem('h2sep-floorview');
+  // A SECOND guest room, with no punch doc of its own — exactly what Austin
+  // gets from "Add room". Deleting 101-MEP instead would not work: demoLoad()
+  // re-seeds the whole fixture the moment a seeded doc id goes missing, which
+  // is deliberate (a demo DB saved before the punch docs existed must not stay
+  // punch-less forever) and would silently put the doc straight back.
+  const db = JSON.parse(localStorage.getItem('h2sep-demo-db-v2') || 'null');
+  if (db && db.rooms && db.rooms['101']) {
+    db.rooms['199'] = { ...JSON.parse(JSON.stringify(db.rooms['101'])), number: '199' };
+    localStorage.setItem('h2sep-demo-db-v2', JSON.stringify(db));
+  }
 });
+await page.goto('about:blank');
+await page.goto(BASE + '#/room/199');
+await page.waitForTimeout(700);
+ok(await page.locator('.doc-switch').count() === 0, 'no FF&E/MEP switch when the room has no punch list');
+// ...and the room that DOES have one offers it, so the assertion above is
+// proving absence rather than a selector that never matches anything.
 await page.goto('about:blank');
 await page.goto(BASE + '#/room/101');
 await page.waitForTimeout(700);
-ok(await page.locator('.doc-switch').count() === 0, 'no FF&E/MEP switch when the room has no punch list');
+ok(await page.locator('.doc-switch').count() > 0, 'the seeded punch list DOES offer the switch (control)');
 
 const heroBefore = await (async () => {
   await page.goto('about:blank');

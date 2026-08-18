@@ -25,7 +25,13 @@ const $ = (id) => document.getElementById(id);
 $('back-link').href = FROM === '3d'
   ? './room-3d.html?room=' + encodeURIComponent(ROOM) + (DEMO ? '&demo=1' : '')
   : './index.html#/room/' + encodeURIComponent(ROOM);
-$('title').textContent = 'Room ' + ROOM + ' · References';
+// Punch docs live in the same collection under "<room>-MEP" and reach this
+// page from the punch screen's 📄 button. Naming one "Room 101-MEP" would
+// read as a room number nobody has; it is the MEP list for room 101.
+const MEP_BASE = (/^(\d+)-MEP$/.exec(ROOM) || [])[1] || '';
+$('title').textContent = MEP_BASE
+  ? 'MEP ' + MEP_BASE + ' · References'
+  : 'Room ' + ROOM + ' · References';
 
 // ---------- room data (same handoff the print sheet uses) ----------
 function handoffRoom() {

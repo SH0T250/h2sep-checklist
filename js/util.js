@@ -129,6 +129,16 @@ export const CATEGORY_ORDER = [
   'FF&E - Lighting', 'FF&E - Window', 'FF&E - Art / Mirror', 'FF&E - Misc',
 ];
 
+// Does this line actually print a mark? Punch content uses an em dash (and,
+// historically, a bare hyphen) to mean "the drawings tag nothing here". That is
+// correct in the data — it distinguishes "no tag" from "tag not yet read" — and
+// wrong on screen, where it renders as a bold tag that says nothing. Shared by
+// the room screen and the dashboard so they can never disagree about it.
+export function hasMark(code) {
+  const c = String(code == null ? '' : code).trim();
+  return c !== '' && c !== '\u2014' && c !== '-' && c !== '\u2013';
+}
+
 export function roomStats(room) {
   const items = Object.entries(room.items || {}).filter(([, it]) => !it.deleted);
   const total = items.length;

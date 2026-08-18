@@ -168,10 +168,15 @@ function closeSheets() {
   document.querySelectorAll('.dscrim').forEach(el => el.remove());
 }
 
+// EXPORTED for js/dash-mep.js. The punch surface needs a modal, and a second
+// implementation would ship without the inert teardown and the focus trap that
+// two adversarial review rounds put here — the round-2 blocker where a footer
+// Close skipped the inert teardown and left the whole wall board dead to touch
+// until reload came from exactly one modal having two code paths.
 // stack:true layers this sheet OVER whatever is open (PIN over the bulk
 // drawer, confirm over the PIN spot) instead of replacing it — the drawer
 // must survive its own confirmation flow or Undo has no home to return to.
-function sheet(html, { title = '', wide = false, onClose = null, stack = false } = {}) {
+export function sheet(html, { title = '', wide = false, onClose = null, stack = false } = {}) {
   if (!stack) closeSheets();
   const depth = document.querySelectorAll('.dscrim').length;
   const scrim = document.createElement('div');
@@ -317,18 +322,19 @@ function whereLabel(room) {
 
 // References (submittals + plan snippets), same join the app uses (refs.js).
 // Snippets render inline in a stacked viewer; submittals open in Drive.
-function refsSection(room, item, itemId) {
+export function refsSection(room, item, itemId) {
   const refs = refsFor(room.number, item, itemId, room.typeLabel || '');
   if (!refs.length) return '';
   return `<div class="dref-head">References</div>` + refs.map((r, i) => `
     <button class="dref" data-refi="${i}">
       <span aria-hidden="true">${r.kind === 'plan' ? '📐' : '📄'}</span>
-      <span class="dref-main">${esc(r.title)}<em>${r.kind === 'plan' ? 'Plan detail' : 'Submittal'}${r.sheetId ? ' · sheet ' + esc(r.sheetId) : ''}</em></span>
+      <span class="dref-main">${esc(r.title)}<em>${r.kind === 'plan' ? 'Plan detail' : 'Submittal'}${r.sheetId ? ' · sheet ' + esc(r.sheetId) : ''}</em>${
+        r.note ? `<em class="dref-note">${esc(r.note)}</em>` : ''}</span>
       <span aria-hidden="true">›</span>
     </button>`).join('');
 }
 
-function wireRefs(s, room, item, itemId) {
+export function wireRefs(s, room, item, itemId) {
   const refs = refsFor(room.number, item, itemId, room.typeLabel || '');
   s.querySelectorAll('[data-refi]').forEach(b => b.addEventListener('click', (e) => {
     e.stopPropagation();

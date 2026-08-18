@@ -1,0 +1,546 @@
+[
+ {
+  "itemId": "275cf3cd898b",
+  "category": "Low Voltage",
+  "code": "",
+  "label": "Connected Room edge controller \u2014 the in-room head-end the TV data jack patches into",
+  "where": "NOT LOCATED ON ANY SHEET. The only clue is kn47's own topology \u2014 the TV CAT6 runs in smurf tube to the WAP under the desk and a patch cord goes to the edge controller \u2014 which puts it at or near the WAP position under the desk. That is inference from the cable path, not a printed location.",
+  "qtyMax": 1,
+  "src": "A550 view 04 kn47 (both options A and B end 'PATCH CORD TO EDGE CONTROLLER FOR CONNECTED ROOM') \u00b7 E101 GN #8 (names 'connected room' among the exposed connections requiring Panduit locks)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Locate the edge controller and RECORD WHERE IT IS \u2014 you are creating the record; confirm the TV CAT6 patch cord lands on it with a Panduit lock, it is powered with a normal status indication, and Connected Room guest features actually work end to end (cast to the TV from a guest device).",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "cce32e43d225",
+  "category": "Low Voltage",
+  "code": "",
+  "label": "Guestroom entry-door electronic card lock \u2014 A600 Door Hardware Set #1 'Advance Card Lock' on door GR-1",
+  "where": "Guest-room entry door leaf, corridor side, at the bottom of the working wall",
+  "qtyMax": 1,
+  "src": "A600 Door Hardware Sets, Set #1 verbatim: '1 One Way Viewer ((2) @ Accessible Rooms); 1 Privacy Latch; 1 Door Sweep; 1 Vinyl Threshold; 1 Perimeter Gasketing; 1 Door Closer - w/ 90 degree Stop; 1 Advance Card Lock; 1.5 PR Hinges' \u00b7 A600 door schedule row GR-1 \u00b7 A550 view 01 places GR-1 at the entry",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Present a test key \u2014 the lock reads and unlatches first time, relatches and secures on close, status LED normal; privacy latch operates and the lock respects it; confirm the lock is programmed to room 104 and the read is logged; swing the door and confirm the closer pulls it fully closed and latched from a normal open position, and that the 90-degree stop works.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "564cfced1bd2",
+  "category": "Low Voltage",
+  "code": "DATA",
+  "label": "Data outlets \u2014 CAT6 RJ-45, Panduit cable and patch cord with locks, labelled, each cable HOMERUN to the floor IDF. Keynote 45 verbatim: 'EACH CABLE MUST HOMERUN BETWEEN THE GUESTROOM AND THE IDF ON EACH FLOOR'",
+  "where": "Per the A550 view-04 device-spacing dimension strings; the standalone DATA symbol's position is graphic only and not readable from the transcription",
+  "qtyMax": 1,
+  "src": "A550 POWER & SIGNAL LEGEND 'DATA' (a symbol distinct from OPTIONAL DATA and OUTLET - TV) \u00b7 A550 view 04 kn45 ('EACH CABLE MUST HOMERUN BETWEEN THE GUESTROOM AND THE IDF ON EACH FLOOR') \u00b7 E101 GN #8 \u00b7 E101 spec #27 (plenum-rated) \u00b7 G400 detail 02 (1'-6\") \u00b7 A530 note D (12\")",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "COUNT the RJ-45 jacks and record count and location \u2014 you are building the missing record, not checking against one; each jack terminated, LABELLED, Panduit with Panduit locks; plug a laptop in and confirm link/DHCP, which is the visible proof the concealed homerun landed; record the mounting height.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "373568784f2a",
+  "category": "Low Voltage",
+  "code": "DB (kn 28)",
+  "label": "Doorbell on/off switch \u2014 kn28 verbatim: 'DOORBELL ON/OFF SWITCH (COMMUNICATION FEATURES ROOMS ONLY) SIGNAGE AS REQ'D.' COMMUNICATION-FEATURES KEYS ONLY.",
+  "where": "At the entry door (GR-1); kn28 is also carried on A550's elevations, so the on/off switch is an in-room device, not only a corridor push",
+  "qtyMax": 1,
+  "src": "A550 view 04 kn28 (PLACED) + A550 elevation keynote list \u00b7 A550 POWER & SIGNAL LEGEND 'DOORBELL (DB)' \u00b7 A100 Guestroom Matrix floor-1 'King Studio, HI - 1 T' \u00b7 G001 Unit Mix 'King Studio, HI, CD - 1' \u00b7 E103 TYPICAL GUEST ROOMS LOAD ANALYSIS rows 2 and 6 \u00b7 conflicts.md A11 \u00b7 coordination_issues C-04",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "If 104 is confirmed as the communication-features key: doorbell push at the corridor face, on/off switch inside and reachable, signage present, press it and confirm BOTH a chime AND a visual signal, and confirm it is on the hearing-accessible kit and NOT wired to the fire alarm. Otherwise confirm there is NO push, NO switch and no orphan blank plate or capped box at the entry door \u2014 absence is CORRECT, do not write it up.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "f87e208ddead",
+  "category": "Low Voltage",
+  "code": "OPTIONAL DATA (kn 46)",
+  "label": "Wired data connection at the desktop grommet \u2014 keynote 46 verbatim: 'OPTION WIRED DATA CONNECTION FOR GUEST USE: A) ADD CAT6 RJ-45 CABLE JACK AND PATCH CORD THROUGH DESKTOP GROMMET - OR - B) PATCH CORD FROM WAP PORT THROUGH DESKTOP GROMMET'",
+  "where": "At the desktop grommet on the working-wall desk, directly above the WAP under the desk",
+  "qtyMax": 1,
+  "src": "A550 view 04 kn46 (PLACED \u2014 confirmed on the view-04 keynote list) \u00b7 A550 POWER & SIGNAL LEGEND carries 'OPTIONAL DATA' as a symbol in its own right",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Plug a laptop in at the desk and confirm link; RECORD WHICH option you found (a real jack vs a cord from the WAP) and hold the other 15 first-floor rooms to it; cord or jack reachable at the grommet, not stuffed behind the casegoods or pinched.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "5f0bf61a976b",
+  "category": "Low Voltage",
+  "code": "PHONE",
+  "label": "Telephone outlet with 3/4\" conduit and pull string \u2014 serves FF&E tag 905 telephone",
+  "where": "Bed side at a nightstand \u2014 on A550 view 01 the 905 tag sits in the bed run between GR-603 king bed base and GR-202 nightstand sconce, adjacent to GR-323 nightstand @ left",
+  "qtyMax": 1,
+  "src": "A550 POWER & SIGNAL LEGEND 'PHONE' \u00b7 E101 electrical specification #16 ('Coordinate telephone outlet locations w/owner; 3/4\" conduit w/pull-string for phone') \u00b7 E101 symbol legend (telephone outlet 18\" AFF) \u00b7 E101 GN #8 (Panduit locks; IP telephones named) \u00b7 A550 view 01 plan tag 905 \u00b7 G402 general note 9 \u00b7 E400 GN #1 / E101 spec #28",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Plug the 905 handset in and get DIAL TONE; MEASURE that an electrical outlet is within 48\" of the telephone connection with clear floor space (G402 GN9); jack labelled with a Panduit lock; confirm the box is offset from the adjacent room's rather than back-to-back \u2014 E101 spec #28 requires at least 6\" separation in a non-rated wall and 24\" in a fire/acoustic-rated wall, and E400 GN1 names telephone outlets specifically; record the mounting height.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "936a0896c914",
+  "category": "Low Voltage",
+  "code": "WAP",
+  "label": "Wireless access point in a 3-GANG BOX MOUNTED VERTICALLY under the desk \u2014 keynote 44 verbatim: 'WAP IN 3-GANG BOX MOUNTED VERTICALLY UNDER DESK. MAINTAIN 6\" BETWEEN ALL BOXES, TYP ALL GUESTROOMS. COORDINATE WAP LOCATION WITH CASEGOODS TO AVOID CONFLICTS'",
+  "where": "Under the desk on the working wall; A550's POWER & SIGNAL LEGEND prints the entry as 'WAP (18\")'",
+  "qtyMax": 1,
+  "src": "A550 view 04 kn44 (PLACED \u2014 confirmed on the view-04 keynote list) \u00b7 A550 POWER & SIGNAL LEGEND 'WAP (18\")'",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Confirm the 3-gang box is mounted VERTICALLY (an easy field miss) and MEASURE at least 6\" to every adjacent box; MEASURE and record the mounting height against the legend's 'WAP (18\")'; WAP powered, status LED normal, SSID broadcasting and a phone gets internet with the room door shut; casegoods do not cover or overheat it.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "d57799b0a838",
+  "category": "Low Voltage",
+  "code": "kn 47",
+  "label": "TV outlet behind the television (FF&E tag 903) \u2014 CAT6 RJ-45 jack required in every case, plus coax F-connector only if a non-smart TV was procured",
+  "where": "Behind the TV on the working wall, between GR-204 sconce @ wall hook and GR-320 decorative shelves; kn47 requires MIN. 6\" CLEARANCE FROM WALL BOXES",
+  "qtyMax": 1,
+  "src": "A550 view 04 kn47 (placed) \u00b7 A550 POWER & SIGNAL LEGEND 'OUTLET - TV' \u00b7 E101 symbol legend (TV outlet w/ F, 18\" AFF) \u00b7 E101 GN #8 (Panduit) \u00b7 A530 GENERAL NOTES note D (12\")",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Behind the TV: CAT6 RJ-45 jack present, terminated and LABELLED; coax present only if option A was built \u2014 establish which first; PANDUIT cable and patch cord with PANDUIT LOCKS on exposed connections; MEASURE the clearance to adjacent boxes, it must be at least 6\" (kn47); TV powers up and pulls free-to-guest content; record the mounting height.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "bfd3576e2441",
+  "category": "Low Voltage",
+  "code": "DB",
+  "label": "Doorbell on/off switch (keyed note 28) \u2014 'DOORBELL ON/OFF SWITCH (COMMUNICATION FEATURES ROOMS ONLY) SIGNAGE AS REQ'D.' EXPECT ZERO IN 217.",
+  "where": "Would be at the entry door \u2014 but this room is not a communication-features key",
+  "qtyMax": 1,
+  "src": "A555 keynote 28 (placed on views 04/04.1 and elevation 07); A550 legend keynote 28; A550/A555 POWER & SIGNAL LEGEND 'DOORBELL (DB)'; against A100 Guestroom Matrix floor-1 column; coordination_issues C-04",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Confirm there is NO doorbell push at the corridor side of the entry door, NO on/off switch inside, and no orphan blank plate or capped box \u2014 if any of those IS present, photograph it and log it as unaccounted for.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "5789d5f4d5aa",
+  "category": "Low Voltage",
+  "code": "WAP",
+  "label": "Wireless access point in a 3-GANG BOX MOUNTED VERTICALLY under the desk \u2014 keynote 44 verbatim: 'WAP IN 3-GANG BOX MOUNTED VERTICALLY UNDER DESK. MAINTAIN 6\" BETWEEN ALL BOXES, TYP ALL GUESTROOMS. COORDINATE WAP LOCATION WITH CASEGOODS TO AVOID CONFLICTS'",
+  "where": "Under the desk on the working wall; the A550/A555 POWER & SIGNAL LEGEND prints 'WAP (18\")'",
+  "qtyMax": 1,
+  "src": "A555 keynote 44 (views 04/04.1); A550 legend keynote 44 full text; A550/A555 POWER & SIGNAL LEGEND 'WAP (18\")'; E101 General Note 8 (Panduit/CAT6)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Confirm the 3-gang box is mounted VERTICALLY and measure at least 6\" clear to every adjacent box; confirm the casegoods do not block it; associate a phone to the WAP with the room door shut and confirm you get internet.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "face7323a176",
+  "category": "Low Voltage",
+  "code": "\u2014",
+  "label": "Connected Room edge controller \u2014 the in-room head-end the TV data jack patches into",
+  "where": "NOT LOCATED ON ANY SHEET \u2014 the cable path in keynote 47 puts it at or near the WAP under the desk",
+  "qtyMax": 1,
+  "src": "A555 keynote 47 (named twice); A550 legend keynote 47 full text; E101 General Note 8",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Locate the edge controller and write down what it is and where it mounts; confirm the TV patch cord actually lands on it; switch the TV on and confirm Connected Room features respond.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "87880930d83a",
+  "category": "Low Voltage",
+  "code": "\u2014",
+  "label": "Data outlet \u2014 CAT6 RJ-45, PANDUIT cable and patch cord with PANDUIT locks, labelled, homerun to the floor IDF",
+  "where": "Per the A555 view 04.1 device-spacing dimensions; height contested",
+  "qtyMax": 1,
+  "src": "E101 General Note 8; A555 keynote 45 (views 04/04.1); A550/A555 POWER & SIGNAL LEGEND 'DATA'; A530 general notes D and F; G400 detail 02; E101 symbol legend; coordination_issues C-03",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Plug a laptop into every data jack in the room \u2014 confirm link and a DHCP address on each; confirm the cable and patch cord are PANDUIT with locks fitted and the jack is labelled; write down the count and the measured height.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "6ef92634a059",
+  "category": "Low Voltage",
+  "code": "\u2014",
+  "label": "Optional wired data connection at the desktop grommet \u2014 CAT6 jack + patch cord (A), or a patch cord from the WAP port (B)",
+  "where": "At the desktop grommet on the working-wall desk",
+  "qtyMax": 1,
+  "src": "A555 keynote 46 (views 04/04.1); A550 legend keynote 46 full text; A550/A555 POWER & SIGNAL LEGEND 'OPTIONAL DATA'",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Plug a laptop in at the desk grommet and confirm link and a DHCP address; record which option you found \u2014 a real jack, a patch cord run from the WAP port, or nothing at all.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "307f0817698a",
+  "category": "Low Voltage",
+  "code": "\u2014",
+  "label": "TV outlet behind the television \u2014 CAT6 RJ-45 jack always, coax ONLY if option A was built",
+  "where": "Working wall behind the TV (FF&E tag 903); A555 elevations 05 and 09 carry keynote 47",
+  "qtyMax": 1,
+  "src": "A555 keynote 47 (views 04/04.1 + elevations 05/09); A550/A555 POWER & SIGNAL LEGEND 'OUTLET - TV'; E101 General Note 8 and symbol legend; A530 general notes D and F; G400 detail 02",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Confirm a CAT6 RJ-45 jack is present behind the TV with a PANDUIT lock on the connection; record whether coax is also present; measure and record the height; establish which keynote-47 option was bought before writing anything up.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "e31169849e95",
+  "category": "Low Voltage",
+  "code": "\u2014",
+  "label": "Telephone outlet (FF&E tag 905) fed by 3/4\" conduit with pull string",
+  "where": "Nightstand / bed area at the 905 telephone position tagged on A555 view 01",
+  "qtyMax": 1,
+  "src": "E101 specification #16 and symbol legend; A550/A555 POWER & SIGNAL LEGEND 'PHONE'; A555 view 01 tag 905; G402 guestroom-bath general note 9; E400 General Note 1; E101 spec #28; A530 general notes D and F",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Plug in the handset and confirm dial tone; then measure from the telephone jack to the nearest electrical outlet \u2014 it must be within 48\" and that outlet must have clear floor space in front of it. Write both numbers down.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "1443dd768b5a",
+  "category": "Low Voltage",
+  "code": "",
+  "label": "Connected Room edge controller \u2014 the in-room head-end the TV data jack patches into",
+  "where": "NOT LOCATED ON ANY SHEET. The only clue is keynote 47's cable topology, which puts it at or near the WAP in the 3-gang box under the desk",
+  "qtyMax": 1,
+  "src": "A555 keynote 47 (both options, verbatim: \"PATCH CORD TO EDGE CONTROLLER FOR CONNECTED ROOM\") \u00b7 E101 GN #8 (\"connected room\" named among exposed connections requiring Panduit locks)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Find the edge controller, write down exactly where it is and its make and model, confirm the TV patch cord lands on it with a Panduit lock, and prove Connected Room features work end to end from the TV.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "daee9a91f781",
+  "category": "Low Voltage",
+  "code": "",
+  "label": "Connected Room edge controller \u2014 the in-room head-end the TV data jack patches into. NO mark, NO symbol, NO schedule entry anywhere in the set.",
+  "where": "NOT LOCATED ON ANY SHEET. The only clue is kn47's own cable topology \u2014 TV CAT6 in smurf tube to the WAP under the desk, then a patch cord to the edge controller \u2014 which puts it at or near the WAP. That is inference from the cable path, not a printed location.",
+  "qtyMax": 1,
+  "src": "A552 kn47 (both options end 'PATCH CORD TO EDGE CONTROLLER FOR CONNECTED ROOM') \u00b7 E101 GN #8 (names 'connected room' among the exposed connections requiring Panduit locks)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Find it and record exactly where it is (behind the TV / under the desk / in the closet / not present) with a photo. Confirm the TV CAT6 patch cord lands on it and that the exposed connection carries a PANDUIT LOCK (E101 GN8). Confirm it is powered. Then test end to end from a guest device \u2014 cast to the TV and confirm Connected Room features work. Walk the first room with the integrator and punch the other 114 against what you record here.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "f36d6c45f499",
+  "category": "Low Voltage",
+  "code": "",
+  "label": "Data outlet \u2014 CAT6 RJ-45, PANDUIT cable and patch cord with PANDUIT LOCKS on exposed connections, LABELLED, homerun to the floor IDF",
+  "where": "Per A552 view 04's device-spacing string (8'-1\" through 4\"). Height contested \u2014 record it.",
+  "qtyMax": 1,
+  "src": "A552 view 04 kn45 (placed) \u00b7 A550 POWER & SIGNAL LEGEND 'DATA' \u00b7 E101 GN #8 (CAT6, Panduit, labelled) \u00b7 E101 symbol legend (18\") \u00b7 G400 det 02 (1'-6\") \u00b7 A530 GN D (12\")",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "COUNT the data jacks in the room and write the number down \u2014 there is no printed baseline. On each: read the label and confirm it is labelled at all (E101 GN8), confirm the cable and patch cord are PANDUIT with PANDUIT LOCKS on the exposed connections, and plug a laptop in to prove link and get an address. Measure and record each jack's centreline height against the open 12\" / 18\" split. Confirm at least ONE data connection falls inside 15\"-48\" AFF with clear floor area (A530 GN G) \u2014 that one is the accessible-key requirement.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "009c6d7c50f8",
+  "category": "Low Voltage",
+  "code": "",
+  "label": "Guestroom entry-door electronic card lock \u2014 A600 Door Hardware Set #1 lists it verbatim as \"1 Advance Card Lock\" on door GR-1. NO manufacturer or model is printed anywhere in the set",
+  "where": "Entry door GR-1 at the bottom of the working wall \u2014 reader/escutcheon on the corridor face, lever and privacy latch on the room face",
+  "qtyMax": 1,
+  "src": "A600 Door Hardware Sets, Set #1 (verbatim) \u00b7 A600 door schedule row GR-1 ENTRY (D2, SGL, 3'-0\" x 6'-8\" x 1 3/4\", SC WOOD, F1 HM frame, 20-minute rated, hardware column \"1\") \u00b7 A555 view 01 / elevation 06 (GR-1 at the entry) \u00b7 tools/out/mep/_trade-truth.json Low Voltage list (carried with the same scope ruling open)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Present a working card twice \u2014 the lock must read, unlatch and relock and the deadlatch must throw \u2014 then set the privacy latch and confirm a guest card is refused, let the closer swing the door and confirm it pulls to a fully latched stop against the 90\u00b0 stop, and write down the lock make and model off the escutcheon or battery cover (nothing in the drawings names one).",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "24f8d90b2a63",
+  "category": "Low Voltage",
+  "code": "",
+  "label": "Optional wired data connection at the desktop grommet (kn46) \u2014 either a CAT6 RJ-45 jack and patch cord, or a patch cord from a WAP port",
+  "where": "At the desktop grommet on the working-wall desk, directly above the WAP position.",
+  "qtyMax": 1,
+  "src": "A552 view 04 kn46 (placed) \u00b7 A550 keynote legend line 161 \u00b7 A550 POWER & SIGNAL LEGEND 'OPTIONAL DATA' (a symbol in its own right)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look into the desktop grommet and record which of the three you find: a CAT6 RJ-45 jack (option A), a patch cord run up from a WAP port (option B), or nothing. Plug a laptop in at the desk and confirm a working wired link \u2014 under either option a guest must get one. Do NOT call 'nothing there' a defect; the scope question is unanswered.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "42e9ba0a6223",
+  "category": "Low Voltage",
+  "code": "",
+  "label": "TV outlet behind the television (903) \u2014 CAT6 RJ-45 jack always; coax F-connector ONLY if kn47 option A governs",
+  "where": "Behind the TV on the working wall; kn47 requires MIN 6\" CLEARANCE FROM WALL BOXES.",
+  "qtyMax": 1,
+  "src": "A552 view 04 kn47 (placed) \u00b7 A552 plan 01 FF&E tag 903 TELEVISION \u00b7 A550 POWER & SIGNAL LEGEND 'OUTLET - TV' \u00b7 E101 symbol legend (TV outlet w/ F, 18\" AFF)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Pull the TV off the wall/mount. Confirm a CAT6 RJ-45 jack is present behind it \u2014 that is required under BOTH options and is punchable unconditionally; plug a laptop in and prove link. Record whether a COAX F-connector is also present: option A yes, option B 'COAX NOT REQ'D' \u2014 establish which option was bought BEFORE writing anything up; a missing coax is not a defect until that is answered. Confirm the smurf tube runs from behind the TV to the WAP position under the desk, that the patch cord lands on the edge controller, and that the box keeps MIN 6\" clearance from adjacent wall boxes (kn47).",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "e69476a7f331",
+  "category": "Low Voltage",
+  "code": "",
+  "label": "Telephone outlet (905) with 3/4\" conduit and pull string",
+  "where": "Nightstand / bed area at the 905 telephone position. Height contested \u2014 record it.",
+  "qtyMax": 1,
+  "src": "E101 spec #16 ('Coordinate telephone outlet locations w/owner; 3/4\" conduit w/pull-string') \u00b7 A550 POWER & SIGNAL LEGEND 'PHONE' \u00b7 A552 plan 01 tag 905 \u00b7 E101 symbol legend (18\") \u00b7 A530 GN D (12\") \u00b7 G402 general note 9 \u00b7 E400 GN #1",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Plug the handset in and confirm dial tone. Measure the distance from the telephone connection to the nearest electrical outlet and record it against 48\" MAX (G402 guestroom-bath general note 9), and confirm that outlet has clear floor space and sits in the accessible reach range \u2014 on an accessible key this one is inspectable. Confirm the 3/4\" conduit with pull string is there at the box (E101 spec #16). Confirm the plate is offset roughly 6\" from the adjacent room's box (E400 GN1, no back-to-back). Measure and record the height.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "01a3761fedf7",
+  "category": "Low Voltage",
+  "code": "DATA",
+  "label": "Data outlets \u2014 CAT6 RJ-45, Panduit cable and patch cord with locks, labelled, each cable HOMERUN to the floor IDF. Keynote 45 verbatim: 'EACH CABLE MUST HOMERUN BETWEEN THE GUESTROOM AND THE IDF ON EACH FLOOR'",
+  "where": "Per the A555 view-04 device-spacing dimension string; height contested \u2014 record it",
+  "qtyMax": 1,
+  "src": "A550/A555 POWER & SIGNAL LEGEND \"DATA\" \u00b7 A555 keynote 45 (\"EACH CABLE MUST HOMERUN BETWEEN THE GUESTROOM AND THE IDF ON EACH FLOOR\", placed views 04/04.1) \u00b7 E101 GN #8 \u00b7 E101 spec #27 (plenum-rated extra-low-voltage cable) \u00b7 G400 detail 02 vs A530 general note D \u00b7 gap LV-3",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Count the RJ-45 jacks in the room and write the number down, confirm every one is labelled and carries a Panduit lock, plug a laptop into each and confirm it links to the floor IDF, and record the mounting height.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "5107e0612dab",
+  "category": "Low Voltage",
+  "code": "DB",
+  "label": "Doorbell on/off switch (keyed note 28) \u2014 'DOORBELL ON/OFF SWITCH (COMMUNICATION FEATURES ROOMS ONLY) SIGNAGE AS REQ'D.' EXPECT ZERO IN 118.",
+  "where": "Guest-room entry door (GR-1) in a communication-features key; the on/off switch is an in-room device (kn28 is also carried on the bed-wall elevations of A555/A556).",
+  "qtyMax": 1,
+  "src": "A552 view 04 kn28 (PLACED) \u00b7 A550 POWER & SIGNAL LEGEND 'DOORBELL (DB)' \u00b7 A100 Guestroom Matrix and G001 Unit Mix (118 = 'King Studio ACC MOD, CD', separate from every HI row) \u00b7 coordination_issues C-04 / PH-GU-002",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Check the corridor face of the entry door for a doorbell push and the inside of the room for an on/off switch \u2014 confirm NEITHER is present, and that there is no orphan blank plate, capped box or filled hole at either location. If one IS installed, photograph it and log it: kn28 restricts the doorbell to communication-features rooms and 118 is mobility-accessible, not hearing-accessible.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "d100d71ecee8",
+  "category": "Low Voltage",
+  "code": "DB",
+  "label": "Doorbell on/off switch \u2014 communication-features rooms ONLY; ZERO in room 105 (zero-quantity confirm line)",
+  "where": "Would be at the entry door with signage, if this were a hearing-accessible key",
+  "qtyMax": 1,
+  "src": "A555 keynote 28 (placed views 04/04.1; verbatim text from the A550 shared legend) \u00b7 A550/A555 POWER & SIGNAL LEGEND \"DOORBELL (DB)\" \u00b7 AGAINST A100 Guestroom Matrix floor-1 column \u00b7 coordination_issues C-04 \u00b7 placeholder PH-GU-002 \u00b7 data/project.sqlite (unsupported row)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Confirm there is NO doorbell push at the corridor side of the entry door, NO on/off switch inside and no orphan blank plate or capped box; if any of those IS present, photograph it and log it as unaccounted for.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "cf3a3a7b5018",
+  "category": "Low Voltage",
+  "code": "OPTIONAL DATA",
+  "label": "Wired data connection at the desktop grommet \u2014 either a CAT6 RJ-45 jack with patch cord, or a patch cord run from the WAP port",
+  "where": "At the desktop grommet on the working-wall desk, directly above the WAP",
+  "qtyMax": 1,
+  "src": "A555 keynote 46 (placed views 04/04.1, verbatim) \u00b7 A550 POWER & SIGNAL LEGEND \"OPTIONAL DATA\" as a symbol in its own right \u00b7 E101 GN #8",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Plug a laptop in at the desktop grommet and confirm it gets a link and an address, then write down which you found \u2014 a jack (option A) or a patch cord out of the WAP (option B).",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "a85b780f135a",
+  "category": "Low Voltage",
+  "code": "OUTLET - TV",
+  "label": "TV outlet behind the television \u2014 CAT6 RJ-45 jack required under either option, plus a coax F-connector ONLY if the non-smart-TV option was built",
+  "where": "Behind the television (FF&E tag 903) on the working wall, between the GR-204 sconce @ wall hook and the decorative shelves; minimum 6\" clearance from adjacent wall boxes",
+  "qtyMax": 1,
+  "src": "A555 keynote 47 (placed views 04/04.1 and elevations 05/09; verbatim from the A550 shared legend) \u00b7 A550 POWER & SIGNAL LEGEND \"OUTLET - TV\" \u00b7 E101 symbol legend (TV outlet w/ F, 18\" AFF) \u00b7 E101 GN #8 (CAT6, Panduit cable and patch cord with Panduit locks) \u00b7 A530 general note D (12\") \u00b7 G400 detail 02",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Pull the TV off the wall: confirm a CAT6 RJ-45 jack is there with a Panduit lock on the exposed connection, write down whether coax is present as well, measure the height, then power the TV and confirm it pulls free-to-guest content.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "a7fa40dc7efe",
+  "category": "Low Voltage",
+  "code": "PHONE",
+  "label": "Telephone outlet with 3/4\" conduit and pull string \u2014 serves FF&E tag 905 telephone",
+  "where": "Bed side at a nightstand \u2014 A555 view 01 groups FF&E tag 905 TELEPHONE with 904 clock/radio in the bed zone",
+  "qtyMax": 1,
+  "src": "A550/A555 POWER & SIGNAL LEGEND \"PHONE\" \u00b7 E101 spec #16 (\"Coordinate telephone outlet locations w/owner; 3/4\\\" conduit w/pull-string for phone\") \u00b7 E101 symbol legend (telephone outlet 18\" AFF) \u00b7 A555 view 01 tag 905 \u00b7 G402 GENERAL NOTES (guestroom bath block) note 9 (verbatim) \u00b7 gap LV-3",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Plug the handset in and confirm dial tone, then tape-measure from the telephone connection to the nearest electrical outlet \u2014 it must be 48\" or less with clear floor space in front of it \u2014 and write the number down.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "dc36639ca4fe",
+  "category": "Low Voltage",
+  "code": "WAP",
+  "label": "Wireless access point in a 3-GANG BOX MOUNTED VERTICALLY under the desk \u2014 keynote 44 verbatim: 'WAP IN 3-GANG BOX MOUNTED VERTICALLY UNDER DESK. MAINTAIN 6\" BETWEEN ALL BOXES, TYP ALL GUESTROOMS. COORDINATE WAP LOCATION WITH CASEGOODS TO AVOID CONFLICTS'",
+  "where": "Under the desk on the working wall; box vertical; maintain 6\" between all boxes. The A550/A555 POWER & SIGNAL LEGEND prints the symbol as \"WAP (18\\\")\"",
+  "qtyMax": 1,
+  "src": "A555 keynote 44 (placed views 04/04.1, verbatim) \u00b7 A550 POWER & SIGNAL LEGEND \"WAP (18\\\")\" \u00b7 packages/electrical.md open item 8 / conflict LV-2 \u00b7 E101 spec #28 (max 4\"x4\" box in a fire-rated wall, no back-to-back boxes, 6\" separation)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Confirm the 3-gang box is mounted VERTICALLY under the desk, tape-measure at least 6\" clear to every adjacent box and write the smallest number down, then associate a phone to the room's SSID with the door shut and confirm it reaches the internet.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "2c5c702e6f16",
+  "category": "Low Voltage",
+  "code": "WAP",
+  "label": "Wireless access point in a 3-GANG BOX MOUNTED VERTICALLY under the desk \u2014 keynote 44 verbatim: 'WAP IN 3-GANG BOX MOUNTED VERTICALLY UNDER DESK. MAINTAIN 6\" BETWEEN ALL BOXES, TYP ALL GUESTROOMS. COORDINATE WAP LOCATION WITH CASEGOODS TO AVOID CONFLICTS'",
+  "where": "Under the desk on the working wall; kn44 requires \u22656\" between all boxes and coordination with the casegoods.",
+  "qtyMax": 1,
+  "src": "A550 kn44 (verbatim, 'TYP ALL GUESTROOMS') and A550 POWER & SIGNAL LEGEND 'WAP (18\")' \u00b7 placed on A550, A551, A555 \u2014 NOT in A552 view 04's placed keynote list",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Look under the desk: is a WAP in a 3-gang box there \u2014 yes or no? Record it with a photo either way. If present: box mounted VERTICALLY, at least 6\" clear of every adjacent box, not buried or heat-trapped behind the casegoods, powered and with its status LED normal. Then shut the guestroom door and confirm a phone gets internet at the bed and in the bath. If absent, do NOT write it up yet \u2014 kn44 is not in A552 view 04's placed list and no E-series schedule carries a WAP at all.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ }
+]

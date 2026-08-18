@@ -1,0 +1,1345 @@
+[
+ {
+  "itemId": "6cc638e8e3e6",
+  "category": "Electrical",
+  "code": "S21",
+  "label": "Bath ceiling surface-mount downlight \u2014 Cooper Halo SMD6R69SWH, LED (E101 row verbatim: \"S21 | Surface mount downlight \u2014 guestroom restroom\")",
+  "where": "Bath ceiling, 7'-3\" AFF, PT-07 on moisture-resistant ceiling board",
+  "qtyMax": 1,
+  "src": "E101 Lighting Fixture Schedule row S21 \u00b7 E400 (King Studio detail 01)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Operates from the bath switch; canopy tight to the moisture-resistant board with no light leak; confirm it has NOT been installed in place of the separate recessed wet-location shower fixture (kn18); record the make/model off the label.",
+  "rooms": [
+   "104",
+   "105",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 12
+ },
+ {
+  "itemId": "089e1d04bcb7",
+  "category": "Electrical",
+  "code": "",
+  "label": "Convenience duplex receptacles throughout the room \u2014 tamper-resistant, 20 A, Hubbell or approved equal, colour/style coordinated with the architect",
+  "where": "Bed wall, working wall, seating area and entry per the A550 view-04 device-spacing dimension strings; heights per the room elevations",
+  "qtyMax": 1,
+  "src": "E400 (device layout; counts on the PDF only) \u00b7 E101 spec #18, #25, #14, GN #10 \u00b7 G400 detail 02 \u00b7 A550 view 04 ('NOTE: REFER TO ELEVATIONS FOR DEVICE HEIGHTS, UNO.') \u00b7 A530 GENERAL NOTES note D \u00b7 E101 spec #28 / E400 GN #1 (no back-to-back boxes)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "COUNT the receptacles and write the number down; plug-test every one for polarity and ground; confirm tamper-resistant shutters and a 20 A rating; trip the AFCI at the panel and confirm it kills the convenience circuit; measure and RECORD the mounting height.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "1a906facedda",
+  "category": "Electrical",
+  "code": "",
+  "label": "Dishwasher appliance connection at the kitchenette (902 dishwasher) on the dedicated Dishwasher circuit",
+  "where": "Kitchenette / working wall at the 902 dishwasher position, between GR-201 desk lamp and keynote 11 in A550 view 01's plan order",
+  "qtyMax": 1,
+  "src": "A550 view 04 kn10 ('DEDICATED CIRCUIT FOR DISHWASHER', placed) \u00b7 E400 PANEL \"A\" 'Dishwasher' circuit \u00b7 E103 (Dishwasher 1068 VA) \u00b7 A550 view 01 plan tag 902 \u00b7 appliance cutsheet: Danby DDW18D1ESS (18\") or DDW2404EBSS (24\")",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Dishwasher connected and powered \u2014 run one short cycle and confirm it fills, runs and drains; trip the Dishwasher breaker at the room panel and confirm it kills the unit; check the connection method (cord-and-plug vs hardwired) and RECORD it, because the 24\" Danby DDW2404EBSS ships with the power cord SOLD SEPARATELY per its cutsheet \u2014 an unconnected dishwasher at punch is a real finding.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "f2362d355d32",
+  "category": "Electrical",
+  "code": "",
+  "label": "Dishwasher disconnect switch in the cabinet under the sink \u2014 E101 GENERAL NOTE #4 verbatim: 'Dishwasher switches in cabinet under sink.'",
+  "where": "If provided: inside the kitchenette cabinet under the sink",
+  "qtyMax": 1,
+  "src": "E101 GENERAL NOTE #4 \u00b7 A550 view 04 kn10 ('DEDICATED CIRCUIT FOR DISHWASHER') \u00b7 E400 Panel \"A\" 'Dishwasher' circuit \u00b7 E103 (1068 VA)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Open the cabinet under the kitchenette sink and look for a switch or disconnect serving the dishwasher \u2014 if present, throw it and confirm it kills the dishwasher, and confirm it is reachable and not buried behind the trap; if absent, log it as a QUESTION against E101 GN#4, NOT as a defect.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "ab04c4bfd63e",
+  "category": "Electrical",
+  "code": "",
+  "label": "Entry / general room lighting switch(es) \u2014 count and type not stated on any sheet; A550's POWER & SIGNAL LEGEND carries 'SWITCH, 3 WAY, 4 WAY' as a distinct symbol",
+  "where": "Entry leg at the door, and \u2014 if a 3-way pair exists \u2014 a second point; positions live on the A550 view-04 / E400 device layouts, which are graphics not text",
+  "qtyMax": 1,
+  "src": "E400 'Systems and elements present' verbatim: 'Per-room lighting: vanity/bath light (WS03 vanity, S21 bath downlight), entry/closet/general lights, switching (entry, bath w/ integrated night light)' \u00b7 A550 POWER & SIGNAL LEGEND 'SWITCH, 3 WAY, 4 WAY' \u00b7 heights: G400 detail 02 ('SWITCH 3'-10\" UNO'), E101 symbol legend (single-pole switch 48\" AFF), E101 spec #18 ('Switches at +54\" AFF') \u00b7 coordination_issues C-03",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "COUNT the switch points in the room and write the number down; throw each and record WHAT IT CONTROLS; where a 3-way pair exists confirm the light works from BOTH ends; MEASURE and RECORD the height to the top of each device \u2014 do not judge it, the height is an open RFI; plate flush, square and on one consistent series.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "0f4c78cc8fe7",
+  "category": "Electrical",
+  "code": "",
+  "label": "Entry / kitchenette / closet lighting fixture(s) \u2014 type never named on any sheet",
+  "where": "Entry / kitchenette leg (7'-3\" ceiling per A550 view 02) and the closet \u2014 exact positions are not stated on A550",
+  "qtyMax": 1,
+  "src": "E400 (fixtures present, untyped; 'entry/closet/general lights' named in E400's per-room lighting) \u00b7 E200 (first-floor LIGHTING plan \u2014 guestroom wing shaded, two callouts 'Refer to Enlarged Guestroom Plan (E-400)') \u00b7 E300 (first-floor POWER plan \u2014 same shading and the same deferral) \u00b7 E101 Lighting Fixture Schedule has NO guestroom general/entry/closet row \u00b7 A550 view 02 RCP keynotes are 31, 18, 19, 4, 1, 8 \u2014 no general-lighting note",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Walk the entry, kitchenette leg and closet and RECORD what is actually installed \u2014 count, type and make/model off the label; confirm each operates from a switch and record which switch.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "b6d6ced6ad9b",
+  "category": "Electrical",
+  "code": "",
+  "label": "Kitchenette countertop receptacles on small-appliance circuits #1 and #2 (E103 prints 'Small Appliances 1500VA x2, NEC 220.52 = 3000' for every room type)",
+  "where": "Kitchenette / working-wall countertop area; no sheet places the devices by number",
+  "qtyMax": 1,
+  "src": "E400 PANEL \"A\" (TYPICAL) circuit list ('... Microwave/Hood; PTAC; Small Appliance; Spare') \u00b7 E103 TYPICAL GUEST ROOMS LOAD ANALYSIS ('Small Appliances (1500VA x2, NEC 220.52 = 3000)' on all 16 room types) \u00b7 E101 GN #10 (20 A devices) and #25 (tamper-resistant in guestrooms/baths)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Find and COUNT the countertop receptacles at the kitchenette and write the number down; plug-test each for polarity and ground; then trip Small Appliance #1 and #2 at the room panel one at a time and record WHICH receptacles each one kills \u2014 that mapping is the record nobody has; tamper-resistant and 20 A.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "937c199b0190",
+  "category": "Electrical",
+  "code": "",
+  "label": "Refrigerator receptacle / appliance connection on the dedicated Refrigerator circuit (901 refrigerator \u2014 Danby DFF101B1BSSDB per the appliance cutsheet, 115 V / 160 W)",
+  "where": "Working wall behind the 901 refrigerator at the end of the GR-304 working wall (A550's working-wall installation note starts the layout at the refrigerator hold dimension)",
+  "qtyMax": 1,
+  "src": "E400 PANEL \"A\" (TYPICAL) circuit list ('Lighting; Convenience Receptacles; Bathroom GFCI; Refrigerator; Disposer; Dishwasher; Microwave/Hood; PTAC; Small Appliance; Spare') \u00b7 E103 TYPICAL GUEST ROOMS LOAD ANALYSIS ('Refrigerator 173 (120V)' on all rooms) \u00b7 A550 view 01 working-wall plan order ending '... keynote 11 \u00b7 901 refrigerator' \u00b7 E101 GN #10, spec #25",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Refrigerator plugged in and running; trip the Refrigerator breaker at the room panel and confirm it kills the unit, then reset and confirm it restarts; cord not visible from the room (E400 GN2); receptacle tamper-resistant and 20 A.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "218c15037af8",
+  "category": "Electrical",
+  "code": "",
+  "label": "Wiring devices and cover plates generally \u2014 Hubbell or approved equal, 20 A rated, colour/style coordinated with the architect",
+  "where": "Every device in the room and bath",
+  "qtyMax": 1,
+  "src": "E101 spec #14, #20, GN #2, GN #10 \u00b7 A550 kn36 (WHITE plate at the microwave) \u00b7 G402 GN1 and E400 GN2 (switch + GFCI may share a 4x4 box under one plate) \u00b7 E101 spec #28 and E400 GN #1 (no back-to-back boxes; min 6\" separation non-rated, 24\" fire/acoustic-rated) \u00b7 E101 spec #29 (putty pads)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Plates on every device, flat, square and tight with no drywall gaps or paint bridging; ONE consistent colour and series across the room, the bath and room-to-room down the corridor \u2014 record the colour and series you find; WHITE at the microwave; devices marked 20 A; spot-check two devices on the demising wall against the adjacent room and confirm they are offset, not back-to-back.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "e963c9d47bab",
+  "category": "Electrical",
+  "code": "GR-202",
+  "label": "Nightstand wall sconce (A530/A550 FURNISHINGS LEGEND: 'GR-202 NIGHTSTAND SCONCE') \u2014 one at each nightstand",
+  "where": "Bed wall, one over each nightstand (GR-319 @right and GR-323 @left); A550 elevation 07 prints 4'-4\" as the nightstand-sconce centreline",
+  "qtyMax": 2,
+  "src": "A550 view 01 FF&E plan tags (GR-202 tagged twice in the bed run) \u00b7 A550 elevation 07 ('4'-4\" nightstand-sconce CL') \u00b7 A530/A550 FURNISHINGS LEGEND \u00b7 data/project.sqlite ITM-0118 and ITM-0119 on room 104, both HIGH \u00b7 A550 view 01 keynotes 32 (3/4\" FRT plywood blocking) and 33 (coordinate blocking with fixture fabricator) \u00b7 A530 general note I ('FOR ALL ITEMS MOUNTED TO THE WALL ... PROVIDE BLOCKING AS REQUIRED') \u00b7 E400 General Note 7",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Both sconces level and on the A550 elevation-07 4'-4\" centreline \u2014 MEASURE and record; each operates (from a wall switch or its own body switch \u2014 record which); canopy tight to WC-01/PT-02 with no gap or exposed fastener; push firmly and confirm it is mounted on blocking, not hollow gyp; MEASURE THE PROJECTION from the wall face against the 4\" maximum for anything between 27\" and 80\" AFF (E400 GN7).",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "0130f7b5ec7f",
+  "category": "Electrical",
+  "code": "GR-204",
+  "label": "Sconce at the wall hook (A530/A550 FURNISHINGS LEGEND prints 'GR-204 SCONE @WALL HOOK' [sic \u2014 sconce])",
+  "where": "Working wall, between GR-403 closet drapery and the 903 television per A550 view 01's plan order",
+  "qtyMax": 1,
+  "src": "A550 view 01 working-wall plan order ('GR-403 closet drapery \u00b7 GR-204 sconce @ wall hook \u00b7 903 television') \u00b7 A530/A550 FURNISHINGS LEGEND \u00b7 data/project.sqlite ITM-0117 on room 104, HIGH \u00b7 A550 view 04 kn25 and elevations 05/09 (extended J-box on this wall) \u00b7 E400 General Note 7",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Sconce level and square on the working wall in the plan position between the closet drapery and the TV; operates (record whether from a wall switch or its own body switch); canopy tight to PT-03 with no gap or exposed fastener; push firmly and confirm it is on blocking; MEASURE THE PROJECTION from the wall face against the 4\" maximum between 27\" and 80\" AFF (E400 GN7); record what the adjacent kn25 J-box feeds.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "263e54b60354",
+  "category": "Electrical",
+  "code": "PANEL \"A\"",
+  "label": "Guestroom panelboard \u2014 100 A MCB, 120/208 V 1-phase 3-wire, NEMA 1, COPPER BUS ONLY (no load centers), Square D / GE / Cutler-Hammer, located in the bedroom",
+  "where": "Bedroom (E400 prints 'Location: Bedroom'); fed from first-floor distribution Panel 1G",
+  "qtyMax": 1,
+  "src": "E400 PANEL \"A\" (TYPICAL) schedule + panel notes 1-4 \u00b7 E103 Typical Guest Rooms Load Analysis \u00b7 E101 spec #10 \u00b7 A550 view 04 kn51 ('ELECTRICAL PANEL')",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Open the panel: nameplate reads 100 A main, 120/208 V 1-phase 3-wire, COPPER bus (a load center is a rejection); directory filled in and legible; confirm every E400 circuit is present \u2014 Lighting, Convenience Receptacles, Bathroom GFCI, Refrigerator, Disposer, Dishwasher, Microwave/Hood, PTAC, Small Appliance #1 and #2, Spare; trip and reset every AFCI and the GFCI breaker; at least one spare breaker or space; NEC 110.26 clearance not blocked by FF&E.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "bc932e9d063c",
+  "category": "Electrical",
+  "code": "WS03",
+  "label": "Vanity wall sconce \u2014 Arkansas Lighting 3550V, LED, wall mounted (E101 row verbatim: \"WS03 | Wall sconce \u2014 guestroom vanity | Arkansas Lighting 3550V | Wall | LED\")",
+  "where": "Bath, on the vanity/mirror wall above the GR-302 vanity and GR-501 mirror; blocking called out on A530 view 02i",
+  "qtyMax": 1,
+  "src": "E101 Lighting Fixture Schedule row WS03 \u00b7 E400 (King Studio detail 01) \u00b7 A530 kn12 ('VANITY MIRROR AND LIGHT FIXTURE'), placed on plan 01 \u00b7 A530 view 02 (vanity wall elevation \u2014 tags GR-203 and GR-501, carries no keynote) \u00b7 A530 blocking view 02i ('blocking for vanity sconce') \u00b7 E400 General Note 7",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Fixture level and centred on the vanity/mirror, operates from the bath switch, canopy tight to the WC-02 wallcovering with no gap or exposed fastener; MEASURE THE PROJECTION from the wall face \u2014 anything mounted between 27\" and 80\" AFF must not protrude more than 4\" (E400 GN7); record the make/model actually installed.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "8c0813889e8a",
+  "category": "Electrical",
+  "code": "kn 13",
+  "label": "Bathroom GFCI duplex receptacle, tamper-resistant, 20 A",
+  "where": "Bath, on a SIDEWALL of the lavatory / water basin \u2014 NOT the wall behind the basin (G402 GN6)",
+  "qtyMax": 1,
+  "src": "A530 elev 03 kn13 ('GFCI OUTLET') \u00b7 G402 general note 6 \u00b7 G400 TA-schedule note 6 \u00b7 E400 Panel \"A\" 'Bathroom GFCI' circuit + panel note (4) \u00b7 E101 spec #25",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Confirm the device is on a SIDEWALL of the basin, not behind it; press TEST then RESET \u2014 it must trip, reset and actually kill the receptacle on a tester; tamper-resistant shutters visible; measure and RECORD the mounting height (do not judge it).",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "883b078363fd",
+  "category": "Electrical",
+  "code": "kn 14",
+  "label": "Garbage-disposal switch ganged with a duplex receptacle \u2014 keynote 14 verbatim: 'SWITCH CONTROLLING GARBAGE DISPOSAL GANGED WITH DUPLEX - REFER TO HADG FOR ACCESSIBLE ROOM REQUIREMENTS'",
+  "where": "Kitchenette / working wall at the sink",
+  "qtyMax": 1,
+  "src": "A550 view 04 kn14 and kn15 ('DEDICATED CIRCUIT FOR GARBAGE DISPOSAL'), both placed \u00b7 E400 Panel \"A\" 'Disposer' circuit \u00b7 E103 (Disposer 480 VA)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Switch and duplex under one plate \u2014 throw the switch and confirm it kills the disposer; confirm the disposer is on its own dedicated breaker at the room panel by tripping it; ganged receptacle tamper-resistant and 20 A; record the mounting height.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "a410eccb5d46",
+  "category": "Electrical",
+  "code": "kn 18",
+  "label": "Recessed WET-LOCATION ceiling light over the shower, with shatter-proof lens \u2014 keyed note 18 verbatim: 'RECESSED CEILING LIGHT FOR WET LOCATIONS W/ SHATTER PROOF LENS'",
+  "where": "Bath ceiling directly over the shower compartment, 7'-3\" AFF",
+  "qtyMax": 1,
+  "src": "A550 view 02 kn18 (placed) \u00b7 E101 spec Note (1) [NEC 550.14(D)] \u00b7 E400 GN #5 \u00b7 G402 general note 5",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Fixture installed over the shower and operating; lens shatter-proof and gasketed, trim sealed to the ceiling board with no water path; UL WET-location listing (not merely damp) legible \u2014 and WRITE DOWN the installed make/model, that observation is what closes the RFI.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "51b3a9d7df2b",
+  "category": "Electrical",
+  "code": "kn 25",
+  "label": "Extended J-box with device and cover plate flush with the millwork back panel \u2014 keynote 25 verbatim: 'EXTEND J-BOX, DEVICE & COVER PLATE FLUSH W/ MILLWORK BACK PANEL'",
+  "where": "Working wall at the GR-304 millwork back panel; elevations 05 and 09 print 'ALIGN WALL DEVICES (CT OF SOFIT) (TYP.)'",
+  "qtyMax": 1,
+  "src": "A550 view 04 kn25 (placed) + elevations 05/09 \u00b7 A550 POWER & SIGNAL LEGEND 'J BOX (J)'",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "COUNT the J-boxes on the working wall and record the number; each box extended so the device and plate finish FLUSH with the millwork back panel \u2014 nothing recessed behind it or standing proud; plate aligned to the soffit centreline with the other wall devices; box supported off blocking, not hanging on the millwork; RECORD what each one feeds.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "c7e90eee16ef",
+  "category": "Electrical",
+  "code": "kn 3",
+  "label": "Bathroom light switch with integrated LED night light \u2014 keynote 3 verbatim: 'IN BATHROOM LOCATIONS ONLY, LIGHT SWITCH EQUIPPED WITH NIGHTLIGHT. MOUNTED SO TOP OF SWITCH IS 48\" MAX A.F.F.'",
+  "where": "Bath, at the door; may share a common 4\"x4\" box and a single cover plate with the bath GFCI (G402 GN1; E400 GN2)",
+  "qtyMax": 1,
+  "src": "E400 Keyed Note (1) \u00b7 A550 view 04 kn3 (placed) \u00b7 A530 elev 03 kn24 ('LED NIGHT LIGHT INTEGRATED WITH EITHER LIGHT SWITCH OR OUTLET') \u00b7 G402 general note 1",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Operate the switch \u2014 night-light LED lit with the switch OFF; MEASURE the top of the switch, it must be 48\" AFF or less (this is a hard stated MAX, and the one height on the sheet you CAN judge against); if ganged with the GFCI, one plate with both devices flush and square.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "5ae29f59bc01",
+  "category": "Electrical",
+  "code": "kn 36",
+  "label": "Receptacle above for the microwave, mounted HORIZONTALLY, WHITE face plate \u2014 kn36 verbatim: 'OUTLET ABOVE FOR MICROWAVE - REFER TO ROOM ELEVATION MOUNT DEVICE HORIZONTALLY--FACE PLATE TO BE WHITE'",
+  "where": "Working wall above the wall-affixed microwave (kn11), concealed by the appliance per the room elevation",
+  "qtyMax": 1,
+  "src": "A550 view 04 kn36 (placed) + elevations 05/09 \u00b7 E400 Panel \"A\" 'Microwave/Hood' circuit \u00b7 E103 (850 VA)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Outlet present above the microwave, device mounted HORIZONTALLY, face plate WHITE; microwave plugs in and runs, cord not visible from the room; trip the Microwave/Hood breaker and confirm it kills it.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "f5ea21887a15",
+  "category": "Electrical",
+  "code": "kn 50",
+  "label": "DB PHANTOM \u2014 'Outlet for undercabinet lighting' (kn50, legend text verbatim: 'PROVIDE OUTLET FOR UNDERCABINET LIGHTING BY OTHERS'). THE SHEETS PLACE ZERO OF THESE IN ROOM 104.",
+  "where": "n/a in 104 \u2014 kn50 is placed only on the accessible working wall, which on floor 1 is room 118",
+  "qtyMax": 1,
+  "src": "A550.md line 165 defines kn50 in the KEYNOTE LEGEND ONLY; A550 view 04's placed-keynote list is 3, 10, 14, 15, 16, 24, 25, 28, 36, 43, 44, 45, 46, 47, 51, 4 \u2014 kn50 is NOT on it \u00b7 packages/electrical.md 5.1.1 repair CR-2 (2026-08-07)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Do NOT write up a missing undercabinet outlet in 104 \u2014 record only whether one physically exists, and if it does, report it as installed-not-drawn.",
+  "rooms": [
+   "104",
+   "106",
+   "107",
+   "108",
+   "109",
+   "110",
+   "111",
+   "112",
+   "113",
+   "114",
+   "115"
+  ],
+  "roomCount": 11
+ },
+ {
+  "itemId": "9f9cd4cbadce",
+  "category": "Electrical",
+  "code": "S21",
+  "label": "Bath ceiling surface-mount downlight \u2014 Cooper Halo SMD6R69SWH, LED (E101 row verbatim: \"S21 | Surface mount downlight \u2014 guestroom restroom\")",
+  "where": "Bath ceiling, 7'-3\" AFF PT-07 on moisture-resistant ceiling board",
+  "qtyMax": 1,
+  "src": "E101 Lighting Fixture Schedule row S21 (Cooper Halo SMD6R69SWH); E400; E200 (defers first-floor guestroom lighting to E400)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Operate it from the bath switch; confirm the canopy is tight to the ceiling board with no light leak or gap; write down the make/model off the label.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "f635582aa8e1",
+  "category": "Electrical",
+  "code": "WS03",
+  "label": "Vanity wall sconce \u2014 Arkansas Lighting 3550V, LED, wall mounted (E101 row verbatim: \"WS03 | Wall sconce \u2014 guestroom vanity | Arkansas Lighting 3550V | Wall | LED\")",
+  "where": "Bath, vanity/mirror wall above the GR-302 vanity; blocking called out on A530 view 02i",
+  "qtyMax": 1,
+  "src": "E101 Lighting Fixture Schedule row WS03 (Arkansas Lighting 3550V); E400 (vanity light); A530 keyed note 12 (placed on plan 01); A530 view 02i (blocking for vanity sconce)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Operate it from the bath switch; confirm it is level, centred on the mirror, and the canopy is tight to the wallcovering with no gap; write down the make/model off the fixture label and check it against E101 row WS03 before calling any substitution.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "f47c51e4b579",
+  "category": "Electrical",
+  "code": "\u2014",
+  "label": "Bathroom GFCI duplex receptacle, tamper-resistant, 20 A",
+  "where": "Bath, on a SIDEWALL of the lavatory / water basin (G402 schedule note 6) \u2014 not the wall behind the basin. May share a 4x4 box and one plate with the bath light switch (G402 bath GN1, E400 GN2)",
+  "qtyMax": 1,
+  "src": "A530 keyed note 13 (placed on view 03); G402 schedule general note 6; A530 keyed note 24; E400 Panel A/B bathroom-GFCI circuit + panel note 4; E101 spec #25 (TR in guestrooms/baths) and #18; A530 general note D; G400 detail 02",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Press TEST then RESET \u2014 it must trip, reset, and actually kill the receptacle (confirm with a plug tester, not the indicator light); measure to the device centreline and write the number down; record whether this outlet carries the night light.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "cf82951a5a8e",
+  "category": "Electrical",
+  "code": "\u2014",
+  "label": "Bathroom light switch \u2014 LED night light integrated with EITHER the switch or the outlet (A530 keyed note 24)",
+  "where": "Bath, at the door; may be ganged with the bath GFCI in a common 4x4 box under one plate",
+  "qtyMax": 1,
+  "src": "A555 keynote 3 (views 04/04.1); A530 keyed note 24 (placed on view 03); E400 Keyed Note 1; E101 spec #18 and symbol legend; G400 detail 02; A530 general note F; G402 bath GN1; coordination_issues C-03",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "With the room dark, confirm a night-light LED glows and write down WHICH device it is in \u2014 switch or outlet; then measure to the top of the switch and write the number down against 46\" / 48\" / 54\".",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "2aafc32bc625",
+  "category": "Electrical",
+  "code": "\u2014",
+  "label": "Convenience receptacles \u2014 DUPLEX and QUAD, tamper-resistant, 20 A, Hubbell or approved equal",
+  "where": "Bed wall, working wall, seating area and entry per the A555 view 04.1 spacing dimensions",
+  "qtyMax": 1,
+  "src": "E400 (layout; counts on the PDF only); E101 spec #18/#25/#14 and GN #10 (all devices 20 A) and symbol legend; A555 views 04 and 04.1; A550/A555 POWER & SIGNAL LEGEND (duplex, duplex-GFI, quad, quad-GFI); A530 general notes D and F; G400 detail 02; coordination_issues C-03",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Count the DUPLEX and the QUAD receptacles separately and write both numbers down; plug-test every one for correct polarity and ground; trip the AFCI at the panel and confirm it kills them; measure and record the centreline height of one on each wall.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "f3250123b4b4",
+  "category": "Electrical",
+  "code": "\u2014",
+  "label": "Dishwasher switch, in the cabinet under the sink",
+  "where": "Kitchenette / working wall, inside the base cabinet under the sink",
+  "qtyMax": 1,
+  "src": "E101 General Note 4; A555 keynote 10 (views 04/04.1); A555 view 01 tag 902; A550 furnishings legend 902 = DISHWASHER; E400/E103 Dishwasher circuit 1068 VA; P401/P402 (SK-3/SK-4 scope); S3 Danby cutsheets",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Open the base cabinet under the sink \u2014 record switch present or absent; if present, flip it and confirm the dishwasher starts and stops; record the dishwasher model and whether a cord is fitted.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "4cb6f2b5bc13",
+  "category": "Electrical",
+  "code": "\u2014",
+  "label": "Entry / closet / general room lighting fixture(s) \u2014 type never named on any sheet",
+  "where": "Entry and kitchenette leg (7'-3\" ceiling) and the closet \u2014 A555 view 04 prints 'CENTER OVER CLOSET'",
+  "qtyMax": 1,
+  "src": "E400 (fixtures present, untyped); A555 view 04 printed note 'CENTER OVER CLOSET'; E200 (explicitly defers first-floor guestroom lighting to E400); packages/electrical.md open item 2",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Walk the entry, the kitchenette leg and the closet \u2014 record the count and location of every fixture and write down the make/model off each label; confirm each one switches from the switch that should control it.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "8672399f567a",
+  "category": "Electrical",
+  "code": "\u2014",
+  "label": "Entry / room lighting switch(es) \u2014 count, location and height not stated on any sheet",
+  "where": "Entry leg at the guestroom door, and wherever else A555 view 04.1 dimensions a switch symbol",
+  "qtyMax": 1,
+  "src": "E400 ('switching (entry, bath w/ integrated night light)'); A550/A555 POWER & SIGNAL LEGEND 'SWITCH, 3 WAY, 4 WAY'; A555 keynote 3 (bathroom-only qualifier); E101 spec #18 and symbol legend; G400 detail 02; A530 general note F; coordination_issues C-03",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Operate every switch in the room and write down what each one controls; count them and record the number; measure to the top of each and write the numbers down against 46\" / 48\" / 54\"; confirm any 3-way pair works from both positions.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "6fe8484648c5",
+  "category": "Electrical",
+  "code": "\u2014",
+  "label": "Extended J-box with device and cover plate flush with the millwork back panel",
+  "where": "Working wall at the millwork back panel \u2014 J-box symbol shown on A555 elevations 05 and 09",
+  "qtyMax": 1,
+  "src": "A555 keynote 25 (views 04/04.1) + elevations 05 and 09; A550/A555 POWER & SIGNAL LEGEND 'J BOX (J)'",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Put a straightedge across the millwork back panel \u2014 the plate must finish FLUSH, not recessed behind and not proud; record how many there are and what each one feeds; confirm the devices line up with the adjacent wall devices per the ALIGN note.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "d727d2699954",
+  "category": "Electrical",
+  "code": "\u2014",
+  "label": "Garbage-disposal switch ganged with a duplex receptacle",
+  "where": "Kitchenette / working wall at the sink",
+  "qtyMax": 1,
+  "src": "A555 keynote 14 and keynote 15 (views 04/04.1 and elevations 05/09); A550 legend keynote 14 full text; E400 Panel A/B Disposer circuit; E103 (480 VA)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Flip the switch \u2014 the disposer must run and stop; confirm the switch and the duplex sit under ONE plate; if there is no disposer, write 'disposer absent, circuit only' and log it.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "784029a3ffc3",
+  "category": "Electrical",
+  "code": "\u2014",
+  "label": "Guestroom panelboard, 100 A MCB, 120/208 V 1Ph 3W, NEMA 1, copper bus (Square D / GE / Cutler-Hammer)",
+  "where": "Bedroom \u2014 A555 keynote 51 (ELECTRICAL PANEL) is placed on views 04/04.1 and on view 07 (bed wall / sofa wall); E400 prints 'Location: Bedroom'",
+  "qtyMax": 1,
+  "src": "E400 Panel A/B schedules + panel notes 1-4; E103 rows 14 and 15; E101 spec #10 (Square D/GE/Cutler-Hammer, copper bus only) and #31 (AFCI per Art. 210.12); A555 keynote 51 views 04/04.1 and 07",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Open the dead front \u2014 write down the panel LETTER and the full circuit list against E400's schedule; trip and reset every AFCI breaker and the GFCI breaker and confirm each kills its circuit; confirm at least one spare breaker or space; confirm the directory is typed and legible.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "3ab7d16f11a9",
+  "category": "Electrical",
+  "code": "\u2014",
+  "label": "Outlet for undercabinet lighting (fixture by others) \u2014 EXPECTED ABSENT IN THIS ROOM",
+  "where": "Would be at the working-wall undercabinet \u2014 but no sheet places one in this room type",
+  "qtyMax": 1,
+  "src": "DB row cites A55x keynote 50 \u2014 but A555 NEVER PLACES keynote 50 (views 04/04.1 = 3, 10, 14, 15, 16, 24, 25, 28, 36, 44, 45, 46, 47, 51); A550 legend keynote 50; packages/electrical.md \u00a75.1.1 CR-2",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Confirm NO undercabinet outlet exists at the working wall \u2014 if one IS installed, photograph it and log it as unaccounted for against A555.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "73d0327ca4e3",
+  "category": "Electrical",
+  "code": "\u2014",
+  "label": "Receptacle above for the microwave \u2014 mounted HORIZONTALLY, face plate WHITE",
+  "where": "Working wall, above the microwave, concealed behind the appliance (A555 elevations 05 and 09)",
+  "qtyMax": 1,
+  "src": "A555 keynote 36 (views 04/04.1 + elevations 05/09); A555 keynote 11; E400 Panel A/B Microwave-Hood circuit; E103 (850 VA); S3 Danby DOM16A2SSDB cutsheet",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Confirm the device is mounted HORIZONTALLY and the plate is WHITE; plug the microwave in and run it; confirm no cord is visible below the cabinet.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "e6dd963ffe3a",
+  "category": "Electrical",
+  "code": "\u2014",
+  "label": "Recessed wet-location ceiling light at the shower, with shatter-proof lens",
+  "where": "Bath ceiling directly over the shower compartment, 7'-3\" AFF (A555 view 02, keynote 18)",
+  "qtyMax": 1,
+  "src": "A555 keynote 18 view 02; E101 specification Note (1) [NEC 550.14(D)]; E400 General Note 5; G402 guestroom-bath general note 5",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Operate it; read the UL listing off the fixture and confirm it says WET location (not damp); confirm the lens is shatterproof and gasketed; write down the make and model.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "7bc0ef08a698",
+  "category": "Electrical",
+  "code": "\u2014",
+  "label": "Refrigerator receptacle / appliance connection at the working wall (901 REFRIGERATOR, Danby DFF101B1BSSDB, 115 V / 160 W)",
+  "where": "Working wall / kitchenette leg, behind or beside the 901 refrigerator position tagged on A555 view 01",
+  "qtyMax": 1,
+  "src": "E400 per-room power list ('refrigerator') + Panel A/B Refrigerator circuit; E103 refrigerator 173 VA column; A555 view 01 tag 901; A550 furnishings legend 901 = REFRIGERATOR; S3 Danby DFF101B1BSSDB cutsheet (115 V / 160 W \u2014 states no connection type); E101 symbol legend",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Pull the refrigerator forward \u2014 record whether it is plugged into a receptacle or hard-wired, record the receptacle height and whether it is TR, plug-test it for polarity and ground, and confirm the refrigerator runs.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "c75186d67506",
+  "category": "Electrical",
+  "code": "\u2014",
+  "label": "Wiring devices and cover plates generally \u2014 one consistent series and colour, all devices 20 A",
+  "where": "Every device in the room and bath",
+  "qtyMax": 1,
+  "src": "E101 spec #14, #25, #28, #29 and General Notes #2, #7, #10; A555 keynote 36 (WHITE at the microwave); G402 bath GN1; E400 General Notes 1 and 2; A300 (W4/W5 ratings)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Sight down the room \u2014 one plate colour and series throughout, all flat and square, no drywall gaps and no paint bridging the plate to the wall; confirm ganged devices share one plate; confirm no device box is back-to-back with the adjacent room's.",
+  "rooms": [
+   "101",
+   "103",
+   "116"
+  ],
+  "roomCount": 3
+ },
+ {
+  "itemId": "1eb13a235e78",
+  "category": "Electrical",
+  "code": "",
+  "label": "3-way \"welcome\" light switch at the bed location \u2014 centreline 2'-5\" (29\") AFF, ACCESSIBLE KEYS ONLY",
+  "where": "Bed wall / bed location, centreline 2'-5\" AFF, reachable from the bed.",
+  "qtyMax": 1,
+  "src": "G400 detail 02, receptacle/switch mounting-height diagram \u2014 row '3-WAY WELCOME LIGHT SWITCH' annotated \"ACCESSIBLE GUESTROOMS @ BED LOCATION\", 2'-5\" (UNO) to centreline above finished floor",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Operate the same load from BOTH 3-way locations, then reverse and repeat \u2014 no dead position, no flicker at the changeover. Measure the bed-location switch centreline and record it against 2'-5\" (G400 det 02). Reach it from a seated position on the bed without leaning off the mattress.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "297293919ccf",
+  "category": "Electrical",
+  "code": "",
+  "label": "Accessible-reach check \u2014 at least one guest OUTLET and one DATA connection between 15\" and 48\" AFF with compliant clear floor area",
+  "where": "Guest circulation area of 118, with a 30\"x48\" clear floor space at each. A552 plan 01 draws TWO required accessible clear-floor circles (bath and main room).",
+  "qtyMax": 1,
+  "src": "A530\u2013A533 GENERAL NOTES note G (verbatim) \u00b7 G402 note 11 \u00b7 A530 GN F and GN H \u00b7 E400 GN #7",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Walk it AFTER the FF&E is set. Measure and record the centreline of the outlet and of the data jack you are nominating \u2014 both must fall inside 15\"-48\" AFF (A530 GN G). At each, lay out a 30\"x48\" clear floor space and confirm nothing (sleeper sofa GR-101, ottoman GR-100, casegoods) intrudes. MEASURE the two turning circles A552 plan 01 draws (one in the bath, one in the main room) and record each against 60\" DIAMETER (A552 plan 01; A532 dashes the same 60\" circle into both bath plans) \u2014 with the FF&E in place, not empty. Sweep the circulation path between 27\" and 80\" AFF \u2014 nothing protrudes more than 4\" from the wall (A530 GN H).",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "f39186801847",
+  "category": "Electrical",
+  "code": "",
+  "label": "Bathroom GFCI duplex receptacle on a SIDEWALL of the water basin",
+  "where": "Bath, on a sidewall of the lavatory \u2014 NOT on the wall behind the basin (G402 / G400 schedule note 6); may share a 4\"x4\" box and one plate with the bath light switch",
+  "qtyMax": 1,
+  "src": "A530 keyed note 13 (placed elevation 03) \u00b7 G402 schedule general note 6 / G400 schedule general note 6 (verbatim) \u00b7 E400 Panel \"A\" \"Bathroom GFCI\" circuit + panel note (4) \u00b7 E101 spec #25 \u00b7 A530 keyed note 24",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Press TEST then RESET \u2014 it must trip, reset and actually kill power at the receptacle (prove it with a tester) \u2014 then confirm it is on a SIDEWALL of the basin and record its height.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "151db147ea1c",
+  "category": "Electrical",
+  "code": "",
+  "label": "Bathroom GFCI duplex receptacle, tamper-resistant, 20 A \u2014 on a SIDEWALL of the water basin",
+  "where": "Bath, on a SIDEWALL of the lavatory \u2014 G400 / G402 TA-schedule general note 6, verbatim: 'A GFCI/ELCB/RCCB OR EQUAL DUPLEX OUTLET MUST BE LOCATED ON A SIDEWALL OF THE WATER BASIN' \u2014 not on the wall behind the basin.",
+  "qtyMax": 1,
+  "src": "G400 / G402 TA-schedule general note 6 (verbatim, identical text on both sheets) \u00b7 A532 elevation 03 kn13 (tub configuration) \u2014 NOT carried on A532.1 (roll-in elevations) \u00b7 E400 Panel B 'Bathroom GFCI' circuit + panel note (4) GFCI breaker \u00b7 E101 spec #25 (guestroom/bath 15A/20A receptacles tamper-resistant) \u00b7 E101 symbol legend (GFCI duplex 18\" AFF) \u00b7 A530 GENERAL NOTES note D (12\")",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Press TEST then RESET \u2014 it trips, resets, and plug-test proves the trip actually killed the receptacle. Confirm it is on a SIDEWALL of the basin, not on the wall behind it (G400/G402 TA-schedule note 6). Confirm tamper-resistant shutters and a 20 A rating. Measure and record the centreline height against the open 12\" / 18\" split \u2014 record, do not write up.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "4b4c6c5feb14",
+  "category": "Electrical",
+  "code": "",
+  "label": "Bathroom exhaust-fan switch \u2014 a SECOND bath switch, separate from the light switch, if G402 bath general note 3 governs",
+  "where": "Bath, at the door, alongside the bath light switch \u2014 if it exists at all",
+  "qtyMax": 1,
+  "src": "G402 GENERAL NOTES (guestroom bath block) note 3 (verbatim) \u00b7 AGAINST M201 Exhaust Fan Schedule EF-1 row, remark code 3 (\"switch w/ room lights\") \u00b7 E400 Panel \"A\" schedule (no exhaust-fan circuit) \u00b7 coordination_issues C-06",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Count the switches in the bathroom \u2014 one or two \u2014 write down what each one controls, and if there are two, confirm the fan runs on its own switch with the light OFF.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "9c552a4891ff",
+  "category": "Electrical",
+  "code": "",
+  "label": "Bathroom light switch with integrated LED night light (kn3 / kn24) \u2014 mounting height CONTESTED, measure and record",
+  "where": "Bath, at the door. May share a common 4\"x4\" box and one cover plate with the bath GFCI (G402 GN1; E400 GN2).",
+  "qtyMax": 1,
+  "src": "A552 view 04 kn3 (placed; 'IN BATHROOM LOCATIONS ONLY, LIGHT SWITCH EQUIPPED WITH NIGHTLIGHT. MOUNTED SO TOP OF SWITCH IS 48\" MAX A.F.F.') \u00b7 E400 Keyed Note 1 (integrated night light in bathroom switch, typ) \u00b7 A530/A532 kn24 (LED night light integrated with either light switch or outlet) \u00b7 G402 guestroom-bath GN1 (switch + GFCI may share one 4x4 box and plate) and GN3 (fan switched separately from light) \u00b7 HEIGHTS: G400 det 02 (3'-10\"), E101 spec #18 (+54\"), E101 symbol legend (48\"), G402 note 11 / A530 GN F (15\"-48\") \u00b7 coordination_issues C-03 \u00b7 conflicts.md B1.5",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Switch off \u2014 the night-light LED glows. Switch on \u2014 the bath fixtures light. Measure to the TOP of the switch and write the number down against the contested set (46\" G400 / 48\" legend and kn3 / 54\" E101 #18); record, do not judge. Record whether the bath FAN runs off this same switch or off a separate one (M201 EF-1 remark 3 vs G402 bath GN3 \u2014 the sheets disagree). If the switch and the GFCI share one 4x4 box, confirm one plate, flat and tight.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "663bd577544b",
+  "category": "Electrical",
+  "code": "",
+  "label": "Bathroom light switch with integrated LED night light \u2014 top of switch 48\" MAX AFF",
+  "where": "Bath, at the door; may share a common 4\"x4\" box and one cover plate with the bath GFCI receptacle (G402 bath GN1 / E400 GN2)",
+  "qtyMax": 1,
+  "src": "A555 keynote 3 (placed views 04/04.1, verbatim) \u00b7 A530 keyed note 24 (placed on view 03, verbatim) \u00b7 E400 Keyed Note (1) (\"Provide integrated night light in bathroom switch (typ)\") \u00b7 G402 GENERAL NOTES (guestroom bath block) note 1 \u00b7 E101 spec #18 \u00b7 coordination_issues C-03",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "With the bath dark, confirm a night-light LED glows with the switch OFF and WRITE DOWN which device it is in \u2014 switch or outlet \u2014 then measure to the top of the switch against 48\" MAX and record the number.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "4df2f3ce80a5",
+  "category": "Electrical",
+  "code": "",
+  "label": "Convenience duplex receptacles throughout the room \u2014 tamper-resistant, 20 A, Hubbell or approved equal",
+  "where": "Per A552 view 04's device-spacing string: 8'-1\", 7'-2\", 6'-5\", 3'-3\", 2'-10\", 1'-10 1/2\", 1'-10\", 1'-6\", 1'-4\", 1'-2\", 1'-1\", 10\"/10\", 10\"/1'-0\", 9\", 6\", 4\". Heights per the room elevations.",
+  "qtyMax": 1,
+  "src": "E400 (device layout, counts on PDF only) \u00b7 E101 spec #18, #25, #14, GN #6/#10 \u00b7 G400 det 02 \u00b7 A552 view 04 \u00b7 A530 GENERAL NOTES note D",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Plug-test EVERY outlet in the room and bath with a three-light tester \u2014 correct polarity and ground on each, no open neutral, no reversed hot/neutral. Confirm tamper-resistant shutters and a 20 A rating on each device. Push TEST on the AFCI at Panel B and confirm the circuit actually goes dead, then reset. WRITE DOWN the total count found and the measured mounting height \u2014 there is no printed baseline for either, and your count is what establishes it.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "ac57d72f24d0",
+  "category": "Electrical",
+  "code": "",
+  "label": "Dedicated appliance receptacles at the working wall \u2014 refrigerator (901, 173 VA), dishwasher (902, 1068 VA), and the countertop Small Appliance receptacles (E103: 1500 VA x 2)",
+  "where": "Working wall / kitchenette leg \u2014 behind the refrigerator (tag 901), at the dishwasher (tag 902), and on the countertop backsplash for the small-appliance circuits. Device spacings printed on A552 view 04: 8'-1\", 7'-2\", 6'-5\", 3'-3\", 2'-10\", 1'-10 1/2\", 1'-10\", 1'-6\", 1'-4\", 1'-2\", 1'-1\", 10\"/10\", 10\"/1'-0\", 9\", 6\", 4\".",
+  "qtyMax": 2,
+  "src": "E103 Typical Guest Rooms Load Analysis, per-room columns (Small Appliances 1500VA x 2 NEC 220.52 = 3000; Dishwasher 1068; Disposer 480; Refrigerator 173) \u00b7 E400 Panel \"A\"/\"B\" circuit lists (Refrigerator, Dishwasher, Small Appliance \u2014 singular) \u00b7 A552 view 01 FF&E tags 901 REFRIGERATOR and 902 DISHWASHER on the working wall \u00b7 A552 view 04 device-spacing string \u00b7 E101 spec #25 (tamper-resistant) and GN #10 (all receptacles/switches 20 A per local amendment) \u00b7 packages/electrical.md open item 14",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Pull the refrigerator out: receptacle present behind it, plug-tested for correct polarity and ground, and the appliance cord reaches it WITHOUT an extension cord, a splice or a multi-tap \u2014 a cord that does not reach is the finding. Do the same at the dishwasher and RECORD whether it lands on a receptacle or a hardwired connection. On the countertop: COUNT the small-appliance receptacles and write the number down, confirm each is tamper-resistant and 20 A, and prove they are split across two circuits by killing one breaker at a time and re-testing each outlet. Record the result of that split test either way.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "ca21dea6ce24",
+  "category": "Electrical",
+  "code": "",
+  "label": "Dishwasher disconnect switch in the cabinet under the sink",
+  "where": "If provided: inside the kitchenette base cabinet under the sink",
+  "qtyMax": 1,
+  "src": "E101 GENERAL NOTE #4 (verbatim) \u00b7 A555 keynote 10 (placed views 04/04.1) \u00b7 A555 view 01 appliance tag 902 \u00b7 E400 Panel \"A\" \"Dishwasher\" circuit \u00b7 E103 (1068 VA) \u00b7 P401/P402 (SK-3/SK-4 scope open)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Open the base cabinet under the kitchenette sink and write down PRESENT or ABSENT; if present, flip it and confirm the dishwasher starts and stops, and record the dishwasher model and whether it is cord-connected.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "71de3613a0b5",
+  "category": "Electrical",
+  "code": "",
+  "label": "Dishwasher disconnect switch inside the cabinet under the sink \u2014 E101 General Note #4: \"Dishwasher switches in cabinet under sink\"",
+  "where": "Kitchenette / working wall \u2014 INSIDE the sink base cabinet, behind the door. A552 view 04's placed keynote list includes 10 (dedicated circuit for dishwasher); A552 view 01 tags 902 DISHWASHER on the working wall.",
+  "qtyMax": 1,
+  "src": "E101 GENERAL NOTES item 4 (verbatim: 'Dishwasher switches in cabinet under sink') \u00b7 A552 view 04 placed keyed notes (10 present) \u00b7 A550 keynote legend kn10 ('DEDICATED CIRCUIT FOR DISHWASHER') \u00b7 E400 Panel \"B\" 'Dishwasher' circuit \u00b7 E103 (Dishwasher 1068 VA)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Open the sink base cabinet: switch present and reachable without moving the trap or the disposer \u2014 not buried behind piping. Flip it and confirm the dishwasher (902) goes dead, then flip it back and confirm it restarts. Cover plate on and fastened, no exposed conductors, box secured to the cabinet side or a stud. Record its location inside the cabinet.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "53308ccab6b6",
+  "category": "Electrical",
+  "code": "",
+  "label": "Entry / closet / general room light switch(es) \u2014 Hubbell, 20 A; type, count and height never stated on any sheet",
+  "where": "Entry leg at the guestroom door, on the kitchenette leg, and at the closet. A555 view 04 (ELECTRICAL PLAN) is the only device layout for this room and its switch symbols are graphics, not text",
+  "qtyMax": 1,
+  "src": "E400 (\"switching (entry, bath w/ integrated night light)\") \u00b7 A550/A555 POWER & SIGNAL LEGEND \"SWITCH, 3 WAY, 4 WAY\" \u00b7 A555 view 04 (only device layout; counts on the PDF) \u00b7 G400 detail 02 (\"SWITCH \u2014 3'-10\\\" (UNO)\") \u00b7 E101 specification #18 (+54\") \u00b7 E101 symbol legend (48\") \u00b7 E101 spec #14 (Hubbell) and GN #10 (all switches rated 20 A) \u00b7 conflicts.md #5 \u00b7 coordination_issues C-03",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Operate every switch in the room and write down what each one controls; count them and record the number; measure to the TOP of each device and write the numbers down against 46\" / 48\" / 54\" \u2014 record only, no write-up; and confirm any 3-way pair works from both positions.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "6d556266f056",
+  "category": "Electrical",
+  "code": "",
+  "label": "Entry / closet / general room lighting fixture(s) \u2014 NO type, mark, make or model is named on ANY sheet",
+  "where": "Entry / kitchenette leg (7'-3\" ceiling) and the closet. Not dimensioned on any transcribed view.",
+  "qtyMax": 1,
+  "src": "E200 General Note 6 ('See E400 for typical guestroom layout') and E200 plan callouts 'Refer to Enlarged Guestroom Plan (E-400)' (first-floor guestroom wing shaded, no fixtures drawn) \u00b7 E400 (guestroom entry/closet/general lighting present, untyped) \u00b7 A555 view 04 printed note 'CENTER OVER CLOSET' \u00b7 E101 Lighting Fixture Schedule (no guestroom entry/closet/general row) \u00b7 packages/electrical.md open item 2",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Walk entry, kitchenette leg and closet: count the fixtures and write the number down, then read the make and model off each label and write those down too \u2014 no sheet names a type, so your record IS the answer to the open RFI. Operate each from its switch. Confirm the closet fixture is centred over the closet (A555 view 04). Do not write any of them up as missing or wrong.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "a979194b75c3",
+  "category": "Electrical",
+  "code": "",
+  "label": "Entry / closet / general room lighting fixture(s) \u2014 shown on the plan, type NEVER named on any sheet",
+  "where": "Entry / kitchenette leg (7'-3\" ceiling) and the closet; A555 view 04 prints \"CENTER OVER CLOSET\"",
+  "qtyMax": 1,
+  "src": "E400 (per-room lighting: \"entry/closet/general lights\", fixtures present but untyped) \u00b7 A555 view 04 printed note \"CENTER OVER CLOSET\" \u00b7 E200 (first-floor lighting plan, guestroom wing shaded, two callouts \"Refer to Enlarged Guestroom Plan (E-400)\") \u00b7 E101 schedule (no guestroom general/entry/closet row) \u00b7 packages/electrical.md open item 2",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Walk the entry, the kitchenette leg and the closet \u2014 count every fixture and write the number down, read the make and model off each label, and confirm each one lights from the switch that should control it.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "ed22a35b7bca",
+  "category": "Electrical",
+  "code": "",
+  "label": "Extended J-box with device and cover plate FLUSH with the millwork back panel",
+  "where": "Working wall at the GR-304-316 millwork back panel; A555 elevations 05 and 09 EACH print a J-box symbol, aligned to the soffit centreline (\"ALIGN WALL DEVICES (CT ON SOFIT) (TYP.)\")",
+  "qtyMax": 1,
+  "src": "A555 keynote 25 (placed views 04/04.1) + elevations 05 and 09 (J-box symbol on each) \u00b7 A550 POWER & SIGNAL LEGEND \"J BOX (J)\" \u00b7 A555 elevation note \"ALIGN WALL DEVICES (CT ON SOFIT) (TYP.)\"",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Count the J-boxes on the working wall and write the number down, run a straightedge across each plate to confirm it finishes FLUSH with the millwork back panel \u2014 not recessed behind, not standing proud \u2014 and record what each one feeds.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "9a66cfaf047d",
+  "category": "Electrical",
+  "code": "",
+  "label": "Extended J-box with device and cover plate FLUSH with the millwork back panel (kn25)",
+  "where": "Working wall at the GR-307 accessible working-wall millwork back panel. Elevation note governs: 'ALIGN WALL DEVICES (CT OF SOFIT) (TYP.)'.",
+  "qtyMax": 1,
+  "src": "A552 view 04 kn25 (placed) \u00b7 A550 keynote legend line 145 \u00b7 A550 POWER & SIGNAL LEGEND 'J BOX (J)'",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Run a straightedge across the millwork back panel \u2014 the device and cover plate must sit FLUSH with it, not proud and not recessed behind it (kn25). Confirm the device aligns on the soffit centreline per the elevation note 'ALIGN WALL DEVICES (CT OF SOFIT) (TYP.)'. Push on the box \u2014 it must be supported off wall blocking, not hanging on the millwork. Record how many J-boxes you find and WHAT each one feeds (test it live).",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "171036088229",
+  "category": "Electrical",
+  "code": "",
+  "label": "Garbage-disposal switch ganged with a duplex receptacle (kn14) \u2014 accessible reach per HADG",
+  "where": "Kitchenette / working wall at the sink. On 118 the switch must sit inside the 15\"\u201348\" guest-control band (G402 note 11 / A530 GN F).",
+  "qtyMax": 1,
+  "src": "A552 view 04 kn14 (placed; 'SWITCH CONTROLLING GARBAGE DISPOSAL GANGED WITH DUPLEX - REFER TO HADG FOR ACCESSIBLE ROOM REQUIREMENTS') + kn15 (dedicated circuit for garbage disposal) \u00b7 E400 Panel B 'Disposer' circuit \u00b7 E103 (Disposer 480 VA) \u00b7 HEIGHTS: G400 det 02 (3'-10\"), E101 spec #18 (+54\"), E101 legend (48\"), G402 note 11 / A530 GN F (15\"-48\", max 46\" over an obstruction deeper than 10\") \u00b7 coordination_issues C-03",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "One gang, one plate, switch and duplex together. Flip it and confirm it kills the disposer (and only the disposer). Plug-test the ganged duplex for polarity and ground. Measure the switch centreline and record it against the 15\"-48\" accessible band, and against 46\" if it sits over the countertop; record the number, do not judge it against the contested 46\"/48\"/54\" set.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "ea2518e6a33f",
+  "category": "Electrical",
+  "code": "",
+  "label": "Garbage-disposal switch ganged with a duplex receptacle in one gang assembly",
+  "where": "Kitchenette / working wall at the sink",
+  "qtyMax": 1,
+  "src": "A555 keynote 14 and keynote 15 (placed views 04/04.1; elevations 05 and 09) \u00b7 A550 keynote legend 14 full text \u00b7 E400 Panel \"A\" \"Disposer\" circuit \u00b7 E103 (Disposer 480 VA) \u00b7 E101 GN #10 (20 A devices)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Throw the switch \u2014 the disposer must run and stop \u2014 confirm the switch and the duplex sit under ONE plate and the receptacle is tamper-resistant and 20 A; if there is no disposer, write \"disposer absent, circuit and switch only\" and log it.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "87a564279fc5",
+  "category": "Electrical",
+  "code": "",
+  "label": "Hardwired blackout roller shade \u2014 NO exposed wires at the head (kn49), on the Panel B 114 VA motorized-shade circuit",
+  "where": "Window wall head, over the PTAC/window. GR-401 is the motorized (ADA) shade; A552 view 08 shows 6\" shade overrun each side.",
+  "qtyMax": 1,
+  "src": "A552 view 04 kn49 (placed, verbatim 'HARDWIRED BLACK OUT ROLLER SHADE WITH NO EXPOSES WIRES' [sic]) \u00b7 E400 Panel \"B\" motorized-shade circuit \u00b7 E103 rows 4/5/8/9/11 (114 VA) \u00b7 A550 kn4 (GR-400 manual / GR-401 motorized)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Drive the shade fully down and fully up twice from its control and confirm it stops square at both ends with no fabric skew. Inspect the head: NO exposed wires anywhere (kn49), power terminated inside a box \u2014 a lamp cord or a plug-in transformer dangling at the head is the finding. Confirm the shade fabric overruns the window opening 6\" each side (A552 view 08). Kill the MOTORIZED SHADE breaker at Panel B and confirm the shade goes dead.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "94b5b4ce4cc7",
+  "category": "Electrical",
+  "code": "",
+  "label": "Outlet for undercabinet lighting (keynote 50) \u2014 NOT placed on the Queen-Queen sheet; ZERO in room 105 (zero-quantity confirm line)",
+  "where": "n/a in 105 \u2014 keynote 50 is placed only on accessible guestroom sheets. The independently confirmed placements are A554.1 view 08 (accessible working wall) = rooms 217, 317, 417; 118 and 438 rest on a cross-sheet statement in A554.1 and are NOT independently confirmed; 238/338 are disputed",
+  "qtyMax": 1,
+  "src": "A555 views 04/04.1 placed keynote list (3, 10, 14, 15, 16, 24, 25, 28, 36, 44, 45, 46, 47, 51 \u2014 50 absent) \u00b7 A550 keynote legend 50 (definition only) \u00b7 packages/electrical.md \u00a75.1.1 repair CR-2 and its confidence grading \u00b7 data/project.sqlite (stale row)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Confirm there is no undercabinet outlet and no capped box on the working wall, and do NOT write its absence up; if one IS physically present, photograph it and log it as unaccounted for.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "c6a7c70c6a6c",
+  "category": "Electrical",
+  "code": "",
+  "label": "Outlet for undercabinet lighting (kn50) \u2014 the light fixture itself is BY OTHERS",
+  "where": "Accessible working wall, under the upper cabinet/shelf.",
+  "qtyMax": 1,
+  "src": "A552 view 04 placed keyed notes 3, 10, 14, 15, 16, 24, 25, 28, 45, 46, 47, 49, 50, 51 \u2014 kn50 present \u00b7 A550 keynote legend (kn50 verbatim: 'PROVIDE OUTLET FOR UNDERCABINET LIGHTING BY OTHERS') \u00b7 packages/electrical.md \u00a75.1.1 repair CR-2 (scope = 7 accessible keys incl. 118; 118 row graded MEDIUM on a stale premise) + open items 5a and 18",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Look under the upper cabinet / shelf on the accessible working wall: outlet present, yes or no \u2014 record it. If present, plug-test it live with correct polarity and ground, plate flat to the millwork, and confirm the undercabinet FIXTURE is absent or supplied by others (do not write the EC up for a missing fixture).",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "3b3c03b4bde2",
+  "category": "Electrical",
+  "code": "",
+  "label": "Receptacle above for the microwave \u2014 mounted HORIZONTALLY, WHITE face plate (kn36)",
+  "where": "Working wall above the microwave, concealed by the appliance per the room elevation.",
+  "qtyMax": 1,
+  "src": "A550 kn36 + elevs 05/09 and A555 views 04/04.1 (placed) \u2014 NOT in A552 view 04's placed list \u00b7 A552 view 01 kn11 (range-top microwave affixed to wall, PLACED) \u00b7 E103 accessible 700+300 VA split",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Is there an outlet on the wall above the microwave \u2014 yes or no? Record it with a photo. If yes: mounted HORIZONTALLY, face plate WHITE (kn36 is the only place the set states a device colour), cord concealed behind the appliance, plug-tested live. Record separately whether the microwave itself is wall-affixed (kn11) or a countertop unit (kn40) \u2014 those two readings are what the sheet conflict turns on.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "0d9f71bf02d8",
+  "category": "Electrical",
+  "code": "",
+  "label": "Receptacle above for the microwave \u2014 mounted HORIZONTALLY, face plate WHITE",
+  "where": "Working wall above the range-top-style microwave (A555 keynote 11), concealed behind the appliance per A555 elevations 05 and 09",
+  "qtyMax": 1,
+  "src": "A555 keynote 36 (placed views 04/04.1 and elevations 05/09, verbatim) \u00b7 E400 Panel \"A\" \"Microwave/Hood\" circuit \u00b7 E103 (850 VA)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Pull the microwave forward far enough to see the device \u2014 confirm it is mounted HORIZONTALLY with a WHITE plate \u2014 then run the microwave and confirm no cord is visible from the room.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "b415e3110305",
+  "category": "Electrical",
+  "code": "",
+  "label": "Recessed WET-LOCATION ceiling light at the shower, with shatter-proof lens (kn18) \u2014 no fixture mark, make or model exists anywhere in the set",
+  "where": "Bath ceiling directly over the shower compartment, 7'-3\" AFF. A552 view 02 places kn18.",
+  "qtyMax": 1,
+  "src": "A552 view 02 kn18 (verbatim 'RECESSED CEILING LIGHT FOR WET LOCATIONS W/ SHATTER PROOF LENS') \u00b7 E101 spec Note (1) NEC 550.14(D) \u00b7 E400 GN #5 \u00b7 G402 general note 5",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Fixture over the shower operates from the bath switch. Lens shatter-proof and gasketed, trim sealed to the ceiling board with no gap for steam. Read the UL listing on the label and RECORD it verbatim \u2014 WET or DAMP. The sheets disagree: E101 spec Note (1) requires WET-location listed per NEC 550.14(D), G402 bath GN5 requires DAMP-location rated. A WET listing clears both; a DAMP listing is a sheet conflict to log, not an installer write-up. WRITE DOWN the make and model you find: no sheet names one, and your observation is what closes the open RFI. Confirm the surface-mount S21 was not installed here in its place.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "73f55de93fbd",
+  "category": "Electrical",
+  "code": "",
+  "label": "Recessed wet-location ceiling light at the shower with SHATTER-PROOF LENS \u2014 no fixture mark, make or model exists anywhere in the drawing set",
+  "where": "Bath ceiling directly over the shower compartment, 7'-3\" AFF",
+  "qtyMax": 1,
+  "src": "A555 keynote 18 placed on view 02 (\"RECESSED CEILING LIGHT FOR WET LOCATIONS W/ SHATTER PROOF LENS\") \u00b7 E101 specification Notes (1) (NEC 550.14(D), enclosed / gasketed / WET-location listed over bathtub or shower) \u00b7 E400 general note 5 (DAMP-location rated) \u00b7 G402 GENERAL NOTES (guestroom bath block) note 5 (DAMP location rated w/ shatterproof lens) \u00b7 packages/electrical.md open item 3",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Operate it, then read the fixture label and WRITE DOWN the make, model and whether it is listed WET or DAMP location; confirm the lens is the shatter-proof type and is seated and uncracked.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "bd928775ed7c",
+  "category": "Electrical",
+  "code": "",
+  "label": "Refrigerator receptacle \u2014 the visible end of the dedicated 173 VA refrigerator circuit",
+  "where": "Working wall behind or under the 901 refrigerator (A555 view 01 tags 901 at the far end of the working wall; the working-wall installation box makes the refrigerator the layout hold point). NO sheet places this device or states its height",
+  "qtyMax": 1,
+  "src": "E400 Panel \"A\" schedule (\"Refrigerator\" circuit) \u00b7 E103 Typical Guest Rooms Load Analysis (Refrigerator 173 VA, all rooms; row 10 Queen Queen) \u00b7 A555 view 01 appliance tag 901 \u00b7 A550/A530 FURNISHINGS LEGEND 901 = REFRIGERATOR \u00b7 E101 spec #25 (tamper-resistant), GN #10 (20 A) \u00b7 A530 GENERAL NOTES note D vs G400 detail 02 (height, open)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Pull the refrigerator out, plug-test the receptacle behind it for polarity and ground, confirm the fridge runs from it, and write down the receptacle height and whether it is on its own dedicated device or shared.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "a22f758b6f50",
+  "category": "Electrical",
+  "code": "",
+  "label": "Switch controlling the mechanical (motorized) shade (kn35)",
+  "where": "Not dimensioned on A552. If it is a wall switch it must sit inside the 15\"\u201348\" guest-control band on 118.",
+  "qtyMax": 1,
+  "src": "A550 keynote legend line 152 (kn35 'SWITCHES CONTROLLING MECHANICAL SHADES - REFER TO FFE MANUAL') \u2014 legend printed on A552 but kn35 NOT in A552 view 04's placed list",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Record what actually controls the shade \u2014 a wall switch, or an FF&E handheld/remote \u2014 with a photo. If it is a wall switch, measure its centreline and record against the 15\"-48\" accessible band (A530 GN F). If it is a handheld, record where it is stored and confirm it is reachable within the band. Do NOT write up a missing wall switch: kn35 is not in A552 view 04's placed list and kn35's own text defers to the FFE manual.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "61043c5a11e9",
+  "category": "Electrical",
+  "code": "",
+  "label": "Tamper-resistant 20 A convenience duplex receptacles throughout the room (bed wall, working wall, seating area, entry)",
+  "where": "Per the A555 view-04 device-spacing dimension string: 8'-4\", 7'-7\", 7'-6\", 7'-5\", 7'-0\", 6'-5\", 4'-9\", 3'-9\", 3'-2\", 2'-11\", 2'-9\", 2'-8\", 2'-6\", 2'-5\", 2'-4\", 2'-2 1/2\", 1'-7\", 1'-5\", 1'-4\", 1'-3\", 1'-0\", 10\", 9\", 8\", 6\", 3\"",
+  "qtyMax": 1,
+  "src": "E400 (device layout, counts on PDF only) \u00b7 A555 view 04 spacing dimensions and printed note \"REFER TO ELEVATIONS FOR DEVICE HEIGHTS, UNO.\" \u00b7 E101 spec #18, #25, #28, GN #10 \u00b7 G400 detail 02 \u00b7 A530 GENERAL NOTES note D \u00b7 coordination_issues C-03",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Plug-test every outlet in the room for correct polarity and ground, push a probe against the tamper-resistant shutters to confirm they hold, then write down the total count and the measured centreline height of a representative one.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "07afef647f6e",
+  "category": "Electrical",
+  "code": "",
+  "label": "Wiring devices and cover plates generally \u2014 Hubbell or approved equal, 20 A, colour/style coordinated with the architect",
+  "where": "Every device in the room and bath.",
+  "qtyMax": 1,
+  "src": "E101 spec #14, #20, GN #2, GN #10 \u00b7 A550 kn36 (WHITE plate at the microwave outlet) \u00b7 G402 GN1 and E400 GN #2 (switch + GFCI may share one 4x4 box and one plate)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Lay one plate against another down the room, the bath and out to the corridor \u2014 one consistent colour and one series throughout; note any odd device or plate and photograph it. Plates flat, square and tight to the wall with no drywall gap showing and no paint bridging the plate edge. Ganged devices under a single plate, not two butted plates. Every device marked 20 A. Record the colour and series you find \u2014 there is no approved submittal to punch against yet, so your record establishes the baseline for the other 114 keys.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "42610e5b85e6",
+  "category": "Electrical",
+  "code": "",
+  "label": "Wiring devices and cover plates generally \u2014 Hubbell, 20 A, colour and style coordinated with the architect",
+  "where": "Every device in the room and the bath",
+  "qtyMax": 1,
+  "src": "E101 spec #14 (Hubbell, colour/style coordinated with architect) \u00b7 E101 GN #2 \u00b7 E101 GN #10 (20 A) \u00b7 A555 keynote 36 (WHITE plate at the microwave outlet) \u00b7 G402 bath GN1 / E400 GN2 (switch + GFCI may share one 4x4 box and one plate)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Sight down the room and the bath \u2014 confirm ONE consistent plate colour and series throughout, every plate flat, square and tight to the wall with no drywall gap behind it, and WHITE at the microwave outlet; photograph any odd one out.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "8cbc7f884313",
+  "category": "Electrical",
+  "code": "GR-204",
+  "label": "Sconce at the wall hook on the working wall \u2014 the FURNISHINGS LEGEND prints it verbatim as \"GR-204 SCONE @WALL HOOK\" [sic]. No make, model or lamp is printed on any sheet",
+  "where": "Working wall, between the GR-403 closet drapery and the 903 television (A555 view 01 tags GR-204 once in that run)",
+  "qtyMax": 1,
+  "src": "A555 view 01 FF&E tag GR-204 on the working wall \u00b7 A530 / A550 FURNISHINGS LEGEND verbatim \"GR-204 SCONE @WALL HOOK\" \u00b7 A555 keynote 25 (extended J-box flush with millwork back panel, placed views 04/04.1) \u00b7 A555 elevations 05 and 09 (working-wall heights, none assigned) \u00b7 A530 GENERAL NOTES - GUESTROOMS note A \u00b7 data/project.sqlite row (FF&E - Lighting, 105)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Switch it on \u2014 it must light \u2014 confirm the fixture is plumb, the canopy tight to the PT-03 wall with no gap, and write down whether it sits on the flush millwork J-box (if so, record it against the J-box line rather than raising two items) and its measured centreline height.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "72d5c79b0c5e",
+  "category": "Electrical",
+  "code": "GR-207",
+  "label": "Nightstand wall sconce BETWEEN THE BEDS \u2014 the A530/A550/A555 FURNISHINGS LEGEND prints it verbatim as \"GR-207 NIGHTSTAND SCONE @QUEEN QUEEN CENTER\" [sic, 'SCONE']. Queen-Queen-only fixture; no make, model or lamp is printed on any sheet in this set",
+  "where": "Bed zone, on the WC-01 wallcovered bed wall between the two queen beds; A555 view 01 tags GR-207 once, centred between the GR-322 nightstands",
+  "qtyMax": 1,
+  "src": "A555 view 01 FF&E tags (\"GR-207 nightstand sconce @QQ center (between the beds)\") \u00b7 A530 / A550 FURNISHINGS LEGEND verbatim \"GR-207 NIGHTSTAND SCONE @QUEEN QUEEN CENTER\" \u00b7 A555 elevation 07 (bed-wall heights, none assigned to the sconce) \u00b7 A530 GENERAL NOTES - GUESTROOMS note A (FF&E package governs the GR series) \u00b7 data/project.sqlite row (FF&E - Lighting, 105)",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Switch it on \u2014 it must light and hold the position you set it to \u2014 then run a finger round the canopy and confirm it is tight to the WC-01 wallcovering with no gap and no cord showing, and write down whether it is hardwired or plugged in plus the measured centreline height.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "f5a9d070abb0",
+  "category": "Electrical",
+  "code": "GR-208",
+  "label": "Nightstand wall sconces OUTBOARD of the beds \u2014 the FURNISHINGS LEGEND prints \"GR-208 NIGHTSTAND SCONCE @QUEEN QUEEN SIDE\"; two of them, one at each outboard nightstand. No make, model or lamp is printed on any sheet",
+  "where": "Bed zone, bed wall, one outboard of each queen bed (A555 view 01 tags GR-208 x2)",
+  "qtyMax": 2,
+  "src": "A555 view 01 FF&E tags (\"GR-208 nightstand sconce @QQ side x2 (outboard)\") \u00b7 A530 / A550 FURNISHINGS LEGEND verbatim \"GR-208 NIGHTSTAND SCONCE @QUEEN QUEEN SIDE\" \u00b7 A555 elevation 07 (bed-wall heights, none assigned) \u00b7 A530 GENERAL NOTES - GUESTROOMS note A \u00b7 data/project.sqlite rows (FF&E - Lighting, 105, 'outboard 1 of 2' and '2 of 2')",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Count them \u2014 there must be TWO, one outboard of each bed \u2014 switch each on and confirm it lights and holds its aim, confirm both canopies are tight to the wallcovering, and write down the measured centreline height of one and whether they are hardwired or plugged in.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "7ef710c1a7b0",
+  "category": "Electrical",
+  "code": "PNL \"A\"",
+  "label": "Guestroom panelboard \u2014 100 A MCB, 120/208 V 1-phase 3-wire, NEMA 1, COPPER bus only, Square D / GE / Cutler-Hammer (a load centre is a rejection)",
+  "where": "Bedroom \u2014 E400 prints \"Location: Bedroom\"; A555 keynote 51 \"ELECTRICAL PANEL\" is placed on views 04/04.1 and elevation 07",
+  "qtyMax": 1,
+  "src": "E400 Panel \"A\" schedule + panel notes 1\u20134 \u00b7 E103 Typical Guest Rooms Load Analysis row 10 (Queen Queen, Panel A, 27 rooms) and row 15 (Queen Queen (Wide), CD, Panel B, 2 rooms) \u00b7 E103.2 (\"PNL A \u2014 Queen Queen Wide Conn\") \u00b7 A100 Guestroom Matrix floor-1 \u00b7 E101 spec #10 \u00b7 A555 keynote 51",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Open the panel: read the nameplate for 100 A / 120-208 V / copper bus, confirm a legible typed directory, confirm every circuit E400's Panel \"A\" schedule prints is present and labelled \u2014 Lighting, Convenience Receptacles, Bathroom GFCI, Refrigerator, Disposer, Dishwasher, Microwave/Hood, PTAC, Small Appliance, Spare \u2014 then write down HOW MANY small-appliance circuits you find (E400 prints the circuit name once; E103 loads Small Appliances at 1500 VA x 2 per NEC 220.52, so one or two is what the sheets support and neither is a write-up), and trip and reset every AFCI and the GFCI breaker.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "24c162c1f60c",
+  "category": "Electrical",
+  "code": "PNL \"B\"",
+  "label": "Guestroom panelboard PANEL \"B\" \u2014 100 A MCB, 120/208 V 1\u00d8 3W, NEMA 1, COPPER bus, Square D / GE / Cutler-Hammer",
+  "where": "Bedroom (E400 prints 'Location: Bedroom'); A552 view 04 places kn51 'ELECTRICAL PANEL'. Fed from first-floor distribution Panel 1G.",
+  "qtyMax": 1,
+  "src": "E400 Panel \"B\" schedule + panel notes 1-4 (Panel A/B circuit lists; 'Small Appliance' singular) \u00b7 E400 detail 02 'King Studio Acc. Conn.' \u00b7 E103 Typical Guest Rooms Load Analysis row 8 'King Studio ACC MOD, CD' (9076 VA, Panel B, 1 room; Small Appliances 1500VA x 2, Dishwasher 1068, Disposer 480, Refrigerator 173, Motorized Shade 114, PTAC 2080) \u00b7 E101 spec #10 (Square D/GE/Cutler-Hammer, copper bus only) \u00b7 A552 view 04 kn51 \u00b7 E103.2 (Panel 1G feeds first-floor rooms)",
+  "reliability": "HIGH",
+  "verifyAtPunch": "Open the panel: 100 A main, copper bus (a load center is a rejection), NEMA 1 enclosure, directory typed and legible. Walk the directory against E400's Panel B list and record it as found \u2014 Lighting, Convenience Receptacles, Bathroom GFCI, Refrigerator, Disposer, Dishwasher, Microwave/Hood, PTAC, Small Appliance, MOTORIZED SHADE, Spare \u2014 and note whether the installed directory shows ONE 'Small Appliance' circuit (as E400 prints) or TWO (as E103's 1500 VA x 2 load column implies). Push TEST on every AFCI and on the GFCI breaker, confirm each trips and resets and that the trip actually kills its circuit. Confirm NEC 110.26 working clearance in front of the panel is not blocked by FF&E once the room is set.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "d643dafd3410",
+  "category": "Electrical",
+  "code": "S21",
+  "label": "Bath ceiling surface-mount downlight \u2014 Cooper Halo SMD6R69SWH, LED (E101 row verbatim: \"S21 | Surface mount downlight \u2014 guestroom restroom\")",
+  "where": "Bath ceiling, 7'-3\" AFF PT-07 on moisture-resistant rated board (A552 view 02; G402 GN8; E400 GN6).",
+  "qtyMax": 1,
+  "src": "E101 Lighting Fixture Schedule row S21 (Cooper Halo SMD6R69SWH LED, verbatim) \u00b7 E200 General Note 6 ('See E400 for typical guestroom layout') \u00b7 E400 enlarged typical guestroom plan (fixtures shown, per-type counts on the PDF only) \u00b7 A552 view 02 RCP (7'-3\" PT-07 bath lid) \u00b7 G402 guestroom-bath GN8 / E400 GN6 (moisture-resistant rated ceiling board at bath)",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Operate it from the bath switch \u2014 lights, no flicker, no hum. Canopy tight to the moisture-resistant ceiling board with no light leak or gap at the rim. Read the model off the label and record it against Cooper Halo SMD6R69SWH (or the architect-approved equal). COUNT the bath ceiling fixtures and write the number down \u2014 there is no printed baseline.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "a0db9d332c49",
+  "category": "Electrical",
+  "code": "WS03",
+  "label": "Vanity wall sconce \u2014 Arkansas Lighting 3550V, LED, wall mounted (E101 row verbatim: \"WS03 | Wall sconce \u2014 guestroom vanity | Arkansas Lighting 3550V | Wall | LED\")",
+  "where": "Bath, on the vanity/mirror wall above the GR-302 vanity and GR-501 mirror; blocking per A530 view 02i",
+  "qtyMax": 1,
+  "src": "E101 Lighting Fixture Schedule row WS03 (verbatim) \u00b7 E400 (per-room lighting: WS03 vanity) \u00b7 A530 keyed note 12 on views 01 and 02 \u00b7 A530 blocking view 02i \u00b7 packages/electrical.md open item 4",
+  "reliability": "MEDIUM",
+  "verifyAtPunch": "Switch it on \u2014 confirm it lights, sits level and centred on the mirror with the canopy tight to the WC-02 wallcovering \u2014 and write down the model printed on the fixture label.",
+  "rooms": [
+   "105"
+  ],
+  "roomCount": 1
+ },
+ {
+  "itemId": "989017eb3c5b",
+  "category": "Electrical",
+  "code": "WS03",
+  "label": "Vanity wall sconce \u2014 Arkansas Lighting 3550V, LED, wall mounted (E101 row verbatim: \"WS03 | Wall sconce \u2014 guestroom vanity | Arkansas Lighting 3550V | Wall | LED\")",
+  "where": "Bath, on the vanity/mirror wall above the accessible vanity. A532 kn12 'VANITY MIRROR AND LIGHT FIXTURE'; blocking called out on A530 view 02i.",
+  "qtyMax": 1,
+  "src": "E101 Lighting Fixture Schedule row WS03 (verbatim) \u00b7 E400 \u00b7 A532 kn12 on plan and elev 04 \u00b7 A530 blocking view 02i",
+  "reliability": "FLAGGED",
+  "verifyAtPunch": "Read the model off the fixture and record it against Arkansas Lighting 3550V (or the architect-approved equal). Level and centred on the vanity/mirror; lamps operate from the bath switch; canopy tight to the wallcovering with no exposed fasteners or gap. Measure and record how many sconces are installed \u2014 no sheet states a count. Note it here so the FF&E punch list does not write the same fixture up again as GR-203.",
+  "rooms": [
+   "118"
+  ],
+  "roomCount": 1
+ }
+]
