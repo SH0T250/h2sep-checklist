@@ -18,7 +18,40 @@ function groupByCategory(entries) {
 }
 
 function specRef(it) {
-  return it.src ? `<span class="speclink">${ic('jump')}${esc(it.src)} › ${esc(it.code || it.label || '')}</span>` : '';
+  if (!it.src) return '';
+  const parts = String(it.src).split(';').map(x => x.trim()).filter(Boolean);
+  const lead = (parts[0].match(/^[A-Z]{1,2}[0-9]{3}(?:\.[0-9]+)?/) || [parts[0].split(' ')[0]])[0];
+  const more = parts.length > 1 ? ` +${parts.length - 1}` : '';
+  return `<span class="speclink">${ic('jump')}${esc(lead)}${more}</span>`;
+}
+function fullSrc(it) { return String(it.src || '').trim(); }
+
+// Crew-facing short label (Austin: "too much clutter"). The full label, model
+// numbers, and the verification paper trail stay intact in the item sheet;
+// the list row carries only what a punch walk needs.
+function shortLabel(it) {
+  let t = String(it.label || '');
+  t = t.split(' \u2014 ')[0];                                   // cut at " — "
+  t = t.split(/\s+-\s+(?=[A-Z]{1,4}-?\d)/)[0];                  // " - WC-3 ..." tag dumps
+  t = t.split(/\s+-\s+(?=[A-Z][a-z]+\s+[A-Z0-9])/)[0];          // " - Danby DDW..." brand+model
+  t = t.replace(/\s*\(.{12,}\)\s*$/, '');                      // trailing long parenthetical
+  t = t.trim().replace(/[,;:]$/, '');
+  if (t.length > 64) {
+    const cut = t.slice(0, 64);
+    t = cut.slice(0, Math.max(cut.lastIndexOf(' '), 40)) + '\u2026';
+  }
+  return t || it.label || '';
+}
+function shortCode(it) {
+  const c = String(it.code || '').trim();
+  if (!c || c === '\u2014' || c === '-' || c === '\u2013') return '';
+  if (c.length <= 10) return c;
+  const head = c.split('/')[0].trim().split(' ').slice(0, 2).join(' ');
+  return (head.length > 10 ? head.slice(0, 9) : head) + '\u2026';
+}
+function hasDetail(it) {
+  return !!(it.instanceNote || (it.label && shortLabel(it) !== it.label)
+    || (it.code && String(it.code).length > 10) || String(it.src || '').includes(';'));
 }
 
 // ---------- screens ----------
@@ -172,8 +205,8 @@ function itemRow(ctx, docId, itemId, it) {
     <span class="stamp ${it.checked ? 'checked' : ''}">${it.checked ? esc(it.initials || '✓') : ''}</span>
     <span class="mid">
       <span class="l1">
-        ${it.code ? `<span class="tag">${esc(it.code)}</span>` : ''}
-        <span class="nm">${esc(it.label)}</span>
+        ${shortCode(it) ? `<span class="tag">${esc(shortCode(it))}</span>` : ''}
+        <span class="nm">${esc(shortLabel(it))}</span>
         ${it.qty > 1 ? `<span class="qty">x${it.qty}</span>` : ''}
         ${flagged ? `<span class="chip hold sm">FLAGGED</span>` : ''}
       </span>
@@ -181,8 +214,8 @@ function itemRow(ctx, docId, itemId, it) {
         ${it.issue ? `<span class="issue-pill ${it.issueResolved ? 'res' : ''}">${ic('flag', 'flag-ic')}${esc(it.issue)}</span>` : ''}
         ${specRef(it)}
         ${it.checked && it.checkedAt ? `<span class="meta">${esc(it.initials)} · ${fmtWhen(it.checkedAt)}</span>` : (it.checked ? `<span class="meta">${esc(it.initials)} · from paper</span>` : '')}
+        ${hasDetail(it) ? `<span class="detail-cue">${ic('note')}details</span>` : ''}
       </span>
-      ${it.instanceNote ? `<span class="meta" style="display:block;margin-top:3px;color:var(--hold-ink)">${esc(it.instanceNote)}</span>` : ''}
     </span>
   </div>`);
 
@@ -204,17 +237,19 @@ function itemSheet(ctx, docId, itemId) {
   const it = doc.items[itemId];
   const { close } = sheet(`
     <div class="sh">
-      ${it.code ? `<span class="tag">${esc(it.code)}</span>` : ''}
-      <b style="font-size:15px">${esc(it.label)}</b>
+      ${shortCode(it) ? `<span class="tag">${esc(shortCode(it))}</span>` : ''}
+      <b style="font-size:15px">${esc(shortLabel(it))}</b>
       ${it.qty > 1 ? `<span class="qty">x${it.qty}</span>` : ''}
       <button class="icon-btn x" data-close aria-label="Close">${ic('x')}</button>
     </div>
+    ${shortLabel(it) !== (it.label || '') || (it.code && String(it.code).length > 10) || String(it.src || '').includes(';') ? `<div class="fulldetail">${it.code && String(it.code).length > 10 ? `<div class="fd-code">${esc(it.code)}</div>` : ''}${shortLabel(it) !== (it.label || '') ? `<div>${esc(it.label)}</div>` : ''}${String(it.src || '').includes(';') ? `<div class="fd-src"><span>Sources</span> ${esc(fullSrc(it))}</div>` : ''}</div>` : ''}
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
       <button class="stamp big ${it.checked ? 'checked' : ''}" data-check>${it.checked ? esc(it.initials) : ''}</button>
       <div style="font-size:13px">${it.checked ? `<b>Checked</b> · ${esc(it.initials)}${it.checkedAt ? ' · ' + fmtWhen(it.checkedAt) : ' · from paper'}` : '<b>Not checked off</b> · tap the box to stamp your initials'}</div>
       <span class="spacer"></span>${specRef(it)}
     </div>
     ${it.reliability === 'FLAGGED' && it.instanceNote ? `<div class="conflict"><div class="ch">${ic('flag', 'flag-ic')}FLAGGED · SOURCES DISAGREE</div><div style="font-size:13px;padding:6px 0">${esc(it.instanceNote)}</div><div class="foot">Do not order or close from either position. Only Austin closes conflicts.</div></div>` : ''}
+    ${it.reliability !== 'FLAGGED' && it.instanceNote ? `<div class="vnote"><div class="vn-h">Verification notes</div><div>${esc(it.instanceNote)}</div></div>` : ''}
     <div class="field"><label>Issue</label></div>
     <div class="qps">${QUICK_PICKS.map(q => `<button class="qp ${it.issue === q ? 'on' : ''}" data-q="${q}">${q}</button>`).join('')}</div>
     <div class="field"><label>Custom note on the issue</label>
