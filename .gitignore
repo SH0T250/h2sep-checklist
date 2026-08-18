@@ -30,3 +30,5 @@ tools/minutes/fonts/
 data/minutes-*.json
 out/*.pdf
 docs/meeting-*-markup-ledger.txt
+platform/room3d.html
+platform/dist/
