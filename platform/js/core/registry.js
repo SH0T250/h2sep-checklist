@@ -1,0 +1,39 @@
+// Module registry (OpenConstructionERP idea, our code): a small stable core reads
+// this registry; every feature ships as a module that registers nav entries and
+// routes. Module two through module twenty plug in the same way with zero core edits.
+
+export class Registry {
+  constructor() { this.modules = []; this.routes = []; }
+
+  register(mod) {
+    // mod: { id, name, nav: [{path,label,icon,count?,section?}], routes: [{match, render}] }
+    this.modules.push(mod);
+    for (const r of mod.routes || []) this.routes.push({ ...r, moduleId: mod.id });
+  }
+
+  navEntries() {
+    const entries = [];
+    for (const m of this.modules) for (const n of m.nav || []) entries.push({ ...n, moduleId: m.id });
+    return entries;
+  }
+
+  resolve(hash) {
+    for (const r of this.routes) {
+      const m = hash.match(r.match);
+      if (m) return { route: r, params: m.groups || {}, match: m };
+    }
+    return null;
+  }
+}
+
+export function startRouter(registry, ctx, renderShell) {
+  const render = () => {
+    const hash = location.hash || '#/';
+    const hit = registry.resolve(hash);
+    renderShell(hash, hit ? () => hit.route.render(ctx, hit.params) : null);
+  };
+  window.addEventListener('hashchange', render);
+  ctx.store.subscribe(() => render());
+  render();
+  return render;
+}
