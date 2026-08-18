@@ -41,7 +41,6 @@ function renderDashboard(ctx) {
       <h1 class="h1">Dashboard</h1>
       <span class="sub">${esc(SLICE_NOTE)}</span>
       <span class="spacer"></span>
-      <span class="live-pill"><i class="dot"></i>LOCAL · SYNCS ON FIREBASE GO</span>
     </div>
     <div class="kpis">
       <div class="kpi"><div class="kl">Items checked</div><div class="kv">${done}<small> of ${total}</small></div><div class="kc">${pct}% of the three-room slice</div></div>

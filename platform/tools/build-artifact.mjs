@@ -10,6 +10,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const read = p => readFileSync(resolve(root, p), 'utf8');
 
 const ORDER = [
+  'js/config.js',
   'js/core/ui.js',
   'js/core/store.js',
   'js/core/registry.js',
@@ -47,6 +48,7 @@ const html = `<!doctype html>
 <body>
 <div id="app" aria-live="polite"></div>
 <script>
+window.__H2SEP_NO_BACKEND = 1; // artifact pages cannot reach external hosts; local mode
 window.__H2SEP_SEED = ${guard(seed)};
 window.__H2SEP_LOGO = "data:image/png;base64,${logoB64}";
 window.__H2SEP_VIEWER_SRCDOC = ${guard(JSON.stringify(viewer))};

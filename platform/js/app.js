@@ -7,10 +7,20 @@ import { Registry, startRouter } from './core/registry.js';
 import { ic, el, esc } from './core/ui.js';
 import { trackingModule, identityGate } from './modules/tracking/module.js';
 import { bimModule } from './modules/bim/module.js';
+import { firebaseConfig } from './config.js';
 
 const MODEL_ROOMS = ['101', '103', '105']; // slice rooms with their own geometry (all QQ family)
 
 const store = await loadStore();
+
+// Attach Firebase when configured. The bundled artifact preview cannot reach
+// external hosts (its page blocks them), so it stays in local mode by flag.
+if (firebaseConfig && !window.__H2SEP_NO_BACKEND) {
+  import('./core/firebase-backend.js')
+    .then(({ FirebaseBackend }) => store.attachBackend(new FirebaseBackend(firebaseConfig)))
+    .catch(err => { store.status.message = 'Backend unavailable: ' + (err.message || err); store._emit(); });
+}
+
 const registry = new Registry();
 registry.register(trackingModule());
 registry.register(bimModule());
@@ -18,6 +28,15 @@ registry.register(bimModule());
 const ctx = { store, registry, modelRooms: MODEL_ROOMS };
 
 const app = document.getElementById('app');
+
+function connPill(st) {
+  if (st.mode === 'local') return '<span class="offline-pill">LOCAL · SYNC WAITING ON RULES</span>';
+  if (st.message) return `<span class="offline-pill">${esc(st.message)}</span>`;
+  if (!st.ready) return '<span class="offline-pill">SIGNING IN…</span>';
+  if (st.pending > 0) return `<span class="offline-pill">SYNCING · ${st.pending} QUEUED</span>`;
+  if (st.fromCache) return '<span class="offline-pill">OFFLINE · CACHED</span>';
+  return '<span class="live-pill"><i class="dot"></i>LIVE · SYNCED</span>';
+}
 
 function navLink(n, hash, mobile) {
   const active = n.path === '#/' ? (hash === '#/' || hash === '') : hash.startsWith(n.path);
@@ -35,7 +54,7 @@ function renderShell(hash, renderScreen) {
   app.append(el(`<div class="shell">
     <aside class="side">
       <div class="brand"><img src="${window.__H2SEP_LOGO || 'img/triun-logo.png'}" alt="Triun Construction and Engineering"/></div>
-      <div class="proj"><div class="pcode">H2SEP · SLICE BUILD</div><div class="pname">Home2 Suites · Eagle Pass</div></div>
+      <div class="proj"><div class="pcode">H2SEP · SLICE BUILD</div><div class="pname">Home2 Suites · Eagle Pass</div><div class="conn">${connPill(store.status)}</div></div>
       <nav class="nav">
         ${main.map(n => navLink(n, hash)).join('')}
         <div class="sect">Model</div>
@@ -51,6 +70,8 @@ function renderShell(hash, renderScreen) {
     <nav class="navmob">${entries.filter(n => mobilePicks.includes(n.path)).map(n => navLink(n, hash, true)).join('')}</nav>
   </div>`));
 
+  const mobPill = el(`<div class="connmob">${connPill(store.status)}</div>`);
+  app.append(mobPill);
   app.querySelectorAll('[data-id-switch]').forEach(b => b.addEventListener('click', () => identityGate(ctx)));
   const mainEl = app.querySelector('.main');
   if (renderScreen) mainEl.append(renderScreen());

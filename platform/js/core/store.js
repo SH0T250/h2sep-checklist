@@ -18,6 +18,8 @@ export class Store {
     this.activity = [];
     this.listeners = new Set();
     this.queued = 0;               // pending writes (offline story; local backend syncs instantly)
+    this.backend = null;           // set by attachBackend() when Firebase is configured
+    this.status = { mode: 'local', ready: true, fromCache: false, pending: 0, message: null };
     this._replayOverlay();
   }
 
@@ -87,9 +89,18 @@ export class Store {
     const activity = activityText
       ? { text: activityText, by: this.user?.initials || '??', at: nowIso(), docId }
       : null;
-    this._apply(docId, patch);
+    this._apply(docId, patch);          // optimistic: the tap lands instantly
     if (activity) this.activity.push(activity);
-    this._persist(docId, patch, activity);
+    if (this.backend) {
+      // Firestore keeps its own offline queue and flushes on reconnect, so a
+      // failure here is a real rejection (rules/auth), not a dead zone.
+      this.backend.patch(docId, patch).catch(err => {
+        this.status.message = 'Could not save: ' + (err.code || err.message);
+        this._emit();
+      });
+    } else {
+      this._persist(docId, patch, activity);
+    }
     this._emit();
   }
 
@@ -135,6 +146,26 @@ export class Store {
   }
   resolveNote(docId, noteId) {
     this._write(docId, { [`notes.${noteId}.resolved`]: true, 'updatedAt': nowIso() }, `resolved a room note in ${docId}`);
+  }
+
+  // Firebase takes over as the source of truth when attached. Remote docs
+  // replace local ones wholesale: the server copy already carries every
+  // patch this device sent, so there is nothing local worth preserving.
+  async attachBackend(backend) {
+    this.backend = backend;
+    this.status = { mode: 'firebase', ready: false, fromCache: false, pending: 0, message: null };
+    await backend.start({
+      onChange: docs => {
+        if (Object.keys(docs).length) {
+          for (const [id, d] of Object.entries(docs)) this.docs[id] = d;
+        }
+        this._emit();
+      },
+      onStatus: st => {
+        this.status = { mode: 'firebase', ...st };
+        this._emit();
+      },
+    });
   }
 
   subscribe(fn) { this.listeners.add(fn); return () => this.listeners.delete(fn); }

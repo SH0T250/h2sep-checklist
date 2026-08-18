@@ -236,3 +236,10 @@ a{color:inherit;text-decoration:none}
 .hdr-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .kv{display:flex;gap:8px;align-items:baseline;font-size:12.5px;color:var(--muted)}
 .kv b{color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* connection status */
+.proj .conn{margin-top:9px}
+.connmob{display:none}
+@media (max-width:899px){
+  .connmob{display:block;position:fixed;top:calc(8px + env(safe-area-inset-top));right:10px;z-index:50}
+}
