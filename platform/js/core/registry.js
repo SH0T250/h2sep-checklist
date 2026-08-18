@@ -14,7 +14,9 @@ export class Registry {
   navEntries() {
     const entries = [];
     for (const m of this.modules) for (const n of m.nav || []) entries.push({ ...n, moduleId: m.id });
-    return entries;
+    // A module declares where it sits in the menu, so registration order does
+    // not decide the office nav. No order given means "after the numbered ones".
+    return entries.sort((a, b) => (a.order ?? 500) - (b.order ?? 500));
   }
 
   resolve(hash) {

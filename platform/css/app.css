@@ -257,6 +257,70 @@ a{color:inherit;text-decoration:none}
 .attaches{display:flex;flex-direction:column;gap:7px;margin:10px 0}
 .btn.attach{justify-content:flex-start;font-size:12.5px;color:var(--cyan-ink)}
 
+/* ---------- directory: contacts + sub assignments (module three) ---------- */
+.searchbar{display:flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--hair-strong);border-radius:10px;padding:9px 13px;margin-bottom:14px}
+.searchbar .ic{width:15px;height:15px;stroke:var(--subtle);fill:none;stroke-width:1.9;flex-shrink:0}
+.searchbar input{flex:1;background:none;border:0;font:inherit;color:var(--ink);outline:none}
+.dirgroup{margin-bottom:14px}
+.field select{width:100%;background:var(--field);border:1px solid var(--hair-strong);border-radius:8px;padding:9px 11px;font:inherit;color:var(--ink)}
+.field select:focus{outline:2px solid var(--cyan);border-color:var(--cyan)}
+.btn.sm{padding:5px 10px;font-size:12px}
+.empty-note{color:var(--subtle);font-size:12.5px;padding:10px 0}
+.warn{color:var(--issue-ink);font-weight:600}
+
+.dir-row,.asg-row,.open-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--hair)}
+.dir-row:first-child,.asg-row:first-child,.open-row:first-child{border-top:0}
+.dir-row,.asg-row{cursor:pointer;touch-action:manipulation}
+.dir-row:hover,.asg-row:hover{background:var(--field)}
+.dir-row .mid,.asg-row .mid,.open-row .mid,.asg-mini .mid{flex:1;min-width:0}
+.dir-row .l1,.asg-row .l1{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dir-row .l2,.asg-row .l2,.open-row .l2,.asg-mini .l2{display:block;margin-top:3px;font-size:12px;color:var(--muted)}
+.dir-row .nm,.asg-row .nm{font-size:13.5px;font-weight:650}
+.av.org{width:34px;height:34px;border-radius:9px;background:var(--field);border:1px solid var(--hair-strong);
+  color:var(--muted);font:700 11px var(--mono);display:grid;place-items:center;flex-shrink:0}
+.dir-acts{display:flex;gap:6px;flex-shrink:0}
+.dir-acts .icon-btn{color:var(--cyan-ink);border-color:var(--hair-strong)}
+.dir-row .chev,.asg-row .chev{width:14px;height:14px;stroke:var(--subtle);fill:none;stroke-width:2;flex-shrink:0}
+.dir-row .nm.rep{font-weight:500;color:var(--muted)}
+.av.org.rep{border-style:dashed;border-color:var(--hair);background:none}
+.chip.scope{color:var(--muted);background:var(--field);border-color:var(--hair-strong)}
+.chip.role{color:var(--cyan-ink);background:var(--cyan-dim);border-color:var(--cyan)}
+
+.asg-prog{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.asg-prog .bar{width:90px}
+.frac{font:600 12px var(--mono);color:var(--muted);min-width:44px;text-align:right}
+.open-row .mid b{font-size:13px}
+
+.cdetail{border:1px solid var(--hair);border-radius:9px;overflow:hidden;margin:4px 0 12px}
+.cd-row{display:flex;gap:12px;padding:8px 12px;border-top:1px solid var(--hair);font-size:12.5px}
+.cd-row:first-child{border-top:0}
+.cd-row>span{font:600 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--subtle);width:78px;flex-shrink:0;padding-top:2px}
+.cd-row>b{font-weight:600;word-break:break-word}
+.callrow{display:flex;gap:9px;flex-wrap:wrap}
+.asg-mini{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--hair);border-radius:9px;margin-bottom:7px;cursor:pointer}
+.asg-mini:hover{background:var(--field)}
+
+.roompick{display:flex;gap:7px;flex-wrap:wrap}
+.rp{border:1px solid var(--hair-strong);background:var(--card);border-radius:8px;padding:8px 13px;
+  font:600 13px var(--mono);color:var(--muted);min-width:52px;touch-action:manipulation}
+.rp.on{border-color:var(--cyan);background:var(--cyan-dim);color:var(--cyan-ink)}
+.rp.all{font-family:inherit;font-size:12.5px}
+
+/* who owns this scope, right on the checklist the crew is walking */
+.owner-chip{display:inline-flex;align-items:center;gap:5px;font:600 10.5px var(--mono);letter-spacing:.06em;
+  color:var(--cyan-ink);background:var(--cyan-dim);border:1px solid var(--cyan);border-radius:999px;padding:1px 9px;text-transform:none}
+.owner-chip.none{color:var(--subtle);background:none;border-color:var(--hair-strong)}
+.owner-chip .ic{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2}
+.cat-head .spacer{flex:1}
+
+@media (max-width:600px){
+  .dir-row,.asg-row,.open-row{padding:12px 12px;gap:10px}
+  .asg-prog .bar{width:56px}
+  .frac{min-width:38px}
+  .cd-row{flex-direction:column;gap:2px}
+  .cd-row>span{width:auto}
+}
+
 /* ---------- live print sheet (paper is always light, on screen and on paper) ---------- */
 .paper{background:#FFFFFF;color:#10181D;border:1px solid var(--hair);border-radius:10px;padding:26px 30px;max-width:820px;font-size:12.5px}
 .p-head{display:flex;align-items:center;gap:16px;border-bottom:2px solid #10181D;padding-bottom:12px;margin-bottom:12px}

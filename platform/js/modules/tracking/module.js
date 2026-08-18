@@ -190,10 +190,24 @@ function renderRoom(ctx, { no }) {
   const groups = groupByCategory(store.liveItems(active));
   for (const [cat, entries] of groups) {
     const done = entries.filter(([, it]) => it.checked).length;
-    list.append(el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">·</span><span>${done} of ${entries.length} checked</span></div>`));
+    list.append(el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">·</span><span>${done} of ${entries.length} checked</span>
+      <span class="spacer"></span>${ownerChip(store, cat, no)}</div>`));
     for (const [id, it] of entries) list.append(itemRow(ctx, activeId, id, it));
   }
   return root;
+}
+
+// Who owns a scope, read straight off the directory module's assignment doc.
+// Kept as a guarded read rather than an import so tracking still runs on its
+// own if the directory module is not registered.
+function ownerChip(store, category, roomNo) {
+  const asg = store.getDoc('_asg');
+  const hit = Object.values(asg?.items || {}).find(a =>
+    !a.deleted && a.category === category && (a.rooms || []).includes(String(roomNo)));
+  const href = `#/assignments?cat=${encodeURIComponent(category)}&rooms=${encodeURIComponent(roomNo)}`;
+  return hit
+    ? `<a class="owner-chip" href="${href}" title="${esc(hit.role || 'Install')} · ${esc(hit.contactName || '')}">${ic('people')}${esc(hit.org || 'assigned')}</a>`
+    : `<a class="owner-chip none" href="${href}">${ic('people')}assign</a>`;
 }
 
 function noteCount(doc) {
@@ -418,14 +432,12 @@ export function trackingModule() {
     id: 'tracking',
     name: 'Tracking',
     nav: [
-      { path: '#/', label: 'Dashboard', icon: 'grid' },
-      { path: '#/rooms', label: 'Rooms', icon: 'door', count: '3' },
-      { path: '#/common', label: 'Common Areas', icon: 'layers', count: '66' },
-      { path: '#/categories', label: 'Categories', icon: 'tagi' },
-      { path: '#/assignments', label: 'Assignments', icon: 'people' },
-      { path: '#/contacts', label: 'Contacts', icon: 'contact' },
-      { path: '#/files', label: 'Files', icon: 'file' },
-      { path: '#/activity', label: 'Activity', icon: 'pulse' },
+      { path: '#/', label: 'Dashboard', icon: 'grid', order: 10 },
+      { path: '#/rooms', label: 'Rooms', icon: 'door', count: '3', order: 20 },
+      { path: '#/common', label: 'Common Areas', icon: 'layers', count: '66', order: 30 },
+      { path: '#/categories', label: 'Categories', icon: 'tagi', order: 40 },
+      { path: '#/files', label: 'Files', icon: 'file', order: 70 },
+      { path: '#/activity', label: 'Activity', icon: 'pulse', order: 80 },
     ],
     routes: [
       { match: /^#\/$/, render: renderDashboard },
@@ -435,8 +447,6 @@ export function trackingModule() {
       { match: /^#\/activity$/, render: renderActivity },
       { match: /^#\/common$/, render: comingSoon('Common Areas', 'All 66 spaces are confirmed (ruling D2) and arrive with the data rollout.') },
       { match: /^#\/categories$/, render: comingSoon('Categories', 'The 21 real categories plus the custom category creator.') },
-      { match: /^#\/assignments$/, render: comingSoon('Assignments', 'Assign rooms, filtered sets, or whole categories to your subs with due dates.') },
-      { match: /^#\/contacts$/, render: comingSoon('Contacts', 'Imported from your project directory, editable like the first app.') },
       { match: /^#\/files$/, render: comingSoon('Files', 'Plans, submittals, and exports with spec jump links.') },
     ],
   };
