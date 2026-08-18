@@ -1,0 +1,26 @@
+{
+ "category": "Fire Protection",
+ "docs": [
+  "101-MEP",
+  "103-MEP",
+  "105-MEP"
+ ],
+ "lines": [
+  {
+   "id": "fp_heads_a",
+   "code": "FP",
+   "label": "Sprinkler heads: all present, escutcheons on, no paint or damage",
+   "src": "FP-1 head schedule, both rows (◉ 62/437 VK430 7/16 FR 155 C PD K=4.3; ⊗ 73/101 VK462 1/2 QR 155 B CC K=5.6; 144 total heads 1st floor); FP-1 design notes block; A550/A555 POWER & SIGNAL LEGEND (three sprinkler symbols); A120/A121 General Note I; conflicts.md B5.3; packages/fire-appliance.md §1.3/§1.4",
+   "qty": 1,
+   "instanceNote": "Ceiling and side-wall heads per the FP-1 rows; head count varies by room, so verify every head you can see rather than counting to a number."
+  },
+  {
+   "id": "fp_smoke_a",
+   "code": "(S)SB",
+   "label": "Smoke detector on sounder base mounted, undamaged",
+   "src": "FA-1 schedule row (S)SB — 121 SKPHOTOW + 121 B200S-LF-WH; FA-1 scope of work and audibility chart; FA-2/FA-3 verified on 303/305/307/311 and 304/306/308 (other room types); E501-E504 + E400; A555 view 06 (SD symbol, keynote 16); E500 FA notes 10 and 17; packages/fire-appliance.md §2.4",
+   "qty": 1,
+   "instanceNote": "The low-frequency sounder base is the required audible for a sleeping room; a corridor horn does not satisfy it. No CO detector belongs in a guest room: three are scheduled building-wide, none in rooms."
+  }
+ ]
+}

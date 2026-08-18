@@ -1,0 +1,43 @@
+{
+ "category": "Electrical",
+ "docs": [
+  "101-MEP",
+  "103-MEP",
+  "105-MEP"
+ ],
+ "lines": [
+  {
+   "id": "elec_panel",
+   "code": "",
+   "label": "Guestroom panelboard energized, breakers labeled, cover on",
+   "src": "E400 Panel A/B schedules + panel notes 1-4; E103 rows 14 and 15; E101 spec #10 (Square D/GE/Cutler-Hammer, copper bus only) and #31 (AFCI per Art. 210.12); A555 keynote 51 views 04/04.1 and 07"
+  },
+  {
+   "id": "elec_gfci",
+   "code": "GFCI",
+   "label": "Bathroom GFCI outlet trips and resets",
+   "src": "A530 keyed note 13 (placed on view 03); G402 schedule general note 6; A530 keyed note 24; E400 Panel A/B bathroom-GFCI circuit + panel note 4; E101 spec #25 (TR in guestrooms/baths) and #18; A530 general note D; G400 detail 02"
+  },
+  {
+   "id": "elec_lights",
+   "code": "",
+   "label": "Every light works from its switch, night light works",
+   "src": "E400 ('switching (entry, bath w/ integrated night light)'); A550/A555 POWER & SIGNAL LEGEND 'SWITCH, 3 WAY, 4 WAY'; A555 keynote 3 (bathroom-only qualifier); E101 spec #18 and symbol legend; G400 detail 02; A530 general note F; coordination_issues C-03",
+   "instanceNote": "Covers entry, room and closet fixtures, the vanity sconce, the bath ceiling downlight, and the wet-location shower light with its shatterproof lens. Bathroom switch night light works."
+  },
+  {
+   "id": "elec_outlets",
+   "code": "",
+   "label": "Every outlet works, cover plates complete and straight",
+   "src": "E400 (layout; counts on the PDF only); E101 spec #18/#25/#14 and GN #10 (all devices 20 A) and symbol legend; A555 views 04 and 04.1; A550/A555 POWER & SIGNAL LEGEND (duplex, duplex-GFI, quad, quad-GFI); A530 general notes D and F; G400 detail 02; coordination_issues C-03",
+   "instanceNote": "Covers convenience duplexes and quads, the microwave receptacle (mounted horizontally), the refrigerator receptacle, the undercabinet lighting outlet, and the extended J-box flush with the millwork. One consistent device series and color throughout."
+  },
+  {
+   "id": "elec_sink_sw",
+   "code": "",
+   "label": "Sink switches work: disposal and dishwasher",
+   "src": "A555 keynote 14 and keynote 15 (views 04/04.1 and elevations 05/09); A550 legend keynote 14 full text; E400 Panel A/B Disposer circuit; E103 (480 VA)",
+   "instanceNote": "Disposal switch ganged with a duplex receptacle at the sink; dishwasher switch in the cabinet under the sink."
+  }
+ ]
+}

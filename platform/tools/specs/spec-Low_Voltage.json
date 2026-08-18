@@ -1,0 +1,31 @@
+{
+ "category": "Low Voltage",
+ "docs": [
+  "101-MEP",
+  "103-MEP",
+  "105-MEP"
+ ],
+ "lines": [
+  {
+   "id": "lv_wap",
+   "code": "WAP",
+   "label": "WAP mounted vertically in its box under the desk",
+   "src": "A555 keynote 44 (views 04/04.1); A550 legend keynote 44 full text; A550/A555 POWER & SIGNAL LEGEND 'WAP (18\")'; E101 General Note 8 (Panduit/CAT6)",
+   "instanceNote": "3-gang box, 6 inches between boxes, coordinated with the casegoods."
+  },
+  {
+   "id": "lv_tvdata",
+   "code": "",
+   "label": "TV, data and desk jacks terminated, labeled, live",
+   "src": "A555 keynote 47 (views 04/04.1 + elevations 05/09); A550/A555 POWER & SIGNAL LEGEND 'OUTLET - TV'; E101 General Note 8 and symbol legend; A530 general notes D and F; G400 detail 02",
+   "instanceNote": "CAT6 throughout, homerun to the floor IDF. Coax at the TV only if option A was built. Desktop grommet jack where drawn; Connected Room edge controller at the TV head-end."
+  },
+  {
+   "id": "lv_phone_db",
+   "code": "",
+   "label": "Phone jack live, doorbell switch works",
+   "src": "E101 specification #16 and symbol legend; A550/A555 POWER & SIGNAL LEGEND 'PHONE'; A555 view 01 tag 905; G402 guestroom-bath general note 9; E400 General Note 1; E101 spec #28; A530 general notes D and F",
+   "instanceNote": "Phone outlet is FF&E tag 905 on a conduit with pull string. Doorbell on/off switch per keyed note 28."
+  }
+ ]
+}
