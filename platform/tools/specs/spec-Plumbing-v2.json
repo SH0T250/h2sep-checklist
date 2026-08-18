@@ -1,0 +1,74 @@
+{
+ "category": "Plumbing",
+ "docs": [
+  "101-MEP",
+  "103-MEP",
+  "105-MEP"
+ ],
+ "lines": [
+  {
+   "id": "plmb_wc_a",
+   "code": "WC-3 / WC-4",
+   "label": "Water closet, guestroom, floor outlet, tank type, 1.28 GPF - WC-3 American Standard Champion Pro 211AA.104 ('Guestroom, Floor Outlet, ADA') / WC-4 Cadet Pro 215CA.104; seat AS 5257A.65C.020 slow-close elongated CLOSED-FRONT W/ COVER. ADA seat height 17\"-19\" (G400 detail 07)",
+   "src": "P104 rows WC-3 and WC-4; P401/P402 (both marks printed together on the unit plans); A530 keyed note 19 (placed on plan 01); A530 placed-keynote lists by view; A100 Guestroom Matrix; G400 detail 07 (TA-15/TA-16, accessible toilet only)",
+   "qty": 1,
+   "instanceNote": "Slow-close closed-front seat with cover; ADA seat height 17 to 19 inches where applicable. Model per the approved submittal (the P sheets carry WC-3 and WC-4 rows). Flag closed for the punch list by AJ ruling 2026-08-18."
+  },
+  {
+   "id": "plmb_lavfaucet_a",
+   "code": "—",
+   "label": "Lavatory faucet — Delta 581LF-GPM-PP, manual, 1.0 GPM, less 3-hole escutcheon",
+   "src": "P104 REMARKS column on rows L-3 and L-4, verbatim: 'Faucet Delta 581LF-GPM-PP manual 1.0 GPM, less 3-hole escutcheon'",
+   "qty": 1,
+   "instanceNote": "Delta 581LF-GPM-PP, manual, 1.0 GPM."
+  },
+  {
+   "id": "plmb_shower_a",
+   "code": "SH-1 / SH-4",
+   "label": "Shower, guestroom — 30\"x60\" pan, CENTRE drain, 4\" threshold, Kohler Rely series, Delta T24859 supply, SS-01 solid surround (Mincey Marble)",
+   "src": "P401/P402 mark SH-1; P104 rows SH-3 and SH-4; A530 plan 01 dimensions and bathing configuration; A555 view 03 printed note 'NO FINISHES UNDER SHOWER'; A550/A555 keynote 26; conflicts.md B3.1",
+   "qty": 1,
+   "instanceNote": "30x60 pan, center drain, 4 inch threshold."
+  },
+  {
+   "id": "plmb_showerhead_a",
+   "code": "kn 9",
+   "label": "Shower head — trim Delta T24859",
+   "src": "A530 keyed note 9 (placed on plan 01 and elevation 05); P104 REMARKS rows SH-3/SH-4 — which print 'Delta T24859 supply' and NOTHING MORE. The full trim string Delta T24859 / R22000-WS / U4993-PK / RP70175 / 51600 / 59434-18-PK is printed on the SH-1 EMPLOYEE-shower row only and must not be attributed to the guestroom, for the same reason its 2.5 GPM must not be",
+   "qty": 1,
+   "instanceNote": "Trim Delta T24859."
+  },
+  {
+   "id": "plmb_shencl_a",
+   "code": "kn 28 / kn 5",
+   "label": "Shower enclosure — BI-PASS SLIDING GLASS DOOR, BRUSHED ALUMINUM FINISH, CLEAR GLASS, 24\" BAR PULL, with door-stop hardware",
+   "src": "A530 keyed note 28 (elevation 04) and keyed note 27 (plan 01); A555 keynote 5 (view 01)",
+   "qty": 1,
+   "instanceNote": "Bi-pass sliding glass door, brushed aluminum finish."
+  },
+  {
+   "id": "plmb_fd_a",
+   "code": "FD",
+   "label": "Floor drain, guest bathroom — 2\" per the P301-series general notes; \"MAINTAIN ACCESSIBLE COMPLIANT SLOPES TO DRAIN\". No guestroom floor drain is scheduled anywhere in P104",
+   "src": "A530 keyed note 20 (placed on plan 01, standard guest bath); E400 General Note 4; G402 bath general note 4; against P402 (FD in accessible units); P104 Drain and Drainage Appurtenance Schedule (no guestroom FD row); P301 note 9 (floor drain 2\")",
+   "qty": 1,
+   "instanceNote": "2 inch per the P301-series general notes. Flag closed for the punch list by AJ ruling 2026-08-18."
+  },
+  {
+   "id": "plmb_trapguard_a",
+   "code": "TP",
+   "label": "Trap guard / trap primer at the bathroom floor drain — the primer valve body is concealed but the trap guard is visible through the strainer and the seal is testable",
+   "src": "P301 note 6 ('All floor drains to be installed with trap guards / primers'); P501 detail 12 ('trap primers required at all floor drains' — primer valve, 2\" vent, 1\" CW primer connection); P102 (Sioux Chief 695 Series); P104 TP-1 (PPP SMP-500-115V, sump standpipe) and TG-1 (on FD-1, FD-2, FS)",
+   "qty": 1,
+   "instanceNote": "Flag closed for the punch list by AJ ruling 2026-08-18."
+  },
+  {
+   "id": "plmb_ksink_a",
+   "code": "SK-3 / SK-4",
+   "label": "Kitchenette / wet-bar sink and faucet — American Standard PEKOE 23x18 single-bowl stainless undermount 18SB.10231800.075 + Moen 8227",
+   "src": "P401/P402 (marks SK-3/SK-4, 'suite/extended units', assigned to no unit plan); P104 (schedules no product for either mark); S4 product data (American Standard 18SB.10231800.075; Moen 8227)",
+   "qty": 1,
+   "instanceNote": "American Standard PEKOE per schedule. Flag closed for the punch list by AJ ruling 2026-08-18."
+  }
+ ]
+}

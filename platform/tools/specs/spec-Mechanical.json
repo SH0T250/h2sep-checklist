@@ -1,0 +1,37 @@
+{
+ "category": "Mechanical",
+ "docs": [
+  "101-MEP",
+  "103-MEP",
+  "105-MEP"
+ ],
+ "lines": [
+  {
+   "id": "mech_ptac",
+   "code": "PTAC",
+   "label": "PTAC unit set and sealed, heats and cools",
+   "src": "M201 PTAC schedule (PTAC-1 AZ65H12DAB / PTAC-2 AZ65H15DAB, OSA 45.0 CFM both); M401 det.01 + KN3 + KN7; M301 line 30; M501 det.9; A555 KN1 view 08",
+   "instanceNote": "Complete means: sleeve caulked and trimmed at the drywall, fresh-air filter in, drain kit on, louvered access panel and exterior louver in place, unit clear of the stool. Model reads off the nameplate: AZ65H12DAB is PTAC-1, AZ65H15DAB is PTAC-2."
+  },
+  {
+   "id": "mech_tstat",
+   "code": "T",
+   "label": "Thermostat mounted and controls the PTAC",
+   "src": "A555 KN24 view 07; M401 KN4; M101 GN28/GN29; M201 PTAC notes; M301 GN5; A530 GENERAL NOTES - GUESTROOMS note F (unqualified); G402 note 11; G400 detail 02; E101 symbol legend; coordination_issues C-03",
+   "instanceNote": "7-day programmable, hardwired. Covers the energy-management wall controller with occupancy sensor where installed."
+  },
+  {
+   "id": "mech_grille_rm",
+   "code": "",
+   "label": "Room wall grille at the PTAC set, painted to match",
+   "src": "M401 KN5 (vs M401 KN1); A555 view 08 (ST-01 tagged, no PT code)"
+  },
+  {
+   "id": "mech_grille_bath",
+   "code": "EAG-50",
+   "label": "Bath exhaust grille set and pulling air",
+   "src": "M401 (EAG-50 with VD and FD); M305 EV riser diagrams ('CEILING GRILLE EXHAUST 50 CFM'); A555 keynote 19 view 02; M201 EF remark 6",
+   "instanceNote": "Covers the EF-1 exhaust fan running, the volume damper, the ceiling fire damper, the constant-airflow regulator, and the ceiling access panel that reaches them."
+  }
+ ]
+}
