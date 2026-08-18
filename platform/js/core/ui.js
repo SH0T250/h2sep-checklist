@@ -21,6 +21,7 @@ export const ICONS = {
   search: '<circle cx="11" cy="11" r="6.5"/><path d="m20 20-3.8-3.8"/>',
   plus: '<path d="M12 5v14M5 12h14"/>',
   wrench: '<path d="M14.2 6.3a4.6 4.6 0 0 0-6 5.9L3 17.4 6.6 21l5.2-5.2a4.6 4.6 0 0 0 5.9-6L14.6 13l-2.5-2.5 2.1-4.2z"/>',
+  clip: '<path d="M20 11.5 12.6 19a4.6 4.6 0 0 1-6.5-6.5l7.8-7.8a3 3 0 0 1 4.3 4.3l-7.6 7.6a1.5 1.5 0 0 1-2.1-2.1l6.8-6.9"/>',
 };
 
 export function ic(name, cls = 'ic') {

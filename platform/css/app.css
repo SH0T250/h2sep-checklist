@@ -253,3 +253,6 @@ a{color:inherit;text-decoration:none}
 .vnote .vn-h{font:600 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--subtle);margin-bottom:4px}
 .fulldetail .fd-src{margin-top:6px;font:500 11px var(--mono)}
 .fulldetail .fd-src span{font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--subtle);font-size:9.5px;margin-right:5px}
+.detail-cue.clip{color:var(--cyan-ink)}
+.attaches{display:flex;flex-direction:column;gap:7px;margin:10px 0}
+.btn.attach{justify-content:flex-start;font-size:12.5px;color:var(--cyan-ink)}
