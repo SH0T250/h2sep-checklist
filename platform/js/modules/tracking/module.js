@@ -6,18 +6,8 @@ import { ic, el, esc, fmtWhen, toast, sheet, pressable } from '../../core/ui.js'
 const QUICK_PICKS = ['NEED INSTALL', 'NEED PROPER PLACE', 'IN BOX', 'DAMAGED', 'MISSING', 'WRONG ITEM'];
 const SLICE_NOTE = 'Slice build: rooms 101, 103, 105 at 100%. The other 112 rooms arrive with the data rollout.';
 
-// Aug 14 door-sheet PDFs in Drive (folder 7, Guest Room FF&E and Finishes).
-// Room 103 has no sheet in Drive yet; flagged to Austin.
-const PRINT_SHEETS = {
-  '101': '18nSnm4ZoueyW1P7iE_K-MVuTT80mLk9u', '104': '1XQn2pVpnQ_JgTmzDl95-FN4uQVHJSVAF',
-  '105': '1h2PAGJVtHbq9RAOr-lE3knO9N4Zbkmz-', '109': '1V3jZ3DxFIDststv57Tjg-X4d85-BFddh',
-  '116': '18MlxBMq56YvqyRpjMmlTUMceyO0TBzL6', '118': '1A6N9Wcweb9m_JDMftCCxv25DFaL-G55l',
-  '202': '1O3WWFtMH-E61SMDmdt8k_NtXj5Q8BoKy', '215': '1msubXqGbG0nLaI2jI2cA4L2WRQ6UDKBe',
-  '230': '1jT-UlxO6Sf1P_CUgFMA7qke-gok6f462', '238': '11FR41rxjQ7EH8F9eyv0TEtw9d2WVvJxV',
-};
-function printSheetUrl(no) {
-  return PRINT_SHEETS[no] ? `https://drive.google.com/file/d/${PRINT_SHEETS[no]}/view` : null;
-}
+// The printer icon opens the live in-app sheet (#/print/<no>), always current.
+// Drive PDF revisions are generated and uploaded by tools at each milestone.
 
 // Category display order mirrors the crew app (work top-of-wall down for MEP; FF&E families for rooms).
 function groupByCategory(entries) {
@@ -169,7 +159,7 @@ function renderRoom(ctx, { no }) {
       <span class="spacer"></span>
       <div class="hdr-actions">
         ${has3d ? `<a class="btn" href="#/bim/${esc(no)}">${ic('cube')}3D model</a>` : ''}
-        ${printSheetUrl(no) ? `<a class="btn" href="${printSheetUrl(no)}" target="_blank" rel="noopener">${ic('printer')}Print sheet</a>` : ''}
+        <a class="btn" href="#/print/${esc(no)}">${ic('printer')}Print sheet</a>
         <button class="btn" data-note>${ic('note')}Room notes${noteCount(doc) ? ` · ${noteCount(doc)}` : ''}</button>
       </div>
     </div>
@@ -364,6 +354,65 @@ function renderActivity(ctx) {
   </div>`);
 }
 
+// ---------- print sheet (live data, paper-styled, like the first build) ----------
+
+function renderPrint(ctx, { no }) {
+  const { store } = ctx;
+  const doc = store.getDoc(no);
+  if (!doc) return el(`<div class="coming"><b>Room ${esc(no)} is not in this slice</b></div>`);
+  const mep = store.mepDoc(no);
+  const now = new Date();
+  const stamp = `${now.toLocaleDateString('en-US')} · ${fmtWhen(now.toISOString())}`;
+
+  function section(title, d) {
+    const groups = groupByCategory(store.liveItems(d));
+    let html = '';
+    for (const [cat, entries] of groups) {
+      html += `<div class="p-cat">${esc(cat.toUpperCase())}</div>`;
+      for (const [, it] of entries) {
+        const openIssue = it.issue && !it.issueResolved;
+        html += `<div class="p-row">
+          <span class="p-box">${it.checked ? esc(it.initials || '') : ''}</span>
+          <span class="p-tag">${esc(shortCode(it) || '')}</span>
+          <span class="p-lbl">${esc(shortLabel(it))}${it.qty > 1 ? ` <b>x${it.qty}</b>` : ''}
+            ${openIssue ? `<span class="p-issue">! ${esc(it.issue)}</span>` : ''}</span>
+        </div>`;
+      }
+    }
+    return `<div class="p-sect"><div class="p-sect-h">${esc(title)}</div>${html}</div>`;
+  }
+
+  const notes = Object.values(doc.notes || {}).filter(n => !n.deleted && !n.resolved);
+  const root = el(`<div class="paper-wrap">
+    <div class="pagehead noprint">
+      <button class="icon-btn" data-back aria-label="Back">${ic('back')}</button>
+      <div><h1 class="h1">Room ${esc(no)} print sheet</h1>
+        <div class="sub">generated from live data, current as of right now</div></div>
+      <span class="spacer"></span>
+      <button class="btn primary" data-print>${ic('printer')}Print or save PDF</button>
+    </div>
+    <div class="paper">
+      <div class="p-head">
+        <img src="${window.__H2SEP_LOGO || 'img/triun-logo.png'}" alt="Triun"/>
+        <div class="p-title"><b>ROOM ${esc(no)}</b><span>${esc(doc.typeLabel || doc.type)} · Floor ${esc(doc.floor)}</span></div>
+        <div class="p-tb">
+          <div><span>PROJECT</span><b>H2SEP</b></div>
+          <div><span>JOB</span><b>TRIUN 24030</b></div>
+          <div><span>GENERATED</span><b>${esc(stamp)}</b></div>
+        </div>
+      </div>
+      ${notes.length ? `<div class="p-notes"><b>ROOM NOTES:</b> ${notes.map(n => esc(n.text)).join(' · ')}</div>` : ''}
+      ${section('FF&E CHECKLIST', doc)}
+      ${mep ? `<div class="p-break"></div>${section('MEP PUNCH', mep)}
+        <div class="p-sign"><span>Punch walked by: ____________________</span><span>Date: ____________</span></div>` : ''}
+      <div class="p-foot">Initials in the box mean checked, like the paper sheet. Generated from live data · Triun Construction &amp; Engineering</div>
+    </div>
+  </div>`);
+  root.querySelector('[data-back]').addEventListener('click', () => { location.hash = `#/room/${no}`; });
+  root.querySelector('[data-print]').addEventListener('click', () => window.print());
+  return root;
+}
+
 export function trackingModule() {
   return {
     id: 'tracking',
@@ -382,6 +431,7 @@ export function trackingModule() {
       { match: /^#\/$/, render: renderDashboard },
       { match: /^#\/rooms$/, render: renderRooms },
       { match: /^#\/room\/(?<no>[^?]+)/, render: renderRoom },
+      { match: /^#\/print\/(?<no>[^?]+)/, render: renderPrint },
       { match: /^#\/activity$/, render: renderActivity },
       { match: /^#\/common$/, render: comingSoon('Common Areas', 'All 66 spaces are confirmed (ruling D2) and arrive with the data rollout.') },
       { match: /^#\/categories$/, render: comingSoon('Categories', 'The 21 real categories plus the custom category creator.') },
