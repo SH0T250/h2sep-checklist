@@ -6,6 +6,19 @@ import { ic, el, esc, fmtWhen, toast, sheet, pressable } from '../../core/ui.js'
 const QUICK_PICKS = ['NEED INSTALL', 'NEED PROPER PLACE', 'IN BOX', 'DAMAGED', 'MISSING', 'WRONG ITEM'];
 const SLICE_NOTE = 'Slice build: rooms 101, 103, 105 at 100%. The other 112 rooms arrive with the data rollout.';
 
+// Aug 14 door-sheet PDFs in Drive (folder 7, Guest Room FF&E and Finishes).
+// Room 103 has no sheet in Drive yet; flagged to Austin.
+const PRINT_SHEETS = {
+  '101': '18nSnm4ZoueyW1P7iE_K-MVuTT80mLk9u', '104': '1XQn2pVpnQ_JgTmzDl95-FN4uQVHJSVAF',
+  '105': '1h2PAGJVtHbq9RAOr-lE3knO9N4Zbkmz-', '109': '1V3jZ3DxFIDststv57Tjg-X4d85-BFddh',
+  '116': '18MlxBMq56YvqyRpjMmlTUMceyO0TBzL6', '118': '1A6N9Wcweb9m_JDMftCCxv25DFaL-G55l',
+  '202': '1O3WWFtMH-E61SMDmdt8k_NtXj5Q8BoKy', '215': '1msubXqGbG0nLaI2jI2cA4L2WRQ6UDKBe',
+  '230': '1jT-UlxO6Sf1P_CUgFMA7qke-gok6f462', '238': '11FR41rxjQ7EH8F9eyv0TEtw9d2WVvJxV',
+};
+function printSheetUrl(no) {
+  return PRINT_SHEETS[no] ? `https://drive.google.com/file/d/${PRINT_SHEETS[no]}/view` : null;
+}
+
 // Category display order mirrors the crew app (work top-of-wall down for MEP; FF&E families for rooms).
 function groupByCategory(entries) {
   const groups = new Map();
@@ -156,6 +169,7 @@ function renderRoom(ctx, { no }) {
       <span class="spacer"></span>
       <div class="hdr-actions">
         ${has3d ? `<a class="btn" href="#/bim/${esc(no)}">${ic('cube')}3D model</a>` : ''}
+        ${printSheetUrl(no) ? `<a class="btn" href="${printSheetUrl(no)}" target="_blank" rel="noopener">${ic('printer')}Print sheet</a>` : ''}
         <button class="btn" data-note>${ic('note')}Room notes${noteCount(doc) ? ` · ${noteCount(doc)}` : ''}</button>
       </div>
     </div>
@@ -214,6 +228,7 @@ function itemRow(ctx, docId, itemId, it) {
         ${it.issue ? `<span class="issue-pill ${it.issueResolved ? 'res' : ''}">${ic('flag', 'flag-ic')}${esc(it.issue)}</span>` : ''}
         ${specRef(it)}
         ${it.checked && it.checkedAt ? `<span class="meta">${esc(it.initials)} · ${fmtWhen(it.checkedAt)}</span>` : (it.checked ? `<span class="meta">${esc(it.initials)} · from paper</span>` : '')}
+        ${(it.attachments || []).length ? `<span class="detail-cue clip">${ic('clip')}${(it.attachments).length}</span>` : ''}
         ${hasDetail(it) ? `<span class="detail-cue">${ic('note')}details</span>` : ''}
       </span>
     </span>
@@ -250,6 +265,7 @@ function itemSheet(ctx, docId, itemId) {
     </div>
     ${it.reliability === 'FLAGGED' && it.instanceNote ? `<div class="conflict"><div class="ch">${ic('flag', 'flag-ic')}FLAGGED · SOURCES DISAGREE</div><div style="font-size:13px;padding:6px 0">${esc(it.instanceNote)}</div><div class="foot">Do not order or close from either position. Only Austin closes conflicts.</div></div>` : ''}
     ${it.reliability !== 'FLAGGED' && it.instanceNote ? `<div class="vnote"><div class="vn-h">Verification notes</div><div>${esc(it.instanceNote)}</div></div>` : ''}
+    ${(it.attachments || []).length ? `<div class="attaches">${it.attachments.map(a => `<a class="btn attach" href="${esc(a.url)}" target="_blank" rel="noopener">${ic('clip')}${esc(a.label)}</a>`).join('')}</div>` : ''}
     <div class="field"><label>Issue</label></div>
     <div class="qps">${QUICK_PICKS.map(q => `<button class="qp ${it.issue === q ? 'on' : ''}" data-q="${q}">${q}</button>`).join('')}</div>
     <div class="field"><label>Custom note on the issue</label>

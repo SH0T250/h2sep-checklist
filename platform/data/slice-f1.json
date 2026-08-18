@@ -54,7 +54,13 @@
      "issueResolved": false,
      "derived": 1,
      "label": "Over-the-range microwave, wall-affixed - Danby DOM16A2SSDB, 1.6 cu ft, 1000 W, 300 CFM, mounting brackets included",
-     "checkedAt": null
+     "checkedAt": null,
+     "attachments": [
+      {
+       "label": "Submittal · Danby OTR Microwave DOM16A2SSDB",
+       "url": "https://drive.google.com/file/d/1KrnAUpZLbxVzQy7abn9YlsszQd-7mqSE/view"
+      }
+     ]
     },
     "gr100_a": {
      "initials": "CC",
@@ -244,7 +250,13 @@
      "category": "Appliance",
      "deleted": false,
      "trade": "",
-     "src": "A550"
+     "src": "A550",
+     "attachments": [
+      {
+       "label": "Submittal · Danby Refrigerator DFF101B1BSSDB",
+       "url": "https://drive.google.com/file/d/11UUrE446TshGMdj25qdwkKU_AoZ5JpJl/view"
+      }
+     ]
     },
     "gr205_a": {
      "checked": true,
@@ -451,9 +463,15 @@
      "issue": "MISSING",
      "checkedAt": null,
      "label": "Divider Drapery Hardware",
-     "instanceNote": "",
+     "instanceNote": "Submittal on file: WINGITS WRD5SS36SN structural rod, 36 inch satin, ceiling mounts, 100 lb rated.",
      "issueResolved": false,
-     "derived": 1
+     "derived": 1,
+     "attachments": [
+      {
+       "label": "Submittal · WINGITS Room Divider WRD5SS36SN",
+       "url": "https://drive.google.com/file/d/1qSz_8IPYyxxsiIwHorKKVRHcUYfrbWFE/view"
+      }
+     ]
     },
     "gr203_a": {
      "reliability": "HIGH",
@@ -495,13 +513,13 @@
     },
     "902_a": {
      "checked": true,
-     "instanceNote": "⚑ no submittal link — model (DDW18D1ESS 18\" vs DDW2404EBSS 24\") pending Austin ruling",
+     "instanceNote": "Approved submittal on file: Danby DDW2404EBSS, 24 inch, 12 place settings. The sheets carried both the 18 and 24 inch models; the submittal governs. Flag closed by AJ ruling 2026-08-18.",
      "issueResolved": false,
      "derived": 1,
      "checkedAt": "2026-08-10T18:58:36.843Z",
      "label": "Dishwasher - Danby DDW18D1ESS (18\", 10 place settings) or DDW2404EBSS (24\", 12 place settings)",
      "qty": 1,
-     "reliability": "FLAGGED",
+     "reliability": "HIGH",
      "issue": "",
      "sort": 14010,
      "checkedAtLocal": "2026-08-10T18:58:36.699Z",
@@ -510,7 +528,13 @@
      "deleted": false,
      "src": "A550",
      "code": "902",
-     "initials": "MD"
+     "initials": "MD",
+     "attachments": [
+      {
+       "label": "Submittal · Danby Dishwasher DDW2404EBSS",
+       "url": "https://drive.google.com/file/d/1lvwLfJQPcD_qRPyv4MNT_hl7_UpDXtUc/view"
+      }
+     ]
     },
     "904_a": {
      "src": "A550",
@@ -616,11 +640,11 @@
      "initials": "CC",
      "checked": true,
      "qty": 1,
-     "reliability": "FLAGGED",
+     "reliability": "HIGH",
      "checkedAtLocal": null,
      "sort": 15020,
      "issue": "",
-     "instanceNote": "⚑ F-1 / OPEN_ITEMS A1 - ONE working wall per key. The room-101 field sheet prints this same physical run as 'GR-308R Working Wall @ QQ Connector (x2)'. GR-308R is carried VERBATIM and UNNORMALISED, is NOT merged into GR-308, and is NOT emitted as a second physical item - a QQ Connector has one working wall. The field sheet's (x2) is unresolved; if real it is two rows, never three. Spec alternative for the base QQ is GR-305",
+     "instanceNote": "One working wall per key (F-1 / OPEN_ITEMS A1). The spec book prints the tag under the Connector family name while the base QQ plan tags the same physical run; naming quirk only, no order or install impact. Flag closed by AJ ruling 2026-08-18.",
      "issueResolved": false,
      "derived": 1,
      "checkedAt": null,
@@ -705,11 +729,11 @@
     "u_ce20ab6281": {
      "checked": true,
      "checkedAt": "2026-08-10T18:59:02.656Z",
-     "label": "Garbage disposer",
-     "instanceNote": "⚑ no submittal link — only the E400 disposer circuit + E103 480 VA load evidence it; existence in Room 101 unresolved, resolve before ordering",
+     "label": "Garbage disposer - Moen MGXP33C",
+     "instanceNote": "Approved submittal on file: Moen MGXP33C. Existence was the open question; the submittal plus the E400 disposer circuit settle it. Flag closed by AJ ruling 2026-08-18.",
      "derived": 1,
      "issueResolved": false,
-     "reliability": "FLAGGED",
+     "reliability": "HIGH",
      "qty": 1,
      "checkedAtLocal": "2026-08-10T18:59:02.513Z",
      "sort": 14060,
@@ -719,7 +743,13 @@
      "deleted": false,
      "src": "E400 Panel A/B 'Disposer' circuit; E103 480 VA",
      "initials": "MD",
-     "code": ""
+     "code": "",
+     "attachments": [
+      {
+       "label": "Submittal · Moen Garbage Disposal MGXP33C",
+       "url": "https://drive.google.com/file/d/1vBFDnZIwHDKtPj0q6b3U5zXaorDdnZGx/view"
+      }
+     ]
     },
     "hd16_a": {
      "category": "Bath Accessory",
@@ -834,7 +864,13 @@
      "derived": 1,
      "instanceNote": "",
      "label": "Over-the-range microwave, wall-affixed - Danby DOM16A2SSDB, 1.6 cu ft, 1000 W, 300 CFM, mounting brackets included",
-     "checkedAt": null
+     "checkedAt": null,
+     "attachments": [
+      {
+       "label": "Submittal · Danby OTR Microwave DOM16A2SSDB",
+       "url": "https://drive.google.com/file/d/1KrnAUpZLbxVzQy7abn9YlsszQd-7mqSE/view"
+      }
+     ]
     },
     "hd03_a": {
      "trade": "",
@@ -1081,7 +1117,13 @@
      "checkedAtLocal": "2026-08-10T19:01:34.482Z",
      "qty": 1,
      "reliability": "HIGH",
-     "checked": true
+     "checked": true,
+     "attachments": [
+      {
+       "label": "Submittal · Danby Refrigerator DFF101B1BSSDB",
+       "url": "https://drive.google.com/file/d/11UUrE446TshGMdj25qdwkKU_AoZ5JpJl/view"
+      }
+     ]
     },
     "gr321_a": {
      "trade": "",
@@ -1221,7 +1263,7 @@
      "label": "Divider Drapery Hardware",
      "derived": 1,
      "issueResolved": false,
-     "instanceNote": "",
+     "instanceNote": "Submittal on file: WINGITS WRD5SS36SN structural rod, 36 inch satin, ceiling mounts, 100 lb rated.",
      "issue": "MISSING",
      "sort": 19020,
      "checkedAtLocal": null,
@@ -1233,7 +1275,13 @@
      "category": "FF&E - Window",
      "deleted": false,
      "trade": "",
-     "src": "A555"
+     "src": "A555",
+     "attachments": [
+      {
+       "label": "Submittal · WINGITS Room Divider WRD5SS36SN",
+       "url": "https://drive.google.com/file/d/1qSz_8IPYyxxsiIwHorKKVRHcUYfrbWFE/view"
+      }
+     ]
     },
     "gr402_a": {
      "code": "GR-402",
@@ -1259,19 +1307,25 @@
      "checkedAtLocal": "2026-08-10T19:01:35.766Z",
      "sort": 14010,
      "issue": "",
-     "reliability": "FLAGGED",
+     "reliability": "HIGH",
      "qty": 1,
      "label": "Dishwasher - Danby DDW18D1ESS (18\", 10 place settings) or DDW2404EBSS (24\", 12 place settings)",
      "checkedAt": "2026-08-10T19:01:35.857Z",
      "derived": 1,
      "issueResolved": false,
-     "instanceNote": "⚑ no submittal link — model (DDW18D1ESS 18\" vs DDW2404EBSS 24\") pending Austin ruling",
+     "instanceNote": "Approved submittal on file: Danby DDW2404EBSS, 24 inch, 12 place settings. The sheets carried both the 18 and 24 inch models; the submittal governs. Flag closed by AJ ruling 2026-08-18.",
      "src": "A550",
      "category": "Appliance",
      "deleted": false,
      "trade": "",
      "initials": "MD",
-     "code": "902"
+     "code": "902",
+     "attachments": [
+      {
+       "label": "Submittal · Danby Dishwasher DDW2404EBSS",
+       "url": "https://drive.google.com/file/d/1lvwLfJQPcD_qRPyv4MNT_hl7_UpDXtUc/view"
+      }
+     ]
     },
     "gr400_a": {
      "derived": 1,
@@ -1398,13 +1452,13 @@
      "issue": "",
      "sort": 15020,
      "checkedAtLocal": "2026-08-10T19:01:59.821Z",
-     "reliability": "FLAGGED",
+     "reliability": "HIGH",
      "qty": 1,
      "label": "Working Wall @ Queen Queen Studio Suite Connector",
      "checkedAt": "2026-08-10T19:01:59.947Z",
      "derived": 1,
      "issueResolved": false,
-     "instanceNote": "⚑ F-1 / OPEN_ITEMS A1 - ONE working wall per key. The room-101 field sheet prints this same physical run as 'GR-308R Working Wall @ QQ Connector (x2)'. GR-308R is carried VERBATIM and UNNORMALISED, is NOT merged into GR-308, and is NOT emitted as a second physical item - a QQ Connector has one working wall. The field sheet's (x2) is unresolved; if real it is two rows, never three. Spec alternative for the base QQ is GR-305"
+     "instanceNote": "One working wall per key (F-1 / OPEN_ITEMS A1). The spec book prints the tag under the Connector family name while the base QQ plan tags the same physical run; naming quirk only, no order or install impact. Flag closed by AJ ruling 2026-08-18."
     },
     "hd12_a": {
      "checkedAtLocal": null,
@@ -1491,15 +1545,21 @@
      "src": "E400 Panel A/B 'Disposer' circuit; E103 480 VA",
      "issueResolved": false,
      "derived": 1,
-     "instanceNote": "⚑ no submittal link — only the E400 disposer circuit + E103 480 VA load evidence it; existence in Room 101 unresolved, resolve before ordering",
+     "instanceNote": "Approved submittal on file: Moen MGXP33C. Existence was the open question; the submittal plus the E400 disposer circuit settle it. Flag closed by AJ ruling 2026-08-18.",
      "checkedAt": "2026-08-10T19:01:44.254Z",
-     "label": "Garbage disposer",
+     "label": "Garbage disposer - Moen MGXP33C",
      "issue": "",
      "sort": 14060,
      "checkedAtLocal": "2026-08-10T19:01:44.139Z",
-     "reliability": "FLAGGED",
+     "reliability": "HIGH",
      "qty": 1,
-     "checked": true
+     "checked": true,
+     "attachments": [
+      {
+       "label": "Submittal · Moen Garbage Disposal MGXP33C",
+       "url": "https://drive.google.com/file/d/1vBFDnZIwHDKtPj0q6b3U5zXaorDdnZGx/view"
+      }
+     ]
     },
     "hd16_a": {
      "checked": false,
@@ -1668,7 +1728,13 @@
      "reliability": "HIGH",
      "issue": "",
      "sort": 14000,
-     "checkedAtLocal": "2026-08-10T19:12:19.378Z"
+     "checkedAtLocal": "2026-08-10T19:12:19.378Z",
+     "attachments": [
+      {
+       "label": "Submittal · Danby Refrigerator DFF101B1BSSDB",
+       "url": "https://drive.google.com/file/d/11UUrE446TshGMdj25qdwkKU_AoZ5JpJl/view"
+      }
+     ]
     },
     "gr205_a": {
      "issueResolved": false,
@@ -1858,7 +1924,13 @@
      "category": "Appliance",
      "deleted": false,
      "initials": "",
-     "code": "kn 11"
+     "code": "kn 11",
+     "attachments": [
+      {
+       "label": "Submittal · Danby OTR Microwave DOM16A2SSDB",
+       "url": "https://drive.google.com/file/d/1KrnAUpZLbxVzQy7abn9YlsszQd-7mqSE/view"
+      }
+     ]
     },
     "gr100_a": {
      "initials": "MD",
@@ -1926,15 +1998,21 @@
      "code": "",
      "checked": true,
      "checkedAt": "2026-08-10T19:12:30.476Z",
-     "label": "Garbage disposer",
-     "instanceNote": "⚑ no submittal link — only the E400 disposer circuit + E103 480 VA load evidence it; existence unresolved, resolve before ordering",
+     "label": "Garbage disposer - Moen MGXP33C",
+     "instanceNote": "Approved submittal on file: Moen MGXP33C. Existence was the open question; the submittal plus the E400 disposer circuit settle it. Flag closed by AJ ruling 2026-08-18.",
      "derived": 1,
      "issueResolved": false,
      "qty": 1,
-     "reliability": "FLAGGED",
+     "reliability": "HIGH",
      "issue": "",
      "sort": 14060,
-     "checkedAtLocal": "2026-08-10T19:12:30.330Z"
+     "checkedAtLocal": "2026-08-10T19:12:30.330Z",
+     "attachments": [
+      {
+       "label": "Submittal · Moen Garbage Disposal MGXP33C",
+       "url": "https://drive.google.com/file/d/1vBFDnZIwHDKtPj0q6b3U5zXaorDdnZGx/view"
+      }
+     ]
     },
     "gr6001_a": {
      "category": "FF&E - Bedding",
@@ -2072,14 +2150,14 @@
     "gr308_a": {
      "issueResolved": false,
      "derived": 1,
-     "instanceNote": "one continuous run — ⚑ spec prints '@ Queen Queen Studio Suite Connector' but it is tagged on the BASE QQ plan; confirm the correct working wall for a non-connecting QQ Studio",
+     "instanceNote": "One working wall per key (F-1 / OPEN_ITEMS A1). The spec book prints the tag under the Connector family name while the base QQ plan tags the same physical run; naming quirk only, no order or install impact. Flag closed by AJ ruling 2026-08-18.",
      "checkedAt": "2026-08-10T19:13:03.704Z",
      "label": "Working Wall - printed '@ Queen Queen Studio Suite Connector' in the spec but tagged on the BASE QQ plan",
      "issue": "",
      "sort": 15030,
      "checkedAtLocal": "2026-08-10T19:13:03.557Z",
      "qty": 1,
-     "reliability": "FLAGGED",
+     "reliability": "HIGH",
      "checked": true,
      "code": "GR-308",
      "initials": "MD",
@@ -2176,12 +2254,18 @@
      "checkedAtLocal": "2026-08-10T19:12:22.696Z",
      "sort": 14010,
      "qty": 1,
-     "reliability": "FLAGGED",
+     "reliability": "HIGH",
      "checkedAt": "2026-08-10T19:12:22.817Z",
      "label": "Dishwasher - Danby DDW18D1ESS (18\", 10 place settings) or DDW2404EBSS (24\", 12 place settings)",
      "derived": 1,
      "issueResolved": false,
-     "instanceNote": "⚑ no submittal link — model (DDW18D1ESS 18\" vs DDW2404EBSS 24\") pending Austin ruling"
+     "instanceNote": "Approved submittal on file: Danby DDW2404EBSS, 24 inch, 12 place settings. The sheets carried both the 18 and 24 inch models; the submittal governs. Flag closed by AJ ruling 2026-08-18.",
+     "attachments": [
+      {
+       "label": "Submittal · Danby Dishwasher DDW2404EBSS",
+       "url": "https://drive.google.com/file/d/1lvwLfJQPcD_qRPyv4MNT_hl7_UpDXtUc/view"
+      }
+     ]
     },
     "gr400_a": {
      "deleted": false,
@@ -2213,13 +2297,19 @@
      "label": "Divider Drapery Hardware",
      "issueResolved": false,
      "derived": 1,
-     "instanceNote": "",
+     "instanceNote": "Submittal on file: WINGITS WRD5SS36SN structural rod, 36 inch satin, ceiling mounts, 100 lb rated.",
      "src": "A555",
      "category": "FF&E - Window",
      "deleted": false,
      "trade": "",
      "initials": "",
-     "code": "GR-402.1"
+     "code": "GR-402.1",
+     "attachments": [
+      {
+       "label": "Submittal · WINGITS Room Divider WRD5SS36SN",
+       "url": "https://drive.google.com/file/d/1qSz_8IPYyxxsiIwHorKKVRHcUYfrbWFE/view"
+      }
+     ]
     },
     "gr402_a": {
      "initials": "",
@@ -4054,10 +4144,20 @@
      "label": "Lavatory faucet — Delta 581LF-GPM-PP, manual, 1.0 GPM, less 3-hole escutcheon",
      "src": "P104 REMARKS column on rows L-3 and L-4, verbatim: 'Faucet Delta 581LF-GPM-PP manual 1.0 GPM, less 3-hole escutcheon'",
      "qty": 1,
-     "instanceNote": "Delta 581LF-GPM-PP, manual, 1.0 GPM.",
+     "instanceNote": "Approved submittals attached: Moen vanity faucet and American Standard vanity sink. The P sheets scheduled Delta 581LF-GPM-PP; the approved submittal governs.",
      "category": "Plumbing",
      "sort": 3011,
-     "reliability": "HIGH"
+     "reliability": "HIGH",
+     "attachments": [
+      {
+       "label": "Submittal · Moen Bathroom Vanity Faucet",
+       "url": "https://drive.google.com/file/d/1aSYi19GiExpp8CfsMi_vmRZEQ_qiZXg9/view"
+      },
+      {
+       "label": "Submittal · American Standard Bathroom Vanity Sink",
+       "url": "https://drive.google.com/file/d/1whVATgyeShGb46aPIG0cUorNC1nBxZK6/view"
+      }
+     ]
     },
     "plmb_shower_a": {
      "checked": false,
@@ -4174,10 +4274,20 @@
      "label": "Kitchenette / wet-bar sink and faucet — American Standard PEKOE 23x18 single-bowl stainless undermount 18SB.10231800.075 + Moen 8227",
      "src": "P401/P402 (marks SK-3/SK-4, 'suite/extended units', assigned to no unit plan); P104 (schedules no product for either mark); S4 product data (American Standard 18SB.10231800.075; Moen 8227)",
      "qty": 1,
-     "instanceNote": "American Standard PEKOE per schedule. Flag closed for the punch list by AJ ruling 2026-08-18.",
+     "instanceNote": "Approved submittals attached: American Standard kitchenette sink and Moen kitchenette faucet. Where a plan schedule differs, the approved submittal governs. Flag closed by AJ ruling 2026-08-18.",
      "category": "Plumbing",
      "sort": 3017,
-     "reliability": "HIGH"
+     "reliability": "HIGH",
+     "attachments": [
+      {
+       "label": "Submittal · American Standard Kitchenette Sink",
+       "url": "https://drive.google.com/file/d/1b54c-VNphwmTSMTxzzlOVkhPxtkdYnaM/view"
+      },
+      {
+       "label": "Submittal · Moen Kitchenette Faucet",
+       "url": "https://drive.google.com/file/d/1l1Puul8zGtsfwUoTlGqKMXRNX4064ugg/view"
+      }
+     ]
     },
     "fp_heads_a": {
      "checked": false,
@@ -5944,10 +6054,20 @@
      "label": "Lavatory faucet — Delta 581LF-GPM-PP, manual, 1.0 GPM, less 3-hole escutcheon",
      "src": "P104 REMARKS column on rows L-3 and L-4, verbatim: 'Faucet Delta 581LF-GPM-PP manual 1.0 GPM, less 3-hole escutcheon'",
      "qty": 1,
-     "instanceNote": "Delta 581LF-GPM-PP, manual, 1.0 GPM.",
+     "instanceNote": "Approved submittals attached: Moen vanity faucet and American Standard vanity sink. The P sheets scheduled Delta 581LF-GPM-PP; the approved submittal governs.",
      "category": "Plumbing",
      "sort": 3011,
-     "reliability": "HIGH"
+     "reliability": "HIGH",
+     "attachments": [
+      {
+       "label": "Submittal · Moen Bathroom Vanity Faucet",
+       "url": "https://drive.google.com/file/d/1aSYi19GiExpp8CfsMi_vmRZEQ_qiZXg9/view"
+      },
+      {
+       "label": "Submittal · American Standard Bathroom Vanity Sink",
+       "url": "https://drive.google.com/file/d/1whVATgyeShGb46aPIG0cUorNC1nBxZK6/view"
+      }
+     ]
     },
     "plmb_shower_a": {
      "checked": false,
@@ -6064,10 +6184,20 @@
      "label": "Kitchenette / wet-bar sink and faucet — American Standard PEKOE 23x18 single-bowl stainless undermount 18SB.10231800.075 + Moen 8227",
      "src": "P401/P402 (marks SK-3/SK-4, 'suite/extended units', assigned to no unit plan); P104 (schedules no product for either mark); S4 product data (American Standard 18SB.10231800.075; Moen 8227)",
      "qty": 1,
-     "instanceNote": "American Standard PEKOE per schedule. Flag closed for the punch list by AJ ruling 2026-08-18.",
+     "instanceNote": "Approved submittals attached: American Standard kitchenette sink and Moen kitchenette faucet. Where a plan schedule differs, the approved submittal governs. Flag closed by AJ ruling 2026-08-18.",
      "category": "Plumbing",
      "sort": 3017,
-     "reliability": "HIGH"
+     "reliability": "HIGH",
+     "attachments": [
+      {
+       "label": "Submittal · American Standard Kitchenette Sink",
+       "url": "https://drive.google.com/file/d/1b54c-VNphwmTSMTxzzlOVkhPxtkdYnaM/view"
+      },
+      {
+       "label": "Submittal · Moen Kitchenette Faucet",
+       "url": "https://drive.google.com/file/d/1l1Puul8zGtsfwUoTlGqKMXRNX4064ugg/view"
+      }
+     ]
     },
     "fp_heads_a": {
      "checked": false,
@@ -7997,10 +8127,20 @@
      "label": "Lavatory faucet — Delta 581LF-GPM-PP, manual, 1.0 GPM, less 3-hole escutcheon",
      "src": "P104 REMARKS column on rows L-3 and L-4, verbatim: 'Faucet Delta 581LF-GPM-PP manual 1.0 GPM, less 3-hole escutcheon'",
      "qty": 1,
-     "instanceNote": "Delta 581LF-GPM-PP, manual, 1.0 GPM.",
+     "instanceNote": "Approved submittals attached: Moen vanity faucet and American Standard vanity sink. The P sheets scheduled Delta 581LF-GPM-PP; the approved submittal governs.",
      "category": "Plumbing",
      "sort": 3011,
-     "reliability": "HIGH"
+     "reliability": "HIGH",
+     "attachments": [
+      {
+       "label": "Submittal · Moen Bathroom Vanity Faucet",
+       "url": "https://drive.google.com/file/d/1aSYi19GiExpp8CfsMi_vmRZEQ_qiZXg9/view"
+      },
+      {
+       "label": "Submittal · American Standard Bathroom Vanity Sink",
+       "url": "https://drive.google.com/file/d/1whVATgyeShGb46aPIG0cUorNC1nBxZK6/view"
+      }
+     ]
     },
     "plmb_shower_a": {
      "checked": false,
@@ -8117,10 +8257,20 @@
      "label": "Kitchenette / wet-bar sink and faucet — American Standard PEKOE 23x18 single-bowl stainless undermount 18SB.10231800.075 + Moen 8227",
      "src": "P401/P402 (marks SK-3/SK-4, 'suite/extended units', assigned to no unit plan); P104 (schedules no product for either mark); S4 product data (American Standard 18SB.10231800.075; Moen 8227)",
      "qty": 1,
-     "instanceNote": "American Standard PEKOE per schedule. Flag closed for the punch list by AJ ruling 2026-08-18.",
+     "instanceNote": "Approved submittals attached: American Standard kitchenette sink and Moen kitchenette faucet. Where a plan schedule differs, the approved submittal governs. Flag closed by AJ ruling 2026-08-18.",
      "category": "Plumbing",
      "sort": 3017,
-     "reliability": "HIGH"
+     "reliability": "HIGH",
+     "attachments": [
+      {
+       "label": "Submittal · American Standard Kitchenette Sink",
+       "url": "https://drive.google.com/file/d/1b54c-VNphwmTSMTxzzlOVkhPxtkdYnaM/view"
+      },
+      {
+       "label": "Submittal · Moen Kitchenette Faucet",
+       "url": "https://drive.google.com/file/d/1l1Puul8zGtsfwUoTlGqKMXRNX4064ugg/view"
+      }
+     ]
     },
     "fp_heads_a": {
      "checked": false,
