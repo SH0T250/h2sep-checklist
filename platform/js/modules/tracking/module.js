@@ -197,6 +197,25 @@ function renderRoom(ctx, { no }) {
   return root;
 }
 
+// A company name short enough to sit next to initials on a checklist line.
+function shortCo(co) {
+  let t = String(co || '').trim().replace(/,?\s+(LLC|L\.L\.C\.|Inc\.?|Corp\.?|Corporation|Company|Co\.)$/i, '');
+  if (t.length > 22) t = t.slice(0, 21).trimEnd() + '\u2026';
+  return t;
+}
+// Companies on the job, from the directory module's doc. Guarded: the identity
+// sheet still works with a plain text box if the directory is not loaded.
+function companyOptions(store) {
+  const dir = store.getDoc('_dir');
+  return [...new Set(Object.values(dir?.items || {}).filter(c => !c.deleted && c.org).map(c => c.org))]
+    .sort((a, b) => a.localeCompare(b));
+}
+function contactByName(store, name) {
+  const n = String(name || '').trim().toLowerCase();
+  if (!n) return null;
+  return Object.values(store.getDoc('_dir')?.items || {}).find(c => !c.deleted && String(c.name || '').toLowerCase() === n) || null;
+}
+
 // Who owns a scope, read straight off the directory module's assignment doc.
 // Kept as a guarded read rather than an import so tracking still runs on its
 // own if the directory module is not registered.
@@ -231,7 +250,7 @@ function itemRow(ctx, docId, itemId, it) {
       <span class="l2">
         ${it.issue ? `<span class="issue-pill ${it.issueResolved ? 'res' : ''}">${ic('flag', 'flag-ic')}${esc(it.issue)}</span>` : ''}
         ${specRef(it)}
-        ${it.checked && it.checkedAt ? `<span class="meta">${esc(it.initials)} · ${fmtWhen(it.checkedAt)}</span>` : (it.checked ? `<span class="meta">${esc(it.initials)} · from paper</span>` : '')}
+        ${it.checked ? `<span class="meta">${esc(it.initials)}${it.checkedByCo ? ` · <b class="co">${esc(shortCo(it.checkedByCo))}</b>` : ''} · ${it.checkedAt ? fmtWhen(it.checkedAt) : 'from paper'}</span>` : ''}
         ${(it.attachments || []).length ? `<span class="detail-cue clip">${ic('clip')}${(it.attachments).length}</span>` : ''}
         ${hasDetail(it) ? `<span class="detail-cue">${ic('note')}details</span>` : ''}
       </span>
@@ -264,7 +283,7 @@ function itemSheet(ctx, docId, itemId) {
     ${shortLabel(it) !== (it.label || '') || (it.code && String(it.code).length > 10) || String(it.src || '').includes(';') ? `<div class="fulldetail">${it.code && String(it.code).length > 10 ? `<div class="fd-code">${esc(it.code)}</div>` : ''}${shortLabel(it) !== (it.label || '') ? `<div>${esc(it.label)}</div>` : ''}${String(it.src || '').includes(';') ? `<div class="fd-src"><span>Sources</span> ${esc(fullSrc(it))}</div>` : ''}</div>` : ''}
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
       <button class="stamp big ${it.checked ? 'checked' : ''}" data-check>${it.checked ? esc(it.initials) : ''}</button>
-      <div style="font-size:13px">${it.checked ? `<b>Checked</b> · ${esc(it.initials)}${it.checkedAt ? ' · ' + fmtWhen(it.checkedAt) : ' · from paper'}` : '<b>Not checked off</b> · tap the box to stamp your initials'}</div>
+      <div style="font-size:13px">${it.checked ? `<b>Checked</b> · ${esc(it.initials)}${it.checkedByCo ? ' · ' + esc(it.checkedByCo) : ''}${it.checkedAt ? ' · ' + fmtWhen(it.checkedAt) : ' · from paper'}` : '<b>Not checked off</b> · tap the box to stamp your initials'}</div>
       <span class="spacer"></span>${specRef(it)}
     </div>
     ${it.reliability === 'FLAGGED' && it.instanceNote ? `<div class="conflict"><div class="ch">${ic('flag', 'flag-ic')}FLAGGED · SOURCES DISAGREE</div><div style="font-size:13px;padding:6px 0">${esc(it.instanceNote)}</div><div class="foot">Do not order or close from either position. Only Austin closes conflicts.</div></div>` : ''}
@@ -332,22 +351,43 @@ function notesSheet(ctx, roomNo) {
 
 export function identityGate(ctx) {
   const { store } = ctx;
+  const u = store.user;
+  const orgs = companyOptions(store);
   const { close } = sheet(`
     <div class="sh"><b style="font-size:15px">Who is checking?</b></div>
-    <div style="font-size:13px;color:var(--muted);margin-bottom:4px">Your initials go on every box you check, exactly like initialing the paper sheet.</div>
-    <div class="field"><label>Your name</label><input data-name maxlength="40" placeholder="Full name"/></div>
-    <div class="field"><label>Initials</label><input data-init maxlength="3" placeholder="AB" style="width:110px;text-transform:uppercase;font-family:var(--mono);font-weight:700"/></div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:4px">Your initials go on every box you check, exactly like initialing the paper sheet. Your company rides along with them, so anyone reading the list knows which outfit signed the line.</div>
+    <div class="field"><label>Your name</label><input data-name maxlength="40" placeholder="Full name" value="${esc(u?.name || '')}"/></div>
+    <div class="field"><label>Initials</label><input data-init maxlength="3" placeholder="AB" value="${esc(u?.initials || '')}" style="width:110px;text-transform:uppercase;font-family:var(--mono);font-weight:700"/></div>
+    <div class="field"><label>Company you work for</label>
+      <select data-co>
+        <option value="">Pick your company</option>
+        ${orgs.map(o => `<option ${u?.company === o ? 'selected' : ''}>${esc(o)}</option>`).join('')}
+        <option value="__other" ${u?.company && !orgs.includes(u.company) ? 'selected' : ''}>Not on the list, type it</option>
+      </select></div>
+    <div class="field" data-otherwrap style="display:${u?.company && !orgs.includes(u.company) ? 'block' : 'none'}"><label>Company name</label>
+      <input data-other maxlength="60" placeholder="Company name" value="${esc(u?.company && !orgs.includes(u.company) ? u.company : '')}"/></div>
     <div class="srow"><button class="btn primary" data-go>Start</button></div>`);
   const s = document.querySelector('.sheet');
   const nameEl = s.querySelector('[data-name]'), initEl = s.querySelector('[data-init]');
-  let touched = false;
+  const coEl = s.querySelector('[data-co]'), otherEl = s.querySelector('[data-other]');
+  const otherWrap = s.querySelector('[data-otherwrap]');
+  let touched = !!u?.initials, coTouched = !!u?.company;
   initEl.addEventListener('input', () => { touched = true; });
+  coEl.addEventListener('change', () => {
+    coTouched = true;
+    otherWrap.style.display = coEl.value === '__other' ? 'block' : 'none';
+  });
   nameEl.addEventListener('input', () => {
     if (!touched) initEl.value = nameEl.value.split(/\s+/).filter(Boolean).map(w => w[0]).join('').toUpperCase().slice(0, 3);
+    // If they are already in the project directory, their company is known.
+    const hit = contactByName(store, nameEl.value);
+    if (hit && !coTouched && orgs.includes(hit.org)) coEl.value = hit.org;
   });
   s.querySelector('[data-go]').addEventListener('click', () => {
     if (!initEl.value.trim()) { toast('Initials are required to check items'); return; }
-    store.setUser(nameEl.value || initEl.value, initEl.value);
+    const company = coEl.value === '__other' ? otherEl.value.trim() : coEl.value;
+    if (!company) { toast('Pick the company you work for'); return; }
+    store.setUser(nameEl.value || initEl.value, initEl.value, company);
     close();
   });
 }
@@ -363,7 +403,7 @@ function renderActivity(ctx) {
   return el(`<div>
     <div class="pagehead"><h1 class="h1">Activity</h1><span class="sub">every action in this browser, newest first</span></div>
     <section class="card">${acts.length ? acts.map(a => `
-      <div class="note-row"><span class="nfl info">${esc(a.by)}</span><span class="nt">${esc(a.text)}</span><span class="nd">${fmtWhen(a.at)}</span></div>`).join('')
+      <div class="note-row"><span class="nfl info">${esc(a.by)}</span><span class="nt">${esc(a.text)}${a.byCo ? ` <b class="co">${esc(shortCo(a.byCo))}</b>` : ''}</span><span class="nd">${fmtWhen(a.at)}</span></div>`).join('')
       : `<div class="coming">${ic('pulse')}<b>Nothing yet</b><span>Check a line in any room and it lands here with your initials and a timestamp.</span></div>`}</section>
   </div>`);
 }
@@ -397,6 +437,10 @@ function renderPrint(ctx, { no }) {
   }
 
   const notes = Object.values(doc.notes || {}).filter(n => !n.deleted && !n.resolved);
+  // Legend of everyone whose initials appear on this sheet, and their company.
+  const signers = [...new Set([doc, mep].filter(Boolean).flatMap(d =>
+    store.liveItems(d).filter(([, it]) => it.checked && it.initials)
+      .map(([, it]) => it.initials + (it.checkedByCo ? ' \u2014 ' + shortCo(it.checkedByCo) : ''))))].sort();
   const root = el(`<div class="paper-wrap">
     <div class="pagehead noprint">
       <button class="icon-btn" data-back aria-label="Back">${ic('back')}</button>
@@ -419,6 +463,7 @@ function renderPrint(ctx, { no }) {
       ${section('FF&E CHECKLIST', doc)}
       ${mep ? `<div class="p-break"></div>${section('MEP PUNCH', mep)}
         <div class="p-sign"><span>Punch walked by: ____________________</span><span>Date: ____________</span></div>` : ''}
+      ${signers.length ? `<div class="p-signers"><b>SIGNED BY:</b> ${signers.map(x => `${esc(x)}`).join(' &nbsp;·&nbsp; ')}</div>` : ''}
       <div class="p-foot">Initials in the box mean checked, like the paper sheet. Generated from live data · Triun Construction &amp; Engineering</div>
     </div>
   </div>`);

@@ -17,7 +17,7 @@ import {
 import {
   initializeFirestore, persistentLocalCache, persistentMultipleTabManager,
   CACHE_SIZE_UNLIMITED, collection, doc, onSnapshot, updateDoc, setDoc,
-  serverTimestamp,
+  getDoc, serverTimestamp,
 } from '../../firebase/firebase-firestore.js';
 
 export const PLATFORM_COLLECTION = ['projects', 'h2sep', 'platform_rooms'];
@@ -87,9 +87,16 @@ export class FirebaseBackend {
     await updateDoc(ref, withStamp);
   }
 
+  // Create ONLY when the document really does not exist. A merge write is not
+  // safe here: an empty map in the payload (items: {}) is a leaf in the merge
+  // field mask, so Firestore writes the empty map OVER the live one and every
+  // record in it is gone. Read first, write only into an empty slot.
   async createIfMissing(docId, data) {
     if (!this.isWriteReady()) throw new Error('not signed in yet');
     const ref = doc(this.db, ...PLATFORM_COLLECTION, docId);
-    await setDoc(ref, data, { merge: true });
+    const snap = await getDoc(ref);
+    if (snap.exists()) return false;
+    await setDoc(ref, data);
+    return true;
   }
 }

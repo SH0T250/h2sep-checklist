@@ -27,8 +27,12 @@ export class Store {
   get user() {
     try { return JSON.parse(localStorage.getItem(ID_KEY)) || null; } catch { return null; }
   }
-  setUser(name, initials) {
-    localStorage.setItem(ID_KEY, JSON.stringify({ name: name.trim().slice(0, 40), initials: initials.trim().toUpperCase().slice(0, 3) }));
+  setUser(name, initials, company = '') {
+    localStorage.setItem(ID_KEY, JSON.stringify({
+      name: name.trim().slice(0, 40),
+      initials: initials.trim().toUpperCase().slice(0, 3),
+      company: String(company || '').trim().slice(0, 60),
+    }));
     this._emit();
   }
 
@@ -88,7 +92,7 @@ export class Store {
   // ---- writes (each an atomic patch + activity record) ----
   _write(docId, patch, activityText) {
     const activity = activityText
-      ? { text: activityText, by: this.user?.initials || '??', at: nowIso(), docId }
+      ? { text: activityText, by: this.user?.initials || '??', byCo: this.user?.company || '', at: nowIso(), docId }
       : null;
     this._apply(docId, patch);          // optimistic: the tap lands instantly
     if (activity) this.activity.push(activity);
@@ -114,7 +118,9 @@ export class Store {
   // A module doc may not exist yet on a fresh project. Create it locally, and
   // in the cloud with merge, so the first write from any device lands.
   async ensureDoc(docId, data) {
-    if (!this.docs[docId]) { this.docs[docId] = structuredClone(data); this._emit(); }
+    if (this.docs[docId]) return;                 // already have it: never write a skeleton over live records
+    this.docs[docId] = structuredClone(data);
+    this._emit();
     if (this.backend?.isWriteReady?.()) {
       try { await this.backend.createIfMissing(docId, data); } catch { /* rules or offline: local copy still works */ }
     }
@@ -130,6 +136,7 @@ export class Store {
     this._write(docId, {
       [p + 'checked']: on,
       [p + 'initials']: on ? u.initials : '',
+      [p + 'checkedByCo']: on ? (u.company || '') : '',
       [p + 'checkedAt']: on ? nowIso() : null,
       [p + 'checkedAtLocal']: on ? nowIso() : null,
       'updatedAt': nowIso(),

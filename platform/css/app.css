@@ -283,6 +283,8 @@ a{color:inherit;text-decoration:none}
 .dir-row .chev,.asg-row .chev{width:14px;height:14px;stroke:var(--subtle);fill:none;stroke-width:2;flex-shrink:0}
 .dir-row .nm.rep{font-weight:500;color:var(--muted)}
 .av.org.rep{border-style:dashed;border-color:var(--hair);background:none}
+.meta .co,.note-row .co{color:var(--cyan-ink);font-weight:650}
+.p-signers{margin-top:10px;padding-top:8px;border-top:1px solid #d8dee4;font:600 9.5px var(--pmono,ui-monospace,monospace);letter-spacing:.06em;color:#333}
 .chip.scope{color:var(--muted);background:var(--field);border-color:var(--hair-strong)}
 .chip.role{color:var(--cyan-ink);background:var(--cyan-dim);border-color:var(--cyan)}
 

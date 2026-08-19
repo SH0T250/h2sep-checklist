@@ -79,9 +79,9 @@ function buildContacts() {
     seen.add(id);
     sort += 10;
     out[id] = {
-      category: r.category || 'Subcontractor', org: r.org, scope: r.scope, name: r.name,
+      category: r.category || 'Other', org: r.org, scope: r.scope, name: r.name,
       title: r.title, phone: r.phone, email: r.email, address: r.address, note: r.note,
-      sort, deleted: false, createdAt: NOW, updatedAt: NOW,
+      sort, deleted: false, src: 'sheet', createdAt: NOW, updatedAt: NOW, syncedAt: NOW,
     };
   }
   return { contacts: out, skipped };

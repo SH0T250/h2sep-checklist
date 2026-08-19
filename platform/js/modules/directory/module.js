@@ -14,7 +14,7 @@ import { ic, el, esc, toast, sheet, pressable } from '../../core/ui.js';
 export const DIR_DOC = '_dir';
 export const ASG_DOC = '_asg';
 
-const CAT_ORDER = ['Contractor (GC)', 'Architect', 'Engineer', 'MEP', 'Structural', 'Subcontractor', 'Supplier', 'Other'];
+const CAT_ORDER = ['Owner', 'Contractor (GC)', 'Architect', 'Engineer', 'MEP', 'Structural', 'Subcontractor', 'Supplier', 'Other'];
 const ROLES = ['Install', 'Supply'];
 
 function nowIso() { return new Date().toISOString(); }
