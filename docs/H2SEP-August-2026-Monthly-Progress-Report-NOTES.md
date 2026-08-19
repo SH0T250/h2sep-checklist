@@ -1,7 +1,12 @@
 # H2SEP August 2026 Monthly Progress Report — PM review notes
 
-Report file: `H2SEP-August-2026-Monthly-Progress-Report.docx` (built 08/18/2026 from the July
-template + EGLMT July 30-Day Report + H2SEP PII 4WLA 08/18/2026 + 08/18 PM meeting minutes).
+Report file: `H2SEP-August-2026-Monthly-Progress-Report.docx` (built from the July template +
+EGLMT July 30-Day Report + H2SEP PII 4WLA 08/18/2026 + the 08/18 PM meeting minutes).
+
+Per Austin, the report is written date-free: activity dates were pulled out of the body so the
+narrative reads as scope and percent complete. Only three milestone dates remain, all under
+Delay/Impact — Hilton's 08/25/2026 target opening, the 09/16/2026 state elevator inspection, and
+the 10/08/2026 Substantial Completion projection. The header table keeps its dates.
 
 ## Verify before issuing
 1. **Construction Complete 90%** — derived, not sourced: July reported 85%; the 08/18 completion
@@ -14,24 +19,24 @@ template + EGLMT July 30-Day Report + H2SEP PII 4WLA 08/18/2026 + 08/18 PM meeti
    07/24 letter. Triun's own schedule shows elevator inspection 09/16 and Substantial Completion
    projected 10/08/2026 (stated with attribution under Delay/Impact). Confirm the header date is the
    one you want to print.
-4. **Weather Days: none recorded 07/16–08/18** — sources contained no weather events for the
-   period; check the Daily Logs and add dated entries if any occurred.
+4. **Weather Days: none this reporting period** — sources contained no weather events; check the
+   Daily Logs and add entries if any occurred.
 5. **Pay Approval: "Current pay application under reconciliation."** — neutral wording for the
-   client/team audience; adjust the draw reference if you want the month stated.
-6. **1st floor touch-up paint "completing 08/18/2026"** (report date) — confirm it actually finished.
-7. **2nd-floor remaining touch-up paint 09/16–09/21** — straight from the completion schedule even
-   though it reads oddly against the 90% status; flagged in case the schedule export was stale.
+   client/team audience; adjust if you want the draw referenced.
+6. **Percent-complete figures** (interior finish-out 40%, floor-by-floor rooms/common areas,
+   irrigation 63%, landscaping 75%, pool equipment room 71%, EFIS 50%) come straight from the
+   08/18 completion schedule export — refresh if a newer export supersedes it.
 
-## Deliberately left out (client + whole-team audience, per Austin 08/18)
+## Deliberately left out (client + whole-team audience, per Austin)
 - Pay application received short / owner outstanding balance on capstones (reported only as
   "fabricated; delivery being scheduled").
 - FF&E subcontractor dispute and direct-hire deliberations (reported only as "installation
   paused; 14 guestrooms remain").
 - "Design error" and blame framing on the working-wall/casework condition (reported neutrally;
   Rooms 116/118 await written Hilton direction).
-- TKE's lost week (crew unavailability), 2×12 blocking detail, pool-contractor liability rationale,
-  fire-department hose logistics, container/warehouse housekeeping counts, Hilton portal
-  credential issue, StayConnected TBD status, individual staff names.
+- TKE's lost week, 2×12 blocking detail, pool-contractor liability rationale, fire-department hose
+  logistics, container/warehouse housekeeping counts, Hilton portal credential issue,
+  StayConnected TBD status, individual staff names.
 
 ## Still to do
 - Drop the August progress photos into Figures 1–24 (placeholders preserved).
