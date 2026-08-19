@@ -3,7 +3,7 @@
 // Bump VERSION on every deploy — it busts the old cache and triggers the
 // in-app "Update available" banner. VERSION must equal 'h2sep-v' + APP_VERSION
 // in js/config.js — install verifies this to defeat CDN mixed-version races.
-const VERSION = 'h2sep-v1.18.3';
+const VERSION = 'h2sep-v1.19.0';
 // Paper-sheet photos live in their own PERMANENT cache — never wiped by app
 // updates. Only room JPGs under /sheets/ may enter it (index.json stays in the
 // versioned shell cache so it can never be shadowed by a stale copy).
@@ -31,6 +31,7 @@ const SHELL = [
   './manifest.webmanifest',
   './print.html',
   './refs.html',
+  './contacts.html',
   // Settings links to the dashboard (screens.js:682). It was never precached,
   // so on site — where the app is usually offline — it fell through to the
   // navigate fallback below and silently rendered the CHECKLIST instead of the
@@ -40,6 +41,7 @@ const SHELL = [
   './css/app.css',
   './css/dash.css',
   './css/print.css',
+  './css/contacts-page.css',
   './css/refs-page.css',
   './js/app.js',
   './js/bulk.js',
@@ -47,6 +49,7 @@ const SHELL = [
   './js/dash-edit.js',
   './js/config.js',
   './js/print.js',
+  './js/contacts-page.js',
   './js/refs-page.js',
   './js/refs.js',
   './js/screens.js',
@@ -58,6 +61,7 @@ const SHELL = [
   './js/theme.js',
   './js/util.js',
   './refs/refs-101.json',
+  './data/contacts.json',
   './firebase/firebase-app.js',
   './firebase/firebase-auth.js',
   './firebase/firebase-firestore.js',

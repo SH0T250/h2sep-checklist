@@ -151,6 +151,8 @@ h2 {
   text-align: center; font-size: 11px; letter-spacing: .8px; color: var(--ink-3);
   padding: 14px; border-top: 1px solid var(--hairline); margin-top: 10px;
 }
+.dfoot-link { color: var(--brand); text-decoration: none; }
+.dfoot-link:hover { text-decoration: underline; }
 .tip {
   position: fixed; z-index: 50; pointer-events: none;
   background: var(--panel-2); border: 1px solid var(--hairline); border-radius: 8px;

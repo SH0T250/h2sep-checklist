@@ -1,0 +1,1142 @@
+{
+ "source": "H2SEP-PhII_Contact-List_2026-08-14.xlsx",
+ "count": 52,
+ "categoryOrder": [
+  "Owner",
+  "Brand / Franchisor",
+  "Engineer",
+  "Architect",
+  "Contractor (GC)",
+  "MEP",
+  "Structural",
+  "Subcontractor",
+  "Supplier"
+ ],
+ "contacts": [
+  {
+   "category": "Owner",
+   "org": "JD Design and Developers LLC",
+   "scope": "Development / project management",
+   "name": "Ken Patel",
+   "title": "Project Manager",
+   "address": "",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(903) 705-3336"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "pm.jddevelopers@gmail.com"
+    }
+   ]
+  },
+  {
+   "category": "Owner",
+   "org": "Vibrant Services, LLC",
+   "scope": "",
+   "name": "Kamlesh Patel",
+   "title": "Owner",
+   "address": "",
+   "procore": "",
+   "notes": "Confirm role on this project; fill in phone and email",
+   "phones": [],
+   "emails": []
+  },
+  {
+   "category": "Owner",
+   "org": "Vibrant Services, LLC",
+   "scope": "",
+   "name": "Vipal Patel",
+   "title": "Owner",
+   "address": "",
+   "procore": "",
+   "notes": "Confirm role on this project",
+   "phones": [
+    {
+     "label": "",
+     "value": "(575) 937-1954"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "vipal.m.patel@gmail.com"
+    }
+   ]
+  },
+  {
+   "category": "Brand / Franchisor",
+   "org": "Hilton",
+   "scope": "Brand standards / ADC review",
+   "name": "Justine Chiang",
+   "title": "Senior Manager – North America, Architecture Design & Construction, All Suites Brands",
+   "address": "Austin, TX",
+   "procore": "",
+   "notes": "No email provided — get direct address; hilton.com",
+   "phones": [
+    {
+     "label": "",
+     "value": "(512) 434-9028"
+    }
+   ],
+   "emails": []
+  },
+  {
+   "category": "Engineer",
+   "org": "",
+   "scope": "",
+   "name": "",
+   "title": "",
+   "address": "",
+   "procore": "",
+   "notes": "Open slot — add current engineer of record",
+   "phones": [],
+   "emails": []
+  },
+  {
+   "category": "Architect",
+   "org": "MWT",
+   "scope": "Architecture",
+   "name": "Anita Bansal",
+   "title": "AIA, NCARB",
+   "address": "",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(716) 435-0019"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "anita@mwtusa.com"
+    }
+   ]
+  },
+  {
+   "category": "Contractor (GC)",
+   "org": "Triun, LLC",
+   "scope": "General contractor",
+   "name": "Edward R. De La Garza",
+   "title": "Chief Executive Officer",
+   "address": "4242 Medical Dr., Suite 1200, San Antonio, TX 78229",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(210) 572-4900"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "edelagarza@triunco.com"
+    }
+   ]
+  },
+  {
+   "category": "Contractor (GC)",
+   "org": "Triun, LLC",
+   "scope": "General contractor",
+   "name": "Cesar Esquivel",
+   "title": "General Superintendent",
+   "address": "4242 Medical Dr., Suite 1200, San Antonio, TX 78229",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(210) 718-1001"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "cesquivel@triunco.com"
+    }
+   ]
+  },
+  {
+   "category": "Contractor (GC)",
+   "org": "Triun, LLC",
+   "scope": "General contractor",
+   "name": "Joaquin Gomez",
+   "title": "Superintendent",
+   "address": "4242 Medical Dr., Suite 1200, San Antonio, TX 78229",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(830) 335-0522"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "jgomez@triunco.com"
+    }
+   ]
+  },
+  {
+   "category": "Contractor (GC)",
+   "org": "Triun, LLC",
+   "scope": "General contractor",
+   "name": "Morgan Davis",
+   "title": "Project Manager I",
+   "address": "4242 Medical Dr., Suite 1200, San Antonio, TX 78229",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(512) 771-2329"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "mdavis@triunco.com"
+    }
+   ]
+  },
+  {
+   "category": "Contractor (GC)",
+   "org": "Triun, LLC",
+   "scope": "General contractor",
+   "name": "Austin Jones",
+   "title": "Assistant Project Manager",
+   "address": "4242 Medical Dr., Suite 1200, San Antonio, TX 78229",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(210) 834-9687"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "ajones@triunco.com"
+    }
+   ]
+  },
+  {
+   "category": "MEP",
+   "org": "Iceberg Heating & Air Conditioning",
+   "scope": "Mechanical / HVAC",
+   "name": "Jorge Garcia",
+   "title": "Owner",
+   "address": "4001 McCart Ave., Fort Worth, TX 76110",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(817) 920-9950"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "jorgejr@icebergair.com"
+    },
+    {
+     "label": "",
+     "value": "estimating@icebergair.com"
+    }
+   ]
+  },
+  {
+   "category": "MEP",
+   "org": "Iceberg Heating & Air Conditioning",
+   "scope": "Mechanical / HVAC",
+   "name": "Andrea Garcia",
+   "title": "Estimator",
+   "address": "1220 Oak Knoll Dr. Suite 200, Fort Worth, TX 76117",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(817) 920-9950"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "estimating@icebergair.com"
+    }
+   ]
+  },
+  {
+   "category": "MEP",
+   "org": "United Electric",
+   "scope": "Electrical",
+   "name": "Manuel Hernandez",
+   "title": "Owner",
+   "address": "4624 Martinal Road, Brownsville, TX 78526",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(956) 309-4209"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "manuel@unitedelectricrgv.com"
+    }
+   ]
+  },
+  {
+   "category": "MEP",
+   "org": "Larry's Commercial & Residential Plumbing, LLC",
+   "scope": "Plumbing",
+   "name": "Larry Sanchez",
+   "title": "Owner",
+   "address": "2615 El Indio Hwy., Eagle Pass, TX 78852",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(830) 513-1789"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "larrysplumbing@live.com"
+    }
+   ]
+  },
+  {
+   "category": "MEP",
+   "org": "Larry's Commercial & Residential Plumbing, LLC",
+   "scope": "Plumbing",
+   "name": "Jay Hernandaz",
+   "title": "Foreman",
+   "address": "2615 El Indio Hwy., Eagle Pass, TX 78852",
+   "procore": "",
+   "notes": "From notes at bottom of old list — verify name spelling and get direct number",
+   "phones": [
+    {
+     "label": "",
+     "value": "(830) 513-1789"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "larrysplumbing@live.com"
+    }
+   ]
+  },
+  {
+   "category": "Structural",
+   "org": "Steel Tech USA",
+   "scope": "Steel erection",
+   "name": "Yalcin Kucukkomurler",
+   "title": "Director of Engineering",
+   "address": "500 Huffines Blvd., Lewisville, TX 75056",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(561) 906-2840"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "yalcin@steeltechusa.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "A/E Hiller & Sons Inc.",
+   "scope": "Concrete; parking lot striping & signage; ADA pavers",
+   "name": "Christopher Hiller",
+   "title": "President",
+   "address": "P.O. Box 557, Eagle Pass, TX 78852",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(830) 773-9156"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "cw_hiller@yahoo.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "JC Enterprises",
+   "scope": "",
+   "name": "Isaac Chapa",
+   "title": "Owner",
+   "address": "2254 Foothills St., Eagle Pass, TX 78852",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(830) 968-1857"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "jcenterprises@yahoo.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Texas Fire Services, LLC",
+   "scope": "Fire protection",
+   "name": "Rodney Jackson",
+   "title": "Owner",
+   "address": "1260 FM 1863, Building 2, New Braunfels, TX 78132",
+   "procore": "",
+   "notes": "Cell (956) 376-7054 came off the company signature block — confirm it is Rodney's. TX licenses: RME G 1768429; Alarm ACR-2368235; Sprinkler SCR-G-2398977; Security B09419101. Authorized distributor of AUTOCALL/CWSI",
+   "phones": [
+    {
+     "label": "",
+     "value": "(830) 609-9090"
+    },
+    {
+     "label": "C",
+     "value": "(956) 376-7054"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "rod@texasfireservices.net"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "TK Elevator Corporation",
+   "scope": "Elevator",
+   "name": "WH (Joey) Hawkins Jr.",
+   "title": "Owner",
+   "address": "3660 Thousand Oaks, Suite 210, San Antonio, TX 78247",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(210) 669-4818"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "joey.hawkins@tkelevator.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Irontek Metal Works",
+   "scope": "Misc. metals",
+   "name": "Johnny Pina",
+   "title": "Owner",
+   "address": "213 Goldenrod, San Marcos, TX 78666",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(512) 633-5140"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "irontekmetalworks@gmail.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "The Montecito",
+   "scope": "Stucco / plastering",
+   "name": "Victor A. Rodriguez",
+   "title": "Owner",
+   "address": "5517 Rio Rd., Denton, TX 76208",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(940) 600-8106"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "plasteringstuccoirdallas@gmail.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Keen Glass Solutions",
+   "scope": "Glass & glazing",
+   "name": "Joe Wilkinson",
+   "title": "Owner",
+   "address": "3923 Morse St. #116, Denton, TX 76208",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(214) 673-1761"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "sales@keen-glass.org"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Thermal Guard Roofing",
+   "scope": "TPO roofing",
+   "name": "Quinton Rockwell",
+   "title": "Owner",
+   "address": "P.O. Box 1026, Argyle, TX 76226",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(817) 909-9884"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "quinton@thermalguardroofing.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Security Integrated",
+   "scope": "Security systems",
+   "name": "Randy Jasik",
+   "title": "Owner",
+   "address": "14080 Nacogdoches Rd. #536, San Antonio, TX 78247",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(210) 519-5009"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "team@siinc.systems"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Tormax USA, LLC",
+   "scope": "Automatic glass doors",
+   "name": "Chris Valadez",
+   "title": "Owner",
+   "address": "12859 Wetmore Road, San Antonio, TX 78247",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(210) 362-4887"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "cvaladez@tormaxusa.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Steel Tech USA",
+   "scope": "Steel fabrication",
+   "name": "Edward Tekin",
+   "title": "Owner",
+   "address": "500 Huffines Blvd., Lewisville, TX 75056",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(254) 368-7956"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "edward@steeltechusa.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Texas Chutes",
+   "scope": "Trash / linen chutes",
+   "name": "Gerry Whitaker",
+   "title": "Owner",
+   "address": "14812 South Access Rd. #A, Canyon Lake, TX 78133",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(830) 964-3102"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "gerry@texaschutes.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Texas Chutes",
+   "scope": "Trash / linen chutes",
+   "name": "Annalisa Call",
+   "title": "Administrative Assistant",
+   "address": "14812 S. Access Road, Unit A, Canyon Lake, TX 78133",
+   "procore": "",
+   "notes": "www.texaschutes.com",
+   "phones": [
+    {
+     "label": "",
+     "value": "(830) 964-3102"
+    }
+   ],
+   "emails": []
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Keepers Construction",
+   "scope": "Flooring",
+   "name": "Justin Allen Perez",
+   "title": "Owner",
+   "address": "2016 E Garrison St., Ste 24, Eagle Pass, TX 78852",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(210) 909-3250"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "keeperconst@gmail.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Velasquez Pool",
+   "scope": "Pool",
+   "name": "Sabino Velasquez",
+   "title": "Owner",
+   "address": "1586 Valerie Dr., Eagle Pass, TX 78852",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(830) 352-4026"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "velasquezpools@yahoo.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Cemplex Group",
+   "scope": "Gypsum floor underlayment",
+   "name": "Shane Kuempel",
+   "title": "Owner",
+   "address": "2135 Wald Rd., New Braunfels, TX 78132",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(817) 760-9457"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "skuempel@cemplexgroup.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Access Online Inc",
+   "scope": "Data / low voltage",
+   "name": "Rameez",
+   "title": "",
+   "address": "2130 Foster Ave., Wheeling, IL 60090",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(847) 306-3777 Ext. 8205"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "rameez@accessonline.io"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Access Online Inc",
+   "scope": "Data / low voltage",
+   "name": "Bhavana Rao",
+   "title": "Project Coordinator",
+   "address": "2130 Foster Ave., Wheeling, IL 60090",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "Direct",
+     "value": "(847) 881-3681"
+    },
+    {
+     "label": "Office",
+     "value": "(847) 306-3777 Ext. 8603"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "bhavana.rao@accessonline.io"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "The Green Company",
+   "scope": "Landscaping",
+   "name": "Jorge Cavazos",
+   "title": "Owner",
+   "address": "126 Concho Street, Eagle Pass, TX 78852",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(830) 335-2488"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "management@thegreencoep.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Pinnacle Communications",
+   "scope": "Communications",
+   "name": "Trista Stillwagon",
+   "title": "Project Coordinator",
+   "address": "",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "Main",
+     "value": "(800) 644-9101"
+    },
+    {
+     "label": "Direct",
+     "value": "(240) 912-2546"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "tstillwagon@pinn360.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Spectrum Business",
+   "scope": "Internet / Fiber",
+   "name": "Ian V Rywalt",
+   "title": "Program Manager",
+   "address": "65 S Keller Rd, Orlando, FL 32810",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "O",
+     "value": "(407) 215-5917"
+    },
+    {
+     "label": "M",
+     "value": "(689) 213-9770"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "Ian.Rywalt@spectrum.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Spectrum Business",
+   "scope": "Internet / Fiber",
+   "name": "Suszie Campbell",
+   "title": "Manager",
+   "address": "9300 Arrowpoint Blvd, Charlotte, NC 28273",
+   "procore": "",
+   "notes": "Email matches Access Online's Bhavana Rao — likely a paste error, verify Suszie's real address",
+   "phones": [
+    {
+     "label": "",
+     "value": "(951) 291-9115"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "bhavana.rao@accessonline.io"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Spectrum Business",
+   "scope": "Internet / Fiber",
+   "name": "Charlamar Stephney",
+   "title": "Manager",
+   "address": "65 S Keller Rd, Orlando, FL 32810",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(212) 379-5125"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "Charlamar.Stephney@charter.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Spectrum Business",
+   "scope": "Internet / Fiber",
+   "name": "Rob Schutte",
+   "title": "Sr. Director",
+   "address": "66 S Keller Rd, Orlando, FL 32810",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(513) 386-5386"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "Robert.Schutte@charter.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "Spectrum Business",
+   "scope": "Internet / Fiber",
+   "name": "Craig Plue",
+   "title": "Vice President",
+   "address": "67 S Keller Rd, Orlando, FL 32810",
+   "procore": "",
+   "notes": "Street numbers across this Spectrum block (65/65/66/67 S Keller Rd) look like an autofill artifact — verify each one",
+   "phones": [
+    {
+     "label": "",
+     "value": "(484) 629-9542"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "craig.plue@spectrum.com"
+    }
+   ]
+  },
+  {
+   "category": "Subcontractor",
+   "org": "AMI",
+   "scope": "",
+   "name": "",
+   "title": "",
+   "address": "",
+   "procore": "",
+   "notes": "From notes at bottom of old list — needs full contact info",
+   "phones": [],
+   "emails": []
+  },
+  {
+   "category": "Subcontractor",
+   "org": "APM Services LLC",
+   "scope": "",
+   "name": "Ramón Aguirre",
+   "title": "President",
+   "address": "",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(305) 988-2350"
+    },
+    {
+     "label": "",
+     "value": "(512) 887-7980"
+    }
+   ],
+   "emails": []
+  },
+  {
+   "category": "Subcontractor",
+   "org": "APM Services LLC",
+   "scope": "",
+   "name": "Jacob Murphy",
+   "title": "",
+   "address": "",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(830) 752-2023"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "murphyisme@live.com"
+    }
+   ]
+  },
+  {
+   "category": "Supplier",
+   "org": "Rapid Hotel Supplies",
+   "scope": "Appliances",
+   "name": "Andy Kumar",
+   "title": "Sales Manager",
+   "address": "8910 Lawndale St. Suite C, Houston, TX 77012",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(213) 214-1739"
+    },
+    {
+     "label": "Office",
+     "value": "(866) 663-3301"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "sales01@rapidhotelsupplies.com"
+    }
+   ]
+  },
+  {
+   "category": "Supplier",
+   "org": "RK Design Hospitality",
+   "scope": "FF&E",
+   "name": "Ana Najera",
+   "title": "Project Manager",
+   "address": "6255 Corporate Center Drive, Dublin, OH 43016",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(614) 933-0300 x1006"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "ana@rkhdesign.com"
+    }
+   ]
+  },
+  {
+   "category": "Supplier",
+   "org": "RK Design Hospitality",
+   "scope": "FF&E",
+   "name": "Nadia Hayek",
+   "title": "Director of Design",
+   "address": "6255 Corporate Center Drive, Dublin, OH 43016",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "Cell",
+     "value": "(312) 825-6146"
+    },
+    {
+     "label": "Office",
+     "value": "(614) 933-0300"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "nadia@rkhdesign.com"
+    }
+   ]
+  },
+  {
+   "category": "Supplier",
+   "org": "RK Design Hospitality",
+   "scope": "FF&E",
+   "name": "Naveen Bhadari",
+   "title": "",
+   "address": "6256 Corporate Center Drive, Dublin, OH 43016",
+   "procore": "",
+   "notes": "Address differs by 1 from Ana/Nadia's (6255) — verify correct suite number",
+   "phones": [],
+   "emails": [
+    {
+     "label": "",
+     "value": "naveen@rkhdesign.com"
+    }
+   ]
+  },
+  {
+   "category": "Supplier",
+   "org": "RK Design Hospitality",
+   "scope": "FF&E",
+   "name": "CB Bhandari",
+   "title": "",
+   "address": "6257 Corporate Center Drive, Dublin, OH 43016",
+   "procore": "",
+   "notes": "Address differs from Ana/Nadia's (6255) — verify correct suite number",
+   "phones": [],
+   "emails": [
+    {
+     "label": "",
+     "value": "cb@rkhdesign.com"
+    }
+   ]
+  },
+  {
+   "category": "Supplier",
+   "org": "National Wholesale Hospitality",
+   "scope": "FF&E",
+   "name": "Royal West",
+   "title": "",
+   "address": "4108 Keller Hicks Road, Building B, Keller, TX 76248",
+   "procore": "",
+   "notes": "",
+   "phones": [
+    {
+     "label": "",
+     "value": "(817) 723-5004"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "r.west@nws-inc.com"
+    }
+   ]
+  },
+  {
+   "category": "Supplier",
+   "org": "Vingcard | ASSA ABLOY",
+   "scope": "Door locks / access",
+   "name": "Leah Johnson",
+   "title": "",
+   "address": "2925 E. Plano Pkwy, Plano, TX 75074",
+   "procore": "",
+   "notes": "assaabloyglobalsolutions.com",
+   "phones": [
+    {
+     "label": "Mobile",
+     "value": "(469) 507-0672"
+    },
+    {
+     "label": "Tech Support",
+     "value": "(800) 225-8464"
+    }
+   ],
+   "emails": [
+    {
+     "label": "",
+     "value": "leah.johnson@assaabloy.com"
+    }
+   ]
+  }
+ ]
+}
