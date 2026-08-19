@@ -64,7 +64,7 @@ function renderShell(hash, renderScreen) {
       </nav>
       <div class="me">
         <span class="av">${esc(u?.initials || '?')}</span>
-        <span><span class="mn">${esc(u?.name || 'Set your initials')}</span><br/><span class="mr">${u ? 'Initials on every check' : 'Required to check items'}</span></span>
+        <span><span class="mn">${esc(u?.name || 'Set your initials')}</span><br/><span class="mr">${u ? esc(u.company || 'Initials on every check') : 'Required to check items'}</span></span>
         <button class="sw" data-id-switch>${u ? 'switch' : 'set up'}</button>
       </div>
     </aside>
