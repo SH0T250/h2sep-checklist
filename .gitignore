@@ -30,3 +30,13 @@ tools/minutes/fonts/
 data/minutes-*.json
 out/*.pdf
 docs/meeting-*-markup-ledger.txt
+
+# The contact list carries personal cell numbers and personal Gmail/Yahoo/live
+# addresses for 50+ subs. This repo is PUBLIC and deploys to Pages, so neither
+# the workbook nor any JSON projection of it may be committed — same standing
+# rule as backups/ and reference/. Contacts live in Firestore (synced from the
+# Sheet by platform/tools/appsscript/SyncContacts.gs); the local working copy
+# of the workbook lives in tools/private/.
+docs/H2SEP-PhII_Contact-List_*.xlsx
+data/contacts.json
+tools/private/
