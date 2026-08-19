@@ -845,6 +845,7 @@ export function renderSettings(el) {
               : `Offline — ${store.pendingCount() || 'no'} change(s) queued on this phone.`)}
       </div>
       <a class="btn ghost" href="./dashboard.html" target="_blank" rel="noopener">Open live dashboard ↗</a>
+      <a class="btn ghost" href="./contacts.html">Project contacts</a>
       <button class="btn ghost" id="show-install">Install instructions</button>
       <div class="field-hint">Version ${esc(APP_VERSION)} · <a href="#" id="check-update">check for update</a></div>
     </section>
