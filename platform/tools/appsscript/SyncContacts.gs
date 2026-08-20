@@ -31,6 +31,7 @@ var HEADERS = {                       // sheet header text -> record field
 function onOpen() {
   SpreadsheetApp.getUi().createMenu('H2SEP App')
     .addItem('Sync contacts to the app now', 'syncContacts')
+    .addItem('Sync and let the sheet win', 'syncContactsSheetWins')
     .addSeparator()
     .addItem('Turn on hourly sync', 'installHourlyTrigger')
     .addItem('Turn off hourly sync', 'removeTriggers')
@@ -136,7 +137,20 @@ function readSheet_() {
   return out;
 }
 
-function syncContacts() {
+function syncContacts() { return syncContacts_(false); }
+
+/**
+ * Same sync, but the sheet overwrites contacts that were edited in the app.
+ *
+ * Needed because a record whose src is not 'sheet' always differs, and an app
+ * edit always makes updatedAt newer than syncedAt — so the ordinary sync
+ * reports it and skips it, every hour, with no way for the sheet to ever take
+ * ownership back. That is a deadlock, not a disagreement. Run this once to
+ * settle it in the sheet's favour.
+ */
+function syncContactsSheetWins() { return syncContacts_(true); }
+
+function syncContacts_(force) {
   var now = new Date().toISOString();
   var rows = readSheet_();
   var token = idToken_();
@@ -168,7 +182,7 @@ function syncContacts() {
     if (!diffs.length) continue;
 
     var since = have.syncedAt || have.createdAt || '';
-    if (have.updatedAt && have.updatedAt > since) {        // edited in the app since the last sync
+    if (!force && have.updatedAt && have.updatedAt > since) {   // edited in the app since the last sync
       conflicts.push((want.org || '') + (want.name ? ' / ' + want.name : '') + ': ' + diffs.join(', '));
       continue;
     }
@@ -218,6 +232,7 @@ function syncContacts() {
     if (batch.length) batches.push(batch);
     for (var bi = 0; bi < batches.length; bi++) writeBatch_(batches[bi], patch, H);
     msg = 'Synced. ' + added + ' added, ' + changed + ' updated, ' + archived + ' archived.'
+        + (force ? ' Sheet forced over app edits.' : '')
         + (batches.length > 1 ? ' (' + batches.length + ' batches)' : '');
   }
   if (conflicts.length) {
