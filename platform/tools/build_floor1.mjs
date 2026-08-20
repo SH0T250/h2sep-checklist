@@ -444,7 +444,7 @@ function openDb() {
 
 function readRoom(db, roomNo) {
   const room = db.prepare(
-    'SELECT room_no, floor, room_type, display_label, accessible, connecting FROM rooms WHERE room_no = ?'
+    'SELECT room_no, floor, room_type, display_label, accessible, connecting, note FROM rooms WHERE room_no = ?'
   ).get(roomNo);
   if (!room) die('room ' + roomNo + ' does not exist in the rooms table');
   const rows = db.prepare(
@@ -469,7 +469,7 @@ function readRoom(db, roomNo) {
  * Reduce a room's raw room_items rows to the FF&E line shape.
  * A "line" is { key, code, category, qty, sort, sqlite:{...} }.
  */
-function reduceFFE(roomNo, rows) {
+function reduceFFE(roomNo, rows, convention) {
   /* STEP 0 - ruled drops. Matched on the DATABASE'S OWN description prefix. */
   const drops = configADrops(roomNo, rows);
   const configDropped = rows.filter((r) => drops.ids.has(r.rowid));
@@ -538,10 +538,10 @@ function reduceFFE(roomNo, rows) {
   /* STEP 3 + STEP 5 - quantity override and sort band. */
   const lines = [];
   const seen = new Set();
-  let prevCat = null, ordinal = 0;
+  let prevCat = null, ordinal = 0, rowOrdinal = 0;
   let foldedGroups = 0;
   for (const g of ordered) {
-    if (g.category !== prevCat) { prevCat = g.category; ordinal = 0; } else ordinal++;
+    if (g.category !== prevCat) { prevCat = g.category; ordinal = 0; rowOrdinal = 0; } else ordinal++;
 
     let qty = g.rows.length;
     let overrideRuling = null;
@@ -560,7 +560,15 @@ function reduceFFE(roomNo, rows) {
       category: g.category,
       qty,
       overrideRuling,
-      sort: (catIdx(g.category) + 1) * 1000 + ordinal * 10,
+      /* STEP 5 has TWO conventions in the approved work, and which one a room
+       * uses is measured off its own approved doc, never assumed. See
+       * detectSortConvention(): rooms 101 / 103 advance the band ordinal once
+       * per LINE, room 105 advances it once per RAW ROW, so a folded group of
+       * two leaves a gap behind it. Rooms 107-115 and the whole King family
+       * take their package from 105 and must therefore use 105's numbering. */
+      sortByLine: (catIdx(g.category) + 1) * 1000 + ordinal * 10,
+      sortByRow: (catIdx(g.category) + 1) * 1000 + rowOrdinal * 10,
+      sort: (catIdx(g.category) + 1) * 1000 + (convention === 'row' ? rowOrdinal : ordinal) * 10,
       rawRows: g.rows.length,
       sqlite: {
         label: g.first.description,
@@ -572,11 +580,13 @@ function reduceFFE(roomNo, rows) {
         derived: g.first.derived,
       },
     });
+    rowOrdinal += g.rows.length;
   }
 
   return {
     lines,
     rawCount: rows.length,
+    convention: convention === 'row' ? 'row' : 'line',
     gatedCount: kept.length,
     foldedGroups,
     mepRowCount,
@@ -641,6 +651,50 @@ function injectWorkbookRows(db, roomNo, room, rows) {
     injected.push(w.tag + ' x' + w.units);
   }
   return { rows: out, injected };
+}
+
+/**
+ * SORT IS MEASURED, NOT ASSUMED.
+ *
+ * The approved work uses two band-ordinal conventions and they disagree
+ * wherever a group folds more than one raw row:
+ *
+ *   'line'  the ordinal advances once per emitted LINE   (rooms 101, 103)
+ *   'row'   the ordinal advances once per RAW ROW, so a folded pair of rows
+ *           leaves a 10-wide gap behind it                (room 105)
+ *
+ * Rooms 107 and 115 take their whole package from approved room 105, so they
+ * must reproduce 105's numbering exactly - under the 'line' convention eleven
+ * of their FF&E lines came out 10 low (one 20 low), which is what the
+ * verifiers found. Rather than hard-code either rule, this reads the approved
+ * doc and reports which convention reproduces it, and refuses if neither does.
+ */
+function detectSortConvention(approvedItems, red) {
+  const tries = [['row', 'sortByRow'], ['line', 'sortByLine']];
+  const misses = {};
+  for (const [name, field] of tries) {
+    const bad = [];
+    for (const line of red.lines) {
+      const a = approvedItems[line.key];
+      if (!a) continue;
+      if (line[field] !== a.sort) bad.push(line.key + ': ' + line[field] + ' != approved ' + a.sort);
+    }
+    if (!bad.length) return { convention: name, misses };
+    misses[name] = bad;
+  }
+  return { convention: null, misses };
+}
+
+/** The convention the approved reference room uses, measured on every run. */
+function conventionOf(db, slice, refNo) {
+  const { rows } = readRoom(db, refNo);
+  const red = reduceFFE(refNo, rows);
+  const got = detectSortConvention(slice.docs[refNo].items, red);
+  if (!got.convention) {
+    die('neither sort convention reproduces approved room ' + refNo + ' - refusing to number a new room:\n  ' +
+        Object.entries(got.misses).map(([k, v]) => k + ': ' + v.join('; ')).join('\n  '));
+  }
+  return got.convention;
 }
 
 /* ------------------------------------------------------------- slice reading */
@@ -792,11 +846,17 @@ function selftest(db, slice) {
   let ok = true;
   for (const roomNo of APPROVED_ROOMS) {
     const { rows } = readRoom(db, roomNo);
-    const red = reduceFFE(roomNo, rows);
+    const probe = reduceFFE(roomNo, rows);
     const approved = slice.docs[roomNo].items;
+    const found = detectSortConvention(approved, probe);
+    const red = reduceFFE(roomNo, rows, found.convention || 'line');
 
     const deltas = [];
     const sortNotes = [];
+    if (!found.convention) {
+      deltas.push('SORT: neither band-ordinal convention reproduces this room - ' +
+        Object.entries(found.misses).map(([k, v]) => k + ' misses ' + v.length).join(', '));
+    }
     const gen = new Map(red.lines.map((l) => [l.key, l]));
     const appKeys = Object.keys(approved).sort(cmpStr);
     const genKeys = [...gen.keys()].sort(cmpStr);
@@ -820,7 +880,9 @@ function selftest(db, slice) {
       if (g.category !== a.category) deltas.push(k + ': category ' + JSON.stringify(g.category) + ' != ' + JSON.stringify(a.category));
       if (g.code !== a.code) deltas.push(k + ': tag ' + JSON.stringify(g.code) + ' != ' + JSON.stringify(a.code));
       if (g.qty !== a.qty) deltas.push(k + ': qty ' + g.qty + ' != ' + a.qty);
-      if (g.sort !== a.sort) sortNotes.push(k + ': recipe sort ' + g.sort + ', approved ' + a.sort);
+      /* Sort is now a DELTA, not a note: a new room of this type must land on
+       * the approved room's numbering, line for line. */
+      if (g.sort !== a.sort) deltas.push(k + ': sort ' + g.sort + ' != approved ' + a.sort);
     }
 
     results.push({
@@ -830,6 +892,7 @@ function selftest(db, slice) {
       folded: red.foldedGroups,
       generated: red.lines.length,
       approved: appKeys.length,
+      convention: found.convention,
       deltas,
       sortNotes,
       unknownCategories: red.unknownCategories,
@@ -840,7 +903,7 @@ function selftest(db, slice) {
   const mepLive = assertMepConstant(slice);
   const proof = assertDerivationRules(db, slice);
 
-  process.stdout.write('\nSELFTEST - regenerate 101 / 103 / 105 from sqlite, diff on (category, tag, qty)\n');
+  process.stdout.write('\nSELFTEST - regenerate 101 / 103 / 105 from sqlite, diff on (category, tag, qty, sort)\n');
   process.stdout.write('-'.repeat(78) + '\n');
   for (const r of results) {
     process.stdout.write(
@@ -849,8 +912,11 @@ function selftest(db, slice) {
     if (r.unknownCategories.length) {
       process.stdout.write('  NOTE unrecognised categories: ' + r.unknownCategories.join(', ') + '\n');
     }
+    process.stdout.write('  sort convention measured off the approved doc: ' +
+      (r.convention ? '"' + r.convention + '" (band ordinal advances once per ' +
+        (r.convention === 'row' ? 'RAW ROW' : 'LINE') + ')' : 'NONE FITS') + '\n');
     if (r.deltas.length === 0) {
-      process.stdout.write('  PASS 0 deltas on (category, tag, qty) across ' + r.generated + ' lines\n');
+      process.stdout.write('  PASS 0 deltas on (category, tag, qty, sort) across ' + r.generated + ' lines\n');
     } else {
       process.stdout.write('  FAIL ' + r.deltas.length + ' delta(s):\n');
       for (const d of r.deltas) process.stdout.write('    - ' + d + '\n');
@@ -873,12 +939,67 @@ function selftest(db, slice) {
 
 /* ---------------------------------------------------------------- generation */
 
+/**
+ * Whole-room notes for a generated doc - the same shape store.addNote() writes
+ * ({ text, flag, resolved, createdAt, by }), with deterministic ids so a
+ * rebuild stays byte-identical. Every note QUOTES a source; none is authored.
+ *
+ * Note 1 is the one the app was silently dropping: data/project.sqlite
+ * rooms.note. On room 115 that note is a documented room-IDENTITY conflict
+ * ("A100 reads 115 here; ID-1.1 wrongly reads 114. A100 governs"), and a crew
+ * standing in the doorway needs to see it rather than have the app assert a
+ * room number the drawings argue about.
+ */
+function buildRoomNotes(db, roomNo, room, rows, stamp, report) {
+  const notes = {};
+  const added = [];
+  const add = (id, text) => {
+    notes[id] = { text, flag: 'info', resolved: false, createdAt: stamp, by: '' };
+    added.push(id);
+  };
+
+  if (room.note) {
+    add('n_dbroom', 'FROM THE DRAWING RECORD (data/project.sqlite rooms.note for room ' +
+      roomNo + ', verbatim): "' + room.note + '"');
+  }
+
+  const res = ROOM_SHEET_RESOLUTION[roomNo];
+  if (res) {
+    const rt = db.prepare('SELECT room_sheet, bath_sheet, notes FROM room_types WHERE type_name = ?')
+      .get(room.room_type) || {};
+    const bath = rows.find((r) => /A532\.1|A532 plan 01\.1/.test(String(r.source_sheet || '')));
+    add('n_sheet',
+      'SHEET IDENTITY. room_types "' + room.room_type + '" reads room_sheet ' + JSON.stringify(rt.room_sheet || '') +
+      ' and bath_sheet ' + JSON.stringify(rt.bath_sheet || '') + ', notes: "' + (rt.notes || '') + '". ' +
+      'This build resolves room ' + roomNo + ' to ' + res.sheet + ' - ' + res.why + '. ' +
+      (bath ? 'The bath is the roll-in plan (room_items ' + bath.item_id + ' cites "' + bath.source_sheet + '"). ' : '') +
+      'Citations off other sheets are carried VERBATIM and are not rewritten to match: the room\'s own PTAC row ' +
+      'still cites A551/A552, and the bath keynotes still cite the A530-A533 range, exactly as the database writes them.');
+  }
+
+  if (String(room.connecting) === '1') {
+    const door = rows.find((r) => r.category === 'Doors' && /connecting door/i.test(String(r.description || '')));
+    if (door) {
+      add('n_conndoor',
+        'CONNECTING KEY. ' + (door.tag ? door.tag + ': ' : '') + door.description +
+        ' (' + (door.source_sheet || door.primary_sheet || 'no citation') + '). ' +
+        'Category "Doors" sits outside the approved checklist gate, so the connecting door carries no ' +
+        'checkable line in either doc - the same as every other connecting key. It is recorded here so it ' +
+        'is not lost.');
+    } else {
+      report.unresolved.push('room ' + roomNo + ' has rooms.connecting = 1 but no "connecting door" row in room_items');
+    }
+  }
+
+  report.roomNotes = added;
+  return notes;
+}
+
 function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
   const { room, rows: dbRows } = readRoom(db, roomNo);
   const inj = injectWorkbookRows(db, roomNo, room, dbRows);
   const rows = inj.rows;
   report.injected = inj.injected;
-  const red = reduceFFE(roomNo, rows);
   const roomType = room.room_type;
 
   const composed = COMPOSED_TYPES[roomType] || null;
@@ -902,6 +1023,12 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
     refNo = donorNo;
   }
   const ref = slice.docs[refNo];
+
+  /* Number this room the way its own approved reference is numbered. Measured
+   * off that doc on every run; never assumed. */
+  const convention = conventionOf(db, slice, refNo);
+  const red = reduceFFE(roomNo, rows, convention);
+  report.sortConvention = convention;
 
   /* Index the donor/reference package so a line is matched on what it IS, not
    * on where it happened to sort. Tagged lines match on (category, tag).
@@ -1091,7 +1218,7 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
     typeLabel,
     schemaV: ref.schemaV,
     items,
-    notes: {},
+    notes: buildRoomNotes(db, roomNo, room, rows, stamp, report),
     deleted: false,
     createdAt: stamp,
     updatedAt: stamp,
@@ -1812,12 +1939,19 @@ function reduceSpaceBand(spaceNo, rows, band) {
     }
     seen.add(g.key);
 
-    /* Note (c): a single FLAGGED row whose note says no count is printed gets
-     * NO qty at all. Everything else is folded row count. */
+    /* Note (c): a FLAGGED group whose own note says no count is printed gets NO
+     * qty at all. Everything else is folded row count.
+     *
+     * This deliberately does NOT require the group to be a single row. S017
+     * Open Storage tag 404 STORAGE SHELVING is two FLAGGED rows whose own note
+     * reads "A510.3 shows two TAG GROUPS, not two counted units. Quantity
+     * within each group is not printed." Folding those two rows into qty 2 put
+     * a unit count on the line that no sheet states. A row count is not a
+     * quantity when the database says the rows are tag groups. */
     const note = g.first.note || '';
-    const countIsUnknown = g.rows.length === 1
-      && g.first.reliability === 'FLAGGED'
-      && SPACE_NO_COUNT_RE.test(note);
+    const groupNotes = g.rows.map((r) => r.note || '');
+    const countIsUnknown = g.rows.every((r) => r.reliability === 'FLAGGED')
+      && groupNotes.some((n) => SPACE_NO_COUNT_RE.test(n));
     if (countIsUnknown) qtyUnknown.push((g.tag || '<untagged>') + ' [' + g.category + ']');
 
     /* MEP band keeps the approved 1xxx..5xxx numbering (offset 10), FF&E band
@@ -1980,15 +2114,110 @@ function spaceUnknownMepCategories(db, floor = '1') {
 
 /* ------------------------------------------------- spaces: doc generation */
 
-function buildSpaceBandDoc(space, band, red, stamp) {
+/**
+ * Tags the database records in MORE THAN ONE floor-1 space, on the SAME sheet,
+ * where the rows themselves say so ("Also tagged at Elevator Lobby 137 ... -
+ * separate rows, do not sum") and then give CONFLICTING answers - PA-501 is
+ * recorded at Reception 004 as MEDIUM with a count and at Elev. Lobby 137 as
+ * FLAGGED with none.
+ *
+ * This tool does not pick a winner. The tag is emitted ONCE, on the
+ * lowest-numbered space that carries it, with NO quantity and reliability
+ * FLAGGED, and every recorded position is written into the line note. The
+ * space that loses the line gets a doc note saying so, so nobody standing in
+ * that room thinks the tag was forgotten.
+ */
+function spaceDuplicateTags(db, floor = '1') {
+  const rows = db.prepare(
+    'SELECT space_no, space_name, item_id, category, tag, description, note, reliability,' +
+    '       source_sheet, primary_sheet' +
+    '  FROM space_items WHERE floor = ? AND tag IS NOT NULL AND tag != \'\' ORDER BY space_no, rowid'
+  ).all(floor);
+
+  const byTag = new Map();
+  for (const r of rows) {
+    if (!GATE_CATEGORIES.has(r.category) && !MEP_CATEGORIES.has(r.category)) continue;
+    if (!byTag.has(r.tag)) byTag.set(r.tag, []);
+    byTag.get(r.tag).push(r);
+  }
+
+  const out = new Map();
+  for (const [tag, all] of byTag) {
+    const spaces = [...new Set(all.map((r) => r.space_no))];
+    if (spaces.length < 2) continue;
+    /* Same sheet, and the rows themselves cross-reference each other. */
+    const sheets = new Set(all.map((r) => r.primary_sheet || ''));
+    const crossRefs = all.filter((r) => /also tagged at/i.test(String(r.note || '')));
+    if (sheets.size !== 1 || crossRefs.length < 2) continue;
+    /* Conflicting answers: the records disagree on reliability or wording. */
+    const answers = new Set(all.map((r) => r.reliability + '|' + r.description));
+    if (answers.size < 2) continue;
+
+    /* WHERE the one surviving line sits is decided by the DATABASE'S OWN words,
+     * not by a coin flip: a record whose description says "... also tagged at
+     * X" is marking itself as the secondary transcription of a tag that lives
+     * somewhere else. If exactly one record is the plain one, it carries the
+     * line. If nothing distinguishes them, the lowest-numbered space does, and
+     * the note says so. Either way the ANSWER - which room, how many - is left
+     * open for Austin; only the placement of the single line is settled. */
+    const primary = all.filter((r) => !/also tagged at/i.test(String(r.description || '')));
+    const primarySpaces = [...new Set(primary.map((r) => r.space_no))];
+    const decided = primarySpaces.length === 1;
+    const keep = decided ? primarySpaces[0] : spaces.slice().sort(cmpStr)[0];
+    const keepWhy = decided
+      ? 'It is listed on ' + spaceDocId(keep) + ' because every OTHER record of this tag describes itself as '
+        + '"also tagged at ..." - the database marks those as secondary transcriptions of a tag that lives here.'
+      : 'No record distinguishes itself, so it is listed on ' + spaceDocId(keep) +
+        ', the lowest-numbered space that carries it. That placement is arbitrary and is NOT a ruling.';
+    out.set(tag, {
+      keep,
+      keepWhy,
+      spaces: spaces.slice().sort(cmpStr),
+      sheet: [...sheets][0],
+      positions: all.map((r) => ({
+        space: r.space_no, name: r.space_name, itemId: r.item_id,
+        reliability: r.reliability, description: r.description,
+        src: r.source_sheet || r.primary_sheet || '', note: r.note || '',
+      })),
+    });
+  }
+  return out;
+}
+
+/** The conflict, written out so Austin can rule on it from the line itself. */
+function duplicateConflictText(tag, dup) {
+  const parts = dup.positions.map((p) =>
+    p.name + ' ' + p.space + ' (' + p.itemId + ', reliability ' + p.reliability + '): "' +
+    p.description + '" — ' + p.src + (p.note ? ' — note: "' + p.note + '"' : ''));
+  return 'UNRESOLVED DUPLICATE. ' + tag + ' is recorded ' + dup.positions.length +
+    ' times in data/project.sqlite, all on ' + (dup.sheet || 'the same sheet') +
+    ', with conflicting answers. This tool does not pick a winner and does not sum them. ' +
+    'The recorded positions are: ' + parts.join('  ||  ') + '. ' +
+    'The line is emitted ONCE, with NO quantity and reliability FLAGGED. ' + dup.keepWhy + ' ' +
+    'OPEN for Austin: which space carries it, and how many there are.';
+}
+
+function buildSpaceBandDoc(space, band, red, stamp, dups, report) {
   const isMep = band === 'mep';
   const docId = isMep ? spaceMepDocId(space.space_no) : spaceDocId(space.space_no);
   const items = {};
+  const notes = {};
 
   for (const line of red.lines) {
     if (!line.sqlite.src) {
       die('space ' + space.space_no + ' line ' + line.key + ' (' + (line.code || '<untagged>') +
           '): no primary_sheet and no source_sheet in sqlite - refusing to emit an uncited line');
+    }
+
+    /* An unresolved cross-space duplicate is emitted once, and only once. */
+    const dup = line.code ? (dups && dups.get(line.code)) : null;
+    if (dup && dup.keep !== space.space_no) {
+      notes['n_dup_' + tagSlug(line.code)] =
+        { text: 'NOT LISTED HERE ON PURPOSE. ' + duplicateConflictText(line.code, dup) +
+                ' It is carried on doc ' + spaceDocId(dup.keep) + ' only, so the seed cannot imply two of them.',
+          flag: 'info', resolved: false, createdAt: stamp, by: '' };
+      if (report) report.dupSuppressed.push(line.code + ' suppressed on ' + docId + ' (kept on ' + spaceDocId(dup.keep) + ')');
+      continue;
     }
 
     /* instanceNote carries the database's own text, verbatim. The flag prefix
@@ -1997,7 +2226,11 @@ function buildSpaceBandDoc(space, band, red, stamp) {
      * shown, so a crew member reading the line sees the reason, not a blank. */
     const parts = [];
     if (line.sqlite.instanceNote) parts.push(line.sqlite.instanceNote);
-    if (line.qtyUnknown && line.sqlite.note) parts.push('QTY NOT STATED - ' + line.sqlite.note);
+    if (line.qtyUnknown && line.sqlite.note) {
+      parts.push('QTY NOT STATED' +
+        (line.rawRows > 1 ? ' (' + line.rawRows + ' source rows folded here, but no sheet prints a unit count)' : '') +
+        ' - ' + line.sqlite.note);
+    }
     else if (line.sqlite.note && line.sqlite.reliability !== 'HIGH') parts.push(line.sqlite.note);
     let instanceNote = parts.join(' — ');
     if (instanceNote && line.sqlite.reliability !== 'HIGH') instanceNote = '⚑ ' + instanceNote;
@@ -2022,6 +2255,14 @@ function buildSpaceBandDoc(space, band, red, stamp) {
     };
     /* Note (c): omitted entirely, not null and not 1, when no sheet states it. */
     if (!line.qtyUnknown) item.qty = line.qty;
+
+    if (dup) {
+      /* Do not pick a winner: FLAGGED, no quantity, conflict in the note. */
+      delete item.qty;
+      item.reliability = 'FLAGGED';
+      item.instanceNote = '⚑ ' + duplicateConflictText(line.code, dup);
+      if (report) report.dupKept.push(line.code + ' emitted once on ' + docId + ' (recorded in spaces ' + dup.spaces.join(', ') + ')');
+    }
     items[line.key] = item;
   }
 
@@ -2034,7 +2275,7 @@ function buildSpaceBandDoc(space, band, red, stamp) {
     typeLabel: space.name,
     schemaV: 3,
     items,
-    notes: {},
+    notes,
     deleted: false,
     createdAt: stamp,
     updatedAt: stamp,
@@ -2069,6 +2310,8 @@ function mainSpaces(db, slice, positional, opts) {
   const ids = assertSpaceIds(db, all);
   assertDerivationRules(db, slice);
   const drops = spaceGateDrops(db, FLOOR);
+  const dups = spaceDuplicateTags(db, FLOOR);
+  const dupReport = { dupKept: [], dupSuppressed: [] };
   const fixtures = spaceFixtureAgreement(db);
   const unknownMep = spaceUnknownMepCategories(db, FLOOR);
 
@@ -2117,12 +2360,14 @@ function mainSpaces(db, slice, positional, opts) {
     }
 
     if (ffe.lines.length) {
-      docs[spaceDocId(s.space_no)] = buildSpaceBandDoc(space, 'ffe', ffe, opts.stamp);
-      totalFfe += ffe.lines.length;
+      const doc = buildSpaceBandDoc(space, 'ffe', ffe, opts.stamp, dups, dupReport);
+      docs[spaceDocId(s.space_no)] = doc;
+      totalFfe += Object.keys(doc.items).length;
     }
     if (mep.lines.length) {
-      docs[spaceMepDocId(s.space_no)] = buildSpaceBandDoc(space, 'mep', mep, opts.stamp);
-      totalMep += mep.lines.length;
+      const doc = buildSpaceBandDoc(space, 'mep', mep, opts.stamp, dups, dupReport);
+      docs[spaceMepDocId(s.space_no)] = doc;
+      totalMep += Object.keys(doc.items).length;
     }
     totalUnknownQty += ffe.qtyUnknown.length + mep.qtyUnknown.length;
     built.push({
@@ -2169,6 +2414,21 @@ function mainSpaces(db, slice, positional, opts) {
       W('  ' + b.no.padEnd(7) + b.name.padEnd(28) + b.qtyUnknown.join(', ') + '\n');
     }
     W('  (qty is OMITTED from these lines, not defaulted to 1. The reason is written into instanceNote.)\n');
+  }
+
+  if (dups.size) {
+    W('\nUNRESOLVED CROSS-SPACE DUPLICATE TAGS - emitted ONCE, no quantity, no winner picked (' + dups.size + ')\n' + '-'.repeat(100) + '\n');
+    for (const [tag, d] of dups) {
+      W('  ' + tag + '  recorded in space(s) ' + d.spaces.join(', ') + ' on ' + d.sheet + '\n');
+      for (const pos of d.positions) {
+        W('      ' + pos.space.padEnd(8) + pos.name.padEnd(18) + pos.itemId + '  ' + pos.reliability.padEnd(8) +
+          JSON.stringify(pos.description) + '\n');
+      }
+      W('      -> kept on ' + spaceDocId(d.keep) + ', FLAGGED, quantity omitted; the other doc(s) carry a note saying why.\n');
+    }
+    for (const x of dupReport.dupKept) W('  ' + x + '\n');
+    for (const x of dupReport.dupSuppressed) W('  ' + x + '\n');
+    W('  OPEN for Austin: which space carries each of these, and how many there are.\n');
   }
 
   if (allSplits.length) {
@@ -2229,6 +2489,17 @@ function mainSpaces(db, slice, positional, opts) {
 
   for (const id of APPROVED_DOC_IDS) {
     if (!deepEqual(outDocs[id], slice.docs[id])) die('internal error: approved doc ' + id + ' was modified');
+  }
+
+  /* An empty checklist tells the crew "nothing to verify here", which is false.
+   * A space with no gated line is refused earlier; this catches the other way
+   * in - a doc emptied by suppressing a duplicate. */
+  for (const [id, d] of Object.entries(outDocs)) {
+    if (!Object.keys(d.items || {}).length) {
+      die('doc ' + JSON.stringify(id) + ' would be written with ZERO lines - an empty checklist reads as ' +
+          '"nothing to verify here". Refusing. (If a duplicate suppression emptied it, the tag must stay ' +
+          'on this doc and move off the other one.)');
+    }
   }
 
   /* number == docId, for every doc in the file. */
@@ -2423,7 +2694,8 @@ function main(argv) {
           ', ' + r.fromSqlite.length + ' type-only tag(s) built from sqlite'
         : 'copied from approved same-type room ' + r.refRoom) + '\n' +
       '  FF&E : ' + r.ffeLines + ' lines   [' + r.rawRows + ' raw rows -> ' + r.gatedRows +
-      ' gated -> ' + r.ffeLines + ' after ' + r.foldedGroups + ' folds]\n' +
+      ' gated -> ' + r.ffeLines + ' after ' + r.foldedGroups + ' folds]   sort convention "' +
+      r.sortConvention + '" (measured off room ' + r.refRoom + ')\n' +
       '  MEP  : ' + r.mepLines + ' lines   [' + r.mepSkippedDeleted + ' deleted history rows in ' +
       r.mepRefRoom + ' deliberately not copied]\n' +
       '  unresolved tags: ' + (r.unresolved.length ? r.unresolved.join('; ') : 'none') + '\n');
@@ -2458,6 +2730,19 @@ function main(argv) {
             '(carried on the donor citation): ' + r.mepUnsupported.join(', ') + '\n');
         }
       }
+    }
+    if (r.injected && r.injected.length) {
+      process.stdout.write('  workbook lines injected as synthetic rows (qty derived by the ordinary fold): ' +
+        r.injected.join(', ') + '\n');
+    }
+    if (r.configDropped && r.configDropped.length) {
+      process.stdout.write('  ruling ' + r.configRuling + ' drops ' + r.configDropped.length +
+        ' FF&E row(s) matched on the description prefix ' + JSON.stringify(CONFIG_A_PREFIX) +
+        ' (' + r.configBLeft + ' Configuration B row(s) survive):\n');
+      for (const x of r.configDropped) process.stdout.write('        - ' + x + '\n');
+    }
+    if (r.roomNotes && r.roomNotes.length) {
+      process.stdout.write('  room notes seeded: ' + r.roomNotes.join(', ') + '\n');
     }
     if (r.unknownCategories.length) {
       process.stdout.write('  NOTE unrecognised sqlite categories seen: ' + r.unknownCategories.join(', ') + '\n');

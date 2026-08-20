@@ -1209,7 +1209,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 renderer.setSize(host.clientWidth, host.clientHeight);
 renderer.outputEncoding = T.sRGBEncoding;
 renderer.toneMapping = T.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 0.72;
+renderer.toneMappingExposure = 0.66;
 renderer.physicallyCorrectLights = true;   // inverse-square falloff, no fudged pi
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = T.PCFSoftShadowMap;
@@ -1482,17 +1482,17 @@ function woodCanvas(base, dark, light, seed) {
   g.fillStyle = base; g.fillRect(0, 0, N, N);
   // broad colour drift
   for (var b = 0; b < 26; b++) {
-    g.globalAlpha = 0.09;
+    g.globalAlpha = 0.11;
     g.fillStyle = r() < 0.5 ? dark : light;
-    g.fillRect(0, r() * N, N, 6 + r() * 34);
+    g.fillRect(0, r() * N, N, 10 + r() * 52);
   }
   g.globalAlpha = 1;
   // grain lines running along canvas X
   for (var i = 0; i < 260; i++) {
     var y0 = r() * N;
     g.strokeStyle = r() < 0.55 ? dark : light;
-    g.globalAlpha = 0.05 + r() * 0.20;
-    g.lineWidth = 0.5 + r() * 2.6;
+    g.globalAlpha = 0.035 + r() * 0.11;
+    g.lineWidth = 0.5 + r() * 3.4;
     g.beginPath();
     var y = y0; g.moveTo(0, y);
     for (var x = 0; x <= N; x += 12) { y += (r() - 0.5) * 2.4; g.lineTo(x, y); }
@@ -1630,29 +1630,29 @@ function carPrintCanvas() {
   // grille surround
   g.fillStyle = '#d8dbde';
   g.beginPath();
-  g.moveTo(Wc * 0.26, Hc * 0.40); g.lineTo(Wc * 0.74, Hc * 0.40);
-  g.quadraticCurveTo(Wc * 0.78, Hc * 0.66, Wc * 0.72, Hc * 0.80);
-  g.lineTo(Wc * 0.28, Hc * 0.80);
-  g.quadraticCurveTo(Wc * 0.22, Hc * 0.66, Wc * 0.26, Hc * 0.40);
+  g.moveTo(Wc * 0.33, Hc * 0.33); g.lineTo(Wc * 0.67, Hc * 0.33);
+  g.quadraticCurveTo(Wc * 0.71, Hc * 0.62, Wc * 0.665, Hc * 0.82);
+  g.lineTo(Wc * 0.335, Hc * 0.82);
+  g.quadraticCurveTo(Wc * 0.29, Hc * 0.62, Wc * 0.33, Hc * 0.33);
   g.closePath(); g.fill();
   // grille bars
   g.save();
   g.beginPath();
-  g.rect(Wc * 0.28, Hc * 0.43, Wc * 0.44, Hc * 0.34); g.clip();
-  for (var i = 0; i < 13; i++) {
-    var y = Hc * 0.43 + i * (Hc * 0.34 / 13);
-    var lg = g.createLinearGradient(0, y, 0, y + Hc * 0.34 / 13);
-    lg.addColorStop(0, '#f2f4f6'); lg.addColorStop(0.55, '#7b7f84'); lg.addColorStop(1, '#3b3e42');
+  g.rect(Wc * 0.345, Hc * 0.36, Wc * 0.31, Hc * 0.43); g.clip();
+  for (var i = 0; i < 16; i++) {
+    var y = Hc * 0.36 + i * (Hc * 0.43 / 16);
+    var lg = g.createLinearGradient(0, y, 0, y + Hc * 0.43 / 16);
+    lg.addColorStop(0, '#f6f8fa'); lg.addColorStop(0.5, '#84888d'); lg.addColorStop(1, '#303337');
     g.fillStyle = lg;
-    g.fillRect(Wc * 0.27, y, Wc * 0.46, Hc * 0.34 / 13 * 0.62);
+    g.fillRect(Wc * 0.33, y, Wc * 0.35, Hc * 0.43 / 16 * 0.58);
   }
   g.restore();
   // chrome vertical centre bar
   g.fillStyle = '#eceff2';
-  g.fillRect(Wc * 0.487, Hc * 0.40, Wc * 0.026, Hc * 0.40);
+  g.fillRect(Wc * 0.489, Hc * 0.33, Wc * 0.022, Hc * 0.49);
   // headlights
-  [[0.155, '#ffffff'], [0.845, '#ffffff']].forEach(function (h) {
-    var cx = Wc * h[0], cy = Hc * 0.52, rr = Hc * 0.155;
+  [[0.175, '#ffffff'], [0.825, '#ffffff']].forEach(function (h) {
+    var cx = Wc * h[0], cy = Hc * 0.50, rr = Hc * 0.205;
     var rg = g.createRadialGradient(cx - rr * 0.25, cy - rr * 0.3, rr * 0.08, cx, cy, rr);
     rg.addColorStop(0, '#ffffff'); rg.addColorStop(0.45, '#c6cacd');
     rg.addColorStop(0.8, '#585c60'); rg.addColorStop(1, '#1c1e21');
@@ -1732,9 +1732,9 @@ var TEX = {
   woodWarm: toTex(woodCanvas('#a8825b', '#755231', '#c9a97f', 22)),   // working wall, desk, cabinets
   woodDark: toTex(woodCanvas('#5a4433', '#33241a', '#7d6047', 33)),   // bath vanity
   woodDoor: toTex(woodCanvas('#8c7f74', '#5f544b', '#a89b8f', 44)),   // entry door slab, grey-brown
-  tweed: toTex(tweedCanvas('#3c4552', '#5b6675', '#252b34')),
+  tweed: toTex(tweedCanvas('#65717f', '#8892a0', '#454d58')),
   ottoman: toTex(ottomanCanvas()),
-  weave: toTex(curtainWeaveCanvas('#8e8478')),
+  weave: toTex(curtainWeaveCanvas('#9a9184')),
   weaveGrey: toTex(curtainWeaveCanvas('#9a9a98')),
   quartz: toTex(quartzCanvas('#f4f3f0')),
   quilt: toTex(quiltCanvas()),
@@ -1744,6 +1744,15 @@ var TEX = {
   mesh: toTex(meshFabricCanvas()),
   contact: toTex(contactCanvas())
 };
+
+// set an explicit UV repeat on every map a material carries
+function tiledRepeat(m, rx, ry) {
+  ['map', 'bumpMap', 'roughnessMap'].forEach(function (k) {
+    if (m[k]) { m[k] = m[k].clone(); m[k].needsUpdate = true;
+      m[k].wrapS = m[k].wrapT = T.RepeatWrapping; m[k].repeat.set(rx, ry); }
+  });
+  return m;
+}
 
 function std(o) {
   o = o || {};
@@ -1777,27 +1786,27 @@ M.chromeSoft  = std({ color: 0xd8dbdd, roughness: 0.28, metalness: 1.0, envMapIn
 M.stainless   = std({ color: 0xc3c7cb, roughness: 0.30, metalness: 0.92, envMapIntensity: 1.2 });
 M.blackMetal  = std({ color: 0x24262a, roughness: 0.42, metalness: 0.75, envMapIntensity: 0.8 });
 M.navyShelf   = std({ color: 0x1b2740, roughness: 0.40, envMapIntensity: 0.7 });  // [PHOTO] navy floating shelves
-M.tweed       = std({ color: 0xffffff, map: TEX.tweed, roughness: 0.94, bumpMap: TEX.tweed, bumpScale: 0.006 });
+M.tweed       = tiledRepeat(std({ color: 0xffffff, map: TEX.tweed, roughness: 0.95, bumpMap: TEX.tweed, bumpScale: 0.008, envMapIntensity: 0.28 }), 3, 3);
 M.ottoman     = std({ color: 0xe9e4d8, map: TEX.ottoman, roughness: 0.90, envMapIntensity: 0.3 });
-M.plum        = std({ color: 0x3b262c, roughness: 0.78, envMapIntensity: 0.35 });  // headboard, dark plum-brown
-M.plumVinyl   = std({ color: 0x53343a, roughness: 0.38, envMapIntensity: 0.9 });  // wardrobe bench cushion
-M.mattress    = std({ color: 0xffffff, map: TEX.quilt, roughness: 0.90, bumpMap: TEX.quilt, bumpScale: 0.012 });
+M.plum        = std({ color: 0x2c1d22, roughness: 0.82, envMapIntensity: 0.22 });  // headboard, dark plum-brown
+M.plumVinyl   = std({ color: 0x33202a, roughness: 0.48, envMapIntensity: 0.25 });  // wardrobe bench cushion
+M.mattress    = tiledRepeat(std({ color: 0xffffff, map: TEX.quilt, roughness: 0.90, bumpMap: TEX.quilt, bumpScale: 0.014 }), 0.5, 0.5);
 M.ticking     = std({ color: 0xb9b6ad, roughness: 0.92 });   // grey knit mattress border
-M.boxCover    = std({ color: 0x2f3237, roughness: 0.90 });
-M.curtain     = std({ color: 0xffffff, map: TEX.weave, roughness: 0.95, side: T.DoubleSide, bumpMap: TEX.weave, bumpScale: 0.01 });
-M.curtainGrey = std({ color: 0xffffff, map: TEX.weaveGrey, roughness: 0.95, side: T.DoubleSide });
+M.boxCover    = std({ color: 0x22252a, roughness: 0.92, envMapIntensity: 0.25 });
+M.curtain     = tiledRepeat(std({ color: 0xffffff, map: TEX.weave, roughness: 0.96, side: T.DoubleSide, bumpMap: TEX.weave, bumpScale: 0.012 }), 7, 12);
+M.curtainGrey = tiledRepeat(std({ color: 0xffffff, map: TEX.weaveGrey, roughness: 0.96, side: T.DoubleSide }), 5, 9);
 M.shade       = std({ color: 0xffffff, map: TEX.shade, roughness: 0.86, side: T.DoubleSide });
-M.glass       = std({ color: 0xdcebf2, roughness: 0.03, metalness: 0.0, transparent: true, opacity: 0.10, side: T.DoubleSide, depthWrite: false, envMapIntensity: 0.30 });
+M.glass       = std({ color: 0xdcebf2, roughness: 0.03, metalness: 0.0, transparent: true, opacity: 0.07, side: T.DoubleSide, depthWrite: false, envMapIntensity: 0.14 });
 M.showerGlass = std({ color: 0xe4f2f4, roughness: 0.03, metalness: 0.0, transparent: true, opacity: 0.10, side: T.DoubleSide, depthWrite: false, envMapIntensity: 0.30 });
 M.tvScreen    = std({ color: 0x0a0b0d, roughness: 0.14, metalness: 0.35, envMapIntensity: 0.55 });
-M.lampShade   = std({ color: 0xf6f1e6, roughness: 0.92, side: T.DoubleSide, emissive: 0xffdcb0, emissiveIntensity: 0.5 });
+M.lampShade   = std({ color: 0xf2e9d6, roughness: 0.94, side: T.DoubleSide, emissive: 0xffc98a, emissiveIntensity: 0.42 });
 M.globe       = std({ color: 0xfff6e6, roughness: 0.55, emissive: 0xffd9a4, emissiveIntensity: 2.4 });
 M.ledStrip    = std({ color: 0xffffff, roughness: 0.5, emissive: 0xfff0d8, emissiveIntensity: 3.0 });
 M.frameBlack  = std({ color: 0x141517, roughness: 0.48 });
-M.frameYellow = std({ color: 0xe0912a, roughness: 0.45, envMapIntensity: 0.8 });  // [PHOTO] bathroom mirror frame
+M.frameYellow = std({ color: 0xc9741a, roughness: 0.50, envMapIntensity: 0.35 });  // [PHOTO] bathroom mirror frame
 M.frameWhite  = std({ color: 0xf2efe9, roughness: 0.42 });
 M.mesh        = std({ color: 0xffffff, map: TEX.mesh, roughness: 0.85, side: T.DoubleSide });
-M.chairSeat   = std({ color: 0x5a2c22, roughness: 0.82, envMapIntensity: 0.25 });
+M.chairSeat   = std({ color: 0x40291f, roughness: 0.90, envMapIntensity: 0.14 });
 M.panelGrey   = std({ color: 0x9c9e9f, roughness: 0.55, metalness: 0.3 });
 M.louvre      = std({ color: 0xffffff, map: TEX.louvre, roughness: 0.55 });
 M.porcelain   = std({ color: 0xfbfaf8, roughness: 0.10, envMapIntensity: 1.3 });
@@ -1954,9 +1963,14 @@ plane(D - BZ, H, accent, 0, H / 2, (BZ + D) / 2, 0, Math.PI / 2);
 // working wall, x = W, full 29'-0"  (PT-03)
 var wwall = tiled(M.paintWhite, D, H, 6);
 plane(D, H, wwall, W, H / 2, D / 2, 0, -Math.PI / 2);
-// window wall, z = D  (PT-01, soft grey-blue)
-var winwall = tiled(M.paintBlue, W, H, 6);
-plane(W, H, winwall, W / 2, H / 2, D, 0, Math.PI);
+// window wall, z = D  (PT-01, soft grey-blue), built around the 6'-0" opening
+(function windowWallPanels() {
+  var y0 = WIN_SILL, y1 = WIN_HEAD, x0 = WIN_X0, x1 = WIN_X1;
+  plane(W, y0, tiled(M.paintBlue, W, y0, 6), W / 2, y0 / 2, D, 0, Math.PI);                       // under sill
+  plane(W, H - y1, tiled(M.paintBlue, W, H - y1, 6), W / 2, (y1 + H) / 2, D, 0, Math.PI);         // over head
+  plane(x0, y1 - y0, tiled(M.paintBlue, x0, y1 - y0, 6), x0 / 2, (y0 + y1) / 2, D, 0, Math.PI);   // left of jamb
+  plane(W - x1, y1 - y0, tiled(M.paintBlue, W - x1, y1 - y0, 6), (x1 + W) / 2, (y0 + y1) / 2, D, 0, Math.PI);
+})();
 // corridor wall at the entry leg, z = 0
 plane(W - BX, HL, M.paintWhite, (BX + W) / 2, HL / 2, 0.002);
 
@@ -2028,43 +2042,57 @@ var REVEAL = 6 * IN;
   gm.position.set((WIN_X0 + WIN_X1) / 2, (WIN_SILL + WIN_HEAD) / 2, D - REVEAL + 0.02);
   gm.rotation.y = Math.PI;
   add(gm);
-  var fm = M.panelGrey;
-  box2(WIN_X0 - 0.04, WIN_X1 + 0.04, WIN_HEAD - 0.02, WIN_HEAD + 0.06, D - REVEAL - 0.02, D - REVEAL + 0.06, fm, { r: 0.006 });
-  box2(WIN_X0 - 0.04, WIN_X1 + 0.04, WIN_SILL - 0.06, WIN_SILL + 0.02, D - REVEAL - 0.02, D - REVEAL + 0.06, fm, { r: 0.006 });
-  box2(WIN_X0 - 0.04, WIN_X0 + 0.04, WIN_SILL, WIN_HEAD, D - REVEAL - 0.02, D - REVEAL + 0.06, fm, { r: 0.006 });
-  box2(WIN_X1 - 0.04, WIN_X1 + 0.04, WIN_SILL, WIN_HEAD, D - REVEAL - 0.02, D - REVEAL + 0.06, fm, { r: 0.006 });
-  box2((WIN_X0 + WIN_X1) / 2 - 0.05, (WIN_X0 + WIN_X1) / 2 + 0.05, WIN_SILL, WIN_HEAD,
-       D - REVEAL - 0.02, D - REVEAL + 0.05, fm, { r: 0.006 });                 // centre mullion
+  var fm = std({ color: 0xf0eee9, roughness: 0.34, envMapIntensity: 0.6 });
+  box2(WIN_X0 - 0.03, WIN_X1 + 0.03, WIN_HEAD - 0.015, WIN_HEAD + 0.05, D - REVEAL + 0.005, D - REVEAL + 0.10, fm, { r: 0.005 });
+  box2(WIN_X0 - 0.03, WIN_X1 + 0.03, WIN_SILL - 0.05, WIN_SILL + 0.015, D - REVEAL + 0.005, D - REVEAL + 0.10, fm, { r: 0.005 });
+  box2(WIN_X0 - 0.03, WIN_X0 + 0.025, WIN_SILL, WIN_HEAD, D - REVEAL + 0.005, D - REVEAL + 0.10, fm, { r: 0.005 });
+  box2(WIN_X1 - 0.025, WIN_X1 + 0.03, WIN_SILL, WIN_HEAD, D - REVEAL + 0.005, D - REVEAL + 0.10, fm, { r: 0.005 });
+  box2((WIN_X0 + WIN_X1) / 2 - 0.035, (WIN_X0 + WIN_X1) / 2 + 0.035, WIN_SILL, WIN_HEAD,
+       D - REVEAL + 0.005, D - REVEAL + 0.09, fm, { r: 0.005 });                // centre mullion
 
   // exterior: a bright card so the opening reads as blown-out daylight
   // Exterior: bright, but not clipped white — a clipped window is the fastest
   // way to make an interior render look like an interior render.
-  var skyC = cv(8, 256), sg = skyC[1];
+  var skyC = cv(512, 256), sg = skyC[1];
   var lg2 = sg.createLinearGradient(0, 0, 0, 256);
-  lg2.addColorStop(0.00, '#8fb6dd');
-  lg2.addColorStop(0.55, '#cfe0ee');
-  lg2.addColorStop(0.72, '#e8eee9');
-  lg2.addColorStop(0.735, '#93a189');
-  lg2.addColorStop(0.86, '#7d8b72');
-  lg2.addColorStop(1.00, '#6d7a63');
-  sg.fillStyle = lg2; sg.fillRect(0, 0, 8, 256);
+  // Eagle Pass in August: pale hot sky, a haze band at the horizon, dry
+  // tan-olive scrub below.  The horizon is placed so it lands inside the
+  // visible glass from the room cameras, not above or below them.
+  lg2.addColorStop(0.00, '#6d9bcc');
+  lg2.addColorStop(0.24, '#a2c2de');
+  lg2.addColorStop(0.40, '#d3e0ea');
+  lg2.addColorStop(0.442, '#eae9e0');
+  lg2.addColorStop(0.452, '#a9a189');
+  lg2.addColorStop(0.56, '#948b70');
+  lg2.addColorStop(0.80, '#a09a80');
+  lg2.addColorStop(1.00, '#79715c');
+  sg.fillStyle = lg2; sg.fillRect(0, 0, 512, 256);
+  // a low, soft treeline / roofline so the horizon is not a ruled edge
+  var rs = rng(2026);
+  sg.globalAlpha = 0.45;
+  for (var b2 = 0; b2 < 110; b2++) {
+    sg.fillStyle = rs() < 0.5 ? '#8c8570' : '#9d9781';
+    var bw2 = 10 + rs() * 52, bh2 = 2 + rs() * 10;
+    sg.fillRect(rs() * 512, 116 - bh2, bw2, bh2 + 6);
+  }
+  sg.globalAlpha = 1;
   var sky = new T.Mesh(new T.PlaneGeometry(34, 22),
     new T.MeshBasicMaterial({ map: toTex(skyC[0]) }));
-  sky.position.set(W / 2, 4.2, D + 6.0); sky.rotation.y = Math.PI;
+  sky.position.set(W / 2, 1.0, D + 6.0); sky.rotation.y = Math.PI;
   add(sky);
 
   // GR-400 blackout roller shade in a white valance box.
   // [A550] shade is 7'-0" wide: 6" past each jamb, elevation 08.
   // Drop shown at 46" AFF — an ASSUMED position; the drawings do not fix it.
   var sx0 = WIN_X0 - 0.5, sx1 = WIN_X1 + 0.5, hem = 58 * IN;
-  box2(sx0 - 0.08, sx1 + 0.08, SHADE_TOP, SHADE_TOP + 4 * IN, D - 5.5 * IN, D - 0.5 * IN, M.trim, { r: 0.01 });
+  box2(sx0 - 0.08, sx1 + 0.08, SHADE_TOP, SHADE_TOP + 4.5 * IN, D - REVEAL - 0.20, D - 0.02, M.trim, { r: 0.01 });
   var shadeMat = tiled(M.shade, sx1 - sx0, SHADE_TOP - hem, 3.9);
   var sh = new T.Mesh(new T.PlaneGeometry(sx1 - sx0, SHADE_TOP - hem, 12, 2), shadeMat);
-  sh.position.set((sx0 + sx1) / 2, (SHADE_TOP + hem) / 2, D - 3.2 * IN);
+  sh.position.set((sx0 + sx1) / 2, (SHADE_TOP + hem) / 2, D - REVEAL - 0.085);
   sh.rotation.y = Math.PI;
   sh.castShadow = true;
   add(sh);
-  box2(sx0, sx1, hem - 1.1 * IN, hem, D - 4 * IN, D - 2.4 * IN, M.trim, { r: 0.006 });
+  box2(sx0, sx1, hem - 1.2 * IN, hem, D - REVEAL - 0.13, D - REVEAL - 0.04, M.trim, { r: 0.006 });
 
   // PTAC below the window  [A550 keynote 1, keynote 30].  A550 gives no size:
   // 42" x 16" x 9" is an ASSUMED M-series envelope.
@@ -2143,10 +2171,12 @@ var WWF = W - 0.02;              // face of the working wall
   // "OPEN" box in the working wall.  [A550 elev 05] head at 48" AFF, at
   // ~10'-5" from the window end.  Width ASSUMED.
   var z1 = D - 9.4, z0 = D - 11.5, depth = 13 * IN, x0 = W - depth;
-  box2(x0, WWF, 24 * IN, 48 * IN, z0, z1, M.woodWarm, { r: 0.01 });
-  box2(x0 + 0.05, WWF, 25.5 * IN, 46.5 * IN, z0 + 0.06, z1 - 0.06,
-       std({ color: 0x6d5842, roughness: 0.7 }), { r: 0.006, cast: false });
-  box2(x0 + 0.05, WWF, 35 * IN, 36 * IN, z0 + 0.06, z1 - 0.06, M.woodWarm, { r: 0.006 });
+  box2(x0, WWF, 3 * IN, 48 * IN, z0, z1, M.woodWarm, { r: 0.01 });
+  box2(x0 - 0.005, WWF, 0, 3 * IN, z0, z1, std({ color: 0x3a332c, roughness: 0.8 }), { r: 0.004 });
+  // the "OPEN" box on elevation 05: a lit niche, head at 4'-0" AFF
+  box2(x0 + 0.05, WWF, 25.5 * IN, 46.5 * IN, z0 + 0.07, z1 - 0.07,
+       std({ color: 0x5f4c39, roughness: 0.78, envMapIntensity: 0.25 }), { r: 0.006, cast: false });
+  box2(x0 + 0.05, WWF, 35 * IN, 36 * IN, z0 + 0.07, z1 - 0.07, M.woodWarm, { r: 0.006 });
 })();
 
 var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall counter
@@ -2285,7 +2315,7 @@ var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall co
   box2(WWF - mdp - 0.05, WWF - mdp + 0.01, my + 1.2 * IN, my + mh - 1.2 * IN, mz - mw / 2 + 0.10, mz + mw / 2 - 0.10,
        M.stainless, { r: 0.010 });
   box2(WWF - mdp - 0.055, WWF - mdp - 0.045, my + 2.2 * IN, my + mh - 2.2 * IN, mz - mw / 2 + 0.20, mz + mw / 2 - 0.95,
-       std({ color: 0x1a1c1f, roughness: 0.16, metalness: 0.55, envMapIntensity: 1.1 }), { r: 0.008 });
+       std({ color: 0x141619, roughness: 0.16, metalness: 0.55, envMapIntensity: 0.35 }), { r: 0.008 });
   box2(WWF - mdp - 0.055, WWF - mdp - 0.048, my + 3.0 * IN, my + mh - 3.0 * IN, mz + mw / 2 - 0.80, mz + mw / 2 - 0.18,
        std({ color: 0x27292c, roughness: 0.35, metalness: 0.4 }), { r: 0.005 });
   box2(WWF - mdp - 0.085, WWF - mdp - 0.055, my + mh - 4.0 * IN, my + mh - 3.4 * IN, mz - mw / 2 + 0.20, mz + mw / 2 - 0.95,
@@ -2306,12 +2336,55 @@ var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall co
        std({ color: 0x2a2d31, roughness: 1 }), { sharp: true, cast: false });
   box2(W - fdep - 0.016, W - fdep + 0.004, 0.02, fh, fz0 + 0.015, fz0 + 0.032,
        std({ color: 0x2a2d31, roughness: 1 }), { sharp: true, cast: false });
-  box2(W - fdep - 0.055, W - fdep - 0.03, fh * 0.34, fh * 0.34 + 0.55, fz0 + 0.22, fz0 + 0.30, M.chromeSoft, { r: 0.008 });
-  box2(W - fdep - 0.055, W - fdep - 0.03, fh * 0.10, fh * 0.10 + 1.6, fz0 + 0.22, fz0 + 0.30, M.chromeSoft, { r: 0.008 });
+  box2(W - fdep - 0.075, W - fdep - 0.035, fh * 0.335, fh * 0.335 - 0.95, fz0 + 0.20, fz0 + 0.29, M.chromeSoft, { r: 0.010 });
+  box2(W - fdep - 0.075, W - fdep - 0.035, fh * 0.345, fh * 0.345 + 1.85, fz0 + 0.20, fz0 + 0.29, M.chromeSoft, { r: 0.010 });
   // PL-01 plastic laminate surround  [A550 elev 06]
   box2(W - fdep - 0.08, W - fdep, 0, fh + 6 * IN, fz0 - 0.10, fz0, M.woodWarm, { r: 0.008 });
   box2(W - fdep - 0.08, WWF, fh, fh + 6 * IN, fz0 - 0.10, fz1 + 0.10, M.woodWarm, { r: 0.008 });
   contact(W - fdep / 2, (fz0 + fz1) / 2, fdep * 1.7, (fz1 - fz0) * 1.4, 0.6);
+})();
+
+/* ---------------------------------------------------------------------
+   8b.  PROPS
+        Not on any drawing.  Every item here is [ASSUMED] — they are in the
+        scene because an empty counter and an empty towel rail are two of the
+        things that make a render look like a render.
+   ------------------------------------------------------------------ */
+(function props() {
+  var CT = 36 * IN, WWFp = W - 0.02;
+
+  // coffee maker on the kitchenette counter
+  var cmz = 3.55, cmx = W - 1.05;
+  blk(0.62, 0.75, 0.58, std({ color: 0x1b1d20, roughness: 0.35, envMapIntensity: 0.5 }),
+      cmx, CT + 0.38, cmz, { r: 0.05, corner: 0.09 });
+  blk(0.58, 0.30, 0.52, std({ color: 0x26292d, roughness: 0.30 }), cmx, CT + 0.90, cmz, { r: 0.05 });
+  cyl(0.20, 0.16, 0.34, std({ color: 0xd9dde0, roughness: 0.16, transparent: true, opacity: 0.55 }),
+      cmx - 0.06, CT + 0.19, cmz + 0.02, 14);
+  contact(cmx, cmz, 1.1, 1.1, 0.35, CT + 0.005);
+
+  // two inverted cups on a small tray
+  var trz = 4.15;
+  blk(0.70, 0.05, 0.52, std({ color: 0x2f2a24, roughness: 0.5 }), W - 0.72, CT + 0.03, trz, { r: 0.015 });
+  [-0.14, 0.14].forEach(function (d) {
+    cyl(0.145, 0.16, 0.28, std({ color: 0xf6f4ef, roughness: 0.18, envMapIntensity: 1.1 }),
+        W - 0.72, CT + 0.19, trz + d, 16);
+  });
+
+  // ice bucket
+  cyl(0.26, 0.23, 0.62, std({ color: 0xe8e6e1, roughness: 0.30, envMapIntensity: 0.9 }),
+      W - 0.75, CT + 0.32, 7.55, 18);
+  cyl(0.28, 0.28, 0.05, std({ color: 0xe8e6e1, roughness: 0.30 }), W - 0.75, CT + 0.66, 7.55, 18);
+
+  // hangers on the wardrobe rod  [PHOTO: chrome rod in the open hanging bay]
+  var hd = 24 * IN, hx0 = W - hd;
+  for (var i = 0; i < 4; i++) {
+    var hz = D - 1.1 - i * 0.42;
+    var hk = new T.Mesh(new T.TorusGeometry(0.08, 0.014, 5, 10, Math.PI * 1.4), M.chrome);
+    hk.position.set(hx0 + hd * 0.45, 66 * IN + 0.07, hz);
+    hk.rotation.y = Math.PI / 2; add(hk);
+    cyl(0.013, 0.013, 0.30, M.chrome, hx0 + hd * 0.45, 66 * IN - 0.16, hz, 6);
+    blk(0.90, 0.035, 0.05, M.chrome, hx0 + hd * 0.45, 66 * IN - 0.31, hz, { r: 0.012, ry: Math.PI / 2 });
+  }
 })();
 
 /* ---------------------------------------------------------------------
@@ -2329,7 +2402,7 @@ var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall co
   // vertical channel tufting  [PHOTO: upholstered panel, dark plum-brown]
   for (var i = 0; i < 14; i++) {
     var cz = hz0 + 0.22 + i * (hbW - 0.44) / 13;
-    cyl(0.05, 0.05, 29 * IN, std({ color: 0x36222a, roughness: 0.80 }), 0.362, 39 * IN, cz, 8, { cast: false });
+    cyl(0.05, 0.05, 29 * IN, std({ color: 0x241820, roughness: 0.84, envMapIntensity: 0.18 }), 0.362, 39 * IN, cz, 8, { cast: false });
   }
   box2(0.02, 0.40, 53 * IN, 54.6 * IN, hz0 - 0.03, hz1 + 0.03, M.plum, { r: 0.03 });
 
@@ -2409,7 +2482,7 @@ var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall co
   cyl(0.055, 0.055, SOF_LEN - 0.05, M.chrome, SOF_LEN / 2, H - 0.50, cz, 14, { rz: Math.PI / 2 });
   // coarse weave panel in warm taupe-grey, hung on large chrome grommets
   var pw = SOF_LEN - 0.16, ph = H - 0.62;
-  var pan = foldedPanel(pw, ph, 9, 0.095, M.curtain);
+  var pan = foldedPanel(pw, ph, 8, 0.085, M.curtain);
   pan.rotation.y = 0;
   pan.position.set(SOF_LEN / 2 - 0.02, ph / 2 + 0.01, cz);
   add(pan);
@@ -2486,11 +2559,13 @@ var SOFA_Z0 = 10.4, SOFA_Z1 = 17.0;
     var lx = 0.95, lz = SOFA_Z1 + 0.32;
     cyl(0.50, 0.52, 0.07, M.blackMetal, lx, 0.035, lz, 22);
     cyl(0.035, 0.035, 4.55, M.blackMetal, lx, 2.30, lz, 10);
-    var sh = new T.Mesh(new T.CylinderGeometry(0.62, 0.80, 1.10, 24, 1, true), M.lampShade);
+    var sh = new T.Mesh(new T.CylinderGeometry(0.60, 0.78, 1.10, 40, 1, true), M.lampShade);
     sh.position.set(lx, 4.95, lz);
-    add(sh);
-    var capm = new T.Mesh(new T.CircleGeometry(0.62, 24), std({ color: 0xfff0d6, roughness: 0.9, emissive: 0xffd9a4, emissiveIntensity: 0.9, side: T.DoubleSide }));
+    sh.castShadow = true; add(sh);
+    var capm = new T.Mesh(new T.CircleGeometry(0.60, 32), std({ color: 0xfff0d6, roughness: 0.95, emissive: 0xffc98a, emissiveIntensity: 0.35, side: T.DoubleSide }));
     capm.position.set(lx, 5.49, lz); capm.rotation.x = -Math.PI / 2; add(capm);
+    var glow = new T.Mesh(new T.CircleGeometry(0.76, 32), std({ color: 0xfff2dd, roughness: 1, emissive: 0xffcf96, emissiveIntensity: 1.1, side: T.DoubleSide }));
+    glow.position.set(lx, 4.42, lz); glow.rotation.x = Math.PI / 2; add(glow);
     contact(lx, lz, 1.7, 1.7, 0.5);
   })();
 
@@ -2547,7 +2622,7 @@ var SOFA_Z0 = 10.4, SOFA_Z1 = 17.0;
     std({ color: 0xf3f5f6, roughness: 0.02, metalness: 1.0, envMapIntensity: 1.0 }));
   mirror.position.set(mCX, (mB + mTop) / 2, BZ + 0.0565);
   add(mirror);
-  MIRRORS.push({ mesh: mirror, at: new T.Vector3(mCX, (mB + mTop) / 2, BZ + 0.10) });
+  MIRRORS.push({ mesh: mirror, at: new T.Vector3(mCX, (mB + mTop) / 2, BZ + 0.10), gain: 2.6 });
 
   // electrical panel, grey painted cover  [A550 elev 07 keynote 51, top at 5'-6"]
   // [A550 elev 07 keynote 51] top at 5'-6" AFF.  Width is not dimensioned;
@@ -2583,7 +2658,9 @@ var SOFA_Z0 = 10.4, SOFA_Z1 = 17.0;
   box2(0.01, shX1, 0, 0.42, 0.01, shZ1, M.porcelain, { r: 0.03 });
   box2(0.06, shX1 - 0.06, 0.30, 0.36, 0.06, shZ1 - 0.06,
        std({ color: 0xf4f3f1, roughness: 0.14, envMapIntensity: 1.2 }), { r: 0.02, cast: false });
-  box2(0.02, 1.15, 0.42, 0.58, 0.02, 0.85, M.porcelain, { r: 0.03 });          // corner soap ledge
+  box2(0.02, 1.15, 0.42, 0.60, 0.02, 0.92, M.porcelain, { r: 0.035, corner: 0.16 });   // corner soap ledge
+  box2(0.02, 1.05, 0.56, 0.60, 0.02, 0.82,
+       std({ color: 0xeeece8, roughness: 0.14 }), { r: 0.02, cast: false });
   cyl(0.10, 0.10, 0.03, M.chrome, shX1 * 0.5, 0.345, shZ1 * 0.5, 16);          // round chrome drain
   // chrome arm, head, pressure balancing trim  [PHOTO]
   cyl(0.035, 0.035, 0.75, M.chrome, 0.30, 6.35, 1.5, 10, { rz: -0.9 });
@@ -2592,47 +2669,74 @@ var SOFA_Z0 = 10.4, SOFA_Z1 = 17.0;
   cyl(0.24, 0.24, 0.06, M.chrome, 0.06, 4.1, 1.5, 18, { rz: Math.PI / 2 });
   cyl(0.07, 0.07, 0.22, M.chrome, 0.16, 4.1, 1.5, 10, { rz: Math.PI / 2 });
   // bypass slider glass enclosure in chrome, with a vertical pull  [PHOTO]
-  box2(0, shX1, 0.42, 6.5, shZ1 - 0.16, shZ1 - 0.12, M.chromeSoft, { r: 0.006 });
-  box2(0, shX1, 6.42, 6.5, shZ1 - 0.20, shZ1 - 0.06, M.chromeSoft, { r: 0.008 });
+  box2(0, 0.10, 0.42, 6.56, shZ1 - 0.22, shZ1 - 0.06, M.chromeSoft, { r: 0.006 });   // jamb
+  box2(shX1 - 0.10, shX1, 0.42, 6.56, shZ1 - 0.22, shZ1 - 0.06, M.chromeSoft, { r: 0.006 });
+  box2(0, shX1, 6.42, 6.56, shZ1 - 0.22, shZ1 - 0.06, M.chromeSoft, { r: 0.008 });   // header track
+  box2(0, shX1, 0.42, 0.50, shZ1 - 0.22, shZ1 - 0.06, M.chromeSoft, { r: 0.006 });   // sill track
   // Bypass sliders shown STACKED toward the end wall, so the camera can see
   // into the alcove — the way a shower gets photographed.
   var g1 = new T.Mesh(new T.PlaneGeometry(shX1 * 0.52, 6.0), M.showerGlass);
   g1.position.set(shX1 * 0.74, 3.45, shZ1 - 0.14); g1.renderOrder = 3; add(g1);
   var g2 = new T.Mesh(new T.PlaneGeometry(shX1 * 0.52, 6.0), M.showerGlass);
   g2.position.set(shX1 * 0.70, 3.45, shZ1 - 0.20); g2.renderOrder = 3; add(g2);
-  cyl(0.030, 0.030, 1.4, M.chrome, shX1 * 0.45, 3.6, shZ1 - 0.20, 10);
-  box2(shX1 * 0.44, shX1 * 0.46, 2.85, 4.35, shZ1 - 0.24, shZ1 - 0.17, M.chrome, { r: 0.006 });
-  box2(0, shX1, 6.5, 6.56, shZ1 - 0.22, shZ1 - 0.04, M.chromeSoft, { r: 0.006 });
+  // vertical pull on the leading edge of the inner slider
+  box2(shX1 * 0.445, shX1 * 0.475, 2.70, 4.50, shZ1 - 0.30, shZ1 - 0.235, M.chrome, { r: 0.010 });
+  cyl(0.028, 0.028, 0.11, M.chrome, shX1 * 0.46, 4.44, shZ1 - 0.245, 8, { rx: Math.PI / 2 });
+  cyl(0.028, 0.028, 0.11, M.chrome, shX1 * 0.46, 2.76, shZ1 - 0.245, 8, { rx: Math.PI / 2 });
 
   // ---- vanity on the far (north) wall  [PHOTO]
   var vz = BIZ - 0.02, vw = 4.0, vcx = 2.3, vh = 32 * IN, vd = 21 * IN;
-  // dark woodgrain casework on slim chrome legs
-  box2(vcx - vw / 2, vcx + vw / 2, 8 * IN, vh - 1.4 * IN, vz - vd, vz, M.woodDark, { r: 0.012 });
-  [[-1], [1]].forEach(function (s) {
-    cyl(0.035, 0.035, 8 * IN, M.chrome, vcx + s[0] * (vw / 2 - 0.14), 4 * IN, vz - 0.16, 8);
-    cyl(0.035, 0.035, 8 * IN, M.chrome, vcx + s[0] * (vw / 2 - 0.14), 4 * IN, vz - vd + 0.16, 8);
+  var vy0 = 8 * IN, vy1 = vh - 1.4 * IN, vzf = vz - vd;
+  // Carcase built as panels, so the two open cubbies actually read as open.
+  box2(vcx - vw / 2, vcx - vw / 2 + 0.07, vy0, vy1, vzf, vz, M.woodDark, { r: 0.008 });   // left end
+  box2(vcx + vw / 2 - 0.07, vcx + vw / 2, vy0, vy1, vzf, vz, M.woodDark, { r: 0.008 });   // right end
+  box2(vcx - 0.05, vcx + 0.05, vy0, vh - 1.4 * IN - 0.46, vzf, vz, M.woodDark, { r: 0.006 }); // divider, stopped below the basin
+  box2(vcx - vw / 2, vcx + vw / 2, vy0, vy0 + 0.07, vzf, vz, M.woodDark, { r: 0.006 });   // bottom
+  box2(vcx - vw / 2, vcx + vw / 2, vy0, vy1, vz - 0.07, vz, M.woodDark, { r: 0.006 });    // back
+  // sub-top, split so it does not run across the basin opening
+  var stB0 = vcx - 0.87, stB1 = vcx + 0.87;
+  box2(vcx - vw / 2, stB0, vy1 - 0.07, vy1, vzf, vz, M.woodDark, { r: 0.006 });
+  box2(stB1, vcx + vw / 2, vy1 - 0.07, vy1, vzf, vz, M.woodDark, { r: 0.006 });
+  // slim chrome legs  [PHOTO]
+  [[-1], [1]].forEach(function (sgn) {
+    cyl(0.032, 0.032, vy0, M.chrome, vcx + sgn[0] * (vw / 2 - 0.16), vy0 / 2, vz - 0.20, 8);
+    cyl(0.032, 0.032, vy0, M.chrome, vcx + sgn[0] * (vw / 2 - 0.16), vy0 / 2, vzf + 0.20, 8);
   });
-  // two open shelf cubbies, no doors
-  box2(vcx - vw / 2 + 0.10, vcx - 0.06, 10 * IN, vh - 3.4 * IN, vz - vd + 0.10, vz - 0.03,
-       std({ color: 0x3d2c20, roughness: 0.75 }), { r: 0.008, cast: false });
-  box2(vcx + 0.06, vcx + vw / 2 - 0.10, 10 * IN, vh - 3.4 * IN, vz - vd + 0.10, vz - 0.03,
-       std({ color: 0x3d2c20, roughness: 0.75 }), { r: 0.008, cast: false });
-  // white solid surface top with an integral rectangular basin  [PHOTO]
-  box2(vcx - vw / 2 - 0.04, vcx + vw / 2 + 0.04, vh - 1.4 * IN, vh, vz - vd - 0.04, vz, M.solidWhite, { r: 0.012 });
-  box2(vcx - 0.85, vcx + 0.85, vh - 5.2 * IN, vh - 1.2 * IN, vz - vd + 0.28, vz - 0.34, M.solidWhite, { r: 0.03, cast: false });
-  box2(vcx - 0.78, vcx + 0.78, vh - 4.8 * IN, vh - 1.1 * IN, vz - vd + 0.35, vz - 0.41,
-       std({ color: 0xe4e6e6, roughness: 0.12, envMapIntensity: 1.4 }), { r: 0.03, cast: false });
-  // single lever chrome faucet
-  cyl(0.075, 0.095, 0.14, M.chrome, vcx, vh + 0.07, vz - vd + 0.22, 14);
-  cyl(0.055, 0.055, 0.52, M.chrome, vcx, vh + 0.33, vz - vd + 0.22, 14);
-  var sp = new T.Mesh(new T.BoxGeometry(0.09, 0.05, 0.42), M.chrome);
-  sp.position.set(vcx, vh + 0.57, vz - vd + 0.40); add(sp);
-  cyl(0.022, 0.022, 0.30, M.chrome, vcx + 0.10, vh + 0.55, vz - vd + 0.16, 8, { rz: 0.5 });
+
+  // white solid surface top with an integral rectangular basin  [PHOTO].
+  // The top is four strips around the basin opening, and the bowl is real
+  // geometry — a basin modelled inside a solid slab is a basin nobody sees.
+  var bx0 = vcx - 0.82, bx1 = vcx + 0.82, bz0 = vzf + 0.30, bz1 = vz - 0.42;
+  var tz0 = vzf - 0.04, tz1 = vz, ty0 = vh - 1.4 * IN;
+  box2(vcx - vw / 2 - 0.04, bx0 + 0.01, ty0, vh, tz0, tz1, M.solidWhite, { r: 0.005 });
+  box2(bx1 - 0.01, vcx + vw / 2 + 0.04, ty0, vh, tz0, tz1, M.solidWhite, { r: 0.005 });
+  box2(bx0, bx1, ty0, vh, tz0, bz0 + 0.01, M.solidWhite, { r: 0.005 });
+  box2(bx0, bx1, ty0, vh, bz1 - 0.01, tz1, M.solidWhite, { r: 0.005 });
+  var bowlD = 0.40;
+  // A BackSide box is a cavity: its outward faces are culled, its inner faces
+  // are drawn, so the basin has a floor and cannot show the cabinet through it.
+  var bowl = new T.Mesh(new T.BoxGeometry(bx1 - bx0, bowlD, bz1 - bz0),
+    std({ color: 0xf2f1ee, roughness: 0.10, envMapIntensity: 1.25, side: T.BackSide }));
+  bowl.position.set(vcx, ty0 - bowlD / 2 + 0.005, (bz0 + bz1) / 2);
+  bowl.receiveShadow = true; add(bowl);
+  box2(bx0 - 0.03, bx1 + 0.03, ty0 - bowlD - 0.05, ty0 - bowlD + 0.005, bz0 - 0.03, bz1 + 0.03,
+       M.solidWhite, { r: 0.010, cast: false });
+  cyl(0.055, 0.055, 0.02, M.chrome, vcx, ty0 - bowlD + 0.022, (bz0 + bz1) / 2, 14);
+
+  // single lever chrome faucet  [PHOTO]
+  var fz = bz0 - 0.24;
+  cyl(0.085, 0.10, 0.05, M.chrome, vcx, vh + 0.025, fz, 16);
+  cyl(0.055, 0.055, 0.46, M.chrome, vcx, vh + 0.26, fz, 14);
+  var arc = new T.Mesh(new T.TorusGeometry(0.20, 0.050, 8, 14, Math.PI / 2), M.chrome);
+  arc.position.set(vcx, vh + 0.48, fz); arc.rotation.y = Math.PI / 2; arc.rotation.z = Math.PI;
+  arc.castShadow = true; add(arc);
+  cyl(0.048, 0.048, 0.10, M.chrome, vcx, vh + 0.44, fz + 0.20, 12);
+  cyl(0.020, 0.020, 0.26, M.chrome, vcx + 0.09, vh + 0.40, fz - 0.05, 8, { rz: -0.55 });
   contact(vcx, vz - vd / 2, vw * 1.3, vd * 2.0, 0.5, 0.006);
 
   // MIRROR in a saturated yellow-orange painted frame — the strongest colour
   // accent anywhere in the room  [PHOTO]
-  var mW2 = 3.4, mH2 = 2.5, mY = 4.85, fT = 0.13;
+  var mW2 = 3.05, mH2 = 2.15, mY = 4.55, fT = 0.115;
   box2(vcx - mW2 / 2 - fT, vcx + mW2 / 2 + fT, mY - mH2 / 2 - fT, mY + mH2 / 2 + fT, vz - 0.09, vz - 0.02,
        M.frameYellow, { r: 0.012 });
   var bm = new T.Mesh(new T.PlaneGeometry(mW2, mH2),
@@ -2640,7 +2744,7 @@ var SOFA_Z0 = 10.4, SOFA_Z1 = 17.0;
   bm.position.set(vcx, mY, vz - 0.0915);
   bm.rotation.y = Math.PI;
   add(bm);
-  MIRRORS.push({ mesh: bm, at: new T.Vector3(vcx, mY, vz - 0.30), ry: Math.PI });
+  MIRRORS.push({ mesh: bm, at: new T.Vector3(vcx, mY, vz - 0.30), ry: Math.PI, gain: 1.35 });
 
   // horizontal linear LED vanity light above the mirror, brushed housing  [PHOTO]
   box2(vcx - 1.5, vcx + 1.5, mY + mH2 / 2 + 0.30, mY + mH2 / 2 + 0.46, vz - 0.26, vz - 0.04, M.chromeSoft, { r: 0.02 });
@@ -2649,6 +2753,31 @@ var SOFA_Z0 = 10.4, SOFA_Z1 = 17.0;
   // two dark woodgrain shelf rails beside and below the mirror  [PHOTO]
   box2(vcx + mW2 / 2 + 0.30, vcx + mW2 / 2 + 1.05, 4.1, 4.22, vz - 0.55, vz - 0.03, M.woodDark, { r: 0.008 });
   box2(vcx - mW2 / 2 - 1.05, vcx - mW2 / 2 - 0.30, 3.5, 3.62, vz - 0.55, vz - 0.03, M.woodDark, { r: 0.008 });
+
+  // towels on the two wood rails, and amenity bottles at the basin.
+  // [ASSUMED] — not drawn, not itemised in the photograph record, but a bare
+  // rail and a bare vanity read as an unfinished model.
+  var tw = std({ color: 0xf4f2ec, roughness: 0.94 });
+  // folded stack on the upper rail, a hanging bath towel on the lower one
+  [[vcx + mW2 / 2 + 0.68, 4.22], [vcx + mW2 / 2 + 0.68, 4.38]].forEach(function (t, i) {
+    blk(0.60, 0.15, 0.44, tw, t[0], t[1], vz - 0.30, { r: 0.035, corner: 0.05, ry: i * 0.05 });
+  });
+  var hang = foldedPanel(1.05, 1.65, 4, 0.055, tw);
+  hang.position.set(vcx - mW2 / 2 - 0.68, 3.56 - 0.83, vz - 0.30);
+  hang.rotation.y = Math.PI; add(hang);
+  var shTowel = foldedPanel(0.95, 1.50, 4, 0.05, tw);
+  shTowel.position.set(shX1 * 0.72, 3.60, shZ1 - 0.02);
+  add(shTowel);
+  cyl(0.028, 0.028, 1.45, M.chrome, shX1 * 0.72, 4.38, shZ1 - 0.055, 10, { rz: Math.PI / 2 });
+  [-0.70, 0.70].forEach(function (d) {
+    cyl(0.022, 0.022, 0.14, M.chrome, shX1 * 0.72 + d, 4.38, shZ1 - 0.11, 8, { rx: Math.PI / 2 });
+  });
+  [[-0.42, 0.30, 0xdfe6e2], [-0.20, 0.26, 0xe8dfd0], [0.02, 0.28, 0xd9dfe6]].forEach(function (a) {
+    var ax = vcx + 1.30 + a[0] * 0.35;
+    cyl(0.048, 0.055, a[1], std({ color: a[2], roughness: 0.28, envMapIntensity: 0.8 }),
+        ax, vh + a[1] / 2, vz - 0.30, 12);
+    cyl(0.034, 0.034, 0.05, std({ color: 0x2f3236, roughness: 0.35 }), ax, vh + a[1] + 0.025, vz - 0.30, 10);
+  });
 
   // TOILET, white two piece, standard height, chrome lever  [PHOTO]
   (function toilet() {
@@ -2695,7 +2824,7 @@ var SOFA_Z0 = 10.4, SOFA_Z1 = 17.0;
    ------------------------------------------------------------------ */
 
 // --- daylight through the window: the strongest source, slightly cool
-var sun = new T.DirectionalLight(0xeaf1ff, 5.6);
+var sun = new T.DirectionalLight(0xeaf1ff, 5.2);
 sun.position.set(W / 2 + 5.5, 15.5, D + 15);
 sun.target.position.set(W / 2 - 1.5, 1.2, D - 12);
 scene.add(sun.target);
@@ -2709,7 +2838,7 @@ sun.shadow.normalBias = 0.02;
 scene.add(sun);
 
 // sky/ground bounce
-var hemi = new T.HemisphereLight(0xa8c4e4, 0x3a332a, 0.22);
+var hemi = new T.HemisphereLight(0xa8c4e4, 0x3a332a, 0.24);
 scene.add(hemi);
 
 // cool bounce just inside the glass — keeps the window end from going flat
@@ -2719,21 +2848,21 @@ function fill(color, intensity, dist, x, y, z) {
   scene.add(l);
   return l;
 }
-fill(0xd8e6ff, 20, 24, W / 2, 4.6, D - 1.4);
+fill(0xd8e6ff, 13, 24, W / 2, 4.5, D - 2.8);
 fill(0xcfe0f6, 7, 20, W / 2, 6.4, D - 5.5);
 
 // --- warm lamps
 function warm(intensity, dist, x, y, z, color) {
   return fill(color || 0xffc98a, intensity, dist, x, y, z);
 }
-warm(20, 16, 0.85, 3.85, NS_A_Z + 1.05);          // bedside globe, window side
-warm(20, 16, 0.85, 3.85, NS_B_Z - 1.05);          // bedside globe, corridor side
-warm(24, 18, 0.95, 4.95, SOFA_Z1 + 0.32);         // GR-205 floor lamp
-warm(12, 12, 0.95, 26 * IN + 1.62, SOFA_Z0 - 0.95);// GR-200 side table lamp
+warm(6, 11, 0.85, 3.85, NS_A_Z + 1.05);          // bedside globe, window side
+warm(6, 11, 0.85, 3.85, NS_B_Z - 1.05);          // bedside globe, corridor side
+warm(15, 16, 0.95, 4.95, SOFA_Z1 + 0.32);         // GR-205 floor lamp
+warm(8, 11, 0.95, 26 * IN + 1.62, SOFA_Z0 - 0.95);// GR-200 side table lamp
 
 // GR-201 desk lamp — the one lamp that casts, so the working wall gets a
 // real pool of light with a real shadow behind the task chair
-var deskSpot = new T.SpotLight(0xffcf98, 40, 12, 0.85, 0.6, 2);
+var deskSpot = new T.SpotLight(0xffcf98, 18, 11, 0.80, 0.6, 2);
 deskSpot.position.set(W - 1.18, DESK_Y + 1.20, D - 19.2);
 deskSpot.target.position.set(W - 1.6, 0.2, D - 20.4);
 deskSpot.castShadow = true;
@@ -2742,7 +2871,7 @@ deskSpot.shadow.bias = -0.0012;
 scene.add(deskSpot.target); scene.add(deskSpot);
 
 // wardrobe reading light + LED strip in the hanging bay  [PHOTO]
-warm(14, 12, W - 1.25, 68 * IN, D - 5.0);           // reading light + hanging-bay LED, merged
+warm(8, 11, W - 1.25, 68 * IN, D - 5.0);           // reading light + hanging-bay LED, merged
 
 // entry downlights  [A550 view 02: two rows at 2'-10" and 7'-6" from the
 // corridor wall, at 2'-0" / 2'-0" across the leg]
@@ -2751,24 +2880,36 @@ warm(14, 12, W - 1.25, 68 * IN, D - 5.0);           // reading light + hanging-b
 [[8.97, 2.833], [8.97, 7.5]].forEach(function (p) {
   // Downward spots, not point lights: a point light this close to a 7'-3"
   // ceiling blows a white disc onto it in every frame.
-  var s = new T.SpotLight(0xffdcb4, 34, 16, 1.15, 0.85, 2);
+  var s = new T.SpotLight(0xffdcb4, 26, 16, 1.15, 0.85, 2);
   s.position.set(p[0], HL - 0.14, p[1]);
   s.target.position.set(p[0], 0, p[1]);
   scene.add(s.target); scene.add(s);
 });
 (function () {                                     // kitchenette surface fixture
-  var s = new T.SpotLight(0xffe7c4, 30, 15, 1.25, 0.9, 2);
+  var s = new T.SpotLight(0xffe7c4, 22, 15, 1.25, 0.9, 2);
   s.position.set(9.4, HL - 0.22, 5.6);
   s.target.position.set(9.4, 0, 5.6);
   scene.add(s.target); scene.add(s);
 })();
 
 // bathroom
-fill(0xfff3e2, 20, 12, 2.3, 5.9, BIZ - 0.7);       // linear LED over the vanity
-fill(0xf4f4ff, 13, 11, 3.0, HL - 0.3, 3.2);        // bath + shower downlights, merged
+fill(0xfff3e2, 13, 11, 2.3, 5.9, BIZ - 0.7);       // linear LED over the vanity
+fill(0xf4f4ff, 9, 10, 3.0, HL - 0.3, 3.2);        // bath + shower downlights, merged
+
+// Faked single bounce off the floor.  A directional light pointing UP lights
+// only the down-facing surfaces, which is what a floor bounce actually does.
+var bounce = new T.DirectionalLight(0xece5d8, 1.35);
+bounce.position.set(W / 2, -4, 19);
+bounce.target.position.set(W / 2, 9, 19);
+scene.add(bounce.target); scene.add(bounce);
+
+fill(0xe6ecf4, 5.0, 22, W / 2, 2.4, D - 6.5);
+fill(0xf0e6d6, 3.2, 20, W / 2 - 1.5, 2.4, 13.0);
+fill(0xffdcb0, 6.0, 12, 2.6, 3.0, 13.6);   // lounge zone, keeps the sofa off black
+fill(0xf2e6d2, 2.2, 12, 9.2, 2.2, 4.5);
 
 // a low ambient so nothing goes pure black in a phone-style exposure
-scene.add(new T.AmbientLight(0x39404b, 0.16));
+scene.add(new T.AmbientLight(0x39404b, 0.18));
 
 /* ---------------------------------------------------------------------
    16.  ENVIRONMENT MAP  +  MIRRORS
@@ -2790,6 +2931,15 @@ scene.add(new T.AmbientLight(0x39404b, 0.16));
   panel(30, 30, 0xf2efe8, 0, 6, 0, Math.PI / 2, 0);     // ceiling
   panel(30, 30, 0x2e3033, 0, -6, 0, -Math.PI / 2, 0);   // floor
   panel(9, 6, 0xffffff, 14.6, 1.4, 0, 0, -Math.PI / 2); // bright window card
+  // A few blocks of contrast.  Chrome reflecting a flat grey box looks like
+  // grey plastic; chrome reflecting some structure looks like chrome.
+  [[-8, -2, -9, 6, 5, 0x2b2e33], [7, -3, -8, 5, 4, 0x6c5a44],
+   [-3, 3.5, 8, 8, 3, 0xd8d2c4], [10, 3, 6, 4, 4, 0x1d2026],
+   [-11, 1, 4, 3, 7, 0x8a8f95]].forEach(function (b) {
+    var m = new T.Mesh(new T.BoxGeometry(b[3], b[4], b[3]),
+      new T.MeshBasicMaterial({ color: b[5] }));
+    m.position.set(b[0], b[1], b[2]); es.add(m);
+  });
   var pm = new T.PMREMGenerator(renderer);
   pm.compileEquirectangularShader();
   var rt = pm.fromScene(es, 0.02);
@@ -2803,14 +2953,14 @@ function bakeMirrors() {
     var rt = new T.WebGLCubeRenderTarget(256, {
       format: T.RGBFormat, generateMipmaps: true, minFilter: T.LinearMipmapLinearFilter
     });
-    rt.texture.encoding = T.sRGBEncoding;
+    rt.texture.encoding = T.LinearEncoding;
     var cc = new T.CubeCamera(0.1, 80, rt);
     cc.position.copy(m.at);
     m.mesh.visible = false;
     cc.update(renderer, scene);
     m.mesh.visible = true;
     m.mesh.material.envMap = rt.texture;
-    m.mesh.material.envMapIntensity = 1.0;
+    m.mesh.material.envMapIntensity = m.gain || 2.2;
     m.mesh.material.needsUpdate = true;
   });
 }
@@ -2835,8 +2985,8 @@ var VIEWS = {
   // facing the kitchenette run from inside the room
   kitchen:      { p: [7.60, EYE, 12.00], t: [11.20, 3.00, 4.20] },
   // bathroom, from the door end
-  'bath-vanity': { p: [4.55, 4.95, 3.30], t: [2.30, 3.05, 8.42] },
-  'bath-shower': { p: [4.60, 4.95, 5.75], t: [1.30, 2.60, 0.60] }
+  'bath-vanity': { p: [4.60, 4.70, 3.00], t: [2.30, 3.55, 8.42] },
+  'bath-shower': { p: [4.80, 4.15, 6.42], t: [1.80, 3.75, 0.85] }
 };
 
 var target = new T.Vector3();
