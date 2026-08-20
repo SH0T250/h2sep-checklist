@@ -1,13 +1,18 @@
 // Bundle the platform into one self-contained HTML file for artifact preview.
+// This is the REVIEW path: Austin clicks through a build with no backend and no
+// deploy, so nothing reaches the live site or the live database until he says so.
+//   node platform/tools/build-artifact.mjs [seedPath] [outPath]
 // No bundler dependency: modules are concatenated in dependency order with
 // import/export lines stripped (names are unique across modules by convention).
 // Usage: node platform/tools/build-artifact.mjs
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const read = p => readFileSync(resolve(root, p), 'utf8');
+const SEED_PATH = process.argv[2] || 'data/slice-f1.json';
+const OUT_PATH = process.argv[3] || 'dist/h2sep-slice.html';
 
 const ORDER = [
   'js/config.js',
@@ -30,7 +35,7 @@ function stripModuleSyntax(src) {
 }
 
 const css = read('css/app.css');
-const seed = read('data/slice-f1.json');
+const seed = read(SEED_PATH);
 const logoB64 = readFileSync(resolve(root, 'img/triun-logo.png')).toString('base64');
 const viewer = read('room3d.html');
 
@@ -60,5 +65,6 @@ ${guard(js)}
 </body>
 </html>`;
 
-writeFileSync(resolve(root, 'dist/h2sep-slice.html'), html);
-console.log('wrote platform/dist/h2sep-slice.html', html.length, 'bytes');
+mkdirSync(dirname(resolve(root, OUT_PATH)), { recursive: true });
+writeFileSync(resolve(root, OUT_PATH), html);
+console.log(`wrote platform/${OUT_PATH} from ${SEED_PATH}`, html.length, 'bytes');
