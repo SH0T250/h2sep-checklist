@@ -14,6 +14,36 @@ on disk. Everything below is OBSERVED IN THE PHOTOGRAPHS, not inferred from draw
 drawing disagrees with this file, the photograph wins for as-built condition and the drawing wins
 for what was specified.
 
+## HANDEDNESS, read this before placing anything
+
+Established 2026-08-20 by opening all 24 photographs. The observations below describe WHAT is in the
+room; this section fixes WHICH SIDE each thing is on. A model built mirrored will fail every single
+photograph comparison, so this is the first thing to get right.
+
+Standing in the corridor doorway looking into the room:
+  LEFT wall  = the herringbone accent wall. Sofa nearest you, then the divider curtain, then the
+               bed headboard. The bed head is against this wall.
+  RIGHT wall = the hard working run. Kitchenette counter nearest you, then the desk with the two
+               navy floating shelves, then the dresser carrying the TV.
+  FAR SHORT WALL = the window with its patterned roller shade, PTAC below it, and the wardrobe and
+               luggage unit beside it on the RIGHT (working wall) side.
+  The bed projects ACROSS the room from the left wall toward the dresser, so the TV faces the bed
+  from the side rather than from the foot.
+  The bathroom and the full length mirror are in the entry zone on the LEFT as you enter, opposite
+  the kitchenette.
+
+A per-photograph index, including where the camera stood for each shot and what each frame must
+match, is at research/king-studio/photo-index.md, with the machine readable version at
+/tmp/demo-room/index.json.
+
+## Two things that will trip a naive comparison
+
+1. The mattresses have NO LINENS in every photograph. The room is furnished but not made up. A
+   render with crisp white bedding will not match, and a critic will call it instantly.
+2. Site conditions are visible. A red mop leans in four frames, and a worker in a hi-vis vest is
+   reflected in the TV in one and clips the edge of another. These are real and should not be
+   reproduced, but a critic should not treat their absence as a mismatch either.
+
 ## Room organisation, entry to window
 
 The room reads as one long rectangle entered from a corridor at the short end.

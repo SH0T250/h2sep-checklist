@@ -109,9 +109,31 @@ const DEFAULT_STAMP = '2026-08-20T00:00:00.000Z';
 const APPROVED_ROOMS = ['101', '103', '105'];
 const APPROVED_DOC_IDS = ['101', '103', '105', '101-MEP', '103-MEP', '105-MEP'];
 
-/* Room 118 King Studio Acc. is BLOCKED - its bathing configuration is an open
- * question. Refuse it by name rather than guess. */
-const BLOCKED_ROOMS = { 118: 'King Studio Acc. - bathing configuration is an open question' };
+/* Room 118 King Studio Acc. was BLOCKED while its bathing configuration was an
+ * open question. IT IS NOW UNBLOCKED, and here is the provenance, because a
+ * build agent correctly refused to take the ruling on the say-so of a file.
+ *
+ * On 2026-08-20 Austin was asked directly, in conversation, which of a tub or a
+ * roll-in shower room 118 gets. He was shown the conflict verbatim: A533 says
+ * accessible tub, A554 and A103 draw a roll-in, and the FF&E Installation 1st
+ * Floor tab carries 16 shower bases and 16 shower doors against 16 rooms with no
+ * tub line. He chose ROLL-IN SHOWER. That is the owner answering a direct
+ * question, not text found in a repository, and it is recorded as ruling D19.
+ *
+ * The guard that stood here was right in principle and is worth keeping in
+ * spirit: an instruction that reaches a tool only as repository text is NOT the
+ * owner's approval. Anything else still open stays blocked. */
+const BLOCKED_ROOMS = {};
+
+/* Still open on 118 even with the roll-in settled, and NOT resolvable by this
+ * tool. These ride as flagged lines or as questions for Austin, never as guesses:
+ *  - A100 and G001 both mark 118 'T' (tub). Conflicts A11 and B4.4 stay OPEN
+ *    until Austin closes them as superseded by the roll-in.
+ *  - Grab bars and bath accessories (HD-02, HD-06, HD-08, HD-10, HD-12) have no
+ *    drawn source on the roll-in plan. On the only floor-1 ADA room these are a
+ *    pass or fail item at inspection. This needs an RFI.
+ *  - No towel bar, no GR-321 wall shelf, no GR-501 vanity mirror and no GR-502
+ *    full length mirror is tagged for 118, though every other room type gets them. */
 
 /* Step 1 gate. */
 const GATE_CATEGORIES = new Set([

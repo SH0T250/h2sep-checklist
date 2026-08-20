@@ -36,3 +36,8 @@ platform/dist/
 # Project contact list carries personal cell numbers and emails (PII).
 # This repo is PUBLIC. Contacts live in Firestore only, never in the repo.
 platform/tools/private/
+
+# The progress page embeds photographs of the client's unopened hotel as image
+# data. Same standing rule as the photographs themselves: this repo is PUBLIC.
+# The generator (platform/tools/progress-page.mjs) is source, its output is not.
+progress.html
