@@ -198,6 +198,47 @@ const CATEGORY_ORDER = [
 const CATEGORY_INDEX = new Map(CATEGORY_ORDER.map((c, i) => [c, i]));
 
 /* Step 3. Austin's ruling D12, scoped to this exact tag only. */
+/* AUSTIN RULING D21 (2026-08-20): the plain Queen-Queen working wall is GR-305,
+ * not GR-308. Austin instructed "fix GR-305 on 105-115".
+ *
+ * WHY THIS IS A CORRECTION AND NOT A RENAME. data/project.sqlite carries NO
+ * GR-305 row anywhere in the building: every Queen-Queen room, connecting or
+ * not, was transcribed as GR-308. The transcriber saw the oddity and said so in
+ * the row itself ("printed '@ Queen Queen Studio Suite Connector' in the spec
+ * but tagged on the BASE QQ plan") and marked the row FLAGGED. Ruling D11 later
+ * closed that flag as a naming quirk with no order impact. D11 was decided
+ * WITHOUT the FF&E Installation workbook, and the workbook shows it was wrong.
+ *
+ * The workbook's 1st Floor tab carries the two tags as SEPARATE purchased parts
+ * with separate counts:
+ *     GR-305  Working Wall @ QQ             L = 2, R = 4   -> 6 units
+ *     GR-308  Working Wall @ QQ Connector   L = 1, R = 1   -> 2 units
+ * Floor 1 has exactly 6 plain Queen-Queen keys (105 107 109 111 113 115) and
+ * exactly 2 QQ connecting keys (101 QQ Wide Connecting, 103 QQ Connecting).
+ * 6 and 2. The counts reconcile with no remainder, which is what makes this
+ * evidence rather than a guess. Two different part numbers were ordered, so a
+ * crew told to install GR-308 in room 109 would hang the wrong casework.
+ *
+ * WHAT THIS RULING DOES NOT SETTLE: which of the six rooms takes the LEFT hand
+ * and which takes the RIGHT. The workbook gives floor totals (2 L, 4 R), never a
+ * room assignment, and no drawing this tool can read states it per room. The
+ * line therefore ships as the base tag with handedness called out as open. It is
+ * NOT guessed, and reliability drops to MEDIUM to say so. */
+const TAG_CORRECTIONS = [
+  {
+    ruling: 'D21',
+    from: 'GR-308',
+    to: 'GR-305',
+    roomTypes: ['Queen-Queen'],
+    floors: ['1'],
+    label: 'Working Wall @ Queen Queen Studio Suite',
+    workbook: 'GR-305 Working Wall @ QQ, 1st Floor tab: L = 2, R = 4, six units against six plain QQ keys',
+    handedness: 'The workbook splits GR-305 into 2 LEFT and 4 RIGHT across these six rooms. ' +
+      'No drawing and no schedule this tool can read says WHICH room takes which hand, so no hand is ' +
+      'assigned here. Confirm the per-room handedness with RK Design before this casework is released.',
+  },
+];
+
 const QTY_OVERRIDES = [
   { tag: 'GR-322', category: 'FF&E - Casegoods', qty: 3, ruling: 'D12',
     because: 'a two-queen room has three nightstands' },
@@ -490,6 +531,50 @@ function readRoom(db, roomNo) {
  * Reduce a room's raw room_items rows to the FF&E line shape.
  * A "line" is { key, code, category, qty, sort, sqlite:{...} }.
  */
+/* Rewrite a tag under a ruling, on the room's own rows, before anything is
+ * grouped or keyed - so the key, the ordering and the fold all follow from the
+ * corrected tag rather than being patched afterwards. Returns what it changed. */
+function applyTagCorrections(roomNo, room, rows) {
+  const applied = [];
+  for (const c of TAG_CORRECTIONS) {
+    if (!c.roomTypes.includes(room.room_type)) continue;
+    if (c.floors && !c.floors.includes(String(room.floor))) {
+      die('room ' + roomNo + ' is type ' + JSON.stringify(room.room_type) + ' but sits on floor ' +
+          room.floor + ', and correction ' + c.ruling + ' is only evidenced for floor(s) ' +
+          c.floors.join('/') + '. Check that floor\'s FF&E Installation tab before building it.');
+    }
+    const hit = rows.filter((r) => r.tag === c.from);
+    if (!hit.length) continue;
+    for (const r of hit) r.tag = c.to;
+    applied.push({ ruling: c.ruling, from: c.from, to: c.to, rows: hit.length, spec: c });
+  }
+  return applied;
+}
+
+/* The correction is only trustworthy because the counts reconcile. Re-prove that
+ * from the database on every run rather than trusting the comment above: floor 1
+ * must hold exactly six plain Queen-Queen keys and exactly two QQ connecting
+ * keys, matching the workbook's 6 and 2. If the room mix ever changes, stop. */
+function assertTagCorrectionCounts(db) {
+  for (const c of TAG_CORRECTIONS) {
+    if (c.ruling !== 'D21') continue;
+    const plain = db.prepare(
+      "select count(*) n from rooms where floor = 1 and room_type = 'Queen-Queen'").get().n;
+    const conn = db.prepare(
+      "select count(*) n from rooms where floor = 1 and room_type in ('QQ Connecting','QQ Wide Connecting')").get().n;
+    if (plain !== 6 || conn !== 2) {
+      die('D21 count check failed: the workbook pairs GR-305 with 6 units and GR-308 with 2, but ' +
+          'floor 1 now has ' + plain + ' plain Queen-Queen and ' + conn + ' QQ connecting keys. ' +
+          'The correction is only evidence while those reconcile.');
+    }
+    const stray = db.prepare("select count(*) n from room_items where tag = 'GR-305'").get().n;
+    if (stray !== 0) {
+      die('D21 assumed the database carries no GR-305 row anywhere, but it now has ' + stray +
+          '. Re-check the correction before applying it.');
+    }
+  }
+}
+
 function reduceFFE(roomNo, rows, convention) {
   /* STEP 0 - ruled drops. Matched on the DATABASE'S OWN description prefix. */
   const drops = configADrops(roomNo, rows);
@@ -890,7 +975,19 @@ function selftest(db, slice) {
   const results = [];
   let ok = true;
   for (const roomNo of APPROVED_ROOMS) {
-    const { rows } = readRoom(db, roomNo);
+    const { room, rows } = readRoom(db, roomNo);
+    /* The selftest has to walk the SAME path the build walks, corrections and
+     * all, or it proves nothing about what the build actually emits. A ruled
+     * correction means an approved room is now DELIBERATELY different from its
+     * stored copy - so the expected difference is declared here, and any delta
+     * that is not on that list is still a failure. */
+    assertTagCorrectionCounts(db);
+    const corrs = applyTagCorrections(roomNo, room, rows);
+    const expected = new Set();
+    for (const c of corrs) {
+      expected.add('MISSING:' + tagSlug(c.from) + '_a');
+      expected.add('EXTRA:' + tagSlug(c.to) + '_a');
+    }
     const probe = reduceFFE(roomNo, rows);
     const approved = slice.docs[roomNo].items;
     const found = detectSortConvention(approved, probe);
@@ -906,17 +1003,29 @@ function selftest(db, slice) {
     const appKeys = Object.keys(approved).sort(cmpStr);
     const genKeys = [...gen.keys()].sort(cmpStr);
 
+    const ruled = [];
     for (const k of genKeys) {
       if (!(k in approved)) {
         const g = gen.get(k);
-        deltas.push('EXTRA   ' + k + ' (' + g.category + ' / ' + (g.code || '<untagged>') + ' / qty ' + g.qty + ') generated but not in approved');
+        const line = 'EXTRA   ' + k + ' (' + g.category + ' / ' + (g.code || '<untagged>') + ' / qty ' + g.qty + ') generated but not in approved';
+        if (expected.has('EXTRA:' + k)) ruled.push(line + '  [RULED, expected]');
+        else deltas.push(line);
       }
     }
     for (const k of appKeys) {
       if (!gen.has(k)) {
         const a = approved[k];
-        deltas.push('MISSING ' + k + ' (' + a.category + ' / ' + (a.code || '<untagged>') + ' / qty ' + a.qty + ') approved but not generated');
+        const line = 'MISSING ' + k + ' (' + a.category + ' / ' + (a.code || '<untagged>') + ' / qty ' + a.qty + ') approved but not generated';
+        if (expected.has('MISSING:' + k)) ruled.push(line + '  [RULED, expected]');
+        else deltas.push(line);
       }
+    }
+    /* A declared correction that did NOT show up is also a failure: it means the
+     * ruling silently stopped applying. */
+    for (const e of expected) {
+      const [kind, key] = e.split(':');
+      const showed = kind === 'EXTRA' ? gen.has(key) && !(key in approved) : (key in approved) && !gen.has(key);
+      if (!showed) deltas.push('RULED CORRECTION DID NOT APPLY: expected ' + kind + ' ' + key);
     }
 
     for (const k of genKeys) {
@@ -938,6 +1047,7 @@ function selftest(db, slice) {
       generated: red.lines.length,
       approved: appKeys.length,
       convention: found.convention,
+      ruled,
       deltas,
       sortNotes,
       unknownCategories: red.unknownCategories,
@@ -966,6 +1076,10 @@ function selftest(db, slice) {
       process.stdout.write('  FAIL ' + r.deltas.length + ' delta(s):\n');
       for (const d of r.deltas) process.stdout.write('    - ' + d + '\n');
     }
+    if (r.ruled && r.ruled.length) {
+      process.stdout.write('  RULED ' + r.ruled.length + ' deliberate difference(s) from the stored approved copy:\n');
+      for (const d of r.ruled) process.stdout.write('    - ' + d + '\n');
+    }
     if (r.sortNotes.length) {
       process.stdout.write('  INFO ' + r.sortNotes.length + ' sort value(s) differ from the recipe band (line ORDER unchanged):\n');
       for (const s of r.sortNotes) process.stdout.write('    - ' + s + '\n');
@@ -977,8 +1091,11 @@ function selftest(db, slice) {
     '  composition uses to re-point citations from A555 to A550.\n');
   for (const n of proof.labelNotes) process.stdout.write('  INFO ' + n + '\n');
   process.stdout.write('-'.repeat(78) + '\n');
-  process.stdout.write(ok ? 'SELFTEST PASSED - zero deltas on all three approved rooms\n\n'
-                          : 'SELFTEST FAILED\n\n');
+  const ruledTotal = results.reduce((n, r) => n + (r.ruled ? r.ruled.length : 0), 0);
+  process.stdout.write(ok
+    ? 'SELFTEST PASSED - zero unexplained deltas on all three approved rooms' +
+      (ruledTotal ? ' (' + ruledTotal + ' ruled difference(s), listed above)' : '') + '\n\n'
+    : 'SELFTEST FAILED\n\n');
   return ok;
 }
 
@@ -1048,12 +1165,99 @@ function buildRoomNotes(db, roomNo, room, rows, stamp, report) {
   return notes;
 }
 
+/* REGENERATION IS NOT REPLACEMENT.
+ *
+ * Room 105 is approved and already carries real field state in the live
+ * database. Rebuilding it must therefore preserve two things the rebuild does
+ * not know about:
+ *
+ *  1. A LINE THE REBUILD NO LONGER PRODUCES. Ruling D21 retags the working wall,
+ *     so gr308_a stops existing and gr305_a appears. gr308_a is a line a person
+ *     may already have checked off. It is carried forward as deleted: true with
+ *     a note naming what superseded it - the same soft-delete discipline every
+ *     other supersede on this project uses. Deletes are blocked in the published
+ *     rules anyway, so a tombstone is the only honest way to retire a line.
+ *
+ *  2. THE MEP DOC'S FIELD HISTORY. 105-MEP holds 22 live lines and 77 already
+ *     deleted ones - that room's own supersede record. A fresh build emits only
+ *     the 22. The 77 are copied back verbatim.
+ *
+ * Anything else that differs is reported line by line, so no field changes
+ * silently on an approved room. */
+function carryForwardApproved(roomNo, ffe, mep, slice, stamp) {
+  const out = { tombstoned: [], historyCarried: 0, changed: [], added: [] };
+  const oldFfe = slice.docs[roomNo];
+  const oldMep = slice.docs[roomNo + '-MEP'];
+  if (!oldFfe || !oldMep) die('cannot regenerate ' + roomNo + ': it is not in the approved slice');
+
+  /* 1. tombstone every approved FF&E line the rebuild dropped */
+  for (const [k, v] of Object.entries(oldFfe.items)) {
+    if (k in ffe.items) continue;
+    if (v.deleted) { ffe.items[k] = clone(v); continue; }
+    const t = clone(v);
+    t.deleted = true;
+    t.instanceNote = 'SUPERSEDED on ' + stamp.slice(0, 10) + '. This line was retired when the room was ' +
+      'regenerated; the work it stood for is now carried by another line in this room. Kept, not deleted, ' +
+      'so any check-off already recorded against it survives. Previous note: ' +
+      (v.instanceNote ? JSON.stringify(v.instanceNote) : 'none');
+    ffe.items[k] = t;
+    out.tombstoned.push(k + ' (' + (v.code || '<untagged>') + ')');
+  }
+
+  /* 2. carry the MEP field history back */
+  for (const [k, v] of Object.entries(oldMep.items)) {
+    if (k in mep.items) continue;
+    if (!v.deleted) {
+      const t = clone(v);
+      t.deleted = true;
+      t.instanceNote = 'SUPERSEDED on ' + stamp.slice(0, 10) + ' when room ' + roomNo +
+        ' was regenerated. Previous note: ' + (v.instanceNote ? JSON.stringify(v.instanceNote) : 'none');
+      mep.items[k] = t;
+      out.tombstoned.push(roomNo + '-MEP/' + k + ' (' + (v.code || '<untagged>') + ')');
+    } else {
+      mep.items[k] = clone(v);
+      out.historyCarried++;
+    }
+  }
+
+  /* 3. report every other field that moved, on both docs */
+  const FIELDS = ['code', 'label', 'category', 'qty', 'reliability', 'src', 'instanceNote', 'trade', 'sort'];
+  for (const [docId, oldDoc, newDoc] of [[roomNo, oldFfe, ffe], [roomNo + '-MEP', oldMep, mep]]) {
+    for (const [k, nv] of Object.entries(newDoc.items)) {
+      const ov = oldDoc.items[k];
+      if (!ov) { out.added.push(docId + '/' + k + ' (' + (nv.code || '<untagged>') + ')'); continue; }
+      for (const f of FIELDS) {
+        const a = ov[f] === undefined ? '' : String(ov[f]);
+        const b2 = nv[f] === undefined ? '' : String(nv[f]);
+        if (a !== b2) {
+          out.changed.push(docId + '/' + k + '.' + f + ': ' + JSON.stringify(a).slice(0, 90) +
+            ' -> ' + JSON.stringify(b2).slice(0, 90));
+        }
+      }
+      /* Field state belongs to whoever checked the box, never to a rebuild. */
+      for (const f of ['checked', 'initials', 'checkedAt', 'checkedAtLocal', 'checkedByCo', 'issue', 'issueResolved']) {
+        if (ov[f] !== undefined) nv[f] = clone(ov[f]);
+      }
+    }
+  }
+  /* Room notes are field-authored too. */
+  if (oldFfe.notes) for (const [k, v] of Object.entries(oldFfe.notes)) if (!(k in (ffe.notes || {}))) (ffe.notes = ffe.notes || {})[k] = clone(v);
+  if (oldMep.notes) for (const [k, v] of Object.entries(oldMep.notes)) if (!(k in (mep.notes || {}))) (mep.notes = mep.notes || {})[k] = clone(v);
+  return out;
+}
+
 function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
   const { room, rows: dbRows } = readRoom(db, roomNo);
   const inj = injectWorkbookRows(db, roomNo, room, dbRows);
   const rows = inj.rows;
   report.injected = inj.injected;
   const roomType = room.room_type;
+
+  /* Ruled tag corrections run on this room's own rows BEFORE grouping, so the
+   * key, the fold and the ordering all follow from the corrected tag. */
+  assertTagCorrectionCounts(db);
+  const corrections = applyTagCorrections(roomNo, room, rows);
+  report.tagCorrections = corrections.map((c) => c.ruling + ': ' + c.from + ' -> ' + c.to + ' on ' + c.rows + ' row(s)');
 
   const composed = COMPOSED_TYPES[roomType] || null;
   let refNo = typeRef.get(roomType);
@@ -1106,6 +1310,7 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
   const donorQtyNotes = [];
   const donorLabelNotes = [];
   const ruledClosed = [];
+  const correctedLines = [];
   const overrideNotes = [];
 
   for (const line of red.lines) {
@@ -1114,7 +1319,41 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
     const hit = refIndex.get(donorKey(line.category, line.code, line.key));
 
     let pkg;
-    if (!composed) {
+    const corr = corrections.find((c) => c.to === line.code);
+    if (corr) {
+      /* The donor still files this run under the OLD tag, so match it there and
+       * keep everything the donor legitimately knows - the citation, the trade,
+       * the submittals. Only the identity of the part changes, plus the honesty
+       * about what is still open. */
+      const old = refIndex.get(line.category + SEP + corr.from);
+      if (!old) {
+        die('room ' + roomNo + ': ruling ' + corr.ruling + ' corrects ' + corr.from + ' to ' + corr.to +
+            ' but reference room ' + refNo + ' has no ' + corr.from + ' line in category ' +
+            JSON.stringify(line.category) + ' to carry forward');
+      }
+      const r = old.item;
+      pkg = {
+        label: corr.spec.label,
+        src: r.src,
+        reliability: 'MEDIUM',
+        instanceNote:
+          'Austin ruling ' + corr.ruling + ': this room takes ' + corr.to + ', not ' + corr.from + '. ' +
+          'The two are different purchased parts, not two names for one. The FF&E Installation ' +
+          'workbook 1st Floor tab lists ' + corr.spec.workbook + ', and ' + corr.from +
+          ' (Working Wall @ QQ Connector) separately as L = 1, R = 1 against the two connecting keys ' +
+          '101 and 103. Six and two, with no remainder. ' +
+          'data/project.sqlite transcribed every Queen-Queen room as ' + corr.from +
+          ' and carries no ' + corr.to + ' row anywhere in the building; its own row here says the ' +
+          'spec book printed the Connector name on the base QQ plan, and it flagged that. Ruling D11 ' +
+          'previously closed that flag as a naming quirk with no order impact - the workbook shows ' +
+          'otherwise, so D21 supersedes D11 on this line only. ' +
+          'STILL OPEN: ' + corr.spec.handedness,
+        trade: r.trade,
+        derived: r.derived,
+        attachments: r.attachments,
+      };
+      correctedLines.push(corr.to + ' (' + corr.ruling + ', was ' + corr.from + ')');
+    } else if (!composed) {
       /* Unchanged QQ path: strict key match against the same-type approved room. */
       const r = ref.items[line.key];
       if (!r) {
@@ -1249,11 +1488,21 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
     /* Same-type path only: anything in the reference we did not reproduce is a
      * hole. A composed type legitimately does not carry the donor's whole set. */
     const producedKeys = new Set(red.lines.map((l) => l.key));
+    /* A tag this run deliberately corrected is EXPECTED to stop being produced
+     * under its old key. That is the ruling doing its job, not a hole. It is
+     * still recorded, and the old line is tombstoned rather than dropped. */
+    const supersededKeys = new Set(corrections.map((c) => tagSlug(c.from) + '_a'));
     for (const k of Object.keys(ref.items).sort(cmpStr)) {
-      if (!producedKeys.has(k)) {
-        report.unresolved.push((ref.items[k].code || '<untagged>') + ' (key ' + k + ') present in room ' +
-          refNo + ' but not produced from sqlite for ' + roomNo);
+      if (producedKeys.has(k)) continue;
+      if (supersededKeys.has(k)) {
+        const c = corrections.find((x) => tagSlug(x.from) + '_a' === k);
+        report.superseded = report.superseded || [];
+        report.superseded.push(k + ' (' + c.from + ') superseded by ' + tagSlug(c.to) + '_a (' + c.to +
+          ') under ruling ' + c.ruling);
+        continue;
       }
+      report.unresolved.push((ref.items[k].code || '<untagged>') + ' (key ' + k + ') present in room ' +
+        refNo + ' but not produced from sqlite for ' + roomNo);
     }
   } else {
     const produced = new Set(red.lines.map((l) => donorKey(l.category, l.code, l.key)));
@@ -1283,6 +1532,7 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
   report.configRuling = red.configRuling;
   report.configBLeft = red.configBLeft;
   report.ffeRuledClosed = ruledClosed.sort(cmpStr);
+  report.correctedLines = correctedLines.sort(cmpStr);
   report.qtyOverrideNotes = overrideNotes.sort(cmpStr);
   report.qtyUnknown = red.lines.filter((l) => l.qtyUnknown).map((l) => l.code || '<untagged>').sort(cmpStr);
 
@@ -2979,12 +3229,13 @@ function mainSpaces(db, slice, positional, opts) {
 function main(argv) {
   const args = argv.slice(2);
   let stamp = DEFAULT_STAMP;
-  let fresh = false, wantSelftest = false, spacesMode = false, spacesReportOnly = false;
+  let fresh = false, wantSelftest = false, spacesMode = false, spacesReportOnly = false, regen = false;
   const positional = [];
 
   for (const a of args) {
     if (a === '--selftest') { wantSelftest = true; continue; }
     if (a === '--fresh') { fresh = true; continue; }
+    if (a === '--regen') { regen = true; continue; }
     if (a === '--spaces') { spacesMode = true; continue; }
     if (a === '--spaces-report') { spacesMode = true; spacesReportOnly = true; continue; }
     if (a.startsWith('--stamp=')) {
@@ -3024,12 +3275,18 @@ function main(argv) {
     return;
   }
 
-  /* CREATE-ONLY. The approved rooms are copied verbatim and never rebuilt. */
-  const refused = rooms.filter((n) => APPROVED_ROOMS.includes(n));
+  /* CREATE-ONLY by default. The approved rooms are copied verbatim and never
+   * rebuilt unless --regen says so on this run, for the rooms named on this
+   * command line. Regeneration NEVER destroys: a line the rebuild no longer
+   * produces is carried forward as deleted with a supersede note, and the MEP
+   * doc's field history is copied over untouched. */
+  const regenRooms = regen ? rooms.filter((n) => APPROVED_ROOMS.includes(n)) : [];
+  const refused = rooms.filter((n) => APPROVED_ROOMS.includes(n) && !regenRooms.includes(n));
   if (refused.length) {
     die('refusing to modify approved room(s) ' + refused.join(', ') + ' - this tool is create-only. ' +
-        'They are copied into the staging seed verbatim from slice-f1.json.');
+        'They are copied into the staging seed verbatim from slice-f1.json. Pass --regen to rebuild them.');
   }
+  const regenDocIds = new Set(regenRooms.flatMap((n) => [n, n + '-MEP']));
   for (const n of rooms) {
     if (BLOCKED_ROOMS[n]) die('room ' + n + ' is BLOCKED: ' + BLOCKED_ROOMS[n] + '. Not building it.');
   }
@@ -3055,8 +3312,9 @@ function main(argv) {
     }
   }
 
-  /* Requirement 4 - the approved 6, verbatim, so the seed is loadable on its own. */
-  for (const id of APPROVED_DOC_IDS) docs[id] = clone(slice.docs[id]);
+  /* Requirement 4 - the approved 6, verbatim, so the seed is loadable on its own.
+   * A room being regenerated on this run is built below instead. */
+  for (const id of APPROVED_DOC_IDS) if (!regenDocIds.has(id)) docs[id] = clone(slice.docs[id]);
 
   const reports = [];
   for (const roomNo of rooms) {
@@ -3071,13 +3329,17 @@ function main(argv) {
       : buildMepDoc(db, roomNo, rows, slice, report.refRoom, ffe.floor, stamp, report,
         { typeLabel: ffe.typeLabel });
     if (!report.composed) report.mepSheetCitations = mepSheetCitations(slice, report.refRoom);
+    if (regenRooms.includes(roomNo)) {
+      report.regen = carryForwardApproved(roomNo, ffe, mep, slice, stamp);
+    }
     docs[roomNo] = ffe;
     docs[roomNo + '-MEP'] = mep;
     reports.push(report);
   }
 
-  /* Post-condition: the approved docs in the output are the slice, unchanged. */
-  for (const id of APPROVED_DOC_IDS) {
+  /* Post-condition: the approved docs in the output are the slice, unchanged -
+   * except any deliberately regenerated on this run, which are diffed instead. */
+  for (const id of APPROVED_DOC_IDS.filter((x) => !regenDocIds.has(x))) {
     if (!deepEqual(docs[id], slice.docs[id])) die('internal error: approved doc ' + id + ' was modified');
   }
 
@@ -3181,6 +3443,22 @@ function main(argv) {
     }
     if (r.qtyOverrideNotes && r.qtyOverrideNotes.length) {
       process.stdout.write('  quantity set by ruling, and the note says so: ' + r.qtyOverrideNotes.join('; ') + '\n');
+    }
+    if (r.correctedLines && r.correctedLines.length) {
+      process.stdout.write('  ruled TAG CORRECTION on ' + r.correctedLines.length +
+        ' line(s): ' + r.correctedLines.join(', ') + '\n');
+    }
+    if (r.superseded && r.superseded.length) {
+      for (const sup of r.superseded) process.stdout.write('    ' + sup + '\n');
+    }
+    if (r.regen) {
+      process.stdout.write('  REGENERATED an approved room. tombstoned ' + r.regen.tombstoned.length +
+        ' line(s), carried ' + r.regen.historyCarried + ' history row(s), ' +
+        r.regen.changed.length + ' field change(s), ' + r.regen.added.length + ' new line(s)\n');
+      for (const t of r.regen.tombstoned) process.stdout.write('    tombstoned: ' + t + '\n');
+      for (const c of r.regen.changed.slice(0, 12)) process.stdout.write('    changed: ' + c + '\n');
+      if (r.regen.changed.length > 12) process.stdout.write('    ... and ' + (r.regen.changed.length - 12) + ' more field change(s)\n');
+      for (const c of r.regen.added) process.stdout.write('    added: ' + c + '\n');
     }
     if (r.ffeRuledClosed && r.ffeRuledClosed.length) {
       process.stdout.write('  ruling ' + r.configRuling + ' closes the flag on ' + r.ffeRuledClosed.length +
