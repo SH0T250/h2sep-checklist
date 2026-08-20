@@ -1209,7 +1209,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 renderer.setSize(host.clientWidth, host.clientHeight);
 renderer.outputEncoding = T.sRGBEncoding;
 renderer.toneMapping = T.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.05;
+renderer.toneMappingExposure = 0.72;
 renderer.physicallyCorrectLights = true;   // inverse-square falloff, no fudged pi
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = T.PCFSoftShadowMap;
@@ -1274,18 +1274,23 @@ function noiseOver(g, w, h, amt, seed) {    // fine film grain / fibre
 var CARPET_TILE_FT = 4;
 function carpetCanvas() {
   var N = 640, cell = N / 8, o = cv(N, N), c = o[0], g = o[1];
-  var pal = ['#33363b', '#3d4147', '#6f747a', '#9aa0a5', '#c39a30', '#a8842a', '#8ba7bd', '#6f8a9e'];
-  g.fillStyle = '#2f3236'; g.fillRect(0, 0, N, N);
+  // charcoal and grey carry the field; mustard and pale blue are accents, not
+  // half the floor  [PHOTO: "overlapping chevrons and blocks in charcoal, grey,
+  // mustard-gold and pale blue"]
+  var pal = ['#2f3237', '#383c42', '#33373c', '#4a4f55', '#3d4147', '#5c6167',
+             '#8f7328', '#4e6478', '#42464c', '#2b2e33'];
+  g.fillStyle = '#2a2d31'; g.fillRect(0, 0, N, N);
   var r = rng(7331);
   for (var iy = 0; iy < 8; iy++) for (var ix = 0; ix < 8; ix++) {
     var x = ix * cell, y = iy * cell, k = r();
     g.save(); g.beginPath(); g.rect(x, y, cell, cell); g.clip();
     g.fillStyle = pal[(ix * 3 + iy * 5) % pal.length];
-    g.globalAlpha = 0.75 + r() * 0.25;
+    g.globalAlpha = 0.55 + r() * 0.25;
     g.fillRect(x, y, cell, cell);
     g.globalAlpha = 1;
     if (k < 0.34) {                                  // chevron band
       g.strokeStyle = pal[(ix + iy * 2 + 3) % pal.length];
+      g.globalAlpha = 0.75;
       g.lineWidth = cell * 0.12; g.lineCap = 'butt';
       for (var s = -cell; s < cell * 2; s += cell * 0.34) {
         g.beginPath();
@@ -1306,8 +1311,8 @@ function carpetCanvas() {
     g.restore();
   }
   // soften the cell grid so it reads as broadloom, not as squares
-  g.globalAlpha = 0.28;
-  for (var q = 0; q < 700; q++) {
+  g.globalAlpha = 0.20;
+  for (var q = 0; q < 900; q++) {
     var rx = r() * N, ry = r() * N, rr = 4 + r() * 26;
     g.fillStyle = pal[(q * 13) % pal.length];
     g.beginPath(); g.arc(rx, ry, rr, 0, 6.283); g.fill();
@@ -1529,12 +1534,13 @@ function curtainWeaveCanvas(base) {   // coarse weave divider  [PHOTO]
   var N = 256, o = cv(N, N), c = o[0], g = o[1], r = rng(404);
   g.fillStyle = base; g.fillRect(0, 0, N, N);
   for (var y = 0; y < N; y += 4) {
-    g.globalAlpha = 0.16 + r() * 0.12;
+    g.globalAlpha = 0.07 + r() * 0.05;
     g.fillStyle = '#ffffff'; g.fillRect(0, y, N, 1.6);
+    g.globalAlpha = 0.05 + r() * 0.05;
     g.fillStyle = '#000000'; g.fillRect(0, y + 2, N, 1.2);
   }
   for (var x = 0; x < N; x += 5) {
-    g.globalAlpha = 0.10 + r() * 0.10;
+    g.globalAlpha = 0.045 + r() * 0.045;
     g.fillStyle = '#000000'; g.fillRect(x, 0, 1.6, N);
   }
   g.globalAlpha = 1;
@@ -1700,7 +1706,7 @@ var TEX = {
 
 function std(o) {
   o = o || {};
-  if (o.envMapIntensity === undefined) o.envMapIntensity = 0.7;
+  if (o.envMapIntensity === undefined) o.envMapIntensity = 0.45;
   return new T.MeshStandardMaterial(o);
 }
 function phys(o) {
@@ -1711,9 +1717,9 @@ function phys(o) {
 
 var MIRRORS = [];   // filled by the two mirrors, baked once at boot
 var M = {};
-M.paintWhite  = std({ color: 0xefece5, roughness: 0.94, bumpMap: TEX.paintBump, bumpScale: 0.004 });
-M.paintBlue   = std({ color: 0x9fadb8, roughness: 0.92, bumpMap: TEX.paintBump, bumpScale: 0.004 }); // PT-01 window wall [PHOTO: soft grey-blue]
-M.ceiling     = std({ color: 0xf3f1ec, roughness: 0.97 });
+M.paintWhite  = std({ color: 0xe9e5dc, roughness: 0.94, bumpMap: TEX.paintBump, bumpScale: 0.004 });
+M.paintBlue   = std({ color: 0x91a1ad, roughness: 0.92, bumpMap: TEX.paintBump, bumpScale: 0.004 }); // PT-01 window wall [PHOTO: soft grey-blue]
+M.ceiling     = std({ color: 0xeceae4, roughness: 0.97 });
 M.accentWall  = std({ color: 0xffffff, map: TEX.herring, roughness: 0.90, bumpMap: TEX.herring, bumpScale: 0.006 });
 M.bathPaper   = std({ color: 0xffffff, map: TEX.gold, roughness: 0.72 });
 M.carpet      = std({ color: 0xffffff, map: TEX.carpet, roughness: 0.98, bumpMap: TEX.carpetBump, bumpScale: 0.012 });
@@ -1729,12 +1735,12 @@ M.chrome      = std({ color: 0xf2f4f6, roughness: 0.11, metalness: 1.0, envMapIn
 M.chromeSoft  = std({ color: 0xd8dbdd, roughness: 0.28, metalness: 1.0, envMapIntensity: 1.3 });
 M.stainless   = std({ color: 0xc3c7cb, roughness: 0.30, metalness: 0.92, envMapIntensity: 1.2 });
 M.blackMetal  = std({ color: 0x24262a, roughness: 0.42, metalness: 0.75, envMapIntensity: 0.8 });
-M.navyShelf   = std({ color: 0x22304d, roughness: 0.42, envMapIntensity: 0.7 });  // [PHOTO] navy floating shelves
+M.navyShelf   = std({ color: 0x1b2740, roughness: 0.40, envMapIntensity: 0.7 });  // [PHOTO] navy floating shelves
 M.tweed       = std({ color: 0xffffff, map: TEX.tweed, roughness: 0.94, bumpMap: TEX.tweed, bumpScale: 0.006 });
 M.ottoman     = std({ color: 0xffffff, map: TEX.ottoman, roughness: 0.88 });
 M.plum        = std({ color: 0x4a2f34, roughness: 0.70, envMapIntensity: 0.6 });  // headboard, dark plum-brown
 M.plumVinyl   = std({ color: 0x53343a, roughness: 0.38, envMapIntensity: 0.9 });  // wardrobe bench cushion
-M.mattress    = std({ color: 0xf0ece3, roughness: 0.86 });
+M.mattress    = std({ color: 0xe3ddd0, roughness: 0.88 });
 M.boxCover    = std({ color: 0x2f3237, roughness: 0.90 });
 M.curtain     = std({ color: 0xffffff, map: TEX.weave, roughness: 0.95, side: T.DoubleSide, bumpMap: TEX.weave, bumpScale: 0.01 });
 M.curtainGrey = std({ color: 0xffffff, map: TEX.weaveGrey, roughness: 0.95, side: T.DoubleSide });
@@ -1749,7 +1755,7 @@ M.frameBlack  = std({ color: 0x141517, roughness: 0.48 });
 M.frameYellow = std({ color: 0xe0912a, roughness: 0.45, envMapIntensity: 0.8 });  // [PHOTO] bathroom mirror frame
 M.frameWhite  = std({ color: 0xf2efe9, roughness: 0.42 });
 M.mesh        = std({ color: 0xffffff, map: TEX.mesh, roughness: 0.85, side: T.DoubleSide });
-M.chairSeat   = std({ color: 0x7a3f33, roughness: 0.72 });
+M.chairSeat   = std({ color: 0x6a3125, roughness: 0.76 });
 M.panelGrey   = std({ color: 0x9c9e9f, roughness: 0.55, metalness: 0.3 });
 M.louvre      = std({ color: 0xffffff, map: TEX.louvre, roughness: 0.55 });
 M.porcelain   = std({ color: 0xfbfaf8, roughness: 0.10, envMapIntensity: 1.3 });
@@ -1935,8 +1941,30 @@ gp(BIX, HL, BIX / 2, HL / 2, BIZ - 0.01, Math.PI);        // north wall
 
 // bathroom door GR-2A — white painted flush slab.  Modelled CLOSED, which is
 // how it is photographed, and which keeps both bathroom cameras clear.
-box2(BIX - 0.01, BX + 0.01, 0, BD_H, BD_Z0 + 0.03, BD_Z1 - 0.03, M.trim, { r: 0.008 });
-cyl(0.035, 0.035, 0.5, M.chromeSoft, BX + 0.04, 3.0, BD_Z0 + 0.35, 10, { rz: Math.PI / 2 });
+box2(BIX - 0.01, BX + 0.01, 0, BD_H, BD_Z0 + 0.05, BD_Z1 - 0.05, M.trim, { r: 0.008 });
+// painted casing on the entry side
+box2(BX, BX + 0.055, 0, BD_H + 0.14, BD_Z0 - 0.09, BD_Z0 + 0.05, M.trim, { r: 0.006 });
+box2(BX, BX + 0.055, 0, BD_H + 0.14, BD_Z1 - 0.05, BD_Z1 + 0.09, M.trim, { r: 0.006 });
+box2(BX, BX + 0.055, BD_H, BD_H + 0.14, BD_Z0 - 0.09, BD_Z1 + 0.09, M.trim, { r: 0.006 });
+// lever + hinges
+cyl(0.09, 0.09, 0.05, M.chromeSoft, BX + 0.03, 3.1, BD_Z1 - 0.38, 14, { rz: Math.PI / 2 });
+cyl(0.035, 0.035, 0.36, M.chromeSoft, BX + 0.09, 3.1, BD_Z1 - 0.52, 10);
+[1.0, 3.4, 5.7].forEach(function (hy) {
+  box2(BX - 0.005, BX + 0.02, hy - 0.17, hy + 0.17, BD_Z0 + 0.02, BD_Z0 + 0.08, M.chromeSoft, { r: 0.004 });
+});
+
+// ---- 4" vinyl base.  Not a drawing dimension: [ASSUMED] typical H2 base.
+(function base() {
+  var bh = 4 * IN, pr = 0.55 * IN;
+  var bm = std({ color: 0xdedad1, roughness: 0.55, envMapIntensity: 0.5 });
+  box2(0, pr, 0, bh, BZ, D, bm, { r: 0.004 });                       // bed / sofa wall
+  box2(W - pr, W, 0, bh, BZ, D, bm, { r: 0.004 });                   // working wall
+  box2(W - pr, W, 0, bh, 0, BZ, bm, { r: 0.004 });                   // working wall, entry leg
+  box2(0, W, 0, bh, D - pr, D, bm, { r: 0.004 });                    // window wall
+  box2(BX, BX + pr, 0, bh, 0, BZ, bm, { r: 0.004 });                 // bath partition, entry side
+  box2(0, BX, 0, bh, BZ - pr, BZ, bm, { r: 0.004 });                 // bath mass, room side
+  box2(BX, W, 0, bh, 0, pr, bm, { r: 0.004 });                       // corridor wall
+})();
 
 /* ---------------------------------------------------------------------
    7.  WINDOW WALL  —  window, shade, PTAC, stool
@@ -1979,9 +2007,9 @@ var REVEAL = 6 * IN;
   // GR-400 blackout roller shade in a white valance box.
   // [A550] shade is 7'-0" wide: 6" past each jamb, elevation 08.
   // Drop shown at 46" AFF — an ASSUMED position; the drawings do not fix it.
-  var sx0 = WIN_X0 - 0.5, sx1 = WIN_X1 + 0.5, hem = 46 * IN;
+  var sx0 = WIN_X0 - 0.5, sx1 = WIN_X1 + 0.5, hem = 58 * IN;
   box2(sx0 - 0.08, sx1 + 0.08, SHADE_TOP, SHADE_TOP + 4 * IN, D - 5.5 * IN, D - 0.5 * IN, M.trim, { r: 0.01 });
-  var shadeMat = tiled(M.shade, sx1 - sx0, SHADE_TOP - hem, 2.6);
+  var shadeMat = tiled(M.shade, sx1 - sx0, SHADE_TOP - hem, 3.9);
   var sh = new T.Mesh(new T.PlaneGeometry(sx1 - sx0, SHADE_TOP - hem, 12, 2), shadeMat);
   sh.position.set((sx0 + sx1) / 2, (SHADE_TOP + hem) / 2, D - 3.2 * IN);
   sh.rotation.y = Math.PI;
@@ -2128,14 +2156,18 @@ var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall co
     contact(cx, cz, 2.4, 2.4, 0.55);
   })();
 
-  // GR-201 desk lamp
+  // GR-201 desk lamp — round base, stem, elbow, cone shade over the desktop
   (function deskLamp() {
-    var lx = W - 1.15, lz = D - 18.6;
-    cyl(0.28, 0.30, 0.05, M.blackMetal, lx, DESK_Y + 0.03, lz, 18);
-    cyl(0.035, 0.035, 1.05, M.blackMetal, lx, DESK_Y + 0.55, lz, 10);
-    var arm = cyl(0.03, 0.03, 0.75, M.blackMetal, lx - 0.02, DESK_Y + 1.05, lz - 0.28, 10, { rx: Math.PI / 2.6 });
-    var sh = cyl(0.30, 0.16, 0.34, M.lampShade, lx - 0.03, DESK_Y + 1.20, lz - 0.60, 18, { rx: 0.55, open: true });
-    sh.material = M.lampShade;
+    var lx = W - 0.95, lz = D - 18.9;
+    cyl(0.26, 0.28, 0.055, M.blackMetal, lx, DESK_Y + 0.03, lz, 20);
+    cyl(0.030, 0.030, 1.15, M.blackMetal, lx, DESK_Y + 0.62, lz, 10);
+    cyl(0.030, 0.030, 0.95, M.blackMetal, lx - 0.44, DESK_Y + 1.17, lz, 10, { rz: Math.PI / 2 });
+    var sh = new T.Mesh(new T.CylinderGeometry(0.115, 0.235, 0.30, 20, 1, true), M.lampShade);
+    sh.position.set(lx - 0.86, DESK_Y + 1.02, lz);
+    sh.castShadow = true; add(sh);
+    var bulb = new T.Mesh(new T.SphereGeometry(0.075, 10, 8),
+      std({ color: 0xfff3dd, emissive: 0xffd8a2, emissiveIntensity: 3.0, roughness: 0.5 }));
+    bulb.position.set(lx - 0.86, DESK_Y + 0.93, lz); add(bulb);
   })();
 })();
 
@@ -2428,7 +2460,11 @@ var SOFA_Z0 = 10.4, SOFA_Z1 = 17.0;
   // scales at about 9".  White painted frame, recessed flush  [PHOTO].
   // Horizontal position is [ASSUMED] from elevation 06's ~8'-3" from the
   // working-wall end.
-  var mCX = W - 8.25, mW = 2.5, mB = 9 * IN, mTop = 82 * IN;
+  // Horizontal position [ASSUMED].  Elevation 06's 6'-10" dim sits about 8'-3"
+  // from the working-wall end; the photographs read the mirror, the panel and the
+  // bath door as one wall, which on A550 is this corner — so it is set toward the
+  // corner rather than mid-face.
+  var mCX = 4.40, mW = 2.5, mB = 9 * IN, mTop = 82 * IN;
   box2(mCX - mW / 2 - 0.11, mCX + mW / 2 + 0.11, mB - 0.11, mTop + 0.11, BZ, BZ + 0.055, M.frameWhite, { r: 0.008 });
   var mirror = new T.Mesh(new T.PlaneGeometry(mW, mTop - mB),
     std({ color: 0xf3f5f6, roughness: 0.02, metalness: 1.0, envMapIntensity: 1.0 }));
@@ -2577,7 +2613,7 @@ var SOFA_Z0 = 10.4, SOFA_Z1 = 17.0;
    ------------------------------------------------------------------ */
 
 // --- daylight through the window: the strongest source, slightly cool
-var sun = new T.DirectionalLight(0xeaf1ff, 3.4);
+var sun = new T.DirectionalLight(0xeaf1ff, 5.6);
 sun.position.set(W / 2 + 5.5, 15.5, D + 15);
 sun.target.position.set(W / 2 - 1.5, 1.2, D - 12);
 scene.add(sun.target);
@@ -2591,7 +2627,7 @@ sun.shadow.normalBias = 0.02;
 scene.add(sun);
 
 // sky/ground bounce
-var hemi = new T.HemisphereLight(0xbdd6f2, 0x4a4034, 0.55);
+var hemi = new T.HemisphereLight(0xa8c4e4, 0x3a332a, 0.22);
 scene.add(hemi);
 
 // cool bounce just inside the glass — keeps the window end from going flat
@@ -2601,21 +2637,21 @@ function fill(color, intensity, dist, x, y, z) {
   scene.add(l);
   return l;
 }
-fill(0xd8e6ff, 26, 26, W / 2, 4.6, D - 1.4);
-fill(0xcfe0f6, 12, 22, W / 2, 6.4, D - 5.5);
+fill(0xd8e6ff, 20, 24, W / 2, 4.6, D - 1.4);
+fill(0xcfe0f6, 7, 20, W / 2, 6.4, D - 5.5);
 
 // --- warm lamps
 function warm(intensity, dist, x, y, z, color) {
   return fill(color || 0xffc98a, intensity, dist, x, y, z);
 }
-warm(12, 15, 0.85, 3.85, NS_A_Z + 1.05);          // bedside globe, window side
-warm(12, 15, 0.85, 3.85, NS_B_Z - 1.05);          // bedside globe, corridor side
-warm(15, 17, 0.95, 4.95, SOFA_Z1 + 0.32);         // GR-205 floor lamp
-warm(7, 11, 0.95, 26 * IN + 1.62, SOFA_Z0 - 0.95);// GR-200 side table lamp
+warm(20, 16, 0.85, 3.85, NS_A_Z + 1.05);          // bedside globe, window side
+warm(20, 16, 0.85, 3.85, NS_B_Z - 1.05);          // bedside globe, corridor side
+warm(24, 18, 0.95, 4.95, SOFA_Z1 + 0.32);         // GR-205 floor lamp
+warm(12, 12, 0.95, 26 * IN + 1.62, SOFA_Z0 - 0.95);// GR-200 side table lamp
 
 // GR-201 desk lamp — the one lamp that casts, so the working wall gets a
 // real pool of light with a real shadow behind the task chair
-var deskSpot = new T.SpotLight(0xffcf98, 26, 11, 0.85, 0.6, 2);
+var deskSpot = new T.SpotLight(0xffcf98, 40, 12, 0.85, 0.6, 2);
 deskSpot.position.set(W - 1.18, DESK_Y + 1.20, D - 19.2);
 deskSpot.target.position.set(W - 1.6, 0.2, D - 20.4);
 deskSpot.castShadow = true;
@@ -2624,25 +2660,25 @@ deskSpot.shadow.bias = -0.0012;
 scene.add(deskSpot.target); scene.add(deskSpot);
 
 // wardrobe reading light + LED strip in the hanging bay  [PHOTO]
-warm(9, 11, W - 1.25, 68 * IN, D - 5.0);           // reading light + hanging-bay LED, merged
+warm(14, 12, W - 1.25, 68 * IN, D - 5.0);           // reading light + hanging-bay LED, merged
 
 // entry downlights  [A550 view 02: two rows at 2'-10" and 7'-6" from the
 // corridor wall, at 2'-0" / 2'-0" across the leg]
 // (two rows collapsed to two lamps: the fragment cost of a light is paid by
 //  every pixel in the frame, and this room already carries fourteen of them)
 [[8.97, 2.833], [8.97, 7.5]].forEach(function (p) {
-  var s = new T.PointLight(0xffdcb4, 20, 14, 2);
+  var s = new T.PointLight(0xffdcb4, 26, 15, 2);
   s.position.set(p[0], HL - 0.10, p[1]);
   scene.add(s);
 });
-warm(14, 12, 9.4, HL - 0.25, 5.6, 0xffe7c4);      // kitchenette surface fixture
+warm(20, 13, 9.4, HL - 0.25, 5.6, 0xffe7c4);      // kitchenette surface fixture
 
 // bathroom
 fill(0xfff3e2, 20, 12, 2.3, 5.9, BIZ - 0.7);       // linear LED over the vanity
 fill(0xf4f4ff, 13, 11, 3.0, HL - 0.3, 3.2);        // bath + shower downlights, merged
 
 // a low ambient so nothing goes pure black in a phone-style exposure
-scene.add(new T.AmbientLight(0x3b4048, 0.55));
+scene.add(new T.AmbientLight(0x39404b, 0.16));
 
 /* ---------------------------------------------------------------------
    16.  ENVIRONMENT MAP  +  MIRRORS
@@ -2716,6 +2752,7 @@ var target = new T.Vector3();
 function setView(name) {
   var v = VIEWS[name];
   if (!v) return false;
+  warmup = Math.max(warmup, 2);
   camera.position.set(v.p[0], v.p[1], v.p[2]);
   target.set(v.t[0], v.t[1], v.t[2]);
   controls.target.copy(target);
@@ -2752,20 +2789,24 @@ function resize() {
 }
 window.addEventListener('resize', resize);
 
-var frames = 0;
+var frames = 0, warmup = 3;
+window.__frameMs = 0;
 function loop() {
   requestAnimationFrame(loop);
-  if (controls.enableDamping) { if (controls.update()) needs = true; }
+  if (controls.update()) needs = true;
+  // The first frames are forced: damping settles after a preset move and would
+  // otherwise leave the loop idle at frame 1, so __ready would never fire.
+  if (warmup > 0) { warmup--; needs = true; }
   if (!needs) return;
   needs = false;
+  var t0 = performance.now();
   renderer.render(scene, camera);
+  window.__frameMs = Math.round(performance.now() - t0);
   frames++;
-  if (frames === 1) {
-    renderer.shadowMap.needsUpdate = true;
-  }
   if (frames >= 2 && !window.__ready) {
     window.__ready = true;
-    document.getElementById('boot').style.display = 'none';
+    var b = document.getElementById('boot');
+    if (b) b.style.display = 'none';
   }
 }
 

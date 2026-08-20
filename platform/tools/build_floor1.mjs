@@ -80,11 +80,45 @@
  * collapses the whole family to one 'GR-304 -316 WORKING WALL' row. Every King
  * room therefore carries the plain GR-304 tag. Open question, not a guess.
  *
- * MEP CITATIONS ARE NOT REWRITTEN for King rooms. The 22 live lines are copied
- * verbatim, as proven. Many of their `src` strings name A555 views and keynotes
- * (the QQ sheet). A550 and A555 do NOT share a view numbering, and no document
- * in the set states the A550 equivalents, so rewriting them would be a guess.
- * reportMepSheetCitations() prints every affected line instead.
+ * THE KING-FAMILY MEP DOCUMENT IS COMPOSED, NOT COPIED  (rebuilt 2026-08-20)
+ *
+ * The previous build COPIED the Queen-Queen -MEP doc into every King room. That
+ * carried the QQ sheet (A555) onto 14 of the 22 live lines, carried the QQ
+ * CONNECTING view (04.1) onto five lines in rooms whose rooms.connecting = 0,
+ * carried the QQ room's UNRESOLVED PTAC-1/PTAC-2 question into rooms whose own
+ * DB row resolves it, and discarded the room-specific Fire Sprinkler take-off
+ * the database holds for rooms 104-115. All four are fixed here.
+ *
+ *   SHAPE          the 22 condensed lines stay - key, category, sort and the
+ *                  D10 verification wording are Austin's approved condensation.
+ *   CITATIONS      every `src` is re-pointed off THIS room's own room_items
+ *                  rows. The A555 -> A550 re-point is a derivation, not a
+ *                  guess: assertSheetNumberingShared() re-proves on every run
+ *                  that A550 and A555 share their keynote AND view numbering,
+ *                  from three independent DB facts (room_types 'A550 view 01'
+ *                  vs 'A555 view 01', room_types 'A550 view 01.1' for the
+ *                  connecting King, and room_items ITM-0152 'A550 KN1 / view
+ *                  08' against the donor ITM-0443 'A555 KN1 / view 08' - the
+ *                  same row, the same keynote, the same view, two sheets).
+ *   CONNECTING     the '.1' view variant is the CONNECTING plan (room_types:
+ *                  "A555 view 01.1 'QQ Studio Conn.' + electrical view 04.1").
+ *                  It is dropped where rooms.connecting = 0 and kept where it
+ *                  is 1 (room 116, room 118).
+ *   PTAC           where the room's own row carries a resolved mark, the line
+ *                  carries that mark and quotes the row's reasoning verbatim.
+ *   SPRINKLER      where the room has its own Fire Sprinkler rows, the head
+ *                  count and the head-by-head positions are carried instead of
+ *                  being thrown away.
+ *   ACCOUNTING     MEP_CONDENSED_SOURCES + MEP_ROUGH_IN_ITEMS must cover the
+ *                  donor's MEP rows EXACTLY (assertMepCondensationCovers). A
+ *                  row in the target room that is neither condensed, nor a
+ *                  known variant, nor a ruled drop, becomes its OWN line - it
+ *                  is never silently lost. That is what gives room 118 its
+ *                  five ADA electrical lines and its two Config-B plumbing
+ *                  lines on top of the 22.
+ *
+ * The QQ rooms (107-115) keep the proven copy path: their type has an approved
+ * -MEP doc and this tool is create-only against approved work.
  * ---------------------------------------------------------------------------
  */
 
@@ -174,6 +208,120 @@ const QTY_OVERRIDES = [
 const COMPOSED_TYPES = {
   'King Studio': { donorType: 'Queen-Queen' },
   'King Studio Connecting': { donorType: 'Queen-Queen' },
+  'King Studio Acc.': { donorType: 'Queen-Queen' },
+};
+
+/* ===========================================================================
+ * THE COMPOSED MEP DOCUMENT - the D10 condensation, expressed as data.
+ * =========================================================================== */
+
+/* The room whose approved -MEP doc carries the 22-line D10 shape, and whose
+ * room_items rows the condensation map below is written against. */
+const MEP_DONOR_ROOM = '105';
+
+/* The QQ guestroom sheet the approved citations name, and the '.1' view suffix
+ * that means "the CONNECTING variant of that view". Both are re-proved against
+ * the DB by assertSheetNumberingShared() before any re-point happens. */
+const MEP_DONOR_SHEET = 'A555';
+
+/* D10 CONDENSATION MAP. For each approved MEP line key, the room_items.item_id
+ * values IN THE DONOR ROOM that the line stands for. Read off the approved
+ * line's own label / instanceNote / src - e.g. mech_grille_bath's note says it
+ * "Covers the EF-1 exhaust fan running, the volume damper, the ceiling fire
+ * damper, the constant-airflow regulator, and the ceiling access panel", which
+ * is exactly ITM-0070 / ITM-0066 / ITM-0067 / ITM-0065 / ITM-0064. */
+const MEP_CONDENSED_SOURCES = {
+  mech_ptac: ['ITM-0443', 'ITM-0052', 'ITM-0054', 'ITM-0055', 'ITM-0056',
+    'ITM-0057', 'ITM-0058', 'ITM-0061', 'ITM-0048'],
+  mech_tstat: ['ITM-0060', 'ITM-0059', 'ITM-0018'],
+  mech_grille_rm: ['ITM-0053'],
+  mech_grille_bath: ['ITM-0064', 'ITM-0070', 'ITM-0066', 'ITM-0067', 'ITM-0065',
+    'ITM-0063', 'ITM-0068', 'ITM-0062', 'ITM-0069'],
+  elec_panel: ['ITM-0001', 'ITM-0002', 'ITM-0003', 'ITM-0004', 'ITM-0005',
+    'ITM-0006', 'ITM-0007', 'ITM-0008', 'ITM-0009', 'ITM-0010', 'ITM-0011',
+    'ITM-0012', 'ITM-0013'],
+  elec_gfci: ['ITM-0015'],
+  elec_lights: ['ITM-0014', 'ITM-0022', 'ITM-0023', 'ITM-0024', 'ITM-0025'],
+  elec_outlets: ['ITM-0021', 'ITM-0017', 'ITM-0019', 'ITM-0020'],
+  elec_sink_sw: ['ITM-0016'],
+  plmb_wc_a: ['ITM-0042', 'ITM-0039'],
+  plmb_lavfaucet_a: ['ITM-0044', 'ITM-0043', 'ITM-0045'],
+  plmb_shower_a: ['ITM-0441'],
+  plmb_showerhead_a: ['ITM-0049', 'ITM-0050'],
+  plmb_shencl_a: ['ITM-0442'],
+  plmb_fd_a: ['ITM-0046'],
+  plmb_trapguard_a: ['ITM-0047'],
+  plmb_ksink_a: ['ITM-0051'],
+  fp_heads_a: ['ITM-0447', 'ITM-0448', 'ITM-0449'],
+  fp_smoke_a: ['ITM-0078'],
+  lv_wap: ['ITM-0026'],
+  lv_tvdata: ['ITM-0027', 'ITM-0029', 'ITM-0030'],
+  lv_phone_db: ['ITM-0028', 'ITM-0031'],
+};
+
+/* Donor MEP rows the approved 22-line punch deliberately does NOT carry:
+ * concealed distribution and rough-in, none of which a finish walk can see.
+ * Listed by name so that a row which is neither condensed nor listed here
+ * fails the build instead of vanishing. */
+const MEP_ROUGH_IN_ITEMS = [
+  'ITM-0032', 'ITM-0033', 'ITM-0034',   // gate valves at the CWS/HWS/HWR risers
+  'ITM-0035',                            // domestic water branch set to unit
+  'ITM-0036',                            // fixture runouts
+  'ITM-0037',                            // sanitary sewer riser tie
+  'ITM-0038',                            // vent riser at the wet wall
+  'ITM-0040',                            // 2" SS waste branch
+  'ITM-0041',                            // vent piping
+];
+
+/* Rows that fill a condensed line's slot but carry a ROOM-SPECIFIC item_id
+ * because the type differs there. Verified against the DB: the six King Studio
+ * rooms share ITM-0150/0151/0152/0156/0157/0158, room 116 has ITM-0200/0201/
+ * 0202, room 118 has ITM-0240 and its Configuration-B plumbing rows. */
+const MEP_VARIANT_SLOTS = {
+  'ITM-0150': 'plmb_shower_a', 'ITM-0200': 'plmb_shower_a', 'ITM-0706': 'plmb_shower_a',
+  'ITM-0151': 'plmb_shencl_a', 'ITM-0201': 'plmb_shencl_a', 'ITM-0730': 'plmb_shencl_a',
+  'ITM-0152': 'mech_ptac', 'ITM-0202': 'mech_ptac', 'ITM-0240': 'mech_ptac',
+  'ITM-0156': 'fp_heads_a', 'ITM-0157': 'fp_heads_a', 'ITM-0158': 'fp_heads_a',
+};
+
+/* Whose words are the line's label? 'row' means the approved label IS the
+ * product description off the DB row, so it must track THIS room's row (a
+ * roll-in shower is not a 4-inch-threshold shower and must not be labelled as
+ * one). Anything not listed keeps the approved D10 verification wording, and
+ * this room's own row text goes into the note instead. */
+const MEP_LABEL_FROM_ROW = new Set(['plmb_shower_a', 'plmb_shencl_a']);
+
+/* Sentences in the approved donor text that a room's own row can RESOLVE.
+ * Asserted present before they are touched; the build stops if the approved
+ * wording ever changes underneath this tool. */
+const PTAC_DONOR_M401 = 'M401 det.01 + KN3 + KN7';
+const PTAC_NAMEPLATE = 'Model reads off the nameplate: AZ65H12DAB is PTAC-1, AZ65H15DAB is PTAC-2.';
+const FP_COUNT_SENTENCE = 'head count varies by room, so verify every head you can see rather than counting to a number.';
+
+/* Austin ruling D19 (research/construction-os/DECISIONS.md, 2026-08-20): room
+ * 118 gets the ROLL-IN SHOWER package, not a tub. The mutually exclusive tub
+ * rows are dropped - matched on the DATABASE'S OWN description prefix, never on
+ * a keyword guess - and the build fails if dropping them would leave no
+ * Configuration B row behind. */
+const CONFIG_A_PREFIX = 'CONFIGURATION A (TUB) - ';
+const CONFIG_B_PREFIX = 'CONFIGURATION B (ROLL-IN SHOWER) - ';
+const CONFIG_A_DROP_ROOMS = { 118: 'D19' };
+
+/* room_types.room_sheet is ambiguous for exactly one floor-1 type: King Studio
+ * Acc. reads 'A551 / A552' for two keys, 118 and 438. The database's own rows
+ * settle it and assertRoomSheetResolution() re-proves the evidence every run.
+ * Nothing here is asserted that the DB does not already state. */
+const ROOM_SHEET_RESOLUTION = {
+  118: {
+    sheet: 'A552',
+    otherSheet: 'A551',
+    otherRoom: '438',
+    onlyHere: ['GR-320', 'GR-208'],
+    onlyThere: ['GR-502'],
+    why: "room 118 carries GR-320 and GR-208, both primary_sheet A552 ('present on A552 (118), absent on A551 (438)'); "
+       + 'room 438 carries GR-502 on A551 and neither of the other two. A552 is titled '
+       + "'Enl. Guest Room Plans & Elevs - King Studio Acc. Mod.'",
+  },
 };
 
 /* The doc-level `type` slug is DERIVED, and the derivation is proved against
@@ -269,7 +417,7 @@ function readRoom(db, roomNo) {
   ).get(roomNo);
   if (!room) die('room ' + roomNo + ' does not exist in the rooms table');
   const rows = db.prepare(
-    'SELECT rowid AS rowid, room_type, category, tag, description, instance_note, note,' +
+    'SELECT rowid AS rowid, item_id, room_type, category, tag, description, instance_note, note,' +
     '       trade_responsible, source_sheet, primary_sheet, reliability, derived' +
     '  FROM room_items WHERE room_no = ? ORDER BY rowid'
   ).all(roomNo);
