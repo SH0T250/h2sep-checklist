@@ -198,7 +198,7 @@ const CATEGORY_ORDER = [
 const CATEGORY_INDEX = new Map(CATEGORY_ORDER.map((c, i) => [c, i]));
 
 /* Step 3. Austin's ruling D12, scoped to this exact tag only. */
-/* AUSTIN RULING D21 (2026-08-20): the plain Queen-Queen working wall is GR-305,
+/* AUSTIN RULING D22 (2026-08-20): the plain Queen-Queen working wall is GR-305,
  * not GR-308. Austin instructed "fix GR-305 on 105-115".
  *
  * WHY THIS IS A CORRECTION AND NOT A RENAME. data/project.sqlite carries NO
@@ -226,7 +226,7 @@ const CATEGORY_INDEX = new Map(CATEGORY_ORDER.map((c, i) => [c, i]));
  * NOT guessed, and reliability drops to MEDIUM to say so. */
 const TAG_CORRECTIONS = [
   {
-    ruling: 'D21',
+    ruling: 'D22',
     from: 'GR-308',
     to: 'GR-305',
     roomTypes: ['Queen-Queen'],
@@ -557,19 +557,19 @@ function applyTagCorrections(roomNo, room, rows) {
  * keys, matching the workbook's 6 and 2. If the room mix ever changes, stop. */
 function assertTagCorrectionCounts(db) {
   for (const c of TAG_CORRECTIONS) {
-    if (c.ruling !== 'D21') continue;
+    if (c.ruling !== 'D22') continue;
     const plain = db.prepare(
       "select count(*) n from rooms where floor = 1 and room_type = 'Queen-Queen'").get().n;
     const conn = db.prepare(
       "select count(*) n from rooms where floor = 1 and room_type in ('QQ Connecting','QQ Wide Connecting')").get().n;
     if (plain !== 6 || conn !== 2) {
-      die('D21 count check failed: the workbook pairs GR-305 with 6 units and GR-308 with 2, but ' +
+      die('D22 count check failed: the workbook pairs GR-305 with 6 units and GR-308 with 2, but ' +
           'floor 1 now has ' + plain + ' plain Queen-Queen and ' + conn + ' QQ connecting keys. ' +
           'The correction is only evidence while those reconcile.');
     }
     const stray = db.prepare("select count(*) n from room_items where tag = 'GR-305'").get().n;
     if (stray !== 0) {
-      die('D21 assumed the database carries no GR-305 row anywhere, but it now has ' + stray +
+      die('D22 assumed the database carries no GR-305 row anywhere, but it now has ' + stray +
           '. Re-check the correction before applying it.');
     }
   }
@@ -1171,7 +1171,7 @@ function buildRoomNotes(db, roomNo, room, rows, stamp, report) {
  * database. Rebuilding it must therefore preserve two things the rebuild does
  * not know about:
  *
- *  1. A LINE THE REBUILD NO LONGER PRODUCES. Ruling D21 retags the working wall,
+ *  1. A LINE THE REBUILD NO LONGER PRODUCES. Ruling D22 retags the working wall,
  *     so gr308_a stops existing and gr305_a appears. gr308_a is a line a person
  *     may already have checked off. It is carried forward as deleted: true with
  *     a note naming what superseded it - the same soft-delete discipline every
@@ -1346,7 +1346,7 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
           ' and carries no ' + corr.to + ' row anywhere in the building; its own row here says the ' +
           'spec book printed the Connector name on the base QQ plan, and it flagged that. Ruling D11 ' +
           'previously closed that flag as a naming quirk with no order impact - the workbook shows ' +
-          'otherwise, so D21 supersedes D11 on this line only. ' +
+          'otherwise, so D22 supersedes D11 on this line only. ' +
           'STILL OPEN: ' + corr.spec.handedness,
         trade: r.trade,
         derived: r.derived,
