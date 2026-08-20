@@ -82,6 +82,19 @@ export class Store {
   // 'SZONEA-MEP' is 10, so the space docs cannot use the long one. The app
   // resolves both, preferring the long suffix, and every caller goes through
   // these two so the rule lives in exactly one place.
+  // Common-area spaces: same document shape as a guest room, distinguished by a
+  // "space-" type. Identified by ID rather than by type, because a space with
+  // MEP lines and no FF&E lines legitimately owns the parent id and carries the
+  // punch type - filtering on type alone would hide it.
+  spaces() {
+    const isCompanion = (id) => Store.MEP_SUFFIXES.some((sfx) => id.endsWith(sfx));
+    return Object.entries(this.docs)
+      .filter(([id, d]) => !id.startsWith('_') && !d.deleted &&
+        String(d.type).startsWith('space-') && !isCompanion(id))
+      .map(([, d]) => d)
+      .sort((a, b) => String(a.typeLabel || a.number).localeCompare(String(b.typeLabel || b.number)));
+  }
+
   mepDocId(parentId) {
     for (const suffix of Store.MEP_SUFFIXES) {
       const id = String(parentId) + suffix;

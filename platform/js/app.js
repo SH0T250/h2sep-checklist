@@ -23,7 +23,7 @@ if (firebaseConfig && !window.__H2SEP_NO_BACKEND) {
 }
 
 const registry = new Registry();
-registry.register(trackingModule());
+registry.register(trackingModule(store));
 registry.register(directoryModule());   // module three: contacts + sub assignments
 registry.register(bimModule());
 
