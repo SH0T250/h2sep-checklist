@@ -1,0 +1,464 @@
+[
+ {
+  "floor": "1",
+  "space_no": "001",
+  "name": "Vestibule",
+  "kind": "Public / guest-facing",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "003",
+  "name": "Lobby",
+  "kind": "Public / guest-facing",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "004",
+  "name": "Reception",
+  "kind": "Public / guest-facing",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "005",
+  "name": "Market",
+  "kind": "Public / guest-facing",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "006",
+  "name": "Breakfast",
+  "kind": "Public / guest-facing",
+  "assembly": true
+ },
+ {
+  "floor": "1",
+  "space_no": "007",
+  "name": "Food Prep",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "008",
+  "name": "Dry Storage",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "009",
+  "name": "Servery",
+  "kind": "Public / guest-facing",
+  "assembly": true
+ },
+ {
+  "floor": "1",
+  "space_no": "010",
+  "name": "Work Stations",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "011",
+  "name": "Managers Office",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "012",
+  "name": "Closet",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "013",
+  "name": "Laundry Discharge",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "014",
+  "name": "Employee Breakroom",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "015",
+  "name": "Laundry",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "016",
+  "name": "Dryer Room",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "017",
+  "name": "Open Storage",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "018",
+  "name": "Meeting Room",
+  "kind": "Public / guest-facing",
+  "assembly": true
+ },
+ {
+  "floor": "1",
+  "space_no": "019",
+  "name": "WOMENS",
+  "kind": "Public restroom",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "020",
+  "name": "MEN'S",
+  "kind": "Public restroom",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "021",
+  "name": "Engineer",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "022",
+  "name": "Sales",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "023",
+  "name": "Fitness Room",
+  "kind": "Public / guest-facing",
+  "assembly": true
+ },
+ {
+  "floor": "1",
+  "space_no": "024",
+  "name": "Guest Laundry",
+  "kind": "Public / guest-facing",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "025",
+  "name": "Mech.",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "027",
+  "name": "Unisex",
+  "kind": "Public restroom",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "028",
+  "name": "Elev. Eq.",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "029",
+  "name": "Meeting Rm. Sto.",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "030",
+  "name": "Mech. / Plumb. Room",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "031",
+  "name": "PBX",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "032",
+  "name": "Housekeeping",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "033",
+  "name": "Electrical",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "100",
+  "name": "Stair 1",
+  "kind": "Exit stair enclosure",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "121",
+  "name": "Guest Corridor",
+  "kind": "Public / guest-facing",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "137",
+  "name": "Elev. Lobby",
+  "kind": "Public / guest-facing",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "139",
+  "name": "Ice Machine",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "140",
+  "name": "Elev.",
+  "kind": "Elevator / hoistway",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "141",
+  "name": "Stair 2",
+  "kind": "Exit stair enclosure",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "ZONE-A",
+  "name": "Entry / Porte-Cochere Outdoor Lounge",
+  "kind": "Exterior zone",
+  "assembly": false
+ },
+ {
+  "floor": "1",
+  "space_no": "ZONE-B",
+  "name": "Pool Deck / Patio",
+  "kind": "Exterior zone",
+  "assembly": true
+ },
+ {
+  "floor": "2",
+  "space_no": "200",
+  "name": "Stair 1",
+  "kind": "Exit stair enclosure",
+  "assembly": false
+ },
+ {
+  "floor": "2",
+  "space_no": "219",
+  "name": "Electrical",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "2",
+  "space_no": "220",
+  "name": "Storage",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "2",
+  "space_no": "221",
+  "name": "Guest Corridor",
+  "kind": "Public / guest-facing",
+  "assembly": false
+ },
+ {
+  "floor": "2",
+  "space_no": "235",
+  "name": "House Keeping",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "2",
+  "space_no": "237",
+  "name": "Elevator Lobby",
+  "kind": "Public / guest-facing",
+  "assembly": false
+ },
+ {
+  "floor": "2",
+  "space_no": "239",
+  "name": "Ice Machine",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "2",
+  "space_no": "240",
+  "name": "Elev.",
+  "kind": "Elevator / hoistway",
+  "assembly": false
+ },
+ {
+  "floor": "2",
+  "space_no": "241",
+  "name": "Stair 2",
+  "kind": "Exit stair enclosure",
+  "assembly": false
+ },
+ {
+  "floor": "3",
+  "space_no": "300",
+  "name": "Stair 1",
+  "kind": "Exit stair enclosure",
+  "assembly": false
+ },
+ {
+  "floor": "3",
+  "space_no": "319",
+  "name": "Electrical",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "3",
+  "space_no": "320",
+  "name": "Storage",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "3",
+  "space_no": "321",
+  "name": "Guest Corridor",
+  "kind": "Public / guest-facing",
+  "assembly": false
+ },
+ {
+  "floor": "3",
+  "space_no": "335",
+  "name": "House Keeping",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "3",
+  "space_no": "337",
+  "name": "Elevator Lobby",
+  "kind": "Public / guest-facing",
+  "assembly": false
+ },
+ {
+  "floor": "3",
+  "space_no": "339",
+  "name": "Ice Machine",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "3",
+  "space_no": "340",
+  "name": "Elev.",
+  "kind": "Elevator / hoistway",
+  "assembly": false
+ },
+ {
+  "floor": "3",
+  "space_no": "341",
+  "name": "Stair 2",
+  "kind": "Exit stair enclosure",
+  "assembly": false
+ },
+ {
+  "floor": "4",
+  "space_no": "400",
+  "name": "Stair 1",
+  "kind": "Exit stair enclosure",
+  "assembly": false
+ },
+ {
+  "floor": "4",
+  "space_no": "419",
+  "name": "Electrical",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "4",
+  "space_no": "420",
+  "name": "Storage",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "4",
+  "space_no": "421",
+  "name": "Guest Corridor",
+  "kind": "Public / guest-facing",
+  "assembly": false
+ },
+ {
+  "floor": "4",
+  "space_no": "435",
+  "name": "House Keeping",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "4",
+  "space_no": "437",
+  "name": "Elevator Lobby",
+  "kind": "Public / guest-facing",
+  "assembly": false
+ },
+ {
+  "floor": "4",
+  "space_no": "439",
+  "name": "Ice Machine",
+  "kind": "Back-of-house",
+  "assembly": false
+ },
+ {
+  "floor": "4",
+  "space_no": "440",
+  "name": "Elev.",
+  "kind": "Elevator / hoistway",
+  "assembly": false
+ },
+ {
+  "floor": "4",
+  "space_no": "441",
+  "name": "Stair 2",
+  "kind": "Exit stair enclosure",
+  "assembly": false
+ }
+]
