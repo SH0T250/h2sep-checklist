@@ -1,10 +1,13 @@
 # Demo room photographs, observed 2026-08-20
 
-Austin sent 25 phone photos of the finished demo guest room (shot 2026-08-12, Drive folder
-"8. Photos of Demo Room"). He identified it as a King Studio, room 108. NOTE: two photos show
-**110** hand written in pink marker on the corridor wallpaper beside the door. Room 110 is also a
-King Studio, so the ROOM TYPE is the same either way and this spec stands. The room number needs
-confirming before any photo is filed against a specific room record.
+Austin sent 24 phone photos of the finished demo guest room (shot 2026-08-12, Drive folder
+"8. Photos of Demo Room"). CONFIRMED BY AUSTIN 2026-08-20: the room is **ROOM 110**, a King Studio.
+Two of the photographs independently show '110' hand written in pink marker on the corridor
+wallpaper beside the door.
+
+THE PHOTOGRAPHS ARE ON DISK at /tmp/demo-room/ (24 files, 2000x1500). They are NOT in this repo and
+must not be committed: they are photographs of a client's unopened hotel. If they are lost, they can
+be recovered from the session transcript, where they are stored as base64 image blocks.
 
 This file is the written record of what the photographs show, because the images themselves are not
 on disk. Everything below is OBSERVED IN THE PHOTOGRAPHS, not inferred from drawings. Where a

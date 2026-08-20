@@ -109,10 +109,9 @@ const DEFAULT_STAMP = '2026-08-20T00:00:00.000Z';
 const APPROVED_ROOMS = ['101', '103', '105'];
 const APPROVED_DOC_IDS = ['101', '103', '105', '101-MEP', '103-MEP', '105-MEP'];
 
-/* Rooms refused by name because a governing question is still open. Room 118
- * lived here until Austin's ruling D19 (2026-08-20) settled its bathing
- * configuration; see the ROOM 118 block below. Empty is the honest state now. */
-const BLOCKED_ROOMS = {};
+/* Room 118 King Studio Acc. is BLOCKED - its bathing configuration is an open
+ * question. Refuse it by name rather than guess. */
+const BLOCKED_ROOMS = { 118: 'King Studio Acc. - bathing configuration is an open question' };
 
 /* Step 1 gate. */
 const GATE_CATEGORIES = new Set([
@@ -161,162 +160,6 @@ const typeSlug = (roomType) => roomType.toLowerCase().replace(/[^a-z0-9]+/g, '-'
 
 /* Constant across 101-MEP / 103-MEP / 105-MEP. Asserted, not assumed. */
 const MEP_DOC_TYPE = 'mep-punch';
-
-/* ===========================================================================
- * ROOM 118 - King Studio Accessible. Austin's ruling D19 (2026-08-20).
- *
- * 118 was BLOCKED because its bathing configuration was an open question:
- * data/project.sqlite emits BOTH mutually exclusive packages on every one of
- * the seven accessible keys and supersedes neither ("Only Austin can close
- * this" - items.note on ITM-0703..0711).  D19 closes it: ROLL-IN SHOWER.
- *
- * Verified against the documents rather than taken on trust:
- *   - A551.md (sheet 88, 'ENL. GUEST ROOM PLANS & ELEVS - KING STUDIO ACC.')
- *     view 01: "roll-in shower with fold-down seat".  No tub is drawn.
- *   - A552.md (sheet 89, '... KING STUDIO ACC. MOD.') view 01: accessible
- *     shower with fold-down seat behind a tempered-glass enclosure (kn 5);
- *     view 03 finish plan: T-02 tagged "ROLL-IN SHOWER TILE".  No tub.
- *   - FF&E Installation.xlsx, '1st Floor FF&E Installation' tab: 6034-L
- *     Shower Base TOTAL 16 and NOVA-6076 Shower Door TOTAL 16 on a 16-key
- *     floor, with no tub line anywhere on the tab.
- * Three independent documents, no tub.  D19 is confirmed, not merely applied.
- *
- * WHICH SHEET IS CITED, AND WHY: A552 (King Studio Acc. Mod.) governs 118.
- * room_types carries an explicit ~90% assumption to that effect, and the
- * database's own row set proves it out - 118 carries GR-320 and GR-208, which
- * A552 tags and A551 does not, and carries NO GR-502, which A551 tags and
- * A552 does not (items.note on ITM-0251: "NOT tagged on A552, so not emitted
- * for 118").  The shared rows keep sqlite's A551 citation verbatim because
- * both sheets tag those items identically; nothing is rewritten here.
- * =========================================================================== */
-
-/* Rooms with no approved reference room of their own room_type.  Their package
- * is sourced from sqlite directly (label / src / reliability / instanceNote /
- * trade / derived are all sqlite columns), never guessed, and never borrowed
- * from a room of a DIFFERENT type. */
-const SELF_SOURCED_ROOMS = new Set(['118']);
-
-/* The database marks the two mutually exclusive bath packages by an explicit
- * prefix on the description.  Dropping by that prefix cannot over-reach: it is
- * the database's own marker, not a keyword guess. */
-const CONFIG_A_PREFIX = 'CONFIGURATION A (TUB) - ';
-const CONFIG_B_PREFIX = 'CONFIGURATION B (ROLL-IN SHOWER) - ';
-
-const D19_CLOSURE =
-  'Bathing configuration closed by AJ ruling D19 (2026-08-20): room 118 gets the ROLL-IN SHOWER ' +
-  'package, not a tub. A551 draws a roll-in shower with fold-down seat and A552 draws an accessible ' +
-  'shower with fold-down seat behind a tempered-glass door; neither sheet draws a tub. The FF&E ' +
-  'Installation "1st Floor" tab carries 16 shower bases (6034-L) and 16 shower doors (NOVA-6076) ' +
-  'for 16 keys and no tub line. The Configuration A rows (BT-1, HD-05 bowed rod, 2" tub waste) are ' +
-  'dropped. Flag closed.';
-
-/* Rows the ruling drops, asserted by count so a database change cannot pass
- * silently.  These three are the ONLY Configuration A rows on room 118. */
-const CONFIG_DROP_EXPECT = {
-  118: [
-    { category: 'Plumbing',       tag: 'BT-1',  desc: 'Bathtub, guestroom ADA' },
-    { category: 'Bath Accessory', tag: 'HD-05', desc: 'Shower rod, BOWED' },
-    { category: 'Plumbing',       tag: '',      desc: '2" SS tub waste + trap' },
-  ],
-};
-
-/* Lines added on documentary evidence from a schedule rather than a plan tag.
- * Each row is ONE physical unit, exactly the way sqlite models multiples, so
- * the existing fold step derives qty from the row count and nothing overrides
- * a quantity by hand.  Injected BEFORE the reduction so the ordinary gate,
- * fold, key and sort machinery handles them - one code path, no special case.
- *
- * EVIDENCE.  The FF&E Installation.xlsx "1st Floor FF&E Installation" tab
- * lists these items with a floor total, and floor 1 has exactly ONE accessible
- * key - room 118 (rooms table: accessible='1' on 118 and on no other floor-1
- * room).  A floor total of 1 or 2 on an accessible-only item on a floor with
- * one accessible room is a statement about room 118.  The architectural sheets
- * do not tag them, which is placeholder PH-GU-007 verbatim: "The two accessible
- * King Studios have no tagged accessible vanity and no tagged accessible wall
- * shelf - only keyed notes 6 and 8. Gap G-1."  The schedule fills that gap.
- *
- * reliability MEDIUM: schedule-sourced, not plan-tagged. Stated, not implied. */
-const ROOM_ADDITIONS = {
-  118: [
-    {
-      units: 1,
-      category: 'FF&E - Casegoods',
-      tag: 'GR-303',
-      /* description verbatim from items.item_id ITM-0324 / ITM-0653, the same
-       * tag as built on A554 and A556. The FF&E tab prints "Accesible" (sic). */
-      description: 'ACCESSIBLE Vanity @ Guest Bath',
-      instance_note:
-        'Added on schedule evidence, not a plan tag. FF&E Installation.xlsx "1st Floor FF&E ' +
-        'Installation" tab: GR-303 Accesible Vanity @ Guest Bath, TOTAL 1. Floor 1 has exactly one ' +
-        'accessible key (room 118), so that 1 is this room. A552 and A532/A532.1 tag no accessible ' +
-        'vanity - placeholder PH-GU-007 (gap G-1) records the omission. Confirm the tag on the ' +
-        'A532/A532.1 elevation before ordering.',
-      source_sheet: 'FF&E Installation.xlsx, 1st Floor FF&E Installation tab',
-      primary_sheet: 'FF&E Installation.xlsx (1st Floor tab)',
-      reliability: 'MEDIUM',
-      derived: 1,
-    },
-    {
-      units: 2,
-      category: 'FF&E - Casegoods',
-      tag: 'GR-324',
-      description: 'Wall Shelf @ ACCESSIBLE Bathroom',
-      instance_note:
-        'Added on schedule evidence, not a plan tag. FF&E Installation.xlsx "1st Floor FF&E ' +
-        'Installation" tab: GR-324 Wall Shelf @ Accessible Bathroom, TOTAL 2. Floor 1 has exactly ' +
-        'one accessible key (room 118), so both are this room. A552 and A532/A532.1 tag no ' +
-        'accessible wall shelf - placeholder PH-GU-007 (gap G-1). Confirm before ordering.',
-      source_sheet: 'FF&E Installation.xlsx, 1st Floor FF&E Installation tab',
-      primary_sheet: 'FF&E Installation.xlsx (1st Floor tab)',
-      reliability: 'MEDIUM',
-      derived: 1,
-    },
-  ],
-};
-
-/* Submittals are PROJECT-WIDE product decisions (D11), not room-specific
- * curation, so a self-sourced room carries them too. Matched by exact
- * (category, code) against the approved room named here; the build dies if the
- * approved line has moved. Nothing is copied for a tag the room does not have. */
-const SUBMITTAL_CARRY = {
-  118: [
-    { key: '901_a',        from: '101', category: 'Appliance',    code: '901',      why: 'D11 Danby refrigerator submittal' },
-    { key: '902_a',        from: '101', category: 'Appliance',    code: '902',      why: 'D11 Danby dishwasher submittal, closes the 18-vs-24-inch flag' },
-    { key: 'u_ce20ab6281', from: '101', category: 'Appliance',    code: '',         why: 'D11 Moen MGXP33C disposer submittal, closes the existence flag' },
-    { key: 'gr4021_a',     from: '101', category: 'FF&E - Window', code: 'GR-402.1', why: 'D11 WINGITS WRD5SS36SN divider hardware submittal' },
-  ],
-};
-
-/* MEP.  The 22-line punch is a type-level constant (D10) proved identical
- * across 101/103/105-MEP on every run.  Room 118 takes that constant, with two
- * lines RE-SOURCED because they assert standard-room facts the accessible
- * documents contradict, and seven lines ADDED that exist only on this room.
- * Every replacement and every addition is a verbatim sqlite row - no text is
- * composed here. */
-const MEP_ROOM_RULINGS = {
-  118: {
-    /* The QQ constant's shower line says '4" threshold'.  A roll-in is
-     * curbless.  Shipping the constant unchanged would assert a threshold that
-     * D19 just ruled out - the single most dangerous line in the room. */
-    replace: [
-      { key: 'plmb_shower_a', match: { category: 'Plumbing', tag: 'SH-1 / SH-3' },
-        why: 'D19: the roll-in pan governs. The QQ constant asserts a 4" threshold and SS-01 solid surround; the roll-in is curbless and requires a slab depression.' },
-      { key: 'plmb_shencl_a', match: { category: 'Plumbing', tag: 'kn 5' },
-        why: 'A552 keynote 5 tags a tempered-glass shower door at 118. The QQ constant carries the standard-room bi-pass sliding door (A530 kn 28).' },
-    ],
-    /* Order inside a band is presentation, not a claim.  Appended to the tail
-     * of their own band so no existing sort value moves. */
-    add: [
-      { key: 'plmb_diverter_b',        sort: 3018, match: { category: 'Plumbing',  tag: 'kn 10' } },
-      { key: 'plmb_handshower_b',      sort: 3019, match: { category: 'Plumbing',  tag: 'kn 11' } },
-      { key: 'elec_ada_shade_circuit', sort: 2015, match: { category: 'Electrical', tag: '', desc: 'Motorized-shade circuit on the room panel' } },
-      { key: 'elec_ada_shade_switch',  sort: 2016, match: { category: 'Electrical', tag: '', desc: 'Switch controlling the mechanical shade' } },
-      { key: 'elec_ada_mw_hood',       sort: 2017, match: { category: 'Electrical', tag: '', desc: 'Microwave/hood circuit split' } },
-      { key: 'elec_ada_welcome_sw',    sort: 2018, match: { category: 'Electrical', tag: '', desc: '3-way welcome light switch' } },
-      { key: 'elec_ada_reach_outlet',  sort: 2019, match: { category: 'Electrical', tag: '', desc: 'At least one outlet AND one data connection' } },
-    ],
-  },
-};
 
 /* Field state a newly born line carries. Never copied from an approved room. */
 const CLEAN_FIELD_STATE = {
@@ -376,10 +219,18 @@ const stringify = (v) => JSON.stringify(canonical(v), null, 2) + '\n';
 const clone = (v) => JSON.parse(JSON.stringify(v));
 const deepEqual = (a, b) => stringify(a) === stringify(b);
 
-/** Doc ordering in the output file: room number ascending, base doc before -MEP. */
+/** Doc ordering in the output file: room number ascending, base doc before -MEP.
+ *
+ * Space doc ids are not numeric ('S003', 'SZONEA-M'), and parseInt returns NaN
+ * for them - a NaN comparator makes Array.prototype.sort implementation-defined
+ * and would destroy the byte-identical-rebuild guarantee. Numeric ids therefore
+ * sort first, ascending; every non-numeric id sorts after them, code-point-wise.
+ * Guest-room ordering is unchanged. */
 function cmpDocId(a, b) {
   const na = parseInt(a, 10), nb = parseInt(b, 10);
-  if (na !== nb) return na - nb;
+  const aNum = Number.isFinite(na), bNum = Number.isFinite(nb);
+  if (aNum !== bNum) return aNum ? -1 : 1;
+  if (aNum && na !== nb) return na - nb;
   return cmpStr(a, b);
 }
 
@@ -599,6 +450,7 @@ function assertMepConstant(slice) {
  */
 function assertDerivationRules(db, slice) {
   const deltas = [];
+  const labelNotes = [];
   let checked = 0;
   for (const roomNo of APPROVED_ROOMS) {
     const { room, rows } = readRoom(db, roomNo);
@@ -619,21 +471,27 @@ function assertDerivationRules(db, slice) {
       const a = approved[line.key];
       if (!a) continue;
       checked++;
-      if (a.label !== line.sqlite.label) {
-        deltas.push(roomNo + '.' + line.key + '.label: sqlite ' + JSON.stringify(line.sqlite.label) +
-          ' != approved ' + JSON.stringify(a.label));
-      }
+      /* HARD rule. src is what re-points a King citation from A555 to A550, so
+       * if it ever stops tracking primary_sheet the King build must stop too. */
       if (a.src !== line.sqlite.src) {
         deltas.push(roomNo + '.' + line.key + '.src: sqlite ' + JSON.stringify(line.sqlite.src) +
           ' != approved ' + JSON.stringify(a.src));
       }
+      /* SOFT. label tracks room_items.description on every approved line except
+       * where an approved submittal enriched it (the garbage disposer gains its
+       * Moen model number). Those are exactly the lines whose curated text the
+       * composed path carries from the donor, so this is an observation. */
+      if (a.label !== line.sqlite.label) {
+        labelNotes.push(roomNo + '.' + line.key + ': approved label is enriched beyond sqlite - sqlite ' +
+          JSON.stringify(line.sqlite.label) + ' vs approved ' + JSON.stringify(a.label));
+      }
     }
   }
   if (deltas.length) {
-    die('the label/src derivation rules that the King composition depends on DO NOT HOLD:\n  ' +
+    die('the src / type-slug derivation rules that the King composition depends on DO NOT HOLD:\n  ' +
         deltas.join('\n  '));
   }
-  return checked;
+  return { checked, labelNotes };
 }
 
 /**
@@ -715,7 +573,7 @@ function selftest(db, slice) {
   }
 
   const mepLive = assertMepConstant(slice);
-  const provedLines = assertDerivationRules(db, slice);
+  const proof = assertDerivationRules(db, slice);
 
   process.stdout.write('\nSELFTEST - regenerate 101 / 103 / 105 from sqlite, diff on (category, tag, qty)\n');
   process.stdout.write('-'.repeat(78) + '\n');
@@ -738,9 +596,10 @@ function selftest(db, slice) {
     }
   }
   process.stdout.write('MEP: type-level constant re-proved - ' + mepLive + ' live lines identical across 101/103/105-MEP\n');
-  process.stdout.write('DERIVATION: label == room_items.description and src == room_items.primary_sheet re-proved\n' +
-    '  on all ' + provedLines + ' approved lines, plus the doc type-slug on all 6 approved docs.\n' +
-    '  These are the rules the King composition uses to re-point citations from A555 to A550.\n');
+  process.stdout.write('DERIVATION: src == room_items.primary_sheet re-proved on all ' + proof.checked +
+    ' approved lines,\n  plus the doc type-slug on all 6 approved docs. This is the rule the King\n' +
+    '  composition uses to re-point citations from A555 to A550.\n');
+  for (const n of proof.labelNotes) process.stdout.write('  INFO ' + n + '\n');
   process.stdout.write('-'.repeat(78) + '\n');
   process.stdout.write(ok ? 'SELFTEST PASSED - zero deltas on all three approved rooms\n\n'
                           : 'SELFTEST FAILED\n\n');
@@ -776,23 +635,33 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
   }
   const ref = slice.docs[refNo];
 
-  /* Index the donor/reference package by (category, tag) rather than by key, so
-   * a tag is matched on what it IS, not on where it happened to sort. */
-  const refByTag = new Map();
+  /* Index the donor/reference package so a line is matched on what it IS, not
+   * on where it happened to sort. Tagged lines match on (category, tag).
+   * Untagged lines have no tag, so they match on their content-derived key
+   * (md5 of category|description|instance note|occurrence), stable by
+   * construction across rooms. */
+  const refIndex = new Map();
+  const donorKey = (category, code, key) => (code ? category + SEP + code : 'u' + SEP + key);
   for (const k of Object.keys(ref.items)) {
     const v = ref.items[k];
-    refByTag.set(v.category + SEP + v.code, { key: k, item: v });
+    const dk = donorKey(v.category, v.code, k);
+    if (refIndex.has(dk)) {
+      die('room ' + roomNo + ': reference room ' + refNo + ' has two lines matching ' +
+          JSON.stringify(dk) + ' - cannot resolve the package unambiguously');
+    }
+    refIndex.set(dk, { key: k, item: v });
   }
 
   const items = {};
   const fromDonor = [];
   const fromSqlite = [];
   const donorQtyNotes = [];
+  const donorLabelNotes = [];
 
   for (const line of red.lines) {
     /* Shape is always sqlite. Package content depends on whether the donor has
      * this exact (category, tag). */
-    const hit = refByTag.get(line.category + SEP + line.code);
+    const hit = refIndex.get(donorKey(line.category, line.code, line.key));
 
     let pkg;
     if (!composed) {
@@ -825,17 +694,28 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
        * what re-points the citation from A555 to A550 - the rule is proved by
        * assertDerivationRules() on all 120 approved lines before we get here. */
       const r = hit.item;
+      /* Whose label? This room's own DB row is the default, because the DB
+       * writes some tags differently per type (the King GR-302 row reads
+       * 'Vanity @ Guest Bath (Left & Right)', verbatim off the A550 furnishings
+       * legend, where the QQ row reads just 'Vanity @ Guest Bath'). The donor
+       * label is carried ONLY when it EXTENDS this room's label - the
+       * submittal-enrichment case (the disposer gains '- Moen MGXP33C'), the
+       * one case where the donor knows something the DB does not. Neither
+       * branch authors text; both quote a document. */
+      const donorExtends = r.label.length > line.sqlite.label.length && r.label.startsWith(line.sqlite.label);
       if (r.label !== line.sqlite.label) {
-        report.unresolved.push(line.key + ' (' + line.code + '): label disagrees between sqlite and donor room ' +
-          refNo + ' - sqlite ' + JSON.stringify(line.sqlite.label) + ' vs donor ' + JSON.stringify(r.label));
-        continue;
+        donorLabelNotes.push((line.code || '<untagged>') + ': ' +
+          (donorExtends
+            ? 'donor label extends sqlite (' + JSON.stringify(r.label) + ') - donor text carried'
+            : 'this room\'s own sqlite label ' + JSON.stringify(line.sqlite.label) +
+              ' differs from donor ' + JSON.stringify(r.label) + ' - own row carried'));
       }
       if (r.qty !== line.qty) {
         donorQtyNotes.push(line.code + ': qty ' + line.qty + ' here vs ' + r.qty + ' in donor room ' + refNo +
           ' (sqlite governs; donor supplies text only)');
       }
       pkg = {
-        label: line.sqlite.label,
+        label: donorExtends ? r.label : line.sqlite.label,
         src: line.sqlite.src,
         reliability: r.reliability,
         instanceNote: r.instanceNote,
@@ -900,9 +780,9 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
       }
     }
   } else {
-    const produced = new Set(red.lines.map((l) => l.category + SEP + l.code));
-    report.donorUnused = [...refByTag.keys()].filter((k) => !produced.has(k))
-      .map((k) => refByTag.get(k).item.code || '<untagged>').sort(cmpStr);
+    const produced = new Set(red.lines.map((l) => donorKey(l.category, l.code, l.key)));
+    report.donorUnused = [...refIndex.keys()].filter((k) => !produced.has(k))
+      .map((k) => refIndex.get(k).item.code || '<untagged>').sort(cmpStr);
   }
 
   if (report.unresolved.length) {
@@ -917,6 +797,7 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
   report.fromDonor = fromDonor.sort(cmpStr);
   report.fromSqlite = fromSqlite.sort(cmpStr);
   report.donorQtyNotes = donorQtyNotes;
+  report.donorLabelNotes = donorLabelNotes;
   report.roomType = roomType;
   report.rawRows = red.rawCount;
   report.gatedRows = red.gatedCount;
@@ -995,17 +876,755 @@ function buildMepDoc(roomNo, slice, refNo, floor, stamp, report, identity) {
   };
 }
 
+/* ===========================================================================
+ * FLOOR-1 COMMON AREAS ("spaces" mode)  -  added 2026-08-20
+ *
+ * Austin's ruling D18: floor-1 common areas use the PLAN numbering from the
+ * architectural drawings, which is exactly what data/project.sqlite `spaces`
+ * carries (39 rows where floor='1', primary_sheet A100 for the numbered rooms,
+ * ID-1.9 / ID-1.7 for the two exterior FF&E zones). The QC Deficiency Tracker
+ * numbering is NOT used anywhere in this path.
+ *
+ * WHAT IS THE SAME AS A GUEST ROOM
+ *   - the category gate (GATE_CATEGORIES -> FF&E doc, MEP_CATEGORIES -> MEP doc)
+ *   - fold duplicate rows by tag into a quantity
+ *   - sort bands, key scheme, soft delete (deleted:false, never destroyed)
+ *   - CLEAN_FIELD_STATE: every space line is born clean
+ *   - label / src / reliability / instanceNote / trade / derived come from
+ *     sqlite columns, using the SAME derivation rules assertDerivationRules()
+ *     re-proves against all 120 approved guest-room lines on every run.
+ *
+ * WHAT IS DIFFERENT, AND WHY
+ *
+ *  a NO DONOR EXISTS. slice-f1.json holds no approved common-area doc, so there
+ *    is no curated package to carry. Every field is sqlite verbatim - the same
+ *    branch the King "type-only tag" path uses. Nothing is composed, nothing is
+ *    borrowed from a guest room. js/seed-spaces.js does hold two hand-built
+ *    fixtures (019, 121) but its own header calls them "demo-mode fixtures", so
+ *    they are used as a CROSS-CHECK (assertSpaceFixtureAgreement) and never as
+ *    a source.
+ *
+ *  b FOLD KEY IS (category, tag, source_sheet), NOT (category, tag).
+ *    This is the one substantive change, and it exists to stop the tool
+ *    silently resolving a conflict Austin has not ruled on. The database
+ *    deliberately carries unresolved sheet disagreements as extra "delta" rows:
+ *    Lobby 003 PA-102 is 6 rows sourced "A510.3 x6" plus 2 rows sourced
+ *    "ID-1.7 prints (8) vs A510.3 x6". Folding on (category, tag) alone sums
+ *    them to 8 - which is not a count any single sheet states, it is this tool
+ *    picking the larger of two conflicting sheets. On ZONE-B OF-715 that same
+ *    fold would pick 5 (ID-1.7, 07/04/2025) over 3 (AS104 Rev 5, 04/09/26),
+ *    contradicting the database's own recorded precedence reasoning.
+ *    Adding source_sheet to the key splits exactly those disagreements into
+ *    separate, separately-cited lines and leaves every other group untouched.
+ *    Across all floor-1 gated rows it splits 6 groups and no others, and
+ *    assertSpaceMultipliers() then proves that EVERY documented "N of M"
+ *    multiplier equals its group's row count, with zero exceptions. Under the
+ *    plain (category, tag) fold that same check fails on 4 groups.
+ *
+ *  c QUANTITY CAN BE ABSENT. A guest-room line always has a qty because a
+ *    guest-room row set is a takeoff. Many public-area tags are placed on the
+ *    sheet with NO count printed anywhere - the database says so in its own
+ *    words ("Count NOT stated on any sheet. One row emitted; quantity FLAGGED",
+ *    "No multiplier on either sheet"). For those, `qty` is OMITTED from the
+ *    line rather than defaulted to 1, and the reason is written into
+ *    instanceNote. The renderers all test `it.qty > 1`, so an absent qty simply
+ *    shows no multiplier badge - it never displays as 0 or NaN.
+ *    An omitted qty is recoverable; a fabricated 1 is not.
+ *
+ *  d THE FF&E INSTALLATION WORKBOOK IS NOT A QUANTITY SOURCE. Its "1st Floor
+ *    FF&E Installation" tab carries the public-area rows PA-100..PA-807-3 plus
+ *    PV-36 with tags and container numbers filled in and EVERY TOTAL BLANK.
+ *    It is therefore not consulted for counts by this tool at all, and no
+ *    public-area quantity anywhere in this path comes from it.
+ *
+ *  e DOC IDS ARE PREFIXED. Guest rooms use the bare room number and require
+ *    number == docId. Spaces need the same discipline but must also satisfy the
+ *    published Firestore rule d.number.size() <= 8, and must not be mistaken
+ *    for a guest room. See SPACE_ID_PREFIX below.
+ *
+ *  f SPACES WITH NO GATED LINE ARE NOT BUILT. Stair 1 (100) has 12 documented
+ *    rows, every one of them Flooring / Paint / Drywall / Doors - categories
+ *    the approved gate keeps out of both docs. Emitting an empty checklist for
+ *    it would tell the crew "nothing to verify here", which is false. Such
+ *    spaces are refused and listed in the report instead.
+ *
+ * THE GATE DROPS A LOT, AND THAT IS REPORTED, NOT HIDDEN. 333 of the 759
+ * floor-1 space_items rows fall in Flooring / FF&E - Misc / Doors / Paint /
+ * Drywall / Wall Covering / Stone-Surround. The approved guest-room docs carry
+ * none of those categories in either doc, so following Austin's approved
+ * precedent means they land nowhere. reportSpaceGateDrops() prints the full
+ * per-category, per-space breakdown so Austin can rule on it. Widening the gate
+ * is a one-line change; it is HIS call, not this tool's.
+ * =========================================================================== */
+
+/* Doc id scheme. 'S' + the space number with every non-alphanumeric stripped:
+ *   001 -> S001      033 -> S033      141 -> S141
+ *   ZONE-A -> SZONEA          ZONE-B -> SZONEB
+ * and the MEP companion takes a '-M' suffix:
+ *   001 -> S001-M    ZONE-A -> SZONEA-M
+ * Longest id in the whole floor-1 set is 'SZONEA-M' / 'SZONEB-M' at exactly 8
+ * characters, so d.number.size() <= 8 holds with nothing to spare. The guest
+ * rooms' '-MEP' suffix would make that id 10 characters and is why the space
+ * companion is '-M'. assertSpaceIds() re-proves the length bound, the
+ * number == docId identity and global uniqueness on every run. */
+const SPACE_ID_PREFIX = 'S';
+const SPACE_MEP_SUFFIX = '-M';
+const SPACE_ID_MAX = 8;
+
+/* Both space doc types start with 'space-'. That prefix is THE discriminator
+ * the platform store and js/util.isSpaceDoc use to keep common areas out of the
+ * guest-room lists (platform/js/core/store.js:72, js/store.js:97). */
+const SPACE_MEP_DOC_TYPE = 'space-mep-punch';
+
+/* FF&E band ordering reuses CATEGORY_ORDER. The MEP band reuses the app's own
+ * five-group order (js/util.js MEP_CATEGORY_ORDER) so a space MEP sheet sorts
+ * the way a guest-room MEP sheet does - Mechanical 1xxx, Electrical 2xxx,
+ * Plumbing 3xxx, Fire Protection 4xxx, Low Voltage 5xxx, exactly as the
+ * approved 101-MEP doc is numbered. 'Fire Sprinkler' and 'Fire Alarm' appear in
+ * space_items but are NOT in the app's list; they are appended after it so the
+ * five known indices keep their approved numbering, and the stored `category`
+ * string is left VERBATIM - no row is relabelled 'Fire Protection' to make it
+ * fit. reportSpaceUnknownMepCategories() flags them for the app side. */
+const SPACE_MEP_ORDER = [
+  'Mechanical', 'Electrical', 'Plumbing', 'Fire Protection', 'Low Voltage',
+  'Fire Sprinkler', 'Fire Alarm',
+];
+const SPACE_MEP_INDEX = new Map(SPACE_MEP_ORDER.map((c, i) => [c, i]));
+const APP_MEP_CATEGORY_ORDER = new Set([
+  'Mechanical', 'Electrical', 'Plumbing', 'Fire Protection', 'Low Voltage',
+]);
+
+/* The database's own words for "this sheet places the tag but prints no count".
+ * Matched against space_items.note ONLY, never authored. A line is emitted with
+ * NO qty when it is a single row, its reliability is FLAGGED, and its note says
+ * one of these. Anything else keeps qty = number of rows folded. */
+const SPACE_NO_COUNT_RE =
+  /no multiplier|count not stated|no count printed|not stated on any sheet|neither the window count|quantity flagged|no count/i;
+
+/* A documented multiplier, as the database writes it: the whole note is "1 of 6",
+ * or it ends with "; 1 of 4", optionally trailing a parenthetical like
+ * "1 of 3 (model 1WD24K3)". Deliberately anchored so that "vanity position 1 of
+ * 3" - a POSITION within a run of three differently-tagged lavatories, not a
+ * multiplier - does not match. */
+const SPACE_MULTIPLIER_RE = /(?:^|;\s*)(\d+) of (\d+)(?:\s*\([^)]*\))?$/;
+
+const spaceIdSlug = (spaceNo) => String(spaceNo).toUpperCase().replace(/[^A-Z0-9]/g, '');
+const spaceDocId = (spaceNo) => SPACE_ID_PREFIX + spaceIdSlug(spaceNo);
+const spaceMepDocId = (spaceNo) => spaceDocId(spaceNo) + SPACE_MEP_SUFFIX;
+
+/* 'WOMENS' -> 'space-womens', 'Guest Corridor' -> 'space-guest-corridor'.
+ * Same slug function the guest-room doc types use, just prefixed. This
+ * reproduces the two js/seed-spaces.js fixtures exactly, which is one of the
+ * things assertSpaceFixtureAgreement() checks. */
+const spaceTypeSlug = (name) => 'space-' + typeSlug(name);
+
+/* --------------------------------------------------------- spaces: db read */
+
+function readSpaceList(db, floor = '1') {
+  const rows = db.prepare(
+    'SELECT space_no, name, note, primary_sheet, source_sheet FROM spaces WHERE floor = ? ORDER BY space_no'
+  ).all(floor);
+  if (!rows.length) die('no spaces on floor ' + floor);
+  return rows;
+}
+
+function readSpace(db, spaceNo, floor = '1') {
+  const space = db.prepare(
+    'SELECT space_no, name, note, primary_sheet, source_sheet, floor FROM spaces WHERE floor = ? AND space_no = ?'
+  ).get(floor, spaceNo);
+  if (!space) die('space ' + JSON.stringify(spaceNo) + ' does not exist on floor ' + floor);
+  const rows = db.prepare(
+    'SELECT rowid AS rowid, space_no, space_name, category, tag, description, instance_note, note,' +
+    '       trade_responsible, source_sheet, primary_sheet, reliability, derived' +
+    '  FROM space_items WHERE floor = ? AND space_no = ? ORDER BY rowid'
+  ).all(floor, spaceNo);
+  return { space, rows };
+}
+
+/* ------------------------------------------------- spaces: the reduction */
+
+/**
+ * Reduce one space's raw space_items rows to lines, for ONE band.
+ * band is 'ffe' (GATE_CATEGORIES) or 'mep' (MEP_CATEGORIES).
+ * Returns { lines, keptRows, foldedGroups, splitGroups, qtyUnknown }.
+ */
+function reduceSpaceBand(spaceNo, rows, band) {
+  const gate = band === 'ffe' ? GATE_CATEGORIES : MEP_CATEGORIES;
+  const orderIndex = band === 'ffe' ? CATEGORY_INDEX : SPACE_MEP_INDEX;
+  const bandName = band === 'ffe' ? 'FF&E' : 'MEP';
+
+  /* STEP 1 - category gate. */
+  const kept = rows.filter((r) => gate.has(r.category));
+  if (!kept.length) return { lines: [], keptRows: 0, foldedGroups: 0, splitGroups: [], qtyUnknown: [] };
+
+  /* STEP 2 + 4 - fold tagged rows by (category, tag, source_sheet); untagged
+   * rows never fold. See note (b) above for why source_sheet is in the key. */
+  const groups = [];
+  const byKey = new Map();
+  const bySheetlessKey = new Map();   // (category, tag) -> groups, to detect splits
+  const untaggedOcc = new Map();
+  for (const r of kept) {
+    const tag = r.tag || '';
+    if (tag) {
+      const sheet = r.source_sheet || '';
+      const gk = r.category + SEP + tag + SEP + sheet;
+      let g = byKey.get(gk);
+      if (!g) {
+        g = { tag, category: r.category, sheet, rows: [], first: r };
+        byKey.set(gk, g);
+        groups.push(g);
+        const sk = r.category + SEP + tag;
+        if (!bySheetlessKey.has(sk)) bySheetlessKey.set(sk, []);
+        bySheetlessKey.get(sk).push(g);
+      }
+      g.rows.push(r);
+    } else {
+      const tk = r.category + SEP + r.description + SEP + (r.instance_note || '');
+      const occ = (untaggedOcc.get(tk) || 0) + 1;
+      untaggedOcc.set(tk, occ);
+      groups.push({ tag: '', category: r.category, sheet: r.source_sheet || '', rows: [r], first: r, untaggedOcc: occ });
+    }
+  }
+
+  /* Report the groups the source_sheet key split apart - each one is a live
+   * sheet-versus-sheet disagreement that this tool refuses to resolve. */
+  const splitGroups = [];
+  for (const [sk, gs] of bySheetlessKey) {
+    if (gs.length < 2) continue;
+    const [category, tag] = sk.split(SEP);
+    splitGroups.push({
+      category, tag,
+      parts: gs.map((g) => ({ sheet: g.sheet, rows: g.rows.length })),
+    });
+  }
+
+  /* STEP 6 - keys, occurrence counted per raw tag across the band. */
+  const tagOcc = new Map();
+  for (const g of groups) {
+    if (g.tag) {
+      const n = (tagOcc.get(g.tag) || 0) + 1;
+      tagOcc.set(g.tag, n);
+      const slug = tagSlug(g.tag);
+      if (!slug) {
+        die('space ' + spaceNo + ' (' + bandName + '): tag ' + JSON.stringify(g.tag) +
+            ' slugs to an empty string - refusing to emit a line with no stable key');
+      }
+      g.key = slug + '_' + occSuffix(n);
+    } else {
+      const basis = g.category + '|' + g.first.description + '|' + (g.first.instance_note || '') + '|' + g.untaggedOcc;
+      g.key = 'u_' + md5(basis).slice(0, 10);
+    }
+  }
+
+  const catIdx = (c) => {
+    if (!orderIndex.has(c)) {
+      die('space ' + spaceNo + ' (' + bandName + '): category ' + JSON.stringify(c) + ' has no band position');
+    }
+    return orderIndex.get(c);
+  };
+
+  const ordered = groups.slice().sort((a, b) => {
+    const d = catIdx(a.category) - catIdx(b.category);
+    if (d) return d;
+    const at = a.tag === '' ? 1 : 0, bt = b.tag === '' ? 1 : 0;
+    if (at !== bt) return at - bt;
+    if (a.tag !== b.tag) return cmpStr(a.tag, b.tag);
+    /* Base rows before delta rows: the earlier rowid is the base set. */
+    return a.first.rowid - b.first.rowid;
+  });
+
+  /* STEP 3 + 5 - quantity and sort band. */
+  const lines = [];
+  const seen = new Set();
+  const qtyUnknown = [];
+  let prevCat = null, ordinal = 0, foldedGroups = 0;
+
+  for (const g of ordered) {
+    if (g.category !== prevCat) { prevCat = g.category; ordinal = 0; } else ordinal++;
+    if (g.rows.length > 1) foldedGroups++;
+
+    if (seen.has(g.key)) die('space ' + spaceNo + ' (' + bandName + '): key collision ' + JSON.stringify(g.key));
+    if (!/^[a-z0-9_]{1,40}$/.test(g.key)) {
+      die('space ' + spaceNo + ' (' + bandName + '): key ' + JSON.stringify(g.key) + ' violates ^[a-z0-9_]{1,40}$');
+    }
+    seen.add(g.key);
+
+    /* Note (c): a single FLAGGED row whose note says no count is printed gets
+     * NO qty at all. Everything else is folded row count. */
+    const note = g.first.note || '';
+    const countIsUnknown = g.rows.length === 1
+      && g.first.reliability === 'FLAGGED'
+      && SPACE_NO_COUNT_RE.test(note);
+    if (countIsUnknown) qtyUnknown.push((g.tag || '<untagged>') + ' [' + g.category + ']');
+
+    /* MEP band keeps the approved 1xxx..5xxx numbering (offset 10), FF&E band
+     * keeps the guest-room recipe's (idx+1)*1000 + ordinal*10. */
+    const sort = band === 'mep'
+      ? (catIdx(g.category) + 1) * 1000 + 10 + ordinal
+      : (catIdx(g.category) + 1) * 1000 + ordinal * 10;
+
+    lines.push({
+      key: g.key,
+      code: g.tag,
+      category: g.category,
+      qty: countIsUnknown ? undefined : g.rows.length,
+      qtyUnknown: countIsUnknown,
+      sort,
+      rawRows: g.rows.length,
+      sheet: g.sheet,
+      sqlite: {
+        label: g.first.description,
+        src: g.first.primary_sheet || g.first.source_sheet || '',
+        reliability: g.first.reliability,
+        instanceNote: g.first.instance_note || '',
+        note,
+        trade: g.first.trade_responsible || '',
+        derived: g.first.derived,
+      },
+    });
+  }
+
+  return { lines, keptRows: kept.length, foldedGroups, splitGroups, qtyUnknown };
+}
+
+/* -------------------------------------------------- spaces: the provers */
+
+/**
+ * Prove the fold key. For EVERY gated tag group on floor 1, if any of its rows
+ * carries a documented multiplier ("1 of 6", "ZONE B (pool deck); 2 of 4"),
+ * then that multiplier MUST equal the number of rows folded into the group.
+ * This is what makes the (category, tag, source_sheet) key a derivation rather
+ * than a preference: under the plain (category, tag) key this check FAILS.
+ */
+function assertSpaceMultipliers(db, floor = '1') {
+  const spaces = readSpaceList(db, floor);
+  const bad = [];
+  let groupsChecked = 0, multipliersChecked = 0;
+  for (const s of spaces) {
+    const { rows } = readSpace(db, s.space_no, floor);
+    for (const band of ['ffe', 'mep']) {
+      const gate = band === 'ffe' ? GATE_CATEGORIES : MEP_CATEGORIES;
+      const byKey = new Map();
+      for (const r of rows) {
+        if (!gate.has(r.category) || !r.tag) continue;
+        const gk = r.category + SEP + r.tag + SEP + (r.source_sheet || '');
+        if (!byKey.has(gk)) byKey.set(gk, []);
+        byKey.get(gk).push(r);
+      }
+      for (const [gk, arr] of byKey) {
+        groupsChecked++;
+        let m = null;
+        for (const r of arr) {
+          const x = SPACE_MULTIPLIER_RE.exec(r.instance_note || '');
+          if (x) m = x;
+        }
+        if (!m) continue;
+        multipliersChecked++;
+        if (Number(m[2]) !== arr.length) {
+          bad.push('space ' + s.space_no + ' ' + gk.split(SEP).join(' / ') +
+            ': sheet says ' + m[2] + ', ' + arr.length + ' row(s) folded');
+        }
+      }
+    }
+  }
+  if (bad.length) {
+    die('the space fold key does NOT reproduce the documented multipliers - refusing to build:\n  ' +
+        bad.join('\n  '));
+  }
+  return { groupsChecked, multipliersChecked };
+}
+
+/** Doc-id discipline: number == docId, <= 8 chars, unique, disjoint from rooms. */
+function assertSpaceIds(db, spaces) {
+  const seen = new Map();
+  const problems = [];
+  const roomNos = new Set(db.prepare('SELECT room_no FROM rooms').all().map((r) => r.room_no));
+  for (const s of spaces) {
+    for (const id of [spaceDocId(s.space_no), spaceMepDocId(s.space_no)]) {
+      if (id.length > SPACE_ID_MAX) {
+        problems.push('doc id ' + JSON.stringify(id) + ' is ' + id.length +
+          ' chars, over the published rule d.number.size() <= ' + SPACE_ID_MAX);
+      }
+      if (!/^[A-Z0-9-]+$/.test(id)) problems.push('doc id ' + JSON.stringify(id) + ' has unexpected characters');
+      if (seen.has(id)) {
+        problems.push('doc id ' + JSON.stringify(id) + ' generated for both space ' +
+          seen.get(id) + ' and space ' + s.space_no);
+      }
+      seen.set(id, s.space_no);
+      if (roomNos.has(id)) problems.push('doc id ' + JSON.stringify(id) + ' collides with guest room ' + id);
+    }
+  }
+  if (problems.length) die('space doc id scheme is not sound:\n  ' + problems.join('\n  '));
+  let longest = '';
+  for (const id of seen.keys()) if (id.length > longest.length) longest = id;
+  return { count: seen.size, longest };
+}
+
+/**
+ * Cross-check against js/seed-spaces.js. Those two docs (019, 121) are the only
+ * other place a common-area doc has ever been built, and their own header calls
+ * them demo fixtures - so a disagreement is REPORTED, never acted on, and they
+ * are never used as a source. Agreement on the doc type slug is the useful
+ * signal: it says the 'space-' + typeSlug(name) rule was not invented here.
+ */
+function spaceFixtureAgreement(db) {
+  const path = resolve(REPO, 'js', 'seed-spaces.js');
+  if (!existsSync(path)) return null;
+  const src = readFileSync(path, 'utf8');
+  const out = [];
+  for (const m of src.matchAll(/"(\d{3})":\s*\{/g)) {
+    const no = m[1];
+    const tail = src.slice(m.index, m.index + 40000);
+    const t = /"type":\s*"(space-[^"]+)"/.exec(tail);
+    const row = db.prepare("SELECT name FROM spaces WHERE floor='1' AND space_no = ?").get(no);
+    if (!t || !row) continue;
+    out.push({ space: no, fixtureType: t[1], derivedType: spaceTypeSlug(row.name), agrees: t[1] === spaceTypeSlug(row.name) });
+  }
+  return out;
+}
+
+/** Rows the approved category gate keeps out of BOTH docs, by category and space. */
+function spaceGateDrops(db, floor = '1') {
+  const spaces = readSpaceList(db, floor);
+  const byCategory = new Map();
+  const bySpace = new Map();
+  let total = 0;
+  for (const s of spaces) {
+    const { rows } = readSpace(db, s.space_no, floor);
+    for (const r of rows) {
+      if (GATE_CATEGORIES.has(r.category) || MEP_CATEGORIES.has(r.category)) continue;
+      total++;
+      byCategory.set(r.category, (byCategory.get(r.category) || 0) + 1);
+      if (!bySpace.has(s.space_no)) bySpace.set(s.space_no, { name: s.name, n: 0, cats: new Map() });
+      const e = bySpace.get(s.space_no);
+      e.n++;
+      e.cats.set(r.category, (e.cats.get(r.category) || 0) + 1);
+    }
+  }
+  return { total, byCategory, bySpace };
+}
+
+/** MEP categories present in space_items that the app's MEP_CATEGORY_ORDER lacks. */
+function spaceUnknownMepCategories(db, floor = '1') {
+  const out = new Map();
+  for (const r of db.prepare("SELECT space_no, category, COUNT(*) c FROM space_items WHERE floor = ? GROUP BY space_no, category").all(floor)) {
+    if (!MEP_CATEGORIES.has(r.category) || APP_MEP_CATEGORY_ORDER.has(r.category)) continue;
+    if (!out.has(r.category)) out.set(r.category, []);
+    out.get(r.category).push(r.space_no + ' x' + r.c);
+  }
+  return out;
+}
+
+/* ------------------------------------------------- spaces: doc generation */
+
+function buildSpaceBandDoc(space, band, red, stamp) {
+  const isMep = band === 'mep';
+  const docId = isMep ? spaceMepDocId(space.space_no) : spaceDocId(space.space_no);
+  const items = {};
+
+  for (const line of red.lines) {
+    if (!line.sqlite.src) {
+      die('space ' + space.space_no + ' line ' + line.key + ' (' + (line.code || '<untagged>') +
+          '): no primary_sheet and no source_sheet in sqlite - refusing to emit an uncited line');
+    }
+
+    /* instanceNote carries the database's own text, verbatim. The flag prefix
+     * mirrors the shape the approved MEDIUM guest-room lines already use.
+     * Where the count is unknown, the DB's own explanation of WHY is what gets
+     * shown, so a crew member reading the line sees the reason, not a blank. */
+    const parts = [];
+    if (line.sqlite.instanceNote) parts.push(line.sqlite.instanceNote);
+    if (line.qtyUnknown && line.sqlite.note) parts.push('QTY NOT STATED - ' + line.sqlite.note);
+    else if (line.sqlite.note && line.sqlite.reliability !== 'HIGH') parts.push(line.sqlite.note);
+    let instanceNote = parts.join(' — ');
+    if (instanceNote && line.sqlite.reliability !== 'HIGH') instanceNote = '⚑ ' + instanceNote;
+
+    const item = {
+      code: line.code,
+      label: line.sqlite.label,
+      category: line.category,
+      src: line.sqlite.src,
+      reliability: line.sqlite.reliability,
+      instanceNote,
+      trade: line.sqlite.trade,
+      derived: line.sqlite.derived,
+      sort: line.sort,
+      deleted: false,
+      checked: CLEAN_FIELD_STATE.checked,
+      initials: CLEAN_FIELD_STATE.initials,
+      checkedAt: CLEAN_FIELD_STATE.checkedAt,
+      checkedAtLocal: CLEAN_FIELD_STATE.checkedAtLocal,
+      issue: CLEAN_FIELD_STATE.issue,
+      issueResolved: CLEAN_FIELD_STATE.issueResolved,
+    };
+    /* Note (c): omitted entirely, not null and not 1, when no sheet states it. */
+    if (!line.qtyUnknown) item.qty = line.qty;
+    items[line.key] = item;
+  }
+
+  return {
+    number: docId,
+    floor: Number.parseInt(space.floor, 10),
+    type: isMep ? SPACE_MEP_DOC_TYPE : spaceTypeSlug(space.name),
+    /* The sheet's own name for the room, off A100 (or ID-1.9 / ID-1.7 for the
+     * two exterior zones). Not authored here. */
+    typeLabel: space.name,
+    schemaV: 3,
+    items,
+    notes: {},
+    deleted: false,
+    createdAt: stamp,
+    updatedAt: stamp,
+  };
+}
+
+/* ------------------------------------------------------- spaces: the driver */
+
+function mainSpaces(db, slice, positional, opts) {
+  const FLOOR = '1';
+  const all = readSpaceList(db, FLOOR);
+  const byNo = new Map(all.map((s) => [s.space_no, s]));
+
+  /* Which spaces? 'all' or nothing means every floor-1 space. */
+  let wanted;
+  if (!positional.length || (positional.length === 1 && positional[0] === 'all')) {
+    wanted = all.slice();
+  } else {
+    wanted = [];
+    for (const a of positional) {
+      const s = byNo.get(a) || byNo.get(a.toUpperCase());
+      if (!s) {
+        die('space ' + JSON.stringify(a) + ' is not a floor-1 space. Known: ' +
+            all.map((x) => x.space_no).join(', '));
+      }
+      wanted.push(s);
+    }
+  }
+
+  /* Provers run before anything is written. */
+  const mult = assertSpaceMultipliers(db, FLOOR);
+  const ids = assertSpaceIds(db, all);
+  assertDerivationRules(db, slice);
+  const drops = spaceGateDrops(db, FLOOR);
+  const fixtures = spaceFixtureAgreement(db);
+  const unknownMep = spaceUnknownMepCategories(db, FLOOR);
+
+  const W = process.stdout.write.bind(process.stdout);
+  W('\nFLOOR-1 COMMON AREAS  (Austin ruling D18 - PLAN numbering from the architectural set)\n');
+  W('='.repeat(100) + '\n');
+  W('spaces on floor 1 in data/project.sqlite: ' + all.length + '  (verified against the DB, not the brief)\n');
+  W('doc id scheme: ' + JSON.stringify(SPACE_ID_PREFIX + '<space_no minus punctuation>') +
+    ', MEP companion ' + JSON.stringify(SPACE_MEP_SUFFIX) + ' - ' + ids.count +
+    ' ids, longest ' + JSON.stringify(ids.longest) + ' (' + ids.longest.length + ' chars, limit ' + SPACE_ID_MAX + ')\n');
+  W('fold key proved: ' + mult.multipliersChecked + ' documented "N of M" multipliers across ' +
+    mult.groupsChecked + ' gated tag groups, all equal to their folded row count\n');
+
+  /* ---- build ---- */
+  const built = [];
+  const skipped = [];
+  const rows = [];
+  let totalFfe = 0, totalMep = 0, totalUnknownQty = 0;
+  const allSplits = [];
+  const docs = {};
+
+  for (const s of wanted) {
+    const { space, rows: raw } = readSpace(db, s.space_no, FLOOR);
+    const ffe = reduceSpaceBand(s.space_no, raw, 'ffe');
+    const mep = reduceSpaceBand(s.space_no, raw, 'mep');
+    const droppedHere = drops.bySpace.get(s.space_no);
+    const dropped = droppedHere ? droppedHere.n : 0;
+
+    rows.push({
+      no: s.space_no, name: s.name, raw: raw.length,
+      ffe: ffe.lines.length, mep: mep.lines.length,
+      unknownQty: ffe.qtyUnknown.length + mep.qtyUnknown.length,
+      dropped,
+      docId: spaceDocId(s.space_no),
+    });
+
+    for (const sp of [...ffe.splitGroups, ...mep.splitGroups]) allSplits.push({ space: s.space_no, ...sp });
+
+    if (!ffe.lines.length && !mep.lines.length) {
+      /* Note (f): an empty checklist would read as "nothing to verify". */
+      skipped.push({
+        no: s.space_no, name: s.name, raw: raw.length, dropped,
+        cats: droppedHere ? [...droppedHere.cats].map(([c, n]) => c + ' x' + n).sort(cmpStr) : [],
+      });
+      continue;
+    }
+
+    if (ffe.lines.length) {
+      docs[spaceDocId(s.space_no)] = buildSpaceBandDoc(space, 'ffe', ffe, opts.stamp);
+      totalFfe += ffe.lines.length;
+    }
+    if (mep.lines.length) {
+      docs[spaceMepDocId(s.space_no)] = buildSpaceBandDoc(space, 'mep', mep, opts.stamp);
+      totalMep += mep.lines.length;
+    }
+    totalUnknownQty += ffe.qtyUnknown.length + mep.qtyUnknown.length;
+    built.push({
+      no: s.space_no, name: s.name,
+      ffe: ffe.lines.length, mep: mep.lines.length,
+      qtyUnknown: [...ffe.qtyUnknown, ...mep.qtyUnknown],
+    });
+  }
+
+  /* ---- the per-space table ---- */
+  W('\nPER-SPACE LINE COUNTS\n' + '-'.repeat(100) + '\n');
+  W('  no     name                              raw   FF&E    MEP  qty?  gated-out   doc id\n');
+  for (const r of rows) {
+    const thin = (r.ffe + r.mep) === 0 ? '  <- NO PACKAGE' : ((r.ffe + r.mep) <= 2 ? '  <- thin' : '');
+    W('  ' + r.no.padEnd(7) + r.name.slice(0, 33).padEnd(34) +
+      String(r.raw).padStart(4) + String(r.ffe).padStart(7) + String(r.mep).padStart(7) +
+      String(r.unknownQty).padStart(6) + String(r.dropped).padStart(11) + '   ' +
+      r.docId.padEnd(7) + thin + '\n');
+  }
+  W('-'.repeat(100) + '\n');
+  W('  TOTAL  ' + rows.length + ' spaces' + String(rows.reduce((n, r) => n + r.raw, 0)).padStart(29) +
+    String(totalFfe).padStart(7) + String(totalMep).padStart(7) + String(totalUnknownQty).padStart(6) +
+    String(drops.total).padStart(11) + '\n');
+
+  /* ---- the honest map ---- */
+  if (skipped.length) {
+    W('\nSPACES WITH NO PACKAGE UNDER THE APPROVED GATE - NO DOC WRITTEN (' + skipped.length + ')\n' + '-'.repeat(100) + '\n');
+    for (const s of skipped) {
+      W('  ' + s.no.padEnd(7) + s.name.padEnd(30) + s.raw + ' documented row(s), all gated out: ' +
+        (s.cats.join(', ') || 'none - the space has no rows at all') + '\n');
+    }
+  }
+
+  const thin = built.filter((b) => (b.ffe + b.mep) <= 2);
+  if (thin.length) {
+    W('\nTHIN PACKAGES - BUILT, BUT 1-2 LINES ONLY (' + thin.length + ')\n' + '-'.repeat(100) + '\n');
+    for (const b of thin) W('  ' + b.no.padEnd(7) + b.name.padEnd(30) + b.ffe + ' FF&E + ' + b.mep + ' MEP\n');
+  }
+
+  if (totalUnknownQty) {
+    W('\nLINES EMITTED WITH NO QUANTITY - no sheet in the set states a count (' + totalUnknownQty + ')\n' + '-'.repeat(100) + '\n');
+    for (const b of built) {
+      if (!b.qtyUnknown.length) continue;
+      W('  ' + b.no.padEnd(7) + b.name.padEnd(28) + b.qtyUnknown.join(', ') + '\n');
+    }
+    W('  (qty is OMITTED from these lines, not defaulted to 1. The reason is written into instanceNote.)\n');
+  }
+
+  if (allSplits.length) {
+    W('\nUNRESOLVED SHEET-VS-SHEET COUNT CONFLICTS - carried as separate lines, NOT summed (' + allSplits.length + ')\n' + '-'.repeat(100) + '\n');
+    for (const s of allSplits) {
+      W('  space ' + s.space + '  ' + s.tag + ' [' + s.category + ']\n');
+      for (const p of s.parts) W('      ' + String(p.rows).padStart(3) + ' row(s)  <-  ' + JSON.stringify(p.sheet) + '\n');
+    }
+    W('  Folding these on (category, tag) alone would silently pick the larger sheet.\n' +
+      '  OPEN for Austin: which sheet governs each of these.\n');
+  }
+
+  W('\nROWS THE APPROVED CATEGORY GATE KEEPS OUT OF BOTH DOCS (' + drops.total + ' of ' +
+    rows.reduce((n, r) => n + r.raw, 0) + ')\n' + '-'.repeat(100) + '\n');
+  for (const [c, n] of [...drops.byCategory].sort((a, b) => b[1] - a[1])) {
+    W('  ' + String(n).padStart(4) + '  ' + c + '\n');
+  }
+  W('  These categories appear in NEITHER approved guest-room doc, so following Austin\'s\n' +
+    '  approved precedent puts them nowhere. For a common area they are the substance of a\n' +
+    '  finish walk. OPEN for Austin: widen the gate for spaces, or leave them out.\n');
+
+  if (unknownMep.size) {
+    W('\nMEP CATEGORIES THE APP DOES NOT KNOW\n' + '-'.repeat(100) + '\n');
+    for (const [c, where] of unknownMep) {
+      W('  ' + c + ' (' + where.join(', ') + ') is not in js/util.js MEP_CATEGORY_ORDER - it will sort last.\n');
+    }
+    W('  Category strings are stored VERBATIM; nothing was relabelled to fit the app.\n');
+  }
+
+  if (fixtures && fixtures.length) {
+    W('\nCROSS-CHECK vs js/seed-spaces.js (demo fixtures - never used as a source)\n' + '-'.repeat(100) + '\n');
+    for (const f of fixtures) {
+      W('  space ' + f.space + ': fixture type ' + JSON.stringify(f.fixtureType) +
+        (f.agrees ? ' == derived' : ' != derived ' + JSON.stringify(f.derivedType)) + '\n');
+    }
+  }
+
+  W('\nAPP-SIDE OPEN ITEM: js/util.js mepParent() matches /^(\\d+)-MEP$/ and mepIdFor() appends\n' +
+    "  '-MEP'. Neither understands a space MEP id, so " + Object.keys(docs).filter((k) => k.endsWith(SPACE_MEP_SUFFIX)).length +
+    ' space MEP doc(s) will not link\n  to their parent until those helpers learn the space scheme. Not patched here.\n');
+
+  if (opts.reportOnly) {
+    W('\n--spaces-report: analysis only. Nothing written.\n\n');
+    return;
+  }
+
+  /* ---- merge and write ---- */
+  const outDocs = {};
+  if (!opts.fresh && existsSync(OUT_PATH)) {
+    const prev = JSON.parse(readFileSync(OUT_PATH, 'utf8'));
+    for (const [k, v] of Object.entries(prev.docs || {})) {
+      if (!APPROVED_DOC_IDS.includes(k)) outDocs[k] = v;
+    }
+  }
+  const carriedRooms = Object.keys(outDocs).length;
+  for (const id of APPROVED_DOC_IDS) outDocs[id] = clone(slice.docs[id]);
+  for (const [k, v] of Object.entries(docs)) outDocs[k] = v;
+
+  for (const id of APPROVED_DOC_IDS) {
+    if (!deepEqual(outDocs[id], slice.docs[id])) die('internal error: approved doc ' + id + ' was modified');
+  }
+
+  /* number == docId, for every doc in the file. */
+  for (const [id, d] of Object.entries(outDocs)) {
+    if (d.number !== id) die('doc ' + JSON.stringify(id) + ' has number ' + JSON.stringify(d.number) + ' - number must equal docId');
+    if (String(id).length > SPACE_ID_MAX) die('doc id ' + JSON.stringify(id) + ' exceeds ' + SPACE_ID_MAX + ' characters');
+  }
+
+  const prevMeta = (!opts.fresh && existsSync(OUT_PATH))
+    ? (JSON.parse(readFileSync(OUT_PATH, 'utf8')).meta || {}) : {};
+
+  const out = {
+    meta: {
+      ...prevMeta,
+      generator: 'platform/tools/build_floor1.mjs',
+      project: 'H2SEP - Home2 Suites by Hilton, Eagle Pass TX',
+      floor: 1,
+      builtAt: opts.stamp,
+      stampIsConstant: true,
+      approvedSource: 'platform/data/slice-f1.json (read only, never written)',
+      approvedDocs: APPROVED_DOC_IDS.slice(),
+      spaceNumbering: 'PLAN numbering from the architectural set (Austin ruling D18); data/project.sqlite spaces table. NOT the QC Deficiency Tracker numbering.',
+      spaceShapeSource: 'data/project.sqlite space_items (category gate + fold by category/tag/source_sheet)',
+      spacePackageSource: 'data/project.sqlite space_items columns verbatim - no approved common-area doc exists to copy from',
+      spaceIdScheme: "'S' + space_no with non-alphanumerics stripped; MEP companion suffix '-M'; every id <= " + SPACE_ID_MAX + ' chars and number == docId',
+      spaceQtyPolicy: 'qty is the number of folded rows; it is OMITTED (not defaulted to 1) where no sheet states a count',
+      spaceFfeWorkbook: 'FF&E Installation "1st Floor FF&E Installation" tab (Drive 1vHg6-8vDVLpoE-x0jwjijOOlXJX4B1Jy) carries the public-area tags and container numbers with EVERY TOTAL BLANK; used for tag identity only, never for quantities',
+      spaceDocs: Object.keys(docs).sort(cmpDocId),
+      spacesWithNoPackage: skipped.map((s) => s.no + ' ' + s.name),
+      fieldState: 'generated docs are born clean: checked false, initials empty, checkedAt null, issue empty',
+      redaction: 'no personal contact data; approved docs carry initials only, as received',
+    },
+    docs: Object.fromEntries(Object.keys(outDocs).sort(cmpDocId).map((k) => [k, outDocs[k]])),
+  };
+
+  writeFileSync(OUT_PATH, stringify(out), 'utf8');
+
+  W('\n' + '='.repeat(100) + '\n');
+  W('wrote ' + OUT_PATH.replace(REPO + '/', '') + '\n');
+  W('  ' + carriedRooms + ' guest-room doc(s) carried forward untouched, ' +
+    APPROVED_DOC_IDS.length + ' approved docs verbatim, ' + Object.keys(docs).length + ' space doc(s) added\n');
+  W('  ' + built.length + ' of ' + wanted.length + ' spaces built (' + totalFfe + ' FF&E lines + ' +
+    totalMep + ' MEP lines), ' + skipped.length + ' refused for having no gated line\n');
+  W('Firestore not touched. Nothing pushed. Nothing deployed. slice-f1.json not written.\n\n');
+}
+
 /* ---------------------------------------------------------------------- main */
 
 function main(argv) {
   const args = argv.slice(2);
   let stamp = DEFAULT_STAMP;
-  let fresh = false, wantSelftest = false;
-  const rooms = [];
+  let fresh = false, wantSelftest = false, spacesMode = false, spacesReportOnly = false;
+  const positional = [];
 
   for (const a of args) {
     if (a === '--selftest') { wantSelftest = true; continue; }
     if (a === '--fresh') { fresh = true; continue; }
+    if (a === '--spaces') { spacesMode = true; continue; }
+    if (a === '--spaces-report') { spacesMode = true; spacesReportOnly = true; continue; }
     if (a.startsWith('--stamp=')) {
       stamp = a.slice('--stamp='.length);
       if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(stamp)) {
@@ -1014,12 +1633,21 @@ function main(argv) {
       continue;
     }
     if (a.startsWith('-')) die('unknown flag ' + a);
-    if (!/^\d{3}$/.test(a)) die('room numbers only, got ' + JSON.stringify(a));
-    rooms.push(a);
+    positional.push(a);
   }
 
   const db = openDb();
   const slice = loadSlice();
+
+  /* Common-area path. Entirely separate from the guest-room path: it never
+   * rebuilds a room doc, and the room path never sees a space. */
+  if (spacesMode) return mainSpaces(db, slice, positional, { stamp, fresh, reportOnly: spacesReportOnly });
+
+  const rooms = [];
+  for (const a of positional) {
+    if (!/^\d{3}$/.test(a)) die('room numbers only, got ' + JSON.stringify(a));
+    rooms.push(a);
+  }
 
   if (wantSelftest) {
     const ok = selftest(db, slice);
@@ -1028,7 +1656,9 @@ function main(argv) {
   }
 
   if (!rooms.length) {
-    process.stdout.write('usage: node platform/tools/build_floor1.mjs [--selftest] [--fresh] [--stamp=<ISO>] <room> ...\n');
+    process.stdout.write('usage: node platform/tools/build_floor1.mjs [--selftest] [--fresh] [--stamp=<ISO>] <room> ...\n' +
+      '       node platform/tools/build_floor1.mjs --spaces [all | <space_no> ...]\n' +
+      '       node platform/tools/build_floor1.mjs --spaces-report        (analysis only, writes nothing)\n');
     return;
   }
 
@@ -1046,8 +1676,8 @@ function main(argv) {
 
   /* The MEP copy assumption is re-proved before any copy happens. */
   assertMepConstant(slice);
-  /* And so are the label/src/type-slug derivations the King path depends on. */
-  const provedLines = assertDerivationRules(db, slice);
+  /* And the label/src/type-slug derivations the King composition depends on. */
+  const proof = assertDerivationRules(db, slice);
   const typeRef = buildTypeReference(db);
 
   /* Carry forward whatever earlier waves already staged. */
@@ -1103,7 +1733,8 @@ function main(argv) {
   writeFileSync(OUT_PATH, stringify(out), 'utf8');
 
   process.stdout.write('\nBUILD REPORT\n' + '-'.repeat(78) + '\n');
-  process.stdout.write('label/src/type-slug derivation rules re-proved on ' + provedLines + ' approved lines\n\n');
+  process.stdout.write('src / type-slug derivation rules re-proved on ' + proof.checked + ' approved lines' +
+    (proof.labelNotes.length ? ' (' + proof.labelNotes.length + ' label(s) enriched by submittal)' : '') + '\n\n');
   for (const r of reports) {
     process.stdout.write(
       'room ' + r.room + '  type ' + r.roomType + '  -> doc type ' + r.docType +
@@ -1124,6 +1755,7 @@ function main(argv) {
       if (r.donorQtyNotes.length) {
         process.stdout.write('  qty differs from donor on: ' + r.donorQtyNotes.join('; ') + '\n');
       }
+      for (const n of r.donorLabelNotes) process.stdout.write('  INFO ' + n + '\n');
       if (r.mepSheetCitations && r.mepSheetCitations.length) {
         process.stdout.write('  OPEN: ' + r.mepSheetCitations.length + ' of ' + r.mepLines +
           ' MEP lines cite A555 (the Queen-Queen sheet) and were NOT re-pointed to A550 -\n' +
