@@ -1209,7 +1209,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 renderer.setSize(host.clientWidth, host.clientHeight);
 renderer.outputEncoding = T.sRGBEncoding;
 renderer.toneMapping = T.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 0.66;
+renderer.toneMappingExposure = 0.80;   // room has a real black point now, so it can carry more exposure
 renderer.physicallyCorrectLights = true;   // inverse-square falloff, no fudged pi
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = T.PCFSoftShadowMap;
@@ -1786,10 +1786,29 @@ function meshFabricCanvas() {                // task chair mesh back
 function contactCanvas() {
   var N = 128, o = cv(N, N), c = o[0], g = o[1];
   var rg = g.createRadialGradient(N / 2, N / 2, 0, N / 2, N / 2, N / 2);
-  rg.addColorStop(0, 'rgba(0,0,0,0.62)');
-  rg.addColorStop(0.45, 'rgba(0,0,0,0.34)');
+  // Tight and dark in the core, gone by the rim.  The old curve was a soft
+  // haze that read as nothing at the object edge, which is exactly where a
+  // contact shadow has to read.
+  rg.addColorStop(0, 'rgba(0,0,0,0.92)');
+  rg.addColorStop(0.34, 'rgba(0,0,0,0.80)');
+  rg.addColorStop(0.56, 'rgba(0,0,0,0.42)');
+  rg.addColorStop(0.76, 'rgba(0,0,0,0.14)');
   rg.addColorStop(1, 'rgba(0,0,0,0)');
   g.fillStyle = rg; g.fillRect(0, 0, N, N);
+  return c;
+}
+
+// A linear ramp, dark at v=0.  Used for the wall/floor junction and for the
+// band of carpet that hugs a wall: the places a room is always darker and that
+// no unoccluded light term will ever produce on its own.
+function edgeCanvas() {
+  var o = cv(8, 128), c = o[0], g = o[1];
+  var lg = g.createLinearGradient(0, 128, 0, 0);
+  lg.addColorStop(0, 'rgba(0,0,0,0.62)');
+  lg.addColorStop(0.30, 'rgba(0,0,0,0.30)');
+  lg.addColorStop(0.62, 'rgba(0,0,0,0.09)');
+  lg.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = lg; g.fillRect(0, 0, 8, 128);
   return c;
 }
 
@@ -1822,7 +1841,12 @@ var TEX = {
   carPrint: toTex(carPrintCanvas()),
   louvre: toTex(louvreCanvas()),
   mesh: toTex(meshFabricCanvas()),
-  contact: toTex(contactCanvas())
+  contact: toTex(contactCanvas()),
+  // clamped, not repeated: with RepeatWrapping the alpha-0.62 bottom row bleeds
+  // into the alpha-0 top row under linear filtering and draws a hard dark seam
+  // right across the wall
+  edge: (function () { var t = toTex(edgeCanvas());
+    t.wrapS = t.wrapT = T.ClampToEdgeWrapping; return t; })()
 };
 
 // set an explicit UV repeat on every map a material carries
@@ -1834,15 +1858,29 @@ function tiledRepeat(m, rx, ry) {
   return m;
 }
 
+// scene.environment feeds MeshStandardMaterial a full DIFFUSE irradiance term
+// as well as the specular reflection, and that diffuse term is UNOCCLUDED: no
+// shadow, no ambient occlusion, no falloff.  Measured on the working view it was
+// carrying 52% of the mean luminance of the frame, which is why every object read
+// as a decal floating in front of the wall.  A matte surface has no business
+// taking that much light from a flat box, so the intensity is now rolled off with
+// roughness: chrome, glass and quartz keep their reflection, plaster and carpet
+// give theirs back to lights that can actually be blocked by something.
+function iblRolloff(o) {
+  var r = o.roughness === undefined ? 0.5 : o.roughness;
+  var t = Math.max(0, Math.min(1, (r - 0.25) / 0.55));
+  o.envMapIntensity *= 1 - 0.78 * t;
+  return o;
+}
 function std(o) {
   o = o || {};
   if (o.envMapIntensity === undefined) o.envMapIntensity = 0.45;
-  return new T.MeshStandardMaterial(o);
+  return new T.MeshStandardMaterial(iblRolloff(o));
 }
 function phys(o) {
   o = o || {};
   if (o.envMapIntensity === undefined) o.envMapIntensity = 1.0;
-  return new T.MeshPhysicalMaterial(o);
+  return new T.MeshPhysicalMaterial(iblRolloff(o));
 }
 
 var MIRRORS = [];   // filled by the two mirrors, baked once at boot
@@ -1895,6 +1933,8 @@ M.louvre      = std({ color: 0xffffff, map: TEX.louvre, roughness: 0.55 });
 M.porcelain   = std({ color: 0xfbfaf8, roughness: 0.10, envMapIntensity: 1.3 });
 M.contact     = new T.MeshBasicMaterial({ map: TEX.contact, transparent: true, depthWrite: false });
 M.trim        = std({ color: 0xf4f2ec, roughness: 0.42 });
+M.edge        = new T.MeshBasicMaterial({ map: TEX.edge, transparent: true, depthWrite: false,
+                                          opacity: 0.90, side: T.DoubleSide });
 
 /* material + texture cloned with a repeat that matches a real-world size */
 function tiled(proto, w, h, tileFt) {
@@ -1994,6 +2034,38 @@ function contact(x, z, w, d, op, y) {
   m.rotation.x = -Math.PI / 2;
   m.position.set(x, y === undefined ? 0.008 : y, z);
   m.renderOrder = 2;
+  return add(m);
+}
+
+/* Wall/floor junction darkening.  A vertical ramp on the wall face and a
+   matching band on the carpet.  Cheap stand-in for the ambient occlusion this
+   renderer has no post pass for, and it is the difference between a wall that
+   ends at the floor and a wall that sits on it. */
+function wallBase(len, x, z, ry, h, op) {
+  var m = new T.Mesh(new T.PlaneGeometry(len, h || 0.95), M.edge.clone());
+  if (op !== undefined) m.material.opacity = op;
+  m.position.set(x, (h || 0.95) / 2, z);
+  m.rotation.y = ry;
+  m.renderOrder = 3;
+  return add(m);
+}
+/* the same ramp at the wall head, where the wall meets the ceiling */
+function wallHead(len, x, y, z, ry, h, op) {
+  var m = new T.Mesh(new T.PlaneGeometry(len, h || 0.70), M.edge.clone());
+  m.material.opacity = op === undefined ? 0.55 : op;
+  m.position.set(x, y - (h || 0.70) / 2, z);
+  m.rotation.y = ry;
+  m.rotation.z = Math.PI;          // flip the ramp so the dark end is at the top
+  m.renderOrder = 3;
+  return add(m);
+}
+function floorBand(len, x, z, rz, w, op) {
+  var m = new T.Mesh(new T.PlaneGeometry(len, w || 0.85), M.edge.clone());
+  m.material.opacity = op === undefined ? 0.62 : op;
+  m.rotation.x = -Math.PI / 2;
+  m.rotation.z = rz;
+  m.position.set(x, 0.006, z);
+  m.renderOrder = 1;
   return add(m);
 }
 
@@ -2919,32 +2991,72 @@ var SOFA_Z0 = 10.4, SOFA_Z1 = 17.0;
 })();
 
 /* ---------------------------------------------------------------------
+   14b. JUNCTION OCCLUSION
+        A room is darker where a surface meets another surface, and no
+        unoccluded term in this renderer produces that.  There is no post
+        pass available here (no EffectComposer in this build), so the two
+        junctions that carry the read - wall to floor, and carpet against
+        wall - are drawn.
+   ------------------------------------------------------------------ */
+(function junctions() {
+  var CZ0 = BZ, CZ1 = D, CL = CZ1 - CZ0;                 // carpeted main room
+  // wall faces
+  wallBase(CL, W - 0.012, (CZ0 + CZ1) / 2, -Math.PI / 2);      // working wall
+  wallBase(CL, 0.012, (CZ0 + CZ1) / 2, Math.PI / 2);           // bed / sofa wall
+  wallBase(W, W / 2, D - 0.012, Math.PI);                      // window wall
+  wallBase(W - BX, (BX + W) / 2, 0.014, 0, 0.85, 0.8);         // corridor wall, entry leg
+  // carpet hugging each wall
+  floorBand(CL, W - 0.42, (CZ0 + CZ1) / 2, Math.PI / 2);
+  floorBand(CL, 0.42, (CZ0 + CZ1) / 2, -Math.PI / 2);
+  floorBand(W, W / 2, D - 0.42, Math.PI);
+  floorBand(W, W / 2, CZ0 + 0.42, 0, 0.85, 0.5);               // step down to the entry tile
+  // wall heads, main room
+  wallHead(CL, W - 0.012, H, (CZ0 + CZ1) / 2, -Math.PI / 2);
+  wallHead(CL, 0.012, H, (CZ0 + CZ1) / 2, Math.PI / 2);
+  wallHead(W, W / 2, H, D - 0.012, Math.PI);
+  // entry / kitchenette leg: the two big flat partition faces either side of it
+  wallBase(BZ, BX + 0.014, BZ / 2, Math.PI / 2, 0.85, 0.8);     // bath partition, entry face
+  wallBase(BZ, W - 0.012, BZ / 2, -Math.PI / 2, 0.85, 0.8);     // kitchenette wall
+  wallHead(BZ, BX + 0.014, HL, BZ / 2, Math.PI / 2, 0.60, 0.5);
+  wallHead(BZ, W - 0.012, HL, BZ / 2, -Math.PI / 2, 0.60, 0.5);
+  wallHead(W - BX, (BX + W) / 2, HL, 0.014, 0, 0.60, 0.5);
+  // room-side face of the bath / entry partition: the big white plane the
+  // lounge camera looks straight at, and the flattest surface in the room
+  wallBase(BX, BX / 2, BZ + 0.014, 0, 0.95);
+  wallHead(BX, BX / 2, H, BZ + 0.014, 0, 0.85, 0.45);
+  floorBand(BX, BX / 2, BZ + 0.44, 0, 0.85, 0.55);
+})();
+
+/* ---------------------------------------------------------------------
    15.  LIGHT
         Warm lamps against cool daylight.  This is the single biggest
         reason a render reads as a photograph, so it gets the most care.
    ------------------------------------------------------------------ */
 
 // --- daylight through the window: the strongest source, slightly cool
-var sun = new T.DirectionalLight(0xeaf1ff, 5.2);
+var sun = new T.DirectionalLight(0xeaf1ff, 7.4);
 sun.position.set(W / 2 + 5.5, 15.5, D + 15);
 sun.target.position.set(W / 2 - 1.5, 1.2, D - 12);
 scene.add(sun.target);
 sun.castShadow = true;
 sun.shadow.mapSize.set(1536, 1536);
-sun.shadow.camera.left = -11; sun.shadow.camera.right = 11;
-sun.shadow.camera.top = 12; sun.shadow.camera.bottom = -8;
-sun.shadow.camera.near = 6; sun.shadow.camera.far = 60;
+// Measured: with left/right +/-11, top/bottom 12/-8, near 6, three of the eight
+// room corners fell OUTSIDE this frustum and cast nothing.  In the light's own
+// frame the room spans x -7.4..11.5, y -7.2..14.3, depth 16.1..47.5.
+sun.shadow.camera.left = -13; sun.shadow.camera.right = 13;
+sun.shadow.camera.top = 16; sun.shadow.camera.bottom = -9;
+sun.shadow.camera.near = 4; sun.shadow.camera.far = 62;
 sun.shadow.bias = -0.0009;
 sun.shadow.normalBias = 0.02;
 scene.add(sun);
 
 // sky/ground bounce
-var hemi = new T.HemisphereLight(0xa8c4e4, 0x3a332a, 0.24);
+var hemi = new T.HemisphereLight(0xa8c4e4, 0x3a332a, 0.16);   // flat and unshadowed: keep it small
 scene.add(hemi);
 
 // cool bounce just inside the glass — keeps the window end from going flat
 function fill(color, intensity, dist, x, y, z) {
-  var l = new T.PointLight(color, intensity, dist, 2);
+  var l = new T.PointLight(color, intensity * 1.25, dist, 2);
   l.position.set(x, y, z);
   scene.add(l);
   return l;
@@ -2961,14 +3073,55 @@ warm(6, 11, 0.85, 3.85, NS_B_Z - 1.05);          // bedside globe, corridor side
 warm(15, 16, 0.95, 4.95, SOFA_Z1 + 0.32);         // GR-205 floor lamp
 warm(8, 11, 0.95, 26 * IN + 1.62, SOFA_Z0 - 0.95);// GR-200 side table lamp
 
+// Every spot in this room casts.  A spot is one 2D shadow map, not a cube, so
+// the whole rig below costs one extra render each at bake time and nothing at
+// all per frame.  This is the fix for the verdict: the room's illumination used
+// to come almost entirely from lights nothing could block.
+function castSpot(s, size, far) {
+  s.castShadow = true;
+  s.shadow.mapSize.set(size || 1024, size || 1024);
+  s.shadow.bias = -0.0011;
+  s.shadow.normalBias = 0.03;
+  s.shadow.camera.near = 0.15;
+  s.shadow.camera.far = far || 22;
+  return s;
+}
+
+// MAIN-ROOM CEILING DOWNLIGHTS.  The sun enters along the room's long axis, so
+// its N.L on the working wall (x = W) is NEGATIVE: that wall is back-facing to
+// the only shadow-casting light in the old rig and could never receive a shadow
+// from anything, which is why the two floating shelves read as stickers.  These
+// four are the light that actually falls on the walls, and they are occluded.
+function downlight(x, z, inten, ang, col, tx, ty) {
+  var s = new T.SpotLight(col || 0xffe2bb, inten, 24, ang || 1.05, 0.92, 2);
+  s.position.set(x, H - 0.14, z);
+  s.target.position.set(tx === undefined ? x : tx, ty === undefined ? 0 : ty, z);
+  castSpot(s, 1024, 20);
+  scene.add(s.target); scene.add(s);
+  return s;
+}
+downlight(W - 2.5, 13.0, 52, 1.05, 0xffe2bb, W - 0.9, 1.2);   // desk + floating shelves
+downlight(W - 2.5, 18.6, 46, 1.05, 0xffe2bb, W - 0.9, 1.2);   // dresser + TV
+downlight(3.1, 11.0, 34, 1.05);                               // lounge
+downlight(3.4, 21.8, 30, 1.05);                               // bed
+
+// DAYLIGHT INTO THE ROOM.  The directional sun only lights what faces the glass;
+// this is the wash coming through the opening, and unlike the old pair of point
+// "fills" at the same place it is blocked by the bed, the PTAC and the curtain.
+(function daylightWash() {
+  var s = new T.SpotLight(0xdcebff, 140, 36, 1.10, 0.9, 2);
+  s.position.set(W / 2, 5.6, D - 0.35);
+  s.target.position.set(W / 2, 0.6, 5.0);
+  castSpot(s, 1024, 38);
+  scene.add(s.target); scene.add(s);
+})();
+
 // GR-201 desk lamp — the one lamp that casts, so the working wall gets a
 // real pool of light with a real shadow behind the task chair
-var deskSpot = new T.SpotLight(0xffcf98, 18, 11, 0.80, 0.6, 2);
+var deskSpot = new T.SpotLight(0xffcf98, 22, 11, 0.80, 0.88, 2);
 deskSpot.position.set(W - 1.18, DESK_Y + 1.20, D - 19.2);
 deskSpot.target.position.set(W - 1.6, 0.2, D - 20.4);
-deskSpot.castShadow = true;
-deskSpot.shadow.mapSize.set(768, 768);
-deskSpot.shadow.bias = -0.0012;
+castSpot(deskSpot, 1024, 14);
 scene.add(deskSpot.target); scene.add(deskSpot);
 
 // wardrobe reading light + LED strip in the hanging bay  [PHOTO]
@@ -2981,15 +3134,17 @@ warm(8, 11, W - 1.25, 68 * IN, D - 5.0);           // reading light + hanging-ba
 [[8.97, 2.833], [8.97, 7.5]].forEach(function (p) {
   // Downward spots, not point lights: a point light this close to a 7'-3"
   // ceiling blows a white disc onto it in every frame.
-  var s = new T.SpotLight(0xffdcb4, 26, 16, 1.15, 0.85, 2);
+  var s = new T.SpotLight(0xffdcb4, 32, 16, 1.15, 0.9, 2);
   s.position.set(p[0], HL - 0.14, p[1]);
   s.target.position.set(p[0], 0, p[1]);
+  castSpot(s);
   scene.add(s.target); scene.add(s);
 });
 (function () {                                     // kitchenette surface fixture
-  var s = new T.SpotLight(0xffe7c4, 22, 15, 1.25, 0.9, 2);
+  var s = new T.SpotLight(0xffe7c4, 27, 15, 1.25, 0.92, 2);
   s.position.set(9.4, HL - 0.22, 5.6);
   s.target.position.set(9.4, 0, 5.6);
+  castSpot(s);
   scene.add(s.target); scene.add(s);
 })();
 
@@ -3010,7 +3165,7 @@ fill(0xffdcb0, 6.0, 12, 2.6, 3.0, 13.6);   // lounge zone, keeps the sofa off bl
 fill(0xf2e6d2, 2.2, 12, 9.2, 2.2, 4.5);
 
 // a low ambient so nothing goes pure black in a phone-style exposure
-scene.add(new T.AmbientLight(0x39404b, 0.18));
+scene.add(new T.AmbientLight(0x39404b, 0.075));   // a floor under black, not a grey wash
 
 /* ---------------------------------------------------------------------
    16.  ENVIRONMENT MAP  +  MIRRORS
@@ -3141,6 +3296,9 @@ function loop() {
   if (warmup > 0) { warmup--; needs = true; }
   if (!needs) return;
   needs = false;
+  // Belt and braces on the one-time bake: the first two painted frames rebuild
+  // the shadow maps regardless of what ran before them.
+  if (frames < 2) renderer.shadowMap.needsUpdate = true;
   var t0 = performance.now();
   renderer.render(scene, camera);
   window.__frameMs = Math.round(performance.now() - t0);
@@ -3156,8 +3314,11 @@ function loop() {
    19.  BOOT
    ------------------------------------------------------------------ */
 
-renderer.shadowMap.needsUpdate = true;
+// bakeMirrors() runs six CubeCamera renders, and the FIRST of them consumes
+// renderer.shadowMap.needsUpdate.  Setting the flag afterwards, and again for
+// the first frames of the loop, means the bake cannot be lost to boot order.
 bakeMirrors();
+renderer.shadowMap.needsUpdate = true;
 
 var q = new URLSearchParams(location.search);
 var want = q.get('view');

@@ -96,13 +96,15 @@ const scenes = VIEWS.map(v => {
   const photoFile = photoIndex?.bestFor?.[v];
   const photoPath = photoFile ? `${PHOTOS}/${photoFile}` : null;
   const renderPath = `${RENDERS}/${v}.png`;
-  const crit = verdictFor(v);
+  const scored = json(`${RENDERS}/verdicts.json`) || {};
+  const crit = scored[v] || verdictFor(v);
   return {
     view: v,
     photo: photoPath && existsSync(photoPath) ? embed(photoPath, 760) : null,
     render: existsSync(renderPath) ? embed(renderPath, 760) : null,
     verdict: crit?.verdict || null,
     confidence: crit?.confidence || null,
+    round: crit?.round || null,
     gap: crit?.biggestGap || '',
     photoFile: photoFile || 'no matching photograph',
   };
@@ -251,8 +253,9 @@ preview build. The live site and the live database are untouched and stay that w
   <div class="scene">
     <div class="hd">
       <b>${esc(s.view)}</b>
-      ${s.verdict ? `<span class="chip ${s.verdict === 'WOWED' ? 'ok' : s.verdict === 'CONVINCING' || s.verdict === 'CLOSE' ? 'mid' : 'bad'}">${esc(s.verdict)}</span>` : '<span class="chip off"><i></i>Scene building</span>'}
-      ${s.confidence ? `<span class="chip off">spotted ${esc(s.confidence)}</span>` : ''}
+      ${s.verdict ? `<span class="chip ${s.verdict.startsWith('FOOLED') ? 'ok' : 'bad'}">${esc(s.verdict)}</span>` : '<span class="chip off"><i></i>Scene building</span>'}
+      ${s.confidence ? `<span class="chip off">${esc(s.confidence)}</span>` : ''}
+      ${s.round ? `<span class="chip off">round ${s.round}</span>` : ''}
       <span class="spacer"></span>
       <span class="lbl">${esc(s.photoFile)}</span>
     </div>
