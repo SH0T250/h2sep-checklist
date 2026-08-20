@@ -40,3 +40,6 @@ docs/meeting-*-markup-ledger.txt
 docs/H2SEP-PhII_Contact-List_*.xlsx
 data/contacts.json
 tools/private/
+
+# PDF build intermediates (the finished report is committed under docs/)
+build/

@@ -15,6 +15,7 @@ Pass, TX 78852** — 115 keys, 4 stories, Type V-A, R-1/A-2/B, sprinklered, outd
 | `POOL-SIGNAGE.md` | 25 TAC Ch. 265 Subch. L — verbatim sign text and letter heights, depth-marker tile specs, chemical room. |
 | `TEXAS-STATUTORY-NOTICES.md` | Human trafficking, innkeeper, firearms, food service, labor posters, elevator and boiler certificates, TABC. |
 | `CITY-OF-EAGLE-PASS.md` | Sign ordinance (Apx. A § 15), adopted codes, fire lane spec, local no-smoking rule, permits and fees. |
+| `../../docs/H2SEP-Signage-Compliance-Report.pdf` | **All of the below as one sourced PDF** — 74 pages, 147 numbered citations, built by `tools/pdf/build.sh`. |
 | `BRAND-AND-PROJECT-RECORD.md` | The TDLR project record, Hilton brand scope, vendors, budget, and the two-sign problem. |
 | `sign-schedule.md` / `.json` | Per-space schedule, generated from the verified spine. |
 | `space-classes.json` | All 69 spaces classified by sign family. |
