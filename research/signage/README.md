@@ -14,6 +14,7 @@ Pass, TX 78852** — 115 keys, 4 stories, Type V-A, R-1/A-2/B, sprinklered, outd
 | `CBC-vs-TAS-DELTA.md` | What to **delete** from G401 and what it's **missing**, because it was drawn to California code. |
 | `POOL-SIGNAGE.md` | 25 TAC Ch. 265 Subch. L — verbatim sign text and letter heights, depth-marker tile specs, chemical room. |
 | `TEXAS-STATUTORY-NOTICES.md` | Human trafficking, innkeeper, firearms, food service, labor posters, elevator and boiler certificates, TABC. |
+| `CITY-OF-EAGLE-PASS.md` | Sign ordinance (Apx. A § 15), adopted codes, fire lane spec, local no-smoking rule, permits and fees. |
 | `BRAND-AND-PROJECT-RECORD.md` | The TDLR project record, Hilton brand scope, vendors, budget, and the two-sign problem. |
 | `sign-schedule.md` / `.json` | Per-space schedule, generated from the verified spine. |
 | `space-classes.json` | All 69 spaces classified by sign family. |
@@ -38,7 +39,21 @@ Regenerate the schedule with `python3 tools/gen_sign_schedule.py`. It exits non-
 4. **Blocking is already committed and carries an unresolved dimension.** A903 says 48"×16",
    ID-4.5 says 48"×18" for the same Market brand signage. It buries when the wall is rocked.
 5. **Eagle Pass allows two permanent signs per business; a Home2 package is three.** Zoning
-   Appendix A §15. Dropping one needs Hilton's written consent as well as the City's.
+   Appendix A § 15 — verbatim, plus **one free-standing sign per legal lot**, a **250 sq ft
+   aggregate cap**, **35 ft** max height, and **no digital or animated signage at all**. Relief is
+   a narrow ZBAA variance, and dropping a brand sign needs **Hilton's** written consent too.
+   → `CITY-OF-EAGLE-PASS.md`
+
+⚠ **One code question is genuinely open.** The codified ordinance says **2015** I-Codes / 2014
+NEC; the City's own June 2025 permit forms and Fire Marshal plan review say **2018** ICC / 2017
+NEC. Both are sourced. Build to 2018 and get the adopting ordinance in writing — but note the
+provisions that drive sign fabrication are **identical in both editions**, so the sign package is
+unaffected either way.
+
+✅ **Answered: IFC Appendix D is adopted** (§ 13-32(Q), verbatim), so the **12" × 18" red-on-white
+reflective "NO PARKING—FIRE LANE"** spec is law here. **Appendix J is not adopted**, so no
+building information sign is required. Spacing interval and curb striping remain undefined — ask
+the Fire Marshal.
 
 ## Who to call
 
