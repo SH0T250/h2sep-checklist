@@ -132,10 +132,31 @@ instruction (`room_map.md`, `PH-GU-002`) is: *do not order 12 visual-alarm / sha
 doorbell kits until floors 1 and 4 are scanned and the count is reconciled against a
 single matrix.* The same caution applies to any signage that identifies those rooms.
 
-For reference, 115 keys puts the ADA minimums at **7 mobility-accessible rooms** (5 without
-roll-in showers + 2 with) and **12 communication-features rooms**. The design provides
-exactly **7** mobility keys — 118, 217, 238, 317, 338, 417, 438 — which matches. At 12 the
-communication-features count matches; **at G001's 10 it would be short by two.**
+**A11 is decidable on the count, and the answer is 12.** 115 keys lands in the "101 to
+150" row of both ADA scoping tables (2010 ADA Standards for Accessible Design, verified
+against two independent renderings of the published tables):
+
+| Table | Row for 101–150 rooms | Requires |
+|---|---|---|
+| **224.2** Guest Rooms with Mobility Features | 5 without roll-in / 2 with roll-in / **7 total** | 7 mobility keys |
+| **224.4** Guest Rooms with Communication Features | **12** | 12 communication-features keys |
+
+The design provides exactly **7** mobility keys — 118, 217, 238, 317, 338, 417, 438 —
+which matches 224.2 on the nose, and the 5-tub/2-roll-in split G100.2 states is exactly
+the table's split. So the architect scoped the counts off the right tables even though
+G401 cites the wrong state's standard.
+
+On the hearing count the two matrices are **not equally valid**: 224.4 sets the minimum at
+**12**, so A100/G100.2's 12 meets it exactly and **G001's 10 would be two rooms short of
+the federal minimum**. The count question is therefore closed — it is 12 — and G001's
+matrix is simply wrong on that row. What is still genuinely open is *which* rooms: only 8
+of the 12 are located (209, 213, 216, 218, 309, 313, 316, 318), and floors 1 and 4 have
+never been scanned. Scan them; do not re-litigate the number.
+
+⚠ This does **not** unblock ordering. `PH-GU-002`'s hold stands, because the hold is about
+*which keys* get the kits, not how many. Sources:
+[Table 224.2](https://www.corada.com/documents/2010ADAStandards/224-2) ·
+[224.2 + 224.4](https://up.codes/s/transient-lodging-guest-rooms)
 
 ## 7. Fire-protection documents the set does not contain
 
