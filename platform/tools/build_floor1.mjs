@@ -195,6 +195,12 @@ const CATEGORY_INDEX = new Map(CATEGORY_ORDER.map((c, i) => [c, i]));
 /* Step 3. Austin's ruling D12, scoped to this exact tag only. */
 const QTY_OVERRIDES = [
   { tag: 'GR-322', category: 'FF&E - Casegoods', qty: 3, ruling: 'D12' },
+  /* D20: GR-202 Nightstand Sconce is 2 per King room, 16 across the 8 King
+   * family keys on floor 1. The DB already carries two rows on 104-116; room
+   * 118 carries one ("only ONE sconce is listed for two nightstands on A551 -
+   * transcribed as tagged, not doubled"). The override makes the ruling hold
+   * on every King key rather than only where the DB happened to draw both. */
+  { tag: 'GR-202', category: 'FF&E - Lighting', qty: 2, ruling: 'D20' },
 ];
 
 /* Room types that have no approved room of their own and must COMPOSE their
@@ -306,6 +312,31 @@ const FP_COUNT_SENTENCE = 'head count varies by room, so verify every head you c
 const CONFIG_A_PREFIX = 'CONFIGURATION A (TUB) - ';
 const CONFIG_B_PREFIX = 'CONFIGURATION B (ROLL-IN SHOWER) - ';
 const CONFIG_A_DROP_ROOMS = { 118: 'D19' };
+
+/* Lines that exist on the FF&E Installation workbook but on no plan sheet the
+ * database transcribed. They are injected as ONE SYNTHETIC ROW PER PHYSICAL
+ * UNIT before the reduction, so the ordinary fold derives the quantity exactly
+ * the way it does for a real row - the tool never writes a qty directly.
+ * Guarded three ways by injectWorkbookRows(): the room must be the only key on
+ * its floor that can carry the tag, the tag must not already exist in sqlite
+ * for that room, and every injected row carries its evidence and a MEDIUM
+ * reliability with 'confirm before ordering' in the note. */
+const WORKBOOK_SRC = 'FF&E Installation workbook, "1st Floor FF&E Installation" tab '
+  + '(Drive 1vHg6-8vDVLpoE-x0jwjijOOlXJX4B1Jy)';
+const WORKBOOK_ROWS = {
+  118: [
+    {
+      tag: 'GR-303', category: 'FF&E - Casegoods', units: 1,
+      description: 'ACCESSIBLE Vanity @ Guest Bath',
+      because: 'floor 1 has exactly one accessible key and it is 118',
+    },
+    {
+      tag: 'GR-324', category: 'FF&E - Casegoods', units: 2,
+      description: 'Wall Shelf @ ACCESSIBLE Bathroom',
+      because: 'floor 1 has exactly one accessible key and it is 118',
+    },
+  ],
+};
 
 /* room_types.room_sheet is ambiguous for exactly one floor-1 type: King Studio
  * Acc. reads 'A551 / A552' for two keys, 118 and 438. The database's own rows
@@ -439,11 +470,16 @@ function readRoom(db, roomNo) {
  * A "line" is { key, code, category, qty, sort, sqlite:{...} }.
  */
 function reduceFFE(roomNo, rows) {
+  /* STEP 0 - ruled drops. Matched on the DATABASE'S OWN description prefix. */
+  const drops = configADrops(roomNo, rows);
+  const configDropped = rows.filter((r) => drops.ids.has(r.rowid));
+
   /* STEP 1 - category gate. */
   const kept = [];
   const unknownCategories = new Set();
   let mepRowCount = 0;
   for (const r of rows) {
+    if (drops.ids.has(r.rowid)) continue;
     if (GATE_CATEGORIES.has(r.category)) kept.push(r);
     else if (MEP_CATEGORIES.has(r.category)) mepRowCount++;
     else if (!CATEGORY_INDEX.has(r.category)) unknownCategories.add(r.category);
@@ -545,7 +581,66 @@ function reduceFFE(roomNo, rows) {
     foldedGroups,
     mepRowCount,
     unknownCategories: [...unknownCategories].sort(cmpStr),
+    configDropped: configDropped.map((r) => (r.tag || '<untagged>') + ' [' + r.category + '] - ' + r.description),
+    configRuling: drops.ruling,
+    configBLeft: drops.b.length,
   };
+}
+
+/**
+ * Inject the workbook-only rows for a room, one synthetic row per physical
+ * unit, BEFORE the reduction. Refuses if the tag already exists in sqlite for
+ * that room, and refuses unless the room really is the only key on its floor
+ * that can carry the line.
+ */
+function injectWorkbookRows(db, roomNo, room, rows) {
+  const spec = WORKBOOK_ROWS[roomNo];
+  if (!spec) return { rows, injected: [] };
+
+  const accessible = db.prepare("SELECT room_no FROM rooms WHERE floor = ? AND accessible = '1'").all(room.floor)
+    .map((r) => r.room_no).sort(cmpStr);
+  if (stringify(accessible) !== stringify([String(roomNo)])) {
+    die('room ' + roomNo + ': the workbook injection assumes this is the ONLY accessible key on floor ' +
+        room.floor + ', but rooms.accessible = 1 on: ' + (accessible.join(', ') || 'no room at all') +
+        '. Refusing to place a workbook line by elimination.');
+  }
+
+  const have = new Set(db.prepare('SELECT DISTINCT tag FROM room_items WHERE room_no = ? AND tag IS NOT NULL')
+    .all(roomNo).map((r) => r.tag));
+  const out = rows.slice();
+  const injected = [];
+  let synth = 9000000;
+  for (const w of spec) {
+    if (have.has(w.tag)) {
+      die('room ' + roomNo + ': refusing to inject ' + w.tag +
+          ' - data/project.sqlite already carries that tag for this room. The DB row governs.');
+    }
+    const note = 'QUANTITY AND PLACEMENT COME FROM THE FF&E INSTALLATION WORKBOOK, NOT FROM A PLAN SHEET. '
+      + 'The "1st Floor FF&E Installation" tab carries ' + w.tag + ' on floor 1, and ' + w.because
+      + ' (rooms.accessible = 1 on room ' + roomNo + ' and on no other floor-' + room.floor + ' key). '
+      + 'data/project.sqlite transcribes no ' + w.tag + ' row for this room, so the line is injected as '
+      + w.units + ' synthetic row(s), one per physical unit, and the quantity shown is the ordinary fold of '
+      + 'those rows. Reliability MEDIUM. Confirm before ordering.';
+    for (let i = 1; i <= w.units; i++) {
+      out.push({
+        rowid: ++synth,
+        item_id: 'SYN-' + roomNo + '-' + w.tag,
+        room_type: room.room_type,
+        category: w.category,
+        tag: w.tag,
+        description: w.description,
+        instance_note: w.units > 1 ? ('unit ' + i + ' of ' + w.units + ' (workbook)') : null,
+        note,
+        trade_responsible: null,
+        source_sheet: WORKBOOK_SRC,
+        primary_sheet: null,
+        reliability: 'MEDIUM',
+        derived: 1,
+      });
+    }
+    injected.push(w.tag + ' x' + w.units);
+  }
+  return { rows: out, injected };
 }
 
 /* ------------------------------------------------------------- slice reading */
@@ -779,7 +874,10 @@ function selftest(db, slice) {
 /* ---------------------------------------------------------------- generation */
 
 function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
-  const { room, rows } = readRoom(db, roomNo);
+  const { room, rows: dbRows } = readRoom(db, roomNo);
+  const inj = injectWorkbookRows(db, roomNo, room, dbRows);
+  const rows = inj.rows;
+  report.injected = inj.injected;
   const red = reduceFFE(roomNo, rows);
   const roomType = room.room_type;
 
@@ -973,6 +1071,9 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
   report.gatedRows = red.gatedCount;
   report.foldedGroups = red.foldedGroups;
   report.unknownCategories = red.unknownCategories;
+  report.configDropped = red.configDropped;
+  report.configRuling = red.configRuling;
+  report.configBLeft = red.configBLeft;
 
   /* Doc-level identity. For an approved type it is copied. For a composed type
    * the slug is derived (rule proved against all three approved docs) and the
@@ -988,6 +1089,398 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
     floor: Number.parseInt(room.floor, 10),
     type,
     typeLabel,
+    schemaV: ref.schemaV,
+    items,
+    notes: {},
+    deleted: false,
+    createdAt: stamp,
+    updatedAt: stamp,
+  };
+}
+
+/* ================================================================= composed MEP */
+
+const isMepRow = (r) => MEP_CATEGORIES.has(r.category);
+
+/** 'A55x' is the database's own type-neutral wildcard for "this room's A55-series
+ *  guestroom sheet". Resolving it is a substitution, not an inference. */
+const resolveSheetWildcard = (text, roomSheet) => String(text || '').replace(/A55x/g, roomSheet);
+
+/** Citations are written as '; '-separated segments throughout the DB and the
+ *  approved slice. Split / rejoin without reordering or reformatting. */
+const citeSegments = (s) => String(s || '').split(';').map((x) => x.trim()).filter(Boolean);
+const citeJoin = (a) => a.join('; ');
+
+/**
+ * Prove that the D10 condensation map accounts for EVERY MEP row in the donor
+ * room. If a donor row is neither condensed onto a line nor listed as rough-in,
+ * this tool does not know what the approved doc did with it and must not guess.
+ */
+function assertMepCondensationCovers(db, slice) {
+  const { rows } = readRoom(db, MEP_DONOR_ROOM);
+  const donorIds = rows.filter(isMepRow).map((r) => r.item_id);
+  const claimed = new Map();
+  for (const [key, ids] of Object.entries(MEP_CONDENSED_SOURCES)) {
+    for (const id of ids) {
+      if (claimed.has(id)) {
+        die('MEP condensation map claims ' + id + ' for both ' + claimed.get(id) + ' and ' + key);
+      }
+      claimed.set(id, key);
+    }
+  }
+  for (const id of MEP_ROUGH_IN_ITEMS) {
+    if (claimed.has(id)) die('MEP condensation map lists ' + id + ' as rough-in AND condenses it onto ' + claimed.get(id));
+    claimed.set(id, '<rough-in, deliberately not on the approved punch>');
+  }
+  const problems = [];
+  for (const id of donorIds) {
+    if (!claimed.has(id)) problems.push('donor room ' + MEP_DONOR_ROOM + ' row ' + id + ' is not accounted for by the condensation map');
+  }
+  const donorSet = new Set(donorIds);
+  for (const id of claimed.keys()) {
+    if (!donorSet.has(id)) problems.push('condensation map names ' + id + ', which is not a MEP row of donor room ' + MEP_DONOR_ROOM);
+  }
+  const refItems = slice.docs[MEP_DONOR_ROOM + '-MEP'].items;
+  const live = Object.keys(refItems).filter((k) => !refItems[k].deleted).sort(cmpStr);
+  const mapped = Object.keys(MEP_CONDENSED_SOURCES).sort(cmpStr);
+  if (stringify(live) !== stringify(mapped)) {
+    problems.push('the condensation map covers ' + mapped.length + ' line key(s); the approved ' +
+      MEP_DONOR_ROOM + '-MEP has ' + live.length + ' live line(s) - they must be the same set');
+  }
+  if (problems.length) die('the D10 condensation map is not sound:\n  ' + problems.join('\n  '));
+  return { donorRows: donorIds.length, lines: mapped.length, roughIn: MEP_ROUGH_IN_ITEMS.length };
+}
+
+/**
+ * Prove - from the database, not from a comment - that A550 and A555 share
+ * their keynote AND their view numbering, and that the '.1' suffix on a view
+ * means the CONNECTING variant of that view. This is the rule that lets a King
+ * citation be re-pointed off the Queen-Queen sheet instead of being copied.
+ */
+function assertSheetNumberingShared(db) {
+  const rt = (name) => {
+    const row = db.prepare('SELECT type_name, room_sheet, notes FROM room_types WHERE type_name = ?').get(name);
+    if (!row) die('room_types has no row for ' + JSON.stringify(name));
+    return row;
+  };
+  const problems = [];
+  const facts = [];
+
+  const king = rt('King Studio'), qq = rt('Queen-Queen');
+  const kingConn = rt('King Studio Connecting'), qqConn = rt('QQ Connecting');
+  if (king.room_sheet !== 'A550') problems.push('King Studio room_sheet is ' + JSON.stringify(king.room_sheet) + ', expected "A550"');
+  if (qq.room_sheet !== MEP_DONOR_SHEET) problems.push('Queen-Queen room_sheet is ' + JSON.stringify(qq.room_sheet) + ', expected ' + JSON.stringify(MEP_DONOR_SHEET));
+  if (!String(king.notes).includes('A550 view 01')) problems.push('room_types King Studio notes do not state "A550 view 01"');
+  if (!String(qq.notes).includes('A555 view 01')) problems.push('room_types Queen-Queen notes do not state "A555 view 01"');
+  facts.push('room_types: King Studio "A550 view 01" vs Queen-Queen "A555 view 01" - the same view number on both sheets');
+  if (!String(kingConn.notes).includes('A550 view 01.1')) problems.push('room_types King Studio Connecting notes do not state "A550 view 01.1"');
+  if (!String(qqConn.notes).includes('A555 view 01.1')) problems.push('room_types QQ Connecting notes do not state "A555 view 01.1"');
+  if (!String(qqConn.notes).includes('electrical view 04.1')) problems.push('room_types QQ Connecting notes do not state "electrical view 04.1"');
+  facts.push('room_types: "A550 view 01.1" (King Studio Connecting) and "A555 view 01.1 ... + electrical view 04.1" (QQ Connecting) - the ".1" suffix IS the connecting variant, on both sheets');
+
+  /* The same physical row, written for a QQ room and for a King room. */
+  const donorPtac = db.prepare("SELECT source_sheet FROM room_items WHERE item_id = 'ITM-0443' LIMIT 1").get();
+  const kingPtac = db.prepare("SELECT source_sheet FROM room_items WHERE item_id = 'ITM-0152' LIMIT 1").get();
+  if (!donorPtac || !kingPtac) {
+    problems.push('room_items is missing the PTAC rows ITM-0443 / ITM-0152 that prove the shared numbering');
+  } else {
+    const archOf = (t) => citeSegments(t).filter((x) => /^A55\d/.test(x)).join('; ');
+    const a = archOf(donorPtac.source_sheet), b = archOf(kingPtac.source_sheet);
+    if (!a || !b) problems.push('the PTAC rows carry no A55-series citation to compare');
+    else if (a.split('A555').join('A550') !== b) {
+      problems.push('room_items ITM-0443 ' + JSON.stringify(a) + ' does not re-point onto ITM-0152 ' +
+        JSON.stringify(b) + ' - the A555 -> A550 substitution is NOT proven, refusing to re-point any citation');
+    } else {
+      facts.push('room_items: ITM-0443 ' + JSON.stringify(a) + ' and ITM-0152 ' + JSON.stringify(b) +
+        ' - same keynote, same view, two sheets');
+    }
+  }
+  if (problems.length) {
+    die('A550 / A555 shared numbering is NOT proven by the database - refusing to re-point MEP citations:\n  ' +
+        problems.join('\n  '));
+  }
+  return facts;
+}
+
+/** Re-prove the DB evidence behind every hard-coded room-sheet resolution. */
+function assertRoomSheetResolution(db) {
+  const out = [];
+  const tagsOf = (no) => new Map(db.prepare(
+    'SELECT tag, primary_sheet FROM room_items WHERE room_no = ? AND tag IS NOT NULL').all(no)
+    .map((x) => [x.tag, x.primary_sheet]));
+  for (const [roomNo, r] of Object.entries(ROOM_SHEET_RESOLUTION)) {
+    const here = tagsOf(roomNo), there = tagsOf(r.otherRoom);
+    const bad = [];
+    for (const t of r.onlyHere) {
+      if (!here.has(t)) bad.push('room ' + roomNo + ' does not carry ' + t);
+      else if (here.get(t) !== r.sheet) bad.push('room ' + roomNo + ' ' + t + ' primary_sheet is ' + JSON.stringify(here.get(t)) + ', expected ' + JSON.stringify(r.sheet));
+      if (there.has(t)) bad.push('room ' + r.otherRoom + ' also carries ' + t + ' - it does not separate the two sheets');
+    }
+    for (const t of r.onlyThere) {
+      if (here.has(t)) bad.push('room ' + roomNo + ' carries ' + t + ', which belongs to ' + r.otherSheet);
+      if (!there.has(t)) bad.push('room ' + r.otherRoom + ' does not carry ' + t);
+      else if (there.get(t) !== r.otherSheet) bad.push('room ' + r.otherRoom + ' ' + t + ' primary_sheet is ' + JSON.stringify(there.get(t)));
+    }
+    if (bad.length) {
+      die('the room-sheet resolution for room ' + roomNo + ' is NOT supported by the database:\n  ' + bad.join('\n  '));
+    }
+    out.push('room ' + roomNo + ' -> ' + r.sheet + ' (' + r.why + ')');
+  }
+  return out;
+}
+
+/** This room's own A55-series guestroom sheet, off room_types, resolved where the DB is ambiguous. */
+function roomSheetFor(db, room, roomNo) {
+  const rt = db.prepare('SELECT room_sheet FROM room_types WHERE type_name = ?').get(room.room_type);
+  if (!rt || !rt.room_sheet) die('room ' + roomNo + ': room_types has no room_sheet for ' + JSON.stringify(room.room_type));
+  const sheet = String(rt.room_sheet).trim();
+  if (/^A\d{3}(\.\d+)?$/.test(sheet)) return sheet;
+  const res = ROOM_SHEET_RESOLUTION[roomNo];
+  if (!res) {
+    die('room ' + roomNo + ': room_types.room_sheet is ' + JSON.stringify(sheet) +
+        ' - ambiguous, and no proven resolution exists for this room. Refusing to pick a sheet.');
+  }
+  return res.sheet;
+}
+
+/**
+ * Re-point one approved citation string onto this room.
+ *   1 'A550/A555' names BOTH sheets and is type-neutral - protected, never touched.
+ *   2 every other A555 token becomes this room's own guestroom sheet.
+ *   3 the '.1' CONNECTING view variant is dropped where rooms.connecting = 0.
+ */
+function repointMepSrc(src, roomSheet, isConnecting) {
+  const MARK = '\u0001';
+  let out = String(src || '')
+    .replace(/A550\s*\/\s*A555/g, MARK + '$&' + MARK)
+    .replace(/A555\s*\/\s*A550/g, MARK + '$&' + MARK);
+  const parts = out.split(MARK);
+  for (let i = 0; i < parts.length; i += 2) parts[i] = parts[i].split(MEP_DONOR_SHEET).join(roomSheet);
+  out = parts.join('');
+  if (!isConnecting) {
+    out = out.replace(/views (\d+)\/\1\.1\b/g, 'view $1')
+             .replace(/views (\d+) and \1\.1\b/g, 'view $1');
+  }
+  return out;
+}
+
+/** The instanceNote shape the approved MEDIUM / FLAGGED lines already use. */
+function sqliteNote(row) {
+  const parts = [];
+  if (row.instance_note) parts.push(row.instance_note);
+  if (row.note) parts.push(row.note);
+  const text = parts.join(' — ');
+  if (!text) return '';
+  return row.reliability === 'HIGH' ? text : '⚑ ' + text;
+}
+
+/**
+ * Configuration A (TUB) rows, matched on the DATABASE'S OWN description prefix.
+ * Returns the set of rowids to drop. Refuses to drop anything without a ruling,
+ * and refuses to drop if it would leave the room with no Configuration B row.
+ */
+function configADrops(roomNo, rows) {
+  const a = rows.filter((r) => String(r.description || '').startsWith(CONFIG_A_PREFIX));
+  const b = rows.filter((r) => String(r.description || '').startsWith(CONFIG_B_PREFIX));
+  if (!a.length) return { ids: new Set(), ruling: null, a: [], b };
+  const ruling = CONFIG_A_DROP_ROOMS[roomNo];
+  if (!ruling) {
+    die('room ' + roomNo + ' carries ' + a.length + ' "' + CONFIG_A_PREFIX +
+        '" row(s) and no ruling closes the tub-versus-roll-in question for it. Not guessing.');
+  }
+  if (!b.length) {
+    die('room ' + roomNo + ': dropping the ' + a.length + ' Configuration A (TUB) row(s) per ruling ' +
+        ruling + ' would leave NO Configuration B (ROLL-IN SHOWER) row behind - that would delete the ' +
+        "room's bathing package outright. Refusing.");
+  }
+  return { ids: new Set(a.map((r) => r.rowid)), ruling, a, b };
+}
+
+/**
+ * Build the MEP doc for a COMPOSED room type from that room's own rows.
+ * Shape and wording: the approved donor's 22 condensed lines.
+ * Citations, marks, counts: this room's own room_items.
+ */
+function buildComposedMepDoc(db, roomNo, room, rows, slice, donorNo, floor, stamp, report, identity) {
+  const ref = slice.docs[donorNo + '-MEP'];
+  if (!ref) die('room ' + roomNo + ': approved slice has no ' + donorNo + '-MEP to take the D10 shape from');
+  if (ref.type !== MEP_DOC_TYPE) die('room ' + roomNo + ': ' + donorNo + '-MEP type is not ' + JSON.stringify(MEP_DOC_TYPE));
+
+  const donorLive = {};
+  let skippedDeleted = 0;
+  for (const k of Object.keys(ref.items)) {
+    if (ref.items[k].deleted) { skippedDeleted++; continue; }
+    donorLive[k] = ref.items[k];
+  }
+
+  const donorRows = readRoom(db, MEP_DONOR_ROOM).rows.filter(isMepRow);
+  const donorById = new Map(donorRows.map((r) => [r.item_id, r]));
+  const keyOfDonorItem = new Map();
+  for (const [key, ids] of Object.entries(MEP_CONDENSED_SOURCES)) for (const id of ids) keyOfDonorItem.set(id, key);
+
+  const roomSheet = roomSheetFor(db, room, roomNo);
+  const isConnecting = String(room.connecting) === '1';
+  const drops = configADrops(roomNo, rows);
+
+  /* Classify every MEP row this room has. Nothing may fall through. */
+  const support = new Map();
+  const newRows = [];
+  const roughIn = [];
+  const droppedHere = [];
+  for (const r of rows) {
+    if (!isMepRow(r)) continue;
+    if (drops.ids.has(r.rowid)) { droppedHere.push(r); continue; }
+    const key = keyOfDonorItem.get(r.item_id) || MEP_VARIANT_SLOTS[r.item_id] || null;
+    if (key) {
+      if (!(key in donorLive)) die('room ' + roomNo + ': row ' + r.item_id + ' maps to MEP line ' + key + ', which is not live in ' + donorNo + '-MEP');
+      if (!support.has(key)) support.set(key, []);
+      support.get(key).push(r);
+    } else if (MEP_ROUGH_IN_ITEMS.includes(r.item_id)) {
+      roughIn.push(r);
+    } else {
+      newRows.push(r);
+    }
+  }
+
+  const items = {};
+  const repointed = [];
+  const connectingDropped = [];
+  const resolutions = [];
+
+  for (const key of Object.keys(donorLive).sort(cmpStr)) {
+    const d = donorLive[key];
+    const mine = support.get(key) || [];
+    const variants = mine.filter((r) => MEP_VARIANT_SLOTS[r.item_id] === key);
+    const variant = variants[0] || null;
+    const donorVariant = (MEP_CONDENSED_SOURCES[key] || []).map((id) => donorById.get(id)).find(Boolean) || null;
+
+    let code = d.code, label = d.label, reliability = d.reliability, trade = d.trade;
+    let derived = d.derived, qty = d.qty, instanceNote = d.instanceNote;
+    let src = repointMepSrc(d.src, roomSheet, isConnecting);
+    if (src !== d.src) repointed.push(key);
+    /* Did this line carry a CONNECTING view, and did we drop it? Measured by
+     * running the same re-point both ways - never by sniffing for '.1', which
+     * also matches a code reference like 'Art. 210.12'. */
+    if (!isConnecting && repointMepSrc(d.src, roomSheet, true) !== repointMepSrc(d.src, roomSheet, false)) {
+      connectingDropped.push(key);
+    }
+
+    const rowDiffers = variant && donorVariant && variant.description !== donorVariant.description;
+
+    if (rowDiffers && MEP_LABEL_FROM_ROW.has(key)) {
+      /* The approved label IS the product description, and this room's product
+       * is a different one. Rebuild the line from this room's own row; the key,
+       * the category and the sort stay the approved ones. */
+      code = variant.tag || '';
+      label = variant.description;
+      src = resolveSheetWildcard(variant.source_sheet || variant.primary_sheet || '', roomSheet);
+      reliability = variant.reliability;
+      trade = variant.trade_responsible || '';
+      derived = variant.derived;
+      instanceNote = sqliteNote(variant);
+      if (drops.ruling && String(variant.description).startsWith(CONFIG_B_PREFIX)) {
+        instanceNote = 'Austin ruling ' + drops.ruling + ': this room is built to Configuration B (roll-in shower); ' +
+          'the Configuration A (TUB) rows are dropped. ' + instanceNote;
+      }
+      resolutions.push(key + ": rebuilt from this room's own row " + variant.item_id);
+    }
+
+    if (key === 'mech_ptac' && variant) {
+      /* Resolve the mark the donor room could not. */
+      code = variant.tag || code;
+      if (!citeSegments(d.src).some((x) => x === PTAC_DONOR_M401)) {
+        die('room ' + roomNo + ': approved mech_ptac src no longer contains ' + JSON.stringify(PTAC_DONOR_M401) +
+            ' - the PTAC resolution was written against that text and must not run blind');
+      }
+      const donorSegs = citeSegments(d.src).filter((x) => !/^M401\b/.test(x) && !/^A55\d/.test(x));
+      const mineSegs = citeSegments(resolveSheetWildcard(variant.source_sheet || '', roomSheet));
+      src = citeJoin([...mineSegs, ...donorSegs]);
+      if (!String(instanceNote).includes(PTAC_NAMEPLATE)) {
+        die('room ' + roomNo + ': approved mech_ptac instanceNote no longer contains the nameplate sentence');
+      }
+      const why = variant.note ? ' — "' + variant.note + '"' : '';
+      const resolved = "This room's own row resolves the mark: " + (variant.tag || '(untagged)') +
+        ' (data/project.sqlite room_items ' + variant.item_id + ', reliability ' + variant.reliability + ')' + why + '.';
+      instanceNote = String(instanceNote).replace(PTAC_NAMEPLATE, resolved + ' ' + PTAC_NAMEPLATE);
+      resolutions.push('mech_ptac: mark resolved to ' + (variant.tag || '(untagged)') + ' from ' + variant.item_id);
+    }
+
+    if (key === 'fp_heads_a' && variants.length) {
+      /* The room-specific sprinkler take-off the copy used to throw away. */
+      qty = variants.length;
+      const positions = variants.map((r) => r.instance_note).filter(Boolean).join('; ');
+      const extras = [...new Set(variants.map((r) => r.note).filter(Boolean))].join(' ');
+      const cites = [...new Set(variants.map((r) => r.source_sheet).filter(Boolean))];
+      src = citeJoin([...citeSegments(src), ...cites]);
+      if (!String(instanceNote).includes(FP_COUNT_SENTENCE)) {
+        die('room ' + roomNo + ': approved fp_heads_a instanceNote no longer contains the head-count sentence');
+      }
+      const own = "this room's own take-off is " + variants.length + ' concealed pendent head(s) on drops — ' +
+        positions + '. ' + (extras ? extras + '. ' : '') + 'Verify every head you can see.';
+      instanceNote = String(instanceNote).replace(FP_COUNT_SENTENCE, own);
+      resolutions.push('fp_heads_a: ' + variants.length + ' room-specific sprinkler head row(s) carried (' +
+        variants.map((r) => r.item_id).join(', ') + ')');
+    }
+
+    if (!src) die('room ' + roomNo + ': MEP line ' + key + ' would carry no citation');
+
+    items[key] = {
+      id: key, code, label, category: d.category, qty, src, reliability, instanceNote,
+      trade, derived, sort: d.sort, deleted: false, ...CLEAN_FIELD_STATE,
+    };
+    if (Array.isArray(d.attachments) && d.attachments.length) items[key].attachments = clone(d.attachments);
+  }
+
+  /* Rows this room has that the donor does not, and that no condensed line
+   * claims. They become their own lines - never silently lost. */
+  const nextSort = new Map();
+  for (const v of Object.values(items)) {
+    nextSort.set(v.category, Math.max(nextSort.get(v.category) || 0, v.sort));
+  }
+  const added = [];
+  for (const r of newRows) {
+    const c = r.category;
+    if (!SPACE_MEP_INDEX.has(c)) die('room ' + roomNo + ': MEP category ' + JSON.stringify(c) + ' has no band position');
+    const base = nextSort.has(c) ? nextSort.get(c) + 1 : (SPACE_MEP_INDEX.get(c) + 1) * 1000 + 10;
+    nextSort.set(c, base);
+    const key = 'db_' + String(r.item_id).toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (!/^[a-z0-9_]{1,40}$/.test(key)) die('room ' + roomNo + ': MEP key ' + JSON.stringify(key) + ' violates ^[a-z0-9_]{1,40}$');
+    if (items[key]) die('room ' + roomNo + ': MEP key collision ' + JSON.stringify(key));
+    const src = resolveSheetWildcard(r.source_sheet || r.primary_sheet || '', roomSheet);
+    if (!src) die('room ' + roomNo + ': row ' + r.item_id + ' has no citation in sqlite - refusing to emit an uncited line');
+    let note = sqliteNote(r);
+    if (drops.ruling && String(r.description).startsWith(CONFIG_B_PREFIX)) {
+      note = 'Austin ruling ' + drops.ruling + ': this room is built to Configuration B (roll-in shower); ' +
+        'the Configuration A (TUB) rows are dropped. ' + note;
+    }
+    items[key] = {
+      id: key, code: r.tag || '', label: r.description, category: c, qty: 1, src,
+      reliability: r.reliability, instanceNote: note, trade: r.trade_responsible || '',
+      derived: r.derived, sort: base, deleted: false, ...CLEAN_FIELD_STATE,
+    };
+    added.push((r.tag || '<untagged>') + ' [' + c + '] ' + r.item_id);
+  }
+
+  report.mepLines = Object.keys(items).length;
+  report.mepSkippedDeleted = skippedDeleted;
+  report.mepRefRoom = donorNo + '-MEP';
+  report.mepComposed = true;
+  report.mepRoomSheet = roomSheet;
+  report.mepConnecting = isConnecting;
+  report.mepRepointed = repointed.sort(cmpStr);
+  report.mepConnectingDropped = connectingDropped.sort(cmpStr);
+  report.mepResolutions = resolutions;
+  report.mepAdded = added;
+  report.mepRoughIn = roughIn.length;
+  report.mepDropped = droppedHere.map((r) => (r.tag || '<untagged>') + ' [' + r.category + '] ' + r.item_id + ' - ' + r.description.slice(0, 70));
+  report.mepDropRuling = drops.ruling;
+  report.mepUnsupported = Object.keys(donorLive).filter((k) => !(support.get(k) || []).length).sort(cmpStr);
+
+  return {
+    number: roomNo + '-MEP',
+    floor,
+    type: MEP_DOC_TYPE,
+    typeLabel: identity.typeLabel,
     schemaV: ref.schemaV,
     items,
     notes: {},
@@ -1848,6 +2341,10 @@ function main(argv) {
   assertMepConstant(slice);
   /* And the label/src/type-slug derivations the King composition depends on. */
   const proof = assertDerivationRules(db, slice);
+  /* And everything the COMPOSED MEP document leans on. */
+  const cover = assertMepCondensationCovers(db, slice);
+  const numbering = assertSheetNumberingShared(db);
+  const sheetRes = assertRoomSheetResolution(db);
   const typeRef = buildTypeReference(db);
 
   /* Carry forward whatever earlier waves already staged. */
@@ -1866,9 +2363,15 @@ function main(argv) {
   for (const roomNo of rooms) {
     const report = { room: roomNo, unresolved: [] };
     const ffe = buildFFEDoc(db, roomNo, slice, typeRef, stamp, report);
-    const mep = buildMepDoc(roomNo, slice, report.refRoom, ffe.floor, stamp, report,
-      { typeLabel: ffe.typeLabel });
-    report.mepSheetCitations = mepSheetCitations(slice, report.refRoom);
+    const { room, rows } = readRoom(db, roomNo);
+    /* A type with an approved -MEP doc of its own keeps the proven copy path.
+     * A composed type builds its MEP doc from its own rows instead. */
+    const mep = report.composed
+      ? buildComposedMepDoc(db, roomNo, room, rows, slice, report.donorRoom, ffe.floor, stamp, report,
+        { typeLabel: ffe.typeLabel })
+      : buildMepDoc(roomNo, slice, report.refRoom, ffe.floor, stamp, report,
+        { typeLabel: ffe.typeLabel });
+    if (!report.composed) report.mepSheetCitations = mepSheetCitations(slice, report.refRoom);
     docs[roomNo] = ffe;
     docs[roomNo + '-MEP'] = mep;
     reports.push(report);
@@ -1904,7 +2407,13 @@ function main(argv) {
 
   process.stdout.write('\nBUILD REPORT\n' + '-'.repeat(78) + '\n');
   process.stdout.write('src / type-slug derivation rules re-proved on ' + proof.checked + ' approved lines' +
-    (proof.labelNotes.length ? ' (' + proof.labelNotes.length + ' label(s) enriched by submittal)' : '') + '\n\n');
+    (proof.labelNotes.length ? ' (' + proof.labelNotes.length + ' label(s) enriched by submittal)' : '') + '\n');
+  process.stdout.write('D10 condensation map re-proved: ' + cover.donorRows + ' donor MEP rows -> ' +
+    cover.lines + ' condensed lines + ' + cover.roughIn + ' rough-in rows deliberately off the punch\n');
+  process.stdout.write('A550 / A555 shared numbering re-proved from the database:\n');
+  for (const f of numbering) process.stdout.write('    - ' + f + '\n');
+  for (const f of sheetRes) process.stdout.write('  room-sheet resolution: ' + f + '\n');
+  process.stdout.write('\n');
   for (const r of reports) {
     process.stdout.write(
       'room ' + r.room + '  type ' + r.roomType + '  -> doc type ' + r.docType +
@@ -1926,11 +2435,28 @@ function main(argv) {
         process.stdout.write('  qty differs from donor on: ' + r.donorQtyNotes.join('; ') + '\n');
       }
       for (const n of r.donorLabelNotes) process.stdout.write('  INFO ' + n + '\n');
-      if (r.mepSheetCitations && r.mepSheetCitations.length) {
-        process.stdout.write('  OPEN: ' + r.mepSheetCitations.length + ' of ' + r.mepLines +
-          ' MEP lines cite A555 (the Queen-Queen sheet) and were NOT re-pointed to A550 -\n' +
-          '        A550 and A555 do not share a view numbering and no document states the\n' +
-          '        A550 equivalents. Lines: ' + r.mepSheetCitations.map((c) => c.key).join(', ') + '\n');
+      if (r.mepComposed) {
+        process.stdout.write('  MEP composed from this room\'s own rows against sheet ' + r.mepRoomSheet +
+          ' (rooms.connecting = ' + (r.mepConnecting ? '1' : '0') + ')\n');
+        process.stdout.write('    citations re-pointed off ' + MEP_DONOR_SHEET + ': ' +
+          (r.mepRepointed.length ? r.mepRepointed.join(', ') : 'none') + '\n');
+        process.stdout.write('    connecting ".1" view citation ' +
+          (r.mepConnecting ? 'KEPT (this room IS connecting)' : 'dropped on: ' +
+            (r.mepConnectingDropped.length ? r.mepConnectingDropped.join(', ') : 'none')) + '\n');
+        for (const x of r.mepResolutions) process.stdout.write('    resolved: ' + x + '\n');
+        if (r.mepAdded.length) {
+          process.stdout.write('    ' + r.mepAdded.length + ' room-specific row(s) added as their own line(s): ' +
+            r.mepAdded.join('; ') + '\n');
+        }
+        if (r.mepDropped.length) {
+          process.stdout.write('    ' + r.mepDropped.length + ' row(s) dropped by ruling ' + r.mepDropRuling + ':\n');
+          for (const x of r.mepDropped) process.stdout.write('        - ' + x + '\n');
+        }
+        process.stdout.write('    ' + r.mepRoughIn + ' rough-in / distribution row(s) left off the punch, as in the approved doc\n');
+        if (r.mepUnsupported.length) {
+          process.stdout.write('    NOTE ' + r.mepUnsupported.length + ' condensed line(s) have no row of their own in this room ' +
+            '(carried on the donor citation): ' + r.mepUnsupported.join(', ') + '\n');
+        }
       }
     }
     if (r.unknownCategories.length) {
