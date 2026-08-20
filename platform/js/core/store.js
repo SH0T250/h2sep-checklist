@@ -9,6 +9,9 @@ const ID_KEY = 'h2sep-platform-user';
 function nowIso() { return new Date().toISOString(); }
 
 export class Store {
+  // Long suffix first: a doc that has both is the guest-room one.
+  static MEP_SUFFIXES = ['-MEP', '-M'];
+
   constructor(seed) {
     this.seed = seed;
     this.docs = {};
@@ -73,7 +76,20 @@ export class Store {
       .map(([, d]) => d)
       .sort((a, b) => String(a.number).localeCompare(String(b.number)));
   }
-  mepDoc(roomNo) { return this.docs[roomNo + '-MEP'] || null; }
+  // An MEP companion doc is suffixed '-MEP' on a guest room (105-MEP) and '-M'
+  // on a common-area space (S003-M, SZONEB-M). The short suffix is not a typo:
+  // the published Firestore rule caps a document id at 8 characters and
+  // 'SZONEA-MEP' is 10, so the space docs cannot use the long one. The app
+  // resolves both, preferring the long suffix, and every caller goes through
+  // these two so the rule lives in exactly one place.
+  mepDocId(parentId) {
+    for (const suffix of Store.MEP_SUFFIXES) {
+      const id = String(parentId) + suffix;
+      if (this.docs[id]) return id;
+    }
+    return null;
+  }
+  mepDoc(parentId) { return this.docs[this.mepDocId(parentId)] || null; }
 
   liveItems(doc) {
     return Object.entries(doc.items || {})

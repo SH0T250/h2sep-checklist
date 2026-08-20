@@ -51,11 +51,14 @@ const setview = args.setview || null;
 const url = setview
   ? `${base}/${page}?view=${encodeURIComponent(setview)}`
   : `${base}/${page}?room=${encodeURIComponent(room)}&view=iso`;
-await p.goto(url, { waitUntil: 'networkidle' });
+// king-studio.html draws every texture in the room, generates a PMREM and bakes
+// two cube reflections before it paints, so first paint is tens of seconds on
+// SwiftShader. Both waits are generous enough for that.
+await p.goto(url, { waitUntil: 'load', timeout: 180000 });
 await p.waitForFunction(() => {
   const c = document.querySelector('canvas');
   return !!c && c.width > 100;
-}, null, { timeout: 20000 });
+}, null, { timeout: 180000 });
 await p.waitForTimeout(600);
 
 // Pages that expose a scripting API (king-studio.html) are driven directly:

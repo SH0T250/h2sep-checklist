@@ -1273,66 +1273,76 @@ function noiseOver(g, w, h, amt, seed) {    // fine film grain / fibre
    pale blue.  Cell grid keeps it seamless.  [PHOTO] --------------------- */
 var CARPET_TILE_FT = 6;
 function carpetCanvas() {
-  var N = 640, cell = N / 8, o = cv(N, N), c = o[0], g = o[1];
-  // charcoal and grey carry the field; mustard and pale blue are accents, not
-  // half the floor  [PHOTO: "overlapping chevrons and blocks in charcoal, grey,
-  // mustard-gold and pale blue"]
-  var pal = ['#2f3237', '#383c42', '#33373c', '#43474d', '#3d4147', '#4d5258',
-             '#2b2e33', '#3a3e44', '#36393f', '#45494f'];
-  var accent = ['#8a6d24', '#4a5f72'];      // mustard and pale blue, used sparingly
-  g.fillStyle = '#2a2d31'; g.fillRect(0, 0, N, N);
+  // Redrawn against photo-01 and photo-05 rather than the written record: the
+  // field is a mid teal-grey, not charcoal, the motifs are LARGE (arrowheads
+  // and hatch blocks around 12-18"), and the mustard is a scattered accent in
+  // groups of hatch lines, not a block colour.
+  var N = 512, cell = N / 4, o = cv(N, N), c = o[0], g = o[1];
+  var base = '#555e5d';
+  var greys = ['#606a68', '#6c7674', '#7a8482', '#4d5655', '#5b6564'];
+  var mustard = ['#98803f', '#8a7338'];
+  g.fillStyle = base; g.fillRect(0, 0, N, N);
   var r = rng(7331);
-  for (var iy = 0; iy < 8; iy++) for (var ix = 0; ix < 8; ix++) {
-    var x = ix * cell, y = iy * cell, k = r();
+
+  function hatch(x, y, w, h, col, gap, ang) {
+    g.save(); g.beginPath(); g.rect(x, y, w, h); g.clip();
+    g.strokeStyle = col; g.lineWidth = 2.4; g.globalAlpha = 0.85;
+    for (var t = -h; t < w + h; t += gap) {
+      g.beginPath();
+      if (ang > 0) { g.moveTo(x + t, y + h); g.lineTo(x + t + h, y); }
+      else { g.moveTo(x + t, y); g.lineTo(x + t + h, y + h); }
+      g.stroke();
+    }
+    g.restore(); g.globalAlpha = 1;
+  }
+  function arrow(cx, cy, sz, col, rot) {
+    g.save(); g.translate(cx, cy); g.rotate(rot);
+    g.fillStyle = col;
+    g.beginPath();
+    g.moveTo(0, -sz * 0.55); g.lineTo(sz * 0.62, sz * 0.45);
+    g.lineTo(0, sz * 0.12); g.lineTo(-sz * 0.62, sz * 0.45);
+    g.closePath(); g.fill();
+    g.restore();
+  }
+
+  for (var iy = 0; iy < 4; iy++) for (var ix = 0; ix < 4; ix++) {
+    var x = ix * cell, y = iy * cell, k = (ix * 5 + iy * 3) % 8;
     g.save(); g.beginPath(); g.rect(x, y, cell, cell); g.clip();
-    var acc = ((ix * 5 + iy * 3) % 7) === 0;
-    g.fillStyle = acc ? accent[(ix + iy) % 2] : pal[(ix * 3 + iy * 5) % pal.length];
-    g.globalAlpha = acc ? (0.45 + r() * 0.2) : (0.55 + r() * 0.25);
+    g.globalAlpha = 0.55 + r() * 0.3;
+    g.fillStyle = greys[(ix + iy * 2) % greys.length];
     g.fillRect(x, y, cell, cell);
     g.globalAlpha = 1;
-    if (k < 0.34) {                                  // chevron band
-      g.strokeStyle = ((ix * 3 + iy) % 6 === 0) ? accent[(ix) % 2] : pal[(ix + iy * 2 + 3) % pal.length];
-      g.globalAlpha = 0.60;
-      g.lineWidth = cell * 0.12; g.lineCap = 'butt';
-      for (var s = -cell; s < cell * 2; s += cell * 0.34) {
-        g.beginPath();
-        g.moveTo(x + s, y + cell); g.lineTo(x + s + cell * 0.5, y);
-        g.lineTo(x + s + cell, y + cell); g.stroke();
-      }
-    } else if (k < 0.62) {                           // half block
-      g.fillStyle = ((ix + iy * 5) % 8 === 0) ? accent[iy % 2] : pal[(ix * 5 + iy + 1) % pal.length];
-      g.globalAlpha = 0.7;
-      if (r() < 0.5) g.fillRect(x, y, cell, cell * (0.35 + r() * 0.3));
-      else g.fillRect(x, y, cell * (0.35 + r() * 0.3), cell);
-    } else if (k < 0.82) {                           // hatch
-      g.strokeStyle = ((ix * 7 + iy) % 9 === 0) ? accent[(iy) % 2] : pal[(ix + iy * 7) % pal.length];
-      g.globalAlpha = 0.55;
-      g.lineWidth = cell * 0.06;
-      for (var t2 = -cell; t2 < cell * 2; t2 += cell * 0.16) {
-        g.beginPath(); g.moveTo(x + t2, y); g.lineTo(x + t2 + cell, y + cell); g.stroke();
-      }
+    if (k === 0 || k === 5) {
+      arrow(x + cell * 0.5, y + cell * 0.5, cell * 0.86, greys[(ix + 3) % greys.length], (k === 0 ? 0 : Math.PI));
+      hatch(x + cell * 0.08, y + cell * 0.60, cell * 0.84, cell * 0.30, greys[(iy + 1) % greys.length], 9, 1);
+    } else if (k === 1 || k === 6) {
+      hatch(x + cell * 0.06, y + cell * 0.10, cell * 0.88, cell * 0.34, mustard[iy % 2], 8, 1);
+      hatch(x + cell * 0.06, y + cell * 0.55, cell * 0.55, cell * 0.35, greys[(ix + 2) % greys.length], 8, -1);
+    } else if (k === 2 || k === 7) {
+      arrow(x + cell * 0.35, y + cell * 0.42, cell * 0.62, greys[(ix + iy) % greys.length], Math.PI / 2);
+      arrow(x + cell * 0.72, y + cell * 0.74, cell * 0.5, greys[(ix + 4) % greys.length], -Math.PI / 2);
+    } else if (k === 3) {
+      hatch(x, y, cell, cell, greys[(ix * 3 + iy) % greys.length], 11, -1);
+    } else {
+      g.fillStyle = greys[(ix + iy * 3) % greys.length];
+      g.globalAlpha = 0.6;
+      g.fillRect(x + cell * 0.10, y + cell * 0.16, cell * 0.5, cell * 0.62);
+      g.globalAlpha = 1;
+      hatch(x + cell * 0.62, y + cell * 0.20, cell * 0.30, cell * 0.62, mustard[ix % 2], 9, 1);
     }
     g.restore();
   }
-  // soften the cell grid so it reads as broadloom, not as squares
-  g.globalAlpha = 0.20;
-  for (var q = 0; q < 900; q++) {
-    var rx = r() * N, ry = r() * N, rr = 4 + r() * 26;
-    g.fillStyle = pal[(q * 13) % pal.length];
-    g.beginPath(); g.arc(rx, ry, rr, 0, 6.283); g.fill();
-  }
-  // low-frequency drift across the whole tile, so the 8x8 build grid stops
-  // reading as a chequerboard from across the room
-  g.globalAlpha = 0.16;
-  for (var d = 0; d < 40; d++) {
-    var dx = r() * N, dy = r() * N, dr = 60 + r() * 190;
+  // low-frequency drift so the 4x4 build grid does not read as a chequerboard
+  g.globalAlpha = 0.13;
+  for (var d = 0; d < 34; d++) {
+    var dx = r() * N, dy = r() * N, dr = 60 + r() * 180;
     var rg2 = g.createRadialGradient(dx, dy, 0, dx, dy, dr);
-    var cc2 = r() < 0.5 ? '#000000' : '#7b8189';
-    rg2.addColorStop(0, cc2); rg2.addColorStop(1, 'rgba(0,0,0,0)');
+    rg2.addColorStop(0, r() < 0.5 ? '#000000' : '#9aa3a1');
+    rg2.addColorStop(1, 'rgba(0,0,0,0)');
     g.fillStyle = rg2; g.beginPath(); g.arc(dx, dy, dr, 0, 6.283); g.fill();
   }
   g.globalAlpha = 1;
-  noiseOver(g, N, N, 26, 4242);
+  noiseOver(g, N, N, 22, 4242);
   return c;
 }
 function carpetBumpCanvas() {
@@ -1369,62 +1379,125 @@ function herringboneCanvas() {
 /* ---- roller shade GR-400: arcs and blocks, red / gold / navy / grey on
    cream.  This is the loudest thing in the room.  [PHOTO] --------------- */
 function shadeCanvas() {
-  var N = 512, o = cv(N, N), c = o[0], g = o[1];
-  var cream = '#f2ebdb', red = '#b53a30', gold = '#d3a233', navy = '#25355e', grey = '#8b9096';
+  // Against photo-01 and photo-09: cream ground, BURGUNDY / RUST-TERRACOTTA /
+  // CHARCOAL / warm grey.  Big arch and half-round motifs with dot and dash
+  // fills.  (The written record called this "red, gold, navy, grey"; the
+  // photograph has no navy and no gold in it at all.)
+  var N = 576, o = cv(N, N), c = o[0], g = o[1];
+  var cream = '#efe7d8';
+  var pal = ['#8e2f38', '#b3652c', '#31323a', '#9a938a', '#7d2b33', '#c08243'];
   g.fillStyle = cream; g.fillRect(0, 0, N, N);
-  var pal = [red, gold, navy, grey];
-  var q = N / 4, r = rng(20260812);
-  for (var iy = 0; iy < 4; iy++) for (var ix = 0; ix < 4; ix++) {
-    var x = ix * q, y = iy * q, k = (ix * 7 + iy * 5) % 4, col = pal[k];
+  var q = N / 3, r = rng(20260812);
+
+  function dots(x, y, w, h, col) {
+    g.fillStyle = col;
+    for (var dy = y + 5; dy < y + h; dy += 9)
+      for (var dx = x + 5; dx < x + w; dx += 9) g.fillRect(dx, dy, 4, 4);
+  }
+  function dashes(x, y, w, h, col) {
+    g.fillStyle = col;
+    for (var dy = y + 4; dy < y + h; dy += 8) g.fillRect(x + 3, dy, w - 6, 2.6);
+  }
+
+  for (var iy = 0; iy < 3; iy++) for (var ix = 0; ix < 3; ix++) {
+    var x = ix * q, y = iy * q, k = (ix * 4 + iy * 5) % 6, col = pal[k];
     g.save(); g.beginPath(); g.rect(x, y, q, q); g.clip();
-    var mode = (ix + iy * 3) % 4;
-    g.fillStyle = col; g.strokeStyle = col;
-    if (mode === 0) {                       // quarter arc, thick stroke
-      g.lineWidth = q * 0.17;
-      g.beginPath(); g.arc(x, y + q, q * 0.78, -Math.PI / 2, 0); g.stroke();
-      g.beginPath(); g.arc(x, y + q, q * 0.40, -Math.PI / 2, 0); g.stroke();
-    } else if (mode === 1) {                // solid half round
-      g.beginPath(); g.arc(x + q / 2, y + q, q * 0.62, Math.PI, 0); g.fill();
-    } else if (mode === 2) {                // stacked blocks
-      g.fillRect(x + q * 0.12, y + q * 0.14, q * 0.76, q * 0.20);
-      g.fillRect(x + q * 0.12, y + q * 0.46, q * 0.44, q * 0.18);
-      g.fillStyle = pal[(k + 2) % 4];
-      g.fillRect(x + q * 0.12, y + q * 0.72, q * 0.76, q * 0.14);
-    } else {                                 // concentric rings
-      g.lineWidth = q * 0.09;
-      g.beginPath(); g.arc(x + q / 2, y + q / 2, q * 0.34, 0, 6.283); g.stroke();
-      g.strokeStyle = pal[(k + 1) % 4];
-      g.beginPath(); g.arc(x + q / 2, y + q / 2, q * 0.16, 0, 6.283); g.stroke();
+    var mode = (ix + iy * 2) % 5;
+    if (mode === 0) {                          // solid arch on a plinth
+      g.fillStyle = col;
+      g.beginPath();
+      g.moveTo(x + q * 0.20, y + q * 0.86);
+      g.lineTo(x + q * 0.20, y + q * 0.44);
+      g.arc(x + q * 0.50, y + q * 0.44, q * 0.30, Math.PI, 0);
+      g.lineTo(x + q * 0.80, y + q * 0.86);
+      g.closePath(); g.fill();
+      dots(x + q * 0.26, y + q * 0.50, q * 0.48, q * 0.30, cream);
+    } else if (mode === 1) {                   // outlined arch, hatched inside
+      g.strokeStyle = col; g.lineWidth = q * 0.075;
+      g.beginPath();
+      g.moveTo(x + q * 0.18, y + q * 0.88);
+      g.lineTo(x + q * 0.18, y + q * 0.46);
+      g.arc(x + q * 0.50, y + q * 0.46, q * 0.32, Math.PI, 0);
+      g.lineTo(x + q * 0.82, y + q * 0.88);
+      g.stroke();
+      dashes(x + q * 0.28, y + q * 0.42, q * 0.44, q * 0.42, pal[(k + 2) % 6]);
+    } else if (mode === 2) {                   // stacked blocks
+      g.fillStyle = col;
+      g.fillRect(x + q * 0.14, y + q * 0.12, q * 0.72, q * 0.26);
+      dots(x + q * 0.18, y + q * 0.16, q * 0.64, q * 0.18, cream);
+      g.fillStyle = pal[(k + 3) % 6];
+      g.fillRect(x + q * 0.14, y + q * 0.48, q * 0.40, q * 0.36);
+      g.fillStyle = pal[(k + 1) % 6];
+      g.fillRect(x + q * 0.60, y + q * 0.52, q * 0.26, q * 0.32);
+    } else if (mode === 3) {                   // half round + dash field
+      g.fillStyle = col;
+      g.beginPath(); g.arc(x + q * 0.50, y + q * 0.66, q * 0.34, Math.PI, 0); g.fill();
+      dashes(x + q * 0.14, y + q * 0.10, q * 0.72, q * 0.36, pal[(k + 4) % 6]);
+    } else {                                   // quarter arcs
+      g.strokeStyle = col; g.lineWidth = q * 0.10;
+      for (var i = 1; i <= 3; i++) {
+        g.beginPath(); g.arc(x + q * 0.10, y + q * 0.90, q * 0.24 * i, -Math.PI / 2, 0); g.stroke();
+      }
+      g.fillStyle = pal[(k + 2) % 6];
+      g.fillRect(x + q * 0.66, y + q * 0.10, q * 0.22, q * 0.44);
     }
     g.restore();
   }
-  noiseOver(g, N, N, 10, 77);
+  noiseOver(g, N, N, 9, 77);
   return c;
 }
 
 /* ---- bathroom wallpaper: fine gold line arcs, half rounds, hatch blocks
    on white.  [PHOTO] --------------------------------------------------- */
 function goldLineCanvas() {
-  var N = 512, o = cv(N, N), c = o[0], g = o[1];
-  g.fillStyle = '#fbfaf6'; g.fillRect(0, 0, N, N);
-  g.strokeStyle = '#b8912f'; g.fillStyle = '#c9a03c';
-  var q = N / 4;
-  for (var iy = 0; iy < 4; iy++) for (var ix = 0; ix < 4; ix++) {
-    var x = ix * q, y = iy * q, mode = (ix * 5 + iy * 3) % 4;
+  // Against photo-16: big half-round "D" lozenges and rectangles, filled with
+  // groups of parallel gold lines, on white.  Large and sparse — the motifs
+  // are roughly a foot across on the wall.
+  var N = 576, o = cv(N, N), c = o[0], g = o[1];
+  g.fillStyle = '#fcfaf6'; g.fillRect(0, 0, N, N);
+  var gold = '#d0a24a';
+  var q = N / 3;
+  function lines(x, y, w, h, n, vertical) {
+    g.strokeStyle = gold; g.lineWidth = 2.0;
+    for (var i = 0; i < n; i++) {
+      var t = i / (n - 1 || 1);
+      g.beginPath();
+      if (vertical) { g.moveTo(x + t * w, y); g.lineTo(x + t * w, y + h); }
+      else { g.moveTo(x, y + t * h); g.lineTo(x + w, y + t * h); }
+      g.stroke();
+    }
+  }
+  for (var iy = 0; iy < 3; iy++) for (var ix = 0; ix < 3; ix++) {
+    var x = ix * q, y = iy * q, mode = (ix * 4 + iy * 5) % 5;
     g.save(); g.beginPath(); g.rect(x, y, q, q); g.clip();
-    g.lineWidth = 1.6;
-    if (mode === 0) {
-      for (var i = 1; i <= 4; i++) { g.beginPath(); g.arc(x, y + q, q * 0.2 * i, -Math.PI / 2, 0); g.stroke(); }
-    } else if (mode === 1) {
-      g.beginPath(); g.arc(x + q / 2, y + q * 0.62, q * 0.3, Math.PI, 0); g.stroke();
-      g.beginPath(); g.moveTo(x + q * 0.2, y + q * 0.62); g.lineTo(x + q * 0.8, y + q * 0.62); g.stroke();
-    } else if (mode === 2) {
-      for (var j = 0; j < 7; j++) {
-        g.beginPath(); g.moveTo(x + q * 0.15 + j * q * 0.1, y + q * 0.25);
-        g.lineTo(x + q * 0.15 + j * q * 0.1, y + q * 0.75); g.stroke();
-      }
-    } else {
-      for (var k2 = 1; k2 <= 3; k2++) { g.beginPath(); g.arc(x + q, y, q * 0.26 * k2, Math.PI / 2, Math.PI); g.stroke(); }
+    g.strokeStyle = gold; g.lineWidth = 2.2;
+    if (mode === 0) {                          // D lozenge, flat side left
+      g.beginPath();
+      g.moveTo(x + q * 0.16, y + q * 0.16);
+      g.lineTo(x + q * 0.52, y + q * 0.16);
+      g.arc(x + q * 0.52, y + q * 0.46, q * 0.30, -Math.PI / 2, Math.PI / 2);
+      g.lineTo(x + q * 0.16, y + q * 0.76);
+      g.closePath(); g.stroke();
+      lines(x + q * 0.22, y + q * 0.24, q * 0.26, q * 0.44, 6, false);
+    } else if (mode === 1) {                   // rectangle with vertical rule set
+      g.strokeRect(x + q * 0.18, y + q * 0.22, q * 0.62, q * 0.50);
+      lines(x + q * 0.26, y + q * 0.30, q * 0.46, q * 0.34, 7, true);
+    } else if (mode === 2) {                   // half round on its side + bars
+      g.beginPath(); g.arc(x + q * 0.46, y + q * 0.50, q * 0.32, Math.PI / 2, -Math.PI / 2); g.stroke();
+      g.beginPath(); g.moveTo(x + q * 0.46, y + q * 0.18); g.lineTo(x + q * 0.46, y + q * 0.82); g.stroke();
+      lines(x + q * 0.56, y + q * 0.28, q * 0.28, q * 0.44, 5, false);
+    } else if (mode === 3) {                   // stacked line groups
+      lines(x + q * 0.14, y + q * 0.14, q * 0.34, q * 0.28, 6, false);
+      lines(x + q * 0.56, y + q * 0.34, q * 0.30, q * 0.24, 5, true);
+      g.beginPath(); g.arc(x + q * 0.34, y + q * 0.74, q * 0.20, Math.PI, 0); g.stroke();
+    } else {                                   // big open lozenge
+      g.beginPath();
+      g.moveTo(x + q * 0.80, y + q * 0.18);
+      g.lineTo(x + q * 0.42, y + q * 0.18);
+      g.arc(x + q * 0.42, y + q * 0.50, q * 0.32, -Math.PI / 2, Math.PI / 2, true);
+      g.lineTo(x + q * 0.80, y + q * 0.82);
+      g.closePath(); g.stroke();
+      lines(x + q * 0.50, y + q * 0.28, q * 0.26, q * 0.44, 6, false);
     }
     g.restore();
   }
@@ -1564,27 +1637,33 @@ function curtainWeaveCanvas(base) {   // coarse weave divider  [PHOTO]
 
 /* ---- mattress ticking: quilted damask, tape edge, grey knit border ---- */
 function quiltCanvas() {
-  var N = 512, o = cv(N, N), c = o[0], g = o[1], r = rng(515);
-  g.fillStyle = '#e8e2d5'; g.fillRect(0, 0, N, N);
+  // photo-09: a diamond quilt, each cell puffed between the stitch lines, with
+  // the buttons pulling craters on top of it (those are geometry, not texture).
+  var N = 512, o = cv(N, N), c = o[0], g = o[1];
+  g.fillStyle = '#e9e3d6'; g.fillRect(0, 0, N, N);
   var q = N / 4;
-  // soft quilted puff: light in the middle of each diamond, shade at the seams
-  for (var iy = -1; iy < 5; iy++) for (var ix = -1; ix < 5; ix++) {
-    var cx = ix * q + (iy % 2 ? q / 2 : 0), cy = iy * q;
-    var rg2 = g.createRadialGradient(cx, cy, 2, cx, cy, q * 0.62);
-    rg2.addColorStop(0, 'rgba(255,255,255,0.55)');
-    rg2.addColorStop(0.75, 'rgba(255,255,255,0.06)');
-    rg2.addColorStop(1, 'rgba(150,142,126,0.16)');
-    g.fillStyle = rg2; g.beginPath(); g.arc(cx, cy, q * 0.62, 0, 6.283); g.fill();
+  function puff(cx, cy, r) {
+    g.save(); g.translate(cx, cy); g.rotate(Math.PI / 4);
+    var rg2 = g.createRadialGradient(0, 0, r * 0.05, 0, 0, r);
+    rg2.addColorStop(0, 'rgba(255,255,255,0.62)');
+    rg2.addColorStop(0.62, 'rgba(255,255,255,0.14)');
+    rg2.addColorStop(1, 'rgba(146,138,120,0.22)');
+    g.fillStyle = rg2;
+    g.fillRect(-r * 0.72, -r * 0.72, r * 1.44, r * 1.44);
+    g.restore();
   }
-  // stitch lines on the diamond grid
-  g.strokeStyle = 'rgba(155,146,128,0.55)'; g.lineWidth = 1.3;
-  g.setLineDash([5, 4]);
-  for (var k = -6; k < 12; k++) {
-    g.beginPath(); g.moveTo(k * q, 0); g.lineTo(k * q + N, N); g.stroke();
-    g.beginPath(); g.moveTo(k * q, N); g.lineTo(k * q + N, 0); g.stroke();
+  for (var iy = -1; iy < 6; iy++) for (var ix = -1; ix < 6; ix++) {
+    puff(ix * q + (iy % 2 ? q / 2 : 0), iy * q * 0.5, q * 0.52);
+  }
+  // stitch seams on the diamond lattice
+  g.strokeStyle = 'rgba(150,141,122,0.6)'; g.lineWidth = 1.5;
+  g.setLineDash([6, 5]);
+  for (var k = -8; k < 16; k++) {
+    g.beginPath(); g.moveTo(k * q * 0.5, 0); g.lineTo(k * q * 0.5 + N, N); g.stroke();
+    g.beginPath(); g.moveTo(k * q * 0.5, N); g.lineTo(k * q * 0.5 + N, 0); g.stroke();
   }
   g.setLineDash([]);
-  noiseOver(g, N, N, 12, 8);
+  noiseOver(g, N, N, 11, 8);
   return c;
 }
 
@@ -1728,13 +1807,14 @@ var TEX = {
   floorTileBump: toTex(tileBumpCanvas(256, 128), false),
   showerTile: toTex(tileCanvas('#f0efec', '#d9d7d2', 0.045, 256, 128)),
   showerTileBump: toTex(tileBumpCanvas(256, 128), false),
-  woodLight: toTex(woodCanvas('#b99b74', '#8a6d49', '#d8c1a0', 11)),   // nightstands, wardrobe
-  woodWarm: toTex(woodCanvas('#a8825b', '#755231', '#c9a97f', 22)),   // working wall, desk, cabinets
-  woodDark: toTex(woodCanvas('#5a4433', '#33241a', '#7d6047', 33)),   // bath vanity
+  woodLight: toTex(woodCanvas('#c1a77f', '#967c55', '#dfcbaa', 11)),   // desk / counter tops, nightstands
+  woodGrey: toTex(woodCanvas('#9c9081', '#776c5e', '#bcb1a1', 22)),   // working-wall boxes, wardrobe
+  woodWarm: toTex(woodCanvas('#c1a77f', '#967c55', '#dfcbaa', 23)),   // tops
+  woodDark: toTex(woodCanvas('#54423a', '#31241f', '#75604f', 33)),   // dresser, bath vanity
   woodDoor: toTex(woodCanvas('#8c7f74', '#5f544b', '#a89b8f', 44)),   // entry door slab, grey-brown
-  tweed: toTex(tweedCanvas('#65717f', '#8892a0', '#454d58')),
+  tweed: toTex(tweedCanvas('#585349', '#736d61', '#3d3933')),
   ottoman: toTex(ottomanCanvas()),
-  weave: toTex(curtainWeaveCanvas('#9a9184')),
+  weave: toTex(curtainWeaveCanvas('#b3a99a')),
   weaveGrey: toTex(curtainWeaveCanvas('#9a9a98')),
   quartz: toTex(quartzCanvas('#f4f3f0')),
   quilt: toTex(quiltCanvas()),
@@ -1776,7 +1856,8 @@ M.carpet      = std({ color: 0xffffff, map: TEX.carpet, roughness: 0.98, bumpMap
 M.tile        = std({ color: 0xffffff, map: TEX.floorTile, roughness: 0.30, metalness: 0.0, bumpMap: TEX.floorTileBump, bumpScale: 0.010, envMapIntensity: 1.1 });
 M.showerTile  = std({ color: 0xffffff, map: TEX.showerTile, roughness: 0.16, bumpMap: TEX.showerTileBump, bumpScale: 0.008, envMapIntensity: 1.2 });
 M.woodLight   = std({ color: 0xffffff, map: TEX.woodLight, roughness: 0.44, envMapIntensity: 0.85 });
-M.woodWarm    = std({ color: 0xffffff, map: TEX.woodWarm, roughness: 0.42, envMapIntensity: 0.85 });
+M.woodWarm    = std({ color: 0xffffff, map: TEX.woodWarm, roughness: 0.44, envMapIntensity: 0.7 });
+M.woodGrey    = std({ color: 0xffffff, map: TEX.woodGrey, roughness: 0.52, envMapIntensity: 0.55 });
 M.woodDark    = std({ color: 0xffffff, map: TEX.woodDark, roughness: 0.38, envMapIntensity: 0.9 });
 M.woodDoor    = std({ color: 0xffffff, map: TEX.woodDoor, roughness: 0.55 });
 M.quartz      = std({ color: 0xffffff, map: TEX.quartz, roughness: 0.14, envMapIntensity: 1.3 });
@@ -1788,10 +1869,11 @@ M.blackMetal  = std({ color: 0x24262a, roughness: 0.42, metalness: 0.75, envMapI
 M.navyShelf   = std({ color: 0x1b2740, roughness: 0.40, envMapIntensity: 0.7 });  // [PHOTO] navy floating shelves
 M.tweed       = tiledRepeat(std({ color: 0xffffff, map: TEX.tweed, roughness: 0.95, bumpMap: TEX.tweed, bumpScale: 0.008, envMapIntensity: 0.28 }), 3, 3);
 M.ottoman     = std({ color: 0xe9e4d8, map: TEX.ottoman, roughness: 0.90, envMapIntensity: 0.3 });
-M.plum        = std({ color: 0x2c1d22, roughness: 0.82, envMapIntensity: 0.22 });  // headboard, dark plum-brown
+M.plum        = std({ color: 0x453230, roughness: 0.84, envMapIntensity: 0.14 });  // headboard, dark plum-brown
 M.plumVinyl   = std({ color: 0x33202a, roughness: 0.48, envMapIntensity: 0.25 });  // wardrobe bench cushion
-M.mattress    = tiledRepeat(std({ color: 0xffffff, map: TEX.quilt, roughness: 0.90, bumpMap: TEX.quilt, bumpScale: 0.014 }), 0.5, 0.5);
-M.ticking     = std({ color: 0xb9b6ad, roughness: 0.92 });   // grey knit mattress border
+M.mattress    = tiledRepeat(std({ color: 0xffffff, map: TEX.quilt, roughness: 0.90, bumpMap: TEX.quilt, bumpScale: 0.014 }), 0.85, 0.85);
+M.ticking     = tiledRepeat(std({ color: 0xf2ece0, map: TEX.quilt, roughness: 0.93, bumpMap: TEX.quilt, bumpScale: 0.010 }), 0.9, 0.9);
+M.tape        = std({ color: 0x9c9789, roughness: 0.85, envMapIntensity: 0.3 });   // grey tape edge
 M.boxCover    = std({ color: 0x22252a, roughness: 0.92, envMapIntensity: 0.25 });
 M.curtain     = tiledRepeat(std({ color: 0xffffff, map: TEX.weave, roughness: 0.96, side: T.DoubleSide, bumpMap: TEX.weave, bumpScale: 0.012 }), 7, 12);
 M.curtainGrey = tiledRepeat(std({ color: 0xffffff, map: TEX.weaveGrey, roughness: 0.96, side: T.DoubleSide }), 5, 9);
@@ -1803,10 +1885,11 @@ M.lampShade   = std({ color: 0xf2e9d6, roughness: 0.94, side: T.DoubleSide, emis
 M.globe       = std({ color: 0xfff6e6, roughness: 0.55, emissive: 0xffd9a4, emissiveIntensity: 2.4 });
 M.ledStrip    = std({ color: 0xffffff, roughness: 0.5, emissive: 0xfff0d8, emissiveIntensity: 3.0 });
 M.frameBlack  = std({ color: 0x141517, roughness: 0.48 });
-M.frameYellow = std({ color: 0xc9741a, roughness: 0.50, envMapIntensity: 0.35 });  // [PHOTO] bathroom mirror frame
+M.frameYellow = std({ color: 0xe89a17, roughness: 0.48, envMapIntensity: 0.30 });  // [PHOTO] bathroom mirror frame
 M.frameWhite  = std({ color: 0xf2efe9, roughness: 0.42 });
 M.mesh        = std({ color: 0xffffff, map: TEX.mesh, roughness: 0.85, side: T.DoubleSide });
-M.chairSeat   = std({ color: 0x40291f, roughness: 0.90, envMapIntensity: 0.14 });
+M.chairSeat   = std({ color: 0x7b3540, roughness: 0.88, envMapIntensity: 0.16 });
+M.chairFrame  = std({ color: 0xb9bbbd, roughness: 0.55, metalness: 0.15, envMapIntensity: 0.5 });
 M.panelGrey   = std({ color: 0x9c9e9f, roughness: 0.55, metalness: 0.3 });
 M.louvre      = std({ color: 0xffffff, map: TEX.louvre, roughness: 0.55 });
 M.porcelain   = std({ color: 0xfbfaf8, roughness: 0.10, envMapIntensity: 1.3 });
@@ -1987,7 +2070,7 @@ box2(0, BX, 0, H, BIZ, BZ, M.paintWhite, { sharp: true });
 
 // bathroom interior finishes: gold line paper on all four walls  [PHOTO]
 var gp = function (w, h, x, y, z, ry) {
-  var m = tiled(M.bathPaper, w, h, 2.6);
+  var m = tiled(M.bathPaper, w, h, 3.4);
   plane(w, h, m, x, y, z, 0, ry);
 };
 gp(BIZ, HL, 0.01, HL / 2, BIZ / 2, Math.PI / 2);          // demising wall
@@ -2058,26 +2141,26 @@ var REVEAL = 6 * IN;
   // Eagle Pass in August: pale hot sky, a haze band at the horizon, dry
   // tan-olive scrub below.  The horizon is placed so it lands inside the
   // visible glass from the room cameras, not above or below them.
-  lg2.addColorStop(0.00, '#6d9bcc');
-  lg2.addColorStop(0.24, '#a2c2de');
-  lg2.addColorStop(0.40, '#d3e0ea');
-  lg2.addColorStop(0.442, '#eae9e0');
-  lg2.addColorStop(0.452, '#a9a189');
-  lg2.addColorStop(0.56, '#948b70');
-  lg2.addColorStop(0.80, '#a09a80');
-  lg2.addColorStop(1.00, '#79715c');
+  lg2.addColorStop(0.00, '#cfe2f2');
+  lg2.addColorStop(0.24, '#e2eef8');
+  lg2.addColorStop(0.40, '#f4f9fc');
+  lg2.addColorStop(0.442, '#ffffff');
+  lg2.addColorStop(0.452, '#e8e4d6');
+  lg2.addColorStop(0.56, '#dcd6c4');
+  lg2.addColorStop(0.80, '#e6e1d2');
+  lg2.addColorStop(1.00, '#cec8b6');
   sg.fillStyle = lg2; sg.fillRect(0, 0, 512, 256);
   // a low, soft treeline / roofline so the horizon is not a ruled edge
   var rs = rng(2026);
-  sg.globalAlpha = 0.45;
+  sg.globalAlpha = 0.22;
   for (var b2 = 0; b2 < 110; b2++) {
-    sg.fillStyle = rs() < 0.5 ? '#8c8570' : '#9d9781';
+    sg.fillStyle = rs() < 0.5 ? '#cfc9b6' : '#dcd6c6';
     var bw2 = 10 + rs() * 52, bh2 = 2 + rs() * 10;
     sg.fillRect(rs() * 512, 116 - bh2, bw2, bh2 + 6);
   }
   sg.globalAlpha = 1;
   var sky = new T.Mesh(new T.PlaneGeometry(34, 22),
-    new T.MeshBasicMaterial({ map: toTex(skyC[0]) }));
+    new T.MeshBasicMaterial({ map: toTex(skyC[0]), toneMapped: false }));
   sky.position.set(W / 2, 1.0, D + 6.0); sky.rotation.y = Math.PI;
   add(sky);
 
@@ -2086,7 +2169,7 @@ var REVEAL = 6 * IN;
   // Drop shown at 46" AFF — an ASSUMED position; the drawings do not fix it.
   var sx0 = WIN_X0 - 0.5, sx1 = WIN_X1 + 0.5, hem = 58 * IN;
   box2(sx0 - 0.08, sx1 + 0.08, SHADE_TOP, SHADE_TOP + 4.5 * IN, D - REVEAL - 0.20, D - 0.02, M.trim, { r: 0.01 });
-  var shadeMat = tiled(M.shade, sx1 - sx0, SHADE_TOP - hem, 3.9);
+  var shadeMat = tiled(M.shade, sx1 - sx0, SHADE_TOP - hem, 3.0);   // 3'-0" tile = ~12" motifs
   var sh = new T.Mesh(new T.PlaneGeometry(sx1 - sx0, SHADE_TOP - hem, 12, 2), shadeMat);
   sh.position.set((sx0 + sx1) / 2, (SHADE_TOP + hem) / 2, D - REVEAL - 0.085);
   sh.rotation.y = Math.PI;
@@ -2125,7 +2208,7 @@ var WWF = W - 0.02;              // face of the working wall
   var top = 78 * IN;
 
   // carcase
-  box2(x0, WWF, 0, top, z0, z1, M.woodLight, { r: 0.012 });
+  box2(x0, WWF, 0, top, z0, z1, M.woodGrey, { r: 0.012 });
   // hollow the hanging bay out with a darker inner face
   box2(x0 + 0.06, WWF - 0.02, 0.35, top - 0.35, z0 + 0.08, z1 - 0.06,
        std({ color: 0x8f7a5f, roughness: 0.6 }), { r: 0.008, cast: false });
@@ -2141,16 +2224,16 @@ var WWF = W - 0.02;              // face of the working wall
 
   // bench + shelf + hook panel section.  End panels and a back so the run
   // reads as one built-in unit rather than three floating boards.
-  box2(x0, WWF, 0, top, zb0, zb0 + 0.075, M.woodLight, { r: 0.01 });            // end panel
-  box2(x0, WWF, 0, top, zb1 - 0.075, zb1, M.woodLight, { r: 0.01 });            // shared panel
-  box2(WWF - 0.08, WWF, 0, top, zb0, zb1, M.woodLight, { r: 0.008 });           // back
-  box2(x0, WWF, 0, 4 * IN, zb0, zb1, M.woodLight, { r: 0.01 });                 // plinth
-  box2(x0, WWF, 17 * IN, 18.5 * IN, zb0, zb1, M.woodLight, { r: 0.01 });        // bench top
+  box2(x0, WWF, 0, top, zb0, zb0 + 0.075, M.woodGrey, { r: 0.01 });             // end panel
+  box2(x0, WWF, 0, top, zb1 - 0.075, zb1, M.woodGrey, { r: 0.01 });             // shared panel
+  box2(WWF - 0.08, WWF, 0, top, zb0, zb1, M.woodGrey, { r: 0.008 });            // back
+  box2(x0, WWF, 0, 4 * IN, zb0, zb1, M.woodGrey, { r: 0.01 });                  // plinth
+  box2(x0, WWF, 17 * IN, 18.5 * IN, zb0, zb1, M.woodGrey, { r: 0.01 });         // bench top
   box2(x0 + 0.05, WWF - 0.03, 18.5 * IN, 21.5 * IN, zb0 + 0.06, zb1 - 0.06,
        M.plumVinyl, { r: 0.045, corner: 0.09 });                                // dark plum cushion [PHOTO]
-  box2(x0, WWF, 40.5 * IN, 42 * IN, zb0, zb1, M.woodLight, { r: 0.01 });        // 42" shelf [A550 elev 05]
-  box2(x0 + depth * 0.45, WWF, 56 * IN, 74 * IN, zb0, zb1, M.woodLight, { r: 0.012 }); // hook panel
-  box2(x0, WWF, top - 1.5 * IN, top, zb0, z1, M.woodLight, { r: 0.01 });        // continuous top cap
+  box2(x0, WWF, 40.5 * IN, 42 * IN, zb0, zb1, M.woodGrey, { r: 0.01 });         // 42" shelf [A550 elev 05]
+  box2(x0 + depth * 0.45, WWF, 56 * IN, 74 * IN, zb0, zb1, M.woodGrey, { r: 0.012 });  // hook panel
+  box2(x0, WWF, top - 1.5 * IN, top, zb0, z1, M.woodGrey, { r: 0.01 });         // continuous top cap
   for (var i = 0; i < 5; i++) {                                                  // five black hooks [PHOTO]
     var hz = zb0 + (zb1 - zb0) * (0.12 + i * 0.19);
     cyl(0.028, 0.028, 0.30, M.blackMetal, WWF - depth * 0.55 - 0.13, 66 * IN, hz, 8, { rz: Math.PI / 2 });
@@ -2171,12 +2254,12 @@ var WWF = W - 0.02;              // face of the working wall
   // "OPEN" box in the working wall.  [A550 elev 05] head at 48" AFF, at
   // ~10'-5" from the window end.  Width ASSUMED.
   var z1 = D - 9.4, z0 = D - 11.5, depth = 13 * IN, x0 = W - depth;
-  box2(x0, WWF, 3 * IN, 48 * IN, z0, z1, M.woodWarm, { r: 0.01 });
+  box2(x0, WWF, 3 * IN, 48 * IN, z0, z1, M.woodGrey, { r: 0.01 });
   box2(x0 - 0.005, WWF, 0, 3 * IN, z0, z1, std({ color: 0x3a332c, roughness: 0.8 }), { r: 0.004 });
   // the "OPEN" box on elevation 05: a lit niche, head at 4'-0" AFF
   box2(x0 + 0.05, WWF, 25.5 * IN, 46.5 * IN, z0 + 0.07, z1 - 0.07,
        std({ color: 0x5f4c39, roughness: 0.78, envMapIntensity: 0.25 }), { r: 0.006, cast: false });
-  box2(x0 + 0.05, WWF, 35 * IN, 36 * IN, z0 + 0.07, z1 - 0.07, M.woodWarm, { r: 0.006 });
+  box2(x0 + 0.05, WWF, 35 * IN, 36 * IN, z0 + 0.07, z1 - 0.07, M.woodGrey, { r: 0.006 });
 })();
 
 var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall counter
@@ -2193,7 +2276,7 @@ var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall co
   contact(W - depth / 2, (zD0 + zTV1) / 2, depth * 2.0, (zTV1 - zD0) * 1.02, 0.5);
 
   // dresser, three drawers, black bar pulls  [PHOTO]
-  box2(x0, WWF, 3 * IN, DESK_Y - 1.6 * IN, zTV0, zTV1, M.woodWarm, { r: 0.01 });
+  box2(x0, WWF, 3 * IN, DESK_Y - 1.6 * IN, zTV0, zTV1, M.woodDark, { r: 0.01 });
   for (var i = 0; i < 3; i++) {
     var y0 = 4 * IN + i * 10.2 * IN;
     // drawer reveal: a thin dark line, not a black drawer front
@@ -2234,18 +2317,25 @@ var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall co
     var cx = W - 3.05, cz = D - 17.2, seatY = 18.5 * IN;
     var g = new T.Group(); g.position.set(cx, 0, cz); g.rotation.y = -Math.PI / 2 + 0.35;
     scene.add(g);
-    cyl(0.05, 0.05, seatY - 0.30, M.blackMetal, 0, (seatY - 0.30) / 2 + 0.24, 0, 10, { parent: g });
+    cyl(0.05, 0.05, seatY - 0.30, M.chairFrame, 0, (seatY - 0.30) / 2 + 0.24, 0, 10, { parent: g });
     for (var i = 0; i < 5; i++) {
       var a = i * Math.PI * 2 / 5;
-      var leg = blk(0.90, 0.05, 0.10, M.blackMetal, Math.cos(a) * 0.45, 0.24, Math.sin(a) * 0.45,
+      var leg = blk(0.90, 0.05, 0.10, M.chairFrame, Math.cos(a) * 0.45, 0.24, Math.sin(a) * 0.45,
         { r: 0.02, ry: -a, parent: g });
       cyl(0.09, 0.09, 0.06, M.blackMetal, Math.cos(a) * 0.88, 0.10, Math.sin(a) * 0.88, 10, { rx: Math.PI / 2, parent: g });
     }
     blk(1.42, 0.26, 1.34, M.chairSeat, 0, seatY, 0.05, { r: 0.08, corner: 0.20, parent: g });
     var back = blk(1.45, 1.75, 0.12, M.mesh, 0, seatY + 0.95, -0.62, { r: 0.03, corner: 0.20, rx: -0.13, parent: g });
-    blk(1.55, 1.85, 0.06, M.blackMetal, 0, seatY + 0.95, -0.67, { r: 0.03, corner: 0.22, rx: -0.13, parent: g });
-    blk(0.07, 0.42, 0.80, M.blackMetal, 0.72, seatY + 0.28, -0.05, { r: 0.025, parent: g });
-    blk(0.07, 0.42, 0.80, M.blackMetal, -0.72, seatY + 0.28, -0.05, { r: 0.025, parent: g });
+    // frame as a border, not a solid paddle, so the mesh reads from both sides
+    [[0, 0.92], [0, -0.92]].forEach(function (d) {
+      blk(1.58, 0.09, 0.07, M.chairFrame, 0, seatY + 0.95 + d[1] * 0.98, -0.665 + d[1] * 0.13,
+          { r: 0.025, rx: -0.13, parent: g });
+    });
+    [-0.76, 0.76].forEach(function (dx) {
+      blk(0.09, 1.86, 0.07, M.chairFrame, dx, seatY + 0.95, -0.665, { r: 0.025, rx: -0.13, parent: g });
+    });
+    blk(0.07, 0.42, 0.80, M.chairFrame, 0.72, seatY + 0.28, -0.05, { r: 0.025, parent: g });
+    blk(0.07, 0.42, 0.80, M.chairFrame, -0.72, seatY + 0.28, -0.05, { r: 0.025, parent: g });
     contact(cx, cz, 2.4, 2.4, 0.55);
   })();
 
@@ -2274,7 +2364,7 @@ var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall co
   var CT = 36 * IN;
 
   // base cabinets, woodgrain fronts, black bar pulls  [PHOTO]
-  box2(x0, WWF, 3.5 * IN, CT - 1.5 * IN, kz0, kz1, M.woodWarm, { r: 0.01 });
+  box2(x0, WWF, 3.5 * IN, CT - 1.5 * IN, kz0, kz1, M.woodGrey, { r: 0.01 });
   box2(x0 - 0.005, WWF, 0, 3.5 * IN, kz0, kz1, std({ color: 0x3a332c, roughness: 0.8 }), { r: 0.004 });
   for (var i = 0; i < 3; i++) {
     var z = kz0 + 0.12 + i * 1.22;
@@ -2324,8 +2414,8 @@ var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall co
        std({ color: 0xb9bdc1, roughness: 0.45, metalness: 0.7 }), { r: 0.006 });  // underside
 
   // open woodgrain upper shelf unit over the microwave  [PHOTO]
-  box2(WWF - 13 * IN, WWF, 71.5 * IN, 84 * IN, kz0, kz1, M.woodWarm, { r: 0.012 });
-  box2(WWF - 12.5 * IN, WWF, 77.5 * IN, 78.5 * IN, kz0 + 0.06, kz1 - 0.06, M.woodWarm, { r: 0.006 });
+  box2(WWF - 13 * IN, WWF, 71.5 * IN, 84 * IN, kz0, kz1, M.woodGrey, { r: 0.012 });
+  box2(WWF - 12.5 * IN, WWF, 77.5 * IN, 78.5 * IN, kz0 + 0.06, kz1 - 0.06, M.woodGrey, { r: 0.006 });
 
   // 901 refrigerator, full height stainless top-freezer, at the corridor end
   // against the entry wall  [A550 view 01 / elev 06]  [PHOTO]
@@ -2397,26 +2487,36 @@ var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall co
   var z0 = BED_CZ - mw / 2, z1 = BED_CZ + mw / 2;
 
   // GR-301 upholstered headboard, dark plum-brown, channel tufted  [PHOTO]
-  var hbW = 7.0, hz0 = BED_CZ - hbW / 2, hz1 = BED_CZ + hbW / 2;
-  box2(0.02, 0.36, 24 * IN, 54 * IN, hz0, hz1, M.plum, { r: 0.03, corner: 0.08 });
-  // vertical channel tufting  [PHOTO: upholstered panel, dark plum-brown]
-  for (var i = 0; i < 14; i++) {
-    var cz = hz0 + 0.22 + i * (hbW - 0.44) / 13;
-    cyl(0.05, 0.05, 29 * IN, std({ color: 0x241820, roughness: 0.84, envMapIntensity: 0.18 }), 0.362, 39 * IN, cz, 8, { cast: false });
-  }
-  box2(0.02, 0.40, 53 * IN, 54.6 * IN, hz0 - 0.03, hz1 + 0.03, M.plum, { r: 0.03 });
+  var hbW = 6.55, hz0 = BED_CZ - hbW / 2, hz1 = BED_CZ + hbW / 2;   // [ASSUMED] a touch under the mattress width, as photographed
+  box2(0.02, 0.34, 26 * IN, 51 * IN, hz0, hz1, M.plum, { r: 0.045, corner: 0.22 });
+  // photo-09: a plain flat upholstered panel with softly rounded top corners.
+  // No channels and no tufting on it — that is all on the mattress.
 
   // GR-603 bed base — low dark platform, set back from the mattress
   box2(0.34, 0.34 + ml - 0.30, 0, 7 * IN, z0 + 0.14, z1 - 0.14, M.boxCover, { r: 0.012 });
-  // GR-601.1 box spring cover
-  box2(0.30, 0.30 + ml, 7 * IN, 16 * IN, z0, z1, M.boxCover, { r: 0.02 });
+  // GR-601.1 box spring cover.  photo-09: this is IVORY quilted ticking with
+  // its own grey tape edge, not the dark cover the written record implied.
+  box2(0.30, 0.30 + ml, 7 * IN, 16 * IN, z0, z1, M.ticking, { r: 0.02 });
+  box2(0.295, 0.30 + ml + 0.01, 15.2 * IN, 16 * IN, z0 - 0.005, z1 + 0.005, M.tape, { r: 0.014 });
+  box2(0.295, 0.30 + ml + 0.01, 7 * IN, 7.7 * IN, z0 - 0.005, z1 + 0.005, M.tape, { r: 0.014 });
   // GR-601 mattress.  Photographed with NO LINENS FITTED — this is the
   // as-built demo condition recorded in demo-room-observations.md.
   // grey knit border, then the quilted damask pillow-top proud of it, then a
   // tape edge — the three things that make a bare mattress read as a mattress
-  box2(0.28, 0.28 + ml + 0.04, 16 * IN, 25 * IN, z0 - 0.02, z1 + 0.02, M.ticking, { r: 0.055, corner: 0.16 });
-  box2(0.265, 0.28 + ml + 0.07, 24.4 * IN, 28.8 * IN, z0 - 0.045, z1 + 0.045, M.mattress, { r: 0.11, corner: 0.22 });
-  box2(0.30, 0.28 + ml + 0.03, 24.2 * IN, 24.9 * IN, z0 + 0.005, z1 - 0.005, M.ticking, { r: 0.03 });
+  box2(0.28, 0.28 + ml + 0.04, 16 * IN, 25 * IN, z0 - 0.02, z1 + 0.02, M.mattress, { r: 0.055, corner: 0.16 });
+  box2(0.265, 0.28 + ml + 0.07, 24.4 * IN, 29.2 * IN, z0 - 0.045, z1 + 0.045, M.mattress, { r: 0.13, corner: 0.26 });
+  box2(0.275, 0.28 + ml + 0.05, 24.0 * IN, 24.8 * IN, z0 - 0.02, z1 + 0.02, M.tape, { r: 0.022 });
+  // button tufting: each button pulls a shallow crater in the pillow top
+  for (var br = 0; br < 7; br++) for (var bc = 0; bc < 9; bc++) {
+    var tx = 0.55 + br * (ml - 0.9) / 6.6;
+    var tz = z0 + 0.42 + bc * (mw - 0.84) / 8;
+    var dimp = new T.Mesh(new T.SphereGeometry(0.135, 12, 8),
+      std({ color: 0xcbc2ae, roughness: 0.96, envMapIntensity: 0.12 }));
+    dimp.position.set(tx, 29.2 * IN - 0.030, tz);
+    dimp.scale.set(1, 0.34, 1);
+    dimp.receiveShadow = true;
+    add(dimp);
+  }
   // side carry handles
   [z0 + 1.3, z1 - 1.3].forEach(function (hz) {
     box2(0.28 + ml + 0.02, 0.28 + ml + 0.08, 19 * IN, 20.4 * IN, hz - 0.42, hz + 0.42, M.ticking, { r: 0.02 });
@@ -2424,10 +2524,10 @@ var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall co
   // Beautyrest Hospitality label on the gusset  [PHOTO]
   var lab = new T.Mesh(new T.PlaneGeometry(1.05, 0.30),
     new T.MeshStandardMaterial({
-      map: toTex(labelCanvas(['BEAUTYREST', 'HOSPITALITY'], '#e9e5da', '#1e3a6a', 512, 160)),
-      roughness: 0.8
+      map: toTex(labelCanvas(['Beautyrest', 'HOSPITALITY'], '#141414', '#d8ceb4', 512, 160)),
+      roughness: 0.6, envMapIntensity: 0.4
     }));
-  lab.position.set(0.28 + ml + 0.075, 21 * IN, BED_CZ - 1.4);
+  lab.position.set(0.28 + ml + 0.085, 20 * IN, BED_CZ - 1.4);
   lab.rotation.y = Math.PI / 2;
   add(lab);
   contact(0.30 + ml / 2, BED_CZ, ml + 2.2, mw + 2.2, 0.68);
@@ -2793,8 +2893,9 @@ var SOFA_Z0 = 10.4, SOFA_Z1 = 17.0;
   })();
 
   // ceiling devices  [PHOTO]
-  var dl = new T.Mesh(new T.CylinderGeometry(0.26, 0.26, 0.07, 18), M.solidWhite);
-  dl.position.set(3.6, HL - 0.04, 5.6); add(dl);
+  var dl = new T.Mesh(new T.CylinderGeometry(0.52, 0.56, 0.20, 24),
+    std({ color: 0xf8f5ee, roughness: 0.6, emissive: 0xffeed2, emissiveIntensity: 0.9 }));
+  dl.position.set(3.0, HL - 0.11, 6.1); add(dl);
   box2(1.1, 1.85, HL - 0.05, HL - 0.01, 6.6, 7.35, M.solidWhite, { r: 0.006 });
   var sdl = new T.Mesh(new T.CylinderGeometry(0.24, 0.24, 0.07, 18), M.solidWhite);
   sdl.position.set(2.4, HL - 0.04, 1.5); add(sdl);

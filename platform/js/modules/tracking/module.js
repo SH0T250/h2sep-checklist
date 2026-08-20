@@ -186,7 +186,8 @@ function renderRoom(ctx, { no }) {
   root.querySelector('[data-note]').addEventListener('click', () => notesSheet(ctx, no));
 
   const list = root.querySelector('.ilist');
-  const activeId = view === 'mep' ? no + '-MEP' : no;
+  // Never concatenate the suffix here: a space MEP doc is '-M', not '-MEP'.
+  const activeId = view === 'mep' ? store.mepDocId(no) : no;
   const groups = groupByCategory(store.liveItems(active));
   for (const [cat, entries] of groups) {
     const done = entries.filter(([, it]) => it.checked).length;

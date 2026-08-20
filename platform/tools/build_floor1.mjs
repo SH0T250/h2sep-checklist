@@ -91,15 +91,20 @@
  *
  *   SHAPE          the 22 condensed lines stay - key, category, sort and the
  *                  D10 verification wording are Austin's approved condensation.
- *   CITATIONS      every `src` is re-pointed off THIS room's own room_items
- *                  rows. The A555 -> A550 re-point is a derivation, not a
- *                  guess: assertSheetNumberingShared() re-proves on every run
- *                  that A550 and A555 share their keynote AND view numbering,
- *                  from three independent DB facts (room_types 'A550 view 01'
- *                  vs 'A555 view 01', room_types 'A550 view 01.1' for the
- *                  connecting King, and room_items ITM-0152 'A550 KN1 / view
- *                  08' against the donor ITM-0443 'A555 KN1 / view 08' - the
- *                  same row, the same keynote, the same view, two sheets).
+ *   CITATIONS      every `src` comes off THIS room's own room_items rows, and
+ *                  the SHEET NAME is the only thing a mapping is allowed to
+ *                  change. A555 -> A550 as a STRING SUBSTITUTION was tried on
+ *                  2026-08-20 and was wrong: it rewrote 56 view numbers along
+ *                  with the sheet name across the seven King rooms, pointing
+ *                  the smoke detector at A550 view 06 (the entry / mirror wall
+ *                  elevation) and the thermostat at A550 view 07 (the bed /
+ *                  sofa wall). assertSheetNumberingShared() now proves, number
+ *                  by number, WHICH references survive a sheet change - the
+ *                  database's own 'A55x kn<n>' wildcard, plus view 01, view
+ *                  01.1, KN1 and view 08 on the A550/A555 pair - and
+ *                  composeMepCitation() REMOVES every number outside that set
+ *                  rather than rewriting it, preferring the room's own row and
+ *                  saying in the line note what it dropped and why.
  *   CONNECTING     the '.1' view variant is the CONNECTING plan (room_types:
  *                  "A555 view 01.1 'QQ Studio Conn.' + electrical view 04.1").
  *                  It is dropped where rooms.connecting = 0 and kept where it
@@ -194,13 +199,16 @@ const CATEGORY_INDEX = new Map(CATEGORY_ORDER.map((c, i) => [c, i]));
 
 /* Step 3. Austin's ruling D12, scoped to this exact tag only. */
 const QTY_OVERRIDES = [
-  { tag: 'GR-322', category: 'FF&E - Casegoods', qty: 3, ruling: 'D12' },
+  { tag: 'GR-322', category: 'FF&E - Casegoods', qty: 3, ruling: 'D12',
+    because: 'a two-queen room has three nightstands' },
   /* D20: GR-202 Nightstand Sconce is 2 per King room, 16 across the 8 King
    * family keys on floor 1. The DB already carries two rows on 104-116; room
    * 118 carries one ("only ONE sconce is listed for two nightstands on A551 -
    * transcribed as tagged, not doubled"). The override makes the ruling hold
    * on every King key rather than only where the DB happened to draw both. */
-  { tag: 'GR-202', category: 'FF&E - Lighting', qty: 2, ruling: 'D20' },
+  { tag: 'GR-202', category: 'FF&E - Lighting', qty: 2, ruling: 'D20',
+    because: 'a King-family key has two nightstands and takes two GR-202 nightstand sconces, one per '
+      + 'nightstand - which is how data/project.sqlite already draws rooms 104 through 116' },
 ];
 
 /* Room types that have no approved room of their own and must COMPOSE their
@@ -229,6 +237,11 @@ const MEP_DONOR_ROOM = '105';
  * that means "the CONNECTING variant of that view". Both are re-proved against
  * the DB by assertSheetNumberingShared() before any re-point happens. */
 const MEP_DONOR_SHEET = 'A555';
+
+/* The OTHER half of the only sheet PAIR the database says anything about. A
+ * pair proof ('A550 view 01' vs 'A555 view 01') licenses exactly one
+ * substitution, A555 -> A550, and says nothing about A551 / A552 / A556. */
+const KING_PAIR_SHEET = 'A550';
 
 /* D10 CONDENSATION MAP. For each approved MEP line key, the room_items.item_id
  * values IN THE DONOR ROOM that the line stands for. Read off the approved
@@ -314,9 +327,17 @@ const CONFIG_B_PREFIX = 'CONFIGURATION B (ROLL-IN SHOWER) - ';
 const CONFIG_A_DROP_ROOMS = { 118: 'D19' };
 
 /* Lines that exist on the FF&E Installation workbook but on no plan sheet the
- * database transcribed. They are injected as ONE SYNTHETIC ROW PER PHYSICAL
- * UNIT before the reduction, so the ordinary fold derives the quantity exactly
- * the way it does for a real row - the tool never writes a qty directly.
+ * database transcribed.
+ *
+ * THE NUMBER IN THE WORKBOOK IS A FLOOR TOTAL, NOT A TAKE-OFF. The tab prints
+ * one figure for the whole floor; no sheet tags the item in the room. Turning
+ * that figure into a per-room quantity by folding N synthetic rows put a count
+ * on the line that no drawing states - and on GR-324 it put 2 units in the one
+ * accessible key on a floor whose workbook total is 2. So the line is emitted
+ * as ONE row with NO QUANTITY AT ALL, the same way space S017's tag 404
+ * STORAGE SHELVING is emitted: the item is real, the count is not established,
+ * and the note says exactly that.
+ *
  * Guarded three ways by injectWorkbookRows(): the room must be the only key on
  * its floor that can carry the tag, the tag must not already exist in sqlite
  * for that room, and every injected row carries its evidence and a MEDIUM
@@ -326,12 +347,12 @@ const WORKBOOK_SRC = 'FF&E Installation workbook, "1st Floor FF&E Installation" 
 const WORKBOOK_ROWS = {
   118: [
     {
-      tag: 'GR-303', category: 'FF&E - Casegoods', units: 1,
+      tag: 'GR-303', category: 'FF&E - Casegoods', floorTotal: 1,
       description: 'ACCESSIBLE Vanity @ Guest Bath',
       because: 'floor 1 has exactly one accessible key and it is 118',
     },
     {
-      tag: 'GR-324', category: 'FF&E - Casegoods', units: 2,
+      tag: 'GR-324', category: 'FF&E - Casegoods', floorTotal: 2,
       description: 'Wall Shelf @ ACCESSIBLE Bathroom',
       because: 'floor 1 has exactly one accessible key and it is 118',
     },
@@ -545,9 +566,18 @@ function reduceFFE(roomNo, rows, convention) {
 
     let qty = g.rows.length;
     let overrideRuling = null;
+    let overrideBecause = '';
     for (const ov of QTY_OVERRIDES) {
-      if (ov.tag === g.tag && ov.category === g.category) { qty = ov.qty; overrideRuling = ov.ruling; }
+      if (ov.tag === g.tag && ov.category === g.category) { qty = ov.qty; overrideRuling = ov.ruling; overrideBecause = ov.because || ''; }
     }
+    /* A ruling that only restates the fold changed nothing and needs no note;
+     * a ruling that OVERRIDES the row count is doing work and has to say so. */
+    const overrideChanged = !!overrideRuling && qty !== g.rows.length;
+    /* No drawing states a count for this line - so it ships without one, the
+     * same rule the common-area path uses for a tag group with no printed
+     * count. See WORKBOOK_ROWS. */
+    const qtyUnknown = g.rows.some((r) => r.qty_unknown);
+    if (qtyUnknown) qty = undefined;
     if (g.rows.length > 1) foldedGroups++;
 
     if (seen.has(g.key)) die('room ' + roomNo + ': key collision ' + JSON.stringify(g.key));
@@ -559,7 +589,10 @@ function reduceFFE(roomNo, rows, convention) {
       code: g.tag,
       category: g.category,
       qty,
+      qtyUnknown,
       overrideRuling,
+      overrideBecause,
+      overrideChanged,
       /* STEP 5 has TWO conventions in the approved work, and which one a room
        * uses is measured off its own approved doc, never assumed. See
        * detectSortConvention(): rooms 101 / 103 advance the band ordinal once
@@ -570,6 +603,9 @@ function reduceFFE(roomNo, rows, convention) {
       sortByRow: (catIdx(g.category) + 1) * 1000 + rowOrdinal * 10,
       sort: (catIdx(g.category) + 1) * 1000 + (convention === 'row' ? rowOrdinal : ordinal) * 10,
       rawRows: g.rows.length,
+      /* The raw rows behind the line, so a ruling can be matched against the
+       * row it actually rules on rather than against a rendered string. */
+      rows: g.rows,
       sqlite: {
         label: g.first.description,
         src: g.first.primary_sheet || g.first.source_sheet || '',
@@ -594,6 +630,7 @@ function reduceFFE(roomNo, rows, convention) {
     configDropped: configDropped.map((r) => (r.tag || '<untagged>') + ' [' + r.category + '] - ' + r.description),
     configRuling: drops.ruling,
     configBLeft: drops.b.length,
+    drops,
   };
 }
 
@@ -625,30 +662,38 @@ function injectWorkbookRows(db, roomNo, room, rows) {
       die('room ' + roomNo + ': refusing to inject ' + w.tag +
           ' - data/project.sqlite already carries that tag for this room. The DB row governs.');
     }
-    const note = 'QUANTITY AND PLACEMENT COME FROM THE FF&E INSTALLATION WORKBOOK, NOT FROM A PLAN SHEET. '
-      + 'The "1st Floor FF&E Installation" tab carries ' + w.tag + ' on floor 1, and ' + w.because
-      + ' (rooms.accessible = 1 on room ' + roomNo + ' and on no other floor-' + room.floor + ' key). '
-      + 'data/project.sqlite transcribes no ' + w.tag + ' row for this room, so the line is injected as '
-      + w.units + ' synthetic row(s), one per physical unit, and the quantity shown is the ordinary fold of '
-      + 'those rows. Reliability MEDIUM. Confirm before ordering.';
-    for (let i = 1; i <= w.units; i++) {
-      out.push({
-        rowid: ++synth,
-        item_id: 'SYN-' + roomNo + '-' + w.tag,
-        room_type: room.room_type,
-        category: w.category,
-        tag: w.tag,
-        description: w.description,
-        instance_note: w.units > 1 ? ('unit ' + i + ' of ' + w.units + ' (workbook)') : null,
-        note,
-        trade_responsible: null,
-        source_sheet: WORKBOOK_SRC,
-        primary_sheet: null,
-        reliability: 'MEDIUM',
-        derived: 1,
-      });
-    }
-    injected.push(w.tag + ' x' + w.units);
+    /* Where else does the database actually draw this tag? Reported as a fact,
+     * never used to pick a number for this room. */
+    const elsewhere = db.prepare('SELECT room_no, COUNT(*) AS n FROM room_items WHERE tag = ? GROUP BY room_no ORDER BY room_no')
+      .all(w.tag).map((x) => 'room ' + x.room_no + ' x' + x.n);
+    const note = 'PLACEMENT IS THE FF&E INSTALLATION WORKBOOK\'S; THE QUANTITY IS NOBODY\'S. '
+      + 'The "1st Floor FF&E Installation" tab carries a FLOOR TOTAL of ' + w.floorTotal + ' for ' + w.tag
+      + ' on floor 1, and ' + w.because + ' (rooms.accessible = 1 on room ' + roomNo
+      + ' and on no other floor-' + room.floor + ' key). A floor total is a SCHEDULE TOTAL, not a count taken '
+      + 'off a drawing: data/project.sqlite transcribes no ' + w.tag + ' row for this room and no sheet tags '
+      + 'the item here'
+      + (elsewhere.length ? ' (the database does draw ' + w.tag + ' elsewhere - ' + elsewhere.join(', ')
+          + ' - none of them on floor ' + room.floor + ')' : '')
+      + '. THE LINE THEREFORE SHIPS WITH NO QUANTITY: the item is real, the count is not. Reliability MEDIUM. '
+      + 'Confirm the count before ordering.';
+    out.push({
+      rowid: ++synth,
+      item_id: 'SYN-' + roomNo + '-' + w.tag,
+      room_type: room.room_type,
+      category: w.category,
+      tag: w.tag,
+      description: w.description,
+      instance_note: null,
+      note,
+      trade_responsible: null,
+      source_sheet: WORKBOOK_SRC,
+      primary_sheet: null,
+      reliability: 'MEDIUM',
+      derived: 1,
+      /* Read by reduceFFE: this line carries no qty at all. */
+      qty_unknown: 1,
+    });
+    injected.push(w.tag + ' (workbook floor total ' + w.floorTotal + '; line emitted with NO quantity)');
   }
   return { rows: out, injected };
 }
@@ -977,6 +1022,14 @@ function buildRoomNotes(db, roomNo, room, rows, stamp, report) {
       'still cites A551/A552, and the bath keynotes still cite the A530-A533 range, exactly as the database writes them.');
   }
 
+  /* What Austin's ruling settled, and the part of it he did NOT settle. The
+   * ruled lines stop carrying the conflict; the conflict itself does not stop
+   * existing, so it rides here where the crew and the architect both see it. */
+  for (const [id, note] of Object.entries(configRuledRoomNotes(db, roomNo, report.configRuling, stamp))) {
+    notes[id] = note;
+    added.push(id);
+  }
+
   if (String(room.connecting) === '1') {
     const door = rows.find((r) => r.category === 'Doors' && /connecting door/i.test(String(r.description || '')));
     if (door) {
@@ -1052,6 +1105,8 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
   const fromSqlite = [];
   const donorQtyNotes = [];
   const donorLabelNotes = [];
+  const ruledClosed = [];
+  const overrideNotes = [];
 
   for (const line of red.lines) {
     /* Shape is always sqlite. Package content depends on whether the donor has
@@ -1141,6 +1196,30 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
       continue;
     }
 
+    if (composed) {
+      /* Austin ruling D19 applies to the FF&E doc exactly as it does to the MEP
+       * doc. HD-14 and HD-5.1 are Configuration B lines flagged for one reason
+       * only - tub or roll-in - and the owner has answered that. */
+      const ruledRow = line.rows.find((r) => configBIsRuled(red.drops, r));
+      if (ruledRow) {
+        pkg.reliability = CONFIG_RULED_RELIABILITY;
+        pkg.instanceNote = configBRuledNote(red.drops.ruling, roomNo, ruledRow);
+        ruledClosed.push(line.key + ' (' + ruledRow.item_id + ')');
+      }
+      /* A ruling that overrode the row count has to say so on the line, or the
+       * note ends up contradicting the number right next to it. */
+      if (line.overrideChanged) {
+        const own = line.sqlite.note
+          ? " This room's own row is a single transcribed tag - data/project.sqlite note, verbatim: \"" +
+            line.sqlite.note + '".'
+          : " This room's own rows number " + line.rawRows + '.';
+        pkg.instanceNote = 'Austin ruling ' + line.overrideRuling + ': ' + line.overrideBecause + '.' + own +
+          ' The line therefore ships qty ' + line.qty + ' on the ruling rather than on the ' + line.rawRows +
+          ' row(s) the drawing set tags. Confirm both positions in the field before ordering.';
+        overrideNotes.push(line.key + ': qty ' + line.rawRows + ' -> ' + line.qty + ' per ruling ' + line.overrideRuling);
+      }
+    }
+
     const item = {
       code: line.code,
       label: pkg.label,
@@ -1160,6 +1239,8 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
       issue: CLEAN_FIELD_STATE.issue,
       issueResolved: CLEAN_FIELD_STATE.issueResolved,
     };
+    /* Omitted entirely - not null, not 1 - when no drawing states a count. */
+    if (line.qtyUnknown) delete item.qty;
     if (Array.isArray(pkg.attachments) && pkg.attachments.length) item.attachments = clone(pkg.attachments);
     items[line.key] = item;
   }
@@ -1201,6 +1282,9 @@ function buildFFEDoc(db, roomNo, slice, typeRef, stamp, report) {
   report.configDropped = red.configDropped;
   report.configRuling = red.configRuling;
   report.configBLeft = red.configBLeft;
+  report.ffeRuledClosed = ruledClosed.sort(cmpStr);
+  report.qtyOverrideNotes = overrideNotes.sort(cmpStr);
+  report.qtyUnknown = red.lines.filter((l) => l.qtyUnknown).map((l) => l.code || '<untagged>').sort(cmpStr);
 
   /* Doc-level identity. For an approved type it is copied. For a composed type
    * the slug is derived (rule proved against all three approved docs) and the
@@ -1237,6 +1321,17 @@ const resolveSheetWildcard = (text, roomSheet) => String(text || '').replace(/A5
  *  approved slice. Split / rejoin without reordering or reformatting. */
 const citeSegments = (s) => String(s || '').split(';').map((x) => x.trim()).filter(Boolean);
 const citeJoin = (a) => a.join('; ');
+
+/* The two kinds of SHEET-SPECIFIC number a citation can carry. A view number
+ * means a different drawing on a different sheet; a keynote number means a
+ * different note. Both are matched so that neither can be carried across a
+ * sheet boundary by accident. 'views 04/04.1 and 07' is ONE token holding
+ * three numbers, and each number is judged on its own. */
+const CITE_VIEW_TOKEN = /\b(views?|elevations?|el\.)(\s*)(\d+(?:\.\d+)?(?:\s*(?:\/|and|,|\+)\s*\d+(?:\.\d+)?)*)/gi;
+const CITE_KN_TOKEN = /\b(keyed notes?|keynotes?|kn)(\s*\.?\s*)(\d+(?:\s*(?:\/|and|,)\s*\d+)*)/gi;
+const citeNums = (list) => String(list).split(/\s*(?:\/|and|,|\+)\s*/).filter(Boolean);
+const citeViewNumbers = (t) => new Set([...String(t || '').matchAll(CITE_VIEW_TOKEN)].flatMap((m) => citeNums(m[3])));
+const citeKeynoteNumbers = (t) => new Set([...String(t || '').matchAll(CITE_KN_TOKEN)].flatMap((m) => citeNums(m[3])));
 
 /**
  * Prove that the D10 condensation map accounts for EVERY MEP row in the donor
@@ -1292,17 +1387,23 @@ function assertSheetNumberingShared(db) {
   };
   const problems = [];
   const facts = [];
+  /* WILDCARD evidence: true on ANY A55-series guestroom sheet. */
+  const wildcardViews = new Set(), wildcardKeynotes = new Set();
+  /* PAIR evidence: true of A550 vs A555 and of NOTHING ELSE. */
+  const pairViews = new Set(), pairKeynotes = new Set();
 
   const king = rt('King Studio'), qq = rt('Queen-Queen');
   const kingConn = rt('King Studio Connecting'), qqConn = rt('QQ Connecting');
-  if (king.room_sheet !== 'A550') problems.push('King Studio room_sheet is ' + JSON.stringify(king.room_sheet) + ', expected "A550"');
+  if (king.room_sheet !== KING_PAIR_SHEET) problems.push('King Studio room_sheet is ' + JSON.stringify(king.room_sheet) + ', expected ' + JSON.stringify(KING_PAIR_SHEET));
   if (qq.room_sheet !== MEP_DONOR_SHEET) problems.push('Queen-Queen room_sheet is ' + JSON.stringify(qq.room_sheet) + ', expected ' + JSON.stringify(MEP_DONOR_SHEET));
   if (!String(king.notes).includes('A550 view 01')) problems.push('room_types King Studio notes do not state "A550 view 01"');
   if (!String(qq.notes).includes('A555 view 01')) problems.push('room_types Queen-Queen notes do not state "A555 view 01"');
-  facts.push('room_types: King Studio "A550 view 01" vs Queen-Queen "A555 view 01" - the same view number on both sheets');
+  pairViews.add('01');
+  facts.push('room_types: King Studio "A550 view 01" vs Queen-Queen "A555 view 01" - view 01 is the same view number on both sheets');
   if (!String(kingConn.notes).includes('A550 view 01.1')) problems.push('room_types King Studio Connecting notes do not state "A550 view 01.1"');
   if (!String(qqConn.notes).includes('A555 view 01.1')) problems.push('room_types QQ Connecting notes do not state "A555 view 01.1"');
   if (!String(qqConn.notes).includes('electrical view 04.1')) problems.push('room_types QQ Connecting notes do not state "electrical view 04.1"');
+  pairViews.add('01.1');
   facts.push('room_types: "A550 view 01.1" (King Studio Connecting) and "A555 view 01.1 ... + electrical view 04.1" (QQ Connecting) - the ".1" suffix IS the connecting variant, on both sheets');
 
   /* The same physical row, written for a QQ room and for a King room. */
@@ -1314,19 +1415,53 @@ function assertSheetNumberingShared(db) {
     const archOf = (t) => citeSegments(t).filter((x) => /^A55\d/.test(x)).join('; ');
     const a = archOf(donorPtac.source_sheet), b = archOf(kingPtac.source_sheet);
     if (!a || !b) problems.push('the PTAC rows carry no A55-series citation to compare');
-    else if (a.split('A555').join('A550') !== b) {
+    else if (a.split(MEP_DONOR_SHEET).join(KING_PAIR_SHEET) !== b) {
       problems.push('room_items ITM-0443 ' + JSON.stringify(a) + ' does not re-point onto ITM-0152 ' +
         JSON.stringify(b) + ' - the A555 -> A550 substitution is NOT proven, refusing to re-point any citation');
     } else {
+      /* Only the numbers the two strings ACTUALLY carry are proved - not the
+       * substitution as a licence to rewrite anything else. */
+      for (const n of citeViewNumbers(b)) pairViews.add(n);
+      for (const n of citeKeynoteNumbers(b)) pairKeynotes.add(n);
       facts.push('room_items: ITM-0443 ' + JSON.stringify(a) + ' and ITM-0152 ' + JSON.stringify(b) +
-        ' - same keynote, same view, two sheets');
+        ' - proves keynote ' + [...citeKeynoteNumbers(b)].join('/') + ' and view ' + [...citeViewNumbers(b)].join('/') +
+        ' only, on those two sheets only');
     }
   }
+
+  /* The database's own type-neutral wildcard. 'A55x kn14' / 'A55x view 02' say,
+   * in the database's own hand, that the number holds on WHICHEVER A55-series
+   * sheet the room uses. That is the only evidence that reaches A552 / A556. */
+  for (const r of db.prepare("SELECT DISTINCT source_sheet FROM room_items WHERE source_sheet LIKE '%A55x%'").all()) {
+    const t = String(r.source_sheet || '');
+    for (const m of t.matchAll(/A55x\s+(?:keyed note|keynotes?|kn)\s*\.?\s*(\d+)/gi)) wildcardKeynotes.add(m[1]);
+    for (const m of t.matchAll(/A55x\s+(?:views?|elevations?|el\.)\s*(\d+(?:\.\d+)?)/gi)) wildcardViews.add(m[1]);
+  }
+  if (!wildcardKeynotes.size) {
+    problems.push("room_items carries no 'A55x kn<n>' wildcard citation - the sheet-independent keynote evidence this build relies on is gone");
+  }
+  facts.push('room_items "A55x" wildcard (the DB\'s own "this room\'s A55-series sheet"): keynote(s) ' +
+    [...wildcardKeynotes].sort(cmpStr).join('/') + ' and view(s) ' + [...wildcardViews].sort(cmpStr).join('/') +
+    ' are written sheet-independently, so they hold on any A55-series guestroom sheet');
+
+  /* Rows that name BOTH sheets on one reference ('A550/A555 kn5'). */
+  const both = db.prepare("SELECT DISTINCT source_sheet FROM room_items WHERE source_sheet LIKE '%A550/A555%' OR source_sheet LIKE '%A555/A550%'").all();
+  for (const r of both) {
+    const t = String(r.source_sheet || '');
+    for (const m of t.matchAll(/A55[05]\s*\/\s*A55[05]\s+(?:keyed note|keynotes?|kn)\s*\.?\s*(\d+)/gi)) pairKeynotes.add(m[1]);
+    for (const m of t.matchAll(/A55[05]\s*\/\s*A55[05]\s+(?:views?|elevations?|el\.)\s*(\d+(?:\.\d+)?)/gi)) pairViews.add(m[1]);
+  }
+  if (both.length) {
+    facts.push('room_items rows naming both sheets on one reference (' + both.length + ' distinct citation string(s), e.g. ' +
+      JSON.stringify(String(both[0].source_sheet)) + '): keynote(s) ' + [...pairKeynotes].sort(cmpStr).join('/') +
+      ' and view(s) ' + [...pairViews].sort(cmpStr).join('/') + ' are proved shared BETWEEN A550 AND A555 ONLY');
+  }
+
   if (problems.length) {
     die('A550 / A555 shared numbering is NOT proven by the database - refusing to re-point MEP citations:\n  ' +
         problems.join('\n  '));
   }
-  return facts;
+  return { facts, wildcardViews, wildcardKeynotes, pairViews, pairKeynotes };
 }
 
 /** Re-prove the DB evidence behind every hard-coded room-sheet resolution. */
@@ -1370,25 +1505,156 @@ function roomSheetFor(db, room, roomNo) {
   return res.sheet;
 }
 
+/* ===========================================================================
+ * CITATIONS ARE NOT STRINGS TO BE SEARCH-AND-REPLACED.
+ *
+ * The 2026-08-20 regression: the King MEP citations were "fixed" by running
+ * A555 -> A550 across the whole citation string. That rewrote the SHEET NAME,
+ * which was the intent, and it silently rewrote every VIEW NUMBER with it,
+ * which was not. 'A555 view 06 (SD symbol)' became 'A550 view 06' - but view
+ * 06 on A550 is the entry / mirror wall elevation (ITM-0143 and ITM-0144 both
+ * cite 'A550 el.06'), and 'A555 KN24 view 07' became 'A550 KN24 view 07' when
+ * A550 view 07 is the bed / sofa wall elevation (ITM-0141, 'A550 el.07') and
+ * the room's OWN thermostat row ITM-0060 cites 'A550 KN24' with no view at all.
+ *
+ * So the rule here is narrow and it is enforced number by number:
+ *
+ *   1 'A550/A555 ...' names BOTH sheets and is type-neutral. Never touched.
+ *   2 the SHEET NAME is mapped: A555 -> this room's own guestroom sheet.
+ *   3 every VIEW and KEYNOTE number is kept ONLY if assertSheetNumberingShared()
+ *     proved that exact number shared - by the database's own 'A55x' wildcard
+ *     (holds on any A55-series sheet) or by a two-sheet pair proof (holds for
+ *     A550 vs A555 and nothing else). Anything else is REMOVED, not rewritten.
+ *   4 a '.1' view is the CONNECTING variant and is removed where the room is
+ *     not a connecting key.
+ *   5 where step 3 strips a segment down to a bare sheet name, THIS ROOM'S OWN
+ *     rows supply the replacement citation if it has any. If it has none, the
+ *     sheet stands alone and the line's note says why.
+ * =========================================================================== */
+
 /**
- * Re-point one approved citation string onto this room.
- *   1 'A550/A555' names BOTH sheets and is type-neutral - protected, never touched.
- *   2 every other A555 token becomes this room's own guestroom sheet.
- *   3 the '.1' CONNECTING view variant is dropped where rooms.connecting = 0.
+ * Rewrite ONE citation segment that names the donor sheet.
+ * Returns { text, removed, connectingRemoved }.
  */
-function repointMepSrc(src, roomSheet, isConnecting) {
-  const MARK = '\u0001';
-  let out = String(src || '')
-    .replace(/A550\s*\/\s*A555/g, MARK + '$&' + MARK)
-    .replace(/A555\s*\/\s*A550/g, MARK + '$&' + MARK);
-  const parts = out.split(MARK);
-  for (let i = 0; i < parts.length; i += 2) parts[i] = parts[i].split(MEP_DONOR_SHEET).join(roomSheet);
-  out = parts.join('');
-  if (!isConnecting) {
-    out = out.replace(/views (\d+)\/\1\.1\b/g, 'view $1')
-             .replace(/views (\d+) and \1\.1\b/g, 'view $1');
+function repointCiteSegment(seg, roomSheet, isConnecting, numbering) {
+  const removed = [];
+  const connectingRemoved = [];
+  const isProven = (kind, n) => {
+    if (kind === 'view' && /\.1$/.test(n) && !isConnecting) { connectingRemoved.push('view ' + n); return false; }
+    const wild = kind === 'view' ? numbering.wildcardViews : numbering.wildcardKeynotes;
+    if (wild.has(n)) return true;
+    /* The pair proof is about A550 vs A555. It reaches no other sheet. */
+    if (roomSheet !== KING_PAIR_SHEET) return false;
+    const pair = kind === 'view' ? numbering.pairViews : numbering.pairKeynotes;
+    return pair.has(n);
+  };
+  const sift = (kind, singular, plural) => (whole, word, gap, list) => {
+    const nums = citeNums(list);
+    const keep = nums.filter((n) => isProven(kind, n));
+    for (const n of nums) if (!keep.includes(n)) removed.push(kind + ' ' + n);
+    /* Nothing removed -> the donor's own wording survives byte for byte. */
+    if (keep.length === nums.length) return whole;
+    if (!keep.length) return '';
+    /* A shortened list is re-written, so the word has to agree with what is left. */
+    const many = keep.length > 1;
+    const w = /^(kn|el\.)$/i.test(word) ? word
+      : /^e/i.test(word) ? (many ? 'elevations' : 'elevation')
+      : /^k/i.test(word) ? (many ? 'keynotes' : 'keynote')
+      : (many ? plural : singular);
+    return w + gap + keep.join('/');
+  };
+
+  let out = String(seg)
+    .replace(CITE_VIEW_TOKEN, sift('view', 'view', 'views'))
+    .replace(CITE_KN_TOKEN, sift('keynote', 'keynote', 'keynotes'));
+
+  /* Tidy the punctuation the removals left behind, without touching wording. */
+  out = out
+    .replace(/\(\s*(?:and|,|;|\+|\/|\s)*\)/g, '')
+    .replace(/\(\s*[,;+/]\s*/g, '(')
+    .replace(/\s*[,;+/]\s*\)/g, ')')
+    .replace(/\s+([,;.])/g, '$1')
+    .replace(/\s{2,}/g, ' ')
+    .trim()
+    .replace(/[,;+/]$/, '')
+    .trim();
+
+  /* Step 2 - the sheet name itself, last, so the numbers were judged against
+   * the DONOR sheet they were written for. */
+  out = out.split(MEP_DONOR_SHEET).join(roomSheet);
+  return { text: out, removed, connectingRemoved };
+}
+
+/**
+ * Compose this room's citation for one condensed MEP line.
+ *   donorSrc  the approved Queen-Queen line's citation
+ *   mine      THIS room's own room_items rows that feed this line
+ * Returns { src, note, removed, connectingRemoved, ownUsed }.
+ */
+function composeMepCitation(donorSrc, mine, roomSheet, isConnecting, numbering) {
+  const BOTH = /A55\d\s*\/\s*A55\d/;
+  /* This room's own A55-series citation segments, the DB's wildcard resolved. */
+  const ownArch = [];
+  const ownRowIds = [];
+  for (const r of mine || []) {
+    const segs = citeSegments(resolveSheetWildcard(r.source_sheet || r.primary_sheet || '', roomSheet));
+    let used = false;
+    for (const seg of segs) {
+      if (!/A55\d/.test(seg)) continue;
+      used = true;
+      if (!ownArch.includes(seg)) ownArch.push(seg);
+    }
+    if (used && !ownRowIds.includes(r.item_id)) ownRowIds.push(r.item_id);
   }
-  return out;
+
+  const kept = [];
+  const removed = [];
+  const connectingRemoved = [];
+  const donorQuoted = [];
+  let ownUsed = false;
+
+  for (const seg of citeSegments(donorSrc)) {
+    if (!seg.includes(MEP_DONOR_SHEET) || BOTH.test(seg)) { kept.push(seg); continue; }
+    const r = repointCiteSegment(seg, roomSheet, isConnecting, numbering);
+    if (r.removed.length) donorQuoted.push(seg);
+    removed.push(...r.removed);
+    connectingRemoved.push(...r.connectingRemoved);
+    if (r.text === roomSheet && ownArch.length) {
+      /* Nothing proven survived. This room's own rows carry the citation. */
+      ownUsed = true;
+      for (const o of ownArch) if (!kept.includes(o)) kept.push(o);
+      continue;
+    }
+    if (r.text) kept.push(r.text);
+  }
+
+  let note = '';
+  let outcome = '';
+  if (removed.length) {
+    const uniq = [...new Set(removed)];
+    /* What is LEFT pointing at a guestroom sheet, after the removals? */
+    const survivors = kept.filter((x) => x.includes(roomSheet) && !BOTH.test(x) &&
+      (citeViewNumbers(x).size || citeKeynoteNumbers(x).size));
+    outcome = ownUsed ? "replaced by this room's own row(s) " + ownRowIds.join(', ')
+      : survivors.length ? 'proven sheet-independent numbering kept: ' + survivors.join('; ')
+      : 'sheet cited alone - this room has no row of its own';
+    const how = ownUsed
+      ? "This room's own row(s) " + ownRowIds.join(', ') + ' supply the ' + roomSheet + ' reference instead.'
+      : survivors.length
+        ? 'What is left - ' + survivors.map((x) => '"' + x + '"').join(', ') + ' - is numbering the database ' +
+          "writes sheet-independently, so it holds on " + roomSheet +
+          (ownRowIds.length ? " and this room's own row(s) " + ownRowIds.join(', ') + ' cite it too.' : '.')
+        : 'This room has no row of its own that places this line on a guestroom sheet, so the sheet is cited ' +
+          'with no view or keynote number at all. Confirm it on ' + roomSheet + ' before relying on one.';
+    note = 'CITATION. The approved Queen-Queen line cites ' +
+      donorQuoted.map((x) => '"' + x + '"').join(' and ') + ' on ' + MEP_DONOR_SHEET + '. ' +
+      'data/project.sqlite proves ' + MEP_DONOR_SHEET + ' and ' + roomSheet + ' share only the numbers it writes ' +
+      "sheet-independently ('A55x kn<n>', 'A55x view 02')" +
+      (roomSheet === KING_PAIR_SHEET ? ' plus view 01, view 01.1, KN1 and view 08 on the A550/A555 pair' : '') +
+      ', so ' + uniq.join(', ') + ' ' + (uniq.length > 1 ? 'are' : 'is') + ' NOT carried onto ' + roomSheet + '. ' + how;
+  }
+
+  return { src: citeJoin(kept), note, removed, connectingRemoved, ownUsed, ownRowIds, outcome };
 }
 
 /** The instanceNote shape the approved MEDIUM / FLAGGED lines already use. */
@@ -1399,6 +1665,142 @@ function sqliteNote(row) {
   const text = parts.join(' — ');
   if (!text) return '';
   return row.reliability === 'HIGH' ? text : '⚑ ' + text;
+}
+
+/* ===========================================================================
+ * AUSTIN RULING D19, APPLIED - and what it deliberately does NOT close.
+ *
+ * D19 is the OWNER answering a direct question: room 118 is built to
+ * Configuration B, the roll-in shower. A Configuration B line whose ONLY
+ * reason for being flagged was "tub or roll-in?" is therefore not flagged any
+ * more, and its note states the ruling once instead of arguing with itself.
+ *
+ * The test for "only reason" is not a keyword guess. The database writes ONE
+ * identical `note` on every Configuration A and Configuration B row of the
+ * room - that string IS the tub-versus-roll-in question - so a row whose note
+ * is exactly that string, and nothing else, is flagged for that and for
+ * nothing else. A row carrying any other note keeps its flag.
+ *
+ * What D19 does NOT close: A100 and G001 still print a 'T' (tub) mark for the
+ * room and conflicts.md A11 / B4.4 are still formally OPEN. That is the
+ * ARCHITECT'S to close, so it rides as a ROOM NOTE on both of the room's docs
+ * rather than disappearing with the line flags.
+ * =========================================================================== */
+
+/* A ruled Config-B line is not HIGH: the configuration is settled by a ruling,
+ * not by a corrected drawing, and the drawings still disagree. */
+const CONFIG_RULED_RELIABILITY = 'MEDIUM';
+
+/** The one note the DB writes on every Config-A / Config-B row of the room. */
+function configConflictNote(rows) {
+  const notes = new Set(rows
+    .filter((r) => isConfigRow(r))
+    .map((r) => String(r.note || '')));
+  if (notes.size !== 1) return null;
+  const only = [...notes][0];
+  return only && /MUTUALLY EXCLUSIVE/.test(only) ? only : null;
+}
+
+const isConfigRow = (r) => String(r.description || '').startsWith(CONFIG_A_PREFIX)
+  || String(r.description || '').startsWith(CONFIG_B_PREFIX);
+
+/**
+ * Is this row a Configuration B row whose ONLY reason for being flagged is the
+ * question the ruling just closed? `drops` comes from configADrops(), which
+ * already refused to drop anything without a ruling.
+ */
+function configBIsRuled(drops, row) {
+  if (!drops || !drops.ruling || !row) return false;
+  if (!String(row.description || '').startsWith(CONFIG_B_PREFIX)) return false;
+  if (!drops.conflictNote) return false;
+  return String(row.note || '') === drops.conflictNote;
+}
+
+/** The line note a ruled Configuration B line carries. States the ruling once. */
+function configBRuledNote(ruling, roomNo, row) {
+  const own = row && row.instance_note ? ' Row provenance: ' + row.instance_note + '.' : '';
+  return 'Austin ruling ' + ruling + ' (the owner, asked directly on 2026-08-20): room ' + roomNo +
+    ' is built to Configuration B, the ROLL-IN SHOWER. The Configuration A (TUB) rows are dropped from this ' +
+    'room and this is a line that gets built.' + own +
+    ' Reliability ' + CONFIG_RULED_RELIABILITY + ' rather than HIGH because the ruling closed the configuration, ' +
+    'not the drawings: A100 and G001 still mark this room "T" (tub) and conflicts.md A11 / B4.4 are still open ' +
+    'for the architect. See the room note.';
+}
+
+/**
+ * The room note that carries what the ruling did NOT close. Quotes the
+ * database's own words for the open conflict rather than paraphrasing them.
+ * Used by both of the room's docs.
+ */
+function configRuledRoomNotes(db, roomNo, ruling, stamp) {
+  if (!ruling) return {};
+  const rows = db.prepare('SELECT description, note FROM room_items WHERE room_no = ?').all(roomNo);
+  const conflict = configConflictNote(rows);
+  /* Quote the part of the database's note that is STILL TRUE - the two
+   * verbatim conflict extracts - rather than the whole thing. The sentences
+   * before them ("Both are emitted. Neither is superseded. Only Austin can
+   * close this.") were written while the question was open; D19 is Austin
+   * closing it, so repeating them here would re-open it in the reader's head. */
+  const cut = conflict ? conflict.indexOf('A11 verbatim:') : -1;
+  const openPart = cut >= 0 ? conflict.slice(cut).trim() : conflict;
+  const text = 'BATHING CONFIGURATION - RULED, WITH ONE THING STILL OPEN. Austin ruling ' + ruling +
+    ' (the owner, asked directly on 2026-08-20): room ' + roomNo + ' is built to Configuration B, the ROLL-IN ' +
+    'SHOWER. Every Configuration A (TUB) line is dropped from this room, and the Configuration B lines are the ' +
+    'ones to build - they are no longer carried as an open conflict on this key. ' +
+    'WHAT THE RULING DOES NOT CLOSE IS THE DRAWINGS, and that is the architect\'s to close, not the crew\'s: ' +
+    'A100 and G001 both still mark room ' + roomNo + ' "T" (tub), and conflicts.md A11 and B4.4 are still ' +
+    'formally OPEN on it. data/project.sqlite records the open part this way, verbatim: "' + openPart + '" ' +
+    'The ruling supersedes the tub mark for construction. It does not correct the drawings. Nobody should order ' +
+    'a bath package off either matrix, and the architect still owes a corrected A100 / G001, until A11 and B4.4 ' +
+    'are closed.';
+  return {
+    n_config: { text, flag: 'info', resolved: false, createdAt: stamp, by: '' },
+  };
+}
+
+/* ===========================================================================
+ * THE ROOM'S OWN SPRINKLER TAKE-OFF.
+ *
+ * The approved donor line ships qty 1 and says the count varies by room. The
+ * database holds one row PER HEAD for rooms 104 through 115 - King and
+ * Queen-Queen alike - so the room can state its own take-off instead of
+ * throwing those rows away. Shared by the copy path and the composed path so
+ * that two rooms across a corridor from each other read the same way.
+ * =========================================================================== */
+const FP_HEADS_KEY = 'fp_heads_a';
+const FP_HEADS_ITEM_IDS = new Set([
+  ...(MEP_CONDENSED_SOURCES[FP_HEADS_KEY] || []),
+  ...Object.keys(MEP_VARIANT_SLOTS).filter((id) => MEP_VARIANT_SLOTS[id] === FP_HEADS_KEY),
+]);
+
+/** This room's own sprinkler-head rows, in a deterministic order. */
+const sprinklerRowsFor = (rows) => (rows || [])
+  .filter((r) => FP_HEADS_ITEM_IDS.has(r.item_id))
+  .slice()
+  .sort((a, b) => cmpStr(String(a.item_id), String(b.item_id)));
+
+/**
+ * Fold the room's own heads into the approved line. Returns null when the room
+ * has no sprinkler rows of its own (116 and 118 have none), in which case the
+ * approved line stands untouched.
+ */
+function sprinklerTakeoff(roomNo, heads, src, instanceNote) {
+  if (!heads || !heads.length) return null;
+  const positions = heads.map((r) => r.instance_note).filter(Boolean).join('; ');
+  const extras = [...new Set(heads.map((r) => r.note).filter(Boolean))].join(' ');
+  const cites = [...new Set(heads.map((r) => r.source_sheet).filter(Boolean))];
+  if (!String(instanceNote).includes(FP_COUNT_SENTENCE)) {
+    die('room ' + roomNo + ': approved ' + FP_HEADS_KEY + ' instanceNote no longer contains the head-count sentence');
+  }
+  const own = "this room's own take-off is " + heads.length + ' concealed pendent head(s) on drops — ' +
+    positions + '. ' + (extras ? extras + '. ' : '') + 'Verify every head you can see.';
+  return {
+    qty: heads.length,
+    src: citeJoin([...new Set([...citeSegments(src), ...cites])]),
+    instanceNote: String(instanceNote).replace(FP_COUNT_SENTENCE, own),
+    report: FP_HEADS_KEY + ': ' + heads.length + ' room-specific sprinkler head row(s) carried (' +
+      heads.map((r) => r.item_id).join(', ') + ')',
+  };
 }
 
 /**
@@ -1420,7 +1822,7 @@ function configADrops(roomNo, rows) {
         ruling + ' would leave NO Configuration B (ROLL-IN SHOWER) row behind - that would delete the ' +
         "room's bathing package outright. Refusing.");
   }
-  return { ids: new Set(a.map((r) => r.rowid)), ruling, a, b };
+  return { ids: new Set(a.map((r) => r.rowid)), ruling, a, b, conflictNote: configConflictNote(rows) };
 }
 
 /**
@@ -1428,7 +1830,7 @@ function configADrops(roomNo, rows) {
  * Shape and wording: the approved donor's 22 condensed lines.
  * Citations, marks, counts: this room's own room_items.
  */
-function buildComposedMepDoc(db, roomNo, room, rows, slice, donorNo, floor, stamp, report, identity) {
+function buildComposedMepDoc(db, roomNo, room, rows, slice, donorNo, floor, stamp, report, identity, numbering) {
   const ref = slice.docs[donorNo + '-MEP'];
   if (!ref) die('room ' + roomNo + ': approved slice has no ' + donorNo + '-MEP to take the D10 shape from');
   if (ref.type !== MEP_DOC_TYPE) die('room ' + roomNo + ': ' + donorNo + '-MEP type is not ' + JSON.stringify(MEP_DOC_TYPE));
@@ -1471,8 +1873,10 @@ function buildComposedMepDoc(db, roomNo, room, rows, slice, donorNo, floor, stam
 
   const items = {};
   const repointed = [];
+  const citationDropped = [];
   const connectingDropped = [];
   const resolutions = [];
+  const ruledClosed = [];
 
   for (const key of Object.keys(donorLive).sort(cmpStr)) {
     const d = donorLive[key];
@@ -1483,14 +1887,18 @@ function buildComposedMepDoc(db, roomNo, room, rows, slice, donorNo, floor, stam
 
     let code = d.code, label = d.label, reliability = d.reliability, trade = d.trade;
     let derived = d.derived, qty = d.qty, instanceNote = d.instanceNote;
-    let src = repointMepSrc(d.src, roomSheet, isConnecting);
+    /* Citations: sheet name mapped, every view and keynote number judged on its
+     * own, this room's own rows preferred over the donor's string. */
+    const cite = composeMepCitation(d.src, mine, roomSheet, isConnecting, numbering);
+    let src = cite.src;
+    let citeNote = cite.note;
     if (src !== d.src) repointed.push(key);
-    /* Did this line carry a CONNECTING view, and did we drop it? Measured by
-     * running the same re-point both ways - never by sniffing for '.1', which
-     * also matches a code reference like 'Art. 210.12'. */
-    if (!isConnecting && repointMepSrc(d.src, roomSheet, true) !== repointMepSrc(d.src, roomSheet, false)) {
-      connectingDropped.push(key);
+    if (cite.removed.length) {
+      citationDropped.push(key + ': ' + [...new Set(cite.removed)].join(', ') + ' -> ' + cite.outcome);
     }
+    /* A '.1' view is the CONNECTING variant of that view. Reported, never
+     * sniffed for with a bare '.1' test, which also matches 'Art. 210.12'. */
+    if (cite.connectingRemoved.length) connectingDropped.push(key);
 
     const rowDiffers = variant && donorVariant && variant.description !== donorVariant.description;
 
@@ -1505,9 +1913,11 @@ function buildComposedMepDoc(db, roomNo, room, rows, slice, donorNo, floor, stam
       trade = variant.trade_responsible || '';
       derived = variant.derived;
       instanceNote = sqliteNote(variant);
-      if (drops.ruling && String(variant.description).startsWith(CONFIG_B_PREFIX)) {
-        instanceNote = 'Austin ruling ' + drops.ruling + ': this room is built to Configuration B (roll-in shower); ' +
-          'the Configuration A (TUB) rows are dropped. ' + instanceNote;
+      citeNote = '';   /* the citation is this room's own row now, not the donor's string */
+      if (configBIsRuled(drops, variant)) {
+        reliability = CONFIG_RULED_RELIABILITY;
+        instanceNote = configBRuledNote(drops.ruling, roomNo, variant);
+        ruledClosed.push(key + ' (' + variant.item_id + ')');
       }
       resolutions.push(key + ": rebuilt from this room's own row " + variant.item_id);
     }
@@ -1522,6 +1932,7 @@ function buildComposedMepDoc(db, roomNo, room, rows, slice, donorNo, floor, stam
       const donorSegs = citeSegments(d.src).filter((x) => !/^M401\b/.test(x) && !/^A55\d/.test(x));
       const mineSegs = citeSegments(resolveSheetWildcard(variant.source_sheet || '', roomSheet));
       src = citeJoin([...mineSegs, ...donorSegs]);
+      citeNote = '';   /* every A55-series segment came from this room's own row */
       if (!String(instanceNote).includes(PTAC_NAMEPLATE)) {
         die('room ' + roomNo + ': approved mech_ptac instanceNote no longer contains the nameplate sentence');
       }
@@ -1532,24 +1943,14 @@ function buildComposedMepDoc(db, roomNo, room, rows, slice, donorNo, floor, stam
       resolutions.push('mech_ptac: mark resolved to ' + (variant.tag || '(untagged)') + ' from ' + variant.item_id);
     }
 
-    if (key === 'fp_heads_a' && variants.length) {
-      /* The room-specific sprinkler take-off the copy used to throw away. */
-      qty = variants.length;
-      const positions = variants.map((r) => r.instance_note).filter(Boolean).join('; ');
-      const extras = [...new Set(variants.map((r) => r.note).filter(Boolean))].join(' ');
-      const cites = [...new Set(variants.map((r) => r.source_sheet).filter(Boolean))];
-      src = citeJoin([...citeSegments(src), ...cites]);
-      if (!String(instanceNote).includes(FP_COUNT_SENTENCE)) {
-        die('room ' + roomNo + ': approved fp_heads_a instanceNote no longer contains the head-count sentence');
-      }
-      const own = "this room's own take-off is " + variants.length + ' concealed pendent head(s) on drops — ' +
-        positions + '. ' + (extras ? extras + '. ' : '') + 'Verify every head you can see.';
-      instanceNote = String(instanceNote).replace(FP_COUNT_SENTENCE, own);
-      resolutions.push('fp_heads_a: ' + variants.length + ' room-specific sprinkler head row(s) carried (' +
-        variants.map((r) => r.item_id).join(', ') + ')');
+    if (key === FP_HEADS_KEY) {
+      const heads = sprinklerRowsFor(mine);
+      const take = sprinklerTakeoff(roomNo, heads, src, instanceNote);
+      if (take) { qty = take.qty; src = take.src; instanceNote = take.instanceNote; resolutions.push(take.report); }
     }
 
     if (!src) die('room ' + roomNo + ': MEP line ' + key + ' would carry no citation');
+    if (citeNote) instanceNote = (instanceNote ? instanceNote + ' ' : '') + citeNote;
 
     items[key] = {
       id: key, code, label, category: d.category, qty, src, reliability, instanceNote,
@@ -1576,13 +1977,15 @@ function buildComposedMepDoc(db, roomNo, room, rows, slice, donorNo, floor, stam
     const src = resolveSheetWildcard(r.source_sheet || r.primary_sheet || '', roomSheet);
     if (!src) die('room ' + roomNo + ': row ' + r.item_id + ' has no citation in sqlite - refusing to emit an uncited line');
     let note = sqliteNote(r);
-    if (drops.ruling && String(r.description).startsWith(CONFIG_B_PREFIX)) {
-      note = 'Austin ruling ' + drops.ruling + ': this room is built to Configuration B (roll-in shower); ' +
-        'the Configuration A (TUB) rows are dropped. ' + note;
+    let reliability = r.reliability;
+    if (configBIsRuled(drops, r)) {
+      reliability = CONFIG_RULED_RELIABILITY;
+      note = configBRuledNote(drops.ruling, roomNo, r);
+      ruledClosed.push(key + ' (' + r.item_id + ')');
     }
     items[key] = {
       id: key, code: r.tag || '', label: r.description, category: c, qty: 1, src,
-      reliability: r.reliability, instanceNote: note, trade: r.trade_responsible || '',
+      reliability, instanceNote: note, trade: r.trade_responsible || '',
       derived: r.derived, sort: base, deleted: false, ...CLEAN_FIELD_STATE,
     };
     added.push((r.tag || '<untagged>') + ' [' + c + '] ' + r.item_id);
@@ -1595,6 +1998,8 @@ function buildComposedMepDoc(db, roomNo, room, rows, slice, donorNo, floor, stam
   report.mepRoomSheet = roomSheet;
   report.mepConnecting = isConnecting;
   report.mepRepointed = repointed.sort(cmpStr);
+  report.mepCitationDropped = citationDropped.sort(cmpStr);
+  report.mepRuledClosed = ruledClosed.sort(cmpStr);
   report.mepConnectingDropped = connectingDropped.sort(cmpStr);
   report.mepResolutions = resolutions;
   report.mepAdded = added;
@@ -1610,14 +2015,16 @@ function buildComposedMepDoc(db, roomNo, room, rows, slice, donorNo, floor, stam
     typeLabel: identity.typeLabel,
     schemaV: ref.schemaV,
     items,
-    notes: {},
+    /* The bathing-configuration ruling and what it does NOT close belong on
+     * both sheets: four of the six ruled lines live here, not on the FF&E doc. */
+    notes: configRuledRoomNotes(db, roomNo, drops.ruling, stamp),
     deleted: false,
     createdAt: stamp,
     updatedAt: stamp,
   };
 }
 
-function buildMepDoc(roomNo, slice, refNo, floor, stamp, report, identity) {
+function buildMepDoc(db, roomNo, rows, slice, refNo, floor, stamp, report, identity) {
   const ref = slice.docs[refNo + '-MEP'];
   if (!ref) die('room ' + roomNo + ': approved slice has no ' + refNo + '-MEP to copy');
   if (ref.type !== MEP_DOC_TYPE) {
@@ -1646,9 +2053,26 @@ function buildMepDoc(roomNo, slice, refNo, floor, stamp, report, identity) {
     items[k] = item;
   }
 
+  /* The one thing a straight copy used to throw away: this room's OWN Fire
+   * Sprinkler rows. The database holds three of them for every room 104-115,
+   * so a Queen-Queen states its own head-by-head take-off exactly the way the
+   * King rooms already do. Nothing else in the copy is touched. */
+  const resolutions = [];
+  const fp = items[FP_HEADS_KEY];
+  if (fp) {
+    const take = sprinklerTakeoff(roomNo, sprinklerRowsFor(rows), fp.src, fp.instanceNote);
+    if (take) {
+      fp.qty = take.qty;
+      fp.src = take.src;
+      fp.instanceNote = take.instanceNote;
+      resolutions.push(take.report);
+    }
+  }
+
   report.mepLines = Object.keys(items).length;
   report.mepSkippedDeleted = skippedDeleted;
   report.mepRefRoom = refNo + '-MEP';
+  report.mepResolutions = resolutions;
 
   return {
     number: roomNo + '-MEP',
@@ -2466,9 +2890,13 @@ function mainSpaces(db, slice, positional, opts) {
     }
   }
 
-  W('\nAPP-SIDE OPEN ITEM: js/util.js mepParent() matches /^(\\d+)-MEP$/ and mepIdFor() appends\n' +
-    "  '-MEP'. Neither understands a space MEP id, so " + Object.keys(docs).filter((k) => k.endsWith(SPACE_MEP_SUFFIX)).length +
-    ' space MEP doc(s) will not link\n  to their parent until those helpers learn the space scheme. Not patched here.\n');
+  W('\nAPP-SIDE: the PLATFORM app now resolves both suffixes. platform/js/core/store.js\n' +
+    "  mepDocId() tries '-MEP' then '" + SPACE_MEP_SUFFIX + "' and every caller goes through it, so all " +
+    Object.keys(docs).filter((k) => k.endsWith(SPACE_MEP_SUFFIX)).length +
+    ' space MEP doc(s)\n  resolve without the 8-character Firestore id cap being broken.\n' +
+    "  STILL OPEN, in the LIVE crew app and deliberately not touched here: js/util.js\n" +
+    "  mepParent() matches /^(\\d+)-MEP$/ and mepIdFor() appends '-MEP'. Neither understands a\n" +
+    '  space MEP id. That is the live application and it is out of this scope.\n');
 
   if (opts.reportOnly) {
     W('\n--spaces-report: analysis only. Nothing written.\n\n');
@@ -2639,8 +3067,8 @@ function main(argv) {
      * A composed type builds its MEP doc from its own rows instead. */
     const mep = report.composed
       ? buildComposedMepDoc(db, roomNo, room, rows, slice, report.donorRoom, ffe.floor, stamp, report,
-        { typeLabel: ffe.typeLabel })
-      : buildMepDoc(roomNo, slice, report.refRoom, ffe.floor, stamp, report,
+        { typeLabel: ffe.typeLabel }, numbering)
+      : buildMepDoc(db, roomNo, rows, slice, report.refRoom, ffe.floor, stamp, report,
         { typeLabel: ffe.typeLabel });
     if (!report.composed) report.mepSheetCitations = mepSheetCitations(slice, report.refRoom);
     docs[roomNo] = ffe;
@@ -2682,7 +3110,7 @@ function main(argv) {
   process.stdout.write('D10 condensation map re-proved: ' + cover.donorRows + ' donor MEP rows -> ' +
     cover.lines + ' condensed lines + ' + cover.roughIn + ' rough-in rows deliberately off the punch\n');
   process.stdout.write('A550 / A555 shared numbering re-proved from the database:\n');
-  for (const f of numbering) process.stdout.write('    - ' + f + '\n');
+  for (const f of numbering.facts) process.stdout.write('    - ' + f + '\n');
   for (const f of sheetRes) process.stdout.write('  room-sheet resolution: ' + f + '\n');
   process.stdout.write('\n');
   for (const r of reports) {
@@ -2699,6 +3127,11 @@ function main(argv) {
       '  MEP  : ' + r.mepLines + ' lines   [' + r.mepSkippedDeleted + ' deleted history rows in ' +
       r.mepRefRoom + ' deliberately not copied]\n' +
       '  unresolved tags: ' + (r.unresolved.length ? r.unresolved.join('; ') : 'none') + '\n');
+    if (!r.composed) {
+      for (const x of r.mepResolutions || []) {
+        process.stdout.write("    MEP copy enriched from this room's own rows - " + x + '\n');
+      }
+    }
     if (r.composed) {
       process.stdout.write('  type-only tags (sqlite is the only source): ' + r.fromSqlite.join(', ') + '\n');
       process.stdout.write('  donor tags not applicable to this type: ' +
@@ -2715,7 +3148,14 @@ function main(argv) {
         process.stdout.write('    connecting ".1" view citation ' +
           (r.mepConnecting ? 'KEPT (this room IS connecting)' : 'dropped on: ' +
             (r.mepConnectingDropped.length ? r.mepConnectingDropped.join(', ') : 'none')) + '\n');
+        for (const x of r.mepCitationDropped || []) {
+          process.stdout.write('    citation number NOT carried across sheets - ' + x + '\n');
+        }
         for (const x of r.mepResolutions) process.stdout.write('    resolved: ' + x + '\n');
+        if (r.mepRuledClosed && r.mepRuledClosed.length) {
+          process.stdout.write('    ruling ' + r.mepDropRuling + ' closes the flag on ' + r.mepRuledClosed.length +
+            ' Configuration B line(s): ' + r.mepRuledClosed.join(', ') + '\n');
+        }
         if (r.mepAdded.length) {
           process.stdout.write('    ' + r.mepAdded.length + ' room-specific row(s) added as their own line(s): ' +
             r.mepAdded.join('; ') + '\n');
@@ -2732,8 +3172,19 @@ function main(argv) {
       }
     }
     if (r.injected && r.injected.length) {
-      process.stdout.write('  workbook lines injected as synthetic rows (qty derived by the ordinary fold): ' +
+      process.stdout.write('  workbook-only lines (the workbook states a FLOOR TOTAL, no sheet states a count): ' +
         r.injected.join(', ') + '\n');
+    }
+    if (r.qtyUnknown && r.qtyUnknown.length) {
+      process.stdout.write('  FF&E line(s) emitted with NO quantity because no drawing states one: ' +
+        r.qtyUnknown.join(', ') + '\n');
+    }
+    if (r.qtyOverrideNotes && r.qtyOverrideNotes.length) {
+      process.stdout.write('  quantity set by ruling, and the note says so: ' + r.qtyOverrideNotes.join('; ') + '\n');
+    }
+    if (r.ffeRuledClosed && r.ffeRuledClosed.length) {
+      process.stdout.write('  ruling ' + r.configRuling + ' closes the flag on ' + r.ffeRuledClosed.length +
+        ' FF&E Configuration B line(s): ' + r.ffeRuledClosed.join(', ') + '\n');
     }
     if (r.configDropped && r.configDropped.length) {
       process.stdout.write('  ruling ' + r.configRuling + ' drops ' + r.configDropped.length +
