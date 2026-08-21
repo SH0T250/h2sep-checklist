@@ -1209,7 +1209,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 renderer.setSize(host.clientWidth, host.clientHeight);
 renderer.outputEncoding = T.sRGBEncoding;
 renderer.toneMapping = T.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 0.80;   // room has a real black point now, so it can carry more exposure
+renderer.toneMappingExposure = 0.745;   // room has a real black point now, so it can carry more exposure
 renderer.physicallyCorrectLights = true;   // inverse-square falloff, no fudged pi
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = T.PCFSoftShadowMap;
@@ -1219,8 +1219,31 @@ host.appendChild(renderer.domElement);
 var scene = new T.Scene();
 scene.background = new T.Color(0x0b0d10);
 
+/* HANDEDNESS.  The model is authored with z = 0 at the corridor wall and z = D
+   at the window, so "walking into the room" is +z.  In a right-handed scene with
+   +y up, a camera at low z looking toward +z has +x on its LEFT - which put the
+   working wall (x = W) on the left of every frame and the accent wall on the
+   right.  Room 110 is the other way round: entering from the corridor, the
+   herringbone accent wall is on the LEFT and the kitchenette/desk run on the
+   RIGHT.  MEASURED against the photographs, every render was the mirror image of
+   its pairing: photo-04 has the electrical panel left and the shelf box right,
+   photo-18 has the entry door right, photo-02 has the full-length mirror left of
+   the sofa - the renders had all three reversed.
+
+   Everything below is authored in the SAME coordinates as before, and this one
+   group reflects the finished model through the plane z = D/2 so that entering
+   the room is -z and +x lands on the right.  r128 flips the winding order for a
+   negative-determinant matrixWorld, so faces, normals and shadows all follow.
+   Only code that reasons in WORLD coordinates - the two cube probes, the bath
+   material scope and the camera stations - has to say D - z. */
+var WORLD = new T.Group();
+WORLD.scale.z = -1;
+WORLD.position.z = D;
+T.Object3D.prototype.add.call(scene, WORLD);
+scene.add = WORLD.add.bind(WORLD);
+
 var HFOV = 71;                              // phone-camera horizontal field of view
-var camera = new T.PerspectiveCamera(50, host.clientWidth / host.clientHeight, 0.05, 200);
+var camera = new T.PerspectiveCamera(50, host.clientWidth / host.clientHeight, 0.10, 80);
 function applyFov() {
   var a = camera.aspect;
   camera.fov = 2 * T.MathUtils.radToDeg(Math.atan(Math.tan(T.MathUtils.degToRad(HFOV) / 2) / a));
@@ -1260,6 +1283,51 @@ function toTex(canvas, srgb) {
   if (srgb !== false) t.encoding = T.sRGBEncoding;
   return t;
 }
+/* Pull a finished canvas toward its own mean.  MEASURED against photo-02 on
+   matched patches, at matched apparent scale: the render's carpet carried a
+   9px-band sigma of 0.0837 where the real carpet carries 0.0473, and a 3px-band
+   sigma of 0.0331 where the real carpet carries 0.0200 - the pattern was drawn
+   very nearly twice as loud as the thing it is a picture of.  The herringbone
+   was 2.0x at the coarse band and its chroma noise was 4.8x.  A floor and an
+   accent wall are the two largest surfaces in every frame of this room, so
+   drawing them at twice contrast is the loudest single material error in the
+   set.  lum pulls luminance toward the field mean, chr pulls colour toward
+   neutral; both leave the mean exactly where it was, so nothing about the
+   room's exposure moves. */
+function flatten(g, w, h, lum, chr) {
+  var d = g.getImageData(0, 0, w, h), a = d.data, n = w * h;
+  var mr = 0, mg = 0, mb = 0, i;
+  for (i = 0; i < n; i++) { mr += a[i * 4]; mg += a[i * 4 + 1]; mb += a[i * 4 + 2]; }
+  mr /= n; mg /= n; mb /= n;
+  var mm = (mr + mg + mb) / 3;
+  for (i = 0; i < n; i++) {
+    var r = a[i * 4], gg = a[i * 4 + 1], b = a[i * 4 + 2];
+    var l = (r + gg + b) / 3, l2 = mm + (l - mm) * lum;
+    a[i * 4]     = Math.max(0, Math.min(255, l2 + (r  - l) * chr + (mr - mm) * (1 - chr)));
+    a[i * 4 + 1] = Math.max(0, Math.min(255, l2 + (gg - l) * chr + (mg - mm) * (1 - chr)));
+    a[i * 4 + 2] = Math.max(0, Math.min(255, l2 + (b  - l) * chr + (mb - mm) * (1 - chr)));
+  }
+  g.putImageData(d, 0, 0);
+}
+
+/* A MEASUREMENT THAT WAS WRONG, kept because the next round will otherwise
+   make it again.  Measured at matched angular scale, every procedural surface
+   in the room appeared to carry four to five times the fine-scale COLOUR noise
+   of the photograph of it - carpet 0.0172 against 0.0046, bath tile 0.0100
+   against 0.0019, ceiling 0.0048 against 0.0009.  Five surfaces, one direction,
+   a textbook systematic error.
+
+   It was a file format.  The photographs are JPEG with 4:2:0 chroma
+   subsampling (sampling factors 1,2,2), which stores colour at half resolution
+   in each axis; the renders are PNG.  CONTROL: re-encoding the render as JPEG
+   q92 4:2:0 and re-measuring the same crop took the carpet from 0.01681 to
+   0.00616 and the bath tile from 0.01004 to 0.00252, against the photographs'
+   0.00457 and 0.00186 - a residual of 1.3x, which is region-selection noise.
+   Luminance detail was unaffected by the same control, so luminance bands are
+   safe to compare directly and chroma bands are not.
+
+   The desaturation pass this comment used to justify has been removed. */
+
 function noiseOver(g, w, h, amt, seed) {    // fine film grain / fibre
   var r = rng(seed), img = g.getImageData(0, 0, w, h), d = img.data;
   for (var i = 0; i < d.length; i += 4) {
@@ -1271,7 +1339,7 @@ function noiseOver(g, w, h, amt, seed) {    // fine film grain / fibre
 
 /* ---- carpet: overlapping chevrons and blocks, charcoal / grey / mustard /
    pale blue.  Cell grid keeps it seamless.  [PHOTO] --------------------- */
-var CARPET_TILE_FT = 6;
+var CARPET_TILE_FT = 3.0;
 function carpetCanvas() {
   // Redrawn against photo-01 and photo-05 rather than the written record: the
   // field is a mid teal-grey, not charcoal, the motifs are LARGE (arrowheads
@@ -1343,6 +1411,10 @@ function carpetCanvas() {
   }
   g.globalAlpha = 1;
   noiseOver(g, N, N, 22, 4242);
+  // 0.56 luminance / 0.55 chroma takes the measured 0.0837 mid-band sigma to
+  // about 0.047 and the 0.0180 chroma-noise sigma to about 0.010, against
+  // photo-02's 0.0473 and 0.0030.
+  flatten(g, N, N, 0.56, 0.55);
   return c;
 }
 function carpetBumpCanvas() {
@@ -1373,6 +1445,7 @@ function herringboneCanvas() {
     g.stroke();
   }
   noiseOver(g, N, N, 12, 555);
+  flatten(g, N, N, 0.62, 0.30);   // 0.0611 mid-band -> ~0.038 against photo-02's 0.0299
   return c;
 }
 
@@ -1680,6 +1753,34 @@ function quartzCanvas(base) {
 }
 
 /* ---- painted wall: no pattern, just a faint orange-peel bump ---------- */
+/* MEASURED on matched flat-wall patches at matched apparent scale: the
+   photograph's painted wall carries a 25px-band sigma of 0.0203 and a 9px-band
+   of 0.0093; the render's carries 0.0026 and 0.0026.  The render's walls are
+   EIGHT TIMES too even - a level-5 gypsum wall has joint compound patches,
+   roller lap and a skim that reads at exactly that scale, and its absence is
+   what makes a big plain wall read as untextured card.  This is a very low
+   amplitude map: +/- 2.5% of albedo, no colour. */
+function paintCanvas() {
+  var N = 512, o = cv(N, N), c = o[0], g = o[1], r = rng(4711);
+  g.fillStyle = '#ffffff'; g.fillRect(0, 0, N, N);
+  // broad compound patches
+  for (var i = 0; i < 26; i++) {
+    var x = r() * N, y = r() * N, rr = 40 + r() * 150;
+    var rg2 = g.createRadialGradient(x, y, 0, x, y, rr);
+    var v = r() < 0.5 ? '250,249,246' : '255,255,255';
+    rg2.addColorStop(0, 'rgba(' + v + ',' + (0.22 + r() * 0.26).toFixed(2) + ')');
+    rg2.addColorStop(1, 'rgba(' + v + ',0)');
+    g.fillStyle = rg2; g.beginPath(); g.arc(x, y, rr, 0, 6.283); g.fill();
+  }
+  // roller lap: soft vertical bands, the width of a 9" roller
+  for (var j = 0; j < 14; j++) {
+    g.fillStyle = 'rgba(0,0,0,' + (0.008 + r() * 0.016).toFixed(3) + ')';
+    g.fillRect(r() * N, 0, 18 + r() * 40, N);
+  }
+  noiseOver(g, N, N, 5, 1234);
+  return c;
+}
+
 function paintBumpCanvas() {
   var N = 256, o = cv(N, N), c = o[0], g = o[1], r = rng(12);
   g.fillStyle = '#808080'; g.fillRect(0, 0, N, N);
@@ -1783,6 +1884,73 @@ function meshFabricCanvas() {                // task chair mesh back
   }
   return c;
 }
+/* A lamp shade is not a uniform white card.  MEASURED on the lounge frame:
+   the render's shade ran mean 0.847 with 16.9% of it CLIPPED and a gradient
+   energy of 0.0050; the same shade in photo-02 measures mean 0.514, ZERO
+   clipped pixels, and 0.0156 gradient - three times the internal structure and
+   a full stop darker.  The render was clipping the one thing the photograph
+   does not clip.  This is the shade's transmission: hot at the bulb line, a
+   cooler wash toward the rims, seam shadows down the pleats, and a lighter
+   halo where the fabric thins over the top wire. */
+function shadeGlowCanvas() {
+  var W = 256, H = 128, o = cv(W, H), c = o[0], g = o[1];
+  // v = 0 is the BOTTOM of a three.js open cylinder, which is where the bulb
+  // sits and where a real shade is brightest.
+  var lg = g.createLinearGradient(0, H, 0, 0);
+  lg.addColorStop(0.00, '#fff4e2');
+  lg.addColorStop(0.13, '#ffe9c8');
+  lg.addColorStop(0.38, '#e8c294');
+  lg.addColorStop(0.68, '#c69f74');
+  lg.addColorStop(0.92, '#b08f68');
+  lg.addColorStop(1.00, '#d8b98d');
+  g.fillStyle = lg; g.fillRect(0, 0, W, H);
+  // vertical seams: an unevenly spaced set, because a rolled shade has one
+  // real seam and a lot of near-invisible stiffener lines
+  var r = rng(808);
+  for (var i = 0; i < 46; i++) {
+    var x = (i + r() * 0.8) / 46 * W, w = 0.7 + r() * 1.5;
+    g.fillStyle = 'rgba(0,0,0,' + (0.03 + r() * 0.05).toFixed(3) + ')';
+    g.fillRect(x, 0, w, H);
+  }
+  g.fillStyle = 'rgba(40,26,10,0.16)'; g.fillRect(W * 0.31, 0, 2.4, H);
+  noiseOver(g, W, H, 9, 71);
+  return c;
+}
+
+/* Ceiling pool.  A recessed can throws a bright disc on the plane it is set
+   into and a falloff around it; the spot light that does the work in this room
+   points DOWN and so lights nothing of the ceiling it hangs in.  MEASURED, the
+   entry ceiling band of the render had max 0.799 and 0.000% clipped pixels
+   against photo-04's max 1.000 and 1.534% - the render had no fixture in it at
+   all, and the ceiling read as untextured card. */
+function haloCanvas() {
+  var N = 256, o = cv(N, N), c = o[0], g = o[1];
+  var rg = g.createRadialGradient(N / 2, N / 2, N * 0.10, N / 2, N / 2, N / 2);
+  rg.addColorStop(0.00, 'rgba(255,236,205,0.95)');
+  rg.addColorStop(0.16, 'rgba(255,231,198,0.62)');
+  rg.addColorStop(0.34, 'rgba(255,226,190,0.30)');
+  rg.addColorStop(0.60, 'rgba(255,222,186,0.10)');
+  rg.addColorStop(1.00, 'rgba(255,220,184,0.0)');
+  g.fillStyle = rg; g.fillRect(0, 0, N, N);
+  return c;
+}
+
+/* Brushed stainless.  MEASURED on photo-18 the microwave door carries a strong
+   vertical luminance ramp and a fine horizontal streak; the render's appliance
+   faces were a flat pale slab because a metal at roughness 0.16 with nothing
+   structured in its roughness map mirrors the room in one piece. */
+function brushCanvas() {
+  var W = 32, H = 512, o = cv(W, H), c = o[0], g = o[1];
+  g.fillStyle = '#9a9a9a'; g.fillRect(0, 0, W, H);
+  var r = rng(313);
+  for (var i = 0; i < 900; i++) {
+    var y = r() * H, v = 128 + (r() - 0.5) * 150;
+    g.fillStyle = 'rgba(' + (v | 0) + ',' + (v | 0) + ',' + (v | 0) + ',0.5)';
+    g.fillRect(0, y, W, 0.6 + r() * 1.4);
+  }
+  return c;
+}
+
 function contactCanvas() {
   var N = 128, o = cv(N, N), c = o[0], g = o[1];
   var rg = g.createRadialGradient(N / 2, N / 2, 0, N / 2, N / 2, N / 2);
@@ -1823,6 +1991,7 @@ var TEX = {
   shade: toTex(shadeCanvas()),
   gold: toTex(goldLineCanvas()),
   floorTile: toTex(tileCanvas('#8e8f90', '#6d6e70', 0.10, 256, 128)),
+  bathTile: toTex(tileCanvas('#4c4e50', '#3a3c3e', 0.10, 256, 128)),   // [PHOTO] photo-16: the bath floor is charcoal, not the entry grey
   floorTileBump: toTex(tileBumpCanvas(256, 128), false),
   showerTile: toTex(tileCanvas('#f0efec', '#d9d7d2', 0.045, 256, 128)),
   showerTileBump: toTex(tileBumpCanvas(256, 128), false),
@@ -1831,17 +2000,22 @@ var TEX = {
   woodWarm: toTex(woodCanvas('#c1a77f', '#967c55', '#dfcbaa', 23)),   // tops
   woodDark: toTex(woodCanvas('#54423a', '#31241f', '#75604f', 33)),   // dresser, bath vanity
   woodDoor: toTex(woodCanvas('#8c7f74', '#5f544b', '#a89b8f', 44)),   // entry door slab, grey-brown
-  tweed: toTex(tweedCanvas('#585349', '#736d61', '#3d3933')),
+  tweed: toTex(tweedCanvas('#41454c', '#585d66', '#2b2e34')),   // [PHOTO-02] charcoal blue-grey, not the warm brown the written record implied
   ottoman: toTex(ottomanCanvas()),
   weave: toTex(curtainWeaveCanvas('#b3a99a')),
   weaveGrey: toTex(curtainWeaveCanvas('#9a9a98')),
   quartz: toTex(quartzCanvas('#f4f3f0')),
   quilt: toTex(quiltCanvas()),
   paintBump: toTex(paintBumpCanvas(), false),
+  paint: toTex(paintCanvas()),
   carPrint: toTex(carPrintCanvas()),
   louvre: toTex(louvreCanvas()),
   mesh: toTex(meshFabricCanvas()),
   contact: toTex(contactCanvas()),
+  shadeGlow: toTex(shadeGlowCanvas()),
+  halo: toTex(haloCanvas()),
+  brush: (function () { var t = toTex(brushCanvas(), false);
+    t.wrapS = t.wrapT = T.RepeatWrapping; return t; })(),
   // clamped, not repeated: with RepeatWrapping the alpha-0.62 bottom row bleeds
   // into the alpha-0 top row under linear filtering and draws a hard dark seam
   // right across the wall
@@ -1885,13 +2059,20 @@ function phys(o) {
 
 var MIRRORS = [];   // filled by the two mirrors, baked once at boot
 var M = {};
-M.paintWhite  = std({ color: 0xe9e5dc, roughness: 0.94, bumpMap: TEX.paintBump, bumpScale: 0.004 });
-M.paintBlue   = std({ color: 0x91a1ad, roughness: 0.92, bumpMap: TEX.paintBump, bumpScale: 0.004 }); // PT-01 window wall [PHOTO: soft grey-blue]
-M.ceiling     = std({ color: 0xeceae4, roughness: 0.97 });
-M.accentWall  = std({ color: 0xf6f2ea, map: TEX.herring, roughness: 0.92, bumpMap: TEX.herring, bumpScale: 0.003 });
+M.paintWhite  = tiledRepeat(std({ color: 0xe9e5dc, roughness: 0.94, map: TEX.paint, bumpMap: TEX.paintBump, bumpScale: 0.009 }), 1.6, 1.6);
+M.paintBlue   = tiledRepeat(std({ color: 0x91a1ad, roughness: 0.92, map: TEX.paint, bumpMap: TEX.paintBump, bumpScale: 0.009 }), 1.6, 1.6); // PT-01 window wall [PHOTO: soft grey-blue]
+// MEASURED on the bed frame, matched region: the render's ceiling read
+// L 0.657 with R-B +0.047 against photo-09's L 0.463 with R-B +0.149 - half a
+// stop bright and a third as warm.  A white ceiling under 3000K lamps is not
+// white in a photograph, it is a warm mid tone, and the map comes off because
+// the same measurement puts the render's ceiling at 15x the photograph's
+// coarse-band variation already.
+M.ceiling     = std({ color: 0xcdc1ac, roughness: 0.97 });
+M.accentWall  = std({ color: 0xf6f2ea, map: TEX.herring, roughness: 0.92, bumpMap: TEX.herring, bumpScale: 0.007 });
 M.bathPaper   = std({ color: 0xffffff, map: TEX.gold, roughness: 0.72 });
-M.carpet      = std({ color: 0xffffff, map: TEX.carpet, roughness: 0.98, bumpMap: TEX.carpetBump, bumpScale: 0.012 });
+M.carpet      = std({ color: 0xffffff, map: TEX.carpet, roughness: 0.98, bumpMap: TEX.carpetBump, bumpScale: 0.024 });
 M.tile        = std({ color: 0xffffff, map: TEX.floorTile, roughness: 0.30, metalness: 0.0, bumpMap: TEX.floorTileBump, bumpScale: 0.010, envMapIntensity: 1.1 });
+M.tileBath    = std({ color: 0xffffff, map: TEX.bathTile, roughness: 0.26, metalness: 0.0, bumpMap: TEX.floorTileBump, bumpScale: 0.010, envMapIntensity: 0.9 });
 M.showerTile  = std({ color: 0xffffff, map: TEX.showerTile, roughness: 0.16, bumpMap: TEX.showerTileBump, bumpScale: 0.008, envMapIntensity: 1.2 });
 M.woodLight   = std({ color: 0xffffff, map: TEX.woodLight, roughness: 0.44, envMapIntensity: 0.85 });
 M.woodWarm    = std({ color: 0xffffff, map: TEX.woodWarm, roughness: 0.44, envMapIntensity: 0.7 });
@@ -1900,9 +2081,16 @@ M.woodDark    = std({ color: 0xffffff, map: TEX.woodDark, roughness: 0.38, envMa
 M.woodDoor    = std({ color: 0xffffff, map: TEX.woodDoor, roughness: 0.55 });
 M.quartz      = std({ color: 0xffffff, map: TEX.quartz, roughness: 0.14, envMapIntensity: 1.3 });
 M.solidWhite  = std({ color: 0xf7f6f3, roughness: 0.18, envMapIntensity: 1.2 });
-M.chrome      = std({ color: 0xf2f4f6, roughness: 0.11, metalness: 1.0, envMapIntensity: 1.6 });
-M.chromeSoft  = std({ color: 0xd8dbdd, roughness: 0.28, metalness: 1.0, envMapIntensity: 1.3 });
-M.stainless   = std({ color: 0xc3c7cb, roughness: 0.30, metalness: 0.92, envMapIntensity: 1.2 });
+M.chrome      = std({ color: 0xf4f6f8, roughness: 0.075, metalness: 1.0, envMapIntensity: 1.8 });
+M.chromeSoft  = std({ color: 0xdcdfe1, roughness: 0.20, metalness: 1.0, envMapIntensity: 1.5 });
+// MEASURED against photo-18: the render's microwave and fridge faces read as a
+// near-white slab.  A metalness-0.94 surface takes ALL its colour from the
+// reflection, so a 0.78-grey base times a 1.9 envMapIntensity on a bright cube
+// of a bright room can only come out white.  Real 304 stainless reflects about
+// 60%, is slightly cool, and is brushed - so the base drops, the reflection is
+// no longer amplified, and a streak map breaks the mirror up.
+M.stainless   = std({ color: 0x8f9599, roughness: 0.28, metalness: 1.0,
+                      roughnessMap: TEX.brush, envMapIntensity: 1.0 });
 M.blackMetal  = std({ color: 0x24262a, roughness: 0.42, metalness: 0.75, envMapIntensity: 0.8 });
 M.navyShelf   = std({ color: 0x1b2740, roughness: 0.40, envMapIntensity: 0.7 });  // [PHOTO] navy floating shelves
 M.tweed       = tiledRepeat(std({ color: 0xffffff, map: TEX.tweed, roughness: 0.95, bumpMap: TEX.tweed, bumpScale: 0.008, envMapIntensity: 0.28 }), 3, 3);
@@ -1918,10 +2106,20 @@ M.curtainGrey = tiledRepeat(std({ color: 0xffffff, map: TEX.weaveGrey, roughness
 M.shade       = std({ color: 0xffffff, map: TEX.shade, roughness: 0.86, side: T.DoubleSide });
 M.glass       = std({ color: 0xdcebf2, roughness: 0.03, metalness: 0.0, transparent: true, opacity: 0.07, side: T.DoubleSide, depthWrite: false, envMapIntensity: 0.14 });
 M.showerGlass = std({ color: 0xe4f2f4, roughness: 0.03, metalness: 0.0, transparent: true, opacity: 0.10, side: T.DoubleSide, depthWrite: false, envMapIntensity: 0.30 });
-M.tvScreen    = std({ color: 0x0a0b0d, roughness: 0.14, metalness: 0.35, envMapIntensity: 0.55 });
-M.lampShade   = std({ color: 0xf2e9d6, roughness: 0.94, side: T.DoubleSide, emissive: 0xffc98a, emissiveIntensity: 0.42 });
-M.globe       = std({ color: 0xfff6e6, roughness: 0.55, emissive: 0xffd9a4, emissiveIntensity: 2.4 });
-M.ledStrip    = std({ color: 0xffffff, roughness: 0.5, emissive: 0xfff0d8, emissiveIntensity: 3.0 });
+M.tvScreen    = std({ color: 0x090a0c, roughness: 0.045, metalness: 0.12, envMapIntensity: 1.0 });
+M.lampShade   = std({ color: 0xd9cdb6, roughness: 0.95, side: T.DoubleSide,
+                      map: TEX.shadeGlow, emissive: 0xffffff, emissiveMap: TEX.shadeGlow,
+                      emissiveIntensity: 0.62, envMapIntensity: 0.10 });
+// MEASURED across the seven frames: the photographs put 0.402% of their pixels
+// above 0.96 and the render puts 0.110% there.  Round 2's render actually
+// matched that number (0.385%) but in the wrong places - 16.9% of a LAMP SHADE
+// was clipped, which no photograph of this room does.  Clipping belongs to the
+// sources themselves.  ACES asymptotes below 1.0, so a tone-mapped emissive
+// can never saturate however hard it is driven: emissiveIntensity 2.4 and 24
+// both land near 0.95.  A bare globe and an LED batten in a phone frame are
+// blown white, so they leave the tone curve.
+M.globe       = new T.MeshBasicMaterial({ color: 0xfffaf0, toneMapped: false });
+M.ledStrip    = new T.MeshBasicMaterial({ color: 0xfffdf8, toneMapped: false });
 M.frameBlack  = std({ color: 0x141517, roughness: 0.48 });
 M.frameYellow = std({ color: 0xe89a17, roughness: 0.48, envMapIntensity: 0.30 });  // [PHOTO] bathroom mirror frame
 M.frameWhite  = std({ color: 0xf2efe9, roughness: 0.42 });
@@ -2013,6 +2211,14 @@ function plane(w, h, mat, x, y, z, rx, ry, rz) {
   m.position.set(x, y, z);
   m.rotation.set(rx || 0, ry || 0, rz || 0);
   m.receiveShadow = true;
+  // MEASURED: every wall, ceiling and floor in this room was built with plane(),
+  // and plane() never set castShadow.  The shell was therefore transparent to
+  // every shadow-casting light in the scene: the sun's 7.4 was landing on the
+  // tile of a WINDOWLESS BATHROOM (ablation: 0.0384 of the bath-shower frame
+  // mean) straight through the ceiling, which is the "soft diagonal daylight
+  // wash with no plausible source" the critics named.  Glass and the sky card
+  // stay non-casting so daylight can still come through the opening.
+  m.castShadow = !(mat && (mat.transparent || mat.toneMapped === false));
   return add(m);
 }
 
@@ -2035,6 +2241,37 @@ function contact(x, z, w, d, op, y) {
   m.position.set(x, y === undefined ? 0.008 : y, z);
   m.renderOrder = 2;
   return add(m);
+}
+
+/* A recessed can, as a THING in the ceiling rather than an off-camera spot.
+   MEASURED: the entry ceiling band of the render had max luminance 0.799 and
+   0.000% of its pixels clipped, against 1.000 and 1.534% for the same band of
+   photo-04, and 0.068 mean saturation against 0.164.  The photograph's ceiling
+   is a warm plane with a blown white disc in it; the render's was flat card.
+   Three parts: a trim ring, a lens that is deliberately NOT tone mapped so it
+   clips the way a source does and the post pass's veiling glare has something
+   to bleed from, and the pool the fixture throws on the plane it sits in -
+   which the downward spot below it can never light. */
+var CANS = [];
+function can(x, y, z, r, tint, pool) {
+  r = r || 0.30;
+  cyl(r, r * 0.94, 0.05, M.trim, x, y - 0.026, z, 30, { cast: false });
+  var lens = new T.Mesh(new T.CircleGeometry(r * 0.94, 30),
+    new T.MeshBasicMaterial({ color: tint === undefined ? 0xfff3e2 : tint, toneMapped: false }));
+  lens.rotation.x = Math.PI / 2;
+  lens.position.set(x, y - 0.052, z);
+  lens.renderOrder = 5;
+  add(lens);
+  var h = new T.Mesh(new T.PlaneGeometry(r * 8.5, r * 8.5),
+    new T.MeshBasicMaterial({ map: TEX.halo, transparent: true, blending: T.AdditiveBlending,
+                              depthWrite: false, opacity: pool === undefined ? 0.56 : pool,
+                              toneMapped: false }));
+  h.rotation.x = Math.PI / 2;
+  h.position.set(x, y - 0.011, z);
+  h.renderOrder = 4;
+  add(h);
+  CANS.push(lens);
+  return lens;
 }
 
 /* Wall/floor junction darkening.  A vertical ramp on the wall face and a
@@ -2070,17 +2307,152 @@ function floorBand(len, x, z, rz, w, op) {
 }
 
 /* a hung fabric panel with real folds, not a flat card */
-function foldedPanel(w, h, folds, amp, mat, taperTop) {
-  var g = new T.PlaneGeometry(w, h, folds * 5, 12);
+/* ---- soft goods ------------------------------------------------------
+   Round 1's second verdict: "the sheer curtain is an extruded ripple with
+   identical pleats, no weighted hem, no gravity", and the mattress "a rigid
+   box with tufting painted on".  Both were literally true - the panel was one
+   sine of constant frequency and the mattress was two bevelled boxes with a
+   quilt bitmap on them.  What follows is geometry that answers to gravity and
+   to contact: irregular fold spacing that widens as it falls, a hem that
+   hangs heavier than the head, cushions that crown in the middle and sag over
+   the frame they sit on, and buttons that pull real craters with the ticking
+   puffed up between them. */
+
+function h31(x, y, z) {                       // deterministic 3D value hash
+  var n = Math.sin(x * 127.1 + y * 311.7 + z * 74.7) * 43758.5453;
+  return (n - Math.floor(n)) * 2 - 1;
+}
+function noise3(x, y, z) {                    // trilinear value noise
+  var xi = Math.floor(x), yi = Math.floor(y), zi = Math.floor(z);
+  var xf = x - xi, yf = y - yi, zf = z - zi;
+  var u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf), w = zf * zf * (3 - 2 * zf);
+  function L(a, b, t) { return a + (b - a) * t; }
+  var c000 = h31(xi, yi, zi), c100 = h31(xi + 1, yi, zi);
+  var c010 = h31(xi, yi + 1, zi), c110 = h31(xi + 1, yi + 1, zi);
+  var c001 = h31(xi, yi, zi + 1), c101 = h31(xi + 1, yi, zi + 1);
+  var c011 = h31(xi, yi + 1, zi + 1), c111 = h31(xi + 1, yi + 1, zi + 1);
+  return L(L(L(c000, c100, u), L(c010, c110, u), v),
+           L(L(c001, c101, u), L(c011, c111, u), v), w);
+}
+
+/* BoxGeometry duplicates the vertices along every face seam, so a deformed box
+   creases at its own edges unless the normals are welded back together. */
+function smoothNormals(g) {
+  var pos = g.attributes.position, nor = g.attributes.normal, map = {}, i, k;
+  for (i = 0; i < pos.count; i++) {
+    k = pos.getX(i).toFixed(4) + '|' + pos.getY(i).toFixed(4) + '|' + pos.getZ(i).toFixed(4);
+    var e = map[k] || (map[k] = [0, 0, 0, []]);
+    e[0] += nor.getX(i); e[1] += nor.getY(i); e[2] += nor.getZ(i); e[3].push(i);
+  }
+  for (k in map) {
+    var e2 = map[k], L = Math.sqrt(e2[0] * e2[0] + e2[1] * e2[1] + e2[2] * e2[2]) || 1;
+    for (i = 0; i < e2[3].length; i++) nor.setXYZ(e2[3][i], e2[0] / L, e2[1] / L, e2[2] / L);
+  }
+  nor.needsUpdate = true;
+}
+
+/* A filled soft slab: mattress, cushion, pillow.  The box is subdivided, then
+   pushed into a superellipsoid (the corners round because filling cannot hold
+   a corner), crowned on top, sagged where it overhangs its frame, dimpled at
+   the buttons and finally wrinkled. */
+function softSlab(w, h, d, mat, opt) {
+  opt = opt || {};
+  var g = new T.BoxGeometry(w, h, d, opt.sx || 40, opt.sy || 10, opt.sz || 30);
   var p = g.attributes.position;
+  var n = opt.n || 6;                                  // superellipsoid exponent
+  var crown = opt.crown === undefined ? 0.035 : opt.crown;
+  var sag = opt.sag === undefined ? 0.022 : opt.sag;
+  var edge = opt.edge === undefined ? 0.26 : opt.edge;  // width of the sag ramp
+  var tufts = opt.tufts || null, tR = opt.tuftR || 0.075, tD = opt.tuftD || 0.045;
+  var wr = opt.wrinkle === undefined ? 0.0045 : opt.wrinkle;
+  var ws = opt.wrinkleScale || 9;
+  var sd = opt.seed || 3;
+  var hw = w / 2, hh = h / 2, hd = d / 2;
   for (var i = 0; i < p.count; i++) {
+    var x = p.getX(i), y = p.getY(i), z = p.getZ(i);
+    var nx = x / hw, ny = y / hh, nz = z / hd;
+    var ax = Math.abs(nx), ay = Math.abs(ny), az = Math.abs(nz);
+    var f = Math.pow(Math.pow(ax, n) + Math.pow(ay, n) + Math.pow(az, n), -1 / n);
+    if (!isFinite(f) || f > 1) f = 1;
+    x *= f; y *= f; z *= f;
+    var u = x / w + 0.5, t = z / d + 0.5, ty = y / h + 0.5;
+    u = Math.min(1, Math.max(0, u)); t = Math.min(1, Math.max(0, t));
+    var eu = Math.min(u, 1 - u) * 2, ev = Math.min(t, 1 - t) * 2;
+    var e = Math.min(1, Math.min(eu, ev) / edge);
+    var soft = e * e * (3 - 2 * e);                    // 0 at the perimeter, 1 inside
+    var top = Math.max(0, ty) * Math.max(0, ty) * Math.max(0, ty);
+    var dy = top * (crown * Math.pow(Math.sin(Math.PI * u), 0.65) * Math.pow(Math.sin(Math.PI * t), 0.65)
+                    - sag * (1 - soft));
+    if (tufts) {
+      for (var k = 0; k < tufts.length; k++) {
+        var du = (u - tufts[k][0]) * (w / Math.min(w, d));
+        var dv = (t - tufts[k][1]) * (d / Math.min(w, d));
+        var r2 = (du * du + dv * dv) / (tR * tR);
+        if (r2 < 9) {
+          var pull = Math.exp(-r2);
+          // the button pulls a crater and the ticking around it puffs up
+          dy += top * (-tD * pull + tD * 0.42 * Math.exp(-r2 * 0.22) * (1 - pull));
+        }
+      }
+    }
+    y += dy;
+    if (wr > 0) {
+      var nn = noise3(x * ws + sd, y * ws * 1.7, z * ws + sd * 2);
+      var nn2 = noise3(x * ws * 2.7 - sd, y * ws * 3, z * ws * 2.7);
+      var amp = wr * (0.65 + 0.35 * (1 - soft));
+      x += nn * amp; y += (nn2 * 0.5 + nn * 0.5) * amp * 1.3; z += nn2 * amp;
+    }
+    p.setXYZ(i, x, y, z);
+  }
+  g.computeVertexNormals(); smoothNormals(g);
+  var m = new T.Mesh(g, mat);
+  m.castShadow = opt.cast !== false; m.receiveShadow = true;
+  if (opt.pos) m.position.set(opt.pos[0], opt.pos[1], opt.pos[2]);
+  if (opt.ry) m.rotation.y = opt.ry;
+  return add(m, opt.parent);
+}
+
+/* Hanging fabric.  Folds are placed by a seeded random walk rather than on a
+   pitch, they widen and drift as the cloth falls, the hem is weighted so the
+   bottom 8% hangs straighter than the middle, and the head gathers narrower
+   where it is pinched on the grommets. */
+function foldedPanel(w, h, folds, amp, mat, taperTop, seed) {
+  var n = Math.max(3, Math.round(folds));
+  var g = new T.PlaneGeometry(w, h, Math.max(56, n * 9), 22);
+  var p = g.attributes.position;
+  var r = rng(seed || 4177);
+  var cs = [], amps = [], wid = [], acc = 0, i;
+  for (i = 0; i <= n; i++) { cs.push(acc); acc += 0.55 + 0.9 * r(); }
+  for (i = 0; i <= n; i++) {
+    cs[i] = cs[i] / acc;
+    amps.push((0.45 + 0.95 * r()) * (i % 2 ? 1 : -1));
+    wid.push(0.030 + 0.030 * r());
+  }
+  var drift = [];
+  for (i = 0; i <= n; i++) drift.push((r() - 0.5) * 0.045);
+  function profile(t, down) {
+    var z = 0;
+    for (var j = 0; j <= n; j++) {
+      var c = cs[j] + drift[j] * down * down;
+      var wj = wid[j] * (1 + 0.85 * down);          // folds broaden as they fall
+      var dd = (t - c) / wj;
+      z += amps[j] * Math.exp(-dd * dd);
+    }
+    return z;
+  }
+  for (i = 0; i < p.count; i++) {
     var x = p.getX(i), y = p.getY(i);
     var t = (x + w / 2) / w;
-    var down = (h / 2 - y) / h;                 // 0 at top, 1 at hem
-    var taper = taperTop === false ? 1 : (0.30 + 0.70 * down);
-    p.setZ(i, Math.sin(t * Math.PI * 2 * folds) * amp * taper);
-    // fabric gathers slightly narrower at the top
-    p.setX(i, x * (taperTop === false ? 1 : (0.985 + 0.015 * down)));
+    // clamp: (h/2 - y)/h lands at -1.4e-16 on the top row for some heights,
+    // and Math.pow(negative, 0.75) is NaN, which quietly poisons the geometry
+    var down = Math.min(1, Math.max(0, (h / 2 - y) / h));   // 0 at the head, 1 at the hem
+    var grav = taperTop === false ? 1 : (0.34 + 0.66 * Math.pow(down, 0.75));
+    var hem = 1 - 0.34 * Math.max(0, (down - 0.92) / 0.08);   // weighted hem hangs straight
+    var z = profile(t, down) * amp * grav * hem;
+    z += noise3(t * 7, down * 5.5, seed || 4) * amp * 0.10;
+    p.setZ(i, z);
+    p.setX(i, x * (taperTop === false ? 1 : (0.975 + 0.025 * down)));
+    p.setY(i, y + Math.abs(z) * -0.06);              // cloth taken up by the fold is length lost
   }
   g.computeVertexNormals();
   var m = new T.Mesh(g, mat);
@@ -2100,7 +2472,7 @@ plane(W, D - BZ, carpetMat, W / 2, 0, (BZ + D) / 2, -Math.PI / 2);
 var tileEntry = tiled(M.tile, W - BX, BZ, 4);
 plane(W - BX, BZ, tileEntry, (BX + W) / 2, 0, BZ / 2, -Math.PI / 2);
 // bathroom tile
-var tileBath = tiled(M.tile, BIX, BIZ, 4);
+var tileBath = tiled(M.tileBath, BIX, BIZ, 4);
 plane(BIX, BIZ, tileBath, BIX / 2, 0.001, BIZ / 2, -Math.PI / 2);
 
 // ---- ceilings
@@ -2113,7 +2485,12 @@ plane(W - BX, H - HL, M.paintWhite, (BX + W) / 2, (HL + H) / 2, BZ, 0, 0, 0);
 // ---- walls
 // bed / sofa wall, x = 0, main room only.  WC-01 herringbone runs behind both
 // the bed and the sofa  [A550 elev 07: two WC-01 leaders]  [PHOTO]
-var accent = tiled(M.accentWall, D - BZ, H, 1.45);
+// [PHOTO-02] OBSERVED, not measured: the chevron courses in the photograph
+// are about 4" wide and the render's were about 2".  (The measurement that
+// looked like it confirmed this was taken on the full-length MIRROR, which
+// occupies that part of the lounge frame - a raycast through the same
+// screen point returns the reflector's ShaderMaterial, not the wallpaper.)
+var accent = tiled(M.accentWall, D - BZ, H, 2.60);
 plane(D - BZ, H, accent, 0, H / 2, (BZ + D) / 2, 0, Math.PI / 2);
 // working wall, x = W, full 29'-0"  (PT-03)
 var wwall = tiled(M.paintWhite, D, H, 6);
@@ -2213,20 +2590,26 @@ var REVEAL = 6 * IN;
   // Eagle Pass in August: pale hot sky, a haze band at the horizon, dry
   // tan-olive scrub below.  The horizon is placed so it lands inside the
   // visible glass from the room cameras, not above or below them.
-  lg2.addColorStop(0.00, '#cfe2f2');
-  lg2.addColorStop(0.24, '#e2eef8');
-  lg2.addColorStop(0.40, '#f4f9fc');
-  lg2.addColorStop(0.442, '#ffffff');
-  lg2.addColorStop(0.452, '#e8e4d6');
-  lg2.addColorStop(0.56, '#dcd6c4');
-  lg2.addColorStop(0.80, '#e6e1d2');
-  lg2.addColorStop(1.00, '#cec8b6');
+  // MEASURED: the window rectangle of photo-09 has a mean RGB of
+  // (0.595, 0.756, 0.831) - blue MINUS red is +0.236, because the phone white
+  // balanced for 3000K lamps and daylight went cyan.  The render's window
+  // measured (0.775, 0.749, 0.694), red minus blue +0.081.  That is a 0.32
+  // swing on the brightest object in three of the seven frames, and it is why
+  // the render's window reads as a lit panel and the photograph's as outdoors.
+  lg2.addColorStop(0.00, '#8fc4ec');
+  lg2.addColorStop(0.24, '#addaf3');
+  lg2.addColorStop(0.40, '#d3edfb');
+  lg2.addColorStop(0.442, '#eefaff');
+  lg2.addColorStop(0.452, '#cfd8d4');
+  lg2.addColorStop(0.56, '#c2cbc6');
+  lg2.addColorStop(0.80, '#cdd4cd');
+  lg2.addColorStop(1.00, '#b6bdb8');
   sg.fillStyle = lg2; sg.fillRect(0, 0, 512, 256);
   // a low, soft treeline / roofline so the horizon is not a ruled edge
   var rs = rng(2026);
   sg.globalAlpha = 0.22;
   for (var b2 = 0; b2 < 110; b2++) {
-    sg.fillStyle = rs() < 0.5 ? '#cfc9b6' : '#dcd6c6';
+    sg.fillStyle = rs() < 0.5 ? '#bcc4bd' : '#ccd3cc';
     var bw2 = 10 + rs() * 52, bh2 = 2 + rs() * 10;
     sg.fillRect(rs() * 512, 116 - bh2, bw2, bh2 + 6);
   }
@@ -2239,9 +2622,12 @@ var REVEAL = 6 * IN;
   // GR-400 blackout roller shade in a white valance box.
   // [A550] shade is 7'-0" wide: 6" past each jamb, elevation 08.
   // Drop shown at 46" AFF — an ASSUMED position; the drawings do not fix it.
-  var sx0 = WIN_X0 - 0.5, sx1 = WIN_X1 + 0.5, hem = 58 * IN;
+  // [PHOTO-09/06/01] the shade is down far enough to cover the head of the
+  // opening and its motifs are 18" arches, not 9" ones - measured off photo-09,
+  // where four motif columns cross the 7'-0" shade against the render's nine.
+  var sx0 = WIN_X0 - 0.5, sx1 = WIN_X1 + 0.5, hem = 46 * IN;
   box2(sx0 - 0.08, sx1 + 0.08, SHADE_TOP, SHADE_TOP + 4.5 * IN, D - REVEAL - 0.20, D - 0.02, M.trim, { r: 0.01 });
-  var shadeMat = tiled(M.shade, sx1 - sx0, SHADE_TOP - hem, 3.0);   // 3'-0" tile = ~12" motifs
+  var shadeMat = tiled(M.shade, sx1 - sx0, SHADE_TOP - hem, 5.8);   // 5'-10" tile = ~18" motifs
   var sh = new T.Mesh(new T.PlaneGeometry(sx1 - sx0, SHADE_TOP - hem, 12, 2), shadeMat);
   sh.position.set((sx0 + sx1) / 2, (SHADE_TOP + hem) / 2, D - REVEAL - 0.085);
   sh.rotation.y = Math.PI;
@@ -2477,7 +2863,7 @@ var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall co
   box2(WWF - mdp - 0.05, WWF - mdp + 0.01, my + 1.2 * IN, my + mh - 1.2 * IN, mz - mw / 2 + 0.10, mz + mw / 2 - 0.10,
        M.stainless, { r: 0.010 });
   box2(WWF - mdp - 0.055, WWF - mdp - 0.045, my + 2.2 * IN, my + mh - 2.2 * IN, mz - mw / 2 + 0.20, mz + mw / 2 - 0.95,
-       std({ color: 0x141619, roughness: 0.16, metalness: 0.55, envMapIntensity: 0.35 }), { r: 0.008 });
+       std({ color: 0x141619, roughness: 0.07, metalness: 0.35, envMapIntensity: 1.2 }), { r: 0.008 });
   box2(WWF - mdp - 0.055, WWF - mdp - 0.048, my + 3.0 * IN, my + mh - 3.0 * IN, mz + mw / 2 - 0.80, mz + mw / 2 - 0.18,
        std({ color: 0x27292c, roughness: 0.35, metalness: 0.4 }), { r: 0.005 });
   box2(WWF - mdp - 0.085, WWF - mdp - 0.055, my + mh - 4.0 * IN, my + mh - 3.4 * IN, mz - mw / 2 + 0.20, mz + mw / 2 - 0.95,
@@ -2575,20 +2961,33 @@ var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall co
   // as-built demo condition recorded in demo-room-observations.md.
   // grey knit border, then the quilted damask pillow-top proud of it, then a
   // tape edge — the three things that make a bare mattress read as a mattress
-  box2(0.28, 0.28 + ml + 0.04, 16 * IN, 25 * IN, z0 - 0.02, z1 + 0.02, M.mattress, { r: 0.055, corner: 0.16 });
-  box2(0.265, 0.28 + ml + 0.07, 24.4 * IN, 29.2 * IN, z0 - 0.045, z1 + 0.045, M.mattress, { r: 0.13, corner: 0.26 });
-  box2(0.275, 0.28 + ml + 0.05, 24.0 * IN, 24.8 * IN, z0 - 0.02, z1 + 0.02, M.tape, { r: 0.022 });
-  // button tufting: each button pulls a shallow crater in the pillow top
-  for (var br = 0; br < 7; br++) for (var bc = 0; bc < 9; bc++) {
-    var tx = 0.55 + br * (ml - 0.9) / 6.6;
-    var tz = z0 + 0.42 + bc * (mw - 0.84) / 8;
-    var dimp = new T.Mesh(new T.SphereGeometry(0.135, 12, 8),
-      std({ color: 0xcbc2ae, roughness: 0.96, envMapIntensity: 0.12 }));
-    dimp.position.set(tx, 29.2 * IN - 0.030, tz);
-    dimp.scale.set(1, 0.34, 1);
-    dimp.receiveShadow = true;
-    add(dimp);
+  // The mattress body and its pillow top are DEFORMED slabs, not boxes.  The
+  // round-1 critic put it exactly: in the photograph "each button pulls a
+  // shallow crater and the ticking wrinkles between them", and a quilt bitmap
+  // on a bevelled box cannot do that at any resolution.
+  var TUFT = [];
+  for (var br = 0; br < 11; br++) for (var bc = 0; bc < 13; bc++) {
+    // photo-09: the buttons run about every 5-6 inches in both directions,
+    // offset row to row, and each one pulls its own crater
+    TUFT.push([0.055 + br * 0.89 / 10 + (bc % 2 ? 0.020 : -0.020),
+               0.050 + bc * 0.90 / 12]);
   }
+  var mQuilt = M.mattress.clone();
+  ['map', 'bumpMap'].forEach(function (k) {
+    if (mQuilt[k]) { var t = mQuilt[k].clone(); t.needsUpdate = true;
+      t.wrapS = t.wrapT = T.RepeatWrapping; t.repeat.set(4.0, 3.8); mQuilt[k] = t; }
+  });
+  var mBodyW = ml + 0.04, mBodyD = mw + 0.04;
+  softSlab(mBodyW, 9 * IN, mBodyD, mQuilt, {
+    pos: [0.28 + mBodyW / 2, 20.5 * IN, BED_CZ], sx: 46, sy: 8, sz: 34,
+    n: 7, crown: 0.012, sag: 0.010, edge: 0.16, wrinkle: 0.004, wrinkleScale: 7, seed: 5
+  });
+  softSlab(ml + 0.10, 5.6 * IN, mw + 0.11, mQuilt, {
+    pos: [0.275 + (ml + 0.10) / 2, 26.9 * IN, BED_CZ], sx: 104, sy: 8, sz: 88,
+    n: 5.0, crown: 0.045, sag: 0.034, edge: 0.20,
+    tufts: TUFT, tuftR: 0.030, tuftD: 0.050, wrinkle: 0.008, wrinkleScale: 15, seed: 12
+  });
+  box2(0.277, 0.28 + ml + 0.045, 23.8 * IN, 24.4 * IN, z0 - 0.01, z1 + 0.01, M.tape, { r: 0.016 });
   // side carry handles
   [z0 + 1.3, z1 - 1.3].forEach(function (hz) {
     box2(0.28 + ml + 0.02, 0.28 + ml + 0.08, 19 * IN, 20.4 * IN, hz - 0.42, hz + 0.42, M.ticking, { r: 0.02 });
@@ -2596,7 +2995,8 @@ var DESK_Y = 36 * IN;             // [A550 elev 05] 3'-0" desk / working-wall co
   // Beautyrest Hospitality label on the gusset  [PHOTO]
   var lab = new T.Mesh(new T.PlaneGeometry(1.05, 0.30),
     new T.MeshStandardMaterial({
-      map: toTex(labelCanvas(['Beautyrest', 'HOSPITALITY'], '#141414', '#d8ceb4', 512, 160)),
+      map: (function (t) { t.wrapS = T.RepeatWrapping; t.repeat.x = -1; t.offset.x = 1; return t; })(
+             toTex(labelCanvas(['Beautyrest', 'HOSPITALITY'], '#141414', '#d8ceb4', 512, 160))),
       roughness: 0.6, envMapIntensity: 0.4
     }));
   lab.position.set(0.28 + ml + 0.085, 20 * IN, BED_CZ - 1.4);
@@ -2684,17 +3084,26 @@ var SOFA_Z0 = 10.4, SOFA_Z1 = 17.0;
   // arms
   box2(x0, x0 + sd, 4.5 * IN, 24 * IN, sz0, sz0 + 0.62, M.tweed, { r: 0.09, corner: 0.16 });
   box2(x0, x0 + sd, 4.5 * IN, 24 * IN, sz1 - 0.62, sz1, M.tweed, { r: 0.09, corner: 0.16 });
-  // seat cushions
+  // seat and back cushions: filled slabs that crown in the middle, sag where
+  // they overhang the deck and take a crease along the seam
   [0, 1].forEach(function (i) {
     var a = sz0 + 0.66 + i * ((sz1 - sz0 - 1.32) / 2);
     var b = a + (sz1 - sz0 - 1.32) / 2 - 0.03;
-    box2(x0 + 0.50, x0 + sd - 0.06, seatY, seatY + 5.4 * IN, a, b, M.tweed, { r: 0.075, corner: 0.14 });
+    softSlab(sd - 0.56, 5.4 * IN, b - a, M.tweed, {
+      pos: [x0 + 0.50 + (sd - 0.56) / 2, seatY + 2.7 * IN, (a + b) / 2],
+      sx: 26, sy: 8, sz: 22, n: 4.6, crown: 0.030, sag: 0.026, edge: 0.30,
+      wrinkle: 0.007, wrinkleScale: 13, seed: 21 + i * 7
+    });
   });
-  // back cushions
   [0, 1].forEach(function (i) {
     var a = sz0 + 0.68 + i * ((sz1 - sz0 - 1.36) / 2);
     var b = a + (sz1 - sz0 - 1.36) / 2 - 0.04;
-    box2(x0 + 0.52, x0 + 1.16, seatY + 0.10, 29.5 * IN, a, b, M.tweed, { r: 0.08, corner: 0.16, rx: 0.0 });
+    var hgt = 29.5 * IN - (seatY + 0.10);
+    softSlab(0.64, hgt, b - a, M.tweed, {
+      pos: [x0 + 0.84, seatY + 0.10 + hgt / 2, (a + b) / 2],
+      sx: 16, sy: 20, sz: 22, n: 4.4, crown: 0.026, sag: 0.030, edge: 0.32,
+      wrinkle: 0.008, wrinkleScale: 12, seed: 33 + i * 5
+    });
   });
   // feet
   [[sz0 + 0.25], [sz1 - 0.25]].forEach(function (p) {
@@ -2794,7 +3203,7 @@ var SOFA_Z0 = 10.4, SOFA_Z1 = 17.0;
     std({ color: 0xf3f5f6, roughness: 0.02, metalness: 1.0, envMapIntensity: 1.0 }));
   mirror.position.set(mCX, (mB + mTop) / 2, BZ + 0.0565);
   add(mirror);
-  MIRRORS.push({ mesh: mirror, at: new T.Vector3(mCX, (mB + mTop) / 2, BZ + 0.10), gain: 2.6 });
+  MIRRORS.push({ mesh: mirror, opt: { scale: 0.9, tint: 0xeef2f0, ghost: 0.05, grime: 0.05 } });
 
   // electrical panel, grey painted cover  [A550 elev 07 keynote 51, top at 5'-6"]
   // [A550 elev 07 keynote 51] top at 5'-6" AFF.  Width is not dimensioned;
@@ -2845,16 +3254,27 @@ var SOFA_Z0 = 10.4, SOFA_Z1 = 17.0;
   box2(shX1 - 0.10, shX1, 0.42, 6.56, shZ1 - 0.22, shZ1 - 0.06, M.chromeSoft, { r: 0.006 });
   box2(0, shX1, 6.42, 6.56, shZ1 - 0.22, shZ1 - 0.06, M.chromeSoft, { r: 0.008 });   // header track
   box2(0, shX1, 0.42, 0.50, shZ1 - 0.22, shZ1 - 0.06, M.chromeSoft, { r: 0.006 });   // sill track
-  // Bypass sliders shown STACKED toward the end wall, so the camera can see
-  // into the alcove — the way a shower gets photographed.
-  var g1 = new T.Mesh(new T.PlaneGeometry(shX1 * 0.52, 6.0), M.showerGlass);
-  g1.position.set(shX1 * 0.74, 3.45, shZ1 - 0.14); g1.renderOrder = 3; add(g1);
-  var g2 = new T.Mesh(new T.PlaneGeometry(shX1 * 0.52, 6.0), M.showerGlass);
-  g2.position.set(shX1 * 0.70, 3.45, shZ1 - 0.20); g2.renderOrder = 3; add(g2);
-  // vertical pull on the leading edge of the inner slider
-  box2(shX1 * 0.445, shX1 * 0.475, 2.70, 4.50, shZ1 - 0.30, shZ1 - 0.235, M.chrome, { r: 0.010 });
-  cyl(0.028, 0.028, 0.11, M.chrome, shX1 * 0.46, 4.44, shZ1 - 0.245, 8, { rx: Math.PI / 2 });
-  cyl(0.028, 0.028, 0.11, M.chrome, shX1 * 0.46, 2.76, shZ1 - 0.245, 8, { rx: Math.PI / 2 });
+  // photo-24 shows the bypass CLOSED, the two panes overlapping at the middle,
+  // and the panes are the most reflective thing in the room: the LED bar comes
+  // back off them as a hard streak and the tile doubles between the two
+  // surfaces.  Both panes are planar reflectors with a Fresnel alpha, so what
+  // they show is the actual bathroom behind the camera, not a tint.
+  var gW = shX1 * 0.53, gH = 6.02, gY = 3.46;
+  var gOuter = new T.Mesh(new T.PlaneGeometry(gW, gH), M.showerGlass);
+  gOuter.position.set(gW / 2 + 0.02, gY, shZ1 - 0.09); gOuter.renderOrder = 3; add(gOuter);
+  var gInner = new T.Mesh(new T.PlaneGeometry(gW, gH), M.showerGlass);
+  gInner.position.set(shX1 - gW / 2 - 0.02, gY, shZ1 - 0.185); gInner.renderOrder = 3; add(gInner);
+  MIRRORS.push({ mesh: gOuter, opt: { scale: 0.6, glass: true, tint: 0xf4fbfa, base: 0.075, ghost: 0.09, grime: 0.05 } });
+  MIRRORS.push({ mesh: gInner, opt: { scale: 0.6, glass: true, tint: 0xf2f9f9, base: 0.075, ghost: 0.09, grime: 0.05 } });
+  // vertical chrome pull on the outer pane, dark towel bar on the inner one
+  box2(gW - 0.10, gW - 0.055, 2.55, 4.62, shZ1 - 0.175, shZ1 - 0.115, M.chrome, { r: 0.010 });
+  cyl(0.030, 0.030, 0.13, M.chrome, gW - 0.078, 4.56, shZ1 - 0.128, 8, { rx: Math.PI / 2 });
+  cyl(0.030, 0.030, 0.13, M.chrome, gW - 0.078, 2.61, shZ1 - 0.128, 8, { rx: Math.PI / 2 });
+  cyl(0.048, 0.048, gW - 0.42, std({ color: 0x1b1c1e, roughness: 0.34, metalness: 0.55 }),
+      shX1 - gW / 2 - 0.02, 3.62, shZ1 - 0.245, 12, { rz: Math.PI / 2 });
+  [-1, 1].forEach(function (sgn) {
+    cyl(0.055, 0.055, 0.10, M.chrome, shX1 - gW / 2 - 0.02 + sgn * (gW / 2 - 0.20), 3.62, shZ1 - 0.215, 10, { rx: Math.PI / 2 });
+  });
 
   // ---- vanity on the far (north) wall  [PHOTO]
   var vz = BIZ - 0.02, vw = 4.0, vcx = 2.3, vh = 32 * IN, vd = 21 * IN;
@@ -2916,7 +3336,7 @@ var SOFA_Z0 = 10.4, SOFA_Z1 = 17.0;
   bm.position.set(vcx, mY, vz - 0.0915);
   bm.rotation.y = Math.PI;
   add(bm);
-  MIRRORS.push({ mesh: bm, at: new T.Vector3(vcx, mY, vz - 0.30), ry: Math.PI, gain: 1.35 });
+  MIRRORS.push({ mesh: bm, opt: { scale: 0.9, tint: 0xf0f4f1, ghost: 0.06, grime: 0.06 } });
 
   // horizontal linear LED vanity light above the mirror, brushed housing  [PHOTO]
   box2(vcx - 1.5, vcx + 1.5, mY + mH2 / 2 + 0.30, mY + mH2 / 2 + 0.46, vz - 0.26, vz - 0.04, M.chromeSoft, { r: 0.02 });
@@ -3061,6 +3481,21 @@ function fill(color, intensity, dist, x, y, z) {
   scene.add(l);
   return l;
 }
+
+// A point light that casts is six shadow renders at bake time and nothing per
+// frame.  The lounge lamps stand within a foot of the bathroom wall, so without
+// this they light the bathroom THROUGH it: measured 0.58% of the bath frame
+// from the side-table lamp alone, and a lamp that casts nothing in its own
+// room is a tell in the lounge frame as well.
+function castPoint(l, size, far) {
+  l.castShadow = true;
+  l.shadow.mapSize.set(size || 512, size || 512);
+  l.shadow.bias = -0.0016;
+  l.shadow.normalBias = 0.035;
+  l.shadow.camera.near = 0.12;
+  l.shadow.camera.far = far || 16;
+  return l;
+}
 fill(0xd8e6ff, 13, 24, W / 2, 4.5, D - 2.8);
 fill(0xcfe0f6, 7, 20, W / 2, 6.4, D - 5.5);
 
@@ -3068,10 +3503,10 @@ fill(0xcfe0f6, 7, 20, W / 2, 6.4, D - 5.5);
 function warm(intensity, dist, x, y, z, color) {
   return fill(color || 0xffc98a, intensity, dist, x, y, z);
 }
-warm(6, 11, 0.85, 3.85, NS_A_Z + 1.05);          // bedside globe, window side
-warm(6, 11, 0.85, 3.85, NS_B_Z - 1.05);          // bedside globe, corridor side
-warm(15, 16, 0.95, 4.95, SOFA_Z1 + 0.32);         // GR-205 floor lamp
-warm(8, 11, 0.95, 26 * IN + 1.62, SOFA_Z0 - 0.95);// GR-200 side table lamp
+castPoint(warm(6, 11, 0.85, 3.85, NS_A_Z + 1.05), 512, 13);   // bedside globe, window side
+castPoint(warm(6, 11, 0.85, 3.85, NS_B_Z - 1.05), 512, 13);   // bedside globe, corridor side
+castPoint(warm(20, 16, 0.95, 4.95, SOFA_Z1 + 0.32), 512, 17); // GR-205 floor lamp
+castPoint(warm(11, 11, 0.95, 26 * IN + 1.62, SOFA_Z0 - 0.95), 512, 12); // GR-200 side table lamp
 
 // Every spot in this room casts.  A spot is one 2D shadow map, not a cube, so
 // the whole rig below costs one extra render each at bake time and nothing at
@@ -3093,17 +3528,23 @@ function castSpot(s, size, far) {
 // from anything, which is why the two floating shelves read as stickers.  These
 // four are the light that actually falls on the walls, and they are occluded.
 function downlight(x, z, inten, ang, col, tx, ty) {
-  var s = new T.SpotLight(col || 0xffe2bb, inten, 24, ang || 1.05, 0.92, 2);
+  var s = new T.SpotLight(col || 0xffe2bb, inten, 24, ang || 1.05, 1.0, 2);
   s.position.set(x, H - 0.14, z);
   s.target.position.set(tx === undefined ? x : tx, ty === undefined ? 0 : ty, z);
   castSpot(s, 1024, 20);
   scene.add(s.target); scene.add(s);
   return s;
 }
-downlight(W - 2.5, 13.0, 52, 1.05, 0xffe2bb, W - 0.9, 1.2);   // desk + floating shelves
-downlight(W - 2.5, 18.6, 46, 1.05, 0xffe2bb, W - 0.9, 1.2);   // dresser + TV
-downlight(3.1, 11.0, 34, 1.05);                               // lounge
-downlight(3.4, 21.8, 30, 1.05);                               // bed
+downlight(W - 2.5, 13.0, 78, 1.30, 0xffe2bb, W - 0.9, 1.2);   // desk + floating shelves
+downlight(W - 2.5, 18.6, 70, 1.30, 0xffe2bb, W - 0.9, 1.2);   // dresser + TV
+downlight(3.1, 11.0, 62, 1.28);                               // lounge
+downlight(3.4, 21.8, 44, 1.24);                               // bed
+// and the fixtures those four are inside of
+// pool opacity 0.34, not the default 0.50: MEASURED, the bed frame's ceiling
+// read L 0.646 against photo-09's 0.463, and an ADDITIVE decal does not
+// scale with the albedo, so cutting the paint alone moved it only 1.7%.
+can(W - 2.5, H, 13.0, 0.29, undefined, 0.34); can(W - 2.5, H, 18.6, 0.29, undefined, 0.34);
+can(3.1, H, 11.0, 0.29, undefined, 0.34);     can(3.4, H, 21.8, 0.29, undefined, 0.34);
 
 // DAYLIGHT INTO THE ROOM.  The directional sun only lights what faces the glass;
 // this is the wash coming through the opening, and unlike the old pair of point
@@ -3118,7 +3559,7 @@ downlight(3.4, 21.8, 30, 1.05);                               // bed
 
 // GR-201 desk lamp — the one lamp that casts, so the working wall gets a
 // real pool of light with a real shadow behind the task chair
-var deskSpot = new T.SpotLight(0xffcf98, 22, 11, 0.80, 0.88, 2);
+var deskSpot = new T.SpotLight(0xffcf98, 27, 11, 0.92, 0.95, 2);
 deskSpot.position.set(W - 1.18, DESK_Y + 1.20, D - 19.2);
 deskSpot.target.position.set(W - 1.6, 0.2, D - 20.4);
 castSpot(deskSpot, 1024, 14);
@@ -3134,27 +3575,67 @@ warm(8, 11, W - 1.25, 68 * IN, D - 5.0);           // reading light + hanging-ba
 [[8.97, 2.833], [8.97, 7.5]].forEach(function (p) {
   // Downward spots, not point lights: a point light this close to a 7'-3"
   // ceiling blows a white disc onto it in every frame.
-  var s = new T.SpotLight(0xffdcb4, 32, 16, 1.15, 0.9, 2);
+  // MEASURED: the carpet just inside the entry read L 0.433 against photo-04's
+  // 0.202 - one and one eighth stops over.  These two and the kitchenette
+  // fixture are the only things lighting it.
+  var s = new T.SpotLight(0xffdcb4, 17, 16, 1.20, 0.95, 2);
   s.position.set(p[0], HL - 0.14, p[1]);
   s.target.position.set(p[0], 0, p[1]);
   castSpot(s);
   scene.add(s.target); scene.add(s);
+  // photo-04 puts a surface drum in the entry soffit, and it is the brightest
+  // thing in that frame after the window
+  can(p[0], HL, p[1], 0.35, 0xfff6ea, 0.50);
 });
 (function () {                                     // kitchenette surface fixture
-  var s = new T.SpotLight(0xffe7c4, 27, 15, 1.25, 0.92, 2);
+  var s = new T.SpotLight(0xffe7c4, 16, 15, 1.30, 0.95, 2);
   s.position.set(9.4, HL - 0.22, 5.6);
   s.target.position.set(9.4, 0, 5.6);
   castSpot(s);
   scene.add(s.target); scene.add(s);
+  can(9.4, HL, 5.6, 0.33, 0xfff2e0, 0.55);
 })();
 
-// bathroom
-fill(0xfff3e2, 13, 11, 2.3, 5.9, BIZ - 0.7);       // linear LED over the vanity
-fill(0xf4f4ff, 9, 10, 3.0, HL - 0.3, 3.2);        // bath + shower downlights, merged
+// BATHROOM.  A windowless 5'-6 5/8" x 8'-5 3/8" box, so it gets its own rig
+// and its own black point.  MEASURED on the old build: scene.environment was
+// supplying 34.4% of the bath-shower frame and 100% of its p1 (kill the
+// environment and p1 went 0.4482 -> 0.0000), while the two point "fills" that
+// were supposed to be the fixtures carried 3.2% and 2.8%.  A windowless room
+// lit almost entirely by an unoccludable term cannot have a shadow in it.
+(function bathroomLight() {
+  var vzL = BIZ - 0.02;
+  // GR linear LED over the mirror.  Three cones down the length of the bar so
+  // the wash across the vanity wall falls off the way a 3'-0" bar's does.
+  [-1.05, 0.0, 1.05].forEach(function (dx) {
+    var s = new T.SpotLight(0xfff2e0, 28, 13, 1.20, 0.80, 2);
+    s.position.set(2.3 + dx, 5.84, vzL - 0.33);
+    s.target.position.set(2.3 + dx * 1.35, 0.10, vzL - 2.6);
+    castSpot(s, 1024, 14);
+    scene.add(s.target); scene.add(s);
+  });
+  // ceiling downlight on the passage, over the toilet  [PHOTO: the blown white
+  // disc at the top of photo-16]
+  var c1 = new T.SpotLight(0xfff4e8, 42, 13, 1.18, 0.85, 2);
+  c1.position.set(3.30, HL - 0.09, 4.70);
+  c1.target.position.set(3.05, 0, 5.05);
+  castSpot(c1, 1024, 12); scene.add(c1.target); scene.add(c1);
+  can(3.30, HL, 4.70, 0.36, 0xfffaf2, 0.70);   // the blown disc at the top of photo-16
+  // shower can, inside the alcove, aimed at the back wall
+  var c2 = new T.SpotLight(0xfff6ec, 22, 11, 1.20, 0.85, 2);
+  c2.position.set(2.30, HL - 0.09, 1.55);
+  c2.target.position.set(1.60, 0.2, 1.10);
+  castSpot(c2, 1024, 10); scene.add(c2.target); scene.add(c2);
+  can(2.30, HL, 1.55, 0.30, 0xfff8ee, 0.55);
+  // one bounce off four white surfaces four feet apart.  Small, and the only
+  // unoccluded term left in here: p1 stays where the photograph's is.
+  fill(0xfff2e4, 2.4, 9, 2.60, 3.30, 3.90);
+  fill(0xfff4ea, 1.5, 7, 1.90, 2.20, 1.50);
+  fill(0xfff0e0, 2.2, 8, 3.70, 3.40, 6.40);
+})();
 
 // Faked single bounce off the floor.  A directional light pointing UP lights
 // only the down-facing surfaces, which is what a floor bounce actually does.
-var bounce = new T.DirectionalLight(0xece5d8, 1.35);
+var bounce = new T.DirectionalLight(0xece5d8, 2.45);
 bounce.position.set(W / 2, -4, 19);
 bounce.target.position.set(W / 2, 9, 19);
 scene.add(bounce.target); scene.add(bounce);
@@ -3166,6 +3647,41 @@ fill(0xf2e6d2, 2.2, 12, 9.2, 2.2, 4.5);
 
 // a low ambient so nothing goes pure black in a phone-style exposure
 scene.add(new T.AmbientLight(0x39404b, 0.075));   // a floor under black, not a grey wash
+
+/* ---------------------------------------------------------------------
+   15b.  BATHROOM MATERIAL SCOPE
+
+   scene.environment is one box for the whole model, and the bathroom is not
+   in that box - it is a sealed 5'-6" cell off the entry.  Letting the bath
+   finishes take the room's environment at full strength is what put a 0.448
+   floor under a windowless room.  Every standard material whose mesh sits
+   inside the bathroom volume is cloned once and has its environment cut to a
+   sixth, so the bath is lit by the three fixtures above and nothing else.
+   ------------------------------------------------------------------ */
+
+var BATH_MATS = [];
+(function bathEnvScope() {
+  var seen = {}, box = new T.Box3(), c = new T.Vector3(), n = 0;
+  var list = [];
+  scene.updateMatrixWorld(true);   // WORLD's mirror has to be in the matrices first
+  scene.traverse(function (o) { if (o.isMesh) list.push(o); });
+  list.forEach(function (o) {
+    var m = o.material;
+    if (!m || !m.isMeshStandardMaterial) return;
+    box.setFromObject(o); box.getCenter(c);
+    var cz = D - c.z;              // back into authoring coordinates
+    if (c.x > BIX + 0.06 || cz > BIZ + 0.06 || c.y > HL + 0.06) return;
+    if (!seen[m.uuid]) {
+      var cl = m.clone();
+      cl.envMapIntensity = m.envMapIntensity * 0.16;
+      seen[m.uuid] = cl;
+      BATH_MATS.push(cl);
+    }
+    o.material = seen[m.uuid];
+    n++;
+  });
+  window.__bathScoped = n;
+})();
 
 /* ---------------------------------------------------------------------
    16.  ENVIRONMENT MAP  +  MIRRORS
@@ -3203,22 +3719,239 @@ scene.add(new T.AmbientLight(0x39404b, 0.075));   // a floor under black, not a 
   pm.dispose();
 })();
 
-function bakeMirrors() {
-  // One cube render per mirror, once, before the scene is declared ready.
-  MIRRORS.forEach(function (m) {
-    var rt = new T.WebGLCubeRenderTarget(256, {
-      format: T.RGBFormat, generateMipmaps: true, minFilter: T.LinearMipmapLinearFilter
+/* ---------------------------------------------------------------------
+   16a.  WHAT THE METAL SEES
+
+   The box above is a good enough irradiance probe and a terrible reflection.
+   Round 1: "no specular response on the faucet, the microwave, the fridge or
+   the hardware".  Chrome reflecting a five-colour box reads as grey plastic
+   no matter what its roughness says, because there is nothing in the
+   reflection to recognise.  These are two cube renders of the ACTUAL room -
+   one from the middle of the guestroom, one from the middle of the bathroom -
+   handed to the shiny materials only.  Matte finishes keep the probe, so the
+   room's overall light level does not move.
+   ------------------------------------------------------------------ */
+
+(function realReflections() {
+  function cube(x, y, z, res) {
+    var rt = new T.WebGLCubeRenderTarget(res, {
+      format: T.RGBAFormat, generateMipmaps: true, minFilter: T.LinearMipmapLinearFilter
     });
-    rt.texture.encoding = T.LinearEncoding;
-    var cc = new T.CubeCamera(0.1, 80, rt);
-    cc.position.copy(m.at);
-    m.mesh.visible = false;
+    var cc = new T.CubeCamera(0.08, 90, rt);
+    cc.position.set(x, y, z);
     cc.update(renderer, scene);
-    m.mesh.visible = true;
-    m.mesh.material.envMap = rt.texture;
-    m.mesh.material.envMapIntensity = m.gain || 2.2;
-    m.mesh.material.needsUpdate = true;
+    return rt.texture;
+  }
+  renderer.shadowMap.needsUpdate = true;      // bake with real shadows in it
+  var roomCube = cube(W / 2, 4.30, D - 15.5, 512);
+  var bathCube = cube(2.60, 4.10, D - 4.60, 256);
+  ['chrome', 'chromeSoft', 'stainless', 'quartz', 'solidWhite', 'porcelain',
+   'tvScreen', 'glass', 'showerGlass', 'blackMetal', 'panelGrey'].forEach(function (k) {
+    if (!M[k]) return;
+    M[k].envMap = roomCube;
+    M[k].envMapIntensity = k === 'stainless' ? 1.0 : Math.max(M[k].envMapIntensity, 0.9) * 1.25;
+    M[k].needsUpdate = true;
   });
+  BATH_MATS.forEach(function (m) {
+    if (m.roughness === undefined || m.roughness > 0.34) return;
+    m.envMap = bathCube;
+    m.envMapIntensity = (m.metalness > 0.5 ? 1.55 : 0.85);
+    m.needsUpdate = true;
+  });
+  renderer.shadowMap.needsUpdate = true;
+})();
+
+/* ---------------------------------------------------------------------
+   16b.  PLANAR MIRRORS
+
+   The old bakeMirrors() put a CubeCamera at each mirror and hung the cube on
+   the material as an envMap.  A cube envMap is an environment AT INFINITY.
+   In a 5'-6" bathroom the reflected wall is four feet away, so the parallax
+   is wrong by the whole width of the room and the reflection reads as a
+   telephoto crop of nothing.  Measured on the mirror rectangle of the
+   bath-vanity frame: gradient energy 0.0007 against 0.0185 for the same
+   rectangle in photo-16 - a 26x deficit, which is what "a flat vertical grey
+   gradient reflecting nothing at all" measures like.
+
+   This is a real planar reflection instead: the scene is re-rendered from the
+   camera mirrored through the glass plane, with the projection matrix's near
+   plane skewed onto the mirror surface so nothing behind the mirror can leak
+   in, and the result is projected back onto the quad with a texture matrix.
+   The maths is three's Reflector.  Cost is one extra scene render per visible
+   mirror per frame, and mirrors off-screen are skipped entirely.
+   ------------------------------------------------------------------ */
+
+var REFLECTORS = [];
+var MIRROR_VS = [
+  'uniform mat4 textureMatrix;',
+  'varying vec4 vRefUv;',
+  'varying vec2 vLocal;',
+  'varying vec3 vWorld;',
+  'varying vec3 vWN;',
+  'void main() {',
+  '  vLocal = uv;',
+  '  vec4 wp = modelMatrix * vec4( position, 1.0 );',
+  '  vWorld = wp.xyz;',
+  '  vWN = normalize( mat3( modelMatrix ) * normal );',
+  '  vRefUv = textureMatrix * vec4( position, 1.0 );',
+  '  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );',
+  '}'
+].join('\n');
+var MIRROR_FS = [
+  'uniform sampler2D tRef;',
+  'uniform vec3 tint;',
+  'uniform float ghost;',
+  'uniform float grime;',
+  'uniform float base;',
+  'varying vec4 vRefUv;',
+  'varying vec2 vLocal;',
+  'varying vec3 vWorld;',
+  'varying vec3 vWN;',
+  'float h21(vec2 p){ return fract(sin(dot(p, vec2(41.31, 289.17))) * 43758.5453); }',
+  'void main() {',
+  '  vec2 uv = vRefUv.xy / vRefUv.w;',
+  '  vec3 c = texture2D( tRef, uv ).rgb;',
+  '  // second-surface ghost: mirror glass reflects a faint image off the FRONT',
+  '  // face as well, offset by twice the glass thickness.  Real mirrors double.',
+  '  vec3 g = texture2D( tRef, uv + vec2( 0.0038, 0.0017 ) ).rgb;',
+  '  c = mix( c, g, ghost );',
+  '  c *= tint;',
+  '  // wiped glass: low-contrast smear, or the panel reads as a hole in the wall',
+  '  float n = 0.55 * h21( floor( vLocal * 46.0 ) ) + 0.45 * h21( floor( vLocal * 11.0 + 3.7 ) );',
+  '  c *= 1.0 - grime * ( 0.30 + 0.70 * n );',
+  '#ifdef GLASS',
+  '  // 4% a surface at normal incidence, running to 1 at grazing: this is why',
+  '  // a shower panel is a window in the middle and a mirror at its edges',
+  '  vec3 V = normalize( cameraPosition - vWorld );',
+  '  float f = pow( 1.0 - clamp( abs( dot( V, normalize( vWN ) ) ), 0.0, 1.0 ), 5.0 );',
+  '  gl_FragColor = vec4( c, clamp( base + ( 1.0 - base ) * f, 0.0, 1.0 ) );',
+  '#else',
+  '  gl_FragColor = vec4( c, 1.0 );',
+  '#endif',
+  '}'
+].join('\n');
+
+// The reflection is rendered with the MAIN camera's projection, so the target
+// has to be the main frame's size and aspect or the mirror magnifies a small
+// patch of it - which is what produced the stair-stepped reflection measured
+// on the first planar build.  It also needs its own samples, for the same
+// reason the scene target does.
+function ensureReflectorRT(r, w, h) {
+  if (r.rt && r.rt.width === w && r.rt.height === h) return;
+  if (r.rt) r.rt.dispose();
+  var o = { minFilter: T.LinearFilter, magFilter: T.LinearFilter,
+            format: T.RGBAFormat, stencilBuffer: false, depthBuffer: true };
+  r.rt = MSAA ? new T.WebGLMultisampleRenderTarget(w, h, o) : new T.WebGLRenderTarget(w, h, o);
+  if (MSAA) r.rt.samples = MSAA;
+  r.rt.texture.generateMipmaps = false;
+  // r128 takes a render pass's output encoding from the bound target's texture,
+  // so an sRGB target means the reflection is tone-mapped and encoded exactly
+  // like the screen and can be written back out untouched.
+  r.rt.texture.encoding = T.sRGBEncoding;
+  r.mat.uniforms.tRef.value = r.rt.texture;
+}
+
+function makePlanarMirror(mesh, opt) {
+  opt = opt || {};
+  var mat = new T.ShaderMaterial({
+    uniforms: {
+      tRef: { value: null },
+      textureMatrix: { value: new T.Matrix4() },
+      tint: { value: new T.Color(opt.tint === undefined ? 0xeef3f0 : opt.tint) },
+      ghost: { value: opt.ghost === undefined ? 0.055 : opt.ghost },
+      grime: { value: opt.grime === undefined ? 0.055 : opt.grime },
+      base: { value: opt.base === undefined ? 0.08 : opt.base }
+    },
+    vertexShader: MIRROR_VS,
+    fragmentShader: MIRROR_FS,
+    defines: opt.glass ? { GLASS: '' } : {},
+    transparent: !!opt.glass,
+    depthWrite: !opt.glass,
+    toneMapped: false
+  });
+  mesh.material = mat;
+  mesh.castShadow = false;
+  var r = { mesh: mesh, rt: null, mat: mat, cam: new T.PerspectiveCamera(),
+            sphere: new T.Sphere(), scale: opt.scale || 0.85 };
+  REFLECTORS.push(r);
+  return r;
+}
+
+var _rNorm = new T.Vector3(), _rPos = new T.Vector3(), _cPos = new T.Vector3(),
+    _rRot = new T.Matrix4(), _rLook = new T.Vector3(), _rView = new T.Vector3(),
+    _rTgt = new T.Vector3(), _rPlane = new T.Plane(), _rClip = new T.Vector4(),
+    _rQ = new T.Vector4(), _rTex = new T.Matrix4(), _rFrust = new T.Frustum(),
+    _rPV = new T.Matrix4();
+
+function updateReflectors() {
+  if (!REFLECTORS.length) return;
+  camera.updateMatrixWorld();
+  _rPV.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+  _rFrust.setFromProjectionMatrix(_rPV);
+  var prev = renderer.getRenderTarget();
+  var dbs = renderer.getDrawingBufferSize(new T.Vector2());
+  for (var i = 0; i < REFLECTORS.length; i++) {
+    var r = REFLECTORS[i], m = r.mesh;
+    m.updateMatrixWorld();
+    if (!m.geometry.boundingSphere) m.geometry.computeBoundingSphere();
+    r.sphere.copy(m.geometry.boundingSphere).applyMatrix4(m.matrixWorld);
+    if (!_rFrust.intersectsSphere(r.sphere)) continue;   // off screen: keep the last reflection
+
+    _rPos.setFromMatrixPosition(m.matrixWorld);
+    _cPos.setFromMatrixPosition(camera.matrixWorld);
+    _rRot.extractRotation(m.matrixWorld);
+    _rNorm.set(0, 0, 1).applyMatrix4(_rRot).normalize();
+    _rView.subVectors(_rPos, _cPos);
+    if (_rView.dot(_rNorm) > 0) continue;                // looking at the back of it
+    _rView.reflect(_rNorm).negate().add(_rPos);
+
+    _rRot.extractRotation(camera.matrixWorld);
+    _rLook.set(0, 0, -1).applyMatrix4(_rRot).add(_cPos);
+    _rTgt.subVectors(_rPos, _rLook).reflect(_rNorm).negate().add(_rPos);
+
+    var vc = r.cam;
+    vc.position.copy(_rView);
+    vc.up.set(0, 1, 0).applyMatrix4(_rRot).reflect(_rNorm);
+    vc.lookAt(_rTgt);
+    vc.near = camera.near; vc.far = camera.far;
+    vc.updateMatrixWorld();
+    vc.projectionMatrix.copy(camera.projectionMatrix);
+
+    // texture matrix: world position -> projected uv in the reflection target
+    _rTex.set(0.5, 0.0, 0.0, 0.5,
+              0.0, 0.5, 0.0, 0.5,
+              0.0, 0.0, 0.5, 0.5,
+              0.0, 0.0, 0.0, 1.0);
+    _rTex.multiply(vc.projectionMatrix);
+    _rTex.multiply(vc.matrixWorldInverse);
+    _rTex.multiply(m.matrixWorld);
+    r.mat.uniforms.textureMatrix.value.copy(_rTex);
+
+    // oblique near plane on the glass, so the wall BEHIND the mirror is clipped
+    _rPlane.setFromNormalAndCoplanarPoint(_rNorm, _rPos);
+    _rPlane.applyMatrix4(vc.matrixWorldInverse);
+    _rClip.set(_rPlane.normal.x, _rPlane.normal.y, _rPlane.normal.z, _rPlane.constant);
+    var P = vc.projectionMatrix.elements;
+    _rQ.x = (Math.sign(_rClip.x) + P[8]) / P[0];
+    _rQ.y = (Math.sign(_rClip.y) + P[9]) / P[5];
+    _rQ.z = -1.0;
+    _rQ.w = (1.0 + P[10]) / P[14];
+    _rClip.multiplyScalar(2.0 / _rClip.dot(_rQ));
+    P[2] = _rClip.x; P[6] = _rClip.y; P[10] = _rClip.z + 1.0 - 0.004; P[14] = _rClip.w;
+
+    ensureReflectorRT(r, Math.max(64, Math.round(dbs.x * r.scale)),
+                         Math.max(64, Math.round(dbs.y * r.scale)));
+    m.visible = false;
+    renderer.setRenderTarget(r.rt);
+    renderer.clear();
+    renderer.render(scene, vc);
+    m.visible = true;
+  }
+  renderer.setRenderTarget(prev);
+}
+
+function bakeMirrors() {
+  MIRRORS.forEach(function (m) { makePlanarMirror(m.mesh, m.opt); });
 }
 
 /* ---------------------------------------------------------------------
@@ -3230,19 +3963,29 @@ function bakeMirrors() {
 var EYE = 5.25;                                   // 5'-3"
 var VIEWS = {
   // standing just inside the entry door, looking down the room to the window
-  entry:        { p: [8.55, EYE, 1.30], t: [5.90, 3.90, 22.00] },
+  entry:        { p: [8.55, EYE, D - 1.30], t: [5.90, 3.90, D - 22.00] },
   // from the bed zone looking back at the sofa, the art and the mirror wall.
   // Kept on the working-wall side so the sight line passes the divider curtain.
-  lounge:       { p: [8.75, EYE, 21.40], t: [1.70, 3.30, 10.90] },
+  lounge:       { p: [8.75, EYE, D - 21.40], t: [1.70, 3.30, D - 10.90] },
   // from the lounge looking at the bed, headboard and window
-  bed:          { p: [9.55, EYE, 13.90], t: [3.00, 2.90, 24.20] },
+  bed:          { p: [9.55, EYE, D - 13.90], t: [3.00, 2.90, D - 24.20] },
   // facing the desk, TV and the two navy floating shelves
-  working:      { p: [2.60, EYE, 12.20], t: [11.70, 3.40, 15.60] },
+  // photo-05 is taken FROM the kitchenette counter looking down the working
+  // wall to the window - sink in the near corner, then dishwasher, desk, navy
+  // shelf, shelf box, dresser, TV, wardrobe, bed and window - not from across
+  // the room looking at the wall.  Chest height, per the photo index.
+  working:      { p: [8.30, 4.35, D - 5.10], t: [10.30, 2.55, D - 23.50] },
   // facing the kitchenette run from inside the room
-  kitchen:      { p: [7.60, EYE, 12.00], t: [11.20, 3.00, 4.20] },
+  // aim: MEASURED, 86.7% of what photo-18 clips is in the top quarter of the
+  // frame - the ceiling fixture - and the old target put the ceiling above the
+  // top edge, so the render clipped 0.015% against the photograph's 0.201%.
+  kitchen:      { p: [7.60, EYE, D - 12.00], t: [11.20, 4.05, D - 4.20] },
   // bathroom, from the door end
-  'bath-vanity': { p: [4.60, 4.70, 3.00], t: [2.30, 3.55, 8.42] },
-  'bath-shower': { p: [4.80, 4.15, 6.42], t: [1.80, 3.75, 0.85] }
+  'bath-vanity': { p: [4.60, 4.70, D - 3.00], t: [2.30, 4.40, D - 8.42] },   // 81.2% of photo-16's clipped pixels are the ceiling can
+  // photo-24 stands at the vanity and looks back at the enclosure, so the
+  // frame carries the glass, its reflections, the dark floor tile and the
+  // toilet in the near corner - not a wall of white tile at arm's length
+  'bath-shower': { p: [4.42, 4.95, D - 6.95], t: [1.70, 2.80, D - 0.60] }    // 87.7% of photo-24's are the ceiling
 };
 
 var target = new T.Vector3();
@@ -3267,6 +4010,243 @@ function markUI(name) {
   for (var i = 0; i < bs.length; i++) {
     bs[i].classList.toggle('on', bs[i].getAttribute('data-v') === name);
   }
+}
+
+/* ---------------------------------------------------------------------
+   17b. CAMERA
+
+   Round 1's critics all wrote down the same thing: the photograph has grain,
+   a clipped window, a vignette and handheld softness, and the render has an
+   impossibly clean signal.  Measured, a flat wall in photo-16 carries a noise
+   floor an order of magnitude above anything in the render, and the render's
+   contrast runs 0.22-0.28 sigma against the photographs' 0.14-0.22 because
+   nothing is compressing the scene the way a phone's pipeline does.
+
+   r128 has no EffectComposer in it, so this is the pipeline by hand: the room
+   renders into an sRGB target with a depth attachment, and a fullscreen quad
+   puts a camera in front of it.  In order: barrel distortion, lateral
+   chromatic aberration that grows with r^2, a depth-of-field circle of
+   confusion off the real depth buffer, veiling glare off the blown window,
+   a phone-ish tone curve, highlight desaturation, vignette, and sensor grain
+   that rises into the shadows the way a small sensor's does.
+
+   Everything here is deliberately small.  An over-graded frame is its own
+   tell, and the numbers are checked against the photographs after every
+   change rather than eyeballed.
+   ------------------------------------------------------------------ */
+
+var POST = {
+  enabled: true,
+  distort:   0.012,   // barrel k1
+  ca:        0.00026, // lateral chromatic aberration at the frame edge, in uv
+  dofK:      15.0,    // thin-lens constant for a phone main camera, at 2400px wide
+  dofMax:    4.2,     // px, cap: seven taps cannot carry a bigger disc honestly
+  glare:     0.055,   // veiling glare off clipped highlights
+  sharpen:   0.40,    // the unsharp mask every phone ISP applies
+  contrast: -0.155,   // negative = the shoulder+toe a phone pipeline applies
+  lift:      0.012,
+  sat:       1.22,
+  warm:      0.016,
+  vignette:  0.26,
+  grain:     0.0098,  // luminance grain, scaled up into the shadows
+  chroma:    0.03     // fraction that is chroma: the phone's JPEG eats most of it
+};
+
+var sceneRT = null;
+// The scene pass leaves the default framebuffer, so it leaves the context's
+// MSAA behind with it.  Round 0's critics called out "aliased polygon edges, a
+// pixel ladder no lens produces", so the target has to carry its own samples.
+var MSAA = (renderer.capabilities.isWebGL2 && T.WebGLMultisampleRenderTarget) ? 4 : 0;
+function makeSceneRT(w, h) {
+  if (sceneRT) { sceneRT.dispose(); if (sceneRT.depthTexture) sceneRT.depthTexture.dispose(); }
+  var opts = {
+    minFilter: T.LinearFilter, magFilter: T.LinearFilter,
+    format: T.RGBAFormat, stencilBuffer: false, depthBuffer: true
+  };
+  sceneRT = MSAA ? new T.WebGLMultisampleRenderTarget(w, h, opts)
+                 : new T.WebGLRenderTarget(w, h, opts);
+  if (MSAA) sceneRT.samples = MSAA;
+  sceneRT.texture.generateMipmaps = false;
+  sceneRT.texture.encoding = T.sRGBEncoding;   // the pass writes exactly what the screen would get
+  var dt = new T.DepthTexture(w, h);
+  dt.type = T.UnsignedIntType;
+  dt.format = T.DepthFormat;
+  dt.minFilter = T.NearestFilter; dt.magFilter = T.NearestFilter;
+  sceneRT.depthTexture = dt;
+  if (postMat) {
+    postMat.uniforms.tScene.value = sceneRT.texture;
+    postMat.uniforms.tDepth.value = sceneRT.depthTexture;
+    postMat.uniforms.res.value.set(w, h);
+  }
+  return sceneRT;
+}
+
+var POST_VS = [
+  'varying vec2 vUv;',
+  'void main(){ vUv = uv; gl_Position = vec4( position.xy, 0.0, 1.0 ); }'
+].join('\n');
+
+var POST_FS = [
+  'precision highp float;',
+  'uniform sampler2D tScene;',
+  'uniform sampler2D tDepth;',
+  'uniform vec2  res;',
+  'uniform float uNear, uFar, uFocus;',
+  'uniform float uDistort, uCA, uDofK, uDofMax, uGlare;',
+  'uniform float uContrast, uLift, uSat, uWarm, uVig, uGrain, uChroma, uSeed;',
+  'uniform float uSharp;',
+  'uniform float uDebug;',
+  'varying vec2 vUv;',
+  '',
+  'float hash(vec2 p){ p = fract(p * vec2(233.34, 851.73)); p += dot(p, p + 23.45); return fract(p.x * p.y); }',
+  'float lum(vec3 c){ return dot(c, vec3(0.2126, 0.7152, 0.0722)); }',
+  '',
+  '// point sample with lateral chromatic aberration: the three channels focus',
+  '// on slightly different image circles, and the split grows toward the edge',
+  'vec3 tap(vec2 uv, vec2 d){',
+  '  vec2 c = uv - 0.5;',
+  '  vec2 off = c * uCA * (0.35 + dot(c, c) * 3.4);',
+  '  return vec3(',
+  '    texture2D(tScene, uv + d + off).r,',
+  '    texture2D(tScene, uv + d).g,',
+  '    texture2D(tScene, uv + d - off).b );',
+  '}',
+  '',
+  'void main(){',
+  '  vec2 c = vUv - 0.5;',
+  '  float r2 = dot(c, c);',
+  '  // barrel distortion, tiny: a phone lens is corrected but not perfectly',
+  '  vec2 uv = 0.5 + c * (1.0 + uDistort * r2);',
+  '  uv = clamp(uv, vec2(0.0009), vec2(0.9991));',
+  '',
+  '  // --- depth of field.  Circle of confusion from the real depth buffer.',
+  '  float d = texture2D(tDepth, uv).x;',
+  '  float viewZ = (uNear * uFar) / ((uFar - uNear) * d - uFar);',
+  '  float dist = -viewZ;',
+  '  // thin lens, in the units this room is built in (feet).  A phone main',
+  '  '.concat('// camera is f/1.8 at a 5.6mm focal length, so the aperture is 3.1mm and'),
+  '  // the circle of confusion in pixels is  k * |D - S| / (S * D)  with k',
+  '  // carrying the sensor scale.  At a 12.8ft focus that is 4.4px on a foot-',
+  '  // stool 3ft away and 0.9px on the far wall - which is what a phone does.',
+  '  float coc = uDofK * abs(dist - uFocus) / max(uFocus * dist, 0.5);',
+  '  coc = min(coc, uDofMax);',
+  '',
+  '  vec3 col;',
+  '  if (coc < 0.85) {',
+  '    col = tap(uv, vec2(0.0));',
+  '  } else {',
+  '    vec2 px = coc / res;',
+  '    col  = tap(uv, vec2(0.0)) * 0.34;',
+  '    col += tap(uv, vec2( 0.866,  0.5) * px) * 0.11;',
+  '    col += tap(uv, vec2( 0.0,    1.0) * px) * 0.11;',
+  '    col += tap(uv, vec2(-0.866,  0.5) * px) * 0.11;',
+  '    col += tap(uv, vec2(-0.866, -0.5) * px) * 0.11;',
+  '    col += tap(uv, vec2( 0.0,   -1.0) * px) * 0.11;',
+  '    col += tap(uv, vec2( 0.866, -0.5) * px) * 0.11;',
+  '  }',
+  '',
+  '  // --- capture sharpening.  Every phone ISP runs an unsharp mask, and it',
+  '  // is why a phone frame carries visible edge halos that a clean raster does',
+  '  // not.  It also puts back the high frequency the distortion resample above',
+  '  // costs: measured, the resample alone takes about a quarter of the frame',
+  '  // gradient energy, which is most of the render/photograph detail gap.',
+  '  if (uSharp > 0.0) {',
+  '    vec2 sp = 1.35 / res;',
+  '    vec3 b4 = texture2D(tScene, uv + vec2( sp.x,  sp.y)).rgb',
+  '            + texture2D(tScene, uv + vec2(-sp.x,  sp.y)).rgb',
+  '            + texture2D(tScene, uv + vec2( sp.x, -sp.y)).rgb',
+  '            + texture2D(tScene, uv + vec2(-sp.x, -sp.y)).rgb;',
+  '    col += uSharp * (col - b4 * 0.25);',
+  '  }',
+  '',
+  '  // --- veiling glare.  A blown window bleeds into the frame around it;',
+  '  // this is the flare inside the lens stack, not a bloom for prettiness.',
+  '  if (uGlare > 0.0) {',
+  '    vec2 g = 9.0 / res;',
+  '    vec3 s = vec3(0.0);',
+  '    s += texture2D(tScene, uv + vec2( 2.6,  1.1) * g).rgb;',
+  '    s += texture2D(tScene, uv + vec2(-2.1,  2.4) * g).rgb;',
+  '    s += texture2D(tScene, uv + vec2(-2.7, -1.5) * g).rgb;',
+  '    s += texture2D(tScene, uv + vec2( 1.6, -2.6) * g).rgb;',
+  '    s *= 0.25;',
+  '    col += uGlare * max(vec3(0.0), s - 0.72) * 2.2;',
+  '  }',
+  '',
+  '  // --- tone.  Phone pipelines pull the shoulder and the toe together; the',
+  '  // render measured 0.22-0.28 sigma against 0.14-0.22 in the photographs.',
+  '  vec3 sc = clamp(col, 0.0, 1.0);',
+  '  col = mix(col, sc * sc * (3.0 - 2.0 * sc), uContrast);',
+  '  col += uLift * (1.0 - smoothstep(0.0, 0.42, lum(col)));',
+  '  // white balance: the room is lit by 3000K lamps and the photographs keep',
+  '  // some of that warmth rather than neutralising it',
+  '  col *= vec3(1.0 + uWarm, 1.0, 1.0 - uWarm * 0.85);',
+  '  float L = lum(col);',
+  '  col = mix(vec3(L), col, uSat);',
+  '  // highlight desaturation: a clipping sensor runs its channels to white',
+  '  col = mix(col, vec3(1.0), smoothstep(0.93, 1.06, L) * 0.55);',
+  '',
+  '  // --- vignette',
+  '  col *= 1.0 - uVig * pow(clamp(r2 * 2.0, 0.0, 1.0), 1.35);',
+  '',
+  '  // --- sensor grain.  Rises into the shadows, part luminance and part',
+  '  // chroma, and it is the single thing every critic named first.',
+  '  float lg = lum(col);',
+  '  float amt = uGrain * (0.55 + 1.55 * (1.0 - smoothstep(0.0, 0.78, lg)));',
+  '  vec2 gp = vUv * res + uSeed;',
+  '  float n1 = hash(gp) - 0.5;',
+  '  float n2 = hash(gp + 37.1) - 0.5;',
+  '  float n3 = hash(gp + 91.7) - 0.5;',
+  '  vec3 gn = vec3(n1, mix(n1, n2, uChroma), mix(n1, n3, uChroma));',
+  '  col += gn * amt;',
+  '',
+  '  if (uDebug > 0.5) {',
+  '    // instrumentation: the linearised depth buffer, so a broken depth',
+  '    // attachment measures as a flat frame instead of hiding inside the DOF',
+  '    float dd = clamp(dist / 34.0, 0.0, 1.0);',
+  '    gl_FragColor = vec4(vec3(dd), 1.0);',
+  '    return;',
+  '  }',
+  '  gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);',
+  '}'
+].join('\n');
+
+var postMat = new T.ShaderMaterial({
+  uniforms: {
+    tScene: { value: null }, tDepth: { value: null },
+    res: { value: new T.Vector2(1, 1) },
+    uNear: { value: 0.1 }, uFar: { value: 80 }, uFocus: { value: 8 },
+    uDistort: { value: POST.distort }, uCA: { value: POST.ca },
+    uDofK: { value: POST.dofK }, uDofMax: { value: POST.dofMax },
+    uGlare: { value: POST.glare }, uSharp: { value: POST.sharpen },
+    uContrast: { value: POST.contrast }, uLift: { value: POST.lift },
+    uSat: { value: POST.sat }, uWarm: { value: POST.warm },
+    uVig: { value: POST.vignette }, uGrain: { value: POST.grain },
+    uChroma: { value: POST.chroma },
+    uSeed: { value: 11.37 },        // fixed: one exposure has one grain pattern
+    uDebug: { value: 0.0 }
+  },
+  vertexShader: POST_VS,
+  fragmentShader: POST_FS,
+  depthTest: false, depthWrite: false, toneMapped: false
+});
+var postScene = new T.Scene();
+var postCam = new T.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+postScene.add(new T.Mesh(new T.PlaneGeometry(2, 2), postMat));
+
+function renderFrame() {
+  updateReflectors();                       // planar mirrors first
+  if (!POST.enabled) { renderer.render(scene, camera); return; }
+  var sz = renderer.getDrawingBufferSize(new T.Vector2());
+  if (!sceneRT || sceneRT.width !== sz.x || sceneRT.height !== sz.y) makeSceneRT(sz.x, sz.y);
+  var u = postMat.uniforms;
+  u.uNear.value = camera.near;
+  u.uFar.value = camera.far;
+  u.uFocus.value = Math.max(1.0, camera.position.distanceTo(controls.target));
+  u.uDofK.value = POST.dofK * (sz.x / 2400);
+  renderer.setRenderTarget(sceneRT);
+  renderer.render(scene, camera);
+  renderer.setRenderTarget(null);
+  renderer.render(postScene, postCam);
 }
 
 /* ---------------------------------------------------------------------
@@ -3300,7 +4280,7 @@ function loop() {
   // the shadow maps regardless of what ran before them.
   if (frames < 2) renderer.shadowMap.needsUpdate = true;
   var t0 = performance.now();
-  renderer.render(scene, camera);
+  renderFrame();
   window.__frameMs = Math.round(performance.now() - t0);
   frames++;
   if (frames >= 2 && !window.__ready) {
@@ -3341,7 +4321,12 @@ setView(want);
 
 loop();
 
-window.KS = { scene: scene, camera: camera, renderer: renderer, views: VIEWS, setView: setView };
+window.KS = {
+  scene: scene, camera: camera, renderer: renderer, views: VIEWS, setView: setView,
+  post: POST, postMat: postMat, reflectors: REFLECTORS,
+  setPost: function (on) { POST.enabled = !!on; requestRender(); warmup = Math.max(warmup, 2); },
+  frame: function () { renderFrame(); }
+};
 
 })();
 </script>
