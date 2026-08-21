@@ -227,8 +227,15 @@ export class Store {
 export async function loadStore() {
   let seed = window.__H2SEP_SEED;
   if (!seed) {
-    const res = await fetch(new URL('../../data/slice-f1.json', import.meta.url));
-    seed = await res.json();
+    // The full floor-1 seed paints first; Firestore replaces it within seconds.
+    // The approved slice stays as the fallback so the app still boots if the
+    // staged file is ever absent.
+    for (const f of ['../../data/floor1-staged.json', '../../data/slice-f1.json']) {
+      try {
+        const res = await fetch(new URL(f, import.meta.url));
+        if (res.ok) { seed = await res.json(); break; }
+      } catch { /* try the next */ }
+    }
   }
   return new Store(seed);
 }
