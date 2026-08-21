@@ -358,7 +358,11 @@ function notesSheet(ctx, roomNo) {
 export function identityGate(ctx) {
   const { store } = ctx;
   const u = store.user;
-  const orgs = companyOptions(store);
+  let orgs = companyOptions(store);
+  // The directory arrives over live sync, often seconds AFTER this sheet opens
+  // on a fresh device - which left the company list empty. Subscribe while the
+  // sheet is up and refill the options the moment the directory lands.
+  let unsub = null;
   const { close } = sheet(`
     <div class="sh"><b style="font-size:15px">Who is checking?</b></div>
     <div style="font-size:13px;color:var(--muted);margin-bottom:4px">Your initials go on every box you check, exactly like initialing the paper sheet. Your company rides along with them, so anyone reading the list knows which outfit signed the line.</div>
@@ -372,11 +376,23 @@ export function identityGate(ctx) {
       </select></div>
     <div class="field" data-otherwrap style="display:${u?.company && !orgs.includes(u.company) ? 'block' : 'none'}"><label>Company name</label>
       <input data-other maxlength="60" placeholder="Company name" value="${esc(u?.company && !orgs.includes(u.company) ? u.company : '')}"/></div>
-    <div class="srow"><button class="btn primary" data-go>Start</button></div>`);
+    <div class="srow"><button class="btn primary" data-go>Start</button></div>`, { onClose: () => { if (unsub) unsub(); } });
   const s = document.querySelector('.sheet');
   const nameEl = s.querySelector('[data-name]'), initEl = s.querySelector('[data-init]');
   const coEl = s.querySelector('[data-co]'), otherEl = s.querySelector('[data-other]');
   const otherWrap = s.querySelector('[data-otherwrap]');
+  const fillCompanies = () => {
+    const now = companyOptions(store);
+    if (now.length === orgs.length) return;
+    orgs = now;
+    const picked = coEl.value;
+    coEl.innerHTML = `<option value="">Pick your company</option>`
+      + orgs.map(o => `<option>${esc(o)}</option>`).join('')
+      + `<option value="__other">Not on the list, type it</option>`;
+    if (picked && [...coEl.options].some(o => o.value === picked)) coEl.value = picked;
+  };
+  unsub = store.subscribe(fillCompanies);
+  fillCompanies();
   let touched = !!u?.initials, coTouched = !!u?.company;
   initEl.addEventListener('input', () => { touched = true; });
   coEl.addEventListener('change', () => {
@@ -393,6 +409,7 @@ export function identityGate(ctx) {
     if (!initEl.value.trim()) { toast('Initials are required to check items'); return; }
     const company = coEl.value === '__other' ? otherEl.value.trim() : coEl.value;
     if (!company) { toast('Pick the company you work for'); return; }
+    if (unsub) unsub();
     store.setUser(nameEl.value || initEl.value, initEl.value, company);
     close();
   });

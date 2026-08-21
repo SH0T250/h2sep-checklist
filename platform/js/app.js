@@ -31,6 +31,7 @@ registry.register(directoryModule());   // module three: contacts + sub assignme
 registry.register(bimModule());
 
 const ctx = { store, registry, modelRooms: MODEL_ROOMS };
+window.__store = store;   // debug/test handle, same as the crew app exposes
 
 const app = document.getElementById('app');
 
