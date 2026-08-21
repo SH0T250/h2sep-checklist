@@ -9,6 +9,9 @@ const ID_KEY = 'h2sep-platform-user';
 function nowIso() { return new Date().toISOString(); }
 
 export class Store {
+  // Long suffix first: a doc that has both is the guest-room one.
+  static MEP_SUFFIXES = ['-MEP', '-M'];
+
   constructor(seed) {
     this.seed = seed;
     this.docs = {};
@@ -73,7 +76,33 @@ export class Store {
       .map(([, d]) => d)
       .sort((a, b) => String(a.number).localeCompare(String(b.number)));
   }
-  mepDoc(roomNo) { return this.docs[roomNo + '-MEP'] || null; }
+  // An MEP companion doc is suffixed '-MEP' on a guest room (105-MEP) and '-M'
+  // on a common-area space (S003-M, SZONEB-M). The short suffix is not a typo:
+  // the published Firestore rule caps a document id at 8 characters and
+  // 'SZONEA-MEP' is 10, so the space docs cannot use the long one. The app
+  // resolves both, preferring the long suffix, and every caller goes through
+  // these two so the rule lives in exactly one place.
+  // Common-area spaces: same document shape as a guest room, distinguished by a
+  // "space-" type. Identified by ID rather than by type, because a space with
+  // MEP lines and no FF&E lines legitimately owns the parent id and carries the
+  // punch type - filtering on type alone would hide it.
+  spaces() {
+    const isCompanion = (id) => Store.MEP_SUFFIXES.some((sfx) => id.endsWith(sfx));
+    return Object.entries(this.docs)
+      .filter(([id, d]) => !id.startsWith('_') && !d.deleted &&
+        String(d.type).startsWith('space-') && !isCompanion(id))
+      .map(([, d]) => d)
+      .sort((a, b) => String(a.typeLabel || a.number).localeCompare(String(b.typeLabel || b.number)));
+  }
+
+  mepDocId(parentId) {
+    for (const suffix of Store.MEP_SUFFIXES) {
+      const id = String(parentId) + suffix;
+      if (this.docs[id]) return id;
+    }
+    return null;
+  }
+  mepDoc(parentId) { return this.docs[this.mepDocId(parentId)] || null; }
 
   liveItems(doc) {
     return Object.entries(doc.items || {})
@@ -198,8 +227,15 @@ export class Store {
 export async function loadStore() {
   let seed = window.__H2SEP_SEED;
   if (!seed) {
-    const res = await fetch(new URL('../../data/slice-f1.json', import.meta.url));
-    seed = await res.json();
+    // The full floor-1 seed paints first; Firestore replaces it within seconds.
+    // The approved slice stays as the fallback so the app still boots if the
+    // staged file is ever absent.
+    for (const f of ['../../data/floor1-staged.json', '../../data/slice-f1.json']) {
+      try {
+        const res = await fetch(new URL(f, import.meta.url));
+        if (res.ok) { seed = await res.json(); break; }
+      } catch { /* try the next */ }
+    }
   }
   return new Store(seed);
 }

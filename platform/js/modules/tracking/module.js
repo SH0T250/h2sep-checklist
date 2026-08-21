@@ -4,7 +4,12 @@
 import { ic, el, esc, fmtWhen, toast, sheet, pressable } from '../../core/ui.js';
 
 const QUICK_PICKS = ['NEED INSTALL', 'NEED PROPER PLACE', 'IN BOX', 'DAMAGED', 'MISSING', 'WRONG ITEM'];
-const SLICE_NOTE = 'Slice build: rooms 101, 103, 105 at 100%. The other 112 rooms arrive with the data rollout.';
+// Copy that states a count has to be derived, or it goes stale the moment the
+// build grows - which is worse than saying nothing, because it reads as fact.
+function sliceNote(store) {
+  const n = store ? store.guestRooms().length : 0;
+  return `Floor 1: ${n} guest rooms built. Floors 2 to 4 arrive with the next rollout.`;
+}
 
 // The printer icon opens the live in-app sheet (#/print/<no>), always current.
 // Drive PDF revisions are generated and uploaded by tools at each milestone.
@@ -75,17 +80,17 @@ function renderDashboard(ctx) {
   const root = el(`<div>
     <div class="pagehead">
       <h1 class="h1">Dashboard</h1>
-      <span class="sub">${esc(SLICE_NOTE)}</span>
+      <span class="sub">${esc(sliceNote(store))}</span>
       <span class="spacer"></span>
     </div>
     <div class="kpis">
-      <div class="kpi"><div class="kl">Items checked</div><div class="kv">${done}<small> of ${total}</small></div><div class="kc">${pct}% of the three-room slice</div></div>
+      <div class="kpi"><div class="kl">Items checked</div><div class="kv">${done}<small> of ${total}</small></div><div class="kc">${pct}% of floor 1</div></div>
       <div class="kpi"><div class="kl">Open issues</div><div class="kv">${issues}</div><div class="kc">issue flags plus red room notes</div></div>
       <div class="kpi"><div class="kl">Rooms complete</div><div class="kv">${complete}<small> of ${rows.length}</small></div><div class="kc">every line checked, zero open issues</div></div>
       <div class="kpi"><div class="kl">MEP punch lists</div><div class="kv">${mepCount}</div><div class="kc">separate from FF&amp;E, per room</div></div>
     </div>
     <section class="card">
-      <div class="card-head"><h2>Rooms</h2><span class="card-cap">floor 1 slice</span><span class="spacer"></span><span class="card-cap">tap a room to open its checklist</span></div>
+      <div class="card-head"><h2>Rooms</h2><span class="card-cap">floor 1</span><span class="spacer"></span><span class="card-cap">tap a room to open its checklist</span></div>
       <div class="rlist"></div>
     </section>
   </div>`);
@@ -124,7 +129,7 @@ function renderRooms(ctx) {
   const chips = [['all', 'All'], ['prog', 'In progress'], ['issues', 'Issues'], ['done', 'Done'], ['ns', 'Not started']];
 
   const root = el(`<div>
-    <div class="pagehead"><h1 class="h1">Rooms</h1><span class="sub">3 of 115 in this slice · floor 1</span></div>
+    <div class="pagehead"><h1 class="h1">Rooms</h1><span class="sub">${rooms.length} guest rooms on floor 1</span></div>
     <div class="filters">${chips.map(([k, l]) => `<button class="fl ${k === filter ? 'on' : ''}" data-f="${k}">${l} <b>${buckets[k].length}</b></button>`).join('')}</div>
     <section class="card"><div class="rlist"></div></section>
   </div>`);
@@ -133,7 +138,7 @@ function renderRooms(ctx) {
   }));
   const list = root.querySelector('.rlist');
   const shown = buckets[filter] || stats;
-  if (!shown.length) list.append(el(`<div class="coming"><b>No rooms match</b><span>Nothing in this slice matches that filter right now.</span></div>`));
+  if (!shown.length) list.append(el(`<div class="coming"><b>No rooms match</b><span>Nothing on floor 1 matches that filter right now.</span></div>`));
   for (const { r, s } of shown) list.append(roomRow(r, s));
   return root;
 }
@@ -141,7 +146,7 @@ function renderRooms(ctx) {
 function renderRoom(ctx, { no }) {
   const { store } = ctx;
   const doc = store.getDoc(no);
-  if (!doc) return el(`<div class="coming">${ic('door')}<b>Room ${esc(no)} is not in this slice</b><span>${esc(SLICE_NOTE)}</span></div>`);
+  if (!doc) return el(`<div class="coming">${ic('door')}<b>Room ${esc(no)} is not in this build</b><span>${esc(sliceNote(store))}</span></div>`);
 
   const view = new URLSearchParams((location.hash.split('?')[1] || '')).get('view') === 'mep' && store.mepDoc(no) ? 'mep' : 'ffe';
   const active = view === 'mep' ? store.mepDoc(no) : doc;
@@ -186,7 +191,8 @@ function renderRoom(ctx, { no }) {
   root.querySelector('[data-note]').addEventListener('click', () => notesSheet(ctx, no));
 
   const list = root.querySelector('.ilist');
-  const activeId = view === 'mep' ? no + '-MEP' : no;
+  // Never concatenate the suffix here: a space MEP doc is '-M', not '-MEP'.
+  const activeId = view === 'mep' ? store.mepDocId(no) : no;
   const groups = groupByCategory(store.liveItems(active));
   for (const [cat, entries] of groups) {
     const done = entries.filter(([, it]) => it.checked).length;
@@ -392,6 +398,105 @@ export function identityGate(ctx) {
   });
 }
 
+// ---------- common areas (floor 1 spaces) ----------
+
+function spaceRow(ctx, sp) {
+  const { store } = ctx;
+  const mep = store.mepDoc(sp.number);
+  const a = store.roomStats(sp);
+  const b = mep ? store.roomStats(mep) : { total: 0, done: 0, openIssues: 0 };
+  const total = a.total + b.total, done = a.done + b.done, issues = a.openIssues + b.openIssues;
+  const complete = total > 0 && done === total && issues === 0;
+  const status = complete ? ['done', 'Done'] : issues > 0 ? ['issue', 'Issues'] : done > 0 ? ['prog', 'In Progress'] : ['ns', 'Not Started'];
+  const row = el(`<div class="room-row" role="link" tabindex="0" aria-label="Open ${esc(sp.typeLabel || sp.number)}">
+    <span class="rno mono" style="width:64px;font-size:13px">${esc(sp.number)}</span>
+    <span class="rtype">${esc(sp.typeLabel || sp.type)}</span>
+    <span class="chip ${status[0]} sm"><i class="dot"></i>${status[1]}</span>
+    <span class="riss ${issues ? '' : 'none'}">${issues ? ic('flag', 'flag-ic') + ' ' + issues + ' open' : '0 open'}</span>
+    <span class="rfrac">${done}/${total}</span>
+    ${ic('chev', 'chev')}
+  </div>`);
+  pressable(row, { tap: () => { location.hash = `#/space/${sp.number}`; } });
+  return row;
+}
+
+function renderCommon(ctx) {
+  const { store } = ctx;
+  const spaces = store.spaces();
+  if (!spaces.length) {
+    return comingSoon('Common Areas', 'The floor-1 spaces arrive with the data rollout.')();
+  }
+  let total = 0, done = 0, issues = 0;
+  for (const sp of spaces) {
+    const mep = store.mepDoc(sp.number);
+    for (const d of [sp, mep].filter(Boolean)) {
+      const st = store.roomStats(d);
+      total += st.total; done += st.done; issues += st.openIssues;
+    }
+  }
+  const root = el(`<div>
+    <div class="pagehead"><h1 class="h1">Common Areas</h1>
+      <span class="sub">${spaces.length} floor-1 spaces \u00b7 plan numbering from the architectural set</span></div>
+    <div class="kpis">
+      <div class="kpi"><div class="kl">Lines checked</div><div class="kv">${done}<small> of ${total}</small></div><div class="kc">FF&amp;E and MEP punch together</div></div>
+      <div class="kpi"><div class="kl">Open issues</div><div class="kv">${issues}</div><div class="kc">flags and red space notes</div></div>
+      <div class="kpi"><div class="kl">Spaces</div><div class="kv">${spaces.length}</div><div class="kc">every floor-1 space with a package</div></div>
+    </div>
+    <section class="card"><div class="rlist"></div></section>
+  </div>`);
+  const list = root.querySelector('.rlist');
+  for (const sp of spaces) list.append(spaceRow(ctx, sp));
+  return root;
+}
+
+function renderSpace(ctx, { id }) {
+  const { store } = ctx;
+  const doc = store.getDoc(id);
+  if (!doc) return el(`<div class="coming">${ic('layers')}<b>${esc(id)} is not in this build</b>
+    <span>Only floor-1 spaces with a package are built.</span></div>`);
+  const mep = store.mepDoc(id);
+  const view = new URLSearchParams((location.hash.split('?')[1] || '')).get('view') === 'mep' && mep ? 'mep' : 'ffe';
+  const active = view === 'mep' ? mep : doc;
+  const s = store.roomStats(active);
+  const activeId = view === 'mep' ? store.mepDocId(id) : id;
+
+  const root = el(`<div>
+    <div class="pagehead">
+      <button class="icon-btn" data-back aria-label="Back to common areas">${ic('back')}</button>
+      <div><h1 class="h1">${esc(doc.typeLabel || doc.type)}</h1>
+      <div class="sub">Space ${esc(doc.number)} \u00b7 Floor ${esc(doc.floor)}</div></div>
+      <span class="spacer"></span>
+      <div class="hdr-actions">
+        <button class="btn" data-note>${ic('note')}Space notes${noteCount(doc) ? ` \u00b7 ${noteCount(doc)}` : ''}</button>
+      </div>
+    </div>
+    ${mep ? `<div class="filters"><span class="seg">
+      <button data-v="ffe" class="${view === 'ffe' ? 'on' : ''}">FF&amp;E \u00b7 ${store.roomStats(doc).done}/${store.roomStats(doc).total}</button>
+      <button data-v="mep" class="${view === 'mep' ? 'on' : ''}">MEP PUNCH \u00b7 ${store.roomStats(mep).done}/${store.roomStats(mep).total}</button>
+    </span></div>` : ''}
+    <section class="card">
+      <div class="card-head"><h2>${view === 'mep' ? 'MEP punch' : 'Checklist'}</h2>
+        <span class="card-cap">${s.done} of ${s.total} checked</span><span class="spacer"></span>
+        <span class="bar cy" style="width:130px"><i style="width:${s.total ? s.done / s.total * 100 : 0}%"></i></span></div>
+      <div class="how" style="padding:8px 16px;color:var(--subtle);font-size:11.5px">Tap a line to stamp your initials. Press and hold for the issue sheet.</div>
+      <div class="ilist"></div>
+    </section>
+  </div>`);
+  root.querySelector('[data-back]').addEventListener('click', () => { location.hash = '#/common'; });
+  root.querySelectorAll('[data-v]').forEach(b => b.addEventListener('click', () => {
+    location.hash = `#/space/${id}` + (b.dataset.v === 'mep' ? '?view=mep' : '');
+  }));
+  root.querySelector('[data-note]').addEventListener('click', () => notesSheet(ctx, id));
+
+  const list = root.querySelector('.ilist');
+  for (const [cat, entries] of groupByCategory(store.liveItems(active))) {
+    const done = entries.filter(([, it]) => it.checked).length;
+    list.append(el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">\u00b7</span><span>${done} of ${entries.length} checked</span></div>`));
+    for (const [iid, it] of entries) list.append(itemRow(ctx, activeId, iid, it));
+  }
+  return root;
+}
+
 function comingSoon(title, body) {
   return () => el(`<div><div class="pagehead"><h1 class="h1">${esc(title)}</h1></div>
     <section class="card"><div class="coming">${ic('wrench')}<b>${esc(title)} ships with the full rollout</b><span>${esc(body)} The approved mock for this screen is in the Mock Book, and the module slot is already registered.</span></div></section></div>`);
@@ -413,7 +518,7 @@ function renderActivity(ctx) {
 function renderPrint(ctx, { no }) {
   const { store } = ctx;
   const doc = store.getDoc(no);
-  if (!doc) return el(`<div class="coming"><b>Room ${esc(no)} is not in this slice</b></div>`);
+  if (!doc) return el(`<div class="coming"><b>Room ${esc(no)} is not in this build</b></div>`);
   const mep = store.mepDoc(no);
   const now = new Date();
   const stamp = `${now.toLocaleDateString('en-US')} · ${fmtWhen(now.toISOString())}`;
@@ -472,14 +577,16 @@ function renderPrint(ctx, { no }) {
   return root;
 }
 
-export function trackingModule() {
+export function trackingModule(store) {
   return {
     id: 'tracking',
     name: 'Tracking',
     nav: [
       { path: '#/', label: 'Dashboard', icon: 'grid', order: 10 },
-      { path: '#/rooms', label: 'Rooms', icon: 'door', count: '3', order: 20 },
-      { path: '#/common', label: 'Common Areas', icon: 'layers', count: '66', order: 30 },
+      { path: '#/rooms', label: 'Rooms', icon: 'door', order: 20,
+        get count() { return store ? String(store.guestRooms().length) : ''; } },
+      { path: '#/common', label: 'Common Areas', icon: 'layers', order: 30,
+        get count() { return store ? String(store.spaces().length) : ''; } },
       { path: '#/categories', label: 'Categories', icon: 'tagi', order: 40 },
       { path: '#/files', label: 'Files', icon: 'file', order: 70 },
       { path: '#/activity', label: 'Activity', icon: 'pulse', order: 80 },
@@ -490,7 +597,8 @@ export function trackingModule() {
       { match: /^#\/room\/(?<no>[^?]+)/, render: renderRoom },
       { match: /^#\/print\/(?<no>[^?]+)/, render: renderPrint },
       { match: /^#\/activity$/, render: renderActivity },
-      { match: /^#\/common$/, render: comingSoon('Common Areas', 'All 66 spaces are confirmed (ruling D2) and arrive with the data rollout.') },
+      { match: /^#\/common$/, render: renderCommon },
+      { match: /^#\/space\/(?<id>[^?]+)/, render: renderSpace },
       { match: /^#\/categories$/, render: comingSoon('Categories', 'The 21 real categories plus the custom category creator.') },
       { match: /^#\/files$/, render: comingSoon('Files', 'Plans, submittals, and exports with spec jump links.') },
     ],

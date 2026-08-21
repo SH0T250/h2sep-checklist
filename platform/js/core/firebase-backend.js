@@ -16,8 +16,8 @@ import {
 } from '../../firebase/firebase-auth.js';
 import {
   initializeFirestore, persistentLocalCache, persistentMultipleTabManager,
-  CACHE_SIZE_UNLIMITED, collection, doc, onSnapshot, updateDoc,
-  runTransaction, serverTimestamp,
+  CACHE_SIZE_UNLIMITED, collection, doc, onSnapshot, updateDoc, setDoc,
+  getDoc, serverTimestamp,
 } from '../../firebase/firebase-firestore.js';
 
 export const PLATFORM_COLLECTION = ['projects', 'h2sep', 'platform_rooms'];
@@ -87,33 +87,16 @@ export class FirebaseBackend {
     await updateDoc(ref, withStamp);
   }
 
-  // Create ONLY when the document really does not exist.
-  //
-  // Two ways this has already destroyed the live contact directory:
-  //   1. setDoc(ref, data, { merge: true }) — an empty map in the payload
-  //      (items: {}) is a leaf in the merge field mask, so Firestore wrote the
-  //      empty map OVER the live one.
-  //   2. getDoc() then a non-merge setDoc — worse. This client runs
-  //      persistentLocalCache, so getDoc can answer "missing" from the cache
-  //      for a document the server holds: a fresh profile, an evicted cache, a
-  //      first load that has not reached this doc yet. Acting on that answer
-  //      replaced a live 49-contact directory with an empty skeleton, and the
-  //      caller's own patch then landed as the only surviving record.
-  //
-  // A transaction is the fix for both. It reads through to the server rather
-  // than the cache, and re-checks at commit, so the create can only ever land
-  // in a genuinely empty slot. Offline it throws instead of writing, which
-  // ensureDoc already treats as "keep the local copy" — refusing to write is
-  // always the right answer here, because the only write on offer is one that
-  // would clobber records this client cannot see.
+  // Create ONLY when the document really does not exist. A merge write is not
+  // safe here: an empty map in the payload (items: {}) is a leaf in the merge
+  // field mask, so Firestore writes the empty map OVER the live one and every
+  // record in it is gone. Read first, write only into an empty slot.
   async createIfMissing(docId, data) {
     if (!this.isWriteReady()) throw new Error('not signed in yet');
     const ref = doc(this.db, ...PLATFORM_COLLECTION, docId);
-    return runTransaction(this.db, async (tx) => {
-      const snap = await tx.get(ref);
-      if (snap.exists()) return false;
-      tx.set(ref, data);
-      return true;
-    });
+    const snap = await getDoc(ref);
+    if (snap.exists()) return false;
+    await setDoc(ref, data);
+    return true;
   }
 }
