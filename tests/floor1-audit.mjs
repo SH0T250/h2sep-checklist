@@ -217,7 +217,79 @@ check('field state on approved lines was never overwritten by the rebuild', () =
       return o;
     })));
 
+process.stdout.write('\nTHE CREW\'S WORK\n' + '-'.repeat(70) + '\n');
+
+/* The crew has been checking boxes in the live app since July. A build that
+ * looks perfect and has none of that work in it is a build that would erase
+ * months of field time the moment it rolled out. */
+const liveChecked = liveLines.filter((x) => x.v.checked);
+const liveIssues = liveLines.filter((x) => x.v.issue && !x.v.issueResolved);
+
+check('the crew\'s check-offs are present in the build', () =>
+  liveChecked.length >= 380 ? [] : [`only ${liveChecked.length} checked lines; the live app had 382 on floor 1`]);
+
+check('the crew\'s open issues are present in the build', () =>
+  liveIssues.length >= 285 ? [] : [`only ${liveIssues.length} open issues; the live app had 289 on floor 1`]);
+
+check('every checked line carries initials', () =>
+  liveChecked.filter((x) => !x.v.initials || !String(x.v.initials).trim())
+    .map((x) => `${x.id}/${x.k} checked with no initials`));
+
+check('the crew\'s notes came across', () => {
+  const n = Object.values(docs).reduce((a2, d) => a2 + Object.keys(d.notes || {}).length, 0);
+  return n >= 5 ? [] : [`only ${n} notes in the build; the live app had 5 on floor 1`];
+});
+
+/* This seed is committed to a PUBLIC repository. Initials are what the paper
+ * sheet carries and are allowed. Names and account ids are not. */
+check('no personal names or account ids in the committed seed', () => {
+  const raw = readFileSync(SEED, 'utf8');
+  const out = [];
+  for (const f of ['checkedByName', 'checkedByUid', 'createdByUid']) {
+    if (raw.includes(`"${f}"`)) out.push(`field ${f} is present in the seed`);
+  }
+  for (const m of raw.matchAll(/"(?:by|initials)":\s*"([^"]{4,})"/g)) {
+    if (/\s/.test(m[1]) && /^[A-Z]/.test(m[1])) out.push(`looks like a full name: ${JSON.stringify(m[1])}`);
+  }
+  return out;
+});
+
+check('the retagged working wall kept the crew\'s check', () => {
+  const out = [];
+  for (const id of ['105','107','109','111','113','115']) {
+    const w = Object.values(docs[id].items).find((v) => v.code === 'GR-305' && !v.deleted);
+    if (!w) { out.push(`${id}: no live GR-305`); continue; }
+    if (!w.checked) out.push(`${id}: GR-305 is not checked, but the crew checked the wall under GR-308`);
+    if (w.checked && !w.initials) out.push(`${id}: GR-305 checked with no initials`);
+  }
+  return out;
+});
+
 process.stdout.write('\nDETERMINISM AND THE GENERATOR\n' + '-'.repeat(70) + '\n');
+
+/* The bug this exists for: a rebuild used to reset every check to false. */
+check('a rebuild preserves the crew\'s work', () => {
+  const keep = readFileSync(SEED, 'utf8');
+  try {
+    const before = JSON.parse(keep);
+    const count = (j) => {
+      let c = 0, i = 0;
+      for (const d of Object.values(j.docs)) for (const v of Object.values(d.items)) {
+        if (v.deleted) continue;
+        if (v.checked) c++;
+        if (v.issue && !v.issueResolved) i++;
+      }
+      return [c, i];
+    };
+    const [c0, i0] = count(before);
+    execSync('node platform/tools/build_floor1.mjs --regen 105 107 109 111 113 115 >/dev/null 2>&1');
+    const [c1, i1] = count(JSON.parse(readFileSync(SEED, 'utf8')));
+    const out = [];
+    if (c1 !== c0) out.push(`checks ${c0} -> ${c1} after a rebuild`);
+    if (i1 !== i0) out.push(`open issues ${i0} -> ${i1} after a rebuild`);
+    return out;
+  } finally { writeFileSync(SEED, keep); }
+});
 
 check('generator selftest passes', () => {
   const out = execSync('node platform/tools/build_floor1.mjs --selftest 2>&1', { encoding: 'utf8' });

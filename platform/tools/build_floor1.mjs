@@ -1186,6 +1186,38 @@ function buildRoomNotes(db, roomNo, room, rows, stamp, report) {
  *
  * Anything else that differs is reported line by line, so no field changes
  * silently on an approved room. */
+/* Re-apply field state from the copy already in the staged seed onto a freshly
+ * built pair of documents. Matched by item key, which is stable by
+ * construction. A line that no longer exists cannot take its state with it, so
+ * it is counted and reported rather than passed over in silence. */
+const FIELD_STATE_KEYS = ['checked', 'initials', 'checkedAt', 'checkedAtLocal', 'checkedByCo', 'issue', 'issueResolved'];
+function preserveFieldState(existingDocs, roomNo, ffe, mep) {
+  const out = { lines: 0, notes: 0, orphaned: [] };
+  for (const [id, fresh] of [[roomNo, ffe], [roomNo + '-MEP', mep]]) {
+    const prev = existingDocs[id];
+    if (!prev) continue;
+    for (const [k, ov] of Object.entries(prev.items || {})) {
+      const hasState = ov.checked || (ov.issue && String(ov.issue).trim()) || ov.checkedAt;
+      const nv = fresh.items[k];
+      if (!nv) {
+        if (hasState && !ov.deleted) out.orphaned.push(id + '/' + k + ' (' + (ov.code || 'untagged') + ')');
+        continue;
+      }
+      let touched = false;
+      for (const f of FIELD_STATE_KEYS) {
+        if (ov[f] !== undefined && ov[f] !== null && ov[f] !== '' && ov[f] !== false) { nv[f] = ov[f]; touched = true; }
+        else if (ov[f] !== undefined) nv[f] = ov[f];
+      }
+      if (touched && hasState) out.lines++;
+    }
+    for (const [nk, note] of Object.entries(prev.notes || {})) {
+      fresh.notes = fresh.notes || {};
+      if (!(nk in fresh.notes)) { fresh.notes[nk] = note; out.notes++; }
+    }
+  }
+  return out;
+}
+
 function carryForwardApproved(roomNo, ffe, mep, slice, stamp) {
   const out = { tombstoned: [], historyCarried: 0, changed: [], added: [] };
   const oldFfe = slice.docs[roomNo];
@@ -3369,6 +3401,13 @@ function main(argv) {
     if (regenRooms.includes(roomNo)) {
       report.regen = carryForwardApproved(roomNo, ffe, mep, slice, stamp);
     }
+    /* A REBUILD MUST NEVER ERASE THE CREW'S WORK. Field state belongs to
+     * whoever checked the box, not to the generator. If this room already
+     * exists in the staged seed with checks, initials, timestamps, issues or
+     * notes on it - carried in from the live app by carry_field_state.mjs -
+     * that state is re-applied to the freshly built lines. Without this, every
+     * regeneration silently reset the floor to zero. */
+    report.statePreserved = preserveFieldState(docs, roomNo, ffe, mep);
     docs[roomNo] = ffe;
     docs[roomNo + '-MEP'] = mep;
     reports.push(report);
@@ -3495,6 +3534,11 @@ function main(argv) {
     }
     if (r.superseded && r.superseded.length) {
       for (const sup of r.superseded) process.stdout.write('    ' + sup + '\n');
+    }
+    if (r.statePreserved && (r.statePreserved.lines || r.statePreserved.notes)) {
+      process.stdout.write('  field state preserved from the staged copy: ' + r.statePreserved.lines +
+        ' line(s), ' + r.statePreserved.notes + ' note(s)\n');
+      for (const o of r.statePreserved.orphaned) process.stdout.write('    WORK WITH NO LINE TO LAND ON: ' + o + '\n');
     }
     if (r.regen) {
       process.stdout.write('  REGENERATED an approved room. tombstoned ' + r.regen.tombstoned.length +

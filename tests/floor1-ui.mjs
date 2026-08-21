@@ -59,16 +59,42 @@ t('MEP-only space S030 shows its lines', s030.length>0, String(s030.length)+' li
 await p.screenshot({path:'/tmp/shot-common.png',fullPage:false});
 
 console.log('\nCHECK-OFF WRITES CORRECTLY');
-await p.goto(B+'#/room/112',{waitUntil:'networkidle'}); await p.waitForTimeout(400);
-await p.evaluate(()=>{
-  const r=[...document.querySelectorAll('.item-row')].find(x=>!x.querySelector('.stamp.checked')&&!x.querySelector('.issue-pill'));
-  r.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,button:0,clientX:5,clientY:5}));
-  r.dispatchEvent(new PointerEvent('pointerup',{bubbles:true,button:0,clientX:5,clientY:5}));
-});
+// With the crew's real work loaded most lines are checked or flagged, so hunt
+// for a room that still has a clean line to tap.
+let tapped=false;
+for(const rm of ['112','110','114','108','106','104','116','118','107','109']){
+  await p.goto(B+'#/room/'+rm,{waitUntil:'networkidle'}); await p.waitForTimeout(300);
+  tapped=await p.evaluate(()=>{
+    const r=[...document.querySelectorAll('.item-row')].find(x=>!x.querySelector('.stamp.checked')&&!x.querySelector('.issue-pill'));
+    if(!r) return false;
+    r.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,button:0,clientX:5,clientY:5}));
+    r.dispatchEvent(new PointerEvent('pointerup',{bubbles:true,button:0,clientX:5,clientY:5}));
+    return true;
+  });
+  if(tapped) break;
+}
+t('found a clean line to check off', tapped);
 await p.waitForTimeout(400);
 const patch=await p.evaluate(()=>{const l=JSON.parse(localStorage.getItem('h2sep-platform-v1')||'[]');return l.length?l[l.length-1].patch:null});
 const keys=patch?Object.keys(patch).map(k=>k.split('.').pop()):[];
 t('check writes the complete group', ['checked','initials','checkedByCo','checkedAt','checkedAtLocal'].every(f=>keys.includes(f)), keys.join(','));
+
+console.log('\nTHE CREW\'S WORK CARRIED IN');
+const totChecked=await p.evaluate(async()=>{
+  const res=await fetch('data/slice-f1.json'); const j=await res.json();
+  let c=0,i=0,n=0;
+  for(const d of Object.values(j.docs)){
+    for(const v of Object.values(d.items)){ if(v.deleted) continue; if(v.checked)c++; if(v.issue&&!v.issueResolved)i++; }
+    n+=Object.keys(d.notes||{}).length;
+  }
+  return {c,i,n};
+});
+t('382 crew check-offs present', totChecked.c===382, JSON.stringify(totChecked));
+t('289 crew issues present', totChecked.i===289);
+t('crew notes present', totChecked.n>=5);
+await p.goto(B+'#/room/110',{waitUntil:'networkidle'}); await p.waitForTimeout(400);
+const stamps=await p.$$eval('.item-row .stamp.checked',n=>n.map(x=>x.textContent.trim()));
+t('room 110 shows the crew initials on checked lines', stamps.length>0 && stamps.every(x=>/^[A-Z]{1,3}$/.test(x)), stamps.length+' stamps: '+[...new Set(stamps)].join(','));
 
 console.log('\nPRINT SHEET');
 await p.goto(B+'#/print/118',{waitUntil:'networkidle'}); await p.waitForTimeout(500);

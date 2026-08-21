@@ -41,3 +41,6 @@ platform/tools/private/
 # data. Same standing rule as the photographs themselves: this repo is PUBLIC.
 # The generator (platform/tools/progress-page.mjs) is source, its output is not.
 progress.html
+
+# Snapshot of the crew collection: carries real names and account ids.
+tools/out/backups/crew-floor1-snapshot.json
