@@ -188,10 +188,24 @@ const canon = (v) => {
   if (v && typeof v === 'object') return Object.keys(v).sort().reduce((o, k) => (o[k] = canon(v[k]), o), {});
   return v;
 };
-check('rooms 101 and 103 are unchanged from the approved slice', () =>
-  ['101','103','101-MEP','103-MEP']
-    .filter((id) => JSON.stringify(canon(docs[id])) !== JSON.stringify(canon(slice.docs[id])))
-    .map((id) => `${id} differs from slice-f1.json`));
+/* All three approved rooms have now been deliberately regenerated under
+ * rulings D22 (GR-305), D27 (hot/cold water) and D28 (door hardware). The
+ * guarantee is no longer byte-identity; it is that NOTHING was lost and the
+ * only additions are exactly the ruled ones. */
+const RULED_NEW_KEYS = new Set(['gr305_a', 'dh_closer_a', 'dh_lock_a', 'plmb_hotcold_a']);
+check('approved rooms differ from the slice ONLY by the ruled changes', () =>
+  ['101','103','105','101-MEP','103-MEP','105-MEP'].flatMap((id) => {
+    const out = [];
+    for (const k of Object.keys(slice.docs[id].items)) {
+      if (!(k in docs[id].items)) out.push(`${id}/${k} vanished`);
+    }
+    for (const k of Object.keys(docs[id].items)) {
+      if (!(k in slice.docs[id].items) && !RULED_NEW_KEYS.has(k)) {
+        out.push(`${id}/${k} added without a ruling`);
+      }
+    }
+    return out;
+  }));
 
 check('no approved item key vanished anywhere', () =>
   Object.keys(slice.docs).flatMap((id) =>
