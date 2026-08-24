@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 const ROOT = '/home/user/h2sep-checklist';
 const REF = JSON.parse(fs.readFileSync(ROOT + '/platform/data/ref-rooms-staged.json', 'utf8'));
+const LIVE = JSON.parse(fs.readFileSync(ROOT + '/platform/data/floor1-staged.json', 'utf8'));
 const HTML = fs.readFileSync(ROOT + '/research/ref-rooms/mockbook.html', 'utf8');
 const unesc = (s) => s.replace(/&lt;/g, '<').replace(/&gt;/g, '>')
   .replace(/&quot;/g, '"').replace(/&amp;/g, '&');
@@ -134,24 +135,130 @@ for (const k of THREE) {
 }
 
 /* ---------- 4. VERDICTS ---------- */
+/* Round 4 RAN. All four types came back FAIL and none of the findings is
+ * fixed, so this section pins the verdict word, the count, and the verbatim
+ * text of every finding onto the rendered page. The expected counts are hard
+ * numbers on purpose: a silently shortened finding list is the exact failure
+ * this file exists to catch. */
 console.log('\n== 4. VERDICTS ON THE PAGE ==');
 const mod = await import(ROOT + '/research/ref-rooms/mockbook.data.mjs');
+const R4_EXPECT = { '202': 3, '217': 2, '230': 3, '238': 2 };
+let r4total = 0;
 for (const room of ['202', '217', '230', '238']) {
   const v = mod.VERIFIER[room];
-  ok(v.round === 3, `room ${room}: VERIFIER round is ${v.round}, expected 3`);
-  ok(v.verdict === 'FAIL', `room ${room}: verdict ${v.verdict}`);
-  ok(HTML.includes(`Independent check, round 3: <span class="verdict-fail">FAIL</span>`),
-    'page must print "Independent check, round 3: FAIL"');
+  ok(v.round === 4, `room ${room}: VERIFIER round is ${v.round}, expected 4`);
+  ok(v.verdict === 'FAIL', `room ${room}: verdict ${v.verdict}, expected FAIL`);
+  ok(v.pending === false, `room ${room}: round 4 was run, so it must not be marked pending`);
+  ok(v.defects.length === R4_EXPECT[room],
+    `room ${room}: round 4 carries ${v.defects.length} finding(s), expected ${R4_EXPECT[room]}`);
+  r4total += v.defects.length;
+  ok(HTML.includes(`Independent check, round 4: <span class="verdict-fail">FAIL</span>`),
+    'page must print "Independent check, round 4: FAIL"');
+  ok(HTML.includes(`<span class="count">${v.defects.length} finding${v.defects.length === 1 ? '' : 's'} raised</span>`),
+    `room ${room}: the verifier block must badge ${v.defects.length} findings raised`);
+  ok(!HTML.includes('class="verdict-pass"'),
+    'no verdict on this page may be painted PASS - the fixing side does not award itself one');
   for (const d of v.defects) {
     ok(d.state === 'OPEN', `room ${room}: a defect is not OPEN`);
+    ok(d.sev === null, `room ${room}: a severity was invented; round 4 wrote none`);
     ok(HTML.includes(`<div class="vbody">${esc(d.text)}</div>`),
-      `room ${room}: round-3 finding not rendered verbatim -> ${d.text.slice(0, 70)}`);
+      `room ${room}: round-4 finding not rendered verbatim -> ${d.text.slice(0, 70)}`);
   }
-  console.log(`  room ${room}: FAIL, round 3, ${v.defects.length} findings, all OPEN and rendered verbatim`);
+  /* the type's own header badge and its approve box */
+  ok(HTML.includes(`round 4 &middot; ${v.defects.length} finding${v.defects.length === 1 ? '' : 's'} open and unfixed`),
+    `room ${room}: approve box must say ${v.defects.length} open and unfixed`);
+  console.log(`  room ${room}: FAIL, round 4, ${v.defects.length} finding(s) open and unfixed; ` +
+    `prior round ${v.priorRound} was ${v.priorVerdict} with ${v.priorFindings} finding(s)`);
 }
-const openBadges = (HTML.match(/<span class="count">(\d+) open<\/span>/g) || []);
-console.log(`  open-count badges: ${openBadges.join(' ')}`);
-ok((HTML.match(/verdict-fail/g) || []).length >= 8, 'FAIL must be shown on every type');
+ok(r4total === 10, `round 4 should carry 10 findings across the four types, carries ${r4total}`);
+console.log(`  round 4 total: ${r4total} findings, all OPEN, all rendered word for word`);
+
+/* ---------- 4b. THE FRONT PAGE STATES THE VERDICTS AND THE TRAJECTORY ------ */
+/* Austin approves from the front page. It has to carry the four verdicts and
+ * the round-by-round counts without him scrolling, and it must not soften
+ * either one. */
+console.log('\n== 4b. FRONT PAGE: FOUR VERDICTS AND THE TRAJECTORY ==');
+const head = HTML.slice(0, HTML.indexOf('<section class="block" id="summary">'));
+ok(/ROUND 4 FAILED ALL FOUR TYPES/.test(head), 'front page must say round 4 failed all four types');
+for (const room of ['202', '217', '230', '238']) {
+  const n = mod.VERIFIER[room].defects.length;
+  ok(head.includes(`${room} `) && new RegExp(`${room}[^<]*&mdash; FAIL, ${n}\\s+finding`).test(head),
+    `front page must name room ${room} as FAIL with ${n} findings`);
+}
+ok(/not one of them is fixed/.test(head), 'front page must say plainly that none of the findings is fixed');
+const R = mod.ROUND_RAISED;
+ok(R[1] === 21 && R[2] === 26 && R[3] === 25, `ROUND_RAISED should read 21/26/25, reads ${JSON.stringify(R)}`);
+for (const n of [R[1], R[2], R[3], r4total]) {
+  ok(new RegExp(`<b>${n}</b>`).test(head), `front page must print the round count ${n}`);
+}
+ok(head.includes(`findings per round ${R[1]} &rarr; ${R[2]} &rarr; ${R[3]} &rarr; ${r4total}`),
+  `title block must print the trajectory ${R[1]} -> ${R[2]} -> ${R[3]} -> ${r4total}`);
+/* and it must not oversell: no PASS, no "clean", no "approved" */
+ok(!/\bPASS\b/.test(head.replace(/verdict-pass/g, '')), 'front page must not print the word PASS');
+ok(/not\s+a\s+clean\s+package\s+and\s+it\s+is\s+not\s+offered\s+as\s+one/.test(head),
+  'front page must say the package is not clean');
+console.log(`  front page: four FAIL verdicts named, trajectory ${R[1]} -> ${R[2]} -> ${R[3]} -> ${r4total}, `
+  + 'no PASS anywhere, "none of them is fixed" stated');
+
+/* ---------- 4c. THE D29 BED SKIRT LINE ON 238 ---------- */
+/* Ruling D29 is the newest line in the package and the only one added after the
+ * round-3 fix. It has to be in the seed, rendered, and byte-identical to the
+ * approved generator's own definition - build_floor1.mjs is the authority and
+ * this build may not have drifted from it. */
+console.log('\n== 4c. D29 QUEEN BED SKIRT, room 238 ==');
+const bsq = (REF.docs['238'].items || {}).bsq_a;
+ok(!!bsq, 'seed doc 238 must carry the D29 bed skirt line bsq_a');
+if (bsq) {
+  ok(bsq.code === 'BS-Q', `bsq_a code is ${JSON.stringify(bsq.code)}, expected "BS-Q"`);
+  ok(bsq.qty === 2, `bsq_a qty is ${bsq.qty}, expected 2 (one per GR-602.ADA base row)`);
+  ok(bsq.label === 'Queen Bed Skirt @ ACCESSIBLE bed base', `bsq_a label is ${JSON.stringify(bsq.label)}`);
+  ok(bsq.category === 'FF&E - Bedding', `bsq_a category is ${JSON.stringify(bsq.category)}`);
+  ok(/D29/.test(bsq.src || ''), 'bsq_a src must cite ruling D29');
+  ok(/no queen skirt/.test(bsq.instanceNote || ''), 'bsq_a note must state that no document tags a queen skirt');
+  ok(/confirm the size with the FF&E supplier/.test(bsq.instanceNote || ''),
+    'bsq_a note must carry D29\'s confirm-before-ordering instruction');
+  const body238 = byDoc.get('238').body;
+  ok(body238.includes(`<code>${esc(bsq.code)}</code>`), 'bsq_a mark not rendered');
+  ok(body238.includes(`<div class="lbl">${esc(bsq.label)}</div>`), 'bsq_a label not rendered');
+  ok(body238.includes(`<div class="note clamped">${esc(bsq.instanceNote)}</div>`), 'bsq_a note not rendered verbatim');
+  ok(body238.includes(`<span class="src">${esc(bsq.src)}</span>`), 'bsq_a src not rendered verbatim');
+  /* the two generators must agree on this line, word for word */
+  const f1 = fs.readFileSync(ROOT + '/platform/tools/build_floor1.mjs', 'utf8');
+  const rr = fs.readFileSync(ROOT + '/platform/tools/build_ref_rooms.mjs', 'utf8');
+  const cut = (s) => {
+    const i = s.indexOf("ruling: 'D29', doc: 'ffe', key: 'bsq_a'");
+    return i < 0 ? null : s.slice(i, s.indexOf('applies:', i));
+  };
+  const a = cut(f1), b = cut(rr);
+  ok(a && b && a === b, 'the D29 bsq_a definition must be byte-identical in build_floor1.mjs and build_ref_rooms.mjs');
+  /* and it applies to 238 only - floor 1 has no QQ Acc. key, so LIVE is untouched */
+  const liveHas = Object.keys(LIVE.docs || {}).some((d) => (LIVE.docs[d].items || {}).bsq_a);
+  ok(!liveHas, 'no LIVE floor-1 room may carry bsq_a - floor 1 has no QQ Acc. key (D29)');
+  const otherRefHas = ['202', '217', '230'].filter((r) => (REF.docs[r].items || {}).bsq_a);
+  ok(otherRefHas.length === 0, `bsq_a must be on 238 only, also found on ${otherRefHas.join(', ')}`);
+  console.log(`  238/bsq_a  ${bsq.code}  qty ${bsq.qty}  ${bsq.label}`);
+  console.log('  rendered verbatim; definition byte-identical to build_floor1.mjs; absent from LIVE and from 202/217/230');
+}
+/* Round 3's findings are HISTORY now, and every one of them has to still be on
+ * the page word for word - a fix round that quietly shortens the record of what
+ * it was fixing is the same failure in a new place. */
+ok(Array.isArray(mod.ROUND3) && mod.ROUND3.length === 25,
+  `ROUND3 should hold the 25 round-3 findings, holds ${(mod.ROUND3 || []).length}`);
+let r3rendered = 0;
+for (const r of mod.ROUND3) {
+  if (HTML.includes(esc(r.text))) r3rendered++;
+  ok(/NOT RE-VERIFIED/.test(r.state), `a round-3 finding claims more than NOT RE-VERIFIED: ${r.text.slice(0, 60)}`);
+  ok(r.how && r.how.length > 40, `a round-3 finding has no mechanism recorded: ${r.text.slice(0, 60)}`);
+}
+ok(r3rendered === mod.ROUND3.length, `only ${r3rendered}/${mod.ROUND3.length} round-3 findings rendered`);
+console.log(`  round-3 history: ${r3rendered}/${mod.ROUND3.length} findings printed word for word, each with its mechanism`);
+const openBadges = (HTML.match(/<span class="count">(\d+) finding/g) || []);
+console.log(`  finding-count badges: ${openBadges.join(' ')}`);
+/* FAIL has to be visible on every type in all three places it belongs: the
+ * summary row, the type header, and the type's own verifier block. */
+const failBadges = (HTML.match(/class="verdict-fail"/g) || []).length;
+ok(failBadges >= 12, `FAIL must be painted on every type in every place it belongs; found ${failBadges}`);
+console.log(`  FAIL badges painted: ${failBadges}`);
 /* round 2 history preserved */
 ok(mod.ROUND2.length === 30, `ROUND2 history should hold 30 findings, holds ${mod.ROUND2.length}`);
 let r2rendered = 0;

@@ -675,157 +675,286 @@ export const ROUND2 = [
   },
 ];
 
-/* ROUND 3, the CURRENT independent check, printed exactly as it was returned.
- * A separate agent read the rebuilt platform/data/ref-rooms-staged.json with no
- * knowledge of how it was assembled and FAILED ALL FOUR TYPES AGAIN, with 16
- * findings. Every one of them is OPEN: none has been fixed, none has been
- * argued with, and none is softened here. `sev` is the severity or priority
- * marker the checker itself wrote at the head of its finding; where it wrote
- * none (all four room-238 findings), none is invented. `text` is the finding
- * WORD FOR WORD, including its own bracketed head.
+/* ROUND 3, the last independent check, printed exactly as it was returned, with
+ * what the ROUND-4 FIX did about each finding beside it.
  *
- * The verdicts are the checker's own and stand as written. The fixing side does
- * not upgrade its own verdict, and this page is rendered from the same seed the
- * checker read, so what Austin sees is what failed. */
+ * A separate agent read the round-3 platform/data/ref-rooms-staged.json with no
+ * knowledge of how it was assembled and FAILED ALL FOUR TYPES, with 25
+ * findings. Every one of them is printed WORD FOR WORD below, including its own
+ * bracketed head, and none is softened. `sev` is the severity or priority
+ * marker the checker itself wrote; where it wrote none (the room-238 findings),
+ * none is invented.
+ *
+ * `how` is the fixing side's account of the mechanism, and it is exactly that -
+ * an account, not a verdict. Every one of them is checkable against
+ * platform/tools/build_ref_rooms.mjs and against the rebuilt seed. NOBODY
+ * OUTSIDE THIS BUILD HAS RE-READ THE FILE, which is why the round-4 verdict
+ * below is UNVERIFIED and not PASS. */
+export const ROUND3 = [
+  {
+    room: "202",
+    sev: "HIGH",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "[HIGH] platform/data/ref-rooms-staged.json | doc 202-MEP | key mech_tstat | fields `reliability` + `instanceNote` -- the line contradicts itself. `reliability` = \"FLAGGED\", while its own instanceNote states \"...data/project.sqlite feeds this condensed line from 3 row(s) of room 202 (ITM-0018 [HIGH], ITM-0059 [HIGH], ITM-0060 [HIGH]), and the line ships at the WORST of them, HIGH.\" All three support rows are HIGH in data/project.sqlite (verified directly), and no OPEN conflicts-table entry names any mark this line carries (code \"T\"; B3.1/B4.2/B4.5/B5.6/A11 name none of it), so priority-1's rule yields HIGH. Root cause in platform/tools/build_ref_rooms.mjs: the PTAC-repeat block (~line 3437) sets item.reliability='FLAGGED' BEFORE the worst-of-own-rows block (~line 3468), and that later block builds its sentence from the local `ownWorst` rather than the final `item.reliability`, so the sentence is emitted unconditionally and is now false. Either the reliability is wrong (must be HIGH per priority 1) or the sentence is wrong (must say the count conflict flagged it further, the way plmb_shower_a's conflict text correctly does: \"its own data/project.sqlite row(s) read HIGH, and the open conflict flags it further\"). As shipped, a reader is told two different things about the same field, and the mock book renders the contradiction (FLAGGED badge above a note claiming HIGH).",
+    how: "Closed by the round-4 fix, at the cause. A NOTE NO LONGER RESTATES A VALUE ANOTHER FIELD CARRIES. The worst-of-own-rows block in build_ref_rooms.mjs used to end \"and the line ships at the WORST of them, HIGH\", built from the local ownWorst, so the PTAC-repeat block above it could lower the same line to FLAGGED and leave the sentence behind. The sentence now reads \"...each shown at its own reading, and a condensed line is never read better than the worst of them\" - it explains WHY and names every feeding row at its own reliability, and the reliability field alone says what the line ships. Every block that MOVES the reading still announces its own move. The same rewrite covers 217-MEP/mech_tstat and 217/905_a. platform/tools/assert_ref_claims.mjs now fails the build on any note that prints a reliability word for its own line.",
+  },
+  {
+    room: "202",
+    sev: "HIGH",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "[HIGH] platform/data/ref-rooms-staged.json | doc 202 (FF&E) | note n_gategaps | field `text` -- the note states a negative its own document contradicts. It is headed \"ROWS THAT CANNOT CARRY A CHECKLIST LINE\" and lists, among the 7, \"GR-905 [FF&E - Misc, FLAGGED] ITM-0280\". But doc 202 DOES carry a checklist line for exactly that row: key gr905_a, category \"FF&E - Misc\", sort 22000, code \"GR-905\", reliability FLAGGED, carrying the crew's issue \"MISSING\" (meta.fieldState itself announces \"1 line(s) the category gate left with no home were REBUILT ... (202/gr905_a ...)\"). gr905_a's own note admits \"The row is also recorded in room note n_gategaps\", but n_gategaps was never amended to say the row now has a line, so the note and the line list disagree. The identical text on doc 202-MEP is true (no GR-905 line there); only the FF&E copy is false. Fix: the FF&E copy must except GR-905 from the \"cannot carry a line\" claim and point at gr905_a.",
+    how: "Closed by the round-4 fix. The header is now a literal description of the list it heads: \"ROWS OUTSIDE AUSTIN'S CHECKLIST GATE THAT ARE FLAGGED, MEDIUM, OR STATE A DOCUMENT CONFLICT\", and the body says plainly that being listed here does not by itself decide whether a row also carries a checklist line - platform/tools/carry_ref_state.mjs REBUILDS a gated row as a line where the crew already holds field work on it, which is exactly what happened to 202/gr905_a. The note and the line no longer disagree. assert_ref_claims.mjs fails the build if the old header returns or if the header's row count stops matching the list.",
+  },
+  {
+    room: "202",
+    sev: "MEDIUM",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "[MEDIUM] platform/data/ref-rooms-staged.json | doc 202-MEP | key fp_heads_a | field `code` -- the mark \"FP\" is carried from the LIVE room-104 line onto a room that has no row of that family. Room 202 has ZERO Fire Sprinkler / Fire Protection rows in data/project.sqlite (verified: its only fire rows are ITM-0078 and ITM-0319, both category \"Fire Alarm\", tag \"(S)SB\"), and no row anywhere in room_items or items carries tag 'FP' (count = 0). meta.donorRule is explicit: \"The MARK is the target room's too: where this room has no row of the donor's mark family the donor's mark is not carried at all.\" The tool correctly stripped the donor's qty 3 from this line for precisely this reason (`qty` is absent) and correctly stripped the donor's FP-1 citations, but left the donor's mark in the tag column, so the line still displays a mark this room cannot prove.",
+    how: "Closed by the round-4 fix. fpNoCount() now strips the MARK as well as the count and the FP-series citation, for the same stated reason, and writes a MARK paragraph quoting the donor's mark as not carried. The line ships code \"\" on all four rooms. assert_ref_claims.mjs ties meta.donorRule's mark sentence to that field.",
+  },
+  {
+    room: "202",
+    sev: "MEDIUM",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "[MEDIUM] platform/data/ref-rooms-staged.json | doc 202-MEP | all 25 keys, worst at key elec_gfci | field `instanceNote` -- meta.donorRule states, of BOTH documents, \"Every line carries a SOURCE sentence naming which document each part of it came from.\" Zero of the 25 lines in 202-MEP contains a SOURCE sentence (all 44 FF&E lines in doc 202 do). Most MEP lines at least carry a CITATION or \"THIS ROOM'S OWN ROWS GOVERN THIS LINE\" paragraph, but elec_gfci carries NOTHING: its instanceNote is the empty string while its entire `src` (\"A530 keyed note 13 (placed on view 03); G402 schedule general note 6; A530 keyed note 24; E400 Panel A/B bathroom-GFCI circuit + panel note 4; E101 spec #25 ... and #18; A530 general note D; G400 detail 02\") is LIVE room 104's text shipped verbatim at HIGH, of which only \"A530 kn13\" (ITM-0015) and \"A530 kn24\" (ITM-0014) are corroborated by room 202's own rows. plmb_showerhead_a is the same class (note is only \"Trim Delta T24859.\"). A crew member reading these lines has no way to tell which parts are room 202's and which are room 104's -- the exact laundering the donorRule exists to prevent.",
+    how: "Closed by the round-4 fix. Every MEP line now carries a SOURCE sentence - the condensed lines, the own-row db_ lines and the ruled D27/D28/D29 lines each get their own wording - so all 295 lines in the package have one. 202-MEP/elec_gfci went from an EMPTY instanceNote to a bath-sheet paragraph plus a SOURCE sentence naming what came from LIVE room 104 and what came from room 202's own row. assertDocRules() now REFUSES to write a line with no SOURCE sentence, so the promise in meta.donorRule cannot quietly stop being true.",
+  },
+  {
+    room: "217",
+    sev: "PRIORITY 3+5 / HIGH",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "PRIORITY 3+5 / HIGH - platform/data/ref-rooms-staged.json, doc 217-MEP, key mech_ptac, field instanceNote (and src): the line states a room-wide negative that data/project.sqlite contradicts. Verbatim: '1 citation segment(s) carried from LIVE room 104 point at a sheet that data/project.sqlite's own sheets table says covers a DIFFERENT floor, and no row of this room's own cites it, so it is NOT carried. Removed, quoted verbatim: \"M301 line 30\" [M301 = \"Mechanical First Floor Plan\"]'. Room 217 has THREE of its own rows citing M301: ITM-0062 source_sheet 'M401 KN6; M301', ITM-0067 'M401; M301 N3; M501 det.2', ITM-0070 'M201; M301-M304' (a range that also spans M302, this room's floor). Per meta.citationRule ('...is not carried unless this room's own row cites it') the segment should have been KEPT and reported as ownKept, not dropped and replaced with an UNVERIFIED M302. Cause: platform/tools/build_ref_rooms.mjs line ~3499 calls floorTrueCitation(item.src, roomFloor, mine, ...) passing `mine` - the support set of this one condensed line - so ownSrcs/ownOf never see ITM-0062/0067/0070. This is round-2 finding #3's exact defect class, recorded as closed: composeMepCitation was widened to walk allRows, floorTrueCitation was not.",
+    how: "Closed by the round-4 fix, at the named cause. floorTrueCitation() is now handed EVERY row of the room, exactly as composeMepCitation() already was, and its per-segment precedence was reordered to the order its own header declares: KEPT (this room's own row names the sheet outright) beats RE-POINTED beats TRIMMED beats DROPPED. Room 217's ITM-0062, ITM-0067 and ITM-0070 cite M301, so the segment is KEPT and the line quotes the row's own citation verbatim. The false room-wide negative is gone from the sentence entirely.",
+  },
+  {
+    room: "217",
+    sev: "PRIORITY 3+5 / HIGH",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "PRIORITY 3+5 / HIGH - platform/data/ref-rooms-staged.json, doc 217-MEP, key mech_tstat, field instanceNote (and src): same false room-wide negative. Verbatim: '...and no row of this room's own cites it, so it is NOT carried. Removed, quoted verbatim: \"M301 GN5\" [M301 = \"Mechanical First Floor Plan\"]'. Room 217's own rows ITM-0062, ITM-0067 and ITM-0070 all cite M301. Same cause (floorTrueCitation receives `mine`, not all rows).",
+    how: "Closed by the same round-4 fix as the mech_ptac finding: floorTrueCitation() walks all of the room's rows and the own-row KEPT test runs before the range re-point, so \"M301 GN5\" stays and the line names ITM-0062, ITM-0067 and ITM-0070 as the rows that cite it.",
+  },
+  {
+    room: "217",
+    sev: "PRIORITY 3+5 / HIGH",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "PRIORITY 3+5 / HIGH - platform/data/ref-rooms-staged.json, doc 217-MEP, key plmb_fd_a, field instanceNote (and src): same false room-wide negative, on P301. Verbatim: '...and no row of this room's own cites it, so it is NOT carried. Removed, quoted verbatim: \"P301 note 9 (floor drain 2\\\")\" [P301 = \"Sanitary Sewer First Floor Plan\"]'. Room 217's own rows ITM-0040 (source_sheet 'P402; P301'), ITM-0047 ('P301-P310 GN6; P501 det.12') and ITM-0723 ('P402; P301 note (tub 2\\\")') all cite P301 - and the tool itself uses ITM-0047's P301-P310 range to re-point plmb_trapguard_a on the very next line, proving the row is visible to the build. Same cause.",
+    how: "Closed by the same round-4 fix. Room 217's ITM-0040 cites \"P402; P301\" outright, so \"P301 note 9 (floor drain 2\\\")\" is KEPT and reported as ownKept with the row's own citation quoted. plmb_trapguard_a's P301 is kept on the same test rather than re-pointed, so the two plumbing lines now treat the same sheet the same way.",
+  },
+  {
+    room: "217",
+    sev: "PRIORITY 1+5 / HIGH",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "PRIORITY 1+5 / HIGH - platform/data/ref-rooms-staged.json, doc 217-MEP, key mech_tstat, field instanceNote vs field reliability: the note asserts a reliability the line does not ship. It reads 'data/project.sqlite feeds this condensed line from 3 row(s) of room 217 (ITM-0018 [HIGH], ITM-0059 [HIGH], ITM-0060 [HIGH]), and the line ships at the WORST of them, HIGH.' The item's reliability field is FLAGGED (lowered afterwards by the PTAC-2 COUNT CONFLICT rule, which does not say it flags the line). The audit sentence that exists to let Austin check the reliability is therefore false on its face. Cause: build_ref_rooms.mjs composes the worst-of-rows sentence at ~line 3483 and the PTAC repeat block at ~line 3436 sets reliability='FLAGGED' without amending it. Same fault on doc 202-MEP key mech_tstat.",
+    how: "Closed by the round-4 note rewrite described against the 202-MEP finding: the audit sentence names the feeding rows at their own readings and no longer asserts what the line ships.",
+  },
+  {
+    room: "217",
+    sev: "PRIORITY 1+5 / MEDIUM",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "PRIORITY 1+5 / MEDIUM - platform/data/ref-rooms-staged.json, doc 217, key 905_a, field instanceNote vs field reliability: the note's closing reliability sentence reads 'The reliability on this line is the WORST of THIS room's own data/project.sqlite row(s), each at its own reading: ITM-0347 [MEDIUM], ITM-0082 [HIGH]. They do not agree, so the line ships the worst of them, MEDIUM'. The item ships reliability FLAGGED (raised to FLAGGED by the B4.2 conflict carry earlier in the same note). Both the claim 'the reliability on this line is the WORST of THIS room's own row(s)' and 'ships ... MEDIUM' are false for the line as shipped.",
+    how: "Closed by the round-4 note rewrite. The FF&E RELIABILITY paragraph now reads \"This line is read no better than the worst of THIS room's own data/project.sqlite row(s), each shown at its own reading: ITM-0347 [MEDIUM], ITM-0082 [HIGH]. They do not agree, and a fold is only as well read as its weakest row.\" It states the evidence and not the field, so the B4.2 conflict carry that raises the line to FLAGGED cannot contradict it.",
+  },
+  {
+    room: "217",
+    sev: "PRIORITY 3+5 / MEDIUM",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "PRIORITY 3+5 / MEDIUM - platform/data/ref-rooms-staged.json, doc 217-MEP, key lv_phone_db, field instanceNote (and src): the note denies a row it quotes in the same paragraph. It reads 'This room has no row of its own that places this line on a guestroom sheet, so the sheet is cited with no view or keynote number at all.' This line's OWN support row ITM-0031 (tag DB, doorbell) has source_sheet 'A55x kn28; A550 P&S legend', which the tool's own resolveSheetWildcard renders as 'A554 kn28' - a guestroom-sheet placement with a keynote number - and the same note quotes it verbatim later as '[cited: A55x kn28; A550 P&S legend]'. That own-row reference is also absent from src, which carries only the re-pointed donor segment 'A554 tag 905'. Cause: composeMepCitation sets ownUsed only when the re-pointed donor segment reduces to exactly roomSheet; here it reduces to 'A554 tag 905', so the non-empty ownArch built from ITM-0031 is discarded and the 'no row of its own' branch prints.",
+    how: "Closed by the round-4 fix. composeMepCitation() no longer requires the re-pointed donor segment to reduce to exactly the bare sheet name before it will use this room's own rows: wherever the sift leaves no numbered guestroom reference and the room's own A55-series rows do have one, those rows supply the citation and are named. 217-MEP/lv_phone_db now cites \"A554 kn28\" from ITM-0031 and says \"This room's own row(s) ITM-0028, ITM-0031 supply the A554 reference instead\". The room-wide negative it used to print is gone.",
+  },
+  {
+    room: "217",
+    sev: "PRIORITY 3 / MEDIUM",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "PRIORITY 3 / MEDIUM - platform/data/ref-rooms-staged.json, doc 217, field src on 12 lines: the FF&E citation is the raw room_items.primary_sheet of a common-core row, which names a sheet that data/project.sqlite's sheets table says does not draw this room's type. Ten lines cite bare 'A550' = 'Enl. Guest Room Plans & Elevs - King Std. & King Std. Conn.' (901_a, 902_a, 904_a, gr318_a, gr100_a, gr101_a, gr200_a, gr201_a, gr205_a, gr500_a) and two cite bare 'A530' = 'Enl. Bathroom - King Std., Std. Conn., QQ Std., Std. Conn., QQ Wide & QQ Ext.' (hd16_a, gr203_a). Room 217 is King One Bedroom Acc.: room_types.room_sheet = A554, bath_sheet = A533. Nine of these rows carry the true reference for THIS room in their own source_sheet and it is discarded: ITM-0084/0086/0085/0087/0088/0089/0091 all list 'A554:58', ITM-0090 lists 'A554:51' and 'A533', ITM-0092 lists 'A533:44'. The MEP document re-points exactly this class of donor/foreign-sheet citation onto A554; the FF&E document does not, and no line or note discloses it. On LIVE room 104 the same recipe is correct because A550 IS room 104's sheet, so the falsehood is introduced by re-using the recipe on a new type.",
+    how: "Closed by the round-4 fix. A new pass, ffeTypeCitation(), asks of every FF&E citation the question floorTrueCitation() asks of a floor: does data/project.sqlite's sheets table say this enlargement sheet draws THIS room type? Where the row's own source_sheet carries the entry for this type, the line cites that fuller citation instead of the bare primary_sheet - 217/gr318_a now cites \"A550:60; A551:52; A553:55; A554:58; A555:70; A556:56\" and the note names \"A554:58\" as the entry that covers this room. Where neither names this type's sheet, the citation stands and the line says which sheet room_types gives this type, marked UNVERIFIED. Nothing is deleted: reduceFFE() is byte-copied from build_floor1.mjs and was not touched.",
+  },
+  {
+    room: "217",
+    sev: "PRIORITY 3 / MEDIUM",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "PRIORITY 3 / MEDIUM - platform/data/ref-rooms-staged.json, doc 217-MEP, field src on keys elec_gfci, plmb_wc_a, plmb_showerhead_a, plmb_fd_a: donor bath-sheet PLACEMENTS on A530 are carried onto a room whose bath is drawn on A533, with no re-point and no warning. Verbatim: elec_gfci 'A530 keyed note 13 (placed on view 03)' and 'A530 keyed note 24'; plmb_wc_a 'A530 keyed note 19 (placed on plan 01)'; plmb_showerhead_a 'A530 keyed note 9 (placed on plan 01 and elevation 05)'; plmb_fd_a 'A530 keyed note 20 (placed on plan 01, standard guest bath)'. data/project.sqlite room_types.bath_sheet for 'King One Bedroom Acc.' is A533, and A533's own view numbering is different (room 217's rows cite A533:37, A533:44, A533:50, A533:93, elev 03, views 02/05, el.04), so a plan-01/view-03/elevation-05 placement is not transferable. plmb_shower_a and plmb_shencl_a DO carry the sentence 'This room type's bath is drawn on A533 ... confirm it on A533' - these four do not, and elec_gfci ships with an entirely empty instanceNote. The build applies a bath-sheet check only inside bathingUnresolvedLine().",
+    how: "Closed by the round-4 fix. A new pass, bathTrueCitation(), reads the sheets table for the room types each BATHROOM enlargement draws. A plan, view, elevation or keyed-note number read on another type's bath sheet is the donor room's reading of the donor room's own bath drawing: it is dropped, quoted verbatim as removed, and replaced by room_types.bath_sheet for THIS type cited with NO number on it and marked UNVERIFIED. A citation that carries no placement number, or that sits inside a range covering this type's own bath sheet, stays and says so. elec_gfci, plmb_wc_a, plmb_showerhead_a and plmb_fd_a now carry that paragraph on 202, 217 and 238; room 230's bath IS A530, so nothing there moves.",
+  },
+  {
+    room: "217",
+    sev: "PRIORITY 3 / LOW-MEDIUM",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "PRIORITY 3 / LOW-MEDIUM - platform/data/ref-rooms-staged.json, doc 217-MEP, key elec_panel, field src: the donor's calculation-row numbers are asserted for this room with no corroboration and no disclaimer. src carries 'E103 rows 14 and 15'. No row of room 217 cites E103 with those row numbers: ITM-0002 cites 'E400; E103; E101 #12/#13' (no row number) and this room's own accessible-key rows ITM-0388 and ITM-0390 cite 'E103 rows 4/5/8/9/11'. meta.citationRule promises that an uncorroborated donor number is called out on the line ('citing the same sheet ... is not evidence and the line says so instead'); elec_panel's instanceNote says nothing about it, because the number-by-number corroboration in composeMepCitation is applied only to A55-series segments.",
+    how: "Closed by the round-4 fix, by disclosure on the line rather than by a number nobody can prove. Every MEP line's new SOURCE sentence states that view, keynote, note and row numbers on sheets OUTSIDE the guestroom-and-bathroom set are the approved line's and are NOT re-proved for this room - read them on the sheet before relying on them. 217-MEP/elec_panel carries it, so \"E103 rows 14 and 15\" is no longer an unlabelled assertion. meta.citationRule was rewritten to say exactly that, and assert_ref_claims.mjs holds it to it.",
+  },
+  {
+    room: "230",
+    sev: "CONFIRMED · priority 1",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "[CONFIRMED · priority 1] platform/data/ref-rooms-staged.json › docs[\"230-MEP\"].items.plmb_shower_a.instanceNote — source conflict text LOST. This line's only supporting sqlite row for room 230 is ITM-0545 (mapped by product-identity, per the generator's own report). That row's note reads verbatim: \"DUAL MARK CARRY - P401/P402 print SH-1, P104 schedules SH-4; P104's own SH-1 is the 36x36 employee shower. A530: the standard guest bath is a SHOWER, not a tub\". It appears NOWHERE in doc 230 or 230-MEP (0 hits for \"DUAL MARK CARRY\", \"36x36 employee shower\", \"ITM-0545\"). The line carries no \"THIS ROOM'S OWN ROWS GOVERN THIS LINE\" block at all, so the reader is never told which row of room 230 feeds it. meta.donorRule promises \"every one of those rows that is not HIGH, OR WHOSE OWN NOTE STATES A DOCUMENT CONFLICT, is quoted on the line verbatim\", and the tool's own second test (n_gategaps: \"two sheet numbers set against each other in one sentence\") is satisfied by \"P401/P402 print SH-1, P104 schedules SH-4\". Root cause: SHEET_VS_SHEET_RE at platform/tools/build_ref_rooms.mjs:2412 requires a connective (vs|versus|while|against|but) which this note does not use, and CONFLICT_IN_NOTE_RE (:2403) has no matching vocabulary — so rowStatesConflict() returns false and `speaks` is empty. (Reliability itself is correct: FLAGGED, driven by conflict B3.1.)",
+    how: "Closed by the round-4 fix, at the named cause. CONFLICT_WORDS - the vocabulary rowStatesConflict() matches on - gained the database's own phrase for this exact situation, \"DUAL MARK CARRY\", plus \"supersede\" (which catches both \"superseded\" and \"supersedes\"), \"no source states\" and \"no source assigns\". ITM-0545's note is now quoted verbatim on the line, employee shower and all. SHEET_VS_SHEET_RE was deliberately NOT widened to a bare comma: that would read every note listing two sheet numbers as a conflict, and the row is caught on the database's own words instead.",
+  },
+  {
+    room: "230",
+    sev: "CONFIRMED · priority 1",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "[CONFIRMED · priority 1] platform/data/ref-rooms-staged.json › docs[\"230-MEP\"].items.plmb_lavfaucet_a.instanceNote — source conflict text LOST, and the note affirmatively misleads. The block names ITM-0043 [HIGH] as one of the 3 feeding rows, then states \"Row(s) that are not HIGH, or whose own note states a document conflict, carried verbatim and NOT resolved: ITM-0045 ...\" — implying ITM-0043 has nothing to say. ITM-0043's own note in data/project.sqlite reads verbatim: \"DUAL MARK CARRY - P401/P402 print L-2, P104 schedules L-3/L-4; P104's own L-2 is the employee/pool wall-hung lav\". That text appears nowhere in either doc (0 hits for \"employee/pool wall-hung\"). Same root cause as the plmb_shower_a defect (SHEET_VS_SHEET_RE / CONFLICT_IN_NOTE_RE under-match). The fact that P104's own L-2 is a different fixture — the employee/pool wall-hung lav — is material to the open B3.1 mark question and is not recoverable anywhere in the package.",
+    how: "Closed by the same vocabulary fix. ITM-0043's \"DUAL MARK CARRY - P401/P402 print L-2, P104 schedules L-3/L-4; P104's own L-2 is the employee/pool wall-hung lav\" is now quoted on the line on 230-MEP and 238-MEP, so the fact that P104's own L-2 is a different fixture is in the package where the B3.1 mark question is.",
+  },
+  {
+    room: "230",
+    sev: "CONFIRMED · priority 5, completeness of a room-scoped claim",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "[CONFIRMED · priority 5, completeness of a room-scoped claim] platform/data/ref-rooms-staged.json › docs[\"230\"].notes.n_gategaps.text (and the identical copy on docs[\"230-MEP\"].notes.n_gategaps.text) — the note claims to list every gated-out row of this room that \"state[s] a DOCUMENT CONFLICT in their own note at any reliability\", and states the count as 8 rows / 7 stating a conflict. It omits ITM-0095 [Flooring, tag T-01, HIGH], whose own note reads verbatim: \"RK supersedes the finish schedule area text to include 'Guest Suite Bathroom'\" — a document supersession between the RK ID set and the finish schedule. The note's own declared vocabulary list includes \"superseded\"; CONFLICT_IN_NOTE_RE (build_ref_rooms.mjs:2403) matches \"superseded\" but not the DB's actual word \"supersedes\", so the row is dropped. I re-ran the tool's exact two regexes over all 31 gated rows of room 230: ITM-0095 is the ONLY additional row a reader would call a document conflict, so the fix is one row, and the stated counts (8 / 7) become 9 / 8.",
+    how: "Closed by the round-4 fix. \"supersede\" replaced \"superseded\" in CONFLICT_WORDS, so ITM-0095 (\"RK supersedes the finish schedule area text to include 'Guest Suite Bathroom'\") is caught on all four rooms; room 230's note now reads 9 rows, 8 of them stating a conflict. The note also prints the vocabulary FROM the matcher's own list rather than from a hand-kept copy, so the advertised words and the matched words cannot drift apart again.",
+  },
+  {
+    room: "230",
+    sev: "LOWER CONFIDENCE · priority 4",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "[LOWER CONFIDENCE · priority 4] platform/data/ref-rooms-staged.json › docs[\"230-MEP\"].items.fp_heads_a.code = \"FP\" — room 230 has ZERO Fire Sprinkler rows in data/project.sqlite (the line's own instanceNote says so: \"Room 230 is on FLOOR 2 and has NO Fire Sprinkler row of its own in data/project.sqlite\"), and no row of room 230 carries the tag \"FP\". meta.donorRule states \"The MARK is the target room's too: where this room has no row of the donor's mark family the donor's mark is not carried at all.\" The mark is carried anyway. Mitigations: \"FP\" is a curated D10 line code rather than a mark read off a drawing (donor room 105's sprinkler rows ITM-0447/0448/0449 are also untagged), the line ships MEDIUM with no qty, and everything else on it is correctly emptied and explained. Same class: elec_gfci.code = \"GFCI\", which is also not a tag on any room-230 row — but room 230 does carry GFCI rows (ITM-0005, ITM-0015), so that one is descriptively true.",
+    how: "Closed by the round-4 fix - the same mark strip applied for the 202 finding. fp_heads_a ships with no mark, no quantity and PH-GU-001 quoted, on all four rooms.",
+  },
+  {
+    room: "230",
+    sev: "LOWER CONFIDENCE · priority 5",
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "[LOWER CONFIDENCE · priority 5] platform/data/ref-rooms-staged.json › docs[\"230\"].items.gr308_a.instanceNote — the closing sentence asserts \"LIVE room 105 has no line for tag GR-308, so nothing here was borrowed from another room type.\" platform/data/floor1-staged.json docs[\"105\"].items.gr308_a exists; it is a tombstone (deleted:true, \"SUPERSEDED on 2026-08-20\", retired by ruling D22). The generator's own report says \"1 RETIRED donor line(s) skipped - a tombstone is not a source\", so the intent is \"no LIVE (non-retired) line\", but as written the sentence is a negative about the approved floor-1 build that the approved floor-1 build contradicts, and it sits in the same package as note n_d22, which is entirely about the fact that room 105 DID carry GR-308. Suggested fix: qualify it (\"no live line — 105's gr308_a is a D22 tombstone, and a tombstone is not a source\").",
+    how: "Closed by the round-4 fix, by deleting the claim rather than by qualifying it. The SOURCE sentence on a sqlite-only FF&E line now states positively what the line is built from - \"Every field on this line ... is data/project.sqlite room 230's own row(s) ITM-0501, verbatim, at the database's own reliability\" - and adds that the donor index this build reads is LIVE lines only and a retired tombstone is not a source. The negative about the approved floor-1 build is gone.",
+  },
+  {
+    room: "238",
+    sev: null,
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "238-MEP | key plmb_shencl_a | field src -- ships \"A530 keyed note 28 (elevation 04) and keyed note 27 (plan 01); A556\". FALSE FOR THIS ROOM. sheets.A530 = \"Enl. Bathroom - King Std., Std. Conn., QQ Std., Std. Conn., QQ Wide & QQ Ext.\" - QQ Acc. is not drawn on it; room_types.bath_sheet for \"QQ Acc.\" = \"A532 / A532.1\". NO row of room 238 cites A530 kn27 or kn28 anywhere (its own enclosure rows are ITM-0716 [cited: A532 elev 02; A532.1 views 01, 02] and ITM-0717 [cited: A532.1 view 02 keyed note 11]). This is donor room 105's reading of room 105's own bath drawing, placement callouts included. Round 2 raised this exact finding (research/ref-rooms/mockbook.data.mjs, VERIFIER '238') and it is recorded as \"CLOSED BY THE ROUND-3 FIX\", but the fix only changed the `code` field (kn 28 / kn 5 -> kn 10 / kn 11); `src` is untouched. The instanceNote's caveat says \"any bath-sheet keynote carried in the citation above is room 105's reading\" - \"above\" is the row citations quoted inside the MARK block, not the src field - and build_ref_rooms.mjs has no bath-sheet equivalent of floorTrueCitation() (bathSheet is used only for that one sentence in bathingUnresolvedLine(), line 2266).",
+    how: "Closed by the round-4 bath-sheet pass described against the 217 finding. \"A530 keyed note 28 (elevation 04) and keyed note 27 (plan 01)\" is removed and quoted verbatim as removed; the line now cites \"A556; A532 / A532.1 (... NO plan, view, elevation or keyed-note number is asserted on it ... UNVERIFIED for this room type)\". This is the src field, which the round-3 fix left untouched.",
+  },
+  {
+    room: "238",
+    sev: null,
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "238-MEP | key plmb_shower_a | field src -- ships \"P401/P402 mark SH-1; P104 rows SH-3 and SH-4; A530 plan 01 dimensions and bathing configuration; A556 printed note 'NO FINISHES UNDER SHOWER'; A550/A555 keynote 26\". Two carried-donor residues on a room whose code was corrected: (a) \"A530 plan 01\" - A530 does not draw QQ Acc. (see above) and no room-238 row cites A530 plan 01; the room's own bathing row ITM-0715 cites A532 plan 01.1 / A532.1; (b) \"P104 rows SH-3 and SH-4\" keeps SH-4, which is donor room 105's half of the pair - room 238 holds NO SH-4 row anywhere and its own row ITM-0715 resolves the pair as \"SH-1 / SH-3\". Round 3 fixed the `code` (SH-1 / SH-4 -> SH-1 / SH-3) and left the citation asserting the donor's mark and the donor's bath-sheet view.",
+    how: "Closed by the round-4 fix on both halves. (a) \"A530 plan 01 dimensions and bathing configuration\" is dropped by the bath-sheet pass and replaced by A532 / A532.1 with no number on it. (b) A new pass, citedMarkNote(), leaves \"P104 rows SH-3 and SH-4\" alone - P104 really does print both - and states beside it which marks of that family room 238's own rows carry: \"SH-1 (ITM-0715), SH-3 (ITM-0715)\". Nothing is deleted and nothing about this room is asserted off the donor's row.",
+  },
+  {
+    room: "238",
+    sev: null,
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "238-MEP | key plmb_lavfaucet_a | field instanceNote -- source conflict text LOST. Support row ITM-0043 [HIGH], tag \"L-2 / L-3 / L-4\", carries the data/project.sqlite note \"DUAL MARK CARRY - P401/P402 print L-2, P104 schedules L-3/L-4; P104's own L-2 is the employee/pool wall-hung lav\". That is a document disagreement stated on this room's own row, and it is quoted nowhere in doc 238 or 238-MEP (searched: 'DUAL MARK CARRY' and 'employee/pool' both absent). The line names ITM-0043 only in its roster list. Cause: rowStatesConflict() (build_ref_rooms.mjs line 2414) - CONFLICT_IN_NOTE_RE matches none of the words in the note, and SHEET_VS_SHEET_RE requires vs|versus|while|against|but between the two sheet numbers while this note uses a comma. The consequence is that the one fact explaining WHY the P401/P402 L-2 mark is ambiguous (P104's own L-2 is a different, employee/pool fixture) is not in the package at all; B3.1's quoted positions do not contain it.",
+    how: "Closed by the same CONFLICT_WORDS fix as the 230 finding: \"DUAL MARK CARRY\" now matches, and ITM-0043's note is quoted verbatim on 238-MEP/plmb_lavfaucet_a.",
+  },
+  {
+    room: "238",
+    sev: null,
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "238 and 238-MEP | note n_gategaps | count and body -- ITM-0095 [Flooring, HIGH, tag T-01] \"Floor tile, bathroom\", note verbatim \"RK supersedes the finish schedule area text to include 'Guest Suite Bathroom'\", is a gated-out row stating a document conflict (RK area statement against the finish schedule) and is NOT listed; the note therefore says \"8 row(s)\" when 9 qualify by its own stated test. The note itself advertises \"superseded\" as part of the vocabulary; CONFLICT_IN_NOTE_RE matches \"superseded\" but not \"supersedes\", so the row falls through. The same word form is what carries ITM-0009 (\"superseded on the 7 accessible keys by the 700 VA + 300 VA split\") onto 238-MEP/elec_panel, so the treatment is inconsistent within the same document. Text absent from both docs (searched 'RK supersedes').",
+    how: "Closed by the same \"supersede\" fix. Room 238's note now lists ITM-0095 and reads 9 rows.",
+  },
+  {
+    room: "238",
+    sev: null,
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "238-MEP | key plmb_hotcold_a | field src -- the D27 ruled line ships \"D27 (AJ 2026-08-21); P202 HWS distribution\". P305 (\"Domestic Water & Gas First Floor Plan\") was DROPPED from the cited list and nothing was put in its place, so this floor-2 line now cites no domestic-water floor plan at all. Every other floor-wrong sheet in this document is RE-POINTED to the sibling that covers floor 2 with an UNVERIFIED marker (mech_ptac and mech_tstat: M301 -> M302; plmb_fd_a: P301 -> P302; plmb_trapguard_a: P301 -> P302), and P306 = \"Domestic Water Second Floor Plan\" exists in the sheets table. Room 238's OWN row ITM-0036 cites the pair \"P305/P306 keynote 3\", which is the same own-row range evidence that made plmb_trapguard_a re-point rather than trim - and meta.citationRule says a floor-wrong sheet stays \"unless this room's own row cites it\". Cause: floorTrueCitation() is passed only the line's support rows (`mine`, build_ref_rooms.mjs line 3491), which is empty for a RULED_LINE_ADDITION, so neither the own-row exception nor the sibling re-point can fire.",
+    how: "Closed by the round-4 fix, at the named cause. floorTrueCitation() is handed every row of the room, so the D27 ruled line - which has no support rows of its own - is now judged against ITM-0036's \"P305/P306 keynote 3\". P305 is KEPT on the own-row test, the line quotes that row's citation verbatim, and the trim that used to silently drop it runs only after the own-row and range tests have both failed.",
+  },
+  {
+    room: "238",
+    sev: null,
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "238-MEP | key elec_lights | field instanceNote -- support row ITM-0024 [HIGH, tag WS03] \"Wall sconce, guestroom vanity - Arkansas Lighting 3550V LED\", note verbatim \"may be the same physical device as FF&E GR-203 Vanity Sconce; no source states the equivalence, both carried\", is not quoted on the line, and elec_lights' own text explicitly claims to cover \"the vanity sconce\". The mirror-image warning IS carried on 238/gr203_a (from ITM-0090), so the two documents disagree about whether the crew is told this line and the FF&E line may be the same fixture. Cause: rowStatesConflict() - the vocabulary has \"no source settles\" and \"not stated\" but not \"no source states\".",
+    how: "Closed by the round-4 vocabulary fix. \"no source states\" is in CONFLICT_WORDS, so ITM-0024's warning - \"may be the same physical device as FF&E GR-203 Vanity Sconce; no source states the equivalence, both carried\" - is now quoted on 238-MEP/elec_lights, and the two documents say the same thing about the vanity sconce.",
+  },
+  {
+    room: "238",
+    sev: null,
+    state: "ADDRESSED BY THE ROUND-4 FIX · NOT RE-VERIFIED",
+    text: "meta.conflictPolicy vs 238-MEP keys db_itm0712, db_itm0714, db_itm0715, db_itm0716, db_itm0717 and 238 keys hd05_a, hd14_a, hd51_a | field instanceNote -- the stated policy is that an entry rides on THREE tests (a mark this room carries, a room key of this type, or a citation of the entry by id in one of this room's own rows) and that \"Every match lands on the line, FLAGGED, and in room note n_conflicts\". A11 and B4.4 match room 238 ONLY through the third test (rows ITM-0712 through ITM-0720 cite \"conflicts.md A11 / B4.4\" by id) and the entry blocks - \"OPEN DOCUMENT CONFLICT A11/B4.4 ... Topic, verbatim ... Positions, verbatim ...\" - ride on NO line; those eight lines carry only the row's own quoted note. conflictsOnMarks() (line 2541) filters on h.marks only, so a hit with rows but no marks can never reach a line. B4.4's positions text (\"STILL OPEN: whether 438 is a CONNECTOR ... Do not order the 438 bath package.\") appears only in n_conflicts, not on the bathing lines it was matched through.",
+    how: "Closed by the round-4 fix. conflictsOnMarks() filtered on h.marks only, so an entry matched through the THIRD test could reach room note n_conflicts and nothing else. conflictsOnLine() now also matches an entry that one of the rows BEHIND a line cites by id, and conflictOnLineText() says which test caught it. A11 and B4.4 now ride on 238-MEP/db_itm0712, db_itm0714, db_itm0715, db_itm0716, db_itm0717 and on 238/hd05_a, hd14_a, hd51_a - eight lines, all FLAGGED, carrying B4.4's own \"Do not order the 438 bath package\". A ROOM KEY match still rides in the note and on no line, and meta.conflictPolicy now says exactly that, because a key is a fact about the room and not about any one item.",
+  },
+]
+
+/* ROUND 4 RAN, IT READ THIS SEED, AND IT FAILED ALL FOUR TYPES.
+ *
+ * A checker with no knowledge of how this package was assembled read the
+ * rebuilt platform/data/ref-rooms-staged.json - the same file this page renders
+ * - and returned FAIL on 202, 217, 230 and 238 with ten findings: three, two,
+ * three and two. Every one of them is printed below WORD FOR WORD.
+ *
+ * NONE OF THEM IS FIXED, and none is marked closed, answered or softened. The
+ * round-3 loop ended here by design (see the round-3 checkpoint: "round 4 is
+ * the last round ... if round 4 still fails, the loop stops and Austin gets the
+ * book with the honest verdict trail"). This is that book.
+ *
+ * The checker wrote no severity or priority marker on any of the ten, so `sev`
+ * is null on all ten and none is invented - the same rule ROUND3 states.
+ *
+ * Trajectory, from the checkpoint commits: 21 findings in round 1, 26 in round
+ * 2, 25 in round 3, 10 now. See ROUND_RAISED below for what those numbers are
+ * and are not. */
 export const VERIFIER = {
-  '202': {
+  "202": {
     verdict: "FAIL",
-    round: 3,
+    round: 4,
+    pending: false,
+    priorRound: 3,
+    priorVerdict: "FAIL",
+    priorFindings: 4,
     defects: [
-      {
-        sev: "HIGH",
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "[HIGH] platform/data/ref-rooms-staged.json | doc 202-MEP | key mech_tstat | fields `reliability` + `instanceNote` -- the line contradicts itself. `reliability` = \"FLAGGED\", while its own instanceNote states \"...data/project.sqlite feeds this condensed line from 3 row(s) of room 202 (ITM-0018 [HIGH], ITM-0059 [HIGH], ITM-0060 [HIGH]), and the line ships at the WORST of them, HIGH.\" All three support rows are HIGH in data/project.sqlite (verified directly), and no OPEN conflicts-table entry names any mark this line carries (code \"T\"; B3.1/B4.2/B4.5/B5.6/A11 name none of it), so priority-1's rule yields HIGH. Root cause in platform/tools/build_ref_rooms.mjs: the PTAC-repeat block (~line 3437) sets item.reliability='FLAGGED' BEFORE the worst-of-own-rows block (~line 3468), and that later block builds its sentence from the local `ownWorst` rather than the final `item.reliability`, so the sentence is emitted unconditionally and is now false. Either the reliability is wrong (must be HIGH per priority 1) or the sentence is wrong (must say the count conflict flagged it further, the way plmb_shower_a's conflict text correctly does: \"its own data/project.sqlite row(s) read HIGH, and the open conflict flags it further\"). As shipped, a reader is told two different things about the same field, and the mock book renders the contradiction (FLAGGED badge above a note claiming HIGH).",
-      },
-      {
-        sev: "HIGH",
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "[HIGH] platform/data/ref-rooms-staged.json | doc 202 (FF&E) | note n_gategaps | field `text` -- the note states a negative its own document contradicts. It is headed \"ROWS THAT CANNOT CARRY A CHECKLIST LINE\" and lists, among the 7, \"GR-905 [FF&E - Misc, FLAGGED] ITM-0280\". But doc 202 DOES carry a checklist line for exactly that row: key gr905_a, category \"FF&E - Misc\", sort 22000, code \"GR-905\", reliability FLAGGED, carrying the crew's issue \"MISSING\" (meta.fieldState itself announces \"1 line(s) the category gate left with no home were REBUILT ... (202/gr905_a ...)\"). gr905_a's own note admits \"The row is also recorded in room note n_gategaps\", but n_gategaps was never amended to say the row now has a line, so the note and the line list disagree. The identical text on doc 202-MEP is true (no GR-905 line there); only the FF&E copy is false. Fix: the FF&E copy must except GR-905 from the \"cannot carry a line\" claim and point at gr905_a.",
-      },
-      {
-        sev: "MEDIUM",
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "[MEDIUM] platform/data/ref-rooms-staged.json | doc 202-MEP | key fp_heads_a | field `code` -- the mark \"FP\" is carried from the LIVE room-104 line onto a room that has no row of that family. Room 202 has ZERO Fire Sprinkler / Fire Protection rows in data/project.sqlite (verified: its only fire rows are ITM-0078 and ITM-0319, both category \"Fire Alarm\", tag \"(S)SB\"), and no row anywhere in room_items or items carries tag 'FP' (count = 0). meta.donorRule is explicit: \"The MARK is the target room's too: where this room has no row of the donor's mark family the donor's mark is not carried at all.\" The tool correctly stripped the donor's qty 3 from this line for precisely this reason (`qty` is absent) and correctly stripped the donor's FP-1 citations, but left the donor's mark in the tag column, so the line still displays a mark this room cannot prove.",
-      },
-      {
-        sev: "MEDIUM",
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "[MEDIUM] platform/data/ref-rooms-staged.json | doc 202-MEP | all 25 keys, worst at key elec_gfci | field `instanceNote` -- meta.donorRule states, of BOTH documents, \"Every line carries a SOURCE sentence naming which document each part of it came from.\" Zero of the 25 lines in 202-MEP contains a SOURCE sentence (all 44 FF&E lines in doc 202 do). Most MEP lines at least carry a CITATION or \"THIS ROOM'S OWN ROWS GOVERN THIS LINE\" paragraph, but elec_gfci carries NOTHING: its instanceNote is the empty string while its entire `src` (\"A530 keyed note 13 (placed on view 03); G402 schedule general note 6; A530 keyed note 24; E400 Panel A/B bathroom-GFCI circuit + panel note 4; E101 spec #25 ... and #18; A530 general note D; G400 detail 02\") is LIVE room 104's text shipped verbatim at HIGH, of which only \"A530 kn13\" (ITM-0015) and \"A530 kn24\" (ITM-0014) are corroborated by room 202's own rows. plmb_showerhead_a is the same class (note is only \"Trim Delta T24859.\"). A crew member reading these lines has no way to tell which parts are room 202's and which are room 104's -- the exact laundering the donorRule exists to prevent.",
-      },
+      { state: "OPEN", sev: null, text: "doc 202-MEP | key plmb_shencl_a | fields instanceNote + src -- the citation note asserts a reference the line does not carry. Verbatim: \"This room's own row(s) ITM-0311 supply the A553 reference instead, and that reference is on this line above.\" The src reads \"A550/A555 kn5; A531 (... NO plan, view, elevation or keyed-note number is asserted on it ... UNVERIFIED for this room type)\" -- there is no A553 reference anywhere on the line (verified: /A553/ does not match src). What ITM-0311 actually supplies is its own citation \"A530 kn28; A550/A555 kn5\", i.e. keynote 5 on the King Studio and QQ guestroom sheets, neither of which draws room 202 (sheets.A550 = \"Enl. Guest Room Plans & Elevs - King Std. & King Std. Conn.\", A555 = QQ; room_types.room_sheet for \"King One Bedroom\" = A553). The same sentence therefore contradicts its own preceding clause, which says \"keynote 5 [is] NOT carried onto A553\", and then tells the reader an A553 reference is on the line. Cause: build_ref_rooms.mjs composeMepCitation() line ~1356 builds the ownUsed sentence as \"supply the \" + roomSheet + \" reference instead, and that reference is on this line above\" without testing that any pushed ownArch segment actually names roomSheet; ownArch here holds only the BOTH-sheet segment \"A550/A555 kn5\". This is the only one of the 5 ownUsed sentences in the package where the claim is false (202-MEP/lv_phone_db, 217-MEP/lv_phone_db, 238-MEP/elec_outlets, 238-MEP/lv_phone_db all do carry their room sheet)." },
+      { state: "OPEN", sev: null, text: "doc 202-MEP | key mech_tstat | field instanceNote (against field qty) -- the note's stated derivation of the quantity disagrees with the quantity field on the same line, which is exactly what meta.donorRule promises cannot happen (\"A NOTE NEVER RESTATES A VALUE ANOTHER FIELD CARRIES: it says why a reading is what it is, and the reliability and qty fields say what it is, so the two cannot disagree\"). Verbatim: \"This line is fed by ITM-0059 (\\\"PTAC 1\\\"), ITM-0060 (\\\"PTAC 1\\\") - the database transcribes that member ONCE, for PTAC 1 only. The quantity here is therefore the transcribed row count and is NOT doubled\". The line names TWO transcribed rows (ITM-0059 energy-management wall controller, ITM-0060 thermostat -- two different sub-assembly members, not one) and ships qty 1; its own SOURCE sentence names three feeding rows (ITM-0018, ITM-0059, ITM-0060). \"The transcribed row count\" is 2 (or 3), the field reads 1, and a reader checking the arithmetic printed on the line cannot make it come out. The identical sentence on 202-MEP/mech_grille_rm is true because that line is fed by exactly one member row (ITM-0053, qty 1); the template is only false where more than one member feeds the line. Cause: build_ref_rooms.mjs PTAC-repeat block (~line 3894) prints one fixed sentence regardless of how many member rows it just listed." },
+      { state: "OPEN", sev: null, text: "doc 202-MEP | keys mech_ptac, mech_tstat, plmb_fd_a, plmb_trapguard_a, plmb_hotcold_a | field instanceNote -- the FLOOR-keep sentence attributes ONE row's citation string to two or three rows as their verbatim words, and offers as evidence rows the keep rule itself excludes. mech_ptac and mech_tstat: \"(this room's own row(s) ITM-0062, ITM-0067, ITM-0070 cite it, verbatim: \\\"M401 KN6; M301\\\")\" -- only ITM-0062 writes that string; ITM-0067 writes \"M401; M301 N3; M501 det.2\" and ITM-0070 writes \"M201; M301-M304\". plmb_fd_a and plmb_trapguard_a: \"(... ITM-0040, ITM-0047 cite it, verbatim: \\\"P402; P301\\\")\" -- ITM-0047 writes \"P301-P310 GN6; P501 det.12\". plmb_hotcold_a: \"(... ITM-0036, ITM-0047 cite it, verbatim: \\\"P305/P306 keynote 3\\\")\" -- ITM-0047 again writes \"P301-P310 GN6; P501 det.12\" and never writes P305 at all outside that range. Compounding it, the branch this sentence justifies is the one whose own code comment and meta.citationRule wording are \"this room's own row names that sheet outright - not inside a range\" (named0 is computed over stripRanges(ownSrcs)), yet the row list printed as its evidence is built by ownOf()/citesSheet() WITHOUT stripping ranges, so ITM-0070 (M301 only inside \"M301-M304\") and ITM-0047 (P301/P305 only inside \"P301-P310\") are advertised as proving a test they do not pass. A reader who opens ITM-0047 or ITM-0070 to check the quoted \"verbatim\" citation finds different words." },
     ],
   },
-  '217': {
+  "217": {
     verdict: "FAIL",
-    round: 3,
+    round: 4,
+    pending: false,
+    priorRound: 3,
+    priorVerdict: "FAIL",
+    priorFindings: 9,
     defects: [
-      {
-        sev: "PRIORITY 3+5 / HIGH",
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "PRIORITY 3+5 / HIGH - platform/data/ref-rooms-staged.json, doc 217-MEP, key mech_ptac, field instanceNote (and src): the line states a room-wide negative that data/project.sqlite contradicts. Verbatim: '1 citation segment(s) carried from LIVE room 104 point at a sheet that data/project.sqlite's own sheets table says covers a DIFFERENT floor, and no row of this room's own cites it, so it is NOT carried. Removed, quoted verbatim: \"M301 line 30\" [M301 = \"Mechanical First Floor Plan\"]'. Room 217 has THREE of its own rows citing M301: ITM-0062 source_sheet 'M401 KN6; M301', ITM-0067 'M401; M301 N3; M501 det.2', ITM-0070 'M201; M301-M304' (a range that also spans M302, this room's floor). Per meta.citationRule ('...is not carried unless this room's own row cites it') the segment should have been KEPT and reported as ownKept, not dropped and replaced with an UNVERIFIED M302. Cause: platform/tools/build_ref_rooms.mjs line ~3499 calls floorTrueCitation(item.src, roomFloor, mine, ...) passing `mine` - the support set of this one condensed line - so ownSrcs/ownOf never see ITM-0062/0067/0070. This is round-2 finding #3's exact defect class, recorded as closed: composeMepCitation was widened to walk allRows, floorTrueCitation was not.",
-      },
-      {
-        sev: "PRIORITY 3+5 / HIGH",
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "PRIORITY 3+5 / HIGH - platform/data/ref-rooms-staged.json, doc 217-MEP, key mech_tstat, field instanceNote (and src): same false room-wide negative. Verbatim: '...and no row of this room's own cites it, so it is NOT carried. Removed, quoted verbatim: \"M301 GN5\" [M301 = \"Mechanical First Floor Plan\"]'. Room 217's own rows ITM-0062, ITM-0067 and ITM-0070 all cite M301. Same cause (floorTrueCitation receives `mine`, not all rows).",
-      },
-      {
-        sev: "PRIORITY 3+5 / HIGH",
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "PRIORITY 3+5 / HIGH - platform/data/ref-rooms-staged.json, doc 217-MEP, key plmb_fd_a, field instanceNote (and src): same false room-wide negative, on P301. Verbatim: '...and no row of this room's own cites it, so it is NOT carried. Removed, quoted verbatim: \"P301 note 9 (floor drain 2\\\")\" [P301 = \"Sanitary Sewer First Floor Plan\"]'. Room 217's own rows ITM-0040 (source_sheet 'P402; P301'), ITM-0047 ('P301-P310 GN6; P501 det.12') and ITM-0723 ('P402; P301 note (tub 2\\\")') all cite P301 - and the tool itself uses ITM-0047's P301-P310 range to re-point plmb_trapguard_a on the very next line, proving the row is visible to the build. Same cause.",
-      },
-      {
-        sev: "PRIORITY 1+5 / HIGH",
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "PRIORITY 1+5 / HIGH - platform/data/ref-rooms-staged.json, doc 217-MEP, key mech_tstat, field instanceNote vs field reliability: the note asserts a reliability the line does not ship. It reads 'data/project.sqlite feeds this condensed line from 3 row(s) of room 217 (ITM-0018 [HIGH], ITM-0059 [HIGH], ITM-0060 [HIGH]), and the line ships at the WORST of them, HIGH.' The item's reliability field is FLAGGED (lowered afterwards by the PTAC-2 COUNT CONFLICT rule, which does not say it flags the line). The audit sentence that exists to let Austin check the reliability is therefore false on its face. Cause: build_ref_rooms.mjs composes the worst-of-rows sentence at ~line 3483 and the PTAC repeat block at ~line 3436 sets reliability='FLAGGED' without amending it. Same fault on doc 202-MEP key mech_tstat.",
-      },
+      { state: "OPEN", sev: null, text: "doc meta / field `citationRule` (pass 1) + doc `217-MEP`, field `instanceNote` on keys elec_lights, elec_outlets, elec_panel, elec_sink_sw, lv_phone_db, lv_tvdata, lv_wap, mech_grille_bath, mech_tstat — META CLAIM THE CODE DOES NOT IMPLEMENT. meta.citationRule promises: \"what survives is then corroborated NUMBER BY NUMBER against EVERY row of this room; a number that walk matches is named with the row(s) that match it, and a number it does not reach is labelled UNVERIFIED for this room rather than asserted.\" In build_ref_rooms.mjs, composeMepCitation() gates the entire corroboration/UNVERIFIED block behind `if (removed.length) { ... }` (line ~1296), so the walk is only run and reported on lines where at least one donor number was DROPPED. On these 9 donor-fed lines nothing was dropped, so their surviving donor numbers are asserted onto room 217's own sheet A554 with neither a naming row nor an UNVERIFIED label: elec_panel `src` = \"... A554 keynote 51\" (corroborating row ITM-0001 \"A55x kn51\" never named), mech_grille_bath \"A554 keynote 19 view 02\" (ITM-0064 \"A55x KN19\" never named), mech_tstat \"A554 KN24\" (ITM-0018 \"A55x kn24\"), elec_lights \"A554 keynote 3\" (ITM-0014), elec_outlets \"A554 kn36; A554 kn25; A554 kn50\", elec_sink_sw \"A554 keynote 14 and keynote 15\", lv_wap \"A554 keynote 44\", lv_tvdata \"A554 keynote 47\", lv_phone_db \"A554 kn28\". Only mech_ptac carries the promised naming (\"keynote 1 <- ITM-0010\"). The numbers themselves are all DB-wildcard-proven, so this is a disclosure/rule violation, not a wrong citation." },
+      { state: "OPEN", sev: null, text: "doc meta / field `mepSource` + doc `217-MEP` (no key — the rows reach no line) — CHECKABLE FALSEHOOD. meta.mepSource states \"rows no condensed line claims become their own lines and are never lost.\" Nine of room 217's own Plumbing rows are claimed by no condensed line, are emitted as no line, and (7 of the 9) are not named anywhere in either 217 document: ITM-0032 / ITM-0033 / ITM-0034 (gate valves at the CWS / HWS / HWR riser take-offs), ITM-0035 (domestic water branch set to unit), ITM-0036 (fixture runouts), ITM-0037 (sanitary sewer riser tie), ITM-0038 (vent riser), ITM-0040 (2\" SS waste branch), ITM-0041 (vent piping). They are dropped by the copied constant MEP_ROUGH_IN_ITEMS (build_ref_rooms.mjs:555-558), which marks them '<rough-in, deliberately not on the approved punch>'. That exclusion is never disclosed anywhere in the shipped seed (grep for \"rough-in\" in ref-rooms-staged.json returns only \"the rough-in consequence of BT-1\"), so the sentence's \"never lost\" is unqualified and untrue for those rows." },
     ],
   },
-  '230': {
+  "230": {
     verdict: "FAIL",
-    round: 3,
+    round: 4,
+    pending: false,
+    priorRound: 3,
+    priorVerdict: "FAIL",
+    priorFindings: 5,
     defects: [
-      {
-        sev: "CONFIRMED · priority 1",
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "[CONFIRMED · priority 1] platform/data/ref-rooms-staged.json › docs[\"230-MEP\"].items.plmb_shower_a.instanceNote — source conflict text LOST. This line's only supporting sqlite row for room 230 is ITM-0545 (mapped by product-identity, per the generator's own report). That row's note reads verbatim: \"DUAL MARK CARRY - P401/P402 print SH-1, P104 schedules SH-4; P104's own SH-1 is the 36x36 employee shower. A530: the standard guest bath is a SHOWER, not a tub\". It appears NOWHERE in doc 230 or 230-MEP (0 hits for \"DUAL MARK CARRY\", \"36x36 employee shower\", \"ITM-0545\"). The line carries no \"THIS ROOM'S OWN ROWS GOVERN THIS LINE\" block at all, so the reader is never told which row of room 230 feeds it. meta.donorRule promises \"every one of those rows that is not HIGH, OR WHOSE OWN NOTE STATES A DOCUMENT CONFLICT, is quoted on the line verbatim\", and the tool's own second test (n_gategaps: \"two sheet numbers set against each other in one sentence\") is satisfied by \"P401/P402 print SH-1, P104 schedules SH-4\". Root cause: SHEET_VS_SHEET_RE at platform/tools/build_ref_rooms.mjs:2412 requires a connective (vs|versus|while|against|but) which this note does not use, and CONFLICT_IN_NOTE_RE (:2403) has no matching vocabulary — so rowStatesConflict() returns false and `speaks` is empty. (Reliability itself is correct: FLAGGED, driven by conflict B3.1.)",
-      },
-      {
-        sev: "CONFIRMED · priority 1",
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "[CONFIRMED · priority 1] platform/data/ref-rooms-staged.json › docs[\"230-MEP\"].items.plmb_lavfaucet_a.instanceNote — source conflict text LOST, and the note affirmatively misleads. The block names ITM-0043 [HIGH] as one of the 3 feeding rows, then states \"Row(s) that are not HIGH, or whose own note states a document conflict, carried verbatim and NOT resolved: ITM-0045 ...\" — implying ITM-0043 has nothing to say. ITM-0043's own note in data/project.sqlite reads verbatim: \"DUAL MARK CARRY - P401/P402 print L-2, P104 schedules L-3/L-4; P104's own L-2 is the employee/pool wall-hung lav\". That text appears nowhere in either doc (0 hits for \"employee/pool wall-hung\"). Same root cause as the plmb_shower_a defect (SHEET_VS_SHEET_RE / CONFLICT_IN_NOTE_RE under-match). The fact that P104's own L-2 is a different fixture — the employee/pool wall-hung lav — is material to the open B3.1 mark question and is not recoverable anywhere in the package.",
-      },
-      {
-        sev: "CONFIRMED · priority 5, completeness of a room-scoped claim",
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "[CONFIRMED · priority 5, completeness of a room-scoped claim] platform/data/ref-rooms-staged.json › docs[\"230\"].notes.n_gategaps.text (and the identical copy on docs[\"230-MEP\"].notes.n_gategaps.text) — the note claims to list every gated-out row of this room that \"state[s] a DOCUMENT CONFLICT in their own note at any reliability\", and states the count as 8 rows / 7 stating a conflict. It omits ITM-0095 [Flooring, tag T-01, HIGH], whose own note reads verbatim: \"RK supersedes the finish schedule area text to include 'Guest Suite Bathroom'\" — a document supersession between the RK ID set and the finish schedule. The note's own declared vocabulary list includes \"superseded\"; CONFLICT_IN_NOTE_RE (build_ref_rooms.mjs:2403) matches \"superseded\" but not the DB's actual word \"supersedes\", so the row is dropped. I re-ran the tool's exact two regexes over all 31 gated rows of room 230: ITM-0095 is the ONLY additional row a reader would call a document conflict, so the fix is one row, and the stated counts (8 / 7) become 9 / 8.",
-      },
-      {
-        sev: "LOWER CONFIDENCE · priority 4",
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "[LOWER CONFIDENCE · priority 4] platform/data/ref-rooms-staged.json › docs[\"230-MEP\"].items.fp_heads_a.code = \"FP\" — room 230 has ZERO Fire Sprinkler rows in data/project.sqlite (the line's own instanceNote says so: \"Room 230 is on FLOOR 2 and has NO Fire Sprinkler row of its own in data/project.sqlite\"), and no row of room 230 carries the tag \"FP\". meta.donorRule states \"The MARK is the target room's too: where this room has no row of the donor's mark family the donor's mark is not carried at all.\" The mark is carried anyway. Mitigations: \"FP\" is a curated D10 line code rather than a mark read off a drawing (donor room 105's sprinkler rows ITM-0447/0448/0449 are also untagged), the line ships MEDIUM with no qty, and everything else on it is correctly emptied and explained. Same class: elec_gfci.code = \"GFCI\", which is also not a tag on any room-230 row — but room 230 does carry GFCI rows (ITM-0005, ITM-0015), so that one is descriptively true.",
-      },
+      { state: "OPEN", sev: null, text: "meta.mepSource (field: meta.mepSource; affects doc 230-MEP) — CHECKABLE FALSEHOOD / meta claim the code does not implement. The field states: \"rows no condensed line claims become their own lines and are never lost.\" Room 230 has 22 Plumbing rows; nine of them (ITM-0032, ITM-0033, ITM-0034, ITM-0035, ITM-0036, ITM-0037, ITM-0038, ITM-0040, ITM-0041) are claimed by NO condensed line and are given NO line of their own. Seven of the nine (0032, 0033, 0034, 0035, 0037, 0038, 0041) appear nowhere at all in doc 230 or doc 230-MEP — not on a line, not in a room note; the other two (0036, 0040) surface only as citation-provenance inside FLOOR sentences on plmb_hotcold_a / plmb_fd_a / plmb_trapguard_a. The generator routes exactly these nine to a third, undisclosed bucket, `MEP_ROUGH_IN_ITEMS` at platform/tools/build_ref_rooms.mjs:555 (consumed at :3774), and the generator's own selftest counts four outcomes — \"condensed + own line(s) + rough-in + lost\" (build_ref_rooms.mjs:4505-4517) — while meta.mepSource admits only two. The scope itself is fine (D10 is the owner ruling), but the meta sentence asserts a completeness the code does not deliver, and the reader of the shipped document has no way to learn that nine of this room's own rows were dropped. meta.mepSource is also classed as META_DESCRIPTIVE in platform/tools/assert_ref_claims.mjs:262, so no check ever tests this claim." },
+      { state: "OPEN", sev: null, text: "doc 230-MEP / key fp_smoke_a / fields src + instanceNote (rule: meta.citationRule) — the FLOOR pass made a decision and wrote nothing onto the line. meta.citationRule opens \"THE CITATION IS JUDGED IN FOUR PASSES, AND EVERY PASS WRITES ITS DECISION ONTO THE LINE\", and pass (2) says an off-floor sheet is KEPT \"where the citation is a range that already spans this floor\". fp_smoke_a's src carries \"E501-E504 + E400\"; data/project.sqlite's sheets table titles E501 = \"Fire Alarm First Floor Plan\" and E504 = \"Fire Alarm Fourth Floor Plan\", neither of which is room 230's floor. Both were kept on the range-span test, and the line's instanceNote contains no FLOOR sentence at all. Cause: floorTrueCitation() pushes the range-span result into `spanned` (build_ref_rooms.mjs:2002, :2015) and then never emits a bit for it — the note builder at :2081-:2132 handles dropped, repointed, trimmed, wide and ownKept only, and :2081 returns note:'' / changed:false because `spanned` is not in the early-return guard. The sibling pass bathTrueCitation() DOES print its equivalent range-span sentence (:2229-:2231), which shows the intent. Every other off-floor decision on this room is written onto its line (M301 on mech_ptac and mech_tstat, P301 on plmb_fd_a and plmb_trapguard_a, P305 on plmb_hotcold_a, A100 on plmb_wc_a, A120 on fp_heads_a); fp_smoke_a alone is silent." },
+      { state: "OPEN", sev: null, text: "doc 230 / keys gr322_a, hd12_a, gr300_a, gr208_a, gr600_a, gr6001_a, gr602_a / field instanceNote (rule: meta.donorRule) — notes restate a value their own line's fields carry. meta.donorRule states: \"A NOTE NEVER RESTATES A VALUE ANOTHER FIELD CARRIES: it says why a reading is what it is, and the reliability and qty fields say what it is, so the two cannot disagree.\" gr322_a's instanceNote says \"The line therefore ships qty 3 on the ruling rather than on the 1 row(s) the drawing set tags\" beside a qty field reading 3. The six fold lines each open \"QTY 2 IS THIS ROOM'S OWN FOLD, not a donor count: ...\" beside a qty field reading 2 (hd12_a, gr300_a, gr208_a, gr600_a, gr6001_a, gr602_a) — and each already carries the non-restating sentence that does the work (\"The quantity on this line is that row count and nothing else\"), so the leading number is pure duplication of the field. The guard in platform/tools/assert_ref_claims.mjs:293 documents the ban in its own header (\":25\" — \"A note may not print a reliability word or a 'ships qty N' for its own line\") but implements it only as an agreement test (`if (q && Number(q[1]) !== Number(p.item.qty))`), so a restatement that happens to agree is never caught. Note the approved LIVE donor line (floor1-staged.json 105/gr322_a) states the D12 ruling with no qty restatement, so this wording is new to the ref-rooms build, not inherited house style." },
     ],
   },
-  '238': {
+  "238": {
     verdict: "FAIL",
-    round: 3,
+    round: 4,
+    pending: false,
+    priorRound: 3,
+    priorVerdict: "FAIL",
+    priorFindings: 7,
     defects: [
-      {
-        sev: null,
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "238-MEP | key plmb_shencl_a | field src -- ships \"A530 keyed note 28 (elevation 04) and keyed note 27 (plan 01); A556\". FALSE FOR THIS ROOM. sheets.A530 = \"Enl. Bathroom - King Std., Std. Conn., QQ Std., Std. Conn., QQ Wide & QQ Ext.\" - QQ Acc. is not drawn on it; room_types.bath_sheet for \"QQ Acc.\" = \"A532 / A532.1\". NO row of room 238 cites A530 kn27 or kn28 anywhere (its own enclosure rows are ITM-0716 [cited: A532 elev 02; A532.1 views 01, 02] and ITM-0717 [cited: A532.1 view 02 keyed note 11]). This is donor room 105's reading of room 105's own bath drawing, placement callouts included. Round 2 raised this exact finding (research/ref-rooms/mockbook.data.mjs, VERIFIER '238') and it is recorded as \"CLOSED BY THE ROUND-3 FIX\", but the fix only changed the `code` field (kn 28 / kn 5 -> kn 10 / kn 11); `src` is untouched. The instanceNote's caveat says \"any bath-sheet keynote carried in the citation above is room 105's reading\" - \"above\" is the row citations quoted inside the MARK block, not the src field - and build_ref_rooms.mjs has no bath-sheet equivalent of floorTrueCitation() (bathSheet is used only for that one sentence in bathingUnresolvedLine(), line 2266).",
-      },
-      {
-        sev: null,
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "238-MEP | key plmb_shower_a | field src -- ships \"P401/P402 mark SH-1; P104 rows SH-3 and SH-4; A530 plan 01 dimensions and bathing configuration; A556 printed note 'NO FINISHES UNDER SHOWER'; A550/A555 keynote 26\". Two carried-donor residues on a room whose code was corrected: (a) \"A530 plan 01\" - A530 does not draw QQ Acc. (see above) and no room-238 row cites A530 plan 01; the room's own bathing row ITM-0715 cites A532 plan 01.1 / A532.1; (b) \"P104 rows SH-3 and SH-4\" keeps SH-4, which is donor room 105's half of the pair - room 238 holds NO SH-4 row anywhere and its own row ITM-0715 resolves the pair as \"SH-1 / SH-3\". Round 3 fixed the `code` (SH-1 / SH-4 -> SH-1 / SH-3) and left the citation asserting the donor's mark and the donor's bath-sheet view.",
-      },
-      {
-        sev: null,
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "238-MEP | key plmb_lavfaucet_a | field instanceNote -- source conflict text LOST. Support row ITM-0043 [HIGH], tag \"L-2 / L-3 / L-4\", carries the data/project.sqlite note \"DUAL MARK CARRY - P401/P402 print L-2, P104 schedules L-3/L-4; P104's own L-2 is the employee/pool wall-hung lav\". That is a document disagreement stated on this room's own row, and it is quoted nowhere in doc 238 or 238-MEP (searched: 'DUAL MARK CARRY' and 'employee/pool' both absent). The line names ITM-0043 only in its roster list. Cause: rowStatesConflict() (build_ref_rooms.mjs line 2414) - CONFLICT_IN_NOTE_RE matches none of the words in the note, and SHEET_VS_SHEET_RE requires vs|versus|while|against|but between the two sheet numbers while this note uses a comma. The consequence is that the one fact explaining WHY the P401/P402 L-2 mark is ambiguous (P104's own L-2 is a different, employee/pool fixture) is not in the package at all; B3.1's quoted positions do not contain it.",
-      },
-      {
-        sev: null,
-        state: "OPEN",
-        closedBy: null,
-        owner: null,
-        text: "238 and 238-MEP | note n_gategaps | count and body -- ITM-0095 [Flooring, HIGH, tag T-01] \"Floor tile, bathroom\", note verbatim \"RK supersedes the finish schedule area text to include 'Guest Suite Bathroom'\", is a gated-out row stating a document conflict (RK area statement against the finish schedule) and is NOT listed; the note therefore says \"8 row(s)\" when 9 qualify by its own stated test. The note itself advertises \"superseded\" as part of the vocabulary; CONFLICT_IN_NOTE_RE matches \"superseded\" but not \"supersedes\", so the row falls through. The same word form is what carries ITM-0009 (\"superseded on the 7 accessible keys by the 700 VA + 300 VA split\") onto 238-MEP/elec_panel, so the treatment is inconsistent within the same document. Text absent from both docs (searched 'RK supersedes').",
-      },
+      { state: "OPEN", sev: null, text: "doc platform/data/ref-rooms-staged.json | key docs/238/notes/n_type (identical text in docs/238-MEP/notes/n_type) | field text -- CHECKABLE FALSEHOOD. The note reads: \"closest built type with an approved package: Queen-Queen room 105 - the only other two-queen type that is built.\" Room 105 is NOT the only other built two-queen type. Floor 1 is LIVE (D24) and its approved slice (D5) also carries room 103, rooms.room_type 'QQ Connecting', and room 101, rooms.room_type 'QQ Wide Connecting' - both two-queen types, each shipping GR-300 Queen Headboard qty 2 and GR-600 Queen Mattress Set qty 2 in platform/data/floor1-staged.json (docs/101/items/gr300_a, docs/103/items/gr300_a). Three built two-queen types exist, not one. The room contradicts itself: docs/238/notes/n_d22 rests its whole argument on \"the 2 QQ connecting keys\" being built and reconciled on floor 1. Origin: platform/tools/build_ref_rooms.mjs, REP_ROOMS['238'].why (lines 315-316)." },
+      { state: "OPEN", sev: null, text: "doc platform/data/ref-rooms-staged.json | key meta/donorRule (the rule this file states for docs/238 and docs/238-MEP) | field text -- META CLAIM THE CODE DOES NOT IMPLEMENT, added this round (not present at HEAD). The new sentence reads: \"A NOTE NEVER RESTATES A VALUE ANOTHER FIELD CARRIES: it says why a reading is what it is, and the reliability and qty fields say what it is, so the two cannot disagree.\" Room 238's own notes restate both fields, repeatedly: docs/238/items/gr208_a, gr300_a, gr600_a and gr602ada_a all open \"QTY 2 IS THIS ROOM'S OWN FOLD...\" against qty 2; docs/238/items/gr202_a and gr322_a both say \"This line therefore ships qty 1\" against qty 1; docs/238/items/bsq_a says \"Qty 2 matches the room's own two accessible base rows\" against qty 2 (that one is the D29 text mandated byte-identical from build_floor1.mjs, so the line cannot be the thing that changes); and every carried-conflict paragraph on 905_a, gr300_a, gr308_a, gr318_a, gr322_a, gr323_a, hd05_a, hd14_a, hd51_a, plmb_ksink_a, plmb_lavfaucet_a, plmb_shower_a and the db_itm07xx lines ends \"the line is FLAGGED for it\" against reliability FLAGGED. The claim is written as an absolute (\"NEVER\") and the generator does the opposite on the room it governs. Origin: platform/tools/build_ref_rooms.mjs, assemble() meta.donorRule string." },
     ],
   },
 };
 
+/* WHAT EACH ROUND RAISED, and where the number comes from. These are the counts
+ * the round checkpoints record (git log: e06dfd0, 9eb041d, b0253e6) and they are
+ * NOT the same as the row counts of the ROUND1 / ROUND2 / ROUND3 arrays on this
+ * page, which are the write-ups kept of each round:
+ *
+ *   round 1  raised 21   ROUND1 keeps 19 summarised rows
+ *   round 2  raised 26   ROUND2 keeps 30 rows - the 26 seed findings plus the
+ *                        four separate COLLATERAL findings that the delivered
+ *                        mockbook.html was a stale pre-fix render
+ *   round 3  raised 25   ROUND3 keeps 25 rows, one per finding, verbatim
+ *   round 4  raised 10   VERIFIER above holds all ten, verbatim
+ *
+ * The round-1 difference between 21 and 19 is not reconciled anywhere in this
+ * repository and is not reconciled here either; the page says so rather than
+ * picking whichever number reads better. */
+export const ROUND_RAISED = { 1: 21, 2: 26, 3: 25 };
 
 /* The short list a PM needs: the round-2 findings that change what gets bought
  * or where the crew is sent. Each one names who owes the answer. */

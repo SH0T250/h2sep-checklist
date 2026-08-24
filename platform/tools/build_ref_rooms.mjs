@@ -232,6 +232,10 @@
  *   D22  see conflict 5 above - deliberately NOT applied.
  *   D27  hot/cold water line on EVERY room MEP punch.
  *   D28  Door Hardware band - closer + lock on EVERY room FF&E.
+ *   D29  Queen Bed Skirt (BS-Q, qty 2) on the ACCESSIBLE QQ Acc. keys, which in
+ *        this set is room 238 and no other. The predicate is build_floor1.mjs's
+ *        own and is copied with the entry; the three rooms it does not reach
+ *        each report the scope decision rather than passing over it in silence.
  *   D18 / D23 / D24 are floor-1 / common-area / cutover rulings and do not
  *        reach this build.
  *
@@ -348,62 +352,106 @@ const RECIPE_DERIVED = {
   ],
   composeMepCitation: [
     ['function composeMepCitation(donorSrc, mine, roomSheet, isConnecting, numbering) {',
-      'function composeMepCitation(donorSrc, mine, roomSheet, isConnecting, numbering, donorSheet, allRows) {\n'
-      + '  /* ADDED (build_ref_rooms): room 230 sits on the SAME sheet as its donor\n'
-      + '   * (QQ Extended room_sheet A555 == Queen-Queen room_sheet A555). There is\n'
-      + '   * nothing to re-point, and running the number sift would strip A555 view\n'
-      + '   * numbers off a room that IS on A555. So the donor citation stands - with\n'
-      + '   * ONE exception, which a shared sheet does not make shared: the \'.1\'\n'
-      + '   * CONNECTING plan variant. See sameSheetCitation(). */\n'
-      + '  if (donorSheet === roomSheet) {\n'
-      + '    return sameSheetCitation(donorSrc, isConnecting, roomSheet);\n'
-      + '  }'],
-    ['    const survivors = kept.filter((x) => x.includes(roomSheet) && !BOTH.test(x) &&\n'
-      + '      (citeViewNumbers(x).size || citeKeynoteNumbers(x).size));',
-      '    const survivors = kept.filter((x) => x.includes(roomSheet) && !BOTH.test(x) &&\n'
-      + '      (citeViewNumbers(x).size || citeKeynoteNumbers(x).size));\n'
-      + '    /* ADDED (build_ref_rooms): CORROBORATION IS NUMBER BY NUMBER, AND A CLAIM\n'
-      + '     * ABOUT THE WHOLE ROOM IS TESTED AGAINST THE WHOLE ROOM.\n'
-      + '     * Citing the same SHEET is not evidence - it is the very thing the sift\n'
-      + '     * just finished disproving - and citing the same NUMBER on a different\n'
-      + '     * sheet is not evidence either, so both tests have to pass. And the walk\n'
-      + '     * is over EVERY row of this room, not over the support set of this one\n'
-      + '     * condensed line: room 202\'s own ITM-0010 cites "A55x kn1", which resolves\n'
-      + '     * to exactly the surviving "A553 kn1", and the line still printed "NO row\n'
-      + '     * of this room\'s own cites that number" because ITM-0010 is not one of\n'
-      + '     * mech_ptac\'s source rows. A negative about the room has to be proved on\n'
-      + '     * the room. */\n'
-      + '    const survivorViews = new Set(survivors.flatMap((x) => [...citeViewNumbers(x)]));\n'
-      + '    const survivorKns = new Set(survivors.flatMap((x) => [...citeKeynoteNumbers(x)]));\n'
-      + '    const roomSegsByRow = [];\n'
-      + '    for (const r of allRows || []) {\n'
-      + '      const segs = citeSegments(resolveSheetWildcard(r.source_sheet || r.primary_sheet || \'\', roomSheet))\n'
-      + '        .filter((s) => s.includes(roomSheet));\n'
-      + '      if (segs.length) roomSegsByRow.push({ id: r.item_id, segs });\n'
-      + '    }\n'
-      + '    const proofOf = (nums, kind) => [...nums].sort(cmpStr).map((n) => ({\n'
-      + '      what: (kind === \'view\' ? \'view \' : \'keynote \') + n,\n'
-      + '      rows: roomSegsByRow.filter((o) => o.segs.some((s) => (kind === \'view\'\n'
-      + '        ? citeViewNumbers(s) : citeKeynoteNumbers(s)).has(n))).map((o) => o.id),\n'
-      + '    }));\n'
-      + '    const numberProof = [...proofOf(survivorViews, \'view\'), ...proofOf(survivorKns, \'kn\')];\n'
-      + '    const corroborated = numberProof.filter((p) => p.rows.length);\n'
-      + '    const uncorroborated = numberProof.filter((p) => !p.rows.length);'],
-    ["          (ownRowIds.length ? \" and this room's own row(s) \" + ownRowIds.join(', ') + ' cite it too.' : '.')",
-      "          (corroborated.length\n"
+      "function composeMepCitation(donorSrc, mine, roomSheet, isConnecting, numbering, donorSheet, allRows) {\n"
+      + "  /* ADDED (build_ref_rooms): room 230 sits on the SAME sheet as its donor\n"
+      + "   * (QQ Extended room_sheet A555 == Queen-Queen room_sheet A555). There is\n"
+      + "   * nothing to re-point, and running the number sift would strip A555 view\n"
+      + "   * numbers off a room that IS on A555. So the donor citation stands - with\n"
+      + "   * ONE exception, which a shared sheet does not make shared: the '.1'\n"
+      + "   * CONNECTING plan variant. See sameSheetCitation(). */\n"
+      + "  if (donorSheet === roomSheet) {\n"
+      + "    return sameSheetCitation(donorSrc, isConnecting, roomSheet);\n"
+      + "  }"],
+    ["    const survivors = kept.filter((x) => x.includes(roomSheet) && !BOTH.test(x) &&\n"
+      + "      (citeViewNumbers(x).size || citeKeynoteNumbers(x).size));",
+      "    const survivorsOf = () => kept.filter((x) => x.includes(roomSheet) && !BOTH.test(x) &&\n"
+      + "      (citeViewNumbers(x).size || citeKeynoteNumbers(x).size));\n"
+      + "    /* ADDED (build_ref_rooms): THIS ROOM'S OWN GUESTROOM-SHEET REFERENCE IS\n"
+      + "     * USED WHEREVER IT EXISTS, not only where the re-pointed donor segment\n"
+      + "     * reduces to the bare sheet name. 217-MEP/lv_phone_db reduced to \"A554 tag\n"
+      + "     * 905\" - not the bare \"A554\" - so the old test failed, the non-empty\n"
+      + "     * ownArch built from ITM-0031 (\"A55x kn28; A550 P&S legend\", which resolves\n"
+      + "     * to A554 kn28) was thrown away, and the line printed a claim about the\n"
+      + "     * whole room that its own support row contradicts. Where nothing numbered\n"
+      + "     * survives the sift, this room's own rows supply the reference and the line\n"
+      + "     * says which rows they are. */\n"
+      + "    if (!ownUsed && ownArch.length && !survivorsOf().length) {\n"
+      + "      ownUsed = true;\n"
+      + "      for (const o of ownArch) if (!kept.includes(o)) kept.push(o);\n"
+      + "    }\n"
+      + "    const survivors = survivorsOf();\n"
+      + "    /* ADDED (build_ref_rooms): CORROBORATION IS NUMBER BY NUMBER, AND A CLAIM\n"
+      + "     * ABOUT THE WHOLE ROOM IS TESTED AGAINST THE WHOLE ROOM.\n"
+      + "     * Citing the same SHEET is not evidence - it is the very thing the sift\n"
+      + "     * just finished disproving - and citing the same NUMBER on a different\n"
+      + "     * sheet is not evidence either, so both tests have to pass. And the walk\n"
+      + "     * is over EVERY row of this room, not over the support set of this one\n"
+      + "     * condensed line: room 202's own ITM-0010 cites \"A55x kn1\", which resolves\n"
+      + "     * to exactly the surviving \"A553 kn1\", and the line still printed \"NO row\n"
+      + "     * of this room's own cites that number\" because ITM-0010 is not one of\n"
+      + "     * mech_ptac's source rows. A negative about the room has to be proved on\n"
+      + "     * the room. */\n"
+      + "    const survivorViews = new Set(survivors.flatMap((x) => [...citeViewNumbers(x)]));\n"
+      + "    const survivorKns = new Set(survivors.flatMap((x) => [...citeKeynoteNumbers(x)]));\n"
+      + "    const roomSegsByRow = [];\n"
+      + "    for (const r of allRows || []) {\n"
+      + "      const segs = citeSegments(resolveSheetWildcard(r.source_sheet || r.primary_sheet || '', roomSheet))\n"
+      + "        .filter((s) => s.includes(roomSheet));\n"
+      + "      if (segs.length) roomSegsByRow.push({ id: r.item_id, segs });\n"
+      + "    }\n"
+      + "    const proofOf = (nums, kind) => [...nums].sort(cmpStr).map((n) => ({\n"
+      + "      what: (kind === 'view' ? 'view ' : 'keynote ') + n,\n"
+      + "      rows: roomSegsByRow.filter((o) => o.segs.some((s) => (kind === 'view'\n"
+      + "        ? citeViewNumbers(s) : citeKeynoteNumbers(s)).has(n))).map((o) => o.id),\n"
+      + "    }));\n"
+      + "    const numberProof = [...proofOf(survivorViews, 'view'), ...proofOf(survivorKns, 'kn')];\n"
+      + "    const corroborated = numberProof.filter((p) => p.rows.length);\n"
+      + "    const uncorroborated = numberProof.filter((p) => !p.rows.length);"],
+    ["    outcome = ownUsed ? \"replaced by this room's own row(s) \" + ownRowIds.join(', ')\n"
+      + "      : survivors.length ? 'proven sheet-independent numbering kept: ' + survivors.join('; ')\n"
+      + "      : 'sheet cited alone - this room has no row of its own';\n"
+      + "    const how = ownUsed\n"
+      + "      ? \"This room's own row(s) \" + ownRowIds.join(', ') + ' supply the ' + roomSheet + ' reference instead.'\n"
+      + "      : survivors.length\n"
+      + "        ? 'What is left - ' + survivors.map((x) => '\"' + x + '\"').join(', ') + ' - is numbering the database ' +\n"
+      + "          \"writes sheet-independently, so it holds on \" + roomSheet +\n"
+      + "          (ownRowIds.length ? \" and this room's own row(s) \" + ownRowIds.join(', ') + ' cite it too.' : '.')\n"
+      + "        : 'This room has no row of its own that places this line on a guestroom sheet, so the sheet is cited ' +\n"
+      + "          'with no view or keynote number at all. Confirm it on ' + roomSheet + ' before relying on one.';",
+      "    /* WHAT IS SAID IS WHAT IS CITED, AND BY WHICH ROW. The corroboration text\n"
+      + "     * used to close on room-wide negatives - \"NO row of this room's own cites\n"
+      + "     * that number\", \"this room has no row of its own that places this line on a\n"
+      + "     * guestroom sheet\". A sentence like that is a claim about every row in the\n"
+      + "     * room, it is the hardest kind of claim to keep true through a rebuild, and\n"
+      + "     * on 217-MEP/lv_phone_db it was already false. So the line names the rows\n"
+      + "     * that DO corroborate, labels the numbers that are UNVERIFIED for this room,\n"
+      + "     * and stops there. */\n"
+      + "    const unverified = uncorroborated.map((p) => p.what).join(', ');\n"
+      + "    outcome = ownUsed ? \"replaced by this room's own row(s) \" + ownRowIds.join(', ')\n"
+      + "      : survivors.length ? 'proven sheet-independent numbering kept: ' + survivors.join('; ')\n"
+      + "      : 'sheet cited by name only';\n"
+      + "    const how = ownUsed\n"
+      + "      ? \"This room's own row(s) \" + ownRowIds.join(', ') + ' supply the ' + roomSheet + ' reference instead, and ' +\n"
+      + "        'that reference is on this line above.'\n"
+      + "      : survivors.length\n"
+      + "        ? 'What is left - ' + survivors.map((x) => '\"' + x + '\"').join(', ') + ' - is numbering the database ' +\n"
+      + "          \"writes sheet-independently, so it holds on \" + roomSheet +\n"
+      + "          (corroborated.length\n"
       + "            ? \", and this room's own rows corroborate it NUMBER BY NUMBER: \" +\n"
       + "              corroborated.map((p) => p.what + ' <- ' + p.rows.join(', ')).join('; ') +\n"
       + "              (uncorroborated.length\n"
-      + "                ? '. NOT corroborated anywhere in this room: ' + uncorroborated.map((p) => p.what).join(', ') +\n"
-      + "                  ' - no row of this room cites that number on ' + roomSheet + ', so confirm it before relying on it.'\n"
+      + "                ? '. UNVERIFIED for this room: ' + unverified + ' - read ' +\n"
+      + "                  (uncorroborated.length > 1 ? 'them' : 'it') + ' on ' + roomSheet + ' and confirm before relying ' +\n"
+      + "                  'on ' + (uncorroborated.length > 1 ? 'them' : 'it') + '.'\n"
       + "                : '.')\n"
-      + "            : roomSegsByRow.length\n"
-      + "              ? '. NO row of this room\\'s own cites that number, and that is checked against EVERY row of ' +\n"
-      + "                'this room rather than only the rows behind this line: all ' + roomSegsByRow.length +\n"
-      + "                ' row(s) of this room that cite ' + roomSheet + ' cite different numbers. Confirm it on ' +\n"
-      + "                roomSheet + ' before relying on it.'\n"
-      + "              : '. This room has no ' + roomSheet + ' row of its own to corroborate it - confirm it on ' +\n"
-      + "                roomSheet + ' before relying on it.')"],
+      + "            : '. UNVERIFIED for this room: ' + unverified + ' - the corroboration test is NUMBER BY NUMBER on ' +\n"
+      + "              roomSheet + ' and it is run against EVERY row of this room rather than only the rows behind this ' +\n"
+      + "              'line' + (roomSegsByRow.length\n"
+      + "                ? ' (' + roomSegsByRow.length + ' row(s) of this room cite ' + roomSheet + ', at other numbers)'\n"
+      + "                : '') + '. Read ' + (uncorroborated.length > 1 ? 'them' : 'it') + ' on ' + roomSheet +\n"
+      + "              ' and confirm before relying on ' + (uncorroborated.length > 1 ? 'them' : 'it') + '.')\n"
+      + "        : 'The sheet is cited by name only, with no view or keynote number on it. Confirm the location on ' +\n"
+      + "          roomSheet + ' before relying on one.';"],
     ['repointCiteSegment(seg, roomSheet, isConnecting, numbering)',
       'repointCiteSegment(seg, roomSheet, isConnecting, numbering, donorSheet)'],
     ['if (!seg.includes(MEP_DONOR_SHEET) || BOTH.test(seg))', 'if (!seg.includes(donorSheet) || BOTH.test(seg))'],
@@ -525,11 +573,33 @@ const ROOM_SHEET_RESOLUTION = {};
 const DONOR_INDEX_SKIPS_DELETED = true;
 
 /* ===========================================================================
- * RULED LINE ADDITIONS - D27 and D28, copied verbatim from build_floor1.mjs and
- * re-proved against it by assertRuledAdditionsMatchLive().
+ * RULED LINE ADDITIONS - D27, D28 and D29, copied verbatim from
+ * build_floor1.mjs and re-proved against it on every run by
+ * assertRecipeConstants().
+ *
+ * D29 (2026-08-24): "make sure to add Bed Skirts to the ADA rooms." The King
+ * accessible keys already carry GR-603.1 from the drawings; the QQ Acc. rooms
+ * (238, 338) have two GR-602.ADA open accessible bases and NO skirt row - the
+ * standard queens use a GR-600.1 Box Spring Cover an open base cannot take, and
+ * no queen skirt tag exists in the document set. Owner-ruled line, qty 2
+ * matching the room's own two accessible base rows. It fires on room 238 of
+ * this set - the only QQ Acc. representative - and on no other, which is why
+ * `applies` is honoured here rather than dropped.
  * =========================================================================== */
 
 const RULED_LINE_ADDITIONS = [
+  {
+    ruling: 'D29', doc: 'ffe', key: 'bsq_a', category: 'FF&E - Bedding', sort: 16060,
+    code: 'BS-Q', qty: 2,
+    label: 'Queen Bed Skirt @ ACCESSIBLE bed base',
+    src: 'D29 (AJ 2026-08-24); rooms own GR-602.ADA rows',
+    note: 'Added by Austin ruling D29: bed skirts on the ADA rooms. This room has two GR-602.ADA ' +
+      'ACCESSIBLE open bed bases and the drawing set tags no queen skirt (the standard queen rooms ' +
+      'use a GR-600.1 Box Spring Cover an open base cannot take). Qty 2 matches the room\'s own two ' +
+      'accessible base rows. No document tag exists for this item - confirm the size with the FF&E ' +
+      'supplier before ordering.',
+    applies: (room) => String(room.accessible) === '1' && room.room_type === 'QQ Acc.',
+  },
   {
     ruling: 'D27', doc: 'mep', key: 'plmb_hotcold_a', category: 'Plumbing', sort: 3018,
     code: 'HW/CW', qty: 1,
@@ -1227,8 +1297,22 @@ function composeMepCitation(donorSrc, mine, roomSheet, isConnecting, numbering, 
   if (removed.length) {
     const uniq = [...new Set(removed)];
     /* What is LEFT pointing at a guestroom sheet, after the removals? */
-    const survivors = kept.filter((x) => x.includes(roomSheet) && !BOTH.test(x) &&
+    const survivorsOf = () => kept.filter((x) => x.includes(roomSheet) && !BOTH.test(x) &&
       (citeViewNumbers(x).size || citeKeynoteNumbers(x).size));
+    /* ADDED (build_ref_rooms): THIS ROOM'S OWN GUESTROOM-SHEET REFERENCE IS
+     * USED WHEREVER IT EXISTS, not only where the re-pointed donor segment
+     * reduces to the bare sheet name. 217-MEP/lv_phone_db reduced to "A554 tag
+     * 905" - not the bare "A554" - so the old test failed, the non-empty
+     * ownArch built from ITM-0031 ("A55x kn28; A550 P&S legend", which resolves
+     * to A554 kn28) was thrown away, and the line printed a claim about the
+     * whole room that its own support row contradicts. Where nothing numbered
+     * survives the sift, this room's own rows supply the reference and the line
+     * says which rows they are. */
+    if (!ownUsed && ownArch.length && !survivorsOf().length) {
+      ownUsed = true;
+      for (const o of ownArch) if (!kept.includes(o)) kept.push(o);
+    }
+    const survivors = survivorsOf();
     /* ADDED (build_ref_rooms): CORROBORATION IS NUMBER BY NUMBER, AND A CLAIM
      * ABOUT THE WHOLE ROOM IS TESTED AGAINST THE WHOLE ROOM.
      * Citing the same SHEET is not evidence - it is the very thing the sift
@@ -1256,11 +1340,21 @@ function composeMepCitation(donorSrc, mine, roomSheet, isConnecting, numbering, 
     const numberProof = [...proofOf(survivorViews, 'view'), ...proofOf(survivorKns, 'kn')];
     const corroborated = numberProof.filter((p) => p.rows.length);
     const uncorroborated = numberProof.filter((p) => !p.rows.length);
+    /* WHAT IS SAID IS WHAT IS CITED, AND BY WHICH ROW. The corroboration text
+     * used to close on room-wide negatives - "NO row of this room's own cites
+     * that number", "this room has no row of its own that places this line on a
+     * guestroom sheet". A sentence like that is a claim about every row in the
+     * room, it is the hardest kind of claim to keep true through a rebuild, and
+     * on 217-MEP/lv_phone_db it was already false. So the line names the rows
+     * that DO corroborate, labels the numbers that are UNVERIFIED for this room,
+     * and stops there. */
+    const unverified = uncorroborated.map((p) => p.what).join(', ');
     outcome = ownUsed ? "replaced by this room's own row(s) " + ownRowIds.join(', ')
       : survivors.length ? 'proven sheet-independent numbering kept: ' + survivors.join('; ')
-      : 'sheet cited alone - this room has no row of its own';
+      : 'sheet cited by name only';
     const how = ownUsed
-      ? "This room's own row(s) " + ownRowIds.join(', ') + ' supply the ' + roomSheet + ' reference instead.'
+      ? "This room's own row(s) " + ownRowIds.join(', ') + ' supply the ' + roomSheet + ' reference instead, and ' +
+        'that reference is on this line above.'
       : survivors.length
         ? 'What is left - ' + survivors.map((x) => '"' + x + '"').join(', ') + ' - is numbering the database ' +
           "writes sheet-independently, so it holds on " + roomSheet +
@@ -1268,18 +1362,18 @@ function composeMepCitation(donorSrc, mine, roomSheet, isConnecting, numbering, 
             ? ", and this room's own rows corroborate it NUMBER BY NUMBER: " +
               corroborated.map((p) => p.what + ' <- ' + p.rows.join(', ')).join('; ') +
               (uncorroborated.length
-                ? '. NOT corroborated anywhere in this room: ' + uncorroborated.map((p) => p.what).join(', ') +
-                  ' - no row of this room cites that number on ' + roomSheet + ', so confirm it before relying on it.'
+                ? '. UNVERIFIED for this room: ' + unverified + ' - read ' +
+                  (uncorroborated.length > 1 ? 'them' : 'it') + ' on ' + roomSheet + ' and confirm before relying ' +
+                  'on ' + (uncorroborated.length > 1 ? 'them' : 'it') + '.'
                 : '.')
-            : roomSegsByRow.length
-              ? '. NO row of this room\'s own cites that number, and that is checked against EVERY row of ' +
-                'this room rather than only the rows behind this line: all ' + roomSegsByRow.length +
-                ' row(s) of this room that cite ' + roomSheet + ' cite different numbers. Confirm it on ' +
-                roomSheet + ' before relying on it.'
-              : '. This room has no ' + roomSheet + ' row of its own to corroborate it - confirm it on ' +
-                roomSheet + ' before relying on it.')
-        : 'This room has no row of its own that places this line on a guestroom sheet, so the sheet is cited ' +
-          'with no view or keynote number at all. Confirm it on ' + roomSheet + ' before relying on one.';
+            : '. UNVERIFIED for this room: ' + unverified + ' - the corroboration test is NUMBER BY NUMBER on ' +
+              roomSheet + ' and it is run against EVERY row of this room rather than only the rows behind this ' +
+              'line' + (roomSegsByRow.length
+                ? ' (' + roomSegsByRow.length + ' row(s) of this room cite ' + roomSheet + ', at other numbers)'
+                : '') + '. Read ' + (uncorroborated.length > 1 ? 'them' : 'it') + ' on ' + roomSheet +
+              ' and confirm before relying on ' + (uncorroborated.length > 1 ? 'them' : 'it') + '.')
+        : 'The sheet is cited by name only, with no view or keynote number on it. Confirm the location on ' +
+          roomSheet + ' before relying on one.';
     note = 'CITATION. The donor line cites ' +
       donorQuoted.map((x) => '"' + x + '"').join(' and ') + ' on ' + donorSheet + '. ' +
       'data/project.sqlite proves ' + donorSheet + ' and ' + roomSheet + ' share only the numbers it writes ' +
@@ -1487,7 +1581,7 @@ function assertRecipeConstants() {
   cmp('MEP_ROUGH_IN_ITEMS (' + MEP_ROUGH_IN_ITEMS.length + ')', 'MEP_ROUGH_IN_ITEMS', MEP_ROUGH_IN_ITEMS);
   cmp('MEP_LABEL_FROM_ROW', 'MEP_LABEL_FROM_ROW', MEP_LABEL_FROM_ROW);
   cmp('APP_MEP_CATEGORY_ORDER (' + APP_MEP_CATEGORY_ORDER.size + ')', 'APP_MEP_CATEGORY_ORDER', APP_MEP_CATEGORY_ORDER);
-  cmp('RULED_LINE_ADDITIONS (D27/D28)', 'RULED_LINE_ADDITIONS', RULED_LINE_ADDITIONS);
+  cmp('RULED_LINE_ADDITIONS (D27/D28/D29)', 'RULED_LINE_ADDITIONS', RULED_LINE_ADDITIONS);
   for (const [n, v] of [['MEP_DONOR_ROOM', MEP_DONOR_ROOM], ['MEP_DONOR_SHEET', MEP_DONOR_SHEET],
     ['KING_PAIR_SHEET', KING_PAIR_SHEET], ['MEP_DOC_TYPE', MEP_DOC_TYPE],
     ['CONFIG_A_PREFIX', CONFIG_A_PREFIX], ['CONFIG_B_PREFIX', CONFIG_B_PREFIX],
@@ -1566,8 +1660,11 @@ function resolveQtyOverrides(room, rows) {
   for (const rule of QTY_OVERRIDE_RULES) {
     const here = gated.filter((r) => r.tag === rule.tag && r.category === rule.category);
     if (!here.length) {
-      declined.push({ ruling: rule.ruling, tag: rule.tag, why: 'this room carries no ' + rule.tag +
-        ' row in ' + rule.category + ' - the ruling has nothing to act on' });
+      declined.push({ ruling: rule.ruling, tag: rule.tag, why: 'the ruling is about tag ' + rule.tag + ' in ' +
+        rule.category + ', and what this room draws in that category is ' +
+        ([...new Set(gated.filter((r) => r.category === rule.category).map((r) => r.tag || '<untagged>'))].sort(cmpStr)
+          .join(', ') || 'nothing in this room\'s ' + rule.category + ' band') +
+        ', so the ruling has nothing here to act on' });
       continue;
     }
     const tagsInCategory = new Set(gated.filter((r) => r.category === rule.category).map((r) => r.tag).filter(Boolean));
@@ -1885,8 +1982,15 @@ const SHEET_WIDE_ARTEFACT_RE = /^(?:[A-Za-z][A-Za-z-]*\s+){0,2}(matrix|schedule|
 function floorTrueCitation(src, floor, ownRows, idx, roomSheet, donorNo, roomNo) {
   const stripRanges = (o) => String(o).replace(SHEET_RANGE_RE, ' ');
   const ownSrcs = (ownRows || []).map((r) => resolveSheetWildcard(r.source_sheet || r.primary_sheet || '', roomSheet));
-  const ownOf = (id) => (ownRows || []).filter((r) =>
-    citesSheet(resolveSheetWildcard(r.source_sheet || r.primary_sheet || '', roomSheet), id)).map((r) => r.item_id);
+  const ownRowsOf = (id) => (ownRows || []).filter((r) =>
+    citesSheet(resolveSheetWildcard(r.source_sheet || r.primary_sheet || '', roomSheet), id));
+  const ownOf = (id) => ownRowsOf(id).map((r) => r.item_id);
+  /* The citation the room's own row actually writes, quoted so the reader sees
+   * the room's own words rather than a claim about them. */
+  const ownCiteOf = (id) => {
+    const r = ownRowsOf(id)[0];
+    return r ? resolveSheetWildcard(r.source_sheet || r.primary_sheet || '', roomSheet) : '';
+  };
   const sibling = (id) => (idx.series.get(idx.byId.get(id).series) || new Map()).get(floor) || '';
   const artefact = (text, id) => {
     const m = new RegExp('\\b' + reEsc(id) + '\\b\\s*(.*)$').exec(String(text));
@@ -1912,9 +2016,48 @@ function floorTrueCitation(src, floor, ownRows, idx, roomSheet, donorNo, roomNo)
       continue;
     }
 
+    /* KEPT BEATS RE-POINTED BEATS TRIMMED, which is the precedence this
+     * function's own header declares and the order meta.citationRule states.
+     * This room's own row names that sheet outright - not inside a range - so
+     * its own citation governs and stays, marked for what it is. The walk is
+     * over EVERY row of this room, not the support set of one condensed line:
+     * rooms 202/217/230/238 all carry ITM-0062, ITM-0067 and ITM-0070 citing
+     * M301, and ITM-0036 citing "P305/P306 keynote 3". */
+    let still0 = wrongIn(seg);
+    const named0 = still0.filter((id) => ownSrcs.some((o) => new RegExp('\\b' + reEsc(id) + '\\b').test(stripRanges(o))));
+    if (named0.length === still0.length) {
+      kept.push(seg);
+      for (const id of named0) ownKept.push(id + ' = "' + idx.byId.get(id).title + '" (this room\'s own row(s) ' +
+        ownOf(id).join(', ') + ' cite it, verbatim: "' + ownCiteOf(id) + '")');
+      continue;
+    }
+
+    /* A table PRINTED on a floor sheet is not a floor reference. */
+    const artefacts0 = still0.filter((id) => artefact(seg, id));
+    if (artefacts0.length === still0.length) {
+      kept.push(seg);
+      for (const id of artefacts0) {
+        wide.push(id + ' = "' + idx.byId.get(id).title + '", cited for the ' + artefact(seg, id) +
+          ' printed on it, which is a building-wide table and not a floor drawing');
+      }
+      continue;
+    }
+
+    /* This room's own row cites a RANGE spanning both sheets: move the number. */
+    let moved = false;
+    for (const id of still0) {
+      const sib = sibling(id);
+      const range = ownSrcs.find((o) => citesSheet(o, id) && sib && citesSheet(o, sib));
+      if (!sib || !range) continue;
+      seg = seg.replace(new RegExp('\\b' + reEsc(id) + '\\b', 'g'), sib);
+      repointed.push(id + ' -> ' + sib + ' (this room\'s own row(s) ' + ownOf(id).join(', ') +
+        ' cite the range "' + range + '", which spans both)');
+      moved = true;
+    }
+    if (moved && !wrongIn(seg).length) { kept.push(seg); continue; }
+
     /* A sheet number in a "/" list with another sheet: drop just that number.
-     * "A120/A121 General Note I" -> "A121 General Note I" on floor 2, and
-     * "P202/P305 HWS distribution" -> "P202 HWS distribution". */
+     * "A120/A121 General Note I" -> "A121 General Note I" on floor 2. */
     for (const id of wrongIn(seg)) {
       const others = sheetIdsIn(seg).filter((x) => x !== id);
       if (!others.length) continue;
@@ -1928,43 +2071,9 @@ function floorTrueCitation(src, floor, ownRows, idx, roomSheet, donorNo, roomNo)
         seg = next;
       }
     }
-    let still = wrongIn(seg);
+    const still = wrongIn(seg);
     if (!still.length) { kept.push(seg); continue; }
 
-    /* A table PRINTED on a floor sheet is not a floor reference. */
-    const artefacts = still.filter((id) => artefact(seg, id));
-    if (artefacts.length === still.length) {
-      kept.push(seg);
-      for (const id of artefacts) {
-        wide.push(id + ' = "' + idx.byId.get(id).title + '", cited for the ' + artefact(seg, id) +
-          ' printed on it, which is a building-wide table and not a floor drawing');
-      }
-      continue;
-    }
-
-    /* This room's own row cites a RANGE spanning both sheets: move the number. */
-    let moved = false;
-    for (const id of still) {
-      const sib = sibling(id);
-      const range = ownSrcs.find((o) => citesSheet(o, id) && sib && citesSheet(o, sib));
-      if (!sib || !range) continue;
-      seg = seg.replace(new RegExp('\\b' + reEsc(id) + '\\b', 'g'), sib);
-      repointed.push(id + ' -> ' + sib + ' (this room\'s own row(s) ' + ownOf(id).join(', ') +
-        ' cite the range "' + range + '", which spans both)');
-      moved = true;
-    }
-    if (moved && !wrongIn(seg).length) { kept.push(seg); continue; }
-    still = wrongIn(seg);
-
-    /* This room's own row names that sheet outright - not inside a range - so
-     * its own citation governs and stays, marked for what it is. */
-    const named = still.filter((id) => ownSrcs.some((o) => new RegExp('\\b' + reEsc(id) + '\\b').test(stripRanges(o))));
-    if (named.length === still.length) {
-      kept.push(seg);
-      for (const id of named) ownKept.push(id + ' = "' + idx.byId.get(id).title + '" (this room\'s own row(s) ' +
-        ownOf(id).join(', ') + ' cite it)');
-      continue;
-    }
     dropped.push({ seg: raw, ids: still });
   }
 
@@ -1990,7 +2099,7 @@ function floorTrueCitation(src, floor, ownRows, idx, roomSheet, donorNo, roomNo)
   if (dropped.length) {
     bits.push('FLOOR. Room ' + roomNo + ' is on FLOOR ' + floor + '. ' + dropped.length +
       ' citation segment(s) carried from LIVE room ' + donorNo + ' point at a sheet that data/project.sqlite\'s ' +
-      'own sheets table says covers a DIFFERENT floor, and no row of this room\'s own cites it, so ' +
+      'own sheets table says covers a DIFFERENT floor, so ' +
       (dropped.length > 1 ? 'they are' : 'it is') + ' NOT carried. Removed, quoted verbatim: ' +
       dropped.map((d) => '"' + d.seg + '" [' + d.ids.map((id) => id + ' = "' + idx.byId.get(id).title + '"').join(', ') + ']').join('; ') +
       '.' + (sibs.length
@@ -1998,8 +2107,9 @@ function floorTrueCitation(src, floor, ownRows, idx, roomSheet, donorNo, roomNo)
           'floor ' + floor + ' for the same series (' + sibs.map((s) => s.from + ' -> ' + s.sheet).join(', ') +
           '), cited with NO number on it. THE FLOOR-PLAN REFERENCE IS UNVERIFIED FOR THIS FLOOR: read the sheet ' +
           'and confirm the number before relying on it.'
-        : ' data/project.sqlite proves no sibling sheet for floor ' + floor + ' in that series, so nothing ' +
-          'replaces it and none is guessed.'));
+        : ' data/project.sqlite\'s sheets table proves a floor-' + floor + ' sibling only where a sheet title is ' +
+          'identical but for the floor word, and that is not the case for this series, so the reference is removed ' +
+          'and no replacement is invented.'));
   }
   if (repointed.length) {
     bits.push('FLOOR. Sheet number(s) moved onto this room\'s floor because THIS room\'s own row proves the ' +
@@ -2020,6 +2130,244 @@ function floorTrueCitation(src, floor, ownRows, idx, roomSheet, donorNo, roomNo)
       ownKept.join('; ') + '. Read it knowing which floor it draws.');
   }
   return { src: citeJoin(kept), note: bits.join(' '), changed: true, dropped, trimmed, repointed, ownKept, spanned, wide };
+}
+
+/* ============ A BATHROOM SHEET DRAWS ONE SET OF ROOM TYPES, NOT ALL OF THEM
+ *
+ * floorTrueCitation() answers "which FLOOR does this sheet draw". Nothing asked
+ * the same question of the bathroom enlargements, so the approved D10 lines
+ * carried LIVE room 104's and room 105's readings of THEIR bath sheet onto
+ * rooms drawn on a different one:
+ *
+ *   202  bath A531  shipped "A530 keyed note 13 (placed on view 03)",
+ *                   "A530 keyed note 24", "A530 keyed note 19 (placed on plan
+ *                   01)", "A530 keyed note 9 (placed on plan 01 and elevation
+ *                   05)", "A530 keyed note 20 (placed on plan 01, standard
+ *                   guest bath)" and "A530 keyed note 28 (elevation 04)"
+ *   217  bath A533  the same six, and A533's own view numbering is different -
+ *                   room 217's rows cite A533:37, A533:44, A533:50, A533:93,
+ *                   elev 03 and views 02/05
+ *   238  bath A532 / A532.1   the same six, and its own enclosure rows read
+ *                   "A532 elev 02; A532.1 views 01, 02" and "A532.1 view 02
+ *                   keyed note 11"
+ *
+ * A PLACEMENT NUMBER IS THE THING THAT DOES NOT TRANSFER. The sheets table
+ * titles A530 "Enl. Bathroom - King Std., Std. Conn., QQ Std., Std. Conn., QQ
+ * Wide & QQ Ext.", so a plan, view, elevation or keyed-note number read off it
+ * is a fact about those types. Three outcomes, and the line says which:
+ *   KEPT (range)      the citation is a RANGE that also covers this type's own
+ *                     bath sheet - "A530-A533 General Note G".
+ *   KEPT (unnumbered) the citation carries no placement number to transfer, so
+ *                     nothing is asserted about where on the sheet to look.
+ *   DROPPED           a placement number off another type's bath sheet. Removed,
+ *                     quoted verbatim, and replaced by room_types.bath_sheet for
+ *                     THIS type with NO number on it, marked UNVERIFIED.
+ *
+ * It runs on DONOR-derived condensed lines only. A line built from this room's
+ * OWN row carries that row's own citation, and the room's own row governs its
+ * own citation - the same rule the floor pass states.
+ * ========================================================================== */
+const BATH_TITLE_RE = /^Enl\.\s*Bathroom\b/i;
+const BATH_PLACEMENT_RE = /\b(?:plans?|views?|elevations?|keyed notes?|keynotes?|kn)\b\s*\.?\s*\d|\bel\.\s*\d|:\s*\d/i;
+
+/** Every sheet the sheets table titles as a bathroom enlargement, by base id. */
+function bathSheetIndex(db) {
+  const byId = new Map();
+  for (const s of db.prepare('SELECT sheet_id, title FROM sheets ORDER BY sheet_id').all()) {
+    const title = String(s.title || '');
+    if (!BATH_TITLE_RE.test(title)) continue;
+    const id = String(s.sheet_id).replace(/\.\d+$/, '');
+    if (!byId.has(id)) byId.set(id, title);
+  }
+  return byId;
+}
+
+function bathTrueCitation(src, bathSheet, roomType, idx, donorNo, roomNo) {
+  const none = { src, note: '', changed: false, dropped: [], spanned: [], unnumbered: [] };
+  const mineIds = [...new Set(sheetIdsIn(bathSheet))];
+  if (!mineIds.length) return none;
+  const wrongIn = (t) => [...new Set(sheetIdsIn(t))].filter((id) => idx.has(id) && !mineIds.includes(id)).sort(cmpStr);
+
+  const kept = [], dropped = [], spanned = [], unnumbered = [];
+  for (const raw of citeSegmentsBalanced(src)) {
+    const wrong = wrongIn(raw);
+    if (!wrong.length) { kept.push(raw); continue; }
+    if ([...String(raw).matchAll(SHEET_RANGE_RE)].length && mineIds.some((m) => citesSheet(raw, m))) {
+      kept.push(raw);
+      for (const id of wrong) spanned.push(id + ' = "' + idx.get(id) + '" (cited inside a range that also covers ' + bathSheet + ')');
+      continue;
+    }
+    if (!BATH_PLACEMENT_RE.test(raw)) {
+      kept.push(raw);
+      for (const id of wrong) unnumbered.push(id + ' = "' + idx.get(id) + '"');
+      continue;
+    }
+    dropped.push({ seg: raw, ids: wrong });
+  }
+  if (!dropped.length && !spanned.length && !unnumbered.length) return none;
+
+  if (dropped.length) {
+    kept.push(bathSheet + ' (data/project.sqlite room_types.bath_sheet for "' + roomType + '" - the bathroom ' +
+      'sheet that draws THIS room type. NO plan, view, elevation or keyed-note number is asserted on it: the ' +
+      'number the donor line carried was read on ' + [...new Set(dropped.flatMap((d) => d.ids))].sort(cmpStr).join(', ') +
+      ', and this reference is UNVERIFIED for this room type)');
+  }
+
+  const bits = [];
+  if (dropped.length) {
+    bits.push('BATH SHEET. Room ' + roomNo + '\'s bathroom is drawn on ' + bathSheet + ' - data/project.sqlite ' +
+      'room_types.bath_sheet for type "' + roomType + '". ' + dropped.length + ' citation segment(s) carried from ' +
+      'the approved line on LIVE room ' + donorNo + ' read a plan, view, elevation or keyed-note number off a ' +
+      'bathroom sheet the sheets table gives to other room types, which makes ' +
+      (dropped.length > 1 ? 'them room ' : 'it room ') + donorNo + '\'s reading of room ' + donorNo + '\'s own bath ' +
+      'drawing, so ' + (dropped.length > 1 ? 'they are' : 'it is') + ' NOT carried. Removed, quoted verbatim: ' +
+      dropped.map((d) => '"' + d.seg + '" [' + d.ids.map((id) => id + ' = "' + idx.get(id) + '"').join(', ') + ']').join('; ') +
+      '. What replaces ' + (dropped.length > 1 ? 'them' : 'it') + ' is ' + bathSheet + ', cited with NO number on ' +
+      'it. THE BATH-SHEET REFERENCE IS UNVERIFIED FOR THIS ROOM TYPE: read the sheet and confirm the number before ' +
+      'relying on it.');
+  }
+  if (spanned.length) {
+    bits.push('BATH SHEET. A citation names a bathroom sheet drawn for other room types and it STAYS, because it is ' +
+      'cited inside a RANGE that also covers this type\'s own bath sheet: ' + spanned.join('; ') + '.');
+  }
+  if (unnumbered.length) {
+    bits.push('BATH SHEET. A citation names a bathroom sheet drawn for other room types and it STAYS, because it ' +
+      'carries no plan, view, elevation or keyed-note number to transfer: ' + unnumbered.join('; ') +
+      '. Room ' + roomNo + '\'s own bathroom is drawn on ' + bathSheet + ' (data/project.sqlite ' +
+      'room_types.bath_sheet for "' + roomType + '") - read it there.');
+  }
+  return { src: citeJoin(kept), note: bits.join(' '), changed: true, dropped, spanned, unnumbered };
+}
+
+/* ====== AN ENLARGEMENT SHEET DRAWS THE TYPES ITS OWN TITLE NAMES, AND NO OTHER
+ *
+ * The FF&E citation is room_items.primary_sheet, straight out of the recipe
+ * (reduceFFE, byte-copied from build_floor1.mjs and not this tool's to change).
+ * On LIVE room 104 that is right, because A550 IS room 104's sheet. On these
+ * four types it is not: twelve to fourteen lines a room shipped a bare "A550",
+ * "A530", "A533" or "A532.1" - the enlargement sheet for somebody else's room
+ * type - while the SAME row's own source_sheet carries the entry for this type
+ * and was thrown away. ITM-0084's source_sheet is "A550:60; A551:52; A553:55;
+ * A554:58; A555:70; A556:56"; room 217's entry in it is A554:58.
+ *
+ * NOTHING IS DELETED AND NOTHING IS INVENTED. Where the row's own source_sheet
+ * says more than its primary_sheet, the line cites the row's own source_sheet -
+ * the database's fuller record of the same row - and the note names the segment
+ * that covers this room's own sheet. Where neither names this type's sheet, the
+ * citation stands and the line names the sheet room_types gives this type,
+ * marked UNVERIFIED for it.
+ * ========================================================================== */
+const TYPE_SHEET_TITLE_RE = /^Enl\.\s*(?:Bathroom|Guest ?[Rr]oom)\b/i;
+
+function typeSheetIndex(db) {
+  const byId = new Map();
+  for (const s of db.prepare('SELECT sheet_id, title FROM sheets ORDER BY sheet_id').all()) {
+    const title = String(s.title || '');
+    if (!TYPE_SHEET_TITLE_RE.test(title)) continue;
+    const id = String(s.sheet_id).replace(/\.\d+$/, '');
+    if (!byId.has(id)) byId.set(id, title);
+  }
+  return byId;
+}
+
+function ffeTypeCitation(line, roomType, roomSheet, bathSheet, idx, roomNo) {
+  const src0 = String(line.sqlite.src || '');
+  const ownIds = [...new Set([...sheetIdsIn(roomSheet), ...sheetIdsIn(bathSheet)])];
+  const foreignIn = (t) => [...new Set(sheetIdsIn(t))].filter((id) => idx.has(id) && !ownIds.includes(id)).sort(cmpStr);
+  const foreign = foreignIn(src0);
+  if (!foreign.length || !ownIds.length) return { src: src0, note: '', changed: false };
+
+  const covers = (t) => ownIds.some((id) => citesSheet(t, id));
+  const first = (line.rows || [])[0] || {};
+  const full = resolveSheetWildcard(first.source_sheet || '', roomSheet);
+  const ownSegs = (t) => citeSegments(t).filter((s) => covers(s));
+
+  const foreignList = foreign.map((id) => id + ' = "' + idx.get(id) + '"').join('; ');
+  const typeSheets = 'room_sheet ' + roomSheet + (bathSheet ? ' and bath_sheet ' + bathSheet : '') +
+    ' (data/project.sqlite room_types for "' + roomType + '")';
+
+  if (covers(src0)) {
+    return {
+      src: src0,
+      note: 'CITATION. This citation names an enlargement sheet the data/project.sqlite sheets table draws for ' +
+        'other room types (' + foreignList + ') and it STAYS, because the same citation also covers room ' + roomNo +
+        '\'s own ' + typeSheets + '.',
+      changed: true, kind: 'covered',
+    };
+  }
+  if (full && full !== src0 && covers(full)) {
+    return {
+      src: full,
+      note: 'CITATION. data/project.sqlite\'s primary_sheet for this room\'s row(s) reads "' + src0 + '", and the ' +
+        'sheets table titles it ' + foreignList + ' - the enlargement sheet for other room types. The SAME row ' +
+        'carries a fuller citation of its own, and that is what this line cites, verbatim: "' + full + '". The ' +
+        'entry in it that covers room ' + roomNo + '\'s own ' + typeSheets + ' is ' +
+        ownSegs(full).map((s) => '"' + s + '"').join(', ') + '.',
+      changed: true, kind: 'repointed',
+    };
+  }
+  const finalSrc = full && full !== src0 ? full : src0;
+  const finalForeign = foreignIn(finalSrc);
+  return {
+    src: finalSrc,
+    note: 'CITATION. This line cites ' +
+      finalForeign.map((id) => id + ' = "' + idx.get(id) + '"').join('; ') + ' - ' +
+      (finalForeign.length > 1 ? 'enlargement sheets' : 'an enlargement sheet') +
+      ' the data/project.sqlite sheets table draws for other room types' + (full && full !== src0
+        ? ', taken here from the fuller citation the row itself carries, verbatim: "' + full + '"'
+        : ', which is data/project.sqlite\'s primary_sheet for this room\'s own row') +
+      '. The sheet that draws room ' + roomNo + ' is ' + typeSheets + ': read the tag there. THIS CITATION IS ' +
+      'UNVERIFIED FOR THIS ROOM TYPE.',
+    changed: true, kind: 'unverified',
+  };
+}
+
+/* ============== A MARK PRINTED INSIDE A CITATION IS A FACT ABOUT THE SCHEDULE
+ *
+ * plmb_shower_a cites "P104 rows SH-3 and SH-4" and plmb_wc_a cites "P104 rows
+ * WC-3 and WC-4". Those are true statements about what the P104 schedule
+ * prints, and they came from the approved line on the donor room - but on room
+ * 238 the MARK field reads "SH-1 / SH-3" off this room's own row ITM-0715, so a
+ * reader met SH-4 in the citation with nothing saying whose mark it is.
+ *
+ * Nothing is removed: P104 really does print both rows. The line simply says
+ * which marks of that family THIS room's own rows carry, and names them.
+ * ========================================================================== */
+const CITED_MARK_RE = /\b([A-Za-z]{1,4})-(\d+(?:\.\d+)?)\b/g;
+
+function citedMarkNote(src, rows, category, roomNo) {
+  const own = new Map();                       // family -> Map(mark -> [rowIds])
+  for (const r of rows || []) {
+    if (r.category !== category || !r.tag) continue;
+    for (const m of splitMarks(r.tag)) {
+      const fam = markFamily(m);
+      if (!fam || !atomicMark(m)) continue;
+      if (!own.has(fam)) own.set(fam, new Map());
+      if (!own.get(fam).has(m)) own.get(fam).set(m, []);
+      if (!own.get(fam).get(m).includes(r.item_id)) own.get(fam).get(m).push(r.item_id);
+    }
+  }
+  if (!own.size) return '';
+  const cited = new Map();                     // family -> Set(marks)
+  for (const m of String(src || '').matchAll(CITED_MARK_RE)) {
+    const mark = m[1] + '-' + m[2];
+    const fam = markFamily(mark);
+    if (!fam || !own.has(fam)) continue;
+    if (!cited.has(fam)) cited.set(fam, new Set());
+    cited.get(fam).add(mark);
+  }
+  const bits = [];
+  for (const fam of [...cited.keys()].sort(cmpStr)) {
+    const citedMarks = [...cited.get(fam)].sort(cmpStr);
+    const ownMarks = [...own.get(fam).keys()].sort(cmpStr);
+    if (citedMarks.every((m) => ownMarks.includes(m))) continue;
+    bits.push('The document(s) cited above print ' + citedMarks.join(', ') + ' in the ' + fam +
+      ' family, which is a fact about those documents. The mark(s) room ' + roomNo + '\'s own ' +
+      'data/project.sqlite rows state in that family are ' +
+      ownMarks.map((m) => m + ' (' + own.get(fam).get(m).join(', ') + ')').join(', ') +
+      '. Read the citation as a pointer to the schedule and the room\'s own row for what this key holds.');
+  }
+  return bits.length ? 'MARKS IN THE CITATION. ' + bits.join(' ') : '';
 }
 
 function fpNoCount(db, roomNo, roomType, donorNo, item, report, floor) {
@@ -2046,10 +2394,20 @@ function fpNoCount(db, roomNo, roomType, donorNo, item, report, floor) {
   const removedSentence = ' CITATION NOT CARRIED: the donor line (room ' + donorNo + ') cited ' +
     donorFp.map((x) => '"' + x + '"').join(' and ') + '. That is room ' + donorNo + "'s own row text - a FLOOR 1 " +
     'sheet, a floor-1 head total, and a head-by-head verification performed on rooms 107 and 108. Room ' + roomNo +
-    ' is on FLOOR ' + floor + ' and has NO Fire Sprinkler row of its own in data/project.sqlite, so none of it is ' +
-    'carried here. What replaces it is ' + ph.placeholder_id + "'s own suggested sheet list, verbatim: \"" +
-    ph.suggested_sheet + '". Which of those covers floor ' + floor + ' is not stated anywhere in ' +
-    'data/project.sqlite and is not guessed here.';
+    ' is on FLOOR ' + floor + ', and what this package holds for its sprinkler scope is data/project.sqlite ' +
+    'placeholder ' + ph.placeholder_id + ', quoted above. What replaces the donor citation is ' + ph.placeholder_id +
+    "'s own suggested sheet list, verbatim: \"" + ph.suggested_sheet + '". Which of those covers floor ' + floor +
+    ' is not stated anywhere in data/project.sqlite and is not guessed here.';
+  /* THE MARK IS THE TARGET ROOM'S, OR THERE IS NO MARK - the same rule the
+   * bathing lines follow, and the same reason the donor's qty and the donor's
+   * FP-series citation come off. "FP" is the D10 line code the APPROVED donor
+   * line carries; this room's sprinkler scope is a placeholder, so there is no
+   * row of this room to read a mark off and the field is left EMPTY. */
+  const markSentence = ' MARK. The approved D10 line for this item on LIVE room ' + donorNo + ' carries mark "' +
+    String(item.code || '') + '". THAT MARK IS ROOM ' + donorNo + "'S AND IT IS NOT CARRIED HERE: the mark field on " +
+    'this line is left EMPTY, for the same reason the donor\'s count and the donor\'s FP-series citation are left ' +
+    'off. Read the mark off the sprinkler sheet that covers floor ' + floor + ' when ' + ph.placeholder_id +
+    ' is closed.';
   const replacement = 'NO HEAD COUNT IS VERIFIED FOR THIS ROOM TYPE, and none is asserted here. ' +
     'data/project.sqlite placeholders ' + ph.placeholder_id + ' (' + ph.suggested_sheet + '), verbatim: "' +
     ph.what_is_missing + '" Why it is left open, verbatim: "' + ph.why + '" ' +
@@ -2064,11 +2422,14 @@ function fpNoCount(db, roomNo, roomType, donorNo, item, report, floor) {
   const kernel = neutral(String(item.instanceNote).slice(0, m.index)) + replacement
     + neutral(String(item.instanceNote).slice(m.index + m[0].length));
   const out = clone(item);
-  out.instanceNote = kernel + removedSentence;
+  const donorMark = String(item.code || '');
+  out.instanceNote = kernel + removedSentence + (donorMark ? markSentence : '');
   out.src = citeJoin([...kept, replacementSeg]);
   out.reliability = 'MEDIUM';
+  out.code = '';
   delete out.qty;
-  report.fpNoCount = FP_HEADS_KEY + ': donor qty ' + item.qty + ' NOT copied; line ships with no quantity, ' +
+  report.fpNoCount = FP_HEADS_KEY + ': donor qty ' + item.qty + ' NOT copied; donor mark ' +
+    JSON.stringify(donorMark) + ' NOT copied; line ships with no quantity and no mark, ' +
     'reliability MEDIUM, carrying PH-GU-001 verbatim; ' + donorFp.length + ' donor FP-series citation segment(s) ' +
     'removed (floor-1 sheet, floor-1 total, rooms 107/108 verification) and replaced with ' + ph.placeholder_id +
     "'s own sheet list plus this room's floor (" + floor + ')';
@@ -2261,16 +2622,16 @@ function bathingUnresolvedLine(roomNo, key, item, drops, donorNo, bathSheet) {
           String(r.description).replace(CONFIG_A_PREFIX, '').replace(CONFIG_B_PREFIX, '') + '" [cited: ' +
           (r.source_sheet || r.primary_sheet || 'no citation') + ']').join('; ') +
         '. Those rows are the OPEN bathing configuration, so the mark is carried and NOT resolved.'
-      : ' and this room carries NO row of its own in that mark family, so THIS LINE SHIPS WITH NO MARK AT ALL ' +
-        'rather than the donor\'s. Read the configuration rows below.') +
+      : ', and the mark field on this line is left EMPTY rather than filled with the donor\'s. The marks room ' +
+        roomNo + ' carries in this trade are on the configuration rows listed below; read the mark off them.') +
     (bathSheet ? ' This room type\'s bath is drawn on ' + bathSheet + ' (data/project.sqlite room_types.bath_sheet), ' +
-      'not on the donor\'s bath sheet; any bath-sheet keynote carried in the citation above is room ' + donorNo +
-      "'s reading of room " + donorNo + "'s own bath drawing - confirm it on " + bathSheet + '.' : '');
+      'not on the donor\'s bath sheet - read every bath dimension, elevation and keyed note there, and see the ' +
+      'BATH SHEET paragraph on this line for what was carried and what was not.' : '');
 
   out.instanceNote = (item.instanceNote ? item.instanceNote + ' ' : '') + markSentence.trim() + ' ' +
     'CONFLICT CARRIED, NOT RESOLVED. Room ' + roomNo + ' is one of the seven accessible keys on which the ' +
-    'tub-versus-roll-in question is OPEN. This room has NO neutral bathing row of its own: everything it ' +
-    'carries is one configuration or the other, and every one of those rows is FLAGGED in ' +
+    'tub-versus-roll-in question is OPEN. Every bathing row this room carries is one configuration or the other, ' +
+    'and every one of those rows is FLAGGED in ' +
     'data/project.sqlite. The product text on this line is donor room ' + donorNo + "'s STANDARD guestroom " +
     'fixture and it is NOT an answer for this key. ' +
     'CONFIGURATION A (TUB) rows in this room: ' + listOf(drops.a) + '. ' +
@@ -2397,17 +2758,44 @@ function foldSentence(roomNo, line) {
  * ========================================================================== */
 
 /* A row whose OWN note says the documents disagree - matched on the database's
- * own vocabulary, never authored. Used to decide what rides in n_gategaps, so a
- * conflict is carried on the presence of the conflict and not on how confident
- * the transcriber was. */
-const CONFLICT_IN_NOTE_RE = /conflict|conflicts\.md|contradic|mutually exclusive|do not buy|not stated|RFI\b|confirm which|confirm before|confirm with|which is intended|disagree|unresolved|unsettled|no source settles|never assigned|not normalised|two different|is wrong for|superseded/i;
+ * own vocabulary, never authored. Used to decide what rides in n_gategaps and
+ * what is quoted on a condensed line, so a conflict is carried on the presence
+ * of the conflict and not on how confident the transcriber was.
+ *
+ * THE LIST IS THE SINGLE SOURCE. Room note n_gategaps prints this exact array,
+ * so the note cannot advertise a word the matcher does not hold. It used to
+ * print "superseded" while the matcher held only that inflection, and
+ * data/project.sqlite's ITM-0095 writes "RK SUPERSEDES the finish schedule
+ * area text" - one letter away, and the row fell through on all four rooms.
+ * Four more forms the database actually writes were missing the same way:
+ *   "DUAL MARK CARRY - P401/P402 print SH-1, P104 schedules SH-4"  ITM-0545
+ *   "DUAL MARK CARRY - P401/P402 print L-2, P104 schedules L-3/L-4"  ITM-0043
+ *   "no source states the equivalence, both carried"                 ITM-0024
+ *   "RK supersedes the finish schedule area text"                    ITM-0095
+ * Every one of them is a document disagreement stated on a room's own row. */
+const CONFLICT_WORDS = [
+  'conflict', 'conflicts.md', 'contradic', 'mutually exclusive', 'do not buy', 'not stated', 'RFI',
+  'confirm which', 'confirm before', 'confirm with', 'which is intended', 'disagree', 'unresolved',
+  'unsettled', 'no source settles', 'no source states', 'no source assigns', 'never assigned',
+  'not normalised', 'two different', 'is wrong for', 'supersede', 'dual mark carry',
+];
+const reEscLit = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const CONFLICT_IN_NOTE_RE = new RegExp(
+  CONFLICT_WORDS.map((w) => (w === 'RFI' ? '\\bRFI\\b' : reEscLit(w))).join('|'), 'i');
 
 /* Two sheets set against each other in one sentence IS a document conflict,
  * whatever words the transcriber reached for. Room 217's ITM-0378 - "A533 uses
  * the STANDARD palette ... while A532 uses WC-12 ... Confirm which is intended" -
  * is the row that forced this: it states a live disagreement about THIS room's
  * own bathroom finish, it was rated HIGH, and it matched none of the words
- * above, so it vanished from n_gategaps entirely. */
+ * above, so it vanished from n_gategaps entirely.
+ *
+ * IT IS DELIBERATELY NARROW and it stays narrow. ITM-0545 and ITM-0043 set two
+ * sheets against each other with nothing but a comma - "P401/P402 print SH-1,
+ * P104 schedules SH-4" - and widening the connective list to a bare comma would
+ * read every note that lists two sheet numbers as a document conflict. Those
+ * two rows are caught on the database's own phrase for exactly this situation,
+ * "DUAL MARK CARRY", which is in CONFLICT_WORDS above. */
 const SHEET_VS_SHEET_RE = /\b[A-Z]{1,3}-?\d{2,3}(?:\.\d+)?\b[^.;]{0,110}?\b(?:vs\.?|versus|while|against|but)\b[^.;]{0,110}?\b[A-Z]{1,3}-?\d{2,3}(?:\.\d+)?\b/;
 
 /** Does this row's own note say the documents disagree? */
@@ -2546,19 +2934,53 @@ const conflictsOnMarks = (hits, codes) => {
 
 const conflictsOnTag = (hits, code) => conflictsOnMarks(hits, [code]);
 
+/* ==================== AN ENTRY A ROW CITES BY ID REACHES THAT ROW'S OWN LINE
+ *
+ * meta.conflictPolicy states three tests - a mark this room carries, a room key
+ * of this type, or a citation of the entry by id in one of this room's own rows
+ * - and said every match lands on the line. conflictsOnMarks() only ever
+ * filtered on h.marks, so the THIRD test could reach room note n_conflicts and
+ * nothing else. Room 238's rows ITM-0712 through ITM-0720 cite "conflicts.md
+ * A11 / B4.4" by id and every one of them HAS a line in this package
+ * (db_itm0712, db_itm0714..0717, hd05_a, hd14_a, hd51_a), so B4.4's own
+ * instruction - "Do not order the 438 bath package" - sat in a room note while
+ * the eight bathing lines it is about said nothing about it.
+ *
+ * A KEY match still rides in the room note only: a key is a fact about the
+ * room, not about any one line, and that is what the policy now says.
+ * ========================================================================== */
+const conflictsOnLine = (hits, codes, rowIds) => {
+  const marks = marksOf(codes);
+  const ids = (rowIds || []).filter(Boolean);
+  return hits.filter((h) => h.marks.some((m) => marks.includes(m)) || h.rows.some((r) => ids.includes(r)));
+};
+
 /** The marks of THIS line that a given entry actually names. */
 const markHitsFor = (h, codes) => {
   const marks = marksOf(codes);
   return readableMarks(h.marks.filter((m) => marks.includes(m)));
 };
 
-/** The sentence that rides on a line, naming the marks and not the whole list. */
-function conflictOnLineText(h, codes, wasRel, rowWord) {
+/** The rows behind THIS line that cite a given entry by id. */
+const rowHitsFor = (h, rowIds) => h.rows.filter((r) => (rowIds || []).includes(r));
+
+/** The sentence that rides on a line, naming what actually matched it. */
+function conflictOnLineText(h, codes, wasRel, rowWord, rowIds) {
   const hit = markHitsFor(h, codes);
-  return conflictQuote(h) + ' It names ' + (hit.length > 1 ? 'marks ' : 'mark ') + hit.join(', ') +
-    ', which this line carries' + (readableMarks(marksOf(codes)).length > hit.length
-      ? ' (this line\'s full mark list: ' + readableMarks(marksOf(codes)).join(', ') + ')' : '') +
-    '. The entry travels with the line and the line is FLAGGED for it' +
+  const byRow = rowHitsFor(h, rowIds);
+  const why = [];
+  if (hit.length) {
+    why.push('It names ' + (hit.length > 1 ? 'marks ' : 'mark ') + hit.join(', ') + ', which this line carries' +
+      (readableMarks(marksOf(codes)).length > hit.length
+        ? ' (this line\'s full mark list: ' + readableMarks(marksOf(codes)).join(', ') + ')' : '') + '.');
+  }
+  if (byRow.length) {
+    why.push('data/project.sqlite ' + rowWord + ' ' + byRow.join(', ') + ' behind this line cite' +
+      (byRow.length > 1 ? '' : 's') + ' this entry BY ID, which is the database itself saying the entry touches ' +
+      'this item.');
+  }
+  return conflictQuote(h) + ' ' + why.join(' ') +
+    ' The entry travels with the line and the line is FLAGGED for it' +
     (String(wasRel).toUpperCase() === 'FLAGGED' ? '' : ' - its own data/project.sqlite ' + rowWord + ' read ' +
       wasRel + ', and the open conflict flags it further') +
     '; confirm before any takeoff or purchase.';
@@ -2705,19 +3127,22 @@ function buildRoomNotes(db, roomNo, room, rows, red, drops, stamp, report) {
   }
   if (gateNotes.length) {
     notes.n_gategaps = noteOf(
-      'ROWS THAT CANNOT CARRY A CHECKLIST LINE. ' + gateNotes.length + ' row(s) in this room are either FLAGGED or ' +
-      'MEDIUM in data/project.sqlite, or state a DOCUMENT CONFLICT in their own note at any reliability (' +
-      gateConflicts + ' of them do), and sit in a category outside Austin\'s approved checklist gate (the gate keeps ' +
-      'Paint, Drywall, Flooring, Doors, Stone / Surround, Wall Covering and FF&E - Misc out of BOTH documents, which ' +
-      'is how every approved floor-1 room already works). They are recorded here so the conflict is not lost with ' +
-      'the line. A HIGH row that states a conflict is listed too: how well a row was READ says nothing about ' +
-      'whether the documents AGREE. A row counts as stating a conflict on the database\'s own words - the ' +
-      'conflict vocabulary ("conflict", "contradic", "mutually exclusive", "do not buy", "not stated", "RFI", ' +
-      '"confirm which", "confirm before", "which is intended", "disagree", "unresolved", "unsettled", "no source ' +
-      'settles", "never assigned", "not normalised", "two different", "superseded") OR two sheet numbers set ' +
-      'against each other in one sentence, which is what room 217\'s WC-02 row does and what the narrower earlier ' +
-      'test missed. Widening the gate is Austin\'s call, not this tool\'s. ' +
-      gateNotes.join('  ||  '), stamp, 'issue');
+      'ROWS OUTSIDE AUSTIN\'S CHECKLIST GATE THAT ARE FLAGGED, MEDIUM, OR STATE A DOCUMENT CONFLICT. ' +
+      'That is exactly the list below and exactly how it was selected: ' + gateNotes.length + ' row(s) of room ' +
+      roomNo + ' sit in a category outside Austin\'s approved checklist gate (the gate keeps Paint, Drywall, ' +
+      'Flooring, Doors, Stone / Surround, Wall Covering and FF&E - Misc off the normal FF&E and MEP lists, which is ' +
+      'how every approved floor-1 room already works) AND are either FLAGGED or MEDIUM in data/project.sqlite, or ' +
+      'state a DOCUMENT CONFLICT in their own note at any reliability (' + gateConflicts + ' of them do). They are ' +
+      'recorded here so the conflict travels with the room. A HIGH row that states a conflict is listed too: how ' +
+      'well a row was READ says nothing about whether the documents AGREE. A row counts as stating a conflict on ' +
+      'the database\'s own words - the conflict vocabulary, printed here from the matcher\'s own list so the two ' +
+      'cannot drift apart (' + CONFLICT_WORDS.map((w) => '"' + w + '"').join(', ') + ', matched case-insensitively ' +
+      'as substrings, so "supersede" catches both "superseded" and "supersedes") OR two sheet numbers set against ' +
+      'each other in one sentence by the words "vs", "versus", "while", "against" or "but", which is what room 217\'s ' +
+      'WC-02 row does. Being listed here does not by itself decide whether a row also carries a checklist line: ' +
+      'platform/tools/carry_ref_state.mjs REBUILDS a gated row as a line where the crew already holds field work on ' +
+      'it, and that line says on its face why it exists. Widening the gate itself is Austin\'s call, not this ' +
+      'tool\'s. ' + gateNotes.join('  ||  '), stamp, 'issue');
   }
 
   /* Placeholders the database itself raises against THIS room type.
@@ -2805,9 +3230,11 @@ function buildRoomNotes(db, roomNo, room, rows, red, drops, stamp, report) {
       'caught it: (1) it names a MARK this room carries - every mark list on a row or a line is split on "/" and ' +
       '"," and matched mark by mark, so "SH-1 / SH-4" is matched as SH-1 and SH-4 and not as one string; (2) it ' +
       'names one of this type\'s room keys (' + spec.keys.join(', ') + '); (3) one of THIS room\'s own ' +
-      'data/project.sqlite rows cites the entry by id. Wherever a line in this package carries one of the marks an ' +
-      'entry names, that line is FLAGGED and carries the entry with it. An entry whose mark the category gate keeps ' +
-      'off both documents, or that names a key rather than a mark, has no line to sit on and is carried here only. ' +
+      'data/project.sqlite rows cites the entry by id. TESTS 1 AND 3 ALSO PUT THE ENTRY ON A LINE: a line whose ' +
+      'mark the entry names, and a line whose supporting row cites the entry by id, is FLAGGED and carries the ' +
+      'entry verbatim. TEST 2 DOES NOT: a room key is a fact about the room and not about any one item, so a ' +
+      'key-only match is carried here and on no line. An entry whose mark the category gate keeps off the normal ' +
+      'FF&E and MEP lists is carried here too. ' +
       conflictHits.map((h) => h.id + ' [' + h.c.source + ']' +
         (h.marks.length ? ' names mark(s) ' + readableMarks(h.marks).join(', ') + ', carried in this room on tag(s) ' +
           h.tags.map((t) => '"' + t + '"').join(', ') : '') +
@@ -2950,7 +3377,8 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
   const items = {};
   const fromDonor = [], fromSqlite = [], donorQtyNotes = [], donorLabelNotes = [], overrideNotes = [];
   const flagged = [], configLines = [], declinedLines = [];
-  const relKept = [], donorTextDropped = [], donorClosures = [], conflictLines = [];
+  const relKept = [], donorTextDropped = [], donorClosures = [], conflictLines = [], typeCiteFixed = [];
+  const typeIdx = typeSheetIndex(db);
   const drops = configADrops(roomNo, rows);
 
   /* Every OPEN entry in the conflicts table that names this room's keys or one
@@ -3006,10 +3434,10 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
           reliability = r.reliability;
           donorClosures.push(line.key + ' (' + tagLabel + '): ' + line.sqlite.reliability + ' -> ' + r.reliability +
             ' on the ruling closure carried in the donor text');
-          prov.push('RELIABILITY. data/project.sqlite has this room\'s row at ' + line.sqlite.reliability +
-            '. The line ships at ' + r.reliability + ' because the approved package for this tag carries a RULING ' +
-            'that closes that flag for the PRODUCT - it names a model, not a room - and that ruling text is on this ' +
-            'line above. Nothing else may move a flag.');
+          prov.push('RELIABILITY. data/project.sqlite reads this room\'s row at ' + line.sqlite.reliability +
+            '. The approved package for this tag carries a RULING that closes that flag for the PRODUCT - it names ' +
+            'a model, not a room - and that ruling text is on this line above, so the flag is closed here on the ' +
+            'ruling and on nothing else. Nothing but a ruling of that kind may move a flag.');
         } else {
           relKept.push(line.key + ' (' + tagLabel + '): sqlite ' + line.sqlite.reliability + ' KEPT over donor ' +
             r.reliability);
@@ -3028,13 +3456,19 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
           const worstQuotes = worstRows.map((x) => x.item_id +
             (x.instance_note ? ' ("' + x.instance_note + '")' : '') +
             (x.note ? ' — note, verbatim: "' + x.note + '"' : '')).join('; ');
-          prov.push('RELIABILITY. The reliability on this line is the WORST of THIS room\'s own ' +
-            'data/project.sqlite row(s), each at its own reading: ' + perRow + '. ' +
+          /* THE NOTE DOES NOT RESTATE THE RELIABILITY FIELD. It used to end
+           * "the line ships the worst of them, MEDIUM" - and on 217/905_a the
+           * conflicts-table block below then raised the same line to FLAGGED,
+           * so the badge and the sentence disagreed. The note now says which
+           * rows there are and how they are read; the field says what the line
+           * ships, and every block that MOVES the field announces its own move. */
+          prov.push('RELIABILITY. This line is read no better than the worst of THIS room\'s own ' +
+            'data/project.sqlite row(s), each shown at its own reading: ' + perRow + '. ' +
             (mixed
-              ? 'They do not agree, so the line ships the worst of them, ' + line.sqlite.reliability +
-                ' - a fold is only as well read as its weakest row. What pulls it down: ' + worstQuotes + '. ' +
+              ? 'They do not agree, and a fold is only as well read as its weakest row. What pulls it down: ' +
+                worstQuotes + '. ' +
                 'The higher-read row(s) on this same tag are not evidence that the lower one was read better.'
-              : 'They agree at ' + line.sqlite.reliability + '.') +
+              : 'They agree with one another.') +
             ' LIVE room ' + donorNo + ' carries the same tag at ' + r.reliability + ', which is a fact about room ' +
             donorNo + ' and not evidence about this room. A donor may enrich a line; it may not close its flag.');
         }
@@ -3094,10 +3528,27 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
       };
       source = 'SQLITE';
       fromSqlite.push(tagLabel + (line.sqlite.reliability !== 'HIGH' ? ' [' + line.sqlite.reliability + ']' : ''));
-      prov.push('SOURCE. Everything on this line is data/project.sqlite room ' + roomNo + '\'s own row(s) ' + rowIds +
-        ', verbatim, at the database\'s own reliability. LIVE room ' + donorNo + ' has no line for ' +
-        (line.code ? 'tag ' + line.code : 'this untagged item') + ', so nothing here was borrowed from another ' +
-        'room type.');
+      /* THE POSITIVE STATEMENT IS THE WHOLE STATEMENT. This used to close with
+       * "LIVE room 105 has no line for tag GR-308, so nothing here was borrowed
+       * from another room type" - and platform/data/floor1-staged.json DOES
+       * hold 105/gr308_a, as a D22 tombstone. The intent was "no LIVE line",
+       * the words said something the approved floor-1 build contradicts, and a
+       * claim about another document is not needed to say where THIS line came
+       * from. Naming every row it is built from says it completely. */
+      prov.push('SOURCE. Every field on this line - label, tag, count, citation, reliability and text - is ' +
+        'data/project.sqlite room ' + roomNo + '\'s own row(s) ' + rowIds + ', verbatim, at the database\'s own ' +
+        'reliability. The approved package for LIVE room ' + donorNo + ' (' + spec.donorType + ') supplied nothing ' +
+        'to it: the donor index this build reads is LIVE lines only, and a retired tombstone is not a source.');
+    }
+
+    /* AN ENLARGEMENT SHEET DRAWS THE TYPES ITS TITLE NAMES. See ffeTypeCitation(). */
+    const tc = ffeTypeCitation(line, room.room_type, rt.room_sheet || '', rt.bath_sheet || '', typeIdx, roomNo);
+    if (tc.changed) {
+      if (tc.src !== pkg.src) typeCiteFixed.push(line.key + ' (' + tagLabel + '): ' +
+        JSON.stringify(pkg.src) + ' -> ' + JSON.stringify(tc.src) + ' [' + tc.kind + ']');
+      else typeCiteFixed.push(line.key + ' (' + tagLabel + '): ' + JSON.stringify(pkg.src) + ' [' + tc.kind + ']');
+      pkg.src = tc.src;
+      prov.push(tc.note);
     }
 
     if (!pkg.src) {
@@ -3168,14 +3619,16 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
     /* Every mark this line carries: its own tag AND the tag on every row of this
      * room folded into it. Marks are matched one at a time - see splitMarks(). */
     const lineCodes = [line.code, ...line.rows.map((x) => x.tag)].filter(Boolean);
-    const onTag = conflictsOnMarks(conflictHits, lineCodes);
+    const lineRowIds = line.rows.map((x) => x.item_id);
+    const onTag = conflictsOnLine(conflictHits, lineCodes, lineRowIds);
     let conflictText = '';
     if (onTag.length) {
       const wasRel = pkg.reliability;
       pkg.reliability = 'FLAGGED';
-      conflictText = onTag.map((h) => conflictOnLineText(h, lineCodes, wasRel, 'row(s)')).join(' ');
+      conflictText = onTag.map((h) => conflictOnLineText(h, lineCodes, wasRel, 'row(s)', lineRowIds)).join(' ');
       conflictLines.push(line.key + ' (' + readableMarks(marksOf(lineCodes)).join(' + ') + ' <- ' +
-        onTag.map((h) => h.id + '[' + markHitsFor(h, lineCodes).join(',') + ']').join(', ') + ')');
+        onTag.map((h) => h.id + '[' + (markHitsFor(h, lineCodes).join(',') ||
+          'cited by ' + rowHitsFor(h, lineRowIds).join(',')) + ']').join(', ') + ')');
     }
 
     /* The note, assembled in one place: this room's own words first, then why
@@ -3233,6 +3686,7 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
   report.ffeDonorClosures = donorClosures.sort(cmpStr);
   report.ffeDonorTextDropped = donorTextDropped.sort(cmpStr);
   report.ffeConflictLines = conflictLines.sort(cmpStr);
+  report.ffeTypeCiteFixed = typeCiteFixed.sort(cmpStr);
   report.configCarried = drops.carried;
   report.configA = drops.a.length;
   report.configB = drops.b.length;
@@ -3285,6 +3739,7 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
   /* Which sheet covers which floor, read out of data/project.sqlite's own
    * sheets table. See floorTrueCitation(). */
   const floorIdx = floorSheetIndex(db);
+  const bathIdx = bathSheetIndex(db);
   const roomFloor = Number.parseInt(room.floor, 10);
 
   const keyOfDonorItem = new Map();
@@ -3327,7 +3782,7 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
   const repointed = [], citationDropped = [], connectingDropped = [], resolutions = [];
   const qtyFromRows = [], flagged = [], configLines = [], donorCiteStripped = [];
   const conflictLines = [], ptacRepeatLines = [], unknownBandLines = [];
-  const relFromOwn = [], floorFixed = [], markFromOwn = [], tagAssertFixed = [];
+  const relFromOwn = [], floorFixed = [], markFromOwn = [], tagAssertFixed = [], bathFixed = [], citedMarkLines = [];
 
   /* The same OPEN conflicts-table entries the FF&E document carries. An entry
    * that names a tag on an MEP line rides on that line too. */
@@ -3378,6 +3833,7 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
     /* A variant row whose product genuinely differs rebuilds the line - the same
      * rule floor 1 uses (MEP_LABEL_FROM_ROW). Config rows never get here. */
     const variant = units[0] || null;
+    let rebuiltFromOwnRow = '';
     const donorUnit = (descSlots.unitRows.get(key) || [])[0] || null;
     if (variant && donorUnit && MEP_LABEL_FROM_ROW.has(key) && variant.description !== donorUnit.description) {
       code = variant.tag || '';
@@ -3388,6 +3844,7 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
       derived = variant.derived;
       instanceNote = sqliteNote(variant);
       citeNote = '';
+      rebuiltFromOwnRow = variant.item_id;
       resolutions.push(key + ": rebuilt from this room's own row " + variant.item_id);
     }
 
@@ -3464,11 +3921,26 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
      * THIS room's own rows behind it (never better, and the donor's own flag is
      * never lifted either), and every row that is not HIGH, or whose own note
      * states a document conflict, is quoted ON THE LINE. Nothing is resolved.
+     *
+     * THE NOTE DOES NOT RESTATE THE RELIABILITY FIELD, and that is deliberate.
+     * It used to end "the line ships at the WORST of them, HIGH", built from the
+     * local ownWorst - so when the PTAC-repeat block above had already lowered
+     * the same line to FLAGGED, the badge and the sentence said two different
+     * things about one field (202-MEP and 217-MEP mech_tstat). A note explains
+     * WHY a reading is what it is; the reliability field states WHAT it is. Two
+     * fields that cannot disagree are better than two fields kept in step by
+     * hand. Every block that MOVES the reading still says so in its own words -
+     * the PTAC count conflict, the conflicts table, the sprinkler line and the
+     * bathing variant all announce their own move.
      * ================================================================= */
     if (mine.length) {
       const ownWorst = mine.reduce((w, r) => (relRank(r.reliability) < relRank(w)
         ? String(r.reliability).toUpperCase() : w), 'HIGH');
-      const donorRel = item.reliability;
+      /* The DONOR line's own reading, read off the donor line rather than off
+       * item.reliability, which earlier blocks in this loop may already have
+       * moved for reasons that have nothing to do with room ' + donorNo. */
+      const donorRel = String(d.reliability || '').toUpperCase();
+      const before = item.reliability;
       const speaks = mine.filter((r) => relRank(r.reliability) < relRank('HIGH') ||
         rowStatesConflict([r.instance_note, r.note].filter(Boolean).join(' — ')));
       if (relRank(ownWorst) < relRank(item.reliability)) item.reliability = ownWorst;
@@ -3482,8 +3954,8 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
           .filter((q) => !already.includes(q));
         item.instanceNote = appendNote(item.instanceNote, 'THIS ROOM\'S OWN ROWS GOVERN THIS LINE. ' +
           'data/project.sqlite feeds this condensed line from ' + mine.length + ' row(s) of room ' + roomNo +
-          ' (' + mine.map((r) => r.item_id + ' [' + r.reliability + ']').join(', ') + '), and the line ships at ' +
-          'the WORST of them, ' + ownWorst + '' +
+          ' (' + mine.map((r) => r.item_id + ' [' + r.reliability + ']').join(', ') + '), each shown at its own ' +
+          'reading, and a condensed line is never read better than the worst of them' +
           (relRank(ownWorst) < relRank(donorRel)
             ? ' - the approved line for this item on LIVE room ' + donorNo + ' reads ' + donorRel +
               ', and a fact about room ' + donorNo + ' does not close a flag on room ' + roomNo + '.'
@@ -3493,14 +3965,15 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
               'resolved: ' + quotes.join('  ||  ') + '.'
             : ''));
         relFromOwn.push(key + ': donor ' + donorRel + ' -> ' + item.reliability + ' (worst of ' +
-          mine.map((r) => r.item_id + ' [' + r.reliability + ']').join(', ') + ')');
-      } else if (relRank(ownWorst) < relRank(donorRel)) {
-        relFromOwn.push(key + ': donor ' + donorRel + ' -> ' + item.reliability);
+          mine.map((r) => r.item_id + ' [' + r.reliability + ']').join(', ') +
+          (before !== donorRel ? '; already moved to ' + before + ' earlier in this build' : '') + ')');
+      } else if (relRank(ownWorst) < relRank(before)) {
+        relFromOwn.push(key + ': ' + before + ' -> ' + item.reliability);
       }
     }
 
     /* A FLOOR-1 SHEET IS NOT A FLOOR-2 CITATION. See floorTrueCitation(). */
-    const ff = floorTrueCitation(item.src, roomFloor, mine, floorIdx, roomSheet, donorNo, roomNo);
+    const ff = floorTrueCitation(item.src, roomFloor, rows, floorIdx, roomSheet, donorNo, roomNo);
     if (ff.changed) {
       item.src = ff.src;
       if (ff.note) item.instanceNote = appendNote(item.instanceNote, ff.note);
@@ -3513,6 +3986,18 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
         ].filter(Boolean).join('; '));
     }
 
+    /* A BATH SHEET DRAWS ONE SET OF ROOM TYPES. See bathTrueCitation(). */
+    const bf = bathTrueCitation(item.src, bathSheet, room.room_type, bathIdx, donorNo, roomNo);
+    if (bf.changed) {
+      item.src = bf.src;
+      if (bf.note) item.instanceNote = appendNote(item.instanceNote, bf.note);
+      bathFixed.push(key + ': ' +
+        [bf.dropped.length ? bf.dropped.length + ' dropped (' + [...new Set(bf.dropped.flatMap((d) => d.ids))].sort(cmpStr).join(', ') + ') -> ' + bathSheet : '',
+          bf.spanned.length ? 'kept (range spans this type\'s bath sheet) ' + bf.spanned.map((x) => x.split(' =')[0]).join(', ') : '',
+          bf.unnumbered.length ? 'kept (no placement number) ' + bf.unnumbered.map((x) => x.split(' =')[0]).join(', ') : '',
+        ].filter(Boolean).join('; '));
+    }
+
     /* A tag ASSERTION inside a carried citation is the donor's reading. */
     const ta = ownTagAssertions(item.src, roomNo, rows);
     if (ta.changed) {
@@ -3522,17 +4007,62 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
         ' on ' + f.sheet + " (this room's own row(s) " + f.rows.map((r) => r.item_id).join(', ') + ')').join('; '));
     }
 
+    /* A MARK PRINTED INSIDE A CITATION. See citedMarkNote(). */
+    const cm = citedMarkNote(item.src, rows, item.category, roomNo);
+    if (cm) {
+      item.instanceNote = appendNote(item.instanceNote, cm);
+      citedMarkLines.push(key);
+    }
+
     /* An OPEN conflicts-table entry that names one of this line's MARKS - its
      * own code AND the tag on every row of this room folded into it. */
     const lineCodes = [item.code, ...mine.map((r) => r.tag)].filter(Boolean);
-    const onTag = conflictsOnMarks(conflictHits, lineCodes);
+    const lineRowIds = mine.map((r) => r.item_id);
+    const onTag = conflictsOnLine(conflictHits, lineCodes, lineRowIds);
     if (onTag.length) {
       const wasRel = item.reliability;
       item.reliability = 'FLAGGED';
       item.instanceNote = appendNote(item.instanceNote,
-        onTag.map((h) => conflictOnLineText(h, lineCodes, wasRel, 'row(s)')).join(' '));
+        onTag.map((h) => conflictOnLineText(h, lineCodes, wasRel, 'row(s)', lineRowIds)).join(' '));
       conflictLines.push(key + ' (' + readableMarks(marksOf(lineCodes)).join(' + ') + ' <- ' +
-        onTag.map((h) => h.id + '[' + markHitsFor(h, lineCodes).join(',') + ']').join(', ') + ')');
+        onTag.map((h) => h.id + '[' + (markHitsFor(h, lineCodes).join(',') ||
+          'cited by ' + rowHitsFor(h, lineRowIds).join(',')) + ']').join(', ') + ')');
+    }
+
+    /* ============ EVERY MEP LINE SAYS WHERE ITS WORDS CAME FROM
+     *
+     * meta.donorRule has always promised "Every line carries a SOURCE sentence
+     * naming which document each part of it came from". All 44 FF&E lines did.
+     * ZERO of the MEP lines did, and 202-MEP/elec_gfci shipped an instanceNote
+     * that was the empty string beside a citation that was LIVE room 104's text
+     * word for word. A crew member had no way to tell which half of the line
+     * was room 202's. The promise is now kept on this document too.
+     * ================================================================= */
+    const ruledHere = RULED_LINE_ADDITIONS.find((x) => x.key === key && x.doc === 'mep');
+    if (ruledHere) {
+      item.instanceNote = appendNote(item.instanceNote, ruledSourceSentence(ruledHere, room));
+    } else if (rebuiltFromOwnRow) {
+      item.instanceNote = appendNote(item.instanceNote, 'SOURCE. This line is rebuilt from data/project.sqlite ' +
+        'room ' + roomNo + '\'s own row ' + rebuiltFromOwnRow + ': its tag, its label, its citation, its ' +
+        'reliability and its note are that row\'s, verbatim. The approved D10 line for this item on LIVE room ' +
+        donorNo + ' (' + spec.donorType + ') supplied the key, the category and the sort band, and nothing else.');
+    } else {
+      item.instanceNote = appendNote(item.instanceNote, 'SOURCE. The label, the category and the sort band on this ' +
+        'line are the approved D10 condensed line for this item on LIVE room ' + donorNo + ' (' + spec.donorType +
+        '). Its citation was written for guestroom sheet ' + donorSheet + ' and is judged here against ' +
+        'data/project.sqlite: ' + (donorSheet === roomSheet
+          ? 'room ' + roomNo + ' is drawn on that same sheet, so the guestroom references stand as written apart ' +
+            'from the CONNECTING plan variant'
+          : 'the guestroom references are re-pointed onto room ' + roomNo + '\'s own sheet ' + roomSheet +
+            ' number by number') +
+        ', the sheets table decides which FLOOR each sheet covers and which room types each BATHROOM sheet draws, ' +
+        'and every one of those decisions is written on this line above. View, keynote, note and row numbers on ' +
+        'sheets OUTSIDE that guestroom-and-bathroom set are the approved line\'s and are not re-proved for room ' +
+        roomNo + ' - read them on the sheet before relying on them. ' + (mine.length
+          ? 'The reliability and the quoted row text on this line are data/project.sqlite room ' + roomNo +
+            '\'s own row(s) ' + mine.map((r) => r.item_id).join(', ') + '.'
+          : 'The wording above it is the approved line\'s throughout: read it as room ' + donorNo + '\'s punch ' +
+            'text applied to room ' + roomNo + ', and verify it in room ' + roomNo + '.'));
     }
 
     /* `id` rides exactly where the LIVE donor line carries one. The D27 ruled
@@ -3598,7 +4128,7 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
      * row. The citation is this room's own and the room's own row governs its
      * own citation, so NOTHING is removed here - the line simply says which
      * floor the sheet draws, so a crew member is not sent to it blind. */
-    const ffRow = floorTrueCitation(src, roomFloor, [r], floorIdx, roomSheet, donorNo, roomNo);
+    const ffRow = floorTrueCitation(src, roomFloor, rows, floorIdx, roomSheet, donorNo, roomNo);
     if (ffRow.changed) {
       if (ffRow.note) note = appendNote(note, ffRow.note);
       floorFixed.push(key + ' (own row): ' +
@@ -3612,14 +4142,22 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
 
     /* An OPEN conflicts-table entry that names one of this row's MARKS. */
     const rowCodes = [r.tag].filter(Boolean);
-    const onTag = conflictsOnMarks(conflictHits, rowCodes);
+    const rowIdsHere = [r.item_id];
+    const onTag = conflictsOnLine(conflictHits, rowCodes, rowIdsHere);
     if (onTag.length) {
       const wasRel = reliability;
       reliability = 'FLAGGED';
-      note = appendNote(note, onTag.map((h) => conflictOnLineText(h, rowCodes, wasRel, 'row')).join(' '));
-      conflictLines.push(key + ' (' + readableMarks(marksOf(rowCodes)).join(' + ') + ' <- ' +
-        onTag.map((h) => h.id + '[' + markHitsFor(h, rowCodes).join(',') + ']').join(', ') + ')');
+      note = appendNote(note, onTag.map((h) => conflictOnLineText(h, rowCodes, wasRel, 'row', rowIdsHere)).join(' '));
+      conflictLines.push(key + ' (' + (readableMarks(marksOf(rowCodes)).join(' + ') || r.item_id) + ' <- ' +
+        onTag.map((h) => h.id + '[' + (markHitsFor(h, rowCodes).join(',') ||
+          'cited by ' + rowHitsFor(h, rowIdsHere).join(',')) + ']').join(', ') + ')');
     }
+
+    /* This document's SOURCE discipline reaches the own-row lines too. */
+    note = appendNote(note, 'SOURCE. Every field on this line is data/project.sqlite room ' + roomNo +
+      '\'s own row ' + r.item_id + ', verbatim - its tag, its label, its citation, its reliability and its note. ' +
+      'The line exists so that a row the approved D10 condensed punch does not fold into any of its lines still ' +
+      'reaches the crew on a line of its own.');
 
     items[key] = {
       id: key, code: r.tag || '', label: r.description, category: c, qty: 1, src,
@@ -3649,6 +4187,8 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
   report.mepConflictLines = conflictLines.sort(cmpStr);
   report.mepRelFromOwn = relFromOwn.sort(cmpStr);
   report.mepFloorFixed = floorFixed.sort(cmpStr);
+  report.mepBathFixed = bathFixed.sort(cmpStr);
+  report.mepCitedMarkLines = citedMarkLines.sort(cmpStr);
   report.mepMarkFromOwn = markFromOwn.sort(cmpStr);
   report.mepTagAssertFixed = tagAssertFixed.sort(cmpStr);
   report.mepPtacRepeatLines = ptacRepeatLines.sort(cmpStr);
@@ -3671,21 +4211,43 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
   };
 }
 
-/** D27 and D28, on every room. Idempotent by key. */
-function addRuledLines(doc, kind) {
+/** The SOURCE sentence a ruled line carries, wherever it is built - by
+ *  addRuledLines() on a room whose donor has no such line, or by the MEP donor
+ *  loop on a room whose LIVE donor already carries it. One text, one place. */
+function ruledSourceSentence(r, room) {
+  return 'SOURCE. This line is a RULED LINE ADDITION: Austin ruling ' + r.ruling + ' put it on ' +
+    (typeof r.applies === 'function'
+      ? 'the rooms his ruling names - here, the accessible QQ Acc. keys - and room ' + room.room_no +
+        ' is one of them (rooms.room_type "' + room.room_type + '", rooms.accessible ' + room.accessible + ')'
+      : 'every guest room') +
+    '. Its words, its tag, its count and its citation are the ruling\'s, and they are carried in the generator ' +
+    '(RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, ' +
+    'which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the ' +
+    'two floors cannot drift apart. Its citation is still judged against data/project.sqlite\'s sheets table for ' +
+    'this room\'s floor, and the line says what that pass did.';
+}
+
+/** D27, D28 and D29. Idempotent by key. A ruling with its own `applies`
+ *  predicate fires only on the rooms build_floor1.mjs scopes it to - D29 is
+ *  scoped to accessible QQ Acc. keys, so it lands on room 238 and nowhere else,
+ *  and the scope decision is REPORTED for every room rather than being silent. */
+function addRuledLines(doc, kind, room, report) {
   const added = [];
   for (const r of RULED_LINE_ADDITIONS) {
     if (r.doc !== kind) continue;
+    if (typeof r.applies === 'function' && !r.applies(room)) {
+      (report.ruledOutOfScope = report.ruledOutOfScope || []).push(r.ruling + '/' + r.key +
+        ': out of scope for room ' + room.room_no + ' ("' + room.room_type + '", rooms.accessible ' +
+        room.accessible + '); build_floor1.mjs scopes it the same way and this tool copies the predicate');
+      continue;
+    }
     if (doc.items[r.key]) continue;
     doc.items[r.key] = {
       code: r.code, label: r.label, category: r.category, qty: r.qty, sort: r.sort,
       src: r.src, reliability: 'HIGH',
       /* Same SOURCE discipline as every other line: a reader must be able to see
        * that this one comes from a RULING and not from a drawing. */
-      instanceNote: endStop(r.note) + ' SOURCE. This line is not derived from data/project.sqlite at all. It is a ' +
-        'RULED LINE ADDITION: Austin ruling ' + r.ruling + ' put it on every guest room, and it is carried in the ' +
-        'generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE ' +
-        'floor-1 rooms, so no rebuild can drop it and the two floors cannot drift apart.',
+      instanceNote: endStop(r.note) + ' ' + ruledSourceSentence(r, room),
       trade: '', derived: 0,
       deleted: false, ...CLEAN_FIELD_STATE,
     };
@@ -3720,6 +4282,12 @@ function assertDocRules(docs) {
       for (const k of Object.keys(it)) if (!ITEM_KEYS.has(k)) problems.push('doc ' + id + '/' + ik + ': non-whitelisted item key ' + JSON.stringify(k));
       if (typeof it.sort !== 'number') problems.push('doc ' + id + '/' + ik + ': sort is not a number');
       if (!it.src) problems.push('doc ' + id + '/' + ik + ': empty src - an uncited line');
+      /* meta.donorRule promises a SOURCE sentence on EVERY line. A promise the
+       * build does not enforce is a promise that quietly stops being true, so
+       * this is the enforcement: a line with no SOURCE sentence is not written. */
+      if (!/(^|\s)SOURCE\./.test(String(it.instanceNote || ''))) {
+        problems.push('doc ' + id + '/' + ik + ': no SOURCE sentence - meta.donorRule promises one on every line');
+      }
       if (it.checked !== false || it.initials !== '' || it.checkedAt !== null || it.issue !== '') {
         problems.push('doc ' + id + '/' + ik + ': field state is not clean - a staged room must be born clean');
       }
@@ -3744,7 +4312,7 @@ function buildAll(db, live, slice, rooms, stamp, numbering, descSlots, conventio
     const { doc: ffe, room, rows } = buildFFEDoc(db, roomNo, live, convention, stamp, report);
     const mep = buildMepDoc(db, roomNo, room, rows, live, ffe.floor, stamp, report,
       { typeLabel: ffe.typeLabel }, numbering, descSlots);
-    report.ruledAdded = [...addRuledLines(ffe, 'ffe'), ...addRuledLines(mep, 'mep')];
+    report.ruledAdded = [...addRuledLines(ffe, 'ffe', room, report), ...addRuledLines(mep, 'mep', room, report)];
     report.ffeLines = Object.keys(ffe.items).length;
     report.mepLines = Object.keys(mep.items).length;
     docs[roomNo] = ffe;
@@ -3769,35 +4337,53 @@ function assemble(docs, stamp, rooms) {
       packageSource: 'platform/data/floor1-staged.json (LIVE floor 1, READ ONLY) - curated text for SHARED tags only; '
         + 'a tag with no live counterpart ships from data/project.sqlite verbatim with its own reliability',
       donorRule: 'A DONOR MAY ENRICH, NEVER LAUNDER. The target room\'s own data/project.sqlite reliability and its '
-        + 'own note govern every line, on BOTH documents. On the MEP document a condensed line ships at the WORST '
-        + 'reliability among the rows of THIS room that feed it, and every one of those rows that is not HIGH, or '
+        + 'own note govern every line, on BOTH documents. On the MEP document a condensed line is never read better '
+        + 'than the WORST of the rows of THIS room that feed it, and every one of those rows that is not HIGH, or '
         + 'whose own note states a document conflict, is quoted on the line verbatim. On the FF&E document a donor '
         + 'raises a reliability only where its text carries a RULING that closes the flag for the PRODUCT (a model '
         + 'number, not a room), and the line says so in words; a folded line names EVERY row at its OWN reading, '
-        + 'never the fold\'s worst against the whole list. The MARK is the target room\'s too: where this room has '
-        + 'no row of the donor\'s mark family the donor\'s mark is not carried at all. Donor text that is a reading '
-        + 'of the donor room\'s own drawing is dropped, quoted on the line as not carried - including a tag '
-        + 'ASSERTION inside a citation, which is corrected to this room\'s own row. Every line carries a SOURCE '
-        + 'sentence naming which document each part of it came from.',
+        + 'never the fold\'s worst against the whole list. The MARK is the target room\'s too: on the bathing lines '
+        + 'and on the sprinkler line, where this room has rows of the donor\'s mark family the mark is read off '
+        + 'them and where it has none the mark field is left EMPTY, and the donor\'s mark is quoted as not carried '
+        + 'either way. Donor text that is a reading of the donor room\'s own drawing is dropped, quoted on the line '
+        + 'as not carried - including a tag ASSERTION inside a citation, which is corrected to this room\'s own row. '
+        + 'A NOTE NEVER RESTATES A VALUE ANOTHER FIELD CARRIES: it says why a reading is what it is, and the '
+        + 'reliability and qty fields say what it is, so the two cannot disagree. Every line on both documents '
+        + 'carries a SOURCE sentence naming which document each part of it came from; assertDocRules() refuses to '
+        + 'write a line without one.',
       mepSource: 'the D10 condensed punch of the nearest LIVE type, re-cited onto this room\'s own sheet; '
         + 'rows no condensed line claims become their own lines and are never lost. Non-architectural citations are '
         + 're-pointed too: the sprinkler line\'s FP-series citation is a fact about the DONOR\'s floor and the two '
         + 'rooms the count was read on, so it is removed and replaced with PH-GU-001\'s own sheet list plus this '
         + 'room\'s floor. Where the room shares its donor\'s sheet, the citation stands verbatim except for the '
         + '".1" CONNECTING plan variant, which is dropped wherever rooms.connecting = 0.',
-      citationRule: 'A corroboration claim is checked NUMBER BY NUMBER on this room\'s own sheet, and it is checked '
-        + 'against EVERY row of this room rather than the support set of one condensed line, because a negative '
-        + 'about the room has to be proved on the room. A row corroborates a surviving donor reference only when it '
-        + 'cites the same view or keynote number on the same sheet; citing the same sheet, or the same number on '
-        + 'another sheet, is not evidence and the line says so instead. A FLOOR is checked too: a sheet whose title '
-        + 'in data/project.sqlite\'s sheets table names a floor that is not this room\'s is not carried unless '
-        + 'this room\'s own row cites it, unless the cited range already spans this floor, or unless the citation '
-        + 'is to a building-wide table printed on it; what replaces it is the sibling sheet the sheets table proves '
-        + 'covers this floor, cited with NO number on it and marked UNVERIFIED for this floor.',
+      citationRule: 'THE CITATION IS JUDGED IN FOUR PASSES, AND EVERY PASS WRITES ITS DECISION ONTO THE LINE. '
+        + '(1) GUESTROOM SHEET: a donor view or keynote number survives the move to this room\'s sheet only where '
+        + 'data/project.sqlite proves the two sheets share that numbering; what survives is then corroborated '
+        + 'NUMBER BY NUMBER against EVERY row of this room; a number that walk matches is named with the row(s) '
+        + 'that match it, and a number it does not reach is labelled UNVERIFIED for this room rather than asserted. '
+        + 'Citing the same sheet, or the same '
+        + 'number on another sheet, is not corroboration. (2) FLOOR: a sheet whose title in data/project.sqlite\'s '
+        + 'sheets table names a floor that is not this room\'s is KEPT where this room\'s own row names it outright, '
+        + 'or where the citation is a range that already spans this floor, or where the citation is to a '
+        + 'building-wide table printed on it; RE-POINTED to the sibling sheet the sheets table proves covers this '
+        + 'floor where this room\'s own row cites a range spanning both; and otherwise DROPPED, quoted verbatim as '
+        + 'removed and replaced by that sibling cited with NO number on it, marked UNVERIFIED for this floor. '
+        + '(3) BATHROOM: a bathroom enlargement sheet the sheets table draws for OTHER room types keeps its place '
+        + 'while it carries no plan, view, elevation or keyed-note number, or while it is cited inside a range that '
+        + 'also covers this type\'s own bath sheet; a placement number read on it is the donor room\'s reading of '
+        + 'the donor room\'s own bath drawing, so the segment is dropped, quoted verbatim, and replaced by '
+        + 'room_types.bath_sheet for THIS type with NO number on it, marked UNVERIFIED for this room type. On the '
+        + 'FF&E document the same question is asked of room_items.primary_sheet, and where the row\'s own '
+        + 'source_sheet carries the entry for this type that fuller citation is what the line cites. (4) MARKS: a '
+        + 'mark asserted inside a citation is corrected to this room\'s own row, and a mark merely PRINTED by a '
+        + 'cited schedule is left alone with this room\'s own marks in that family named beside it. NUMBERS ON '
+        + 'SHEETS OUTSIDE THE GUESTROOM AND BATHROOM SET - E103 row numbers, P104 schedule rows, M401 details - are '
+        + 'the approved line\'s and are NOT re-proved here; every MEP line says so in its SOURCE sentence.',
       donorMap: Object.fromEntries(Object.keys(REP_ROOMS).map((r) => [r, REP_ROOMS[r].donor])),
       roomTypes: Object.fromEntries(Object.keys(REP_ROOMS).map((r) => [r, REP_ROOMS[r].type])),
       typeKeys: Object.fromEntries(Object.keys(REP_ROOMS).map((r) => [r, REP_ROOMS[r].keys])),
-      rulingsApplied: ['D12 (scoped)', 'D20 (scoped)', 'D27', 'D28'],
+      rulingsApplied: ['D12 (scoped)', 'D20 (scoped)', 'D27', 'D28', 'D29 (scoped to the accessible QQ Acc. keys, so it lands on room 238 only)'],
       rulingsDeliberatelyNotApplied: [
         'D19 - scoped to room 118 only; rooms 217 and 238 carry BOTH bathing configurations, FLAGGED',
         'D22 - its workbook reconciliation covers floor-1 Queen-Queen and QQ Connecting only; 230 and 238 carry '
@@ -3809,13 +4395,18 @@ function assemble(docs, stamp, rooms) {
         + 'split on "/" and "," on BOTH sides and matched one mark at a time, so an entry that names half of a '
         + 'pair names the line. A condensed line carries the marks of its own code AND of every data/project.sqlite '
         + 'row of this room folded into it, which is how the lavatory dispute reaches a line whose code is an em '
-        + 'dash. An entry rides on THREE tests: a mark this room carries, a room key of this type, or a citation of '
-        + 'the entry by id in one of this room\'s own rows. Every match lands on the line, FLAGGED, and in room '
-        + 'note n_conflicts with the full mark list. A gated-out row whose own note states a conflict rides in '
-        + 'n_gategaps at ANY reliability - matched on the database\'s own conflict vocabulary OR on two sheet '
-        + 'numbers set against each other in one sentence - because how well a row was read says nothing about '
-        + 'whether the documents agree. An OPEN entry that prints an AREA for this room type rides as room note '
-        + 'n_typearea and on no line, because an area is a fact about the type.',
+        + 'dash. An entry reaches THIS ROOM on three tests - a mark this room carries, a room key of this type, or '
+        + 'a citation of the entry by id in one of this room\'s own rows - and every entry that reaches the room is '
+        + 'in room note n_conflicts, which says for each one which test caught it. An entry reaches A LINE on two of '
+        + 'those three: a mark the line carries, or a citation by id in one of the rows behind that line. Every '
+        + 'entry that reaches a line is quoted on it, the line is FLAGGED, and the line says which test caught it. '
+        + 'A ROOM KEY is a fact about the room and not about any one item, so a key-only match rides in n_conflicts '
+        + 'and on no line. A gated-out row whose own note states a conflict rides in n_gategaps at ANY reliability - '
+        + 'matched on the database\'s own conflict vocabulary, which n_gategaps prints from the matcher\'s own word '
+        + 'list, OR on two sheet numbers set against each other in one sentence by "vs", "versus", "while", '
+        + '"against" or "but" - because how well a row was read says nothing about whether the documents agree. An '
+        + 'OPEN entry that prints an AREA for this room type rides as room note n_typearea and on no line, because '
+        + 'an area is a fact about the type.',
       fieldState: 'every line is born clean: checked false, initials empty, checkedAt null, issue empty. '
         + 'Floor 2-4 crew work is carried at rollout by platform/tools/carry_field_state.mjs under ruling D24, not here.',
       redaction: 'no personal contact data, no photographs, no crew names',
@@ -3955,7 +4546,8 @@ function printReport(reports, numbering, donorProof, fid, descSlots, convention)
     W('\n' + '-'.repeat(100) + '\nROOM ' + r.room + '  ' + r.roomType + '  (type keys: ' + spec.keys.join(', ') + ')\n');
     W('  doc type ' + r.docType + ' / ' + JSON.stringify(r.docTypeLabel) + '   sheets: ' + spec.sheets + '\n');
     W('  FF&E : ' + r.ffeLines + ' lines   [' + r.rawRows + ' raw rows -> ' + r.gatedRows + ' gated -> ' +
-      (r.ffeLines - 2) + ' after ' + r.foldedGroups + ' folds, + 2 ruled D28 lines]\n');
+      (r.ffeLines - r.ruledAdded.filter((x) => !x.startsWith('plmb_hotcold_a')).length) + ' after ' + r.foldedGroups +
+      ' folds, + ' + r.ruledAdded.filter((x) => !x.startsWith('plmb_hotcold_a')).length + ' ruled FF&E line(s)]\n');
     W('  MEP  : ' + r.mepLines + ' lines   [' + r.mepRowCount + ' MEP rows; ' + r.mepRoughIn +
       ' rough-in left off the punch; ' + r.mepSkippedDeleted + ' deleted history row(s) in ' + r.mepRefRoom + ' not copied]\n');
     W('  gate : ' + r.gateDropped + ' row(s) dropped by Austin\'s approved category gate (Paint / Drywall / Flooring / ' +
@@ -4016,7 +4608,8 @@ function printReport(reports, numbering, donorProof, fid, descSlots, convention)
         : 'qty ' + a.from + ' -> ' + a.to + ', and the line note says so') + ' - ' + a.why + '\n');
     }
     for (const dn of r.qtyOverrides.declined) W('    DECLINED ' + dn.ruling + ' on ' + dn.tag + ' - ' + dn.why + '\n');
-    W('    APPLIED  D27 + D28 ruled lines: ' + r.ruledAdded.join(', ') + '\n');
+    W('    APPLIED  ruled lines: ' + r.ruledAdded.join(', ') + '\n');
+    for (const s of (r.ruledOutOfScope || [])) W('    DECLINED ' + s + '\n');
     if (r.ffeDeclinedLines && r.ffeDeclinedLines.length) {
       W('    the declined ruling is written ONTO the line so the note cannot contradict the number: ' +
         r.ffeDeclinedLines.join(', ') + '\n');
