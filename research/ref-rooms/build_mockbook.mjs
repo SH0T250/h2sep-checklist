@@ -18,7 +18,7 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import {
   TYPES, OWNERS, FLAG_OWNER_BY_KEY, FLAG_OWNER_BY_ROOM_KEY, GATED_OWNER,
-  GAP_OWNER, UNCARRIED, EXTRA_CARRIED, VERIFIER, BUY_STOPPERS,
+  GAP_OWNER, EXTRA_CARRIED, VERIFIER, BUY_STOPPERS, ROUND1,
 } from './mockbook.data.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -44,6 +44,88 @@ const CONFLICTS = DB.conflicts;
 const DBROWS = DB.rows;
 
 const SEV = { FLAGGED: 0, MEDIUM: 1, HIGH: 2 };
+
+/* ------------------------------------------------- open-conflict carriage
+ * The conflicts table names fixture and furniture marks. A room's own sqlite
+ * rows carry marks too, often several on one row ("SH-1 / SH-4"). This walks
+ * both sides mark by mark and reports, for every OPEN entry that names a mark
+ * this room actually holds, whether the entry rides on the line that carries
+ * that mark. Nothing here is typed by hand, so it stays true after the next
+ * fix round instead of going stale. Only hyphenated marks are read (SH-1,
+ * GR-318, L-2). A bare mark such as 905 or W4 is not read, so this table can
+ * only ever under-report, never accuse. */
+const MARK_RUN = /\b([A-Z]{1,3})-(\d+(?:\.\d+)?)((?:\s*\/\s*(?:[A-Z]{1,3}-)?\d+(?:\.\d+)?)*)/g;
+function marksIn(text) {
+  const out = new Set();
+  if (!text) return out;
+  MARK_RUN.lastIndex = 0;
+  let m;
+  while ((m = MARK_RUN.exec(text))) {
+    out.add(m[1] + '-' + m[2]);
+    if (!m[3]) continue;
+    for (const seg of m[3].split('/')) {
+      const s = seg.trim();
+      if (!s) continue;
+      out.add(/^[A-Z]{1,3}-/.test(s) ? s : m[1] + '-' + s);
+    }
+  }
+  return out;
+}
+
+/* What note n_conflicts claims an entry names, as opposed to what the entry
+ * says when it is quoted in full two clauses later. */
+function claimedMarks(room, id) {
+  const n = (REF.docs[room].notes.n_conflicts || {}).text || '';
+  const re = new RegExp('(?:^|\\|\\|)\\s*' + id.replace(/\./g, '\\.') + '\\s*\\[[^\\]]*\\]\\s*names\\s+([^]*?)\\s+-\\s+topic');
+  const m = n.match(re);
+  return m ? marksIn(m[1]) : new Set();
+}
+
+function conflictCarriage(room) {
+  const mine = DBROWS.filter((r) => r.room === room);
+  const roomMarks = new Map();
+  for (const r of mine) {
+    for (const t of marksIn(r.tag)) {
+      if (!roomMarks.has(t)) roomMarks.set(t, []);
+      roomMarks.get(t).push(r);
+    }
+  }
+  const lines = items(room).concat(items(room + '-MEP'));
+  const lineMarks = new Map();
+  for (const l of lines) {
+    const set = marksIn(l.code || '');
+    if (/^db_itm\d+$/.test(l.key)) {
+      const id = 'ITM-' + l.key.slice(6);
+      for (const r of mine.filter((x) => x.itm === id)) for (const t of marksIn(r.tag)) set.add(t);
+    }
+    for (const t of set) {
+      if (!lineMarks.has(t)) lineMarks.set(t, []);
+      lineMarks.get(t).push(l);
+    }
+  }
+  const out = [];
+  for (const [id, c] of Object.entries(CONFLICTS)) {
+    if (c.status !== 'OPEN') continue;
+    const named = marksIn((c.topic || '') + ' ' + (c.positions || ''));
+    const shared = [...named].filter((t) => roomMarks.has(t)).sort();
+    if (!shared.length) continue;
+    const claimed = claimedMarks(room, id);
+    const marks = shared.map((t) => {
+      const ls = lineMarks.get(t) || [];
+      const rides = ls.filter((l) => (l.instanceNote || '').includes('CONFLICT ' + id));
+      return {
+        mark: t,
+        rows: roomMarks.get(t),
+        lines: ls,
+        rides,
+        claimed: claimed.has(t),
+        state: rides.length ? 'RIDES' : (ls.length ? 'ON A LINE, NOT FLAGGED' : 'ON NO LINE AT ALL'),
+      };
+    });
+    out.push({ id, c, marks, gaps: marks.filter((m) => m.state !== 'RIDES') });
+  }
+  return out.sort((a, b) => a.id.localeCompare(b.id));
+}
 
 /* Every reference-database row that stands behind one staged line. */
 function dbRowsFor(room, item) {
@@ -368,6 +450,14 @@ function flagTitle(g) {
     a532_accessory: 'Bath accessories are not drawn on the roll-in elevations',
     a533_medium: 'Accessible bath accessory counts are MEDIUM with no reason recorded',
     elevation_count: 'Count came off an elevation, which is not a takeoff',
+    ptac_count: 'Two PTAC units, and the sub-assembly is transcribed once',
+    b31: 'Fixture marks: P401 / P402 against the P104 schedule, open',
+    b42: 'GR-905 and the 905 telephone tag: two live positions',
+    b45: 'GR tags are ambiguous without A530, open before final takeoff',
+    gr905: 'GR-905 is described in no legend and no spec',
+    grille_material: 'Room grille material is unsettled across three documents',
+    bath_exhaust: 'Bath exhaust: fan or grille, and the regulator count',
+    wc02: 'Accessible bath finish palette: A533 against A532',
   };
   if (g.ownerKey && map[g.ownerKey]) return map[g.ownerKey];
   return g.lines[0].label.slice(0, 90);
@@ -407,34 +497,64 @@ function gapBlock(room) {
   </div>`;
 }
 
-function uncarriedBlock(room) {
-  const ids = UNCARRIED[room] || [];
+const CONFLICT_OWNER = { 'B3.1': 'b31', 'B4.2': 'b42', 'B4.5': 'b45' };
+
+function carriageBlock(room) {
+  const entries = conflictCarriage(room);
   const extra = EXTRA_CARRIED[room] || [];
-  if (!ids.length && !extra.length) return '';
-  const blocks = ids.map((id) => {
-    const c = CONFLICTS[id];
-    if (!c) return '';
-    const ownerKey = id === 'B4.5' ? 'b45' : id === 'B4.2' ? 'b42' : null;
-    return `<div class="flag flag-red">
-      <div class="flag-head"><span class="flag-n">NOT CARRIED</span>
-        <span class="rel r-flag">${esc(c.status)}</span>
-        <h5><code>${esc(id)}</code> ${esc(c.topic)}</h5></div>
-      <div class="verbatim"><span class="k">Positions, verbatim from the conflicts table</span>
-        <blockquote>${esc(c.positions)}</blockquote>
-        <span class="k">Source</span><blockquote class="thin">${esc(c.source)}</blockquote></div>
-      ${ownerBlock(ownerKey)}
-    </div>`;
-  }).join('');
+  if (!entries.length && !extra.length) return '';
+  const gapTotal = entries.reduce((a, e) => a + e.gaps.length, 0);
+  const markRow = (m) => {
+    const cls = m.state === 'RIDES' ? 'd-qty' : (m.lines.length ? 'd-drop' : 'd-rel');
+    const sym = m.state === 'RIDES' ? '&#10003;' : '!';
+    const where = m.rides.length
+      ? m.rides.map((l) => `<code>${esc(l.key)}</code>`).join(' ')
+      : (m.lines.length
+        ? `<span class="bad">on ${m.lines.map((l) => `<code>${esc(l.key)}</code>`).join(' ')}, and the entry is not on it</span>`
+        : '<span class="bad">no line in this package carries this mark</span>');
+    return `<tr class="${cls}">
+      <td class="c-sym">${sym}</td>
+      <td class="c-tag"><code>${esc(m.mark)}</code></td>
+      <td class="c-qty">${m.rows.map((r) => `<span class="tiny">${esc(r.itm)} <span class="rel ${relClass[r.rel]}">${esc(r.rel)}</span></span>`).join(' ')}
+        <div class="tiny">${esc(m.rows[0].tag || '')}</div></td>
+      <td class="c-item">${where}</td>
+      <td class="c-note">${m.claimed
+        ? 'named in the room note\'s own list'
+        : '<strong class="bad">not in the room note\'s own list of the tags this entry names</strong>'}</td>
+    </tr>`;
+  };
+  const blocks = entries.map((e) => `<div class="flag ${e.gaps.length ? 'flag-red' : 'flag-amber'}">
+    <div class="flag-head">
+      <span class="flag-n">${e.gaps.length ? 'PARTLY CARRIED' : 'CARRIED'}</span>
+      <span class="rel ${e.gaps.length ? 'r-flag' : 'r-med'}">${esc(e.c.status)}</span>
+      <h5><code>${esc(e.id)}</code> ${esc(e.c.topic)}</h5>
+    </div>
+    <div class="verbatim"><span class="k">Positions, verbatim from the conflicts table</span>
+      <blockquote>${esc(e.c.positions)}</blockquote>
+      <span class="k">Source</span><blockquote class="thin">${esc(e.c.source)}</blockquote></div>
+    <div class="tablewrap"><table class="difftable">
+      <thead><tr><th class="c-sym"></th><th class="c-tag">Mark the entry names</th>
+        <th class="c-qty">This room's own row</th><th class="c-item">Where the entry rides</th>
+        <th class="c-note">Room note n_conflicts</th></tr></thead>
+      <tbody>${e.marks.map(markRow).join('')}</tbody></table></div>
+    ${ownerBlock(CONFLICT_OWNER[e.id] || null)}
+  </div>`).join('');
   const extras = extra.map((k) => `<div class="flag flag-grey">
-    <div class="flag-head"><span class="flag-n">CARRIED HERE</span>
+    <div class="flag-head"><span class="flag-n">CARRIED IN A NOTE</span>
       <h5>The 438 versus 118 sheet split (A551 / A552)</h5></div>
     ${ownerBlock(k)}
   </div>`).join('');
   return `<div class="subblock">
-    <h4>Open conflicts that touch this room and are NOT in the staged package <span class="count">${ids.length}</span></h4>
-    <p class="lede">The independent verifier found these. They are OPEN in the reference database, they name tags
-      this room is shipping, and they appear on no line and in no room note. They are printed here so the gap is
-      visible rather than silent.</p>
+    <h4>Open conflicts, mark by mark, and where each one actually landed
+      <span class="count">${entries.length}</span></h4>
+    <p class="lede">This table is built at render time, not typed. It reads every OPEN entry in the
+      data/project.sqlite conflicts table, splits out every fixture and furniture mark the entry names, keeps the
+      ones this room's own rows also carry, and then checks whether the entry is really on the line that holds the
+      mark. ${gapTotal
+        ? `<strong>${gapTotal} mark${gapTotal === 1 ? '' : 's'} did not land where the package says every mark lands.</strong>
+           The independent check found the same thing and its wording is in the section above.`
+        : 'Every mark landed on the line that carries it.'}
+      Only hyphenated marks are read here, so this can under-report and never over-report.</p>
     ${blocks}${extras}
   </div>`;
 }
@@ -499,40 +619,66 @@ function notesBlock(room) {
   </div>`;
 }
 
+const sevClass = (w) => (/HIGH|SEVERE|MAJOR|MATERIAL/.test(w || '') ? 'v-hi'
+  : /LOW/.test(w || '') ? 'v-lo' : /MEDIUM|MODERATE/.test(w || '') ? 'v-mid' : 'v-mid');
+
+const openDefects = (room) => VERIFIER[room].defects.filter((d) => d.state === 'OPEN');
+
 function verifierBlock(room) {
   const v = VERIFIER[room];
   if (!v) return '';
-  const sev = (d) => {
-    const m = d.match(/^(MATERIAL|MODERATE|MINOR)\b/) || d.match(/^DEFECT\s+\d+\s+\(([a-z]+)/i);
-    const w = m ? (m[1] || '').toUpperCase() : 'DEFECT';
-    if (/SEVERE|MATERIAL|MAJOR/.test(w)) return { w, c: 'v-hi' };
-    if (/MODERATE/.test(w)) return { w, c: 'v-mid' };
-    if (/MINOR/.test(w)) return { w, c: 'v-lo' };
-    return { w: 'DEFECT', c: 'v-mid' };
-  };
+  const open = openDefects(room).length;
+  const closed = v.defects.length - open;
   return `<div class="subblock verifier">
-    <h4>Independent check: <span class="verdict-fail">${esc(v.verdict)}</span>
-      <span class="count">${v.defects.length} defect${v.defects.length === 1 ? '' : 's'}</span></h4>
+    <h4>Independent check, round ${v.round}: <span class="verdict-fail">${esc(v.verdict)}</span>
+      <span class="count">${open} open</span>${closed
+        ? `<span class="count count-ok">${closed} closed by this rebuild</span>` : ''}</h4>
     <p class="lede">A separate agent read this package against the reference database, the approved floor-1 build
       and the crew snapshot, with no knowledge of how it was assembled. Its findings are printed here word for
-      word. None of them are hidden and none of them are answered by the build.</p>
+      word. Nothing is hidden and nothing is softened. Where a finding was about this document being out of date,
+      it is marked closed and the reason is stated, because re-rendering the page is the whole of what closed it.
+      Everything marked OPEN is open in the data as it stands right now.</p>
     ${v.defects.map((d, idx) => {
-      const s = sev(d);
-      return `<div class="vdef"><div class="vdef-head"><span class="vnum">${idx + 1}</span>
-        <span class="vsev ${s.c}">${esc(s.w)}</span></div>
-        <div class="vbody">${esc(d)}</div></div>`;
+      const isOpen = d.state === 'OPEN';
+      return `<div class="vdef ${isOpen ? '' : 'vdef-closed'}">
+        <div class="vdef-head"><span class="vnum">${idx + 1}</span>
+          <span class="vsev ${isOpen ? sevClass(d.sev) : 'v-ok'}">${esc(isOpen ? (d.sev || 'DEFECT') : d.state)}</span></div>
+        <div class="vbody">${esc(d.text)}</div>
+        ${d.closedBy ? `<div class="vclosed"><span class="k">What closed it</span>${esc(d.closedBy)}</div>` : ''}
+        ${isOpen && d.owner ? ownerBlock(d.owner) : ''}
+      </div>`;
     }).join('')}
   </div>`;
 }
 
+function roundOneBlock() {
+  const byState = (s) => ROUND1.filter((r) => r.state === s).length;
+  return `<div class="tablewrap"><table class="summary r1">
+    <thead><tr><th>Room</th><th>What round 1 found</th><th>State</th><th>What was done</th></tr></thead>
+    <tbody>${ROUND1.map((r) => `<tr>
+      <td><code class="rep">${esc(r.room)}</code></td>
+      <td>${esc(r.finding)}</td>
+      <td class="s-state"><span class="${r.state === 'CLOSED' ? 'ok' : 'warn'}">${esc(r.state)}</span></td>
+      <td class="s-eff">${esc(r.how)}</td></tr>`).join('')}</tbody>
+    </table></div>
+    <p class="lede" style="margin-top:12px">${byState('CLOSED')} of the ${ROUND1.length} round-1 findings are closed
+      in the data. The one that is not is recorded as disclosed rather than closed, because closing it would have
+      meant the tool overruling the reference database.</p>`;
+}
+
 function approveBox(t) {
+  const open = openDefects(t.id).length;
   return `<div class="approve">
-    <div class="approve-head">APPROVE / CHANGES &middot; ${esc(t.type)}</div>
+    <div class="approve-head">APPROVE / CHANGES &middot; ${esc(t.type)}
+      <span class="approve-state">independent check: <span class="verdict-fail">${esc(VERIFIER[t.id].verdict)}</span>,
+        ${open} open finding${open === 1 ? '' : 's'} on this type</span></div>
     <div class="approve-body">
       <div class="ab-row"><span class="box"></span>
         <div><strong>APPROVE the shape.</strong> The bands, the tags, the line wording and the flag handling are right
         for this type. Generate the remaining ${t.rooms.length - 1} key${t.rooms.length - 1 === 1 ? '' : 's'}
-        (${esc(t.rooms.filter((r) => r !== t.rep).join(', '))}) from this package once the defects below are fixed.</div></div>
+        (${esc(t.rooms.filter((r) => r !== t.rep).join(', '))}) from this package once the
+        ${open} open finding${open === 1 ? '' : 's'} above ${open === 1 ? 'is' : 'are'} fixed and the check comes
+        back clean.</div></div>
       <div class="ab-row"><span class="box"></span>
         <div><strong>APPROVE with changes.</strong> Write them here. Anything you mark gets applied to the reference room
         first, re-verified, and only then generated at scale.</div></div>
@@ -570,7 +716,7 @@ function summaryTable() {
         <td class="num">${s.gated}</td><td class="num">${s.gaps}</td>
         <td class="num">${s.checked}</td><td class="num ${s.issues ? 'warm' : ''}">${s.issues}</td>
         <td class="num"><span class="verdict-fail">${esc(v.verdict)}</span>
-          <span class="vcount">${v.defects.length}</span></td>
+          <span class="vcount">${openDefects(t.id).length} open</span></td>
       </tr>`;
     }).join('')}
     <tr class="totals"><td>All four</td><td>${TYPES.reduce((a, t) => a + t.rooms.length, 0)} keys</td>
@@ -584,7 +730,7 @@ function summaryTable() {
           <td class="num">${sum('checked')}</td><td class="num warm">${sum('issues')}</td>`;
       })()}
       <td class="num"><span class="verdict-fail">4 FAIL</span>
-        <span class="vcount">${TYPES.reduce((a, t) => a + VERIFIER[t.id].defects.length, 0)}</span></td></tr>
+        <span class="vcount">${TYPES.reduce((a, t) => a + openDefects(t.id).length, 0)} open</span></td></tr>
     </tbody></table></div>`;
 }
 
@@ -612,12 +758,18 @@ function carryTable() {
 
 function buyStoppers() {
   return `<div class="tablewrap"><table class="summary stoppers">
-    <thead><tr><th>Where</th><th>Line</th><th>What is wrong</th><th>What it costs you</th></tr></thead>
-    <tbody>${BUY_STOPPERS.map((b) => `<tr>
-      <td><code class="rep">${esc(b.room)}</code></td>
-      <td class="s-line">${esc(b.line)}</td>
-      <td>${esc(b.what)}</td>
-      <td class="s-eff">${esc(b.effect)}</td></tr>`).join('')}</tbody></table></div>`;
+    <thead><tr><th>Where</th><th>Line</th><th>What is wrong</th><th>What it costs you</th>
+      <th>Who owes the answer</th></tr></thead>
+    <tbody>${BUY_STOPPERS.map((b) => {
+      const o = OWNERS[b.owner];
+      return `<tr>
+        <td><code class="rep">${esc(b.room)}</code></td>
+        <td class="s-line">${esc(b.line)}</td>
+        <td>${esc(b.what)}</td>
+        <td class="s-eff">${esc(b.effect)}</td>
+        <td class="s-owner"><span class="owes-tag">${esc(o ? o.who : 'NOT ASSIGNED')}</span>
+          <div class="tiny">${esc(o ? o.line : 'Nobody is named on this one yet.')}</div></td></tr>`;
+    }).join('')}</tbody></table></div>`;
 }
 
 function section(t) {
@@ -632,7 +784,7 @@ function section(t) {
           <span class="repnote">reference room ${esc(t.rep)}</span></div>
       </div>
       <div class="type-verdict"><span class="verdict-fail">${esc(VERIFIER[t.id].verdict)}</span>
-        <span class="vcount">${VERIFIER[t.id].defects.length} defects</span></div>
+        <span class="vcount">round ${VERIFIER[t.id].round} &middot; ${openDefects(t.id).length} open</span></div>
     </div>
 
     <p class="story">${esc(t.story)}</p>
@@ -675,7 +827,7 @@ function section(t) {
     ${confidenceBlock(t.id)}
     ${gatedBlock(t.id)}
     ${gapBlock(t.id)}
-    ${uncarriedBlock(t.id)}
+    ${carriageBlock(t.id)}
     ${diffBlock(t)}
     ${notesBlock(t.id)}
     ${approveBox(t)}
@@ -739,6 +891,7 @@ a:hover{border-bottom-color:var(--cyan)}
 .notlive{margin-top:18px;padding:11px 14px;background:#0D141C;color:#E6EDF4;
   font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;line-height:1.7}
 .notlive b{color:var(--cyan)}
+.notlive.round{margin-top:8px;background:#16212D;border-left:3px solid var(--red)}
 
 h2{font-size:23px;margin:0;letter-spacing:-.01em}
 h3{font-size:17px;margin:0 0 6px;letter-spacing:.01em}
@@ -772,9 +925,16 @@ code.rep{background:var(--rail);color:#fff;padding:1px 5px;border-radius:2px}
 .vcount{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-left:6px}
 .carry .ok{color:var(--green);font-weight:600}
 .carry .bad{color:var(--red);font-weight:600}
-.stoppers .s-line{font-family:var(--mono);font-size:12px;white-space:nowrap}
+.stoppers .s-line{font-family:var(--mono);font-size:12px}
 .stoppers .s-eff{color:var(--red);}
+.stoppers .s-owner{width:210px}
+.stoppers .s-owner .owes-tag{white-space:nowrap}
 .stoppers td{font-size:13px}
+.r1 .s-state{white-space:nowrap;width:130px}
+.r1 .s-state .ok{color:var(--green);font-weight:600;font-family:var(--mono);font-size:11px;letter-spacing:.06em}
+.r1 .s-state .warn{color:var(--amber);font-weight:600;font-family:var(--mono);font-size:11px;letter-spacing:.06em}
+.r1 .s-eff{color:var(--ink2)}
+.r1 td{font-size:13px}
 
 /* ---- type section ---- */
 section.type{background:var(--paper);border:1px solid var(--rule);margin:0 0 30px;padding:0}
@@ -912,7 +1072,17 @@ tr.is-med>td{background:#FDFAF4}
 .v-hi{background:var(--red);color:#fff}
 .v-mid{background:var(--amber);color:#fff}
 .v-lo{background:#E4EAF0;color:var(--ink2)}
+.v-ok{background:var(--green);color:#fff}
 .vbody{font-size:12.5px;line-height:1.65;color:var(--ink);white-space:pre-wrap}
+.vdef-closed{border-color:#CFE4D7;background:#F3F9F5}
+.vdef-closed .vbody{color:var(--ink2)}
+.vclosed{margin-top:10px;padding:9px 12px;background:#fff;border:1px solid #CFE4D7;
+  font-size:12.5px;line-height:1.6;color:var(--ink2)}
+.vclosed .k{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+  color:var(--green);text-transform:uppercase;margin-bottom:4px}
+.vdef .owes{margin-top:10px}
+.count-ok{font-family:var(--mono);font-size:11px;color:#fff;background:var(--green);
+  padding:2px 7px;border-radius:2px;margin-left:7px;letter-spacing:.08em}
 
 /* ---- diffs ---- */
 .difftable .c-sym{width:26px;text-align:center;font-family:var(--mono);font-weight:700}
@@ -946,7 +1116,10 @@ tr.is-med>td{background:#FDFAF4}
 /* ---- approve ---- */
 .approve{margin:28px 30px 30px;border:2px solid var(--rail)}
 .approve-head{background:var(--rail);color:#fff;padding:11px 18px;font-family:var(--mono);
-  font-size:12px;letter-spacing:.14em}
+  font-size:12px;letter-spacing:.14em;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;
+  justify-content:space-between}
+.approve-state{font-size:10px;letter-spacing:.1em;color:var(--rail-ink);text-transform:uppercase}
+.approve-state .verdict-fail{background:var(--red);color:#fff;padding:1px 6px;border-radius:2px}
 .approve-body{padding:18px 20px}
 .ab-row{display:flex;gap:13px;align-items:flex-start;margin-bottom:13px;font-size:14px;color:var(--ink2)}
 .ab-row strong{color:var(--ink)}
@@ -1033,6 +1206,14 @@ const JS = `
 const totals = TYPES.map((t) => stagedCounts(t.id));
 const sum = (f) => totals.reduce((a, s) => a + s[f], 0);
 const totalDefects = TYPES.reduce((a, t) => a + VERIFIER[t.id].defects.length, 0);
+const openTotal = TYPES.reduce((a, t) => a + openDefects(t.id).length, 0);
+const closedTotal = totalDefects - openTotal;
+const ROUND = VERIFIER[TYPES[0].id].round;
+
+/* The page carries the seed's own build stamp, not today's clock, so that two
+ * runs of this tool on the same seed produce a byte-identical file. */
+const STAMP = String(REF.meta.builtAt || '').slice(0, 10);
+const CARRIED = String(REF.meta.fieldStateCarriedAt || REF.meta.builtAt || '').slice(0, 10);
 
 const html = `<!doctype html>
 <html lang="en"><head>
@@ -1049,14 +1230,16 @@ const html = `<!doctype html>
   <nav>
     <div class="grp">Start here</div>
     <a href="#summary"><span class="rn">00</span>Summary</a>
+    <a href="#round1"><span class="rn">00</span>What round 1 changed</a>
     <a href="#stoppers"><span class="rn">00</span>Fix before live</a>
     <div class="grp">Room types</div>
     ${TYPES.map((t) => `<a href="#t${t.id}"><span class="rn">${esc(t.n)}</span>${esc(t.type)}</a>`).join('')}
     <div class="grp">Close</div>
     <a href="#next"><span class="rn">05</span>What happens next</a>
   </nav>
-  <div class="foot">Built ${esc(new Date().toISOString().slice(0, 10))}<br>
-    from platform/data/ref-rooms-staged.json<br>and data/project.sqlite</div>
+  <div class="foot">Rendered from the seed stamped ${esc(STAMP)},<br>
+    field state carried ${esc(CARRIED)}.<br>
+    Sources: platform/data/ref-rooms-staged.json<br>and data/project.sqlite</div>
 </aside>
 
 <div class="wrap"><div class="inner">
@@ -1080,10 +1263,16 @@ const html = `<!doctype html>
     <div><span class="k">Lines drawn up</span><span class="v">${sum('ff') + sum('mep')}</span></div>
     <div><span class="k">Flagged lines</span><span class="v">${sum('flagged')}</span></div>
     <div><span class="k">Crew work carried</span><span class="v">${sum('checked')} checks &middot; ${sum('issues')} of ${TYPES.reduce((a, t) => a + crewCounts(t.id).issues, 0)} issues</span></div>
+    <div><span class="k">Independent check</span><span class="v"><span class="verdict-fail">4 FAIL</span> &middot; round ${ROUND} &middot; ${openTotal} open</span></div>
   </div>
   <div class="notlive">THIS IS A MOCK-UP. It lives in one staged file and <b>nothing has been pushed, deployed or written
     to Firestore</b>. The crew app was read and never written. Approve it, mark it up, or hold it. Nothing generates
     at scale until you say so (ruling D24).</div>
+  <div class="notlive round">ROUND ${ROUND}. Round 1 failed all four types. The ${ROUND1.length} findings it raised were
+    worked and this page is rendered from the fixed file, line for line. A second independent check then read the
+    fixed file and <b>failed all four types again</b>, with ${openTotal} open findings, which are printed inside each
+    type below in the checker's own words. ${closedTotal} further findings were about this document being stale and
+    are closed by this rebuild; they are printed too, marked closed, so the record is complete.</div>
 </div>
 
 <section class="block" id="summary">
@@ -1101,13 +1290,23 @@ const html = `<!doctype html>
   ${carryTable()}
 </section>
 
+<section class="block" id="round1">
+  <h3><span class="hn">00</span>What the first check found, and what happened to it</h3>
+  <p class="lede">Round 1 read the four packages and failed all four. Every finding it raised is below with its
+    current state, and every "closed" was re-checked against the staged file before it was written here. This is
+    the honest measure of the fix round: most of it landed, one item was deliberately disclosed instead of changed,
+    and the second check then found a fresh set of problems that are printed in full further down.</p>
+  ${roundOneBlock()}
+</section>
+
 <section class="block" id="stoppers">
   <h3><span class="hn">00</span>Read this before you approve anything</h3>
-  <p class="lede">All four types came back <span class="verdict-fail">FAIL</span> from the independent check,
-    ${totalDefects} defects across the four. That is being shown to you straight rather than cleaned up.
-    Most of the findings are about how a conflict is worded or where a citation points. These are the ones that
-    change what gets bought or what the crew does, and every one of them is fixable in the generator without
-    touching the shape of the package you are approving.</p>
+  <p class="lede">All four types came back <span class="verdict-fail">FAIL</span> again on round ${ROUND},
+    ${openTotal} open findings across the four, plus ${closedTotal} that this rebuild closed. That is being shown to
+    you straight rather than cleaned up. Most of the findings are about where a citation points or whether a
+    conflict is on the line it belongs on. These are the ones that change what gets bought or where the crew is
+    sent, each with the person who owes the answer, and every one of them is fixable without touching the shape of
+    the package you are approving.</p>
   ${buyStoppers()}
   <p class="lede" style="margin-top:16px">Nothing on this list was invented by the mock-up. Each one is a place
     where the build stated something more confidently than the documents do, dropped a caveat, or carried a fact
@@ -1119,8 +1318,10 @@ ${TYPES.map(section).join('')}
 
 <section class="block closing" id="next">
   <h3><span class="hn">05</span>What happens on your word</h3>
+  <p class="lede">Each type has its own APPROVE / CHANGES box at the end of its section, so you can rule on one
+    type without ruling on the other three. The three choices are the same everywhere.</p>
   <ul>
-    <li><strong>APPROVE.</strong> The defects above get fixed in <code>platform/tools/build_ref_rooms.mjs</code>,
+    <li><strong>APPROVE.</strong> The open findings above get fixed in <code>platform/tools/build_ref_rooms.mjs</code>,
       the four reference rooms rebuild, the independent check runs again, and only then do the remaining
       ${TYPES.reduce((a, t) => a + t.rooms.length, 0) - 4} keys generate from the approved package.</li>
     <li><strong>APPROVE WITH CHANGES.</strong> Your marks go onto the reference room first, one room per type,

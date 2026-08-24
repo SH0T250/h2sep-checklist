@@ -29,12 +29,14 @@
  *   node platform/tools/carry_ref_state.mjs --rooms 202,230
  *   node platform/tools/carry_ref_state.mjs --seed platform/data/other.json
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { DatabaseSync } from 'node:sqlite';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const repo = resolve(root, '..');
+const DB_PATH = resolve(repo, 'data', 'project.sqlite');
 const API_KEY = 'AIzaSyAMRImRm7n7DsDACwH_71gChJTKRkaciT8';
 const BASE = 'https://firestore.googleapis.com/v1/projects/h2sep-checklist/databases/(default)/documents';
 const CREW = 'projects/h2sep/rooms'; // the crew's live data. READ ONLY.
@@ -68,6 +70,38 @@ const PII_FIELDS = ['checkedByName', 'checkedByUid'];
  * Austin's behalf. Rooms 230 and 238 hold gr308_a on BOTH sides, so the key
  * matches directly and no remap is needed to carry the work. */
 const RULED_REMAP = {};
+
+/* ================== A LINE THE CREW HOLDS OPEN WORK ON MUST EXIST IN THE BUILD
+ *
+ * Round 1 lost one. The crew's room 202 doc holds 42 lines including gr905_a
+ * (GR-905, category "FF&E - Misc", reliability FLAGGED, with an OPEN field issue
+ * reading "MISSING"). Austin's approved category gate keeps FF&E - Misc out of
+ * both documents, so the rebuild had no line for it, and 27 of the crew's 28
+ * open issues carried while the 28th was reported and then dropped. Under ruling
+ * D24 - "ALL notes, markups, check-offs, initials, timestamps and issues from
+ * the old crew app come with them, and NOTHING is deleted" - that is a
+ * regression against work the crew app already holds, and naming it in a report
+ * is not the same as keeping it.
+ *
+ * So a crew line that holds field work and has no home in the build is REBUILT
+ * from data/project.sqlite - this room's own row for that tag, its own
+ * description, its own citation, its own reliability, its own note, verbatim -
+ * and the crew's state lands on it. Nothing is taken from the crew document
+ * except the field state: the crew's older build text is not evidence about the
+ * drawings, and the database is.
+ *
+ * WHERE IT SITS. The D28 Door Hardware band is 21000/21010, and CATEGORY_ORDER
+ * would put FF&E - Misc at (20+1)*1000 = 21000 - a collision with dh_closer_a,
+ * which is exactly the slot the crew's own gr905_a occupies today. Restored
+ * lines therefore get their own band AFTER Door Hardware, so nothing lands on
+ * top of a D28 line and the ordering stays stable when more are restored.
+ *
+ * WHAT IT IS NOT. This does not widen Austin's category gate. It restores the
+ * specific lines the crew is already working, one per crew key, and each one
+ * says on its face why it exists. Widening the gate stays his call.
+ * ========================================================================== */
+const RESTORED_BAND_BASE = 22000;   // after D28's Door Hardware band at 21000/21010
+const RESTORED_BAND_STEP = 10;
 
 /* -------------------------------------------------------------- Firestore IO */
 
@@ -117,6 +151,84 @@ async function signIn() {
 const hasState = (ci) => !!(ci.checked || (ci.issue && String(ci.issue).trim()) || ci.checkedAt);
 const isOpenIssue = (ci) => !!(ci.issue && String(ci.issue).trim() && !ci.issueResolved);
 
+/* ------------------------------------------------- rebuilding a dropped line */
+
+if (!existsSync(DB_PATH)) throw new Error('data/project.sqlite is missing; a dropped crew line cannot be rebuilt from it');
+const db = new DatabaseSync(DB_PATH, { readOnly: true });
+
+/** The instanceNote shape every approved MEDIUM / FLAGGED line already uses. */
+function sqliteNote(row) {
+  const parts = [];
+  if (row.instance_note) parts.push(row.instance_note);
+  if (row.note) parts.push(row.note);
+  const text = parts.join(' — ');
+  if (!text) return '';
+  return String(row.reliability).toUpperCase() === 'HIGH' ? text : '⚑ ' + text;
+}
+
+/**
+ * Rebuild one crew line from THIS room's own database rows, or return null when
+ * the database has nothing to rebuild it from - in which case the line stays an
+ * orphan and is reported, because inventing it would be worse than losing it.
+ */
+function rebuildFromDb(roomNo, crewItem, sortAt) {
+  const code = String(crewItem.code || '').trim();
+  const category = String(crewItem.category || '').trim();
+  if (!code || !category) return null;
+  const rows = db.prepare(
+    'SELECT rowid AS rowid, item_id, category, tag, description, instance_note, note,' +
+    '       trade_responsible, source_sheet, primary_sheet, reliability, derived' +
+    '  FROM room_items WHERE room_no = ? AND tag = ? AND category = ? ORDER BY rowid'
+  ).all(roomNo, code, category);
+  if (!rows.length) return null;
+  const first = rows[0];
+  const src = first.primary_sheet || first.source_sheet || '';
+  if (!src) return null;
+  const own = sqliteNote(first);
+  /* The same conflicts-table carry the built lines get, for the one thing the
+   * builder could not reach. Matched on the tag with a non-alphanumeric
+   * boundary either side, so "GR-905" does not match inside a longer token. */
+  const conflicts = db.prepare("SELECT * FROM conflicts WHERE UPPER(status) = 'OPEN' ORDER BY conflict_id").all()
+    .filter((c) => new RegExp('(^|[^0-9A-Za-z-])' + code.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '([^0-9A-Za-z]|$)')
+      .test([c.topic, c.positions, c.source].join('  ')));
+  const conflictText = conflicts.map((c) => ' OPEN DOCUMENT CONFLICT ' + c.conflict_id + ', carried from the ' +
+    'data/project.sqlite conflicts table and NOT resolved here. Source: ' + c.source + '. Status: ' + c.status +
+    '. Topic, verbatim: "' + c.topic + '". Positions, verbatim: "' + c.positions + '" It names this line\'s tag, ' +
+    code + ', and it takes a DIFFERENT position from the row note above - both are live in the reference database ' +
+    'and both are shown. Confirm before any takeoff or purchase.').join('');
+  const why = 'THIS LINE EXISTS BECAUSE THE CREW IS ALREADY WORKING IT. Austin\'s approved category gate keeps "' +
+    category + '" off both reference documents, so the rebuild produced no line for ' + code + ' and the field work ' +
+    'the crew app already holds on it had nowhere to land. Ruling D24 is explicit that NOTHING is deleted, so the ' +
+    'line is rebuilt here from data/project.sqlite room ' + roomNo + '\'s own row(s) ' +
+    rows.map((r) => r.item_id).join(', ') + ' - its own description, its own citation, its own reliability and its ' +
+    'own note, verbatim - and the crew\'s check-off and issue are carried onto it. Nothing but the field state comes ' +
+    'from the crew document. The row is also recorded in room note n_gategaps with the rest of the gated-out rows. ' +
+    'It sits in its own band after the D28 Door Hardware lines so it cannot collide with them. Widening the gate ' +
+    'itself is Austin\'s call, not this tool\'s. SOURCE. Everything on this line except the check-off and the ' +
+    'issue is data/project.sqlite room ' + roomNo + '\'s own row(s) ' + rows.map((r) => r.item_id).join(', ') +
+    ', verbatim, at the database\'s own reliability. The check-off, the initials, the timestamp and the issue are ' +
+    'the crew\'s, carried from the live crew app READ ONLY.';
+  return {
+    code,
+    label: first.description,
+    category,
+    qty: rows.length,
+    src,
+    reliability: first.reliability,
+    instanceNote: (own ? (/[.!?"']$/.test(own.trim()) ? own.trim() : own.trim() + '.') + ' ' : '') + why + conflictText,
+    trade: first.trade_responsible || '',
+    derived: first.derived,
+    sort: sortAt,
+    deleted: false,
+    checked: false,
+    initials: '',
+    checkedAt: null,
+    checkedAtLocal: null,
+    issue: '',
+    issueResolved: false,
+  };
+}
+
 /* ------------------------------------------------------------------- the run */
 
 const seed = JSON.parse(readFileSync(SEED, 'utf8'));
@@ -147,7 +259,7 @@ if (missingCrewDoc.length) {
 }
 
 let carried = 0, remapped = 0, notesCarried = 0, piiDropped = 0, pkgTextKept = 0;
-const orphans = [], perDoc = [], noteClashes = [];
+const orphans = [], perDoc = [], noteClashes = [], restored = [];
 
 for (const pid of wanted) {
   const snap = snapshot[pid];
@@ -166,23 +278,42 @@ for (const pid of wanted) {
     if (remap && remap in pdoc.items) { targets.push(remap); if (state) r++; }
 
     if (!targets.length) {
-      /* Never a silent drop. Every key that holds field work and has no line to
-       * land on is named, with the reason it has no line, and it is counted in
-       * the reconciliation below so the arithmetic still closes. */
+      /* A line the crew holds work on must EXIST. Rebuild it from this room's
+       * own database rows and let the work land on it. Only where the database
+       * has nothing to rebuild it from does it stay an orphan - named, counted
+       * in the reconciliation below, and never silently dropped. */
       if (state) {
-        orphans.push({
-          doc: pid,
-          key,
-          code: ci.code || '<untagged>',
-          category: ci.category || '<no category>',
-          label: String(ci.label || '').slice(0, 90),
-          checked: !!ci.checked,
-          openIssue: isOpenIssue(ci),
-          issue: String(ci.issue || ''),
-          initials: ci.initials || '',
-        });
+        const roomNo = pid.replace(/-MEP$/, '');
+        const nextSort = RESTORED_BAND_BASE + restored.filter((x) => x.doc === pid).length * RESTORED_BAND_STEP;
+        const rebuilt = pid.endsWith('-MEP') ? null : rebuildFromDb(roomNo, ci, nextSort);
+        if (rebuilt) {
+          if (Object.values(pdoc.items).some((v) => v.sort === rebuilt.sort)) {
+            throw new Error(`restoring ${pid}/${key} would collide at sort ${rebuilt.sort}`);
+          }
+          pdoc.items[key] = rebuilt;
+          restored.push({
+            doc: pid, key, code: rebuilt.code, category: rebuilt.category,
+            reliability: rebuilt.reliability, sort: rebuilt.sort, crewSort: ci.sort,
+            checked: !!ci.checked, openIssue: isOpenIssue(ci), issue: String(ci.issue || ''),
+          });
+          targets.push(key);
+        } else {
+          orphans.push({
+            doc: pid,
+            key,
+            code: ci.code || '<untagged>',
+            category: ci.category || '<no category>',
+            label: String(ci.label || '').slice(0, 90),
+            checked: !!ci.checked,
+            openIssue: isOpenIssue(ci),
+            issue: String(ci.issue || ''),
+            initials: ci.initials || '',
+          });
+          continue;
+        }
+      } else {
+        continue;
       }
-      continue;
     }
     for (const tk of targets) {
       const t = pdoc.items[tk];
@@ -223,6 +354,16 @@ console.log(perDoc.length ? perDoc.join('\n') : '  (nothing)');
 console.log(`\n  ${carried} line(s) with field state, ${notesCarried} note(s), ${remapped} carried across a ruled retag`);
 console.log(`  ${piiDropped} personal name/uid field(s) dropped on the way in`);
 console.log(`  ${pkgTextKept} line(s) kept the mock-up's package text over the crew build's older text (field state only travels)`);
+
+if (restored.length) {
+  console.log('\nLINES REBUILT SO THE CREW\'S WORK HAS SOMEWHERE TO LAND (ruling D24: nothing is deleted):');
+  for (const x of restored) {
+    console.log(`  ${x.doc}/${x.key}  ${x.code}  [${x.category}]  ${x.reliability}`);
+    console.log(`      rebuilt from data/project.sqlite room ${x.doc}'s own row(s), not from the crew document`);
+    console.log(`      sort ${x.crewSort} in the crew app -> ${x.sort} here (its own band, after the D28 Door Hardware lines)`);
+    console.log(`      carried: checked=${x.checked}  openIssue=${x.openIssue}${x.issue ? ' "' + x.issue + '"' : ''}`);
+  }
+}
 
 if (orphans.length) {
   console.log('\nSTATE WITH NO LINE TO LAND ON - carried nowhere, dropped nowhere, listed here:');
@@ -283,6 +424,7 @@ const line = (what, crew, build, orphan) => {
   return ok;
 };
 console.log('\nRECONCILIATION  (live lines only; a tombstone is history, not a second check)');
+if (restored.length) console.log(`  ${restored.length} line(s) rebuilt above so the work lands on a line instead of being named and lost`);
 if (tombstoned) console.log(`  ${tombstoned} retired line(s) keep their original check as a record`);
 const okChecks = line('checks', crewChecks, seedChecks, orphanChecks);
 const okIssues = line('issues', crewIssues, seedIssues, orphanIssues);
@@ -364,7 +506,13 @@ seed.meta.fieldState =
   'checkedByName and checkedByUid are dropped; note authors are reduced to initials. Reconciliation is exact: ' +
   'crew ' + crewChecks + ' check(s) = ' + seedChecks + ' on live lines + ' + orphanChecks + ' with no line; ' +
   'crew ' + crewIssues + ' open issue(s) = ' + seedIssues + ' on live lines + ' + orphanIssues + ' with no line' +
-  (orphans.length ? ' (' + orphans.map((o) => o.doc + '/' + o.key + ' ' + o.code + ' [' + o.category + ']').join('; ') + ').' : '.');
+  (orphans.length ? ' (' + orphans.map((o) => o.doc + '/' + o.key + ' ' + o.code + ' [' + o.category + ']').join('; ') + ').' : '.') +
+  (restored.length
+    ? ' ' + restored.length + ' line(s) the category gate left with no home were REBUILT from data/project.sqlite so ' +
+      'the crew\'s work lands on a line rather than being named and lost (' +
+      restored.map((x) => x.doc + '/' + x.key + ' ' + x.code + ' [' + x.category + '] ' + x.reliability +
+        ', sort ' + x.sort).join('; ') + '); each carries its own row text and says on its face why it exists.'
+    : '');
 seed.meta.fieldStateCarriedAt = new Date().toISOString();
 writeFileSync(SEED, JSON.stringify(canonical(seed), null, 2) + '\n', 'utf8');
 console.log(`\nwrote ${SEED}`);

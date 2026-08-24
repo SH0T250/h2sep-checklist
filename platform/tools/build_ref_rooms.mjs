@@ -73,7 +73,26 @@
  *
  * A tag with no live counterpart in the donor ships from sqlite VERBATIM with
  * its own reliability - never from a different room type, never invented. Every
- * line's source is recorded and printed: DONOR, SQLITE or RULING.
+ * line's source is recorded and printed: DONOR, SQLITE or RULING, and every line
+ * carries that source ON ITSELF as a SOURCE sentence.
+ *
+ * A DONOR MAY ENRICH. IT MAY NOT LAUNDER. (round-2 correction)
+ * The first build handed the donor's reliability AND note straight onto every
+ * shared tag, which shipped a room's own FLAG away five times over - 238's
+ * gr403_a ("DO NOT BUY BOTH") at HIGH with an empty note, 238's hd12_a and
+ * hd08_a with their ASSUMPTION flags gone, 217's 905_a at HIGH on a tag its own
+ * row downgrades, and 217's hd08_a wearing room 104's contradicting caveat. The
+ * rule now:
+ *   - the TARGET room's own reliability governs; a donor raises it only where
+ *     the donor's text carries a RULING that closes the flag for the PRODUCT
+ *     (Austin's D11 submittal closures name a model, not a room);
+ *   - where the room's own row has words, THOSE words govern, and a donor note
+ *     that is a reading of the donor's own drawing is dropped and quoted on the
+ *     line as not carried;
+ *   - where the room's own row is silent, the approved package text rides whole
+ *     and the line says where it came from.
+ * Every folded line also states WHY its quantity is what it is, row by row.
+ * See "A DONOR MAY ENRICH. IT MAY NOT LAUNDER." further down.
  *
  * DELETED DONOR LINES ARE NOT A SOURCE. Live room 105 carries gr308_a as a
  * deleted tombstone (retired by ruling D22 with a "SUPERSEDED" note). Indexing
@@ -86,7 +105,19 @@
  *
  * Every open document conflict rides into the output as a FLAGGED line and/or a
  * room note carrying data/project.sqlite's own words VERBATIM. This tool
- * resolves nothing. In particular:
+ * resolves nothing.
+ *
+ * That includes the data/project.sqlite CONFLICTS TABLE, which the first build
+ * never read (round-2 correction). Every OPEN entry naming one of these rooms'
+ * keys or one of its tags now rides on the line that carries the tag, FLAGGED,
+ * and in room note n_conflicts - B4.2 (GR-905 versus the plain 905 telephone
+ * tag), B4.5 (GR tags ambiguous without A530), B3.1, B5.6 and A11. And a
+ * gated-out row whose own note states a conflict rides in n_gategaps at ANY
+ * reliability: how well a row was READ says nothing about whether the documents
+ * AGREE, and scoping that note to FLAGGED/MEDIUM dropped three real conflicts
+ * off room 202.
+ *
+ * In particular:
  *
  *  1 ROOM 217 AND ROOM 238 - TUB versus ROLL-IN, OPEN.
  *    Ruling D19 put room 118 on the roll-in shower. D19 IS SCOPED TO ROOM 118
@@ -102,6 +133,28 @@
  *    because "Stone / Surround" sits outside Austin's approved category gate.
  *    It rides as a room note instead, quoting the row: "S-1 CONFLICT,
  *    purchase-order-grade gap. ST-02 is NOT in the 67-card finish schedule."
+ *
+ *  3a SPRINKLER CITATION - THE DONOR'S FP SHEET IS THE DONOR'S FLOOR.
+ *    The donor's fp_heads_a cites "FP-1 head schedule ... 144 total heads 1st
+ *    floor" and "FP-1, verified head-by-head on rooms 107 and 108". These rooms
+ *    are on FLOOR 2 and no head in them was verified, so those segments are
+ *    REMOVED, quoted on the line as removed, and replaced with PH-GU-001's own
+ *    sheet list plus this room's own rooms.floor. Which FP sheet covers floor 2
+ *    is nowhere stated in the database and is NOT guessed. See fpNoCount().
+ *
+ *  3b A SHARED SHEET IS NOT A SHARED CONNECTING PLAN.
+ *    Room 230 sits on A555, the same sheet as donor 105, so its citations stand
+ *    verbatim - except the '.1' variant, which room_types identifies as the QQ
+ *    CONNECTING plan and which build_floor1.mjs drops wherever
+ *    rooms.connecting = 0. That rule only ran on the re-point path, so five of
+ *    230's lines pointed a non-connecting room at the connecting electrical
+ *    plan. See sameSheetCitation().
+ *
+ *  3c A CORROBORATION CLAIM IS CHECKED NUMBER BY NUMBER.
+ *    composeMepCitation() used to print every row citing ANY A55-series sheet as
+ *    corroborating whatever number survived the sift, which put a fabricated
+ *    "and this room's own rows cite it too" on room 217's FLAGGED PTAC line. A
+ *    row corroborates only when it cites the SAME number on the SAME sheet.
  *
  *  3 SPRINKLER HEAD COUNT - NOT VERIFIED for any of these four types.
  *    None of the four rooms has a single Fire Sprinkler row in sqlite, and
@@ -154,9 +207,16 @@
  *   D18 / D23 / D24 are floor-1 / common-area / cutover rulings and do not
  *        reach this build.
  *
- * FIELD STATE: these rooms are born clean. There is no crew work to carry -
- * they are floor 2 and the floor-2 crew data is carried at rollout under D24's
- * standing directive, by carry_field_state.mjs, not here.
+ * FIELD STATE: the lines this tool writes are born clean, and that is only half
+ * the story. THE CREW HAS BEEN WORKING ROOMS 202, 217, 230 AND 238 IN THE LIVE
+ * APP SINCE AUGUST, so platform/tools/carry_ref_state.mjs runs AFTER every build
+ * and carries their check-offs, initials, timestamps, issues and notes in under
+ * ruling D24 - with EXACT reconciliation, or it refuses to write. It also
+ * REBUILDS any line the crew holds work on that the category gate left with no
+ * home (room 202's GR-905, which the crew has flagged MISSING); that line is
+ * rebuilt from data/project.sqlite's own row, in its own sort band after the D28
+ * Door Hardware lines. This tool cannot do that itself: it never touches
+ * Firestore, so it cannot see what the crew holds.
  *
  * DETERMINISM: one declared constant stamp, canonical JSON with object keys
  * sorted at every depth. Re-running the same arguments rewrites a byte-
@@ -259,10 +319,48 @@ const RECIPE_DERIVED = {
       + '  /* ADDED (build_ref_rooms): room 230 sits on the SAME sheet as its donor\n'
       + '   * (QQ Extended room_sheet A555 == Queen-Queen room_sheet A555). There is\n'
       + '   * nothing to re-point, and running the number sift would strip A555 view\n'
-      + "   * numbers off a room that IS on A555. Carry the donor's citation verbatim. */\n"
+      + '   * numbers off a room that IS on A555. So the donor citation stands - with\n'
+      + '   * ONE exception, which a shared sheet does not make shared: the \'.1\'\n'
+      + '   * CONNECTING plan variant. See sameSheetCitation(). */\n'
       + '  if (donorSheet === roomSheet) {\n'
-      + '    return { src: String(donorSrc || \'\'), note: \'\', removed: [], connectingRemoved: [], ownUsed: false, ownRowIds: [], outcome: \'\' };\n'
+      + '    return sameSheetCitation(donorSrc, isConnecting, roomSheet);\n'
       + '  }'],
+    ['  const ownRowIds = [];',
+      '  const ownRowIds = [];\n'
+      + '  /* ADDED (build_ref_rooms): the A55-series segments each row contributes,\n'
+      + '   * kept PER ROW, so a corroboration claim can be tested number by number\n'
+      + '   * instead of on the bare fact that the row cites some A55-series sheet.\n'
+      + '   * Room 217 is why: its own rows cite A554.1 view 01/07 and A554 KN30, and\n'
+      + '   * the surviving donor segment is "A554 KN1". None of those rows cites KN1,\n'
+      + '   * yet all three were being printed as corroborating it. */\n'
+      + '  const ownSegsByRow = [];'],
+    ['    if (used && !ownRowIds.includes(r.item_id)) ownRowIds.push(r.item_id);',
+      '    if (used && !ownRowIds.includes(r.item_id)) ownRowIds.push(r.item_id);\n'
+      + '    if (used) ownSegsByRow.push({ id: r.item_id, segs: segs.filter((s) => /A55\\d/.test(s)) });'],
+    ['    const survivors = kept.filter((x) => x.includes(roomSheet) && !BOTH.test(x) &&\n'
+      + '      (citeViewNumbers(x).size || citeKeynoteNumbers(x).size));',
+      '    const survivors = kept.filter((x) => x.includes(roomSheet) && !BOTH.test(x) &&\n'
+      + '      (citeViewNumbers(x).size || citeKeynoteNumbers(x).size));\n'
+      + '    /* ADDED (build_ref_rooms): CORROBORATION IS NUMBER BY NUMBER. A row of this\n'
+      + '     * room\'s own corroborates a surviving reference only when it cites one of\n'
+      + '     * the SAME view or keynote number ON THIS ROOM\'S OWN SHEET. Citing the\n'
+      + '     * same SHEET is not evidence - it is the very thing the sift just finished\n'
+      + '     * disproving - and citing the same NUMBER on a different sheet is not\n'
+      + '     * evidence either. Both tests have to pass. */\n'
+      + '    const survivorViews = new Set(survivors.flatMap((x) => [...citeViewNumbers(x)]));\n'
+      + '    const survivorKns = new Set(survivors.flatMap((x) => [...citeKeynoteNumbers(x)]));\n'
+      + '    const corroborating = ownSegsByRow.filter((o) => o.segs.some((s) => s.includes(roomSheet) && (\n'
+      + '      [...citeViewNumbers(s)].some((n) => survivorViews.has(n))\n'
+      + '      || [...citeKeynoteNumbers(s)].some((n) => survivorKns.has(n))))).map((o) => o.id);'],
+    ["          (ownRowIds.length ? \" and this room's own row(s) \" + ownRowIds.join(', ') + ' cite it too.' : '.')",
+      "          (corroborating.length\n"
+      + "            ? \" and this room's own row(s) \" + corroborating.join(', ') + ' cite the same number on the same sheet.'\n"
+      + "            : ownRowIds.length\n"
+      + "              ? '. NO row of this room\\'s own cites that number: its own A55-series row(s) (' +\n"
+      + "                ownRowIds.join(', ') + ') cite different numbers, so nothing in this room corroborates it. ' +\n"
+      + "                'Confirm it on ' + roomSheet + ' before relying on it.'\n"
+      + "              : '. This room has no A55-series row of its own to corroborate it - confirm it on ' +\n"
+      + "                roomSheet + ' before relying on it.')"],
     ['repointCiteSegment(seg, roomSheet, isConnecting, numbering)',
       'repointCiteSegment(seg, roomSheet, isConnecting, numbering, donorSheet)'],
     ['if (!seg.includes(MEP_DONOR_SHEET) || BOTH.test(seg))', 'if (!seg.includes(donorSheet) || BOTH.test(seg))'],
@@ -305,6 +403,17 @@ const CATEGORY_INDEX = new Map(CATEGORY_ORDER.map((c, i) => [c, i]));
 const SPACE_MEP_ORDER = ['Mechanical', 'Electrical', 'Plumbing', 'Fire Protection', 'Low Voltage',
   'Fire Sprinkler', 'Fire Alarm'];
 const SPACE_MEP_INDEX = new Map(SPACE_MEP_ORDER.map((c, i) => [c, i]));
+
+/* The five MEP bands the CREW APP itself knows (js/util.js MEP_CATEGORY_ORDER).
+ * build_floor1.mjs reports any space row outside this set because such a line
+ * "will sort last"; this tool had no equivalent check, so room 202's second
+ * smoke detector shipped under 'Fire Alarm' - a band no floor-1 guest room
+ * carries - at sort 7010, in a group that renders after everything else, while
+ * the first smoke detector sat under 'Fire Protection' at 4011. The category
+ * string is still carried verbatim; the LINE and the REPORT now say so. */
+const APP_MEP_CATEGORY_ORDER = new Set([
+  'Mechanical', 'Electrical', 'Plumbing', 'Fire Protection', 'Low Voltage',
+]);
 
 /* The three approved rooms the recipe proves itself against. Read only. */
 const APPROVED_ROOMS = ['101', '103', '105'];
@@ -1028,14 +1137,23 @@ function composeMepCitation(donorSrc, mine, roomSheet, isConnecting, numbering, 
   /* ADDED (build_ref_rooms): room 230 sits on the SAME sheet as its donor
    * (QQ Extended room_sheet A555 == Queen-Queen room_sheet A555). There is
    * nothing to re-point, and running the number sift would strip A555 view
-   * numbers off a room that IS on A555. Carry the donor's citation verbatim. */
+   * numbers off a room that IS on A555. So the donor citation stands - with
+   * ONE exception, which a shared sheet does not make shared: the '.1'
+   * CONNECTING plan variant. See sameSheetCitation(). */
   if (donorSheet === roomSheet) {
-    return { src: String(donorSrc || ''), note: '', removed: [], connectingRemoved: [], ownUsed: false, ownRowIds: [], outcome: '' };
+    return sameSheetCitation(donorSrc, isConnecting, roomSheet);
   }
   const BOTH = /A55\d\s*\/\s*A55\d/;
   /* This room's own A55-series citation segments, the DB's wildcard resolved. */
   const ownArch = [];
   const ownRowIds = [];
+  /* ADDED (build_ref_rooms): the A55-series segments each row contributes,
+   * kept PER ROW, so a corroboration claim can be tested number by number
+   * instead of on the bare fact that the row cites some A55-series sheet.
+   * Room 217 is why: its own rows cite A554.1 view 01/07 and A554 KN30, and
+   * the surviving donor segment is "A554 KN1". None of those rows cites KN1,
+   * yet all three were being printed as corroborating it. */
+  const ownSegsByRow = [];
   for (const r of mine || []) {
     const segs = citeSegments(resolveSheetWildcard(r.source_sheet || r.primary_sheet || '', roomSheet));
     let used = false;
@@ -1045,6 +1163,7 @@ function composeMepCitation(donorSrc, mine, roomSheet, isConnecting, numbering, 
       if (!ownArch.includes(seg)) ownArch.push(seg);
     }
     if (used && !ownRowIds.includes(r.item_id)) ownRowIds.push(r.item_id);
+    if (used) ownSegsByRow.push({ id: r.item_id, segs: segs.filter((s) => /A55\d/.test(s)) });
   }
 
   const kept = [];
@@ -1075,6 +1194,17 @@ function composeMepCitation(donorSrc, mine, roomSheet, isConnecting, numbering, 
     /* What is LEFT pointing at a guestroom sheet, after the removals? */
     const survivors = kept.filter((x) => x.includes(roomSheet) && !BOTH.test(x) &&
       (citeViewNumbers(x).size || citeKeynoteNumbers(x).size));
+    /* ADDED (build_ref_rooms): CORROBORATION IS NUMBER BY NUMBER. A row of this
+     * room's own corroborates a surviving reference only when it cites one of
+     * the SAME view or keynote number ON THIS ROOM'S OWN SHEET. Citing the
+     * same SHEET is not evidence - it is the very thing the sift just finished
+     * disproving - and citing the same NUMBER on a different sheet is not
+     * evidence either. Both tests have to pass. */
+    const survivorViews = new Set(survivors.flatMap((x) => [...citeViewNumbers(x)]));
+    const survivorKns = new Set(survivors.flatMap((x) => [...citeKeynoteNumbers(x)]));
+    const corroborating = ownSegsByRow.filter((o) => o.segs.some((s) => s.includes(roomSheet) && (
+      [...citeViewNumbers(s)].some((n) => survivorViews.has(n))
+      || [...citeKeynoteNumbers(s)].some((n) => survivorKns.has(n))))).map((o) => o.id);
     outcome = ownUsed ? "replaced by this room's own row(s) " + ownRowIds.join(', ')
       : survivors.length ? 'proven sheet-independent numbering kept: ' + survivors.join('; ')
       : 'sheet cited alone - this room has no row of its own';
@@ -1083,7 +1213,14 @@ function composeMepCitation(donorSrc, mine, roomSheet, isConnecting, numbering, 
       : survivors.length
         ? 'What is left - ' + survivors.map((x) => '"' + x + '"').join(', ') + ' - is numbering the database ' +
           "writes sheet-independently, so it holds on " + roomSheet +
-          (ownRowIds.length ? " and this room's own row(s) " + ownRowIds.join(', ') + ' cite it too.' : '.')
+          (corroborating.length
+            ? " and this room's own row(s) " + corroborating.join(', ') + ' cite the same number on the same sheet.'
+            : ownRowIds.length
+              ? '. NO row of this room\'s own cites that number: its own A55-series row(s) (' +
+                ownRowIds.join(', ') + ') cite different numbers, so nothing in this room corroborates it. ' +
+                'Confirm it on ' + roomSheet + ' before relying on it.'
+              : '. This room has no A55-series row of its own to corroborate it - confirm it on ' +
+                roomSheet + ' before relying on it.')
         : 'This room has no row of its own that places this line on a guestroom sheet, so the sheet is cited ' +
           'with no view or keynote number at all. Confirm it on ' + roomSheet + ' before relying on one.';
     note = 'CITATION. The donor line cites ' +
@@ -1102,6 +1239,79 @@ function composeMepCitation(donorSrc, mine, roomSheet, isConnecting, numbering, 
 /* ###########################################################################
  * END OF COPIED RECIPE. Everything below is this tool's own.
  * ######################################################################### */
+
+/* ================== A SHARED SHEET IS NOT A SHARED CONNECTING PLAN
+ *
+ * build_floor1.mjs proves the '.1' view variant is the CONNECTING plan -
+ * room_types, verbatim: "A555 view 01.1 'QQ Studio Conn.' + electrical view
+ * 04.1" - and its header records the rule: "It is dropped where
+ * rooms.connecting = 0 and kept where it is 1". That rule lives inside
+ * repointCiteSegment(), which only ever runs when the donor sheet and the room
+ * sheet DIFFER. Room 230 (QQ Extended) shares A555 with donor room 105 and has
+ * rooms.connecting = 0, so the whole donor citation used to ride through
+ * untouched and five of its lines - elec_panel, elec_outlets, elec_sink_sw,
+ * lv_wap, lv_tvdata - pointed a NON-connecting room at the CONNECTING
+ * electrical plan, view 04.1.
+ *
+ * A shared sheet makes the SHEET shared. It does not make the CONNECTING plan
+ * shared. So this pass applies exactly ONE rule - drop '.1' views on a
+ * non-connecting room - and touches no other number, because every other number
+ * on the donor line was written for the sheet this room is actually on.
+ * ========================================================================== */
+
+/** Drop the '.1' CONNECTING view variant from one citation segment. */
+function dropConnectingViews(seg, isConnecting) {
+  const connectingRemoved = [];
+  if (isConnecting) return { text: String(seg), connectingRemoved };
+  const sift = (whole, word, gap, list) => {
+    const nums = citeNums(list);
+    const keep = nums.filter((n) => !/\.1$/.test(n));
+    for (const n of nums) if (!keep.includes(n)) connectingRemoved.push('view ' + n);
+    if (keep.length === nums.length) return whole;
+    if (!keep.length) return '';
+    const many = keep.length > 1;
+    const w = /^(kn|el\.)$/i.test(word) ? word
+      : /^e/i.test(word) ? (many ? 'elevations' : 'elevation')
+      : /^k/i.test(word) ? (many ? 'keynotes' : 'keynote')
+      : (many ? 'views' : 'view');
+    return w + gap + keep.join('/');
+  };
+  /* Same punctuation tidy repointCiteSegment uses, so a shortened list reads
+   * the way the approved lines already read. */
+  const out = String(seg).replace(CITE_VIEW_TOKEN, sift)
+    .replace(/\(\s*(?:and|,|;|\+|\/|\s)*\)/g, '')
+    .replace(/\(\s*[,;+/]\s*/g, '(')
+    .replace(/\s*[,;+/]\s*\)/g, ')')
+    .replace(/\s+([,;.])/g, '$1')
+    .replace(/\s{2,}/g, ' ')
+    .trim()
+    .replace(/[,;+/]$/, '')
+    .trim();
+  return { text: out, connectingRemoved };
+}
+
+/** The citation for a room that sits on its donor's own sheet. */
+function sameSheetCitation(donorSrc, isConnecting, roomSheet) {
+  const kept = [];
+  const connectingRemoved = [];
+  for (const seg of citeSegments(donorSrc)) {
+    const r = dropConnectingViews(seg, isConnecting);
+    connectingRemoved.push(...r.connectingRemoved);
+    if (r.text) kept.push(r.text);
+  }
+  const uniq = [...new Set(connectingRemoved)];
+  const note = uniq.length
+    ? 'CITATION. This room sits on the SAME guestroom sheet as the donor (' + roomSheet + '), so every reference ' +
+      'on this line stands verbatim with ONE exception: ' + uniq.join(', ') + '. data/project.sqlite room_types ' +
+      'identifies the ".1" variant as the CONNECTING plan, verbatim: "A555 view 01.1 \'QQ Studio Conn.\' + ' +
+      'electrical view 04.1". This room\'s rooms.connecting is 0, so the connecting plan is not this room\'s plan ' +
+      'and is not carried. Nothing else on the line was touched.'
+    : '';
+  return {
+    src: citeJoin(kept), note, removed: [], connectingRemoved, ownUsed: false, ownRowIds: [],
+    outcome: uniq.length ? 'connecting-plan view(s) dropped on a non-connecting room: ' + uniq.join(', ') : '',
+  };
+}
 
 /* --------------------------------------------------- recipe-fidelity prover */
 
@@ -1219,6 +1429,7 @@ function assertRecipeConstants() {
   cmp('MEP_CONDENSED_SOURCES (' + Object.keys(MEP_CONDENSED_SOURCES).length + ' lines)', 'MEP_CONDENSED_SOURCES', MEP_CONDENSED_SOURCES);
   cmp('MEP_ROUGH_IN_ITEMS (' + MEP_ROUGH_IN_ITEMS.length + ')', 'MEP_ROUGH_IN_ITEMS', MEP_ROUGH_IN_ITEMS);
   cmp('MEP_LABEL_FROM_ROW', 'MEP_LABEL_FROM_ROW', MEP_LABEL_FROM_ROW);
+  cmp('APP_MEP_CATEGORY_ORDER (' + APP_MEP_CATEGORY_ORDER.size + ')', 'APP_MEP_CATEGORY_ORDER', APP_MEP_CATEGORY_ORDER);
   cmp('RULED_LINE_ADDITIONS (D27/D28)', 'RULED_LINE_ADDITIONS', RULED_LINE_ADDITIONS);
   for (const [n, v] of [['MEP_DONOR_ROOM', MEP_DONOR_ROOM], ['MEP_DONOR_SHEET', MEP_DONOR_SHEET],
     ['KING_PAIR_SHEET', KING_PAIR_SHEET], ['MEP_DOC_TYPE', MEP_DOC_TYPE],
@@ -1437,14 +1648,53 @@ function buildDescSlotMap(db) {
  * THE LINE SHIPS WITH NO QUANTITY - the same way a workbook-only FF&E line and
  * space S017's tag 404 already ship. An omitted count is recoverable in the
  * field; a fabricated one is not.
+ *
+ * THE CITATION HAS TO COME OUT TOO, and the first version of this tool forgot it.
+ * The instanceNote said "NO HEAD COUNT IS VERIFIED FOR THIS ROOM TYPE" while the
+ * `src` on the very same line still read "FP-1 head schedule ... 144 total heads
+ * 1st floor" and "FP-1, verified head-by-head on rooms 107 and 108". Both of
+ * those are the DONOR's row text (room_items.source_sheet on rooms 104/105) and
+ * both are false here twice over: this room is on FLOOR 2, and no head in it was
+ * ever verified. A crew member reading that line was being sent to a first-floor
+ * sheet with a first-floor total.
+ *
+ * So every FP-series segment is REMOVED and quoted in the note as removed, and
+ * what replaces it is PH-GU-001's own suggested_sheet plus this room's own
+ * rooms.floor. Nothing asserts WHICH of FP-1 / FP-2 / FP-3 covers floor 2,
+ * because data/project.sqlite nowhere says so - it names the three sheets and
+ * stops, and so does this line.
  * ========================================================================== */
 const FP_HEADS_KEY = 'fp_heads_a';
 /* Any sprinkler row at all, matched on CATEGORY rather than on a list of
  * item_ids, so a head this tool has never seen still trips the guard. */
 const sprinklerRowsIn = (rows) => (rows || []).filter((r) => r.category === 'Fire Sprinkler' || r.category === 'Fire Protection');
 const FP_TAKEOFF_RE = /this room's own take-off is [\s\S]*?Verify every head you can see\./;
+/* A citation segment that names a sprinkler sheet. FP-1/FP-2/FP-3 are the three
+ * PH-GU-001 names; the pattern is the series, not a hard-coded FP-1. */
+const FP_SHEET_RE = /\bFP-\d\b/;
 
-function fpNoCount(db, roomNo, roomType, donorNo, item, report) {
+/* citeSegments() is the recipe's own splitter and it splits on EVERY semicolon.
+ * The sprinkler citation carries semicolons INSIDE a parenthetical - "FP-1 head
+ * schedule, both rows (... K=4.3; ... K=5.6; 144 total heads 1st floor)" - so
+ * the recipe splitter cuts one citation into three and only the first piece
+ * still names FP-1. Removing on that split left "144 total heads 1st floor)"
+ * behind on a floor-2 room. This splitter honours parentheses. It is used ONLY
+ * where a whole segment has to be removed or quoted; the recipe's own splitter
+ * is untouched and still governs every path build_floor1.mjs owns. */
+function citeSegmentsBalanced(s) {
+  const out = [];
+  let buf = '', depth = 0;
+  for (const ch of String(s || '')) {
+    if (ch === '(' || ch === '[') depth++;
+    else if (ch === ')' || ch === ']') depth = Math.max(0, depth - 1);
+    if (ch === ';' && depth === 0) { out.push(buf.trim()); buf = ''; continue; }
+    buf += ch;
+  }
+  out.push(buf.trim());
+  return out.filter(Boolean);
+}
+
+function fpNoCount(db, roomNo, roomType, donorNo, item, report, floor) {
   const ph = db.prepare("SELECT * FROM placeholders WHERE placeholder_id = 'PH-GU-001'").get();
   if (!ph) die('placeholder PH-GU-001 is missing from data/project.sqlite - refusing to ship a sprinkler line without it');
   if (!FP_TAKEOFF_RE.test(String(item.instanceNote))) {
@@ -1452,17 +1702,48 @@ function fpNoCount(db, roomNo, roomType, donorNo, item, report) {
         'head take-off clause. This tool was written to REMOVE that clause and must not run blind - re-read the ' +
         'donor line and re-check this code.');
   }
+  /* The donor's FP-series citation is a fact about the donor's floor and about
+   * the two rooms the count was read on. It does not travel. */
+  const segs = citeSegmentsBalanced(item.src);
+  const donorFp = segs.filter((s) => FP_SHEET_RE.test(s) || /\d+ total heads|head-by-head/i.test(s));
+  const kept = segs.filter((s) => !donorFp.includes(s));
+  if (!donorFp.length) {
+    die('room ' + roomNo + ': donor ' + donorNo + '-MEP ' + FP_HEADS_KEY + ' no longer cites an FP-series sheet. ' +
+        'This tool was written to REMOVE that citation and must not run blind - re-read the donor line.');
+  }
+  const replacementSeg = ph.suggested_sheet + ' (the sprinkler sheets data/project.sqlite placeholder ' +
+    ph.placeholder_id + ' names, and it names no more than that). ROOM ' + roomNo + ' IS ON FLOOR ' + floor +
+    ' - read the sheet that covers floor ' + floor + '. The donor line cited a FIRST-FLOOR sheet with a ' +
+    'first-floor head total; that citation is NOT carried onto this room';
+  const removedSentence = ' CITATION NOT CARRIED: the donor line (room ' + donorNo + ') cited ' +
+    donorFp.map((x) => '"' + x + '"').join(' and ') + '. That is room ' + donorNo + "'s own row text - a FLOOR 1 " +
+    'sheet, a floor-1 head total, and a head-by-head verification performed on rooms 107 and 108. Room ' + roomNo +
+    ' is on FLOOR ' + floor + ' and has NO Fire Sprinkler row of its own in data/project.sqlite, so none of it is ' +
+    'carried here. What replaces it is ' + ph.placeholder_id + "'s own suggested sheet list, verbatim: \"" +
+    ph.suggested_sheet + '". Which of those covers floor ' + floor + ' is not stated anywhere in ' +
+    'data/project.sqlite and is not guessed here.';
   const replacement = 'NO HEAD COUNT IS VERIFIED FOR THIS ROOM TYPE, and none is asserted here. ' +
     'data/project.sqlite placeholders ' + ph.placeholder_id + ' (' + ph.suggested_sheet + '), verbatim: "' +
     ph.what_is_missing + '" Why it is left open, verbatim: "' + ph.why + '" ' +
     'The donor line (room ' + donorNo + ') carries a count of ' + item.qty + ' taken off its OWN rows; that count ' +
     'is NOT copied here and THIS LINE SHIPS WITH NO QUANTITY AT ALL. ' + FP_COUNT_SENTENCE;
+  /* The donor's own prose around the take-off names FP-1 as well ("Ceiling and
+   * side-wall heads per the FP-1 rows"). That is the same floor-1 reference, so
+   * it is neutralised in the surviving prose - and ONLY there, so that the
+   * quoted-as-removed segments below keep the donor's words byte for byte. */
+  const m = FP_TAKEOFF_RE.exec(String(item.instanceNote));
+  const neutral = (t) => t.replace(/\bFP-\d\b/g, 'sprinkler head-schedule');
+  const kernel = neutral(String(item.instanceNote).slice(0, m.index)) + replacement
+    + neutral(String(item.instanceNote).slice(m.index + m[0].length));
   const out = clone(item);
-  out.instanceNote = String(item.instanceNote).replace(FP_TAKEOFF_RE, replacement);
+  out.instanceNote = kernel + removedSentence;
+  out.src = citeJoin([...kept, replacementSeg]);
   out.reliability = 'MEDIUM';
   delete out.qty;
   report.fpNoCount = FP_HEADS_KEY + ': donor qty ' + item.qty + ' NOT copied; line ships with no quantity, ' +
-    'reliability MEDIUM, carrying PH-GU-001 verbatim';
+    'reliability MEDIUM, carrying PH-GU-001 verbatim; ' + donorFp.length + ' donor FP-series citation segment(s) ' +
+    'removed (floor-1 sheet, floor-1 total, rooms 107/108 verification) and replaced with ' + ph.placeholder_id +
+    "'s own sheet list plus this room's floor (" + floor + ')';
   return out;
 }
 
@@ -1596,6 +1877,191 @@ function bathingUnresolvedLine(roomNo, key, item, drops, donorNo) {
   return out;
 }
 
+/* ===================================== A DONOR MAY ENRICH. IT MAY NOT LAUNDER.
+ *
+ * The first build handed the donor line's `reliability` AND `instanceNote`
+ * straight onto every shared tag. That is wrong in both directions and it shipped
+ * five real defects:
+ *
+ *   238 gr403_a  sqlite FLAGGED with "F-5 - A556 tags GR-403 AND GR-404 ...
+ *                ALTERNATES ... DO NOT BUY BOTH" shipped HIGH with an empty note,
+ *                because donor room 105 is HIGH - and room 105 is HIGH only
+ *                because it has no GR-404 alternate. A fact about room 105 is not
+ *                evidence about room 238.
+ *   238 hd12_a   FLAGGED "ASSUMPTION - see HD-02 note" shipped HIGH, blank, while
+ *                its three identical siblings shipped FLAGGED with the note.
+ *   238 hd08_a   FLAGGED "ASSUMPTION - see HD-02 note" shipped MEDIUM carrying
+ *                room 105's reason, "elevation-sourced - not a takeoff".
+ *   217 hd08_a   own row says "counts as stated by A533's own summary block";
+ *                the donor's opposite caveat shipped in its place.
+ *   217 905_a    sqlite MEDIUM ("second tag read at MEDIUM") shipped HIGH.
+ *
+ * THE RULE, and it is the same rule the citations already follow:
+ *
+ *   RELIABILITY  the TARGET room's own data/project.sqlite reliability governs.
+ *                A donor may RAISE it only where the donor's own text carries a
+ *                RULING that closes the flag for the PRODUCT - Austin's D11
+ *                submittal closures, which name a model number and not a room -
+ *                and the line then says so in words. Nothing else moves a flag.
+ *   TEXT         where the room's own row carries words, THOSE words govern. The
+ *                donor's note rides on top only when it carries a ruling or a
+ *                submittal, i.e. something data/project.sqlite structurally
+ *                cannot hold. A donor note that is a READING OF THE DONOR'S OWN
+ *                DRAWING is dropped, and the line records that it was dropped and
+ *                quotes what it said.
+ *                Where the room's own row is silent there is nothing to
+ *                contradict, so the approved package text rides whole - and the
+ *                line still says where it came from.
+ *   LABEL        the room's own row's description governs unless the donor's
+ *                label EXTENDS it (same opening text, more of it).
+ *   CITATION     always the room's own row. Never the donor's.
+ *
+ * Every one of those decisions is written onto the line as a SOURCE sentence, so
+ * a reader never has to guess which document a word came from.
+ * ========================================================================== */
+
+/* The exact shape build_floor1.mjs writes when Austin closes a flag by ruling.
+ * Asserted to still exist in the LIVE donor file on every run. */
+const DONOR_FLAG_CLOSURE_RE = /Flag closed by AJ ruling \d{4}-\d{2}-\d{2}\./;
+/* A donor note that is a ruling or a submittal - the two things the database
+ * cannot hold, and therefore the only two things a donor may add to a line whose
+ * own row already speaks. */
+const DONOR_ENRICHMENT_RE = /(Approved submittal on file|Submittal on file|Flag closed by AJ ruling|Austin rul)/;
+
+const RELIABILITY_RANK = { FLAGGED: 1, MEDIUM: 2, HIGH: 3 };
+const relRank = (r) => RELIABILITY_RANK[String(r).toUpperCase()] || 0;
+
+/* The database's own notes rarely end in a full stop. Sentences from different
+ * documents get joined on one line, so each one gets a stop of its own rather
+ * than running into the next. Nothing else about the text is touched. */
+const endStop = (s) => (/[.!?:"'”)\]]$/.test(String(s).trim()) ? String(s).trim() : String(s).trim() + '.');
+
+/** The room's OWN words for one line. Per-row instance notes ride the fold. */
+function ownLineText(line) {
+  const rows = line.rows || [];
+  if (rows.length <= 1) {
+    return [line.sqlite.instanceNote, line.sqlite.note].filter(Boolean).join(' — ');
+  }
+  const notes = [];
+  for (const r of rows) {
+    const n = String(r.note || '').trim();
+    if (n && !notes.includes(n)) notes.push(n);
+  }
+  return notes.join(' — ');
+}
+
+/**
+ * WHY THE QUANTITY IS WHAT IT IS. A folded line's number is a row count, and the
+ * rows say what each one is. 217's telephone shipped "qty 2" with a blank note
+ * and no way to tell where the second one came from; this is that sentence.
+ */
+function foldSentence(roomNo, line) {
+  const rows = line.rows || [];
+  if (rows.length <= 1) return '';
+  const each = rows.map((r) => r.item_id + (r.instance_note ? ' "' + r.instance_note + '"' : ' (no row note)') +
+    (String(r.reliability).toUpperCase() !== 'HIGH' ? ' [' + r.reliability + ']' : '') +
+    ' [cited: ' + (r.primary_sheet || r.source_sheet || 'no citation') + ']').join(', ');
+  return 'QTY ' + rows.length + ' IS THIS ROOM\'S OWN FOLD, not a donor count: data/project.sqlite transcribes ' +
+    rows.length + ' separate row(s) for ' + (line.code ? 'tag ' + line.code : 'this untagged item') + ' in room ' +
+    roomNo + ' - ' + each + '. The quantity on this line is that row count and nothing else.';
+}
+
+/* ============================================== THE CONFLICTS TABLE ALSO RIDES
+ *
+ * data/project.sqlite has a `conflicts` table and the first build never read it.
+ * B4.2 (GR-905 vs the 905 telephone tag) and B4.5 (GR tags ambiguous without
+ * A530) are both OPEN, both name tags these rooms ship, and both appeared
+ * nowhere - so the reader of room 202 saw one side of a two-sided question and
+ * the reader of room 230 saw four takeoff-grade ambiguities as HIGH.
+ *
+ * Matching is mechanical and deliberately narrow, so nothing arrives by accident:
+ *   - a ROOM KEY of this type named in the entry (with a non-alphanumeric
+ *     boundary either side, so sheet names like "M302" and "P202" do not count);
+ *   - a TAG this room carries, of at least two characters and containing a digit
+ *     (so the thermostat tag "T" does not match the letter T in "A100 marks T");
+ *   - slash-run tag families are expanded first, because the table writes
+ *     "GR-300/305/307/308/318/322/323/325" and means eight tags.
+ * Only OPEN entries ride. Every match lands on the line that carries the tag,
+ * FLAGGED, with the entry quoted verbatim, and every match - line or not - is
+ * listed in room note n_conflicts.
+ * ========================================================================== */
+
+/* A row whose OWN note says the documents disagree - matched on the database's
+ * own vocabulary, never authored. Used to decide what rides in n_gategaps, so a
+ * conflict is carried on the presence of the conflict and not on how confident
+ * the transcriber was. */
+const CONFLICT_IN_NOTE_RE = /conflict|conflicts\.md|contradic|mutually exclusive|do not buy|not stated|RFI\b/i;
+
+const CONFLICT_TAG_FAMILY = /\b([A-Z]{2,}-)(\d+(?:\.\d+)?)((?:\s*\/\s*\d+(?:\.\d+)?)+)/g;
+const reEsc = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const conflictTagUsable = (t) => String(t).length >= 2 && /\d/.test(String(t));
+
+/** The entry's own text, with slash-run tag families spelled out. */
+function conflictHaystack(c) {
+  const base = [c.topic, c.positions, c.source].map((x) => String(x || '')).join('  ');
+  const extra = [];
+  for (const m of base.matchAll(CONFLICT_TAG_FAMILY)) {
+    if (!extra.includes(m[1] + m[2])) extra.push(m[1] + m[2]);
+    for (const n of m[3].split('/').map((s) => s.trim()).filter(Boolean)) {
+      if (!extra.includes(m[1] + n)) extra.push(m[1] + n);
+    }
+  }
+  return base + (extra.length ? '  ' + extra.join(' ') : '');
+}
+
+function openConflictsFor(db, roomNo, keys, rows) {
+  const tags = [...new Set(rows.map((r) => r.tag).filter(Boolean))].filter(conflictTagUsable).sort(cmpStr);
+  const out = [];
+  for (const c of db.prepare('SELECT * FROM conflicts ORDER BY conflict_id').all()) {
+    if (String(c.status).toUpperCase() !== 'OPEN') continue;
+    const hay = conflictHaystack(c);
+    const hitKeys = keys.filter((k) => new RegExp('(^|[^0-9A-Za-z-])' + k + '([^0-9A-Za-z]|$)').test(hay));
+    const hitTags = tags.filter((t) => new RegExp('(^|[^0-9A-Za-z-])' + reEsc(t) + '([^0-9A-Za-z]|$)').test(hay));
+    if (!hitKeys.length && !hitTags.length) continue;
+    out.push({ id: c.conflict_id, c, keys: hitKeys, tags: hitTags });
+  }
+  return out;
+}
+
+/** The entry, verbatim, as it rides on a line or in a note. */
+function conflictQuote(h) {
+  return 'OPEN DOCUMENT CONFLICT ' + h.id + ', carried from the data/project.sqlite conflicts table and NOT ' +
+    'resolved here. Source: ' + h.c.source + '. Status: ' + h.c.status + '. Topic, verbatim: "' + h.c.topic +
+    '". Positions, verbatim: "' + h.c.positions + '"';
+}
+
+/** Conflicts that name the tag this line carries. */
+const conflictsOnTag = (hits, code) => (code ? hits.filter((h) => h.tags.includes(code)) : []);
+
+/* ================================= THE PTAC SUB-ASSEMBLY REPEATS, OR IT DOESN'T
+ *
+ * Rooms 202 and 217 carry TWO PTAC units and their own second-unit row says, in
+ * the database's own words, that the whole ten-row sub-assembly "REPEATS for this
+ * second unit" - sleeve, louver, drain kit, low-ambient kit, fresh-air kit,
+ * filter, access panel, EMS controller, THERMOSTAT, sub-base. The database
+ * transcribes each of those ten rows ONCE, marked "PTAC 1".
+ *
+ * So mech_tstat shipped qty 1 at HIGH, with no flag, in a room whose own rows say
+ * "thermostat x2". That is a documented count conflict resolved to 1 in silence.
+ *
+ * It is not resolved here either. The count is NOT doubled - inventing a row the
+ * database does not transcribe would be the same fabrication in the other
+ * direction - and the line is FLAGGED with the room's own words on it. Carried
+ * and flagged, never resolved.
+ * ========================================================================== */
+const PTAC_UNIT_RE = /^Packaged terminal A\/C unit/;
+const PTAC_SUBASSEMBLY_REPEAT_RE = /The whole \d+-row PTAC sub-assembly[\s\S]*?REPEATS for this second unit/;
+const PTAC_MEMBER_RE = /^PTAC \d+$/;
+
+/** { units, repeatNote } for a room - the open second-unit question, or null. */
+function ptacRepeat(rows) {
+  const units = rows.filter((r) => PTAC_UNIT_RE.test(String(r.description || '')));
+  if (units.length < 2) return null;
+  const withNote = units.map((r) => (PTAC_SUBASSEMBLY_REPEAT_RE.exec(String(r.note || '')) || [null])[0]).filter(Boolean);
+  if (!withNote.length) return null;
+  return { units, quote: withNote[0], ids: units.map((r) => r.item_id) };
+}
+
 /* -------------------------------------------------------------- room notes */
 
 const noteOf = (text, stamp, flag) => ({ text, flag: flag || 'info', resolved: false, createdAt: stamp, by: '' });
@@ -1630,7 +2096,9 @@ function buildRoomNotes(db, roomNo, room, rows, red, drops, stamp, report) {
       'BATHING CONFIGURATION - OPEN. NOBODY HAS RULED ON THIS KEY. Room ' + roomNo + ' carries ' + drops.a.length +
       ' Configuration A (TUB) row(s) and ' + drops.b.length + ' Configuration B (ROLL-IN SHOWER) row(s). They are ' +
       'MUTUALLY EXCLUSIVE - only one gets built - and every one of them is FLAGGED in data/project.sqlite. ' +
-      'BOTH ARE BUILT INTO THIS CHECKLIST AND NEITHER IS SUPERSEDED. Do not order a bath package for this key. ' +
+      'BOTH ARE EMITTED ONTO THIS CHECKLIST AND NEITHER IS SUPERSEDED - which is the database\'s own word, ' +
+      'EMITTED, and is not a statement that both get built. Only one of them gets built. Build what the answer ' +
+      'turns out to be. Do not order a bath package for this key. ' +
       'data/project.sqlite records it this way, verbatim: "' + (drops.conflictNote || '') + '" ' +
       'room_types "' + room.room_type + '" adds, verbatim: "' + (report.roomTypeNotes || '') + '" ' +
       'WHAT IS AND IS NOT RULED: Austin ruling D19 (2026-08-20) put ROOM 118 on the ROLL-IN SHOWER. That ruling names ' +
@@ -1643,22 +2111,39 @@ function buildRoomNotes(db, roomNo, room, rows, red, drops, stamp, report) {
   /* Conflicts and gaps that cannot ride on a line because their category sits
    * outside Austin's approved checklist gate. They ride here instead of being
    * lost. Each quotes the row. */
+  /* WHICH gated-out rows ride here was the second defect in this note. It was
+   * scoped to FLAGGED and MEDIUM rows only, so three rows on room 202 whose own
+   * sqlite note states an explicit DOCUMENT CONFLICT vanished without a record
+   * purely because the transcriber rated them HIGH - ITM-0073 and ITM-0074
+   * ("rating design conflict carried - A300 prints UL U340, A315 cites UL
+   * U301"), and ITM-0108, which cites conflicts.md A11. Reliability is a
+   * statement about how well the row was read. It is not a statement about
+   * whether a conflict exists. A conflict rides on the presence of the conflict.
+   */
   const gateNotes = [];
+  let gateConflicts = 0;
   for (const r of rows) {
     if (GATE_CATEGORIES.has(r.category) || MEP_CATEGORIES.has(r.category)) continue;
-    if (String(r.reliability).toUpperCase() === 'HIGH') continue;
-    gateNotes.push((r.tag || '<untagged>') + ' [' + r.category + ', ' + r.reliability + '] ' + r.item_id +
+    const own = [r.instance_note, r.note].filter(Boolean).join(' — ');
+    const statesConflict = CONFLICT_IN_NOTE_RE.test(own);
+    if (String(r.reliability).toUpperCase() === 'HIGH' && !statesConflict) continue;
+    if (statesConflict) gateConflicts++;
+    gateNotes.push((r.tag || '<untagged>') + ' [' + r.category + ', ' + r.reliability +
+      (statesConflict ? ', STATES A DOCUMENT CONFLICT' : '') + '] ' + r.item_id +
       ' "' + r.description + '"' + (r.instance_note ? ' (' + r.instance_note + ')' : '') +
       (r.note ? ' — data/project.sqlite note, verbatim: "' + r.note + '"' : '') +
       ' [cited: ' + (r.source_sheet || r.primary_sheet || 'no citation') + ']');
   }
   if (gateNotes.length) {
     notes.n_gategaps = noteOf(
-      'FLAGGED ROWS THAT CANNOT CARRY A CHECKLIST LINE. ' + gateNotes.length + ' row(s) in this room are FLAGGED or ' +
-      'MEDIUM in data/project.sqlite but sit in a category outside Austin\'s approved checklist gate (the gate keeps ' +
+      'ROWS THAT CANNOT CARRY A CHECKLIST LINE. ' + gateNotes.length + ' row(s) in this room are either FLAGGED or ' +
+      'MEDIUM in data/project.sqlite, or state a DOCUMENT CONFLICT in their own note at any reliability (' +
+      gateConflicts + ' of them do), and sit in a category outside Austin\'s approved checklist gate (the gate keeps ' +
       'Paint, Drywall, Flooring, Doors, Stone / Surround, Wall Covering and FF&E - Misc out of BOTH documents, which ' +
       'is how every approved floor-1 room already works). They are recorded here so the conflict is not lost with ' +
-      'the line. Widening the gate is Austin\'s call, not this tool\'s. ' + gateNotes.join('  ||  '), stamp, 'issue');
+      'the line. A HIGH row that states a conflict is listed too: how well a row was READ says nothing about ' +
+      'whether the documents AGREE. Widening the gate is Austin\'s call, not this tool\'s. ' +
+      gateNotes.join('  ||  '), stamp, 'issue');
   }
 
   /* Placeholders the database itself raises against THIS room type.
@@ -1696,6 +2181,69 @@ function buildRoomNotes(db, roomNo, room, rows, red, drops, stamp, report) {
 
   /* Ruling D22 - deliberately NOT applied to these types. */
   if (report.d22) notes.n_d22 = noteOf(report.d22, stamp, 'issue');
+
+  /* EVERY OPEN ENTRY IN THE CONFLICTS TABLE THAT TOUCHES THIS ROOM.
+   *
+   * The lines carry the ones that name a tag they hold. This note carries ALL of
+   * them, including the ones that name a tag the category gate keeps off both
+   * documents (room 202's GR-905, and the W4 / W5 drywall types) and the ones
+   * that name a KEY of this type rather than a tag (A11 names room 338). A
+   * conflict that has nowhere to sit is exactly the conflict that gets lost. */
+  const conflictHits = openConflictsFor(db, roomNo, spec.keys, rows);
+  if (conflictHits.length) {
+    notes.n_conflicts = noteOf(
+      'OPEN DOCUMENT CONFLICTS THAT TOUCH THIS ROOM - ' + conflictHits.length + ' entr(y/ies) in the ' +
+      'data/project.sqlite conflicts table, quoted verbatim, every one of them status OPEN. NOTHING HERE IS ' +
+      'RESOLVED BY THIS TOOL. Wherever a line in this package carries one of the tags an entry names, that line is ' +
+      'FLAGGED and carries the entry with it. An entry that names a tag the category gate keeps off both documents, ' +
+      'or that names one of this type\'s room keys (' + spec.keys.join(', ') + ') rather than a tag, has no line ' +
+      'to sit on and is carried here only. ' +
+      conflictHits.map((h) => h.id + ' [' + h.c.source + ']' +
+        (h.tags.length ? ' names tag(s) ' + h.tags.join(', ') : '') +
+        (h.keys.length ? ' names room key(s) ' + h.keys.join(', ') + ' of this type' : '') +
+        ' - topic, verbatim: "' + h.c.topic + '"; positions, verbatim: "' + h.c.positions + '"').join('  ||  '),
+      stamp, 'issue');
+  }
+
+  /* THE QUANTITY RULINGS, DECIDED OR DECLINED, ON EVERY ROOM.
+   *
+   * meta.rulingsApplied says "D12 (scoped)" for the whole FILE. That does not
+   * tell an approver reading ROOM 202 whether D12 was declined on purpose or
+   * simply forgotten. Each room now records the decision and the reason, even
+   * where the ruling changed nothing. */
+  const ov = report.qtyOverrides;
+  if (ov && (ov.applied.length || ov.declined.length)) {
+    const lines = [];
+    for (const a of ov.applied) {
+      lines.push(a.ruling + ' on ' + a.tag + ': APPLIED - ' + (a.from === a.to
+        ? 'and it CHANGED NOTHING, because data/project.sqlite already draws ' + a.from + ' here. It is recorded so ' +
+          'the number is known to be the ruling\'s and the drawing\'s at once.'
+        : 'qty ' + a.from + ' -> ' + a.to + ', and the line itself says so.') + ' Why: ' + a.why + '.');
+    }
+    for (const d of ov.declined) {
+      lines.push(d.ruling + ' on ' + d.tag + ': CONSIDERED AND DECLINED. Why: ' + d.why +
+        (d.sqliteQty !== undefined ? ' The line ships qty ' + d.sqliteQty + ', which is what this room\'s own ' +
+          'drawing tags.' : ''));
+    }
+    notes.n_rulings = noteOf(
+      'AUSTIN\'S QUANTITY RULINGS, EVALUATED FOR THIS ROOM. Each ruling below was tested against THIS room\'s own ' +
+      'evidence, not applied on the tag alone, and the outcome is recorded whether it changed the count or not. ' +
+      'Bed count in this room: ' + ov.queenBeds + ' queen, ' + ov.kingBeds + ' king. ' + lines.join('  ||  '), stamp);
+  }
+
+  /* The second PTAC, and the ten rows the database transcribes once. */
+  const ptac2 = ptacRepeat(rows);
+  if (ptac2) {
+    notes.n_ptac2 = noteOf(
+      'TWO PTAC UNITS, ONE TRANSCRIBED SUB-ASSEMBLY - OPEN, CARRIED, NOT RESOLVED. data/project.sqlite gives room ' +
+      roomNo + ' ' + ptac2.units.length + ' PTAC unit rows (' + ptac2.ids.join(', ') + '), both FLAGGED, and the ' +
+      'second one says, verbatim: "' + ptac2.quote + '" The database transcribes each of those ten member rows ' +
+      'ONCE, marked "PTAC 1". So the quantity on every condensed line fed by one of them - the thermostat and the ' +
+      'room grille among them - is a ONE that this room\'s own row says should be a TWO, and no document states the ' +
+      'second set as its own rows. Neither number is asserted here: the lines ship the transcribed count, FLAGGED, ' +
+      'carrying this text. COUNT WHAT IS INSTALLED. Closing it means either a document that states the second set ' +
+      'or Austin\'s ruling.', stamp, 'issue');
+  }
 
   report.roomNotes = Object.keys(notes).sort(cmpStr);
   return notes;
@@ -1770,55 +2318,133 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
   const items = {};
   const fromDonor = [], fromSqlite = [], donorQtyNotes = [], donorLabelNotes = [], overrideNotes = [];
   const flagged = [], configLines = [], declinedLines = [];
+  const relKept = [], donorTextDropped = [], donorClosures = [], conflictLines = [];
   const drops = configADrops(roomNo, rows);
+
+  /* Every OPEN entry in the conflicts table that names this room's keys or one
+   * of its tags. Read once, used on the lines and again in the room note. */
+  const conflictHits = openConflictsFor(db, roomNo, spec.keys, rows);
+  report.conflictHits = conflictHits.map((h) => h.id + (h.tags.length ? ' [tags ' + h.tags.join(', ') + ']' : '') +
+    (h.keys.length ? ' [keys ' + h.keys.join(', ') + ']' : ''));
 
   for (const line of red.lines) {
     const hit = refIndex.get(donorKey(line.category, line.code, line.key));
+    const tagLabel = line.code || '<untagged>';
+    const ownText = ownLineText(line);
+    const rowIds = line.rows.map((r) => r.item_id).join(', ');
+    /* SOURCE sentences. Every decision this loop makes is written onto the line
+     * so a reader never has to guess which document a word came from. They are
+     * kept apart until the end because a ruling-scope decision REPLACES the
+     * package text, and a "where the text came from" sentence must not survive
+     * text that is no longer there. */
+    const prov = [];
+    let provText = '';
     let pkg, source;
     if (hit) {
-      /* SHARED tag: the donor supplies the curated reliability, ruling text,
-       * trade, derived and submittal links - the things sqlite does not hold.
-       * label and src come from THIS room's own row, which is what re-points
-       * the citation onto this room's own sheet. */
+      /* SHARED tag. Shape and citation are this room's own; the donor supplies
+       * trade, derived and submittal links, and may ENRICH the text - see
+       * "A DONOR MAY ENRICH. IT MAY NOT LAUNDER." above. */
       const r = hit.item;
+      const donorText = String(r.instanceNote || '');
       const donorExtends = r.label.length > line.sqlite.label.length && r.label.startsWith(line.sqlite.label);
       if (r.label !== line.sqlite.label) {
-        donorLabelNotes.push((line.code || '<untagged>') + ': ' + (donorExtends
+        donorLabelNotes.push(tagLabel + ': ' + (donorExtends
           ? 'donor label extends sqlite (' + JSON.stringify(r.label) + ') - donor text carried'
           : "this room's own sqlite label " + JSON.stringify(line.sqlite.label) + ' differs from donor ' +
             JSON.stringify(r.label) + ' - own row carried'));
+        prov.push(donorExtends
+          ? 'LABEL. This room\'s own data/project.sqlite row reads "' + line.sqlite.label + '". The approved line for ' +
+            'this tag on LIVE room ' + donorNo + ' extends that same text to "' + r.label + '", so the longer ' +
+            'wording ships. The tag, the count and the citation are still this room\'s own.'
+          : 'LABEL. This room\'s own data/project.sqlite row reads "' + line.sqlite.label + '" and that is what ships. ' +
+            'LIVE room ' + donorNo + ' labels the same tag "' + r.label + '"; that is a fact about room ' + donorNo + '.');
       }
       if (r.qty !== line.qty) {
-        donorQtyNotes.push((line.code || '<untagged>') + ': qty ' + line.qty + ' here vs ' + r.qty +
+        donorQtyNotes.push(tagLabel + ': qty ' + line.qty + ' here vs ' + r.qty +
           ' in donor room ' + donorNo + ' (sqlite governs; the donor supplies text only)');
+      }
+
+      /* RELIABILITY. This room's own row governs. A donor raises it only on a
+       * ruling that closes the flag for the product. */
+      const closes = DONOR_FLAG_CLOSURE_RE.test(donorText);
+      let reliability = line.sqlite.reliability;
+      if (r.reliability !== line.sqlite.reliability) {
+        if (relRank(r.reliability) > relRank(line.sqlite.reliability) && closes) {
+          reliability = r.reliability;
+          donorClosures.push(line.key + ' (' + tagLabel + '): ' + line.sqlite.reliability + ' -> ' + r.reliability +
+            ' on the ruling closure carried in the donor text');
+          prov.push('RELIABILITY. data/project.sqlite has this room\'s row at ' + line.sqlite.reliability +
+            '. The line ships at ' + r.reliability + ' because the approved package for this tag carries a RULING ' +
+            'that closes that flag for the PRODUCT - it names a model, not a room - and that ruling text is on this ' +
+            'line above. Nothing else may move a flag.');
+        } else {
+          relKept.push(line.key + ' (' + tagLabel + '): sqlite ' + line.sqlite.reliability + ' KEPT over donor ' +
+            r.reliability);
+          prov.push('RELIABILITY. The reliability on this line starts from THIS room\'s own data/project.sqlite ' +
+            'row(s) ' + rowIds + ', which read ' + line.sqlite.reliability + '. LIVE room ' + donorNo +
+            ' carries the same tag at ' + r.reliability + ', which is a fact about room ' + donorNo +
+            ' and not evidence about this room. A donor may enrich a line; it may not close its flag.');
+        }
+      }
+
+      /* TEXT. Where this room's row speaks, it governs. */
+      let base;
+      if (ownText) {
+        base = ownText;
+        if (donorText && DONOR_ENRICHMENT_RE.test(donorText)) {
+          base = endStop(base) + ' FROM THE APPROVED PACKAGE for ' +
+            (line.code ? 'tag ' + line.code : 'this untagged item') + ' (LIVE room ' + donorNo + '), carried ' +
+            'because it is a ruling or a submittal and data/project.sqlite holds neither: ' +
+            donorText.replace(/^⚑\s*/, '');
+        } else if (donorText && donorText.replace(/^⚑\s*/, '') !== ownText) {
+          donorTextDropped.push(line.key + ' (' + tagLabel + '): ' + JSON.stringify(donorText.slice(0, 60)));
+          provText = ('TEXT. This room\'s own row(s) ' + rowIds + ' carry their own words and those govern the line. ' +
+            'The approved line for this tag on LIVE room ' + donorNo + ' carries different text, verbatim: "' +
+            donorText + '". That is room ' + donorNo + '\'s reading of room ' + donorNo + '\'s own drawing, it ' +
+            'carries no ruling and no submittal, and it is NOT carried here.');
+        }
+      } else {
+        base = donorText;
+        if (donorText) {
+          provText = ('TEXT. This room\'s own data/project.sqlite row(s) ' + rowIds + ' carry no note, so the wording ' +
+            'above is the approved package text for tag ' + tagLabel + ', carried from LIVE room ' + donorNo +
+            ' (' + spec.donorType + '). The citation, the count and the reliability on this line are this room\'s own.');
+        }
       }
       pkg = {
         label: donorExtends ? r.label : line.sqlite.label,
         src: line.sqlite.src,
-        reliability: r.reliability,
-        instanceNote: r.instanceNote,
+        reliability,
+        instanceNote: base,
         trade: r.trade,
         derived: r.derived,
         attachments: r.attachments,
       };
       source = 'DONOR ' + donorNo;
-      fromDonor.push(line.code || '<untagged>');
+      fromDonor.push(tagLabel);
+      prov.push('SOURCE. Shape (category, tag, quantity, key, sort) and citation from data/project.sqlite room ' +
+        roomNo + '\'s own row(s) ' + rowIds + '; package text from the approved line for ' +
+        (line.code ? 'tag ' + line.code : 'this untagged item') + ' on LIVE room ' + donorNo +
+        ' (' + spec.donorType + ').');
     } else {
       /* TYPE-ONLY tag: no live counterpart anywhere. Everything from the DB row,
        * verbatim, at the DB's own reliability. Nothing is borrowed from another
        * room type and nothing is invented. */
-      const note = line.sqlite.note || '';
       pkg = {
         label: line.sqlite.label,
         src: line.sqlite.src,
         reliability: line.sqlite.reliability,
-        instanceNote: note ? (line.sqlite.reliability === 'HIGH' ? note : '⚑ ' + note) : '',
+        instanceNote: ownText,
         trade: line.sqlite.trade,
         derived: line.sqlite.derived,
         attachments: undefined,
       };
       source = 'SQLITE';
-      fromSqlite.push((line.code || '<untagged>') + (line.sqlite.reliability !== 'HIGH' ? ' [' + line.sqlite.reliability + ']' : ''));
+      fromSqlite.push(tagLabel + (line.sqlite.reliability !== 'HIGH' ? ' [' + line.sqlite.reliability + ']' : ''));
+      prov.push('SOURCE. Everything on this line is data/project.sqlite room ' + roomNo + '\'s own row(s) ' + rowIds +
+        ', verbatim, at the database\'s own reliability. LIVE room ' + donorNo + ' has no line for ' +
+        (line.code ? 'tag ' + line.code : 'this untagged item') + ', so nothing here was borrowed from another ' +
+        'room type.');
     }
 
     if (!pkg.src) {
@@ -1829,14 +2455,17 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
 
     /* A ruling that OVERRODE the row count has to say so on the line. */
     if (line.overrideChanged) {
-      const own = line.sqlite.note
-        ? " This room's own row is a single transcribed tag - data/project.sqlite note, verbatim: \"" + line.sqlite.note + '".'
+      const own = ownText
+        ? " This room's own row(s) " + rowIds + ' carry this text, verbatim: "' + ownText + '".'
         : " This room's own rows number " + line.rawRows + '.';
       const why = (report.qtyOverrides.applied.find((a) => a.tag === line.code) || {}).why || '';
       pkg.instanceNote = 'Austin ruling ' + line.overrideRuling + ': ' + line.overrideBecause + '.' + own +
         ' Applied here because ' + why + '. The line therefore ships qty ' + line.qty + ' on the ruling rather than ' +
         'on the ' + line.rawRows + ' row(s) the drawing set tags. Confirm both positions in the field before ordering.';
       overrideNotes.push(line.key + ': qty ' + line.rawRows + ' -> ' + line.qty + ' per ruling ' + line.overrideRuling);
+      provText = 'TEXT. The wording above is the RULING, written here from Austin ruling ' + line.overrideRuling +
+        ' and this room\'s own row(s) ' + rowIds + '. It replaces whatever package text this tag carries elsewhere, ' +
+        'because a note that describes a different count beside this one would contradict the number next to it.';
     }
 
     /* A ruling this room is OUTSIDE the scope of must not arrive on the line
@@ -1857,11 +2486,15 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
       pkg.instanceNote = 'RULING SCOPE - ' + declined.ruling + ' WAS CONSIDERED FOR THIS LINE AND DELIBERATELY NOT ' +
         'APPLIED. ' + donorSays + 'Why: ' + declined.why + ' This line therefore ships qty ' + line.qty +
         ', which is what this room\'s own drawing tags' +
-        (line.sqlite.note ? ' - data/project.sqlite note on the row, verbatim: "' + line.sqlite.note + '"' : '') + '.' +
+        (ownText ? ' - data/project.sqlite text on this room\'s own row(s) ' + rowIds + ', verbatim: "' + ownText + '"' : '') + '.' +
         /* Only if it says something the sentence above has not already quoted. */
-        (pkg.instanceNote && !donorSays && !String(line.sqlite.note || '').includes(pkg.instanceNote.replace(/^⚑ /, ''))
+        (pkg.instanceNote && !donorSays && !String(ownText).includes(pkg.instanceNote.replace(/^⚑ /, ''))
           ? ' Carried note: ' + JSON.stringify(pkg.instanceNote) : '');
       declinedLines.push(line.key + ' (' + declined.ruling + ' not applied, qty ' + line.qty + ')');
+      provText = 'TEXT. The wording above is the RULING-SCOPE decision, written here from ' + declined.ruling +
+        ' and this room\'s own row(s) ' + rowIds + '. It replaces the package text this tag carries on LIVE room ' +
+        donorNo + ', which asserts the ruling\'s count and describes a drawing this room does not have; that text ' +
+        'is quoted above rather than deleted.';
     }
 
     /* An open bathing-configuration row keeps its flag and says which side it
@@ -1876,6 +2509,33 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
         'to be, and see the room note.';
       configLines.push(line.key + ' (Config ' + cfg + ', ' + (line.code || '<untagged>') + ')');
     }
+
+    /* An OPEN entry in the conflicts table that names this line's tag rides ON
+     * the line, verbatim, and flags it. Carried, never resolved. */
+    const onTag = conflictsOnTag(conflictHits, line.code);
+    let conflictText = '';
+    if (onTag.length) {
+      const wasRel = pkg.reliability;
+      pkg.reliability = 'FLAGGED';
+      conflictText = onTag.map((h) => conflictQuote(h) + ' It names this line\'s tag, ' + line.code +
+        '. The entry travels with the line and the line is FLAGGED for it' +
+        (wasRel === 'FLAGGED' ? '' : ' - its own data/project.sqlite row(s) read ' + wasRel +
+          ', and the open conflict flags it further') +
+        '; confirm before any takeoff or purchase.').join(' ');
+      conflictLines.push(line.key + ' (' + line.code + ' <- ' + onTag.map((h) => h.id).join(', ') + ')');
+    }
+
+    /* The note, assembled in one place: this room's own words first, then why
+     * the number is the number, then what is open on it, then where every word
+     * on the line came from. The flag mark is decided on the FINAL reliability. */
+    const flagMark = pkg.reliability !== 'HIGH' && pkg.instanceNote ? '⚑ ' : '';
+    pkg.instanceNote = [
+      pkg.instanceNote ? flagMark + pkg.instanceNote : '',
+      foldSentence(roomNo, line),
+      conflictText,
+      provText,
+      ...prov,
+    ].filter(Boolean).map(endStop).join(' ').replace(/\s{2,}/g, ' ').trim();
 
     const item = {
       code: line.code,
@@ -1916,6 +2576,10 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
   report.ffeFlagged = flagged.sort(cmpStr);
   report.ffeConfigLines = configLines.sort(cmpStr);
   report.ffeDeclinedLines = declinedLines.sort(cmpStr);
+  report.ffeRelKept = relKept.sort(cmpStr);
+  report.ffeDonorClosures = donorClosures.sort(cmpStr);
+  report.ffeDonorTextDropped = donorTextDropped.sort(cmpStr);
+  report.ffeConflictLines = conflictLines.sort(cmpStr);
   report.configCarried = drops.carried;
   report.configA = drops.a.length;
   report.configB = drops.b.length;
@@ -2003,6 +2667,13 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
   const items = {};
   const repointed = [], citationDropped = [], connectingDropped = [], resolutions = [];
   const qtyFromRows = [], flagged = [], configLines = [], donorCiteStripped = [];
+  const conflictLines = [], ptacRepeatLines = [], unknownBandLines = [];
+
+  /* The same OPEN conflicts-table entries the FF&E document carries. An entry
+   * that names a tag on an MEP line rides on that line too. */
+  const conflictHits = openConflictsFor(db, roomNo, spec.keys, rows);
+  /* The open second-unit question, where this room has one. */
+  const ptac2 = ptacRepeat(rows);
 
   for (const key of Object.keys(donorLive).sort(cmpStr)) {
     const d = donorLive[key];
@@ -2074,7 +2745,7 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
         die('room ' + roomNo + ' unexpectedly has ' + heads.length + ' sprinkler row(s) in sqlite. This tool was ' +
             'written for four types that have NONE and therefore removes the donor take-off. Re-check before building.');
       }
-      item = fpNoCount(db, roomNo, room.room_type, donorNo, item, report);
+      item = fpNoCount(db, roomNo, room.room_type, donorNo, item, report, room.floor);
     }
 
     /* An accessible key with no neutral bathing row keeps the D10 line but says
@@ -2092,6 +2763,38 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
       item.instanceNote = (item.instanceNote ? item.instanceNote + ' ' : '') + ownRepointNote(donorNo, donorSheet, roomSheet);
     }
     if (citeNote) item.instanceNote = (item.instanceNote ? item.instanceNote + ' ' : '') + citeNote;
+
+    /* THE PTAC SUB-ASSEMBLY REPEATS - CARRIED, NOT RESOLVED. This room has more
+     * than one PTAC and its own row says the whole sub-assembly repeats for the
+     * second unit; the database transcribes each member ONCE, marked "PTAC 1".
+     * mech_ptac already takes its count from the unit rows. Every OTHER
+     * condensed line fed by a "PTAC n" member is flagged and told to count. */
+    if (ptac2 && key !== 'mech_ptac' && mine.some((r) => PTAC_MEMBER_RE.test(String(r.instance_note || '')))) {
+      const members = mine.filter((r) => PTAC_MEMBER_RE.test(String(r.instance_note || '')));
+      item.reliability = 'FLAGGED';
+      item.instanceNote = endStop(item.instanceNote) + ' COUNT CONFLICT CARRIED, NOT RESOLVED. Room ' + roomNo +
+        ' has ' + ptac2.units.length + ' PTAC units (' + ptac2.ids.join(', ') + '), and this room\'s own ' +
+        'data/project.sqlite row says, verbatim: "' + ptac2.quote + '". This line is fed by ' +
+        members.map((r) => r.item_id + ' ("' + r.instance_note + '")').join(', ') +
+        ' - the database transcribes that member ONCE, for PTAC 1 only. The quantity here is therefore the ' +
+        'transcribed row count and is NOT doubled: inventing a row the database does not hold would be the same ' +
+        'fabrication in the other direction. COUNT WHAT IS INSTALLED before signing this line off, and see the ' +
+        'room note.';
+      ptacRepeatLines.push(key + ' (' + members.map((r) => r.item_id).join(', ') + ')');
+    }
+
+    /* An OPEN conflicts-table entry that names this line's tag. */
+    const onTag = conflictsOnTag(conflictHits, item.code);
+    if (onTag.length) {
+      const wasRel = item.reliability;
+      item.reliability = 'FLAGGED';
+      item.instanceNote = endStop(item.instanceNote) + ' ' + onTag.map((h) => conflictQuote(h) +
+        ' It names this line\'s tag, ' + item.code + '. The entry travels with the line and the line is FLAGGED ' +
+        'for it' + (wasRel === 'FLAGGED' ? '' : ' - it read ' + wasRel + ' before this entry was applied') +
+        '; confirm before any takeoff or purchase.').join(' ');
+      conflictLines.push(key + ' (' + item.code + ' <- ' + onTag.map((h) => h.id).join(', ') + ')');
+    }
+
     item.instanceNote = String(item.instanceNote).replace(/\s{2,}/g, ' ').trim();
     items[key] = item;
     if (item.reliability !== 'HIGH') flagged.push(key + ' [' + item.reliability + '] ' + (item.code || '<untagged>'));
@@ -2118,15 +2821,49 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
     const cfg = configOf(r);
     if (cfg && drops.carried) {
       reliability = 'FLAGGED';
+      /* The wording matters and the first build got it wrong: it said "both are
+       * built" three sentences after quoting the database saying the two are
+       * "MUTUALLY EXCLUSIVE - only one gets built on each key". That reads as an
+       * instruction to install a tub AND a roll-in in one accessible bathroom.
+       * The database's own word is EMITTED. This is the FF&E side's wording,
+       * used verbatim so the two documents cannot say different things. */
       note = (note ? note + ' ' : '') + 'CONFLICT CARRIED, NOT RESOLVED: this is a CONFIGURATION ' + cfg +
-        (cfg === 'A' ? ' (TUB)' : ' (ROLL-IN SHOWER)') + ' line. Room ' + roomNo + ' carries BOTH configurations, ' +
-        'both are built, neither is superseded, and nobody has ruled on this key - ruling D19 named ROOM 118 and no ' +
-        'other. See the room note.';
+        (cfg === 'A' ? ' (TUB)' : ' (ROLL-IN SHOWER)') + ' line. Room ' + roomNo + ' carries BOTH configurations and ' +
+        'nobody has ruled on this key - ruling D19 named ROOM 118 and no other. BOTH ARE EMITTED ONTO THIS ' +
+        'CHECKLIST AND NEITHER IS SUPERSEDED; they are MUTUALLY EXCLUSIVE and only one of them gets built. ' +
+        'Build only what the answer turns out to be, and see the room note.';
       configLines.push(key + ' (Config ' + cfg + ', ' + (r.tag || '<untagged>') + ')');
     }
+
+    /* A category the APP does not know sorts after everything else. The string
+     * is left EXACTLY as the database writes it - no row is relabelled to make
+     * it fit, which is the rule build_floor1.mjs already follows for spaces -
+     * and the line says so, because the build report is not shipped with the
+     * document and Austin reads the document. */
+    if (!APP_MEP_CATEGORY_ORDER.has(c)) {
+      note = endStop(note) + ' CATEGORY NOTE: data/project.sqlite files this row under "' + c + '". The crew app ' +
+        'knows five MEP bands (' + [...APP_MEP_CATEGORY_ORDER].join(', ') + '), so this line sorts AFTER all of ' +
+        'them instead of beside the others of its trade. The category string is carried exactly as the database ' +
+        'writes it and no row was relabelled to make it fit; widening the app\'s band list is Austin\'s call.';
+      unknownBandLines.push(key + ' [' + c + '] ' + r.item_id);
+    }
+
+    /* An OPEN conflicts-table entry that names this row's tag. */
+    const onTag = conflictsOnTag(conflictHits, r.tag || '');
+    if (onTag.length) {
+      const wasRel = reliability;
+      reliability = 'FLAGGED';
+      note = endStop(note) + ' ' + onTag.map((h) => conflictQuote(h) + ' It names this line\'s tag, ' + r.tag +
+        '. The entry travels with the line and the line is FLAGGED for it' +
+        (wasRel === 'FLAGGED' ? '' : ' - its own data/project.sqlite row reads ' + wasRel +
+          ', and the open conflict flags it further') +
+        '; confirm before any takeoff or purchase.').join(' ');
+      conflictLines.push(key + ' (' + r.tag + ' <- ' + onTag.map((h) => h.id).join(', ') + ')');
+    }
+
     items[key] = {
       id: key, code: r.tag || '', label: r.description, category: c, qty: 1, src,
-      reliability, instanceNote: note, trade: r.trade_responsible || '',
+      reliability, instanceNote: String(note).replace(/\s{2,}/g, ' ').trim(), trade: r.trade_responsible || '',
       derived: r.derived, sort: base, deleted: false, ...CLEAN_FIELD_STATE,
     };
     added.push((r.tag || '<untagged>') + ' [' + c + '] ' + r.item_id);
@@ -2149,6 +2886,11 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
   report.mepRoughIn = roughIn.length;
   report.mepFlagged = flagged.sort(cmpStr);
   report.mepConfigLines = configLines.sort(cmpStr);
+  report.mepConflictLines = conflictLines.sort(cmpStr);
+  report.mepPtacRepeatLines = ptacRepeatLines.sort(cmpStr);
+  report.mepUnknownBand = unknownBandLines.sort(cmpStr);
+  report.ptacRepeat = ptac2 ? ptac2.units.length + ' PTAC unit(s) ' + ptac2.ids.join(', ') +
+    '; the sub-assembly repeat is OPEN and carried on ' + ptacRepeatLines.length + ' line(s)' : '';
   report.mepUnsupported = Object.keys(donorLive).filter((k) => !(support.get(k) || []).length).sort(cmpStr);
 
   return {
@@ -2173,7 +2915,14 @@ function addRuledLines(doc, kind) {
     if (doc.items[r.key]) continue;
     doc.items[r.key] = {
       code: r.code, label: r.label, category: r.category, qty: r.qty, sort: r.sort,
-      src: r.src, reliability: 'HIGH', instanceNote: r.note, trade: '', derived: 0,
+      src: r.src, reliability: 'HIGH',
+      /* Same SOURCE discipline as every other line: a reader must be able to see
+       * that this one comes from a RULING and not from a drawing. */
+      instanceNote: endStop(r.note) + ' SOURCE. This line is not derived from data/project.sqlite at all. It is a ' +
+        'RULED LINE ADDITION: Austin ruling ' + r.ruling + ' put it on every guest room, and it is carried in the ' +
+        'generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE ' +
+        'floor-1 rooms, so no rebuild can drop it and the two floors cannot drift apart.',
+      trade: '', derived: 0,
       deleted: false, ...CLEAN_FIELD_STATE,
     };
     added.push(r.key + ' (' + r.ruling + ')');
@@ -2255,8 +3004,21 @@ function assemble(docs, stamp, rooms) {
       shapeSource: 'data/project.sqlite room_items (category gate + fold by (category, tag) + scoped ruled overrides)',
       packageSource: 'platform/data/floor1-staged.json (LIVE floor 1, READ ONLY) - curated text for SHARED tags only; '
         + 'a tag with no live counterpart ships from data/project.sqlite verbatim with its own reliability',
+      donorRule: 'A DONOR MAY ENRICH, NEVER LAUNDER. The target room\'s own data/project.sqlite reliability and its '
+        + 'own note govern every line. A donor raises a reliability only where its text carries a RULING that closes '
+        + 'the flag for the PRODUCT (a model number, not a room), and the line says so in words. Donor text that is a '
+        + 'reading of the donor room\'s own drawing is dropped, quoted on the line as not carried. Every line carries '
+        + 'a SOURCE sentence naming which document each part of it came from.',
       mepSource: 'the D10 condensed punch of the nearest LIVE type, re-cited onto this room\'s own sheet; '
-        + 'rows no condensed line claims become their own lines and are never lost',
+        + 'rows no condensed line claims become their own lines and are never lost. Non-architectural citations are '
+        + 're-pointed too: the sprinkler line\'s FP-series citation is a fact about the DONOR\'s floor and the two '
+        + 'rooms the count was read on, so it is removed and replaced with PH-GU-001\'s own sheet list plus this '
+        + 'room\'s floor. Where the room shares its donor\'s sheet, the citation stands verbatim except for the '
+        + '".1" CONNECTING plan variant, which is dropped wherever rooms.connecting = 0.',
+      citationRule: 'A corroboration claim is checked NUMBER BY NUMBER on this room\'s own sheet. A row of this '
+        + 'room\'s own only corroborates a surviving donor reference when it cites the same view or keynote number '
+        + 'on the same sheet; citing the same sheet, or the same number on another sheet, is not evidence and the '
+        + 'line says so instead.',
       donorMap: Object.fromEntries(Object.keys(REP_ROOMS).map((r) => [r, REP_ROOMS[r].donor])),
       roomTypes: Object.fromEntries(Object.keys(REP_ROOMS).map((r) => [r, REP_ROOMS[r].type])),
       typeKeys: Object.fromEntries(Object.keys(REP_ROOMS).map((r) => [r, REP_ROOMS[r].keys])),
@@ -2267,7 +3029,11 @@ function assemble(docs, stamp, rooms) {
           + 'GR-308 as transcribed, with the naming question recorded as OPEN',
       ],
       conflictPolicy: 'document conflicts are CARRIED as FLAGGED lines and room notes quoting data/project.sqlite '
-        + 'verbatim. Nothing is resolved by this tool.',
+        + 'verbatim. Nothing is resolved by this tool. That now includes the data/project.sqlite conflicts TABLE: '
+        + 'every OPEN entry naming one of these rooms\' keys or one of its tags rides on the line that carries the '
+        + 'tag, FLAGGED, and in room note n_conflicts - and a gated-out row whose own note states a conflict rides '
+        + 'in n_gategaps at ANY reliability, because how well a row was read says nothing about whether the '
+        + 'documents agree.',
       fieldState: 'every line is born clean: checked false, initials empty, checkedAt null, issue empty. '
         + 'Floor 2-4 crew work is carried at rollout by platform/tools/carry_field_state.mjs under ruling D24, not here.',
       redaction: 'no personal contact data, no photographs, no crew names',
@@ -2423,10 +3189,24 @@ function printReport(reports, numbering, donorProof, fid, descSlots, convention)
     }
     for (const n of r.donorLabelNotes) W('    label: ' + n + '\n');
     for (const n of r.donorQtyNotes) W('    qty:   ' + n + '\n');
+    W('    THE DONOR MAY ENRICH, NEVER LAUNDER:\n');
+    W('      reliability KEPT from this room\'s own sqlite row over the donor\'s on ' + r.ffeRelKept.length +
+      ' line(s)' + (r.ffeRelKept.length ? ': ' + r.ffeRelKept.join('; ') : '') + '\n');
+    W('      reliability RAISED on a ruling that closes the flag for the product on ' + r.ffeDonorClosures.length +
+      ' line(s)' + (r.ffeDonorClosures.length ? ': ' + r.ffeDonorClosures.join('; ') : '') + '\n');
+    W('      donor text DROPPED as a reading of the donor\'s own drawing on ' + r.ffeDonorTextDropped.length +
+      ' line(s)' + (r.ffeDonorTextDropped.length ? ': ' + r.ffeDonorTextDropped.join('; ') : '') +
+      ' (quoted on the line as not carried)\n');
     W('    MEP text donated from ' + r.mepRefRoom + ', written for sheet ' + r.mepDonorSheet +
       ', re-cited onto ' + r.mepRoomSheet + (r.mepDonorSheet === r.mepRoomSheet
-        ? ' - SAME SHEET, so every citation stands verbatim and nothing is re-pointed\n'
+        ? ' - SAME SHEET, so every citation stands verbatim and no number is re-judged. The ONE exception is the\n' +
+          '      \'.1\' CONNECTING plan variant, which room_types identifies as the connecting plan and which is\n' +
+          '      dropped wherever rooms.connecting = 0 - a shared sheet is not a shared connecting plan.\n'
         : '\n'));
+    if (r.mepConnectingDropped.length) {
+      W('      CONNECTING plan reference(s) dropped on a NON-connecting room (rooms.connecting = 0), and the line\n' +
+        '      says so: ' + r.mepConnectingDropped.join(', ') + '\n');
+    }
     if (r.mepDonorCiteStripped && r.mepDonorCiteStripped.length) {
       W('      ' + r.mepDonorCiteStripped.length + " donor line(s) carried the DONOR's own re-point note (a fact about room " +
         r.donorRoom + ", not this room); removed and replaced with this room's own: " + r.mepDonorCiteStripped.join(', ') + '\n');
@@ -2462,13 +3242,28 @@ function printReport(reports, numbering, donorProof, fid, descSlots, convention)
     W('    MEP  ' + r.mepFlagged.length + ' non-HIGH line(s): ' + (r.mepFlagged.join(', ') || 'none') + '\n');
     if (r.configCarried) {
       W('    BATHING CONFIGURATION OPEN: ' + r.configA + ' Configuration A (TUB) row(s) and ' + r.configB +
-        ' Configuration B (ROLL-IN SHOWER) row(s), ALL BUILT, ALL FLAGGED, NEITHER SUPERSEDED.\n' +
+        ' Configuration B (ROLL-IN SHOWER) row(s), ALL EMITTED, ALL FLAGGED, NEITHER SUPERSEDED - and only one\n' +
+        '      of them gets built.\n' +
         '      Austin ruling D19 covered ROOM 118 ONLY and has NOT been extended.\n' +
         '      FF&E: ' + (r.ffeConfigLines.join(', ') || 'none') + '\n' +
         '      MEP : ' + (r.mepConfigLines.join(', ') || 'none') + '\n');
     }
     if (r.fpNoCount) W('    ' + r.fpNoCount + '\n');
     if (r.ptac) W('    ' + r.ptac + '\n');
+    if (r.ptacRepeat) W('    PTAC SUB-ASSEMBLY REPEAT (open): ' + r.ptacRepeat +
+      (r.mepPtacRepeatLines.length ? ' - ' + r.mepPtacRepeatLines.join(', ') : '') + '\n');
+    W('\n  CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)\n');
+    W('    ' + (r.conflictHits.length ? r.conflictHits.length + ' open entr(y/ies) touch this room: ' +
+      r.conflictHits.join('; ') : 'none touch this room') + '\n');
+    W('    carried as a FLAG on ' + (r.ffeConflictLines.length + r.mepConflictLines.length) + ' line(s)' +
+      ([...r.ffeConflictLines, ...r.mepConflictLines].length
+        ? ': ' + [...r.ffeConflictLines, ...r.mepConflictLines].join('; ') : '') +
+      '; every one of them is also in room note n_conflicts\n');
+    if (r.mepUnknownBand.length) {
+      W('    MEP CATEGORIES THE APP DOES NOT KNOW - ' + r.mepUnknownBand.length + ' line(s) sort last and say so on ' +
+        'the line: ' + r.mepUnknownBand.join(', ') + '. The category string is carried verbatim; widening the app\'s ' +
+        'band list is Austin\'s call\n');
+    }
     W('    room notes seeded: ' + r.roomNotes.join(', ') + '\n');
     if (r.unknownCategories.length) W('    NOTE unrecognised sqlite categories: ' + r.unknownCategories.join(', ') + '\n');
   }
