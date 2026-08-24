@@ -177,7 +177,7 @@ const BLOCKED_ROOMS = {};
 /* Step 1 gate. */
 const GATE_CATEGORIES = new Set([
   'Bath Accessory', 'Appliance', 'FF&E - Casegoods', 'FF&E - Bedding',
-  'FF&E - Seating', 'FF&E - Lighting', 'FF&E - Window', 'FF&E - Art / Mirror',
+  'FF&E - Seating', 'FF&E - Lighting', 'FF&E - Window', 'FF&E - Art / Mirror', 'Door Hardware',
 ]);
 
 /* Categories that belong to the MEP doc, not the FF&E doc. Listed so that a
@@ -224,6 +224,70 @@ const CATEGORY_INDEX = new Map(CATEGORY_ORDER.map((c, i) => [c, i]));
  * room assignment, and no drawing this tool can read states it per room. The
  * line therefore ships as the base tag with handedness called out as open. It is
  * NOT guessed, and reliability drops to MEDIUM to say so. */
+/* AUSTIN RULINGS D27 AND D28 (2026-08-21, given directly in conversation):
+ * lines ADDED to every floor-1 guest room by the owner's instruction.
+ *
+ * D27: "Make sure to add hot and cold water work." One plumbing punch line per
+ * room verifying hot AND cold arrive at every fixture, correct sides.
+ * The P202/P305 series documents the 120F HWS distribution these lines test.
+ *
+ * D28: "Make sure to add items to FF&E - 1. Door Closer installed ... 2. Door
+ * Lock Installed". Two FF&E lines per room under a new Door Hardware category.
+ * Product identities are transcribed VERBATIM from the labels Austin
+ * photographed on site 2026-08-21, not guessed:
+ *   closer: RIXSON R21013, Series 10, UL Classified "MISCELLANEOUS FIRE DOOR
+ *           ACCESSORIES 2MF0"
+ *   lock:   NORTON RIXSON / ASSA ABLOY box label "10-336", DOOR, finish 630;
+ *           one unit photographed installed on a guestroom frame
+ * These are owner-directed CHECK items, so they exist by ruling rather than by
+ * a sheet takeoff; the note on each line says exactly that. */
+const RULED_LINE_ADDITIONS = [
+  {
+    ruling: 'D27', doc: 'mep', key: 'plmb_hotcold_a', category: 'Plumbing', sort: 3018,
+    code: 'HW/CW', qty: 1,
+    label: 'Hot and cold water working at every fixture',
+    src: 'D27 (AJ 2026-08-21); P202/P305 HWS distribution',
+    note: 'Added by Austin ruling D27. Run hot and cold at the lavatory, the shower and the ' +
+      'kitchenette sink: both temperatures arrive, hot on the LEFT, and hot gets hot within a ' +
+      'reasonable wait. Any fixture that fails gets its own issue on its own line.',
+  },
+  {
+    ruling: 'D28', doc: 'ffe', key: 'dh_closer_a', category: 'Door Hardware', sort: 21000,
+    code: 'DH-1', qty: 1,
+    label: 'Door closer installed - Rixson R21013 Series 10',
+    src: 'D28 (AJ 2026-08-21); label on delivered product',
+    note: 'Added by Austin ruling D28. Label transcribed verbatim from the delivered part: ' +
+      'RIXSON R21013, Series 10, UL Classified, MISCELLANEOUS FIRE DOOR ACCESSORIES 2MF0. ' +
+      'Check the closer is installed, the door self-closes and latches from any open position.',
+  },
+  {
+    ruling: 'D28', doc: 'ffe', key: 'dh_lock_a', category: 'Door Hardware', sort: 21010,
+    code: 'DH-2', qty: 1,
+    label: 'Door lock installed - 10-336, finish 630',
+    src: 'D28 (AJ 2026-08-21); box label on delivered product',
+    note: 'Added by Austin ruling D28. Box label transcribed verbatim: NORTON RIXSON / ASSA ABLOY ' +
+      '10-336, DOOR, finish 630, qty 1. One unit photographed installed on a guestroom frame ' +
+      '2026-08-21. Check the lock is installed and operates: latches, locks and releases.',
+  },
+];
+
+/* Apply the ruled additions to a freshly built doc. Idempotent by key. */
+function addRuledLines(roomNo, doc, kind, stamp) {
+  const added = [];
+  for (const r of RULED_LINE_ADDITIONS) {
+    if (r.doc !== kind) continue;
+    if (doc.items[r.key]) continue;              // already there (field state may ride on it)
+    doc.items[r.key] = {
+      code: r.code, label: r.label, category: r.category, qty: r.qty, sort: r.sort,
+      src: r.src, reliability: 'HIGH', instanceNote: r.note, trade: '', derived: 0,
+      deleted: false, checked: false, initials: '', checkedAt: null, checkedAtLocal: null,
+      issue: '', issueResolved: false,
+    };
+    added.push(r.key + ' (' + r.ruling + ')');
+  }
+  return added;
+}
+
 const TAG_CORRECTIONS = [
   {
     ruling: 'D22',
@@ -3407,6 +3471,7 @@ function main(argv) {
      * notes on it - carried in from the live app by carry_field_state.mjs -
      * that state is re-applied to the freshly built lines. Without this, every
      * regeneration silently reset the floor to zero. */
+    report.ruledAdded = [...addRuledLines(roomNo, ffe, 'ffe', stamp), ...addRuledLines(roomNo, mep, 'mep', stamp)];
     report.statePreserved = preserveFieldState(docs, roomNo, ffe, mep);
     docs[roomNo] = ffe;
     docs[roomNo + '-MEP'] = mep;
@@ -3534,6 +3599,9 @@ function main(argv) {
     }
     if (r.superseded && r.superseded.length) {
       for (const sup of r.superseded) process.stdout.write('    ' + sup + '\n');
+    }
+    if (r.ruledAdded && r.ruledAdded.length) {
+      process.stdout.write('  ruled line additions: ' + r.ruledAdded.join(', ') + '\n');
     }
     if (r.statePreserved && (r.statePreserved.lines || r.statePreserved.notes)) {
       process.stdout.write('  field state preserved from the staged copy: ' + r.statePreserved.lines +
