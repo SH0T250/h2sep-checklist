@@ -18,7 +18,7 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import {
   TYPES, OWNERS, FLAG_OWNER_BY_KEY, FLAG_OWNER_BY_ROOM_KEY, GATED_OWNER,
-  GAP_OWNER, EXTRA_CARRIED, VERIFIER, BUY_STOPPERS, ROUND1,
+  GAP_OWNER, EXTRA_CARRIED, VERIFIER, BUY_STOPPERS, ROUND1, ROUND2,
 } from './mockbook.data.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -632,12 +632,16 @@ function verifierBlock(room) {
   return `<div class="subblock verifier">
     <h4>Independent check, round ${v.round}: <span class="verdict-fail">${esc(v.verdict)}</span>
       <span class="count">${open} open</span>${closed
-        ? `<span class="count count-ok">${closed} closed by this rebuild</span>` : ''}</h4>
+        ? `<span class="count count-ok">${closed} closed</span>` : ''}</h4>
     <p class="lede">A separate agent read this package against the reference database, the approved floor-1 build
       and the crew snapshot, with no knowledge of how it was assembled. Its findings are printed here word for
-      word. Nothing is hidden and nothing is softened. Where a finding was about this document being out of date,
-      it is marked closed and the reason is stated, because re-rendering the page is the whole of what closed it.
-      Everything marked OPEN is open in the data as it stands right now.</p>
+      word. Nothing is hidden and nothing is softened. <b>Every finding below is OPEN.</b> This is round 3, run
+      against the very file this page is rendered from, and it failed this type again. Nothing here has been
+      fixed yet, nothing has been argued with, and the fixing side does not get to upgrade its own verdict.
+      Round 2's findings and what the round-3 fix did about each of them are kept in full further up the page,
+      under &ldquo;What the earlier checks found&rdquo; &mdash; and round 3 re-opened two of those closures in
+      its own words, which is exactly why the earlier record is left where you can read it. Read every finding
+      below as a live defect in the package in front of you.</p>
     ${v.defects.map((d, idx) => {
       const isOpen = d.state === 'OPEN';
       return `<div class="vdef ${isOpen ? '' : 'vdef-closed'}">
@@ -645,7 +649,7 @@ function verifierBlock(room) {
           <span class="vsev ${isOpen ? sevClass(d.sev) : 'v-ok'}">${esc(isOpen ? (d.sev || 'DEFECT') : d.state)}</span></div>
         <div class="vbody">${esc(d.text)}</div>
         ${d.closedBy ? `<div class="vclosed"><span class="k">What closed it</span>${esc(d.closedBy)}</div>` : ''}
-        ${isOpen && d.owner ? ownerBlock(d.owner) : ''}
+        ${d.owner ? ownerBlock(d.owner) : ''}
       </div>`;
     }).join('')}
   </div>`;
@@ -666,6 +670,35 @@ function roundOneBlock() {
       meant the tool overruling the reference database.</p>`;
 }
 
+/* Round 2's findings, kept in full. They are HISTORY - the current verdict is
+ * round 3, inside each type - but they are not deleted, because round 3
+ * re-opened two of the closures claimed here and the reader needs both sides. */
+function roundTwoBlock() {
+  /* Counted off the round-3 findings themselves: the ones that name a round-2
+   * closure and say it did not hold. Nothing is asserted that the checker did
+   * not write. */
+  const reopened = Object.keys(VERIFIER).reduce((a, r) => a + VERIFIER[r].defects
+    .filter((d) => /CLOSED BY THE ROUND-3 FIX|Round 3 fixed the/.test(d.text || '')).length, 0);
+  return `<div class="tablewrap"><table class="summary r1">
+    <thead><tr><th>Room</th><th>Severity</th><th>What round 2 found</th><th>State after the round-3 fix</th>
+      <th>What was done</th></tr></thead>
+    <tbody>${ROUND2.map((r) => `<tr>
+      <td><code class="rep">${esc(r.room)}</code></td>
+      <td class="s-state">${r.sev ? `<span class="vsev ${sevClass(r.sev)}">${esc(r.sev)}</span>` : ''}</td>
+      <td>${esc(r.text)}</td>
+      <td class="s-state"><span class="${/CLOSED/.test(r.state) ? 'ok' : 'warn'}">${esc(r.state)}</span></td>
+      <td class="s-eff">${esc(r.how || '')}</td></tr>`).join('')}</tbody>
+    </table></div>
+    <p class="lede" style="margin-top:12px">All ${ROUND2.length} round-2 findings were worked, most of them by
+      changing <code>platform/tools/build_ref_rooms.mjs</code> rather than by patching a line. That work is real
+      and it is checkable against the generator. It did not make the package pass: the round-3 check read the
+      rebuilt file and failed all four types again, and ${reopened} of its ${Object.keys(VERIFIER)
+        .reduce((a, r) => a + VERIFIER[r].defects.length, 0)} findings name a closure claimed in this very table
+      and say it did not hold &mdash; the fix corrected the mark on the 238 bathing lines and left the citation
+      asserting the donor's. Both accounts are on this page, unedited, so you can judge the closure yourself
+      rather than take it.</p>`;
+}
+
 function approveBox(t) {
   const open = openDefects(t.id).length;
   return `<div class="approve">
@@ -676,9 +709,11 @@ function approveBox(t) {
       <div class="ab-row"><span class="box"></span>
         <div><strong>APPROVE the shape.</strong> The bands, the tags, the line wording and the flag handling are right
         for this type. Generate the remaining ${t.rooms.length - 1} key${t.rooms.length - 1 === 1 ? '' : 's'}
-        (${esc(t.rooms.filter((r) => r !== t.rep).join(', '))}) from this package once the
-        ${open} open finding${open === 1 ? '' : 's'} above ${open === 1 ? 'is' : 'are'} fixed and the check comes
-        back clean.</div></div>
+        (${esc(t.rooms.filter((r) => r !== t.rep).join(', '))}) from this package${open
+          ? ` once the ${open} open finding${open === 1 ? '' : 's'} above ${open === 1 ? 'is' : 'are'} fixed and the
+        check comes back clean`
+          : ` once an independent re-check comes back clean on the fixed data — every round-2 finding is closed
+        in the generator, and nobody outside this build has re-verified that yet`}.</div></div>
       <div class="ab-row"><span class="box"></span>
         <div><strong>APPROVE with changes.</strong> Write them here. Anything you mark gets applied to the reference room
         first, re-verified, and only then generated at scale.</div></div>
@@ -1207,7 +1242,13 @@ const totals = TYPES.map((t) => stagedCounts(t.id));
 const sum = (f) => totals.reduce((a, s) => a + s[f], 0);
 const totalDefects = TYPES.reduce((a, t) => a + VERIFIER[t.id].defects.length, 0);
 const openTotal = TYPES.reduce((a, t) => a + openDefects(t.id).length, 0);
-const closedTotal = totalDefects - openTotal;
+/* Round 3 carries no closures: every finding on the page is live. Kept as an
+ * assertion rather than a variable so a future round that DOES carry closed
+ * findings fails loudly here instead of printing them as open. */
+if (totalDefects !== openTotal) {
+  throw new Error(`VERIFIER carries ${totalDefects - openTotal} non-OPEN finding(s); `
+    + 'the page prose says every finding is open. Reconcile before rendering.');
+}
 const ROUND = VERIFIER[TYPES[0].id].round;
 
 /* The page carries the seed's own build stamp, not today's clock, so that two
@@ -1230,7 +1271,7 @@ const html = `<!doctype html>
   <nav>
     <div class="grp">Start here</div>
     <a href="#summary"><span class="rn">00</span>Summary</a>
-    <a href="#round1"><span class="rn">00</span>What round 1 changed</a>
+    <a href="#round1"><span class="rn">00</span>Rounds 1 and 2</a>
     <a href="#stoppers"><span class="rn">00</span>Fix before live</a>
     <div class="grp">Room types</div>
     ${TYPES.map((t) => `<a href="#t${t.id}"><span class="rn">${esc(t.n)}</span>${esc(t.type)}</a>`).join('')}
@@ -1263,16 +1304,21 @@ const html = `<!doctype html>
     <div><span class="k">Lines drawn up</span><span class="v">${sum('ff') + sum('mep')}</span></div>
     <div><span class="k">Flagged lines</span><span class="v">${sum('flagged')}</span></div>
     <div><span class="k">Crew work carried</span><span class="v">${sum('checked')} checks &middot; ${sum('issues')} of ${TYPES.reduce((a, t) => a + crewCounts(t.id).issues, 0)} issues</span></div>
-    <div><span class="k">Independent check</span><span class="v"><span class="verdict-fail">4 FAIL</span> &middot; round ${ROUND} &middot; ${openTotal} open</span></div>
+    <div><span class="k">Independent check</span><span class="v"><span class="verdict-fail">4 FAIL</span> &middot; round ${ROUND} &middot; ${openTotal} open &middot; ${ROUND1.length + ROUND2.length} earlier findings worked</span></div>
   </div>
   <div class="notlive">THIS IS A MOCK-UP. It lives in one staged file and <b>nothing has been pushed, deployed or written
     to Firestore</b>. The crew app was read and never written. Approve it, mark it up, or hold it. Nothing generates
     at scale until you say so (ruling D24).</div>
-  <div class="notlive round">ROUND ${ROUND}. Round 1 failed all four types. The ${ROUND1.length} findings it raised were
-    worked and this page is rendered from the fixed file, line for line. A second independent check then read the
-    fixed file and <b>failed all four types again</b>, with ${openTotal} open findings, which are printed inside each
-    type below in the checker's own words. ${closedTotal} further findings were about this document being stale and
-    are closed by this rebuild; they are printed too, marked closed, so the record is complete.</div>
+  <div class="notlive round">ROUND ${ROUND}, AND IT STILL FAILS. Round 1 failed all four types and its
+    ${ROUND1.length} findings were worked. Round 2 then read the fixed file and failed all four again;
+    its ${ROUND2.length} findings were worked in turn, most of them by changing
+    <code>platform/tools/build_ref_rooms.mjs</code> itself rather than by patching a line. A third independent
+    check has now read <b>this</b> file - the same seed this page is rendered from - and
+    <b>failed all four types again</b>, with ${openTotal} findings. <b>All ${openTotal} are OPEN. None of them has
+    been fixed.</b> They are printed inside their type below in the checker's own words, unedited, and they are
+    the reason the verdict column reads FAIL everywhere. The earlier rounds are kept further down so you can see
+    what was already worked, and so you can see the two places where round 3 says a round-2 closure did not hold.
+    The DOCUMENT conflicts underneath all of this are still open and no fix to this tool can close them.</div>
 </div>
 
 <section class="block" id="summary">
@@ -1291,27 +1337,40 @@ const html = `<!doctype html>
 </section>
 
 <section class="block" id="round1">
-  <h3><span class="hn">00</span>What the first check found, and what happened to it</h3>
+  <h3><span class="hn">00</span>What the earlier checks found, and what happened to it</h3>
+  <p class="lede">Two checks came before the one that governs this page. Both failed all four types, both had
+    every finding worked, and neither is deleted here. This section is the record of that work. It is NOT the
+    current verdict &mdash; the current verdict is round ${ROUND}, it is FAIL on all four types, and its
+    ${openTotal} open findings are printed inside each type further down.</p>
+  <h4>Round 1</h4>
   <p class="lede">Round 1 read the four packages and failed all four. Every finding it raised is below with its
-    current state, and every "closed" was re-checked against the staged file before it was written here. This is
-    the honest measure of the fix round: most of it landed, one item was deliberately disclosed instead of changed,
-    and the second check then found a fresh set of problems that are printed in full further down.</p>
+    current state, and every "closed" was re-checked against the staged file before it was written here. Most of
+    it landed; one item was deliberately disclosed instead of changed.</p>
   ${roundOneBlock()}
+  <h4 style="margin-top:26px">Round 2</h4>
+  <p class="lede">Round 2 read the fixed file and failed all four types again, raising ${ROUND2.length} findings.
+    Each one is printed word for word with the mechanism that was written to close it, so the closure can be
+    checked against <code>platform/tools/build_ref_rooms.mjs</code> and against the data rather than taken on
+    trust. Round 3 took two of these closures apart, and says so in its own words below.</p>
+  ${roundTwoBlock()}
 </section>
 
 <section class="block" id="stoppers">
   <h3><span class="hn">00</span>Read this before you approve anything</h3>
-  <p class="lede">All four types came back <span class="verdict-fail">FAIL</span> again on round ${ROUND},
-    ${openTotal} open findings across the four, plus ${closedTotal} that this rebuild closed. That is being shown to
-    you straight rather than cleaned up. Most of the findings are about where a citation points or whether a
-    conflict is on the line it belongs on. These are the ones that change what gets bought or where the crew is
-    sent, each with the person who owes the answer, and every one of them is fixable without touching the shape of
-    the package you are approving.</p>
+  <p class="lede">All four types came back <span class="verdict-fail">FAIL</span> on round ${ROUND}, with
+    ${openTotal} findings, and every one of them is still OPEN in the file this page renders. Those are printed
+    inside each type below: they are about where a citation points, whether a line's own note agrees with the
+    reliability it ships, whether a room note's count matches the database, and whether a mark or a citation
+    belongs to this room or to the donor room it was built from. Every one of them is a defect in
+    <code>platform/tools/build_ref_rooms.mjs</code> and its output, and every one of them is fixable by us.
+    What follows is the different list: the questions the DOCUMENTS have not answered, which no fix to this tool
+    can close. These are the ones that change what gets bought or where the crew is sent, each with the person
+    who owes the answer.</p>
   ${buyStoppers()}
-  <p class="lede" style="margin-top:16px">Nothing on this list was invented by the mock-up. Each one is a place
-    where the build stated something more confidently than the documents do, dropped a caveat, or carried a fact
-    about the donor room onto a room it is not true for. The recommendation is to approve or mark up the
-    <em>shape</em> now, and hold the generate-at-scale step until these are fixed and the check comes back clean.</p>
+  <p class="lede" style="margin-top:16px">Nothing on this list was invented by the mock-up. Every item is quoted
+    from data/project.sqlite - its conflicts table, its placeholders, or the room's own rows - and every one of
+    them is OPEN in the documents, not in the tool. The recommendation is to approve or mark up the <em>shape</em>
+    now, and hold the generate-at-scale step until an independent check comes back clean on the rebuilt file.</p>
 </section>
 
 ${TYPES.map(section).join('')}
@@ -1321,9 +1380,11 @@ ${TYPES.map(section).join('')}
   <p class="lede">Each type has its own APPROVE / CHANGES box at the end of its section, so you can rule on one
     type without ruling on the other three. The three choices are the same everywhere.</p>
   <ul>
-    <li><strong>APPROVE.</strong> The open findings above get fixed in <code>platform/tools/build_ref_rooms.mjs</code>,
-      the four reference rooms rebuild, the independent check runs again, and only then do the remaining
-      ${TYPES.reduce((a, t) => a + t.rooms.length, 0) - 4} keys generate from the approved package.</li>
+    <li><strong>APPROVE THE SHAPE.</strong> That is a ruling on the bands, the tags, the line wording and the
+      flag handling, not a certificate that the file is clean. It is not clean: round ${ROUND} left ${openTotal}
+      open findings on it. Those get fixed in <code>platform/tools/build_ref_rooms.mjs</code> first, the four
+      reference rooms get rebuilt, the independent check runs again, and only then do the remaining
+      ${TYPES.reduce((a, t) => a + t.rooms.length, 0) - 4} keys generate.</li>
     <li><strong>APPROVE WITH CHANGES.</strong> Your marks go onto the reference room first, one room per type,
       and get re-verified before anything multiplies.</li>
     <li><strong>HOLD.</strong> The package sits where it is. Nothing generates, nothing seeds, nothing deploys.</li>
