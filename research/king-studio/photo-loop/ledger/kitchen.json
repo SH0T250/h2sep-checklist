@@ -1,5 +1,13 @@
 {
  "view": "kitchen",
  "photo": "20260812_141218.jpg",
- "rounds": []
+ "rounds": [
+  {
+   "round": 1,
+   "renderJpg": "/tmp/claude-0/-home-user-h2sep-checklist/fb47d53f-23f6-5d8f-88e1-343b94d9771e/scratchpad/renders/kitchen/r1.jpg",
+   "critics": [],
+   "fix": null,
+   "status": "pending"
+  }
+ ]
 }
