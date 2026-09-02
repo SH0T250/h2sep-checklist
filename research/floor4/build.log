@@ -120,7 +120,7 @@ SELFTEST
 ====================================================================================================
 SELFTEST PASSED
 
-DETERMINISM: two independent in-process builds are byte-identical (md5 28d76466acacc88f9138439b8caff29c)
+DETERMINISM: two independent in-process builds are byte-identical (md5 93d913c0ffb7a759ed8b0a04ed89dc62)
 
 BUILD REPORT - floor 4, 33 guest room(s), staged for approval
 ====================================================================================================
@@ -2397,9 +2397,9 @@ field state preserved from the previous staged file (a rebuild never zeroes the 
 4th Floor FF&E Installation tab DOES NOT RECONCILE: GR-308: the 4th Floor FF&E Installation tab lists 2, floor 4's key mix gives 3 (3 connecting key(s))
 4th Floor FF&E Installation tab DOES NOT RECONCILE: GR-309R: the 4th Floor FF&E Installation tab lists 1, floor 4's key mix gives 0 (0 QQ Acc.)
 wrote platform/data/floor4-staged.json  (70 docs: 401, 401-MEP, 402, 402-MEP, 403, 403-MEP, 404, 404-MEP, 405, 405-MEP, 406, 406-MEP, 407, 407-MEP, 408, 408-MEP, 409, 409-MEP, 410, 410-MEP, 411, 411-MEP, 412, 412-MEP, 413, 413-MEP, 414, 414-MEP, 415, 415-MEP, 416, 416-MEP, 417, 417-MEP, 418, 418-MEP, 422, 422-MEP, 423, 423-MEP, 424, 424-MEP, 425, 425-MEP, 426, 426-MEP, 427, 427-MEP, 428, 428-MEP, 429, 429-MEP, 430, 430-MEP, 431, 431-MEP, 432, 432-MEP, 433, 433-MEP, 434, 434-MEP, 436, 436-MEP, 438, 438-MEP, S421, S421-M, S437, S439)
-  md5 28d76466acacc88f9138439b8caff29c   5060724 bytes
+  md5 93d913c0ffb7a759ed8b0a04ed89dc62   5067167 bytes
 READ ONLY and untouched, verified by size+mtime: floor1-staged.json, slice-f1.json, ref-rooms-staged.json, build_floor1.mjs
-FLOOR 4 STAGED FOR APPROVAL. NOT LIVE. Firestore not touched. Nothing pushed. Nothing deployed.
+FLOOR 4 STAGED FILE WRITTEN. This tool never touches Firestore; rollout_floor.mjs --floor=4 --apply is the only path live. Nothing pushed. Nothing deployed.
 
-(node:8075) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(node:10074) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
