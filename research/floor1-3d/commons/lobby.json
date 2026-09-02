@@ -1196,6 +1196,7 @@
   "PA-307 ADA table printed dimensions and PA-306 booth table height did not come through the spec text layer.",
   "TV lounge items (PA-108, PA-113, PA-305, PA-308) carry no tags on ID-1.7 in the lobby; not placed.",
   "Reception ceiling baffle ACB-001 and pendants (PA-201, PA-205) are lighting/ceiling scope, left to the lighting kit.",
-  "RK Hospitality FF&E Guest Rooms, Public Area Locations Floor Plans.pdf (16 MB) and FF&E Installation.xlsx were not opened; the per-sheet split of the same set (sheet8) was used instead."
+  "RK Hospitality FF&E Guest Rooms, Public Area Locations Floor Plans.pdf (16 MB) and FF&E Installation.xlsx were not opened; the per-sheet split of the same set (sheet8) was used instead.",
+  "Scene disagreement, for the scene owner: ID-1.7 draws the lobby west wall at U 178.8 with the PA-803 coffee station, both PA-105 focus booths and the PA-104 highback group on its lobby face, and the Womens 019 / Mens 020 / Engineer 021 restroom band ending at that wall (its fixtures sit west of U 178.8). A100 gives the same FOH envelope start, U 178.78. The scene source currently draws the FOH plate from U 187 and runs the 019/020/021 band to U 187 (both SCALED), so those kit pieces between U 178.8 and 188 overlap that band on today's plate. The kit keeps the sheet positions rather than moving pieces to fit the plate."
  ]
 }
