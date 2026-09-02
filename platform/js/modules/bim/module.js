@@ -29,9 +29,9 @@ function renderHub(ctx) {
       <div class="card-head"><h2>Floor 1 room models</h2><span class="card-cap">each room renders its own geometry, never a shared shell</span></div>
       <div class="rows"></div>
     </section>
-    <section class="card" style="margin-top:14px"><div class="card-head"><h2>Not modeled yet</h2><span class="card-cap">honest hard-stop, per standing ruling</span></div>
-      <div class="coming" style="padding:20px">${ic('cube')}<b>King family, One Bedroom, and QQ Acc have no model</b>
-      <span>A550 gives the King Studio its own 29 ft clear depth and working wall, so it gets its own geometry in the Blender pipeline, never a relabeled QQ shell. Until then those rooms show this stop instead of wrong geometry.</span></div>
+    <section class="card" style="margin-top:14px"><div class="card-head"><h2>Not modeled</h2><span class="card-cap">honest hard-stop, per standing ruling</span></div>
+      <div class="coming" style="padding:20px">${ic('cube')}<b>Floors 2 to 4 have no models</b>
+      <span>Every floor-1 key renders its own geometry from its own sheet. The upper floors have not been modeled; until they are, their rooms show a stop instead of another room's shell.</span></div>
     </section>
     ${upperRooms ? `<p class="card-cap" style="margin-top:14px">Floors 2 to 4 (${upperRooms} rooms) are live on the checklists and have no 3D models yet; they are not listed here.</p>` : ''}
   </div>`);

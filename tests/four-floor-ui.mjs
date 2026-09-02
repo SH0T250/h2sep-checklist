@@ -59,6 +59,9 @@ t('room 338 offers no 3D model button', !(await p.$('a[href="#/bim/338"]')));
 await p.goto(B + '#/room/105', { waitUntil: 'networkidle' });
 await p.waitForSelector('.pagehead');
 t('room 105 still offers its 3D model', !!(await p.$('a[href="#/bim/105"]')));
+await p.goto(B + '#/room/110', { waitUntil: 'networkidle' });
+await p.waitForSelector('.pagehead');
+t('room 110 (King Studio) offers its 3D model', !!(await p.$('a[href="#/bim/110"]')));
 
 t('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' ; '));
 await b.close();

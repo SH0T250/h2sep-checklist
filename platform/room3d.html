@@ -1535,13 +1535,13 @@ var KING_STD = {
    NOT a second drawing of elevation 05: dropping GR-3 into the working wall
    pushes the closet / TV / desk group toward the window. The spec measures that
    shift at ABOUT 4'-3" and explicitly forbids encoding it as a hard number, so
-   it is carried as a stylized shift and labelled as a reading of elevation 09. */
+   NO number is encoded here: the group is placed clear of the GR-3 opening by
+   its own extents and the shift is labelled as a reading of elevation 09. */
 var KING_CONN = kingType(KING_STD, {
   variant:'King Studio Connecting', sheet:'A550 views 01 + 01.1, elevation 09',
   conn:true,
   gr3CL: 132*KIN,        /* 11'-0" from the corridor wall INSIDE FACE  PRINTED A550/01.1 */
   gr3RO: 40*KIN,         /* 3'-4" R.O. — A552's measurement of the SAME opening; A550 prints none */
-  wwShift: 51*KIN,       /* stylized elevation-09 shift toward the window — A READING, not printed */
   ww:'GR-306'
 });
 /* King Studio Acc. Mod. (room 118), sheet A552 — a different room, not a wide
@@ -3083,20 +3083,23 @@ if (!ACC){
     scenery(cyl(tx, kz(BZa+1.32), 0.66, 1.39, 1.52, MAT.porc));
   })();
   /* The two clear floor circles A552 view 01 actually draws — one in the
-     bathroom, one required in the main room. Drawn as ring MESHES rather than
-     lines: a WebGL line is one pixel wide at any zoom and these have to read
-     as a required clearance, not as a stray edge. */
+     bathroom, one in the main room. Drawn as ring MESHES rather than lines: a
+     WebGL line is one pixel wide at any zoom and these have to read as a
+     required clearance, not as a stray edge. The bathroom circle is the
+     proven 60" turning circle. The main-room circle is on the sheet but A552
+     prints NEITHER its diameter NOR its position, so it is drawn fainter at a
+     stylized position and labelled STYLIZED; it asserts no dimension. */
   (function(){
-    function circle(cx, cz, r){
+    function circle(cx, cz, r, opacity){
       var g = new THREE.RingGeometry(r - 0.09, r, 72);
       var m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({
-        color:0x02A9E0, transparent:true, opacity:0.55, side:THREE.DoubleSide}));
+        color:0x02A9E0, transparent:true, opacity:opacity, side:THREE.DoubleSide}));
       m.rotation.x = -Math.PI/2;
       m.position.set(MX(cx), 0.1, cz);
       scenery(m);
     }
-    circle(BW*0.52, kz(BZa + 3.1), G.turnR);
-    circle(W*0.62, kz(G.bedCL - 6.2), G.turnR);
+    circle(BW*0.52, kz(BZa + 3.1), G.turnR, 0.55);
+    circle(W*0.62, kz(G.bedCL - 6.2), G.turnR, 0.25);   /* STYLIZED: A552 prints no size or position */
   })();
 }
 
@@ -3300,6 +3303,9 @@ var kingLabels = function(){
             dx:-70, dy:-12, noleader:true, pri:3});
   if (ACC) addLabel({anchor:V3(BW*0.52,0.12,kz(BZ0+3.1)), html:'60″ TURNING CIRCLE',
             cls:'min', dx:-42, dy:12, noleader:true, pri:3});
+  if (ACC) addLabel({anchor:V3(MX(W*0.62),0.12,kz(G.bedCL-6.2)),
+            html:'CLEAR FLOOR SPACE · STYLIZED · A552 PRINTS NO SIZE OR POSITION',
+            cls:'min', dx:-110, dy:12, noleader:true, pri:3});
 };
 } /* ---- end King family build ---- */
 
