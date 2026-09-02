@@ -1,5 +1,40 @@
 {
  "view": "bath-shower",
  "photo": "20260812_141304.jpg",
- "rounds": []
+ "rounds": [
+  {
+   "round": 1,
+   "renderJpg": "/tmp/claude-0/-home-user-h2sep-checklist/fb47d53f-23f6-5d8f-88e1-343b94d9771e/scratchpad/renders/bath-shower/r1.jpg",
+   "critics": [
+    {
+     "pick": "A",
+     "correct": true,
+     "confidence": "instant",
+     "tells": [
+      "A's vanity is a plain white slab hovering next to the toilet with no cabinet, plumbing or support beneath it; B's toilet has a real tank, seat hinges and a supply stop.",
+      "A's toilet is a featureless glossy ovoid with no tank, seat split, bolt caps or hinge; it reads as a primitive with a single fake specular hotspot.",
+      "A's shower door has no roller/track hardware, no hinge plates, no frame extrusions; B shows the exposed barn-style rollers, header bar, jamb hinges and the door's lock strike with real chrome reflections.",
+      "A's door lever is mounted near the bottom of the door leaf (roughly knee height), and the jamb/casing to the shower has no reveal or stop; B's door shows three hinge leaves, casing reveal and correct hardware height.",
+      "A's shower floor carries an unexplained black rectangular hole and a bare stub pipe for a shower head; the light fixture is a three-bulb bar with a floating white disc above it, all reflected as flat white shapes with no roll-off.",
+      "A's glass is a uniform milky smear with no distinct reflections, and the whole panel has soft, uniformly low-contrast shading with no sensor grain, no vignette, no clipped highlights; B has phone-camera noise in the grey tile, a clipped ceiling LED and a hard LED reflection on the tile."
+     ],
+     "biggestGap": "The fixture models in A are placeholders that no hotel bathroom contains: the vanity is an unsupported white plank with a wood offcut on top, and the toilet is a smooth capsule with no tank. Replace them with a real one-piece or two-piece elongated toilet (tank against the wall, seat with hinge bumpers, bolt caps, a chrome supply stop at floor level like B shows next to the base) and a vanity with a visible cabinet, apron or wall bracket, sink cutout and backsplash edge; then the room stops reading as a massing model.",
+     "secondaryGaps": [
+      "Shower door hardware: add the exposed top roller assembly, header bar, U-channel frame, bottom guide and door towel bar with proper chrome environment reflections as in B; A's frameless-yet-frame-less door with no rollers is physically impossible.",
+      "Door leaf and jamb: raise the lever to standard height (about 36-40 in), add three hinges on the jamb, a casing reveal and stop, and a lock strike; A's lever sits near the floor.",
+      "Shower interior: remove the black rectangular void on the pan, give the shower head an actual head and arm, model a drain like B's, and replace the three-bulb bar with a recessed LED strip whose reflection clips to white on the tile.",
+      "Camera signature: add luminance grain that rises in the grey floor tile and shadow corners, slight wide-angle barrel distortion, a subtle vignette and genuine highlight clipping on light sources; A's image is uniformly soft and noise-free.",
+      "Glass: replace the uniform milky tint with clear glass carrying distinct, sharp reflections of the wallpaper, door and the photographer, with parallax offset between the two panes like B's overlapping door leaves."
+     ],
+     "realismScore": 2,
+     "wowed": false,
+     "composite": "/tmp/claude-0/-home-user-h2sep-checklist/fb47d53f-23f6-5d8f-88e1-343b94d9771e/scratchpad/blind/bath-shower-r1a.png",
+     "renderPanel": "A"
+    }
+   ],
+   "fix": null,
+   "status": "spotted",
+   "note": "Shower glass door, tiled walls, patterned wallpaper on the side wall, and part of a toilet and vanity counter are visible; frame looks like a normal bathroom view with no black or empty regions."
+  }
+ ]
 }
