@@ -223,7 +223,7 @@ function renderRoom(ctx, { no }) {
     const done = entries.filter(([, it]) => it.checked).length;
     const head = el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">·</span><span>${done} of ${entries.length} checked</span>
       <span class="spacer"></span>${ownerChip(store, cat, no)}${bulkOn(activeId) ? '<span class="pickall" role="button" tabindex="0">select all</span>' : ''}</div>`);
-    head.querySelector('.pickall')?.addEventListener('click', () => bulkCatToggle(list, activeId, entries));
+    head.querySelector('.pickall')?.addEventListener('click', (e) => bulkCatToggle(list, activeId, entries, e.currentTarget));
     list.append(head);
     for (const [id, it] of entries) list.append(itemRow(ctx, activeId, id, it));
   }
@@ -278,6 +278,13 @@ function noteCount(doc) {
 // unless the user turns that on. Every apply has an Undo.
 let bulkSel = null;               // { docId, ids: Set<itemId> } while select mode is on
 const BULK_Q_KEY = 'h2sep-p-bulkq';
+const pl = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
+// A document key shown to a PM: "Room 204 · MEP", "S221 · MEP", never a raw id.
+function docLabel(id) {
+  const m = String(id).match(/^(.*?)(-MEP|-M)?$/);
+  const base = m[1], mep = !!m[2];
+  return `${/^S/.test(base) ? base : 'Room ' + base}${mep ? ' · MEP' : ''}`;
+}
 
 function bulkOn(docId) { return !!(bulkSel && bulkSel.docId === docId); }
 function bulkToggleRow(row, docId, itemId) {
@@ -293,12 +300,13 @@ function bulkRefreshBar() {
   bar.querySelector('.cnt').innerHTML = `${n} selected<small> of ${bar.dataset.total}</small>`;
   bar.querySelectorAll('[data-act]:not([data-act="cancel"])').forEach(b => { b.disabled = n === 0; });
 }
-function bulkCatToggle(list, docId, entries) {
+function bulkCatToggle(list, docId, entries, headEl) {
   if (!bulkOn(docId)) return;
   const ids = entries.map(([id]) => id);
   const allOn = ids.every(id => bulkSel.ids.has(id));
   for (const id of ids) { if (allOn) bulkSel.ids.delete(id); else bulkSel.ids.add(id); }
   list.querySelectorAll('.item-row[data-item]').forEach(r => r.classList.toggle('picked', bulkSel.ids.has(r.dataset.item)));
+  if (headEl) headEl.textContent = allOn ? 'select all' : 'clear';
   bulkRefreshBar();
 }
 function bulkBar(ctx, docId, doc) {
@@ -312,15 +320,26 @@ function bulkBar(ctx, docId, doc) {
     <button class="btn" data-act="resolve" disabled>Resolve issues</button>
     <button class="btn" data-act="resolveAndCheck" disabled>Resolve and check</button>
     <button class="btn" data-act="setIssue" disabled>${ic('flag', 'flag-ic')}Flag issue</button>
+    <button class="btn" data-act="more" disabled>More…</button>
     <button class="btn" data-act="cancel">Cancel</button>
   </div>`);
+  const run = (act) => {
+    const targets = [...bulkSel.ids].map(itemId => ({ docId, itemId }));
+    if (!targets.length) return;
+    const go = (text) => bulkConfirm(ctx, targets, act, { text, scopeLabel: docLabel(docId) }, () => { bulkSel = null; });
+    if (act === 'setIssue') issueTextSheet(ctx, go); else go('');
+  };
   bar.querySelectorAll('[data-act]').forEach(b => b.addEventListener('click', () => {
     const act = b.dataset.act;
     if (act === 'cancel') { bulkSel = null; store._emit(); return; }
-    const targets = [...bulkSel.ids].map(itemId => ({ docId, itemId }));
-    if (!targets.length) return;
-    const go = (text) => bulkConfirm(ctx, targets, act, { text, scopeLabel: `${docId}` }, () => { bulkSel = null; });
-    if (act === 'setIssue') issueTextSheet(ctx, go); else go('');
+    if (act === 'more') {
+      const A = store.constructor.BULK_ACTIONS;
+      const { close } = sheet(`<div class="sh"><b style="font-size:15px">${bulkSel.ids.size} selected · do what?</b><button class="icon-btn x" data-close aria-label="Close">${ic('x')}</button></div>
+        <div style="display:grid;gap:8px">${Object.entries(A).filter(([k]) => k !== 'clearIssue').map(([k, l]) => `<button class="btn" data-more="${k}" style="justify-content:center;padding:12px">${l}</button>`).join('')}</div>`);
+      document.querySelectorAll('.sheet [data-more]').forEach(x => x.addEventListener('click', () => { close(); run(x.dataset.more); }));
+      return;
+    }
+    run(act);
   }));
   return bar;
 }
@@ -345,6 +364,33 @@ function issueTextSheet(ctx, next) {
   });
 }
 
+// One place that applies a plan, reports a refusal, watches the cloud acks,
+// and offers Undo. Undo re-reads every line first and reports what it kept.
+function bulkApplyAndToast(store, plan, verb) {
+  const res = store.applyBulk(plan);
+  if (!res) return null;
+  if (res.error) { toast(res.error); return null; }
+  toast(`${verb}: ${pl(res.lines, 'line')} in ${pl(res.docs, 'document')}`, { label: 'Undo', fn: () => {
+    const r = store.undoBulk(res.entry);
+    if (!r) { toast('Nothing to undo'); return; }
+    toast(`Undone: ${pl(r.reverted, 'line')} reverted${r.skipped.length ? `, ${r.skipped.length} left alone (changed since, or gone)` : ''}`);
+    r.done.then(({ failed, total }) => { if (failed) toast(`${failed} of ${total} documents did not save the undo`, { label: 'OK', fn: () => {} }); });
+  } });
+  res.done.then(({ failed, total }) => { if (failed) toast(`${failed} of ${total} documents did not save. Check the connection and try again.`, { label: 'OK', fn: () => {} }); });
+  return res;
+}
+// The plan shown was computed at preview time. Re-plan at Apply; if the
+// checklist moved underneath (another device, a line flagged since), show the
+// new numbers instead of writing the stale ones.
+function replanOrWarn(store, targets, action, opts, previewed) {
+  const fresh = store.planBulk(targets, action, opts);
+  if (fresh.changes.length !== previewed.changes.length || fresh.skipped.length !== previewed.skipped.length) {
+    toast('The checklist changed since the preview. Look again, then Apply.');
+    return null;
+  }
+  return fresh;
+}
+
 // The confirm sheet: exact count, exact skips with reasons, the restamp
 // switch (off by default), Apply, and an Undo on the toast afterwards.
 function bulkConfirm(ctx, targets, action, opts = {}, onDone) {
@@ -353,7 +399,7 @@ function bulkConfirm(ctx, targets, action, opts = {}, onDone) {
   let overwrite = false;
   const verb = store.constructor.BULK_ACTIONS[action] || action;
   const { close } = sheet(`
-    <div class="sh"><b style="font-size:15px">${esc(verb)}${opts.text ? ` · ${esc(opts.text)}` : ''}</b><button class="icon-btn x" data-close aria-label="Close">${ic('x')}</button></div>
+    <div class="sh"><b style="font-size:15px">${esc(verb)}${opts.text ? ` · ${esc(opts.text)}` : ''}${opts.scopeLabel ? ` · ${esc(opts.scopeLabel)}` : ''}</b><button class="icon-btn x" data-close aria-label="Close">${ic('x')}</button></div>
     <div data-body></div>
     ${['check', 'uncheck', 'resolveAndCheck'].includes(action) ? `<label style="display:flex;gap:8px;align-items:center;font-size:12.5px;margin-top:10px"><input type="checkbox" data-overwrite/> Also restamp lines checked by someone else (their initials are field evidence; off unless you mean it)</label>` : ''}
     <div class="srow"><button class="btn" data-close>Cancel</button><button class="btn primary" data-apply>Apply</button></div>`);
@@ -367,27 +413,30 @@ function bulkConfirm(ctx, targets, action, opts = {}, onDone) {
     for (const k of plan.skipped) { if (!byWhy.has(k.why)) byWhy.set(k.why, []); byWhy.get(k.why).push(k); }
     const single = byDoc.size <= 1;
     const rows = single
-      ? plan.changes.slice(0, 40).map(c => `<div class="prow"><span class="tag">${esc(shortCode(c) || '')}</span><span>${esc(c.label.length > 60 ? c.label.slice(0, 59) + '…' : c.label)}</span></div>`).join('')
+      ? plan.changes.slice(0, 40).map(c => `<div class="prow"><span class="tag">${esc(shortCode(c) || '')}</span><span>${esc(c.label.length > 60 ? c.label.slice(0, 59) + '…' : c.label)}</span>${c.replaces ? `<span class="why">replaces "${esc(c.replaces)}"</span>` : ''}</div>`).join('')
         + (plan.changes.length > 40 ? `<div class="prow"><span class="why">and ${plan.changes.length - 40} more</span></div>` : '')
-      : [...byDoc].slice(0, 60).map(([d, n]) => `<div class="prow"><span class="mono">${esc(d)}</span><span>${n} line(s)</span></div>`).join('')
+      : [...byDoc].slice(0, 60).map(([d, n]) => `<div class="prow"><span class="mono">${esc(docLabel(d))}</span><span>${pl(n, 'line')}</span></div>`).join('')
         + (byDoc.size > 60 ? `<div class="prow"><span class="why">and ${byDoc.size - 60} more documents</span></div>` : '');
     sh.querySelector('[data-body]').innerHTML = `
       <div class="preview">
-        <div class="ph"><b>${plan.changes.length}</b> will change${byDoc.size > 1 ? ` in <b>${byDoc.size}</b> rooms` : ''} · ${plan.skipped.length} left alone</div>
+        <div class="ph"><b>${plan.changes.length}</b> will change${byDoc.size > 1 ? ` in <b>${byDoc.size}</b> rooms` : ''} · <span class="n">${plan.skipped.length}</span> left alone${plan.replaced ? ` · <b style="color:var(--issue-ink)">${plan.replaced}</b> will have their issue text replaced` : ''}</div>
         ${rows}
-        ${plan.skipped.length ? `<div class="skipsum"><b>Left alone (${plan.skipped.length})</b>${[...byWhy].map(([why, ks]) => `<div>${ks.length} · ${esc(why)}${single ? `: ${esc(ks.slice(0, 8).map(k => shortCode(k) || k.itemId).join(', '))}${ks.length > 8 ? ', …' : ''}` : ''}</div>`).join('')}</div>` : '<div class="skipsum">Nothing left alone.</div>'}
+        ${plan.skipped.length ? `<div class="skipsum"><b>Left alone (${plan.skipped.length})</b>${[...byWhy].map(([why, ks]) => `<div><b>${ks.length}</b> · ${esc(why)}${single ? `: ${esc(ks.slice(0, 8).map(k => shortCode(k) || k.itemId).join(', '))}${ks.length > 8 ? ', …' : ''}` : ''}</div>`).join('')}</div>` : '<div class="skipsum">Nothing left alone.</div>'}
       </div>`;
-    sh.querySelector('[data-apply]').disabled = plan.changes.length === 0;
+    const ap = sh.querySelector('[data-apply]');
+    ap.disabled = plan.changes.length === 0;
+    ap.textContent = plan.changes.length ? `Apply to ${pl(plan.changes.length, 'line')}` : 'Nothing to apply';
   };
   render();
   sh.querySelector('[data-overwrite]')?.addEventListener('change', e => { overwrite = e.target.checked; render(); });
   sh.querySelector('[data-apply]').addEventListener('click', () => {
     if (!plan || !plan.changes.length) return;
-    const res = store.applyBulk(plan);
+    const fresh = replanOrWarn(store, targets, action, { text: opts.text || '', overwriteChecked: overwrite }, plan);
+    if (!fresh) { render(); return; }
+    const res = bulkApplyAndToast(store, fresh, verb);
+    if (!res) return;
     close();
     onDone && onDone(res);
-    if (!res) return;
-    toast(`${verb}: ${res.lines} line(s) in ${res.docs} document(s)`, { label: 'Undo', fn: () => { store.undoBulk(res.entry); toast('Undone'); } });
     store._emit();
   });
 }
@@ -398,7 +447,10 @@ function bulkQ() {
   return { floors: [], types: [], kind: 'ffe', cats: [], codes: [], action: 'check', text: '' };
 }
 function setBulkQ(q) { sessionStorage.setItem(BULK_Q_KEY, JSON.stringify(q)); }
-const codeKey = (it) => `${it.category || 'Other'}|${it.code || ''}|${it.label || ''}`;
+// One job, one row: keyed on category and label, so PTAC / PTAC-1 / an
+// untagged "PTAC unit set and sealed" line on different floors collapse into
+// a single row that names every code it covers.
+const codeKey = (it) => `${it.category || 'Other'}|${String(it.label || '').trim().toLowerCase()}`;
 
 function renderBulk(ctx) {
   const { store } = ctx;
@@ -411,21 +463,35 @@ function renderBulk(ctx) {
     .filter(r => !q.floors.length || q.floors.includes(Number(r.floor)))
     .filter(r => q.kind.startsWith('space') || !q.types.length || q.types.includes(r.typeLabel || r.type));
   const mep = q.kind.endsWith('mep');
-  const docs = parents.map(r => mep ? store.mepDoc(r.number) : r).filter(Boolean);
+  // Address documents by their STORE KEY, never by a field inside the payload.
+  const keyOf = new Map(Object.entries(store.docs).map(([k, v]) => [v, k]));
+  const docs = parents.map(r => mep ? store.mepDoc(r.number) : r).filter(Boolean).filter(d => keyOf.has(d));
   // Distinct lines across the scope, counted.
   const tags = new Map();
   for (const d of docs) for (const [, it] of store.liveItems(d)) {
     const k = codeKey(it);
-    if (!tags.has(k)) tags.set(k, { key: k, category: it.category || 'Other', code: it.code || '', label: it.label || '', n: 0, unchecked: 0, open: 0 });
+    if (!tags.has(k)) tags.set(k, { key: k, category: it.category || 'Other', codes: new Set(), label: it.label || '', n: 0, unchecked: 0, open: 0 });
     const t = tags.get(k); t.n++; if (!it.checked) t.unchecked++; if (it.issue && !it.issueResolved) t.open++;
+    for (const c of String(it.code || '').split('/').map(x => x.trim()).filter(Boolean)) t.codes.add(c);
   }
   const cats = [...new Set([...tags.values()].map(t => t.category))];
-  const shownTags = [...tags.values()].filter(t => !q.cats.length || q.cats.includes(t.category)).sort((a, b) => a.category.localeCompare(b.category) || a.code.localeCompare(b.code) || a.label.localeCompare(b.label));
+  const filterText = String(q.filter || '').trim().toLowerCase();
+  const shownTags = [...tags.values()]
+    .filter(t => !q.cats.length || q.cats.includes(t.category))
+    .filter(t => !filterText || `${[...t.codes].join(' ')} ${t.label}`.toLowerCase().includes(filterText))
+    .sort((a, b) => a.category.localeCompare(b.category) || a.label.localeCompare(b.label));
+  const codesOf = (t) => { const c = [...t.codes]; return c.length ? (c.length > 3 ? `${c.slice(0, 3).join(' / ')} +${c.length - 3}` : c.join(' / ')) : '—'; };
+  const typesOnFloors = new Set(rooms.filter(r => !q.floors.length || q.floors.includes(Number(r.floor))).map(r => r.typeLabel || r.type));
+  const fam = (t) => /^King/.test(t) ? 'King' : /^(QQ|Queen)/.test(t) ? 'QQ' : '';
+  const lastResult = q.lastResult || null;
   const picked = new Set(q.codes);
   const targets = [];
-  if (picked.size) for (const d of docs) for (const [id, it] of store.liveItems(d)) if (picked.has(codeKey(it))) targets.push({ docId: d.number, itemId: id });
-  const plan = picked.size ? store.planBulk(targets, q.action, { text: q.text, overwriteChecked: !!q.overwrite }) : null;
+  if (picked.size) for (const d of docs) for (const [id, it] of store.liveItems(d)) if (picked.has(codeKey(it))) targets.push({ docId: keyOf.get(d), itemId: id });
+  const planOpts = { text: q.text, overwriteChecked: !!q.overwrite };
+  const plan = picked.size ? store.planBulk(targets, q.action, planOpts) : null;
   const A = store.constructor.BULK_ACTIONS;
+  const D = store.constructor.BULK_DESTRUCTIVE;
+  const lastUndo = store.loadUndo().slice(-1)[0];
 
   const root = el(`<div>
     <div class="pagehead"><h1 class="h1">Bulk mark</h1><span class="sub">one tag across many rooms · previewed, then one write per room · every apply has Undo</span></div>
@@ -436,25 +502,29 @@ function renderBulk(ctx) {
           ${[['ffe', 'Rooms · FF&E'], ['mep', 'Rooms · MEP punch'], ['space-ffe', 'Common areas · FF&E'], ['space-mep', 'Common areas · MEP']].map(([k, l]) => `<button class="fl ${q.kind === k ? 'on' : ''}" data-kind="${k}">${l}</button>`).join('')}
         </div>
         <div class="chips" style="margin-bottom:8px">${floors.map(f => `<button class="fl ${q.floors.includes(f) ? 'on' : ''}" data-floor="${f}">Floor ${f}</button>`).join('')}</div>
-        ${q.kind.startsWith('space') ? '' : `<div class="chips">${types.map(tp => `<button class="fl ${q.types.includes(tp) ? 'on' : ''}" data-type="${esc(tp)}">${esc(tp)}</button>`).join('')}</div>`}
+        ${q.kind.startsWith('space') ? '' : `<div class="chips" style="margin-bottom:6px"><button class="fl" data-family="King">All King</button><button class="fl" data-family="QQ">All QQ</button><button class="fl" data-family="">Every type</button></div>
+        <div class="chips">${types.map(tp => `<button class="fl ${q.types.includes(tp) ? 'on' : ''} ${typesOnFloors.has(tp) ? '' : 'dim'}" data-type="${esc(tp)}" title="${typesOnFloors.has(tp) ? '' : 'no rooms of this type on the picked floors'}">${esc(tp)}</button>`).join('')}</div>`}
         <div style="margin-top:10px;font-size:12.5px;color:var(--muted)"><b>${docs.length}</b> ${q.kind.startsWith('space') ? 'spaces' : 'rooms'} in scope${!q.floors.length && !q.types.length ? ' (every floor, every type; narrow it with the chips)' : ''}</div>
       </section>
       <section class="card">
         <h3>Which lines</h3>
         <div class="chips" style="margin-bottom:8px">${cats.map(c => `<button class="fl ${q.cats.includes(c) ? 'on' : ''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div>
-        <div class="taglist">${shownTags.length ? shownTags.map(tg => `<label><input type="checkbox" data-code="${esc(tg.key)}" ${picked.has(tg.key) ? 'checked' : ''}/><span class="tag">${esc(tg.code || '—')}</span><span>${esc(tg.label.length > 48 ? tg.label.slice(0, 47) + '…' : tg.label)}</span><span class="tcount">${tg.unchecked} open of ${tg.n}${tg.open ? ` · ${tg.open} issue` : ''}</span></label>`).join('') : '<div class="coming" style="padding:18px"><b>No lines in this scope</b></div>'}</div>
-        <div style="margin-top:8px;font-size:12px;color:var(--subtle)">${picked.size} tag(s) picked · ${targets.length} line(s) in scope</div>
+        <input class="tagfilter" data-filter placeholder="Find a tag or a line (PTAC, grille, headboard)" value="${esc(q.filter || '')}"/>
+        <div class="taglist">${shownTags.length ? shownTags.map(tg => `<label><input type="checkbox" data-code="${esc(tg.key)}" ${picked.has(tg.key) ? 'checked' : ''}/><span class="tag" title="${esc([...tg.codes].join(', '))}">${esc(codesOf(tg))}</span><span>${esc(tg.label.length > 48 ? tg.label.slice(0, 47) + '…' : tg.label)}</span><span class="tcount">${tg.unchecked} open of ${tg.n}${tg.open ? ` · ${pl(tg.open, 'issue')}` : ''}</span></label>`).join('') : '<div class="coming" style="padding:18px"><b>No lines match</b></div>'}</div>
+        <div style="margin-top:8px;font-size:12px;color:var(--subtle)">${pl(picked.size, 'tag')} picked · ${pl(targets.length, 'line')} in scope</div>
       </section>
       <section class="card">
         <h3>Do what</h3>
-        <div class="chips">${Object.entries(A).map(([k, l]) => `<button class="fl ${q.action === k ? 'on' : ''}" data-action="${k}">${l}</button>`).join('')}</div>
+        <div class="chips">${Object.entries(A).map(([k, l]) => `<button class="fl ${q.action === k ? 'on' : ''}" data-action="${k}" title="${D.includes(k) ? 'Changes or removes what is on the line' : ''}">${l}${D.includes(k) ? ' <span style="color:var(--issue-ink)">·</span>' : ''}</button>`).join('')}</div>
+        <div style="margin-top:6px;font-size:11.5px;color:var(--subtle)">A red dot marks an action that changes or removes what is already on a line.</div>
         ${q.action === 'setIssue' ? `<div class="qps" style="margin-top:8px">${QUICK_PICKS.map(x => `<button class="qp ${q.text === x ? 'on' : ''}" data-q="${x}">${x}</button>`).join('')}</div><div class="field"><label>Or a custom note</label><input data-custom value="${QUICK_PICKS.includes(q.text) ? '' : esc(q.text)}" placeholder="Type what is wrong"/></div>` : ''}
         ${['check', 'uncheck', 'resolveAndCheck'].includes(q.action) ? `<label style="display:flex;gap:8px;align-items:center;font-size:12.5px;margin-top:10px"><input type="checkbox" data-overwrite ${q.overwrite ? 'checked' : ''}/> Also restamp lines checked by someone else</label>` : ''}
       </section>
       <section class="card">
         <h3>Preview</h3>
+        ${lastResult ? `<div class="preview done"><div class="ph">${ic('check')}<b>Done</b> · ${esc(lastResult.label)} · ${fmtWhen(lastResult.at)}</div></div>` : ''}
         ${plan ? bulkPreviewHtml(plan) : '<div class="coming" style="padding:18px"><b>Pick at least one tag</b><span>The preview shows exactly what will change and what is left alone, per room.</span></div>'}
-        <div class="srow" style="margin-top:10px"><button class="btn primary" data-apply ${plan && plan.changes.length ? '' : 'disabled'}>${ic('check')}Apply${plan ? ` to ${plan.changes.length} line(s)` : ''}</button></div>
+        <div class="srow" style="margin-top:10px">${lastUndo ? `<button class="btn" data-undo-last title="${esc(lastUndo.label)}">Undo last bulk edit</button>` : ''}<button class="btn primary" data-apply ${plan && plan.changes.length ? '' : 'disabled'}>${ic('check')}${plan && plan.changes.length ? `Apply to ${pl(plan.changes.length, 'line')}` : 'Nothing to apply'}</button></div>
       </section>
     </div>
   </div>`);
@@ -463,6 +533,8 @@ function renderBulk(ctx) {
   root.querySelectorAll('[data-kind]').forEach(b => b.addEventListener('click', () => save({ kind: b.dataset.kind, cats: [], codes: [] })));
   root.querySelectorAll('[data-floor]').forEach(b => b.addEventListener('click', () => save({ floors: toggleIn(q.floors, Number(b.dataset.floor)) })));
   root.querySelectorAll('[data-type]').forEach(b => b.addEventListener('click', () => save({ types: toggleIn(q.types, b.dataset.type) })));
+  root.querySelectorAll('[data-family]').forEach(b => b.addEventListener('click', () => save({ types: b.dataset.family ? types.filter(tp => fam(tp) === b.dataset.family) : [] })));
+  root.querySelector('[data-filter]')?.addEventListener('input', e => { const v = e.target.value; clearTimeout(root._ft); root._ft = setTimeout(() => save({ filter: v }), 250); });
   root.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', () => save({ cats: toggleIn(q.cats, b.dataset.cat) })));
   root.querySelectorAll('[data-code]').forEach(b => b.addEventListener('change', () => save({ codes: toggleIn(q.codes, b.dataset.code) })));
   root.querySelectorAll('[data-action]').forEach(b => b.addEventListener('click', () => save({ action: b.dataset.action })));
@@ -473,10 +545,16 @@ function renderBulk(ctx) {
     if (!plan || !plan.changes.length) return;
     if (!store.user) return identityGate(ctx);
     if (q.action === 'setIssue' && !q.text) { toast('Pick an issue or type one'); return; }
-    const res = store.applyBulk(plan);
-    if (!res) return;
-    toast(`${A[q.action]}: ${res.lines} line(s) in ${res.docs} document(s)`, { label: 'Undo', fn: () => { store.undoBulk(res.entry); toast('Undone'); } });
-    store._emit();
+    const fresh = replanOrWarn(store, targets, q.action, planOpts, plan);
+    if (!fresh) { store._emit(); return; }
+    const res = bulkApplyAndToast(store, fresh, A[q.action]);
+    if (res) save({ lastResult: { label: res.entry.label, at: res.entry.at } });
+  });
+  root.querySelector('[data-undo-last]')?.addEventListener('click', () => {
+    const r = store.undoBulk(lastUndo);
+    if (!r) { toast('Nothing to undo'); return; }
+    toast(`Undone: ${pl(r.reverted, 'line')} reverted${r.skipped.length ? `, ${r.skipped.length} left alone (changed since, or gone)` : ''}`);
+    save({ lastResult: { label: `Undone: ${lastUndo.label}`, at: new Date().toISOString() } });
   });
   return root;
 }
@@ -486,14 +564,28 @@ function bulkPreviewHtml(plan) {
   for (const c of plan.changes) byDoc.set(c.docId, (byDoc.get(c.docId) || 0) + 1);
   const skipByDoc = new Map();
   for (const k of plan.skipped) { if (!skipByDoc.has(k.docId)) skipByDoc.set(k.docId, new Map()); const m = skipByDoc.get(k.docId); m.set(k.why, (m.get(k.why) || 0) + 1); }
-  const ids = [...new Set([...byDoc.keys(), ...skipByDoc.keys()])].sort();
   const byWhy = new Map();
   for (const k of plan.skipped) byWhy.set(k.why, (byWhy.get(k.why) || 0) + 1);
+  // Only the exceptions are worth a row: a document with something left alone,
+  // or with a count that differs from the common case. The rest collapse.
+  const counts = [...byDoc.values()];
+  const mode = counts.length ? counts.sort((a, b) => counts.filter(v => v === a).length - counts.filter(v => v === b).length).pop() : 0;
+  const ids = [...new Set([...byDoc.keys(), ...skipByDoc.keys()])].sort();
+  // Rooms that read exactly alike collapse into one row once there are more
+  // than four of them; the exceptions keep their own row.
+  const sig = (d) => `${byDoc.get(d) || 0}|${skipByDoc.has(d) ? [...skipByDoc.get(d)].map(([w, n]) => `${n} ${w}`).join(' · ') : ''}`;
+  const groups = new Map();
+  for (const d of ids) { const g = sig(d); if (!groups.has(g)) groups.set(g, []); groups.get(g).push(d); }
+  const shown = ids.filter(d => groups.get(sig(d)).length <= 4 && (skipByDoc.has(d) || (byDoc.get(d) || 0) !== mode));
+  const collapsed = [...groups].filter(([, ds]) => ds.length > 4 && ds.some(d => skipByDoc.has(d) || (byDoc.get(d) || 0) !== mode));
+  const hidden = ids.length - shown.length - collapsed.reduce((n, [, ds]) => n + ds.length, 0);
   return `<div class="preview">
-    <div class="ph"><b>${plan.changes.length}</b> will change in <b>${byDoc.size}</b> room(s) · ${plan.skipped.length} left alone</div>
-    ${ids.slice(0, 80).map(d => `<div class="prow"><span class="mono">${esc(d)}</span><span>${byDoc.get(d) ? `${byDoc.get(d)} line(s) change` : 'no change'}</span><span class="why">${skipByDoc.has(d) ? [...skipByDoc.get(d)].map(([w, n]) => `${n} ${esc(w)}`).join(' · ') : ''}</span></div>`).join('')}
-    ${ids.length > 80 ? `<div class="prow"><span class="why">and ${ids.length - 80} more</span></div>` : ''}
-    ${plan.skipped.length ? `<div class="skipsum"><b>Left alone (${plan.skipped.length})</b>${[...byWhy].map(([w, n]) => `<div>${n} · ${esc(w)}</div>`).join('')}</div>` : '<div class="skipsum">Nothing left alone.</div>'}
+    <div class="ph"><b>${plan.changes.length}</b> will change in <b>${byDoc.size}</b> ${byDoc.size === 1 ? 'room' : 'rooms'} · <span class="n">${plan.skipped.length}</span> left alone${plan.replaced ? ` · <b style="color:var(--issue-ink)">${plan.replaced}</b> will have their issue text replaced` : ''}</div>
+    ${shown.slice(0, 60).map(d => `<div class="prow"><span class="mono">${esc(docLabel(d))}</span><span>${byDoc.get(d) ? `${pl(byDoc.get(d), 'line')} change` : 'no change'}</span><span class="why">${skipByDoc.has(d) ? [...skipByDoc.get(d)].map(([w, n]) => `${n} ${esc(w)}`).join(' · ') : ''}</span></div>`).join('')}
+    ${shown.length > 60 ? `<div class="prow"><span class="why">and ${shown.length - 60} more exceptions</span></div>` : ''}
+    ${collapsed.map(([g, ds]) => { const [n, why] = g.split('|'); return `<div class="prow"><span class="mono">${pl(ds.length, 'room')}</span><span>${Number(n) ? `${pl(Number(n), 'line')} change each` : 'no change'}</span><span class="why">${esc(why)}</span></div>`; }).join('')}
+    ${hidden ? `<div class="prow"><span class="why">${hidden === ids.length ? `${pl(hidden, 'room')}, ${mode === 1 ? '1 line each' : mode + ' lines each'}` : `and ${pl(hidden, 'more room')} · ${mode === 1 ? '1 line each' : mode + ' lines each'}`}</span></div>` : ''}
+    ${plan.skipped.length ? `<div class="skipsum"><b>Left alone (${plan.skipped.length})</b>${[...byWhy].map(([w, n]) => `<div><b>${n}</b> · ${esc(w)}</div>`).join('')}</div>` : '<div class="skipsum">Nothing left alone.</div>'}
   </div>`;
 }
 
@@ -774,7 +866,7 @@ function renderSpace(ctx, { id }) {
   for (const [cat, entries] of groupByCategory(store.liveItems(active))) {
     const done = entries.filter(([, it]) => it.checked).length;
     const head = el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">\u00b7</span><span>${done} of ${entries.length} checked</span>${bulkOn(activeId) ? '<span class="pickall" role="button" tabindex="0">select all</span>' : ''}</div>`);
-    head.querySelector('.pickall')?.addEventListener('click', () => bulkCatToggle(list, activeId, entries));
+    head.querySelector('.pickall')?.addEventListener('click', (e) => bulkCatToggle(list, activeId, entries, e.currentTarget));
     list.append(head);
     for (const [iid, it] of entries) list.append(itemRow(ctx, activeId, iid, it));
   }

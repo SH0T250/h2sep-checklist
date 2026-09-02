@@ -539,7 +539,7 @@ for (const m of noteMisses) console.log(`      MISSING OR ALTERED: ${m}`);
  * born-clean assertion is deliberately NOT re-run: carrying field state is
  * exactly what this tool is for. */
 const DOC_KEYS = new Set(['createdAt', 'deleted', 'floor', 'items', 'notes', 'number', 'schemaV', 'type', 'typeLabel', 'updatedAt']);
-const ITEM_KEYS = new Set(['attachments', 'category', 'checked', 'checkedAt', 'checkedAtLocal', 'code', 'deleted',
+const ITEM_KEYS = new Set(['attachments', 'category', 'checked', 'checkedAt', 'checkedAtLocal', 'checkedByCo', 'code', 'deleted',
   'derived', 'id', 'initials', 'instanceNote', 'issue', 'issueResolved', 'label', 'qty', 'reliability', 'sort',
   'src', 'trade', 'verifyAtPunch', 'where']);
 const NOTE_KEYS = new Set(['by', 'createdAt', 'flag', 'redactedAuthor', 'resolved', 'text']);

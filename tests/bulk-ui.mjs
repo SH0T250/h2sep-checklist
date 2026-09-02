@@ -135,6 +135,66 @@ t('undo reverses every room document', l3.length === l2.length + newPatches.leng
 await p.goto(B + '#/activity', { waitUntil: 'networkidle' });
 t('the activity log records the bulk edits and the undo', /bulk/.test(await p.textContent('body')) && /undid bulk/.test(await p.textContent('body')));
 
+console.log('\nREVIEW FINDINGS, FIXED AT THE MECHANISM');
+// (1) Undo never overwrites a line someone changed since the bulk.
+await p.goto(B + '#/room/407', { waitUntil: 'networkidle' });
+await p.waitForSelector('.item-row');
+await p.click('[data-bulk]'); await p.waitForSelector('.item-row.selectable');
+await p.click('.cat-head .pickall');
+await p.click('.bulkbar [data-act="check"]'); await p.waitForSelector('.sheet .preview');
+const n407 = Number(((await p.textContent('.sheet .preview .ph')).match(/(\d+) will change/) || [])[1] || 0);
+await p.click('.sheet [data-apply]'); await p.waitForTimeout(300);
+// a crew phone unchecks one of those lines in between
+const changedId = await p.evaluate(() => { const l = JSON.parse(localStorage.getItem('h2sep-platform-v1')); const last = l[l.length - 1]; const k = Object.keys(last.patch).find(x => x.endsWith('.checked')); const itemId = k.split('.')[1]; window.__store.check(last.docId, itemId, false); return itemId; });
+await p.waitForTimeout(200);
+const undoLen0 = (await log()).length;
+await p.click('.toast button'); await p.waitForTimeout(400);
+const undoPatch = (await log()).slice(undoLen0).pop()?.patch || {};
+t('undo skips the line changed since and reverts the rest', !Object.keys(undoPatch).some(k => k.startsWith('items.' + changedId + '.')) && Object.keys(undoPatch).filter(k => k.endsWith('.checked')).length === n407 - 1, `${Object.keys(undoPatch).filter(k => k.endsWith('.checked')).length} of ${n407}`);
+t('the undo toast says one line was left alone', /1 left alone/.test(await p.textContent('.toast')), await p.textContent('.toast'));
+// (2) ABSENT: a field the line never had does not come back as null
+const absentOk = await p.evaluate((id) => { const d = window.__store.getDoc('407'); return Object.values(d.items).filter(it => !it.deleted && !it.checked).every(it => !('checkedByCo' in it) || it.checkedByCo === ''); }, changedId);
+t('undo restores absent fields as absent, never null', absentOk);
+// (3) Re-plan at Apply: the checklist moves between preview and Apply
+await p.goto(B + '#/room/409', { waitUntil: 'networkidle' }); await p.waitForSelector('.item-row');
+await p.click('[data-bulk]'); await p.waitForSelector('.item-row.selectable'); await p.click('.cat-head .pickall');
+await p.click('.bulkbar [data-act="check"]'); await p.waitForSelector('.sheet .preview');
+await p.evaluate(() => { const clean = [...document.querySelectorAll('.item-row.picked')].find(r => !r.querySelector('.stamp.checked') && !r.querySelector('.issue-pill') && !r.classList.contains('flagged')); window.__store.setIssue('409', clean.dataset.item, 'DAMAGED'); });
+const lenBefore = (await log()).length;
+await p.click('.sheet [data-apply]'); await p.waitForTimeout(300);
+t('Apply re-plans and refuses a stale preview', (await log()).length === lenBefore && /changed since the preview/.test(await p.textContent('.toast')));
+t('the sheet re-rendered with the new count', /open issue/.test(await p.textContent('.sheet')));
+await p.click('.sheet [data-close]'); await p.click('.bulkbar [data-act="cancel"]');
+// (4) Flag an issue previews how many lines lose an existing issue text
+await p.goto(B + '#/room/205', { waitUntil: 'networkidle' }); await p.waitForSelector('.item-row');
+await p.click('[data-bulk]'); await p.waitForSelector('.item-row.selectable'); await p.click('.cat-head .pickall');
+await p.click('.bulkbar [data-act="setIssue"]'); await p.waitForSelector('.sheet .qp');
+await p.click('.sheet .qp[data-q="DAMAGED"]'); await p.click('.sheet [data-next]'); await p.waitForSelector('.sheet .preview');
+t('flagging over an existing issue says how many texts are replaced', /will have their issue text replaced/.test(await p.textContent('.sheet .preview .ph')) && /replaces "MISSING"/.test(await p.textContent('.sheet')));
+await p.click('.sheet [data-close]'); await p.click('.bulkbar [data-act="cancel"]');
+// (5) No identity: the Bulk screen must not crash, and the plan says why
+await p.evaluate(() => localStorage.removeItem('h2sep-platform-user'));
+await p.goto(B + '#/bulk', { waitUntil: 'networkidle' }); await p.waitForTimeout(300);
+await p.evaluate(() => { document.querySelector('.scrim')?.remove(); });
+t('the Bulk screen renders without an identity', !!(await p.$('.bulk-scope')));
+t('without an identity every stamping line is left alone with "set your initials first"', /set your initials first/.test(await p.textContent('.bulk-scope')));
+t('disabled buttons look disabled', await p.$eval('[data-apply]', b => b.disabled && getComputedStyle(b).opacity !== '1' || b.disabled && getComputedStyle(b).backgroundColor !== 'rgb(2, 169, 222)'));
+await p.evaluate(() => localStorage.setItem('h2sep-platform-user', JSON.stringify({ name: 'Test User', initials: 'TU', company: 'Triun, LLC' })));
+// (6) Tag rows merge codes that share a label
+await p.goto(B + '#/bulk', { waitUntil: 'networkidle' }); await p.waitForSelector('.bulk-scope');
+await p.evaluate(() => sessionStorage.setItem('h2sep-p-bulkq', JSON.stringify({ floors: [2], types: [], kind: 'mep', cats: ['Mechanical'], codes: [], action: 'check', text: '' })));
+await p.goto(B + '#/bulk', { waitUntil: 'networkidle' }); await p.reload({ waitUntil: 'networkidle' }); await p.waitForSelector('.taglist label');
+const labels = await p.$$eval('.taglist label', ls => ls.map(l => l.textContent.replace(/\s+/g, ' ').trim()));
+t('one PTAC row covers every PTAC code on the floor', labels.filter(l => /PTAC unit set and sealed/.test(l)).length === 1 && labels.some(l => /PTAC.*\/.*PTAC unit set/.test(l)), labels.filter(l => /PTAC unit/.test(l)).join(' | '));
+const ptacIdx = labels.findIndex(l => /PTAC unit set and sealed/.test(l));
+await p.click(`.taglist label:nth-child(${ptacIdx + 1}) input`); await p.waitForSelector('.preview');
+const ptacWant = Number(((await p.textContent('.preview .ph')).match(/(\d+) will change/) || [])[1] || 0);
+await p.click('[data-apply]'); await p.waitForTimeout(400);
+t('the merged PTAC row applies across every code it covers', ptacWant > 2 && /Done/.test(await p.textContent('.preview.done')), `${ptacWant} lines`);
+t('the Undo last bulk edit button is offered after a bulk', !!(await p.$('[data-undo-last]')));
+await p.click('[data-undo-last]'); await p.waitForTimeout(400);
+t('Undo last bulk edit reverts it and says so', /Undone/.test(await p.textContent('.preview.done')));
+
 t('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' ; '));
 await b.close();
 console.log(`\n${pass} passed, ${fail} failed`);
