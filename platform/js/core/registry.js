@@ -29,10 +29,22 @@ export class Registry {
 }
 
 export function startRouter(registry, ctx, renderShell) {
+  // A store change re-renders the same screen in place: keep the scroll
+  // position, so checking a line at the bottom of a long checklist does not
+  // throw the reader back to the top. A hash change is a new screen and
+  // starts at the top, as before.
+  let lastHash = null;
   const render = () => {
     const hash = location.hash || '#/';
+    const sameScreen = hash === lastHash;
+    const y = sameScreen ? window.scrollY : 0;
+    lastHash = hash;
     const hit = registry.resolve(hash);
     renderShell(hash, hit ? () => hit.route.render(ctx, hit.params) : null);
+    if (sameScreen && y) {
+      window.scrollTo(0, y);
+      requestAnimationFrame(() => window.scrollTo(0, Math.min(y, document.documentElement.scrollHeight)));
+    }
   };
   window.addEventListener('hashchange', render);
   ctx.store.subscribe(() => render());

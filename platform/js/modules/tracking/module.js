@@ -86,6 +86,67 @@ function hasDetail(it) {
 
 // ---------- screens ----------
 
+// Percent complete per trade, building-wide, with a per-floor split. FF&E is
+// one trade with its families under it; each MEP category is its own trade.
+// Counted off the same checklist lines the crew taps, rooms and common areas
+// alike, so there is no second set of books.
+const MEP_ORDER = ['Mechanical', 'Electrical', 'Plumbing', 'Fire Protection', 'Fire Sprinkler', 'Fire Alarm', 'Low Voltage'];
+function tradeStats(store) {
+  const floors = new Set();
+  const mk = () => ({ total: 0, done: 0, open: 0, byFloor: {} });
+  const ffe = mk(), fam = new Map(), mep = new Map();
+  const add = (acc, it, floor) => {
+    acc.total++; if (it.checked) acc.done++; if (it.issue && !it.issueResolved) acc.open++;
+    const f = acc.byFloor[floor] || (acc.byFloor[floor] = { total: 0, done: 0 });
+    f.total++; if (it.checked) f.done++;
+  };
+  for (const [id, d] of Object.entries(store.docs)) {
+    if (id.startsWith('_') || d.deleted) continue;
+    const isMep = store.constructor.MEP_SUFFIXES.some(sfx => id.endsWith(sfx)) || d.type === 'mep-punch';
+    const floor = Number(d.floor) || 0;
+    if (floor) floors.add(floor);
+    for (const [, it] of store.liveItems(d)) {
+      if (isMep) {
+        const c = it.category || 'Other';
+        if (!mep.has(c)) mep.set(c, mk());
+        add(mep.get(c), it, floor);
+      } else {
+        add(ffe, it, floor);
+        const c = String(it.category || 'Other').replace(/^FF&E - /, '');
+        if (!fam.has(c)) fam.set(c, mk());
+        add(fam.get(c), it, floor);
+      }
+    }
+  }
+  const order = (a, b) => { const ia = MEP_ORDER.indexOf(a[0]), ib = MEP_ORDER.indexOf(b[0]); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || a[0].localeCompare(b[0]); };
+  return {
+    floors: [...floors].sort((a, b) => a - b),
+    rows: [
+      { name: 'FF&E', ...ffe, head: true },
+      ...[...fam].sort((a, b) => b[1].total - a[1].total).map(([name, v]) => ({ name, ...v, sub: true })),
+      ...[...mep].sort(order).map(([name, v]) => ({ name, ...v, head: true, mep: true })),
+    ],
+  };
+}
+const pct = (d, t) => t ? Math.round(d / t * 100) : 0;
+function tradeTable(store) {
+  const { floors, rows } = tradeStats(store);
+  return `<section class="card" style="margin-bottom:18px">
+    <div class="card-head trades-head"><h2>Percent complete by trade</h2><span class="card-cap">FF&amp;E with its families, then each MEP trade · rooms and common areas · every floor</span><span class="spacer"></span><span class="card-cap">open issues counted per trade</span></div>
+    <div class="trades" style="--nf:${floors.length}">
+      <div class="trow th"><span class="tn">Trade</span><span class="tb"></span><span class="tp">%</span><span class="tf">checked</span><span class="ti">open</span>${floors.map(f => `<span class="tfl">F${f}</span>`).join('')}</div>
+      ${rows.map(r => `<div class="trow ${r.sub ? 'sub' : 'head'} ${r.mep ? 'mep' : ''}">
+        <span class="tn">${esc(r.name)}</span>
+        <span class="tb"><span class="bar ${r.sub ? '' : 'cy'}"><i style="width:${pct(r.done, r.total)}%"></i></span></span>
+        <span class="tp">${pct(r.done, r.total)}%</span>
+        <span class="tf">${r.done}<small> / ${r.total}</small></span>
+        <span class="ti ${r.open ? 'has' : ''}">${r.open ? ic('flag', 'flag-ic') + ' ' + r.open : '0'}</span>
+        ${floors.map(f => { const x = r.byFloor[f]; return `<span class="tfl ${x ? '' : 'na'}">${x ? pct(x.done, x.total) + '%' : '·'}</span>`; }).join('')}
+      </div>`).join('')}
+    </div>
+  </section>`;
+}
+
 function renderDashboard(ctx) {
   const { store } = ctx;
   const rooms = store.guestRooms();
@@ -111,6 +172,7 @@ function renderDashboard(ctx) {
       <div class="kpi"><div class="kl">Rooms complete</div><div class="kv">${complete}<small> of ${rows.length}</small></div><div class="kc">every line checked, zero open issues</div></div>
       <div class="kpi"><div class="kl">MEP punch lists</div><div class="kv">${mepCount}</div><div class="kc">separate from FF&amp;E, per room</div></div>
     </div>
+    ${tradeTable(store)}
     <section class="card">
       <div class="card-head"><h2>Rooms</h2><span class="card-cap">${esc(floorRange(rooms))}</span><span class="spacer"></span><span class="card-cap">tap a room to open its checklist</span></div>
       <div class="rlist"></div>
@@ -336,15 +398,19 @@ function bulkBar(ctx, docId, doc) {
     <button class="btn" data-act="uncheck" disabled>Mark unchecked</button>
     <button class="btn" data-act="resolve" disabled>Resolve issues</button>
     <button class="btn" data-act="resolveAndCheck" disabled>Resolve and check</button>
-    <button class="btn" data-act="setIssue" disabled>${ic('flag', 'flag-ic')}Flag issue</button>
+    <button class="btn" data-act="flag:MISSING" disabled>${ic('flag', 'flag-ic')}Missing</button>
+    <button class="btn" data-act="flag:IN BOX" disabled>${ic('flag', 'flag-ic')}In box</button>
+    <button class="btn" data-act="setIssue" disabled>${ic('flag', 'flag-ic')}Other issue</button>
     <button class="btn" data-act="more" disabled>More…</button>
     <button class="btn" data-act="cancel">Cancel</button>
   </div>`);
   const run = (act) => {
     const targets = [...bulkSel.ids].map(itemId => ({ docId, itemId }));
     if (!targets.length) return;
-    const go = (text) => bulkConfirm(ctx, targets, act, { text, scopeLabel: docLabel(docId) }, () => { bulkSel = null; });
-    if (act === 'setIssue') issueTextSheet(ctx, go); else go('');
+    const go = (text) => bulkConfirm(ctx, targets, act.startsWith('flag:') ? 'setIssue' : act, { text, scopeLabel: docLabel(docId) }, () => { bulkSel = null; });
+    if (act.startsWith('flag:')) go(act.slice(5));          // one-tap MISSING / IN BOX, straight to the preview
+    else if (act === 'setIssue') issueTextSheet(ctx, go);
+    else go('');
   };
   bar.querySelectorAll('[data-act]').forEach(b => b.addEventListener('click', () => {
     const act = b.dataset.act;
@@ -352,7 +418,7 @@ function bulkBar(ctx, docId, doc) {
     if (act === 'more') {
       const A = store.constructor.BULK_ACTIONS;
       const { close } = sheet(`<div class="sh"><b style="font-size:15px">${bulkSel.ids.size} selected · do what?</b><button class="icon-btn x" data-close aria-label="Close">${ic('x')}</button></div>
-        <div style="display:grid;gap:8px">${Object.entries(A).filter(([k]) => k !== 'clearIssue').map(([k, l]) => `<button class="btn" data-more="${k}" style="justify-content:center;padding:12px">${l}</button>`).join('')}</div>`);
+        <div style="display:grid;gap:8px">${[['flag:MISSING', 'Flag MISSING'], ['flag:IN BOX', 'Flag IN BOX'], ...Object.entries(A).filter(([k]) => k !== 'clearIssue').map(([k, l]) => [k, k === 'setIssue' ? 'Flag another issue' : l])].map(([k, l]) => `<button class="btn" data-more="${k}" style="justify-content:center;padding:12px">${l}</button>`).join('')}</div>`);
       document.querySelectorAll('.sheet [data-more]').forEach(x => x.addEventListener('click', () => { close(); run(x.dataset.more); }));
       return;
     }
