@@ -1,0 +1,61 @@
+
+FLOOR-3 COMMON AREAS  (Austin ruling D18 - PLAN numbering from the architectural set)
+====================================================================================================
+spaces on floor 3 in data/project.sqlite: 9  (verified against the DB, not the brief)
+doc id scheme: "S<space_no minus punctuation>", MEP companion "-M" - 18 ids, longest "S300-M" (6 chars, limit 8)
+fold key proved: 0 documented "N of M" multipliers across 7 gated tag groups, all equal to their folded row count
+
+PER-SPACE LINE COUNTS
+----------------------------------------------------------------------------------------------------
+  no     name                              raw   FF&E    MEP  qty?  gated-out   doc id
+  300    Stair 1                              0      0      0     0          0   S300     <- NO PACKAGE
+  319    Electrical                           3      0      0     0          3   S319     <- NO PACKAGE
+  320    Storage                              3      0      0     0          3   S320     <- NO PACKAGE
+  321    Guest Corridor                      14      2      3     1          9   S321   
+  335    House Keeping                        2      0      0     0          2   S335     <- NO PACKAGE
+  337    Elevator Lobby                      13      1      0     1         12   S337     <- thin
+  339    Ice Machine                          4      1      0     0          3   S339     <- thin
+  340    Elev.                                0      0      0     0          0   S340     <- NO PACKAGE
+  341    Stair 2                              0      0      0     0          0   S341     <- NO PACKAGE
+----------------------------------------------------------------------------------------------------
+  TOTAL  9 spaces                           39     10      3     2         32
+
+SPACES WITH NO PACKAGE UNDER THE APPROVED GATE - NO DOC WRITTEN (6)
+----------------------------------------------------------------------------------------------------
+  300    Stair 1                       0 documented row(s), all gated out: none - the space has no rows at all
+  319    Electrical                    3 documented row(s), all gated out: Doors x1, Drywall x1, Flooring x1
+  320    Storage                       3 documented row(s), all gated out: Doors x1, Drywall x1, Flooring x1
+  335    House Keeping                 2 documented row(s), all gated out: Flooring x2
+  340    Elev.                         0 documented row(s), all gated out: none - the space has no rows at all
+  341    Stair 2                       0 documented row(s), all gated out: none - the space has no rows at all
+
+THIN PACKAGES - BUILT, BUT 1-2 LINES ONLY (2)
+----------------------------------------------------------------------------------------------------
+  337    Elevator Lobby                1 FF&E + 0 MEP
+  339    Ice Machine                   1 FF&E + 0 MEP
+
+LINES EMITTED WITH NO QUANTITY - no sheet in the set states a count (2)
+----------------------------------------------------------------------------------------------------
+  321    Guest Corridor              PA-204 [FF&E - Lighting]
+  337    Elevator Lobby              PA-501 [FF&E - Casegoods]
+  (qty is OMITTED from these lines, not defaulted to 1. The reason is written into instanceNote.)
+
+ROWS THE APPROVED CATEGORY GATE KEEPS OUT OF BOTH DOCS (32 of 39)
+----------------------------------------------------------------------------------------------------
+    12  Flooring
+     5  Doors
+     5  Wall Covering
+     5  Paint
+     4  Drywall
+     1  Stone / Surround
+  These categories appear in NEITHER approved guest-room doc, so following Austin's approved precedent puts
+  them nowhere. For a common area they are the substance of a finish walk. OPEN for Austin (same as floor 1):
+  widen the gate for spaces, or leave them out.
+
+====================================================================================================
+wrote platform/data/floor3-staged.json: 4 space doc(s) written, 66 doc(s) carried forward untouched
+  3 of 9 spaces built (10 FF&E lines + 3 MEP lines), 6 refused for having no gated line
+FLOOR 3 STAGED FILE WRITTEN. This tool never touches Firestore; rollout_floor.mjs --floor=3 --apply is the only path live. Nothing pushed. Nothing deployed.
+
+(node:2585) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

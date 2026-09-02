@@ -2419,5 +2419,5 @@ wrote platform/data/floor2-staged.json  (70 docs: 201, 201-MEP, 202, 202-MEP, 20
 READ ONLY and untouched, verified by size+mtime: floor1-staged.json, slice-f1.json, ref-rooms-staged.json, build_floor1.mjs
 FLOOR 2 STAGED FILE WRITTEN. This tool never touches Firestore; rollout_floor.mjs --floor=2 --apply is the only path live. Nothing pushed. Nothing deployed.
 
-(node:1636) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(node:2241) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)

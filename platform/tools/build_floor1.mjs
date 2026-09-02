@@ -284,6 +284,28 @@ const RULED_LINE_ADDITIONS = [
       'on the working wall where the TV goes, level, and secure to the backing.',
   },
   {
+    ruling: 'D48', doc: 'space', key: 'dh_closer_a', category: 'Door Hardware', sort: 21000,
+    code: 'DH-1', qty: 1,
+    label: 'Door closer installed - Rixson R21013 Series 10',
+    src: 'D48 (AJ 2026-09-02) extends D28 to every common area; label on delivered product',
+    note: 'Added by Austin ruling D48: "add door closers and door locks to all the common areas too", ' +
+      'extending D28 from the guest rooms to every common-area checklist. Product identity as ' +
+      'transcribed for D28: RIXSON R21013, Series 10, UL Classified, MISCELLANEOUS FIRE DOOR ' +
+      'ACCESSORIES 2MF0. Check the closer is installed, the door self-closes and latches from any ' +
+      'open position. A space with no door of its own: flag the line rather than check it.',
+  },
+  {
+    ruling: 'D48', doc: 'space', key: 'dh_lock_a', category: 'Door Hardware', sort: 21010,
+    code: 'DH-2', qty: 1,
+    label: 'Door lock installed - 10-336, finish 630',
+    src: 'D48 (AJ 2026-09-02) extends D28 to every common area; box label on delivered product',
+    note: 'Added by Austin ruling D48: "add door closers and door locks to all the common areas too", ' +
+      'extending D28 from the guest rooms to every common-area checklist. Product identity as ' +
+      'transcribed for D28: NORTON RIXSON / ASSA ABLOY 10-336, DOOR, finish 630. Check the lock is ' +
+      'installed and operates: latches, locks and releases. A space with no door of its own: flag ' +
+      'the line rather than check it.',
+  },
+  {
     ruling: 'D28', doc: 'ffe', key: 'dh_closer_a', category: 'Door Hardware', sort: 21000,
     code: 'DH-1', qty: 1,
     label: 'Door closer installed - Rixson R21013 Series 10',
@@ -3069,6 +3091,22 @@ function buildSpaceBandDoc(space, band, red, stamp, dups, report, docIdOverride)
       if (report) report.dupKept.push(line.code + ' emitted once on ' + docId + ' (recorded in spaces ' + dup.spaces.join(', ') + ')');
     }
     items[line.key] = item;
+  }
+
+  /* Owner-ruled lines for every common-area checklist (D48). They ride on the
+   * space's own checklist doc, which is the FF&E doc, or the parent doc of a
+   * space that has only a punch. Idempotent by key; born clean. */
+  if (docId === spaceDocId(space.space_no)) {
+    for (const r of RULED_LINE_ADDITIONS) {
+      if (r.doc !== 'space' || items[r.key]) continue;
+      items[r.key] = {
+        code: r.code, label: r.label, category: r.category, qty: r.qty, sort: r.sort,
+        src: r.src, reliability: 'HIGH', instanceNote: r.note, trade: '', derived: 0,
+        deleted: false, checked: false, initials: '', checkedAt: null, checkedAtLocal: null,
+        issue: '', issueResolved: false,
+      };
+      if (report && report.ruledAdded) report.ruledAdded.push(r.key + ' (' + r.ruling + ') on ' + docId);
+    }
   }
 
   return {
