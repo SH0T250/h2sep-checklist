@@ -6,9 +6,31 @@ import { ic, el, esc, fmtWhen, toast, sheet, pressable } from '../../core/ui.js'
 const QUICK_PICKS = ['NEED INSTALL', 'NEED PROPER PLACE', 'IN BOX', 'DAMAGED', 'MISSING', 'WRONG ITEM'];
 // Copy that states a count has to be derived, or it goes stale the moment the
 // build grows - which is worse than saying nothing, because it reads as fact.
+function floorsOf(docs) {
+  return [...new Set(docs.map(d => Number(d.floor)).filter(n => n > 0))].sort((a, b) => a - b);
+}
+// "floor 1" or "floors 1 to 4", from the documents actually loaded, so the
+// copy never claims a floor the data does not hold.
+function floorRange(docs) {
+  const f = floorsOf(docs);
+  if (!f.length) return 'no floor yet';
+  if (f.length === 1) return `floor ${f[0]}`;
+  const contiguous = f[f.length - 1] - f[0] === f.length - 1;
+  return contiguous ? `floors ${f[0]} to ${f[f.length - 1]}` : `floors ${f.join(', ')}`;
+}
 function sliceNote(store) {
-  const n = store ? store.guestRooms().length : 0;
-  return `Floor 1: ${n} guest rooms built. Floors 2 to 4 arrive with the next rollout.`;
+  const rooms = store ? store.guestRooms() : [];
+  const range = floorRange(rooms);
+  return `${range[0].toUpperCase() + range.slice(1)}: ${rooms.length} guest rooms built.`;
+}
+// A room or space list with a heading row wherever the floor changes.
+function appendByFloor(list, entries, floorOf, rowOf) {
+  let last = null;
+  for (const e of entries) {
+    const f = Number(floorOf(e));
+    if (f !== last) { list.append(el(`<div class="rlist-floor">Floor ${esc(f || '?')}</div>`)); last = f; }
+    list.append(rowOf(e));
+  }
 }
 
 // The printer icon opens the live in-app sheet (#/print/<no>), always current.
@@ -84,19 +106,19 @@ function renderDashboard(ctx) {
       <span class="spacer"></span>
     </div>
     <div class="kpis">
-      <div class="kpi"><div class="kl">Items checked</div><div class="kv">${done}<small> of ${total}</small></div><div class="kc">${pct}% of floor 1</div></div>
+      <div class="kpi"><div class="kl">Items checked</div><div class="kv">${done}<small> of ${total}</small></div><div class="kc">${pct}% of ${esc(floorRange(rooms))}</div></div>
       <div class="kpi"><div class="kl">Open issues</div><div class="kv">${issues}</div><div class="kc">issue flags plus red room notes</div></div>
       <div class="kpi"><div class="kl">Rooms complete</div><div class="kv">${complete}<small> of ${rows.length}</small></div><div class="kc">every line checked, zero open issues</div></div>
       <div class="kpi"><div class="kl">MEP punch lists</div><div class="kv">${mepCount}</div><div class="kc">separate from FF&amp;E, per room</div></div>
     </div>
     <section class="card">
-      <div class="card-head"><h2>Rooms</h2><span class="card-cap">floor 1</span><span class="spacer"></span><span class="card-cap">tap a room to open its checklist</span></div>
+      <div class="card-head"><h2>Rooms</h2><span class="card-cap">${esc(floorRange(rooms))}</span><span class="spacer"></span><span class="card-cap">tap a room to open its checklist</span></div>
       <div class="rlist"></div>
     </section>
   </div>`);
 
   const list = root.querySelector('.rlist');
-  for (const { r, s } of rows) list.append(roomRow(r, s));
+  appendByFloor(list, rows, x => x.r.floor, x => roomRow(x.r, x.s));
   return root;
 }
 
@@ -129,7 +151,7 @@ function renderRooms(ctx) {
   const chips = [['all', 'All'], ['prog', 'In progress'], ['issues', 'Issues'], ['done', 'Done'], ['ns', 'Not started']];
 
   const root = el(`<div>
-    <div class="pagehead"><h1 class="h1">Rooms</h1><span class="sub">${rooms.length} guest rooms on floor 1</span></div>
+    <div class="pagehead"><h1 class="h1">Rooms</h1><span class="sub">${rooms.length} guest rooms on ${esc(floorRange(rooms))}</span></div>
     <div class="filters">${chips.map(([k, l]) => `<button class="fl ${k === filter ? 'on' : ''}" data-f="${k}">${l} <b>${buckets[k].length}</b></button>`).join('')}</div>
     <section class="card"><div class="rlist"></div></section>
   </div>`);
@@ -138,8 +160,8 @@ function renderRooms(ctx) {
   }));
   const list = root.querySelector('.rlist');
   const shown = buckets[filter] || stats;
-  if (!shown.length) list.append(el(`<div class="coming"><b>No rooms match</b><span>Nothing on floor 1 matches that filter right now.</span></div>`));
-  for (const { r, s } of shown) list.append(roomRow(r, s));
+  if (!shown.length) list.append(el(`<div class="coming"><b>No rooms match</b><span>Nothing on ${esc(floorRange(rooms))} matches that filter right now.</span></div>`));
+  appendByFloor(list, shown, x => x.r.floor, x => roomRow(x.r, x.s));
   return root;
 }
 
@@ -415,7 +437,7 @@ export function identityGate(ctx) {
   });
 }
 
-// ---------- common areas (floor 1 spaces) ----------
+// ---------- common areas (the spaces on every built floor) ----------
 
 function spaceRow(ctx, sp) {
   const { store } = ctx;
@@ -441,7 +463,7 @@ function renderCommon(ctx) {
   const { store } = ctx;
   const spaces = store.spaces();
   if (!spaces.length) {
-    return comingSoon('Common Areas', 'The floor-1 spaces arrive with the data rollout.')();
+    return comingSoon('Common Areas', 'The common-area spaces arrive with the data rollout.')();
   }
   let total = 0, done = 0, issues = 0;
   for (const sp of spaces) {
@@ -453,16 +475,17 @@ function renderCommon(ctx) {
   }
   const root = el(`<div>
     <div class="pagehead"><h1 class="h1">Common Areas</h1>
-      <span class="sub">${spaces.length} floor-1 spaces \u00b7 plan numbering from the architectural set</span></div>
+      <span class="sub">${spaces.length} spaces on ${esc(floorRange(spaces))} \u00b7 plan numbering from the architectural set</span></div>
     <div class="kpis">
       <div class="kpi"><div class="kl">Lines checked</div><div class="kv">${done}<small> of ${total}</small></div><div class="kc">FF&amp;E and MEP punch together</div></div>
       <div class="kpi"><div class="kl">Open issues</div><div class="kv">${issues}</div><div class="kc">flags and red space notes</div></div>
-      <div class="kpi"><div class="kl">Spaces</div><div class="kv">${spaces.length}</div><div class="kc">every floor-1 space with a package</div></div>
+      <div class="kpi"><div class="kl">Spaces</div><div class="kv">${spaces.length}</div><div class="kc">every space with a package</div></div>
     </div>
     <section class="card"><div class="rlist"></div></section>
   </div>`);
   const list = root.querySelector('.rlist');
-  for (const sp of spaces) list.append(spaceRow(ctx, sp));
+  const byFloor = [...spaces].sort((a, b) => (Number(a.floor) - Number(b.floor)) || String(a.typeLabel || a.number).localeCompare(String(b.typeLabel || b.number)));
+  appendByFloor(list, byFloor, sp => sp.floor, sp => spaceRow(ctx, sp));
   return root;
 }
 
@@ -470,7 +493,7 @@ function renderSpace(ctx, { id }) {
   const { store } = ctx;
   const doc = store.getDoc(id);
   if (!doc) return el(`<div class="coming">${ic('layers')}<b>${esc(id)} is not in this build</b>
-    <span>Only floor-1 spaces with a package are built.</span></div>`);
+    <span>Only spaces with a package are built.</span></div>`);
   const mep = store.mepDoc(id);
   const view = new URLSearchParams((location.hash.split('?')[1] || '')).get('view') === 'mep' && mep ? 'mep' : 'ffe';
   const active = view === 'mep' ? mep : doc;

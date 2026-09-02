@@ -1,0 +1,26 @@
+FLOOR 4  seed /home/user/h2sep-checklist/platform/data/floor4-staged.json
+live collection: 223 docs
+crew collection: 296 docs (read only, never written)
+staged build   : 70 docs
+
+backup: /home/user/h2sep-checklist/tools/out/backups/platform-before-floor4-rollout-2026-09-02T13-04-07-119Z.json (223 docs)
+
+CREATE  70 new doc(s)
+   401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 436, 438, 401-MEP, 402-MEP, 403-MEP, 404-MEP, 405-MEP, 406-MEP, 407-MEP, 408-MEP, 409-MEP, 410-MEP, 411-MEP, 412-MEP, 413-MEP, 414-MEP, 415-MEP, 416-MEP, 417-MEP, 418-MEP, 422-MEP, 423-MEP, 424-MEP, 425-MEP, 426-MEP, 427-MEP, 428-MEP, 429-MEP, 430-MEP, 431-MEP, 432-MEP, 433-MEP, 434-MEP, 436-MEP, 438-MEP, S421, S421-M, S437, S439
+
+UPDATE  0 existing doc(s)
+
+UNTOUCHED  223 live doc(s) outside this floor's build (left exactly as they are)
+   101, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 118, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 236, 238, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 336, 338, 101-MEP, 103-MEP, 104-MEP, 105-MEP, 106-MEP, 107-MEP, 108-MEP, 109-MEP, 110-MEP, 111-MEP, 112-MEP, 113-MEP, 114-MEP, 115-MEP, 116-MEP, 118-MEP, 201-MEP, 202-MEP, 203-MEP, 204-MEP, 205-MEP, 206-MEP, 207-MEP, 208-MEP, 209-MEP, 210-MEP, 211-MEP, 212-MEP, 213-MEP, 214-MEP, 215-MEP, 216-MEP, 217-MEP, 218-MEP, 222-MEP, 223-MEP, 224-MEP, 225-MEP, 226-MEP, 227-MEP, 228-MEP, 229-MEP, 230-MEP, 231-MEP, 232-MEP, 233-MEP, 234-MEP, 236-MEP, 238-MEP, 301-MEP, 302-MEP, 303-MEP, 304-MEP, 305-MEP, 306-MEP, 307-MEP, 308-MEP, 309-MEP, 310-MEP, 311-MEP, 312-MEP, 313-MEP, 314-MEP, 315-MEP, 316-MEP, 317-MEP, 318-MEP, 322-MEP, 323-MEP, 324-MEP, 325-MEP, 326-MEP, 327-MEP, 328-MEP, 329-MEP, 330-MEP, 331-MEP, 332-MEP, 333-MEP, 334-MEP, 336-MEP, 338-MEP, S001, S003, S003-M, S004, S004-M, S005, S005-M, S006, S007, S007-M, S008, S009, S009-M, S010, S011, S013, S014, S014-M, S015, S015-M, S016, S016-M, S017, S018, S019, S019-M, S020, S020-M, S021, S022, S023, S023-M, S024, S024-M, S027, S027-M, S030, S031, S031-M, S032, S121, S121-M, S137, S137-M, S139, S139-M, S221, S221-M, S237, S239, S321, S321-M, S337, S339, SZONEA, SZONEB, SZONEB-M, _asg, _dir
+
+ZERO-LOSS CHECK, over the docs that already exist live
+  checks  live 0  ->  after rollout 0  OK
+  notes   live 0  ->  after rollout 0  OK
+  open issues  live 0  ->  after rollout 0  (a resolved issue is never reopened: 0 resolution(s) protected)
+
+AFTER ROLLOUT floor 4 would hold 70 docs, 3 check-offs, 442 open issues, 445 notes.
+The platform collection would hold 293 docs.
+
+crew collection: 296 docs re-read, every updateTime identical before and after - UNTOUCHED
+
+DONE, every floor-4 document verified in the cloud, every other document unmoved

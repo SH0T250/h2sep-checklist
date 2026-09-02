@@ -227,14 +227,25 @@ export class Store {
 export async function loadStore() {
   let seed = window.__H2SEP_SEED;
   if (!seed) {
-    // The full floor-1 seed paints first; Firestore replaces it within seconds.
-    // The approved slice stays as the fallback so the app still boots if the
-    // staged file is ever absent.
-    for (const f of ['../../data/floor1-staged.json', '../../data/slice-f1.json']) {
+    // The staged seeds paint first, one file per floor; Firestore replaces
+    // them within seconds. Every floor that loads is merged into one seed.
+    // The approved floor-1 slice stays as the fallback so the app still boots
+    // if every staged file is ever absent.
+    const floors = [];
+    for (const f of ['../../data/floor1-staged.json', '../../data/floor2-staged.json', '../../data/floor3-staged.json', '../../data/floor4-staged.json']) {
       try {
         const res = await fetch(new URL(f, import.meta.url));
-        if (res.ok) { seed = await res.json(); break; }
-      } catch { /* try the next */ }
+        if (res.ok) floors.push(await res.json());
+      } catch { /* that floor stays absent until Firestore arrives */ }
+    }
+    if (floors.length) {
+      seed = { docs: {}, meta: { ...(floors[0].meta || {}), floors: floors.map(x => x.meta && x.meta.floor).filter(Boolean) } };
+      for (const fl of floors) Object.assign(seed.docs, fl.docs);
+    } else {
+      try {
+        const res = await fetch(new URL('../../data/slice-f1.json', import.meta.url));
+        if (res.ok) seed = await res.json();
+      } catch { /* nothing to paint from */ }
     }
   }
   return new Store(seed);
