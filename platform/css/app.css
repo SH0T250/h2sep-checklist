@@ -427,7 +427,8 @@ a{color:inherit;text-decoration:none}
 .trow .tfl{font:600 11px var(--mono);text-align:right;color:var(--muted)}
 .trow .tfl.na{color:var(--subtle)}
 @media (max-width:899px){
-  .trow{grid-template-columns:minmax(90px,1.4fr) minmax(60px,2fr) 46px 78px 44px;padding:8px 12px}
+  .trow{grid-template-columns:minmax(76px,1.2fr) minmax(36px,1.4fr) 40px 66px 40px;gap:6px;padding:8px 10px;font-size:12.5px}
+  .trow .tf{font-size:11px}
   .trow .tfl{display:none}
 }
 @media (max-width:899px){.trades-head .card-cap{display:none}}
