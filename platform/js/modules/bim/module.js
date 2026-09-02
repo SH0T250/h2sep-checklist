@@ -16,8 +16,11 @@ function viewerFrame(no) {
   return f;
 }
 
-// Floor 1 assembled, platform/floor3d.html: all 46 spaces in their measured A100
-// places, painted live from data/floor1-staged.json.
+// Floor 1 assembled, platform/floor3d.html: every space A100 gives, in its
+// measured place, painted live from data/floor1-staged.json. Fifty are drawn -
+// the 16 guest rooms, the corridor and every common area, back of house
+// included - and the pool deck is an honest hard stop because it is not on A100
+// at all.
 //
 // Two ways it can run, and NEITHER of them is a blank frame:
 //   hosted     - the file is beside index.html, so a relative src works and the
