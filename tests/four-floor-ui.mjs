@@ -89,6 +89,24 @@ t('the floor 2 packet holds 36 sheets with page breaks', (await p.$$('.paper')).
 await p.goto(B + '#/space/S221', { waitUntil: 'networkidle' }); await p.waitForSelector('.pagehead');
 t('a common area has a Print sheet button', !!(await p.$('a[href="#/print/S221"]')));
 
+console.log('\nRESOLVED ISSUES ARE NOT FLAGS (D50)');
+await p.goto(B + '#/room/404', { waitUntil: 'networkidle' }); await p.waitForSelector('.item-row');
+await p.evaluate(() => document.querySelectorAll('.scrim').forEach(s => s.remove()));   // the identity sheet from the first load of this test run
+const rid = await p.evaluate(() => { const d = window.__store.getDoc('404'); const id = Object.entries(d.items).find(([, it]) => !it.deleted && !it.checked && !it.issue && it.reliability !== 'FLAGGED')[0]; window.__store.setIssue('404', id, 'MISSING'); return id; });
+await p.waitForTimeout(200);
+const openBefore = await p.evaluate(() => window.__store.roomStats(window.__store.getDoc('404')).openIssues);
+t('an open issue shows a red pill and counts', !!(await p.$(`.item-row[data-item="${rid}"] .issue-pill`)) && openBefore >= 1);
+await p.evaluate((id) => window.__store.resolveIssue('404', id), rid); await p.waitForTimeout(400);
+t('a resolved issue shows no flag pill', !(await p.$(`.item-row[data-item="${rid}"] .issue-pill`)) && !!(await p.$(`.item-row[data-item="${rid}"] .issue-done`)));
+t('a resolved issue counts nowhere on the room', (await p.evaluate(() => window.__store.roomStats(window.__store.getDoc('404')).openIssues)) === openBefore - 1);
+const tap2 = async (sel) => p.evaluate((s) => { const r = document.querySelector(s); r.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0, clientX: 5, clientY: 5 })); r.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, button: 0, clientX: 5, clientY: 5 })); }, sel);
+await tap2(`.item-row[data-item="${rid}"]`); await p.waitForTimeout(500);
+t('tapping a line with a resolved issue checks it instead of opening the issue sheet', !!(await p.$(`.item-row[data-item="${rid}"] .stamp.checked`)) && !(await p.$('.sheet')), `sheet=${!!(await p.$('.sheet'))} checked=${await p.evaluate((id) => window.__store.getDoc('404').items[id].checked, rid)} hash=${await p.evaluate(() => location.hash)} row=${await p.$eval(`.item-row[data-item="${rid}"]`, r => r.className).catch(() => 'missing')}`);
+await p.goto(B + '#/', { waitUntil: 'networkidle' }); await p.waitForSelector('.trades');
+const openCells = await p.$$eval('.trades .trow.head .ti', c => c.map(x => x.textContent.trim()));
+t('the trade table renders open-issue counts', openCells.length > 0);
+await p.evaluate((id) => { window.__store.check('404', id, false); window.__store.setIssue('404', id, ''); }, rid);
+
 t('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' ; '));
 await b.close();
 console.log(`\n${pass} passed, ${fail} failed`);
