@@ -601,7 +601,12 @@ function renderBulk(ctx) {
       </section>
       <section class="card">
         <h3>Do what</h3>
-        <div class="chips">${Object.entries(A).map(([k, l]) => `<button class="fl ${q.action === k ? 'on' : ''}" data-action="${k}" title="${D.includes(k) ? 'Changes or removes what is on the line' : ''}">${l}${D.includes(k) ? ' <span style="color:var(--issue-ink)">·</span>' : ''}</button>`).join('')}</div>
+        <div class="chips">${Object.entries(A).flatMap(([k, l]) => {
+          const chip = (key, label, on, preset) => `<button class="fl ${on ? 'on' : ''}" data-action="${key}" ${preset ? `data-preset="${preset}"` : ''} title="${D.includes(k) ? 'Changes or removes what is on the line' : ''}">${label}${D.includes(k) ? ' <span style="color:var(--issue-ink)">·</span>' : ''}</button>`;
+          // One-tap flags sit ahead of the general "Flag an issue" (Austin, 2026-09-02: "add missing and in box to this area").
+          if (k === 'setIssue') return [chip(k, 'Missing', q.action === k && q.text === 'MISSING', 'MISSING'), chip(k, 'In box', q.action === k && q.text === 'IN BOX', 'IN BOX'), chip(k, l, q.action === k && !['MISSING', 'IN BOX'].includes(q.text), '')];
+          return [chip(k, l, q.action === k, '')];
+        }).join('')}</div>
         <div style="margin-top:6px;font-size:11.5px;color:var(--subtle)">A red dot marks an action that changes or removes what is already on a line.</div>
         ${q.action === 'setIssue' ? `<div class="qps" style="margin-top:8px">${QUICK_PICKS.map(x => `<button class="qp ${q.text === x ? 'on' : ''}" data-q="${x}">${x}</button>`).join('')}</div><div class="field"><label>Or a custom note</label><input data-custom value="${QUICK_PICKS.includes(q.text) ? '' : esc(q.text)}" placeholder="Type what is wrong"/></div>` : ''}
         ${['check', 'uncheck', 'resolveAndCheck'].includes(q.action) ? `<label style="display:flex;gap:8px;align-items:center;font-size:12.5px;margin-top:10px"><input type="checkbox" data-overwrite ${q.overwrite ? 'checked' : ''}/> Also restamp lines checked by someone else</label>` : ''}
@@ -623,7 +628,7 @@ function renderBulk(ctx) {
   root.querySelector('[data-filter]')?.addEventListener('input', e => { const v = e.target.value; clearTimeout(root._ft); root._ft = setTimeout(() => save({ filter: v }), 250); });
   root.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', () => save({ cats: toggleIn(q.cats, b.dataset.cat) })));
   root.querySelectorAll('[data-code]').forEach(b => b.addEventListener('change', () => save({ codes: toggleIn(q.codes, b.dataset.code) })));
-  root.querySelectorAll('[data-action]').forEach(b => b.addEventListener('click', () => save({ action: b.dataset.action })));
+  root.querySelectorAll('[data-action]').forEach(b => b.addEventListener('click', () => save({ action: b.dataset.action, text: b.dataset.preset || (b.dataset.action === 'setIssue' && ['MISSING', 'IN BOX'].includes(q.text) ? '' : q.text) })));
   root.querySelectorAll('.qp').forEach(b => b.addEventListener('click', () => save({ text: q.text === b.dataset.q ? '' : b.dataset.q })));
   root.querySelector('[data-custom]')?.addEventListener('change', e => save({ text: e.target.value.trim() }));
   root.querySelector('[data-overwrite]')?.addEventListener('change', e => save({ overwrite: e.target.checked }));

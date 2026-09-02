@@ -240,6 +240,13 @@ const yAfter = await p.evaluate(() => window.scrollY);
 t('checking a line keeps the scroll position', Math.abs(yAfter - yBefore) < 40 && yBefore > 300, `${yBefore} -> ${yAfter} (page bottom ${y0})`);
 t('the line shows as checked', !!(await p.$(`.item-row[data-item="${clean}"] .stamp.checked`)));
 
+await p.evaluate(() => sessionStorage.setItem('h2sep-p-bulkq', JSON.stringify({ floors: [4], types: [], kind: 'ffe', cats: ['Appliance'], codes: [], action: 'check', text: '' })));
+await p.goto(B + '#/bulk', { waitUntil: 'networkidle' }); await p.reload({ waitUntil: 'networkidle' }); await p.waitForSelector('.taglist label');
+t('the Do what row offers Missing and In box chips', !!(await p.$('[data-action="setIssue"][data-preset="MISSING"]')) && !!(await p.$('[data-action="setIssue"][data-preset="IN BOX"]')));
+await p.click('[data-preset="IN BOX"]'); await p.waitForTimeout(200);
+await p.click('.taglist label:nth-child(1) input'); await p.waitForSelector('.preview');
+t('In box chip arms a flag with the text set, and the preview counts lines', await p.$eval('[data-preset="IN BOX"]', b => b.classList.contains('on')) && /\d+ will change/.test(await p.textContent('.preview .ph')) && !(await p.$eval('[data-apply]', b => b.disabled)));
+
 t('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' ; '));
 await b.close();
 console.log(`\n${pass} passed, ${fail} failed`);
