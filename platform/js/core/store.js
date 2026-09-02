@@ -9,6 +9,9 @@ const UNDO_KEY = 'h2sep-platform-bulk-undo';
 // the Firebase backend maps it to deleteField(), so an undo is an exact inverse.
 export const ABSENT = Object.freeze({ __absentField: true });
 export const isAbsent = (v) => !!v && typeof v === 'object' && v.__absentField === true;
+// A note the build wrote onto the record (open document conflicts, gaps, the
+// type note): key n_..., no author. Office reference, never a crew flag (D55).
+export const isBuildNote = (id, n) => /^n_/.test(String(id || '')) && !(n && (n.by || n.createdBy || n.createdByUid));
 const ID_KEY = 'h2sep-platform-user';
 
 function nowIso() { return new Date().toISOString(); }
@@ -127,7 +130,7 @@ export class Store {
     const total = items.length;
     const done = items.filter(i => i.checked).length;
     const openIssues = items.filter(i => i.issue && !i.issueResolved).length
-      + Object.values(doc.notes || {}).filter(n => !n.deleted && n.flag === 'issue' && !n.resolved).length;
+      + Object.entries(doc.notes || {}).filter(([id, n]) => !n.deleted && !isBuildNote(id, n) && n.flag === 'issue' && !n.resolved).length;
     return { total, done, openIssues, complete: total > 0 && done === total && openIssues === 0 };
   }
 

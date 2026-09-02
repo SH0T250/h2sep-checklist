@@ -133,13 +133,20 @@ export const CATEGORY_ORDER = [
   'FF&E - Lighting', 'FF&E - Window', 'FF&E - Art / Mirror', 'FF&E - Misc',
 ];
 
+// A note the BUILD wrote onto the record (open document conflicts, document
+// gaps, bathing configuration, the type note): key n_..., no author. They are
+// the office's reference and never a crew flag (ruling D55): the crew screens
+// hide them and no count treats them as an open issue.
+export function isBuildNote(id, n) {
+  return /^n_/.test(String(id || '')) && !(n && (n.by || n.createdBy || n.createdByUid));
+}
 export function roomStats(room) {
   const items = Object.entries(room.items || {}).filter(([, it]) => !it.deleted);
   const total = items.length;
   const done = items.filter(([, it]) => it.checked).length;
   const issues = items.filter(([, it]) => it.issue && !it.issueResolved).length;
-  const noteIssues = Object.values(room.notes || {})
-    .filter(n => n.flag === 'issue' && !n.resolved).length;
+  const noteIssues = Object.entries(room.notes || {})
+    .filter(([id, n]) => !isBuildNote(id, n) && n.flag === 'issue' && !n.resolved).length;
   return { total, done, issues, noteIssues, openIssues: issues + noteIssues,
     pct: total ? Math.round(done / total * 100) : 0,
     complete: total > 0 && done === total && issues + noteIssues === 0 };

@@ -1,6 +1,6 @@
 // Screen renderers. Each returns an HTML string and wires events after mount
 // via the returned `wire(el)` function.
-import { esc, fmtWhen, roomStats, typeAbbrev, platform, vibrate, toast, roomSort, isSpaceDoc, isMepDoc, mepParent, mepIdFor, CATEGORY_ORDER, MEP_CATEGORY_ORDER, MEP_LETTER } from './util.js';
+import { esc, fmtWhen, roomStats, typeAbbrev, platform, vibrate, toast, roomSort, isSpaceDoc, isMepDoc, mepParent, mepIdFor, CATEGORY_ORDER, MEP_CATEGORY_ORDER, MEP_LETTER, isBuildNote } from './util.js';
 import { SPACE_META } from './space-meta.js';
 import * as store from './store.js';
 import * as sheets from './sheets.js';
@@ -452,7 +452,7 @@ export function renderRoom(el, number) {
   const prev = idx > 0 ? siblings[idx - 1] : null;
   const next = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : null;
 
-  const notes = Object.entries(room.notes || {});
+  const notes = Object.entries(room.notes || {}).filter(([id, n]) => !isBuildNote(id, n));   // D55: build notes stay off the crew screen
   const openNotes = notes.filter(([, n]) => !n.resolved);
   const resolvedNotes = notes.filter(([, n]) => n.resolved);
   const meta = isSpace ? (SPACE_META[room.number] || {}) : {};
