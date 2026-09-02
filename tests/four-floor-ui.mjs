@@ -73,6 +73,22 @@ t('every row shows a percent, a checked count and four floor cells', trows.every
 const ffe = trows[0];
 t('the FF&E percent matches its checked count', Math.round(Number(ffe.frac.split(' / ')[0]) / Number(ffe.frac.split(' / ')[1]) * 100) + '%' === ffe.pct, `${ffe.frac} vs ${ffe.pct}`);
 
+await p.goto(B + '#/prints', { waitUntil: 'networkidle' }); await p.waitForSelector('.rlist .room-row');
+t('the Print sheets hub lists every room and common area', (await p.$$('.rlist .room-row')).length === 155, String((await p.$$('.rlist .room-row')).length));
+t('the hub offers a packet per floor and the whole building', (await p.$$('a[href^="#/print-floor/"]')).length === 5);
+await p.goto(B + '#/print/S221', { waitUntil: 'networkidle' }); await p.waitForSelector('.paper');
+t('a common-area space has a print sheet with its MEP punch', /MEP PUNCH/.test(await p.textContent('.paper')) && /Space S221/.test(await p.textContent('.paper')));
+await p.goto(B + '#/print/338', { waitUntil: 'networkidle' }); await p.waitForSelector('.paper');
+const before338 = (await p.$$('.paper .p-box')).length;
+const firstEmpty = await p.evaluate(() => { const d = window.__store.getDoc('338'); const id = Object.entries(d.items).find(([, it]) => !it.deleted && !it.checked && !it.issue && it.reliability !== 'FLAGGED')[0]; window.__store.check('338', id, true); return id; });
+await p.waitForTimeout(300);
+t('an open print sheet redraws when a line is checked', (await p.$$eval('.paper .p-box', b => b.filter(x => x.textContent.trim() === 'TU').length)) === 1 && (await p.$$('.paper .p-box')).length === before338, firstEmpty);
+await p.evaluate((id) => window.__store.check('338', id, false), firstEmpty);
+await p.goto(B + '#/print-floor/2', { waitUntil: 'networkidle' }); await p.waitForSelector('.paper');
+t('the floor 2 packet holds 36 sheets with page breaks', (await p.$$('.paper')).length === 36 && (await p.$$('.p-break')).length >= 35, String((await p.$$('.paper')).length));
+await p.goto(B + '#/space/S221', { waitUntil: 'networkidle' }); await p.waitForSelector('.pagehead');
+t('a common area has a Print sheet button', !!(await p.$('a[href="#/print/S221"]')));
+
 t('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' ; '));
 await b.close();
 console.log(`\n${pass} passed, ${fail} failed`);
