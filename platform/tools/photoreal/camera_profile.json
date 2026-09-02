@@ -1,0 +1,32 @@
+{
+  "_about": "Camera signature and per view exposure for the King Studio photoreal loop. EXIF values are from the Galaxy S25 Ultra ultrawide originals (13 mm equivalent, f/1.9, auto white balance, 2026-08-12 about 14:10 CDT). ev100 = log2(F^2 / T) - log2(ISO / 100). Post pass parameters are deliberately small: an over graded frame is its own tell. grainStd is the luminance noise (std of a 64x64 flat wall patch minus its own 9 px blur) measured in the matching photograph at 2000 px width; measured 0.0039 at 2000 px and 0.0038 at 1200 px on the bed photograph's ceiling, so it is not scaled with width (grainWidthExponent 0); it is scaled with the square root of each view's ISO relative to isoRef.",
+  "lens": { "focalMm": 13.0, "sensorWidthMm": 36.0, "fnumber": 1.9, "hfovDeg": 108.4 },
+  "defaults": {
+    "distort": 0.010,
+    "ca": 0.0012,
+    "vignette": 0.22,
+    "vignettePower": 2.2,
+    "contrast": 0.10,
+    "lift": 0.006,
+    "shoulder": 0.92,
+    "saturation": 1.06,
+    "sharpen": 0.35,
+    "sharpenRadius": 1.0,
+    "grainStd": 0.0040,
+    "grainShadowGain": 1.5,
+    "grainWidthExponent": 0.0,
+    "grainChroma": 0.15,
+    "isoRef": 200,
+    "measureWidth": 2000,
+    "jpegQuality": 92
+  },
+  "views": {
+    "entry":       { "photo": "20260812_141012.jpg", "iso": 320, "exposureTime": 0.0083337, "fnumber": 1.9, "ev100": 7.08 },
+    "lounge":      { "photo": "20260812_141158.jpg", "iso": 320, "exposureTime": 0.0166674, "fnumber": 1.9, "ev100": 6.08 },
+    "bed":         { "photo": "20260812_141100.jpg", "iso": 200, "exposureTime": 0.0083337, "fnumber": 1.9, "ev100": 7.76 },
+    "working":     { "photo": "20260812_141016.jpg", "iso": 160, "exposureTime": 0.0166674, "fnumber": 1.9, "ev100": 7.08 },
+    "kitchen":     { "photo": "20260812_141218.jpg", "iso": 160, "exposureTime": 0.0166674, "fnumber": 1.9, "ev100": 7.08 },
+    "bath-vanity": { "photo": "20260812_141251.jpg", "iso": 80,  "exposureTime": 0.0083337, "fnumber": 1.9, "ev100": 9.08 },
+    "bath-shower": { "photo": "20260812_141304.jpg", "iso": 125, "exposureTime": 0.0083337, "fnumber": 1.9, "ev100": 8.44 }
+  }
+}
