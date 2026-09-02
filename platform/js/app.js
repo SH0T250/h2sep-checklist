@@ -22,6 +22,7 @@ const store = await loadStore();
 // Attach Firebase when configured. The bundled artifact preview cannot reach
 // external hosts (its page blocks them), so it stays in local mode by flag.
 if (firebaseConfig && !window.__H2SEP_NO_BACKEND) {
+  store.expectBackend = true;   // a bulk write refuses to run until the backend is attached and signed in
   import('./core/firebase-backend.js')
     .then(({ FirebaseBackend }) => store.attachBackend(new FirebaseBackend(firebaseConfig)))
     .catch(err => { store.status.message = 'Backend unavailable: ' + (err.message || err); store._emit(); });

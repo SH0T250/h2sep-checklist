@@ -17,8 +17,9 @@ import {
 import {
   initializeFirestore, persistentLocalCache, persistentMultipleTabManager,
   CACHE_SIZE_UNLIMITED, collection, doc, onSnapshot, updateDoc, setDoc,
-  getDoc, serverTimestamp,
+  getDoc, serverTimestamp, deleteField,
 } from '../../firebase/firebase-firestore.js';
+import { isAbsent } from './store.js';
 
 export const PLATFORM_COLLECTION = ['projects', 'h2sep', 'platform_rooms'];
 
@@ -83,7 +84,9 @@ export class FirebaseBackend {
   async patch(docId, patch) {
     if (!this.isWriteReady()) throw new Error('not signed in yet');
     const ref = doc(this.db, ...PLATFORM_COLLECTION, docId);
-    const withStamp = { ...patch, updatedAt: serverTimestamp() };
+    const withStamp = { updatedAt: serverTimestamp() };
+    // ABSENT means "this field never existed": delete it rather than write null.
+    for (const [k, v] of Object.entries(patch)) withStamp[k] = isAbsent(v) ? deleteField() : v;
     await updateDoc(ref, withStamp);
   }
 
