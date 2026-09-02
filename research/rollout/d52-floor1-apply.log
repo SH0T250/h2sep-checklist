@@ -1,0 +1,549 @@
+live collection: 293 docs
+staged build   : 81 docs
+
+backup: /home/user/h2sep-checklist/tools/out/backups/platform-before-floor1-rollout-2026-09-02T19-34-54-645Z.json
+
+CREATE  0 new doc(s)
+   
+
+UPDATE  35 existing doc(s)
+   101: 0 field change(s), 12 kept from live
+   103: 0 field change(s), 9 kept from live
+   104: 0 field change(s), 10 kept from live
+   105: 0 field change(s), 6 kept from live
+   106: 0 field change(s), 7 kept from live
+   107: 0 field change(s), 4 kept from live
+   108: 0 field change(s), 5 kept from live
+   109: 0 field change(s), 9 kept from live
+   110: 0 field change(s), 2 kept from live
+   111: 0 field change(s), 4 kept from live
+   112: 0 field change(s), 5 kept from live
+   113: 0 field change(s), 4 kept from live
+   114: 0 field change(s), 5 kept from live
+   115: 0 field change(s), 4 kept from live
+   116: 0 field change(s), 4 kept from live
+   118: 0 field change(s), 11 kept from live
+   101-MEP: 0 field change(s), 24 kept from live
+   103-MEP: 0 field change(s), 24 kept from live
+   104-MEP: 0 field change(s), 24 kept from live
+   105-MEP: 0 field change(s), 24 kept from live
+   106-MEP: 0 field change(s), 24 kept from live
+   107-MEP: 0 field change(s), 24 kept from live
+   108-MEP: 0 field change(s), 24 kept from live
+   109-MEP: 0 field change(s), 24 kept from live
+   110-MEP: 0 field change(s), 24 kept from live
+   111-MEP: 0 field change(s), 24 kept from live
+   112-MEP: 0 field change(s), 24 kept from live
+   113-MEP: 0 field change(s), 24 kept from live
+   114-MEP: 0 field change(s), 24 kept from live
+   115-MEP: 0 field change(s), 24 kept from live
+   116-MEP: 0 field change(s), 24 kept from live
+   118-MEP: 0 field change(s), 26 kept from live
+   S019: 0 field change(s), 1 kept from live
+   S020: 0 field change(s), 1 kept from live
+   S027: 0 field change(s), 1 kept from live
+
+UNTOUCHED  212 live doc(s) the build does not cover (left exactly as they are)
+   201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 236, 238, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 336, 338, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 436, 438, 201-MEP, 202-MEP, 203-MEP, 204-MEP, 205-MEP, 206-MEP, 207-MEP, 208-MEP, 209-MEP, 210-MEP, 211-MEP, 212-MEP, 213-MEP, 214-MEP, 215-MEP, 216-MEP, 217-MEP, 218-MEP, 222-MEP, 223-MEP, 224-MEP, 225-MEP, 226-MEP, 227-MEP, 228-MEP, 229-MEP, 230-MEP, 231-MEP, 232-MEP, 233-MEP, 234-MEP, 236-MEP, 238-MEP, 301-MEP, 302-MEP, 303-MEP, 304-MEP, 305-MEP, 306-MEP, 307-MEP, 308-MEP, 309-MEP, 310-MEP, 311-MEP, 312-MEP, 313-MEP, 314-MEP, 315-MEP, 316-MEP, 317-MEP, 318-MEP, 322-MEP, 323-MEP, 324-MEP, 325-MEP, 326-MEP, 327-MEP, 328-MEP, 329-MEP, 330-MEP, 331-MEP, 332-MEP, 333-MEP, 334-MEP, 336-MEP, 338-MEP, 401-MEP, 402-MEP, 403-MEP, 404-MEP, 405-MEP, 406-MEP, 407-MEP, 408-MEP, 409-MEP, 410-MEP, 411-MEP, 412-MEP, 413-MEP, 414-MEP, 415-MEP, 416-MEP, 417-MEP, 418-MEP, 422-MEP, 423-MEP, 424-MEP, 425-MEP, 426-MEP, 427-MEP, 428-MEP, 429-MEP, 430-MEP, 431-MEP, 432-MEP, 433-MEP, 434-MEP, 436-MEP, 438-MEP, S221, S221-M, S237, S239, S321, S321-M, S337, S339, S421, S421-M, S437, S439, _asg, _dir
+
+CONFLICTS RESOLVED IN FAVOUR OF THE LIVE APP  (490) - a rollout never undoes someone's work
+   101/903_a (903): checked in the live app, not in the build - LIVE KEPT
+   101/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   101/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   101/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   101/gr4021_a (GR-402.1): checked in the live app, not in the build - LIVE KEPT
+   101/gr402_a (GR-402): checked in the live app, not in the build - LIVE KEPT
+   101/gr6001_a (GR-600.1): checked in the live app, not in the build - LIVE KEPT
+   101/gr600_a (GR-600): checked in the live app, not in the build - LIVE KEPT
+   101/gr602_a (GR-602): checked in the live app, not in the build - LIVE KEPT
+   101/hd08_a (HD-08): issue RESOLVED in the live app, open in the build - LIVE KEPT ("MISSING")
+   101/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   101/tvmount_a (untagged): checked in the live app, not in the build - LIVE KEPT
+   103/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   103/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   103/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   103/gr203_a (GR-203): checked in the live app, not in the build - LIVE KEPT
+   103/gr204_a (GR-204): checked in the live app, not in the build - LIVE KEPT
+   103/gr6001_a (GR-600.1): checked in the live app, not in the build - LIVE KEPT
+   103/gr600_a (GR-600): checked in the live app, not in the build - LIVE KEPT
+   103/gr602_a (GR-602): checked in the live app, not in the build - LIVE KEPT
+   103/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   104/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   104/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   104/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   104/gr203_a (GR-203): checked in the live app, not in the build - LIVE KEPT
+   104/gr204_a (GR-204): checked in the live app, not in the build - LIVE KEPT
+   104/gr6011_a (GR-601.1): checked in the live app, not in the build - LIVE KEPT
+   104/gr601_a (GR-601): checked in the live app, not in the build - LIVE KEPT
+   104/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   104/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   104/u_ce20ab6281 (untagged): checked in the live app, not in the build - LIVE KEPT
+   105/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   105/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   105/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   105/gr203_a (GR-203): checked in the live app, not in the build - LIVE KEPT
+   105/gr204_a (GR-204): checked in the live app, not in the build - LIVE KEPT
+   105/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   106/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   106/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   106/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   106/gr6011_a (GR-601.1): checked in the live app, not in the build - LIVE KEPT
+   106/gr601_a (GR-601): checked in the live app, not in the build - LIVE KEPT
+   106/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   106/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   107/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   107/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   107/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   107/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   108/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   108/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   108/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   108/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   108/kn11_a (kn 11): issue RESOLVED in the live app, open in the build - LIVE KEPT ("MISSING")
+   109/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   109/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   109/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   109/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   109/gr201_a (GR-201): checked in the live app, not in the build - LIVE KEPT
+   109/gr203_a (GR-203): checked in the live app, not in the build - LIVE KEPT
+   109/gr204_a (GR-204): checked in the live app, not in the build - LIVE KEPT
+   109/gr205_a (GR-205): checked in the live app, not in the build - LIVE KEPT
+   109/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   110/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   110/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   111/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   111/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   111/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   111/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   112/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   112/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   112/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   112/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   112/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   113/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   113/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   113/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   113/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   114/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   114/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   114/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   114/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   114/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   115/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   115/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   115/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   115/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   116/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   116/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   116/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   116/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   118/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   118/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   118/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   118/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   118/gr201_a (GR-201): checked in the live app, not in the build - LIVE KEPT
+   118/gr303_a (GR-303): checked in the live app, not in the build - LIVE KEPT
+   118/gr307_a (GR-307): issue raised in the live app, absent from the build - LIVE KEPT ("NEED INSTALL")
+   118/gr320_a (GR-320): checked in the live app, not in the build - LIVE KEPT
+   118/gr324_a (GR-324): checked in the live app, not in the build - LIVE KEPT
+   118/gr405_a (GR-405): checked in the live app, not in the build - LIVE KEPT
+   118/gr601_a (GR-601): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/mech_ptac (PTAC): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   101-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/mech_ptac (PTAC): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   103-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/mech_ptac (PTAC-1): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   104-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/mech_ptac (PTAC): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   105-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/mech_ptac (PTAC-1): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   106-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/mech_ptac (PTAC): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   107-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/mech_ptac (PTAC-1): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   108-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/mech_ptac (PTAC): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   109-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/mech_ptac (PTAC-1): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   110-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/mech_ptac (PTAC): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   111-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/mech_ptac (PTAC-1): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   112-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/mech_ptac (PTAC): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   113-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/mech_ptac (PTAC-1): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   114-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/mech_ptac (PTAC): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   115-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/mech_ptac (PTAC-1): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   116-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/mech_access_a (AP): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/mech_ptac (PTAC-1): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/mech_ptac_kit (PTAC-K): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/mech_tstat (TSTAT): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/elec_gfci (GFCI): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/elec_panel (PNL): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/elec_nightlight_a (NL): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/elec_kitch_a (KIT): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/elec_covers_a (REC-C): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/elec_lights (LTG): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/elec_bathlights_a (BL): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/elec_outlets (REC): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/elec_sink_sw (SW): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/plmb_shower_a (SH-V): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/plmb_handshower_a (ADA-H): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/plmb_hot_a (HW): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/plmb_fd_a (FD): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/plmb_lavfaucet_a (LAV): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/plmb_press_a (PSI): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/plmb_tubroll_a (ADA-T): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/plmb_cold_a (CW): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/plmb_shencl_a (SH-D): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/plmb_valves_a (GV): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/plmb_ksink_a (SK): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/plmb_cond_a (CD): checked in the live app, not in the build - LIVE KEPT
+   118-MEP/plmb_wc_a (WC): checked in the live app, not in the build - LIVE KEPT
+   S019/hd12_a (HD-12): issue raised in the live app, absent from the build - LIVE KEPT ("MISSING")
+   S020/hd12_a (HD-12): issue raised in the live app, absent from the build - LIVE KEPT ("MISSING")
+   S027/hd12_a (HD-12): issue raised in the live app, absent from the build - LIVE KEPT ("MISSING")
+
+ZERO-LOSS CHECK, over the docs that already exist live
+  checks  live 866  ->  after rollout 866  OK
+  a resolved issue is never reopened: 2 resolution(s) protected
+
+AFTER ROLLOUT the platform would hold 81 docs, 866 check-offs, 247 open issues, 19 notes.
+
+crew collection untouched, sample updateTimes: 001=2026-08-10T13:10:39 003=2026-08-10T02:04:43 004=2026-08-10T13:10:40
+
+DONE, every document verified in the cloud
