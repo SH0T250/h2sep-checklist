@@ -692,6 +692,8 @@ export function renderRoom(el, number) {
   }
   const lineLabel = (it) => it.code || String(it.label || '').slice(0, 40);
   const floorOffer = (it) => ({ label: 'Whole floor ' + room.floor, onAction: () => wholeFloorCheck(room, it) });
+  // D59: a flag picked on the issue sheet can go to the whole floor too.
+  sheets.setFloorFlagHandler((r, itemId, text) => { const it = r.items && r.items[itemId]; if (it) wholeFloorApply(r, it, 'setIssue', text); });
   // Check the same line (same tag, or same label when untagged) on every room
   // of this kind on this floor. The crew's bulk engine plans it: a line already
   // checked, checked by someone else, carrying an open issue, or flagged is
@@ -699,9 +701,12 @@ export function renderRoom(el, number) {
   // Every kind of document (D58): a guest room walks the floor's guest rooms,
   // a common area the floor's common areas, and a punch doc the punch docs of
   // its own kind, so an MEP line never lands on an FF&E list or the reverse.
-  async function wholeFloorCheck(fromRoom, it) {
+  function wholeFloorCheck(fromRoom, it) { return wholeFloorApply(fromRoom, it, 'check'); }
+  // action: 'check' (D57/D58) or 'setIssue' with the flag text (D59).
+  async function wholeFloorApply(fromRoom, it, action, text = '') {
     const w2 = canWrite();
     if (!w2) { readOnlyNudge(); return; }
+    const checking = action === 'check';
     const isSpace = isSpaceDoc(fromRoom);   // a common area and its punch doc alike
     const isMep = isMepDoc(fromRoom);
     const kind = isSpace ? 'common area' : 'room';
@@ -714,10 +719,10 @@ export function renderRoom(el, number) {
     scope.floors = new Set([String(fromRoom.floor)]);
     scope.includeGuest = !isSpace;
     scope.includeSpaces = isSpace;
-    scope.state = 'noissue';
+    scope.state = checking ? 'noissue' : 'any';
     const user = store.getUser();
-    const plan = bulk.planAction(floorRooms, scope, 'check', { user, uid: store.getUid ? store.getUid() : '', overwriteChecked: false });
-    const flagged = plan.changes.filter(c => { const r = store.getRoom(c.room); const item = r && r.items && r.items[c.itemId]; return item && item.reliability === 'FLAGGED'; });
+    const plan = bulk.planAction(floorRooms, scope, action, { user, uid: store.getUid ? store.getUid() : '', text, overwriteChecked: false });
+    const flagged = checking ? plan.changes.filter(c => { const r = store.getRoom(c.room); const item = r && r.items && r.items[c.itemId]; return item && item.reliability === 'FLAGGED'; }) : [];
     if (flagged.length) {
       plan.changes = plan.changes.filter(c => !flagged.includes(c));
       for (const c of flagged) plan.skipped.push({ ...c, why: 'flagged, sources disagree: open the line' });
@@ -727,14 +732,15 @@ export function renderRoom(el, number) {
     const skipWhy = {};
     for (const k of plan.skipped) skipWhy[k.why] = (skipWhy[k.why] || 0) + 1;
     const skipText = Object.entries(skipWhy).map(([w, n]) => `${n} ${w}`).join(', ');
+    const did = checking ? 'checked' : `flagged "${text}"`;
     if (!plan.changes.length) { toast(`Nothing to do on floor ${fromRoom.floor}: ${skipText || `every other ${kind} already has it`}`, { ms: 6000 }); return; }
-    const ok = window.confirm(`Check ${label} on ${plan.counts.changing} more ${kind}${plan.counts.changing === 1 ? '' : 's'} on floor ${fromRoom.floor}?` + (plan.skipped.length ? `\n\nLeft alone: ${skipText}.` : ''));
+    const ok = window.confirm(`${checking ? 'Check' : `Flag "${text}" on`} ${label} on ${plan.counts.changing} more ${kind}${plan.counts.changing === 1 ? '' : 's'} on floor ${fromRoom.floor}?` + (plan.skipped.length ? `\n\nLeft alone: ${skipText}.` : ''));
     if (!ok) return;
     const ctx = store.getBulkContext();
     try {
       await bulk.executePlan(plan, ctx, () => {});
       if (ctx.mode !== 'demo') bulk.auditBulk(plan, ctx, 'floor-' + Date.now().toString(36)).catch(() => {});
-      toast(`${label} checked on ${plan.counts.changing} ${kind}${plan.counts.changing === 1 ? '' : 's'} on floor ${fromRoom.floor}`, { action: 'Undo', onAction: async () => {
+      toast(`${label} ${did} on ${plan.counts.changing} ${kind}${plan.counts.changing === 1 ? '' : 's'} on floor ${fromRoom.floor}`, { action: 'Undo', onAction: async () => {
         const inverse = bulk.deriveUndoPlan(bulk.invertPlan(plan), store.getAllRooms().concat(floorRooms));
         await bulk.executePlan(inverse, ctx, () => {});
         toast(`Undone on ${inverse.counts ? inverse.counts.changing : plan.counts.changing} ${kind}(s)`);

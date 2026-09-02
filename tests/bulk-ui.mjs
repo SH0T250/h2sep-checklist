@@ -311,6 +311,26 @@ t('the sheet closed and the flagged line is checked', !(await p.$('.sheet')) && 
 await p.click('.toast button:first-child'); await p.waitForTimeout(300);
 t('Undo from the sheet toast unchecks it', await p.evaluate((id) => !window.__store.getDoc('405').items[id].checked, flId));
 
+console.log('\nFLAG THE WHOLE FLOOR FROM THE LINE SHEET (D59)');
+await p.goto(B + '#/room/405', { waitUntil: 'networkidle' }); await p.waitForSelector('.item-row');
+const isId = await cleanRow();
+// press and hold opens the sheet on a clean line
+await p.evaluate((id) => { const r = document.querySelector(`.item-row[data-item="${id}"]`); r.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0, clientX: 5, clientY: 5 })); }, isId);
+await p.waitForTimeout(700);
+await p.evaluate((id) => { const r = document.querySelector(`.item-row[data-item="${id}"]`); r.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, button: 0, clientX: 5, clientY: 5 })); }, isId);
+await p.waitForSelector('.sheet [data-save]');
+t('the line sheet carries the whole-floor box', !!(await p.$('.sheet [data-floor]')) && /every other guest room on floor 4/.test(await p.textContent('.sheet .floor-opt')));
+await p.click('.sheet .qp[data-q="MISSING"]'); await p.check('.sheet [data-floor]'); await p.click('.sheet [data-save]');
+await p.waitForSelector('.sheet .preview');
+t('Save flags this line and previews the flag for the other rooms', /Flag an issue/.test(await p.textContent('.sheet .sh')) && /MISSING/.test(await p.textContent('.sheet .sh')) && /other room/.test(await p.textContent('.sheet .sh')) && (await p.evaluate((id) => window.__store.getDoc('405').items[id].issue, isId)) === 'MISSING');
+const lenIs = (await log()).length;
+await p.click('.sheet [data-apply]'); await p.waitForTimeout(500);
+const newIs = (await log()).slice(lenIs);
+t('apply flags MISSING on the same line in the other floor-4 rooms only', newIs.length > 1 && newIs.every(x => /^4\d\d$/.test(x.docId) && x.docId !== '405' && Object.entries(x.patch).some(([k, v]) => k.endsWith('.issue') && v === 'MISSING')), newIs.map(x => x.docId).join(','));
+await p.click('.toast button'); await p.waitForTimeout(400);
+t('undo clears the floor flags again', (await log()).length === lenIs + newIs.length * 2);
+await p.evaluate((id) => window.__store.setIssue('405', id, ''), isId);
+
 t('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' ; '));
 await b.close();
 console.log(`\n${pass} passed, ${fail} failed`);

@@ -785,10 +785,15 @@ function bulkPreviewHtml(plan) {
 // on every document of the same kind on this floor. Goes through the bulk
 // confirm sheet, so the count, the lines left alone and their reasons show
 // before anything is written, and the apply has an Undo (D57).
-function wholeFloorCheck(ctx, docId, itemId) {
+function wholeFloorCheck(ctx, docId, itemId) { wholeFloorApply(ctx, docId, itemId, 'check'); }
+
+// The same line on every other document of this kind on this floor: a guest
+// room walks the floor's guest rooms, a common area the floor's common areas,
+// a punch doc the punch docs of its own kind.
+function wholeFloorTargets(ctx, docId, itemId) {
   const { store } = ctx;
   const doc = store.getDoc(docId); const it = doc?.items?.[itemId];
-  if (!doc || !it) return;
+  if (!doc || !it) return null;
   const floor = Number(doc.floor);
   const isSpace = String(doc.type || '').startsWith('space-');
   const isMep = store.constructor.MEP_SUFFIXES.some(sfx => docId.endsWith(sfx)) || doc.type === 'mep-punch';
@@ -798,8 +803,17 @@ function wholeFloorCheck(ctx, docId, itemId) {
   const want = codeKey(it);
   const targets = [];
   for (const d of docs) for (const [id, x] of store.liveItems(d)) if (codeKey(x) === want) targets.push({ docId: keyOf.get(d), itemId: id });
-  if (!targets.length) { toast(`No other ${isSpace ? 'common area' : 'room'} on floor ${floor} carries this line`); return; }
-  bulkConfirm(ctx, targets, 'check', { text: '', scopeLabel: `Floor ${floor} · ${pl(docs.length, isSpace ? 'other common area' : 'other room')}` });
+  return { floor, isSpace, isMep, docs, targets, kind: isSpace ? 'common area' : 'room' };
+}
+
+// One floor-wide action from a single line: 'check' (D57/D58) or 'setIssue'
+// with the flag text (D59, "Missing" for the whole floor). Always through the
+// bulk confirm sheet, so the count and the lines left alone show first.
+function wholeFloorApply(ctx, docId, itemId, action, text = '') {
+  const w = wholeFloorTargets(ctx, docId, itemId);
+  if (!w) return;
+  if (!w.targets.length) { toast(`No other ${w.kind} on floor ${w.floor} carries this line`); return; }
+  bulkConfirm(ctx, w.targets, action, { text, scopeLabel: `Floor ${w.floor} · ${pl(w.docs.length, 'other ' + w.kind)}` });
 }
 
 // The one check path for every line on every screen: a tap on a row and the
@@ -861,6 +875,12 @@ function itemSheet(ctx, docId, itemId) {
   const { store } = ctx;
   const doc = store.getDoc(docId);
   const it = doc.items[itemId];
+  // D59: the issue picked here can go to the whole floor of this kind.
+  const floorScope = (() => {
+    const w = wholeFloorTargets(ctx, docId, itemId);
+    if (!w || !w.targets.length) return null;
+    return { kindWord: (w.isSpace ? 'common area' : 'guest room') + (w.isMep ? ' punch list' : '') };
+  })();
   const { close } = sheet(`
     <div class="sh">
       ${shortCode(it) ? `<span class="tag">${esc(shortCode(it))}</span>` : ''}
@@ -882,6 +902,7 @@ function itemSheet(ctx, docId, itemId) {
     <div class="qps">${QUICK_PICKS.map(q => `<button class="qp ${it.issue === q ? 'on' : ''}" data-q="${q}">${q}</button>`).join('')}</div>
     <div class="field"><label>Custom note on the issue</label>
       <input data-custom placeholder="${it.issue && !QUICK_PICKS.includes(it.issue) ? esc(it.issue) : 'Type what is wrong (optional)'}" value="${!QUICK_PICKS.includes(it.issue || '') ? esc(it.issue || '') : ''}"/></div>
+    ${floorScope ? `<label class="floor-opt" style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;margin:10px 0 4px;cursor:pointer"><input type="checkbox" data-floor style="margin-top:2px"/><span>Also flag this line on every other ${esc(floorScope.kindWord)} on floor ${esc(String(doc.floor))}. Save picks the flag above (Missing, In box, or your note); a count shows before anything is written.</span></label>` : ''}
     <div class="srow">
       ${it.issue && !it.issueResolved ? '<button class="btn" data-resolve>Mark issue resolved</button>' : ''}
       ${it.issue ? '<button class="btn" data-clear>Clear issue</button>' : ''}
@@ -901,8 +922,10 @@ function itemSheet(ctx, docId, itemId) {
   sheetEl.querySelector('[data-save]').addEventListener('click', () => {
     const custom = sheetEl.querySelector('[data-custom]').value.trim();
     const issue = custom || picked;
+    const floorToo = !!issue && !!sheetEl.querySelector('[data-floor]')?.checked;
     if (issue !== (it.issue || '')) store.setIssue(docId, itemId, issue);
     close();
+    if (floorToo) wholeFloorApply(ctx, docId, itemId, 'setIssue', issue);   // D59
   });
   sheetEl.querySelector('[data-resolve]')?.addEventListener('click', () => { store.resolveIssue(docId, itemId); close(); });
   sheetEl.querySelector('[data-clear]')?.addEventListener('click', () => { store.setIssue(docId, itemId, ''); close(); });
