@@ -43,7 +43,7 @@ async function liveRoom() {
   const app = initializeApp(firebaseConfig);
   const auth = authm.getAuth(app);
   if (!auth.currentUser) await authm.signInAnonymously(auth);
-  const snap = await fs.getDoc(fs.doc(fs.getFirestore(app), 'projects', PROJECT_ID, 'rooms', ROOM));
+  const snap = await fs.getDoc(fs.doc(fs.getFirestore(app), 'projects', PROJECT_ID, 'platform_rooms', ROOM));
   if (!snap.exists()) throw new Error('room not found');
   return snap.data();
 }

@@ -255,8 +255,12 @@ async function liveInit() {
   window.addEventListener('online', () => { if (!auth.currentUser) trySignIn(); });
 }
 
-function roomsCol() { return fs.collection(db, 'projects', PROJECT_ID, 'rooms'); }
-function roomRef(number) { return fs.doc(db, 'projects', PROJECT_ID, 'rooms', String(number)); }
+// Ruling D54 (2026-09-02): the crew app and the office platform share ONE set of
+// records, projects/h2sep/platform_rooms. The old 'rooms' collection is frozen
+// as an archive; every check, issue and note it held was carried across first.
+const ROOMS_COLLECTION = 'platform_rooms';
+function roomsCol() { return fs.collection(db, 'projects', PROJECT_ID, ROOMS_COLLECTION); }
+function roomRef(number) { return fs.doc(db, 'projects', PROJECT_ID, ROOMS_COLLECTION, String(number)); }
 
 function liveSubscribeFloor(floor) {
   const q = fs.query(roomsCol(), fs.where('floor', '==', Number(floor)));

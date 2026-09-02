@@ -40,6 +40,7 @@ const BASE = 'https://firestore.googleapis.com/v1/projects/h2sep-checklist/datab
 const CREW = 'projects/h2sep/rooms'; // the crew's live data. READ ONLY.
 
 const argv = process.argv.slice(2);
+const LAND_ALL = process.argv.includes('--land-all');   // D54: land every orphaned crew line as a field-authored line
 const flag = (name, dflt) => {
   const i = argv.indexOf(name);
   return i === -1 ? dflt : argv[i + 1];
@@ -48,7 +49,7 @@ const dry = argv.includes('--dry-run');
 const FLOOR = (() => {
   const a = process.argv.find((x) => x.startsWith('--floor='));
   const f = a ? a.slice('--floor='.length) : '2';
-  if (!/^[2-4]$/.test(f)) throw new Error('--floor must be 2, 3 or 4');
+  if (!/^[1-4]$/.test(f)) throw new Error('--floor must be 1, 2, 3 or 4');
   return f;
 })();
 const SEED = resolve(repo, flag('--seed', 'platform/data/floor' + FLOOR + '-staged.json'));
@@ -358,7 +359,12 @@ for (const pid of wanted) {
         const roomNo = pid.replace(/-MEP$/, '');
         const nextSort = priorRestored ? prior.sort : RESTORED_BAND_BASE + restored.filter((x) => x.doc === pid).length * RESTORED_BAND_STEP;
         const fromDb = (pid.endsWith('-MEP') || isSpaceDoc(pid)) ? null : rebuildFromDb(roomNo, ci, nextSort);
-        const rebuilt = fromDb || ((pid.endsWith('-MEP') || isSpaceDoc(pid)) ? null : restoreFieldAuthored(roomNo, ci, nextSort));
+        /* --land-all (D54, "merge the old and new data into one"): a punch or
+         * common-area line the crew holds work on is restored as a field-authored
+         * line too, in the crew's own words and category, so no work is left
+         * with no line to land on when the crew app moves onto these records. */
+        const mayRestore = LAND_ALL || !(pid.endsWith('-MEP') || isSpaceDoc(pid));
+        const rebuilt = fromDb || (mayRestore ? restoreFieldAuthored(roomNo, ci, nextSort) : null);
         if (rebuilt) {
           if (Object.values(pdoc.items).some((v) => v.sort === rebuilt.sort)) {
             throw new Error(`restoring ${pid}/${key} would collide at sort ${rebuilt.sort}`);
