@@ -1,5 +1,43 @@
 {
  "view": "bath-vanity",
  "photo": "20260812_141251.jpg",
- "rounds": []
+ "rounds": [
+  {
+   "round": 1,
+   "renderJpg": "/tmp/claude-0/-home-user-h2sep-checklist/fb47d53f-23f6-5d8f-88e1-343b94d9771e/scratchpad/renders/bath-vanity/r1.jpg",
+   "critics": [
+    {
+     "pick": "B",
+     "correct": true,
+     "confidence": "instant",
+     "tells": [
+      "B's countertop is a dead-flat, featureless pure-white slab with a hard rectangular trough cut in it; A's top has quartz speckle, a real undermount basin with drain, overflow hole, and highlight roll-off on the ceramic.",
+      "B's wallpaper pattern is hairline vector strokes on a perfectly smooth surface with no paper grain, seam, or specular sheen; A's pattern has slight ink weight variation and the wall shows the phone's noise and micro-texture.",
+      "B's left half is a blank partition/wall face rendered as a perfect smooth gradient with no grain, no surface texture, no corner bead, no cast shadow from the room; a phone would have shown noise rise and some mottling in that flat field.",
+      "B's mirror reflection contains a floating dark grab bar with no wall contact, a bulky white curved object (towel ring/dispenser) pushing out through the mirror frame at the wrong scale, and a shower pan as a uniform grey slab; A's mirror shows a coherent shower with chrome trim, a valve plate, a door handle and a toilet at correct parallax.",
+      "B's vanity light bar is a flat glowing rectangle with a barely-visible mount block and almost no bloom or hot spot on the wallpaper beneath it; A's bar shows a clipped tube with a lens highlight gradient, a brushed-aluminum backplate with reflections, and a soft wash falling off across the wall.",
+      "B's faucet and two toiletry bottles are generic low-poly primitives (bottles are two capped cylinders, faucet is a plain bent rod with no chrome reflections); A's faucet reflects the room and the sink.",
+      "B has zero sensor signature: no grain in shadows, no vignette, no barrel distortion, no chromatic fringe on the mirror frame edges; A shows wide-angle stretching at the corners and phone-style noise reduction smearing.",
+      "Perfect geometry in B: mirror frame corners are razor-mitred with a uniform flat orange with no wood grain, paint edge, or specular variation; the countertop edge is a single straight line with no thickness variation or caulk line at the wall."
+     ],
+     "biggestGap": "The vanity top and sink in B. It is a uniformly white matte slab with a sharp-cornered rectangular trough, no material at all. It needs to become what A shows: a light quartz/engineered stone with fine multi-tone speckle (tiny grey and cream flecks), a slightly glossy surface that catches a smeared reflection of the light bar and the wallpaper, an undermount oval-rectangular white ceramic basin with a rounded bowl, an overflow slot, a chrome pop-up drain, and a properly modelled chrome single-lever faucet whose body reflects the room and the basin. Add a caulk line and a 1/2 inch backsplash/ledge where the top meets the wallpaper. That single object is the giveaway from across the room.",
+     "secondaryGaps": [
+      "Wallpaper material: the gold pattern is a flat vector overlay. Give it a paper base with subtle roughness/sheen, a very faint bump on the printed lines, slight ink density variation, a visible vertical seam, and a small spec highlight under the light bar the way A's wall shows a soft gradient wash.",
+      "The left-half blank wall/partition: an empty noiseless gradient occupying half the frame. Either move the camera so the partition is a thin edge as in A (which shows the whole vanity, shelves, toilet and corner), or give that face paint texture, orange-peel roughness, a corner bead line, a small shadow from the ceiling, and sensor grain matching the rest.",
+      "Mirror reflection contents: remove the floating dark bar and the oversized white curved dispenser cutting through the frame; model a real shower with chrome frame, valve trim plate, glass door rail and grab bar bracketed to the wall, plus the toilet and open shelf visible at the correct parallax as in A.",
+      "Light bar: model a real fixture with a diffuser lens that clips to white in the middle and rolls off at the ends, a brushed aluminium mount plate showing reflections, a warm bloom on the wall above and a brighter cone on the wallpaper below with soft penumbra; A shows this wash clearly.",
+      "Camera/sensor pass: add luminance grain that rises in shadows (under the vanity, in the reflection), slight barrel distortion at the edges, mild vignette, a hint of chromatic fringe on the orange frame against white, and phone-style noise reduction softness in the far corners.",
+      "Props and hardware: the two toiletry bottles are capped cylinders; replace with labelled dispensers with translucent bodies and printed caps, add the wood open shelves with chrome brackets seen in A, a vanity toe kick shadow, and a visible wall base/caulk at the floor line."
+     ],
+     "realismScore": 2.5,
+     "wowed": false,
+     "composite": "/tmp/claude-0/-home-user-h2sep-checklist/fb47d53f-23f6-5d8f-88e1-343b94d9771e/scratchpad/blind/bath-vanity-r1a.png",
+     "renderPanel": "B"
+    }
+   ],
+   "fix": null,
+   "status": "spotted",
+   "note": "Frame shows a foreground wall on the left occupying about half the image (the doorway jamb into the bathroom), with the vanity, mirror, and patterned wallpaper visible through the opening on the right; the render lock waited about 953 seconds before the render itself started."
+  }
+ ]
 }
