@@ -259,6 +259,7 @@
 import { createHash } from 'node:crypto';
 import { DatabaseSync } from 'node:sqlite';
 import { existsSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { simplifyMepDoc } from './mep_punch_template.mjs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -626,6 +627,58 @@ const RULED_LINE_ADDITIONS = [
     note: 'Added by Austin ruling D28. Box label transcribed verbatim: NORTON RIXSON / ASSA ABLOY ' +
       '10-336, DOOR, finish 630, qty 1. One unit photographed installed on a guestroom frame ' +
       '2026-08-21. Check the lock is installed and operates: latches, locks and releases.',
+  },
+  /* D49 (2026-09-02): "Add line item under door closer - 'Rework closer' to
+   * all doors - Add Key Card - installed & Key Card - Working." The rework
+   * line is checked only when the rework was needed (optional: true, so it
+   * does not count toward the room total until it is checked); the key card
+   * lines sit beside the closer and the lock. Connecting rooms (rooms.connecting
+   * = '1', the GR-3 pair on hardware set 3) get the closer and rework lines
+   * for that door too, because the ruling says ALL doors. */
+  {
+    ruling: 'D49', doc: 'ffe', key: 'dh_rework_a', category: 'Door Hardware', sort: 21005,
+    code: 'DH-1R', qty: 1, optional: true,
+    label: 'Rework closer (if needed)',
+    src: 'D49 (AJ 2026-09-02)',
+    note: 'Added by Austin ruling D49. Check this line only when the closer needed rework: adjust it ' +
+      'so the door self-closes and latches from any open position. It does not count toward the ' +
+      'room total until it is checked.',
+  },
+  {
+    ruling: 'D49', doc: 'ffe', key: 'dh_keycard_inst_a', category: 'Door Hardware', sort: 21020,
+    code: 'DH-3', qty: 1,
+    label: 'Key card installed',
+    src: 'D49 (AJ 2026-09-02); A600 hardware set 1 (Advance Card Lock)',
+    note: 'Added by Austin ruling D49. The electronic card lock is mounted on the entry door with its ' +
+      'reader and bezel flush and its supply connected.',
+  },
+  {
+    ruling: 'D49', doc: 'ffe', key: 'dh_keycard_work_a', category: 'Door Hardware', sort: 21030,
+    code: 'DH-4', qty: 1,
+    label: 'Key card working',
+    src: 'D49 (AJ 2026-09-02)',
+    note: 'Added by Austin ruling D49. Present a working card: the lock reads, unlatches and relatches; ' +
+      'the deadbolt throws; the privacy latch holds.',
+  },
+  {
+    ruling: 'D49', doc: 'ffe', key: 'dh_conn_closer_a', category: 'Door Hardware', sort: 21040,
+    code: 'DH-5', qty: 1,
+    label: 'Connecting door closer installed',
+    src: 'D49 (AJ 2026-09-02); A600 door GR-3, hardware set 3',
+    note: 'Added by Austin ruling D49 (rework closer on ALL doors). The GR-3 connecting door is a 45 minute ' +
+      'rated leaf on hardware set 3 per A600. Check the closer is installed and the leaf self-closes and ' +
+      'latches. The set 3 contents were not readable in this pass; if set 3 carries no closer, mark N/A.',
+    scope: 'the connecting rooms (rooms.connecting = 1)',
+    applies: (room) => String((room || {}).connecting) === '1',
+  },
+  {
+    ruling: 'D49', doc: 'ffe', key: 'dh_conn_rework_a', category: 'Door Hardware', sort: 21045,
+    code: 'DH-5R', qty: 1, optional: true,
+    label: 'Rework connecting door closer (if needed)',
+    src: 'D49 (AJ 2026-09-02)',
+    note: 'Added by Austin ruling D49. Check this line only when the connecting door closer needed rework.',
+    scope: 'the connecting rooms (rooms.connecting = 1)',
+    applies: (room) => String((room || {}).connecting) === '1',
   },
 ];
 
@@ -3718,7 +3771,14 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
 function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identity, numbering, descSlots) {
   const spec = REP_ROOMS[roomNo];
   const donorNo = spec.donor;
-  const ref = live.docs[donorNo + '-MEP'];
+  /* D49: floor1-staged.json carries the donor's MEP doc as SIMPLIFIED by
+   * simplifyMepDoc. This tool's condensation reads the donor's pre-D49 lines
+   * (the head take-off clause, the shower head and trap guard rows, the D27
+   * hot/cold line), which build_floor1.mjs preserves under
+   * meta.d49PreSimplifiedMep. The built doc is simplified again at the end. */
+  const preD49 = live.meta && live.meta.d49PreSimplifiedMep && live.meta.d49PreSimplifiedMep[donorNo + '-MEP'];
+  if (!preD49) die('room ' + roomNo + ': floor1-staged.json meta.d49PreSimplifiedMep has no ' + donorNo + '-MEP; rebuild floor 1 first');
+  const ref = { ...live.docs[donorNo + '-MEP'], items: preD49 };
   if (ref.type !== MEP_DOC_TYPE) die('room ' + roomNo + ': ' + donorNo + '-MEP type is not ' + JSON.stringify(MEP_DOC_TYPE));
 
   const donorLive = {};
@@ -4217,7 +4277,7 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
 function ruledSourceSentence(r, room) {
   return 'SOURCE. This line is a RULED LINE ADDITION: Austin ruling ' + r.ruling + ' put it on ' +
     (typeof r.applies === 'function'
-      ? 'the rooms his ruling names - here, the accessible QQ Acc. keys - and room ' + room.room_no +
+      ? 'the rooms his ruling names - here, ' + (r.scope || 'the accessible QQ Acc. keys') + ' - and room ' + room.room_no +
         ' is one of them (rooms.room_type "' + room.room_type + '", rooms.accessible ' + room.accessible + ')'
       : 'every guest room') +
     '. Its words, its tag, its count and its citation are the ruling\'s, and they are carried in the generator ' +
@@ -4250,6 +4310,7 @@ function addRuledLines(doc, kind, room, report) {
       instanceNote: endStop(r.note) + ' ' + ruledSourceSentence(r, room),
       trade: '', derived: 0,
       deleted: false, ...CLEAN_FIELD_STATE,
+      ...(r.optional ? { optional: true } : {}),
     };
     added.push(r.key + ' (' + r.ruling + ')');
   }
@@ -4261,7 +4322,7 @@ function addRuledLines(doc, kind, room, report) {
 const DOC_KEYS = new Set(['createdAt', 'deleted', 'floor', 'items', 'notes', 'number', 'schemaV', 'type', 'typeLabel', 'updatedAt']);
 const ITEM_KEYS = new Set(['attachments', 'category', 'checked', 'checkedAt', 'checkedAtLocal', 'checkedByCo', 'code', 'deleted',
   'derived', 'id', 'initials', 'instanceNote', 'issue', 'issueResolved', 'label', 'qty', 'reliability', 'sort',
-  'src', 'trade', 'verifyAtPunch', 'where']);
+  'src', 'trade', 'verifyAtPunch', 'where', 'optional']);
 const NOTE_KEYS = new Set(['by', 'createdAt', 'flag', 'redactedAuthor', 'resolved', 'text']);
 const DOC_ID_MAX = 8;
 const ITEMS_MAX = 200;
@@ -4313,6 +4374,8 @@ function buildAll(db, live, slice, rooms, stamp, numbering, descSlots, conventio
     const mep = buildMepDoc(db, roomNo, room, rows, live, ffe.floor, stamp, report,
       { typeLabel: ffe.typeLabel }, numbering, descSlots);
     report.ruledAdded = [...addRuledLines(ffe, 'ffe', room, report), ...addRuledLines(mep, 'mep', room, report)];
+    /* D49: the simplified punch, applied after the ruled lines so D27 folds in. */
+    report.mepSimplified = simplifyMepDoc(mep, room, stamp);
     report.ffeLines = Object.keys(ffe.items).length;
     report.mepLines = Object.keys(mep.items).length;
     docs[roomNo] = ffe;
