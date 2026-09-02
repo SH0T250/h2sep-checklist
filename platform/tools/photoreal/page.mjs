@@ -138,7 +138,7 @@ function row(v) {
   const c = v.critic;
   const badge = BADGE[v.status] || BADGE.pending;
   const img = (data, alt) => data
-    ? `<img src="${data}" alt="${esc(alt)}" loading="lazy">`
+    ? `<img src="${data}" alt="${esc(alt)}">`
     : `<div class="missing">${esc(alt)}</div>`;
   return `
   <article class="view" id="${esc(v.view)}">
@@ -174,7 +174,7 @@ const html = `<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Photo loop, room 110 King Studio</title>
+<title>Room 110 Photo Loop</title>
 <style>
 :root {
   color-scheme: light dark;
