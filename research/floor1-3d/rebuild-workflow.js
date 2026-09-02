@@ -1,8 +1,7 @@
 export const meta = {
-  name: 'h2sep-floor1-3d-v3-rebuild',
-  description: 'Rebuild the floor-1 3D scene after the restart, with every round-1 defect fixed at the source, pushed as it goes',
+  name: 'h2sep-floor1-3d-v4-rebuild',
+  description: 'Rebuild the floor-1 3D scene after the restart, King rooms already verified (D41), every round-1 defect fixed at the source, pushed as it goes',
   phases: [
-    { title: 'KingRooms', detail: 'finish and prove the King family in the platform viewer' },
     { title: 'FloorScene', detail: 'assembled floor-1 scene, status paint, red-pin issue markers, honest datums' },
     { title: 'Commons', detail: 'furnish the 30 common areas; package the artifact correctly' },
     { title: 'Verify', detail: 'fresh dimension verifier and three fresh design critics' },
@@ -15,14 +14,25 @@ const RULES = `
 PROJECT: H2SEP Field Tracking Platform, Home2 Suites by Hilton, Eagle Pass TX, Triun job 24030.
 Repo: /home/user/h2sep-checklist. Platform: /home/user/h2sep-checklist/platform.
 AUSTIN'S ASK, verbatim: "complete all the 3D models, and ... add all the 3D models together to
-complete one floor ... make this shit look epic." Then: "finish."
-CONTEXT: a container restart destroyed the previous completed build before it was committed.
+complete one floor ... make this shit look epic." Then: "finish." Then, 2026-09-02: "ok start
+the floor 1 3d scene rebuild."
+STATE ON 2026-09-02 (ruling D41): every floor-1 key already renders in platform/room3d.html.
+The King family (104-118) was cold-verified constant by constant against geometry-spec.json;
+lessons V1 and V5 below are FIXED in room3d.html; research/floor1-3d/king-viewer-notes.json
+records exactly what the room viewer draws so the floor scene can mirror it. platform/room3d.html
+is READ-ONLY in this run: nobody edits it. platform/js/app.js MODEL_ROOMS lists all 16 floor-1
+keys and platform/js/modules/bim/module.js already lists floor-1 rooms only in the 3D hub (floors
+2 to 4 are live on the checklists with no models; do not add them to the scene). Floors 2 to 4
+data files exist (floor2/3/4-staged.json) and are NOT inputs to this scene.
+CONTEXT: a container restart destroyed the previous completed floor scene before it was committed.
 Anything you write that is not pushed can vanish at any moment. So:
 COMMIT AND PUSH DISCIPLINE (mandatory for build agents, forbidden for judges):
 - At every working milestone and at the end: git add ONLY the exact files you own (named in your
   job), git commit, then git push -u origin ${BRANCH}. Never push any other branch, never main or
   gh-pages, never deploy, never write Firestore. If the push is rejected as non-fast-forward, run
-  git pull --rebase origin ${BRANCH} and push again; never force-push.
+  git pull --rebase origin ${BRANCH} and push again; never force-push. Other agents share this
+  checkout: if git reports index.lock, wait a few seconds and retry; never delete the lock of a
+  running command; never git add -A, never git stash, never git checkout or reset another file.
 - Commit messages: plain English, American spelling, no em dashes, no model names. End every
   message with exactly these two lines:
   Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
@@ -53,7 +63,10 @@ INPUTS (all committed, all proven, cite them):
   boundary in the sheet's U/V feet coordinates, the envelope, and an honest gap list.
 - research/floor1-3d/king-spec-recon.json: the recon notes behind the spec.
 - platform/data/floor1-staged.json: the live checklist state (81 docs) for status paint.
-- The QQ family already has correct geometry in platform/room3d.html; do not break it.
+- platform/room3d.html: the QQ family (A555) and the King family (A550 / A552) both render
+  correct geometry; read it for the builders and constants, never edit it in this run.
+- research/floor1-3d/king-viewer-notes.json: the exact King treatment the floor scene mirrors
+  (circle centers, radius, opacities, label texts; GR-3 datums; no wwShift anywhere).
 DRIVE tools if a sheet must be re-read: ToolSearch select:mcp__Google_Drive__search_files,mcp__Google_Drive__read_file_content,mcp__Google_Drive__get_file_metadata
 `
 
@@ -62,7 +75,8 @@ DRIVE tools if a sheet must be re-read: ToolSearch select:mcp__Google_Drive__sea
 const LESSONS = `
 LESSONS FROM THE LOST ROUND (an independent verifier failed the previous build on these; build
 them in correctly from the start, do not reintroduce them):
-V1. A constant "wwShift: 51*KIN" (exactly 4'-3") was encoded for the King Studio Connecting
+V1 (FIXED in room3d.html on 2026-09-02; the floor scene must not reintroduce it). A constant
+    "wwShift: 51*KIN" (exactly 4'-3") was encoded for the King Studio Connecting
     working-wall shift, but geometry-spec.json marks that shift UNPROVEN and says verbatim
     "Do not encode 4'-3" as a hard number." The constant was also dead code with a comment that
     claimed it was used. Rule: no unproven number becomes a constant; the connecting variant
@@ -87,11 +101,14 @@ V4. The packaged single-file artifact (platform/tools/build-artifact.mjs) never 
     that does not exist inside the bundle, so the Floor 1 screen was a silent blank iframe. Rule:
     the bundle inlines floor3d.html (window.__H2SEP_FLOOR_SRCDOC) AND the status data it fetches,
     or the screen shows an honest hard-stop; never a silent blank.
-V5. The second accessible clear-floor circle in 118's main room was drawn at a 60" diameter at
-    a proportional position in room3d.html and not drawn at all in the floor scene. The spec gives
-    it NO diameter and NO position. Rule: both viewers draw the same thing, and anything without a
-    printed size or position is labelled SCALED or STYLIZED on screen, never presented as a
-    dimensioned clearance.
+V5 (FIXED in room3d.html on 2026-09-02; mirror it). The second accessible clear-floor circle in
+    118's main room was drawn at a 60" diameter at a proportional position and unlabelled, and not
+    drawn at all in the floor scene. The spec gives it NO diameter and NO position. The room viewer
+    now draws it at opacity 0.25 (the proven bath circle is 0.55) at x = W*0.62, z = bedCL - 6.2 ft,
+    labelled "CLEAR FLOOR SPACE · STYLIZED · A552 PRINTS NO SIZE OR POSITION" beside the proven
+    "60″ TURNING CIRCLE". Rule: the floor scene draws exactly that (king-viewer-notes.json), and
+    anything without a printed size or position is labelled SCALED or STYLIZED on screen, never
+    presented as a dimensioned clearance.
 CRITIC FINDINGS (all three critics rated the lost build STRONG, not WOWED, for these):
 C1. 30 of 46 spaces (every common area) were empty grey shells: floor, wall ring, cap, nothing
     inside. The FOH block (U 178.78-221.22, V -7.38-44.22) is the largest volume on the floor and
@@ -116,32 +133,6 @@ A100 HONESTY (from the layout gap list; carry these, never paper over them):
 - A100 revision 5 (12/12/24, "REVISED PER RFI") postdates the sheet date; delta-5 clouds sit on
   both connecting pairs. Put the sheet issue and revision in the title block.
 `
-
-phase('KingRooms')
-const king = await agent(`${RULES}${LESSONS}
-YOUR JOB: finish and prove the King family in platform/room3d.html. You own exactly:
-platform/room3d.html and research/floor1-3d/king-viewer-notes.json.
-The file on disk already carries a near-complete King build (KING_ constants, rooms 104-118) from
-an earlier run that was cut off during final verification; do not start over, finish it.
-Do, in order: (1) screenshot QQ room 105 (?room=105&view=iso) as the baseline; (2) read the King
-entries against geometry-spec.json field by field; fix V1 (no unproven hard numbers, honest
-comments) and V5 (the second accessible circle in 118: label it SCALED/STYLIZED on screen or leave
-it out; write the exact treatment, diameter, and position you chose into
-research/floor1-3d/king-viewer-notes.json so the floor scene can mirror it exactly); (3) confirm
-rooms 102 and 120 still hard-stop with "NO 3D MODEL FOR ROOM"; (4) screenshot every King room
-104-118 at iso and top and 118's bath, LOOK at each: bath at the corridor end, window centred,
-working-wall order per spec, ceiling step, GR-3 at its proven centreline on 116 and 118, even-side
-mirroring only where the spec says; (5) confirm 105 renders identically to the baseline;
-(6) commit and push (git add platform/room3d.html research/floor1-3d/king-viewer-notes.json).
-Commit and push once more midway if the work takes more than ~20 tool calls.`, {
-  label: 'build:king-rooms', model: 'opus', phase: 'KingRooms', effort: 'max',
-  schema: { type: 'object', required: ['roomsProven', 'qqUnchanged', 'pushedCommit', 'screenshots'], properties: {
-    roomsProven: { type: 'array', items: { type: 'string' } }, qqUnchanged: { type: 'boolean' },
-    pushedCommit: { type: 'string' }, circleTreatment: { type: 'string' },
-    screenshots: { type: 'array', items: { type: 'string' } }, perRoomVerdict: { type: 'string' },
-    issues: { type: 'array', items: { type: 'string' } } } },
-})
-log(`king rooms proven: ${(king?.roomsProven || []).join(',')} | QQ unchanged: ${king?.qqUnchanged} | pushed: ${king?.pushedCommit}`)
 
 phase('FloorScene')
 const floor = await agent(`${RULES}${LESSONS}
@@ -237,7 +228,9 @@ for new defects of the same kind: unproven numbers encoded as constants, proof t
 match the rendered geometry, non-coincident openings, silent blanks, the two viewers disagreeing.
 Screenshot rooms 104, 110, 116, 118, QQ 105, the floor overview, and the packaged artifact's
 Floor 1 screen (build it to a scratch path). Confirm /home/user/h2sep-checklist/room-3d.html is
-UNTOUCHED (git status and git diff origin/${BRANCH} -- room-3d.html empty). List every defect with
+UNTOUCHED (git status and git diff origin/${BRANCH} -- room-3d.html empty) and that
+platform/room3d.html was not edited in this run (git log -1 -- platform/room3d.html predates it;
+no wwShift anywhere; the two 118 circles and their labels match king-viewer-notes.json). List every defect with
 file:line; PASS only at zero.`, {
     label: 'verify:dimensions', model: 'opus', phase: 'Verify', effort: 'high',
     schema: { type: 'object', required: ['verdict', 'defects'], properties: {
@@ -267,7 +260,6 @@ improvement with file:line. Harsh; a false WOWED wastes everyone's time.`, {
 log(`dims: ${dims?.verdict} (${(dims?.defects || []).length}) | critics: ${critics.filter(Boolean).map((c) => c.verdict).join('/')}`)
 
 return {
-  kingRoomsProven: king?.roomsProven, kingPushed: king?.pushedCommit, qqUnchanged: king?.qqUnchanged,
   floorBuilt: floor?.built, floorPushed: floor?.pushedCommit, statusPaint: floor?.statusPaintWorks,
   uiSuitePassed: floor?.uiSuitePassed,
   commonsKits: commons?.kitsBuilt, commonsPushed: commons?.pushedCommit, scaledCalls: commons?.scaledCalls,

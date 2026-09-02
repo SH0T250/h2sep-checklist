@@ -1,0 +1,52 @@
+{
+  "written": "2026-09-02",
+  "ruling": "D41",
+  "purpose": "What platform/room3d.html draws for the King family that the floor scene must mirror exactly (lesson V5: both viewers draw the same thing).",
+  "verified": "Cold verification 2026-09-02: all 20 KING_STD and all 25 KING_ACC constants match research/king-studio/geometry-spec.json; rooms 104, 106, 108, 110, 112, 114, 116, 118 render with zero errors; 102 and 120 hard-stop.",
+  "rooms": {
+    "as_drawn": ["106", "110", "114", "118"],
+    "mirrored_per_A550": ["104", "108", "112"],
+    "connecting_pair": ["116", "118"],
+    "accessible": "118 (King Studio Acc. Mod., A552)",
+    "hard_stop": ["102", "120"]
+  },
+  "wwShift": {
+    "status": "DELETED (V1)",
+    "note": "The 4 ft 3 in elevation-09 shift is UNPROVEN in the spec and is not encoded anywhere. In 116 the closet / TV / desk group is placed clear of the GR-3 opening by its own extents and the shift is labelled as a reading of elevation 09. The floor scene must not encode 51 in either."
+  },
+  "gr3": {
+    "116_centreline_in": 132.0,
+    "116_cite": "A550/01.1 PRINTED 11'-0\" from the corridor wall inside face",
+    "118_centreline_in": 132.82,
+    "118_cite": "A552/01 measured from the sheet vectors",
+    "conflict": "C1: the two sheets disagree by 0.82 in; the values are kept distinct and never averaged. The floor scene cuts the demising wall from ONE datum (A100's measured hole) like the QQ pair (lesson V3) and writes the A550 / A552 / A100 spread in its CONN_OPENINGS comment."
+  },
+  "clear_floor_circles_118": {
+    "source_line": "platform/room3d.html lines 3084 to 3103 (draw) and 3301 to 3306 (labels)",
+    "primitive": "THREE.RingGeometry(r - 0.09 ft, r, 72 segments), MeshBasicMaterial color 0x02A9E0, transparent, rotated flat, y = 0.1 ft",
+    "bathroom_circle": {
+      "status": "PROVEN",
+      "radius_in": 30,
+      "cite": "geometry-spec.json KING_ACC.turnR = 30 in, 60 in turning circle drawn on A552/01",
+      "center": "x = BW * 0.52 (BW = bath interior width), z = bath corridor-wall face + 3.1 ft",
+      "opacity": 0.55,
+      "label": "60″ TURNING CIRCLE"
+    },
+    "main_room_circle": {
+      "status": "STYLIZED (V5 fixed 2026-09-02)",
+      "radius_in": 30,
+      "why": "A552 view 01 draws a second clear floor space in the main room but prints NEITHER its diameter NOR its position. The viewer draws it at the same radius as the proven circle so the two read as the same kind of thing, but fainter, at a stylized position, and labelled so it asserts no dimension.",
+      "center": "x = W * 0.62 (W = room clear width), z = KING_ACC.bedCL - 6.2 ft",
+      "opacity": 0.25,
+      "label": "CLEAR FLOOR SPACE · STYLIZED · A552 PRINTS NO SIZE OR POSITION"
+    },
+    "floor_scene_rule": "Draw both circles in 118 in the floor scene with the same centers, radius, opacity split (0.55 proven / 0.25 stylized) and the same two label texts. Never draw the main-room circle as a dimensioned clearance."
+  },
+  "tags": {
+    "note": "room3d.html hard-codes its tag list per type and per key; it was diffed against every King room's own document in platform/data/floor1-staged.json on 2026-09-02 and matched exactly. A package change will not propagate to the viewer; that is a known gap, not something the floor scene should copy. The floor scene reads status from floor1-staged.json (or the injected window.__H2SEP_FLOOR_DATA) and does not need the tag list."
+  },
+  "disclosed_soft_borrows": [
+    "116 gr3RO 40 in is A552's measurement of the same opening; A550 prints no rough opening width (disclosed on the GR-3 card).",
+    "118 window stool / head / box heights are A550's SCALED jamb values; A552 prints no sill or head (comment in KING_ACC)."
+  ]
+}
