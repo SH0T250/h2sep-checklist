@@ -1,0 +1,1021 @@
+{
+ "kit": "fitness-laundry",
+ "compiledBy": "commons research agent",
+ "frame": "A100 frame from research/floor1-3d/a100-layout.json: U feet along the building from the north face, V feet across from the west face. Both plan sheets read with U increasing to the right and V increasing upward in their displayed (rotated 270) frames.",
+ "space": [
+  {
+   "id": "023",
+   "name": "Fitness Room",
+   "U": [
+    221.79,
+    246.39
+   ],
+   "V": [
+    -6.87,
+    29.18
+   ],
+   "basis": "MEASURED",
+   "note": "A100 poche 24'-7\" x 36'-0\". Entry door from the corridor on the north wall near the east end (ID-1.7 arc at U 222 to 224, V 21 to 27). Curtain wall on the west face, a framed window on the south face at V about 11.6."
+  },
+  {
+   "id": "024",
+   "name": "Guest Laundry",
+   "U": [
+    229.9,
+    242.3
+   ],
+   "V": [
+    29.6,
+    39.6
+   ],
+   "basis": "SCALED",
+   "note": "A100 gives only the label anchor (U 219.2 to 226.5, V 35.5 to 38.8). Walls scaled from ID-1.7: corridor wall at U 229.9 with the entry door, elevator wall at V 39.6, Mech 025 wall at U 242.3, fitness wall at V 29.6. About 12.4 x 10.0 ft."
+  },
+  {
+   "id": "015",
+   "name": "Laundry",
+   "U": [
+    128.17,
+    177.02
+   ],
+   "V": [
+    52.35,
+    64.99
+   ],
+   "basis": "MEASURED",
+   "note": "A100 band that includes the east part of Open Storage 017 at the north end. ID-1.7 draws the south wall at about V 53.8 and the shelving against it."
+  },
+  {
+   "id": "016",
+   "name": "Dryer Room",
+   "U": [
+    177.57,
+    195.48
+   ],
+   "V": [
+    52.35,
+    64.99
+   ],
+   "basis": "MEASURED",
+   "note": "A100 poche 17'-11\" x 12'-8\"."
+  },
+  {
+   "id": "014",
+   "name": "Employee Breakroom",
+   "U": [
+    196.05,
+    208.63
+   ],
+   "V": [
+    52.35,
+    64.99
+   ],
+   "basis": "MEASURED",
+   "note": "A100 poche 12'-7\" x 12'-8\". Door from the corridor on the south wall (ID-1.7 arc at U 204 to 208)."
+  }
+ ],
+ "pieces": [
+  {
+   "name": "Treadmill (A510.3 legend 803; owner supplied through the Hilton approved fitness vendor)",
+   "tag": "803 (A510.3)",
+   "count": 4,
+   "space": "023",
+   "footprintFt": {
+    "w": 8.4,
+    "d": 3.0,
+    "h": 4.6
+   },
+   "placements": [
+    {
+     "u": 242.0,
+     "v": 22.8,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; four identical symbols stacked along V on the south half of the room, deck U 237.8 to 246.2 with the console against the south wall"
+    },
+    {
+     "u": 242.0,
+     "v": 18.8,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; four identical symbols stacked along V on the south half of the room, deck U 237.8 to 246.2 with the console against the south wall"
+    },
+    {
+     "u": 242.0,
+     "v": 14.7,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; four identical symbols stacked along V on the south half of the room, deck U 237.8 to 246.2 with the console against the south wall"
+    },
+    {
+     "u": 242.0,
+     "v": 10.8,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; four identical symbols stacked along V on the south half of the room, deck U 237.8 to 246.2 with the console against the south wall"
+    }
+   ],
+   "form": "Long grey deck with a raised console head at the south end (U high), belt in dark grey, side rails in light metal; user faces the south windows",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Footprint scaled from the ID-1.7 symbol (113 pt long by 40 pt wide at 13.5 pt/ft). Height is not on any sheet; 4.6 ft assumed for massing (see scaledCalls)"
+  },
+  {
+   "name": "Cardio trainer, elliptical or recumbent cycle (A510.3 legend 804 and 805; the two ID-1.7 symbols are identical)",
+   "tag": "804/805 (A510.3)",
+   "count": 2,
+   "space": "023",
+   "footprintFt": {
+    "w": 7.5,
+    "d": 3.0,
+    "h": 5.0
+   },
+   "placements": [
+    {
+     "u": 241.7,
+     "v": 4.1,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; two identical seat-and-pedal symbols in the south west corner, U 237.9 to 245.4, accessible clear floor symbol drawn between them and the treadmills"
+    },
+    {
+     "u": 241.7,
+     "v": 0.5,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; second symbol, same row"
+    }
+   ],
+   "form": "Low frame with a seat, pedal arms and a console post at the south end; dark grey frame, light metal arms",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Footprint scaled from the ID-1.7 symbol (101 pt by 40 pt). Height not on any sheet; 5.0 ft assumed for massing"
+  },
+  {
+   "name": "Dumbbell rack, two tier, on the mirror wall (A510.3 legend 806 free weights and rack)",
+   "tag": "806 (A510.3)",
+   "count": 1,
+   "space": "023",
+   "footprintFt": {
+    "w": 1.9,
+    "d": 7.5,
+    "h": 2.6
+   },
+   "placements": [
+    {
+     "u": 223.4,
+     "v": 9.4,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; rack symbol with paired round ends drawn tight to the north wall, U 222.5 to 224.3, V 5.6 to 13.1"
+    }
+   ],
+   "form": "Open black steel rack with two tiers of paired dumbbells, long axis along V, backs to the north wall",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Footprint scaled from the ID-1.7 symbol (25 pt by 101 pt). Height not on any sheet; 2.6 ft assumed for massing"
+  },
+  {
+   "name": "Wall mounted mirror behind the dumbbell rack (A510.3 legend 817, keyed note 2: GC plate mirror in a decorative frame per the Home2 fitness guide)",
+   "tag": "817 (A510.3)",
+   "count": 1,
+   "space": "023",
+   "footprintFt": {
+    "w": 0.1,
+    "d": 8.5,
+    "h": 4.0
+   },
+   "placements": [
+    {
+     "u": 221.85,
+     "v": 8.5,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "A510.3 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), Architectural Pages sheet72, fitted to the A100 frame from its own vector lines (south exterior face at x 1774.7, west face south of U 162.7 at y 1309.7: U = 246.46 + (x - 1774.7)/13.5, V = 65.59 - (y - 324.6)/13.5); tag leader tip read on a ruled crop, about 0.5 ft error; 817 leader lands on the north wall at V about 12.2 and the mirror line runs along the wall from V 4.3 to 12.8"
+    }
+   ],
+   "form": "Frameless plate mirror panel with a slim decorative frame on the north wall face at U 221.79; bottom about 1.5 ft above the floor",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Length scaled from the A510.3 mirror line (115 pt). Height is not stated on A510.3 or A701 (A701 fitness elevations only print 1'-6\" and 4'-0\" dimensions); 4.0 ft used for massing"
+  },
+  {
+   "name": "Flat weight bench (A510.3 legend 807)",
+   "tag": "807 (A510.3)",
+   "count": 1,
+   "space": "023",
+   "footprintFt": {
+    "w": 4.3,
+    "d": 1.7,
+    "h": 1.5
+   },
+   "placements": [
+    {
+     "u": 228.7,
+     "v": 9.4,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; bench symbol with a round head pad in the middle of the room, U 226.6 to 230.9, V 7.6 to 10.8"
+    }
+   ],
+   "form": "Padded black bench on a steel base, long axis along U",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Footprint scaled from the ID-1.7 symbol (58 pt by 23 pt). Height not on any sheet; 1.5 ft assumed"
+  },
+  {
+   "name": "Adjustable incline bench, drawn on a diagonal (A510.3 legend 808 strength system or second bench; the sheet does not name it)",
+   "tag": "808 (A510.3), unconfirmed",
+   "count": 1,
+   "space": "023",
+   "footprintFt": {
+    "w": 5.5,
+    "d": 1.7,
+    "h": 3.5
+   },
+   "placements": [
+    {
+     "u": 225.0,
+     "v": -3.2,
+     "rotDeg": 35,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; angled bench symbol in the north west corner, U 222.5 to 227.5, V -6.0 to -0.4"
+    }
+   ],
+   "form": "Angled backrest bench on a steel frame, black pads, turned about 35 degrees off the U axis",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Footprint scaled from the ID-1.7 symbol diagonal. Height not on any sheet; 3.5 ft assumed"
+  },
+  {
+   "name": "Medicine ball rack, four balls (A510.3 legend 809)",
+   "tag": "809 (A510.3)",
+   "count": 1,
+   "space": "023",
+   "footprintFt": {
+    "w": 4.8,
+    "d": 3.3,
+    "h": 3.0
+   },
+   "placements": [
+    {
+     "u": 234.2,
+     "v": -4.45,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; rack symbol with four circles against the west wall, U 231.8 to 236.6, V -6.1 to -2.8"
+    }
+   ],
+   "form": "Black steel rack holding four medicine balls, long axis along U, back to the west curtain wall",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Footprint scaled from the ID-1.7 symbol (65 pt by 45 pt). Height not on any sheet; 3.0 ft assumed"
+  },
+  {
+   "name": "Exercise ball or rolled mat station (A510.3 legend 810 and 811; ID-1.7 draws one 2.2 ft square)",
+   "tag": "810/811 (A510.3)",
+   "count": 1,
+   "space": "023",
+   "footprintFt": {
+    "w": 2.2,
+    "d": 2.2,
+    "h": 2.2
+   },
+   "placements": [
+    {
+     "u": 234.0,
+     "v": -0.2,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; small square symbol at U 232.9 to 235.1, V -1.3 to 0.9"
+    }
+   ],
+   "form": "Small grey square block; render as a stability ball on a base or a stacked mat pile",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Footprint scaled from the ID-1.7 symbol (30 pt square). Height assumed equal to the width"
+  },
+  {
+   "name": "Towel station with two towel hampers (PA-310 towel station, A510.3 legend 800 towel hamper)",
+   "tag": "PA-310, 800",
+   "count": 1,
+   "space": "023",
+   "footprintFt": {
+    "w": 1.6,
+    "d": 6.7,
+    "h": 3.0
+   },
+   "placements": [
+    {
+     "u": 222.6,
+     "v": 22.3,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; PA-310 leader lands on a tall rectangle with two circles on the north wall just south of the entry door, U 221.7 to 223.4, V 18.9 to 25.6"
+    }
+   ],
+   "form": "Plastic laminate cabinet (PL-01 Wilsonart 5th Ave Elm per the PA-310 card) with two round hamper openings, long axis along V, back to the north wall",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "PA-310 spec card dimension line is blank in the text layer; footprint scaled from the ID-1.7 symbol (23 pt by 90 pt); 3.0 ft counter height assumed"
+  },
+  {
+   "name": "Water and cup dispenser stand with the rules sign above (A510.3 legend 801 and 812)",
+   "tag": "801, 812 (A510.3)",
+   "count": 1,
+   "space": "023",
+   "footprintFt": {
+    "w": 1.6,
+    "d": 1.5,
+    "h": 3.5
+   },
+   "placements": [
+    {
+     "u": 222.55,
+     "v": 17.95,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; small square on the north wall south of the towel station, U 221.7 to 223.4, V 17.2 to 18.7; A510.3 801 leader lands on the same wall at V 18.2"
+    }
+   ],
+   "form": "Small square stand with a water dispenser on top and a framed rules sign on the wall above",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Footprint scaled from the ID-1.7 symbol (23 pt by 20 pt). Height assumed"
+  },
+  {
+   "name": "Wall mounted television on the east wall of the fitness room (A510.3 legend 813)",
+   "tag": "813 (A510.3)",
+   "count": 1,
+   "space": "023",
+   "footprintFt": {
+    "w": 4.0,
+    "d": 0.3,
+    "h": 2.3
+   },
+   "placements": [
+    {
+     "u": 240.5,
+     "v": 29.0,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "A510.3 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), Architectural Pages sheet72, fitted to the A100 frame from its own vector lines (south exterior face at x 1774.7, west face south of U 162.7 at y 1309.7: U = 246.46 + (x - 1774.7)/13.5, V = 65.59 - (y - 324.6)/13.5); tag leader tip read on a ruled crop, about 0.5 ft error; 813 leader lands on the fitness side of the fitness and guest laundry wall at U about 240.5; towel hook 816 and clock 819 leaders land on the same wall at U about 242 and 244.5"
+    }
+   ],
+   "form": "Flat black screen on the east wall face at V 29.18, centered about 5 ft above the floor, facing the treadmill row",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Screen size is not on any sheet; 48 in class assumed for massing"
+  },
+  {
+   "name": "Fitness wall accessories: gym wipes dispenser 802 and emergency telephone 814 on the north wall, towel hook 816 and wall clock 819 on the east wall",
+   "tag": "802, 814, 816, 819 (A510.3)",
+   "count": 4,
+   "space": "023",
+   "footprintFt": {
+    "w": 0.8,
+    "d": 0.3,
+    "h": 1.0
+   },
+   "placements": [
+    {
+     "u": 230.0,
+     "v": 29.0,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "A510.3 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), Architectural Pages sheet72, fitted to the A100 frame from its own vector lines (south exterior face at x 1774.7, west face south of U 162.7 at y 1309.7: U = 246.46 + (x - 1774.7)/13.5, V = 65.59 - (y - 324.6)/13.5); tag leader tip read on a ruled crop, about 0.5 ft error; 802 tag at U 230.0 V 22.1 with leader to the east wall"
+    },
+    {
+     "u": 230.3,
+     "v": 29.0,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "A510.3 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), Architectural Pages sheet72, fitted to the A100 frame from its own vector lines (south exterior face at x 1774.7, west face south of U 162.7 at y 1309.7: U = 246.46 + (x - 1774.7)/13.5, V = 65.59 - (y - 324.6)/13.5); tag leader tip read on a ruled crop, about 0.5 ft error; 814 tag at U 230.0 V 23.0, leader to the same wall; keyed note 7 requires an accessible reach range"
+    },
+    {
+     "u": 242.0,
+     "v": 29.0,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "A510.3 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), Architectural Pages sheet72, fitted to the A100 frame from its own vector lines (south exterior face at x 1774.7, west face south of U 162.7 at y 1309.7: U = 246.46 + (x - 1774.7)/13.5, V = 65.59 - (y - 324.6)/13.5); tag leader tip read on a ruled crop, about 0.5 ft error; 816 towel hook leader"
+    },
+    {
+     "u": 244.5,
+     "v": 29.0,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "A510.3 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), Architectural Pages sheet72, fitted to the A100 frame from its own vector lines (south exterior face at x 1774.7, west face south of U 162.7 at y 1309.7: U = 246.46 + (x - 1774.7)/13.5, V = 65.59 - (y - 324.6)/13.5); tag leader tip read on a ruled crop, about 0.5 ft error; 819 clock leader"
+    }
+   ],
+   "form": "Small wall mounted boxes and a round clock; render as thin plates on the wall face",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "No sizes on any sheet; 0.8 ft nominal plates for massing"
+  },
+  {
+   "name": "Sheer roller shades PA-400 at the fitness curtain wall (west) and a third PA-400 at the south window",
+   "tag": "PA-400",
+   "count": 3,
+   "space": "023",
+   "footprintFt": {
+    "w": 9.5,
+    "d": 0.3,
+    "h": 8.0
+   },
+   "placements": [
+    {
+     "u": 228.3,
+     "v": -6.7,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; PA-400 tag below the west wall with a leader to the wall at U 228.3; the spec calls the curtain wall run approx 19 ft wide x 8 ft high, split into two shades"
+    },
+    {
+     "u": 238.4,
+     "v": -6.7,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; second PA-400 leader to the west wall at U 238.4"
+    },
+    {
+     "u": 246.2,
+     "v": 11.6,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; third PA-400 tag inside the room at U 240.6 V 11.1 with a leader to the south wall at V 11.6; drawn 6 ft wide, matching the PA-402 framed window size"
+    }
+   ],
+   "form": "Grey sheer fabric roller (Hunter Douglas Bleecker Steel) with a 4 in black aluminum fascia, outside mount at the ceiling",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas PA-400 card: Fitness Room approx 19'W x approx 8'H, ceiling 9'-3\" VIF; PA-402 card: fitness framed windows 6'-0\"W x 6'-8\"H"
+  },
+  {
+   "name": "Bottle filling station, Elkay Liv LBWD06BKK built-in filtered water dispenser (A510.3 legend 821)",
+   "tag": "821 (A510.3)",
+   "count": 1,
+   "space": "corridor at 024/011",
+   "footprintFt": {
+    "w": 1.5,
+    "d": 0.43,
+    "h": 1.71
+   },
+   "placements": [
+    {
+     "u": 223.9,
+     "v": 44.4,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A510.3 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), Architectural Pages sheet72, fitted to the A100 frame from its own vector lines (south exterior face at x 1774.7, west face south of U 162.7 at y 1309.7: U = 246.46 + (x - 1774.7)/13.5, V = 65.59 - (y - 324.6)/13.5); tag leader tip read on a ruled crop, about 0.5 ft error; clouded 821 tag at U 223.9 V 44.4 in the corridor wall between Guest Laundry 024 and Managers Office 011, outside the fitness room; a second 821 sits at U 166.4 V 28.6 by the meeting room corridor and is not part of this kit"
+    }
+   ],
+   "form": "Slim black (Midnight) recessed panel with a bottle filler alcove, remote chiller behind the wall",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "BOTTLE FILLER FITNESS.pdf (Drive 1Gq4kara0CeFfoRZlwJFohS0Pj6ur3wna) product specifications: 5-1/8 in x 18 in x 20-1/2 in"
+  },
+  {
+   "name": "Coin operated dryer, front load (A510.3 legend 407)",
+   "tag": "407 (A510.3)",
+   "count": 2,
+   "space": "024",
+   "footprintFt": {
+    "w": 2.53,
+    "d": 2.9,
+    "h": 3.6
+   },
+   "placements": [
+    {
+     "u": 233.3,
+     "v": 38.0,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; four equal machine boxes in a row against the elevator wall of Guest Laundry 024, U 232.0 to 242.1, V 36.5 to 39.4; A510.3 407 leaders land on the two west boxes"
+    },
+    {
+     "u": 235.8,
+     "v": 38.0,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; second west box"
+    }
+   ],
+   "form": "White front load laundry machine with a round door, back to the V 39.6 wall, door facing south",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Footprint scaled from the ID-1.7 row (137 pt for four units, 39 pt deep). Height not on any sheet; 3.6 ft assumed. No cutsheet found on Drive"
+  },
+  {
+   "name": "Coin operated washer, front load (A510.3 legend 406)",
+   "tag": "406 (A510.3)",
+   "count": 2,
+   "space": "024",
+   "footprintFt": {
+    "w": 2.53,
+    "d": 2.9,
+    "h": 3.6
+   },
+   "placements": [
+    {
+     "u": 238.3,
+     "v": 38.0,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; third box in the row; A510.3 406 leaders land on the two east boxes"
+    },
+    {
+     "u": 240.8,
+     "v": 38.0,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; east box"
+    }
+   ],
+   "form": "White front load washer with a round door, same row as the dryers",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Same row as the dryers; height assumed; no cutsheet found"
+  },
+  {
+   "name": "Guest laundry folding counter with clothes rod and shelf below (PA-805, A904 guest laundry millwork)",
+   "tag": "PA-805",
+   "count": 1,
+   "space": "024",
+   "footprintFt": {
+    "w": 5.5,
+    "d": 2.0,
+    "h": 2.83
+   },
+   "placements": [
+    {
+     "u": 237.0,
+     "v": 30.4,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; PA-805 leader lands on the counter drawn against the fitness wall of the guest laundry, U 234.4 to 239.7, V 29.7 to 31.2"
+    }
+   ],
+   "form": "Wall hung plastic laminate counter (PL-01 Wilsonart 5th Ave Elm 7966K-12) on white powder coated metal brackets, stainless steel hanging rod above, second shelf below",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "A904.md Guest Laundry plan and section (Drive 1K-AEYQwPfHVGQbTfwKM2kQepgNhD1XA4): 5'-6\" wide, 2'-0\" deep, 2'-10\" counter height; PA-805 card: large shelf 66 W x 15 D x 6 3/4 H"
+  },
+  {
+   "name": "Counter stool at the guest laundry counter (PA-109 Emeco Broom counter stool)",
+   "tag": "PA-109",
+   "count": 1,
+   "space": "024",
+   "footprintFt": {
+    "w": 1.38,
+    "d": 1.5,
+    "h": 3.17
+   },
+   "placements": [
+    {
+     "u": 237.5,
+     "v": 31.9,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; PA-109 leader lands on the stool symbol at the front of the PA-805 counter"
+    }
+   ],
+   "form": "Molded dark grey stool with a metal foot rail, 24 in seat height",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas PA-109 card: 16 1/2 W x 18 D x 38 H, seat 24 H"
+  },
+  {
+   "name": "Decorative trash can, guest laundry (A510.3 legend 408)",
+   "tag": "408 (A510.3)",
+   "count": 1,
+   "space": "024",
+   "footprintFt": {
+    "w": 1.3,
+    "d": 1.3,
+    "h": 2.5
+   },
+   "placements": [
+    {
+     "u": 231.1,
+     "v": 38.0,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; round symbol in the north west corner of the guest laundry beside the west dryer; A510.3 408 leader lands on the same circle"
+    }
+   ],
+   "form": "Round dark grey can",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Diameter scaled from the ID-1.7 circle (17 pt); height assumed"
+  },
+  {
+   "name": "Commercial top load washer (A510.3 legend 409)",
+   "tag": "409 (A510.3)",
+   "count": 1,
+   "space": "015",
+   "footprintFt": {
+    "w": 3.3,
+    "d": 4.1,
+    "h": 3.6
+   },
+   "placements": [
+    {
+     "u": 167.2,
+     "v": 61.05,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; west box of three equal machine boxes against the east exterior wall of Laundry 015, U 165.5 to 168.8, V 59.0 to 63.1, with a dashed plumbing band behind; A510.3 puts the same tag at U 166.1"
+    }
+   ],
+   "form": "White boxy top load washer with a lid, back to the east wall, controls facing west into the room",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Footprint scaled from the ID-1.7 box (45 pt by 55 pt). Height not on any sheet; 3.6 ft assumed; no cutsheet found on Drive"
+  },
+  {
+   "name": "Commercial washer, front load (A510.3 legend 401)",
+   "tag": "401 (A510.3)",
+   "count": 2,
+   "space": "015",
+   "footprintFt": {
+    "w": 3.3,
+    "d": 4.1,
+    "h": 4.0
+   },
+   "placements": [
+    {
+     "u": 170.9,
+     "v": 61.05,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; middle box, U 169.2 to 172.6; A510.3 401 tag at U 170.0"
+    },
+    {
+     "u": 174.7,
+     "v": 61.05,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; east box, U 173.0 to 176.4; A510.3 401 tag at U 173.9"
+    }
+   ],
+   "form": "Stainless or white front load washer extractor with a large round door, back to the east wall",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Same boxes as the top load washer; height assumed 4.0 ft; no cutsheet found"
+  },
+  {
+   "name": "Mop sink and two compartment laundry sink on the east wall (A510.3 draws both; ID-1.7 draws both)",
+   "tag": "untagged",
+   "count": 2,
+   "space": "015",
+   "footprintFt": {
+    "w": 2.3,
+    "d": 2.5,
+    "h": 3.0
+   },
+   "placements": [
+    {
+     "u": 157.75,
+     "v": 63.75,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; square with an X (mop sink) at U 156.6 to 158.9, V 62.5 to 65.0"
+    },
+    {
+     "u": 160.65,
+     "v": 63.75,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; two compartment sink at U 159.2 to 162.1, same V band"
+    }
+   ],
+   "form": "Floor mop basin (square, low) and a stainless two bowl sink on legs against the east wall",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Footprints scaled from the ID-1.7 symbols; heights assumed (mop sink 1 ft, laundry sink 3 ft)"
+  },
+  {
+   "name": "Storage shelving, adjustable melamine shelves on KV standards, east wall run (A510.3 legend 404 x2; A906 house laundry shelving)",
+   "tag": "404 (A510.3)",
+   "count": 2,
+   "space": "015",
+   "footprintFt": {
+    "w": 6.5,
+    "d": 1.5,
+    "h": 6.5
+   },
+   "placements": [
+    {
+     "u": 140.5,
+     "v": 64.8,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; long shelf band drawn along the east wall from U 137.0 to 151.2; A510.3 404 x2 leader lands at U 143.2 V 61.5; split into two A906 runs"
+    },
+    {
+     "u": 147.7,
+     "v": 64.8,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; second run"
+    }
+   ],
+   "form": "White melamine shelves 1'-6\" deep on white KV standards and brackets, back to the east exterior wall",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "A906.md house laundry elevation and section (Drive 1iNsOg3IQ62HAobYLzyosAnMq8xlJpOqM): 6'-6\" runs, 1'-6\" deep, about 6'-6\" tall"
+  },
+  {
+   "name": "Storage shelving, south wall run (A510.3 legend 404 x3)",
+   "tag": "404 (A510.3)",
+   "count": 3,
+   "space": "015",
+   "footprintFt": {
+    "w": 5.9,
+    "d": 2.2,
+    "h": 6.5
+   },
+   "placements": [
+    {
+     "u": 143.1,
+     "v": 55.2,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; continuous unit drawn along the south wall of Laundry 015 from U 140.1 to 157.9, V 54.1 to 56.3; A510.3 404 x3 leader lands at U 141.5 V 57.0; drawn length split into three equal bays"
+    },
+    {
+     "u": 149.0,
+     "v": 55.2,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; middle bay"
+    },
+    {
+     "u": 154.9,
+     "v": 55.2,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; east bay"
+    }
+   ],
+   "form": "Same white melamine shelving, freestanding or wall hung along the south partition",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Length scaled from the ID-1.7 unit (240 pt total); A906 says 6'-6\" typical runs but three runs would exceed the drawn 17.8 ft, so 5.9 ft bays are used; depth from the drawn 2.2 ft; height per A906"
+  },
+  {
+   "name": "Commercial dryer, front load (A510.3 legend 402)",
+   "tag": "402 (A510.3)",
+   "count": 4,
+   "space": "016",
+   "footprintFt": {
+    "w": 3.2,
+    "d": 3.3,
+    "h": 4.5
+   },
+   "placements": [
+    {
+     "u": 183.7,
+     "v": 60.25,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; four equal boxes in a row along the east wall of Dryer Room 016, U 182.1 to 194.9, body V 58.6 to 61.9 with a 1.9 ft service band behind to the wall; A510.3 402 tags at U 182.7, 185.9, 189.2, 192.5"
+    },
+    {
+     "u": 186.9,
+     "v": 60.25,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; four equal boxes in a row along the east wall of Dryer Room 016, U 182.1 to 194.9, body V 58.6 to 61.9 with a 1.9 ft service band behind to the wall; A510.3 402 tags at U 182.7, 185.9, 189.2, 192.5"
+    },
+    {
+     "u": 190.1,
+     "v": 60.25,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; four equal boxes in a row along the east wall of Dryer Room 016, U 182.1 to 194.9, body V 58.6 to 61.9 with a 1.9 ft service band behind to the wall; A510.3 402 tags at U 182.7, 185.9, 189.2, 192.5"
+    },
+    {
+     "u": 193.3,
+     "v": 60.25,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; four equal boxes in a row along the east wall of Dryer Room 016, U 182.1 to 194.9, body V 58.6 to 61.9 with a 1.9 ft service band behind to the wall; A510.3 402 tags at U 182.7, 185.9, 189.2, 192.5"
+    }
+   ],
+   "form": "Tall stainless front load tumble dryer with a round door, back to the east exterior wall",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Footprint scaled from the ID-1.7 boxes (43 pt wide, 44 pt deep body). Height not on any sheet; 4.5 ft assumed; no cutsheet found on Drive"
+  },
+  {
+   "name": "Breakroom dining table with metal base (PA-309)",
+   "tag": "PA-309",
+   "count": 1,
+   "space": "014",
+   "footprintFt": {
+    "w": 6.0,
+    "d": 2.5,
+    "h": 2.375
+   },
+   "placements": [
+    {
+     "u": 202.0,
+     "v": 62.4,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; PA-309 tag on the table drawn along U near the east wall of Employee Breakroom 014, U 199.3 to 204.6, V 61.5 to 63.3; A510.3 draws it 2.3 ft further west at U 197.0 to 202.5"
+    }
+   ],
+   "form": "Rectangular plastic laminate top (PL-01) on a metal base, long axis along U",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas PA-309 card: 72 W x 30 D x 28 1/2 H"
+  },
+  {
+   "name": "Employee breakroom chair, ISA Zodiac stack chair (PA-110)",
+   "tag": "PA-110",
+   "count": 6,
+   "space": "014",
+   "footprintFt": {
+    "w": 1.6,
+    "d": 1.6,
+    "h": 2.7
+   },
+   "placements": [
+    {
+     "u": 200.3,
+     "v": 64.0,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; three chair arcs on the east side of the table"
+    },
+    {
+     "u": 202.0,
+     "v": 64.0,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error"
+    },
+    {
+     "u": 203.7,
+     "v": 64.0,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error"
+    },
+    {
+     "u": 200.3,
+     "v": 60.8,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; three chair arcs on the west side of the table"
+    },
+    {
+     "u": 202.0,
+     "v": 60.8,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error"
+    },
+    {
+     "u": 203.7,
+     "v": 60.8,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error"
+    }
+   ],
+   "form": "Red molded polypropylene shell on polished chrome legs",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "PA-110 card lists model 306-SMLG Zodiac Stack and finishes; the overall dimension line did not come through the text layer, so 1.6 ft is scaled from the plan arcs and 2.7 ft height assumed"
+  },
+  {
+   "name": "Breakroom sink counter (A510.3 legend 405 breakroom sink; A905 employee break room millwork)",
+   "tag": "405 (A510.3)",
+   "count": 1,
+   "space": "014",
+   "footprintFt": {
+    "w": 4.5,
+    "d": 2.3,
+    "h": 3.0
+   },
+   "placements": [
+    {
+     "u": 200.9,
+     "v": 53.5,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; counter with a sink bowl drawn on the south wall of the breakroom, U 198.6 to 203.1, V 52.35 to 54.65"
+    }
+   ],
+   "form": "Plastic laminate base cabinet with a stainless drop in sink, back to the south partition",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Footprint scaled from the ID-1.7 symbol; 3 ft counter height assumed; A905 (not read) carries the millwork detail"
+  },
+  {
+   "name": "Refrigerator or base cabinet, untagged, west end of the breakroom counter",
+   "tag": "untagged",
+   "count": 1,
+   "space": "014",
+   "footprintFt": {
+    "w": 2.8,
+    "d": 2.5,
+    "h": 5.5
+   },
+   "placements": [
+    {
+     "u": 197.4,
+     "v": 53.6,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), FF&E Locations_sheet8.png, fitted to the A100 frame with the lobby kit's mapping (U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 in the displayed frame); symbol outline read on a ruled crop, about 0.5 ft error; solid square with a dashed twin beside the sink counter at U 196.05 to 198.9, V 52.35 to 54.9"
+    }
+   ],
+   "form": "Boxy white appliance mass at the corner of the south and west walls",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Footprint scaled from the ID-1.7 square; height assumed for a refrigerator; identity not stated on either sheet"
+  },
+  {
+   "name": "Wall mounted television, breakroom (A510.3 legend 431)",
+   "tag": "431 (A510.3)",
+   "count": 1,
+   "space": "014",
+   "footprintFt": {
+    "w": 3.5,
+    "d": 0.3,
+    "h": 2.0
+   },
+   "placements": [
+    {
+     "u": 196.2,
+     "v": 63.5,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A510.3 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), Architectural Pages sheet72, fitted to the A100 frame from its own vector lines (south exterior face at x 1774.7, west face south of U 162.7 at y 1309.7: U = 246.46 + (x - 1774.7)/13.5, V = 65.59 - (y - 324.6)/13.5); tag leader tip read on a ruled crop, about 0.5 ft error; 431 leader lands on the west partition wall of the breakroom near the east exterior wall, U 196.05 V about 63.5"
+    }
+   ],
+   "form": "Flat black screen on the west wall face of the breakroom",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Screen size not on any sheet; 42 in class assumed"
+  },
+  {
+   "name": "Decorative trash can, breakroom (A510.3 legend 408)",
+   "tag": "408 (A510.3)",
+   "count": 1,
+   "space": "014",
+   "footprintFt": {
+    "w": 1.3,
+    "d": 1.3,
+    "h": 2.5
+   },
+   "placements": [
+    {
+     "u": 204.1,
+     "v": 57.4,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A510.3 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), Architectural Pages sheet72, fitted to the A100 frame from its own vector lines (south exterior face at x 1774.7, west face south of U 162.7 at y 1309.7: U = 246.46 + (x - 1774.7)/13.5, V = 65.59 - (y - 324.6)/13.5); tag leader tip read on a ruled crop, about 0.5 ft error; second 408 tag in the breakroom at U 204.1 V 58.9 with a short leader south"
+    }
+   ],
+   "form": "Round dark grey can",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Diameter as the guest laundry can; height assumed"
+  },
+  {
+   "name": "Sheer roller shade PA-402 at the breakroom window",
+   "tag": "PA-402",
+   "count": 1,
+   "space": "014",
+   "footprintFt": {
+    "w": 6.0,
+    "d": 0.3,
+    "h": 6.67
+   },
+   "placements": [
+    {
+     "u": 202.3,
+     "v": 65.5,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A510.3 Enlarged Lobby Furniture and Equipment Plan (3/16 in = 1 ft), Architectural Pages sheet72, fitted to the A100 frame from its own vector lines (south exterior face at x 1774.7, west face south of U 162.7 at y 1309.7: U = 246.46 + (x - 1774.7)/13.5, V = 65.59 - (y - 324.6)/13.5); tag leader tip read on a ruled crop, about 0.5 ft error; breakroom window centered on the east exterior wall by the PA-309 table; exact window position is not tagged on either plan"
+    }
+   ],
+   "form": "Grey sheer roller with a black 4 in fascia, outside mount",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas PA-402 card: Breakroom 6'-0\" W x 6'-8\" H, ceiling 8'-0\" VIF"
+  }
+ ],
+ "sheetToFrame": {
+  "ID-1.7": "FF&E Locations_sheet8.png (Drive 1f9MlwkXgfwjyJisFHJYd5hF_cpYNBw7W), displayed 2576 x 1718 px for a 2592 x 1728 pt page rotated 270. U = 246.46 + (x - 1801.9)/13.5, V = 65.59 - (y - 522.7)/13.5 (from the lobby kit, checked here against the fitness walls: U 222.0/246.3, V 29.5/-6.8). The sheet8.json text_blocks are in the unrotated frame: x_displayed = y_raw, y_displayed = 1728 - x_raw.",
+  "A510.3": "05-H2SEP Architectural Pages sheet72 (Drive 1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np), page rotated 270, rendered at 3960 x 2640 px. Fitted from its own vector lines: south exterior face at displayed x 1774.7 (1163 pt long), west face south of U 162.7 at displayed y 1309.7 (1120 pt long). U = 246.46 + (x - 1774.7)/13.5, V = 65.59 - (y - 324.6)/13.5. Same raw-to-displayed rule for its json text_blocks."
+ },
+ "sources": [
+  "A100 frame: /home/user/h2sep-checklist/research/floor1-3d/a100-layout.json (commonAreas text)",
+  "ID-1.7 Enlarged Lobby Furniture and Equipment Plan: FF&E Locations_sheet8.png (Drive 1f9MlwkXgfwjyJisFHJYd5hF_cpYNBw7W), sheet8.json text layer (1XIF0XhElZwriDV6qbA5Rr1AXRwJjBOG7), ID-1.7.txt (1vDpwWHZrn5yBOGMsNh1Grw3Mp8ns4dR-)",
+  "ID-1.6 (ceiling), ID-1.8 (finish) and ID-1.1 (overall) text layers, read to confirm they carry no fitness or laundry equipment tags (Drive 1v_3H_CF12ijOLLrxYZtzi9dx7tXautHj, 1jL9ge2E1arR-mmDHmHi-tddglh3okThK, 1CYOg1kkm_zMp8P61UO3zjkAMuAIVHYno)",
+  "A510.3 Enlarged Lobby Furniture and Equipment Plan with the furniture and equipment tag legend (400 to 432, 800 to 821) and keyed notes: 05-H2SEP - Architectural Pages_sheet72.pdf (Drive 1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np) and sheet72.json (1mhQvmI9JXM0A20rZ2idDH9OVrS9pLeSg)",
+  "Home2-Dynamic FF&E Specifications Public Areas.pdf, text layer (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_): cards PA-109, PA-110, PA-309, PA-310, PA-400, PA-402, PA-805",
+  "BOTTLE FILLER FITNESS.pdf, Elkay LBWD06BKK (Drive 1Gq4kara0CeFfoRZlwJFohS0Pj6ur3wna)",
+  "A904.md Millwork Guest Laundry and Window Perch (Drive 1K-AEYQwPfHVGQbTfwKM2kQepgNhD1XA4)",
+  "A906.md Millwork House Laundry (Drive 1iNsOg3IQ62HAobYLzyosAnMq8xlJpOqM)",
+  "A701.md Interior Elevations, laundry and fitness (Drive 1Lqo_kdGs4TYQbWD1-PlvY29M6YyV-t7q)",
+  "FF&E Installation.xlsx (Drive 1vHg6-8vDVLpoE-x0jwjijOOlXJX4B1Jy): container list only, no fitness or laundry machines",
+  "drawings_split/FFE-Locations manifest.json (Drive 1yNe-Uv_9hDszJtAOMRblADWjtsbWLUt7)",
+  "Local: research/floor1-3d/commons/lobby.json (ID-1.7 sheet mapping), research/enrich-reports/amenity-wet.md and boh-admin.md"
+ ],
+ "scaledCalls": [
+  "Every placement is SCALED from a plan symbol or a tag leader on ID-1.7 or A510.3 after fitting each sheet to the A100 frame; expect about 0.5 ft error. Where the two sheets disagree (washers, breakroom table) the ID-1.7 position is used because it is the FF&E designer's later sheet (07/04/2025) and the A510.3 value is quoted in the source string.",
+  "Fitness cardio and strength equipment: no cutsheets exist in the set (A701 keyed note 32 sends the buyer to fitness.hilton.com). Footprints are scaled from the ID-1.7 symbols; heights (treadmill 4.6, trainer 5.0, rack 2.6, bench 1.5, incline bench 3.5, ball rack 3.0) are assumed for massing and have no sheet source.",
+  "Which two ID-1.7 trainer symbols are the elliptical and which the recumbent cycle cannot be told apart; A510.3 lists both (804, 805) in a group note inside the room rather than placing them.",
+  "Laundry machines (401, 402, 406, 407, 409): footprints scaled from the ID-1.7 boxes; heights assumed (3.6, 4.5, 3.6, 3.6, 3.6 ft); no washer or dryer cutsheet was found on Drive by title or full text search.",
+  "Guest Laundry 024 room box scaled from the ID-1.7 walls because A100 only carries the label anchor.",
+  "Mirror 817 height 4.0 ft and television sizes are not on any sheet; used for massing only.",
+  "PA-310 towel station and PA-110 chair overall dimensions did not come through the spec text layer; scaled from the plan symbols.",
+  "Storage shelving 404 x3 along the laundry south wall: drawn 17.8 ft total, split into three 5.9 ft bays instead of the A906 6'-6\" typical run.",
+  "Breakroom window and PA-402 shade position: no window tag on either plan; centered on the table."
+ ],
+ "gaps": [
+  "No fitness equipment cutsheets or vendor list in the set; models, counts beyond what ID-1.7 draws, and heights are unknown. A510.3 legend also lists 808 strength system, 809 medicine balls, 810 exercise ball, 811 mat, 802 gym wipes, 812 rules sign, 814 emergency phone, 816 towel hook, 819 clock; ID-1.7 draws fewer symbols than that.",
+  "No commercial or coin operated washer or dryer cutsheets found on Drive (searched titles and full text for washer, dryer, laundry, Speed Queen, UniMac, washer extractor). Machine sizes are plan boxes only.",
+  "Folding tables, laundry carts and hampers for Laundry 015 are not drawn on ID-1.7 or A510.3; the laundry chute terminates in Laundry Discharge 013 (not in this kit).",
+  "A512 Enlarged Fitness and Laundry Plan and RCP exists only as a DWG on Drive (no PDF or text layer found), so it was not read.",
+  "A905 employee break room millwork and A701 elevations were not rendered; A701.md gives no mirror or TV mounting heights beyond 1'-6\" and 4'-0\" dimensions.",
+  "Keyed note 60 (accessible front load washer and dryer) placement conflict between Guest Laundry 024 and Laundry 015 (boh-admin.md D-3) is not resolved here.",
+  "The fitness room roller shades on ID-1.7 are all tagged PA-400 although the spec puts the framed window shades under PA-402."
+ ]
+}
