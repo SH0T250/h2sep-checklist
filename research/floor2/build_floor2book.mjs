@@ -104,9 +104,16 @@ const spaceRows = spaceIds.filter((id) => !id.endsWith('-M')).map((id) => {
 });
 const noPackage = (F2.meta.spacesWithNoPackage || []);
 
-const wwTable = FLOOR !== '2' ? [
+const wwTable = FLOOR === '3' ? [
+  ['GR-304', 'Working Wall @ King', '17', roomRows.filter((x) => x.ww === 'GR-304').length, 'stands, HIGH (reconciles: 17 = 17)', 'the King Studios'],
+  ['GR-305', 'Working Wall @ QQ', '11 printed (L 5 + R 6) against 12 keys', roomRows.filter((x) => x.ww === 'GR-305').length, 'D35 (Austin, 2026-09-02): D22 and D33 carried up by room type. MEDIUM while the hand and the twelfth unit are open', roomRows.filter((x) => x.ww === 'GR-305').map((x) => x.r).join(' ')],
+  ['GR-308', 'Working Wall @ QQ Connector', '2 printed against 1 key', roomRows.filter((x) => x.ww === 'GR-308').length, 'stands on the one connecting key', roomRows.filter((x) => x.ww === 'GR-308').map((x) => x.r).join(' ')],
+  ['GR-309', 'Working Wall @ QQ Accessible (printed GR-309R)', '1', roomRows.filter((x) => x.ww === 'GR-309').length, 'D35; the spec and ID-5.9 also name GR-309. MEDIUM while the hand is open', roomRows.filter((x) => x.ww === 'GR-309').map((x) => x.r).join(' ')],
+  ['GR-315', 'Working Wall @ K 1 BDRM Suite', '1', roomRows.filter((x) => x.ww === 'GR-315').length, 'stands, HIGH', roomRows.filter((x) => x.ww === 'GR-315').map((x) => x.r).join(' ')],
+  ['GR-316', 'Working Wall @ K Accessible', '1', roomRows.filter((x) => x.ww === 'GR-316').length, 'stands, HIGH', roomRows.filter((x) => x.ww === 'GR-316').map((x) => x.r).join(' ')],
+] : FLOOR !== '2' ? [
   ['GR-304', 'Working Wall @ King', String(F2.meta.workbookTab || '').includes('GR-304 17') ? '17' : '?', roomRows.filter((x) => x.ww === 'GR-304').length, 'stands, HIGH (reconciles: 17 = 17)', 'the King Studios'],
-  ['GR-308', 'as transcribed on every two-queen key', 'tab: GR-305 11, GR-308 2', roomRows.filter((x) => x.ww === 'GR-308').length, 'OPEN. The ' + FLOOR + (FLOOR === '3' ? 'rd' : 'th') + ' Floor tab prints the same figures as the 2nd and does not reconcile with this floor (9 plain + 1 wide + 2 extended = 12 two-queen walls against 11 printed; 1 connector against 2), so no floor-2 ruling is applied here', roomRows.filter((x) => x.ww === 'GR-308').map((x) => x.r).join(' ')],
+  ['GR-308', 'as transcribed on every two-queen key', 'tab: GR-305 11, GR-308 2', roomRows.filter((x) => x.ww === 'GR-308').length, 'OPEN. The ' + FLOOR + 'th Floor tab prints the same figures as the 2nd and does not reconcile with this floor, so no floor-2 ruling is applied here', roomRows.filter((x) => x.ww === 'GR-308').map((x) => x.r).join(' ')],
   ['GR-315', 'Working Wall @ K 1 BDRM Suite', '1', roomRows.filter((x) => x.ww === 'GR-315').length, 'stands, HIGH', roomRows.filter((x) => x.ww === 'GR-315').map((x) => x.r).join(' ')],
   ['GR-316', 'Working Wall @ K Accessible', '1', roomRows.filter((x) => x.ww === 'GR-316').length, 'stands, HIGH', roomRows.filter((x) => x.ww === 'GR-316').map((x) => x.r).join(' ')],
 ] : [
@@ -120,7 +127,9 @@ const wwTable = FLOOR !== '2' ? [
 
 const decisions = FLOOR !== '2' ? [
   ['Approve floor ' + FLOOR + ' for rollout', 'Nothing here is live. Approval starts the cutover: backup first, three-way merge, read-back verify, crew collection never written (the floor-1 runbook).'],
-  ['Working walls on the two-queen keys', 'On floor 2 you ruled the working walls against the workbook\'s 2nd Floor tab, which reconciled exactly. The ' + FLOOR + (FLOOR === '3' ? 'rd' : 'th') + ' Floor tab prints the same six figures, and this floor\'s key mix is different (nine plain Queen-Queens and one connector, per the drawings), so the arithmetic does not close: 12 two-queen walls against 11 printed, 1 connector against 2. Every two-queen wall ships GR-308 as transcribed, FLAGGED, with the arithmetic on the line. Say whether D22 and D33 carry up by room type, or whether the drawings (A102: is 315 a connector?) or the tab need correcting first.'],
+  ...(FLOOR === '3'
+    ? [['Working walls, ruled', 'D35, 2026-09-02: "carry D22 and D33 up by room type on floor 3". Applied: the nine plain Queen-Queens, 301, 330 and 332 take GR-305; 338 takes GR-309; 336 keeps GR-308. The 3rd Floor tab still prints 11 GR-305 walls against these 12 keys and 2 connectors against 1, so the purchase record is one wall short and the hand per room is unknown; every line says so.']]
+    : [['Working walls on the two-queen keys', 'The ' + FLOOR + 'th Floor tab prints the same six figures as the 2nd and this floor\'s key mix differs, so the arithmetic does not close. Every two-queen wall ships GR-308 as transcribed, FLAGGED, with the arithmetic on the line. Say whether the floor-2 and floor-3 rulings carry up by room type.']]),
   ['GR-305 handedness', 'Still open building-wide. D26 records you are answering this yourself.'],
   ['Bathing configuration on 317 and 338', 'Both the tub and the roll-in rows are carried and flagged on each; D19 covered room 118 only and was not extended. Do not order a bath package for either key until ruled.'],
   ['Common-area finish rows', 'Six of the nine floor-' + FLOOR + ' spaces have only paint, drywall, flooring, doors and wall-covering rows, which your approved gate keeps off every checklist, so they get no document. Same question floors 1 and 2 left open.'],

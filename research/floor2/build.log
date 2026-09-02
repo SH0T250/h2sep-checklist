@@ -120,7 +120,7 @@ SELFTEST
 ====================================================================================================
 SELFTEST PASSED
 
-DETERMINISM: two independent in-process builds are byte-identical (md5 937744c6d14ca20af05a75b2e7ff2ffc)
+DETERMINISM: two independent in-process builds are byte-identical (md5 3fbb75ca711e099cf8db7a967c0c4bef)
 
 BUILD REPORT - floor 2, 33 guest room(s), staged for approval
 ====================================================================================================
@@ -341,7 +341,7 @@ ROOM 203  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
     fp_heads_a: 3 room-specific sprinkler head row(s) carried (ITM-0447, ITM-0448, ITM-0449); donor floor-1 head total removed; reliability HIGH
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322] [keys 305, 307]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
+    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type
 
@@ -408,7 +408,7 @@ ROOM 204  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -473,7 +473,7 @@ ROOM 205  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
     fp_heads_a: 3 room-specific sprinkler head row(s) carried (ITM-0447, ITM-0448, ITM-0449); donor floor-1 head total removed; reliability HIGH
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322] [keys 305, 307]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
+    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type
 
@@ -540,7 +540,7 @@ ROOM 206  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -605,7 +605,7 @@ ROOM 207  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
     fp_heads_a: 3 room-specific sprinkler head row(s) carried (ITM-0447, ITM-0448, ITM-0449); donor floor-1 head total removed; reliability HIGH
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322] [keys 305, 307]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
+    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type
 
@@ -672,7 +672,7 @@ ROOM 208  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -737,7 +737,7 @@ ROOM 209  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
     fp_heads_a: 3 room-specific sprinkler head row(s) carried (ITM-0447, ITM-0448, ITM-0449); donor floor-1 head total removed; reliability HIGH
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322] [keys 305, 307]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
+    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_d22, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type
 
@@ -804,7 +804,7 @@ ROOM 210  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -869,7 +869,7 @@ ROOM 211  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
     fp_heads_a: 3 room-specific sprinkler head row(s) carried (ITM-0447, ITM-0448, ITM-0449); donor floor-1 head total removed; reliability HIGH
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322] [keys 305, 307]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
+    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type
 
@@ -936,7 +936,7 @@ ROOM 212  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -1001,7 +1001,7 @@ ROOM 213  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
     fp_heads_a: 3 room-specific sprinkler head row(s) carried (ITM-0447, ITM-0448, ITM-0449); donor floor-1 head total removed; reliability HIGH
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322] [keys 305, 307]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
+    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_d22, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type
 
@@ -1068,7 +1068,7 @@ ROOM 214  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -1199,7 +1199,7 @@ ROOM 216  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -1346,7 +1346,7 @@ ROOM 218  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -1413,7 +1413,7 @@ ROOM 222  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -1480,7 +1480,7 @@ ROOM 223  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -1547,7 +1547,7 @@ ROOM 224  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -1614,7 +1614,7 @@ ROOM 225  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -1681,7 +1681,7 @@ ROOM 226  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -1748,7 +1748,7 @@ ROOM 227  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -1813,7 +1813,7 @@ ROOM 228  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
     fp_heads_a: 3 room-specific sprinkler head row(s) carried (ITM-0447, ITM-0448, ITM-0449); donor floor-1 head total removed; reliability HIGH
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322] [keys 305, 307]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
+    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type
 
@@ -1880,7 +1880,7 @@ ROOM 229  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -2016,7 +2016,7 @@ ROOM 231  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -2152,7 +2152,7 @@ ROOM 233  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
     mech_ptac: 1 unit row(s) ITM-0152; mark "PTAC-1"; reliability HIGH; donor's own-row resolution removed
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323] [keys 308, 318, 322, 323, 325]; B5.6 [marks W4, W5]
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0101]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-318, GR-323]; B5.6 [marks W4, W5]
     carried as a FLAG on 6 line(s): 905_a (905 <- B4.2[905]); gr318_a (GR-318 <- B4.5[GR-318]); gr323_a (GR-323 <- B4.5[GR-323]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
@@ -2217,7 +2217,7 @@ ROOM 234  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
     fp_heads_a: 3 room-specific sprinkler head row(s) carried (ITM-0447, ITM-0448, ITM-0449); donor floor-1 head total removed; reliability HIGH
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322] [keys 305, 307]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
+    7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type
 
@@ -2415,7 +2415,7 @@ field state preserved from the previous staged file (a rebuild never zeroes the 
 2nd Floor FF&E Installation tab reconciled: GR-315 = 1 (1 King One Bedroom)
 2nd Floor FF&E Installation tab reconciled: GR-316 = 1 (1 King One Bedroom Acc.)
 wrote platform/data/floor2-staged.json  (70 docs: 201, 201-MEP, 202, 202-MEP, 203, 203-MEP, 204, 204-MEP, 205, 205-MEP, 206, 206-MEP, 207, 207-MEP, 208, 208-MEP, 209, 209-MEP, 210, 210-MEP, 211, 211-MEP, 212, 212-MEP, 213, 213-MEP, 214, 214-MEP, 215, 215-MEP, 216, 216-MEP, 217, 217-MEP, 218, 218-MEP, 222, 222-MEP, 223, 223-MEP, 224, 224-MEP, 225, 225-MEP, 226, 226-MEP, 227, 227-MEP, 228, 228-MEP, 229, 229-MEP, 230, 230-MEP, 231, 231-MEP, 232, 232-MEP, 233, 233-MEP, 234, 234-MEP, 236, 236-MEP, 238, 238-MEP, S221, S221-M, S237, S239)
-  md5 937744c6d14ca20af05a75b2e7ff2ffc   5044348 bytes
+  md5 3fbb75ca711e099cf8db7a967c0c4bef   5041538 bytes
 READ ONLY and untouched, verified by size+mtime: floor1-staged.json, slice-f1.json, ref-rooms-staged.json, build_floor1.mjs
 FLOOR 2 STAGED FOR APPROVAL. NOT LIVE. Firestore not touched. Nothing pushed. Nothing deployed.
 

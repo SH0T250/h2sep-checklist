@@ -163,7 +163,8 @@
  *  3a SPRINKLER CITATION - THE DONOR'S FP SHEET IS THE DONOR'S FLOOR.
  *    The donor's fp_heads_a cites "FP-1 head schedule ... 144 total heads 1st
  *    floor" and "FP-1, verified head-by-head on rooms 107 and 108". These rooms
- *    are on FLOOR 2 and no head in them was verified, so those segments are
+ *    are floor-1 keys (107 and 108), this room is on another floor, and no
+ *    head in it was verified, so those segments are
  *    REMOVED, quoted on the line as removed, and replaced with PH-GU-001's own
  *    sheet list plus this room's own rooms.floor. Which FP sheet covers floor 2
  *    is nowhere stated in the database and is NOT guessed. See fpNoCount().
@@ -413,6 +414,43 @@ const TAG_CORRECTIONS_F2 = [
     basis: 'Austin ruling D33 (2026-09-02), on the floor-2 review book: "ok retag 201, 230, 232 to GR-305 and 238 ' +
       'to GR-309"',
   },
+  /* RULING D35 (2026-09-02). Austin, on the floor-3 review book: "carry D22 and
+   * D33 up by room type on floor 3". The 3rd Floor tab does NOT reconcile with
+   * floor 3's key mix (12 two-queen walls against 11 printed, 1 connector
+   * against 2), so the evidence here is the ruling itself, extending the
+   * floor-2 rulings BY ROOM TYPE: plain Queen-Queen, QQ Wide and QQ Extended
+   * take GR-305; QQ Acc. takes GR-309; the connecting key keeps GR-308. */
+  {
+    ruling: 'D35',
+    from: 'GR-308',
+    to: 'GR-305',
+    roomTypes: ['Queen-Queen', 'QQ Wide', 'QQ Extended'],
+    floors: ['3'],
+    label: 'Working Wall @ Queen Queen Studio Suite',
+    workbook: 'the 3rd Floor tab prints GR-305 Working Wall @ QQ at L = 5, R = 6, eleven units, and GR-308 Working Wall ' +
+      '@ QQ Connector at L = 1, R = 1; floor 3 per the drawings has 9 plain Queen-Queen + 1 QQ Wide + 2 QQ Extended = ' +
+      '12 two-queen keys and ONE connecting key (336), so the tab does NOT reconcile (12 against 11, 1 against 2) and is ' +
+      'not the evidence for this line. The evidence is the ruling: D22 (plain Queen-Queen, floor 1 and floor 2) and D33 ' +
+      '(QQ Wide and QQ Extended, floor 2) carried up by room type at Austin\'s instruction',
+    handedness: 'The 3rd Floor tab splits GR-305 into 5 LEFT and 6 RIGHT for eleven walls where floor 3 has twelve; no ' +
+      'document this tool can read says which room takes which hand or accounts for the twelfth wall, so no hand is ' +
+      'assigned here. Confirm the per-room hand and the twelfth unit with RK Design before this casework is released.',
+    basis: 'Austin ruling D35 (2026-09-02), on the floor-3 review book: "carry D22 and D33 up by room type on floor 3"',
+  },
+  {
+    ruling: 'D35',
+    from: 'GR-308',
+    to: 'GR-309',
+    roomTypes: ['QQ Acc.'],
+    floors: ['3'],
+    label: 'Working Wall @ Queen Queen Studio Suite Accessible',
+    workbook: 'the 3rd Floor tab prints GR-309R Working Wall @ QQ Accessible at ONE unit against the ONE QQ Acc. key on ' +
+      'floor 3 (338), which reconciles; the FF&E spec and ID-5.9 name GR-309 for this room type while the accessible plan ' +
+      'tags GR-308. D33 retagged floor 2\'s QQ Acc. key (238) to GR-309 on that evidence',
+    handedness: 'The 3rd Floor tab prints the part as GR-309R. Whether that R is a hand is not stated by any document ' +
+      'this tool can read and is not asserted here; confirm the hand with RK Design before this casework is released.',
+    basis: 'Austin ruling D35 (2026-09-02), on the floor-3 review book: "carry D22 and D33 up by room type on floor 3"',
+  },
 ];
 
 function applyTagCorrectionsF2(roomNo, room, rows) {
@@ -477,8 +515,12 @@ function d22LineNote(roomNo, corr) {
   const history = c.ruling === 'D22'
     ? 'D22 was ruled on floor 1 against the FF&E Installation workbook\'s 1st Floor tab; room ' + roomNo +
       ' is on floor ' + FLOOR + ', and the SAME reconciliation holds on the ' + WORKBOOK_F2 + ': '
-    : 'Ruling D22 (2026-08-20) corrected the plain Queen-Queen keys on this evidence and D33 extends it to this key ' +
-      'on the ' + WORKBOOK_F2 + ': ';
+    : c.ruling === 'D33'
+      ? 'Ruling D22 (2026-08-20) corrected the plain Queen-Queen keys on this evidence and D33 extends it to this key ' +
+        'on the ' + WORKBOOK_F2 + ': '
+      : 'Rulings D22 (2026-08-20) and D33 (2026-09-02) retagged every two-queen key on floor 2 against the workbook\'s ' +
+        '2nd Floor tab, which reconciled exactly; D35 carries them up to floor ' + FLOOR + ' BY ROOM TYPE. On the ' +
+        WORKBOOK_F2 + ' ';
   return 'Austin ruling ' + c.ruling + ': this room takes ' + c.to + ', not ' + c.from + '. The two are different ' +
     'purchased parts, not two names for one. ' + history + c.workbook + '. data/project.sqlite transcribed this room ' +
     'as ' + c.from + ' and carries no ' + c.to + ' row anywhere in the building; its own row note, verbatim: "' +
@@ -3234,7 +3276,11 @@ function openConflictsFor(db, roomNo, keys, rows) {
   for (const c of db.prepare('SELECT * FROM conflicts ORDER BY conflict_id').all()) {
     if (String(c.status).toUpperCase() !== 'OPEN') continue;
     const hay = conflictHaystack(c);
-    const hitKeys = keys.filter((k) => new RegExp('(^|[^0-9A-Za-z-])' + k + '([^0-9A-Za-z]|$)').test(hay));
+    /* A room key is matched as a standalone number. A number reached through a
+     * slash or a dot is part of a tag run ("GR-300/305/307/308", "GR-600.1"),
+     * not a room, so those are excluded: B4.5 names tags 305 and 307, not
+     * rooms 305 and 307 (which exist on floor 3). */
+    const hitKeys = keys.filter((k) => new RegExp('(^|[^0-9A-Za-z\\-/.])' + k + '([^0-9A-Za-z./]|$)').test(hay));
     const hitMarks = allMarks.filter((t) => new RegExp('(^|[^0-9A-Za-z-])' + reEsc(t) + '([^0-9A-Za-z]|$)').test(hay));
     const hitTags = rawTags.filter((t) => (marksByTag.get(t) || []).some((m) => hitMarks.includes(m)));
     const hitRows = (citedBy.get(c.conflict_id) || []).slice().sort(cmpStr);
@@ -3659,8 +3705,11 @@ function d22ScopeNote(db, room, roomNo, rows, corrections) {
     const c = corrections[0];
     const who = c.ruling === 'D22'
       ? 'Room ' + roomNo + ' is a plain Queen-Queen key, the type D22 names, and it takes '
-      : 'Austin ruled on 2026-09-02, reviewing the floor-2 book: "ok retag 201, 230, 232 to GR-305 and 238 to GR-309" ' +
-        '(D33). Room ' + roomNo + ' (' + room.room_type + ') therefore takes ';
+      : c.ruling === 'D33'
+        ? 'Austin ruled on 2026-09-02, reviewing the floor-2 book: "ok retag 201, 230, 232 to GR-305 and 238 to GR-309" ' +
+          '(D33). Room ' + roomNo + ' (' + room.room_type + ') therefore takes '
+        : 'Austin ruled on 2026-09-02, reviewing the floor-3 book: "carry D22 and D33 up by room type on floor 3" (D35). ' +
+          'Room ' + roomNo + ' (' + room.room_type + ') therefore takes ';
     return { flag: 'issue', summary: 'APPLIED ' + c.ruling + ' - ' + c.from + ' -> ' + c.to + ' (2nd Floor tab reconciled); handedness OPEN',
       text: 'WORKING WALL TAG - RULING ' + c.ruling + ' APPLIED TO THIS ROOM. ' + who + c.to + ' (' + c.spec.label +
         '), not the ' + c.from + ' data/project.sqlite transcribed off the architectural plan. ' + tab + ' ' +
@@ -4790,10 +4839,13 @@ function assemble(docs, stamp, rooms) {
         ...(FLOOR === '2' ? ['D22 (the eight plain Queen-Queen keys, 2nd Floor tab reconciled 11 = 8 + 1 + 2 and 2 = 2; '
           + 'handedness OPEN, reliability MEDIUM)',
           'D33 (Austin 2026-09-02: "ok retag 201, 230, 232 to GR-305 and 238 to GR-309"; handedness OPEN, reliability MEDIUM)'] : []),
+        ...(FLOOR === '3' ? ['D35 (Austin 2026-09-02: "carry D22 and D33 up by room type on floor 3" - plain Queen-Queen, QQ Wide '
+          + 'and QQ Extended take GR-305, QQ Acc. takes GR-309, the connecting key keeps GR-308; the 3rd Floor tab does not '
+          + 'reconcile and is not the evidence; handedness OPEN, reliability MEDIUM)'] : []),
         'D27', 'D28', 'D29 (scoped to the accessible QQ Acc. keys)'],
       rulingsDeliberatelyNotApplied: [
         'D19 - scoped to room 118 only; the accessible keys carry BOTH bathing configurations, FLAGGED',
-        ...(FLOOR === '2' ? [] : ['D22 and D33 - they name floor-2 keys and rest on the 2nd Floor tab; this floor\'s tab does not '
+        ...(['2', '3'].includes(FLOOR) ? [] : ['D22, D33 and D35 - they name floor-2 and floor-3 keys; this floor\'s tab does not '
           + 'reconcile, so every two-queen working wall ships as transcribed with the evidence in room note n_d22, OPEN for Austin']),
       ],
       conflictPolicy: 'document conflicts are CARRIED as FLAGGED lines and room notes quoting data/project.sqlite '

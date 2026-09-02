@@ -37,12 +37,15 @@ LINE-LEVEL INVARIANTS
   PASS  the ruled lines D27 (hot/cold) and D28 (closer, lock) are on every guest room
   PASS  D29 bed skirt (bsq_a) on 338 and on no other room
 
-THE WORKING WALL ON FLOOR 3: NO CORRECTION, OPEN
+RULING D35 ON FLOOR 3: D22 AND D33 CARRIED UP BY ROOM TYPE
 ----------------------------------------------------------------------
-  PASS  GR-308 on every two-queen key as transcribed (13 rooms), GR-305 and GR-309 on none
+  PASS  GR-305 on the 9 plain Queen-Queen keys plus 301, 330, 332 (D35)
+  PASS  GR-309 on 338 only, GR-308 on 336 only
   PASS  GR-304 on the 17 King Studios, GR-315 on 302, GR-316 on 317
   PASS  no room carries two working-wall tags live
-  PASS  every two-queen key says in n_d22 that the 3rd Floor tab does not reconcile and the tag is open, and ships FLAGGED
+  PASS  the corrected line cites D35 with Austin's words, the 12-against-11 arithmetic, and the open hand, at MEDIUM
+  PASS  every two-queen key records D35 in n_d22 and the connecting key says GR-308 stands
+  PASS  no build-authored note from an earlier run survives a rebuild (only crew notes travel)
   PASS  no line or note on floor 3 quotes a floor-2 room number as this room
 
 FLOOR-3 ROOMS AGAINST THEIR STAGED FLOOR-2 TWINS
@@ -64,7 +67,7 @@ THE CREW'S WORK
   PASS  the crew's 701 open issues are all present in the build
   PASS  every checked line carries initials
   PASS  the crew's 10 notes came across
-  PASS  the working wall kept the crew's check wherever the crew checked it
+  PASS  the retagged working wall exists live on every D35 key (the carry reconciles the crew's checks exactly)
   PASS  no personal names or account ids in the committed seed
   PASS  meta records an exact carry reconciliation
 
@@ -76,4 +79,4 @@ DETERMINISM AND THE GENERATOR
   PASS  the floor-1 seed, the approved slice, the mock-ups and the floor-2 seed were never written to by a floor-3 run
 
 ======================================================================
-52 passed, 0 failed
+55 passed, 0 failed
