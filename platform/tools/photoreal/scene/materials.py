@@ -72,6 +72,24 @@ OVERRIDES = {
     # repeat 0.9855 m, box projected on the +X facing plane); the exhibit's
     # 2 mm bump becomes a 0.15 mm vinyl emboss.  Paper, not wood.
     'accentWall': {'textures': 'accentWall'},
+    # [PHOTO 20260812_141100.jpg, photo-09] the glass is not a blown white
+    # card: sampled at 2000 px it is a pale cyan blue, (144, 199, 232) sRGB
+    # beside the reveal and (172, 218, 240) low in the opening, 95th
+    # percentile (183, 228, 254), so the sky card carries that hue and only
+    # its blue channel reaches the shoulder.  Strength SCALED against the bed
+    # view's exposure: at 3.5 AgX pushed the card to a neutral pale grey
+    # (146, 149, 151); 1.6 keeps the hue under the shoulder.
+    'sky': {'emission_color': (0.42, 0.72, 1.0), 'emission_strength': 1.6},
+    # [PHOTO 20260812_141100.jpg, photo-09] the divider curtain is a mid warm
+    # grey, (79, 67, 58) sRGB where it hangs beside the bed, while the exhibit's
+    # white weave rendered (150, 137, 121) at the same exposure: linear ratio
+    # about 0.4.  The same fabric hangs in the wardrobe bay.
+    'curtain': {'tint': (0.42, 0.38, 0.36)},
+    # [PHOTO 20260812_141100.jpg, photo-09] the bare mattress ticking is a warm
+    # cream under the globe lamps, (147, 133, 122) sRGB, not the exhibit's
+    # white, which rendered (199, 194, 184).  Part of that gap is exposure and
+    # the phone's warm balance; the ticking itself takes a light warm tint.
+    'mattress': {'tint': (0.72, 0.66, 0.60)},
     # [PHOTO 20260812_141218.jpg, photo-18] the entry leg walls are a neutral
     # white, (223, 223, 214) sRGB beside the corridor door at the phone's
     # balance, while the exhibit's #e9e5dc times its paint map is a warm off
@@ -344,6 +362,9 @@ def apply_override(mat, ov):
             p.inputs['Emission Strength'].default_value = float(ov['emission_strength'])
     if 'emission_color' in ov:
         if e:
+            # a flat colour replaces a linked emissive map (the sky card)
+            for l in list(e.inputs['Color'].links):
+                nt.links.remove(l)
             e.inputs['Color'].default_value = _rgb(ov['emission_color'])
         elif p:
             p.inputs['Emission Color'].default_value = _rgb(ov['emission_color'])
