@@ -88,6 +88,8 @@
     box-shadow:0 0 7px rgba(255,92,92,.8)}
   .sw.acf{background:none;border:2px solid var(--cyan);border-radius:50%}
   .sw.acf2{background:none;border:2px dashed var(--amber);border-radius:50%}
+  .sw.door{background:rgba(2,169,222,.78)}
+  .sw.doorsc{background:rgba(2,169,222,.28);box-shadow:inset 0 0 0 1px rgba(2,169,222,.55)}
   .rows{display:flex;flex-direction:column;padding-bottom:8px}
   .row{display:grid;grid-template-columns:46px 1fr auto;align-items:center;gap:7px;
     padding:3px 8px 3px 10px;background:none;border:none;border-left:2px solid transparent;
@@ -236,6 +238,17 @@
         <div><i class="sw acf"></i><span>ROOM 118 turning circle, 60&Prime; from A552. POSITION STYLIZED.</span></div>
         <div><i class="sw acf2"></i><span>ROOM 118 second clear floor circle, drawn dashed as A552 draws it.
           SIZE AND POSITION BOTH STYLIZED - not a clearance.</span></div>
+        <div><i class="sw door"></i><span>CYAN DOOR MARKERS. Walls are cut at 4&prime;-0&Prime; AFF, below every
+          door head, so a door reads as a gap. GR-1 ENTRY DOORS: a threshold band and a jamb pair in the
+          corridor wall at the rough opening. GR-3 CONNECTING PAIRS 101/103 and 116/118: a jamb pair on the
+          ONE hole A100 measures in the shared demising wall, plus one leaf per room drawn standing in it.
+          GR-2A BATH DOORS: a threshold band in the partition gap. Meeting Room 018A / 018B carry the same
+          marker in wall grey, SCALED.</span></div>
+        <div><i class="sw doorsc"></i><span>SCALED OPENINGS, drawn lighter. On the standard Kings 104 to 116,
+          A550 view 01 prints neither the GR-1 rough opening (3&prime;-4&Prime; SCALED) nor the GR-2A bath door
+          (centreline 4&prime;-9&Prime;, width 3&prime;-2&Prime;, both SCALED): the wall is cut at those values and
+          the marker is drawn in this lighter cyan. Room 118&apos;s GR-1 and GR-2A are MEASURED on A552 view 01
+          (the GR-1 R.O. is PRINTED there) and drawn crisp.</span></div>
       </div>
     </div>
     <div class="sec">
@@ -350,17 +363,22 @@ var MASSCAP = 3.86;
      T_EXT  the ~7" exterior run, drawn inboard of the envelope polyline.
      T_INT  amenity-block partitions, which A100 does not call out at all -
             SCALED at 5".
-   T_COR is the corridor wall's own measured thickness, used for the two things
-   that need a wall body rather than a gap: the guest entry door jambs, and room
-   118's corridor wall where it jogs into the bathroom. */
+   T_COR is the corridor wall's own measured thickness, used for the one thing
+   that needs a wall body rather than a gap: the guest entry door jambs. Room
+   118's corridor wall jog is NOT a T_COR slab: it fills z = 0 to the MEASURED
+   1'-1 3/4" jog itself (see buildKing). */
 var T_EXT = 0.58, T_COR = 0.552, T_INT = 0.42;
 
 /* ---- the guest wing's two cross-building datums -------------------------
    King side: A100 measures the room face of the corridor wall at V=29.60 and
-   the west inside face at V=0.55. A550 and A552 both PRINT 29'-0" CLEAR. The
-   room is set out from the corridor face and run 29'-0" to the window wall,
-   which lands at V=0.60 - five eighths of an inch off A100's own 0.55 read at
-   3/32" scale. The printed dimension governs; the residual is recorded here.
+   the west inside face at V=0.55. A550 view 01 PRINTS 29'-0" CLEAR for the
+   King Studio. A552 does NOT print it for room 118: geometry-spec.json
+   clear.depth_z_entry_side is MEASURED there, 348.02 in read off the wall-face
+   lines (conflict C10, "clear width and depth are MEASURED, not printed"), and
+   it lands on the same 29'-0". The room is set out from the corridor face and
+   run 29'-0" to the window wall, which lands at V=0.60 - five eighths of an
+   inch off A100's own 0.55 read at 3/32" scale. The printed King dimension
+   governs; the residual is recorded here.
    QQ side: A100 measures the corridor room face at V=35.98 and the window wall
    inside face at V=72.44, a 36.46 ft clear depth. A555 gives 36'-5" = 36.417,
    which is the number already hard-coded in platform/room3d.html. Same
@@ -653,6 +671,7 @@ var MAT = {
   art:      std(0x59636d, 0.8),
   ghost:    std(0x455360, 0.95, 0.5),
   cyanFr:   std(0x02A9DE, 0.4),
+  cyanFrSc: std(0x02A9DE, 0.4, 0.5),   /* the same cyan at the SCALED weight, for openings cut at scaled values */
   cut:      std(0x7f8d9a, 0.66),   /* the 4'-0" plan cut face, drawn light the way a plan poche is */
   pin:      new THREE.MeshStandardMaterial({color:0xff4646, roughness:0.35,
               emissive:0x5a0d0d, emissiveIntensity:0.9}),
@@ -957,11 +976,28 @@ function buildKing(rm, sp){
   rbx(rm, 0, G.bathPartZ, G.bathPartX, G.bathPartZ + G.bathPartT, 0, MASSCAP, MAT.wall, sp);
   rbx(rm, G.bathPartX, G.bathZ0, G.bathPartX + G.bathPartT, G.d2aCL - G.d2aW/2, 0, MASSCAP, MAT.wall, sp);
   rbx(rm, G.bathPartX, G.d2aCL + G.d2aW/2, G.bathPartX + G.bathPartT, G.bathPartZ, 0, MASSCAP, MAT.wall, sp);
+  /* GR-2A threshold band in that gap. Standard Kings: geometry-spec.json
+     doors.GR-2A.cl_z 57 in (4'-9") and .width 38 in (3'-2") are both SCALED on
+     A550/01 ("NO locating dimension", "NO width printed"), so the band is the
+     lighter SCALED cyan. Room 118: ro_z0 37.75 in and ro_z1 77.75 in are
+     MEASURED on A552/01 (cl_z 57.75 in, ro_width 40 in), drawn crisp. */
+  rbx(rm, G.bathPartX, G.d2aCL - G.d2aW/2, G.bathPartX + G.bathPartT, G.d2aCL + G.d2aW/2,
+      0.02, 0.11, acc ? MAT.cyanFr : MAT.cyanFrSc, sp);
   if (G.bathZ0 > 0.01){
     /* Room 118 only: the corridor wall is set 1'-1 3/4" into the room at the
-       bathroom. The jog is MEASURED on A552 and lands exactly on the bath /
-       entry partition line, so this return closes it. */
-    rbx(rm, 0, G.bathZ0, G.bathPartX, G.bathZ0 + T_COR, 0, MASSCAP, MAT.wall, sp);
+       bathroom. geometry-spec.json, King Studio Acc. Mod.:
+       clear.corridor_wall_jog 13.75 in MEASURED A552/01, bathroom.interior_z0
+       13.75 in, bathroom.interior_depth 108.0 in (9'-0", 162.000 units exactly).
+       The jog IS the wall body, so this slab fills z = 0 (the entry-side
+       corridor face) to z = bathZ0 across the bath and the entry partition, and
+       the bath's corridor-end face lands at 13.75 in - the same face
+       platform/room3d.html draws with its wallSeg at kz(BZ0). An earlier build
+       drew a T_COR slab from bathZ0 to bathZ0 + T_COR, which left a 13.75 in
+       strip of open floor against the corridor wall and cut the bath to
+       101.4 in deep; the verifier flagged it (defect 1) and it is corrected
+       here. The slab runs to the entry-side partition face at bathPartX +
+       bathPartT so the return the room viewer draws at x = BPX is closed too. */
+    rbx(rm, 0, 0, G.bathPartX + G.bathPartT, G.bathZ0, 0, MASSCAP, MAT.wall, sp);
   }
   /* bed group, 76" wide about its centreline */
   var b0 = G.bedCL - 38*KIN, b1 = G.bedCL + 38*KIN;
@@ -1053,6 +1089,10 @@ function buildKing(rm, sp){
    end. The middle of the room is deliberately left clear so room 118's turning
    circle is never covered by a block that has no dimension behind it. */
 function bathKit(rm, sp, x0, x1, z0, z1){
+  /* z0 is the bath's corridor-end face. On room 118 that is bathZ0 = 13.75 in,
+     the room face of the jog slab drawn in buildKing, so the water-closet block
+     below, set at z0 + 0.35 ft, stands clear of the slab: re-checked after the
+     verifier's defect 1, which had the slab overlapping it. */
   var w = x1 - x0, d = z1 - z0;
   if (w < 3 || d < 4) return;
   rbx(rm, x0+0.10, z1-Math.min(2.6, d*0.30), x1-0.10, z1-0.10, 0.02, 0.24, MAT.counter, sp);
@@ -1178,24 +1218,35 @@ KING_ROWS.forEach(function(r){
     basis:'MEASURED', kind:'king', wall:'none', room:rm,
     rects:[{u0:r.u0, v0:KV_WIN, u1:r.u1, v1:KV_COR}],
     src:'A100 tick marks give the bay at ' + (r.no==='118' ? '17\'-6" CL-CL' : '12\'-8" CL-CL')
-      + ' and ' + (r.u1-r.u0).toFixed(2) + ' ft clear. Depth 29\'-0" CLEAR is PRINTED on '
-      + (r.no==='118' ? 'A552 view 01' : 'A550 view 01') + '. '
+      + ' and ' + (r.u1-r.u0).toFixed(2) + ' ft clear. '
+      + (r.no==='118'
+        ? 'Depth 29\'-0" CLEAR is MEASURED on A552 view 01 - 348.02 in read off the wall-face lines, NOT printed (conflict C10) - and equals the standard King\'s printed 29\'-0". '
+        : 'Depth 29\'-0" CLEAR is PRINTED on A550 view 01. ')
       + (KING_HAND[r.no] ? 'MIRRORED' : 'AS DRAWN')
       + ' - handedness measured off A100\'s GR-1 rough-opening centreline.',
     note:(r.no==='118'
       ? GR3_SHEET_READ['118'] + ' The hole itself is cut once, from A100\'s measured datum, in the one wall 116 and 118 share. ROOM 118 IS ITS OWN ROOM, NOT A WIDE KING. The corridor wall JOGS 1\'-1 3/4" into the room at the bathroom, the window is ASYMMETRIC in the bay, and the bath is nearly twice the standard width. The bath / main-room partition sits at z = 10\'-8 1/2" from the corridor wall room face, leaving a main-room clear depth of 18\'-3 1/2" - the value A552 view 01 PRINTS and labels CLEAR.'
       : (r.no==='116'
         ? 'CONNECTING KEY. Elevation 09 pushes the closet / TV / desk group toward the window when GR-3 goes into the working wall, and the spec marks that shift UNPROVEN. No shift is encoded: the group is set out from the GR-3 opening itself. ' + GR3_SHEET_READ['116'] + ' The hole itself is cut once, from A100\'s measured datum, in the one wall 116 and 118 share.'
-        : 'FURNITURE, WORKING-WALL MODULES AND BATH FIXTURES ARE ALL STYLIZED. Not one piece of furniture on A550 has a locating dimension, not one module on the 29\'-0" working wall is dimensioned, and the bathroom fixtures are undimensioned background graphics. A530 for the standard key, A532 for the accessible one.'))});
+        : 'FURNITURE, WORKING-WALL MODULES AND BATH FIXTURES ARE ALL STYLIZED. Not one piece of furniture on A550 has a locating dimension, not one module on the 29\'-0" working wall is dimensioned, and the bathroom fixtures are undimensioned background graphics. A530 for the standard key, A532 for the accessible one.'))
+      + ' ' + (r.no==='118'
+        ? 'OPENINGS: GR-1 rough-opening centreline 11\'-11 5/8" off the bed wall is MEASURED on A552 view 01 and its 3\'-4" R.O. is PRINTED there; GR-2A centreline 4\'-9 3/4" and 3\'-4" R.O. are MEASURED on A552 view 01. Both drawn crisp.'
+        : 'SCALED OPENINGS: GR-1\'s 3\'-4" rough opening and GR-2A\'s centreline 4\'-9" and width 3\'-2" are SCALED on A550 view 01 - the sheet prints neither - so both cuts are drawn in the lighter SCALED cyan.')});
   buildKing(rm, sp);
   GUEST.push(sp);
   var a = mapU(rm, G.d1CL - G.d1RO/2), b = mapU(rm, G.d1CL + G.d1RO/2);
   var g = [Math.min(a,b), Math.max(a,b)];
   corGapsK.push(g);
   sp.pin = {u:(g[0]+g[1])/2, v:(KV_COR + COR_V0)/2};
-  sp.pinSrc = 'GR-1 entry door, centreline ' + (r.no==='118' ? '11\'-11 5/8"' : '7\'-10 1/8"')
-    + ' off the bed wall - DERIVED on ' + (r.no==='118' ? 'A552 view 01' : 'A550 views 01 and 06') + '.';
-  doorU((KV_COR + COR_V0)/2, g[0], g[1], T_COR, MAT.cyanFr, sp.group);
+  /* geometry-spec.json: room 118 doors.GR-1.cl_x 143.625 in MEASURED A552/01,
+     ro_x0 123.625 / ro_x1 163.625 in MEASURED, ro_width 40 in PRINTED as
+     "3'-4\" R.O.". Standard King doors.GR-1.cl_x 94.125 in DERIVED A550/01
+     (5'-11 5/8" + the printed 1'-10 1/2"), rough_opening 40 in SCALED A550/01,
+     so the standard cut is a SCALED cut and its marker takes the lighter cyan. */
+  sp.pinSrc = r.no==='118'
+    ? 'GR-1 entry door, centreline 11\'-11 5/8" off the bed wall - MEASURED on A552 view 01; the 3\'-4" R.O. is PRINTED there.'
+    : 'GR-1 entry door, centreline 7\'-10 1/8" off the bed wall - DERIVED on A550 views 01 and 06; the 3\'-4" rough opening it is cut to is SCALED on A550 view 01.';
+  doorU((KV_COR + COR_V0)/2, g[0], g[1], T_COR, r.no==='118' ? MAT.cyanFr : MAT.cyanFrSc, sp.group);
 });
 
 QQ_ROWS.forEach(function(r){
