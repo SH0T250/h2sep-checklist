@@ -5,9 +5,36 @@
   {
    "round": 1,
    "renderJpg": "/tmp/claude-0/-home-user-h2sep-checklist/fb47d53f-23f6-5d8f-88e1-343b94d9771e/scratchpad/renders/kitchen/r1.jpg",
-   "critics": [],
+   "critics": [
+    {
+     "pick": "A",
+     "correct": true,
+     "confidence": "instant",
+     "tells": [
+      "A's microwave is a flat grey box with two black rectangles and no control panel, no branding, no handle geometry; B's is a specific Danby over-range unit with a real curved handle, keypad, and interior-light glint.",
+      "A's door has no hinges, no strike, no lever lock -- just a floating dot, a flat black card-reader slab and a stubby cylinder 'handle' hanging in space; B has a hinged door with a real electronic lockset and lever, plus a light switch and outlet on the adjacent wall.",
+      "A's faucet is a bent chrome tube with a mirror-smooth environment reflection and a sink basin with uniform brushed shading and no water, scratches or seams; B's faucet shows real specular hotspots, a base escutcheon, and the sink has an undermount reveal and soft ambient occlusion under the rim.",
+      "A's floor tile is dead-white, perfectly grouted, bright as the walls with no reflection of the cabinet or door; B's tile is grey porcelain with visible grout depth, dirt/scuffs, and darker falloff near the walls.",
+      "A's walls, ceiling and countertop are all the same flat noiseless white with no cornice shadow, no texture, no exposure roll-off; B has camera grain, warmer bounce on the ceiling near the lamp, a blown-out ceiling light and JPEG-texture on the drywall.",
+      "A has a sweeping ultra-wide keystone (door leaning ~15 degrees) that a phone camera at that spot would not produce without matching lens distortion on straight lines elsewhere; the straight lines stay perfectly straight, which is a virtual-camera fingerprint.",
+      "A has generic prop clutter -- two cubic black canisters and stacked white discs with soft, blob-like contact shadows -- while B has nothing on the counter but does have real-world wall hardware and an open storage cubby with correct interior shadow."
+     ],
+     "biggestGap": "The over-range microwave and the door hardware in A read as untextured placeholder blocks. Replace the flat grey slab microwave with a real product model like B's Danby: brushed stainless with anisotropic reflections, a curved pull handle, a recessed dark-glass window with a visible interior turntable and light glint, and a keypad with printed labels. At the same time give the door real hardware -- three hinges on the jamb side, a lever lockset with a cylinder escutcheon, and a card reader mounted flush with a slight bezel -- because a hotel guest room door with no hinges or lever is the first thing a viewer sees.",
+     "secondaryGaps": [
+      "Add a phone sensor signature: luminance noise rising in shadows, a slightly blown-out and warm-fringed ceiling light, gentle vignetting, and subtle barrel distortion consistent with the wide FOV -- A's straight lines stay perfectly straight despite an exaggerated keystone.",
+      "Floor tile: change to a mid-grey porcelain like B with darker grout recesses, minor tone variation between tiles, faint scuffs near the door, and a weak reflection of the refrigerator and cabinet base; currently it is as bright as the walls with no shading gradient.",
+      "Room hardware and wall marks: add the outlet, light switch and thermostat-style plate on the walls, a cornice/ceiling-wall shadow line, slight drywall texture, and a base shoe or caulk line where the cabinet meets the floor.",
+      "Countertop and sink: add the undermount reveal, a thin dark edge line where quartz meets the cabinet, faint sink-rim ambient occlusion, and the surface speckle of engineered quartz; the sink basin should have anisotropic brushed-steel highlights instead of a uniform grey gradient.",
+      "Remove or ground the prop clutter: the black canisters and white discs have soft blobby shadows and cartoon proportions; either delete them (B has an empty counter) or give them real labels, sharper contact shadows and lower saturation."
+     ],
+     "realismScore": 2.5,
+     "wowed": false,
+     "composite": "/tmp/claude-0/-home-user-h2sep-checklist/fb47d53f-23f6-5d8f-88e1-343b94d9771e/scratchpad/blind/kitchen-r1a.png",
+     "renderPanel": "A"
+    }
+   ],
    "fix": null,
-   "status": "pending"
+   "status": "spotted"
   }
  ]
 }
