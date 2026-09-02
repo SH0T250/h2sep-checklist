@@ -506,17 +506,20 @@ input, textarea, [contenteditable="true"] { -webkit-user-select: text; user-sele
   position: fixed; left: 50%; transform: translateX(-50%) translateY(20px);
   bottom: calc(72px + env(safe-area-inset-bottom)); z-index: 60;
   background: var(--toast-bg); color: #fff; border-radius: 10px; padding: 12px 16px;
-  font-size: 14px; display: flex; gap: 14px; align-items: center;
+  font-size: 15px; display: flex; gap: 10px; align-items: center;
   opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
-  max-width: calc(100vw - 32px);
+  /* D61: the check-off toast carries the whole-floor offer, so it spans the
+     screen and its buttons read as buttons; a small pill was being missed. */
+  width: calc(100vw - 24px); max-width: 520px; box-shadow: 0 4px 16px rgba(0,0,0,.3);
 }
+#toast > span { flex: 1; min-width: 0; }
 /* The toast floats over the checklist near the thumb. It must NEVER eat a
    tap meant for a row underneath — a swallowed check-off in the crew's
    scroll-tap-scroll loop just looks like the app ignored them. Only the
    Undo button inside it is clickable. */
 #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: none; }
 #toast.show .toast-action { pointer-events: auto; }
-.toast-action { color: #8FC3FF; font-weight: 700; }
+.toast-action { color: #8FC3FF; font-weight: 700; white-space: nowrap; min-height: 40px; padding: 6px 12px; border: 1px solid rgba(143,195,255,.55); border-radius: 8px; flex: none; }
 
 #update-banner {
   position: fixed; top: calc(60px + env(safe-area-inset-top)); left: 50%; transform: translateX(-50%);
