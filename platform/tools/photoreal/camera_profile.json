@@ -21,12 +21,12 @@
     "jpegQuality": 92
   },
   "views": {
-    "entry":       { "photo": "20260812_141012.jpg", "iso": 320, "exposureTime": 0.0083337, "fnumber": 1.9, "ev100": 7.08 },
+    "entry":       { "photo": "20260812_141012.jpg", "iso": 320, "exposureTime": 0.0083337, "fnumber": 1.9, "ev100": 7.08, "exposureTrim": -0.85 },
     "lounge":      { "photo": "20260812_141158.jpg", "iso": 320, "exposureTime": 0.0166674, "fnumber": 1.9, "ev100": 6.08 },
-    "bed":         { "photo": "20260812_141100.jpg", "iso": 200, "exposureTime": 0.0083337, "fnumber": 1.9, "ev100": 7.76 },
-    "working":     { "photo": "20260812_141016.jpg", "iso": 160, "exposureTime": 0.0166674, "fnumber": 1.9, "ev100": 7.08 },
+    "bed":         { "photo": "20260812_141100.jpg", "iso": 200, "exposureTime": 0.0083337, "fnumber": 1.9, "ev100": 7.76, "exposureTrim": -0.35 },
+    "working":     { "photo": "20260812_141016.jpg", "iso": 160, "exposureTime": 0.0166674, "fnumber": 1.9, "ev100": 7.08, "exposureTrim": -0.2 },
     "kitchen":     { "photo": "20260812_141218.jpg", "iso": 160, "exposureTime": 0.0166674, "fnumber": 1.9, "ev100": 7.08 },
     "bath-vanity": { "photo": "20260812_141251.jpg", "iso": 80,  "exposureTime": 0.0083337, "fnumber": 1.9, "ev100": 9.08 },
-    "bath-shower": { "photo": "20260812_141304.jpg", "iso": 125, "exposureTime": 0.0083337, "fnumber": 1.9, "ev100": 8.44 }
+    "bath-shower": { "photo": "20260812_141304.jpg", "iso": 125, "exposureTime": 0.0083337, "fnumber": 1.9, "ev100": 8.44, "exposureTrim": 0.0 }
   }
 }
