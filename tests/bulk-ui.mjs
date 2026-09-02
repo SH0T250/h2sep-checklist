@@ -216,6 +216,30 @@ t('the category button works from the keyboard', (await p.$$('.item-row.picked')
 t('no dead selection boxes in the markup', (await p.$$('.item-row .pick')).length === 0);
 await p.click('.bulkbar [data-act="cancel"]');
 
+console.log('\nONE-TAP FLAGS AND SCROLL');
+await p.goto(B + '#/room/403', { waitUntil: 'networkidle' }); await p.waitForSelector('.item-row');
+await p.click('[data-bulk]'); await p.waitForSelector('.item-row.selectable');
+t('the bulk bar offers Missing and In box one-tap flags', !!(await p.$('.bulkbar [data-act="flag:MISSING"]')) && !!(await p.$('.bulkbar [data-act="flag:IN BOX"]')));
+await p.click('.cat-head .pickall');
+await p.click('.bulkbar [data-act="flag:IN BOX"]'); await p.waitForSelector('.sheet .preview');
+t('In box goes straight to a preview titled with the text', /Flag an issue · IN BOX/.test(await p.textContent('.sheet .sh')), await p.textContent('.sheet .sh'));
+const lenF = (await log()).length;
+await p.click('.sheet [data-apply]'); await p.waitForTimeout(300);
+const fp = (await log()).slice(lenF)[0]?.patch || {};
+t('the flag writes IN BOX on every previewed line', Object.keys(fp).filter(k => k.endsWith('.issue')).length > 0 && Object.keys(fp).filter(k => k.endsWith('.issue')).every(k => fp[k] === 'IN BOX'));
+await p.click('.toast button'); await p.waitForTimeout(300);
+// scroll: checking a line at the bottom of a long checklist keeps the position
+await p.goto(B + '#/room/406', { waitUntil: 'networkidle' }); await p.waitForSelector('.item-row');
+await p.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+await p.waitForTimeout(200);
+const y0 = await p.evaluate(() => window.scrollY);
+const clean = await p.evaluate(() => { const rows = [...document.querySelectorAll('.item-row')].reverse(); const r = rows.find(x => !x.querySelector('.stamp.checked') && !x.querySelector('.issue-pill') && !x.classList.contains('flagged')); r.scrollIntoView(); return r.dataset.item; });
+const yBefore = await p.evaluate(() => window.scrollY);
+await tap(`.item-row[data-item="${clean}"]`); await p.waitForTimeout(400);
+const yAfter = await p.evaluate(() => window.scrollY);
+t('checking a line keeps the scroll position', Math.abs(yAfter - yBefore) < 40 && yBefore > 300, `${yBefore} -> ${yAfter} (page bottom ${y0})`);
+t('the line shows as checked', !!(await p.$(`.item-row[data-item="${clean}"] .stamp.checked`)));
+
 t('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' ; '));
 await b.close();
 console.log(`\n${pass} passed, ${fail} failed`);
