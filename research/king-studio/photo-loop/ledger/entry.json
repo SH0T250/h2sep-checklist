@@ -1,5 +1,43 @@
 {
  "view": "entry",
  "photo": "20260812_141012.jpg",
- "rounds": []
+ "rounds": [
+  {
+   "round": 1,
+   "renderJpg": "/tmp/claude-0/-home-user-h2sep-checklist/fb47d53f-23f6-5d8f-88e1-343b94d9771e/scratchpad/renders/entry/r1.jpg",
+   "critics": [
+    {
+     "pick": "B",
+     "correct": true,
+     "confidence": "instant",
+     "tells": [
+      "B's desk lamp shade is a flat white cylinder with no emission, no translucency glow, no cast pool on the desk; A's lamp is lit, shows warm gradient through the shade and a hot spot on the desktop",
+      "B's ceiling downlight is a clean-edged flat white disc with a uniform cream ceiling around it and no bloom, no lens flare, no falloff on the drywall; A's fixture clips with soft roll-off and lights the ceiling around it",
+      "B's task chair reads as a low-poly asset: hard-edged armrest boxes, seat cushion with no fabric weave or wrinkle, uniform anti-aliased edges, floating without contact shadow into the carpet",
+      "B's carpet is a flat tiled texture with zero pile or specular response; A's carpet shows pile direction, colour noise, and darkens toward the far wall",
+      "B's door edge and closet panel are dead-black, dead-straight with a hard blue-lit 3D-app edge highlight; A's door frame has a real jamb, trim profile, hinge and slightly bowed edges",
+      "B's mattress and box spring are a single smooth beige block with no quilting, no piping, no gravity sag; A shows quilted top, welt seams and slight sag",
+      "B's window is a flat uniform pale blue plane with no exterior detail or brightness gradient; A shows blown-out sky with an atmospheric gradient",
+      "B's roller shade pattern is perfectly planar and crisply mapped with no texture ripple; A's shade shows slight perspective bow and softness",
+      "B's wide FOV stretches the near shelving and pendant, with no barrel distortion, chroma fringing, grain, or vignette; A carries phone-camera softness, noise in the dark carpet, and corner falloff",
+      "B has almost no site clutter or wear (no outlet cover, no wall marks, no seams); A shows an outlet, panel bevel, baseboard and slight scuffs"
+     ],
+     "biggestGap": "The desk lamp in B: it is a dead, unlit white cylinder with a matte shade and a shadowless base. In A the same lamp is switched on, the shade glows with a warm gradient (brighter at the bottom rim, translucent falloff up the drum), it throws a warm elliptical pool onto the light-oak desktop and a soft contact shadow under the base. Make the shade an emissive translucent material with subsurface glow, add the warm cast light on the desk and a small ground contact shadow; a lamp that is lit anchors the whole scene's light transport and is the first thing a viewer's eye lands on at the desk.",
+     "secondaryGaps": [
+      "Ceiling downlight in B: replace the flat white disc with a clipped emissive source that blooms softly, brightens the surrounding drywall with a falloff gradient, and shows a slight trim shadow; match A's roll-off.",
+      "Task chair in B: replace the low-poly asset with a proper chair model (mesh back, seat cushion with fabric weave normal map and slight compression wrinkles, rounded armrest edges), and add a contact shadow under the base into the carpet.",
+      "Carpet in B: the tiled texture needs pile direction, subtle fibre specular, colour variation between tiles and a darker, noisier falloff toward the far room as in A; kill the visible repeat.",
+      "Bed in B: add quilted mattress top with welt seams, a visible mattress/box spring split with slightly different textures, and gravitational sag of the mattress edge; A's bed has stitching and pillow-top softness.",
+      "Camera signature in B: add mild barrel distortion, luminance grain that rises in the dark carpet, faint vignette, and slightly softer focus at the frame edges; also add a real outlet cover, baseboard shadow seam and slight wall scuffs to give the walls history."
+     ],
+     "realismScore": 2.5,
+     "wowed": false,
+     "composite": "/tmp/claude-0/-home-user-h2sep-checklist/fb47d53f-23f6-5d8f-88e1-343b94d9771e/scratchpad/blind/entry-r1a.png",
+     "renderPanel": "B"
+    }
+   ],
+   "fix": null,
+   "status": "spotted"
+  }
+ ]
 }
