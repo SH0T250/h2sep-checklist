@@ -85,6 +85,15 @@ OVERRIDES = {
     # view's exposure: at 3.5 AgX pushed the card to a neutral pale grey
     # (146, 149, 151); 1.6 keeps the hue under the shoulder.
     'sky': {'emission_color': (0.42, 0.72, 1.0), 'emission_strength': 1.6},
+    # [PHOTO] the roller shade print: arcs and blocks in burgundy, rust, ochre,
+    # charcoal and gray on cream, one 0.67 m repeat measured on photograph
+    # 20260812_141031 and anchored at the shade's top left corner.  Generated
+    # by textures/shade.py; the daylight behind it comes through a Translucent
+    # BSDF whose color is the same print, plus a camera and glossy only
+    # emission of that transmitted print standing in for the daylight the
+    # world does not carry (see _apply_translucent), so the backlit inks stay
+    # deep and the cream reads level with the white paint as photographed.
+    'shade': {'textures': 'shade'},
     # [PHOTO 20260812_141100.jpg, photo-09] the divider curtain is a mid warm
     # grey, (79, 67, 58) sRGB where it hangs beside the bed, while the exhibit's
     # white weave rendered (150, 137, 121) at the same exposure: linear ratio

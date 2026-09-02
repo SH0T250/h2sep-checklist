@@ -1,0 +1,34 @@
+{
+ "surface": "shade",
+ "repeat_m": [
+  0.67,
+  0.67
+ ],
+ "pixels": 2048,
+ "maps": {
+  "color": "shade_color.png",
+  "roughness": "shade_rough.png",
+  "bump": "shade_bump.png"
+ },
+ "origin_m": [
+  0.762,
+  0.0,
+  2.41300001016
+ ],
+ "bump_distance_m": 5e-05,
+ "translucent": {
+  "mix": 0.6,
+  "gamma": 1.5,
+  "scale": [
+   1.2,
+   1.0,
+   0.82
+  ],
+  "backlight": 0.5
+ },
+ "principled": {
+  "Roughness": 0.86
+ },
+ "projection": "box",
+ "notes": "repeat and layout measured on the rectified shade of photograph 20260812_141031; colors as ratios to the cream; weave SCALED; brush texture STYLIZED"
+}
