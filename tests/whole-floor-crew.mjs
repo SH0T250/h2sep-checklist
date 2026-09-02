@@ -98,6 +98,24 @@ await p.click('[data-act=resolve-check]'); await p.waitForSelector('#toast.show'
 const tbi = await toastButtons();
 t('Resolve & check offers Whole floor 1', tbi.includes('Whole floor 1'), tbi.join('|'));
 
+console.log('\nFLAG THE WHOLE FLOOR FROM THE ISSUE SHEET (D59)');
+await open('#/room/101');
+const flagId = await cleanBox();
+await p.click(`[data-flag="${flagId}"]`); await p.waitForSelector('[data-floor]');
+t('the issue sheet carries the whole-floor box', /every other guest room on floor 1/.test(await p.textContent('.floor-opt')));
+await p.check('[data-floor]'); await p.click('.chip-pick[data-note="MISSING"]'); await p.waitForTimeout(800);
+const dI = await db();
+t('the tapped line is flagged MISSING', dI.rooms['101'].items[flagId].issue === 'MISSING' && !dI.rooms['101'].items[flagId].issueResolved);
+t('the same line in room 102 is flagged MISSING', dI.rooms['102'].items[flagId].issue === 'MISSING' && !dI.rooms['102'].items[flagId].issueResolved, JSON.stringify(dI.rooms['102'].items[flagId] && dI.rooms['102'].items[flagId].issue));
+const strays = Object.entries(dI.rooms).filter(([k, r]) => k !== '101' && k !== '102' && r.items && r.items[flagId] && r.items[flagId].issue === 'MISSING');
+t('no other document was flagged', strays.length === 0, strays.map(([k]) => k).join(','));
+await open('#/room/101');
+await p.click(`[data-flag="${flagId}"]`); await p.waitForSelector('[data-floor]');
+t('the box starts unchecked each time (a floor-wide flag is always deliberate)', !(await p.isChecked('[data-floor]')));
+await p.click('.chip-pick[data-note="IN BOX"]'); await p.waitForTimeout(500);
+const dI2 = await db();
+t('without the box only the tapped line changes', dI2.rooms['101'].items[flagId].issue === 'IN BOX' && dI2.rooms['102'].items[flagId].issue === 'MISSING');
+
 console.log('\nCOMMON AREAS PAGE');
 await p.goto('about:blank'); await p.goto(BASE + '#/common'); await p.waitForTimeout(800);
 const commonText = await p.evaluate(() => document.body.innerText);

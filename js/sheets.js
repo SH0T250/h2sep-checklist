@@ -1,5 +1,5 @@
 // Bottom sheets & modal helpers (no routes; overlay on current screen).
-import { esc, fmtWhen, vibrate } from './util.js';
+import { esc, fmtWhen, vibrate, isSpaceDoc, isMepDoc } from './util.js';
 import * as store from './store.js';
 import { refsFor } from './refs.js';
 
@@ -179,9 +179,18 @@ export function confirmDialog(msg, { danger = false, okLabel = 'OK' } = {}) {
 }
 
 // ---- issue sheet: flag an item with the paper vocabulary ----
+// D59: the room screen hands the issue sheet a floor-wide flag handler, so a
+// flag picked here can also land on the same line across the floor.
+let floorFlagHandler = null;
+export function setFloorFlagHandler(fn) { floorFlagHandler = fn; }
+
 export function issueSheet(room, itemId) {
   const item = room.items[itemId];
+  const kindWord = (isSpaceDoc(room) ? 'common area' : 'guest room') + (isMepDoc(room) ? ' punch list' : '');
+  const floorOpt = floorFlagHandler && room.floor != null
+    ? `<label class="floor-opt"><input type="checkbox" data-floor><span>Also flag this line on every other ${esc(kindWord)} on floor ${esc(String(room.floor))}</span></label>` : '';
   const s = sheet(`
+    ${floorOpt}
     <div class="chip-grid">
       ${QUICK_PICKS.map(q => `<button class="chip-pick" data-note="${esc(q)}">${esc(q)}</button>`).join('')}
       <button class="chip-pick custom" data-custom>CUSTOM…</button>
@@ -196,10 +205,14 @@ export function issueSheet(room, itemId) {
     { title: `${itemTitle(item)} — flag issue` });
 
   wireRefs(s, room, item, itemId);
-  s.querySelectorAll('.chip-pick[data-note]').forEach(b => b.addEventListener('click', () => {
-    store.setIssue(room.number, itemId, b.dataset.note);
+  const floorToo = () => { const c = s.querySelector('[data-floor]'); return !!(c && c.checked); };
+  const flag = (text) => {
+    const wholeFloor = floorToo();
+    store.setIssue(room.number, itemId, text);
     vibrate(); s.remove();
-  }));
+    if (wholeFloor && floorFlagHandler) floorFlagHandler(room, itemId, text);
+  };
+  s.querySelectorAll('.chip-pick[data-note]').forEach(b => b.addEventListener('click', () => flag(b.dataset.note)));
   const form = s.querySelector('.custom-note');
   s.querySelector('[data-custom]').addEventListener('click', () => {
     form.classList.remove('hidden');
@@ -208,7 +221,7 @@ export function issueSheet(room, itemId) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const v = form.note.value.trim().toUpperCase();
-    if (v) { store.setIssue(room.number, itemId, v); s.remove(); }
+    if (v) flag(v);
   });
   const clr = s.querySelector('[data-clear]');
   if (clr) clr.addEventListener('click', () => { store.resolveIssue(room.number, itemId, { clear: true }); s.remove(); });
