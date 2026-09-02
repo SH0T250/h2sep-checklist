@@ -4,7 +4,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { execSync } from 'child_process';
 
-import { D49_KEYS } from '../platform/tools/mep_punch_template.mjs';
+import { D52_KEYS } from '../platform/tools/mep_punch_template.mjs';
 
 const SEED = 'platform/data/floor1-staged.json';
 const SLICE = 'platform/data/slice-f1.json';
@@ -194,7 +194,7 @@ const canon = (v) => {
  * rulings D22 (GR-305), D27 (hot/cold water) and D28 (door hardware). The
  * guarantee is no longer byte-identity; it is that NOTHING was lost and the
  * only additions are exactly the ruled ones. */
-const RULED_NEW_KEYS = new Set(['gr305_a', 'dh_closer_a', 'dh_lock_a', 'plmb_hotcold_a', 'tvmount_a', ...D49_KEYS]);   // tvmount_a: D46; D49: the simplified punch
+const RULED_NEW_KEYS = new Set(['gr305_a', 'dh_closer_a', 'dh_lock_a', 'plmb_hotcold_a', 'tvmount_a', ...D52_KEYS]);   // tvmount_a: D46; D52: the simplified punch
 check('approved rooms differ from the slice ONLY by the ruled changes', () =>
   ['101','103','105','101-MEP','103-MEP','105-MEP'].flatMap((id) => {
     const out = [];

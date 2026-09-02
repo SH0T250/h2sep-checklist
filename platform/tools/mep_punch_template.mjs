@@ -1,5 +1,5 @@
 /**
- * mep_punch_template.mjs - the simplified guest room MEP punch (ruling D49).
+ * mep_punch_template.mjs - the simplified guest room MEP punch (ruling D52).
  *
  * H2SEP / Home2 Suites by Hilton, Eagle Pass TX - Triun Construction & Engineering.
  *
@@ -40,11 +40,11 @@
  *   inside the item like every other field.
  */
 
-export const RULING = 'D49';
-const RULED_SRC = 'D49 (AJ 2026-09-02)';
+export const RULING = 'D52';
+const RULED_SRC = 'D52 (AJ 2026-09-02)';
 /* Every line carries a SOURCE sentence, the documentation discipline the
  * mockup builder enforces on every line it writes. */
-const SOURCE_SENTENCE = 'SOURCE. This line is Austin ruling D49 (2026-09-02): the MEP punch simplified to one ' +
+const SOURCE_SENTENCE = 'SOURCE. This line is Austin ruling D52 (2026-09-02): the MEP punch simplified to one ' +
   'device per line in plain words. The spec lines it covers are listed above when the room had them, and ' +
   'their sheet citations are carried in src.';
 
@@ -207,50 +207,50 @@ export const MEP_LINES = [
  * The FF&E "Door Hardware" additions, in RULED_LINE_ADDITIONS shape. The two
  * builders carry this exact list inside their own RULED_LINE_ADDITIONS (the
  * ref-rooms builder asserts byte-identity with build_floor1.mjs); it is
- * repeated here only so the audit can name every D49 key. */
+ * repeated here only so the audit can name every D52 key. */
 export const DOOR_LINES = [
-  { ruling: 'D49', doc: 'ffe', key: 'dh_rework_a', category: 'Door Hardware', sort: 21005,
+  { ruling: 'D52', doc: 'ffe', key: 'dh_rework_a', category: 'Door Hardware', sort: 21005,
     code: 'DH-1R', qty: 1, optional: true,
     label: 'Rework closer (if needed)',
-    src: 'D49 (AJ 2026-09-02)',
-    note: 'Added by Austin ruling D49. Check this line only when the closer needed rework: adjust it ' +
+    src: 'D52 (AJ 2026-09-02)',
+    note: 'Added by Austin ruling D52. Check this line only when the closer needed rework: adjust it ' +
       'so the door self-closes and latches from any open position. It does not count toward the ' +
       'room total until it is checked.' },
-  { ruling: 'D49', doc: 'ffe', key: 'dh_keycard_inst_a', category: 'Door Hardware', sort: 21020,
+  { ruling: 'D52', doc: 'ffe', key: 'dh_keycard_inst_a', category: 'Door Hardware', sort: 21020,
     code: 'DH-3', qty: 1,
     label: 'Key card installed',
-    src: 'D49 (AJ 2026-09-02); A600 hardware set 1 (Advance Card Lock)',
-    note: 'Added by Austin ruling D49. The electronic card lock is mounted on the entry door with its ' +
+    src: 'D52 (AJ 2026-09-02); A600 hardware set 1 (Advance Card Lock)',
+    note: 'Added by Austin ruling D52. The electronic card lock is mounted on the entry door with its ' +
       'reader and bezel flush and its supply connected.' },
-  { ruling: 'D49', doc: 'ffe', key: 'dh_keycard_work_a', category: 'Door Hardware', sort: 21030,
+  { ruling: 'D52', doc: 'ffe', key: 'dh_keycard_work_a', category: 'Door Hardware', sort: 21030,
     code: 'DH-4', qty: 1,
     label: 'Key card working',
-    src: 'D49 (AJ 2026-09-02)',
-    note: 'Added by Austin ruling D49. Present a working card: the lock reads, unlatches and relatches; ' +
+    src: 'D52 (AJ 2026-09-02)',
+    note: 'Added by Austin ruling D52. Present a working card: the lock reads, unlatches and relatches; ' +
       'the deadbolt throws; the privacy latch holds.' },
-  { ruling: 'D49', doc: 'ffe', key: 'dh_conn_closer_a', category: 'Door Hardware', sort: 21040,
+  { ruling: 'D52', doc: 'ffe', key: 'dh_conn_closer_a', category: 'Door Hardware', sort: 21040,
     code: 'DH-5', qty: 1,
     label: 'Connecting door closer installed',
-    src: 'D49 (AJ 2026-09-02); A600 door GR-3, hardware set 3',
-    note: 'Added by Austin ruling D49 (rework closer on ALL doors). The GR-3 connecting door is a 45 minute ' +
+    src: 'D52 (AJ 2026-09-02); A600 door GR-3, hardware set 3',
+    note: 'Added by Austin ruling D52 (rework closer on ALL doors). The GR-3 connecting door is a 45 minute ' +
       'rated leaf on hardware set 3 per A600. Check the closer is installed and the leaf self-closes and ' +
       'latches. The set 3 contents were not readable in this pass; if set 3 carries no closer, mark N/A.',
     scope: 'the connecting rooms (rooms.connecting = 1)',
     applies: (room) => String((room || {}).connecting) === '1' },
-  { ruling: 'D49', doc: 'ffe', key: 'dh_conn_rework_a', category: 'Door Hardware', sort: 21045,
+  { ruling: 'D52', doc: 'ffe', key: 'dh_conn_rework_a', category: 'Door Hardware', sort: 21045,
     code: 'DH-5R', qty: 1, optional: true,
     label: 'Rework connecting door closer (if needed)',
-    src: 'D49 (AJ 2026-09-02)',
-    note: 'Added by Austin ruling D49. Check this line only when the connecting door closer needed rework.',
+    src: 'D52 (AJ 2026-09-02)',
+    note: 'Added by Austin ruling D52. Check this line only when the connecting door closer needed rework.',
     scope: 'the connecting rooms (rooms.connecting = 1)',
     applies: (room) => String((room || {}).connecting) === '1' },
 ];
 
-/** Every key ruling D49 may add to a room or its MEP punch (for the audit). */
-export const D49_KEYS = new Set([...MEP_LINES.map((l) => l.key), ...DOOR_LINES.map((l) => l.key)]);
+/** Every key ruling D52 may add to a room or its MEP punch (for the audit). */
+export const D52_KEYS = new Set([...MEP_LINES.map((l) => l.key), ...DOOR_LINES.map((l) => l.key)]);
 
-/** Keys of old MEP lines that D49 archives on every room (for the audit). */
-export const D49_RETIRED_KEYS = new Set(['mech_grille_rm', 'plmb_showerhead_a', 'plmb_trapguard_a', 'plmb_hotcold_a']);
+/** Keys of old MEP lines that D52 archives on every room (for the audit). */
+export const D52_RETIRED_KEYS = new Set(['mech_grille_rm', 'plmb_showerhead_a', 'plmb_trapguard_a', 'plmb_hotcold_a']);
 
 const lineApplies = (line, flags) => !line.applies || !!flags[line.applies];
 

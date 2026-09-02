@@ -68,7 +68,7 @@ await p.waitForSelector('.trades');
 const trows = await p.$$eval('.trades .trow:not(.th)', rs => rs.map(r => ({ name: r.querySelector('.tn').textContent.trim(), pct: r.querySelector('.tp').textContent.trim(), frac: r.querySelector('.tf').textContent.replace(/\s+/g, ' ').trim(), fl: [...r.querySelectorAll('.tfl')].map(x => x.textContent.trim()) })));
 t('the dashboard has a percent complete by trade table', trows.length > 8, String(trows.length));
 t('FF&E leads the table with its families under it', trows[0].name === 'FF&E' && trows.slice(1, 4).every(r => !/^FF&E$/.test(r.name)), trows.slice(0, 4).map(r => r.name).join(','));
-t('every MEP trade is a row', ['Mechanical', 'Electrical', 'Plumbing', 'Fire Sprinkler', 'Fire Alarm', 'Low Voltage'].every(n => trows.some(r => r.name === n)), trows.map(r => r.name).join(','));   // D49: Fire Protection became Fire Sprinkler + Fire Alarm on the guest rooms
+t('every MEP trade is a row', ['Mechanical', 'Electrical', 'Plumbing', 'Fire Sprinkler', 'Fire Alarm', 'Low Voltage'].every(n => trows.some(r => r.name === n)), trows.map(r => r.name).join(','));   // D52: Fire Protection became Fire Sprinkler + Fire Alarm on the guest rooms
 t('every row shows a percent, a checked count and four floor cells', trows.every(r => /^\d+%$/.test(r.pct) && /^\d+ \/ \d+$/.test(r.frac) && r.fl.length === 4), JSON.stringify(trows[0]));
 const ffe = trows[0];
 t('the FF&E percent matches its checked count', Math.round(Number(ffe.frac.split(' / ')[0]) / Number(ffe.frac.split(' / ')[1]) * 100) + '%' === ffe.pct, `${ffe.frac} vs ${ffe.pct}`);
@@ -88,6 +88,38 @@ await p.goto(B + '#/print-floor/2', { waitUntil: 'networkidle' }); await p.waitF
 t('the floor 2 packet holds 36 sheets with page breaks', (await p.$$('.paper')).length === 36 && (await p.$$('.p-break')).length >= 35, String((await p.$$('.paper')).length));
 await p.goto(B + '#/space/S221', { waitUntil: 'networkidle' }); await p.waitForSelector('.pagehead');
 t('a common area has a Print sheet button', !!(await p.$('a[href="#/print/S221"]')));
+
+console.log('\nRESOLVED ISSUES ARE NOT FLAGS (D50)');
+await p.goto(B + '#/room/404', { waitUntil: 'networkidle' }); await p.waitForSelector('.item-row');
+await p.evaluate(() => document.querySelectorAll('.scrim').forEach(s => s.remove()));   // the identity sheet from the first load of this test run
+const rid = await p.evaluate(() => { const d = window.__store.getDoc('404'); const id = Object.entries(d.items).find(([, it]) => !it.deleted && !it.checked && !it.issue && it.reliability !== 'FLAGGED')[0]; window.__store.setIssue('404', id, 'MISSING'); return id; });
+await p.waitForTimeout(200);
+const openBefore = await p.evaluate(() => window.__store.roomStats(window.__store.getDoc('404')).openIssues);
+t('an open issue shows a red pill and counts', !!(await p.$(`.item-row[data-item="${rid}"] .issue-pill`)) && openBefore >= 1);
+await p.evaluate((id) => window.__store.resolveIssue('404', id), rid); await p.waitForTimeout(400);
+t('a resolved issue shows no flag pill', !(await p.$(`.item-row[data-item="${rid}"] .issue-pill`)) && !!(await p.$(`.item-row[data-item="${rid}"] .issue-done`)));
+t('a resolved issue counts nowhere on the room', (await p.evaluate(() => window.__store.roomStats(window.__store.getDoc('404')).openIssues)) === openBefore - 1);
+const tap2 = async (sel) => p.evaluate((s) => { const r = document.querySelector(s); r.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0, clientX: 5, clientY: 5 })); r.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, button: 0, clientX: 5, clientY: 5 })); }, sel);
+await tap2(`.item-row[data-item="${rid}"]`); await p.waitForTimeout(500);
+t('tapping a line with a resolved issue checks it instead of opening the issue sheet', !!(await p.$(`.item-row[data-item="${rid}"] .stamp.checked`)) && !(await p.$('.sheet')), `sheet=${!!(await p.$('.sheet'))} checked=${await p.evaluate((id) => window.__store.getDoc('404').items[id].checked, rid)} hash=${await p.evaluate(() => location.hash)} row=${await p.$eval(`.item-row[data-item="${rid}"]`, r => r.className).catch(() => 'missing')}`);
+await p.goto(B + '#/', { waitUntil: 'networkidle' }); await p.waitForSelector('.trades');
+const openCells = await p.$$eval('.trades .trow.head .ti', c => c.map(x => x.textContent.trim()));
+t('the trade table renders open-issue counts', openCells.length > 0);
+await p.evaluate((id) => { window.__store.check('404', id, false); window.__store.setIssue('404', id, ''); }, rid);
+
+console.log('\nITEM STATUS BOARD');
+await p.goto(B + '#/', { waitUntil: 'networkidle' }); await p.waitForSelector('.istat');
+const kv = await p.$$eval('.istat-kpis .kpi', k => Object.fromEntries(k.map(x => [x.querySelector('.kl').textContent.trim(), Number(x.querySelector('.kv').textContent.trim().split(' ')[0])])));
+t('the item status board shows the pending, missing, in box and need install counts', ['Pending', 'Missing', 'In box', 'Need install', 'Installed'].every(k => Number.isFinite(kv[k])) && kv.Missing > 100 && kv['In box'] > 0, JSON.stringify(kv));
+const truth = await p.evaluate(() => { let miss = 0, pend = 0; for (const [id, d] of Object.entries(window.__store.docs)) { if (id.startsWith('_')) continue; for (const it of Object.values(d.items)) { if (it.deleted) continue; const open = it.issue && !it.issueResolved; if (open && it.issue === 'MISSING') miss++; if (!it.checked && !open) pend++; } } return { miss, pend }; });
+t('its counts match a direct count of the store', kv.Missing === truth.miss && kv.Pending === truth.pend, JSON.stringify({ kv, truth }));
+const nrows = await p.$$eval('.istat-t tr[data-key]', r => r.length);
+t('every distinct line has a row', nrows > 100, String(nrows));
+await p.fill('.istat [data-filter]', 'PTAC'); await p.waitForTimeout(500); await p.waitForSelector('.istat-t tr[data-key]');
+t('the filter narrows the rows', (await p.$$eval('.istat-t tr[data-key]', r => r.length)) < 12 && (await p.$$eval('.istat-t tr[data-key] .tn', r => r.every(x => /PTAC/i.test(x.textContent)))));
+await p.click('.istat-t tr[data-key]'); await p.waitForSelector('.bulk-scope');
+t('tapping a row opens Bulk mark with that tag picked', (await p.$$('.taglist input:checked')).length === 1 && /will change|left alone|Nothing to apply|Apply/.test(await p.textContent('.bulk-scope')));
+await p.evaluate(() => sessionStorage.removeItem('h2sep-p-istat'));
 
 t('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' ; '));
 await b.close();

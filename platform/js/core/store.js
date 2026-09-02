@@ -13,7 +13,7 @@ const ID_KEY = 'h2sep-platform-user';
 
 function nowIso() { return new Date().toISOString(); }
 
-// Ruling D49: an optional line counts toward a room only when it has been acted on.
+// Ruling D52: an optional line counts toward a room only when it has been acted on.
 export function counts(it) { return !it.optional || !!it.checked || !!(it.issue && !it.issueResolved); }
 
 export class Store {
@@ -121,7 +121,7 @@ export class Store {
       .sort((a, b) => (a[1].sort || 0) - (b[1].sort || 0) || a[0].localeCompare(b[0]));
   }
   roomStats(doc) {
-    // An "if needed" line (optional: true, ruling D49) joins the count only
+    // An "if needed" line (optional: true, ruling D52) joins the count only
     // once someone checks it or raises an issue on it.
     const items = this.liveItems(doc).map(([, it]) => it).filter(counts);
     const total = items.length;
