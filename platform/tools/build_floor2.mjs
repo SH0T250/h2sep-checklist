@@ -340,18 +340,21 @@ const FLOOR_PROFILES = {
     counts: { 'GR-304': 17, 'GR-305': 11, 'GR-308': 2, 'GR-309R': 1, 'GR-315': 1, 'GR-316': 1 },
     mustReconcile: true,
     ask: 'Austin, 2026-09-02: "I need the 2 floor built out. Just the FF&E & MEP not the 3d bim yet."',
+    approval: 'APPROVED BY AUSTIN 2026-09-02 AND LIVE (ruling D40): "approve floors 2, 3 and 4 and push them live for the app and dashoard".',
   },
   '3': {
     tab: '3rd Floor FF&E Installation',
     counts: { 'GR-304': 17, 'GR-305': 11, 'GR-308': 2, 'GR-309R': 1, 'GR-315': 1, 'GR-316': 1 },
     mustReconcile: false,
     ask: 'Austin, 2026-09-02: "once completed lets start floor 3 just no 3d BIM yet."',
+    approval: 'APPROVED BY AUSTIN 2026-09-02 AND LIVE (ruling D40): "approve floors 2, 3 and 4 and push them live for the app and dashoard".',
   },
   '4': {
     tab: '4th Floor FF&E Installation',
     counts: { 'GR-304': 17, 'GR-305': 11, 'GR-308': 2, 'GR-309R': 1, 'GR-315': 1, 'GR-316': 1 },
     mustReconcile: false,
     ask: 'Austin, 2026-09-02: "once completed lets start floor 4 just no 3d BIM yet."',
+    approval: 'APPROVED BY AUSTIN 2026-09-02 AND LIVE (ruling D40): "approve floors 2, 3 and 4 and push them live for the app and dashoard".',
   },
 };
 const PROFILE = FLOOR_PROFILES[FLOOR];
@@ -3516,7 +3519,7 @@ function buildRoomNotes(db, roomNo, room, rows, red, drops, stamp, report) {
   const spec = REP_ROOMS[roomNo];
 
   notes.n_type = noteOf(
-    'FLOOR ' + FLOOR + ' BUILD, STAGED FOR APPROVAL - NOT LIVE. Room ' + roomNo + ' is room type "' + room.room_type + '" (' +
+    'FLOOR ' + FLOOR + ' BUILD, ' + PROFILE.approval + ' Room ' + roomNo + ' is room type "' + room.room_type + '" (' +
     spec.keys.length + ' key(s) of this type building-wide: ' + spec.keys.join(', ') + '). Sheets: ' + spec.sheets + '. ' +
     PROFILE.ask + ' ' +
     'Package text for the tags this room shares with a built floor-1 room is carried from room ' + spec.donor + ' (' +
@@ -4912,6 +4915,7 @@ function assemble(docs, stamp, rooms) {
       donorMap: Object.fromEntries(Object.keys(REP_ROOMS).map((r) => [r, REP_ROOMS[r].donor])),
       roomTypes: Object.fromEntries(Object.keys(REP_ROOMS).map((r) => [r, REP_ROOMS[r].type])),
       typeKeys: Object.fromEntries(Object.keys(REP_ROOMS).map((r) => [r, REP_ROOMS[r].keys])),
+      approval: PROFILE.approval,
       rulingsApplied: ['D12 (scoped)', 'D20 (scoped)',
         ...(FLOOR === '2' ? ['D22 (the eight plain Queen-Queen keys, 2nd Floor tab reconciled 11 = 8 + 1 + 2 and 2 = 2; '
           + 'handedness OPEN, reliability MEDIUM)',
@@ -5799,7 +5803,7 @@ function mainSpaces2(db, positional, opts, before) {
     (Object.keys(outDocs).length - Object.keys(docs).length) + ' doc(s) carried forward untouched\n');
   W('  ' + built.length + ' of ' + wanted.length + ' spaces built (' + totalFfe + ' FF&E lines + ' + totalMep +
     ' MEP lines), ' + skipped.length + ' refused for having no gated line\n');
-  W('FLOOR ' + FLOOR + ' STAGED FOR APPROVAL. NOT LIVE. Firestore not touched. Nothing pushed. Nothing deployed.\n\n');
+  W('FLOOR ' + FLOOR + ' STAGED FILE WRITTEN. This tool never touches Firestore; rollout_floor.mjs --floor=' + FLOOR + ' --apply is the only path live. Nothing pushed. Nothing deployed.\n\n');
 }
 
 function main(argv) {
@@ -5981,7 +5985,7 @@ function main(argv) {
     ' docs: ' + Object.keys(out.docs).sort(cmpDocId).join(', ') + ')\n');
   process.stdout.write('  md5 ' + md5(text) + '   ' + text.length + ' bytes\n');
   process.stdout.write('READ ONLY and untouched, verified by size+mtime: floor1-staged.json, slice-f1.json, ref-rooms-staged.json, build_floor1.mjs\n');
-  process.stdout.write('FLOOR ' + FLOOR + ' STAGED FOR APPROVAL. NOT LIVE. Firestore not touched. Nothing pushed. Nothing deployed.\n\n');
+  process.stdout.write('FLOOR ' + FLOOR + ' STAGED FILE WRITTEN. This tool never touches Firestore; rollout_floor.mjs --floor=' + FLOOR + ' --apply is the only path live. Nothing pushed. Nothing deployed.\n\n');
 }
 
 main(process.argv);
