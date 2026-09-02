@@ -144,7 +144,8 @@ const catalogue = await page.evaluate(() => {
   }
   function keyOf(mesh) {
     const m = mesh.material;
-    if (mirrorMeshes.has(mesh)) return 'mirror';
+    // the shower panes carry the GLASS define: a see-through pane, not a silvered mirror
+    if (mirrorMeshes.has(mesh)) return (m.defines && 'GLASS' in m.defines) ? 'mirrorGlass' : 'mirror';
     if (identity.has(m)) return identity.get(m);
     // the AO decals are cloned with a different opacity per placement: one key each
     for (const dk of ['edge', 'contact', 'halo']) if (m.map && TEX[dk] && m.map.image === TEX[dk].image) return dk === 'halo' ? 'canHalo' : dk;
@@ -178,9 +179,9 @@ const catalogue = await page.evaluate(() => {
       bumpScale: m.bumpScale ?? null, envMapIntensity: m.envMapIntensity ?? null,
       map: texChan(m, 'map'), bumpMap: texChan(m, 'bumpMap'), roughnessMap: texChan(m, 'roughnessMap'),
       emissiveMap: texChan(m, 'emissiveMap'), alphaMap: texChan(m, 'alphaMap'),
-      isMirror: key === 'mirror',
-      mirrorGlass: key === 'mirror' ? !!(m.defines && 'GLASS' in m.defines) : false,
-      mirrorTint: key === 'mirror' && m.uniforms && m.uniforms.tint ? '#' + m.uniforms.tint.value.getHexString() : null
+      isMirror: key === 'mirror' || key === 'mirrorGlass',
+      mirrorGlass: key === 'mirrorGlass',
+      mirrorTint: (key === 'mirror' || key === 'mirrorGlass') && m.uniforms && m.uniforms.tint ? '#' + m.uniforms.tint.value.getHexString() : null
     };
     return r;
   }
@@ -209,7 +210,8 @@ const catalogue = await page.evaluate(() => {
     const key = keyOf(o);
     if (!mats[key]) mats[key] = matRecord(key, o.material, o);
     const zone = zoneOf(o, key);
-    const cn = zone + '.' + key;
+    // every MIRRORS entry is named <zone>.mirror.<n> whatever its material key
+    const cn = zone + '.' + (key === 'mirrorGlass' ? 'mirror' : key);
     counters[cn] = (counters[cn] || 0) + 1;
     const name = cn + '.' + counters[cn];
     o.userData.__exportName = name;

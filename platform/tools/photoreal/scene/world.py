@@ -37,7 +37,7 @@ VIEW_TRANSFORM = 'AgX'
 # The phone's auto white balance settled between the 3000 K lamps and the
 # daylight: walls near neutral, lamps yellow, the window cyan (critic log,
 # round 3: photo-09's window is blue minus red +0.236).  SCALED.
-WHITE_BALANCE_K = 4200.0
+WHITE_BALANCE_K = 5000.0
 WHITE_BALANCE_TINT = 0.0
 LOOK_CANDIDATES = ['AgX - Base Contrast', 'Base Contrast', 'None', 'NONE']
 

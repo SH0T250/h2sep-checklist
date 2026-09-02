@@ -26,9 +26,9 @@ Every three.js material in scene.json becomes a Principled BSDF:
 OVERRIDES is keyed by material key.  A later agent can hand tune a material
 here without touching the importer: any key of the dict below is applied after
 the node tree is built.  Values that are understood:
-  base_color=(r, g, b) linear, roughness=f, metallic=f, emission_strength=f,
-  emission_color=(r, g, b), hide=True, no_shadow=True, translucent=f (0..1),
-  alpha=f, bump_distance=f (metres), roughness_scale=f
+  base_color=(r, g, b) linear, tint=(r, g, b) linear multiplied into the map,
+  roughness=f, metallic=f, emission_strength=f, emission_color=(r, g, b),
+  hide=True, no_shadow=True, alpha=f, bump_distance=f (metres), roughness_scale=f
 """
 import os
 import bpy
@@ -58,8 +58,13 @@ NO_SHADOW = {'globe', 'lampShade', 'sky', 'canLens'}
 # The roller shade: a blackout fabric that still glows with the window behind it.
 TRANSLUCENT = {'shade': 0.35}   # SCALED fraction of a Translucent BSDF mixed in
 
-# Hand tuning, keyed by material key.  Empty until a later agent needs it.
+# Hand tuning, keyed by material key.
 OVERRIDES = {
+    # [PHOTO] every photograph shows a white painted ceiling; the exhibit's
+    # 0xcdc1ac tan was a rasteriser fix for a ceiling that took too much
+    # unshadowed light.  In a path tracer the ceiling is lit by bounce, and a
+    # tan albedo darkens the whole room's second bounce.  SCALED white paint.
+    'ceiling': {'base_color': (0.78, 0.76, 0.72)},
 }
 
 _IMAGE_CACHE = {}
@@ -119,8 +124,8 @@ def build_material(rec, tex_dir):
     t = rec.get('type', '')
 
     # --- mirrors: a real mirror
-    if rec.get('isMirror'):
-        if rec.get('mirrorGlass'):
+    if rec.get('isMirror') or key in ('mirror', 'mirrorGlass'):
+        if rec.get('mirrorGlass') or key == 'mirrorGlass':
             return _glass_material(mat, nodes, links, out, units.hex_to_linear(rec.get('mirrorTint'), (0.96, 0.98, 0.98)), 0.0, shadow_pass=True)
         p = nodes.new('ShaderNodeBsdfPrincipled')
         p.location = (300, 0)
@@ -279,6 +284,21 @@ def apply_override(mat, ov):
         for l in list(p.inputs['Base Color'].links):
             nt.links.remove(l)
         p.inputs['Base Color'].default_value = _rgb(ov['base_color'])
+    if 'tint' in ov and p:
+        src = p.inputs['Base Color'].links[0].from_socket if p.inputs['Base Color'].links else None
+        if src is not None:
+            mix = nt.nodes.new('ShaderNodeMix')
+            mix.data_type = 'RGBA'
+            mix.blend_type = 'MULTIPLY'
+            mix.inputs['Factor'].default_value = 1.0
+            mix.location = (100, 300)
+            nt.links.remove(p.inputs['Base Color'].links[0])
+            nt.links.new(src, mix.inputs[6])
+            mix.inputs[7].default_value = _rgb(ov['tint'])
+            nt.links.new(mix.outputs[2], p.inputs['Base Color'])
+        else:
+            c = p.inputs['Base Color'].default_value
+            p.inputs['Base Color'].default_value = _rgb((c[0] * ov['tint'][0], c[1] * ov['tint'][1], c[2] * ov['tint'][2]))
     if 'roughness' in ov and p:
         for l in list(p.inputs['Roughness'].links):
             nt.links.remove(l)

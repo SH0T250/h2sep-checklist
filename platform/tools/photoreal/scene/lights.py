@@ -35,6 +35,12 @@ from mathutils import Vector
 from . import units
 
 WATT_PER_UNIT = 1.0          # SCALED: Blender watts per exhibit intensity unit
+# The exhibit's spots (ceiling cans, the bath bar, the desk lamp) were tuned
+# against a shadow map rig where nothing bounced.  MEASURED on the first
+# preview pass: with one constant the bath rendered two stops under the
+# photograph at its EXIF exposure (ISO 80, 1/120 s) while the lamp lit lounge
+# matched, so the fixtures the phone metered as bright are the spots.  SCALED.
+SPOT_GAIN = 3.0
 BULB_RADIUS = 0.035          # metres, a frosted globe or a lamp bulb  [SCALED]
 CAN_RADIUS = 0.045           # metres, a recessed can lens             [SCALED]
 WARM_COLOR = '#ffc98a'       # the exhibit's warm() lamp colour
@@ -80,7 +86,7 @@ def build_lights(scene_json, collection):
         kind = 'SPOT' if L['type'] == 'SpotLight' else 'POINT'
         data = bpy.data.lights.new('light.%02d.%s' % (n, kind.lower()), kind)
         data.color = units.hex_to_linear(L['color'])
-        data.energy = float(L['intensity']) * WATT_PER_UNIT
+        data.energy = float(L['intensity']) * WATT_PER_UNIT * (SPOT_GAIN if kind == 'SPOT' else 1.0)
         data.use_shadow = True
         if kind == 'SPOT':
             data.spot_size = min(math.pi, 2.0 * float(L['angle']))

@@ -35,7 +35,7 @@ SENSOR_WIDTH_MM = 36.0
 FOCAL_MM = 13.0
 FNUMBER = 1.9
 REFERENCE_VIEW = 'entry'
-BASE_EXPOSURE = 0.0          # SCALED, stops
+BASE_EXPOSURE = 0.5          # SCALED, stops
 
 # Optional per view station overrides in three.js world feet: {'p': [...], 't': [...]}.
 # Empty means "use the exhibit's station from scene.json".
