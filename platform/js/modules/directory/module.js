@@ -17,14 +17,14 @@ export const ASG_DOC = '_asg';
 const CAT_ORDER = ['Owner', 'Contractor (GC)', 'Architect', 'Engineer', 'MEP', 'Structural', 'Subcontractor', 'Supplier', 'Other'];
 const ROLES = ['Install', 'Supply'];
 
-function nowIso() { return new Date().toISOString(); }
+function directoryNowIso() { return new Date().toISOString(); }
 function today() { return new Date().toISOString().slice(0, 10); }
 function rid(p) { return p + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
 
 function skeleton(id, type, typeLabel) {
   return {
     number: id, floor: 0, type, typeLabel, items: {}, notes: {},
-    deleted: false, schemaV: 1, createdAt: nowIso(), updatedAt: nowIso(),
+    deleted: false, schemaV: 1, createdAt: directoryNowIso(), updatedAt: directoryNowIso(),
   };
 }
 async function ensure(store, docId) {
@@ -291,16 +291,16 @@ function contactSheet(ctx, id) {
     if (!v.org && !v.name) { toast('A company or a person name is required'); return; }
     const cid = id || rid('c_');
     await ensure(store, DIR_DOC);
-    const rec = { ...(c || { sort: 9000, createdAt: nowIso() }), ...v, deleted: false, updatedAt: nowIso() };
-    store.write(DIR_DOC, { [`items.${cid}`]: rec, updatedAt: nowIso() },
+    const rec = { ...(c || { sort: 9000, createdAt: directoryNowIso() }), ...v, deleted: false, updatedAt: directoryNowIso() };
+    store.write(DIR_DOC, { [`items.${cid}`]: rec, updatedAt: directoryNowIso() },
       `${id ? 'updated' : 'added'} contact ${v.org || v.name}`);
     close();
     toast(`${id ? 'Updated' : 'Added'} ${v.org || v.name}`);
   });
   s.querySelector('[data-archive]')?.addEventListener('click', () => {
-    store.write(DIR_DOC, { [`items.${id}.deleted`]: true, updatedAt: nowIso() }, `archived contact ${c?.org || id}`);
+    store.write(DIR_DOC, { [`items.${id}.deleted`]: true, updatedAt: directoryNowIso() }, `archived contact ${c?.org || id}`);
     close();
-    toast('Contact archived, not deleted', { label: 'Undo', fn: () => store.write(DIR_DOC, { [`items.${id}.deleted`]: false, updatedAt: nowIso() }, `restored contact ${c?.org || id}`) });
+    toast('Contact archived, not deleted', { label: 'Undo', fn: () => store.write(DIR_DOC, { [`items.${id}.deleted`]: false, updatedAt: directoryNowIso() }, `restored contact ${c?.org || id}`) });
   });
 }
 
@@ -456,21 +456,21 @@ function assignSheet(ctx, id, prefill = {}) {
     const aid = id || rid('a_');
     await ensure(store, ASG_DOC);
     const rec = {
-      ...(existing || { createdAt: nowIso() }),
+      ...(existing || { createdAt: directoryNowIso() }),
       contactId: v.contactId, org: c?.org || '', contactName: c?.name || '', phone: c?.phone || '',
       category: v.category, role, rooms: [...picked].sort(), due: v.due || '', note: v.note || '',
       source: existing?.source === 'auto-match' ? 'confirmed' : (existing?.source || 'manual'),
-      deleted: false, updatedAt: nowIso(), by: store.user?.initials || '',
+      deleted: false, updatedAt: directoryNowIso(), by: store.user?.initials || '',
     };
-    store.write(ASG_DOC, { [`items.${aid}`]: rec, updatedAt: nowIso() },
+    store.write(ASG_DOC, { [`items.${aid}`]: rec, updatedAt: directoryNowIso() },
       `${id ? 'updated' : 'assigned'} ${v.category} in ${[...picked].sort().join(', ')} to ${c?.org || 'a company'}`);
     close();
     toast(`${c?.org || 'Company'} owns ${v.category} in ${roomsLabel([...picked].sort()).toLowerCase()}`);
   });
   s.querySelector('[data-archive]')?.addEventListener('click', () => {
-    store.write(ASG_DOC, { [`items.${id}.deleted`]: true, updatedAt: nowIso() }, `archived the ${a.category} assignment`);
+    store.write(ASG_DOC, { [`items.${id}.deleted`]: true, updatedAt: directoryNowIso() }, `archived the ${a.category} assignment`);
     close();
-    toast('Assignment archived, not deleted', { label: 'Undo', fn: () => store.write(ASG_DOC, { [`items.${id}.deleted`]: false, updatedAt: nowIso() }, `restored the ${a.category} assignment`) });
+    toast('Assignment archived, not deleted', { label: 'Undo', fn: () => store.write(ASG_DOC, { [`items.${id}.deleted`]: false, updatedAt: directoryNowIso() }, `restored the ${a.category} assignment`) });
   });
 }
 

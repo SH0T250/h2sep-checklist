@@ -1518,7 +1518,15 @@ var KING_STD = {
   winStool: 20.75*KIN,             /* ST-01 quartz stool               SCALED  A550/08 */
   winHead:  72.625*KIN,            /* drawn jamb head                  SCALED  A550/08 */
   winBox:   95*KIN,                /* shade-box head                   SCALED  A550/08 */
-  d1CL: 94.125*KIN, d1RO: 40*KIN, d1Leaf: 36*KIN,   /* GR-1  DERIVED A550/01 + /06 */
+  /* GR-1, three constants with three different standings (geometry-spec.json
+     types['King Studio'].doors['GR-1']):
+       d1CL   7'-10 1/8"  DERIVED A550/01 - the printed 1'-10 1/2" from the bath
+                          partition entry face plus that face at 5'-11 5/8" (cl_x)
+       d1RO   3'-4"       SCALED  A550/01 - the gap in the corridor wall scales
+                          at 3'-4"; nothing prints it (rough_opening SCALED)
+       d1Leaf 3'-0"       DERIVED A550/06 - the EQ / EQ pair on elevation 06
+                          (leaf_width DERIVED; A600 governs)                   */
+  d1CL: 94.125*KIN, d1RO: 40*KIN, d1Leaf: 36*KIN,
   d2aCL: 57*KIN, d2aW: 38*KIN,                      /* GR-2A SCALED  A550/01 */
   sofX1: 52*KIN, sofZ0: 205.5*KIN, sofZ1: 218.5*KIN,/* divider soffit PRINTED A550/02 */
   bedCL: 274.25*KIN,                                /* DERIVED A550/04 device chain */
@@ -1545,7 +1553,8 @@ var KING_CONN = kingType(KING_STD, {
   variant:'King Studio Connecting', sheet:'A550 views 01 + 01.1, elevation 09',
   conn:true,
   gr3CL: 132*KIN,        /* 11'-0" from the corridor wall INSIDE FACE  PRINTED A550/01.1 */
-  gr3RO: 40*KIN,         /* 3'-4" R.O. - A552's measurement of the SAME opening; A550 prints none */
+  gr3RO: 40*KIN,         /* 3'-4" R.O. - MEASURED on A552/01 of the SAME opening (spec Acc. Mod.
+                            doors['GR-3'].ro_width); on A550 the width is UNPROVEN, keyed to A600 */
   ww:'GR-306'
 });
 /* King Studio Acc. Mod. (room 118), sheet A552 - a different room, not a wide
@@ -1566,9 +1575,18 @@ var KING_ACC = {
   bathPartZ: 128.5*KIN,            /* 10'-8 1/2" main-room face          MEASURED A552/01 */
   bathIntZ:  121.75*KIN,           /* 10'-1 3/4" bath-side face          MEASURED A552/01 */
   mainClear: 219.5*KIN,            /* 18'-3 1/2" CLEAR main room         PRINTED  A552/01 */
-  winX0: 94.125*KIN, winX1: 166.125*KIN,  /* ASYMMETRIC 3'-4"/6'-0"/8'-2 1/2" PRINTED A552/01 */
+  /* Window jambs, ASYMMETRIC in the bay. Both x values are MEASURED on A552/01
+     (spec window.x0 7'-10 1/8" and x1 13'-10 1/8", status MEASURED). What the
+     sheet PRINTS is the chain 3'-4" / 6'-0" / 8'-2 1/2", and that chain runs
+     demising-wall CENTRELINE to jamb, so it does not give the jambs in the
+     clear frame directly: 8'-2 1/2" less the 4" half wall is 7'-10 1/2",
+     against the measured 7'-10 1/8", a 3/8" printed rounding the spec notes.
+     The 6'-0" opening itself is PRINTED.                                     */
+  winX0: 94.125*KIN, winX1: 166.125*KIN,
   winStool: 20.75*KIN, winHead: 72.625*KIN, winBox: 95*KIN,  /* SCALED - A552 prints no sill/head either */
-  d1CL: 143.625*KIN, d1RO: 40*KIN, d1Leaf: null,   /* GR-1 3'-4" R.O. PRINTED A552/01; leaf UNPROVEN */
+  d1CL: 143.625*KIN, d1RO: 40*KIN, d1Leaf: null,   /* GR-1: CL 11'-11 5/8" MEASURED A552/01 (cl_x);
+                                                       3'-4" R.O. PRINTED A552/01 (ro_width);
+                                                       leaf UNPROVEN, A600 (leaf_width)          */
   d2aCL: 57.75*KIN, d2aW: 40*KIN,                  /* GR-2A MEASURED A552/01 */
   gr3CL: 132.82*KIN, gr3RO: 40*KIN,                /* GR-3  MEASURED A552/01 */
   sofX1: 52*KIN, sofZ0: 212*KIN, sofZ1: 225*KIN,   /* divider soffit PRINTED A552/02 */
@@ -2562,8 +2580,13 @@ scenery(box(0.16, 0.45, kz(SOF0 - 0.5), 0.27, 6.4, kz(SOF1 + 0.5), KM.accent));
 
 /* ---- shell: entry door GR-1 ---------------------------------------------- */
 (function(){
-  var leaf = G.d1Leaf || (G.d1RO - 4*KIN);
-  var hd = 6.667 + 0.25;                       /* 6'-8" leaf + frame head */
+  var leaf = G.d1Leaf || (G.d1RO - 4*KIN);   /* 118: leaf UNPROVEN (A600), drawn R.O. less 4" so the picture closes */
+  /* Door HEIGHT is UNPROVEN. Neither A550 nor A552 prints a leaf or frame
+     height for GR-1 (spec unproven_across_all_types: door leaf sizes are
+     A600's). 6'-8" is drawn here only because a 6'-8" leaf is the usual
+     nominal, so the wall closes over the door in the picture; it is not a
+     number to build from and the sidebar caveat says so.                    */
+  var hd = 6.667 + 0.25;                       /* 6'-8" nominal leaf + frame head, UNPROVEN */
   scenery(box(D1A,0,-T/2, D1A+0.22,hd,T/2, MAT.frame));
   scenery(box(D1B-0.22,0,-T/2, D1B,hd,T/2, MAT.frame));
   scenery(box(D1A,hd,-T/2, D1B,hd+0.3,T/2, MAT.frame));
@@ -2571,6 +2594,13 @@ scenery(box(0.16, 0.45, kz(SOF0 - 0.5), 0.27, 6.4, kz(SOF1 + 0.5), KM.accent));
   var slab = new THREE.Mesh(BOX, MAT.doorNeu);
   slab.scale.set(leaf, 6.667, 0.15); slab.position.set(leaf/2, 3.33, 0);
   slab.castShadow = true; g.add(slab);
+  /* Hinge side and swing are UNPROVEN (spec types['King Studio'].doors['GR-1']
+     .swing, status UNPROVEN: not stated as data on A550, read them off the
+     drawn arc or A600; the Acc. Mod. entry has no swing field at all, only
+     the note 'Drawn with a wide swing arc'). Hanging the leaf at
+     the D1A jamb (the bath-partition side) and opening it 0.62 rad into the
+     entry leg is this file's reading of the arc drawn on view 01, so the
+     entry reads as a room and not a hole; it is a drawing choice, not data. */
   g.position.set(MX(D1A + 0.22), 0, -0.1); g.rotation.y = MRY(-0.62);
   scenery(g);
 })();
@@ -2648,8 +2678,14 @@ var pDoor = reg({id:'GR-3', tag:'GR-3', grp:'door',
        '. Centreline ' + (ACC ? '11′-0 13/16″ off the corridor wall face, MEASURED on A552 view 01'
                              : '11′-0″ off the corridor wall inside face, PRINTED on A550 view 01.1 and the ONLY dimension that view carries') +
        '. Keynote 9: ALTERNATE LOCATION OF DOOR FOR CONNECTING ROOMS TO ACCESSIBLE ROOMS. Keynote 48 hinge stop. A600 remark a provides two doors per communicating location, one leaf hung each side, so this key carries ONE leaf.',
-  note:'FLAGGED - THE TWO SHEETS DISAGREE BY ABOUT 3/4″ ON THE SAME OPENING. A550 view 01.1 puts room 116’s GR-3 centreline at 11′-0″ from its corridor wall face; A552 view 01 puts room 118’s at 11′-0 13/16″ from its own. It is one hole in one wall. Set it out from ONE datum on site and raise an RFI before framing. Leaf width is printed on neither sheet - A600.',
+  note:'FLAGGED - THE TWO SHEETS DISAGREE BY ABOUT 3/4″ ON THE SAME OPENING. A550 view 01.1 puts room 116’s GR-3 centreline at 11′-0″ from its corridor wall face; A552 view 01 puts room 118’s at 11′-0 13/16″ from its own. It is one hole in one wall. Set it out from ONE datum on site and raise an RFI before framing. Leaf width is printed on neither sheet - A600. The 3′-4″ opening drawn here is A552′s MEASURED rough opening (A550 prints none). LEAF AND FRAME HEIGHT ARE UNPROVEN - drawn at a nominal so the wall closes, not a number to build from.',
   focus:V3(W-1.5,3.4,kz(G.gr3CL)), dist:16});
+/* GR-3 frame jambs to 7.0 ft, head to 7.3 ft, leaf 6.8 ft below: ALL UNPROVEN.
+   Neither sheet prints a height for GR-3 (spec: Connecting doors['GR-3'].width
+   UNPROVEN, keyed to A600; Acc. Mod. doors['GR-3'] carries only the MEASURED
+   3'-4" R.O. and the centreline). The z extents G3A / G3B are the proven part.
+   These heights are nominal so the frame reads as a door in the picture; the
+   card says so and nothing here is a number to build from.                   */
 attach(pDoor, box(W-0.3,0,kz(G3A), W+0.3,7.0,kz(G3A)+0.3, cloneMat(MAT.cyanFr)));
 attach(pDoor, box(W-0.3,0,kz(G3B)-0.3, W+0.3,7.0,kz(G3B), cloneMat(MAT.cyanFr)));
 attach(pDoor, box(W-0.3,7.0,kz(G3A), W+0.3,7.3,kz(G3B), cloneMat(MAT.cyanFr)));
@@ -2657,8 +2693,8 @@ attach(pDoor, box(W+0.02,0.05,kz(G3A)-0.32, W+0.18,6.85,kz(G3B)+0.32, cloneMat(M
 (function(){                                   /* this room's leaf, ajar */
   var g = new THREE.Group();
   var slab = new THREE.Mesh(BOX, cloneMat(MAT.cyanDr));
-  var lw = G.gr3RO - 0.35;
-  slab.scale.set(0.16, 6.8, lw); slab.position.set(-0.08, 3.4, -lw/2);
+  var lw = G.gr3RO - 0.35;                     /* leaf width UNPROVEN (A600): drawn R.O. less a frame allowance */
+  slab.scale.set(0.16, 6.8, lw); slab.position.set(-0.08, 3.4, -lw/2);   /* 6.8 ft tall: UNPROVEN nominal, see above */
   slab.castShadow = true; slab.userData.pid = 'GR-3';
   g.add(slab); pickables.push(slab); pDoor.mats.push(slab.material);
   g.position.set(MX(W-0.12), 0, kz(G3A)-0.32); g.rotation.y = MRY(-0.1);
@@ -3345,7 +3381,7 @@ var kingLabels = function(){
   addLabel({anchor:V3(BW*0.4,0.15,kz(BZ0+3.4)), html:'GUEST BATH' + (ACC ? ' · ACCESSIBLE' : ''),
             cls:'min', dx:-34, dy:-8, noleader:true, pri:3});
   addLabel({anchor:V3(half,HM+0.35,kz(D)-1.1),
-            html:(ACC ? '3′-4″ / 6′-0″ / 8′-2½″ · ASYMMETRIC IN THE BAY' : '3′-0″ / 6′-0″ / 3′-0″ · CENTRED')
+            html:(ACC ? '3′-4″ / 6′-0″ / 8′-2½″ PRINTED CL-TO-JAMB · JAMBS MEASURED' : '3′-0″ / 6′-0″ / 3′-0″ · CENTRED')
                  + ' · PTAC BELOW', cls:'min', dx:-72, dy:-26, noleader:true, pri:3});
   addLabel({anchor:V3(W+2.6,(HM+HL)/2,kz(BPZ)), html:'CEILING STEPS 8′-3⅜″ → 7′-3″ · BOTH MIN.',
             cls:'min', dx:16, dy:-14, noleader:true, pri:3});
@@ -4142,11 +4178,28 @@ if (!FREEZE && !REDUCED && !qs.has('view')){
     /* The sidebar caveat box carries the long version - the strip has to stay
        one line at phone width, but the distinction between a shell that IS
        dimensioned and furniture that is NOT has to be somewhere legible. */
+    /* The two sheets do not dimension the same things, so the sentence is
+       written per sheet (geometry-spec.json). A550 prints the clear sizes,
+       both ceilings, the window bay, the GR-1 locating dimension and the
+       soffit; its bath interior, the bath partition, the GR-1 rough opening
+       and GR-2A are SCALED off the linework (conflict C6: replace the bath
+       from A530). A552 carries everything MEASURED or PRINTED, with the clear
+       sizes and window jambs measured off its linework (conflict C10). Door
+       heights are on neither sheet (A600). */
     var sbCav = document.querySelector('.tb .caveat');
-    if (sbCav) sbCav.innerHTML = 'SHELL IS DIMENSIONED - CLEAR SIZES, BOTH CEILINGS, BATH, '
-      + 'WINDOW BAY, DOOR CENTRELINES AND DIVIDER SOFFIT ARE ALL OFF '
-      + String(GEOM.sheet).split(' ')[0] + '. NO PIECE OF FURNITURE AND NO WORKING-WALL '
-      + 'MODULE IS DIMENSIONED ON EITHER SHEET - THOSE ARE STYLIZED. NOT SHOP DRAWINGS.';
+    if (sbCav) sbCav.innerHTML = GEOM.acc
+      ? 'SHELL IS DIMENSIONED - CLEAR SIZES, BOTH CEILINGS, BATH, WINDOW BAY, DOOR '
+        + 'CENTRELINES AND DIVIDER SOFFIT ARE ALL OFF A552 (CLEAR SIZES, BATH, WINDOW '
+        + 'JAMBS AND DOOR CENTRELINES MEASURED OFF ITS LINEWORK, NOT PRINTED; THE 3′-4″ '
+        + 'GR-1 R.O. IS PRINTED). DOOR HEIGHTS, LEAF SIZES AND SWINGS ARE '
+        + 'NOT ON THE SHEET (A600) - DRAWN NOMINAL. NO PIECE OF FURNITURE AND NO '
+        + 'WORKING-WALL MODULE IS DIMENSIONED ON EITHER SHEET - THOSE ARE STYLIZED. NOT SHOP DRAWINGS.'
+      : 'SHELL IS DIMENSIONED - CLEAR SIZES, BOTH CEILINGS, WINDOW BAY, GR-1 CENTRELINE '
+        + 'AND DIVIDER SOFFIT ARE ALL OFF A550. SCALED OFF A550 LINEWORK, NOT PRINTED: THE '
+        + 'BATH INTERIOR AND ITS PARTITION (REPLACE FROM A530), THE GR-1 3′-4″ ROUGH OPENING, '
+        + 'AND THE GR-2A POSITION AND WIDTH. DOOR HEIGHTS AND SWINGS ARE NOT ON THE SHEET '
+        + '(A600) - DRAWN NOMINAL. NO PIECE OF FURNITURE AND NO WORKING-WALL MODULE IS '
+        + 'DIMENSIONED ON EITHER SHEET - THOSE ARE STYLIZED. NOT SHOP DRAWINGS.';
   }
   else if (cav) {
     cav.innerHTML = VAR + ' &middot; '
