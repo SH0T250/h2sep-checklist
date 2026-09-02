@@ -802,6 +802,23 @@ function wholeFloorCheck(ctx, docId, itemId) {
   bulkConfirm(ctx, targets, 'check', { text: '', scopeLabel: `Floor ${floor} · ${pl(docs.length, isSpace ? 'other common area' : 'other room')}` });
 }
 
+// The one check path for every line on every screen: a tap on a row and the
+// stamp inside the line sheet both land here, so the whole-floor offer follows
+// every check-off (D57, widened by D58): FF&E, MEP punch, common area and its
+// punch, and a flagged line or one with an issue once its sheet is open.
+function checkWithFloorOffer(ctx, docId, itemId) {
+  const { store } = ctx;
+  const it = store.getDoc(docId)?.items?.[itemId];
+  if (!it) return;
+  const wasChecked = !!it.checked;   // the store mutates this line in place
+  store.check(docId, itemId, !wasChecked);
+  if (wasChecked) return;
+  toast(`Checked ${it.code || it.label}`, [
+    { label: 'Undo', fn: () => store.check(docId, itemId, false) },
+    { label: `Whole floor ${store.getDoc(docId)?.floor ?? ''}`, fn: () => wholeFloorCheck(ctx, docId, itemId) },
+  ]);
+}
+
 function itemRow(ctx, docId, itemId, it) {
   const { store } = ctx;
   const flagged = it.reliability === 'FLAGGED';
@@ -833,13 +850,7 @@ function itemRow(ctx, docId, itemId, it) {
       if (bulkOn(docId)) return bulkToggleRow(row, docId, itemId);
       if (!store.user) return identityGate(ctx);
       if (openIssue || flagged) return itemSheet(ctx, docId, itemId);   // a resolved issue is history, not a flag (D50)
-      const wasChecked = !!it.checked;   // the store mutates this line in place
-      store.check(docId, itemId, !wasChecked);
-      // D57: every check offers the same check on this line in every room on the floor.
-      if (!wasChecked) toast(`Checked ${it.code || it.label}`, [
-        { label: 'Undo', fn: () => store.check(docId, itemId, false) },
-        { label: `Whole floor ${store.getDoc(docId)?.floor ?? ''}`, fn: () => wholeFloorCheck(ctx, docId, itemId) },
-      ]);
+      checkWithFloorOffer(ctx, docId, itemId);
     },
     hold: () => itemSheet(ctx, docId, itemId),
   });
@@ -880,7 +891,7 @@ function itemSheet(ctx, docId, itemId) {
   const sheetEl = document.querySelector('.sheet');
   sheetEl.querySelector('[data-check]').addEventListener('click', () => {
     if (!store.user) { close(); return identityGate(ctx); }
-    store.check(docId, itemId, !it.checked); close();
+    close(); checkWithFloorOffer(ctx, docId, itemId);   // D58: the sheet's stamp offers the floor too
   });
   let picked = QUICK_PICKS.includes(it.issue || '') ? it.issue : '';
   sheetEl.querySelectorAll('.qp').forEach(b => b.addEventListener('click', () => {

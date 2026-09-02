@@ -265,6 +265,52 @@ await p.click('.toast button'); await p.waitForTimeout(400);
 t('undo reverses the floor', (await log()).length === lenWf + newWf.length * 2);
 await p.evaluate((id) => window.__store.check('405', id, false), cleanId);
 
+console.log('\nWHOLE FLOOR ON EVERY KIND OF LINE (D58)');
+const cleanRow = () => p.evaluate(() => { const r = [...document.querySelectorAll('.item-row')].find(x => !x.querySelector('.stamp.checked') && !x.querySelector('.issue-pill') && !x.classList.contains('flagged')); return r ? r.dataset.item : null; });
+const toastButtons = () => p.$$eval('.toast button', b => b.map(x => x.textContent.trim()));
+// MEP punch line in room 405: the floor offer walks the other rooms' punch docs only.
+await p.goto(B + '#/room/405?view=mep', { waitUntil: 'networkidle' }); await p.waitForSelector('.item-row');
+const mepId = await cleanRow();
+await tap(`.item-row[data-item="${mepId}"]`); await p.waitForSelector('.toast');
+t('an MEP punch check offers Whole floor 4', (await toastButtons()).includes('Whole floor 4'), (await toastButtons()).join('|'));
+await p.click('.toast button:last-child'); await p.waitForSelector('.sheet .preview');
+t('the MEP preview walks the other rooms', /other room/.test(await p.textContent('.sheet .sh')));
+const lenMep = (await log()).length;
+await p.click('.sheet [data-apply]'); await p.waitForTimeout(500);
+const newMep = (await log()).slice(lenMep);
+t('MEP apply writes only to other punch docs on floor 4', newMep.length > 1 && newMep.every(x => /^4\d\d-MEP$/.test(x.docId) && x.docId !== '405-MEP'), newMep.map(x => x.docId).join(','));
+await p.click('.toast button'); await p.waitForTimeout(400);
+t('MEP undo reverses the floor', (await log()).length === lenMep + newMep.length * 2);
+await p.evaluate((id) => window.__store.check('405-MEP', id, false), mepId);
+// Common area S421 on floor 4: the floor offer walks the other common areas only.
+await p.goto(B + '#/space/S421', { waitUntil: 'networkidle' }); await p.waitForSelector('.item-row');
+const spId = await cleanRow();
+await tap(`.item-row[data-item="${spId}"]`); await p.waitForSelector('.toast');
+t('a common-area check offers Whole floor 4', (await toastButtons()).includes('Whole floor 4'), (await toastButtons()).join('|'));
+await p.click('.toast button:last-child'); await p.waitForTimeout(400);
+const spSheet = !!(await p.$('.sheet .preview'));
+if (spSheet) {
+  t('the common-area preview walks the other common areas', /other common area/.test(await p.textContent('.sheet .sh')));
+  const lenSp = (await log()).length;
+  await p.click('.sheet [data-apply]'); await p.waitForTimeout(500);
+  const newSp = (await log()).slice(lenSp);
+  t('common-area apply writes only to other floor-4 common areas', newSp.length >= 1 && newSp.every(x => /^S4\d\d$/.test(x.docId) && x.docId !== 'S421'), newSp.map(x => x.docId).join(','));
+  await p.click('.toast button'); await p.waitForTimeout(400);
+  t('common-area undo reverses the floor', (await log()).length === lenSp + newSp.length * 2);
+} else {
+  t('the common-area line is carried by another floor-4 common area', false, 'no preview sheet: ' + (await p.textContent('.toast').catch(() => '')));
+}
+await p.evaluate((id) => window.__store.check('S421', id, false), spId);
+// A flagged line opens its sheet instead of checking; the stamp inside the sheet offers the floor too.
+await p.goto(B + '#/room/405', { waitUntil: 'networkidle' }); await p.waitForSelector('.item-row');
+const flId = await p.evaluate(() => { const r = [...document.querySelectorAll('.item-row.flagged')].find(x => !x.querySelector('.stamp.checked')); return r ? r.dataset.item : null; });
+await tap(`.item-row[data-item="${flId}"]`); await p.waitForSelector('.sheet [data-check]');
+await p.click('.sheet [data-check]'); await p.waitForSelector('.toast');
+t('the line sheet stamp offers Undo and Whole floor 4', (await toastButtons()).includes('Undo') && (await toastButtons()).includes('Whole floor 4'), (await toastButtons()).join('|'));
+t('the sheet closed and the flagged line is checked', !(await p.$('.sheet')) && (await p.evaluate((id) => !!window.__store.getDoc('405').items[id].checked, flId)));
+await p.click('.toast button:first-child'); await p.waitForTimeout(300);
+t('Undo from the sheet toast unchecks it', await p.evaluate((id) => !window.__store.getDoc('405').items[id].checked, flId));
+
 t('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' ; '));
 await b.close();
 console.log(`\n${pass} passed, ${fail} failed`);
