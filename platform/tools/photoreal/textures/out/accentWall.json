@@ -1,0 +1,48 @@
+{
+ "surface": "accentWall",
+ "repeat_m": [
+  0.98552,
+  0.98552
+ ],
+ "pixels": {
+  "color": 2048,
+  "roughness": 1024,
+  "bump": 1024
+ },
+ "maps": {
+  "color": "accentWall_color.png",
+  "roughness": "accentWall_rough.png",
+  "bump": "accentWall_bump.png"
+ },
+ "bump_distance_m": 0.00015,
+ "projection": "box",
+ "measured": {
+  "repeat_in": [
+   38.8,
+   38.8
+  ],
+  "px_per_in": 52.784,
+  "column_in": 4.85,
+  "pair_in": 9.7,
+  "line_pitch_in": 1.0486,
+  "line_width_in": 0.18,
+  "line_angle_deg": 45,
+  "ground_srgb": [
+   207,
+   204,
+   198
+  ],
+  "ink_srgb": [
+   148,
+   142,
+   134
+  ],
+  "ink_area_fraction": 0.1711,
+  "from": [
+   "20260812_141100.jpg",
+   "20260812_141158.jpg"
+  ],
+  "scale_reference": "headboard 78 in = 500 px at 2000 px, 6.4 px/in"
+ },
+ "notes": "column pitch, line angle, pitch, width and tone measured; bundle length, emboss depth and sheen SCALED; the stroke drawing is STYLIZED hand work"
+}
