@@ -181,7 +181,7 @@ check('the corrected line cites D35 with Austin\'s words, the 12-against-11 arit
     if (id !== '338' && !/12 against 11, 1 against 2/.test(t)) o.push(`${id}: note does not carry the arithmetic`);
     if (!/hand/i.test(t)) o.push(`${id}: note does not raise handedness`);
     if (/six units against six|eleven units against floor 2/.test(t)) o.push(`${id}: note carries floor-1 or floor-2 figures as this room's`);
-    if (v.reliability !== 'MEDIUM') o.push(`${id}: reliability ${v.reliability}`);
+    { const want = /B4\.5/.test(String(v.instanceNote)) ? 'FLAGGED' : 'MEDIUM'; if (v.reliability !== want) o.push(`${id}: reliability ${v.reliability}, want ${want}`); }
     if (id !== '338' && !/B4\.5/.test(t)) o.push(`${id}: open conflict B4.5 dropped from the line`);
     return o;
   }));

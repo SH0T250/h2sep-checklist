@@ -27,6 +27,7 @@ const seed = JSON.parse(readFileSync(SEED, 'utf8'));
 const ref = JSON.parse(readFileSync(REF, 'utf8'));
 const live = JSON.parse(readFileSync(LIVE, 'utf8'));
 const docs = seed.docs;
+const OTHER_SEEDS = Object.fromEntries(['platform/data/floor2-staged.json', 'platform/data/floor3-staged.json'].map((f) => [f, execSync(`md5sum ${f}`, { encoding: 'utf8' }).split(' ')[0]]));
 
 let pass = 0, fail = 0;
 const failures = [];
@@ -183,7 +184,7 @@ check('GR-304 on the 17 King Studios, GR-307 on 438, GR-315 on 402, GR-316 on 41
 });
 check('no room carries two working-wall tags live', () =>
   Object.entries(docs).filter(([id]) => isRoom(id)).filter(([, d]) => live_(d).filter(([, v]) => /^GR-3(04|05|07|08|09|15|16)$/.test(v.code || '')).length !== 1).map(([id]) => `${id}: not exactly one working wall`));
-check('the corrected line cites D37 with Austin\'s words, the 10-against-11 arithmetic and the open hand, at MEDIUM, and keeps B4.5', () =>
+check('the corrected line cites D37 with Austin\'s words, the 10-against-11 arithmetic and the open hand, FLAGGED where B4.5 names it, and keeps B4.5', () =>
   TWO_QUEEN.flatMap((id) => {
     const [, v] = live_(docs[id]).find(([, x]) => x.code === 'GR-305'); const o = []; const t = String(v.instanceNote);
     if (!/Austin ruling D37/.test(t)) o.push(`${id}: note does not cite D37`);
@@ -191,7 +192,7 @@ check('the corrected line cites D37 with Austin\'s words, the 10-against-11 arit
     if (!/10 against 11, 3 against 2, 0 against 1/.test(t)) o.push(`${id}: note does not carry the arithmetic`);
     if (!/hand/i.test(t)) o.push(`${id}: note does not raise handedness`);
     if (/six units against six|eleven units against floor 2|floor 3 per the drawings/.test(t)) o.push(`${id}: note carries another floor's figures as this room's`);
-    if (v.reliability !== 'MEDIUM') o.push(`${id}: reliability ${v.reliability}`);
+    { const want = /B4\.5/.test(String(v.instanceNote)) ? 'FLAGGED' : 'MEDIUM'; if (v.reliability !== want) o.push(`${id}: reliability ${v.reliability}, want ${want}`); }
     if (!/B4\.5/.test(t)) o.push(`${id}: open conflict B4.5 dropped from the line`);
     return o;
   }));
@@ -342,8 +343,12 @@ check('the spaces path is reproducible and leaves the rooms alone', () => {
   } finally { writeFileSync(SEED, keep); }
 });
 check('the floor-1 seed, the approved slice, the mock-ups and the floor-2 and floor-3 seeds were never written to by a floor-4 run', () => {
-  const status = execSync('git status --porcelain platform/data/slice-f1.json platform/data/floor1-staged.json platform/data/ref-rooms-staged.json platform/data/floor2-staged.json platform/data/floor3-staged.json', { encoding: 'utf8' }).trim();
-  return status ? [`modified: ${status}`] : [];
+  const md5 = (f) => execSync(`md5sum ${f}`, { encoding: 'utf8' }).split(' ')[0];
+  const out = [];
+  for (const f of ['platform/data/floor2-staged.json', 'platform/data/floor3-staged.json']) if (md5(f) !== OTHER_SEEDS[f]) out.push(`${f} changed during this audit's floor-4 runs`);
+  const status = execSync('git status --porcelain platform/data/slice-f1.json platform/data/floor1-staged.json platform/data/ref-rooms-staged.json', { encoding: 'utf8' }).trim();
+  if (status) out.push(`modified: ${status}`);
+  return out;
 });
 
 process.stdout.write('\n' + '='.repeat(70) + '\n');

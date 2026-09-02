@@ -49,19 +49,19 @@ SELFTEST
    room 238: FF&E 45 line(s), MEP 33 line(s); 82 MEP row(s) = 63 condensed + 10 own line(s) + 9 rough-in + 0 lost - PASS
 
 4. FIRESTORE DOC RULES
-   201: id 3/8 chars, 42/200 items, 7 note(s)
+   201: id 3/8 chars, 42/200 items, 8 note(s)
    202: id 3/8 chars, 43/200 items, 7 note(s)
-   203: id 3/8 chars, 42/200 items, 6 note(s)
+   203: id 3/8 chars, 42/200 items, 7 note(s)
    204: id 3/8 chars, 43/200 items, 6 note(s)
-   205: id 3/8 chars, 42/200 items, 6 note(s)
+   205: id 3/8 chars, 42/200 items, 7 note(s)
    206: id 3/8 chars, 43/200 items, 6 note(s)
-   207: id 3/8 chars, 42/200 items, 6 note(s)
+   207: id 3/8 chars, 42/200 items, 7 note(s)
    208: id 3/8 chars, 43/200 items, 6 note(s)
-   209: id 3/8 chars, 42/200 items, 7 note(s)
+   209: id 3/8 chars, 42/200 items, 8 note(s)
    210: id 3/8 chars, 43/200 items, 6 note(s)
-   211: id 3/8 chars, 42/200 items, 6 note(s)
+   211: id 3/8 chars, 42/200 items, 7 note(s)
    212: id 3/8 chars, 43/200 items, 6 note(s)
-   213: id 3/8 chars, 42/200 items, 7 note(s)
+   213: id 3/8 chars, 42/200 items, 8 note(s)
    214: id 3/8 chars, 43/200 items, 6 note(s)
    215: id 3/8 chars, 42/200 items, 7 note(s)
    216: id 3/8 chars, 43/200 items, 7 note(s)
@@ -73,28 +73,28 @@ SELFTEST
    225: id 3/8 chars, 43/200 items, 6 note(s)
    226: id 3/8 chars, 43/200 items, 6 note(s)
    227: id 3/8 chars, 43/200 items, 6 note(s)
-   228: id 3/8 chars, 42/200 items, 6 note(s)
+   228: id 3/8 chars, 42/200 items, 7 note(s)
    229: id 3/8 chars, 43/200 items, 6 note(s)
    230: id 3/8 chars, 42/200 items, 8 note(s)
    231: id 3/8 chars, 43/200 items, 6 note(s)
    232: id 3/8 chars, 42/200 items, 8 note(s)
    233: id 3/8 chars, 43/200 items, 7 note(s)
-   234: id 3/8 chars, 42/200 items, 6 note(s)
+   234: id 3/8 chars, 42/200 items, 7 note(s)
    236: id 3/8 chars, 42/200 items, 6 note(s)
    238: id 3/8 chars, 45/200 items, 8 note(s)
-   201-MEP: id 7/8 chars, 23/200 items, 7 note(s)
+   201-MEP: id 7/8 chars, 23/200 items, 8 note(s)
    202-MEP: id 7/8 chars, 25/200 items, 7 note(s)
-   203-MEP: id 7/8 chars, 23/200 items, 6 note(s)
+   203-MEP: id 7/8 chars, 23/200 items, 7 note(s)
    204-MEP: id 7/8 chars, 23/200 items, 6 note(s)
-   205-MEP: id 7/8 chars, 23/200 items, 6 note(s)
+   205-MEP: id 7/8 chars, 23/200 items, 7 note(s)
    206-MEP: id 7/8 chars, 23/200 items, 6 note(s)
-   207-MEP: id 7/8 chars, 23/200 items, 6 note(s)
+   207-MEP: id 7/8 chars, 23/200 items, 7 note(s)
    208-MEP: id 7/8 chars, 23/200 items, 6 note(s)
-   209-MEP: id 7/8 chars, 23/200 items, 7 note(s)
+   209-MEP: id 7/8 chars, 23/200 items, 8 note(s)
    210-MEP: id 7/8 chars, 23/200 items, 6 note(s)
-   211-MEP: id 7/8 chars, 23/200 items, 6 note(s)
+   211-MEP: id 7/8 chars, 23/200 items, 7 note(s)
    212-MEP: id 7/8 chars, 23/200 items, 6 note(s)
-   213-MEP: id 7/8 chars, 23/200 items, 7 note(s)
+   213-MEP: id 7/8 chars, 23/200 items, 8 note(s)
    214-MEP: id 7/8 chars, 23/200 items, 6 note(s)
    215-MEP: id 7/8 chars, 23/200 items, 7 note(s)
    216-MEP: id 7/8 chars, 23/200 items, 7 note(s)
@@ -106,13 +106,13 @@ SELFTEST
    225-MEP: id 7/8 chars, 23/200 items, 6 note(s)
    226-MEP: id 7/8 chars, 23/200 items, 6 note(s)
    227-MEP: id 7/8 chars, 23/200 items, 6 note(s)
-   228-MEP: id 7/8 chars, 23/200 items, 6 note(s)
+   228-MEP: id 7/8 chars, 23/200 items, 7 note(s)
    229-MEP: id 7/8 chars, 23/200 items, 6 note(s)
    230-MEP: id 7/8 chars, 23/200 items, 8 note(s)
    231-MEP: id 7/8 chars, 23/200 items, 6 note(s)
    232-MEP: id 7/8 chars, 23/200 items, 8 note(s)
    233-MEP: id 7/8 chars, 23/200 items, 7 note(s)
-   234-MEP: id 7/8 chars, 23/200 items, 6 note(s)
+   234-MEP: id 7/8 chars, 23/200 items, 7 note(s)
    236-MEP: id 7/8 chars, 23/200 items, 6 note(s)
    238-MEP: id 7/8 chars, 33/200 items, 8 note(s)
    PASS - every doc id <= 8 chars, number == docId, items <= 200, doc/item/note keys all whitelisted, every line born clean and cited
@@ -120,7 +120,7 @@ SELFTEST
 ====================================================================================================
 SELFTEST PASSED
 
-DETERMINISM: two independent in-process builds are byte-identical (md5 3fbb75ca711e099cf8db7a967c0c4bef)
+DETERMINISM: two independent in-process builds are byte-identical (md5 723a9497f129d9033220db3ba9d448f1)
 
 BUILD REPORT - floor 2, 33 guest room(s), staged for approval
 ====================================================================================================
@@ -203,7 +203,7 @@ ROOM 201  QQ Wide  (2 key(s) of this type: 201, 301)
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
     5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0106]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
-    room notes seeded: n_conflicts, n_d22, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type
+    room notes seeded: n_conflicts, n_d22, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
 ----------------------------------------------------------------------------------------------------
 ROOM 202  King One Bedroom  (3 key(s) of this type: 202, 302, 402)
@@ -343,7 +343,7 @@ ROOM 203  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
     7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
-    room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type
+    room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
 ----------------------------------------------------------------------------------------------------
 ROOM 204  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
@@ -475,7 +475,7 @@ ROOM 205  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
     7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
-    room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type
+    room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
 ----------------------------------------------------------------------------------------------------
 ROOM 206  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
@@ -607,7 +607,7 @@ ROOM 207  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
     7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
-    room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type
+    room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
 ----------------------------------------------------------------------------------------------------
 ROOM 208  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
@@ -739,7 +739,7 @@ ROOM 209  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
     7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
-    room notes seeded: n_conflicts, n_d22, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type
+    room notes seeded: n_conflicts, n_d22, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
 ----------------------------------------------------------------------------------------------------
 ROOM 210  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
@@ -871,7 +871,7 @@ ROOM 211  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
     7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
-    room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type
+    room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
 ----------------------------------------------------------------------------------------------------
 ROOM 212  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
@@ -1003,7 +1003,7 @@ ROOM 213  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
     7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
-    room notes seeded: n_conflicts, n_d22, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type
+    room notes seeded: n_conflicts, n_d22, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
 ----------------------------------------------------------------------------------------------------
 ROOM 214  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
@@ -1815,7 +1815,7 @@ ROOM 228  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
     7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
-    room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type
+    room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
 ----------------------------------------------------------------------------------------------------
 ROOM 229  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
@@ -2219,7 +2219,7 @@ ROOM 234  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
     7 open entr(y/ies) touch this room: A11 [keys 115] [cited by own row(s) ITM-0103]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.3 [keys 115]; B5.4 [keys 115]; B5.6 [marks W4, W5]
     carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
-    room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type
+    room notes seeded: n_conflicts, n_d22, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
 ----------------------------------------------------------------------------------------------------
 ROOM 236  QQ Connecting  (6 key(s) of this type: 103, 215, 236, 336, 403, 436)
@@ -2351,7 +2351,7 @@ ROOM 238  QQ Acc.  (2 key(s) of this type: 238, 338)
 
   RULINGS
     DECLINED D12 on GR-322 - the drawing already tags the nightstand family separately in this room (GR-319 + GR-322 + GR-323), so the fold already yields 3 nightstands. D12 was ruled for the case where the drawing tags the family ONCE. Forcing qty 3 here would ship 5.
-    DECLINED D20 on GR-202 - room type "QQ Acc." is NOT a King-family key. D20 reasons only about the King rooms; this room’s own sqlite row explains its single GR-202 and it also carries GR-208 x2. Doubling GR-202 here would invent a sconce.
+    DECLINED D20 on GR-202 - room type "QQ Acc." is NOT a King-family key. D20 reasons only about the King rooms; this room's own sqlite row explains its single GR-202 and it also carries GR-208 x2. Doubling GR-202 here would invent a sconce.
     APPLIED  ruled lines: bsq_a (D29), dh_closer_a (D28), dh_lock_a (D28)
     the declined ruling is written ONTO the line so the note cannot contradict the number: gr202_a (D20 not applied, qty 1), gr322_a (D12 not applied, qty 1)
     D22: APPLIED D33 - GR-308 -> GR-309 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
@@ -2415,7 +2415,7 @@ field state preserved from the previous staged file (a rebuild never zeroes the 
 2nd Floor FF&E Installation tab reconciled: GR-315 = 1 (1 King One Bedroom)
 2nd Floor FF&E Installation tab reconciled: GR-316 = 1 (1 King One Bedroom Acc.)
 wrote platform/data/floor2-staged.json  (70 docs: 201, 201-MEP, 202, 202-MEP, 203, 203-MEP, 204, 204-MEP, 205, 205-MEP, 206, 206-MEP, 207, 207-MEP, 208, 208-MEP, 209, 209-MEP, 210, 210-MEP, 211, 211-MEP, 212, 212-MEP, 213, 213-MEP, 214, 214-MEP, 215, 215-MEP, 216, 216-MEP, 217, 217-MEP, 218, 218-MEP, 222, 222-MEP, 223, 223-MEP, 224, 224-MEP, 225, 225-MEP, 226, 226-MEP, 227, 227-MEP, 228, 228-MEP, 229, 229-MEP, 230, 230-MEP, 231, 231-MEP, 232, 232-MEP, 233, 233-MEP, 234, 234-MEP, 236, 236-MEP, 238, 238-MEP, S221, S221-M, S237, S239)
-  md5 3fbb75ca711e099cf8db7a967c0c4bef   5041538 bytes
+  md5 723a9497f129d9033220db3ba9d448f1   5073632 bytes
 READ ONLY and untouched, verified by size+mtime: floor1-staged.json, slice-f1.json, ref-rooms-staged.json, build_floor1.mjs
 FLOOR 2 STAGED FOR APPROVAL. NOT LIVE. Firestore not touched. Nothing pushed. Nothing deployed.
 

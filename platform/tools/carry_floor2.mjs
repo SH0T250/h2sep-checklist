@@ -205,18 +205,22 @@ function rebuildFromDb(roomNo, crewItem, sortAt) {
     '. Topic, verbatim: "' + c.topic + '". Positions, verbatim: "' + c.positions + '" It names this line\'s tag, ' +
     code + ', and it takes a DIFFERENT position from the row note above - both are live in the reference database ' +
     'and both are shown. Confirm before any takeoff or purchase.').join('');
+  const carriedWhat = [
+    crewItem.checked ? 'check-off (initials and timestamp)' : '',
+    crewItem.issue && String(crewItem.issue).trim() ? (crewItem.issueResolved ? 'resolved issue' : 'open issue') : '',
+  ].filter(Boolean).join(' and ') || 'field state';
   const why = 'THIS LINE EXISTS BECAUSE THE CREW IS ALREADY WORKING IT. Austin\'s approved category gate keeps "' +
     category + '" off both reference documents, so the rebuild produced no line for ' + code + ' and the field work ' +
     'the crew app already holds on it had nowhere to land. Ruling D24 is explicit that NOTHING is deleted, so the ' +
     'line is rebuilt here from data/project.sqlite room ' + roomNo + '\'s own row(s) ' +
     rows.map((r) => r.item_id).join(', ') + ' - its own description, its own citation, its own reliability and its ' +
-    'own note, verbatim - and the crew\'s check-off and issue are carried onto it. Nothing but the field state comes ' +
+    'own note, verbatim - and the crew\'s ' + carriedWhat + ' is carried onto it. Nothing but the field state comes ' +
     'from the crew document. The row is also recorded in room note n_gategaps with the rest of the gated-out rows. ' +
     'It sits in its own band after the D28 Door Hardware lines so it cannot collide with them. Widening the gate ' +
     'itself is Austin\'s call, not this tool\'s. SOURCE. Everything on this line except the check-off and the ' +
     'issue is data/project.sqlite room ' + roomNo + '\'s own row(s) ' + rows.map((r) => r.item_id).join(', ') +
-    ', verbatim, at the database\'s own reliability. The check-off, the initials, the timestamp and the issue are ' +
-    'the crew\'s, carried from the live crew app READ ONLY.';
+    ', verbatim, at the database\'s own reliability. The ' + carriedWhat + ' on this line is the crew\'s, carried from ' +
+    'the live crew app READ ONLY.';
   return {
     code,
     label: first.description,

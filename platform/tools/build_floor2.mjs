@@ -536,7 +536,7 @@ function assertTagCorrectionCountsF2(db) {
 
 /** The D22 line text for a corrected floor-2 room. Replaces the donor's note,
  *  which is a true statement about FLOOR 1 and a false one about this room. */
-function d22LineNote(roomNo, corr) {
+function d22LineNote(roomNo, corr, flaggedByConflict) {
   const c = corr.spec;
   const history = c.ruling === 'D22'
     ? 'D22 was ruled on floor 1 against the FF&E Installation workbook\'s 1st Floor tab; room ' + roomNo +
@@ -545,14 +545,18 @@ function d22LineNote(roomNo, corr) {
       ? 'Ruling D22 (2026-08-20) corrected the plain Queen-Queen keys on this evidence and D33 extends it to this key ' +
         'on the ' + WORKBOOK_F2 + ': '
       : 'Rulings D22 (2026-08-20) and D33 (2026-09-02) retagged every two-queen key on floor 2 against the workbook\'s ' +
-        '2nd Floor tab, which reconciled exactly; ' + c.ruling + ' carries them up to floor ' + FLOOR + ' BY ROOM TYPE. On the ' +
-        WORKBOOK_F2 + ' ';
+        '2nd Floor tab, which reconciled exactly; ' + c.ruling + ' carries them up to floor ' + FLOOR + ' BY ROOM TYPE. ' +
+        'What the purchase record (' + WORKBOOK_F2 + ') says: ';
   return 'Austin ruling ' + c.ruling + ': this room takes ' + c.to + ', not ' + c.from + '. The two are different ' +
     'purchased parts, not two names for one. ' + history + c.workbook + '. data/project.sqlite transcribed this room ' +
     'as ' + c.from + ' and carries no ' + c.to + ' row anywhere in the building; its own row note, verbatim: "' +
     corr.ownNote + '". STILL OPEN: ' + c.handedness + ' SOURCE. Tag: ' + c.basis + '. Label: the workbook\'s own ' +
     'item name. Citation, quantity, category and sort: this room\'s own data/project.sqlite row(s) ' +
-    corr.rows.join(', ') + '. Reliability MEDIUM while the handedness is open.';
+    corr.rows.join(', ') + (flaggedByConflict
+      ? '. Reliability FLAGGED: an OPEN conflicts-table entry names this mark and travels with the line (quoted below); ' +
+        'the ruling on its own would make it MEDIUM, and it becomes MEDIUM once that entry is closed, while the ' +
+        'handedness stays open.'
+      : '. Reliability MEDIUM while the handedness is open.');
 }
 
 const DONOR_BY_TYPE = {
@@ -990,7 +994,7 @@ const QTY_OVERRIDE_RULES = [
       ? { apply: true, why: 'room type ' + JSON.stringify(ctx.roomType) + ' is a King-family key, which is '
           + 'the set D20 was ruled on' }
       : { apply: false, why: 'room type ' + JSON.stringify(ctx.roomType) + ' is NOT a King-family key. D20 '
-          + 'reasons only about the King rooms; this room’s own sqlite row explains its single GR-202 '
+          + 'reasons only about the King rooms; this room\'s own sqlite row explains its single GR-202 '
           + 'and it also carries GR-208 x2. Doubling GR-202 here would invent a sconce.' }),
   },
 ];
@@ -2269,7 +2273,7 @@ function ownTagAssertions(src, roomNo, rows) {
     '. The assertion is corrected to this room\'s own mark and the row(s) are quoted: ' +
     f.rows.map((r) => r.item_id + ' [' + r.reliability + '] tag "' + r.tag + '" "' + r.description + '" [cited: ' +
       (r.source_sheet || r.primary_sheet || 'no citation') + ']' +
-      (r.note ? ' — data/project.sqlite note, verbatim: "' + r.note + '"' : '')).join('; ') + '.').join(' ');
+      (r.note ? ' - data/project.sqlite note, verbatim: "' + r.note + '"' : '')).join('; ') + '.').join(' ');
   return { src: citeJoin(out), note, changed: true, fixes };
 }
 
@@ -2430,7 +2434,11 @@ function floorTrueCitation(src, floor, ownRows, idx, roomSheet, donorNo, roomNo)
     if (moved && !wrongIn(seg).length) { kept.push(seg); continue; }
 
     /* A sheet number in a "/" list with another sheet: drop just that number.
-     * "A120/A121 General Note I" -> "A121 General Note I" on floor 2. */
+     * "A120/A121 General Note I" -> "A121 General Note I" on floor 2. A trim
+     * is only REPORTED if the segment survives: on floor 3 the same list loses
+     * A120 and then A121 too, and the whole segment is dropped, so saying
+     * "what is left is A121" would name a second-floor sheet as this room's. */
+    const segTrimmed = [];
     for (const id of wrongIn(seg)) {
       const others = sheetIdsIn(seg).filter((x) => x !== id);
       if (!others.length) continue;
@@ -2439,13 +2447,13 @@ function floorTrueCitation(src, floor, ownRows, idx, roomSheet, donorNo, roomNo)
         .replace(new RegExp('\\s*\\/\\s*' + reEsc(id) + '\\b'), '');
       if (next !== seg) {
         const sib = sibling(id);
-        trimmed.push(id + ' = "' + idx.byId.get(id).title + '" (dropped from the cited list; what is left is ' +
+        segTrimmed.push(id + ' = "' + idx.byId.get(id).title + '" (dropped from the cited list; what is left is ' +
           others.join(', ') + (sib && others.includes(sib) ? ', which is this room\'s floor' : '') + ')');
         seg = next;
       }
     }
     const still = wrongIn(seg);
-    if (!still.length) { kept.push(seg); continue; }
+    if (!still.length) { kept.push(seg); trimmed.push(...segTrimmed); continue; }
 
     dropped.push({ seg: raw, ids: still });
   }
@@ -2830,7 +2838,7 @@ function fpOwnTakeoff(roomNo, donorNo, item, heads, report, floor) {
   const positions = sorted.map((r) => r.instance_note).filter(Boolean).join('; ');
   const extras = [...new Set(sorted.map((r) => r.note).filter(Boolean))].join(' ');
   const ownCites = [...new Set(sorted.map((r) => r.source_sheet || r.primary_sheet).filter(Boolean))];
-  const own = "this room's own take-off is " + sorted.length + ' concealed pendent head(s) on drops — ' +
+  const own = "this room's own take-off is " + sorted.length + ' concealed pendent head(s) on drops - ' +
     positions + '. ' + (extras ? endStop(extras) + ' ' : '') + 'Verify every head you can see.';
   const m = FP_TAKEOFF_RE.exec(String(item.instanceNote));
   const kernel = String(item.instanceNote).slice(0, m.index) + own + String(item.instanceNote).slice(m.index + m[0].length);
@@ -2890,7 +2898,7 @@ function ptacFromOwnRows(roomNo, item, mine, report) {
   const flagged = mine.some((r) => String(r.reliability).toUpperCase() === 'FLAGGED');
   const quotes = mine.map((r) => 'room_items ' + r.item_id + (r.instance_note ? ' ("' + r.instance_note + '")' : '') +
     ', tag ' + (r.tag ? JSON.stringify(r.tag) : 'NONE') +
-    ', reliability ' + r.reliability + (r.note ? ' — "' + r.note + '"' : '')).join('  |  ');
+    ', reliability ' + r.reliability + (r.note ? ' - "' + r.note + '"' : '')).join('  |  ');
 
   const verdict = marks.length === 0
     ? 'THE MARK IS UNRESOLVED AND IS LEFT BLANK. This room\'s own row(s) carry NO PTAC mark at all.'
@@ -2996,7 +3004,7 @@ function ownRepointNote(donorNo, donorSheet, roomSheet) {
  * Both configurations ship as their own FLAGGED lines further down. These two
  * condensed lines keep the donor's product text - dropping a line from Austin's
  * approved D10 punch is not this tool's call - but they are marked FLAGGED and
- * relabelled with the house CONFIGURATION prefix so that nobody reads the
+ * relabeled with the house CONFIGURATION prefix so that nobody reads the
  * standard-room fixture as an answer for an accessible key.
  * ========================================================================== */
 const CONFLICT_LABEL_PREFIX = 'BATHING CONFIGURATION UNRESOLVED (TUB vs ROLL-IN) - the text below is the ' +
@@ -3134,14 +3142,14 @@ const appendNote = (note, add) => (String(note || '').trim() ? endStop(note) + '
 function ownLineText(line) {
   const rows = line.rows || [];
   if (rows.length <= 1) {
-    return [line.sqlite.instanceNote, line.sqlite.note].filter(Boolean).join(' — ');
+    return [line.sqlite.instanceNote, line.sqlite.note].filter(Boolean).join(' - ');
   }
   const notes = [];
   for (const r of rows) {
     const n = String(r.note || '').trim();
     if (n && !notes.includes(n)) notes.push(n);
   }
-  return notes.join(' — ');
+  return notes.join(' - ');
 }
 
 /**
@@ -3312,7 +3320,7 @@ function openConflictsFor(db, roomNo, keys, rows) {
    * 217, 238, ...)", which is the database saying B4.4 touches this key. */
   const citedBy = new Map();
   for (const r of rows) {
-    const own = [r.instance_note, r.note].filter(Boolean).join(' — ');
+    const own = [r.instance_note, r.note].filter(Boolean).join(' - ');
     for (const m of String(own).matchAll(CONFLICT_ID_CITE_RE)) {
       for (const id of m[1].split('/').map((s) => s.trim()).filter(Boolean)) {
         if (!citedBy.has(id)) citedBy.set(id, []);
@@ -3432,6 +3440,20 @@ function conflictOnLineText(h, codes, wasRel, rowWord, rowIds) {
  * ========================================================================== */
 const TYPE_AREA_MIN_PREFIX = 6;
 
+/* The conflicts table writes type names its own way: "Queen Queen" for
+ * Queen-Queen, "Queen Queen (Wide)" for QQ Wide, "QQ Ext" for QQ Extended.
+ * A13 names the plain Queen-Queen and the QQ Wide areas and reached neither
+ * type while the matcher required the database's own spelling. */
+const TYPE_AREA_ALIASES = {
+  'Queen-Queen': ['Queen Queen'],
+  'QQ Wide': ['Queen Queen (Wide)', 'Queen Queen Wide', 'QQ (Wide)'],
+  'QQ Wide Connecting': ['Queen Queen (Wide) Connector', 'Queen Queen Wide Connector', 'QQ Wide Connector'],
+  'QQ Extended': ['QQ Ext', 'Queen Queen Ext', 'Queen Queen Extended', 'Queen Queen (Ext)'],
+  'QQ Connecting': ['QQ Connector', 'Queen Queen Connector', 'QQ Studio Connector'],
+  'QQ Acc.': ['QQ Acc', 'Queen Queen Acc', 'Queen Queen Accessible', 'QQ Accessible'],
+  'King Studio Acc.': ['King Studio Acc', 'King Studio Accessible', 'KS Acc'],
+  'King One Bedroom Acc.': ['King One Bedroom Acc', 'King One Bedroom Accessible', 'K1B Acc'],
+};
 function typeAreaConflictsFor(db, room) {
   const name = String(room.room_type || '');
   const forms = [];
@@ -3440,6 +3462,7 @@ function typeAreaConflictsFor(db, room) {
     if (/[\s.]$/.test(p)) continue;
     forms.push(p);
   }
+  for (const a of TYPE_AREA_ALIASES[name] || []) if (!forms.includes(a)) forms.push(a);
   const out = [];
   for (const c of db.prepare('SELECT * FROM conflicts ORDER BY conflict_id').all()) {
     if (String(c.status).toUpperCase() !== 'OPEN') continue;
@@ -3542,14 +3565,14 @@ function buildRoomNotes(db, roomNo, room, rows, red, drops, stamp, report) {
   let gateConflicts = 0;
   for (const r of rows) {
     if (GATE_CATEGORIES.has(r.category) || MEP_CATEGORIES.has(r.category)) continue;
-    const own = [r.instance_note, r.note].filter(Boolean).join(' — ');
+    const own = [r.instance_note, r.note].filter(Boolean).join(' - ');
     const statesConflict = rowStatesConflict(own);
     if (String(r.reliability).toUpperCase() === 'HIGH' && !statesConflict) continue;
     if (statesConflict) gateConflicts++;
     gateNotes.push((r.tag || '<untagged>') + ' [' + r.category + ', ' + r.reliability +
       (statesConflict ? ', STATES A DOCUMENT CONFLICT' : '') + '] ' + r.item_id +
       ' "' + r.description + '"' + (r.instance_note ? ' (' + r.instance_note + ')' : '') +
-      (r.note ? ' — data/project.sqlite note, verbatim: "' + r.note + '"' : '') +
+      (r.note ? ' - data/project.sqlite note, verbatim: "' + r.note + '"' : '') +
       ' [cited: ' + (r.source_sheet || r.primary_sheet || 'no citation') + ']');
   }
   if (gateNotes.length) {
@@ -3565,9 +3588,9 @@ function buildRoomNotes(db, roomNo, room, rows, red, drops, stamp, report) {
       'the database\'s own words - the conflict vocabulary, printed here from the matcher\'s own list so the two ' +
       'cannot drift apart (' + CONFLICT_WORDS.map((w) => '"' + w + '"').join(', ') + ', matched case-insensitively ' +
       'as substrings, so "supersede" catches both "superseded" and "supersedes") OR two sheet numbers set against ' +
-      'each other in one sentence by the words "vs", "versus", "while", "against" or "but", which is what room 217\'s ' +
+      'each other in one sentence by the words "vs", "versus", "while", "against" or "but", which is what an accessible key\'s ' +
       'WC-02 row does. Being listed here does not by itself decide whether a row also carries a checklist line: ' +
-      'platform/tools/carry_ref_state.mjs REBUILDS a gated row as a line where the crew already holds field work on ' +
+      'platform/tools/carry_floor2.mjs --floor=' + FLOOR + ' REBUILDS a gated row as a line where the crew already holds field work on ' +
       'it, and that line says on its face why it exists. Widening the gate itself is Austin\'s call, not this ' +
       'tool\'s. ' + gateNotes.join('  ||  '), stamp, 'issue');
   }
@@ -3769,7 +3792,7 @@ function d22ScopeNote(db, room, roomNo, rows, corrections) {
     return { flag: 'info', summary: 'GR-308 is the connector wall and stands',
       text: 'WORKING WALL TAG - GR-308 STANDS. Room ' + roomNo + ' is a QQ Connecting key and GR-308 IS the connector ' +
         'working wall. ' + tab + ' Ruling D22 corrected the PLAIN Queen-Queen keys and does not touch a connecting key.' +
-        (r.note ? ' The row\'s own note, verbatim: "' + r.note + '"' : '') };
+        (r.note ? ' The row\'s own note, verbatim: "' + r.note + '".' : '') };
   }
   if (TAB_FACTS.mismatches.length) {
     return { flag: 'issue', summary: 'NO CORRECTION ON FLOOR ' + FLOOR + ' - the ' + PROFILE.tab + ' tab does not reconcile; ' +
@@ -3927,7 +3950,7 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
           const mixed = new Set(line.rows.map((x) => String(x.reliability).toUpperCase())).size > 1;
           const worstQuotes = worstRows.map((x) => x.item_id +
             (x.instance_note ? ' ("' + x.instance_note + '")' : '') +
-            (x.note ? ' — note, verbatim: "' + x.note + '"' : '')).join('; ');
+            (x.note ? ' - note, verbatim: "' + x.note + '"' : '')).join('; ');
           /* THE NOTE DOES NOT RESTATE THE RELIABILITY FIELD. It used to end
            * "the line ships the worst of them, MEDIUM" - and on 217/905_a the
            * conflicts-table block below then raised the same line to FLAGGED,
@@ -4037,7 +4060,7 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
       const why = (report.qtyOverrides.applied.find((a) => a.tag === line.code) || {}).why || '';
       pkg.instanceNote = 'Austin ruling ' + line.overrideRuling + ': ' + line.overrideBecause + '.' + own +
         ' Applied here because ' + why + '. The line therefore ships qty ' + line.qty + ' on the ruling rather than ' +
-        'on the ' + line.rawRows + ' row(s) the drawing set tags. Confirm both positions in the field before ordering.';
+        'on the ' + line.rawRows + ' row(s) the drawing set tags. Confirm all three positions in the field before ordering.';
       overrideNotes.push(line.key + ': qty ' + line.rawRows + ' -> ' + line.qty + ' per ruling ' + line.overrideRuling);
       provText = 'TEXT. The wording above is the RULING, written here from Austin ruling ' + line.overrideRuling +
         ' and this room\'s own row(s) ' + rowIds + '. It replaces whatever package text this tag carries elsewhere, ' +
@@ -4156,8 +4179,12 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
     if (keys.length !== 1) die('room ' + roomNo + ': expected exactly one ' + corr.to + ' line after correction, found ' + keys.length);
     const it = items[keys[0]];
     it.label = corr.spec.label;
-    it.reliability = 'MEDIUM';
-    it.instanceNote = '⚑ ' + d22LineNote(roomNo, corr) + (conflictTextByKey[keys[0]] ? ' ' + conflictTextByKey[keys[0]] : '');
+    const conf = conflictTextByKey[keys[0]] || '';
+    /* An OPEN conflicts-table entry that names the corrected mark keeps the line
+     * FLAGGED, exactly as it does on every other line; the ruling alone would
+     * make it MEDIUM, and the note says both. */
+    it.reliability = conf ? 'FLAGGED' : 'MEDIUM';
+    it.instanceNote = '⚑ ' + d22LineNote(roomNo, corr, Boolean(conf)) + (conf ? ' ' + conf : '');
     correctedLines.push(corr.to + ' (' + corr.ruling + ', was ' + corr.from + ') on ' + keys[0]);
     if (!flagged.some((f) => f.startsWith(keys[0] + ' '))) flagged.push(keys[0] + ' [MEDIUM] ' + corr.to);
   }
@@ -4437,14 +4464,14 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
       const donorRel = String(d.reliability || '').toUpperCase();
       const before = item.reliability;
       const speaks = mine.filter((r) => relRank(r.reliability) < relRank('HIGH') ||
-        rowStatesConflict([r.instance_note, r.note].filter(Boolean).join(' — ')));
+        rowStatesConflict([r.instance_note, r.note].filter(Boolean).join(' - ')));
       if (relRank(ownWorst) < relRank(item.reliability)) item.reliability = ownWorst;
       if (speaks.length) {
         const already = String(item.instanceNote || '');
         const quotes = speaks.map((r) => r.item_id + ' [' + r.reliability + ']' +
           (r.tag ? ' tag "' + r.tag + '"' : '') + ' "' + r.description + '"' +
           (r.instance_note ? ' (' + r.instance_note + ')' : '') +
-          (r.note ? ' — data/project.sqlite note, verbatim: "' + r.note + '"' : '') +
+          (r.note ? ' - data/project.sqlite note, verbatim: "' + r.note + '"' : '') +
           ' [cited: ' + (r.source_sheet || r.primary_sheet || 'no citation') + ']')
           .filter((q) => !already.includes(q));
         item.instanceNote = appendNote(item.instanceNote, 'THIS ROOM\'S OWN ROWS GOVERN THIS LINE. ' +
@@ -4607,7 +4634,7 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
     }
 
     /* A category the APP does not know sorts after everything else. The string
-     * is left EXACTLY as the database writes it - no row is relabelled to make
+     * is left EXACTLY as the database writes it - no row is relabeled to make
      * it fit, which is the rule build_floor1.mjs already follows for spaces -
      * and the line says so, because the build report is not shipped with the
      * document and Austin reads the document. */
@@ -4615,7 +4642,7 @@ function buildMepDoc(db, roomNo, room, rows, live, floor, stamp, report, identit
       note = appendNote(note, 'CATEGORY NOTE: data/project.sqlite files this row under "' + c + '". The crew app ' +
         'knows five MEP bands (' + [...APP_MEP_CATEGORY_ORDER].join(', ') + '), so this line sorts AFTER all of ' +
         'them instead of beside the others of its trade. The category string is carried exactly as the database ' +
-        'writes it and no row was relabelled to make it fit; widening the app\'s band list is Austin\'s call.');
+        'writes it and no row was relabeled to make it fit; widening the app\'s band list is Austin\'s call.');
       unknownBandLines.push(key + ' [' + c + '] ' + r.item_id);
     }
 
@@ -4821,7 +4848,7 @@ function assemble(docs, stamp, rooms) {
   return {
     meta: {
       generator: 'platform/tools/build_floor2.mjs',
-      floor: 2,
+      floor: Number(FLOOR),
       project: 'H2SEP - Home2 Suites by Hilton, Eagle Pass TX (Triun job 24030)',
       purpose: 'FLOOR ' + FLOOR + ' GUEST ROOMS AND COMMON AREAS, STAGED FOR AUSTIN\'S APPROVAL. Not live, not deployed. Every '
         + 'floor-' + FLOOR + ' key in data/project.sqlite rooms, FF&E and MEP, plus the floor-' + FLOOR + ' spaces (--spaces path). '

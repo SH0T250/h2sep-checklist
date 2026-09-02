@@ -166,7 +166,7 @@ check('GR-304 on the 17 King Studios, GR-315 on 202, GR-316 on 217', () => {
 });
 check('no room carries two working-wall tags live', () =>
   Object.entries(docs).filter(([id]) => isRoom(id)).filter(([, d]) => live_(d).filter(([, v]) => /^GR-3(04|05|08|09|15|16)$/.test(v.code || '')).length !== 1).map(([id]) => `${id}: not exactly one working wall`));
-check('the corrected line cites its ruling, the 2nd Floor tab, and the open handedness, at MEDIUM, and keeps B4.5', () =>
+check('the corrected line cites its ruling, the 2nd Floor tab, and the open handedness, FLAGGED where B4.5 names it, and keeps B4.5', () =>
   [...GR305_ROOMS, '238'].flatMap((id) => {
     const [, v] = live_(docs[id]).find(([, x]) => x.code === (id === '238' ? 'GR-309' : 'GR-305')); const o = [];
     const ruling = PLAIN_QQ.includes(id) ? 'D22' : 'D33';
@@ -176,7 +176,7 @@ check('the corrected line cites its ruling, the 2nd Floor tab, and the open hand
     if (!/2nd Floor/.test(String(v.instanceNote))) o.push(`${id}: note does not cite the 2nd Floor tab`);
     if (!/hand/i.test(String(v.instanceNote))) o.push(`${id}: note does not raise handedness`);
     if (/1st Floor tab lists|six units against six/.test(String(v.instanceNote))) o.push(`${id}: note carries floor-1 figures`);
-    if (v.reliability !== 'MEDIUM') o.push(`${id}: reliability ${v.reliability}`);
+    { const want = /B4\.5/.test(String(v.instanceNote)) ? 'FLAGGED' : 'MEDIUM'; if (v.reliability !== want) o.push(`${id}: reliability ${v.reliability}, want ${want}`); }
     return o;
   }));
 check('no build-authored note from an earlier run survives a rebuild (only crew notes travel)', () =>
@@ -202,7 +202,12 @@ check('the four mock-up rooms (D30) re-build to the same shape and text, plus th
       if (k === 'gr308_a' && ['230', '238'].includes(id)) { if (b) out.push(`${id}/gr308_a: still present after D33`); continue; }
       if (!b) { if (/FIELD-AUTHORED|THIS LINE EXISTS BECAUSE THE CREW/.test(String(v.instanceNote))) continue; out.push(`${id}/${k}: in the mock-up, missing from the build`); continue; }
       if (shape(v) !== shape(b)) out.push(`${id}/${k}: shape differs`);
-      if (String(v.instanceNote) !== String(b.instanceNote) && !/THIS LINE EXISTS BECAUSE/.test(String(v.instanceNote))) out.push(`${id}/${k}: note text differs`);
+      /* The mock-ups (D30) were written with em-dash joins in tool prose; the tool now
+       * writes hyphens (HANDOVER rule 7). Compare with that one difference normalised. */
+      const norm = (t) => String(t).replace(/ — /g, ' - ').replace(/’/g, "'").replace(/Confirm both positions/g, 'Confirm all three positions')
+        .replace(/room 217's WC-02 row/g, 'a WC-02 row on an accessible key').replace(/relabelled/g, 'relabeled')
+        .replace(/carry_ref_state\.mjs REBUILDS/g, 'carry_floor2.mjs --floor=2 REBUILDS');
+      if (norm(v.instanceNote) !== norm(b.instanceNote) && !/THIS LINE EXISTS BECAUSE/.test(String(v.instanceNote))) out.push(`${id}/${k}: note text differs`);
     }
     for (const k of Object.keys(docs[id].items)) {
       if (!ref.docs[id].items[k] && !((id === '230' && k === 'gr305_a') || (id === '238' && k === 'gr309_a'))) out.push(`${id}/${k}: in the build, not in the mock-up`);
