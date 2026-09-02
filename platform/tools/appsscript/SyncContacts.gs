@@ -31,7 +31,6 @@ var HEADERS = {                       // sheet header text -> record field
 function onOpen() {
   SpreadsheetApp.getUi().createMenu('H2SEP App')
     .addItem('Sync contacts to the app now', 'syncContacts')
-    .addItem('Sync and let the sheet win', 'syncContactsSheetWins')
     .addSeparator()
     .addItem('Turn on hourly sync', 'installHourlyTrigger')
     .addItem('Turn off hourly sync', 'removeTriggers')
@@ -137,20 +136,7 @@ function readSheet_() {
   return out;
 }
 
-function syncContacts() { return syncContacts_(false); }
-
-/**
- * Same sync, but the sheet overwrites contacts that were edited in the app.
- *
- * Needed because a record whose src is not 'sheet' always differs, and an app
- * edit always makes updatedAt newer than syncedAt — so the ordinary sync
- * reports it and skips it, every hour, with no way for the sheet to ever take
- * ownership back. That is a deadlock, not a disagreement. Run this once to
- * settle it in the sheet's favour.
- */
-function syncContactsSheetWins() { return syncContacts_(true); }
-
-function syncContacts_(force) {
+function syncContacts() {
   var now = new Date().toISOString();
   var rows = readSheet_();
   var token = idToken_();
@@ -182,7 +168,7 @@ function syncContacts_(force) {
     if (!diffs.length) continue;
 
     var since = have.syncedAt || have.createdAt || '';
-    if (!force && have.updatedAt && have.updatedAt > since) {   // edited in the app since the last sync
+    if (have.updatedAt && have.updatedAt > since) {        // edited in the app since the last sync
       conflicts.push((want.org || '') + (want.name ? ' / ' + want.name : '') + ': ' + diffs.join(', '));
       continue;
     }
@@ -210,30 +196,22 @@ function syncContacts_(force) {
     msg = 'Already up to date. ' + Object.keys(rows).length + ' contacts.';
   } else {
     patch.updatedAt = now;
-    // Firestore takes the update mask as query parameters and Apps Script caps a
-    // fetch URL at about 2 KB. An ordinary sync changes a handful of fields and
-    // fits with room to spare; restoring the whole directory after a wipe needs
-    // roughly 600 field paths, which overran the cap and failed with
-    // "Limit Exceeded: URLFetch URL Length" — breaking the recovery path at the
-    // one moment it mattered. So the patch goes out in URL-sized batches.
-    //
-    // Batches are not atomic with each other. That is the right trade here: a
-    // half-applied restore is repaired by running the sync again (it only ever
-    // writes what still differs), whereas no write at all leaves the app empty.
-    var paths = [];
-    for (var path in patch) paths.push(path);
-    var batches = [], batch = [], qsLen = 0;
-    for (var ei = 0; ei < paths.length; ei++) {
-      var segLen = ('updateMask.fieldPaths=' + encodeURIComponent(maskPath_(paths[ei])) + '&').length;
-      if (batch.length && qsLen + segLen > 1600) { batches.push(batch); batch = []; qsLen = 0; }
-      batch.push(paths[ei]);
-      qsLen += segLen;
+    var body = {}, paths = [];
+    for (var path in patch) {
+      paths.push(path.split('.').map(function (seg) {
+        return /^[A-Za-z_][A-Za-z0-9_]*$/.test(seg) ? seg : '`' + seg.replace(/`/g, '\\`') + '`';
+      }).join('.'));
+      var parts = path.split('.'), t = body;
+      for (var pi = 0; pi < parts.length - 1; pi++) { if (!t[parts[pi]]) t[parts[pi]] = {}; t = t[parts[pi]]; }
+      t[parts[parts.length - 1]] = patch[path];
     }
-    if (batch.length) batches.push(batch);
-    for (var bi = 0; bi < batches.length; bi++) writeBatch_(batches[bi], patch, H);
-    msg = 'Synced. ' + added + ' added, ' + changed + ' updated, ' + archived + ' archived.'
-        + (force ? ' Sheet forced over app edits.' : '')
-        + (batches.length > 1 ? ' (' + batches.length + ' batches)' : '');
+    var qs = paths.map(function (m) { return 'updateMask.fieldPaths=' + encodeURIComponent(m); }).join('&');
+    var res = UrlFetchApp.fetch(BASE + '/' + COL + '/' + DOC + '?' + qs, {
+      method: 'patch', contentType: 'application/json', headers: H,
+      payload: JSON.stringify({ fields: enc_(body).mapValue.fields }), muteHttpExceptions: true
+    });
+    if (res.getResponseCode() !== 200) throw new Error('write failed: ' + res.getContentText().slice(0, 300));
+    msg = 'Synced. ' + added + ' added, ' + changed + ' updated, ' + archived + ' archived.';
   }
   if (conflicts.length) {
     msg += ' ' + conflicts.length + ' left alone because they were edited in the app: ' + conflicts.join(' | ');
@@ -241,29 +219,4 @@ function syncContacts_(force) {
   Logger.log(msg);
   try { SpreadsheetApp.getActive().toast(msg, 'H2SEP app sync', 12); } catch (e) { /* time trigger has no UI */ }
   return msg;
-}
-
-/** One update-mask field path, backtick-quoting any segment that is not a plain
- *  identifier (contact ids are, but the sheet can grow odd keys). */
-function maskPath_(path) {
-  return path.split('.').map(function (seg) {
-    return /^[A-Za-z_][A-Za-z0-9_]*$/.test(seg) ? seg : '`' + seg.replace(/`/g, '\\`') + '`';
-  }).join('.');
-}
-
-/** PATCH one batch of field paths, sending only those fields in the body. */
-function writeBatch_(paths, patch, H) {
-  var body = {}, qs = [];
-  for (var i = 0; i < paths.length; i++) {
-    var path = paths[i];
-    qs.push('updateMask.fieldPaths=' + encodeURIComponent(maskPath_(path)));
-    var parts = path.split('.'), t = body;
-    for (var pi = 0; pi < parts.length - 1; pi++) { if (!t[parts[pi]]) t[parts[pi]] = {}; t = t[parts[pi]]; }
-    t[parts[parts.length - 1]] = patch[path];
-  }
-  var res = UrlFetchApp.fetch(BASE + '/' + COL + '/' + DOC + '?' + qs.join('&'), {
-    method: 'patch', contentType: 'application/json', headers: H,
-    payload: JSON.stringify({ fields: enc_(body).mapValue.fields }), muteHttpExceptions: true
-  });
-  if (res.getResponseCode() !== 200) throw new Error('write failed: ' + res.getContentText().slice(0, 300));
 }

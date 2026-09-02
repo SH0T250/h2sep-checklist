@@ -241,7 +241,26 @@ const CATEGORY_INDEX = new Map(CATEGORY_ORDER.map((c, i) => [c, i]));
  *           one unit photographed installed on a guestroom frame
  * These are owner-directed CHECK items, so they exist by ruling rather than by
  * a sheet takeoff; the note on each line says exactly that. */
+/* D29 (2026-08-24): "make sure to add Bed Skirts to the ADA rooms." The King
+ * accessible keys already carry GR-603.1 from the drawings; the QQ Acc. rooms
+ * (238, 338) have two GR-602.ADA open accessible bases and NO skirt row - the
+ * standard queens use a GR-600.1 Box Spring Cover an open base cannot take, and
+ * no queen skirt tag exists in the document set. Owner-ruled line, qty 2
+ * matching the room's own two accessible base rows. Floor 1 has no QQ Acc.
+ * room, so this entry is a documented no-op here and fires on floors 2-4. */
 const RULED_LINE_ADDITIONS = [
+  {
+    ruling: 'D29', doc: 'ffe', key: 'bsq_a', category: 'FF&E - Bedding', sort: 16060,
+    code: 'BS-Q', qty: 2,
+    label: 'Queen Bed Skirt @ ACCESSIBLE bed base',
+    src: 'D29 (AJ 2026-08-24); rooms own GR-602.ADA rows',
+    note: 'Added by Austin ruling D29: bed skirts on the ADA rooms. This room has two GR-602.ADA ' +
+      'ACCESSIBLE open bed bases and the drawing set tags no queen skirt (the standard queen rooms ' +
+      'use a GR-600.1 Box Spring Cover an open base cannot take). Qty 2 matches the room\'s own two ' +
+      'accessible base rows. No document tag exists for this item - confirm the size with the FF&E ' +
+      'supplier before ordering.',
+    applies: (room) => String(room.accessible) === '1' && room.room_type === 'QQ Acc.',
+  },
   {
     ruling: 'D27', doc: 'mep', key: 'plmb_hotcold_a', category: 'Plumbing', sort: 3018,
     code: 'HW/CW', qty: 1,
@@ -272,10 +291,11 @@ const RULED_LINE_ADDITIONS = [
 ];
 
 /* Apply the ruled additions to a freshly built doc. Idempotent by key. */
-function addRuledLines(roomNo, doc, kind, stamp) {
+function addRuledLines(roomNo, doc, kind, stamp, room) {
   const added = [];
   for (const r of RULED_LINE_ADDITIONS) {
     if (r.doc !== kind) continue;
+    if (r.applies && !r.applies(room || {})) continue;
     if (doc.items[r.key]) continue;              // already there (field state may ride on it)
     doc.items[r.key] = {
       code: r.code, label: r.label, category: r.category, qty: r.qty, sort: r.sort,
@@ -3471,7 +3491,7 @@ function main(argv) {
      * notes on it - carried in from the live app by carry_field_state.mjs -
      * that state is re-applied to the freshly built lines. Without this, every
      * regeneration silently reset the floor to zero. */
-    report.ruledAdded = [...addRuledLines(roomNo, ffe, 'ffe', stamp), ...addRuledLines(roomNo, mep, 'mep', stamp)];
+    report.ruledAdded = [...addRuledLines(roomNo, ffe, 'ffe', stamp, room), ...addRuledLines(roomNo, mep, 'mep', stamp, room)];
     report.statePreserved = preserveFieldState(docs, roomNo, ffe, mep);
     docs[roomNo] = ffe;
     docs[roomNo + '-MEP'] = mep;

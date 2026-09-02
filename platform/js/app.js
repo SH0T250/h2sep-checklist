@@ -10,10 +10,12 @@ import { bimModule } from './modules/bim/module.js';
 import { directoryModule } from './modules/directory/module.js';
 import { firebaseConfig } from './config.js';
 
-// Rooms with their own CORRECT geometry in the viewer (D7). The whole QQ family
-// is drawn from A555; the King family keeps the honest hard-stop until its own
-// geometry ships. king-studio.html exists but is a photo exhibit, not the tagged viewer.
-const MODEL_ROOMS = ['101', '103', '105', '107', '109', '111', '113', '115'];
+// Rooms with their own CORRECT geometry in the viewer (D7): every floor-1 key.
+// The QQ family is drawn from A555; the King family from A550 (116 from view
+// 01.1, 118 from A552), verified room by room on 2026-09-02 (D41). Floors 2 to
+// 4 have no models and are not listed, per Austin. king-studio.html exists but
+// is a materials exhibit, not the tagged viewer.
+const MODEL_ROOMS = ['101', '103', '104', '105', '106', '107', '108', '109', '110', '111', '112', '113', '114', '115', '116', '118'];
 
 const store = await loadStore();
 
