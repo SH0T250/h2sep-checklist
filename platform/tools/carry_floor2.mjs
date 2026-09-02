@@ -541,7 +541,7 @@ for (const m of noteMisses) console.log(`      MISSING OR ALTERED: ${m}`);
 const DOC_KEYS = new Set(['createdAt', 'deleted', 'floor', 'items', 'notes', 'number', 'schemaV', 'type', 'typeLabel', 'updatedAt']);
 const ITEM_KEYS = new Set(['attachments', 'category', 'checked', 'checkedAt', 'checkedAtLocal', 'checkedByCo', 'code', 'deleted',
   'derived', 'id', 'initials', 'instanceNote', 'issue', 'issueResolved', 'label', 'qty', 'reliability', 'sort',
-  'src', 'trade', 'verifyAtPunch', 'where']);
+  'src', 'trade', 'verifyAtPunch', 'where', 'optional']);
 const NOTE_KEYS = new Set(['by', 'createdAt', 'flag', 'redactedAuthor', 'resolved', 'text']);
 const problems = [];
 for (const [id, d] of Object.entries(seed.docs)) {

@@ -130,6 +130,7 @@
 import { createHash } from 'node:crypto';
 import { DatabaseSync } from 'node:sqlite';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { simplifyMepDoc } from './mep_punch_template.mjs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -323,6 +324,70 @@ const RULED_LINE_ADDITIONS = [
       '10-336, DOOR, finish 630, qty 1. One unit photographed installed on a guestroom frame ' +
       '2026-08-21. Check the lock is installed and operates: latches, locks and releases.',
   },
+  /* D52 (2026-09-02): "Add line item under door closer - 'Rework closer' to
+   * all doors - Add Key Card - installed & Key Card - Working." The rework
+   * line is checked only when the rework was needed (optional: true, so it
+   * does not count toward the room total until it is checked); the key card
+   * lines sit beside the closer and the lock. Connecting rooms (rooms.connecting
+   * = '1', the GR-3 pair on hardware set 3) get the closer and rework lines
+   * for that door too, because the ruling says ALL doors. */
+  {
+    ruling: 'D52', doc: 'ffe', key: 'dh_rework_a', category: 'Door Hardware', sort: 21005,
+    code: 'DH-1R', qty: 1, optional: true,
+    label: 'Rework closer (if needed)',
+    src: 'D52 (AJ 2026-09-02)',
+    note: 'Added by Austin ruling D52. Check this line only when the closer needed rework: adjust it ' +
+      'so the door self-closes and latches from any open position. It does not count toward the ' +
+      'room total until it is checked.',
+  },
+  {
+    ruling: 'D52', doc: 'ffe', key: 'dh_keycard_inst_a', category: 'Door Hardware', sort: 21020,
+    code: 'DH-3', qty: 1,
+    label: 'Key card installed',
+    src: 'D52 (AJ 2026-09-02); A600 hardware set 1 (Advance Card Lock)',
+    note: 'Added by Austin ruling D52. The electronic card lock is mounted on the entry door with its ' +
+      'reader and bezel flush and its supply connected.',
+  },
+  {
+    ruling: 'D52', doc: 'ffe', key: 'dh_keycard_work_a', category: 'Door Hardware', sort: 21030,
+    code: 'DH-4', qty: 1,
+    label: 'Key card working',
+    src: 'D52 (AJ 2026-09-02)',
+    note: 'Added by Austin ruling D52. Present a working card: the lock reads, unlatches and relatches; ' +
+      'the deadbolt throws; the privacy latch holds.',
+  },
+  {
+    ruling: 'D52', doc: 'ffe', key: 'dh_conn_closer_a', category: 'Door Hardware', sort: 21040,
+    code: 'DH-5', qty: 1,
+    label: 'Connecting door closer installed',
+    src: 'D52 (AJ 2026-09-02); A600 door GR-3, hardware set 3',
+    note: 'Added by Austin ruling D52 (rework closer on ALL doors). The GR-3 connecting door is a 45 minute ' +
+      'rated leaf on hardware set 3 per A600. Check the closer is installed and the leaf self-closes and ' +
+      'latches. The set 3 contents were not readable in this pass; if set 3 carries no closer, mark N/A.',
+    scope: 'the connecting rooms (rooms.connecting = 1)',
+    applies: (room) => String((room || {}).connecting) === '1',
+  },
+  {
+    ruling: 'D52', doc: 'ffe', key: 'dh_conn_rework_a', category: 'Door Hardware', sort: 21045,
+    code: 'DH-5R', qty: 1, optional: true,
+    label: 'Rework connecting door closer (if needed)',
+    src: 'D52 (AJ 2026-09-02)',
+    note: 'Added by Austin ruling D52. Check this line only when the connecting door closer needed rework.',
+    scope: 'the connecting rooms (rooms.connecting = 1)',
+    applies: (room) => String((room || {}).connecting) === '1',
+  },
+  /* D52 (2026-09-02) on the common areas: "Rework closer ... to all doors". The
+   * rework line rides under D48's closer on every common-area checklist, checked
+   * only when the rework was needed (optional: true, not counted until checked). */
+  {
+    ruling: 'D52', doc: 'space', key: 'dh_rework_a', category: 'Door Hardware', sort: 21005,
+    code: 'DH-1R', qty: 1, optional: true,
+    label: 'Rework closer (if needed)',
+    src: 'D52 (AJ 2026-09-02) extends the guest-room rework line to every common area',
+    note: 'Added by Austin ruling D52 (rework closer on ALL doors). Check this line only when the closer ' +
+      'needed rework: adjust it so the door self-closes and latches from any open position. It does not ' +
+      'count toward the space total until it is checked. A space with no door of its own: leave it.',
+  },
 ];
 
 /* Apply the ruled additions to a freshly built doc. Idempotent by key. */
@@ -337,6 +402,7 @@ function addRuledLines(roomNo, doc, kind, stamp, room) {
       src: r.src, reliability: 'HIGH', instanceNote: r.note, trade: '', derived: 0,
       deleted: false, checked: false, initials: '', checkedAt: null, checkedAtLocal: null,
       issue: '', issueResolved: false,
+      ...(r.optional ? { optional: true } : {}),
     };
     added.push(r.key + ' (' + r.ruling + ')');
   }
@@ -3521,6 +3587,10 @@ function main(argv) {
   }
 
   const reports = [];
+  /* D52: the MEP doc as built BEFORE simplifyMepDoc, kept in the file's meta
+   * (never deployed) so build_ref_rooms.mjs can still read the donor's
+   * pre-D52 lines. Earlier waves' entries are carried forward. */
+  const preD52Mep = { ...((prevMetaRm && prevMetaRm.d52PreSimplifiedMep) || {}) };
   for (const roomNo of rooms) {
     const report = { room: roomNo, unresolved: [] };
     const ffe = buildFFEDoc(db, roomNo, slice, typeRef, stamp, report);
@@ -3543,6 +3613,10 @@ function main(argv) {
      * that state is re-applied to the freshly built lines. Without this, every
      * regeneration silently reset the floor to zero. */
     report.ruledAdded = [...addRuledLines(roomNo, ffe, 'ffe', stamp, room), ...addRuledLines(roomNo, mep, 'mep', stamp, room)];
+    /* D52: the simplified punch. Runs last so every ruled MEP line (D27) is
+     * folded into the template with its state, never dropped. */
+    preD52Mep[mep.number] = clone(mep.items);
+    report.mepSimplified = simplifyMepDoc(mep, room, stamp);
     report.statePreserved = preserveFieldState(docs, roomNo, ffe, mep);
     docs[roomNo] = ffe;
     docs[roomNo + '-MEP'] = mep;
@@ -3580,6 +3654,8 @@ function main(argv) {
       spaceDocs: Object.keys(docs).filter((k) => isSpaceDocId(k)).sort(cmpDocId),
       fieldState: 'generated docs are born clean: checked false, initials empty, checkedAt null, issue empty',
       redaction: 'no personal contact data; approved docs carry initials only, as received',
+      mepPunch: 'ruling D52 (2026-09-02): live MEP lines are the simplified template in platform/tools/mep_punch_template.mjs; the pre-D52 lines are archived in each doc and kept whole under d52PreSimplifiedMep for the floors 2 to 4 builder',
+      d52PreSimplifiedMep: Object.fromEntries(Object.keys(preD52Mep).sort(cmpDocId).map((k) => [k, preD52Mep[k]])),
     },
     docs: Object.fromEntries(Object.keys(docs).sort(cmpDocId).map((k) => [k, docs[k]])),
   };
