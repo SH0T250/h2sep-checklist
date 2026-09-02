@@ -16,6 +16,61 @@ function viewerFrame(no) {
   return f;
 }
 
+// Floor 1 assembled, platform/floor3d.html: all 46 spaces in their measured A100
+// places, painted live from data/floor1-staged.json.
+//
+// Two ways it can run, and NEITHER of them is a blank frame:
+//   hosted     - the file is beside index.html, so a relative src works and the
+//                scene fetches its own status data.
+//   packaged   - the single-file artifact has no relative URLs to fetch, so the
+//                bundler must inline BOTH the page (window.__H2SEP_FLOOR_SRCDOC)
+//                and the checklist state the page would otherwise fetch
+//                (window.__H2SEP_FLOOR_DATA, which floor3d.html prefers over its
+//                own fetch). Until platform/tools/build-artifact.mjs inlines
+//                them, the bundle shows the hard stop below and says exactly
+//                what is missing. A silent empty iframe is the one outcome that
+//                is not allowed here.
+function floorFrame() {
+  const f = el(`<iframe title="Floor 1 assembled 3D model" name="h2sep-floor-1" loading="lazy"></iframe>`);
+  if (window.__H2SEP_FLOOR_SRCDOC) {
+    if (window.__H2SEP_FLOOR_DATA) {
+      // Hand the injected checklist state through to the framed page, which
+      // reads it in preference to fetching.
+      f.srcdoc = window.__H2SEP_FLOOR_SRCDOC.replace(
+        '<script>',
+        `<script>window.__H2SEP_FLOOR_DATA=${JSON.stringify(window.__H2SEP_FLOOR_DATA)};</script><script>`);
+    } else {
+      f.srcdoc = window.__H2SEP_FLOOR_SRCDOC;
+    }
+  } else if (window.__H2SEP_VIEWER_SRCDOC) {
+    return null;   // packaged, but the floor scene was not inlined - hard stop
+  } else {
+    f.src = 'floor3d.html';
+  }
+  return f;
+}
+
+function renderFloor(ctx) {
+  const root = el(`<div>
+    <div class="pagehead">
+      <div><h1 class="h1">Floor 1 &middot; assembled</h1>
+      <div class="sub">every space in its measured A100 place &middot; floor tint is checklist progress &middot; red pin is open issues &middot; tap a space to open its checklist</div></div>
+      <span class="spacer"></span>
+      <a class="btn" href="#/bim">${ic('cube')}Room models</a>
+    </div>
+    <div class="viewer-wrap"></div>
+  </div>`);
+  const wrap = root.querySelector('.viewer-wrap');
+  const frame = floorFrame();
+  if (!frame) {
+    wrap.replaceWith(el(`<section class="card"><div class="coming">${ic('cube')}<b>FLOOR 1 MODEL IS NOT IN THIS BUNDLE</b>
+      <span>This packaged copy did not inline floor3d.html or the checklist state it paints with, so there is nothing to show. Open the hosted platform for the assembled floor, or rebuild the bundle with the floor scene inlined. Showing an empty frame instead would be worse than saying so.</span></div></section>`));
+  } else {
+    wrap.append(frame);
+  }
+  return root;
+}
+
 function renderHub(ctx) {
   const { store, modelRooms } = ctx;
   const sliceRooms = store.guestRooms().map(r => r.number);
@@ -75,8 +130,12 @@ export function bimModule() {
   return {
     id: 'bim',
     name: '3D BIM',
-    nav: [{ path: '#/bim', label: '3D BIM', icon: 'cube', section: 'Model' }],
+    nav: [
+      { path: '#/floor', label: 'Floor 1', icon: 'cube', section: 'Model' },
+      { path: '#/bim', label: '3D BIM', icon: 'cube', section: 'Model' },
+    ],
     routes: [
+      { match: /^#\/floor$/, render: renderFloor },
       { match: /^#\/bim$/, render: renderHub },
       { match: /^#\/bim\/(?<no>[^?]+)/, render: renderRoomModel },
     ],
