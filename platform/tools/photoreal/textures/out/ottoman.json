@@ -1,0 +1,12 @@
+{
+ "repeat_m": [
+  0.30479999999999996,
+  0.26396454307349687
+ ],
+ "maps": {
+  "color": "ottoman_color.png",
+  "roughness": "ottoman_rough.png"
+ },
+ "projection": "box",
+ "source": "textures/ottoman.py, photo-02 20260812_141158"
+}

@@ -115,14 +115,20 @@ STATIONS = {
     # 7.25 ft bath ceiling projects, so the ceiling lines were left out of
     # the solve and the shell was not changed.
     'bath-vanity': {'p': [5.37, 4.25, 24.43], 't': [2.474, 4.3, 21.675], 'f': 15.0},
-    # lounge, photo-02 (20260812_141158.jpg).  Fitted to the A550 shell in the
-    # photograph: the bath partition corner at the soffit and at the floor, the
-    # accent wall ceiling corner at the partition and the accent wall ceiling
-    # line.  The phone stood a step off the desk, 8.3 ft from the accent wall
-    # and 14.2 ft from the window wall, turned 29 degrees toward the corridor,
-    # lens about 3.6 ft up (held low, at the chest) and nearly level; the
-    # focal length wanted the 15 mm end of the range like every other view.
-    'lounge': {'p': [8.32, 3.64, 14.21], 't': [-0.40, 3.97, 19.09], 'roll': -2.0, 'f': 15.0},
+    # lounge, photo-02 (20260812_141158.jpg).  Fitted at 15 mm to the A550
+    # shell in the photograph (the accent wall ceiling corner at the bath
+    # partition and the accent wall ceiling line weighted highest, then the
+    # partition corner at the floor and at the soffit) with the sofa back and
+    # the floor lamp base as low weight checks; rms 58 px at 2000 px, the
+    # shell points do not all agree at this focal length.  The phone stood a
+    # step off the desk, 8.4 ft from the accent wall and 12.9 ft from the
+    # window wall, turned 31 degrees toward the corridor, lens 5.1 ft up,
+    # pitched 10 degrees down, rolled 1.3 degrees.  Round 1 overlay check on
+    # the preview: the accent wall corner, the print and the floor lamp
+    # coincided with the photograph but the partition corner sat 50 px (at
+    # 1000 px) left of the photograph's, so the aim was turned 1.5 degrees
+    # further toward the corridor (target z 17.99 to 18.21).
+    'lounge': {'p': [8.42, 5.13, 12.92], 't': [0.11, 3.39, 18.21], 'roll': -1.3, 'f': 15.0},
 }
 
 def _look_at(obj, target, roll_deg=0.0):

@@ -22,7 +22,7 @@
   },
   "views": {
     "entry":       { "photo": "20260812_141012.jpg", "iso": 320, "exposureTime": 0.0083337, "fnumber": 1.9, "ev100": 7.08, "exposureTrim": -0.85 },
-    "lounge":      { "photo": "20260812_141158.jpg", "iso": 320, "exposureTime": 0.0166674, "fnumber": 1.9, "ev100": 6.08 },
+    "lounge":      { "photo": "20260812_141158.jpg", "iso": 320, "exposureTime": 0.0166674, "fnumber": 1.9, "ev100": 6.08, "exposureTrim": -1.4 },
     "bed":         { "photo": "20260812_141100.jpg", "iso": 200, "exposureTime": 0.0083337, "fnumber": 1.9, "ev100": 7.76, "exposureTrim": -0.35 },
     "working":     { "photo": "20260812_141016.jpg", "iso": 160, "exposureTime": 0.0166674, "fnumber": 1.9, "ev100": 7.08, "exposureTrim": -0.2 },
     "kitchen":     { "photo": "20260812_141218.jpg", "iso": 160, "exposureTime": 0.0166674, "fnumber": 1.9, "ev100": 7.08, "exposureTrim": 0.2 },
