@@ -46,7 +46,7 @@ BLEND = os.path.join(EXPORT, 'king-studio.blend')
 
 QUALITY = {
     'preview': dict(w=400, h=300, samples=32, threshold=0.08, denoise=True),
-    'judge': dict(w=1200, h=900, samples=160, threshold=0.02, denoise=True),
+    'judge': dict(w=1000, h=750, samples=128, threshold=0.02, denoise=True),
 }
 
 
