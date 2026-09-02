@@ -827,6 +827,25 @@
           "src": "A550 keynote 11 'range-top style microwave affixed to wall'; S3 cutsheet",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -1764,6 +1783,25 @@
           "src": "A550 keynote 11 'range-top style microwave affixed to wall'; S3 cutsheet",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -2667,6 +2705,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550 keynote 11 'range-top style microwave affixed to wall'; S3 cutsheet",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -3579,6 +3636,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -4468,6 +4544,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550 keynote 11 'range-top style microwave affixed to wall'; S3 cutsheet",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -5380,6 +5475,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -6262,6 +6376,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550 keynote 11 'range-top style microwave affixed to wall'; S3 cutsheet",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -7174,6 +7307,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -8056,6 +8208,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550 keynote 11 'range-top style microwave affixed to wall'; S3 cutsheet",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -8982,6 +9153,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -9864,6 +10054,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550 keynote 11 'range-top style microwave affixed to wall'; S3 cutsheet",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -10776,6 +10985,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -11658,6 +11886,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550 keynote 11 'range-top style microwave affixed to wall'; S3 cutsheet",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -12612,6 +12859,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -13494,6 +13760,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550 keynote 11 'range-top style microwave affixed to wall'; S3 cutsheet",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -14404,6 +14689,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -15361,6 +15665,25 @@
           "src": "A532.1 view 02; A532.1:30",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -16295,6 +16618,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -17235,6 +17577,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -18152,6 +18513,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -19053,6 +19433,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -19986,6 +20385,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -20887,6 +21305,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -21792,6 +22229,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -22681,6 +23137,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550 keynote 11 'range-top style microwave affixed to wall'; S3 cutsheet",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -23607,6 +24082,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -24496,6 +24990,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550 keynote 11 'range-top style microwave affixed to wall'; S3 cutsheet",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -25422,6 +25935,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -26311,6 +26843,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550 keynote 11 'range-top style microwave affixed to wall'; S3 cutsheet",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -27230,6 +27781,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -28135,6 +28705,25 @@
           "src": "A550 keynote 11 'range-top style microwave affixed to wall'; S3 cutsheet",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -29024,6 +29613,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550 keynote 11 'range-top style microwave affixed to wall'; S3 cutsheet",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -29941,6 +30549,25 @@
           "reliability": "FLAGGED",
           "sort": 13100,
           "src": "A532.1",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing. SOURCE. This line is a RULED LINE ADDITION: Austin ruling D46 put it on every guest room. Its words, its tag, its count and its citation are the ruling's, and they are carried in the generator (RULED_LINE_ADDITIONS) byte-identically to the version build_floor1.mjs puts on the LIVE floor-1 rooms, which assertRecipeConstants() re-proves against that file on every run, so no rebuild can drop it and the two floors cannot drift apart. Its citation is still judged against data/project.sqlite's sheets table for this room's floor, and the line says what that pass did.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -48627,7 +49254,7 @@
     },
     "donorRule": "A DONOR MAY ENRICH, NEVER LAUNDER. The target room's own data/project.sqlite reliability and its own note govern every line, on BOTH documents. On the MEP document a condensed line is never read better than the WORST of the rows of THIS room that feed it, and every one of those rows that is not HIGH, or whose own note states a document conflict, is quoted on the line verbatim. On the FF&E document a donor raises a reliability only where its text carries a RULING that closes the flag for the PRODUCT (a model number, not a room), and the line says so in words; a folded line names EVERY row at its OWN reading, never the fold's worst against the whole list. The MARK is the target room's too: on the bathing lines and on the sprinkler line, where this room has rows of the donor's mark family the mark is read off them and where it has none the mark field is left EMPTY, and the donor's mark is quoted as not carried either way. Donor text that is a reading of the donor room's own drawing is dropped, quoted on the line as not carried - including a tag ASSERTION inside a citation, which is corrected to this room's own row. A NOTE NEVER RESTATES A VALUE ANOTHER FIELD CARRIES: it says why a reading is what it is, and the reliability and qty fields say what it is, so the two cannot disagree. Every line on both documents carries a SOURCE sentence naming which document each part of it came from; assertDocRules() refuses to write a line without one.",
     "fieldState": "CARRIED from the live crew app by platform/tools/carry_floor2.mjs (READ ONLY on projects/h2sep/rooms) under ruling D24's standing directive. 1246 line(s) and 28 note(s) of real field work. checkedByName and checkedByUid are dropped; note authors are reduced to initials. Reconciliation is exact: crew 579 check(s) = 579 on live lines + 0 with no line; crew 696 open issue(s) = 696 on live lines + 0 with no line. 2 line(s) the category gate left with no home were REBUILT from data/project.sqlite so the crew's work lands on a line rather than being named and lost (201/gr205_b GR-205 [FF&E - Lighting] HIGH, sort 22000, FIELD-AUTHORED in the crew app and carried verbatim; 202/gr905_a GR-905 [FF&E - Misc] FLAGGED, sort 22000); each carries its own row text and says on its face why it exists.",
-    "fieldStateCarriedAt": "2026-09-02T13:16:07.262Z",
+    "fieldStateCarriedAt": "2026-09-02T17:01:57.080Z",
     "floor": 2,
     "generator": "platform/tools/build_floor2.mjs",
     "mepSource": "the D10 condensed punch of the nearest LIVE type, re-cited onto this room's own sheet; rows no condensed line claims become their own lines and are never lost. Non-architectural citations are re-pointed too: the sprinkler line's FP-series citation is a fact about the DONOR's floor and the two rooms the count was read on, so it is removed and replaced with PH-GU-001's own sheet list plus this room's floor. Where the room shares its donor's sheet, the citation stands verbatim except for the \".1\" CONNECTING plan variant, which is dropped wherever rooms.connecting = 0.",

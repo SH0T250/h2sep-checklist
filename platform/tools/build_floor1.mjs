@@ -241,6 +241,9 @@ const CATEGORY_INDEX = new Map(CATEGORY_ORDER.map((c, i) => [c, i]));
  *           one unit photographed installed on a guestroom frame
  * These are owner-directed CHECK items, so they exist by ruling rather than by
  * a sheet takeoff; the note on each line says exactly that. */
+/* D46 (2026-09-02): "add TV mount to each room. Doesn't matter about the tag, just
+ * put it underneath TV." One Appliance line per guest room, sort 14025, directly
+ * under the Television (903, sort 14020). No tag asserted. */
 /* D29 (2026-08-24): "make sure to add Bed Skirts to the ADA rooms." The King
  * accessible keys already carry GR-603.1 from the drawings; the QQ Acc. rooms
  * (238, 338) have two GR-602.ADA open accessible bases and NO skirt row - the
@@ -269,6 +272,16 @@ const RULED_LINE_ADDITIONS = [
     note: 'Added by Austin ruling D27. Run hot and cold at the lavatory, the shower and the ' +
       'kitchenette sink: both temperatures arrive, hot on the LEFT, and hot gets hot within a ' +
       'reasonable wait. Any fixture that fails gets its own issue on its own line.',
+  },
+  {
+    ruling: 'D46', doc: 'ffe', key: 'tvmount_a', category: 'Appliance', sort: 14025,
+    code: '', qty: 1,
+    label: 'TV mount installed',
+    src: 'D46 (AJ 2026-09-02); owner-directed check item',
+    note: 'Added by Austin ruling D46: "add TV mount to each room. Doesn\'t matter about the tag, ' +
+      'just put it underneath TV." Placed directly under the Television line. No document tag is ' +
+      'asserted for this item; it exists by the owner\'s instruction. Check the mount is installed ' +
+      'on the working wall where the TV goes, level, and secure to the backing.',
   },
   {
     ruling: 'D28', doc: 'ffe', key: 'dh_closer_a', category: 'Door Hardware', sort: 21000,

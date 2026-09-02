@@ -57,7 +57,8 @@ function renderShell(hash, renderScreen) {
   const entries = registry.navEntries();
   const main = entries.filter(n => !n.section);
   const modelSect = entries.filter(n => n.section === 'Model');
-  const mobilePicks = ['#/', '#/rooms', '#/contacts', '#/bim', '#/activity'];
+  // Bulk mark rides on the phone too (Austin, 2026-09-02: "Add bulk edit to the mobile app").
+  const mobilePicks = ['#/', '#/rooms', '#/bulk', '#/contacts', '#/bim', '#/activity'];
 
   app.innerHTML = '';
   app.append(el(`<div class="shell">

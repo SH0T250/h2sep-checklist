@@ -808,6 +808,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -1669,6 +1688,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -2546,6 +2584,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -3404,6 +3461,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -4266,6 +4342,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -5105,6 +5200,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -5967,6 +6081,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -6806,6 +6939,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -7676,6 +7828,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -8515,6 +8686,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -9377,6 +9567,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -10216,6 +10425,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -11078,6 +11306,25 @@
           "src": "A550",
           "trade": ""
         },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
+          "trade": ""
+        },
         "u_ce20ab6281": {
           "attachments": [
             {
@@ -11925,6 +12172,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -12800,6 +13066,25 @@
           "reliability": "HIGH",
           "sort": 14050,
           "src": "A550",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {
@@ -13705,6 +13990,25 @@
           "reliability": "MEDIUM",
           "sort": 13090,
           "src": "A532.1",
+          "trade": ""
+        },
+        "tvmount_a": {
+          "category": "Appliance",
+          "checked": false,
+          "checkedAt": null,
+          "checkedAtLocal": null,
+          "code": "",
+          "deleted": false,
+          "derived": 0,
+          "initials": "",
+          "instanceNote": "Added by Austin ruling D46: \"add TV mount to each room. Doesn't matter about the tag, just put it underneath TV.\" Placed directly under the Television line. No document tag is asserted for this item; it exists by the owner's instruction. Check the mount is installed on the working wall where the TV goes, level, and secure to the backing.",
+          "issue": "",
+          "issueResolved": false,
+          "label": "TV mount installed",
+          "qty": 1,
+          "reliability": "HIGH",
+          "sort": 14025,
+          "src": "D46 (AJ 2026-09-02); owner-directed check item",
           "trade": ""
         },
         "u_ce20ab6281": {

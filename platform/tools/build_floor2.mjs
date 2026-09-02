@@ -932,6 +932,16 @@ const RULED_LINE_ADDITIONS = [
       'reasonable wait. Any fixture that fails gets its own issue on its own line.',
   },
   {
+    ruling: 'D46', doc: 'ffe', key: 'tvmount_a', category: 'Appliance', sort: 14025,
+    code: '', qty: 1,
+    label: 'TV mount installed',
+    src: 'D46 (AJ 2026-09-02); owner-directed check item',
+    note: 'Added by Austin ruling D46: "add TV mount to each room. Doesn\'t matter about the tag, ' +
+      'just put it underneath TV." Placed directly under the Television line. No document tag is ' +
+      'asserted for this item; it exists by the owner\'s instruction. Check the mount is installed ' +
+      'on the working wall where the TV goes, level, and secure to the backing.',
+  },
+  {
     ruling: 'D28', doc: 'ffe', key: 'dh_closer_a', category: 'Door Hardware', sort: 21000,
     code: 'DH-1', qty: 1,
     label: 'Door closer installed - Rixson R21013 Series 10',
