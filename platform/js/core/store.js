@@ -225,6 +225,7 @@ export class Store {
     NO_ISSUE: 'no issue to clear',
     SAME_ISSUE: 'already flagged with that text',
     NO_IDENTITY: 'set your initials first',
+    NO_TEXT: 'pick an issue or type one first',
     GONE: 'no longer in the checklist',
     CHANGED: 'changed since the bulk edit, kept',
   };
@@ -252,6 +253,7 @@ export class Store {
       const skip = (why, extra) => skipped.push({ ...base, why, ...(extra || {}) });
       if (!it || it.deleted) { skip(S.GONE); continue; }
       if (stamping && !u) { skip(S.NO_IDENTITY); continue; }
+      if (action === 'setIssue' && !text) { skip(S.NO_TEXT); continue; }
       const paper = !!it.checked && !it.initials;
       const mine = !!u && !!it.initials && it.initials === u.initials;
       const openIssue = !!(it.issue && !it.issueResolved);
