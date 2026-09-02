@@ -407,9 +407,13 @@ export function renderRoom(el, number) {
     // Duplicate-tag ordinal always shows so siblings never look like missing
     // rows; the db's instanceNote rides along with it when present.
     const ordinal = it.code && codeCount[it.code] > 1 ? `${codeSeen[it.code]} of ${codeCount[it.code]}` : '';
-    const inst = it.instanceNote && ordinal && !/\d+\s+of\s+\d+/.test(it.instanceNote)
-      ? `${it.instanceNote} · ${ordinal}`
-      : (it.instanceNote || ordinal);
+    // D56: the platform's verification notes are paragraphs of drawing
+    // evidence for the office. On a phone row only a few words earn a place;
+    // anything longer stays off the list so the crew can scroll.
+    const shortNote = it.instanceNote && String(it.instanceNote).length <= 80 ? String(it.instanceNote) : '';
+    const inst = shortNote && ordinal && !/\d+\s+of\s+\d+/.test(shortNote)
+      ? `${shortNote} · ${ordinal}`
+      : (shortNote || ordinal);
     const openIssue = it.issue && !it.issueResolved;
     const flagged = it.reliability === 'FLAGGED';
     const pendingDot = store.isRoomPending(room.number) && store.isItemRecentLocal(room.number, id);
@@ -433,7 +437,7 @@ export function renderRoom(el, number) {
             ${isMepRow && it.verifyAtPunch ? `<div class="punch-step"><span class="punch-do">DO</span> ${esc(it.verifyAtPunch)}</div>` : ''}
             ${isMepRow && inst ? `<div class="punch-note">${esc(inst)}</div>` : ''}
           </div>
-          ${!isMepRow && inst ? `<span class="inst${it.instanceNote ? ' inst-note' : ''}">${esc(inst)}</span>` : ''}
+          ${!isMepRow && inst ? `<span class="inst${shortNote ? ' inst-note' : ''}">${esc(inst)}</span>` : ''}
           <button class="flag-btn ${openIssue ? 'on' : ''}" data-flag="${esc(id)}" aria-label="Flag issue">⚑</button>
         </div>`;
   };
