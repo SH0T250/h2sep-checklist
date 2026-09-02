@@ -65,6 +65,23 @@ OVERRIDES = {
     # unshadowed light.  In a path tracer the ceiling is lit by bounce, and a
     # tan albedo darkens the whole room's second bounce.  SCALED white paint.
     'ceiling': {'base_color': (0.78, 0.76, 0.72)},
+    # [PHOTO 20260812_141218.jpg, photo-18] the entry leg walls are a neutral
+    # white, (223, 223, 214) sRGB beside the corridor door at the phone's
+    # balance, while the exhibit's #e9e5dc times its paint map is a warm off
+    # white of albedo (0.78, 0.75, 0.68) that rendered (131, 125, 112) in the
+    # same patch.  Brought to a flat white paint's (0.85, 0.84, 0.83); the
+    # extra bounce is what lights the leg's walls in the photograph.
+    'paintWhite': {'tint': (1.09, 1.12, 1.22)},
+    # [PHOTO 20260812_141218.jpg, photo-18] the corridor door leaf is a grey
+    # brown laminate, (100, 89, 83) sRGB in the same light as the (223, 223,
+    # 214) wall beside it, an albedo near (0.15, 0.12, 0.10); the exported map
+    # averages (0.24, 0.20, 0.16) and rendered (130, 114, 97).
+    'woodDoor': {'tint': (0.65, 0.65, 0.68)},
+    # [PHOTO 20260812_141209.jpg, photo-03] the kitchenette laminate is a grey
+    # driftwood, (94, 89, 85) sRGB on the upper box face in the same light as
+    # the (160, 157, 145) wall above the counter, so its albedo is about
+    # (0.27, 0.24, 0.22); the exported map averages (0.31, 0.26, 0.20).
+    'woodGrey': {'tint': (0.86, 0.92, 1.06)},
 }
 
 _IMAGE_CACHE = {}

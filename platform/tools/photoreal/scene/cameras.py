@@ -81,6 +81,16 @@ STATIONS = {
     # left out of the solve: the photograph puts the ceiling about half a
     # foot above the door head, more than the shell's soffit allows.
     'kitchen': {'p': [6.85, 5.67, 23.46], 't': [9.743, 4.251, 27.276], 'roll': -1.8, 'f': 15.0},
+    # kitchen, photo-18 (20260812_141218.jpg).  Fitted to the door leaf's four
+    # corners, the frame head, the lever height on the strike edge, the entry
+    # can and the working wall corner with a pinhole solve, rms 15 px at
+    # 1000 px.  The phone stood in the entry hall 0.9 ft off the bath
+    # partition and 5.5 ft short of the corridor wall, lens 5.7 ft up, turned
+    # 37 degrees toward the working wall, pitched 16.5 degrees down and rolled
+    # 1.8 degrees; 15 mm fits better than 13.  The entry ceiling corner was
+    # left out of the solve: the photograph puts the ceiling about half a
+    # foot above the door head, more than the shell's soffit allows.
+    'kitchen': {'p': [6.85, 5.67, 23.46], 't': [9.743, 4.251, 27.276], 'roll': -1.8, 'f': 15.0},
     # bed, photo-09 (20260812_141100.jpg).  Least squares against 20 photo
     # points (the accent wall's ceiling corner and ceiling line, the shade's
     # left edge top and bottom, the glass sill corner, the headboard and
