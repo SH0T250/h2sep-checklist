@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="theme-color" content="#0b0f13">
 <link rel="icon" href="./icons/favicon-48.png">
-<title>H2SEP — Room 101 · QQ Studio Connector — FF&amp;E Exhibit</title>
+<title>H2SEP - Room 101 · QQ Studio Connector - FF&amp;E Exhibit</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%;overflow:hidden;background:var(--bg,#0b0f13);color:var(--ink,#eef3f7);
@@ -225,7 +225,7 @@
 
   /* ================= IN-APP PASS =================
      The exhibit already has its own phone layout (bottom drawer, 44px
-     targets, card as a bottom sheet) — this adds only what it cannot know
+     targets, card as a bottom sheet) - this adds only what it cannot know
      about: that it is now a screen INSIDE the crew PWA, reached from a room
      and expected to lead back to one. */
   #backbar {
@@ -244,7 +244,7 @@
   #backbar .row { display: flex; gap: 8px; align-items: center; }
   @media (max-width: 900px) {
     #backbar { display: block; }
-    /* Drop the view chips below the back bar, and out from under the notch —
+    /* Drop the view chips below the back bar, and out from under the notch -
        the exhibit's own rule pins them to a bare top:10px. */
     #views { top: calc(env(safe-area-inset-top) + 58px); }
     #burger { top: calc(env(safe-area-inset-top) + 58px); }
@@ -252,7 +252,7 @@
     .lbl.t2 { display: none; }        /* secondary labels are noise on a phone */
   }
   /* Seven chips (LIGHT TAGS ISO TOP BEDS BATH KITCH) overflow a 412px screen
-     by a few pixels and wrap KITCH onto a lonely second row — tighten the
+     by a few pixels and wrap KITCH onto a lonely second row - tighten the
      tracking rather than let the control bar look broken. Touch height is
      untouched. */
   @media (max-width: 430px) {
@@ -267,7 +267,7 @@
   body.tags-off .lbl,
   body.tags-off #leaders { display: none; }
 
-  /* Touch devices never get a hover state — kill the sticky highlight look. */
+  /* Touch devices never get a hover state - kill the sticky highlight look. */
   @media (hover: none) {
     #views button:hover { color: var(--mut); border-color: var(--line); }
     .row:hover { background: none; border-left-color: transparent; }
@@ -290,22 +290,22 @@
 <button id="burger" aria-label="Toggle item list"><span></span><span></span><span></span></button>
 
 <div id="ministrip" aria-hidden="true">
-  <b>ROOM 101 &mdash; QQ STUDIO CONNECTOR</b>
+  <b>ROOM 101 - QQ STUDIO CONNECTOR</b>
   <span>H2SEP FF&amp;E Exhibit &middot; Triun Construction</span>
 </div>
 
 <aside id="sidebar">
   <button id="drawerbar" aria-expanded="false" aria-controls="sb-scroll" aria-label="Toggle item list drawer">
     <span class="grip"></span>
-    <span><b>ROOM 101 &mdash; QQ STUDIO CONNECTOR</b>
+    <span><b>ROOM 101 - QQ STUDIO CONNECTOR</b>
     <span>H2SEP FF&amp;E EXHIBIT &middot; 42 ITEMS</span></span>
     <span class="chev">&#9650;</span>
   </button>
   <div id="sb-scroll">
     <div class="tb">
       <div class="wordmark"><b>TR<i>I</i>UN</b><span>Construction &amp; Engineering</span></div>
-      <div class="eyebrow">H2SEP &mdash; FF&amp;E Exhibit &middot; Guestroom Template</div>
-      <h1>ROOM 101 &mdash;<br>QQ STUDIO CONNECTOR</h1>
+      <div class="eyebrow">H2SEP - FF&amp;E Exhibit &middot; Guestroom Template</div>
+      <h1>ROOM 101 -<br>QQ STUDIO CONNECTOR</h1>
       <div class="meta">
         <span>PROJECT</span><b>HOME2 SUITES &middot; EAGLE PASS TX &middot; 115 KEYS</b>
         <span>DATE</span><b>08/07/2026</b>
@@ -314,7 +314,7 @@
         <span>SCOPE</span><b>FF&amp;E + APPLIANCES + BATH ACCESSORIES</b>
         <span>BASIS</span><b>A555 V01/01.1 &middot; PROJECT DB 08/07/26</b>
       </div>
-      <div class="caveat">ONE LINE PER TAG &middot; QTY BADGES &middot; LOCATIONS STYLIZED &mdash; NOT SHOP DRAWINGS</div>
+      <div class="caveat">ONE LINE PER TAG &middot; QTY BADGES &middot; LOCATIONS STYLIZED - NOT SHOP DRAWINGS</div>
     </div>
 
     <div class="sec">
@@ -337,7 +337,7 @@
     <div class="sec"><div class="sechead">Appliances</div><div class="rows" id="g-app"></div></div>
     <div class="sec"><div class="sechead">Bath Accessories</div><div class="rows" id="g-bath"></div></div>
   </div>
-  <div class="sb-foot"><span id="sb-more">SCROLL &mdash; MORE ITEMS &#9662;</span>Template scope per project DB: FF&amp;E
+  <div class="sb-foot"><span id="sb-more">SCROLL - MORE ITEMS &#9662;</span>Template scope per project DB: FF&amp;E
     categories + appliances + bath accessories. One line per tag with qty badge; flagged rows carried in red.
     Hover a row to locate; click to zoom.</div>
 </aside>
@@ -1461,7 +1461,7 @@ function MRY(r){ return MIRROR ? -r : r; }
      QQ Extended                                     x  39'-10 1/4" · 38'-9" CLEAR  @QQ EXT
 
    So the QQ Connecting rooms are ELEVEN INCHES narrower than the Wide ones,
-   and QQ Extended is 2'-4" DEEPER than the standard — they are not the same
+   and QQ Extended is 2'-4" DEEPER than the standard - they are not the same
    room. A555 flag: the sheet is drawn ONCE with alternate dimension strings,
    so where the extra width/depth is absorbed "is not separately drawn" and is
    stylized here; the clear dimensions themselves are the architect's.
@@ -1472,7 +1472,7 @@ function MRY(r){ return MIRROR ? -r : r; }
    handedness was arrived at so nothing here reads as more certain than it is.
 
    `conn` is whether the room has a GR-3 connecting door. A non-connecting room
-   gets a continuous demising wall instead of the door opening — drawing a door
+   gets a continuous demising wall instead of the door opening - drawing a door
    into a wall that is solid on the plan is exactly the kind of confident-wrong
    detail this exhibit must never show. */
 var QQ_D = 36.417, EXT_D = 38.75;   /* 36'-5" and 38'-9" CLEAR, per A555 */
@@ -1483,17 +1483,17 @@ var QQ_W = 12.0,   WIDE_W = 12.948; /* 12'-0" and 12'-11 3/8" CLEAR */
    closed A550 (King Studio · King Studio Connecting) and A552 (King Studio Acc.
    Mod.) against each sheet's own vector geometry at 1/4" = 1'-0". The status
    word on each line is the spec's own, and it is carried into the UI:
-     PRINTED  — a dimension string printed on the sheet
-     MEASURED — read off a wall face or an opening in the sheet vectors
-     DERIVED  — arithmetic on printed values
-     SCALED   — scaled off drawn linework and NOT printed  (the exhibit says so)
+     PRINTED  - a dimension string printed on the sheet
+     MEASURED - read off a wall face or an opening in the sheet vectors
+     DERIVED  - arithmetic on printed values
+     SCALED   - scaled off drawn linework and NOT printed  (the exhibit says so)
 
    The King plan is NOT the QQ plan and shares none of its constants:
      29'-0" deep, not 36'-5".  8'-3 3/8" ceiling, not 9'-0".  ONE king bed at
      the WINDOW end opposite a 29'-0" working wall, not two queens mid-room.
      Bathroom at the CORRIDOR end on the bed/sofa wall, with a 7'-3" soffit over
      it and over the entry / kitchenette leg.
-   Nothing here is a relabelled QQ shell — see the shell build far below.        */
+   Nothing here is a relabelled QQ shell - see the shell build far below.        */
 var KIN = 1/12;                      /* inches -> feet, so the sheet's numbers stay readable */
 function kingType(base, over){
   var o = {}, k;
@@ -1530,21 +1530,25 @@ var KING_STD = {
   bedBase:'GR-603', mw:'kn 11', flMirror:'GR-502', hookSconce:'GR-204'
 };
 /* King Studio Connecting (room 116). A550 view 01.1 carries EXACTLY ONE
-   dimension — the 11'-0" GR-3 centreline. Shell, ceilings, bath and window are
-   view 01 / 02 unchanged, so the shell is inherited verbatim. Elevation 09 is
-   NOT a second drawing of elevation 05: dropping GR-3 into the working wall
-   pushes the closet / TV / desk group toward the window. The spec measures that
-   shift at ABOUT 4'-3" and explicitly forbids encoding it as a hard number, so
-   it is carried as a stylized shift and labelled as a reading of elevation 09. */
+   dimension - the 11'-0" GR-3 centreline. Shell, ceilings, bath and window are
+   view 01 / 02 unchanged, so the shell is inherited verbatim.
+   Elevation 09 is NOT a second drawing of elevation 05: dropping GR-3 into the
+   working wall pushes the closet / TV / desk group toward the window. HOW FAR
+   IS NOT A NUMBER THIS FILE IS ALLOWED TO HOLD. geometry-spec.json marks
+   working_wall_variant.shift_toward_window UNPROVEN and says, verbatim, "Do
+   not encode 4'-3" as a hard number", so there is no shift constant here and
+   nothing below multiplies one. The connector's working-wall modules are laid
+   out further down against the PROVEN GR-3 opening itself - the group simply
+   starts past its far jamb - which reproduces the elevation-09 arrangement
+   without inventing the distance. */
 var KING_CONN = kingType(KING_STD, {
   variant:'King Studio Connecting', sheet:'A550 views 01 + 01.1, elevation 09',
   conn:true,
   gr3CL: 132*KIN,        /* 11'-0" from the corridor wall INSIDE FACE  PRINTED A550/01.1 */
-  gr3RO: 40*KIN,         /* 3'-4" R.O. — A552's measurement of the SAME opening; A550 prints none */
-  wwShift: 51*KIN,       /* stylized elevation-09 shift toward the window — A READING, not printed */
+  gr3RO: 40*KIN,         /* 3'-4" R.O. - A552's measurement of the SAME opening; A550 prints none */
   ww:'GR-306'
 });
-/* King Studio Acc. Mod. (room 118), sheet A552 — a different room, not a wide
+/* King Studio Acc. Mod. (room 118), sheet A552 - a different room, not a wide
    King. 16'-10" clear, the corridor wall JOGS 1'-1 3/4" at the bathroom, the
    window is ASYMMETRIC in the bay, and the bath is nearly twice as wide. */
 var KING_ACC = {
@@ -1563,18 +1567,31 @@ var KING_ACC = {
   bathIntZ:  121.75*KIN,           /* 10'-1 3/4" bath-side face          MEASURED A552/01 */
   mainClear: 219.5*KIN,            /* 18'-3 1/2" CLEAR main room         PRINTED  A552/01 */
   winX0: 94.125*KIN, winX1: 166.125*KIN,  /* ASYMMETRIC 3'-4"/6'-0"/8'-2 1/2" PRINTED A552/01 */
-  winStool: 20.75*KIN, winHead: 72.625*KIN, winBox: 95*KIN,  /* SCALED — A552 prints no sill/head either */
+  winStool: 20.75*KIN, winHead: 72.625*KIN, winBox: 95*KIN,  /* SCALED - A552 prints no sill/head either */
   d1CL: 143.625*KIN, d1RO: 40*KIN, d1Leaf: null,   /* GR-1 3'-4" R.O. PRINTED A552/01; leaf UNPROVEN */
   d2aCL: 57.75*KIN, d2aW: 40*KIN,                  /* GR-2A MEASURED A552/01 */
   gr3CL: 132.82*KIN, gr3RO: 40*KIN,                /* GR-3  MEASURED A552/01 */
   sofX1: 52*KIN, sofZ0: 212*KIN, sofZ1: 225*KIN,   /* divider soffit PRINTED A552/02 */
   /* A552 carries no bed-wall electrical chain equivalent to A550 view 04, so the
      bed centreline here is DERIVED from the two proven planes that bound the
-     sleeping zone — the divider soffit and the window wall — and nothing else. */
+     sleeping zone - the divider soffit and the window wall - and nothing else. */
   bedCL: (225 + 348)/2*KIN,
   nsWin: null, nsCor: null,
   shelfZ0: 118*KIN, shelfZ1: 160*KIN,
-  turnR: 30*KIN,                   /* 60" turning circle, drawn on A552/01 */
+  /* Accessible clear floor space. A552 view 01 DRAWS two circles and DIMENSIONS
+     neither, so the two are carried separately and never presented alike:
+       turnR  - the bathroom turning circle. The spec names it a 60" circle
+                (accessible_features, A552/01), so the DIAMETER is the sheet's.
+                Its centre is not dimensioned, so it is centred in the MEASURED
+                bath clear rectangle and the screen says POSITION STYLIZED.
+       turnR2 - the second, main-room clear floor circle. The spec gives it NO
+                diameter and NO position at all; A552 draws it dashed. Nothing
+                to encode, so this is an openly STYLIZED nominal 60" drawn
+                dashed, centred between two proven planes, and the screen and
+                the hover card both say SIZE AND POSITION STYLIZED. It is never
+                to be read as a dimensioned clearance. */
+  turnR:  30*KIN,                  /* 60" turning circle drawn in the bath   A552/01 */
+  turnR2: 30*KIN,                  /* STYLIZED nominal - A552 dimensions NOTHING here */
   ww:'GR-307', vanity:'GR-303', bathShelf:'GR-324', shade:'GR-401',
   divider:'GR-405', closet:'GR-404', vanMirror:'GR-503', bedWrap:'GR-603.1',
   bedBase:'GR-603.ADA', mw:'MW-CT', flMirror:null, hookSconce:null
@@ -1584,17 +1601,17 @@ var KING_ACC = {
    compared it against two candidates 4 feet apart, so the reading separates
    them without ambiguity. Room 110 is the calibration: 24 photographs of the
    finished demo key put the herringbone bed wall on the LEFT entering, which is
-   A550's drawn hand exactly. Reflect geometry, never labels — after mirroring,
+   A550's drawn hand exactly. Reflect geometry, never labels - after mirroring,
    the working wall is still the working wall. */
 var KING_ROOMS = {
-  '104': kingType(KING_STD,  {mirror:true,  basis:'A550 view 01; A100 puts the GR-1 centreline 8.00 ft off the low-end demising centreline, which is the bed/sofa wall — MIRRORED'}),
-  '106': kingType(KING_STD,  {mirror:false, basis:'A550 view 01; A100 GR-1 centreline 4.68 ft off the low-end demising centreline, which is the working wall — AS DRAWN'}),
-  '108': kingType(KING_STD,  {mirror:true,  basis:'A550 view 01; A100 GR-1 centreline 8.00 ft, low end is the bed/sofa wall — MIRRORED'}),
-  '110': kingType(KING_STD,  {mirror:false, basis:'A550 view 01; A100 GR-1 centreline 4.68 ft, low end is the working wall — AS DRAWN, and confirmed by 24 photographs of this key (the demo room)'}),
-  '112': kingType(KING_STD,  {mirror:true,  basis:'A550 view 01; A100 GR-1 centreline 8.00 ft, low end is the bed/sofa wall — MIRRORED'}),
-  '114': kingType(KING_STD,  {mirror:false, basis:'A550 view 01; A100 GR-1 centreline 4.68 ft, low end is the working wall — AS DRAWN'}),
-  '116': kingType(KING_CONN, {mirror:true,  basis:'A550 views 01 + 01.1; A100 GR-1 centreline 8.17 ft, low end is the bed/sofa wall — MIRRORED, which puts its working wall on the wall it shares with 118'}),
-  '118': kingType(KING_ACC,  {mirror:false, basis:'A552 view 01; A100 GR-1 centreline 5.19 ft, low end is the working wall — AS DRAWN. A100 measures this bay at 17′-6″ CL-CL where every other King bay measures 12′-8″'})
+  '104': kingType(KING_STD,  {mirror:true,  basis:'A550 view 01; A100 puts the GR-1 centreline 8.00 ft off the low-end demising centreline, which is the bed/sofa wall - MIRRORED'}),
+  '106': kingType(KING_STD,  {mirror:false, basis:'A550 view 01; A100 GR-1 centreline 4.68 ft off the low-end demising centreline, which is the working wall - AS DRAWN'}),
+  '108': kingType(KING_STD,  {mirror:true,  basis:'A550 view 01; A100 GR-1 centreline 8.00 ft, low end is the bed/sofa wall - MIRRORED'}),
+  '110': kingType(KING_STD,  {mirror:false, basis:'A550 view 01; A100 GR-1 centreline 4.68 ft, low end is the working wall - AS DRAWN, and confirmed by 24 photographs of this key (the demo room)'}),
+  '112': kingType(KING_STD,  {mirror:true,  basis:'A550 view 01; A100 GR-1 centreline 8.00 ft, low end is the bed/sofa wall - MIRRORED'}),
+  '114': kingType(KING_STD,  {mirror:false, basis:'A550 view 01; A100 GR-1 centreline 4.68 ft, low end is the working wall - AS DRAWN'}),
+  '116': kingType(KING_CONN, {mirror:true,  basis:'A550 views 01 + 01.1; A100 GR-1 centreline 8.17 ft, low end is the bed/sofa wall - MIRRORED, which puts its working wall on the wall it shares with 118'}),
+  '118': kingType(KING_ACC,  {mirror:false, basis:'A552 view 01; A100 GR-1 centreline 5.19 ft, low end is the working wall - AS DRAWN. A100 measures this bay at 17′-6″ CL-CL where every other King bay measures 12′-8″'})
 };
 
 var ROOM_GEOM = {
@@ -1604,17 +1621,17 @@ var ROOM_GEOM = {
   '401': {w: WIDE_W, d: QQ_D, conn: true, mirror: false, variant: 'QQ Wide Connecting',
           basis: 'same wide bay as 101; A103 labels it QUEEN QUEEN WIDE, adjoins 403'},
   '103': {w: QQ_W, d: QQ_D, conn: true, mirror: true,  variant: 'QQ Connecting',
-          basis: 'pairs with 101 — the connecting door is on their shared wall, so the plan reads opposite-hand'},
+          basis: 'pairs with 101 - the connecting door is on their shared wall, so the plan reads opposite-hand'},
   '403': {w: QQ_W, d: QQ_D, conn: true, mirror: true,  variant: 'QQ Connecting',
           basis: 'pairs with 401, same relationship as 103 to 101'},
   '215': {w: QQ_W, d: QQ_D, conn: true, mirror: false, variant: 'QQ Connecting',
-          basis: 'odd side of the corridor like 101; A101 does not name its connecting partner — HANDEDNESS UNCONFIRMED'},
+          basis: 'odd side of the corridor like 101; A101 does not name its connecting partner - HANDEDNESS UNCONFIRMED'},
   '236': {w: QQ_W, d: QQ_D, conn: true, mirror: true,  variant: 'QQ Connecting',
-          basis: 'even side of the corridor (opposite hand to the odd side); connects to 238 — CONFIRM ON PLAN'},
+          basis: 'even side of the corridor (opposite hand to the odd side); connects to 238 - CONFIRM ON PLAN'},
   '336': {w: QQ_W, d: QQ_D, conn: true, mirror: true,  variant: 'QQ Connecting',
-          basis: 'even side; A102 draws the connecting door in the 336/338 demising wall — CONFIRM ON PLAN'},
+          basis: 'even side; A102 draws the connecting door in the 336/338 demising wall - CONFIRM ON PLAN'},
   '436': {w: QQ_W, d: QQ_D, conn: true, mirror: true,  variant: 'QQ Connecting',
-          basis: 'even side; adjoins 438 — CONFIRM ON PLAN'},
+          basis: 'even side; adjoins 438 - CONFIRM ON PLAN'},
 
   /* ---- QQ Studio (base Queen-Queen, no connecting door) ---- */
   '105': {w: QQ_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Studio',
@@ -1644,9 +1661,9 @@ var ROOM_GEOM = {
   '213': {w: QQ_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Studio',
           basis: 'base QQ per A555; odd side of the corridor, same hand as 105'},
   '228': {w: QQ_W, d: QQ_D, conn: false, mirror: true,  variant: 'QQ Studio',
-          basis: 'base QQ per A555; EVEN side of the corridor so the plan reads opposite-hand — CONFIRM ON PLAN'},
+          basis: 'base QQ per A555; EVEN side of the corridor so the plan reads opposite-hand - CONFIRM ON PLAN'},
   '234': {w: QQ_W, d: QQ_D, conn: false, mirror: true,  variant: 'QQ Studio',
-          basis: 'base QQ per A555; EVEN side of the corridor so the plan reads opposite-hand — CONFIRM ON PLAN'},
+          basis: 'base QQ per A555; EVEN side of the corridor so the plan reads opposite-hand - CONFIRM ON PLAN'},
   /* ---- floors 3 & 4 QQ Studios (Queen-Queen, no connecting door) ---- */
   '303': {w: QQ_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Studio',
           basis: 'base QQ per A555; odd side of the corridor, same hand as 105'},
@@ -1663,9 +1680,9 @@ var ROOM_GEOM = {
   '315': {w: QQ_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Studio',
           basis: 'base QQ per A555; odd side of the corridor, same hand as 105'},
   '328': {w: QQ_W, d: QQ_D, conn: false, mirror: true,  variant: 'QQ Studio',
-          basis: 'base QQ per A555; EVEN side of the corridor so the plan reads opposite-hand — CONFIRM ON PLAN'},
+          basis: 'base QQ per A555; EVEN side of the corridor so the plan reads opposite-hand - CONFIRM ON PLAN'},
   '334': {w: QQ_W, d: QQ_D, conn: false, mirror: true,  variant: 'QQ Studio',
-          basis: 'base QQ per A555; EVEN side of the corridor so the plan reads opposite-hand — CONFIRM ON PLAN'},
+          basis: 'base QQ per A555; EVEN side of the corridor so the plan reads opposite-hand - CONFIRM ON PLAN'},
   '405': {w: QQ_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Studio',
           basis: 'base QQ per A555; odd side of the corridor, same hand as 105'},
   '407': {w: QQ_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Studio',
@@ -1679,9 +1696,9 @@ var ROOM_GEOM = {
   '415': {w: QQ_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Studio',
           basis: 'base QQ per A555; odd side of the corridor, same hand as 105'},
   '428': {w: QQ_W, d: QQ_D, conn: false, mirror: true,  variant: 'QQ Studio',
-          basis: 'base QQ per A555; EVEN side of the corridor so the plan reads opposite-hand — CONFIRM ON PLAN'},
+          basis: 'base QQ per A555; EVEN side of the corridor so the plan reads opposite-hand - CONFIRM ON PLAN'},
   '434': {w: QQ_W, d: QQ_D, conn: false, mirror: true,  variant: 'QQ Studio',
-          basis: 'base QQ per A555; EVEN side of the corridor so the plan reads opposite-hand — CONFIRM ON PLAN'},
+          basis: 'base QQ per A555; EVEN side of the corridor so the plan reads opposite-hand - CONFIRM ON PLAN'},
   /* ---- QQ Wide (the wide bay WITHOUT a connecting door) ---- */
   '201': {w: WIDE_W, d: QQ_D, conn: false, mirror: false, variant: 'QQ Wide',
           basis: 'A555 @QQ WIDE width, base (non-connecting) plan; odd side of the corridor'},
@@ -1690,25 +1707,25 @@ var ROOM_GEOM = {
 
   /* ---- QQ Extended (standard bay, deeper room) ---- */
   '230': {w: QQ_W, d: EXT_D, conn: false, mirror: true, variant: 'QQ Extended',
-          basis: 'A555 @QQ EXT depth (38\'-9" clear); even side of the corridor — CONFIRM ON PLAN'},
+          basis: 'A555 @QQ EXT depth (38\'-9" clear); even side of the corridor - CONFIRM ON PLAN'},
   '232': {w: QQ_W, d: EXT_D, conn: false, mirror: true, variant: 'QQ Extended',
-          basis: 'A555 @QQ EXT depth; even side — CONFIRM ON PLAN'},
+          basis: 'A555 @QQ EXT depth; even side - CONFIRM ON PLAN'},
   '330': {w: QQ_W, d: EXT_D, conn: false, mirror: true, variant: 'QQ Extended',
-          basis: 'A555 @QQ EXT depth; even side, stacks over 230 — CONFIRM ON PLAN'},
+          basis: 'A555 @QQ EXT depth; even side, stacks over 230 - CONFIRM ON PLAN'},
   '332': {w: QQ_W, d: EXT_D, conn: false, mirror: true, variant: 'QQ Extended',
-          basis: 'A555 @QQ EXT depth; even side, stacks over 232 — CONFIRM ON PLAN'},
+          basis: 'A555 @QQ EXT depth; even side, stacks over 232 - CONFIRM ON PLAN'},
   '430': {w: QQ_W, d: EXT_D, conn: false, mirror: true, variant: 'QQ Extended',
-          basis: 'A555 @QQ EXT depth; even side, stacks over 330 — CONFIRM ON PLAN'},
+          basis: 'A555 @QQ EXT depth; even side, stacks over 330 - CONFIRM ON PLAN'},
   '432': {w: QQ_W, d: EXT_D, conn: false, mirror: true, variant: 'QQ Extended',
-          basis: 'A555 @QQ EXT depth; even side, stacks over 332 — CONFIRM ON PLAN'},
+          basis: 'A555 @QQ EXT depth; even side, stacks over 332 - CONFIRM ON PLAN'},
 };
-/* King family folded in — one entry per PROVEN key, each carrying its own
+/* King family folded in - one entry per PROVEN key, each carrying its own
    sheet-closed numbers rather than a shared shell. A room with no entry here
    still hard-stops below; that is the rule, not an oversight. */
 for (var _kr in KING_ROOMS) ROOM_GEOM[_kr] = KING_ROOMS[_kr];
 /* Connecting partners off the floor plans: A100 (101/103), A101 (236->238),
    A102 (336/338 demising wall), A103 (401/403, 436->438). 215's partner is NOT
-   named on A101 — left blank rather than guessed. 116/118 are the King pair:
+   named on A101 - left blank rather than guessed. 116/118 are the King pair:
    A100 draws the swing in their shared demising wall, A550 view 01.1 and A552
    view 01 each draw their own leaf of it. */
 var PARTNER_OF = {'101':'103','103':'101','401':'403','403':'401',
@@ -1718,12 +1735,12 @@ var PARTNER_OF = {'101':'103','103':'101','401':'403','403':'401',
 var ROOM_NO = (new URLSearchParams(location.search).get('room') || window.__H2SEP_NAME_ROOM || '101').trim();
 /* A room with no entry here has NO MODEL. Falling back to room 101 would draw
    its two queen beds, its 12'-11 3/8" bay and its GR-3 connecting door under
-   the requested room's number — a confidently wrong exhibit, which is worse
+   the requested room's number - a confidently wrong exhibit, which is worse
    than none. Say so and stop instead. */
 if (!ROOM_GEOM[ROOM_NO]) {
   document.documentElement.innerHTML =
     '<head><meta name="viewport" content="width=device-width,initial-scale=1">'
-    + '<title>No 3D model \u2014 Room ' + ROOM_NO + '</title></head><body style="margin:0;'
+    + '<title>No 3D model - Room ' + ROOM_NO + '</title></head><body style="margin:0;'
     + 'background:#0b0f13;color:#e8eef4;font:15px/1.6 ui-monospace,Menlo,monospace;'
     + 'display:flex;align-items:center;justify-content:center;min-height:100vh;'
     + 'padding:24px;text-align:center"><div><div style="font-size:34px">\uD83E\uDDCA</div>'
@@ -1748,7 +1765,7 @@ var PARTNER = CONN ? (PARTNER_OF[ROOM_NO] || '') : '';
 var W = GEOM.w, D = GEOM.d, H = KING ? GEOM.hMain : 9.0, T = 0.35;
 var HLOW = KING ? GEOM.hLow : H;
 /* Bath partition planes. QQ: hard-coded off A555. King: the room's own proven
-   faces — the entry-side face of the bath/entry partition, and the room-side
+   faces - the entry-side face of the bath/entry partition, and the room-side
    face of the bath/main-room partition (negated, since the viewer runs z from
    0 at the corridor to -D at the window and the spec runs it the other way). */
 var BATHX = KING ? GEOM.bathPartX : 6.55;
@@ -1759,7 +1776,7 @@ var CX = W/2, CZ = -D/2;                      /* room centre */
 var stage = document.getElementById('stage');
 /* Phone budget: a mid-range Android runs this at a fraction of a laptop's
    fill rate. Drop MSAA, cap the pixel ratio harder, and use the cheap shadow
-   filter — the exhibit still reads correctly and stays at a usable frame
+   filter - the exhibit still reads correctly and stays at a usable frame
    rate in a crew member's hand. */
 var MOBILE = matchMedia('(max-width: 900px), (hover: none)').matches;
 var renderer = new THREE.WebGLRenderer({antialias: !MOBILE, powerPreference: 'high-performance'});
@@ -1799,14 +1816,14 @@ var sunTgt = new THREE.Object3D(); sunTgt.position.set(CX, 0, CZ);
 scene.add(sunTgt); sun.target = sunTgt;
 scene.add(sun);
 var fill = new THREE.PointLight(0x02A9E0, 0.3, 22);
-/* cyan wash at the connecting door — at the door's OWN centreline, so the King
+/* cyan wash at the connecting door - at the door's OWN centreline, so the King
    pair glows at 11'-0" off the corridor wall and the QQ pair at its own -6.7 */
 fill.position.set(W+3, 6.5, KING ? -(GEOM.gr3CL || 0) : -6.7);
 if (!CONN) fill.intensity = 0;
 scene.add(fill);
 /* warm interior fills so close-up views aren't crushed to black. Two sets: the
    QQ room is 36'-5" deep with the beds mid-room, the King room is 29'-0" deep
-   with the bed at the WINDOW end and a 7'-3" soffit over the first 8'-10" —
+   with the bed at the WINDOW end and a 7'-3" soffit over the first 8'-10" -
    pointing QQ's lamps down a King room lights the wrong third of it. */
 (KING
   ? [[W*0.62, GEOM.hMain-0.7, -22.0, 0.42], [W*0.74, GEOM.hMain-0.9, -13.0, 0.80],
@@ -1949,7 +1966,7 @@ function wallSeg(x1,z1,x2,z2,h,noBase){
     [V3((wx1+wx2)/2,h,wz1), V3((wx1+wx2)/2,h,wz2)]);
   scenery(new THREE.Line(g, edgeMat));
 }
-/* wall sconces — backplate flush to the mounting face at group origin, short
+/* wall sconces - backplate flush to the mounting face at group origin, short
    arm connecting backplate to the shade so the fixture reads as mounted, not
    floating. Used by both families (QQ nightstands + entry hook; King
    nightstands, hook panel and the accessible working wall). */
@@ -1971,7 +1988,7 @@ function sconce(part, x, y, z, rotY){
 }
 
 /* ============================================================================
-   QQ FAMILY BUILD — rooms 101/103/105… off A555. Untouched by the King work;
+   QQ FAMILY BUILD - rooms 101/103/105… off A555. Untouched by the King work;
    it runs only when the requested room is a QQ key.
    ========================================================================== */
 if (!KING) {
@@ -1989,7 +2006,7 @@ scenery(box(WX1,0,-D-T/2, WX2,SILL,-D+T/2, MAT.base));
 wallSeg(0,0, 0,-D);
 if (CONN) { wallSeg(W,0, W,-5.2);  wallSeg(W,-8.2, W,-D); }  /* gap = connecting door */
 else       { wallSeg(W,0, W,-D); }                           /* solid demising wall */
-/* solid headboard feature panel on the x=0 wall — anchors headboards + sconces
+/* solid headboard feature panel on the x=0 wall - anchors headboards + sconces
    so wall-mounted items read as mounted, not floating (walls are ghosted) */
 scenery(box(0.175,0.45,-12.35, 0.28,6.35,-27.25, MAT.panel));
 /* bath partitions */
@@ -2035,10 +2052,10 @@ scenery(box(-2,-0.02,1.2, W+9.5,0.06,4.6, MAT.ghost, true));
 /* ---- Connecting door GR-3 (room feature, highlighted Triun cyan) ---- */
 if (CONN) {
 var pDoor = reg({id:'GR-3', tag:'GR-3', grp:'door', name:'Connecting Door → ' + (PARTNER ? 'Room ' + PARTNER : 'adjoining room'), qty:1,
-  qdisp:'1 — ONE LEAF THIS ROOM (pair spans 101/103)',
+  qdisp:'1 - ONE LEAF THIS ROOM (pair spans 101/103)',
   cat:'Doors · room feature', flag: ROOM_NO === '101',
-  desc:'D1 — SGL 3′-0″×6′-8″×1 3/4″, solid-core wood, F1 HM frame, 45-min rating, hardware set #3. Qty 1 this room: A600 remark a provides (2) doors per communicating location — one leaf hung each side of the demising wall, so Room ' + ROOM_NO + ' carries ONE GR-3 leaf and ' + (PARTNER ? 'Room ' + PARTNER : 'the adjoining room') + ' carries the other. Both leaves drawn for context.',
-  note: ROOM_NO === '101' ? '★ CONNECTING DOOR LOCK — NOT LOCKING. Standing deficiency on the room-101 field sheet; set #3 deadbolt / connecting latch / door guard is the hardware behind it.' : '',
+  desc:'D1 - SGL 3′-0″×6′-8″×1 3/4″, solid-core wood, F1 HM frame, 45-min rating, hardware set #3. Qty 1 this room: A600 remark a provides (2) doors per communicating location - one leaf hung each side of the demising wall, so Room ' + ROOM_NO + ' carries ONE GR-3 leaf and ' + (PARTNER ? 'Room ' + PARTNER : 'the adjoining room') + ' carries the other. Both leaves drawn for context.',
+  note: ROOM_NO === '101' ? '★ CONNECTING DOOR LOCK - NOT LOCKING. Standing deficiency on the room-101 field sheet; set #3 deadbolt / connecting latch / door guard is the hardware behind it.' : '',
   flagIsRoom101Only: true,
   focus:V3(W-1.5,3.4,-6.7), dist:16});
 attach(pDoor, box(W-0.28,0,-5.2, W+0.28,7.0,-5.5, cloneMat(MAT.cyanFr)));
@@ -2058,19 +2075,19 @@ attach(pDoor, box(W+0.02,0.05,-5.55, W+0.18,6.85,-7.85, cloneMat(MAT.cyanDr))); 
 
 /* ---- beds: GR-300 / GR-600 / GR-600.1 / GR-602 / GR-322 ... ---- */
 var pHead = reg({id:'GR-300', tag:'GR-300', grp:'case', name:'Queen Headboard', qty:2,
-  cat:'FF&E — Casegoods',
+  cat:'FF&E - Casegoods',
   desc:'Queen headboard, wall-mounted at each bed. A555 line 66 ×2; the room-101 field sheet lists GR-300 twice.',
   focus:V3(1.5,3.2,-19.8), dist:22});
 var pMatt = reg({id:'GR-600', tag:'GR-600', grp:'bed', name:'Queen Mattress Set', qty:2,
-  cat:'FF&E — Bedding',
+  cat:'FF&E - Bedding',
   desc:'Queen mattress set, one per bed. Center supports per vendor recommendation (ID-5.8 key note).',
   focus:V3(3.4,2.4,-19.8), dist:22});
 var pWrap = reg({id:'GR-600.1', tag:'GR-600.1', grp:'bed', name:'Queen Box Spring Cover', qty:2,
-  cat:'FF&E — Bedding',
+  cat:'FF&E - Bedding',
   desc:'Queen box spring cover (field sheet: “Q Bedwrap”), one per bed.',
   focus:V3(3.4,1.6,-19.8), dist:20});
 var pBase = reg({id:'GR-602', tag:'GR-602', grp:'bed', name:'Queen Bed Base', qty:2,
-  cat:'FF&E — Bedding',
+  cat:'FF&E - Bedding',
   desc:'Queen bed base / platform, one per bed.',
   focus:V3(3.4,0.8,-19.8), dist:20});
 function bed(z1){
@@ -2085,7 +2102,7 @@ bed(-13.6);   /* bed 1: z -13.6..-18.6 */
 bed(-21.0);   /* bed 2: z -21.0..-26.0 */
 
 var pNS = reg({id:'GR-322', tag:'GR-322', grp:'case', name:'Nightstand @ Queen Queen', qty:1,
-  cat:'FF&E — Casegoods',
+  cat:'FF&E - Casegoods',
   desc:'Nightstand between the two queen beds. Tagged once on A555.',
   focus:V3(1.2,2.0,-19.8), dist:14});
 attach(pNS, box(0.25,0,-19.0, 1.85,2.2,-20.6, cloneMat(MAT.wood)));
@@ -2100,26 +2117,26 @@ var pPhone = reg({id:'905', tag:'905', grp:'app', name:'Telephone', qty:1,
 attach(pPhone, box(0.6,2.2,-19.95, 1.3,2.5,-20.4, cloneMat(MAT.appl)));
 
 /* nightstand sconces use the shared sconce() helper hoisted above the family
-   branch — same fixture, same mounting logic, in both families. */
+   branch - same fixture, same mounting logic, in both families. */
 var PANELX = 0.28;   /* headboard feature-panel face */
-var pS207 = reg({id:'GR-207', tag:'GR-207', grp:'light', name:'Nightstand Sconce — QQ Center', qty:1,
-  cat:'FF&E — Lighting',
-  desc:'Nightstand sconce at QUEEN QUEEN CENTER — backplate on the headboard wall, centered between the beds above the nightstand.',
+var pS207 = reg({id:'GR-207', tag:'GR-207', grp:'light', name:'Nightstand Sconce - QQ Center', qty:1,
+  cat:'FF&E - Lighting',
+  desc:'Nightstand sconce at QUEEN QUEEN CENTER - backplate on the headboard wall, centered between the beds above the nightstand.',
   focus:V3(1.0,5.2,-19.8), dist:11});
 sconce(pS207, PANELX, 5.2, -19.8, 0);
-var pS208 = reg({id:'GR-208', tag:'GR-208', grp:'light', name:'Nightstand Sconce — QQ Side', qty:2,
-  cat:'FF&E — Lighting',
-  desc:'Nightstand sconce at QUEEN QUEEN SIDE — outboard of each bed (×2), backplates on the headboard wall. Closes gap G-2.',
+var pS208 = reg({id:'GR-208', tag:'GR-208', grp:'light', name:'Nightstand Sconce - QQ Side', qty:2,
+  cat:'FF&E - Lighting',
+  desc:'Nightstand sconce at QUEEN QUEEN SIDE - outboard of each bed (×2), backplates on the headboard wall. Closes gap G-2.',
   focus:V3(1.0,5.2,-13.1), dist:12});
 sconce(pS208, PANELX, 5.2, -12.9, 0);
 sconce(pS208, PANELX, 5.2, -26.7, 0);
 
 /* ---- working wall GR-308 (FLAGGED) + desk zone ---- */
 var pWW = reg({id:'GR-308', tag:'GR-308', grp:'case', name:'Working Wall @ Queen Queen Studio Suite Connector', qty:1, flag:true,
-  qdisp:'— UNRESOLVED (A555 ×1 vs field sheet “GR-308R ×2”)',
-  cat:'FF&E — Casegoods · millwork',
-  desc:'Continuous millwork run — kitchenette surround, desk, wardrobe/closet — one working wall per key. Install starts at the refrigerator hold dimension and proceeds up the wall; final install is shelf and rod at closet, scribed at wall.',
-  note:'FLAGGED — QTY UNRESOLVED: A555 tags it once; the room-101 field sheet prints the same run as “GR-308R ×2”. GR-308R exists in no drawing; carried verbatim, never merged, never emitted as a second item. → OPEN ITEMS A1.',
+  qdisp:'- UNRESOLVED (A555 ×1 vs field sheet “GR-308R ×2”)',
+  cat:'FF&E - Casegoods · millwork',
+  desc:'Continuous millwork run - kitchenette surround, desk, wardrobe/closet - one working wall per key. Install starts at the refrigerator hold dimension and proceeds up the wall; final install is shelf and rod at closet, scribed at wall.',
+  note:'FLAGGED - QTY UNRESOLVED: A555 tags it once; the room-101 field sheet prints the same run as “GR-308R ×2”. GR-308R exists in no drawing; carried verbatim, never merged, never emitted as a second item. → OPEN ITEMS A1.',
   focus:V3(11.6,3.6,-18.5), dist:26});
 /* millwork carcass: back panel + uprights along x=W face, z -11.8..-25.8 */
 attach(pWW, box(W-0.45,0,-11.8, W-0.2,7.6,-25.8, cloneMat(MAT.woodDk)));
@@ -2139,36 +2156,36 @@ attach(pWW, box(W-2.0,6.0,-22.7, W-0.5,6.15,-25.45, cloneMat(MAT.counter)));
   rod.position.set(MX(W-1.25), 5.5, -24.05); scenery(rod); })();
 
 /* kitchenette appliances */
-var pFr = reg({id:'901', tag:'901', grp:'app', name:'Refrigerator — Danby 10.1 cu ft', qty:1,
+var pFr = reg({id:'901', tag:'901', grp:'app', name:'Refrigerator - Danby 10.1 cu ft', qty:1,
   cat:'Appliance',
   desc:'Danby DFF101B1BSSDB, 10.1 cu ft apartment-size top-mount, stainless, 115 V / 160 W, R600a, ENERGY STAR. Working-wall layout starts at the refrigerator hold dimension.',
   focus:V3(11.8,3.0,-13.2), dist:15});
 attach(pFr, box(W-2.05,0.05,-12.15, W-0.55,5.6,-14.25, cloneMat(MAT.appl)));
 attach(pFr, box(W-2.1,3.6,-12.3, W-2.0,3.68,-14.1, cloneMat(MAT.chrome)));
-var pMw = reg({id:'KN 11', tag:'KN 11', grp:'app', name:'OTR Microwave — wall-affixed', qty:1,
+var pMw = reg({id:'KN 11', tag:'KN 11', grp:'app', name:'OTR Microwave - wall-affixed', qty:1,
   cat:'Appliance · keynote',
   desc:'Danby DOM16A2SSDB over-the-range microwave, 1.6 cu ft, 1000 W, 300 CFM, mounting brackets included. Keynote 11 (not a GR/9xx tag); keynote 36 supplies the outlet above.',
   focus:V3(11.8,5.0,-15.4), dist:12});
 attach(pMw, box(W-1.95,4.5,-14.5, W-0.6,5.65,-16.4, cloneMat(MAT.appl)));
-var pDw = reg({id:'902', tag:'902', grp:'app', name:'Dishwasher — Danby 18″ or 24″', qty:1, flag:true,
+var pDw = reg({id:'902', tag:'902', grp:'app', name:'Dishwasher - Danby 18″ or 24″', qty:1, flag:true,
   cat:'Appliance',
   desc:'Danby DDW18D1ESS (18″, 10 place settings) or DDW2404EBSS (24″, 12 place settings), under the kitchenette counter.',
-  note:'BOTH MODELS CARRIED — nothing in the set distinguishes the 18″ from the 24″ by room type. DO NOT PICK ONE.',
+  note:'BOTH MODELS CARRIED - nothing in the set distinguishes the 18″ from the 24″ by room type. DO NOT PICK ONE.',
   focus:V3(11.8,1.6,-17.5), dist:13});
 attach(pDw, box(W-2.0,0.1,-16.65, W-0.55,2.85,-18.25, cloneMat(MAT.appl)));
 attach(pDw, box(W-2.06,2.55,-16.8, W-1.98,2.63,-18.1, cloneMat(MAT.chrome)));
 /* sink + faucet + disposer */
 scenery(box(W-1.9,3.02,-14.6, W-0.8,3.12,-16.4, MAT.applDk));
 scenery(cyl(W-1.7, -15.5, 0.06, 3.1, 3.75, MAT.chrome));
-var pDisp = reg({id:'DISP', tag:'—', grp:'app', name:'Garbage Disposer (untagged)', qty:1, flag:true,
+var pDisp = reg({id:'DISP', tag:'-', grp:'app', name:'Garbage Disposer (untagged)', qty:1, flag:true,
   cat:'Appliance · untagged',
   desc:'Garbage disposer at the kitchenette sink.',
-  note:'NO DISPOSER CUTSHEET in the appliance set and no disposer in P104 — the dedicated circuit is the only evidence it exists.',
+  note:'NO DISPOSER CUTSHEET in the appliance set and no disposer in P104 - the dedicated circuit is the only evidence it exists.',
   focus:V3(11.6,2.2,-15.5), dist:10});
 attach(pDisp, cyl(W-1.35, -15.5, 0.35, 1.9, 2.85, cloneMat(MAT.applDk)));
 
 /* TV on the working wall face, above the desk, facing the beds */
-var pTV = reg({id:'903', tag:'903', grp:'app', name:'Television — wall-mounted', qty:1,
+var pTV = reg({id:'903', tag:'903', grp:'app', name:'Television - wall-mounted', qty:1,
   cat:'Appliance',
   desc:'Guestroom television, mounted on the working wall opposite the beds. A555 carries variants as alternate dimension strings; item rows identical.',
   focus:V3(10.6,4.9,-20.5), dist:14});
@@ -2177,7 +2194,7 @@ scenery(box(W-2.1,4.6,-20.2, W-1.9,5.2,-20.75, MAT.metal));
 
 /* task chair + desk lamp */
 var pCh = reg({id:'GR-103', tag:'GR-103', grp:'seat', name:'Ergonomic Task Chair', qty:1,
-  cat:'FF&E — Seating',
+  cat:'FF&E - Seating',
   desc:'Ergonomic task chair at the working-wall desk (A530 legend: “TASK CHAIR”).',
   focus:V3(9.9,1.8,-20.5), dist:11});
 attach(pCh, cyl(9.9, -20.5, 0.75, 1.5, 1.7, cloneMat(MAT.seatDk)));
@@ -2185,14 +2202,14 @@ attach(pCh, cyl(9.9, -20.5, 0.09, 0.35, 1.5, cloneMat(MAT.metal)));
 attach(pCh, box(10.35,1.7,-19.95, 10.65,3.1,-21.05, cloneMat(MAT.seatDk)));
 scenery(cyl(9.9,-20.5,0.55,0.3,0.38,MAT.metal));
 var pDL = reg({id:'GR-201', tag:'GR-201', grp:'light', name:'Desk Lamp', qty:1,
-  cat:'FF&E — Lighting', desc:'Desk lamp on the working-wall desk surface.',
+  cat:'FF&E - Lighting', desc:'Desk lamp on the working-wall desk surface.',
   focus:V3(11.7,3.4,-19.2), dist:9});
 attach(pDL, cyl(W-1.4, -19.1, 0.07, 2.65, 3.6, cloneMat(MAT.metal)));
 attach(pDL, cyl(W-1.4, -19.1, 0.32, 3.6, 4.0, cloneMat(MAT.lampsh)));
 
 /* closet drapery GR-403 */
 var pCD = reg({id:'GR-403', tag:'GR-403', grp:'win', name:'Closet Drapery @ Guest Suite', qty:1,
-  cat:'FF&E — Window',
+  cat:'FF&E - Window',
   desc:'Drapery panel closing the working-wall closet bay in lieu of a door.',
   focus:V3(10.9,3.5,-24.0), dist:13});
 (function(){
@@ -2204,24 +2221,24 @@ var pCD = reg({id:'GR-403', tag:'GR-403', grp:'win', name:'Closet Drapery @ Gues
 
 /* full length mirror + entry hook + hook sconce */
 var pFLM = reg({id:'GR-502', tag:'GR-502', grp:'art', name:'Full Length Mirror', qty:1,
-  cat:'FF&E — Art / Mirror', desc:'Full-length mirror at the entry, beside the connecting door.',
+  cat:'FF&E - Art / Mirror', desc:'Full-length mirror at the entry, beside the connecting door.',
   focus:V3(12.4,3.5,-10.3), dist:12});
 attach(pFLM, box(W-0.3,1.0,-9.6, W-0.18,6.6,-11.0, cloneMat(MAT.glass)));
 attach(pFLM, box(W-0.34,0.9,-9.5, W-0.3,6.7,-11.1, cloneMat(MAT.frame)));
 var pHkE = reg({id:'HD-12', tag:'HD-12', grp:'bath', name:'Robe / Coat Hook', qty:2, ada:true,
   cat:'Bath Accessory',
-  desc:'Robe / coat hook, ×2 — one at the entry wall under its sconce, one at the guest bath. Blocking required (G402 TA 2 / TA 21; A530: provide blocking for robe/coat hook as needed); max-4″ protrusion rule applies.',
+  desc:'Robe / coat hook, ×2 - one at the entry wall under its sconce, one at the guest bath. Blocking required (G402 TA 2 / TA 21; A530: provide blocking for robe/coat hook as needed); max-4″ protrusion rule applies.',
   focus:V3(12.5,5.3,-1.2), dist:10});
 attach(pHkE, box(12.35,5.1,-T/2-0.15, 12.65,5.5,-T/2+0.02, cloneMat(MAT.chrome)));
 var pS204 = reg({id:'GR-204', tag:'GR-204', grp:'light', name:'Sconce @ Wall Hook', qty:1,
-  cat:'FF&E — Lighting',
+  cat:'FF&E - Lighting',
   desc:'Sconce above the entry wall hook (A530 prints “SCONE @WALL HOOK” sic).',
   focus:V3(12.5,6.3,-1.2), dist:10});
 sconce(pS204, 12.5, 6.3, -0.175, Math.PI/2);
 
 /* ---- divider drapery ---- */
 var pDD = reg({id:'GR-402', tag:'GR-402', grp:'win', name:'Divider Drapery', qty:1,
-  cat:'FF&E — Window',
+  cat:'FF&E - Window',
   desc:'Room-divider drapery between the sleeping zone and the sofa / living zone, shown part-drawn.',
   focus:V3(9.5,4.0,-27.2), dist:16});
 (function(){
@@ -2231,71 +2248,71 @@ var pDD = reg({id:'GR-402', tag:'GR-402', grp:'win', name:'Divider Drapery', qty
   }
 })();
 var pDDH = reg({id:'GR-402.1', tag:'GR-402.1', grp:'win', name:'Divider Drapery Hardware', qty:1,
-  cat:'FF&E — Window', desc:'Ceiling-mounted track / rod for the divider drapery, full room width.',
+  cat:'FF&E - Window', desc:'Ceiling-mounted track / rod for the divider drapery, full room width.',
   focus:V3(6.6,7.6,-27.1), dist:16});
 attach(pDDH, box(0.3,7.55,-27.05, W-0.3,7.7,-27.2, cloneMat(MAT.chrome)));
 
 /* ---- sofa zone ---- */
 var pSofa = reg({id:'GR-101', tag:'GR-101', grp:'seat', name:'Sleeper Sofa', qty:1,
-  cat:'FF&E — Seating', desc:'Sleeper sofa in the living zone at the window end (keynote 21 marks its extent).',
+  cat:'FF&E - Seating', desc:'Sleeper sofa in the living zone at the window end (keynote 21 marks its extent).',
   focus:V3(2.2,1.8,-32.4), dist:16});
 attach(pSofa, box(0.3,0.35,-29.1, 3.3,1.55,-35.7, cloneMat(MAT.uphol)));
 attach(pSofa, box(0.3,1.55,-29.1, 1.05,3.0,-35.7, cloneMat(MAT.uphol)));
 attach(pSofa, box(0.3,1.55,-29.1, 3.3,2.3,-29.85, cloneMat(MAT.seatDk)));
 attach(pSofa, box(0.3,1.55,-34.95, 3.3,2.3,-35.7, cloneMat(MAT.seatDk)));
 var pOtt = reg({id:'GR-100', tag:'GR-100', grp:'seat', name:'Ottoman', qty:1,
-  cat:'FF&E — Seating', desc:'Ottoman at the sofa grouping.',
+  cat:'FF&E - Seating', desc:'Ottoman at the sofa grouping.',
   focus:V3(5.4,1.2,-32.5), dist:11});
 attach(pOtt, box(4.5,0.3,-31.5, 6.5,1.35,-33.5, cloneMat(MAT.seatDk)));
 var pST = reg({id:'GR-318', tag:'GR-318', grp:'case', name:'Sofa Table @ Sofa', qty:1,
-  cat:'FF&E — Casegoods', desc:'Side table at the sofa (spec: “Side Table @ Sofa”).',
+  cat:'FF&E - Casegoods', desc:'Side table at the sofa (spec: “Side Table @ Sofa”).',
   focus:V3(1.2,1.8,-28.3), dist:10});
 attach(pST, box(0.35,0,-27.7, 1.95,1.95,-28.9, cloneMat(MAT.wood)));
 var pTL = reg({id:'GR-200', tag:'GR-200', grp:'light', name:'Side Table Lamp', qty:1,
-  cat:'FF&E — Lighting', desc:'Table lamp on the sofa side table.',
+  cat:'FF&E - Lighting', desc:'Table lamp on the sofa side table.',
   focus:V3(1.2,3.0,-28.3), dist:9});
 attach(pTL, cyl(1.15, -28.3, 0.09, 1.95, 3.0, cloneMat(MAT.metal)));
 attach(pTL, cyl(1.15, -28.3, 0.42, 3.0, 3.55, cloneMat(MAT.lampsh)));
 var pFL = reg({id:'GR-205', tag:'GR-205', grp:'light', name:'Floor Lamp', qty:1,
-  cat:'FF&E — Lighting', desc:'Floor lamp (spec: “Floor Lamp @ Guest Suites”), window corner of the living zone.',
+  cat:'FF&E - Lighting', desc:'Floor lamp (spec: “Floor Lamp @ Guest Suites”), window corner of the living zone.',
   focus:V3(11.6,4.0,-34.3), dist:12});
 attach(pFL, cyl(11.6, -34.3, 0.09, 0.1, 4.9, cloneMat(MAT.metal)));
 attach(pFL, cyl(11.6, -34.3, 0.55, 4.9, 5.75, cloneMat(MAT.lampsh)));
 scenery(cyl(11.6,-34.3,0.55,0.08,0.14,MAT.metal));
 var pArt = reg({id:'GR-500', tag:'GR-500', grp:'art', name:'Art Above Sofa', qty:1,
-  cat:'FF&E — Art / Mirror', desc:'Framed artwork above the sleeper sofa.',
+  cat:'FF&E - Art / Mirror', desc:'Framed artwork above the sleeper sofa.',
   focus:V3(1.5,5.3,-32.4), dist:13});
 attach(pArt, box(0.12,4.1,-30.6, 0.22,6.4,-34.2, cloneMat(MAT.art)));
 attach(pArt, box(0.1,4.0,-30.5, 0.2,6.5,-34.3, cloneMat(MAT.frame)));
 
 /* ---- window treatment + PTAC ---- */
-var pShade = reg({id:'GR-400', tag:'GR-400', grp:'win', name:'Blackout & Sheer Roller Shade — MANUAL', qty:1,
-  cat:'FF&E — Window', desc:'Dual roller shade (blackout + sheer), manual operation, at the window bay.',
+var pShade = reg({id:'GR-400', tag:'GR-400', grp:'win', name:'Blackout & Sheer Roller Shade - MANUAL', qty:1,
+  cat:'FF&E - Window', desc:'Dual roller shade (blackout + sheer), manual operation, at the window bay.',
   focus:V3(6.6,6.4,-35.6), dist:15});
 attach(pShade, box(WX1-0.15,HEAD-0.05,-D+0.18, WX2+0.15,HEAD+0.5,-D+0.7, cloneMat(MAT.frame)));
 attach(pShade, box(WX1,4.6,-D+0.3, WX2,HEAD-0.05,-D+0.42, cloneMat(MAT.shade)));
-var pPtac = reg({id:'PTAC', tag:'PTAC', grp:'app', name:'PTAC — G.E. (context)', qty:1,
+var pPtac = reg({id:'PTAC', tag:'PTAC', grp:'app', name:'PTAC - G.E. (context)', qty:1,
   cat:'Mechanical · context, not in scope',
-  desc:'Packaged terminal A/C, G.E. AZ65 series, wall sleeve under the window. Shown for orientation — mechanical scope, not on the FF&E template.',
+  desc:'Packaged terminal A/C, G.E. AZ65 series, wall sleeve under the window. Shown for orientation - mechanical scope, not on the FF&E template.',
   focus:V3(6.6,1.0,-35.4), dist:12});
 attach(pPtac, box(4.9,0.1,-D+0.15, 8.3,1.5,-D+1.05, cloneMat(MAT.ptac)));
 scenery(box(5.1,0.95,-D+1.05, 8.1,1.35,-D+1.1, MAT.applDk));
 
 /* ---- bathroom ---- */
-/* shower SH-1 / SH-4 — bath-fixtures.json 08/09/26: Room-101 bath is a SHOWER,
+/* shower SH-1 / SH-4 - bath-fixtures.json 08/09/26: Room-101 bath is a SHOWER,
    not a tub (A530 / DB ITM-0645). Kohler Rely 30″×60″ pan, center drain, 4″
    threshold (SH-4, standard keys); Mincey Marble TS-VS surround, wall height
    80″; Delta T24859 trim; bi-pass sliding glass door, brushed aluminium, 24″
-   bar pull (A530 kn28). Head set in the 74–78″ maximize band (G402). */
+   bar pull (A530 kn28). Head set in the 74-78″ maximize band (G402). */
 var SHX1 = 0.45, SHX2 = 5.45, SHZ1 = -0.4, SHZ2 = -2.9;    /* 60″ × 30″ pan */
 scenery(box(SHX1,0,SHZ1, SHX2,0.12,SHZ2, MAT.porc));                        /* pan */
 scenery(box(SHX1,0.12,SHZ2+0.22, SHX2,0.333,SHZ2, MAT.porc));               /* 4″ threshold */
-scenery(box(0.42,0.05,-0.38, 5.62,6.79,-0.52, MAT.tile));                   /* surround back — 80″ */
-scenery(box(SHX2,0.05,SHZ1, SHX2+0.15,6.79,SHZ2, MAT.tile));                /* surround end — 80″ */
-scenery(cyl(5.36, -0.75, 0.06, 0.4, 6.33, MAT.chrome));                     /* riser — head 76″ AFF */
+scenery(box(0.42,0.05,-0.38, 5.62,6.79,-0.52, MAT.tile));                   /* surround back - 80″ */
+scenery(box(SHX2,0.05,SHZ1, SHX2+0.15,6.79,SHZ2, MAT.tile));                /* surround end - 80″ */
+scenery(cyl(5.36, -0.75, 0.06, 0.4, 6.33, MAT.chrome));                     /* riser - head 76″ AFF */
 scenery(box(5.0,6.23,-0.62, 5.36,6.33,-1.0, MAT.chrome));                   /* head arm */
 scenery(box(5.22,3.4,-0.62, 5.42,3.9,-1.05, MAT.chrome));                   /* T24859 valve trim */
-/* bi-pass sliding glass door — brushed alum tracks + 24″ bar pull */
+/* bi-pass sliding glass door - brushed alum tracks + 24″ bar pull */
 scenery(box(SHX1,0.333,SHZ2+0.12, SHX2,0.42,SHZ2-0.02, MAT.metal));         /* bottom track */
 scenery(box(SHX1,6.1,SHZ2+0.12, SHX2,6.25,SHZ2-0.02, MAT.metal));           /* top track */
 scenery(box(SHX1+0.02,0.42,SHZ2+0.1, SHX1+2.6,6.1,SHZ2+0.05, MAT.glass, true));
@@ -2306,12 +2323,12 @@ scenery(box(SHX1+2.4,0.42,SHZ2-0.01, SHX2-0.02,6.1,SHZ2-0.06, MAT.glass, true));
   scenery(pull); })();
 var pSoapD = reg({id:'HD-16', tag:'HD-16', grp:'bath', name:'Shower Soap Dispenser', qty:1, ada:true,
   cat:'Bath Accessory',
-  desc:'Surface-mounted shower soap dispenser, guestroom — set inside the 15–48″ AFF guest-controls reach band (G402 note 11; top of unit at 48″). A530: provide blocking for amenity dispenser as needed.',
+  desc:'Surface-mounted shower soap dispenser, guestroom - set inside the 15-48″ AFF guest-controls reach band (G402 note 11; top of unit at 48″). A530: provide blocking for amenity dispenser as needed.',
   focus:V3(1.6,3.7,-1.0), dist:8});
 attach(pSoapD, box(1.4,3.35,-0.52, 1.8,4.0,-0.68, cloneMat(MAT.chrome)));
 var pDish = reg({id:'HD-21', tag:'HD-21', grp:'bath', name:'Soap Dish', qty:1, ada:true,
   cat:'Bath Accessory',
-  desc:'Surface-mounted soap dish at the shower, inside the 15–48″ reach band. (Accessible-key tub band is 17–19″ AFF per G402 det 01; Room 101 is a standard shower key.) One of the few TA items not blocking-checked (G402 TA 14).',
+  desc:'Surface-mounted soap dish at the shower, inside the 15-48″ reach band. (Accessible-key tub band is 17-19″ AFF per G402 det 01; Room 101 is a standard shower key.) One of the few TA items not blocking-checked (G402 TA 14).',
   focus:V3(2.7,3.5,-1.0), dist:8});
 attach(pDish, box(2.5,3.35,-0.52, 2.95,3.6,-0.75, cloneMat(MAT.porc)));
 var pFoot = reg({id:'HD-18', tag:'HD-18', grp:'bath', name:'Shower Footrest', qty:1, ada:true,
@@ -2319,14 +2336,14 @@ var pFoot = reg({id:'HD-18', tag:'HD-18', grp:'bath', name:'Shower Footrest', qt
   desc:'Surface-mounted shower footrest at the shower. Blocking required (G402 TA 14.2); A530: provide blocking for footrest as needed.',
   focus:V3(4.3,1.8,-1.0), dist:8});
 attach(pFoot, box(4.0,1.7,-0.52, 4.65,2.0,-0.95, cloneMat(MAT.chrome)));
-var pGrab = reg({id:'HD-08', tag:'HD-08', grp:'bath', name:'Grab Bar ADA 24″ — Vertical', qty:1, flag:true, ada:true,
+var pGrab = reg({id:'HD-08', tag:'HD-08', grp:'bath', name:'Grab Bar ADA 24″ - Vertical', qty:1, flag:true, ada:true,
   cat:'Bath Accessory',
   desc:'24″ vertical-mount ADA grab bar at the shower control-end wall (length per A530 HD legend). Clearances 12″ above / 1½″ below per A530; blocking rated 250 lbs vertical + horizontal (G402); finish polished/brushed chrome, brushed nickel or stainless (G402 note 2).',
-  note:'ELEVATION-SOURCED — A530: “do not treat that as a takeoff”.',
+  note:'ELEVATION-SOURCED - A530: “do not treat that as a takeoff”.',
   focus:V3(5.36,4.0,-2.1), dist:9});
 attach(pGrab, cyl(5.36, -2.1, 0.09, 3.0, 5.0, cloneMat(MAT.chrome)));
 /* toilet */
-/* solid tile backer on the x=0 bath wall (WC + vanity run) — gives the wall
+/* solid tile backer on the x=0 bath wall (WC + vanity run) - gives the wall
    shelf, dispenser, mirror and sconce a real wall face (ghost walls read as
    empty air) */
 scenery(box(0.175,0.45,-3.35, 0.24,6.6,-11.3, MAT.tile));
@@ -2336,36 +2353,36 @@ scenery(box(0.3,0.4,-3.9, 0.95,2.6,-5.3, MAT.porc));
 scenery(cyl(1.45,-4.6,0.62,1.35,1.45,MAT.porc));
 var pTP = reg({id:'HD-03', tag:'HD-03', grp:'bath', name:'Toilet Tissue Dispenser', qty:1, flag:true, ada:true,
   cat:'Bath Accessory',
-  desc:'Toilet tissue dispenser beside the water closet (shower side — the 68″ vanity run fills the wall on the other side). Blocking required (G402 TA 1.2); items 27–80″ AFF protrude max 4″ from wall (G402 note 10).',
-  note:'ELEVATION-SOURCED — A530: “do not treat that as a takeoff”.',
+  desc:'Toilet tissue dispenser beside the water closet (shower side - the 68″ vanity run fills the wall on the other side). Blocking required (G402 TA 1.2); items 27-80″ AFF protrude max 4″ from wall (G402 note 10).',
+  note:'ELEVATION-SOURCED - A530: “do not treat that as a takeoff”.',
   focus:V3(1.0,2.2,-3.5), dist:8});
 attach(pTP, box(0.24,2.0,-3.25, 0.46,2.45,-3.75, cloneMat(MAT.chrome)));
 /* vanity GR-302 */
 var pVan = reg({id:'GR-302', tag:'GR-302', grp:'case', name:'Vanity @ Guest Bath', qty:1, ada:true,
-  cat:'FF&E — Casegoods',
-  desc:'Guest bath vanity casework, 68″W × 25″D × 34″H counter height per G402 details 03/06 (all 115 keys). Undermount rectangular lavatory — spec of record Decolav Callensia 1402-CWH (no cutsheet on Drive); massing shown at the proposed-sub AS Studio 0614.000 cutsheet dims: rim 19¾″ × 13¾″, bowl 6.44″ deep, rim 34″ AFF. ADA per accessible-vanity detail G402 04/05: counter 34″ max, 27″ knee clear, pipe wrap on trap/supplies (TA 24).',
+  cat:'FF&E - Casegoods',
+  desc:'Guest bath vanity casework, 68″W × 25″D × 34″H counter height per G402 details 03/06 (all 115 keys). Undermount rectangular lavatory - spec of record Decolav Callensia 1402-CWH (no cutsheet on Drive); massing shown at the proposed-sub AS Studio 0614.000 cutsheet dims: rim 19¾″ × 13¾″, bowl 6.44″ deep, rim 34″ AFF. ADA per accessible-vanity detail G402 04/05: counter 34″ max, 27″ knee clear, pipe wrap on trap/supplies (TA 24).',
   focus:V3(1.6,2.6,-8.4), dist:13});
 /* carcass 68″(5.667′) x 25″(2.083′), counter top at 34″ (2.833′) AFF */
 attach(pVan, box(0.15,0,-5.6, 2.23,2.72,-11.27, cloneMat(MAT.woodDk)));
 attach(pVan, box(0.1,2.72,-5.52, 2.31,2.833,-11.35, cloneMat(MAT.counter)));
-/* undermount rect bowl — rim 19.75″(z) x 13.75″(x), 6.44″ deep, rim 34″ AFF */
+/* undermount rect bowl - rim 19.75″(z) x 13.75″(x), 6.44″ deep, rim 34″ AFF */
 scenery(box(0.55,2.29,-7.62, 1.70,2.81,-9.26, MAT.applDk));
-/* faucet — Moen 9417F12 proposed sub: 6.5″ overall H, 4.875″ reach */
+/* faucet - Moen 9417F12 proposed sub: 6.5″ overall H, 4.875″ reach */
 scenery(cyl(0.42,-8.44,0.055,2.833,3.375,MAT.chrome));
 scenery(box(0.42,3.28,-8.5, 0.83,3.375,-8.38, MAT.chrome));
 var pVM = reg({id:'GR-501', tag:'GR-501', grp:'art', name:'Vanity Mirror', qty:1,
-  cat:'FF&E — Art / Mirror', desc:'Mirror above the guest bath vanity.',
+  cat:'FF&E - Art / Mirror', desc:'Mirror above the guest bath vanity.',
   focus:V3(1.2,4.8,-8.44), dist:10});
 attach(pVM, box(0.26,3.5,-7.14, 0.36,6.2,-9.74, cloneMat(MAT.glass)));
 attach(pVM, box(0.24,3.4,-7.04, 0.34,6.3,-9.84, cloneMat(MAT.frame)));
 var pVS = reg({id:'GR-203', tag:'GR-203', grp:'light', name:'Vanity Sconce', qty:1, flag:true,
-  cat:'FF&E — Lighting', desc:'Sconce at the vanity mirror.',
-  note:'LEGEND PRINTS “VANITY SCONE” (SIC). May be the same device as electrical fixture WS03 — equivalence not stated.',
+  cat:'FF&E - Lighting', desc:'Sconce at the vanity mirror.',
+  note:'LEGEND PRINTS “VANITY SCONE” (SIC). May be the same device as electrical fixture WS03 - equivalence not stated.',
   focus:V3(1.2,6.4,-8.44), dist:9});
 attach(pVS, box(0.24,6.35,-7.99, 0.46,6.6,-8.89, cloneMat(MAT.lampsh)));
 /* shelf, towel bar, bath hook */
 var pShelf = reg({id:'GR-321', tag:'GR-321', grp:'case', name:'Wall Shelf @ Bathroom', qty:1,
-  cat:'FF&E — Casegoods', desc:'Wall-mounted shelf in the guest bath, above the water closet — back edge on the tiled WC wall.',
+  cat:'FF&E - Casegoods', desc:'Wall-mounted shelf in the guest bath, above the water closet - back edge on the tiled WC wall.',
   focus:V3(0.9,4.8,-4.6), dist:9});
 attach(pShelf, box(0.24,4.7,-3.7, 1.3,4.85,-5.5, cloneMat(MAT.wood)));
 attach(pShelf, box(0.24,4.3,-3.98, 0.4,4.7,-3.86, cloneMat(MAT.metal)));   /* bracket */
@@ -2375,7 +2392,7 @@ attach(pShelf, box(0.24,4.3,-5.34, 0.4,4.7,-5.22, cloneMat(MAT.metal)));   /* br
 scenery(box(0.2,0.45,-11.325, 6.35,4.9,-11.27, MAT.tile));
 var pTB = reg({id:'HD-22', tag:'HD-22', grp:'bath', name:'Towel Bar 24″', qty:1, ada:true,
   cat:'Bath Accessory',
-  desc:'24″ towel bar (length per A530 HD legend) on the bath partition wall, both posts on the tiled wall face. Blocking required (G402 TA 5); protrusion max 4″ between 27–80″ AFF (G402 note 10).',
+  desc:'24″ towel bar (length per A530 HD legend) on the bath partition wall, both posts on the tiled wall face. Blocking required (G402 TA 5); protrusion max 4″ between 27-80″ AFF (G402 note 10).',
   focus:V3(4.0,3.6,-10.9), dist:9});
 (function(){ var bar = new THREE.Mesh(CYL, cloneMat(MAT.chrome));
   bar.scale.set(0.07, 2.0, 0.07); bar.rotation.z = Math.PI/2;
@@ -2396,7 +2413,7 @@ scenery(box(BATHX-0.14,0.01,-8.75, BATHX+0.14,0.09,-11.05, MAT.counter));
 } /* ---- end QQ family build ---- */
 
 /* ============================================================================
-   KING FAMILY BUILD — rooms 104-118, off A550 (King Studio · King Studio
+   KING FAMILY BUILD - rooms 104-118, off A550 (King Studio · King Studio
    Connecting) and A552 (King Studio Acc. Mod.).
 
    This is a SECOND ROOM, not the QQ shell with a new label on it. What is
@@ -2409,7 +2426,7 @@ scenery(box(BATHX-0.14,0.01,-8.75, BATHX+0.14,0.09,-11.05, MAT.counter));
      · The bathroom is at the CORRIDOR end against the bed/sofa wall, not
        mid-room, and the entry leg runs past it to the working wall.
      · ONE king bed, at the WINDOW end, head against the bed/sofa wall, facing
-       a 29'-0" working wall — not two queens amidships.
+       a 29'-0" working wall - not two queens amidships.
      · A ceiling-mounted divider soffit splits the bed zone from the lounge.
 
    Dimensions carry their status into the UI. PRINTED and MEASURED values are
@@ -2428,6 +2445,10 @@ var BIZ = G.bathIntZ;                  /* bath interior, window-side face     */
 var BZ0 = G.bathZ0 || 0;               /* corridor wall face inside the bath  */
 var ACC = !!G.acc;
 var CONNK = !!G.gr3CL;
+/* Accessible clear floor circles, filled in by the accessible bath block below
+   and read back by the label set. Null on every non-accessible key, because
+   A550 draws no clear floor circle at all. */
+var ACF1 = null, ACF2 = null;
 /* Zone anchors, derived once here because the shell needs them too (the accent
    wallcovering runs behind the bed and behind the sofa, and nowhere else).
    The bed is 76" wide about its centreline; the lounge is everything between
@@ -2441,13 +2462,13 @@ function kz(v){ return -v; }
 
 /* King-only materials. The photographs of room 110 (the demo key) name these
    colours: navy floating shelves, a dark plum-brown headboard, and a bathroom
-   mirror in a saturated yellow-orange frame — the strongest colour in the room. */
+   mirror in a saturated yellow-orange frame - the strongest colour in the room. */
 var KM = {
   navy:   std(0x2b3d5c, 0.7),
   plum:   std(0x4e333b, 0.85),
   goldFr: std(0xcf8a2c, 0.55),
   accent: std(0x3d4650, 0.9),
-  /* The demo key is furnished but NOT MADE UP — no linens are fitted on the
+  /* The demo key is furnished but NOT MADE UP - no linens are fitted on the
      mattress in any of the 24 photographs. Quilted grey ticking, not the crisp
      white the QQ exhibit uses, and it stops the top face blowing out. */
   matt:   std(0xc2ccd4, 0.88)
@@ -2468,17 +2489,17 @@ var D2A = G.d2aCL - G.d2aW/2, D2B = G.d2aCL + G.d2aW/2;    /* GR-2A opening     
 wallSeg(BPX, 0, D1A, 0, HL);
 wallSeg(D1B, 0, W, 0, HL);
 /* corridor wall at the bathroom. On room 118 this plane is set 1'-1 3/4" into
-   the room — the jog is MEASURED on A552 and happens exactly on the bath/entry
+   the room - the jog is MEASURED on A552 and happens exactly on the bath/entry
    partition line, so the return below closes it. */
 wallSeg(0, kz(BZ0), BPX, kz(BZ0), HL);
 if (BZ0 > 0.01) wallSeg(BPX, 0, BPX, kz(BZ0), HL);
-/* bed/sofa long wall — low over the bath, full height in the main room */
+/* bed/sofa long wall - low over the bath, full height in the main room */
 wallSeg(0, kz(BZ0), 0, kz(BPZ), HL);
 wallSeg(0, kz(BPZ), 0, kz(D), HM);
 /* working wall, in z pieces, each at the ceiling of the zone it stands in and
    with the GR-3 opening cut out where the room has one. On 118 that opening
-   STRADDLES the entry/main-room line — 9'-4 13/16" to 12'-8 13/16" against a
-   partition face at 10'-8 1/2" — which is what A552 draws. */
+   STRADDLES the entry/main-room line - 9'-4 13/16" to 12'-8 13/16" against a
+   partition face at 10'-8 1/2" - which is what A552 draws. */
 function wwRun(z0, z1){
   if (z1 - z0 < 0.02) return;
   var s = Math.min(Math.max(BPZ, z0), z1);
@@ -2524,14 +2545,14 @@ scenery(box(G.winX0,0,kz(D)-T/2, G.winX1,G.winStool,kz(D)+T/2, MAT.base));
              V3(0,0,-0.01),V3(0,HL,-0.01),      V3(W,0,-0.01),V3(W,HL,-0.01)];
   scenery(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts), edgeMat));
 })();
-/* ceiling-mounted divider soffit — keynote 8, 'CEILING MOUNTED DIVIDER, PROVIDE
+/* ceiling-mounted divider soffit - keynote 8, 'CEILING MOUNTED DIVIDER, PROVIDE
    BLOCKING AS REQUIRED'. Length out from the bed/sofa wall and width are both
    PRINTED; its DEPTH below the slab is not, so it is drawn shallow. */
 scenery(box(0, HM-0.55, kz(G.sofZ0), G.sofX1, HM, kz(G.sofZ1), MAT.base));
 
 /* Solid accent bands on the bed/sofa wall. The room-110 photographs show a
-   tone-on-tone herringbone wallcovering behind the bed AND behind the sofa —
-   two runs, not one continuous slab — and the leaders that tag it on A550 set
+   tone-on-tone herringbone wallcovering behind the bed AND behind the sofa -
+   two runs, not one continuous slab - and the leaders that tag it on A550 set
    no limits, so its true extent is UNPROVEN. Drawn as two runs: accurate to the
    photographs, and it leaves the divider bay open so a camera on this side can
    see the working wall instead of a wall of paint. It also gives the headboard,
@@ -2568,7 +2589,7 @@ scenery(box(W+0.6,0,-0.2, W+9.5,3.0,kz(12.0), MAT.ghost, true));
 scenery(box(-2,-0.02,1.2, W+9.5,0.06,4.6, MAT.ghost, true));
 
 /* ============================================================
-   KING ITEMS — the room package off platform/data/floor1-staged.json, in the
+   KING ITEMS - the room package off platform/data/floor1-staged.json, in the
    sheet's own order. Template scope is FF&E + Appliance + Bath Accessory, the
    same scope the QQ exhibit carries, plus GR-3 as a room feature.
    ============================================================ */
@@ -2578,22 +2599,26 @@ scenery(box(-2,-0.02,1.2, W+9.5,0.06,4.6, MAT.ghost, true));
    window end to corridor end: closet, hook panel + sconce, television, the
    GR-320 shelves over the desk, dishwasher, microwave, refrigerator.
    THE MODULE WIDTHS ARE NOT. Not one module on either 29'-0" working wall is
-   dimensioned — the sheet substitutes a build sequence for dimensions ('START
+   dimensioned - the sheet substitutes a build sequence for dimensions ('START
    AT REFRIGERATOR HOLD DIMENSION AND PROCEED UP THE WALL'). The only printed
    horizontals on the whole wall are the GR-320 upper shelf (3'-6" long, running
    15'-8" to 19'-2" from the window end) and the 6" offset between the two
    shelves; both are honoured exactly. Everything else is proportioned between
-   the fixed points — the entry-leg partition, the GR-3 opening where there is
-   one, and the window wall — and is flagged stylized.                        */
+   the fixed points - the entry-leg partition, the GR-3 opening where there is
+   one, and the window wall - and is flagged stylized.                        */
 var WW = {};
 if (ACC){
   WW.fridge=[0.55,2.55]; WW.counter=[2.8,7.05]; WW.mw=[2.95,4.45]; WW.dw=[5.25,6.9];
   WW.desk=[13.2,17.6]; WW.tv=[18.0,21.6]; WW.hooks=null; WW.closet=[22.0,28.4];
 } else if (CONNK){
-  /* Dropping GR-3 into the working wall pushes the closet / TV / desk group
-     toward the window. Elevation 09 shows it; the spec measures the shift at
-     ABOUT 4'-3" and forbids encoding that as a hard number, so the group is
-     placed against the door opening instead and labelled as a reading. */
+  /* Elevation 09 puts GR-3 between the desk and the kitchenette, which pushes
+     the closet / TV / desk group toward the window. The spec marks that shift
+     UNPROVEN and forbids encoding 4'-3" as a hard number, so no shift is
+     applied to the standard layout at all. Instead the group is set out from
+     the one PROVEN fixture on this wall: the desk starts just past the GR-3
+     far jamb (11'-0" CL + half of the 3'-4" R.O. = 12'-8"), and the kitchenette
+     keeps the standard corridor-end run below it. Module widths are still
+     undimensioned on every sheet and stay flagged EXHIBIT ONLY on the card. */
   WW.fridge=[0.55,2.55]; WW.counter=[2.75,7.0]; WW.mw=[3.0,4.7]; WW.dw=[5.05,6.65];
   WW.desk=[13.0,17.4]; WW.tv=[17.8,21.4]; WW.hooks=[21.7,23.9]; WW.closet=[24.2,28.5];
 } else {
@@ -2617,13 +2642,13 @@ var WWX = W - 2.05;                 /* room-side face of the working-wall run */
 if (CONNK){
 var pDoor = reg({id:'GR-3', tag:'GR-3', grp:'door',
   name:'Connecting Door → Room ' + (PARTNER_OF[ROOM_NO] || '?'), qty:1,
-  qdisp:'1 — ONE LEAF THIS ROOM (pair spans 116/118)',
+  qdisp:'1 - ONE LEAF THIS ROOM (pair spans 116/118)',
   cat:'Doors · room feature', flag:true, flagChip:'RFI', flagCard:'SHEETS DISAGREE',
-  desc:'GR-3 in the WORKING wall — the wall this key shares with room ' + (PARTNER_OF[ROOM_NO]||'?') +
+  desc:'GR-3 in the WORKING wall - the wall this key shares with room ' + (PARTNER_OF[ROOM_NO]||'?') +
        '. Centreline ' + (ACC ? '11′-0 13/16″ off the corridor wall face, MEASURED on A552 view 01'
                              : '11′-0″ off the corridor wall inside face, PRINTED on A550 view 01.1 and the ONLY dimension that view carries') +
        '. Keynote 9: ALTERNATE LOCATION OF DOOR FOR CONNECTING ROOMS TO ACCESSIBLE ROOMS. Keynote 48 hinge stop. A600 remark a provides two doors per communicating location, one leaf hung each side, so this key carries ONE leaf.',
-  note:'FLAGGED — THE TWO SHEETS DISAGREE BY ABOUT 3/4″ ON THE SAME OPENING. A550 view 01.1 puts room 116’s GR-3 centreline at 11′-0″ from its corridor wall face; A552 view 01 puts room 118’s at 11′-0 13/16″ from its own. It is one hole in one wall. Set it out from ONE datum on site and raise an RFI before framing. Leaf width is printed on neither sheet — A600.',
+  note:'FLAGGED - THE TWO SHEETS DISAGREE BY ABOUT 3/4″ ON THE SAME OPENING. A550 view 01.1 puts room 116’s GR-3 centreline at 11′-0″ from its corridor wall face; A552 view 01 puts room 118’s at 11′-0 13/16″ from its own. It is one hole in one wall. Set it out from ONE datum on site and raise an RFI before framing. Leaf width is printed on neither sheet - A600.',
   focus:V3(W-1.5,3.4,kz(G.gr3CL)), dist:16});
 attach(pDoor, box(W-0.3,0,kz(G3A), W+0.3,7.0,kz(G3A)+0.3, cloneMat(MAT.cyanFr)));
 attach(pDoor, box(W-0.3,0,kz(G3B)-0.3, W+0.3,7.0,kz(G3B), cloneMat(MAT.cyanFr)));
@@ -2646,9 +2671,9 @@ var pWW = reg({id:G.ww, tag:G.ww, grp:'case',
   name: ACC ? 'Working Wall @ King Studio Suite Accessible'
             : (CONNK ? 'Working Wall @ King Studio Suite Connector'
                      : 'Working Wall @ King Studio Suite'), qty:1,
-  cat:'FF&E — Casegoods · millwork',
-  desc:'The continuous 29′-0″ millwork run: kitchenette, desk, television dresser, closet and luggage bay. On-sheet instruction box, verbatim: “WORKING WALL INSTALLATION: LAYOUT AND CONSTRUCTION IS TO START AT REFRIGERATOR HOLD DIMENSION AND PROCEED UP THE WALL FROM THAT END — FINAL INSTALLATION IS SHELF AND ROD AT CLOSET. THESE ARE TO BE SCRIBED AT WALL AS REQUIRED.”',
-  note:'MODULE WIDTHS ARE NOT DIMENSIONED ANYWHERE. Two horizontal dimensions exist on the whole wall — the 3′-6″ GR-320 upper shelf and the 6″ offset between the two shelves. Everything else here is proportioned between the entry partition, the GR-3 opening and the window, and is EXHIBIT ONLY. Set out on site from the refrigerator hold dimension, per the sheet.',
+  cat:'FF&E - Casegoods · millwork',
+  desc:'The continuous 29′-0″ millwork run: kitchenette, desk, television dresser, closet and luggage bay. On-sheet instruction box, verbatim: “WORKING WALL INSTALLATION: LAYOUT AND CONSTRUCTION IS TO START AT REFRIGERATOR HOLD DIMENSION AND PROCEED UP THE WALL FROM THAT END - FINAL INSTALLATION IS SHELF AND ROD AT CLOSET. THESE ARE TO BE SCRIBED AT WALL AS REQUIRED.”',
+  note:'MODULE WIDTHS ARE NOT DIMENSIONED ANYWHERE. Two horizontal dimensions exist on the whole wall - the 3′-6″ GR-320 upper shelf and the 6″ offset between the two shelves. Everything else here is proportioned between the entry partition, the GR-3 opening and the window, and is EXHIBIT ONLY. Set out on site from the refrigerator hold dimension, per the sheet.',
   focus:V3(W-1.6,3.4,kz(D*0.55)), dist:26});
 /* Carcass. NOT a continuous 6'-6" panel down all 29'-0": the room-110
    photographs show discrete modules with open wall between them, and a solid
@@ -2698,24 +2723,24 @@ attach(pWW, box(WWX+0.25,5.55,kz(WW.closet[0])+0.2, W-0.3,5.7,kz(WW.closet[1])-0
   rod.position.set(MX(W-1.1), 5.15, kz((WW.closet[0]+WW.closet[1])/2)); scenery(rod); })();
 
 /* ---- kitchenette appliances --------------------------------------------- */
-var pFr = reg({id:'901', tag:'901', grp:'app', name:'Refrigerator — Danby 10.1 cu ft', qty:1,
+var pFr = reg({id:'901', tag:'901', grp:'app', name:'Refrigerator - Danby 10.1 cu ft', qty:1,
   cat:'Appliance',
-  desc:'Danby DFF101B1BSSDB, 10.1 cu ft apartment-size top-mount, stainless, 115 V / 160 W, R600a, ENERGY STAR. At the corridor end against the entry wall — the working wall is set out FROM this unit’s hold dimension.',
+  desc:'Danby DFF101B1BSSDB, 10.1 cu ft apartment-size top-mount, stainless, 115 V / 160 W, R600a, ENERGY STAR. At the corridor end against the entry wall - the working wall is set out FROM this unit’s hold dimension.',
   focus:V3(W-1.2,2.6,kz(1.6)), dist:13});
 attach(pFr, box(WWX+0.1,0.06,kz(WW.fridge[0]), W-0.35,5.05,kz(WW.fridge[1]), cloneMat(MAT.appl)));
 attach(pFr, box(WWX+0.04,3.3,kz(WW.fridge[0])+0.12, WWX+0.12,3.4,kz(WW.fridge[1])-0.12, cloneMat(MAT.chrome)));
-var pMw = reg({id: ACC ? 'MW-CT' : 'kn 11', tag: ACC ? '—' : 'KN 11', grp:'app',
-  name: ACC ? 'Countertop Microwave (untagged)' : 'OTR Microwave — wall-affixed', qty:1,
+var pMw = reg({id: ACC ? 'MW-CT' : 'kn 11', tag: ACC ? '-' : 'KN 11', grp:'app',
+  name: ACC ? 'Countertop Microwave (untagged)' : 'OTR Microwave - wall-affixed', qty:1,
   cat: ACC ? 'Appliance · untagged' : 'Appliance · keynote',
-  desc: ACC ? 'Danby DBMW1126BBS countertop microwave, 1.1 cu ft, 900 W. The accessible key takes a COUNTERTOP unit, not the wall-affixed over-the-range microwave the standard King carries — reach range.'
+  desc: ACC ? 'Danby DBMW1126BBS countertop microwave, 1.1 cu ft, 900 W. The accessible key takes a COUNTERTOP unit, not the wall-affixed over-the-range microwave the standard King carries - reach range.'
             : 'Danby DOM16A2SSDB over-the-range microwave, 1.6 cu ft, 1000 W, 300 CFM, brackets included. Keynote 11 “RANGE TOP STYLE MICROWAVE AFFIXED TO WALL”; keynote 36 supplies the outlet above it at 6′-7″ AFF (PRINTED).',
   focus:V3(W-1.2,4.6,kz((WW.mw[0]+WW.mw[1])/2)), dist:11});
 if (ACC) attach(pMw, box(WWX+0.35,3.05,kz(WW.mw[0]), W-0.45,4.35,kz(WW.mw[1]), cloneMat(MAT.appl)));
 else     attach(pMw, box(WWX+0.15,4.3,kz(WW.mw[0]), W-0.42,5.5,kz(WW.mw[1]), cloneMat(MAT.appl)));
-var pDw = reg({id:'902', tag:'902', grp:'app', name:'Dishwasher — Danby 18″ or 24″', qty:1, flag:true,
+var pDw = reg({id:'902', tag:'902', grp:'app', name:'Dishwasher - Danby 18″ or 24″', qty:1, flag:true,
   cat:'Appliance',
   desc:'Danby DDW18D1ESS (18″, 10 place settings) or DDW2404EBSS (24″, 12 place settings), under the kitchenette counter. Undercounter datum 1′-9″ AFF (PRINTED A550/05).',
-  note:'BOTH MODELS CARRIED — nothing in the set distinguishes the 18″ from the 24″ by room type. DO NOT PICK ONE.',
+  note:'BOTH MODELS CARRIED - nothing in the set distinguishes the 18″ from the 24″ by room type. DO NOT PICK ONE.',
   focus:V3(W-1.2,1.6,kz((WW.dw[0]+WW.dw[1])/2)), dist:12});
 attach(pDw, box(WWX+0.18,0.1,kz(WW.dw[0]), W-0.35,2.85,kz(WW.dw[1]), cloneMat(MAT.appl)));
 attach(pDw, box(WWX+0.11,2.5,kz(WW.dw[0])+0.1, WWX+0.19,2.6,kz(WW.dw[1])-0.1, cloneMat(MAT.chrome)));
@@ -2724,26 +2749,26 @@ attach(pDw, box(WWX+0.11,2.5,kz(WW.dw[0])+0.1, WWX+0.19,2.6,kz(WW.dw[1])-0.1, cl
   var sz = WW.dw[0] - 1.9, sz2 = WW.dw[0] - 0.35;
   scenery(box(WWX+0.28,2.96,kz(sz), W-0.55,3.06,kz(sz2), MAT.applDk));
   scenery(cyl(W-1.35, kz((sz+sz2)/2), 0.05, 3.05, 3.75, MAT.chrome));
-  var pDisp = reg({id:'DISP', tag:'—', grp:'app', name:'Garbage Disposer — Moen MGXP33C', qty:1, flag:true,
+  var pDisp = reg({id:'DISP', tag:'-', grp:'app', name:'Garbage Disposer - Moen MGXP33C', qty:1, flag:true,
     cat:'Appliance · untagged',
     desc:'Garbage disposer at the kitchenette sink, Moen MGXP33C.',
-    note:'CARRIED WITHOUT A TAG — no disposer symbol on A550 or A552 and none in P104; the dedicated circuit is the only evidence it exists.',
+    note:'CARRIED WITHOUT A TAG - no disposer symbol on A550 or A552 and none in P104; the dedicated circuit is the only evidence it exists.',
     focus:V3(W-1.3,2.2,kz((sz+sz2)/2)), dist:9});
   attach(pDisp, cyl(W-1.35, kz((sz+sz2)/2), 0.32, 1.95, 2.9, cloneMat(MAT.applDk)));
 })();
 
 /* ---- desk group ---------------------------------------------------------- */
 var pSh = reg({id:'GR-320', tag:'GR-320', grp:'case', name:'Decorative Shelves above Desk', qty:1,
-  cat:'FF&E — Casegoods',
+  cat:'FF&E - Casegoods',
   desc:'Two thin cantilevered shelves over the desk, navy (room-110 photographs), no visible brackets. Lower shelf 3′-8″ AFF (PRINTED); upper 5′-0″ AFF (3′-8″ plus the printed 1′-4″ clear between them).' +
-       (!ACC && !CONNK ? ' Upper shelf 3′-6″ long, running 15′-8″ to 19′-2″ from the window end — one of only two horizontal dimensions on the whole 29′-0″ wall — with the two shelf ends offset 6″.'
+       (!ACC && !CONNK ? ' Upper shelf 3′-6″ long, running 15′-8″ to 19′-2″ from the window end - one of only two horizontal dimensions on the whole 29′-0″ wall - with the two shelf ends offset 6″.'
                        : (CONNK ? ' Elevation 09 prints 3′-7 1/2″ and a 4 1/2″ end offset for the connector layout, but not where the pair sits along the wall.'
                                 : ' A552’s elevation heights are transcribed, not re-measured; the run position is not printed.')),
   focus:V3(W-1.8,4.3,kz((SH_UP[0]+SH_UP[1])/2)), dist:11});
 attach(pSh, box(WWX+0.55,4.95,kz(SH_UP[0]), W-0.3,5.08,kz(SH_UP[1]), cloneMat(KM.navy)));
 attach(pSh, box(WWX+0.55,3.62,kz(SH_LO[0]), W-0.3,3.75,kz(SH_LO[1]), cloneMat(KM.navy)));
 var pCh = reg({id:'GR-103', tag:'GR-103', grp:'seat', name:'Ergonomic Task Chair', qty:1,
-  cat:'FF&E — Seating', desc:'Task chair at the working-wall desk — mesh back, red-brown seat in the room-110 photographs.',
+  cat:'FF&E - Seating', desc:'Task chair at the working-wall desk - mesh back, red-brown seat in the room-110 photographs.',
   focus:V3(W-3.0,1.8,kz((WW.desk[0]+WW.desk[1])/2)), dist:10});
 (function(){
   var cz = kz((WW.desk[0]+WW.desk[1])/2 + 0.4), cx = W - 3.05;
@@ -2753,7 +2778,7 @@ var pCh = reg({id:'GR-103', tag:'GR-103', grp:'seat', name:'Ergonomic Task Chair
   scenery(cyl(cx, cz, 0.55, 0.3, 0.38, MAT.metal));
 })();
 var pDL = reg({id:'GR-201', tag:'GR-201', grp:'light', name:'Desk Lamp', qty:1,
-  cat:'FF&E — Lighting', desc:'Desk lamp on the working-wall counter.',
+  cat:'FF&E - Lighting', desc:'Desk lamp on the working-wall counter.',
   focus:V3(W-1.4,3.4,kz(WW.desk[1]-0.6)), dist:8});
 attach(pDL, cyl(W-1.3, kz(WW.desk[1]-0.6), 0.07, 3.0, 3.9, cloneMat(MAT.metal)));
 attach(pDL, cyl(W-1.3, kz(WW.desk[1]-0.6), 0.3, 3.9, 4.3, cloneMat(MAT.lampsh)));
@@ -2771,8 +2796,8 @@ var pTV = reg({id:'903', tag:'903', grp:'app', name:'Television', qty:1,
 })();
 if (ACC){
   var pTL2 = reg({id:'GR-206', tag:'GR-206', grp:'light', name:'Table Lamp @ Accessible Working Wall', qty:1,
-    cat:'FF&E — Lighting',
-    desc:'Table lamp on the accessible working wall. Present on A552 only — the standard King carries the GR-204 hook sconce in its place.',
+    cat:'FF&E - Lighting',
+    desc:'Table lamp on the accessible working wall. Present on A552 only - the standard King carries the GR-204 hook sconce in its place.',
     focus:V3(W-1.5,4.1,kz(WW.tv[1]-0.6)), dist:9});
   attach(pTL2, cyl(W-1.45, kz(WW.tv[1]-0.6), 0.08, 3.5, 4.35, cloneMat(MAT.metal)));
   attach(pTL2, cyl(W-1.45, kz(WW.tv[1]-0.6), 0.38, 4.35, 4.85, cloneMat(MAT.lampsh)));
@@ -2781,7 +2806,7 @@ if (ACC){
 /* ---- closet drapery + hook sconce ---------------------------------------- */
 var pCD = reg({id:G.closet, tag:G.closet, grp:'win',
   name: ACC ? 'ADA Closet Drapery @ Guest Suite' : 'Closet Drapery @ Guest Suite', qty:1,
-  cat:'FF&E — Window',
+  cat:'FF&E - Window',
   desc:'Grey fabric curtain closing the open face of the wardrobe / luggage bay in lieu of a door. The unit tops out at 6′-6″ AFF (PRINTED); rod, shelf and LED strip sit inside it. Final working-wall install is “SHELF AND ROD AT CLOSET”, scribed at wall.',
   focus:V3(W-2.0,3.4,kz((WW.closet[0]+WW.closet[1])/2)), dist:13});
 (function(){
@@ -2793,7 +2818,7 @@ var pCD = reg({id:G.closet, tag:G.closet, grp:'win',
 })();
 if (G.hookSconce && WW.hooks){
   var pS204 = reg({id:G.hookSconce, tag:G.hookSconce, grp:'light', name:'Sconce @ Wall Hook, working wall', qty:1,
-    cat:'FF&E — Lighting',
+    cat:'FF&E - Lighting',
     desc:'Reading light on the horizontal hook panel above the wardrobe bench (A530 legend prints “SCONE @WALL HOOK” sic). Centreline 5′-6″ AFF, the same 5′-6″ that locates the hook panel (PRINTED A550/05 and /09).',
     focus:V3(W-1.6,5.6,kz((WW.hooks[0]+WW.hooks[1])/2)), dist:9});
   sconce(pS204, W-0.5, 5.5, kz((WW.hooks[0]+WW.hooks[1])/2), Math.PI);
@@ -2803,23 +2828,23 @@ if (G.hookSconce && WW.hooks){
 /* BEDZ0 / BEDZ1 are set with the other zone anchors at the top of this block. */
 var pBase = reg({id:G.bedBase, tag:G.bedBase, grp:'bed',
   name: ACC ? 'King ACCESSIBLE Bed Base' : 'King Bed Base', qty:1,
-  cat:'FF&E — Bedding',
-  desc:(ACC ? 'Accessible king bed base — A552 substitutes GR-603.ADA for the standard GR-603.'
+  cat:'FF&E - Bedding',
+  desc:(ACC ? 'Accessible king bed base - A552 substitutes GR-603.ADA for the standard GR-603.'
             : 'King bed base / platform, low and dark in the room-110 photographs.'),
   focus:V3(3.4,0.8,kz(G.bedCL)), dist:18});
 var pWrap = reg({id:G.bedWrap, tag:G.bedWrap, grp:'bed',
   name: ACC ? 'King Bed Skirt' : 'King Box Spring Cover', qty:1,
-  cat:'FF&E — Bedding',
-  desc:(ACC ? 'King bed skirt — A552 substitutes GR-603.1 for the standard GR-601.1 box spring cover.'
+  cat:'FF&E - Bedding',
+  desc:(ACC ? 'King bed skirt - A552 substitutes GR-603.1 for the standard GR-601.1 box spring cover.'
             : 'King box spring cover.'),
   focus:V3(3.4,1.6,kz(G.bedCL)), dist:18});
 var pMatt = reg({id:'GR-601', tag:'GR-601', grp:'bed', name:'King Mattress Set', qty:1,
-  cat:'FF&E — Bedding',
+  cat:'FF&E - Bedding',
   desc:'King mattress set (Beautyrest Hospitality label visible in the room-110 photographs). Centre supports per vendor recommendation.',
-  note:'AS-BUILT NOTE — the demo key is furnished but NOT MADE UP: no linens are fitted on the mattress in any of the 24 photographs.',
+  note:'AS-BUILT NOTE - the demo key is furnished but NOT MADE UP: no linens are fitted on the mattress in any of the 24 photographs.',
   focus:V3(3.4,2.4,kz(G.bedCL)), dist:18});
 var pHead = reg({id:'GR-301', tag:'GR-301', grp:'case', name:'King Headboard', qty:1,
-  cat:'FF&E — Casegoods',
+  cat:'FF&E - Casegoods',
   desc:'Upholstered king headboard, wall-mounted on the bed/sofa wall against the herringbone accent wallcovering. Dark plum-brown in the room-110 photographs.',
   focus:V3(1.4,3.2,kz(G.bedCL)), dist:18});
 attach(pBase, box(0.2,0,kz(BEDZ0)+0.08, 6.9,0.7,kz(BEDZ1)-0.08, cloneMat(MAT.plinth)));
@@ -2832,16 +2857,16 @@ attach(pHead, box(0.05,0.75,kz(BEDZ0)-0.35, 0.44,4.45,kz(BEDZ1)+0.35, cloneMat(K
    on the view-04 bed-wall chain, at 2'-1 1/4" and 10'-2 1/8" from the window
    wall; those two positions are what put the nightstands where they are, and
    their midpoint is the bed centreline. A552 carries no equivalent chain, so
-   room 118's pair is set off its own bed instead — and says so. */
+   room 118's pair is set off its own bed instead - and says so. */
 var NSW = G.nsWin || (G.bedCL + 44*KIN);
 var NSC = G.nsCor || (G.bedCL - 44*KIN);
 var pNS1 = reg({id:'GR-319', tag:'GR-319', grp:'case', name:'Nightstand @ Right', qty:1,
-  cat:'FF&E — Casegoods',
+  cat:'FF&E - Casegoods',
   desc:'Light woodgrain nightstand with an open shelf below and integrated power/data in the top face, at the WINDOW side of the bed.' +
        (G.nsWin ? ' Set at the printed device group 2′-1 1/4″ off the window wall (A550 view 04).' : ' A552 prints no locating chain for it.'),
   focus:V3(1.0,2.0,kz(NSW)), dist:9});
 var pNS2 = reg({id:'GR-323', tag:'GR-323', grp:'case', name:'Nightstand @ Left', qty:1,
-  cat:'FF&E — Casegoods',
+  cat:'FF&E - Casegoods',
   desc:'Matching nightstand at the CORRIDOR side of the bed.' +
        (G.nsCor ? ' Set at the printed device group 10′-2 1/8″ off the window wall (A550 view 04); the two groups are 8′-1″ apart, PRINTED.' : ' A552 prints no locating chain for it.'),
   focus:V3(1.0,2.0,kz(NSC)), dist:9});
@@ -2855,18 +2880,18 @@ var pPhone = reg({id:'905', tag:'905', grp:'app', name:'Telephone', qty:1,
   cat:'Appliance', desc:'Guestroom telephone on the corridor-side nightstand (GR-323).',
   focus:V3(0.9,2.6,kz(NSC)), dist:7});
 attach(pPhone, box(0.55,2.2,kz(NSC)-0.1, 1.28,2.5,kz(NSC)+0.34, cloneMat(MAT.appl)));
-/* nightstand sconces — CL 4'-4" AFF, PRINTED on A550 view 07 */
+/* nightstand sconces - CL 4'-4" AFF, PRINTED on A550 view 07 */
 var pS202 = reg({id:'GR-202', tag:'GR-202', grp:'light', name:'Nightstand Sconce', qty:2,
-  cat:'FF&E — Lighting',
+  cat:'FF&E - Lighting',
   desc:'Wall sconce over each nightstand, centreline 4′-4″ AFF (PRINTED A550/07), backplates on the bed/sofa wall.',
-  note:'AS-BUILT DIVERGENCE — the room-110 photographs show slim chrome FLOOR-STANDING globe lamps beside the nightstands instead of wall sconces. The drawing governs what was specified; the photograph governs what is there. Reconcile before the FF&E close-out.',
+  note:'AS-BUILT DIVERGENCE - the room-110 photographs show slim chrome FLOOR-STANDING globe lamps beside the nightstands instead of wall sconces. The drawing governs what was specified; the photograph governs what is there. Reconcile before the FF&E close-out.',
   focus:V3(0.9,4.4,kz(G.bedCL)), dist:12});
 sconce(pS202, 0.27, 4.333, kz(NSW), 0);
 sconce(pS202, 0.27, 4.333, kz(NSC), 0);
 if (ACC){
   var pS208 = reg({id:'GR-208', tag:'GR-208', grp:'light', name:'Nightstand Sconce @ QUEEN QUEEN SIDE', qty:1,
-    cat:'FF&E — Lighting',
-    desc:'Second sconce type carried on this key only. Present on A552 (room 118) and absent on A551 (room 438) — the tag is one of the three that resolved this room to A552 rather than A551.',
+    cat:'FF&E - Lighting',
+    desc:'Second sconce type carried on this key only. Present on A552 (room 118) and absent on A551 (room 438) - the tag is one of the three that resolved this room to A552 rather than A551.',
     focus:V3(0.9,4.4,kz(NSC-1.9)), dist:11});
   sconce(pS208, 0.27, 4.333, kz(NSC-1.9), 0);
 }
@@ -2875,7 +2900,7 @@ if (ACC){
 var SOFC = (G.sofZ0 + G.sofZ1)/2;
 var pDD = reg({id:G.divider, tag:G.divider, grp:'win',
   name: ACC ? 'ADA Divider Drapery' : 'Divider Drapery', qty:1,
-  cat:'FF&E — Window',
+  cat:'FF&E - Window',
   desc:'Coarse-weave divider panel on large chrome grommets, floor to ceiling, separating the bed zone from the lounge. Its soffit is the only thing on the sheet that fixes where one zone ends and the other begins: ' +
        (ACC ? '4′-4″ out from the bed/sofa wall, 1′-1″ wide, its corridor edge 6′-11 1/2″ off the bath partition (all PRINTED A552/02).'
             : '4′-4″ out from the bed/sofa wall, 1′-1″ wide, its window edge 10′-9 1/2″ off the window wall (all PRINTED A550/02).'),
@@ -2889,7 +2914,7 @@ var pDD = reg({id:G.divider, tag:G.divider, grp:'win',
   }
 })();
 var pDDH = reg({id:'GR-402.1', tag:'GR-402.1', grp:'win', name:'Divider Drapery Hardware', qty:1,
-  cat:'FF&E — Window',
+  cat:'FF&E - Window',
   desc:'Exposed ceiling-mounted track / rod in the divider soffit. Keynote 8: provide blocking as required.',
   focus:V3(2.2,HM-0.6,kz(SOFC)), dist:14});
 attach(pDDH, box(0.05,HM-0.68,kz(SOFC)-0.07, G.sofX1,HM-0.55,kz(SOFC)+0.07, cloneMat(MAT.chrome)));
@@ -2897,16 +2922,16 @@ attach(pDDH, box(0.05,HM-0.68,kz(SOFC)-0.07, G.sofX1,HM-0.55,kz(SOFC)+0.07, clon
 /* ---- lounge zone --------------------------------------------------------- */
 /* LZ0 / LZ1 / SOF0 / SOF1 are set with the other zone anchors at the top. */
 var pST = reg({id:'GR-318', tag:'GR-318', grp:'case', name:'Sofa Table @ Sofa', qty:1,
-  cat:'FF&E — Casegoods', desc:'Small woodgrain side table at the bath end of the sofa.',
+  cat:'FF&E - Casegoods', desc:'Small woodgrain side table at the bath end of the sofa.',
   focus:V3(1.0,1.8,kz(LZ0+0.7)), dist:9});
 attach(pST, box(0.2,0,kz(LZ0), 1.8,1.95,kz(LZ0+1.4), cloneMat(MAT.wood)));
 var pTL = reg({id:'GR-200', tag:'GR-200', grp:'light', name:'Side Table Lamp', qty:1,
-  cat:'FF&E — Lighting', desc:'Table lamp with a dark spherical base on the sofa side table.',
+  cat:'FF&E - Lighting', desc:'Table lamp with a dark spherical base on the sofa side table.',
   focus:V3(1.0,3.0,kz(LZ0+0.7)), dist:8});
 attach(pTL, cyl(1.0, kz(LZ0+0.7), 0.22, 1.95, 2.45, cloneMat(MAT.applDk)));
 attach(pTL, cyl(1.0, kz(LZ0+0.7), 0.4, 2.45, 3.1, cloneMat(MAT.lampsh)));
 var pSofa = reg({id:'GR-101', tag:'GR-101', grp:'seat', name:'Sleeper Sofa', qty:1,
-  cat:'FF&E — Seating',
+  cat:'FF&E - Seating',
   desc:'Two-seat sleeper sofa in dark grey-blue tweed against the accent wall, between the bathroom and the divider. Keynote 21 marks the extent of the sleeper.',
   note:'THE SOFA ITSELF IS UNDIMENSIONED, and keynote 39 “CENTER ARTWORK OVER SOFA” is the only horizontal rule anywhere near it.',
   focus:V3(2.0,1.8,kz((SOF0+SOF1)/2)), dist:14});
@@ -2915,8 +2940,8 @@ attach(pSofa, box(0.2,1.55,kz(SOF0), 1.0,3.0,kz(SOF1), cloneMat(MAT.uphol)));
 attach(pSofa, box(0.2,1.55,kz(SOF0), 3.15,2.3,kz(SOF0+0.72), cloneMat(MAT.seatDk)));
 attach(pSofa, box(0.2,1.55,kz(SOF1-0.72), 3.15,2.3,kz(SOF1), cloneMat(MAT.seatDk)));
 var pArt = reg({id:'GR-500', tag:'GR-500', grp:'art', name:'Art Above Sofa', qty:1,
-  cat:'FF&E — Art / Mirror',
-  desc:'One large landscape print, black frame — a black-and-white photograph of the grille and headlights of a vintage car in the room-110 photographs. Centreline 4′-0 1/2″ AFF (PRINTED A550/07).',
+  cat:'FF&E - Art / Mirror',
+  desc:'One large landscape print, black frame - a black-and-white photograph of the grille and headlights of a vintage car in the room-110 photographs. Centreline 4′-0 1/2″ AFF (PRINTED A550/07).',
   note:'HEIGHT ONLY IS PRINTED. No dimension locates the art horizontally; keynote 39 “CENTER ARTWORK OVER SOFA” is the whole rule, and the sofa is not dimensioned either.',
   focus:V3(1.4,4.05,kz((SOF0+SOF1)/2)), dist:12});
 (function(){
@@ -2925,11 +2950,11 @@ var pArt = reg({id:'GR-500', tag:'GR-500', grp:'art', name:'Art Above Sofa', qty
   attach(pArt, box(0.26,3.1,kz(c-1.85), 0.32,4.98,kz(c+1.85), cloneMat(MAT.frame)));
 })();
 var pOtt = reg({id:'GR-100', tag:'GR-100', grp:'seat', name:'Ottoman', qty:1,
-  cat:'FF&E — Seating', desc:'Patterned cube ottoman (navy and cream geometric) in front of the sofa.',
+  cat:'FF&E - Seating', desc:'Patterned cube ottoman (navy and cream geometric) in front of the sofa.',
   focus:V3(4.4,1.2,kz((SOF0+SOF1)/2)), dist:10});
 attach(pOtt, box(3.7,0.3,kz((SOF0+SOF1)/2-0.9), 5.45,1.35,kz((SOF0+SOF1)/2+0.9), cloneMat(MAT.seatDk)));
 var pFL = reg({id:'GR-205', tag:'GR-205', grp:'light', name:'Floor Lamp', qty:1,
-  cat:'FF&E — Lighting', desc:'Floor lamp, tapered white shade on a slim black stem, at the divider end of the lounge.',
+  cat:'FF&E - Lighting', desc:'Floor lamp, tapered white shade on a slim black stem, at the divider end of the lounge.',
   focus:V3(1.1,4.4,kz(LZ1-0.5)), dist:11});
 attach(pFL, cyl(1.05, kz(LZ1-0.5), 0.08, 0.1, 4.65, cloneMat(MAT.metal)));
 attach(pFL, cyl(1.05, kz(LZ1-0.5), 0.5, 4.65, 5.45, cloneMat(MAT.lampsh)));
@@ -2937,18 +2962,18 @@ scenery(cyl(1.05, kz(LZ1-0.5), 0.5, 0.08, 0.14, MAT.metal));
 
 /* ---- window treatment + PTAC --------------------------------------------- */
 var pShade = reg({id:G.shade, tag:G.shade, grp:'win',
-  name: ACC ? 'Motorized (ADA) Roller Shade' : 'Blackout & Sheer Roller Shade — MANUAL', qty:1,
-  cat:'FF&E — Window',
-  desc:(ACC ? 'Motorized roller shade — the accessible key takes GR-401, not the manual GR-400. Keynote 35 governs the switch, and on this key it has to land inside the accessible reach range.'
+  name: ACC ? 'Motorized (ADA) Roller Shade' : 'Blackout & Sheer Roller Shade - MANUAL', qty:1,
+  cat:'FF&E - Window',
+  desc:(ACC ? 'Motorized roller shade - the accessible key takes GR-401, not the manual GR-400. Keynote 35 governs the switch, and on this key it has to land inside the accessible reach range.'
             : 'Dual roller shade, blackout plus sheer, manual. Bold arc-and-block pattern in red, gold, navy and grey in the room-110 photographs.') +
        ' Keynote 4: the blackout runs 6″ beyond the opening each side, 7′-0″ overall, and the sheer mounts inside the opening.',
-  note:'SILL AND HEAD HEIGHTS ARE NOT PRINTED ON EITHER SHEET, and neither is a window height. What is drawn here is SCALED off the linework — jamb 1′-7 5/8″ to 6′-0 5/8″ AFF, stool 1′-8 3/4″, shade box 7′-11″. The one printed height on the window wall is 6′-7″ AFF and what it terminates at is unresolved. Window type and size are A601’s.',
+  note:'SILL AND HEAD HEIGHTS ARE NOT PRINTED ON EITHER SHEET, and neither is a window height. What is drawn here is SCALED off the linework - jamb 1′-7 5/8″ to 6′-0 5/8″ AFF, stool 1′-8 3/4″, shade box 7′-11″. The one printed height on the window wall is 6′-7″ AFF and what it terminates at is unresolved. Window type and size are A601’s.',
   focus:V3((G.winX0+G.winX1)/2,6.2,kz(D-0.5)), dist:14});
 attach(pShade, box(G.winX0-0.5,G.winBox-0.55,kz(D)+0.18, G.winX1+0.5,G.winBox,kz(D)+0.72, cloneMat(MAT.frame)));
 attach(pShade, box(G.winX0-0.5,4.3,kz(D)+0.3, G.winX1+0.5,G.winBox-0.55,kz(D)+0.44, cloneMat(MAT.shade)));
-var pPtac = reg({id:'PTAC', tag:'PTAC', grp:'app', name:'PTAC — G.E. (context)', qty:1,
+var pPtac = reg({id:'PTAC', tag:'PTAC', grp:'app', name:'PTAC - G.E. (context)', qty:1,
   cat:'Mechanical · context, not in scope',
-  desc:'Packaged terminal A/C in a wall sleeve under the window, floor-mounted, plain louvre face. Keynote 1, plus keynote 30 “EDGE OF PTAC ABOVE CARPET TILES” and keynote 24 (thermostat, 48″ max to top). Shown for orientation — mechanical scope, not on the FF&E template.',
+  desc:'Packaged terminal A/C in a wall sleeve under the window, floor-mounted, plain louvre face. Keynote 1, plus keynote 30 “EDGE OF PTAC ABOVE CARPET TILES” and keynote 24 (thermostat, 48″ max to top). Shown for orientation - mechanical scope, not on the FF&E template.',
   note:'NO SIZE AND NO LOCATING DIMENSION anywhere on A550 or A552. Model and capacity are M-series.',
   focus:V3((G.winX0+G.winX1)/2,1.0,kz(D-0.6)), dist:11});
 attach(pPtac, box(G.winX0+0.85,0.1,kz(D)+0.15, G.winX1-0.85,1.5,kz(D)+1.05, cloneMat(MAT.ptac)));
@@ -2957,13 +2982,13 @@ scenery(box(G.winX0+1.05,0.95,kz(D)+1.05, G.winX1-1.05,1.35,kz(D)+1.1, MAT.applD
 /* ---- entry zone: full-length mirror -------------------------------------- */
 if (G.flMirror){
   var pFLM = reg({id:G.flMirror, tag:G.flMirror, grp:'art', name:'Full Length Mirror', qty:1,
-    cat:'FF&E — Art / Mirror',
-    desc:'Full-length mirror in a white painted frame, recessed flush into the bathroom wall of the entry passage, facing the kitchenette — which is why it appears in elevation 06 and not in 07. Top 6′-10″ AFF (PRINTED A550/06); the bottom is not dimensioned.',
+    cat:'FF&E - Art / Mirror',
+    desc:'Full-length mirror in a white painted frame, recessed flush into the bathroom wall of the entry passage, facing the kitchenette - which is why it appears in elevation 06 and not in 07. Top 6′-10″ AFF (PRINTED A550/06); the bottom is not dimensioned.',
     focus:V3(BPX-0.9,3.5,kz(1.7)), dist:10});
   attach(pFLM, box(BPX+0.02,0.75,kz(0.75), BPX+0.12,6.833,kz(2.55), cloneMat(MAT.glass)));
   attach(pFLM, box(BPX-0.01,0.62,kz(0.62), BPX+0.05,6.95,kz(2.68), cloneMat(MAT.frame)));
 }
-/* electrical panel — context only. Keynote 51 puts its top at 5'-6" AFF and a
+/* electrical panel - context only. Keynote 51 puts its top at 5'-6" AFF and a
    duplex 1'-0" AFF below it (both PRINTED A550/07); it is on the same entry
    wall as the mirror and the bath door in the room-110 photographs. */
 scenery(box(BPX+0.02,4.1,kz(D2B+0.35), BPX+0.09,5.5,kz(D2B+1.55), MAT.panel));
@@ -2971,19 +2996,19 @@ scenery(box(BPX+0.02,4.1,kz(D2B+0.35), BPX+0.09,5.5,kz(D2B+1.55), MAT.panel));
 /* ---- bathroom ------------------------------------------------------------ */
 /* EVERY FIXTURE IN THIS ROOM IS UNDIMENSIONED. A550 and A552 draw the vanity,
    mirror, sconce, shelf, toilet, shower pan, enclosure, grab bars and seat as
-   background graphics with no dimensions at all — the enlarged plans are
+   background graphics with no dimensions at all - the enlarged plans are
    A530 / ID-5.10 for the King Studio and A532 / A532.1 / ID-5.12 for the
    accessible key, and neither was closed this run. The RECTANGLE is proven;
    what sits inside it is arranged, and the caveat says so. */
 var BW = BIX, BZa = BZ0, BZb = BIZ;
-/* Tile backers go on the two surfaces the BATH camera preset looks AT — the
+/* Tile backers go on the two surfaces the BATH camera preset looks AT - the
    bed/sofa demising wall and the far (window-side) end. Nothing solid goes on
    the entry partition, which is the surface the camera looks THROUGH. */
 scenery(box(0.03,0.02,kz(BZa)-0.02, 0.14,6.2,kz(BZb), MAT.tile));
 
 if (!ACC){
   /* --- standard King bath: 5'-6 7/8" x 8'-5 3/8" (both SCALED off A550's
-     linework, NOT printed). Shower, not tub — bath-fixtures.json 08/09/26 and
+     linework, NOT printed). Shower, not tub - bath-fixtures.json 08/09/26 and
      A530 / DB ITM-0645. Kohler Rely 30" x 60" pan, 4" threshold, bi-pass
      sliding glass, head set in the 74-78" maximize band (G402). --- */
   var SHZ0 = BZb - 2.55, SHZ1 = BZb - 0.08;
@@ -3002,9 +3027,9 @@ if (!ACC){
   /* GR-302 vanity along the bed/sofa demising wall, nearest the door */
   var VZ0 = BZa + 0.5, VZ1 = BZa + 5.3;
   var pVan = reg({id:G.vanity, tag:G.vanity, grp:'case', name:'Vanity @ Guest Bath (Left & Right)', qty:1, ada:true,
-    cat:'FF&E — Casegoods',
+    cat:'FF&E - Casegoods',
     desc:'Dark woodgrain casework on slim chrome legs, white solid-surface top with an integral rectangular basin, single-lever chrome faucet, two open cubbies below (room-110 photographs). Counter 2′-10″ AFF.',
-    note:'NOT DIMENSIONED ON A550 — the vanity is a background graphic on view 01. Go to A530 / ID-5.10 before setting it out.',
+    note:'NOT DIMENSIONED ON A550 - the vanity is a background graphic on view 01. Go to A530 / ID-5.10 before setting it out.',
     focus:V3(1.1,2.9,kz((VZ0+VZ1)/2)), dist:8});
   attach(pVan, box(0.16,0.5,kz(VZ0), 1.9,2.72,kz(VZ1), cloneMat(MAT.woodDk)));
   attach(pVan, box(0.16,2.72,kz(VZ0)-0.08, 2.0,2.9,kz(VZ1)+0.08, cloneMat(MAT.counter)));
@@ -3012,18 +3037,18 @@ if (!ACC){
   scenery(box(0.45,2.86,kz((VZ0+VZ1)/2-0.85), 1.7,2.94,kz((VZ0+VZ1)/2+0.85), MAT.porc));
   scenery(cyl(0.42, kz((VZ0+VZ1)/2), 0.05, 2.9, 3.6, MAT.chrome));
   var pVM = reg({id:G.vanMirror, tag:G.vanMirror, grp:'art', name:'Vanity Mirror', qty:1,
-    cat:'FF&E — Art / Mirror',
-    desc:'Large landscape mirror in a saturated yellow-orange painted frame — the strongest colour accent anywhere in the key (room-110 photographs). The 6′-10″ printed on elevation 06 is the FULL-LENGTH mirror’s top, not this one.',
+    cat:'FF&E - Art / Mirror',
+    desc:'Large landscape mirror in a saturated yellow-orange painted frame - the strongest colour accent anywhere in the key (room-110 photographs). The 6′-10″ printed on elevation 06 is the FULL-LENGTH mirror’s top, not this one.',
     focus:V3(0.9,4.4,kz((VZ0+VZ1)/2)), dist:7});
   attach(pVM, box(0.16,3.3,kz(VZ0+0.5), 0.26,5.5,kz(VZ1-0.5), cloneMat(MAT.glass)));
   attach(pVM, box(0.13,3.17,kz(VZ0+0.35), 0.2,5.63,kz(VZ1-0.35), cloneMat(KM.goldFr)));
   var pVS = reg({id:'GR-203', tag:'GR-203', grp:'light', name:'Vanity Sconce', qty:1,
-    cat:'FF&E — Lighting',
+    cat:'FF&E - Lighting',
     desc:'Horizontal linear LED over the vanity mirror in a brushed metal housing (the A530 legend prints “VANITY SCONE” sic).',
     focus:V3(0.9,5.9,kz((VZ0+VZ1)/2)), dist:7});
   attach(pVS, box(0.15,5.75,kz(VZ0+0.9), 0.32,5.95,kz(VZ1-0.9), cloneMat(MAT.lampsh)));
   var pBS = reg({id:G.bathShelf, tag:G.bathShelf, grp:'case', name:'Wall Shelf @ Bathroom', qty:1,
-    cat:'FF&E — Casegoods',
+    cat:'FF&E - Casegoods',
     desc:'Dark woodgrain shelf rails fixed to the wall beside and below the vanity mirror (two rails in the room-110 photographs).',
     focus:V3(BW-0.9,3.3,kz(BZa+1.6)), dist:7});
   attach(pBS, box(BW-1.5,3.05,kz(BZa+0.55), BW-0.16,3.18,kz(BZa+1.75), cloneMat(MAT.woodDk)));
@@ -3051,28 +3076,28 @@ if (!ACC){
   /* GR-303 accessible vanity along the demising wall, knee clearance below */
   var VZ0 = BZa + 0.6, VZ1 = BZa + 4.4;
   var pVan = reg({id:G.vanity, tag:G.vanity, grp:'case', name:'ACCESSIBLE Vanity @ Guest Bath', qty:1, ada:true,
-    qdisp:'— QTY NOT CARRIED IN THE ROOM PACKAGE',
-    cat:'FF&E — Casegoods',
-    desc:'Accessible vanity with knee clearance below — A552 substitutes GR-303 for the standard GR-302.',
-    note:'NOT DIMENSIONED ON A552 — background graphic on view 01. A532 / A532.1 and ID-5.12 are the enlarged plans and neither was closed this run.',
+    qdisp:'- QTY NOT CARRIED IN THE ROOM PACKAGE',
+    cat:'FF&E - Casegoods',
+    desc:'Accessible vanity with knee clearance below - A552 substitutes GR-303 for the standard GR-302.',
+    note:'NOT DIMENSIONED ON A552 - background graphic on view 01. A532 / A532.1 and ID-5.12 are the enlarged plans and neither was closed this run.',
     focus:V3(1.2,2.9,kz((VZ0+VZ1)/2)), dist:9});
   attach(pVan, box(0.16,1.85,kz(VZ0), 2.0,2.72,kz(VZ1), cloneMat(MAT.woodDk)));
   attach(pVan, box(0.16,2.72,kz(VZ0)-0.08, 2.1,2.9,kz(VZ1)+0.08, cloneMat(MAT.counter)));
   scenery(box(0.45,2.86,kz((VZ0+VZ1)/2-0.85), 1.75,2.94,kz((VZ0+VZ1)/2+0.85), MAT.porc));
   scenery(cyl(0.42, kz((VZ0+VZ1)/2), 0.05, 2.9, 3.6, MAT.chrome));
   var pVM = reg({id:G.vanMirror, tag:G.vanMirror, grp:'art', name:'Mirror @ Accessible Bath Vanity', qty:1,
-    cat:'FF&E — Art / Mirror',
+    cat:'FF&E - Art / Mirror',
     desc:'GR-503, tagged as drawn at the accessible-bath vanity mirror on A552.',
     focus:V3(0.9,4.4,kz((VZ0+VZ1)/2)), dist:8});
   attach(pVM, box(0.16,3.15,kz(VZ0+0.35), 0.26,5.5,kz(VZ1-0.35), cloneMat(MAT.glass)));
   attach(pVM, box(0.13,3.02,kz(VZ0+0.2), 0.2,5.63,kz(VZ1-0.2), cloneMat(KM.goldFr)));
   var pVS = reg({id:'GR-203', tag:'GR-203', grp:'light', name:'Vanity Sconce', qty:1,
-    cat:'FF&E — Lighting', desc:'Linear LED over the accessible vanity mirror (legend prints “VANITY SCONE” sic).',
+    cat:'FF&E - Lighting', desc:'Linear LED over the accessible vanity mirror (legend prints “VANITY SCONE” sic).',
     focus:V3(0.9,5.9,kz((VZ0+VZ1)/2)), dist:8});
   attach(pVS, box(0.15,5.75,kz(VZ0+0.7), 0.32,5.95,kz(VZ1-0.7), cloneMat(MAT.lampsh)));
   var pBS = reg({id:G.bathShelf, tag:G.bathShelf, grp:'case', name:'Wall Shelf @ ACCESSIBLE Bathroom', qty:1,
-    qdisp:'— QTY NOT CARRIED IN THE ROOM PACKAGE',
-    cat:'FF&E — Casegoods', desc:'GR-324, the accessible-bath wall shelf.',
+    qdisp:'- QTY NOT CARRIED IN THE ROOM PACKAGE',
+    cat:'FF&E - Casegoods', desc:'GR-324, the accessible-bath wall shelf.',
     focus:V3(BW-1.1,3.3,kz(BZa+1.7)), dist:8});
   attach(pBS, box(BW-1.7,3.05,kz(BZa+0.6), BW-0.16,3.18,kz(BZa+1.9), cloneMat(MAT.woodDk)));
   /* toilet at the corridor wall on the entry-partition side, grab bars each way */
@@ -3082,22 +3107,63 @@ if (!ACC){
     scenery(cyl(tx, kz(BZa+1.32), 0.62, 0.5, 1.42, MAT.porc));
     scenery(cyl(tx, kz(BZa+1.32), 0.66, 1.39, 1.52, MAT.porc));
   })();
-  /* The two clear floor circles A552 view 01 actually draws — one in the
-     bathroom, one required in the main room. Drawn as ring MESHES rather than
-     lines: a WebGL line is one pixel wide at any zoom and these have to read
-     as a required clearance, not as a stray edge. */
+  /* ---- accessible clear floor space -------------------------------------
+     A552 view 01 draws TWO circles and dimensions NEITHER of them. They are
+     therefore drawn differently from each other on purpose, so the plate can
+     never be read as claiming the same certainty for both:
+
+       BATHROOM circle - solid cyan ring. The spec names it a 60" turning
+         circle, so the SIZE is the sheet's. Its centre is not dimensioned, so
+         it is centred in the bath clear rectangle, whose four faces ARE
+         measured on A552 (8'-4 7/8" x 9'-0"). Screen says POSITION STYLIZED.
+
+       MAIN-ROOM circle - DASHED amber ring, and amber is used nowhere else in
+         this scene. The spec gives it no diameter and no position; A552 draws
+         it dashed and leaves it at that. So it is a stylized nominal 60"
+         centred between two PROVEN planes - the bath/main-room partition face
+         and the corridor-side edge of the divider soffit - and centred across
+         the room width. Screen and hover card both say SIZE AND POSITION
+         STYLIZED.
+
+     Both are ring MESHES, not lines: a WebGL line is one pixel wide at any
+     zoom and would read as a stray edge rather than a clearance. The centres
+     computed here are exported to research/floor1-3d/king-viewer-notes.json so
+     the floor scene draws the identical thing rather than its own version. */
+  ACF1 = {cx: BW/2, cz: BZ0 + (BIZ - BZ0)/2, r: G.turnR};
+  ACF2 = {cx: W/2,  cz: (BPZ + G.sofZ0)/2,   r: G.turnR2};
   (function(){
-    function circle(cx, cz, r){
-      var g = new THREE.RingGeometry(r - 0.09, r, 72);
+    function ring(c, colour, dashed){
+      var g = dashed
+        ? new THREE.RingGeometry(c.r - 0.09, c.r, 72, 1, 0, Math.PI*2)
+        : new THREE.RingGeometry(c.r - 0.09, c.r, 72);
       var m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({
-        color:0x02A9E0, transparent:true, opacity:0.55, side:THREE.DoubleSide}));
+        color:colour, transparent:true, opacity: dashed ? 0.75 : 0.55,
+        side:THREE.DoubleSide}));
       m.rotation.x = -Math.PI/2;
-      m.position.set(MX(cx), 0.1, cz);
+      m.position.set(MX(c.cx), 0.1, kz(c.cz));
+      scenery(m);
+      return m;
+    }
+    ring(ACF1, 0x02A9E0, false);
+    /* the dashed one is built from arc segments, because r128's RingGeometry
+       has no dash mode and a dashed LineMaterial would be a hairline */
+    var seg = 18, gap = Math.PI*2/seg;
+    for (var i = 0; i < seg; i++){
+      var g = new THREE.RingGeometry(ACF2.r - 0.10, ACF2.r, 6, 1, i*gap, gap*0.55);
+      var m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({
+        color:0xE0A21E, transparent:true, opacity:0.8, side:THREE.DoubleSide}));
+      m.rotation.x = -Math.PI/2;
+      m.position.set(MX(ACF2.cx), 0.1, kz(ACF2.cz));
       scenery(m);
     }
-    circle(BW*0.52, kz(BZa + 3.1), G.turnR);
-    circle(W*0.62, kz(G.bedCL - 6.2), G.turnR);
   })();
+  /* One card for both, so hovering either ring says what it is and is not. */
+  reg({id:'ACF', tag:'ACF', grp:'door', name:'Accessible Clear Floor Space', qty:2,
+    qdisp:'2 CIRCLES - NEITHER IS DIMENSIONED ON A552',
+    cat:'Accessibility \u00b7 room feature',
+    desc:'A552 view 01 draws a 60\u2033 turning circle in the bathroom and a second required clear floor circle in the main room, drawn dashed. The bathroom circle is drawn here at the 60\u2033 the spec names, centred in the bath clear rectangle (8\u2032-4\u215e\u2033 \u00d7 9\u2032-0\u2033, both MEASURED on A552). The main-room circle is drawn dashed and amber to keep the two apart on sight.',
+    note:'STYLIZED - A552 DIMENSIONS NEITHER CIRCLE. The bathroom circle\u2019s SIZE is the sheet\u2019s 60\u2033; its POSITION is stylized, centred in the measured bath rectangle. The main-room circle has NO printed diameter and NO printed position anywhere in the spec: what is drawn is a stylized nominal 60\u2033 centred between two proven planes - the bath/main-room partition face at 10\u2032-8\u00bd\u2033 and the corridor-side edge of the divider soffit at 17\u2032-8\u2033. Do not scale a clearance off either ring. Resolve against A532 / A532.1 and the accessibility review.',
+    focus:V3(ACF2.cx, 1.2, kz(ACF2.cz)), dist:18});
 }
 
 /* ---- bath accessories ---------------------------------------------------- */
@@ -3125,7 +3191,7 @@ if (!ACC){
   attach(pGB, cyl(0.4, kz(BZb-2.15), 0.07, 2.7, 4.7, cloneMat(MAT.chrome)));
   var pHk = reg({id:'HD-12', tag:'HD-12', grp:'bath', name:'Robe / Coat Hook', qty:2, ada:true,
     cat:'Bath Accessory',
-    desc:'Robe / coat hook ×2 — one on the working-wall hook panel, one in the guest bath. Blocking required (G402 TA 2 / TA 21); the max-4″ protrusion rule applies.',
+    desc:'Robe / coat hook ×2 - one on the working-wall hook panel, one in the guest bath. Blocking required (G402 TA 2 / TA 21); the max-4″ protrusion rule applies.',
     focus:V3(BW-0.5,5.2,kz(BZb-1.5)), dist:7});
   attach(pHk, box(BXin-0.28,5.05,kz(BZb-1.65), BXin,5.45,kz(BZb-1.35), cloneMat(MAT.chrome)));
   if (WW.hooks) attach(pHk, box(W-0.72,5.05,kz(WW.hooks[1]-0.35)-0.08, W-0.5,5.45,kz(WW.hooks[1]-0.35)+0.08, cloneMat(MAT.chrome)));
@@ -3150,7 +3216,7 @@ if (!ACC){
   });
 } else {
   /* Accessible set. Columns: tag, name, description, then the surface it lands
-     on — 'w' the demising wall (x=0), 'p' the entry-partition band, 'f' free —
+     on - 'w' the demising wall (x=0), 'p' the entry-partition band, 'f' free -
      plus height and depth position. */
   var ACCB = [
     ['HD-02','Single Toilet Paper Holder','Single toilet paper holder at the accessible water closet.','p',2.3, BZa+1.9],
@@ -3159,10 +3225,10 @@ if (!ACC){
     ['HD-12','Robe / Coat Hook','Robe / coat hook. Blocking required; the max-4″ protrusion rule applies.','p',5.0, BZb-1.5],
     ['HD-08','Grab Bar ADA 24″ VERTICAL MOUNT','24″ ADA grab bar, vertical mount, at the roll-in shower.','w',3.7, BZb-3.2],
     ['HD-16','Shower Soap Dispenser','Surface-mounted guestroom shower soap dispenser.','w',3.9, BZb-2.4],
-    ['HD-14','Folding Shower Seat','CONFIGURATION B (ROLL-IN SHOWER) — folding rectangular shower seat, surface mounted. Carried on Austin’s ruling D19 of 2026-08-20.','w',1.55, BZb-1.4],
+    ['HD-14','Folding Shower Seat','CONFIGURATION B (ROLL-IN SHOWER) - folding rectangular shower seat, surface mounted. Carried on Austin’s ruling D19 of 2026-08-20.','w',1.55, BZb-1.4],
     ['HD-18','Shower Footrest','Surface-mounted shower footrest.','w',1.3, BZb-0.6],
     ['HD-21','Soap Dish','Surface-mounted soap dish in the roll-in shower.','w',3.3, BZb-0.5],
-    ['HD-5.1','Shower Rod, STRAIGHT','CONFIGURATION B (ROLL-IN SHOWER) — straight shower rod. The roll-in takes the straight rod; the curved rod belongs to the tub configuration. Ruling D19.','w',6.2, BZb-1.9]
+    ['HD-5.1','Shower Rod, STRAIGHT','CONFIGURATION B (ROLL-IN SHOWER) - straight shower rod. The roll-in takes the straight rod; the curved rod belongs to the tub configuration. Ruling D19.','w',6.2, BZb-1.9]
   ];
   ACCB.forEach(function(r){
     var onW = r[3] === 'w';
@@ -3172,7 +3238,7 @@ if (!ACC){
     if (r[0] === 'HD-5.1'){ x1 = BW - 0.3; }
     var p = reg({id:r[0], tag:r[0], grp:'bath', name:r[1], qty:1, ada:true,
       cat:'Bath Accessory', desc:r[2],
-      note:'POSITION NOT DIMENSIONED ON A552 — the accessory layout is A532 / A532.1 and ID-5.12, neither closed this run.',
+      note:'POSITION NOT DIMENSIONED ON A552 - the accessory layout is A532 / A532.1 and ID-5.12, neither closed this run.',
       focus:V3(onW ? 0.7 : BW-0.5, r[4], kz(r[5])), dist:7});
     attach(p, box(x0, r[4]-0.14, kz(r[5])-wide/2, x1, r[4]+0.14, kz(r[5])+wide/2, cloneMat(MAT.chrome)));
   });
@@ -3183,7 +3249,7 @@ if (!ACC){
    survive this block and are picked up by the shared code further down.
    ========================================================================== */
 var KING_ORDER = [
-  'GR-3',
+  'GR-3', 'ACF',
   'GR-301', G.vanity, G.ww, 'GR-318', 'GR-319', 'GR-320', G.bathShelf, 'GR-323',
   'GR-100','GR-101','GR-103',
   'GR-601', G.bedWrap, G.bedBase,
@@ -3206,7 +3272,7 @@ var KING_VIEWS = {
   /* looks back up the room from beyond the window wall: bed, headboard,
      nightstands, and the divider soffit closing the far end */
   /* Down the room toward the window, from the working-wall side and inboard of
-     the divider — the sightline clears the divider soffit (which runs only
+     the divider - the sightline clears the divider soffit (which runs only
      4'-4" out from the bed wall) and the closet at the window end. */
   beds:  {pos:[W + 10.5, 16.0, kz(G.bedCL - 15.0)], tgt:[W*0.32, 1.6, kz(G.bedCL)]},
   /* Over the entry leg near the corridor, angled down into the bath so the
@@ -3221,7 +3287,7 @@ var KING_VIEWS = {
      GR-320 shelves, the television dresser, the hook panel and the closet
      running away to the window. Entering the room at the corridor corner keeps
      the sightline clear of the solid accent wallcovering, which starts 10'-3"
-     in — a square-on elevation from outside the bed wall would look straight
+     in - a square-on elevation from outside the bed wall would look straight
      into the back of it. */
   kitch: {pos:[-(W*0.35), 15.0, 3.0], tgt:[W-1.3, 3.0, kz(16.0)]}
 };
@@ -3278,7 +3344,7 @@ var kingLabels = function(){
       var p = PARTS[id]; if (!p) return;
       tagLbl(id, p.focus.clone(), (i%2 ? 16 : -58), (i%3 - 1) * 16, 1);
     });
-  /* Annotations — the proven numbers, said out loud. Every anchor is OUTSIDE
+  /* Annotations - the proven numbers, said out loud. Every anchor is OUTSIDE
      the room footprint or on an outer face, so a grey caption never lands in
      the middle of the plan and reads as debris. */
   addLabel({anchor:V3(W*0.8,0.3,2.9), html:'CORRIDOR', cls:'min', dx:-30, dy:-10, noleader:true, pri:3});
@@ -3298,8 +3364,16 @@ var kingLabels = function(){
   if (CONNK) addLabel({anchor:V3(W+4.2,0.4,kz(G.gr3CL)),
             html:'ROOM ' + (PARTNER_OF[ROOM_NO]||'?') + ' (CONNECTING)', cls:'min',
             dx:-70, dy:-12, noleader:true, pri:3});
-  if (ACC) addLabel({anchor:V3(BW*0.52,0.12,kz(BZ0+3.1)), html:'60″ TURNING CIRCLE',
-            cls:'min', dx:-42, dy:12, noleader:true, pri:3});
+  /* The two clear floor circles say out loud what part of each is the sheet's.
+     The bathroom ring's SIZE is A552's 60″ and only its centre is stylized;
+     the dashed main-room ring has neither a printed size nor a printed
+     position, and its caption has to say so wherever the ring is visible. */
+  if (ACC && ACF1) addLabel({anchor:V3(ACF1.cx,0.12,kz(ACF1.cz)),
+            html:'60″ TURNING CIRCLE · POSITION STYLIZED',
+            cls:'min', dx:-42, dy:14, noleader:true, pri:3});
+  if (ACC && ACF2) addLabel({anchor:V3(ACF2.cx,0.12,kz(ACF2.cz)),
+            html:'2ND CLEAR FLOOR CIRCLE · SIZE + POSITION STYLIZED',
+            cls:'min', dx:-84, dy:16, noleader:true, pri:3});
 };
 } /* ---- end King family build ---- */
 
@@ -3426,7 +3500,7 @@ function updateLabels(){
   // camera close and the labels for whatever you are looking at fade in, so
   // the wide shot stays clean but a close-up is still identifiable. The TAGS
   // chip forces them all on. Note the loop writes style.display inline every
-  // frame, so a CSS class alone could never hold labels down — the pass
+  // frame, so a CSS class alone could never hold labels down - the pass
   // itself has to be gated.
   var tagsOff = document.body.classList.contains('tags-off');
   var camDist = camera.position.distanceTo(controls.target);
@@ -3533,7 +3607,7 @@ var GROUP_EL = {
   bath:document.getElementById('g-bath')
 };
 /* Sidebar order, per family. The King list is the room package off
-   platform/data/floor1-staged.json — which is per-key, so 116 carries GR-306
+   platform/data/floor1-staged.json - which is per-key, so 116 carries GR-306
    where 110 carries GR-304, and 118 substitutes the whole accessible set. Rows
    for tags the room does not carry are skipped below, so one list per family
    covers every key in it. */
@@ -3553,16 +3627,20 @@ ORDER.forEach(function(id){
   var b = document.createElement('button');
   b.className = 'row' + (p.flag ? ' flag' : '');
   b.setAttribute('data-id', id);
-  /* qty badge always shown when qty is known — GR-308 is the one genuinely
+  /* qty badge always shown when qty is known - GR-308 is the one genuinely
      unresolved qty (A555 ×1 vs field-sheet "GR-308R ×2"), so it gets FLAG only */
   var chip = '';
   if (id === 'PTAC') chip = '<span class="chip n">CTX</span>';
+  /* ACF is the pair of accessible clear floor circles, not an FF&E line item.
+     A quantity badge on it would read as two purchased things; what the row
+     has to say is that A552 dimensions neither of them. */
+  else if (id === 'ACF') chip = '<span class="chip n">STYLIZED</span>';
   else if (id !== 'GR-308') chip = (p.qty > 1 ? '<span class="chip q">×' + p.qty + '</span>'
                                               : '<span class="chip n">×1</span>');
   if (p.ada) chip += '<span class="chip a" title="ADA / accessibility note carried">ADA</span>';
   /* The QQ room-101 GR-3 chip reads "★ DEF" because that leaf is a standing
-     field deficiency. The King GR-3 is flagged for a different reason — the two
-     sheets disagree by 3/4" on the same opening — so it names its own chip
+     field deficiency. The King GR-3 is flagged for a different reason - the two
+     sheets disagree by 3/4" on the same opening - so it names its own chip
      rather than inherit a deficiency it does not have. */
   if (p.flag) chip += '<span class="chip f">' + (p.flagChip || (id==='GR-3' ? '★ DEF' : 'FLAG')) + '</span>';
   b.innerHTML = '<span class="tag">' + p.tag + '</span><span class="nm">' + p.name +
@@ -3676,7 +3754,7 @@ var VIEWS = KING ? KING_VIEWS : {
   kitch: {pos:[0.6, 11.0, -16.8],  tgt:[12.9, 3.0, -16.8]}
 };
 /* ---- portrait framing ----------------------------------------------------
-   The room is 13'-2" wide by 36'-5" deep — a long, narrow footprint. On a
+   The room is 13'-2" wide by 36'-5" deep - a long, narrow footprint. On a
    landscape screen the designed ISO reads fine, but on a portrait phone the
    long axis fights the short screen axis and the far end falls off frame.
    Two corrections, both aspect-driven so a rotated phone re-frames itself:
@@ -3688,7 +3766,7 @@ var ISO_PORTRAIT = KING
   : {pos:[34, 47, 14], tgt:[CX, 1.5, CZ]};
 function aspectNow(){ return window.innerWidth / Math.max(1, window.innerHeight); }
 function isPortrait(){ return aspectNow() < 0.95; }
-/* Vertical FOV widens on narrow screens, but only to 42° — past that the
+/* Vertical FOV widens on narrow screens, but only to 42° - past that the
    perspective distortion makes a stylized exhibit look like a fisheye. */
 function fovFor(a){
   if (a >= 1.2) return 35;
@@ -3696,7 +3774,7 @@ function fovFor(a){
   return 35 + (42 - 35) * t;
 }
 /* Distance multiplier. Tuned so the room fills roughly two thirds of a phone
-   screen — the wider FOV above already recovers most of the lost extent, so
+   screen - the wider FOV above already recovers most of the lost extent, so
    this stays gentle; overshooting here shrinks the room to a chip. */
 function dollyFor(a){ return Math.max(1, Math.min(0.55 / Math.max(a, 0.3), 1.35)); }
 /* Zoom-reveal for tags (see updateLabels): closer than ZOOM_TAGS_DIST feet and
@@ -3742,7 +3820,7 @@ function applyView(name, animate){
   var pos = V3(v.pos[0], v.pos[1], v.pos[2]), tgt = V3(v.tgt[0], v.tgt[1], v.tgt[2]);
   // Pull back along the view direction so a narrow screen still holds the
   // whole framing the preset was composed for. Take the offset BEFORE
-  // rewriting pos — copy(tgt) would otherwise clobber the value we measure.
+  // rewriting pos - copy(tgt) would otherwise clobber the value we measure.
   var k = dollyFor(aspectNow());
   if (k > 1) {
     var off = pos.clone().sub(tgt).multiplyScalar(k);
@@ -3903,7 +3981,7 @@ window.__exhibit = { camera: camera, controls: controls };
 applyView(VIEW, false);
 
 if (!FREEZE && !REDUCED && !qs.has('view')){
-  // Fly in to whatever ISO the current aspect actually uses, dolly included —
+  // Fly in to whatever ISO the current aspect actually uses, dolly included -
   // otherwise the intro lands on the desktop framing and snaps on first touch.
   var end = isPortrait() ? ISO_PORTRAIT : VIEWS.iso;
   var k = dollyFor(aspectNow());
@@ -3923,7 +4001,7 @@ if (!FREEZE && !REDUCED && !qs.has('view')){
    whole scope to the page. */
 /* ---- room-aware exhibit -------------------------------------------------
    The geometry is Room 101's (QQ Wide Connecting), and every QQ Studio
-   Connector shares the same 40-line package — so the exhibit doubles as the
+   Connector shares the same 40-line package - so the exhibit doubles as the
    typical for its siblings. It must not keep SAYING "Room 101" when it was
    opened from another room, and its links have to lead back to THAT room, so
    the number is swapped in at load and a plain-language caveat is added when
@@ -3941,7 +4019,7 @@ if (!FREEZE && !REDUCED && !qs.has('view')){
   if (pr) pr.href = './print.html' + suffix;
   /* Connecting partners, off the floor plans: A100 (101/103), A101 (236->238),
      A102 (336/338 demising wall), A103 (401/403, 436->438). 215's partner is
-     not named on A101 — left blank rather than guessed. */
+     not named on A101 - left blank rather than guessed. */
   var PARTNER = {'101':'103','103':'101','401':'403','403':'401',
                  '236':'238','336':'338','436':'438','215':'',
                  '116':'118','118':'116'};
@@ -3951,8 +4029,8 @@ if (!FREEZE && !REDUCED && !qs.has('view')){
   var VAR  = String(GEOM.variant || '').toUpperCase();
   /* Two different names, on purpose. VAR is the ARCHITECT'S variant off A555
      and belongs on the TYPE row and the caveat next to its dimensions. LABEL is
-     the name the crew knows the room by — the same string the app's room screen
-     shows — and belongs in the headings. Room 101 is "QQ Wide Connecting" on
+     the name the crew knows the room by - the same string the app's room screen
+     shows - and belongs in the headings. Room 101 is "QQ Wide Connecting" on
      the drawings and "QQ Studio Connector" on a phone; both are correct in
      their own place. */
   var TYPE_LABEL = {
@@ -3983,13 +4061,13 @@ if (!FREEZE && !REDUCED && !qs.has('view')){
       el.innerHTML = el.innerHTML.replace(/ROOM 101/g, 'ROOM ' + qsRoom);
     });
   }
-  /* The <title> also carries the modelled room's TYPE — a QQ Extended room was
+  /* The <title> also carries the modelled room's TYPE - a QQ Extended room was
      showing "QQ Studio Connector" in the tab and in any bookmark. */
   document.title = document.title.split('QQ Studio Connector')
                                  .join(TYPE_LABEL[GEOM.variant] || GEOM.variant);
 
   /* The drawer hard-codes "42 ITEMS" (room 101's count). A non-connecting room
-     lists 41 — it has no GR-3. Count what is actually on screen. */
+     lists 41 - it has no GR-3. Count what is actually on screen. */
   (function(){
     var n = document.querySelectorAll('#sb-scroll .row[data-id]').length;
     if (!n) return;
@@ -4000,7 +4078,7 @@ if (!FREEZE && !REDUCED && !qs.has('view')){
   })();
   /* Those same headings hard-code the modelled room's TYPE. Leaving it makes a
      QQ Extended room announce itself as a QQ Studio Connector, which is worse
-     than showing nothing — rewrite it to the variant actually on screen. */
+     than showing nothing - rewrite it to the variant actually on screen. */
   document.querySelectorAll('#ministrip b, #drawerbar b, .tb h1').forEach(function(el){
     el.innerHTML = el.innerHTML.split('QQ STUDIO CONNECTOR').join(LABEL);
   });
@@ -4054,27 +4132,27 @@ if (!FREEZE && !REDUCED && !qs.has('view')){
   });
 
   var cav = document.getElementById('caveat');
-  /* King caveat. The SHELL on screen is dimensioned — clear width, clear depth,
+  /* King caveat. The SHELL on screen is dimensioned - clear width, clear depth,
      the two ceiling heights, the bath rectangle, the window bay, the door
      centrelines and the divider soffit are all off the room's own sheet. What
      is NOT dimensioned anywhere is where the furniture sits and how wide each
      working-wall module is, and the strip has to say which is which or the
      exhibit reads as a shop drawing. */
   if (cav && KING) {
-    /* Kept to one line at phone width — the long version is in the sidebar. */
+    /* Kept to one line at phone width - the long version is in the sidebar. */
     cav.innerHTML = VAR + ' &middot; '
       + (GEOM.acc ? '16&prime;-10&Prime;' : '12&prime;-0&Prime;')
       + ' &times; 29&prime;-0&Prime; CLEAR &middot; '
       + (GEOM.mirror ? 'MIRRORED' : 'AS DRAWN') + ' PER ' + String(GEOM.sheet).split(' ')[0]
       + ' &middot; FURNITURE STYLIZED &middot; EXHIBIT ONLY';
-    /* The sidebar caveat box carries the long version — the strip has to stay
+    /* The sidebar caveat box carries the long version - the strip has to stay
        one line at phone width, but the distinction between a shell that IS
        dimensioned and furniture that is NOT has to be somewhere legible. */
     var sbCav = document.querySelector('.tb .caveat');
-    if (sbCav) sbCav.innerHTML = 'SHELL IS DIMENSIONED &mdash; CLEAR SIZES, BOTH CEILINGS, BATH, '
+    if (sbCav) sbCav.innerHTML = 'SHELL IS DIMENSIONED - CLEAR SIZES, BOTH CEILINGS, BATH, '
       + 'WINDOW BAY, DOOR CENTRELINES AND DIVIDER SOFFIT ARE ALL OFF '
       + String(GEOM.sheet).split(' ')[0] + '. NO PIECE OF FURNITURE AND NO WORKING-WALL '
-      + 'MODULE IS DIMENSIONED ON EITHER SHEET &mdash; THOSE ARE STYLIZED. NOT SHOP DRAWINGS.';
+      + 'MODULE IS DIMENSIONED ON EITHER SHEET - THOSE ARE STYLIZED. NOT SHOP DRAWINGS.';
   }
   else if (cav) {
     cav.innerHTML = VAR + ' &middot; '
@@ -4082,7 +4160,7 @@ if (!FREEZE && !REDUCED && !qs.has('view')){
       + (ext ? ' &times; 38&prime;-9&Prime; DEEP' : '')
       + ' &middot; ' + (GEOM.mirror
             ? (/CONFIRM ON PLAN|UNCONFIRMED/i.test(GEOM.basis || '')
-                 ? 'MIRRORED — HANDEDNESS NOT YET CONFIRMED &middot; '
+                 ? 'MIRRORED - HANDEDNESS NOT YET CONFIRMED &middot; '
                  : 'MIRRORED PER FLOOR PLAN &middot; ')
             : '')
       /* A555 draws the QQ family ONCE with alternate dimension strings, so the
@@ -4115,7 +4193,7 @@ window.__h2sep3d = {
     bedCL: GEOM.bedCL, nsWin: GEOM.nsWin, nsCor: GEOM.nsCor,
     acc: !!GEOM.acc, hand: GEOM.mirror ? 'mirrored' : 'as-drawn'
   } : null,
-  /* Present only when the room actually has a GR-3 — the check asserts on it. */
+  /* Present only when the room actually has a GR-3 - the check asserts on it. */
   hasDoorPart: !!PARTS['GR-3'],
   frame: function(){ return {
     aspect: window.innerWidth / window.innerHeight,
