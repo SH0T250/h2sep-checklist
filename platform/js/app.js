@@ -60,7 +60,7 @@ function renderShell(hash, renderScreen) {
   app.append(el(`<div class="shell">
     <aside class="side">
       <div class="brand"><img src="${window.__H2SEP_LOGO || 'img/triun-logo.png'}" alt="Triun Construction and Engineering"/></div>
-      <div class="proj"><div class="pcode">H2SEP · FLOOR 1 LIVE</div><div class="pname">Home2 Suites · Eagle Pass</div><div class="conn">${connPill(store.status)}</div></div>
+      <div class="proj"><div class="pcode">H2SEP · FLOORS 1-4 LIVE</div><div class="pname">Home2 Suites · Eagle Pass</div><div class="conn">${connPill(store.status)}</div></div>
       <nav class="nav">
         ${main.map(n => navLink(n, hash)).join('')}
         <div class="sect">Model</div>
