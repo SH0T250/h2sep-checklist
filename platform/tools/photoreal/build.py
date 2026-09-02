@@ -30,6 +30,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
 import bpy  # noqa: E402
+from mathutils import Vector  # noqa: E402
 
 from scene import materials, lights, world, cameras, units  # noqa: E402
 from scene import zones  # noqa: E402
@@ -120,14 +121,23 @@ def build(export_dir, out_path, quiet=False):
     # path tracer two coincident surfaces shadow each other completely and both
     # render black.  MEASURED on the bath-vanity frame: the door side of the
     # bath was 0.000 until either surface was hidden.  Each shell plane moves
-    # 1 mm away from the room along its own normal, so a flush face wins.
+    # 1 mm away from the room along its own normal, so a flush face wins, and
+    # grows 4 mm past its own edges about its centroid so the moved planes
+    # still overlap at the corners (a bare 1 mm translation opened a slit at
+    # every wall to ceiling junction that the sky leaked through as a line).
     for o in imported:
         if not o.name.startswith('shell.') or len(o.data.polygons) > 4:
             continue
-        n = o.data.polygons[0].normal.copy()
+        me = o.data
+        n = me.polygons[0].normal.copy()
         if n.length < 0.5:
             continue
         o.location -= n.normalized() * 0.001
+        c = sum((v.co for v in me.vertices), Vector()) / len(me.vertices)
+        for v in me.vertices:
+            d = v.co - c
+            if d.length > 1e-6:
+                v.co = c + d + d.normalized() * 0.004
     # 5b. smooth shading where the exhibit meant it (bevelled boxes carry normals already)
     for o in imported:
         if o.data.has_custom_normals:
