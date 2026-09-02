@@ -6,7 +6,7 @@ import { ic, el, esc, fmtWhen, toast, sheet, pressable } from '../../core/ui.js'
 const QUICK_PICKS = ['NEED INSTALL', 'NEED PROPER PLACE', 'IN BOX', 'DAMAGED', 'MISSING', 'WRONG ITEM'];
 // Copy that states a count has to be derived, or it goes stale the moment the
 // build grows - which is worse than saying nothing, because it reads as fact.
-import { counts } from '../../core/store.js';
+import { counts, isBuildNote } from '../../core/store.js';
 
 function floorsOf(docs) {
   return [...new Set(docs.map(d => Number(d.floor)).filter(n => n > 0))].sort((a, b) => a - b);
@@ -427,7 +427,7 @@ function ownerChip(store, category, roomNo) {
 }
 
 function noteCount(doc) {
-  return Object.values(doc.notes || {}).filter(n => !n.deleted).length;
+  return Object.entries(doc.notes || {}).filter(([id, n]) => !n.deleted && !isBuildNote(id, n)).length;
 }
 
 
@@ -874,8 +874,10 @@ function itemSheet(ctx, docId, itemId) {
 function notesSheet(ctx, roomNo) {
   const { store } = ctx;
   const doc = store.getDoc(roomNo);
-  const notes = Object.entries(doc.notes || {}).filter(([, n]) => !n.deleted)
+  const allNotes = Object.entries(doc.notes || {}).filter(([, n]) => !n.deleted)
     .sort((a, b) => String(a[1].createdAt).localeCompare(String(b[1].createdAt)));
+  const notes = allNotes.filter(([id, n]) => !isBuildNote(id, n));
+  const buildNotes = allNotes.filter(([id, n]) => isBuildNote(id, n));
   const { close } = sheet(`
     <div class="sh"><b style="font-size:15px">Room ${esc(roomNo)} notes</b><button class="icon-btn x" data-close aria-label="Close">${ic('x')}</button></div>
     <div class="card" style="margin-bottom:10px">${notes.length ? notes.map(([id, n]) => `
@@ -885,6 +887,7 @@ function notesSheet(ctx, roomNo) {
         <span class="nd">${n.by ? esc(n.by) + ' · ' : ''}${fmtWhen(n.createdAt)}</span>
         ${!n.resolved ? `<button class="btn" style="padding:3px 9px;font-size:11px" data-res="${id}">Resolve</button>` : ''}
       </div>`).join('') : '<div class="coming" style="padding:22px"><b>No notes yet</b></div>'}</div>
+    ${buildNotes.length ? `<details class="build-notes"><summary>Document notes from the build (${buildNotes.length}) · office reference, not crew flags</summary>${buildNotes.map(([, n]) => `<div class="note-row"><span class="nfl info">BUILD</span><span class="nt">${esc(n.text)}</span></div>`).join('')}</details>` : ''}
     <div class="field"><label>New note</label><textarea data-text rows="2" placeholder="Whole-room note, like the star notes on paper"></textarea></div>
     <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
       <label style="display:flex;gap:6px;align-items:center;font-size:12.5px"><input type="checkbox" data-flag/> Mark as issue (red)</label>

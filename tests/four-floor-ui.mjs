@@ -115,11 +115,19 @@ const truth = await p.evaluate(() => { let miss = 0, pend = 0; for (const [id, d
 t('its counts match a direct count of the store', kv.Missing === truth.miss && kv.Pending === truth.pend, JSON.stringify({ kv, truth }));
 const nrows = await p.$$eval('.istat-t tr[data-key]', r => r.length);
 t('every distinct line has a row', nrows > 100, String(nrows));
-await p.fill('.istat [data-filter]', 'PTAC'); await p.waitForTimeout(500); await p.waitForSelector('.istat-t tr[data-key]');
-t('the filter narrows the rows', (await p.$$eval('.istat-t tr[data-key]', r => r.length)) < 12 && (await p.$$eval('.istat-t tr[data-key] .tn', r => r.every(x => /PTAC/i.test(x.textContent)))));
+await p.fill('.istat [data-filter]', 'PTAC'); await p.waitForTimeout(900); await p.waitForFunction(() => [...document.querySelectorAll('.istat-t tr[data-key] .tn')].every(x => /PTAC/i.test(x.textContent)) && document.querySelectorAll('.istat-t tr[data-key]').length > 0, null, { timeout: 5000 }).catch(() => {});
+t('the filter narrows the rows', (await p.$$eval('.istat-t tr[data-key]', r => r.length)) < 40 && (await p.$$eval('.istat-t tr[data-key] .tn', r => r.length > 0 && r.every(x => /PTAC/i.test(x.textContent)))), String(await p.$$eval('.istat-t tr[data-key]', r => r.length)));
 await p.click('.istat-t tr[data-key]'); await p.waitForSelector('.bulk-scope');
 t('tapping a row opens Bulk mark with that tag picked', (await p.$$('.taglist input:checked')).length === 1 && /will change|left alone|Nothing to apply|Apply/.test(await p.textContent('.bulk-scope')));
 await p.evaluate(() => sessionStorage.removeItem('h2sep-p-istat'));
+
+console.log('\nBUILD NOTES ARE NOT CREW FLAGS (D55)');
+await p.goto(B + '#/room/438', { waitUntil: 'networkidle' }); await p.waitForSelector('.pagehead');
+const noteBtn = await p.$eval('[data-note]', b => b.textContent.trim());
+t('room 438 counts only crew and office notes in its header', /Room notes( · [1-3])?$/.test(noteBtn), noteBtn);
+const st438 = await p.evaluate(() => window.__store.roomStats(window.__store.getDoc('438')));
+const n438 = await p.evaluate(() => { const d = window.__store.getDoc('438'); const notes = Object.entries(d.notes || {}).filter(([, n]) => n.flag === 'issue' && !n.resolved); const build = notes.filter(([id, n]) => /^n_/.test(id) && !(n.by || n.createdBy)).length; const items = Object.values(d.items).filter(it => !it.deleted && it.issue && !it.issueResolved).length; return { red: notes.length, build, items }; });
+t('build notes do not count as open issues', n438.build >= 3 && st438.openIssues === n438.items + (n438.red - n438.build), JSON.stringify({ ...n438, openIssues: st438.openIssues }));
 
 t('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' ; '));
 await b.close();

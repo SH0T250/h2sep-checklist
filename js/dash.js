@@ -8,7 +8,7 @@
 // demo DB (device-local, clearly labeled DEMO).
 import * as store from './store.js';
 import * as edit from './dash-edit.js';
-import { esc, roomSort, isSpaceDoc, roomStats, isMepDoc, mepParent } from './util.js';
+import { esc, roomSort, isSpaceDoc, roomStats, isMepDoc, mepParent, isBuildNote } from './util.js';
 import { initRefs } from './refs.js';
 
 const $ = (id) => document.getElementById(id);
@@ -181,7 +181,8 @@ function compute() {
         m.crew.set(who, c);
       }
     }
-    for (const n of Object.values(r.notes || {})) {
+    for (const [nid, n] of Object.entries(r.notes || {})) {
+      if (isBuildNote(nid, n)) continue;   // D55
       if (n.flag === 'issue' && !n.resolved) {
         m.issueRows.push({ room: r.number, where, code: '', label: '', note: n.text, isNote: true, itemId: '' });
       }
