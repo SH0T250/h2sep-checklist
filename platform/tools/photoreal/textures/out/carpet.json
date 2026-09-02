@@ -1,0 +1,24 @@
+{
+ "surface": "carpet",
+ "repeat_m": [
+  0.9144,
+  0.9144
+ ],
+ "pixels": {
+  "color": 1024,
+  "roughness": 2048,
+  "bump": 1536
+ },
+ "maps": {
+  "color": "carpet_color.png",
+  "roughness": "carpet_rough.png",
+  "bump": "carpet_bump.png"
+ },
+ "bump_distance_m": 0.0012,
+ "principled": {
+  "Sheen Weight": 0.08,
+  "Sheen Roughness": 0.7
+ },
+ "projection": "flat",
+ "notes": "repeat SCALED to the exhibit 3 ft tile; colours and hatch pitch measured against the photographs; shard drawing STYLIZED"
+}
