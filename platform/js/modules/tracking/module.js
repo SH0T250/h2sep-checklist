@@ -147,6 +147,96 @@ function tradeTable(store) {
   </section>`;
 }
 
+// Item status board: for every line in the building, how many are installed
+// (checked), pending (not checked, no open issue), or carry an open issue,
+// by the issue's own text. Rows merge lines that share a category and label,
+// the same way the Bulk mark screen does, so a row can be opened there.
+const ISTAT_KEY = 'h2sep-p-istat';
+function istatQ() {
+  try { return { floor: 0, filter: '', ...(JSON.parse(sessionStorage.getItem(ISTAT_KEY)) || {}) }; } catch { return { floor: 0, filter: '' }; }
+}
+const KIND_LABEL = { ffe: 'Rooms · FF&E', mep: 'Rooms · MEP punch', 'space-ffe': 'Common areas · FF&E', 'space-mep': 'Common areas · MEP' };
+function itemStatusStats(store, q) {
+  const rows = new Map();
+  const totals = { total: 0, installed: 0, pending: 0, other: 0 };
+  for (const k of QUICK_PICKS) totals[k] = 0;
+  const isCompanion = (id) => store.constructor.MEP_SUFFIXES.some(sfx => id.endsWith(sfx));
+  for (const [id, d] of Object.entries(store.docs)) {
+    if (id.startsWith('_') || d.deleted) continue;
+    if (q.floor && Number(d.floor) !== q.floor) continue;
+    const space = String(d.type || '').startsWith('space-');
+    const mep = isCompanion(id) || d.type === 'mep-punch';
+    const kind = (space ? 'space-' : '') + (mep ? 'mep' : 'ffe');
+    for (const [, it] of store.liveItems(d)) {
+      const key = kind + '|' + codeKey(it);
+      if (!rows.has(key)) { const r = { key, kind, tagKey: codeKey(it), category: it.category || 'Other', label: it.label || '', codes: new Set(), total: 0, installed: 0, pending: 0, other: 0, others: new Map() }; for (const k of QUICK_PICKS) r[k] = 0; rows.set(key, r); }
+      const r = rows.get(key);
+      if (it.code) for (const c of String(it.code).split('/')) if (c.trim()) r.codes.add(c.trim());
+      const open = !!(it.issue && !it.issueResolved);
+      r.total++; totals.total++;
+      if (it.checked) { r.installed++; totals.installed++; }
+      if (!it.checked && !open) { r.pending++; totals.pending++; }
+      if (open) {
+        if (QUICK_PICKS.includes(it.issue)) { r[it.issue]++; totals[it.issue]++; }
+        else { r.other++; totals.other++; r.others.set(it.issue, (r.others.get(it.issue) || 0) + 1); }
+      }
+    }
+  }
+  const filter = String(q.filter || '').trim().toLowerCase();
+  const list = [...rows.values()]
+    .filter(r => !filter || `${[...r.codes].join(' ')} ${r.label} ${r.category}`.toLowerCase().includes(filter))
+    .sort((a, b) => Object.keys(KIND_LABEL).indexOf(a.kind) - Object.keys(KIND_LABEL).indexOf(b.kind) || a.category.localeCompare(b.category) || a.label.localeCompare(b.label));
+  return { rows: list, totals };
+}
+function itemStatusBoard(ctx) {
+  const { store } = ctx;
+  const q = istatQ();
+  const { rows, totals } = itemStatusStats(store, q);
+  const floors = floorsOf([...store.guestRooms(), ...store.spaces()]);
+  const codesOf = (r) => { const c = [...r.codes]; return c.length ? (c.length > 3 ? `${c.slice(0, 3).join(' / ')} +${c.length - 3}` : c.join(' / ')) : '—'; };
+  const cell = (n, cls = '') => `<td class="n ${n ? cls : 'zero'}">${n || '·'}</td>`;
+  const root = el(`<section class="card istat" style="margin-bottom:18px">
+    <div class="card-head istat-head"><h2>Item status</h2><span class="card-cap">every line, by what is on it · installed = checked · pending = not checked, no open issue · issue columns count open issues by their text</span></div>
+    <div class="kpis istat-kpis">
+      <div class="kpi"><div class="kl">Pending</div><div class="kv">${totals.pending}</div><div class="kc">not checked, nothing flagged</div></div>
+      <div class="kpi"><div class="kl">Missing</div><div class="kv">${totals.MISSING}</div><div class="kc">open MISSING</div></div>
+      <div class="kpi"><div class="kl">In box</div><div class="kv">${totals['IN BOX']}</div><div class="kc">delivered, not installed</div></div>
+      <div class="kpi"><div class="kl">Need install</div><div class="kv">${totals['NEED INSTALL']}</div><div class="kc">open NEED INSTALL</div></div>
+      <div class="kpi"><div class="kl">Need proper place</div><div class="kv">${totals['NEED PROPER PLACE']}</div><div class="kc">installed wrong spot</div></div>
+      <div class="kpi"><div class="kl">Damaged</div><div class="kv">${totals.DAMAGED}</div><div class="kc">open DAMAGED</div></div>
+      <div class="kpi"><div class="kl">Wrong item</div><div class="kv">${totals['WRONG ITEM']}</div><div class="kc">open WRONG ITEM</div></div>
+      <div class="kpi"><div class="kl">Other issue</div><div class="kv">${totals.other}</div><div class="kc">written in by hand</div></div>
+      <div class="kpi"><div class="kl">Installed</div><div class="kv">${totals.installed}<small> of ${totals.total}</small></div><div class="kc">checked off</div></div>
+    </div>
+    <div class="istat-tools">
+      <div class="chips"><button class="fl ${!q.floor ? 'on' : ''}" data-fl="0">Every floor</button>${floors.map(f => `<button class="fl ${q.floor === f ? 'on' : ''}" data-fl="${f}">Floor ${f}</button>`).join('')}</div>
+      <input class="tagfilter" data-filter placeholder="Find an item (headboard, PTAC, HD-08)" value="${esc(q.filter)}"/>
+    </div>
+    <div class="istat-wrap"><table class="istat-t">
+      <thead><tr><th class="tn">Item</th><th>Total</th><th>Installed</th><th>Pending</th>${QUICK_PICKS.map(k => `<th title="open ${esc(k)}">${esc(k.replace('NEED PROPER PLACE', 'PROPER PLACE'))}</th>`).join('')}<th>Other</th></tr></thead>
+      <tbody>${(() => { let last = ''; return rows.map(r => { const head = r.kind + '|' + r.category; const h = head !== last ? `<tr class="grp"><td colspan="${5 + QUICK_PICKS.length}">${esc(KIND_LABEL[r.kind])} · ${esc(r.category)}</td></tr>` : ''; last = head; return h + `<tr data-key="${esc(r.key)}" tabindex="0" role="link" aria-label="Open ${esc(r.label)} in Bulk mark">
+        <td class="tn"><span class="tag">${esc(codesOf(r))}</span> <span>${esc(r.label.length > 54 ? r.label.slice(0, 53) + '…' : r.label)}</span></td>
+        <td class="n">${r.total}</td>${cell(r.installed, 'ok')}${cell(r.pending, 'pend')}${QUICK_PICKS.map(k => cell(r[k], 'iss')).join('')}<td class="n ${r.other ? 'iss' : 'zero'}" title="${esc([...r.others].map(([t, n]) => `${n} · ${t}`).join('\n'))}">${r.other || '·'}</td>
+      </tr>`; }).join(''); })()}</tbody>
+    </table>${rows.length ? '' : '<div class="coming" style="padding:18px"><b>No items match</b></div>'}</div>
+    <div class="istat-foot">${pl(rows.length, 'item row')} · tap a row to open it in Bulk mark with the tag picked</div>
+  </section>`);
+  const save = (patch) => { sessionStorage.setItem(ISTAT_KEY, JSON.stringify({ ...q, ...patch })); store._emit(); };
+  root.querySelectorAll('[data-fl]').forEach(b => b.addEventListener('click', () => save({ floor: Number(b.dataset.fl) })));
+  root.querySelector('[data-filter]').addEventListener('input', e => { const v = e.target.value; clearTimeout(root._ft); root._ft = setTimeout(() => save({ filter: v }), 250); });
+  root.querySelectorAll('tr[data-key]').forEach(tr => {
+    const go = () => {
+      const r = rows.find(x => x.key === tr.dataset.key);
+      if (!r) return;
+      setBulkQ({ floors: q.floor ? [q.floor] : [], types: [], kind: r.kind, cats: [r.category], codes: [r.tagKey], action: 'check', text: '' });
+      location.hash = '#/bulk';
+    };
+    tr.addEventListener('click', go);
+    tr.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+  });
+  return root;
+}
+
 function renderDashboard(ctx) {
   const { store } = ctx;
   const rooms = store.guestRooms();
@@ -173,12 +263,14 @@ function renderDashboard(ctx) {
       <div class="kpi"><div class="kl">MEP punch lists</div><div class="kv">${mepCount}</div><div class="kc">separate from FF&amp;E, per room</div></div>
     </div>
     ${tradeTable(store)}
+    <div data-istat></div>
     <section class="card">
       <div class="card-head"><h2>Rooms</h2><span class="card-cap">${esc(floorRange(rooms))}</span><span class="spacer"></span><span class="card-cap">tap a room to open its checklist</span></div>
       <div class="rlist"></div>
     </section>
   </div>`);
 
+  root.querySelector('[data-istat]').replaceWith(itemStatusBoard(ctx));
   const list = root.querySelector('.rlist');
   appendByFloor(list, rows, x => x.r.floor, x => roomRow(x.r, x.s));
   return root;
