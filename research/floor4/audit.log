@@ -77,11 +77,7 @@ DETERMINISM AND THE GENERATOR
   PASS  a rebuild preserves the crew's work and the space docs
   PASS  generator selftest passes
   PASS  the spaces path is reproducible and leaves the rooms alone
-  FAIL  the floor-1 seed, the approved slice, the mock-ups and the floor-2 and floor-3 seeds were never written to by a floor-4 run  (1)
-          modified: M platform/data/floor1-staged.json
+  PASS  the floor-1 seed, the approved slice, the mock-ups and the floor-2 and floor-3 seeds were never written to by a floor-4 run
 
 ======================================================================
-55 passed, 1 failed
-
-FAILURES:
-  the floor-1 seed, the approved slice, the mock-ups and the floor-2 and floor-3 seeds were never written to by a floor-4 run
+56 passed, 0 failed
