@@ -7,15 +7,17 @@
   "project": {
     "name": "Home2 Suites by Hilton, Eagle Pass TX",
     "job": "Triun 24030",
-    "sheets": ["A550 King Studio", "A550 view 01.1 King Studio Connector", "A552 King Studio Acc. Mod."]
+    "sheets": [
+      "A550 King Studio",
+      "A550 view 01.1 King Studio Connector",
+      "A552 King Studio Acc. Mod."
+    ]
   },
-
   "frame": {
     "spec_frame": "geometry-spec.json frame: x = 0 at the bed/sofa wall room face, +x to the working wall; z = 0 at the corridor wall room face, +z to the window wall; y = 0 at finish floor. Room 118's z = 0 is the corridor wall on the WORKING / ENTRY side, the 29'-0\" one, because that wall jogs at the bathroom.",
     "viewer_frame": "platform/room3d.html runs z NEGATIVE from the corridor wall, so it converts once with kz(v) = -v and nothing else in the King build changes sign. x is unchanged; MIRROR is applied at draw time as MX(x) = W - x.",
     "units": "Every number in this file is INCHES in the spec frame unless the key ends _ft. The viewer holds feet and multiplies the sheet's inches by KIN = 1/12 so the sheet numbers stay readable in the source."
   },
-
   "ceilings": {
     "main_room_in": 99.375,
     "main_room_ft_in": "8'-3 3/8\"",
@@ -24,12 +26,10 @@
     "status": "PRINTED, both MINIMUMS per keynote 31 on A550/02 and A552/02",
     "warning": "The QQ family's 9'-0\" is the QQ family's. No King sheet gives a 9'-0\" ceiling anywhere. The King shell STEPS: the soffit over the bathroom and the entry leg is a real soffit with a real fascia, and the floor scene must step it too or it is drawing a different room."
   },
-
   "accessible_clear_floor_circles": {
     "applies_to": "Room 118 ONLY (King Studio Acc. Mod., A552). A550 draws no clear floor circle at all, so rooms 104-116 get none.",
     "what_the_sheet_gives": "geometry-spec.json types['King Studio Acc. Mod.'].bathroom.accessible_features, verbatim: '60\" turning circle drawn in the bathroom AND a SECOND required accessible clear floor circle in the main room (keynote 37 family, drawn dashed).' A552 view 01 DRAWS both and DIMENSIONS NEITHER. There is no printed centre for either circle, and no printed diameter at all for the main-room one.",
     "rule_applied": "Anything without a printed size or position is labelled STYLIZED on screen and on the hover card, and is never presented as a dimensioned clearance. Both viewers draw the same two rings at the same centres and radii listed below.",
-
     "bathroom_circle": {
       "id": "ACF1",
       "diameter_in": 60.0,
@@ -43,7 +43,6 @@
       "draw": "Solid ring mesh, 0.09 ft wall thickness, 72 segments, colour 0x02A9E0 (Triun cyan), opacity 0.55, laid flat at y = 0.1 ft.",
       "screen_label": "60\" TURNING CIRCLE . POSITION STYLIZED"
     },
-
     "main_room_circle": {
       "id": "ACF2",
       "diameter_in": 60.0,
@@ -58,23 +57,31 @@
       "screen_label": "2ND CLEAR FLOOR CIRCLE . SIZE + POSITION STYLIZED",
       "floor_scene_alternative": "If the floor scene cannot carry a dashed ring at floor-plan zoom, LEAVE IT OUT rather than draw it solid. A solid ring there would read as a dimensioned clearance, which is the exact failure this entry exists to prevent."
     },
-
     "hover_card": {
       "part_id": "ACF",
       "sidebar_group": "door (room features, beside GR-3)",
       "chip": "STYLIZED",
       "qty_display": "2 CIRCLES - NEITHER IS DIMENSIONED ON A552",
-      "note_says": "STYLIZED - A552 DIMENSIONS NEITHER CIRCLE. The bathroom circle's SIZE is the sheet's 60\"; its POSITION is stylized, centred in the measured bath rectangle. The main-room circle has NO printed diameter and NO printed position: what is drawn is a stylized nominal 60\" centred between two proven planes. Do not scale a clearance off either ring. Resolve against A532 / A532.1 and the accessibility review."
+      "note_says": "STYLIZED - A552 DIMENSIONS NEITHER CIRCLE. The bathroom circle's SIZE is the sheet's 60\"; its POSITION is stylized, centred in the measured bath rectangle. The main-room circle has NO printed diameter and NO printed position: what is drawn is a stylized nominal 60\" centred between two proven planes. Do not scale a clearance off either ring. Resolve against A532 / A532.1 and the accessibility review.",
+      "reachable_from": "Both rings are attached to the ACF part, so hovering or clicking either ring in the 3D view opens this card, as does the ACF row in the sidebar. The rings carry MeshBasicMaterial and take no emissive highlight; the captions highlight instead."
+    },
+    "verified": {
+      "date": "2026-09-02",
+      "how": "Screenshotted room 118 at iso, top and bath, and with the ACF card open. Both rings render, both captions render, and the card states which half of each ring is the sheet's and which is stylized.",
+      "shots": [
+        "118-iso.png",
+        "118-top.png",
+        "118-bath.png",
+        "118-ACF-card.png"
+      ]
     }
   },
-
   "connecting_working_wall_shift": {
     "issue": "A550 elevation 09 is not a second drawing of elevation 05. Inserting GR-3 into room 116's working wall pushes the closet / TV / desk group toward the window.",
     "spec_position": "geometry-spec.json types['King Studio Connecting'].working_wall_variant.shift_toward_window is UNPROVEN, in and ft_in both null, and its note says verbatim: 'The shift measures ABOUT 4'-3\" off the drawing. It is a READING of elevation 09, not a printed dimension - no module on either working wall is dimensioned. Do not encode 4'-3\" as a hard number.'",
     "what_the_viewer_does": "There is NO shift constant in platform/room3d.html. An earlier build carried wwShift = 51 * KIN, exactly 4'-3\", as dead code with a comment claiming it was used; both the constant and the claim are gone. The connector's working-wall group is instead set out from the one PROVEN fixture on that wall: the desk module starts just past the GR-3 far jamb, at z = 13.0 ft against a jamb at 11'-0\" CL + half of the 3'-4\" R.O. = 12'-8\". That reproduces the elevation-09 arrangement without inventing the distance.",
     "rule_for_the_floor_scene": "Do the same or draw nothing there. Never multiply a module position by 4'-3\", and never write a comment that says a constant is used when it is not."
   },
-
   "gr3_116_118_opening": {
     "what_it_is": "ONE physical opening in ONE wall, the demising wall room 116 and room 118 share. Room 116's working wall and room 118's working wall are the two faces of it.",
     "the_spread": {
@@ -88,64 +95,188 @@
     "ro_width_in": 40.0,
     "ro_width_status": "3'-4\" R.O., MEASURED on A552. A550 prints no width for this opening. Leaf width is printed on neither sheet - A600."
   },
-
   "rooms": [
-    {"room": "104", "type": "King Studio",            "sheet": "A550 view 01",              "hand": "mirrored", "conn": false, "acc": false, "clear_w_in": 144.0, "clear_d_in": 348.0, "bay": "12'-8\""},
-    {"room": "106", "type": "King Studio",            "sheet": "A550 view 01",              "hand": "as-drawn", "conn": false, "acc": false, "clear_w_in": 144.0, "clear_d_in": 348.0, "bay": "12'-8\""},
-    {"room": "108", "type": "King Studio",            "sheet": "A550 view 01",              "hand": "mirrored", "conn": false, "acc": false, "clear_w_in": 144.0, "clear_d_in": 348.0, "bay": "12'-8\""},
-    {"room": "110", "type": "King Studio",            "sheet": "A550 view 01",              "hand": "as-drawn", "conn": false, "acc": false, "clear_w_in": 144.0, "clear_d_in": 348.0, "bay": "12'-8\"", "note": "The demo key. 24 photographs confirm this hand and calibrate the whole row."},
-    {"room": "112", "type": "King Studio",            "sheet": "A550 view 01",              "hand": "mirrored", "conn": false, "acc": false, "clear_w_in": 144.0, "clear_d_in": 348.0, "bay": "12'-8\""},
-    {"room": "114", "type": "King Studio",            "sheet": "A550 view 01",              "hand": "as-drawn", "conn": false, "acc": false, "clear_w_in": 144.0, "clear_d_in": 348.0, "bay": "12'-8\""},
-    {"room": "116", "type": "King Studio Connecting", "sheet": "A550 views 01 + 01.1, elev 09", "hand": "mirrored", "conn": true, "acc": false, "clear_w_in": 144.0, "clear_d_in": 348.0, "bay": "12'-8\"", "gr3_cl_in": 132.0, "gr3_ro_in": 40.0, "note": "Mirrored is what puts its working wall on the wall it shares with 118."},
-    {"room": "118", "type": "King Studio Acc. Mod.",  "sheet": "A552 views 01 / 02",        "hand": "as-drawn", "conn": true, "acc": true,  "clear_w_in": 202.0, "clear_d_in": 348.0, "clear_d_bath_side_in": 334.25, "bay": "17'-6\" CL-CL", "gr3_cl_in": 132.82, "gr3_ro_in": 40.0, "note": "Corridor wall JOGS 1'-1 3/4\" into the room at the bathroom. Window is ASYMMETRIC in the bay. Bath is nearly twice the standard width."}
+    {
+      "room": "104",
+      "type": "King Studio",
+      "sheet": "A550 view 01",
+      "hand": "mirrored",
+      "conn": false,
+      "acc": false,
+      "clear_w_in": 144.0,
+      "clear_d_in": 348.0,
+      "bay": "12'-8\""
+    },
+    {
+      "room": "106",
+      "type": "King Studio",
+      "sheet": "A550 view 01",
+      "hand": "as-drawn",
+      "conn": false,
+      "acc": false,
+      "clear_w_in": 144.0,
+      "clear_d_in": 348.0,
+      "bay": "12'-8\""
+    },
+    {
+      "room": "108",
+      "type": "King Studio",
+      "sheet": "A550 view 01",
+      "hand": "mirrored",
+      "conn": false,
+      "acc": false,
+      "clear_w_in": 144.0,
+      "clear_d_in": 348.0,
+      "bay": "12'-8\""
+    },
+    {
+      "room": "110",
+      "type": "King Studio",
+      "sheet": "A550 view 01",
+      "hand": "as-drawn",
+      "conn": false,
+      "acc": false,
+      "clear_w_in": 144.0,
+      "clear_d_in": 348.0,
+      "bay": "12'-8\"",
+      "note": "The demo key. 24 photographs confirm this hand and calibrate the whole row."
+    },
+    {
+      "room": "112",
+      "type": "King Studio",
+      "sheet": "A550 view 01",
+      "hand": "mirrored",
+      "conn": false,
+      "acc": false,
+      "clear_w_in": 144.0,
+      "clear_d_in": 348.0,
+      "bay": "12'-8\""
+    },
+    {
+      "room": "114",
+      "type": "King Studio",
+      "sheet": "A550 view 01",
+      "hand": "as-drawn",
+      "conn": false,
+      "acc": false,
+      "clear_w_in": 144.0,
+      "clear_d_in": 348.0,
+      "bay": "12'-8\""
+    },
+    {
+      "room": "116",
+      "type": "King Studio Connecting",
+      "sheet": "A550 views 01 + 01.1, elev 09",
+      "hand": "mirrored",
+      "conn": true,
+      "acc": false,
+      "clear_w_in": 144.0,
+      "clear_d_in": 348.0,
+      "bay": "12'-8\"",
+      "gr3_cl_in": 132.0,
+      "gr3_ro_in": 40.0,
+      "note": "Mirrored is what puts its working wall on the wall it shares with 118."
+    },
+    {
+      "room": "118",
+      "type": "King Studio Acc. Mod.",
+      "sheet": "A552 views 01 / 02",
+      "hand": "as-drawn",
+      "conn": true,
+      "acc": true,
+      "clear_w_in": 202.0,
+      "clear_d_in": 348.0,
+      "clear_d_bath_side_in": 334.25,
+      "bay": "17'-6\" CL-CL",
+      "gr3_cl_in": 132.82,
+      "gr3_ro_in": 40.0,
+      "note": "Corridor wall JOGS 1'-1 3/4\" into the room at the bathroom. Window is ASYMMETRIC in the bay. Bath is nearly twice the standard width."
+    }
   ],
   "hand_basis": "Per-room, measured on A100 at 3/32\" = 1'-0\" (6.750 PDF units per foot): the GR-1 rough-opening centreline off the demising centreline at the low end of each bay. The two candidates are about 4 ft apart, so the reading separates them without ambiguity. Room 110's photographs are the calibration.",
-
   "shell_planes_the_floor_scene_must_match": {
     "king_studio_a550": {
       "bath_entry_partition_entry_face_x_in": 71.625,
       "bath_main_room_partition_room_face_z_in": 106.125,
-      "bath_interior_x_in": [0.0, 66.875],
-      "bath_interior_z_in": [0.0, 101.375],
+      "bath_interior_x_in": [
+        0.0,
+        66.875
+      ],
+      "bath_interior_z_in": [
+        0.0,
+        101.375
+      ],
       "corridor_wall_z_in": 0.0,
-      "window_jambs_x_in": [36.0, 108.0],
+      "window_jambs_x_in": [
+        36.0,
+        108.0
+      ],
       "gr1_cl_x_in": 94.125,
       "gr1_ro_in": 40.0,
       "gr2a_cl_z_in": 57.0,
-      "divider_soffit": {"x_in": [0.0, 52.0], "z_in": [205.5, 218.5], "status": "length and width PRINTED A550/02; depth below slab NOT printed, drawn shallow"},
+      "divider_soffit": {
+        "x_in": [
+          0.0,
+          52.0
+        ],
+        "z_in": [
+          205.5,
+          218.5
+        ],
+        "status": "length and width PRINTED A550/02; depth below slab NOT printed, drawn shallow"
+      },
       "status_notes": "bath_interior_x1 and bath_interior_z1 and the partition thickness are SCALED, not printed. Replace from A530."
     },
     "king_studio_acc_a552": {
       "bath_entry_partition_entry_face_x_in": 107.625,
       "bath_main_room_partition_room_face_z_in": 128.5,
-      "bath_interior_x_in": [0.0, 100.875],
-      "bath_interior_z_in": [13.75, 121.75],
+      "bath_interior_x_in": [
+        0.0,
+        100.875
+      ],
+      "bath_interior_z_in": [
+        13.75,
+        121.75
+      ],
       "corridor_wall_z_in": 0.0,
       "corridor_wall_z_at_bath_in": 13.75,
-      "window_jambs_x_in": [94.125, 166.125],
+      "window_jambs_x_in": [
+        94.125,
+        166.125
+      ],
       "gr1_cl_x_in": 143.625,
       "gr1_ro_in": 40.0,
       "gr2a_cl_z_in": 57.75,
-      "divider_soffit": {"x_in": [0.0, 52.0], "z_in": [212.0, 225.0], "status": "length, width and the 6'-11 1/2\" locating dimension all PRINTED A552/02"},
+      "divider_soffit": {
+        "x_in": [
+          0.0,
+          52.0
+        ],
+        "z_in": [
+          212.0,
+          225.0
+        ],
+        "status": "length, width and the 6'-11 1/2\" locating dimension all PRINTED A552/02"
+      },
       "main_room_clear_depth_in": 219.5,
       "main_room_clear_depth_ft_in": "18'-3 1/2\"",
       "main_room_clear_depth_status": "PRINTED on A552 view 01, labelled 18'-3 1/2\" CLEAR, window wall room face to the main-room face of the bath partition. Measured 219.507 in."
     }
   },
-
   "proof_text_rules": {
     "room_118_do_not_say": "Do NOT write that room 118's main-room leg is 18'-11\". Spec conflict C2, severity high: 18'-11\" is ONE SEGMENT of the 30'-1 1/2\" grid-to-grid depth chain (18'-11\" + 10'-0 3/4\" + 1'-2\"), not an overall. A552.md on Drive states the room as 17'-6\" x 18'-11\" and is wrong.",
     "room_118_do_say": "The bath/main-room partition sits at z = 10'-8 1/2\" from the corridor wall room face, leaving a main-room clear depth of 18'-3 1/2\", which is the value A552 view 01 PRINTS and labels CLEAR.",
     "name_the_datum": "State whether a number is an absolute sheet coordinate or a distance from a named face, every time. A100's guest-wing partitions are in the sheet's U/V feet; a partition at absolute V = 18.89 is 18.34 ft from a west inside face at V = 0.55, and the two are not the same statement.",
     "general": "Proof text quotes the printed value it matches, names the sheet and view, and never resurrects a number the spec has already debunked."
   },
-
   "hard_stop": {
     "behaviour": "A room with no ROOM_GEOM entry replaces the whole document with a hard-stop page reading NO 3D MODEL FOR ROOM <n> YET and throws, so nothing else runs.",
     "why": "Falling back to another room's shell would draw its bay, its beds and its connecting door under the requested number. Ruling D7: every room renders its own correct geometry or an honest hard-stop, never a relabelled shell.",
-    "verified_this_run": ["102", "120"]
+    "verified_this_run": [
+      "102",
+      "120"
+    ]
   },
-
   "known_gaps_carried_into_the_viewer": [
     "No piece of furniture on A550 or A552 has a locating dimension. Every furniture position in the viewer is proportioned and is flagged STYLIZED in the caveat bar and on the item cards.",
     "Not one working-wall module is dimensioned on either sheet. The only printed horizontals on the whole 29'-0\" run are the GR-320 upper shelf and the offset between the two shelves; both are honoured exactly and everything else is proportioned between the entry partition, the GR-3 opening and the window.",
@@ -154,5 +285,8 @@
     "PTAC has no size and no locating dimension anywhere. Keynote 1 and a leader, nothing else.",
     "Door leaf widths: GR-1's 3'-0\" leaf is DERIVED from an EQ/EQ pair on A550 elevation 06. Room 118's leaf is UNPROVEN. GR-3's leaf is printed on neither sheet. A600.",
     "Room 118 is built to Configuration B, the roll-in shower, on Austin's ruling D19 of 2026-08-20. A100 and G001 still mark it T for tub and conflicts A11 and B4.4 are formally open. The ruling closed the configuration for construction, not the drawings, and the bath RECTANGLE is the same either way."
-  ]
+  ],
+  "style": {
+    "no_em_dashes": "platform/room3d.html carries no em dash and no en dash. 254 em dashes inherited from an earlier pass were replaced with plain hyphens across comments and display strings. That changed punctuation only: the QQ room 105 iso render differs from its pre-change baseline by 106 pixels in 15 rows, every one of them a dash glyph inside a text run, and no geometry pixel changed."
+  }
 }

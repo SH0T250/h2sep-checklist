@@ -3131,39 +3131,33 @@ if (!ACC){
      the floor scene draws the identical thing rather than its own version. */
   ACF1 = {cx: BW/2, cz: BZ0 + (BIZ - BZ0)/2, r: G.turnR};
   ACF2 = {cx: W/2,  cz: (BPZ + G.sofZ0)/2,   r: G.turnR2};
-  (function(){
-    function ring(c, colour, dashed){
-      var g = dashed
-        ? new THREE.RingGeometry(c.r - 0.09, c.r, 72, 1, 0, Math.PI*2)
-        : new THREE.RingGeometry(c.r - 0.09, c.r, 72);
-      var m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({
-        color:colour, transparent:true, opacity: dashed ? 0.75 : 0.55,
-        side:THREE.DoubleSide}));
-      m.rotation.x = -Math.PI/2;
-      m.position.set(MX(c.cx), 0.1, kz(c.cz));
-      scenery(m);
-      return m;
-    }
-    ring(ACF1, 0x02A9E0, false);
-    /* the dashed one is built from arc segments, because r128's RingGeometry
-       has no dash mode and a dashed LineMaterial would be a hairline */
-    var seg = 18, gap = Math.PI*2/seg;
-    for (var i = 0; i < seg; i++){
-      var g = new THREE.RingGeometry(ACF2.r - 0.10, ACF2.r, 6, 1, i*gap, gap*0.55);
-      var m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({
-        color:0xE0A21E, transparent:true, opacity:0.8, side:THREE.DoubleSide}));
-      m.rotation.x = -Math.PI/2;
-      m.position.set(MX(ACF2.cx), 0.1, kz(ACF2.cz));
-      scenery(m);
-    }
-  })();
-  /* One card for both, so hovering either ring says what it is and is not. */
-  reg({id:'ACF', tag:'ACF', grp:'door', name:'Accessible Clear Floor Space', qty:2,
+  /* One card for both rings, registered first so the rings can hang off it:
+     hovering or clicking either ring in the model opens the card that says
+     what is the sheet's and what is stylized. */
+  var pACF = reg({id:'ACF', tag:'ACF', grp:'door', name:'Accessible Clear Floor Space', qty:2,
     qdisp:'2 CIRCLES - NEITHER IS DIMENSIONED ON A552',
     cat:'Accessibility \u00b7 room feature',
     desc:'A552 view 01 draws a 60\u2033 turning circle in the bathroom and a second required clear floor circle in the main room, drawn dashed. The bathroom circle is drawn here at the 60\u2033 the spec names, centred in the bath clear rectangle (8\u2032-4\u215e\u2033 \u00d7 9\u2032-0\u2033, both MEASURED on A552). The main-room circle is drawn dashed and amber to keep the two apart on sight.',
     note:'STYLIZED - A552 DIMENSIONS NEITHER CIRCLE. The bathroom circle\u2019s SIZE is the sheet\u2019s 60\u2033; its POSITION is stylized, centred in the measured bath rectangle. The main-room circle has NO printed diameter and NO printed position anywhere in the spec: what is drawn is a stylized nominal 60\u2033 centred between two proven planes - the bath/main-room partition face at 10\u2032-8\u00bd\u2033 and the corridor-side edge of the divider soffit at 17\u2032-8\u2033. Do not scale a clearance off either ring. Resolve against A532 / A532.1 and the accessibility review.',
     focus:V3(ACF2.cx, 1.2, kz(ACF2.cz)), dist:18});
+  (function(){
+    function ring(c, colour, opacity, th, radial, start, sweep){
+      var g = new THREE.RingGeometry(c.r - th, c.r, radial, 1, start, sweep);
+      var m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({
+        color:colour, transparent:true, opacity:opacity, side:THREE.DoubleSide}));
+      m.rotation.x = -Math.PI/2;
+      m.position.set(MX(c.cx), 0.1, kz(c.cz));
+      attach(pACF, m);
+    }
+    ring(ACF1, 0x02A9E0, 0.55, 0.09, 72, 0, Math.PI*2);
+    /* The dashed one is built from arc segments: r128's RingGeometry has no
+       dash mode, and a dashed LineMaterial would be a one-pixel hairline at
+       any zoom. A552 draws this circle dashed; the dashes are the sheet's
+       convention, and here they also keep it from reading like the solid
+       bathroom ring, whose diameter IS the sheet's. */
+    var seg = 18, gap = Math.PI*2/seg;
+    for (var i = 0; i < seg; i++) ring(ACF2, 0xE0A21E, 0.8, 0.10, 6, i*gap, gap*0.55);
+  })();
 }
 
 /* ---- bath accessories ---------------------------------------------------- */
@@ -3368,10 +3362,10 @@ var kingLabels = function(){
      The bathroom ring's SIZE is A552's 60″ and only its centre is stylized;
      the dashed main-room ring has neither a printed size nor a printed
      position, and its caption has to say so wherever the ring is visible. */
-  if (ACC && ACF1) addLabel({anchor:V3(ACF1.cx,0.12,kz(ACF1.cz)),
+  if (ACC && ACF1) addLabel({part:'ACF', anchor:V3(ACF1.cx,0.12,kz(ACF1.cz)),
             html:'60″ TURNING CIRCLE · POSITION STYLIZED',
             cls:'min', dx:-42, dy:14, noleader:true, pri:3});
-  if (ACC && ACF2) addLabel({anchor:V3(ACF2.cx,0.12,kz(ACF2.cz)),
+  if (ACC && ACF2) addLabel({part:'ACF', anchor:V3(ACF2.cx,0.12,kz(ACF2.cz)),
             html:'2ND CLEAR FLOOR CIRCLE · SIZE + POSITION STYLIZED',
             cls:'min', dx:-84, dy:16, noleader:true, pri:3});
 };
