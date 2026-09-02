@@ -51,13 +51,15 @@ export function fmtWhen(iso) {
 }
 
 let toastTimer = null;
+// One action ({ label, fn }) or several ([{ label, fn }, ...], D57).
 export function toast(msg, action) {
   document.querySelector('.toast')?.remove();
   clearTimeout(toastTimer);
-  const t = el(`<div class="toast" role="status">${esc(msg)}${action ? `<button>${esc(action.label)}</button>` : ''}</div>`);
-  if (action) t.querySelector('button').addEventListener('click', () => { action.fn(); t.remove(); });
+  const actions = Array.isArray(action) ? action : (action ? [action] : []);
+  const t = el(`<div class="toast" role="status">${esc(msg)}${actions.map((a, i) => `<button data-i="${i}">${esc(a.label)}</button>`).join('')}</div>`);
+  t.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { actions[Number(b.dataset.i)].fn(); t.remove(); }));
   document.body.append(t);
-  toastTimer = setTimeout(() => t.remove(), action ? 8000 : 3200);
+  toastTimer = setTimeout(() => t.remove(), actions.length ? 8000 : 3200);
 }
 
 export function sheet(innerHtml, { onClose } = {}) {

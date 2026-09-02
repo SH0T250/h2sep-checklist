@@ -781,6 +781,27 @@ function bulkPreviewHtml(plan) {
   </div>`;
 }
 
+// Check the same line (same category and label, the way Bulk mark merges tags)
+// on every document of the same kind on this floor. Goes through the bulk
+// confirm sheet, so the count, the lines left alone and their reasons show
+// before anything is written, and the apply has an Undo (D57).
+function wholeFloorCheck(ctx, docId, itemId) {
+  const { store } = ctx;
+  const doc = store.getDoc(docId); const it = doc?.items?.[itemId];
+  if (!doc || !it) return;
+  const floor = Number(doc.floor);
+  const isSpace = String(doc.type || '').startsWith('space-');
+  const isMep = store.constructor.MEP_SUFFIXES.some(sfx => docId.endsWith(sfx)) || doc.type === 'mep-punch';
+  const keyOf = new Map(Object.entries(store.docs).map(([k, v]) => [v, k]));
+  const parents = (isSpace ? store.spaces() : store.guestRooms()).filter(d => Number(d.floor) === floor);
+  const docs = parents.map(d => isMep ? store.mepDoc(d.number) : d).filter(d => d && keyOf.get(d) !== docId);
+  const want = codeKey(it);
+  const targets = [];
+  for (const d of docs) for (const [id, x] of store.liveItems(d)) if (codeKey(x) === want) targets.push({ docId: keyOf.get(d), itemId: id });
+  if (!targets.length) { toast(`No other ${isSpace ? 'common area' : 'room'} on floor ${floor} carries this line`); return; }
+  bulkConfirm(ctx, targets, 'check', { text: '', scopeLabel: `Floor ${floor} · ${pl(docs.length, isSpace ? 'other common area' : 'other room')}` });
+}
+
 function itemRow(ctx, docId, itemId, it) {
   const { store } = ctx;
   const flagged = it.reliability === 'FLAGGED';
@@ -812,8 +833,13 @@ function itemRow(ctx, docId, itemId, it) {
       if (bulkOn(docId)) return bulkToggleRow(row, docId, itemId);
       if (!store.user) return identityGate(ctx);
       if (openIssue || flagged) return itemSheet(ctx, docId, itemId);   // a resolved issue is history, not a flag (D50)
-      store.check(docId, itemId, !it.checked);
-      if (!it.checked) toast(`Checked ${it.code || it.label}`, { label: 'Undo', fn: () => store.check(docId, itemId, false) });
+      const wasChecked = !!it.checked;   // the store mutates this line in place
+      store.check(docId, itemId, !wasChecked);
+      // D57: every check offers the same check on this line in every room on the floor.
+      if (!wasChecked) toast(`Checked ${it.code || it.label}`, [
+        { label: 'Undo', fn: () => store.check(docId, itemId, false) },
+        { label: `Whole floor ${store.getDoc(docId)?.floor ?? ''}`, fn: () => wholeFloorCheck(ctx, docId, itemId) },
+      ]);
     },
     hold: () => itemSheet(ctx, docId, itemId),
   });
