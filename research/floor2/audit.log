@@ -39,12 +39,14 @@ LINE-LEVEL INVARIANTS
 
 RULING D22 ON FLOOR 2, THE WORKING WALL
 ----------------------------------------------------------------------
-  PASS  GR-305 on exactly the eight plain Queen-Queen keys
-  PASS  GR-308 on exactly the connecting keys and the undecided two-queen types (201, 215, 230, 232, 236, 238)
+  PASS  GR-305 on the eight plain Queen-Queen keys (D22) plus 201, 230, 232 (D33)
+  PASS  GR-308 on exactly the two connecting keys (215, 236)
+  PASS  GR-309 on 238 only (D33)
   PASS  GR-304 on the 17 King Studios, GR-315 on 202, GR-316 on 217
-  PASS  no room carries both working-wall tags live
-  PASS  the corrected line cites D22, the 2nd Floor tab, and the open handedness, at MEDIUM
-  PASS  the undecided rooms carry the workbook evidence in n_d22 and stay FLAGGED
+  PASS  no room carries two working-wall tags live
+  PASS  the corrected line cites its ruling, the 2nd Floor tab, and the open handedness, at MEDIUM, and keeps B4.5
+  PASS  no build-authored note from an earlier run survives a rebuild (only crew notes travel)
+  PASS  the D33 rooms record the ruling in n_d22 with Austin's words
 
 THE MOCK-UPS ARE REPRODUCED
 ----------------------------------------------------------------------
@@ -63,7 +65,7 @@ THE CREW'S WORK
   PASS  the crew's 696 open issues are all present in the build
   PASS  every checked line carries initials
   PASS  the crew's 28 notes came across
-  PASS  the retagged working wall kept the crew's check on the eight plain QQ keys
+  PASS  the retagged working wall kept the crew's check on every D22 and D33 key
   PASS  no personal names or account ids in the committed seed
   PASS  meta records an exact carry reconciliation
 
@@ -75,4 +77,4 @@ DETERMINISM AND THE GENERATOR
   PASS  the floor-1 seed, the approved slice and the mock-ups were never written to
 
 ======================================================================
-51 passed, 0 failed
+53 passed, 0 failed

@@ -332,6 +332,45 @@ const TAG_CORRECTIONS_F2 = [
       'no schedule this tool can read says WHICH room takes which hand, so no hand is assigned here. Ruling D26 ' +
       'records that Austin is answering the handedness question himself; confirm the per-room hand with RK Design ' +
       'before this casework is released.',
+    basis: 'Austin ruling D22 (2026-08-20), applied to a plain Queen-Queen key on floor 2 with the 2nd Floor tab ' +
+      'reconciled as stated',
+  },
+  /* RULING D33 (2026-09-02). Austin, on the floor-2 review book: "ok retag 201,
+   * 230, 232 to GR-305 and 238 to GR-309". The evidence was the same 2nd Floor
+   * tab: its eleven GR-305 walls only reconcile with QQ Wide and QQ Extended
+   * counted in, and its one GR-309R wall is the one QQ Acc. key. */
+  {
+    ruling: 'D33',
+    from: 'GR-308',
+    to: 'GR-305',
+    roomTypes: ['QQ Wide', 'QQ Extended'],
+    floors: ['2'],
+    label: 'Working Wall @ Queen Queen Studio Suite',
+    workbook: 'GR-305 Working Wall @ QQ, 2nd Floor tab: L = 5, R = 6, eleven units, which reconcile ONLY as the 8 ' +
+      'plain Queen-Queen keys plus QQ Wide 201 plus QQ Extended 230 and 232; GR-308 Working Wall @ QQ Connector is ' +
+      'listed separately at L = 1, R = 1 against the two connecting keys 215 and 236',
+    handedness: 'The 2nd Floor tab splits GR-305 into 5 LEFT and 6 RIGHT across those eleven keys. No drawing and ' +
+      'no schedule this tool can read says WHICH room takes which hand, so no hand is assigned here. Ruling D26 ' +
+      'records that Austin is answering the handedness question himself; confirm the per-room hand with RK Design ' +
+      'before this casework is released.',
+    basis: 'Austin ruling D33 (2026-09-02), on the floor-2 review book: "ok retag 201, 230, 232 to GR-305 and 238 ' +
+      'to GR-309" - the purchase record only reconciles with this key on GR-305',
+  },
+  {
+    ruling: 'D33',
+    from: 'GR-308',
+    to: 'GR-309',
+    roomTypes: ['QQ Acc.'],
+    floors: ['2'],
+    label: 'Working Wall @ Queen Queen Studio Suite Accessible',
+    workbook: 'GR-309R Working Wall @ QQ Accessible, 2nd Floor tab: ONE unit, against the ONE QQ Acc. key on floor 2 ' +
+      '(238); the FF&E spec and ID-5.9 name GR-309 for this room type and A556 tags GR-308 on the accessible plan - ' +
+      'three documents against one, and the workbook is the purchase record',
+    handedness: 'The 2nd Floor tab prints the part as GR-309R. Whether that R is a hand is not stated by any ' +
+      'document this tool can read and is not asserted here; confirm the hand with RK Design before this casework ' +
+      'is released.',
+    basis: 'Austin ruling D33 (2026-09-02), on the floor-2 review book: "ok retag 201, 230, 232 to GR-305 and 238 ' +
+      'to GR-309"',
   },
 ];
 
@@ -374,8 +413,8 @@ function assertTagCorrectionCountsF2(db) {
   };
   want('GR-304', ks); want('GR-305', plain + wide + ext); want('GR-308', conn); want('GR-309R', acc);
   want('GR-315', k1); want('GR-316', k1a);
-  const stray = n("select count(*) n from room_items where tag = 'GR-305'");
-  if (stray !== 0) die('D22 assumed the database carries no GR-305 row anywhere, but it now has ' + stray + '.');
+  const stray = n("select count(*) n from room_items where tag = 'GR-305' or tag = 'GR-309'");
+  if (stray !== 0) die('D22/D33 assume the database carries no GR-305 or GR-309 row anywhere, but it now has ' + stray + '.');
   const f2tags = db.prepare("select room_no, tag from room_items where room_no in ('202','217') and tag in ('GR-315','GR-316')").all();
   if (f2tags.length !== 2) die('expected sqlite to tag 202 GR-315 and 217 GR-316 (matching the 2nd Floor tab); found ' + JSON.stringify(f2tags));
   return { plain, wide, ext, conn, acc, ks, facts };
@@ -385,15 +424,17 @@ function assertTagCorrectionCountsF2(db) {
  *  which is a true statement about FLOOR 1 and a false one about this room. */
 function d22LineNote(roomNo, corr) {
   const c = corr.spec;
-  return 'Austin ruling D22: this room takes ' + c.to + ', not ' + c.from + '. The two are different purchased ' +
-    'parts, not two names for one. D22 was ruled on floor 1 against the FF&E Installation workbook\'s 1st Floor ' +
-    'tab; room ' + roomNo + ' is on floor 2, and the SAME reconciliation holds on the ' + WORKBOOK_F2 + ': ' +
-    c.workbook + '. data/project.sqlite transcribed this room as ' + c.from + ' and carries no ' + c.to +
-    ' row anywhere in the building; its own row note, verbatim: "' + corr.ownNote + '". ' +
-    'STILL OPEN: ' + c.handedness + ' SOURCE. Tag: Austin ruling D22, applied to a plain Queen-Queen key on floor 2 ' +
-    'with the 2nd Floor tab reconciled as stated. Label: the workbook\'s own item name. Citation, quantity, ' +
-    'category and sort: this room\'s own data/project.sqlite row(s) ' + corr.rows.join(', ') + '. Reliability ' +
-    'MEDIUM while the handedness is open.';
+  const history = c.ruling === 'D22'
+    ? 'D22 was ruled on floor 1 against the FF&E Installation workbook\'s 1st Floor tab; room ' + roomNo +
+      ' is on floor 2, and the SAME reconciliation holds on the ' + WORKBOOK_F2 + ': '
+    : 'Ruling D22 (2026-08-20) corrected the plain Queen-Queen keys on this evidence and D33 extends it to this key ' +
+      'on the ' + WORKBOOK_F2 + ': ';
+  return 'Austin ruling ' + c.ruling + ': this room takes ' + c.to + ', not ' + c.from + '. The two are different ' +
+    'purchased parts, not two names for one. ' + history + c.workbook + '. data/project.sqlite transcribed this room ' +
+    'as ' + c.from + ' and carries no ' + c.to + ' row anywhere in the building; its own row note, verbatim: "' +
+    corr.ownNote + '". STILL OPEN: ' + c.handedness + ' SOURCE. Tag: ' + c.basis + '. Label: the workbook\'s own ' +
+    'item name. Citation, quantity, category and sort: this room\'s own data/project.sqlite row(s) ' +
+    corr.rows.join(', ') + '. Reliability MEDIUM while the handedness is open.';
 }
 
 const DONOR_BY_TYPE = {
@@ -3551,7 +3592,7 @@ function buildRoomNotes(db, roomNo, room, rows, red, drops, stamp, report) {
 
 /** The D22 scope decision, stated for every room that carries GR-305 or GR-308. */
 function d22ScopeNote(db, room, roomNo, rows, corrections) {
-  const hit = rows.filter((r) => r.tag === 'GR-308' || r.tag === 'GR-305');
+  const hit = rows.filter((r) => r.tag === 'GR-308' || r.tag === 'GR-305' || r.tag === 'GR-309');
   if (!hit.length) return null;
   const r = hit[0];
   const sameType = db.prepare('select count(*) n from rooms where room_type = ?').get(room.room_type).n;
@@ -3562,11 +3603,15 @@ function d22ScopeNote(db, room, roomNo, rows, corrections) {
     '1 QQ Acc.; 1 King One Bedroom; 1 King One Bedroom Acc.).';
   if (corrections && corrections.length) {
     const c = corrections[0];
-    return { flag: 'issue', summary: 'APPLIED D22 - ' + c.from + ' -> ' + c.to + ' (2nd Floor tab reconciled); handedness OPEN',
-      text: 'WORKING WALL TAG - RULING D22 APPLIED TO THIS ROOM. Room ' + roomNo + ' is a plain Queen-Queen key, the type ' +
-        'D22 names, and it takes ' + c.to + ' (' + c.spec.label + '), not the ' + c.from + ' data/project.sqlite transcribed ' +
-        'off A555. ' + tab + ' ' + c.spec.handedness + ' The line itself (' + c.to + ') carries the full ruling text and ' +
-        'ships at reliability MEDIUM while the hand is open.' };
+    const who = c.ruling === 'D22'
+      ? 'Room ' + roomNo + ' is a plain Queen-Queen key, the type D22 names, and it takes '
+      : 'Austin ruled on 2026-09-02, reviewing the floor-2 book: "ok retag 201, 230, 232 to GR-305 and 238 to GR-309" ' +
+        '(D33). Room ' + roomNo + ' (' + room.room_type + ') therefore takes ';
+    return { flag: 'issue', summary: 'APPLIED ' + c.ruling + ' - ' + c.from + ' -> ' + c.to + ' (2nd Floor tab reconciled); handedness OPEN',
+      text: 'WORKING WALL TAG - RULING ' + c.ruling + ' APPLIED TO THIS ROOM. ' + who + c.to + ' (' + c.spec.label +
+        '), not the ' + c.from + ' data/project.sqlite transcribed off the architectural plan. ' + tab + ' ' +
+        c.spec.handedness + ' The line itself (' + c.to + ') carries the full ruling text and ships at reliability ' +
+        'MEDIUM while the hand is open.' };
   }
   if (/Connecting/.test(room.room_type)) {
     return { flag: 'info', summary: 'GR-308 is the connector wall and stands (2nd Floor tab: 2 = 2)',
@@ -3639,6 +3684,7 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
   report.donorTombstonesSkipped = donorTombstones;
 
   const items = {};
+  const conflictTextByKey = {};
   const fromDonor = [], fromSqlite = [], donorQtyNotes = [], donorLabelNotes = [], overrideNotes = [];
   const flagged = [], configLines = [], declinedLines = [];
   const relKept = [], donorTextDropped = [], donorClosures = [], conflictLines = [], typeCiteFixed = [];
@@ -3890,6 +3936,7 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
       const wasRel = pkg.reliability;
       pkg.reliability = 'FLAGGED';
       conflictText = onTag.map((h) => conflictOnLineText(h, lineCodes, wasRel, 'row(s)', lineRowIds)).join(' ');
+      conflictTextByKey[line.key] = conflictText;
       conflictLines.push(line.key + ' (' + readableMarks(marksOf(lineCodes)).join(' + ') + ' <- ' +
         onTag.map((h) => h.id + '[' + (markHitsFor(h, lineCodes).join(',') ||
           'cited by ' + rowHitsFor(h, lineRowIds).join(',')) + ']').join(', ') + ')');
@@ -3941,12 +3988,14 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
    * note (a true statement about floor 1 and a false one about this room). */
   const correctedLines = [];
   for (const corr of corrections) {
+    /* The corrected line still carries every OPEN conflicts-table entry that
+     * names it, after the ruling text - a ruling on the tag does not close B4.5. */
     const keys = Object.keys(items).filter((k) => items[k].code === corr.to);
     if (keys.length !== 1) die('room ' + roomNo + ': expected exactly one ' + corr.to + ' line after correction, found ' + keys.length);
     const it = items[keys[0]];
     it.label = corr.spec.label;
     it.reliability = 'MEDIUM';
-    it.instanceNote = '⚑ ' + d22LineNote(roomNo, corr);
+    it.instanceNote = '⚑ ' + d22LineNote(roomNo, corr) + (conflictTextByKey[keys[0]] ? ' ' + conflictTextByKey[keys[0]] : '');
     correctedLines.push(corr.to + ' (' + corr.ruling + ', was ' + corr.from + ') on ' + keys[0]);
     if (!flagged.some((f) => f.startsWith(keys[0] + ' '))) flagged.push(keys[0] + ' [MEDIUM] ' + corr.to);
   }
@@ -4671,14 +4720,12 @@ function assemble(docs, stamp, rooms) {
       donorMap: Object.fromEntries(Object.keys(REP_ROOMS).map((r) => [r, REP_ROOMS[r].donor])),
       roomTypes: Object.fromEntries(Object.keys(REP_ROOMS).map((r) => [r, REP_ROOMS[r].type])),
       typeKeys: Object.fromEntries(Object.keys(REP_ROOMS).map((r) => [r, REP_ROOMS[r].keys])),
-      rulingsApplied: ['D12 (scoped)', 'D20 (scoped)', 'D22 (the eight plain Queen-Queen keys only, 2nd Floor tab '
-        + 'reconciled 11 = 8 + 1 + 2 and 2 = 2; handedness OPEN, reliability MEDIUM)', 'D27', 'D28',
-        'D29 (scoped to the accessible QQ Acc. keys, so it lands on room 238 only)'],
+      rulingsApplied: ['D12 (scoped)', 'D20 (scoped)', 'D22 (the eight plain Queen-Queen keys, 2nd Floor tab '
+        + 'reconciled 11 = 8 + 1 + 2 and 2 = 2; handedness OPEN, reliability MEDIUM)',
+        'D33 (Austin 2026-09-02: "ok retag 201, 230, 232 to GR-305 and 238 to GR-309"; handedness OPEN, reliability MEDIUM)',
+        'D27', 'D28', 'D29 (scoped to the accessible QQ Acc. keys, so it lands on room 238 only)'],
       rulingsDeliberatelyNotApplied: [
         'D19 - scoped to room 118 only; rooms 217 and 238 carry BOTH bathing configurations, FLAGGED',
-        'D22 on QQ Wide (201), QQ Extended (230, 232) and QQ Acc. (238) - not the type D22 names; they carry GR-308 as '
-          + 'transcribed with the 2nd Floor tab evidence (GR-305 = 11 only as 8 + 1 + 2; GR-309R x1 @ QQ Accessible) '
-          + 'written on the line and in room note n_d22, OPEN for Austin',
       ],
       conflictPolicy: 'document conflicts are CARRIED as FLAGGED lines and room notes quoting data/project.sqlite '
         + 'verbatim. Nothing is resolved by this tool. That includes the data/project.sqlite conflicts TABLE, and '
@@ -5655,7 +5702,17 @@ function main(argv) {
   const finish = (d) => {
     const report = [];
     for (const r of rooms) {
+      /* preserveFieldState carries every previous note the fresh build lacks.
+       * A CREW note (by != '') must travel; a note THIS TOOL authored on an
+       * earlier run (by === '') must not - it would resurrect text the new
+       * build deliberately no longer says. */
+      const freshNotes = new Set([...Object.keys(d[r].notes || {}), ...Object.keys(d[r + '-MEP'].notes || {})]);
       const p = preserveFieldState(prevDocs, r, d[r], d[r + '-MEP']);
+      for (const id of [r, r + '-MEP']) {
+        for (const [nk, note] of Object.entries(d[id].notes || {})) {
+          if (!freshNotes.has(nk) && !note.by) { delete d[id].notes[nk]; p.notes--; }
+        }
+      }
       const kept = [];
       for (const id of [r, r + '-MEP']) {
         for (const [k, ov] of Object.entries((prevDocs[id] || {}).items || {})) {

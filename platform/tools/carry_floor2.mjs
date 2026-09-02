@@ -69,7 +69,9 @@ const PII_FIELDS = ['checkedByName', 'checkedByUid'];
  * only fires where the BUILD carries gr305_a and no live gr308_a; on 201, 230,
  * 232, 238 and the two connecting keys the build keeps gr308_a, the key matches
  * directly, and nothing is remapped. */
-const RULED_REMAP = { gr308_a: 'gr305_a' };
+const RULED_REMAP = { gr308_a: ['gr305_a', 'gr309_a'] };
+/* D33 (2026-09-02) retags 201, 230, 232 to GR-305 and 238 to GR-309; the crew
+ * checked those walls off under GR-308 too, so the same remap carries them. */
 
 /* ================== A LINE THE CREW HOLDS OPEN WORK ON MUST EXIST IN THE BUILD
  *
@@ -324,8 +326,8 @@ for (const pid of wanted) {
 
     const targets = [];
     if (key in pdoc.items) targets.push(key);
-    const remap = RULED_REMAP[key];
-    if (remap && remap in pdoc.items) { targets.push(remap); if (state) r++; }
+    const remap = [].concat(RULED_REMAP[key] || []).find((t) => t in pdoc.items);
+    if (remap) { targets.push(remap); if (state) r++; }
 
     if (!targets.length) {
       /* A line the crew holds work on must EXIST. Rebuild it from this room's
@@ -461,7 +463,7 @@ for (const pid of wanted) {
   if (!snap) continue;
   for (const [key, ci] of Object.entries(snap.doc.items || {})) {
     if (!hasState(ci)) continue;
-    const t = seed.docs[pid].items[RULED_REMAP[key] && RULED_REMAP[key] in seed.docs[pid].items ? RULED_REMAP[key] : key];
+    const t = seed.docs[pid].items[[].concat(RULED_REMAP[key] || []).find((x) => x in seed.docs[pid].items) || key];
     if (t && t.deleted) landedOnTombstone.push(`${pid}/${key} (${ci.code || '<untagged>'})`);
   }
 }

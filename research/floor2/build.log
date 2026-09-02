@@ -120,7 +120,7 @@ SELFTEST
 ====================================================================================================
 SELFTEST PASSED
 
-DETERMINISM: two independent in-process builds are byte-identical (md5 74bfafc3cfe82f55db4c4482d3028cf7)
+DETERMINISM: two independent in-process builds are byte-identical (md5 1781e147bb842518ea18a4ff88cae99e)
 
 BUILD REPORT - floor 2, 33 guest room(s), staged for approval
 ====================================================================================================
@@ -144,13 +144,14 @@ ROOM 201  QQ Wide  (2 key(s) of this type: 201, 301)
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
-    39 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
-    1 tag(s) have NO live counterpart and ship from sqlite VERBATIM: GR-308 [FLAGGED]
-    3 donor tag(s) not applicable to this type: DH-1, DH-2, GR-305
+    40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-305, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
+    0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
+    2 donor tag(s) not applicable to this type: DH-1, DH-2
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
+    label: GR-305: this room's own sqlite label "Working Wall - printed '@ Queen Queen Studio Suite Connector' in the spec but tagged on the BASE QQ plan" differs from donor "Working Wall @ Queen Queen Studio Suite" - own row carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
-      reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
+      reliability KEPT from this room's own sqlite row over the donor's on 1 line(s): gr305_a (GR-305): sqlite FLAGGED KEPT over donor MEDIUM
       reliability RAISED on a ruling that closes the flag for the product on 2 line(s): 902_a (902): FLAGGED -> HIGH on the ruling closure carried in the donor text; u_ce20ab6281 (<untagged>): FLAGGED -> HIGH on the ruling closure carried in the donor text
       donor text DROPPED as a reading of the donor's own drawing on 2 line(s): hd03_a (HD-03): "⚑ elevation-sourced - A530 warns 'do not treat that as a tak"; hd08_a (HD-08): "⚑ elevation-sourced - not a takeoff" (quoted on the line as not carried)
     MEP text donated from 105-MEP, written for sheet A555, re-cited onto A555 - SAME SHEET, so every citation stands verbatim and no number is re-judged. The ONE exception is the
@@ -190,17 +191,18 @@ ROOM 201  QQ Wide  (2 key(s) of this type: 201, 301)
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
     APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 201 ("QQ Wide", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
-    D22: DECLINED D22 - QQ Wide is not the type D22 names; GR-308 carried as transcribed, 2nd Floor tab evidence recorded, OPEN for Austin - see room note n_d22
+    D22: APPLIED D33 - GR-308 -> GR-305 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
+    ruled TAG CORRECTION on 1 line(s): GR-305 (D33, was GR-308) on gr305_a
 
   FLAGS CARRIED (nothing resolved)
-    FF&E 7 non-HIGH line(s): 905_a [FLAGGED] 905, gr300_a [FLAGGED] GR-300, gr308_a [FLAGGED] GR-308, gr318_a [FLAGGED] GR-318, gr322_a [FLAGGED] GR-322, hd03_a [MEDIUM] HD-03, hd08_a [MEDIUM] HD-08
+    FF&E 7 non-HIGH line(s): 905_a [FLAGGED] 905, gr300_a [FLAGGED] GR-300, gr305_a [FLAGGED] GR-305, gr318_a [FLAGGED] GR-318, gr322_a [FLAGGED] GR-322, hd03_a [MEDIUM] HD-03, hd08_a [MEDIUM] HD-08
     MEP  14 non-HIGH line(s): elec_lights [FLAGGED] <untagged>, elec_outlets [MEDIUM] <untagged>, fp_heads_a [MEDIUM] <untagged>, lv_phone_db [FLAGGED] <untagged>, lv_tvdata [FLAGGED] <untagged>, mech_grille_bath [FLAGGED] EAG-50, mech_grille_rm [FLAGGED] <untagged>, mech_ptac [FLAGGED] PTAC-2 / PTAC-1, plmb_fd_a [MEDIUM] FD, plmb_ksink_a [FLAGGED] SK-3 / SK-4, plmb_lavfaucet_a [FLAGGED] —, plmb_shower_a [FLAGGED] SH-1 / SH-4, plmb_trapguard_a [MEDIUM] TP, plmb_wc_a [FLAGGED] WC-3 / WC-4
     fp_heads_a: donor qty 3 NOT copied; donor mark "FP" NOT copied; line ships with no quantity and no mark, reliability MEDIUM, carrying PH-GU-001 verbatim; 3 donor FP-series citation segment(s) removed (floor-1 sheet, floor-1 total, rooms 107/108 verification) and replaced with PH-GU-001's own sheet list plus this room's floor (2)
     mech_ptac: 1 unit row(s) ITM-0597; mark "PTAC-2 / PTAC-1"; reliability FLAGGED; M401 detail 01 from this room's own row(s)
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0106]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-308, GR-318, GR-322]; B5.6 [marks W4, W5]
-    carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr308_a (GR-308 <- B4.5[GR-308]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0106]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.6 [marks W4, W5]
+    carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_d22, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type
 
 ----------------------------------------------------------------------------------------------------
@@ -1890,13 +1892,14 @@ ROOM 230  QQ Extended  (6 key(s) of this type: 230, 232, 330, 332, 430, 432)
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
-    39 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
-    1 tag(s) have NO live counterpart and ship from sqlite VERBATIM: GR-308 [FLAGGED]
-    3 donor tag(s) not applicable to this type: DH-1, DH-2, GR-305
+    40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-305, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
+    0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
+    2 donor tag(s) not applicable to this type: DH-1, DH-2
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
+    label: GR-305: this room's own sqlite label "Working Wall - printed '@ Queen Queen Studio Suite Connector' in the spec but tagged on the BASE QQ plan" differs from donor "Working Wall @ Queen Queen Studio Suite" - own row carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
-      reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
+      reliability KEPT from this room's own sqlite row over the donor's on 1 line(s): gr305_a (GR-305): sqlite FLAGGED KEPT over donor MEDIUM
       reliability RAISED on a ruling that closes the flag for the product on 2 line(s): 902_a (902): FLAGGED -> HIGH on the ruling closure carried in the donor text; u_ce20ab6281 (<untagged>): FLAGGED -> HIGH on the ruling closure carried in the donor text
       donor text DROPPED as a reading of the donor's own drawing on 0 line(s) (quoted on the line as not carried)
     MEP text donated from 105-MEP, written for sheet A555, re-cited onto A555 - SAME SHEET, so every citation stands verbatim and no number is re-judged. The ONE exception is the
@@ -1936,17 +1939,18 @@ ROOM 230  QQ Extended  (6 key(s) of this type: 230, 232, 330, 332, 430, 432)
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
     APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 230 ("QQ Extended", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
-    D22: DECLINED D22 - QQ Extended is not the type D22 names; GR-308 carried as transcribed, 2nd Floor tab evidence recorded, OPEN for Austin - see room note n_d22
+    D22: APPLIED D33 - GR-308 -> GR-305 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
+    ruled TAG CORRECTION on 1 line(s): GR-305 (D33, was GR-308) on gr305_a
 
   FLAGS CARRIED (nothing resolved)
-    FF&E 7 non-HIGH line(s): 905_a [FLAGGED] 905, gr300_a [FLAGGED] GR-300, gr308_a [FLAGGED] GR-308, gr318_a [FLAGGED] GR-318, gr322_a [FLAGGED] GR-322, hd03_a [MEDIUM] HD-03, hd08_a [MEDIUM] HD-08
+    FF&E 7 non-HIGH line(s): 905_a [FLAGGED] 905, gr300_a [FLAGGED] GR-300, gr305_a [FLAGGED] GR-305, gr318_a [FLAGGED] GR-318, gr322_a [FLAGGED] GR-322, hd03_a [MEDIUM] HD-03, hd08_a [MEDIUM] HD-08
     MEP  14 non-HIGH line(s): elec_lights [FLAGGED] <untagged>, elec_outlets [MEDIUM] <untagged>, fp_heads_a [MEDIUM] <untagged>, lv_phone_db [FLAGGED] <untagged>, lv_tvdata [FLAGGED] <untagged>, mech_grille_bath [FLAGGED] EAG-50, mech_grille_rm [FLAGGED] <untagged>, mech_ptac [FLAGGED] PTAC-2 / PTAC-1, plmb_fd_a [MEDIUM] FD, plmb_ksink_a [FLAGGED] SK-3 / SK-4, plmb_lavfaucet_a [FLAGGED] —, plmb_shower_a [FLAGGED] SH-1 / SH-4, plmb_trapguard_a [MEDIUM] TP, plmb_wc_a [FLAGGED] WC-3 / WC-4
     fp_heads_a: donor qty 3 NOT copied; donor mark "FP" NOT copied; line ships with no quantity and no mark, reliability MEDIUM, carrying PH-GU-001 verbatim; 3 donor FP-series citation segment(s) removed (floor-1 sheet, floor-1 total, rooms 107/108 verification) and replaced with PH-GU-001's own sheet list plus this room's floor (2)
     mech_ptac: 1 unit row(s) ITM-0547; mark "PTAC-2 / PTAC-1"; reliability FLAGGED; M401 detail 01 from this room's own row(s)
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0105]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-308, GR-318, GR-322]; B5.6 [marks W4, W5]
-    carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr308_a (GR-308 <- B4.5[GR-308]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0105]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.6 [marks W4, W5]
+    carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_d22, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
 ----------------------------------------------------------------------------------------------------
@@ -2024,13 +2028,14 @@ ROOM 232  QQ Extended  (6 key(s) of this type: 230, 232, 330, 332, 430, 432)
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
-    39 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
-    1 tag(s) have NO live counterpart and ship from sqlite VERBATIM: GR-308 [FLAGGED]
-    3 donor tag(s) not applicable to this type: DH-1, DH-2, GR-305
+    40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-305, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
+    0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
+    2 donor tag(s) not applicable to this type: DH-1, DH-2
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
+    label: GR-305: this room's own sqlite label "Working Wall - printed '@ Queen Queen Studio Suite Connector' in the spec but tagged on the BASE QQ plan" differs from donor "Working Wall @ Queen Queen Studio Suite" - own row carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
-      reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
+      reliability KEPT from this room's own sqlite row over the donor's on 1 line(s): gr305_a (GR-305): sqlite FLAGGED KEPT over donor MEDIUM
       reliability RAISED on a ruling that closes the flag for the product on 2 line(s): 902_a (902): FLAGGED -> HIGH on the ruling closure carried in the donor text; u_ce20ab6281 (<untagged>): FLAGGED -> HIGH on the ruling closure carried in the donor text
       donor text DROPPED as a reading of the donor's own drawing on 0 line(s) (quoted on the line as not carried)
     MEP text donated from 105-MEP, written for sheet A555, re-cited onto A555 - SAME SHEET, so every citation stands verbatim and no number is re-judged. The ONE exception is the
@@ -2070,17 +2075,18 @@ ROOM 232  QQ Extended  (6 key(s) of this type: 230, 232, 330, 332, 430, 432)
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
     APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 232 ("QQ Extended", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
-    D22: DECLINED D22 - QQ Extended is not the type D22 names; GR-308 carried as transcribed, 2nd Floor tab evidence recorded, OPEN for Austin - see room note n_d22
+    D22: APPLIED D33 - GR-308 -> GR-305 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
+    ruled TAG CORRECTION on 1 line(s): GR-305 (D33, was GR-308) on gr305_a
 
   FLAGS CARRIED (nothing resolved)
-    FF&E 7 non-HIGH line(s): 905_a [FLAGGED] 905, gr300_a [FLAGGED] GR-300, gr308_a [FLAGGED] GR-308, gr318_a [FLAGGED] GR-318, gr322_a [FLAGGED] GR-322, hd03_a [MEDIUM] HD-03, hd08_a [MEDIUM] HD-08
+    FF&E 7 non-HIGH line(s): 905_a [FLAGGED] 905, gr300_a [FLAGGED] GR-300, gr305_a [FLAGGED] GR-305, gr318_a [FLAGGED] GR-318, gr322_a [FLAGGED] GR-322, hd03_a [MEDIUM] HD-03, hd08_a [MEDIUM] HD-08
     MEP  14 non-HIGH line(s): elec_lights [FLAGGED] <untagged>, elec_outlets [MEDIUM] <untagged>, fp_heads_a [MEDIUM] <untagged>, lv_phone_db [FLAGGED] <untagged>, lv_tvdata [FLAGGED] <untagged>, mech_grille_bath [FLAGGED] EAG-50, mech_grille_rm [FLAGGED] <untagged>, mech_ptac [FLAGGED] PTAC-2 / PTAC-1, plmb_fd_a [MEDIUM] FD, plmb_ksink_a [FLAGGED] SK-3 / SK-4, plmb_lavfaucet_a [FLAGGED] —, plmb_shower_a [FLAGGED] SH-1 / SH-4, plmb_trapguard_a [MEDIUM] TP, plmb_wc_a [FLAGGED] WC-3 / WC-4
     fp_heads_a: donor qty 3 NOT copied; donor mark "FP" NOT copied; line ships with no quantity and no mark, reliability MEDIUM, carrying PH-GU-001 verbatim; 3 donor FP-series citation segment(s) removed (floor-1 sheet, floor-1 total, rooms 107/108 verification) and replaced with PH-GU-001's own sheet list plus this room's floor (2)
     mech_ptac: 1 unit row(s) ITM-0547; mark "PTAC-2 / PTAC-1"; reliability FLAGGED; M401 detail 01 from this room's own row(s)
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0105]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-308, GR-318, GR-322]; B5.6 [marks W4, W5]
-    carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr308_a (GR-308 <- B4.5[GR-308]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
+    5 open entr(y/ies) touch this room: A11 [cited by own row(s) ITM-0105]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-4, SK-3, SK-4]; B4.2 [marks 905]; B4.5 [marks GR-300, GR-305, GR-318, GR-322]; B5.6 [marks W4, W5]
+    carried as a FLAG on 8 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr305_a (GR-305 <- B4.5[GR-305]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-4 <- B3.1[SH-1,SH-4]); every one of them is also in room note n_conflicts
     room notes seeded: n_conflicts, n_d22, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type, n_typearea
 
 ----------------------------------------------------------------------------------------------------
@@ -2288,7 +2294,7 @@ ROOM 238  QQ Acc.  (2 key(s) of this type: 238, 338)
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
     27 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-200, GR-201, GR-203, GR-204, GR-205, GR-208, GR-300, GR-318, GR-322, GR-403, GR-500, GR-501, GR-502, GR-600, HD-08, HD-12, HD-16, HD-18, HD-21
-    15 tag(s) have NO live counterpart and ship from sqlite VERBATIM: <untagged> [FLAGGED], GR-202, GR-303, GR-308 [FLAGGED], GR-319, GR-323, GR-401, GR-404 [FLAGGED], GR-602.ADA, HD-02 [FLAGGED], HD-05 [FLAGGED], HD-06 [FLAGGED], HD-10 [FLAGGED], HD-14 [FLAGGED], HD-5.1 [FLAGGED]
+    15 tag(s) have NO live counterpart and ship from sqlite VERBATIM: <untagged> [FLAGGED], GR-202, GR-303, GR-309 [FLAGGED], GR-319, GR-323, GR-401, GR-404 [FLAGGED], GR-602.ADA, HD-02 [FLAGGED], HD-05 [FLAGGED], HD-06 [FLAGGED], HD-10 [FLAGGED], HD-14 [FLAGGED], HD-5.1 [FLAGGED]
     15 donor tag(s) not applicable to this type: DH-1, DH-2, GR-103, GR-207, GR-302, GR-305, GR-321, GR-400, GR-402, GR-402.1, GR-600.1, GR-602, HD-03, HD-22, kn 11
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
@@ -2348,10 +2354,11 @@ ROOM 238  QQ Acc.  (2 key(s) of this type: 238, 338)
     DECLINED D20 on GR-202 - room type "QQ Acc." is NOT a King-family key. D20 reasons only about the King rooms; this room’s own sqlite row explains its single GR-202 and it also carries GR-208 x2. Doubling GR-202 here would invent a sconce.
     APPLIED  ruled lines: bsq_a (D29), dh_closer_a (D28), dh_lock_a (D28)
     the declined ruling is written ONTO the line so the note cannot contradict the number: gr202_a (D20 not applied, qty 1), gr322_a (D12 not applied, qty 1)
-    D22: DECLINED D22 - QQ Acc. is not the type D22 names; GR-308 carried as transcribed, 2nd Floor tab evidence recorded, OPEN for Austin - see room note n_d22
+    D22: APPLIED D33 - GR-308 -> GR-309 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
+    ruled TAG CORRECTION on 1 line(s): GR-309 (D33, was GR-308) on gr309_a
 
   FLAGS CARRIED (nothing resolved)
-    FF&E 17 non-HIGH line(s): 905_a [FLAGGED] 905, gr300_a [FLAGGED] GR-300, gr308_a [FLAGGED] GR-308, gr318_a [FLAGGED] GR-318, gr322_a [FLAGGED] GR-322, gr323_a [FLAGGED] GR-323, gr403_a [FLAGGED] GR-403, gr404_a [FLAGGED] GR-404, hd02_a [FLAGGED] HD-02, hd05_a [FLAGGED] HD-05, hd06_a [FLAGGED] HD-06, hd08_a [FLAGGED] HD-08, hd10_a [FLAGGED] HD-10, hd12_a [FLAGGED] HD-12, hd14_a [FLAGGED] HD-14, hd51_a [FLAGGED] HD-5.1, u_ef5592c066 [FLAGGED] <untagged>
+    FF&E 17 non-HIGH line(s): 905_a [FLAGGED] 905, gr300_a [FLAGGED] GR-300, gr309_a [FLAGGED] GR-309, gr318_a [FLAGGED] GR-318, gr322_a [FLAGGED] GR-322, gr323_a [FLAGGED] GR-323, gr403_a [FLAGGED] GR-403, gr404_a [FLAGGED] GR-404, hd02_a [FLAGGED] HD-02, hd05_a [FLAGGED] HD-05, hd06_a [FLAGGED] HD-06, hd08_a [FLAGGED] HD-08, hd10_a [FLAGGED] HD-10, hd12_a [FLAGGED] HD-12, hd14_a [FLAGGED] HD-14, hd51_a [FLAGGED] HD-5.1, u_ef5592c066 [FLAGGED] <untagged>
     MEP  20 non-HIGH line(s): db_itm0712 [FLAGGED] BT-1, db_itm0714 [FLAGGED] <untagged>, db_itm0715 [FLAGGED] SH-1 / SH-3, db_itm0716 [FLAGGED] kn 10, db_itm0717 [FLAGGED] kn 11, elec_lights [FLAGGED] <untagged>, elec_outlets [MEDIUM] <untagged>, fp_heads_a [MEDIUM] <untagged>, lv_phone_db [FLAGGED] <untagged>, lv_tvdata [FLAGGED] <untagged>, mech_grille_bath [FLAGGED] EAG-50, mech_grille_rm [FLAGGED] <untagged>, mech_ptac [FLAGGED] PTAC-2 / PTAC-1, plmb_fd_a [MEDIUM] FD, plmb_ksink_a [FLAGGED] SK-3 / SK-4, plmb_lavfaucet_a [FLAGGED] —, plmb_shencl_a [FLAGGED] kn 10 / kn 11, plmb_shower_a [FLAGGED] SH-1 / SH-3, plmb_trapguard_a [MEDIUM] TP, plmb_wc_a [FLAGGED] WC-3 / WC-4
     BATHING CONFIGURATION OPEN: 3 Configuration A (TUB) row(s) and 5 Configuration B (ROLL-IN SHOWER) row(s), ALL EMITTED, ALL FLAGGED, NEITHER SUPERSEDED - and only one
       of them gets built.
@@ -2362,8 +2369,8 @@ ROOM 238  QQ Acc.  (2 key(s) of this type: 238, 338)
     mech_ptac: 1 unit row(s) ITM-0695; mark "PTAC-2 / PTAC-1"; reliability FLAGGED; M401 detail 02 from this room's own row(s)
 
   CONFLICTS TABLE (data/project.sqlite conflicts, OPEN entries only)
-    6 open entr(y/ies) touch this room: A11 [keys 338] [cited by own row(s) ITM-0712, ITM-0713, ITM-0714, ITM-0715, ITM-0716, ITM-0717, ITM-0718, ITM-0719, ITM-0720]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-3, SK-3, SK-4]; B4.2 [marks 905]; B4.4 [cited by own row(s) ITM-0712, ITM-0713, ITM-0714, ITM-0715, ITM-0716, ITM-0717, ITM-0718, ITM-0719, ITM-0720]; B4.5 [marks GR-300, GR-308, GR-318, GR-322, GR-323]; B5.6 [marks W4, W5]
-    carried as a FLAG on 17 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr308_a (GR-308 <- B4.5[GR-308]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); gr323_a (GR-323 <- B4.5[GR-323]); hd05_a (HD-05 <- A11[cited by ITM-0713], B4.4[cited by ITM-0713]); hd14_a (HD-14 <- A11[cited by ITM-0718], B4.4[cited by ITM-0718]); hd51_a (HD-5.1 <- A11[cited by ITM-0719], B4.4[cited by ITM-0719]); db_itm0712 (BT-1 <- A11[cited by ITM-0712], B4.4[cited by ITM-0712]); db_itm0714 (ITM-0714 <- A11[cited by ITM-0714], B4.4[cited by ITM-0714]); db_itm0715 (SH-1 + SH-3 <- A11[cited by ITM-0715], B3.1[SH-1,SH-3], B4.4[cited by ITM-0715]); db_itm0716 (kn 10 <- A11[cited by ITM-0716], B4.4[cited by ITM-0716]); db_itm0717 (kn 11 <- A11[cited by ITM-0717], B4.4[cited by ITM-0717]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-3 <- B3.1[SH-1,SH-3]); every one of them is also in room note n_conflicts
+    6 open entr(y/ies) touch this room: A11 [keys 338] [cited by own row(s) ITM-0712, ITM-0713, ITM-0714, ITM-0715, ITM-0716, ITM-0717, ITM-0718, ITM-0719, ITM-0720]; B3.1 [marks L-2, L-3, L-4, SH-1, SH-3, SK-3, SK-4]; B4.2 [marks 905]; B4.4 [cited by own row(s) ITM-0712, ITM-0713, ITM-0714, ITM-0715, ITM-0716, ITM-0717, ITM-0718, ITM-0719, ITM-0720]; B4.5 [marks GR-300, GR-318, GR-322, GR-323]; B5.6 [marks W4, W5]
+    carried as a FLAG on 16 line(s): 905_a (905 <- B4.2[905]); gr300_a (GR-300 <- B4.5[GR-300]); gr318_a (GR-318 <- B4.5[GR-318]); gr322_a (GR-322 <- B4.5[GR-322]); gr323_a (GR-323 <- B4.5[GR-323]); hd05_a (HD-05 <- A11[cited by ITM-0713], B4.4[cited by ITM-0713]); hd14_a (HD-14 <- A11[cited by ITM-0718], B4.4[cited by ITM-0718]); hd51_a (HD-5.1 <- A11[cited by ITM-0719], B4.4[cited by ITM-0719]); db_itm0712 (BT-1 <- A11[cited by ITM-0712], B4.4[cited by ITM-0712]); db_itm0714 (ITM-0714 <- A11[cited by ITM-0714], B4.4[cited by ITM-0714]); db_itm0715 (SH-1 + SH-3 <- A11[cited by ITM-0715], B3.1[SH-1,SH-3], B4.4[cited by ITM-0715]); db_itm0716 (kn 10 <- A11[cited by ITM-0716], B4.4[cited by ITM-0716]); db_itm0717 (kn 11 <- A11[cited by ITM-0717], B4.4[cited by ITM-0717]); plmb_ksink_a (SK-3 + SK-4 <- B3.1[SK-3,SK-4]); plmb_lavfaucet_a (L-2 + L-3 + L-4 <- B3.1[L-2,L-3,L-4]); plmb_shower_a (SH-1 + SH-3 <- B3.1[SH-1,SH-3]); every one of them is also in room note n_conflicts
     room notes seeded: n_config, n_conflicts, n_d22, n_dbroom, n_gaps, n_gategaps, n_rulings, n_type
 
 ====================================================================================================
@@ -2408,7 +2415,7 @@ field state preserved from the previous staged file (a rebuild never zeroes the 
 2nd Floor tab reconciled: GR-315 = 1
 2nd Floor tab reconciled: GR-316 = 1
 wrote platform/data/floor2-staged.json  (70 docs: 201, 201-MEP, 202, 202-MEP, 203, 203-MEP, 204, 204-MEP, 205, 205-MEP, 206, 206-MEP, 207, 207-MEP, 208, 208-MEP, 209, 209-MEP, 210, 210-MEP, 211, 211-MEP, 212, 212-MEP, 213, 213-MEP, 214, 214-MEP, 215, 215-MEP, 216, 216-MEP, 217, 217-MEP, 218, 218-MEP, 222, 222-MEP, 223, 223-MEP, 224, 224-MEP, 225, 225-MEP, 226, 226-MEP, 227, 227-MEP, 228, 228-MEP, 229, 229-MEP, 230, 230-MEP, 231, 231-MEP, 232, 232-MEP, 233, 233-MEP, 234, 234-MEP, 236, 236-MEP, 238, 238-MEP, S221, S221-M, S237, S239)
-  md5 74bfafc3cfe82f55db4c4482d3028cf7   5040852 bytes
+  md5 1781e147bb842518ea18a4ff88cae99e   5043814 bytes
 READ ONLY and untouched, verified by size+mtime: floor1-staged.json, slice-f1.json, ref-rooms-staged.json, build_floor1.mjs
 FLOOR 2 STAGED FOR APPROVAL. NOT LIVE. Firestore not touched. Nothing pushed. Nothing deployed.
 

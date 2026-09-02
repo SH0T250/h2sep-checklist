@@ -43,6 +43,7 @@ const live_ = (d) => Object.entries(d.items || {}).filter(([, v]) => !v.deleted)
 const FLOOR2_ROOMS = ['201','202','203','204','205','206','207','208','209','210','211','212','213','214','215','216','217','218',
   '222','223','224','225','226','227','228','229','230','231','232','233','234','236','238'];
 const PLAIN_QQ = ['203','205','207','209','211','213','228','234'];
+const GR305_ROOMS = ['201','203','205','207','209','211','213','228','230','232','234'];   // D22 + D33
 const MOCKUPS = ['202','217','230','238'];
 const CREW = { checks: 579, issues: 696, notes: 28 };   // read from the live crew app 2026-09-02, READ ONLY
 
@@ -146,12 +147,15 @@ check('D29 bed skirt (bsq_a) on 238 and on no other room', () =>
 
 process.stdout.write('\nRULING D22 ON FLOOR 2, THE WORKING WALL\n' + '-'.repeat(70) + '\n');
 const tagRooms = (tag) => Object.entries(docs).filter(([id]) => isRoom(id)).filter(([, d]) => live_(d).some(([, v]) => v.code === tag)).map(([id]) => id).sort();
-check('GR-305 on exactly the eight plain Queen-Queen keys', () => {
-  const got = tagRooms('GR-305'); return JSON.stringify(got) === JSON.stringify(PLAIN_QQ) ? [] : [`got ${JSON.stringify(got)} want ${JSON.stringify(PLAIN_QQ)}`];
+check('GR-305 on the eight plain Queen-Queen keys (D22) plus 201, 230, 232 (D33)', () => {
+  const got = tagRooms('GR-305'); return JSON.stringify(got) === JSON.stringify(GR305_ROOMS) ? [] : [`got ${JSON.stringify(got)} want ${JSON.stringify(GR305_ROOMS)}`];
 });
-check('GR-308 on exactly the connecting keys and the undecided two-queen types (201, 215, 230, 232, 236, 238)', () => {
-  const want = ['201','215','230','232','236','238']; const got = tagRooms('GR-308');
+check('GR-308 on exactly the two connecting keys (215, 236)', () => {
+  const want = ['215','236']; const got = tagRooms('GR-308');
   return JSON.stringify(got) === JSON.stringify(want) ? [] : [`got ${JSON.stringify(got)} want ${JSON.stringify(want)}`];
+});
+check('GR-309 on 238 only (D33)', () => {
+  const got = tagRooms('GR-309'); return JSON.stringify(got) === '["238"]' ? [] : [`got ${JSON.stringify(got)}`];
 });
 check('GR-304 on the 17 King Studios, GR-315 on 202, GR-316 on 217', () => {
   const o = [];
@@ -160,26 +164,29 @@ check('GR-304 on the 17 King Studios, GR-315 on 202, GR-316 on 217', () => {
   if (JSON.stringify(tagRooms('GR-316')) !== '["217"]') o.push(`GR-316 on ${tagRooms('GR-316')}`);
   return o;
 });
-check('no room carries both working-wall tags live', () =>
-  Object.entries(docs).filter(([id]) => isRoom(id)).filter(([, d]) => { const c = live_(d).map(([, v]) => v.code); return c.includes('GR-305') && c.includes('GR-308'); }).map(([id]) => `${id} carries both`));
-check('the corrected line cites D22, the 2nd Floor tab, and the open handedness, at MEDIUM', () =>
-  PLAIN_QQ.flatMap((id) => {
-    const [, v] = live_(docs[id]).find(([, x]) => x.code === 'GR-305'); const o = [];
-    if (!String(v.instanceNote).includes('D22')) o.push(`${id}: note does not cite D22`);
+check('no room carries two working-wall tags live', () =>
+  Object.entries(docs).filter(([id]) => isRoom(id)).filter(([, d]) => live_(d).filter(([, v]) => /^GR-3(04|05|08|09|15|16)$/.test(v.code || '')).length !== 1).map(([id]) => `${id}: not exactly one working wall`));
+check('the corrected line cites its ruling, the 2nd Floor tab, and the open handedness, at MEDIUM, and keeps B4.5', () =>
+  [...GR305_ROOMS, '238'].flatMap((id) => {
+    const [, v] = live_(docs[id]).find(([, x]) => x.code === (id === '238' ? 'GR-309' : 'GR-305')); const o = [];
+    const ruling = PLAIN_QQ.includes(id) ? 'D22' : 'D33';
+    if (!String(v.instanceNote).includes('Austin ruling ' + ruling)) o.push(`${id}: note does not cite ${ruling}`);
+    if (id !== '238' && !/B4\.5/.test(String(v.instanceNote))) o.push(`${id}: open conflict B4.5 dropped from the line`);
+    if (id === '238' && /B4\.5/.test(String(v.instanceNote))) o.push(`238: B4.5 does not name GR-309 and must not ride on it`);
     if (!/2nd Floor/.test(String(v.instanceNote))) o.push(`${id}: note does not cite the 2nd Floor tab`);
     if (!/hand/i.test(String(v.instanceNote))) o.push(`${id}: note does not raise handedness`);
     if (/1st Floor tab lists|six units against six/.test(String(v.instanceNote))) o.push(`${id}: note carries floor-1 figures`);
     if (v.reliability !== 'MEDIUM') o.push(`${id}: reliability ${v.reliability}`);
     return o;
   }));
-check('the undecided rooms carry the workbook evidence in n_d22 and stay FLAGGED', () =>
+check('no build-authored note from an earlier run survives a rebuild (only crew notes travel)', () =>
+  Object.entries(docs).flatMap(([id, d]) => Object.entries(d.notes || {}).filter(([, n]) => !n.by && /OPEN FOR AUSTIN\. This room carries GR-308/.test(n.text)).map(([k]) => `${id}/${k}: stale note`)));
+check('the D33 rooms record the ruling in n_d22 with Austin\'s words', () =>
   ['201','230','232','238'].flatMap((id) => {
     const o = []; const n = (docs[id].notes || {}).n_d22;
     if (!n) return [`${id}: no n_d22 note`];
-    if (!/2nd Floor/.test(n.text)) o.push(`${id}: n_d22 does not cite the 2nd Floor tab`);
-    if (!/OPEN FOR AUSTIN/.test(n.text)) o.push(`${id}: n_d22 does not say it is open`);
-    const [, v] = live_(docs[id]).find(([, x]) => x.code === 'GR-308');
-    if (v.reliability !== 'FLAGGED') o.push(`${id}: GR-308 is ${v.reliability}`);
+    if (!/RULING D33 APPLIED/.test(n.text)) o.push(`${id}: n_d22 does not say D33 applied`);
+    if (!/ok retag 201, 230, 232 to GR-305 and 238 to GR-309/.test(n.text)) o.push(`${id}: n_d22 does not quote the ruling`);
     return o;
   }));
 
@@ -190,11 +197,16 @@ check('the four mock-up rooms (D30) re-build to the same shape and text, plus th
     const out = [];
     for (const [k, v] of Object.entries(ref.docs[id].items)) {
       const b = docs[id].items[k];
+      /* D33 retagged the working wall on 230 (GR-305) and 238 (GR-309) after the
+       * mock-ups were delivered; that one declared difference is expected. */
+      if (k === 'gr308_a' && ['230', '238'].includes(id)) { if (b) out.push(`${id}/gr308_a: still present after D33`); continue; }
       if (!b) { if (/FIELD-AUTHORED|THIS LINE EXISTS BECAUSE THE CREW/.test(String(v.instanceNote))) continue; out.push(`${id}/${k}: in the mock-up, missing from the build`); continue; }
       if (shape(v) !== shape(b)) out.push(`${id}/${k}: shape differs`);
       if (String(v.instanceNote) !== String(b.instanceNote) && !/THIS LINE EXISTS BECAUSE/.test(String(v.instanceNote))) out.push(`${id}/${k}: note text differs`);
     }
-    for (const k of Object.keys(docs[id].items)) if (!ref.docs[id].items[k]) out.push(`${id}/${k}: in the build, not in the mock-up`);
+    for (const k of Object.keys(docs[id].items)) {
+      if (!ref.docs[id].items[k] && !((id === '230' && k === 'gr305_a') || (id === '238' && k === 'gr309_a'))) out.push(`${id}/${k}: in the build, not in the mock-up`);
+    }
     return out;
   }));
 
@@ -248,8 +260,8 @@ check(`the crew's ${CREW.notes} notes came across`, () => {
   const n = Object.values(docs).reduce((a2, d) => a2 + Object.values(d.notes || {}).filter((x) => x.by !== '' && x.by !== undefined).length, 0);
   return n === CREW.notes ? [] : [`${n} crew-authored notes in the build; the live app has ${CREW.notes}`];
 });
-check('the retagged working wall kept the crew\'s check on the eight plain QQ keys', () =>
-  PLAIN_QQ.flatMap((id) => { const w = Object.values(docs[id].items).find((v) => v.code === 'GR-305' && !v.deleted); return !w ? [`${id}: no live GR-305`] : (!w.checked ? [`${id}: GR-305 not checked, but the crew checked the wall under GR-308`] : []); }));
+check('the retagged working wall kept the crew\'s check on every D22 and D33 key', () =>
+  [...GR305_ROOMS, '238'].flatMap((id) => { const tag = id === '238' ? 'GR-309' : 'GR-305'; const w = Object.values(docs[id].items).find((v) => v.code === tag && !v.deleted); return !w ? [`${id}: no live ${tag}`] : (!w.checked ? [`${id}: ${tag} not checked, but the crew checked the wall under GR-308`] : []); }));
 check('no personal names or account ids in the committed seed', () => {
   const raw = readFileSync(SEED, 'utf8'); const out = [];
   for (const f of ['checkedByName', 'checkedByUid', 'createdByUid', 'createdBy']) if (raw.includes(`"${f}"`)) out.push(`field ${f} is present`);

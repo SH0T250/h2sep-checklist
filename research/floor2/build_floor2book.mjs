@@ -105,17 +105,16 @@ const noPackage = (F2.meta.spacesWithNoPackage || []);
 
 const wwTable = [
   ['GR-304', 'Working Wall @ King', '17', roomRows.filter((x) => x.ww === 'GR-304').length, 'stands, HIGH', 'the 17 King Studios'],
-  ['GR-305', 'Working Wall @ QQ', '11 (L 5 + R 6)', roomRows.filter((x) => x.ww === 'GR-305').length, 'APPLIED by D22 to the 8 plain Queen-Queen keys, MEDIUM while the hand is open', '203 205 207 209 211 213 228 234'],
-  ['GR-308', 'Working Wall @ QQ Connector', '2 (L 1 + R 1)', roomRows.filter((x) => x.ww === 'GR-308' && x.info.conn === '1').length, 'stands on the 2 connecting keys', '215 236'],
-  ['GR-308 as transcribed', 'QQ Wide, QQ Extended, QQ Acc.', 'the tab has no GR-308 left for them', roomRows.filter((x) => x.ww === 'GR-308' && x.info.conn !== '1').length, 'OPEN for Austin: the tab only reconciles with 201, 230, 232 on GR-305 and 238 on GR-309R', '201 230 232 238'],
+  ['GR-305', 'Working Wall @ QQ', '11 (L 5 + R 6)', roomRows.filter((x) => x.ww === 'GR-305').length, 'D22 on the 8 plain Queen-Queen keys; D33 (Austin, 2026-09-02) on QQ Wide 201 and QQ Extended 230, 232. MEDIUM while the hand is open', '201 203 205 207 209 211 213 228 230 232 234'],
+  ['GR-308', 'Working Wall @ QQ Connector', '2 (L 1 + R 1)', roomRows.filter((x) => x.ww === 'GR-308').length, 'stands on the 2 connecting keys', '215 236'],
+  ['GR-309', 'Working Wall @ QQ Accessible (printed GR-309R)', '1', roomRows.filter((x) => x.ww === 'GR-309').length, 'D33 (Austin, 2026-09-02); the spec and ID-5.9 also name GR-309. MEDIUM while the hand is open', '238'],
   ['GR-315', 'Working Wall @ K 1 BDRM Suite', '1', roomRows.filter((x) => x.ww === 'GR-315').length, 'stands, HIGH', '202'],
   ['GR-316', 'Working Wall @ K Accessible', '1', roomRows.filter((x) => x.ww === 'GR-316').length, 'stands, HIGH', '217'],
 ];
 
 const decisions = [
   ['Approve floor 2 for rollout', 'Nothing here is live. Approval starts the cutover: backup first, three-way merge, read-back verify, crew collection never written (the floor-1 runbook).'],
-  ['Working wall on 201, 230 and 232', 'They carry GR-308 as the database transcribed it. The 2nd Floor tab purchased eleven GR-305 walls, which only reconciles with these three counted in. Say the word and they retag to GR-305 the way the eight plain rooms did.'],
-  ['Working wall on 238', 'The tab purchased one GR-309R "Working Wall @ QQ Accessible", the spec and ID-5.9 say GR-309, A556 tags GR-308. Three documents against one. It ships GR-308 FLAGGED until you rule.'],
+  ['Working walls, ruled', 'D33, 2026-09-02: "ok retag 201, 230, 232 to GR-305 and 238 to GR-309". Applied. The crew\'s check-offs on those four walls came across the retag. Nothing left to decide here except the hand.'],
   ['GR-305 handedness', 'The tab splits floor 2 into 5 LEFT and 6 RIGHT. No document says which room takes which hand. D26 records you are answering this yourself.'],
   ['Bathing configuration on 217 and 238', 'Both the tub and the roll-in rows are carried and flagged on each; D19 covered room 118 only and was not extended. Do not order a bath package for either key until ruled.'],
   ['Common-area finish rows', 'Six of the nine floor-2 spaces have only paint, drywall, flooring, doors and wall-covering rows, which your approved gate keeps off every checklist, so they get no document. Same question floor 1 left open: widen the gate for spaces, or leave them out.'],
@@ -188,7 +187,7 @@ a{color:var(--steel)}
 <p>Sheet citations were re-judged for floor 2. A first-floor sheet is dropped and quoted as removed, or re-pointed to its second-floor sibling where the database proves the pairing; A100 survives only where the citation is to a table printed on it. The sprinkler line on a room with head rows counts those rows and drops the first-floor head total; a room type with no verified heads ships with no count at all.</p>
 
 <h2>The working walls, reconciled against the purchase record</h2>
-<p>The FF&amp;E Installation workbook's 2nd Floor tab lists the working walls as separate purchased parts. Every count reconciles against the floor's key mix with no remainder. That is the evidence standard ruling D22 used on floor 1, so D22 is applied exactly where it reaches and no further.</p>
+<p>The FF&amp;E Installation workbook's 2nd Floor tab lists the working walls as separate purchased parts. Every count reconciles against the floor's key mix with no remainder. That is the evidence standard ruling D22 used on floor 1. D22 covers the plain Queen-Queen keys; D33 (Austin, 2026-09-02) covers the three other two-queen keys and the accessible key.</p>
 <div class="scroll"><table>
 <tr><th>tag</th><th>workbook item</th><th class="num">tab count</th><th class="num">rooms here</th><th>treatment</th><th>rooms</th></tr>
 ${wwTable.map((r) => `<tr><td><span class="tag">${esc(r[0])}</span></td><td>${esc(r[1])}</td><td class="num">${esc(r[2])}</td><td class="num">${r[3]}</td><td>${esc(r[4])}</td><td><code>${esc(r[5])}</code></td></tr>`).join('')}
