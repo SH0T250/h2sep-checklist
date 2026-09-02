@@ -188,7 +188,7 @@ export function issueSheet(room, itemId) {
   const item = room.items[itemId];
   const kindWord = (isSpaceDoc(room) ? 'common area' : 'guest room') + (isMepDoc(room) ? ' punch list' : '');
   const floorOpt = floorFlagHandler && room.floor != null
-    ? `<label class="floor-opt"><input type="checkbox" data-floor><span>Also flag this line on every other ${esc(kindWord)} on floor ${esc(String(room.floor))}</span></label>` : '';
+    ? `<label class="floor-opt"><input type="checkbox" data-floor><span>Also flag this line on every other ${esc(kindWord)} on floor ${esc(String(room.floor))}. Tick this first, then pick Missing, In box, or any flag below.</span></label>` : '';
   const s = sheet(`
     ${floorOpt}
     <div class="chip-grid">
