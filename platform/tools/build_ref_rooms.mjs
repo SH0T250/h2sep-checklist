@@ -611,6 +611,38 @@ const RULED_LINE_ADDITIONS = [
       'reasonable wait. Any fixture that fails gets its own issue on its own line.',
   },
   {
+    ruling: 'D46', doc: 'ffe', key: 'tvmount_a', category: 'Appliance', sort: 14025,
+    code: '', qty: 1,
+    label: 'TV mount',
+    src: 'D46 (AJ 2026-09-02); owner-directed check item',
+    note: 'Added by Austin ruling D46: "add TV mount to each room. Doesn\'t matter about the tag, ' +
+      'just put it underneath TV." Placed directly under the Television line. No document tag is ' +
+      'asserted for this item; it exists by the owner\'s instruction. Check the mount is installed ' +
+      'on the working wall where the TV goes, level, and secure to the backing.',
+  },
+  {
+    ruling: 'D48', doc: 'space', key: 'dh_closer_a', category: 'Door Hardware', sort: 21000,
+    code: 'DH-1', qty: 1,
+    label: 'Door closer installed - Rixson R21013 Series 10',
+    src: 'D48 (AJ 2026-09-02) extends D28 to every common area; label on delivered product',
+    note: 'Added by Austin ruling D48: "add door closers and door locks to all the common areas too", ' +
+      'extending D28 from the guest rooms to every common-area checklist. Product identity as ' +
+      'transcribed for D28: RIXSON R21013, Series 10, UL Classified, MISCELLANEOUS FIRE DOOR ' +
+      'ACCESSORIES 2MF0. Check the closer is installed, the door self-closes and latches from any ' +
+      'open position. A space with no door of its own: flag the line rather than check it.',
+  },
+  {
+    ruling: 'D48', doc: 'space', key: 'dh_lock_a', category: 'Door Hardware', sort: 21010,
+    code: 'DH-2', qty: 1,
+    label: 'Door lock installed - 10-336, finish 630',
+    src: 'D48 (AJ 2026-09-02) extends D28 to every common area; box label on delivered product',
+    note: 'Added by Austin ruling D48: "add door closers and door locks to all the common areas too", ' +
+      'extending D28 from the guest rooms to every common-area checklist. Product identity as ' +
+      'transcribed for D28: NORTON RIXSON / ASSA ABLOY 10-336, DOOR, finish 630. Check the lock is ' +
+      'installed and operates: latches, locks and releases. A space with no door of its own: flag ' +
+      'the line rather than check it.',
+  },
+  {
     ruling: 'D28', doc: 'ffe', key: 'dh_closer_a', category: 'Door Hardware', sort: 21000,
     code: 'DH-1', qty: 1,
     label: 'Door closer installed - Rixson R21013 Series 10',
@@ -679,6 +711,18 @@ const RULED_LINE_ADDITIONS = [
     note: 'Added by Austin ruling D49. Check this line only when the connecting door closer needed rework.',
     scope: 'the connecting rooms (rooms.connecting = 1)',
     applies: (room) => String((room || {}).connecting) === '1',
+  },
+  /* D49 (2026-09-02) on the common areas: "Rework closer ... to all doors". The
+   * rework line rides under D48's closer on every common-area checklist, checked
+   * only when the rework was needed (optional: true, not counted until checked). */
+  {
+    ruling: 'D49', doc: 'space', key: 'dh_rework_a', category: 'Door Hardware', sort: 21005,
+    code: 'DH-1R', qty: 1, optional: true,
+    label: 'Rework closer (if needed)',
+    src: 'D49 (AJ 2026-09-02) extends the guest-room rework line to every common area',
+    note: 'Added by Austin ruling D49 (rework closer on ALL doors). Check this line only when the closer ' +
+      'needed rework: adjust it so the door self-closes and latches from any open position. It does not ' +
+      'count toward the space total until it is checked. A space with no door of its own: leave it.',
   },
 ];
 

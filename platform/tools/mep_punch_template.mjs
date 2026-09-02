@@ -80,7 +80,7 @@ export function roomFlags(room) {
  * Low Voltage 5000s. */
 export const MEP_LINES = [
   /* Mechanical */
-  { key: 'mech_ptac', category: 'Mechanical', code: 'PTAC', sort: 1010,
+  { key: 'mech_ptac', category: 'Mechanical', code: 'PTAC', sort: 1010, inheritCode: true,
     label: 'PTAC installed and working', from: ['mech_ptac'], match: /^PTAC\b(?!.*(sleeve|louver|grille|access panel|filter|fresh|low-ambient|drain kit|edge|stool))/i },
   { key: 'mech_ptac_kit', category: 'Mechanical', code: 'PTAC-K', sort: 1011,
     label: 'PTAC sleeve, grilles, filter and drain kit complete', from: ['mech_grille_rm'],
@@ -256,6 +256,7 @@ const lineApplies = (line, flags) => !line.applies || !!flags[line.applies];
 
 function foldedDetail(line, oldLive, consumed) {
   const parts = [];
+  const notes = [];
   for (const [k, it] of oldLive) {
     const fromHit = (line.from || []).includes(k);
     const matchHit = line.match && line.match.test(String(it.label || ''));
@@ -263,10 +264,15 @@ function foldedDetail(line, oldLive, consumed) {
     consumed.add(k);
     const code = it.code ? String(it.code).trim() + ': ' : '';
     parts.push(code + String(it.label || '').replace(/\s+/g, ' ').trim());
+    /* The replaced line's own verification note travels too, so nothing a
+     * reader could tap into before is gone, and a citation such as A100 still
+     * sits next to the sentence that explains it. */
+    if (fromHit && it.instanceNote && !notes.includes(String(it.instanceNote))) notes.push(String(it.instanceNote));
   }
   if (!parts.length) return '';
   let text = 'Covers these spec lines: ' + parts.join(' · ');
   if (text.length > 1200) text = text.slice(0, 1197).trimEnd() + '...';
+  if (notes.length) text += ' Verification notes carried from the replaced line(s): ' + notes.join(' | ');
   return text;
 }
 

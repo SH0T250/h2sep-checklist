@@ -376,6 +376,18 @@ const RULED_LINE_ADDITIONS = [
     scope: 'the connecting rooms (rooms.connecting = 1)',
     applies: (room) => String((room || {}).connecting) === '1',
   },
+  /* D49 (2026-09-02) on the common areas: "Rework closer ... to all doors". The
+   * rework line rides under D48's closer on every common-area checklist, checked
+   * only when the rework was needed (optional: true, not counted until checked). */
+  {
+    ruling: 'D49', doc: 'space', key: 'dh_rework_a', category: 'Door Hardware', sort: 21005,
+    code: 'DH-1R', qty: 1, optional: true,
+    label: 'Rework closer (if needed)',
+    src: 'D49 (AJ 2026-09-02) extends the guest-room rework line to every common area',
+    note: 'Added by Austin ruling D49 (rework closer on ALL doors). Check this line only when the closer ' +
+      'needed rework: adjust it so the door self-closes and latches from any open position. It does not ' +
+      'count toward the space total until it is checked. A space with no door of its own: leave it.',
+  },
 ];
 
 /* Apply the ruled additions to a freshly built doc. Idempotent by key. */
