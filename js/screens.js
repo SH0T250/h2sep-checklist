@@ -761,14 +761,19 @@ export function renderRoom(el, number) {
     sheets.issueSheet(room, b.dataset.flag);
   }));
 
-  // long-press → issue sheet
+  // long-press → issue sheet. D60: the hold must never reach the phone's own
+  // long-press behaviour (Android's context menu, the selection callout), and
+  // the tap that ends a hold must not also check the line underneath.
   el.querySelectorAll('.item-row').forEach(row => {
-    let timer = null;
+    let timer = null, held = false;
+    row.addEventListener('contextmenu', (e) => e.preventDefault());
     row.addEventListener('touchstart', () => {
-      timer = setTimeout(() => { timer = null; if (w) sheets.issueSheet(room, row.dataset.item); }, 500);
+      held = false;
+      timer = setTimeout(() => { timer = null; held = true; if (w) sheets.issueSheet(room, row.dataset.item); }, 500);
     }, { passive: true });
     ['touchend', 'touchmove', 'touchcancel'].forEach(ev =>
       row.addEventListener(ev, () => { if (timer) { clearTimeout(timer); timer = null; } }, { passive: true }));
+    row.addEventListener('click', (e) => { if (held) { held = false; e.preventDefault(); e.stopPropagation(); } }, true);
   });
 
   function readOnlyNudge() {
