@@ -928,6 +928,7 @@ function renderSpace(ctx, { id }) {
       <div class="sub">Space ${esc(doc.number)} \u00b7 Floor ${esc(doc.floor)}</div></div>
       <span class="spacer"></span>
       <div class="hdr-actions">
+        <a class="btn" href="#/print/${esc(id)}">${ic('printer')}Print sheet</a>
         <button class="btn" data-note>${ic('note')}Space notes${noteCount(doc) ? ` \u00b7 ${noteCount(doc)}` : ''}</button>
       </div>
     </div>
@@ -982,14 +983,17 @@ function renderActivity(ctx) {
 
 // ---------- print sheet (live data, paper-styled, like the first build) ----------
 
-function renderPrint(ctx, { no }) {
-  const { store } = ctx;
+// One paper sheet for one document (a room or a common-area space), FF&E then
+// MEP, generated from the live store at the moment it is drawn. The router
+// re-renders on every store change, so an open sheet updates as lines are
+// checked off; the GENERATED stamp is the moment of the last redraw.
+function paperHtml(store, no) {
   const doc = store.getDoc(no);
-  if (!doc) return el(`<div class="coming"><b>Room ${esc(no)} is not in this build</b></div>`);
+  if (!doc) return `<div class="paper"><div class="coming"><b>${esc(no)} is not in this build</b></div></div>`;
   const mep = store.mepDoc(no);
   const now = new Date();
   const stamp = `${now.toLocaleDateString('en-US')} · ${fmtWhen(now.toISOString())}`;
-
+  const isSpace = String(doc.type || '').startsWith('space-');
   function section(title, d) {
     const groups = groupByCategory(store.liveItems(d));
     let html = '';
@@ -1007,40 +1011,113 @@ function renderPrint(ctx, { no }) {
     }
     return `<div class="p-sect"><div class="p-sect-h">${esc(title)}</div>${html}</div>`;
   }
-
-  const notes = Object.values(doc.notes || {}).filter(n => !n.deleted && !n.resolved);
-  // Legend of everyone whose initials appear on this sheet, and their company.
+  const notes = Object.values(doc.notes || {}).filter(n => !n.deleted && !n.resolved && n.by);   // crew and office notes; build-authored notes stay in the app
   const signers = [...new Set([doc, mep].filter(Boolean).flatMap(d =>
     store.liveItems(d).filter(([, it]) => it.checked && it.initials)
-      .map(([, it]) => it.initials + (it.checkedByCo ? ' \u2014 ' + shortCo(it.checkedByCo) : ''))))].sort();
-  const root = el(`<div class="paper-wrap">
-    <div class="pagehead noprint">
-      <button class="icon-btn" data-back aria-label="Back">${ic('back')}</button>
-      <div><h1 class="h1">Room ${esc(no)} print sheet</h1>
-        <div class="sub">generated from live data, current as of right now</div></div>
-      <span class="spacer"></span>
-      <button class="btn primary" data-print>${ic('printer')}Print or save PDF</button>
-    </div>
-    <div class="paper">
+      .map(([, it]) => it.initials + (it.checkedByCo ? ' — ' + shortCo(it.checkedByCo) : ''))))].sort();
+  const a = store.roomStats(doc), b = mep ? store.roomStats(mep) : { total: 0, done: 0, openIssues: 0 };
+  return `<div class="paper" data-paper="${esc(no)}">
       <div class="p-head">
         <img src="${window.__H2SEP_LOGO || 'img/triun-logo.png'}" alt="Triun"/>
-        <div class="p-title"><b>ROOM ${esc(no)}</b><span>${esc(doc.typeLabel || doc.type)} · Floor ${esc(doc.floor)}</span></div>
+        <div class="p-title"><b>${isSpace ? esc(doc.typeLabel || doc.type) : 'ROOM ' + esc(no)}</b><span>${isSpace ? 'Space ' + esc(doc.number) : esc(doc.typeLabel || doc.type)} · Floor ${esc(doc.floor)} · ${a.done + b.done} of ${a.total + b.total} checked · ${a.openIssues + b.openIssues} open</span></div>
         <div class="p-tb">
           <div><span>PROJECT</span><b>H2SEP</b></div>
           <div><span>JOB</span><b>TRIUN 24030</b></div>
           <div><span>GENERATED</span><b>${esc(stamp)}</b></div>
         </div>
       </div>
-      ${notes.length ? `<div class="p-notes"><b>ROOM NOTES:</b> ${notes.map(n => esc(n.text)).join(' · ')}</div>` : ''}
-      ${section('FF&E CHECKLIST', doc)}
-      ${mep ? `<div class="p-break"></div>${section('MEP PUNCH', mep)}
+      ${notes.length ? `<div class="p-notes"><b>${isSpace ? 'SPACE' : 'ROOM'} NOTES:</b> ${notes.map(n => esc(n.text)).join(' · ')}</div>` : ''}
+      ${store.liveItems(doc).length ? section('FF&E CHECKLIST', doc) : ''}
+      ${mep ? `${store.liveItems(doc).length ? '<div class="p-break"></div>' : ''}${section('MEP PUNCH', mep)}
         <div class="p-sign"><span>Punch walked by: ____________________</span><span>Date: ____________</span></div>` : ''}
       ${signers.length ? `<div class="p-signers"><b>SIGNED BY:</b> ${signers.map(x => `${esc(x)}`).join(' &nbsp;·&nbsp; ')}</div>` : ''}
       <div class="p-foot">Initials in the box mean checked, like the paper sheet. Generated from live data · Triun Construction &amp; Engineering</div>
+    </div>`;
+}
+
+function renderPrint(ctx, { no }) {
+  const { store } = ctx;
+  const doc = store.getDoc(no);
+  const isSpace = !!doc && String(doc.type || '').startsWith('space-');
+  const root = el(`<div class="paper-wrap">
+    <div class="pagehead noprint">
+      <button class="icon-btn" data-back aria-label="Back">${ic('back')}</button>
+      <div><h1 class="h1">${isSpace ? esc(doc.typeLabel || no) : 'Room ' + esc(no)} print sheet</h1>
+        <div class="sub">generated from live data · this page redraws as lines are checked off · print or save it whenever you need a copy</div></div>
+      <span class="spacer"></span>
+      <a class="btn" href="#/prints">${ic('printer')}All sheets</a>
+      <button class="btn primary" data-print>${ic('printer')}Print or save PDF</button>
     </div>
+    ${paperHtml(store, no)}
   </div>`);
-  root.querySelector('[data-back]').addEventListener('click', () => { location.hash = `#/room/${no}`; });
+  root.querySelector('[data-back]').addEventListener('click', () => { location.hash = isSpace ? `#/space/${no}` : `#/room/${no}`; });
   root.querySelector('[data-print]').addEventListener('click', () => window.print());
+  return root;
+}
+
+// A packet: every sheet on a floor (rooms first, then common areas), or the
+// whole building, one print job with a page break between sheets.
+function renderPrintPacket(ctx, { f }) {
+  const { store } = ctx;
+  const floor = f === 'all' ? null : Number(f);
+  const rooms = store.guestRooms().filter(r => floor === null || Number(r.floor) === floor);
+  const spaces = store.spaces().filter(sp => floor === null || Number(sp.floor) === floor)
+    .sort((a, b) => (Number(a.floor) - Number(b.floor)) || String(a.typeLabel || a.number).localeCompare(String(b.typeLabel || b.number)));
+  const ids = [...rooms.map(r => r.number), ...spaces.map(sp => sp.number)];
+  const root = el(`<div class="paper-wrap">
+    <div class="pagehead noprint">
+      <button class="icon-btn" data-back aria-label="Back">${ic('back')}</button>
+      <div><h1 class="h1">${floor === null ? 'Whole building' : 'Floor ' + floor} packet</h1>
+        <div class="sub">${pl(rooms.length, 'room')} and ${pl(spaces.length, 'common area')} · ${pl(ids.length, 'sheet')} · generated from live data at print time</div></div>
+      <span class="spacer"></span>
+      <button class="btn primary" data-print>${ic('printer')}Print or save PDF</button>
+    </div>
+    ${ids.map((id, i) => `${i ? '<div class="p-break"></div>' : ''}${paperHtml(store, id)}`).join('')}
+  </div>`);
+  root.querySelector('[data-back]').addEventListener('click', () => { location.hash = '#/prints'; });
+  root.querySelector('[data-print]').addEventListener('click', () => window.print());
+  return root;
+}
+
+// The hub: every sheet in the building, by floor, plus the packets.
+function renderPrintHub(ctx) {
+  const { store } = ctx;
+  const rooms = store.guestRooms(), spaces = store.spaces();
+  const floors = floorsOf([...rooms, ...spaces]);
+  const root = el(`<div>
+    <div class="pagehead"><h1 class="h1">Print sheets</h1>
+      <span class="sub">one sheet per room and per common area, FF&amp;E then MEP punch, drawn from live data whenever it is opened or printed</span></div>
+    <div class="kpis" style="margin-bottom:14px">
+      <div class="kpi"><div class="kl">Room sheets</div><div class="kv">${rooms.length}</div><div class="kc">every guest room, ${esc(floorRange(rooms))}</div></div>
+      <div class="kpi"><div class="kl">Common area sheets</div><div class="kv">${spaces.length}</div><div class="kc">every space with a package</div></div>
+      <div class="kpi"><div class="kl">Always current</div><div class="kv">live</div><div class="kc">a sheet is generated at the moment you open or print it</div></div>
+    </div>
+    <section class="card" style="margin-bottom:14px">
+      <div class="card-head"><h2>Packets</h2><span class="card-cap">one print job, a page break between sheets</span></div>
+      <div class="chips" style="padding:10px 16px 14px">
+        ${floors.map(fl => `<a class="btn" href="#/print-floor/${fl}">${ic('printer')}Floor ${fl} packet</a>`).join('')}
+        <a class="btn" href="#/print-floor/all">${ic('printer')}Whole building</a>
+      </div>
+    </section>
+    <section class="card"><div class="card-head"><h2>Sheets</h2><span class="card-cap">tap a row to open its sheet</span></div><div class="rlist"></div></section>
+  </div>`);
+  const list = root.querySelector('.rlist');
+  const row = (d, isSpace) => {
+    const mep = store.mepDoc(d.number);
+    const a = store.roomStats(d), b = mep ? store.roomStats(mep) : { total: 0, done: 0, openIssues: 0 };
+    const r = el(`<div class="room-row" role="link" tabindex="0" aria-label="Open the print sheet for ${esc(d.number)}">
+      <span class="rno mono" style="width:64px">${esc(d.number)}</span>
+      <span class="rtype">${esc(d.typeLabel || d.type)}${isSpace ? '' : ''}</span>
+      <span class="riss ${a.openIssues + b.openIssues ? '' : 'none'}">${a.openIssues + b.openIssues ? ic('flag', 'flag-ic') + ' ' + (a.openIssues + b.openIssues) + ' open' : '0 open'}</span>
+      <span class="rfrac">${a.done + b.done}/${a.total + b.total}</span>
+      ${ic('printer', 'chev')}
+    </div>`);
+    pressable(r, { tap: () => { location.hash = `#/print/${d.number}`; } });
+    return r;
+  };
+  const entries = [...rooms.map(d => ({ d, sp: false })), ...spaces.map(d => ({ d, sp: true }))]
+    .sort((x, y) => (Number(x.d.floor) - Number(y.d.floor)) || (x.sp - y.sp) || String(x.d.number).localeCompare(String(y.d.number)));
+  appendByFloor(list, entries, x => x.d.floor, x => row(x.d, x.sp));
   return root;
 }
 
@@ -1055,6 +1132,7 @@ export function trackingModule(store) {
       { path: '#/common', label: 'Common Areas', icon: 'layers', order: 30,
         get count() { return store ? String(store.spaces().length) : ''; } },
       { path: '#/bulk', label: 'Bulk mark', icon: 'check', order: 35 },
+      { path: '#/prints', label: 'Print sheets', icon: 'printer', order: 36 },
       { path: '#/categories', label: 'Categories', icon: 'tagi', order: 40 },
       { path: '#/files', label: 'Files', icon: 'file', order: 70 },
       { path: '#/activity', label: 'Activity', icon: 'pulse', order: 80 },
@@ -1064,6 +1142,8 @@ export function trackingModule(store) {
       { match: /^#\/rooms$/, render: renderRooms },
       { match: /^#\/room\/(?<no>[^?]+)/, render: renderRoom },
       { match: /^#\/print\/(?<no>[^?]+)/, render: renderPrint },
+      { match: /^#\/print-floor\/(?<f>\d+|all)$/, render: renderPrintPacket },
+      { match: /^#\/prints$/, render: renderPrintHub },
       { match: /^#\/activity$/, render: renderActivity },
       { match: /^#\/common$/, render: renderCommon },
       { match: /^#\/space\/(?<id>[^?]+)/, render: renderSpace },
