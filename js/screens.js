@@ -4,6 +4,7 @@ import { esc, fmtWhen, roomStats, typeAbbrev, platform, vibrate, toast, roomSort
 import { SPACE_META } from './space-meta.js';
 import * as store from './store.js';
 import * as sheets from './sheets.js';
+import * as bulk from './bulk.js';
 import { refsFor } from './refs.js';
 import { getTheme, setTheme, toggleTheme } from './theme.js';
 import { APP_VERSION, MODEL_ROOMS } from './config.js';
@@ -677,9 +678,54 @@ export function renderRoom(el, number) {
     const scrollAdjacent = Date.now() - lastScrollEnd < 400;
     store.checkItem(room.number, id).catch(e => toast('Could not save: ' + e.message));
     vibrate();
-    if (scrollAdjacent) {
-      toast('Checked ' + (it.code || it.label.slice(0, 40)), { action: 'Undo', onAction: () => store.uncheckItem(room.number, id) });
+    // D57: every check offers the same check on this line in every room on the
+    // floor. Undo stays on the same toast.
+    toast('Checked ' + (it.code || it.label.slice(0, 40)), { actions: [
+      { label: 'Undo', onAction: () => store.uncheckItem(room.number, id) },
+      { label: 'Whole floor ' + room.floor, onAction: () => wholeFloorCheck(room, it) },
+    ] });
+    void scrollAdjacent;
+  }
+  // Check the same line (same tag, or same label when untagged) on every room
+  // of this kind on this floor. The crew's bulk engine plans it: a line already
+  // checked, checked by someone else, carrying an open issue, or flagged is
+  // left alone and counted, and the whole apply has an Undo.
+  async function wholeFloorCheck(fromRoom, it) {
+    const w2 = canWrite();
+    if (!w2) { readOnlyNudge(); return; }
+    const floorRooms = store.getRooms(fromRoom.floor)
+      .map(r => isMepDoc(fromRoom) ? store.getRoom(mepIdFor(r.number)) : r)
+      .filter(r => r && r.number !== fromRoom.number);
+    const scope = bulk.emptyScope();
+    scope.keys = new Set([bulk.inventoryKey(it)]);
+    scope.floors = new Set([String(fromRoom.floor)]);
+    scope.includeSpaces = false;
+    scope.state = 'noissue';
+    const user = store.getUser();
+    const plan = bulk.planAction(floorRooms, scope, 'check', { user, uid: store.getUid ? store.getUid() : '', overwriteChecked: false });
+    const flagged = plan.changes.filter(c => { const r = store.getRoom(c.room); const item = r && r.items && r.items[c.itemId]; return item && item.reliability === 'FLAGGED'; });
+    if (flagged.length) {
+      plan.changes = plan.changes.filter(c => !flagged.includes(c));
+      for (const c of flagged) plan.skipped.push({ ...c, why: 'flagged, sources disagree: open the line' });
+      plan.counts = { ...plan.counts, changing: plan.changes.length, rooms: new Set(plan.changes.map(c => c.room)).size };
     }
+    const label = it.code || it.label.slice(0, 40);
+    const skipWhy = {};
+    for (const k of plan.skipped) skipWhy[k.why] = (skipWhy[k.why] || 0) + 1;
+    const skipText = Object.entries(skipWhy).map(([w, n]) => `${n} ${w}`).join(', ');
+    if (!plan.changes.length) { toast(`Nothing to do on floor ${fromRoom.floor}: ${skipText || 'every other room already has it'}`, { ms: 6000 }); return; }
+    const ok = window.confirm(`Check ${label} on ${plan.counts.changing} more room${plan.counts.changing === 1 ? '' : 's'} on floor ${fromRoom.floor}?` + (plan.skipped.length ? `\n\nLeft alone: ${skipText}.` : ''));
+    if (!ok) return;
+    const ctx = store.getBulkContext();
+    try {
+      await bulk.executePlan(plan, ctx, () => {});
+      if (ctx.mode !== 'demo') bulk.auditBulk(plan, ctx, 'floor-' + Date.now().toString(36)).catch(() => {});
+      toast(`${label} checked on ${plan.counts.changing} room${plan.counts.changing === 1 ? '' : 's'} on floor ${fromRoom.floor}`, { action: 'Undo', onAction: async () => {
+        const inverse = bulk.deriveUndoPlan(bulk.invertPlan(plan), store.getAllRooms().concat(floorRooms));
+        await bulk.executePlan(inverse, ctx, () => {});
+        toast(`Undone on ${inverse.counts ? inverse.counts.changing : plan.counts.changing} room(s)`);
+      }, ms: 10000 });
+    } catch (e) { toast('Could not save the floor: ' + e.message); }
   }
   // 📎 chip opens the references sheet without checking the row (field speed:
   // a plain row tap still checks — refs never get in the way of checking).

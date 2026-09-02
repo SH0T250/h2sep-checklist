@@ -41,19 +41,20 @@ export function toast(msg, opts = {}) {
     el.setAttribute('role', 'status');
     document.body.appendChild(el);
   }
+  // One action (Undo) or several ({ actions: [{ label, onAction }] }, D57).
+  const actions = opts.actions || (opts.action ? [{ label: opts.action, onAction: opts.onAction }] : []);
   el.innerHTML = `<span>${esc(msg)}</span>` +
-    (opts.action ? `<button class="toast-action">${esc(opts.action)}</button>` : '');
+    actions.map((a, i) => `<button class="toast-action" data-i="${i}">${esc(a.label)}</button>`).join('');
   el.classList.add('show');
-  if (opts.action && opts.onAction) {
-    el.querySelector('.toast-action').addEventListener('click', () => {
-      el.classList.remove('show');
-      opts.onAction();
-    }, { once: true });
-  }
+  el.querySelectorAll('.toast-action').forEach(b => b.addEventListener('click', () => {
+    el.classList.remove('show');
+    const a = actions[Number(b.dataset.i)];
+    if (a && a.onAction) a.onAction();
+  }, { once: true }));
   clearTimeout(toastTimer);
   // A toast carrying an ACTION (Undo) must live long enough to actually use —
   // 3 s is fine for "saved", not for reversing a decision.
-  toastTimer = setTimeout(() => el.classList.remove('show'), opts.ms || (opts.action ? 8000 : 3000));
+  toastTimer = setTimeout(() => el.classList.remove('show'), opts.ms || (actions.length ? 8000 : 3000));
 }
 
 export const platform = (() => {

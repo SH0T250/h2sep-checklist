@@ -247,6 +247,24 @@ await p.click('[data-preset="IN BOX"]'); await p.waitForTimeout(200);
 await p.click('.taglist label:nth-child(1) input'); await p.waitForSelector('.preview');
 t('In box chip arms a flag with the text set, and the preview counts lines', await p.$eval('[data-preset="IN BOX"]', b => b.classList.contains('on')) && /\d+ will change/.test(await p.textContent('.preview .ph')) && !(await p.$eval('[data-apply]', b => b.disabled)));
 
+console.log('\nWHOLE FLOOR AFTER A CHECK (D57)');
+await p.goto(B + '#/room/405', { waitUntil: 'networkidle' }); await p.waitForSelector('.item-row');
+const cleanId = await p.evaluate(() => { const r = [...document.querySelectorAll('.item-row')].find(x => !x.querySelector('.stamp.checked') && !x.querySelector('.issue-pill') && !x.classList.contains('flagged')); return r.dataset.item; });
+await tap(`.item-row[data-item="${cleanId}"]`); await p.waitForSelector('.toast');
+const tb = await p.$$eval('.toast button', b => b.map(x => x.textContent.trim()));
+t('the check toast offers Undo and Whole floor 4', tb.includes('Undo') && tb.includes('Whole floor 4'), tb.join('|'));
+await p.click('.toast button:nth-child(3), .toast button:last-child'); await p.waitForSelector('.sheet .preview');
+const wf = await p.textContent('.sheet .preview .ph');
+t('Whole floor previews the other rooms on the floor', /will change in \d+ rooms/.test(wf) && /other room/.test(await p.textContent('.sheet .sh')), wf);
+const nWf = Number((wf.match(/(\d+) will change/) || [])[1] || 0);
+const lenWf = (await log()).length;
+await p.click('.sheet [data-apply]'); await p.waitForTimeout(500);
+const newWf = (await log()).slice(lenWf);
+t('apply writes one patch per other room and checks exactly the previewed lines', newWf.length > 1 && newWf.reduce((n, x) => n + Object.keys(x.patch).filter(k => k.endsWith('.checked')).length, 0) === nWf && !newWf.some(x => x.docId === '405'), `${newWf.length} patches, ${nWf} lines`);
+await p.click('.toast button'); await p.waitForTimeout(400);
+t('undo reverses the floor', (await log()).length === lenWf + newWf.length * 2);
+await p.evaluate((id) => window.__store.check('405', id, false), cleanId);
+
 t('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' ; '));
 await b.close();
 console.log(`\n${pass} passed, ${fail} failed`);
