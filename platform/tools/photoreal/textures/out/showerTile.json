@@ -1,0 +1,29 @@
+{
+ "surface": "showerTile",
+ "repeat_m": [
+  0.6096,
+  0.6096
+ ],
+ "pixels": {
+  "color": [
+   1024,
+   1024
+  ],
+  "roughness": [
+   1024,
+   1024
+  ],
+  "bump": [
+   1024,
+   1024
+  ]
+ },
+ "maps": {
+  "color": "showerTile_color.png",
+  "roughness": "showerTile_rough.png",
+  "bump": "showerTile_bump.png"
+ },
+ "bump_distance_m": 0.0008,
+ "projection": "box",
+ "notes": "white 12 by 24 glazed tile, half offset running bond, from photo-24 and photo-23; grout width SCALED"
+}
