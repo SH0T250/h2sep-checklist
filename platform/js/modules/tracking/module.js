@@ -175,6 +175,7 @@ function itemStatusStats(store, q) {
     const mep = isCompanion(id) || d.type === 'mep-punch';
     const kind = (space ? 'space-' : '') + (mep ? 'mep' : 'ffe');
     for (const [, it] of store.liveItems(d)) {
+      if (!counts(it)) continue;   // an "if needed" line (D52) joins the board only once someone acts on it
       const key = kind + '|' + codeKey(it);
       if (!rows.has(key)) { const r = { key, kind, tagKey: codeKey(it), category: it.category || 'Other', label: it.label || '', codes: new Set(), total: 0, installed: 0, pending: 0, other: 0, others: new Map() }; for (const k of QUICK_PICKS) r[k] = 0; rows.set(key, r); }
       const r = rows.get(key);

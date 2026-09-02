@@ -111,7 +111,7 @@ console.log('\nITEM STATUS BOARD');
 await p.goto(B + '#/', { waitUntil: 'networkidle' }); await p.waitForSelector('.istat');
 const kv = await p.$$eval('.istat-kpis .kpi', k => Object.fromEntries(k.map(x => [x.querySelector('.kl').textContent.trim(), Number(x.querySelector('.kv').textContent.trim().split(' ')[0])])));
 t('the item status board shows the pending, missing, in box and need install counts', ['Pending', 'Missing', 'In box', 'Need install', 'Installed'].every(k => Number.isFinite(kv[k])) && kv.Missing > 100 && kv['In box'] > 0, JSON.stringify(kv));
-const truth = await p.evaluate(() => { let miss = 0, pend = 0; for (const [id, d] of Object.entries(window.__store.docs)) { if (id.startsWith('_')) continue; for (const it of Object.values(d.items)) { if (it.deleted) continue; const open = it.issue && !it.issueResolved; if (open && it.issue === 'MISSING') miss++; if (!it.checked && !open) pend++; } } return { miss, pend }; });
+const truth = await p.evaluate(() => { let miss = 0, pend = 0; for (const [id, d] of Object.entries(window.__store.docs)) { if (id.startsWith('_')) continue; for (const it of Object.values(d.items)) { if (it.deleted) continue; const open = it.issue && !it.issueResolved; if (it.optional && !it.checked && !open) continue; /* D52: an if-needed line joins the count only once acted on */ if (open && it.issue === 'MISSING') miss++; if (!it.checked && !open) pend++; } } return { miss, pend }; });
 t('its counts match a direct count of the store', kv.Missing === truth.miss && kv.Pending === truth.pend, JSON.stringify({ kv, truth }));
 const nrows = await p.$$eval('.istat-t tr[data-key]', r => r.length);
 t('every distinct line has a row', nrows > 100, String(nrows));
