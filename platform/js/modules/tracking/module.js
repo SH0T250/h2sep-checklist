@@ -200,8 +200,9 @@ function renderRoom(ctx, { no }) {
         <span class="card-cap">${s.done} of ${s.total} checked</span>
         <span class="spacer"></span>
         <span class="bar cy" style="width:130px"><i style="width:${s.total ? s.done / s.total * 100 : 0}%"></i></span>
+        <button class="btn ${bulkOn(view === 'mep' ? store.mepDocId(no) : no) ? 'primary' : ''}" data-bulk style="margin-left:10px;padding:5px 10px;font-size:12px">${ic('check')}${bulkOn(view === 'mep' ? store.mepDocId(no) : no) ? 'Done selecting' : 'Select lines'}</button>
       </div>
-      <div class="how" style="padding:8px 16px;color:var(--subtle);font-size:11.5px">Tap a line to stamp your initials, like the paper sheet. Press and hold for the issue sheet.</div>
+      <div class="how" style="padding:8px 16px;color:var(--subtle);font-size:11.5px">${bulkOn(view === 'mep' ? store.mepDocId(no) : no) ? 'Select mode: tap lines or a whole category, then choose an action below. Press and hold still opens a line.' : 'Tap a line to stamp your initials, like the paper sheet. Press and hold for the issue sheet.'}</div>
       <div class="ilist"></div>
     </section>
   </div>`);
@@ -215,13 +216,18 @@ function renderRoom(ctx, { no }) {
   const list = root.querySelector('.ilist');
   // Never concatenate the suffix here: a space MEP doc is '-M', not '-MEP'.
   const activeId = view === 'mep' ? store.mepDocId(no) : no;
+  if (bulkSel && bulkSel.docId !== activeId) bulkSel = null;   // a selection belongs to one document
+  root.querySelector('[data-bulk]').addEventListener('click', () => { bulkSel = bulkOn(activeId) ? null : { docId: activeId, ids: new Set() }; store._emit(); });
   const groups = groupByCategory(store.liveItems(active));
   for (const [cat, entries] of groups) {
     const done = entries.filter(([, it]) => it.checked).length;
-    list.append(el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">·</span><span>${done} of ${entries.length} checked</span>
-      <span class="spacer"></span>${ownerChip(store, cat, no)}</div>`));
+    const head = el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">·</span><span>${done} of ${entries.length} checked</span>
+      <span class="spacer"></span>${ownerChip(store, cat, no)}${bulkOn(activeId) ? '<span class="pickall" role="button" tabindex="0">select all</span>' : ''}</div>`);
+    head.querySelector('.pickall')?.addEventListener('click', () => bulkCatToggle(list, activeId, entries));
+    list.append(head);
     for (const [id, it] of entries) list.append(itemRow(ctx, activeId, id, it));
   }
+  if (bulkOn(activeId)) { root.append(bulkBar(ctx, activeId, active)); queueMicrotask(bulkRefreshBar); }
   return root;
 }
 
@@ -261,12 +267,244 @@ function noteCount(doc) {
   return Object.values(doc.notes || {}).filter(n => !n.deleted).length;
 }
 
+
+// ---------- bulk marking ----------
+// Two entry points, one engine (store.planBulk / store.applyBulk):
+//   1. Select mode on a room or space checklist: pick lines, pick a whole
+//      category, then Mark checked / unchecked / Resolve / Flag in one patch.
+//   2. The Bulk mark screen (#/bulk): one tag across many rooms.
+// Every apply is previewed with the exact count and every line left alone is
+// listed with its reason. Another person's initials are never restamped
+// unless the user turns that on. Every apply has an Undo.
+let bulkSel = null;               // { docId, ids: Set<itemId> } while select mode is on
+const BULK_Q_KEY = 'h2sep-p-bulkq';
+
+function bulkOn(docId) { return !!(bulkSel && bulkSel.docId === docId); }
+function bulkToggleRow(row, docId, itemId) {
+  if (!bulkOn(docId)) return;
+  if (bulkSel.ids.has(itemId)) bulkSel.ids.delete(itemId); else bulkSel.ids.add(itemId);
+  row.classList.toggle('picked', bulkSel.ids.has(itemId));
+  bulkRefreshBar();
+}
+function bulkRefreshBar() {
+  const bar = document.querySelector('.bulkbar');
+  if (!bar || !bulkSel) return;
+  const n = bulkSel.ids.size;
+  bar.querySelector('.cnt').innerHTML = `${n} selected<small> of ${bar.dataset.total}</small>`;
+  bar.querySelectorAll('[data-act]:not([data-act="cancel"])').forEach(b => { b.disabled = n === 0; });
+}
+function bulkCatToggle(list, docId, entries) {
+  if (!bulkOn(docId)) return;
+  const ids = entries.map(([id]) => id);
+  const allOn = ids.every(id => bulkSel.ids.has(id));
+  for (const id of ids) { if (allOn) bulkSel.ids.delete(id); else bulkSel.ids.add(id); }
+  list.querySelectorAll('.item-row[data-item]').forEach(r => r.classList.toggle('picked', bulkSel.ids.has(r.dataset.item)));
+  bulkRefreshBar();
+}
+function bulkBar(ctx, docId, doc) {
+  const { store } = ctx;
+  const total = store.liveItems(doc).length;
+  const bar = el(`<div class="bulkbar" data-total="${total}">
+    <span class="cnt">0 selected<small> of ${total}</small></span>
+    <span class="spacer"></span>
+    <button class="btn primary" data-act="check" disabled>${ic('check')}Mark checked</button>
+    <button class="btn" data-act="uncheck" disabled>Mark unchecked</button>
+    <button class="btn" data-act="resolve" disabled>Resolve issues</button>
+    <button class="btn" data-act="resolveAndCheck" disabled>Resolve and check</button>
+    <button class="btn" data-act="setIssue" disabled>${ic('flag', 'flag-ic')}Flag issue</button>
+    <button class="btn" data-act="cancel">Cancel</button>
+  </div>`);
+  bar.querySelectorAll('[data-act]').forEach(b => b.addEventListener('click', () => {
+    const act = b.dataset.act;
+    if (act === 'cancel') { bulkSel = null; store._emit(); return; }
+    const targets = [...bulkSel.ids].map(itemId => ({ docId, itemId }));
+    if (!targets.length) return;
+    const go = (text) => bulkConfirm(ctx, targets, act, { text, scopeLabel: `${docId}` }, () => { bulkSel = null; });
+    if (act === 'setIssue') issueTextSheet(ctx, go); else go('');
+  }));
+  return bar;
+}
+
+// Ask for the issue text once, with the paper vocabulary, then continue.
+function issueTextSheet(ctx, next) {
+  const { close } = sheet(`
+    <div class="sh"><b style="font-size:15px">Flag an issue on the selected lines</b><button class="icon-btn x" data-close aria-label="Close">${ic('x')}</button></div>
+    <div class="qps">${QUICK_PICKS.map(q => `<button class="qp" data-q="${q}">${q}</button>`).join('')}</div>
+    <div class="field"><label>Or a custom note</label><input data-custom placeholder="Type what is wrong"/></div>
+    <div class="srow"><button class="btn primary" data-next>Continue</button></div>`);
+  const sh = document.querySelector('.sheet');
+  let picked = '';
+  sh.querySelectorAll('.qp').forEach(b => b.addEventListener('click', () => {
+    picked = picked === b.dataset.q ? '' : b.dataset.q;
+    sh.querySelectorAll('.qp').forEach(x => x.classList.toggle('on', x.dataset.q === picked));
+  }));
+  sh.querySelector('[data-next]').addEventListener('click', () => {
+    const text = sh.querySelector('[data-custom]').value.trim() || picked;
+    if (!text) { toast('Pick an issue or type one'); return; }
+    close(); next(text);
+  });
+}
+
+// The confirm sheet: exact count, exact skips with reasons, the restamp
+// switch (off by default), Apply, and an Undo on the toast afterwards.
+function bulkConfirm(ctx, targets, action, opts = {}, onDone) {
+  const { store } = ctx;
+  if (!store.user) return identityGate(ctx);
+  let overwrite = false;
+  const verb = store.constructor.BULK_ACTIONS[action] || action;
+  const { close } = sheet(`
+    <div class="sh"><b style="font-size:15px">${esc(verb)}${opts.text ? ` · ${esc(opts.text)}` : ''}</b><button class="icon-btn x" data-close aria-label="Close">${ic('x')}</button></div>
+    <div data-body></div>
+    ${['check', 'uncheck', 'resolveAndCheck'].includes(action) ? `<label style="display:flex;gap:8px;align-items:center;font-size:12.5px;margin-top:10px"><input type="checkbox" data-overwrite/> Also restamp lines checked by someone else (their initials are field evidence; off unless you mean it)</label>` : ''}
+    <div class="srow"><button class="btn" data-close>Cancel</button><button class="btn primary" data-apply>Apply</button></div>`);
+  const sh = document.querySelector('.sheet');
+  let plan = null;
+  const render = () => {
+    plan = store.planBulk(targets, action, { text: opts.text || '', overwriteChecked: overwrite });
+    const byDoc = new Map();
+    for (const c of plan.changes) byDoc.set(c.docId, (byDoc.get(c.docId) || 0) + 1);
+    const byWhy = new Map();
+    for (const k of plan.skipped) { if (!byWhy.has(k.why)) byWhy.set(k.why, []); byWhy.get(k.why).push(k); }
+    const single = byDoc.size <= 1;
+    const rows = single
+      ? plan.changes.slice(0, 40).map(c => `<div class="prow"><span class="tag">${esc(shortCode(c) || '')}</span><span>${esc(c.label.length > 60 ? c.label.slice(0, 59) + '…' : c.label)}</span></div>`).join('')
+        + (plan.changes.length > 40 ? `<div class="prow"><span class="why">and ${plan.changes.length - 40} more</span></div>` : '')
+      : [...byDoc].slice(0, 60).map(([d, n]) => `<div class="prow"><span class="mono">${esc(d)}</span><span>${n} line(s)</span></div>`).join('')
+        + (byDoc.size > 60 ? `<div class="prow"><span class="why">and ${byDoc.size - 60} more documents</span></div>` : '');
+    sh.querySelector('[data-body]').innerHTML = `
+      <div class="preview">
+        <div class="ph"><b>${plan.changes.length}</b> will change${byDoc.size > 1 ? ` in <b>${byDoc.size}</b> rooms` : ''} · ${plan.skipped.length} left alone</div>
+        ${rows}
+        ${plan.skipped.length ? `<div class="skipsum"><b>Left alone (${plan.skipped.length})</b>${[...byWhy].map(([why, ks]) => `<div>${ks.length} · ${esc(why)}${single ? `: ${esc(ks.slice(0, 8).map(k => shortCode(k) || k.itemId).join(', '))}${ks.length > 8 ? ', …' : ''}` : ''}</div>`).join('')}</div>` : '<div class="skipsum">Nothing left alone.</div>'}
+      </div>`;
+    sh.querySelector('[data-apply]').disabled = plan.changes.length === 0;
+  };
+  render();
+  sh.querySelector('[data-overwrite]')?.addEventListener('change', e => { overwrite = e.target.checked; render(); });
+  sh.querySelector('[data-apply]').addEventListener('click', () => {
+    if (!plan || !plan.changes.length) return;
+    const res = store.applyBulk(plan);
+    close();
+    onDone && onDone(res);
+    if (!res) return;
+    toast(`${verb}: ${res.lines} line(s) in ${res.docs} document(s)`, { label: 'Undo', fn: () => { store.undoBulk(res.entry); toast('Undone'); } });
+    store._emit();
+  });
+}
+
+// ---------- Bulk mark screen: one tag across many rooms ----------
+function bulkQ() {
+  try { const q = JSON.parse(sessionStorage.getItem(BULK_Q_KEY)); if (q) return { floors: [], types: [], kind: 'ffe', cats: [], codes: [], action: 'check', text: '', ...q }; } catch { /* fresh */ }
+  return { floors: [], types: [], kind: 'ffe', cats: [], codes: [], action: 'check', text: '' };
+}
+function setBulkQ(q) { sessionStorage.setItem(BULK_Q_KEY, JSON.stringify(q)); }
+const codeKey = (it) => `${it.category || 'Other'}|${it.code || ''}|${it.label || ''}`;
+
+function renderBulk(ctx) {
+  const { store } = ctx;
+  const q = bulkQ();
+  const rooms = store.guestRooms();
+  const spaces = store.spaces();
+  const floors = floorsOf(rooms);
+  const types = [...new Set(rooms.map(r => r.typeLabel || r.type))].sort();
+  const parents = (q.kind.startsWith('space') ? spaces : rooms)
+    .filter(r => !q.floors.length || q.floors.includes(Number(r.floor)))
+    .filter(r => q.kind.startsWith('space') || !q.types.length || q.types.includes(r.typeLabel || r.type));
+  const mep = q.kind.endsWith('mep');
+  const docs = parents.map(r => mep ? store.mepDoc(r.number) : r).filter(Boolean);
+  // Distinct lines across the scope, counted.
+  const tags = new Map();
+  for (const d of docs) for (const [, it] of store.liveItems(d)) {
+    const k = codeKey(it);
+    if (!tags.has(k)) tags.set(k, { key: k, category: it.category || 'Other', code: it.code || '', label: it.label || '', n: 0, unchecked: 0, open: 0 });
+    const t = tags.get(k); t.n++; if (!it.checked) t.unchecked++; if (it.issue && !it.issueResolved) t.open++;
+  }
+  const cats = [...new Set([...tags.values()].map(t => t.category))];
+  const shownTags = [...tags.values()].filter(t => !q.cats.length || q.cats.includes(t.category)).sort((a, b) => a.category.localeCompare(b.category) || a.code.localeCompare(b.code) || a.label.localeCompare(b.label));
+  const picked = new Set(q.codes);
+  const targets = [];
+  if (picked.size) for (const d of docs) for (const [id, it] of store.liveItems(d)) if (picked.has(codeKey(it))) targets.push({ docId: d.number, itemId: id });
+  const plan = picked.size ? store.planBulk(targets, q.action, { text: q.text, overwriteChecked: !!q.overwrite }) : null;
+  const A = store.constructor.BULK_ACTIONS;
+
+  const root = el(`<div>
+    <div class="pagehead"><h1 class="h1">Bulk mark</h1><span class="sub">one tag across many rooms · previewed, then one write per room · every apply has Undo</span></div>
+    <div class="bulk-scope">
+      <section class="card">
+        <h3>Where</h3>
+        <div class="chips" style="margin-bottom:8px">
+          ${[['ffe', 'Rooms · FF&E'], ['mep', 'Rooms · MEP punch'], ['space-ffe', 'Common areas · FF&E'], ['space-mep', 'Common areas · MEP']].map(([k, l]) => `<button class="fl ${q.kind === k ? 'on' : ''}" data-kind="${k}">${l}</button>`).join('')}
+        </div>
+        <div class="chips" style="margin-bottom:8px">${floors.map(f => `<button class="fl ${q.floors.includes(f) ? 'on' : ''}" data-floor="${f}">Floor ${f}</button>`).join('')}</div>
+        ${q.kind.startsWith('space') ? '' : `<div class="chips">${types.map(tp => `<button class="fl ${q.types.includes(tp) ? 'on' : ''}" data-type="${esc(tp)}">${esc(tp)}</button>`).join('')}</div>`}
+        <div style="margin-top:10px;font-size:12.5px;color:var(--muted)"><b>${docs.length}</b> ${q.kind.startsWith('space') ? 'spaces' : 'rooms'} in scope${!q.floors.length && !q.types.length ? ' (every floor, every type; narrow it with the chips)' : ''}</div>
+      </section>
+      <section class="card">
+        <h3>Which lines</h3>
+        <div class="chips" style="margin-bottom:8px">${cats.map(c => `<button class="fl ${q.cats.includes(c) ? 'on' : ''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div>
+        <div class="taglist">${shownTags.length ? shownTags.map(tg => `<label><input type="checkbox" data-code="${esc(tg.key)}" ${picked.has(tg.key) ? 'checked' : ''}/><span class="tag">${esc(tg.code || '—')}</span><span>${esc(tg.label.length > 48 ? tg.label.slice(0, 47) + '…' : tg.label)}</span><span class="tcount">${tg.unchecked} open of ${tg.n}${tg.open ? ` · ${tg.open} issue` : ''}</span></label>`).join('') : '<div class="coming" style="padding:18px"><b>No lines in this scope</b></div>'}</div>
+        <div style="margin-top:8px;font-size:12px;color:var(--subtle)">${picked.size} tag(s) picked · ${targets.length} line(s) in scope</div>
+      </section>
+      <section class="card">
+        <h3>Do what</h3>
+        <div class="chips">${Object.entries(A).map(([k, l]) => `<button class="fl ${q.action === k ? 'on' : ''}" data-action="${k}">${l}</button>`).join('')}</div>
+        ${q.action === 'setIssue' ? `<div class="qps" style="margin-top:8px">${QUICK_PICKS.map(x => `<button class="qp ${q.text === x ? 'on' : ''}" data-q="${x}">${x}</button>`).join('')}</div><div class="field"><label>Or a custom note</label><input data-custom value="${QUICK_PICKS.includes(q.text) ? '' : esc(q.text)}" placeholder="Type what is wrong"/></div>` : ''}
+        ${['check', 'uncheck', 'resolveAndCheck'].includes(q.action) ? `<label style="display:flex;gap:8px;align-items:center;font-size:12.5px;margin-top:10px"><input type="checkbox" data-overwrite ${q.overwrite ? 'checked' : ''}/> Also restamp lines checked by someone else</label>` : ''}
+      </section>
+      <section class="card">
+        <h3>Preview</h3>
+        ${plan ? bulkPreviewHtml(plan) : '<div class="coming" style="padding:18px"><b>Pick at least one tag</b><span>The preview shows exactly what will change and what is left alone, per room.</span></div>'}
+        <div class="srow" style="margin-top:10px"><button class="btn primary" data-apply ${plan && plan.changes.length ? '' : 'disabled'}>${ic('check')}Apply${plan ? ` to ${plan.changes.length} line(s)` : ''}</button></div>
+      </section>
+    </div>
+  </div>`);
+  const save = (patch) => { setBulkQ({ ...q, ...patch }); location.hash = '#/bulk'; dispatchEvent(new HashChangeEvent('hashchange')); };
+  const toggleIn = (arr, v) => arr.includes(v) ? arr.filter(x => x !== v) : [...arr, v];
+  root.querySelectorAll('[data-kind]').forEach(b => b.addEventListener('click', () => save({ kind: b.dataset.kind, cats: [], codes: [] })));
+  root.querySelectorAll('[data-floor]').forEach(b => b.addEventListener('click', () => save({ floors: toggleIn(q.floors, Number(b.dataset.floor)) })));
+  root.querySelectorAll('[data-type]').forEach(b => b.addEventListener('click', () => save({ types: toggleIn(q.types, b.dataset.type) })));
+  root.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', () => save({ cats: toggleIn(q.cats, b.dataset.cat) })));
+  root.querySelectorAll('[data-code]').forEach(b => b.addEventListener('change', () => save({ codes: toggleIn(q.codes, b.dataset.code) })));
+  root.querySelectorAll('[data-action]').forEach(b => b.addEventListener('click', () => save({ action: b.dataset.action })));
+  root.querySelectorAll('.qp').forEach(b => b.addEventListener('click', () => save({ text: q.text === b.dataset.q ? '' : b.dataset.q })));
+  root.querySelector('[data-custom]')?.addEventListener('change', e => save({ text: e.target.value.trim() }));
+  root.querySelector('[data-overwrite]')?.addEventListener('change', e => save({ overwrite: e.target.checked }));
+  root.querySelector('[data-apply]').addEventListener('click', () => {
+    if (!plan || !plan.changes.length) return;
+    if (!store.user) return identityGate(ctx);
+    if (q.action === 'setIssue' && !q.text) { toast('Pick an issue or type one'); return; }
+    const res = store.applyBulk(plan);
+    if (!res) return;
+    toast(`${A[q.action]}: ${res.lines} line(s) in ${res.docs} document(s)`, { label: 'Undo', fn: () => { store.undoBulk(res.entry); toast('Undone'); } });
+    store._emit();
+  });
+  return root;
+}
+
+function bulkPreviewHtml(plan) {
+  const byDoc = new Map();
+  for (const c of plan.changes) byDoc.set(c.docId, (byDoc.get(c.docId) || 0) + 1);
+  const skipByDoc = new Map();
+  for (const k of plan.skipped) { if (!skipByDoc.has(k.docId)) skipByDoc.set(k.docId, new Map()); const m = skipByDoc.get(k.docId); m.set(k.why, (m.get(k.why) || 0) + 1); }
+  const ids = [...new Set([...byDoc.keys(), ...skipByDoc.keys()])].sort();
+  const byWhy = new Map();
+  for (const k of plan.skipped) byWhy.set(k.why, (byWhy.get(k.why) || 0) + 1);
+  return `<div class="preview">
+    <div class="ph"><b>${plan.changes.length}</b> will change in <b>${byDoc.size}</b> room(s) · ${plan.skipped.length} left alone</div>
+    ${ids.slice(0, 80).map(d => `<div class="prow"><span class="mono">${esc(d)}</span><span>${byDoc.get(d) ? `${byDoc.get(d)} line(s) change` : 'no change'}</span><span class="why">${skipByDoc.has(d) ? [...skipByDoc.get(d)].map(([w, n]) => `${n} ${esc(w)}`).join(' · ') : ''}</span></div>`).join('')}
+    ${ids.length > 80 ? `<div class="prow"><span class="why">and ${ids.length - 80} more</span></div>` : ''}
+    ${plan.skipped.length ? `<div class="skipsum"><b>Left alone (${plan.skipped.length})</b>${[...byWhy].map(([w, n]) => `<div>${n} · ${esc(w)}</div>`).join('')}</div>` : '<div class="skipsum">Nothing left alone.</div>'}
+  </div>`;
+}
+
 function itemRow(ctx, docId, itemId, it) {
   const { store } = ctx;
   const flagged = it.reliability === 'FLAGGED';
   const openIssue = it.issue && !it.issueResolved;
-  const row = el(`<div class="item-row ${flagged ? 'flagged' : ''}" role="button" tabindex="0"
+  const sel = bulkOn(docId);
+  const row = el(`<div class="item-row ${flagged ? 'flagged' : ''} ${sel ? 'selectable' : ''} ${sel && bulkSel.ids.has(itemId) ? 'picked' : ''}" role="button" tabindex="0" data-item="${esc(itemId)}"
       aria-label="${esc(it.label)}${it.checked ? ', checked' : ''}">
+    ${sel ? '<span class="pick"></span>' : ''}
     <span class="stamp ${it.checked ? 'checked' : ''}">${it.checked ? esc(it.initials || '✓') : ''}</span>
     <span class="mid">
       <span class="l1">
@@ -287,6 +525,7 @@ function itemRow(ctx, docId, itemId, it) {
 
   pressable(row, {
     tap: () => {
+      if (bulkOn(docId)) return bulkToggleRow(row, docId, itemId);
       if (!store.user) return identityGate(ctx);
       if (openIssue || it.issue || flagged) return itemSheet(ctx, docId, itemId);
       store.check(docId, itemId, !it.checked);
@@ -517,8 +756,9 @@ function renderSpace(ctx, { id }) {
     <section class="card">
       <div class="card-head"><h2>${view === 'mep' ? 'MEP punch' : 'Checklist'}</h2>
         <span class="card-cap">${s.done} of ${s.total} checked</span><span class="spacer"></span>
-        <span class="bar cy" style="width:130px"><i style="width:${s.total ? s.done / s.total * 100 : 0}%"></i></span></div>
-      <div class="how" style="padding:8px 16px;color:var(--subtle);font-size:11.5px">Tap a line to stamp your initials. Press and hold for the issue sheet.</div>
+        <span class="bar cy" style="width:130px"><i style="width:${s.total ? s.done / s.total * 100 : 0}%"></i></span>
+        <button class="btn ${bulkOn(activeId) ? 'primary' : ''}" data-bulk style="margin-left:10px;padding:5px 10px;font-size:12px">${ic('check')}${bulkOn(activeId) ? 'Done selecting' : 'Select lines'}</button></div>
+      <div class="how" style="padding:8px 16px;color:var(--subtle);font-size:11.5px">${bulkOn(activeId) ? 'Select mode: tap lines or a whole category, then choose an action below.' : 'Tap a line to stamp your initials. Press and hold for the issue sheet.'}</div>
       <div class="ilist"></div>
     </section>
   </div>`);
@@ -529,11 +769,16 @@ function renderSpace(ctx, { id }) {
   root.querySelector('[data-note]').addEventListener('click', () => notesSheet(ctx, id));
 
   const list = root.querySelector('.ilist');
+  if (bulkSel && bulkSel.docId !== activeId) bulkSel = null;
+  root.querySelector('[data-bulk]').addEventListener('click', () => { bulkSel = bulkOn(activeId) ? null : { docId: activeId, ids: new Set() }; store._emit(); });
   for (const [cat, entries] of groupByCategory(store.liveItems(active))) {
     const done = entries.filter(([, it]) => it.checked).length;
-    list.append(el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">\u00b7</span><span>${done} of ${entries.length} checked</span></div>`));
+    const head = el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">\u00b7</span><span>${done} of ${entries.length} checked</span>${bulkOn(activeId) ? '<span class="pickall" role="button" tabindex="0">select all</span>' : ''}</div>`);
+    head.querySelector('.pickall')?.addEventListener('click', () => bulkCatToggle(list, activeId, entries));
+    list.append(head);
     for (const [iid, it] of entries) list.append(itemRow(ctx, activeId, iid, it));
   }
+  if (bulkOn(activeId)) { root.append(bulkBar(ctx, activeId, active)); queueMicrotask(bulkRefreshBar); }
   return root;
 }
 
@@ -627,6 +872,7 @@ export function trackingModule(store) {
         get count() { return store ? String(store.guestRooms().length) : ''; } },
       { path: '#/common', label: 'Common Areas', icon: 'layers', order: 30,
         get count() { return store ? String(store.spaces().length) : ''; } },
+      { path: '#/bulk', label: 'Bulk mark', icon: 'check', order: 35 },
       { path: '#/categories', label: 'Categories', icon: 'tagi', order: 40 },
       { path: '#/files', label: 'Files', icon: 'file', order: 70 },
       { path: '#/activity', label: 'Activity', icon: 'pulse', order: 80 },
@@ -639,6 +885,7 @@ export function trackingModule(store) {
       { match: /^#\/activity$/, render: renderActivity },
       { match: /^#\/common$/, render: renderCommon },
       { match: /^#\/space\/(?<id>[^?]+)/, render: renderSpace },
+      { match: /^#\/bulk$/, render: renderBulk },
       { match: /^#\/categories$/, render: comingSoon('Categories', 'The 21 real categories plus the custom category creator.') },
       { match: /^#\/files$/, render: comingSoon('Files', 'Plans, submittals, and exports with spec jump links.') },
     ],
