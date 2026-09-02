@@ -1,0 +1,2194 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0b0f13">
+<title>H2SEP &mdash; Floor 1 Assembly &middot; A100</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden;background:var(--bg,#0b0f13);color:var(--ink,#eef3f7);
+    font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;}
+  :root{
+    --bg:#0b0f13; --panel:#12181f; --ink:#eef3f7; --mut:#8fa0ad;
+    --cyan:#02A9DE; --cyanhi:#3fc6f5; --red:#ff5c5c; --redink:#C00000;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+    --line:rgba(143,160,173,.22);
+    --lblbg:rgba(13,19,25,.86); --lblbd:rgba(143,160,173,.34); --lblink:#c6d1db;
+    --panelbg:linear-gradient(180deg,rgba(18,24,31,.97),rgba(14,20,26,.97));
+    --chipbg:rgba(18,24,31,.9);
+  }
+  body.light{
+    --bg:#f4f2ec; --panel:#ffffff; --ink:#1c242c; --mut:#5a6a78;
+    --cyan:#0284b3; --cyanhi:#026e96; --red:#c81f1f;
+    --line:rgba(52,66,80,.22);
+    --lblbg:rgba(255,255,255,.9); --lblbd:rgba(52,66,80,.4); --lblink:#33404c;
+    --panelbg:linear-gradient(180deg,rgba(255,255,255,.97),rgba(247,245,239,.97));
+    --chipbg:rgba(255,255,255,.92);
+  }
+  body{overscroll-behavior:none}
+  #stage{position:fixed;inset:0;z-index:0}
+  #stage canvas{display:block;touch-action:none}
+  #labels{position:fixed;inset:0;z-index:3;pointer-events:none;overflow:hidden}
+
+  /* ---------- floating 3D labels ---------- */
+  .lbl{position:absolute;top:0;left:0;pointer-events:none;white-space:nowrap;
+    font:600 10.5px/1.25 var(--mono);color:var(--lblink);letter-spacing:.04em;
+    background:var(--lblbg);border:1px solid var(--lblbd);
+    border-radius:3px;padding:2px 6px;will-change:transform;
+    font-variant-numeric:tabular-nums}
+  .lbl b{color:var(--ink);font-weight:700}
+  .lbl i{font-style:normal;color:var(--mut);font-size:9px;letter-spacing:.1em;margin-left:6px}
+  .lbl.rm b{color:var(--cyan)}
+  .lbl.anchor{background:none;border:1px dashed var(--lblbd);color:var(--mut);font-size:9.5px}
+  .lbl.pin{background:rgba(52,8,8,.92);border-color:rgba(255,92,92,.6);color:#ffd7d7;
+    font:700 10px var(--mono);padding:1px 5px;border-radius:9px}
+  body.light .lbl.pin{background:rgba(255,232,232,.95);color:#8d1414}
+  .lbl.hi{border-color:var(--cyan);color:#fff;background:rgba(4,32,44,.95)}
+  body.light .lbl.hi{color:#0b2733;background:rgba(214,240,250,.96)}
+
+  /* ---------- sidebar ---------- */
+  #sidebar{position:fixed;top:0;left:0;bottom:0;width:318px;z-index:10;
+    background:var(--panelbg);border-right:1px solid var(--line);
+    display:flex;flex-direction:column;transition:transform .25s ease}
+  #sb-scroll{overflow-y:auto;overflow-x:hidden;flex:1;scrollbar-width:thin;scrollbar-color:#3d4a57 transparent}
+  #sb-scroll::-webkit-scrollbar{width:6px}
+  #sb-scroll::-webkit-scrollbar-thumb{background:#3d4a57;border-radius:3px}
+  .tb{padding:11px 16px 10px;border-bottom:2px solid rgba(2,169,222,.5);
+    box-shadow:0 1px 0 rgba(143,160,173,.14), inset 0 -4px 0 rgba(0,0,0,.12)}
+  .wordmark{display:flex;align-items:baseline;gap:7px;margin-bottom:6px}
+  .wordmark b{font-size:15px;font-weight:800;letter-spacing:.34em;color:var(--ink)}
+  .wordmark b i{font-style:normal;color:var(--cyan)}
+  .wordmark span{font:600 8px/1 var(--mono);letter-spacing:.18em;color:var(--mut);text-transform:uppercase}
+  .eyebrow{font:600 10px/1 var(--mono);letter-spacing:.16em;color:var(--cyan);
+    text-transform:uppercase;margin-bottom:6px}
+  .tb h1{font-size:17px;line-height:1.2;font-weight:700;letter-spacing:.04em;margin-bottom:8px}
+  .meta{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:10.5px}
+  .meta span{font:600 9px/1.7 var(--mono);letter-spacing:.12em;color:var(--mut)}
+  .meta b{font:600 9.5px/1.6 var(--mono);color:var(--ink);letter-spacing:.02em;
+    font-variant-numeric:tabular-nums}
+  .caveat{margin-top:8px;padding:5px 8px;border:1px dashed rgba(2,169,222,.55);border-radius:3px;
+    font:600 9px/1.5 var(--mono);letter-spacing:.05em;color:var(--cyanhi)}
+  .sec{padding:7px 16px 2px}
+  .sechead{font:600 10px/1 var(--mono);letter-spacing:.16em;color:var(--mut);
+    text-transform:uppercase;padding-bottom:5px;margin-bottom:5px;border-bottom:1px solid var(--line)}
+  .legend{display:grid;gap:4px;font-size:10px;color:var(--lblink);padding-bottom:4px}
+  .legend>div{display:flex;align-items:flex-start;gap:9px;font-family:var(--mono);
+    letter-spacing:.02em;line-height:1.35}
+  .sw{width:13px;height:13px;border-radius:2px;flex:none;margin-top:1px}
+  .sw.ramp{background:linear-gradient(90deg,#232c34,#24414f,#14657f,#02A9DE);width:52px}
+  .sw.hollow{background:none;border:1.5px solid var(--cyan)}
+  .sw.pad{background:rgba(120,138,152,.3);border:1px dashed rgba(143,160,173,.7)}
+  .sw.tile{background:rgba(120,138,152,.45);width:8px;height:8px;margin:3px 2px 0}
+  .sw.pin{width:5px;height:15px;border-radius:2px;background:var(--red);
+    box-shadow:0 0 7px rgba(255,92,92,.75);margin-left:4px}
+  .sw.wall{background:#4b5a67}
+  .sw.none{background:#1b2229;border:1px solid rgba(143,160,173,.28)}
+  .rows{display:flex;flex-direction:column;padding-bottom:6px}
+  .row{display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:8px;
+    padding:3px 8px 3px 10px;background:none;border:none;border-left:2px solid transparent;
+    color:var(--ink);text-align:left;cursor:pointer;border-radius:0 3px 3px 0;min-height:26px;width:100%}
+  .row:hover{background:rgba(2,169,222,.08);border-left-color:rgba(2,169,222,.6)}
+  .row.on{background:rgba(2,169,222,.14);border-left-color:var(--cyan)}
+  .row:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
+  .row .tag{font:700 11px var(--mono);color:var(--cyan);letter-spacing:.02em;
+    font-variant-numeric:tabular-nums}
+  .row.nodoc .tag{color:var(--mut)}
+  .row .nm{font-size:11px;color:var(--lblink);line-height:1.25}
+  .row .pr{font:700 9px var(--mono);letter-spacing:.06em;color:var(--mut);
+    font-variant-numeric:tabular-nums;text-align:right}
+  .row .pr em{font-style:normal;color:var(--red)}
+  .row .pr b{color:var(--cyan)}
+  .sb-foot{padding:8px 16px 10px;border-top:1px solid var(--line);font-size:9.5px;
+    color:var(--mut);line-height:1.5}
+
+  /* ---------- top chip ---------- */
+  #chip{position:fixed;top:12px;left:calc(318px + 14px);z-index:12;
+    background:var(--chipbg);border:1px solid var(--line);border-radius:5px;
+    padding:7px 13px;display:flex;align-items:center;gap:14px}
+  #chip .k{font:600 8.5px/1 var(--mono);letter-spacing:.15em;color:var(--mut);text-transform:uppercase}
+  #chip .v{font:700 15px/1 var(--mono);color:var(--ink);font-variant-numeric:tabular-nums}
+  #chip .v small{font-size:10px;color:var(--mut);font-weight:600}
+  #chip .v.iss{color:var(--red)}
+  #chip .bar{width:118px;height:6px;border-radius:3px;background:rgba(143,160,173,.2);overflow:hidden}
+  #chip .bar i{display:block;height:100%;background:linear-gradient(90deg,#14657f,#02A9DE)}
+  #chip .grp{display:flex;flex-direction:column;gap:5px}
+
+  /* ---------- view bar ---------- */
+  #views{position:fixed;top:12px;right:12px;z-index:12;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  #views button{font:600 10px var(--mono);letter-spacing:.1em;color:var(--mut);
+    background:var(--chipbg);border:1px solid var(--line);border-radius:4px;
+    padding:7px 11px;cursor:pointer}
+  #views button:hover{color:var(--ink);border-color:rgba(143,160,173,.5)}
+  #views button.on{color:var(--cyan);border-color:rgba(2,169,222,.6)}
+  #views button:focus-visible{outline:2px solid var(--cyan)}
+
+  /* ---------- info card ---------- */
+  #card{position:fixed;right:14px;bottom:44px;z-index:14;width:330px;max-width:calc(100vw - 28px);
+    background:var(--panel);border:1px solid rgba(143,160,173,.35);border-radius:8px;
+    box-shadow:0 12px 34px rgba(0,0,0,.55);padding:13px 15px 14px}
+  #card[hidden]{display:none}
+  #card .hd{display:flex;align-items:center;gap:9px;margin-bottom:6px}
+  #c-tag{font:700 14px var(--mono);color:var(--cyan);letter-spacing:.03em;font-variant-numeric:tabular-nums}
+  #c-x{margin-left:auto;background:none;border:none;color:var(--mut);cursor:pointer;
+    font:600 14px var(--mono);padding:2px 6px;border-radius:3px}
+  #c-x:hover{color:var(--ink);background:rgba(143,160,173,.15)}
+  #c-name{font-size:12.5px;font-weight:700;margin-bottom:7px;line-height:1.3}
+  #c-stats{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin-bottom:8px}
+  #c-stats span{font:600 8.5px/1.7 var(--mono);letter-spacing:.13em;color:var(--mut);text-transform:uppercase}
+  #c-stats b{font:600 10px/1.6 var(--mono);color:var(--ink);font-variant-numeric:tabular-nums}
+  #c-stats b.iss{color:var(--red)}
+  #c-stats b.ok{color:var(--cyan)}
+  #c-basis{font:600 9px/1.5 var(--mono);letter-spacing:.08em;color:var(--cyanhi);
+    border:1px dashed rgba(2,169,222,.45);border-radius:3px;padding:4px 7px;margin-bottom:8px}
+  #c-desc{font-size:10.5px;color:var(--lblink);line-height:1.5}
+  #c-note{margin-top:8px;padding:7px 9px;border-left:3px solid var(--redink);
+    background:rgba(192,0,0,.12);font:600 9.5px/1.5 var(--mono);color:#ff9b9b;border-radius:0 3px 3px 0}
+  body.light #c-note{color:#a31d1d;background:rgba(192,0,0,.08)}
+  #c-note[hidden]{display:none}
+  #c-open{margin-top:10px;display:inline-flex;align-items:center;gap:7px;
+    font:700 10px var(--mono);letter-spacing:.1em;color:var(--cyan);text-decoration:none;
+    border:1px solid rgba(2,169,222,.55);border-radius:4px;padding:7px 11px;cursor:pointer;
+    background:none}
+  #c-open:hover{background:rgba(2,169,222,.12)}
+  #c-open[hidden]{display:none}
+
+  /* ---------- caveat strip ---------- */
+  #caveat{position:fixed;bottom:12px;left:calc(318px + 14px);z-index:9;
+    font:600 9px var(--mono);letter-spacing:.1em;color:var(--mut);
+    background:var(--chipbg);border:1px solid var(--line);border-radius:3px;padding:5px 11px}
+
+  /* ---------- data banner (honest hard-stop, never a silent blank) -------- */
+  #banner{position:fixed;left:calc(318px + 14px);right:14px;top:64px;z-index:13;
+    background:rgba(92,31,31,.94);border:1px solid #ff6b6b;border-radius:5px;
+    color:#ffdede;font:600 10px/1.5 var(--mono);letter-spacing:.05em;padding:8px 12px}
+  #banner[hidden]{display:none}
+
+  /* ---------- burger / phone ---------- */
+  #burger{position:fixed;top:12px;left:12px;z-index:20;width:44px;height:44px;border-radius:6px;
+    background:var(--panel);border:1px solid var(--line);cursor:pointer;display:none;
+    flex-direction:column;align-items:center;justify-content:center;gap:4px}
+  #burger span{display:block;width:16px;height:2px;background:var(--ink);border-radius:1px}
+  @media (max-width:1000px){
+    #sidebar{transform:translateX(-100%)}
+    body.nav-open #sidebar{transform:none}
+    #burger{display:flex}
+    #chip{left:66px;right:12px;top:62px}
+    #caveat{left:12px;right:12px;bottom:8px;text-align:center}
+    #views{top:12px;right:12px;left:66px;justify-content:flex-end}
+    #banner{left:12px;right:12px;top:112px}
+    #card{left:10px;right:10px;width:auto;bottom:44px}
+  }
+  @media (max-width:700px){
+    #chip{gap:10px;padding:6px 10px}
+    #chip .bar{width:70px}
+    #views button{padding:8px 8px;font-size:9px}
+  }
+
+  /* ---------- runtime error overlay ---------- */
+  #err{position:fixed;top:0;left:0;right:0;z-index:99;background:#8e1f1f;color:#fff;
+    font:600 12px/1.5 var(--mono);padding:10px 16px;border-bottom:2px solid #ff6b6b;
+    white-space:pre-wrap;word-break:break-word}
+  #err[hidden]{display:none}
+</style>
+
+<div id="stage"></div>
+<div id="labels" aria-hidden="true"></div>
+
+<button id="burger" aria-label="Toggle space list"><span></span><span></span><span></span></button>
+
+<aside id="sidebar">
+  <div id="sb-scroll">
+    <div class="tb">
+      <div class="wordmark"><b>TR<i>I</i>UN</b><span>Construction &amp; Engineering</span></div>
+      <div class="eyebrow">H2SEP &mdash; Floor Assembly &middot; Dollhouse</div>
+      <h1>FLOOR 1 &mdash;<br>ASSEMBLED PLATE</h1>
+      <div class="meta">
+        <span>PROJECT</span><b>HOME2 SUITES &middot; EAGLE PASS TX &middot; JOB 24030</b>
+        <span>SHEET</span><b>A100 FIRST FLOOR PLAN &middot; 3/32&Prime;=1&prime;-0&Prime; &middot; 22-014</b>
+        <span>ISSUE</span><b>08/09/24</b>
+        <span>REVISION</span><b>5 &middot; REVISED PER RFI &middot; 12/12/24</b>
+        <span>SCALE</span><b>6.75 PT/FT &mdash; PROVEN 4 WAYS</b>
+        <span>EXTENT</span><b>246&prime;-11 1/4&Prime; &times; 72&prime;-11 1/2&Prime; / 75&prime;-4 1/4&Prime;</b>
+        <span>SPACES</span><b id="m-spaces">&mdash;</b>
+        <span>ROOM GEOM</span><b>A550 / A552 KING &middot; A555 QQ</b>
+      </div>
+      <div class="caveat">REV 5 POSTDATES THE SHEET DATE AND CLOUDS BOTH CONNECTING PAIRS &mdash;
+        CONFIRM THE CURRENT ISSUE BEFORE TREATING THIS GEOMETRY AS RELEASED</div>
+    </div>
+
+    <div class="sec">
+      <div class="sechead">Legend &mdash; what this model draws</div>
+      <div class="legend">
+        <div><i class="sw ramp"></i>FLOOR TINT = CHECKLIST PROGRESS, 0% &rarr; 100%</div>
+        <div><i class="sw hollow"></i>CYAN OUTLINE = EVERY LINE DONE, NO OPEN ISSUE</div>
+        <div><i class="sw pin"></i>RED PIN AT THE DOOR = OPEN ISSUES. HEAD SIZED BY COUNT, COUNT ON THE HEAD</div>
+        <div><i class="sw wall"></i>CRISP WALL = BOUNDARY MEASURED ON A100</div>
+        <div><i class="sw pad"></i>LIGHT PAD, NO WALLS = BOUNDARY SCALED OR NOT ISOLATED</div>
+        <div><i class="sw tile"></i>SMALL TILE ON A POST = A100 LABEL ANCHOR ONLY, NO BOUNDARY</div>
+        <div><i class="sw none"></i>UNPAINTED GREY = ON A100, NOT ON THE CHECKLIST</div>
+      </div>
+      <div class="legend" style="margin-top:6px;color:var(--mut)">
+        <div>GUEST-ROOM INTERIORS ARE THE ARCHITECT&rsquo;S: A550 / A552 KING, A555 QQ.</div>
+        <div>COMMON-AREA FURNITURE IS STYLIZED &mdash; A100 DIMENSIONS NONE OF IT.</div>
+        <div>DOLLHOUSE CUT AT 4&prime;-6&Prime; AFF. NOTHING ABOVE THE CUT IS MODELLED HERE.</div>
+        <div>POOL DECK / PATIO AND THE PORTE-COCHERE ARE NOT ON A100 &mdash; LISTED, NOT DRAWN.</div>
+      </div>
+    </div>
+
+    <div class="sec"><div class="sechead">Guest wing &middot; 16 keys</div><div class="rows" id="g-rooms"></div></div>
+    <div class="sec"><div class="sechead">Common areas</div><div class="rows" id="g-common"></div></div>
+    <div class="sec"><div class="sechead">Off plan &mdash; hard stop</div><div class="rows" id="g-off"></div></div>
+  </div>
+  <div class="sb-foot">Hover a volume for its card; click to open its checklist. Rows here do the same.
+    Every dimension on this plate is measured off A100 at 6.75 pt/ft or printed on the guest-room sheets;
+    anything else is labelled SCALED or STYLIZED on screen.</div>
+</aside>
+
+<div id="chip">
+  <div class="grp"><span class="k">Floor 1 complete</span>
+    <span class="v" id="ch-done">&mdash;<small id="ch-tot"></small></span></div>
+  <div class="grp"><span class="k">Progress</span>
+    <span class="bar"><i id="ch-bar" style="width:0%"></i></span></div>
+  <div class="grp"><span class="k">Open issues</span>
+    <span class="v iss" id="ch-iss">&mdash;</span></div>
+</div>
+
+<div id="views" role="group" aria-label="Views">
+  <button id="themeBtn" aria-pressed="false">&#9788; LIGHT</button>
+  <button id="lblBtn" aria-pressed="true">LABELS</button>
+  <button data-v="over" class="on">OVERVIEW</button>
+  <button data-v="wing">GUEST WING</button>
+  <button data-v="common">COMMON AREAS</button>
+  <button data-v="exp">EXPLODED</button>
+</div>
+
+<div id="banner" hidden></div>
+
+<div id="card" hidden>
+  <div class="hd"><span id="c-tag"></span><button id="c-x" aria-label="Close">&#10005;</button></div>
+  <div id="c-name"></div>
+  <div id="c-stats"></div>
+  <div id="c-basis"></div>
+  <div id="c-desc"></div>
+  <div id="c-note" hidden></div>
+  <button id="c-open" hidden></button>
+</div>
+
+<div id="caveat">A100 MEASURED AT 6.75 PT/FT &middot; GUEST-ROOM INTERIORS OFF A550 / A552 / A555 &middot; COMMON-AREA FIT-OUT STYLIZED</div>
+
+<div id="err" hidden></div>
+
+<script>
+(function(){
+  var err = document.getElementById('err');
+  function show(m){ err.hidden = false; err.textContent = 'RUNTIME ERROR: ' + m; }
+  window.addEventListener('error', function(e){ show(e.message || String(e.error || 'unknown')); });
+  window.addEventListener('unhandledrejection', function(e){
+    show('unhandled rejection: ' + ((e.reason && e.reason.message) || String(e.reason))); });
+})();
+</script>
+
+<!-- The packaged single-file artifact has no server to fetch from, so the bundler
+     replaces this marker with an inlined window.__H2SEP_FLOOR_DATA. Hosted, the
+     marker stays a comment and the scene fetches data/floor1-staged.json itself.
+     Either way the geometry builds first and the status paint arrives after, so
+     this screen is never a silent blank (lesson V4). -->
+<script>/*__H2SEP_FLOOR_DATA__*/</script>
+
+<!--THREEJS-->
+
+<script>
+/* =============================================================================
+   H2SEP - FLOOR 1 ASSEMBLY.  One plate, every space on A100, painted with the
+   live checklist state.
+
+   SOURCES, and nothing else:
+     research/floor1-3d/a100-layout.json  - the A100 first-floor plan measured at
+       a PROVEN 6.75 pt/ft: room order, module widths, connecting-door openings,
+       every common-area boundary in the sheet's own U/V feet, the envelope, and
+       an honest gap list. Values below carry the layout's own status word.
+     research/king-studio/geometry-spec.json - the King family, via the constants
+       already cold-verified in platform/room3d.html.
+     platform/room3d.html - the QQ family off A555, and the King builders this
+       plate mirrors at massing scale.
+     research/floor1-3d/king-viewer-notes.json - the exact King treatment this
+       scene mirrors, including both clear-floor circles in 118.
+     platform/data/floor1-staged.json - the live checklist state.
+
+   COORDINATES.  The whole scene is in A100's own U/V feet so every number here
+   can be read straight off the layout file:
+     world X = V, across the building, west (King side) to east (QQ side)
+     world Z = U, along the building, north (Stair 1 end) to south (amenity end)
+     world Y = up, feet
+   Nothing is re-scaled, re-centred or normalised on the way in.
+   ========================================================================== */
+(function(){
+'use strict';
+
+var qs      = new URLSearchParams(location.search);
+var VIEW0   = qs.get('view') || 'over';
+var FREEZE  = qs.get('freeze') === '1';
+var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+var MOBILE  = matchMedia('(max-width: 1000px), (hover: none)').matches;
+
+var V3 = function(x,y,z){ return new THREE.Vector3(x,y,z); };
+var KIN = 1/12;                 /* inches -> feet, so the sheets' numbers stay readable */
+
+/* Feet -> the architect's own ft-in string, to the nearest 1/8". Used on cards so
+   a measured coordinate is quoted the way the sheet quotes it. */
+function frac(e){ var d = 8; while (e % 2 === 0 && d > 1){ e /= 2; d /= 2; } return e + '/' + d; }
+function ftin(f){
+  var neg = f < 0; f = Math.abs(f);
+  var eighths = Math.round(f * 96);
+  var ft = Math.floor(eighths / 96), rem = eighths - ft * 96;
+  var inch = Math.floor(rem / 8), e = rem - inch * 8;
+  var s = ft + '′-' + inch + (e ? ' ' + frac(e) : '') + '″';
+  return (neg ? '-' : '') + s;
+}
+
+/* =============================================================================
+   A100 - THE PLATE
+   ========================================================================== */
+var A100 = {
+  /* PRINTED on the sheet, dimensioned on both long sides */
+  lengthFt: 246.94,          /* 246'-11 1/4" */
+  northFace: 0.00, southFace: 246.46,
+  /* Guest-wing cross chain PRINTED: 30'-1 1/4" + 5'-4" + 24'-10 1/4" + 12'-8" */
+  kingWinFace: 0.55,         /* King row, inside face of the exterior wall  MEASURED */
+  kingCorrFace: 29.60,       /* King row, inside face of the corridor wall  MEASURED */
+  corrKing: 30.16,           /* corridor clear, King side                   MEASURED */
+  corrQQ: 35.49,             /* corridor clear, QQ side  (5'-4" PRINTED)    MEASURED */
+  qqCorrFace: 35.98,         /* QQ row, inside face of the corridor wall    MEASURED */
+  qqWinFace: 72.44,          /* QQ row, inside face of the exterior wall    MEASURED */
+  extWest: 0.00, extEast: 72.97,      /* guest-wing sheathing faces         MEASURED */
+  corrRun: [3.0, 187.1],     /* Stair 1 to the lobby                        MEASURED */
+  /* wall thicknesses, measured poche */
+  tDem: 6.875 * KIN,         /* W5 guestroom demising  ~6 7/8" */
+  tCorr: 6.625 * KIN,        /* W4 corridor            ~6 5/8" */
+  tExt: 7.0 * KIN,           /* exterior               ~7"     */
+  /* gridlines: the U/V VALUES are measured and reliable; which line carries
+     which number or letter is NOT resolved (layout gap list), so no bubbles. */
+  gridU: [0.00,9.81,13.83,26.49,39.16,51.83,64.50,77.16,89.83,102.49,115.17,127.84,
+          140.50,153.17,165.84,178.50,191.17,203.84,211.64,221.73,229.17,246.94],
+  gridV: [-7.38,0.00,2.99,30.05,30.16,35.49,60.35,62.41,67.99,73.01]
+};
+
+/* The two connecting openings on the whole floor. An exhaustive sweep of the
+   grey wall poche on BOTH rows found these and no others; every other demising
+   wall is solid, which is why no other bay gets a hole cut in it.
+
+   SINGLE DATUM (lesson V3).  Each opening is cut ONCE, in the one demising wall
+   the two rooms share, from A100's own measured hole. The rooms' own side walls
+   are not separately cut, so no sliver of wall can be left standing in the hole.
+   The King pair is worth spelling out because three sheets measure the same
+   physical opening and no two agree:
+     A550 view 01.1 - room 116's GR-3 centreline 11'-0" off ITS corridor wall
+       inside face, PRINTED, and the only dimension that view carries.
+     A552 view 01   - room 118's centreline 11'-0 13/16" off ITS OWN corridor
+       wall face, MEASURED off the sheet vectors. Spec conflict C1: the two
+       disagree by about 3/4" on one hole in one wall.
+     A100          - the hole itself, measured at V 17.15 to 20.49, centreline
+       V 18.82, width 3'-4" (the GR-3 pair rough opening).
+   This plate cuts from A100 and keeps the other two on the card. Averaging them
+   would invent a fourth number nobody drew. Same mechanism, same reason, for the
+   QQ pair, where A555 and A100 also diverge. */
+var CONN_OPENINGS = [
+  { pair:['101','103'], wallU: 13.83, v0: 45.27, v1: 48.60, widthTxt: '3′-4″',
+    note:'A100 measures the hole at V 45′-3 1/4″ to 48′-7 1/4″, centreline V 46′-11 1/4″ - '
+       + '10′-11 1/2″ out from the QQ corridor face and 25′-6″ in from the QQ window wall. '
+       + 'A555 dimensions the QQ family once with alternate strings and does not locate this opening, '
+       + 'so A100 is the only datum for it.' },
+  { pair:['116','118'], wallU: 115.17, v0: 17.15, v1: 20.49, widthTxt: '3′-4″',
+    note:'A100 measures the hole at V 17′-1 3/4″ to 20′-5 7/8″, centreline V 18′-9 7/8″. '
+       + 'A550/01.1 prints 11′-0″ for room 116 off its corridor wall face; A552/01 measures '
+       + '11′-0 13/16″ for room 118 off its own. Spec conflict C1 - about 3/4″ apart on one hole. '
+       + 'Cut here from A100 only; set it out from ONE datum on site and raise the RFI before framing.' }
+];
+
+/* =============================================================================
+   GUEST-ROOM GEOMETRY.  Every constant is the one already cold-verified in
+   platform/room3d.html against research/king-studio/geometry-spec.json (King)
+   and A555 (QQ). The status word on each line is the spec's own.
+     PRINTED  - a dimension string printed on the sheet
+     MEASURED - read off a wall face or an opening in the sheet vectors
+     DERIVED  - arithmetic on printed values
+     SCALED   - scaled off drawn linework and NOT printed
+   ========================================================================== */
+var QQ_D = 36.417, WIDE_W = 12.948, QQ_W = 12.0;   /* 36'-5" / 12'-11 3/8" / 12'-0" CLEAR, A555 */
+
+function kingType(base, over){
+  var o = {}, k;
+  for (k in base) o[k] = base[k];
+  for (k in (over || {})) o[k] = over[k];
+  return o;
+}
+var KING_STD = {
+  family:'KING', variant:'King Studio', sheet:'A550 views 01 / 02',
+  conn:false, acc:false,
+  w: 144*KIN, d: 348*KIN,          /* 12'-0" CLEAR x 29'-0" CLEAR       PRINTED A550/01 */
+  bayTxt:'12′-8″',       /* stud face to stud face            PRINTED A550/01 */
+  hMain: 99.375*KIN, hLow: 87*KIN, /* 8'-3 3/8" / 7'-3" MIN             PRINTED A550/02 */
+  bathZ0: 0,                       /* corridor wall runs straight       A550/01 */
+  bathPartX: 71.625*KIN,           /* bath/entry partition ENTRY face   DERIVED A550/01 */
+  bathPartT: 4.75*KIN,             /* partition thickness               SCALED  A550/01 */
+  bathIntX: 66.875*KIN,            /* bath interior clear width         SCALED  A550/01 */
+  bathPartZ: 106.125*KIN,          /* bath/room partition ROOM face     DERIVED A550/01 */
+  bathIntZ: 101.375*KIN,           /* bath interior clear depth         SCALED  A550/01 */
+  winX0: 36*KIN, winX1: 108*KIN,   /* 3'-0" / 6'-0" / 3'-0" CENTRED     PRINTED A550/01 */
+  d1CL: 94.125*KIN, d1RO: 40*KIN,  /* GR-1 entry door                   DERIVED A550/01 + /06 */
+  d2aCL: 57*KIN, d2aW: 38*KIN,     /* GR-2A bath door                   SCALED  A550/01 */
+  sofZ0: 205.5*KIN, sofZ1: 218.5*KIN, sofX1: 52*KIN,  /* divider soffit  PRINTED A550/02 */
+  bedCL: 274.25*KIN,               /* bed centreline                    DERIVED A550/04 */
+  gr3CL: null, turnR: null
+};
+var KING_CONN = kingType(KING_STD, {
+  variant:'King Studio Connecting', sheet:'A550 views 01 + 01.1, elevation 09', conn:true,
+  gr3CL: 132*KIN,   /* 11'-0" off the corridor wall INSIDE FACE           PRINTED A550/01.1 */
+  gr3RO: 40*KIN     /* 3'-4" R.O. - A552's measurement of the SAME opening; A550 prints none */
+});
+/* King Studio Acc. Mod. (room 118), A552. A different room, not a wide King:
+   16'-10" clear, the corridor wall JOGS 1'-1 3/4" at the bathroom, the window is
+   asymmetric in the bay and the bath is nearly twice as wide. */
+var KING_ACC = {
+  family:'KING', variant:'King Studio Acc. Mod.', sheet:'A552 views 01 / 02',
+  conn:true, acc:true,
+  w: 202*KIN, d: 348*KIN,          /* 16'-10" clear x 29'-0" entry side  MEASURED A552/01 */
+  bayTxt:'17′-6″ CL-CL', /* gridline to gridline               PRINTED  A552/01 */
+  hMain: 99.375*KIN, hLow: 87*KIN,
+  bathZ0: 13.75*KIN,               /* corridor wall jog                  MEASURED A552/01 */
+  bathPartX: 107.625*KIN, bathPartT: 6.75*KIN, bathIntX: 100.875*KIN,
+  bathPartZ: 128.5*KIN,            /* 10'-8 1/2" main-room face          MEASURED A552/01 */
+  bathIntZ: 121.75*KIN,
+  mainClear: 219.5*KIN,            /* 18'-3 1/2" CLEAR main room         PRINTED  A552/01 */
+  winX0: 94.125*KIN, winX1: 166.125*KIN,  /* asymmetric 3'-4"/6'-0"/8'-2 1/2" PRINTED A552/01 */
+  d1CL: 143.625*KIN, d1RO: 40*KIN,
+  d2aCL: 57.75*KIN, d2aW: 40*KIN,
+  gr3CL: 132.82*KIN, gr3RO: 40*KIN,       /* GR-3                        MEASURED A552/01 */
+  sofZ0: 212*KIN, sofZ1: 225*KIN, sofX1: 52*KIN,
+  bedCL: (225 + 348)/2*KIN,
+  turnR: 30*KIN                    /* 60" turning circle drawn on A552/01 */
+};
+
+/* ROOM 118, WHAT THE MAIN-ROOM DEPTH ACTUALLY IS (lesson V2).
+   The bath/main-room partition's main-room face sits 10'-8 1/2" off the corridor
+   wall face (MEASURED A552/01), leaving 18'-3 1/2" of main room - and 18'-3 1/2"
+   CLEAR is exactly what A552/01 PRINTS. Two things this proof must not say:
+     - it is NOT 18'-11". Spec conflict C2: 18'-11" is ONE SEGMENT of the
+       30'-1 1/2" grid-to-grid chain (18'-11" + 10'-0 3/4" + 1'-2"), not an
+       overall, and A552.md on Drive is wrong to quote it as the room depth.
+     - A100's internal partition reads at ABSOLUTE V = 18.85. That is a sheet
+       coordinate, not a distance from a face: the King row's west inside face is
+       at V = 0.55, so the partition stands 18.30 ft = 18'-3 5/8" off it. Which
+       lands on A552's printed 18'-3 1/2", to within 1/8", from a completely
+       independent sheet. Datum named, printed value quoted, debunked number left
+       dead. */
+var ROOM118_PROOF =
+  'Main room 18′-3 1/2″ CLEAR, PRINTED on A552/01, measured window-wall room face to the '
++ 'main-room face of the bath partition (that face is 10′-8 1/2″ off the corridor wall, MEASURED). '
++ 'A100 puts the same partition at absolute V = 18.85; the King row’s west inside face is V = 0.55, '
++ 'so it stands 18′-3 5/8″ off that face - the printed value, from an independent sheet. '
++ 'It is NOT 18′-11″: conflict C2 makes 18′-11″ one segment of the 30′-1 1/2″ grid chain, not an overall.';
+
+/* Handedness is per-room and is not a guess: geometry-spec.json measured the GR-1
+   rough-opening centreline for every key on A100 and compared it against two
+   candidates four feet apart. Room 110 is the calibration - 24 photographs of the
+   finished demo key put the herringbone bed wall on the LEFT entering, which is
+   A550's drawn hand. Reflect geometry, never labels. */
+var KING_ROOMS = {
+  '104': kingType(KING_STD,  {mirror:true,  basis:'A550 view 01; A100 puts the GR-1 centreline 8.00 ft off the low-end demising centreline, which is the bed/sofa wall - MIRRORED'}),
+  '106': kingType(KING_STD,  {mirror:false, basis:'A550 view 01; A100 GR-1 centreline 4.68 ft off the low-end demising centreline, which is the working wall - AS DRAWN'}),
+  '108': kingType(KING_STD,  {mirror:true,  basis:'A550 view 01; A100 GR-1 centreline 8.00 ft, low end is the bed/sofa wall - MIRRORED'}),
+  '110': kingType(KING_STD,  {mirror:false, basis:'A550 view 01; A100 GR-1 centreline 4.68 ft, low end is the working wall - AS DRAWN, and confirmed by 24 photographs of this key (the demo room)'}),
+  '112': kingType(KING_STD,  {mirror:true,  basis:'A550 view 01; A100 GR-1 centreline 8.00 ft, low end is the bed/sofa wall - MIRRORED'}),
+  '114': kingType(KING_STD,  {mirror:false, basis:'A550 view 01; A100 GR-1 centreline 4.68 ft, low end is the working wall - AS DRAWN'}),
+  '116': kingType(KING_CONN, {mirror:true,  basis:'A550 views 01 + 01.1; A100 GR-1 centreline 8.17 ft, low end is the bed/sofa wall - MIRRORED, which puts its working wall on the wall it shares with 118'}),
+  '118': kingType(KING_ACC,  {mirror:false, basis:'A552 view 01; A100 GR-1 centreline 5.19 ft, low end is the working wall - AS DRAWN. A100 measures this bay at 17′-6″ CL-CL where every other King bay measures 12′-8″'})
+};
+var QQ_ROOMS = {
+  '101': {w: WIDE_W, d: QQ_D, conn:true,  mirror:false, variant:'QQ Wide Connecting',
+          basis:'as modelled from A555 @QQ WIDE + the 101 field sheet; A100 prints the 13′-10″ bay'},
+  '103': {w: QQ_W,   d: QQ_D, conn:true,  mirror:true,  variant:'QQ Connecting',
+          basis:'pairs with 101 - the connecting door is on their shared wall, so the plan reads opposite-hand'},
+  '105': {w: QQ_W,   d: QQ_D, conn:false, mirror:false, variant:'QQ Studio', basis:'A555 base bay; A100 measures the 12′-8″ module and 12′-0″ clear'},
+  '107': {w: QQ_W,   d: QQ_D, conn:false, mirror:false, variant:'QQ Studio', basis:'A555 base bay; A100 measures the 12′-8″ module and 12′-0″ clear'},
+  '109': {w: QQ_W,   d: QQ_D, conn:false, mirror:false, variant:'QQ Studio', basis:'A555 base bay; A100 measures the 12′-8″ module and 12′-0″ clear'},
+  '111': {w: QQ_W,   d: QQ_D, conn:false, mirror:false, variant:'QQ Studio', basis:'A555 base bay; A100 measures the 12′-8″ module and 12′-0″ clear'},
+  '113': {w: QQ_W,   d: QQ_D, conn:false, mirror:false, variant:'QQ Studio', basis:'A555 base bay; A100 measures the 12′-8″ module and 12′-0″ clear'},
+  '115': {w: QQ_W,   d: QQ_D, conn:false, mirror:false, variant:'QQ Studio', basis:'A555 base bay; A100 measures the 12′-8″ module and 12′-0″ clear'}
+};
+
+/* =============================================================================
+   RENDERER / SCENE
+   ========================================================================== */
+var stage = document.getElementById('stage');
+var renderer = new THREE.WebGLRenderer({antialias: !MOBILE, powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, MOBILE ? 1.6 : 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = !MOBILE;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.setClearColor(0x0b0f13, 1);
+stage.appendChild(renderer.domElement);
+
+var scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0x0b0f13, 320, 900);
+
+var camera = new THREE.PerspectiveCamera(38, window.innerWidth/window.innerHeight, 0.5, 2400);
+camera.position.set(-120, 190, 400);
+
+var controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.maxPolarAngle = Math.PI * 0.492;
+controls.minDistance = 12;
+controls.maxDistance = 900;
+controls.target.set(31, 0, 123);
+
+var hemi = new THREE.HemisphereLight(0x7288a0, 0x161d25, 1.02);
+scene.add(hemi);
+var sun = new THREE.DirectionalLight(0xf6ecdc, 0.95);
+sun.position.set(-140, 230, 280);
+if (!MOBILE){
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048);
+  sun.shadow.camera.left = -150; sun.shadow.camera.right = 150;
+  sun.shadow.camera.top = 190;   sun.shadow.camera.bottom = -190;
+  sun.shadow.camera.near = 40;   sun.shadow.camera.far = 700;
+  sun.shadow.bias = -0.0006;
+}
+var sunTgt = new THREE.Object3D(); sunTgt.position.set(31, 0, 123);
+scene.add(sunTgt); sun.target = sunTgt;
+scene.add(sun);
+/* two cool fills down the length so the far end of a 247 ft plate is not crushed */
+[[31, 70, 40], [31, 70, 120], [24, 70, 205]].forEach(function(p){
+  var pl = new THREE.PointLight(0xbcd2e2, 0.36, 300);
+  pl.position.set(p[0], p[1], p[2]); scene.add(pl);
+});
+
+/* =============================================================================
+   MATERIALS
+   ========================================================================== */
+function std(c, r, m, o){
+  var mm = new THREE.MeshStandardMaterial({color:c, roughness:(r == null ? 0.86 : r), metalness:m || 0});
+  if (o != null){ mm.transparent = true; mm.opacity = o; }
+  return mm;
+}
+var MAT = {
+  ground:  std(0x0d1319, 0.98),
+  ext:     std(0x39485a, 0.9),
+  wall:    std(0x4b5a67, 0.9),
+  part:    std(0x55646f, 0.9),
+  pad:     std(0x78899a, 0.95, 0, 0.20),
+  padEdge: new THREE.LineDashedMaterial({color:0x7d8f9e, dashSize:1.4, gapSize:1.0, transparent:true, opacity:0.75}),
+  glass:   std(0x9fd8ef, 0.15, 0.1, 0.28),
+  wood:    std(0x8a6b45, 0.75),
+  woodDk:  std(0x4c3b28, 0.8),
+  counter: std(0xd6dbdf, 0.5),
+  uphol:   std(0x4a5563, 0.92),
+  seatDk:  std(0x353f4b, 0.92),
+  linen:   std(0xdbe2e8, 0.9),
+  matt:    std(0xc2ccd4, 0.9),
+  plinth:  std(0x2c333c, 0.9),
+  head:    std(0x4e333b, 0.88),
+  porc:    std(0xdfe6ec, 0.45),
+  chrome:  std(0xc9d3da, 0.25, 0.85),
+  appl:    std(0xa8b3bc, 0.4, 0.55),
+  applDk:  std(0x252b33, 0.65),
+  metal:   std(0x8b98a4, 0.4, 0.6),
+  tile:    std(0x9aa8b2, 0.6),
+  screen:  std(0x10161c, 0.35),
+  drape:   std(0x6d7a86, 0.95, 0, 0.55),
+  equip:   std(0x5c6a76, 0.7, 0.3),
+  equipDk: std(0x39434d, 0.8),
+  tank:    std(0xa9b5bf, 0.4, 0.6),
+  pinStem: std(0xff5c5c, 0.4, 0.1),
+  pinHead: new THREE.MeshStandardMaterial({color:0xff4d4d, emissive:0x6b1414, roughness:0.4}),
+  cyanMk:  new THREE.MeshBasicMaterial({color:0x02A9DE, transparent:true, opacity:0.55, side:THREE.DoubleSide}),
+  halo:    new THREE.MeshBasicMaterial({color:0x02A9DE, transparent:true, opacity:0.14, side:THREE.DoubleSide}),
+  anchor:  std(0x8496a5, 0.7, 0, 0.85),
+  post:    std(0x6f8090, 0.6, 0.2)
+};
+var edgeMat  = new THREE.LineBasicMaterial({color:0x35485a, transparent:true, opacity:0.85});
+var gridMat  = new THREE.LineBasicMaterial({color:0x243342, transparent:true, opacity:0.55});
+var doneMat  = new THREE.LineBasicMaterial({color:0x02A9DE, transparent:true, opacity:0.9});
+
+/* =============================================================================
+   GEOMETRY HELPERS - everything in world U/V feet
+   ========================================================================== */
+var BOX = new THREE.BoxGeometry(1,1,1);
+var CYL = new THREE.CylinderGeometry(1,1,1,18);
+var SPH = new THREE.SphereGeometry(1,20,14);
+
+var CUT = 4.5;        /* dollhouse cut plane, feet AFF. Stated in the legend. */
+var CUT_FURN = 4.2;   /* casework is clipped just under it so nothing pokes through */
+
+function wbox(x1,y1,z1, x2,y2,z2, mat, noShadow){
+  var m = new THREE.Mesh(BOX, mat);
+  m.scale.set(Math.max(Math.abs(x2-x1), 0.001), Math.max(Math.abs(y2-y1), 0.001), Math.max(Math.abs(z2-z1), 0.001));
+  m.position.set((x1+x2)/2, (y1+y2)/2, (z1+z2)/2);
+  if (!noShadow && !MOBILE){ m.castShadow = true; m.receiveShadow = true; }
+  return m;
+}
+function wcyl(cx, cz, r, y1, y2, mat){
+  var m = new THREE.Mesh(CYL, mat);
+  m.scale.set(r, Math.max(y2-y1, 0.001), r);
+  m.position.set(cx, (y1+y2)/2, cz);
+  if (!MOBILE) m.castShadow = true;
+  return m;
+}
+function lineLoopY(x0,z0,x1,z1,y,mat){
+  var pts = [V3(x0,y,z0),V3(x1,y,z0),V3(x1,y,z1),V3(x0,y,z1),V3(x0,y,z0)];
+  return new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), mat);
+}
+
+/* =============================================================================
+   SPACE REGISTRY - one record per volume on the plate
+   ========================================================================== */
+var SPACES = [];          /* in draw order */
+var BY_KEY = {};
+var pickables = [];
+
+function reg(rec){
+  rec.grp = new THREE.Group();
+  rec.tintMats = [];
+  rec.lift = 0;
+  scene.add(rec.grp);
+  SPACES.push(rec);
+  BY_KEY[rec.key] = rec;
+  return rec;
+}
+function add(rec, mesh, pick){
+  mesh.userData.sk = rec.key;
+  rec.grp.add(mesh);
+  if (pick !== false) pickables.push(mesh);
+  return mesh;
+}
+
+/* =============================================================================
+   THE PLATE: ground, envelope, gridlines
+   ========================================================================== */
+(function ground(){
+  var g = new THREE.Mesh(new THREE.PlaneGeometry(760, 760), MAT.ground);
+  g.rotation.x = -Math.PI/2; g.position.set(31, -0.62, 123);
+  if (!MOBILE) g.receiveShadow = true;
+  scene.add(g);
+  /* gridlines. The U/V VALUES are measured off A100's own tick marks; which line
+     carries which number or letter is NOT resolved (layout gap list), so the
+     lines are drawn and nothing is numbered. */
+  var pts = [];
+  A100.gridU.forEach(function(u){ pts.push(V3(-14, -0.55, u), V3(78, -0.55, u)); });
+  A100.gridV.forEach(function(v){ pts.push(V3(v, -0.55, -6), V3(v, -0.55, 252)); });
+  scene.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts), gridMat));
+})();
+
+/* ENVELOPE - the polyline A100 prints, walked as wall segments. Overall length
+   246'-11 1/4" and both widths (72'-11 1/2" at the guest wing, 75'-4 1/4" at the
+   amenity end) are PRINTED on the sheet. The main entry at U 185'-4 3/4" to
+   194'-4 3/4" on the west face is drawn as a thin line with no poche - storefront
+   glazing, so it is modelled as glass, not wall. */
+var ENV_H = 5.2;
+(function envelope(){
+  /* The guest rows own the exterior band on their own side (west V 0.00-0.55 for
+     U 0 to 166.07, east V 72.44-72.97 for U 0 to 102.87), so those runs are NOT
+     repeated here - one wall, drawn once, and it lifts with its room. */
+  var runs = [
+    /* west, south of the guest wing. Sales 022's measured box puts the west face
+       at V -9'-2 3/8" for its own U range; A100's rougher bump-out read is
+       U 162.7-168.7 at V -9'-9 1/4". The measured room box governs here. */
+    [-9.20, 166.07,  0.00, 166.07],
+    [-9.20, 166.07, -9.20, 178.21],
+    [-9.20, 178.21, -7.38, 178.21],
+    [-7.38, 178.21, -7.38, 185.40],
+    [-7.38, 194.40, -7.38, 246.46],
+    /* south */
+    [-7.38, 246.46, 67.99, 246.46],
+    /* east, walking north */
+    [67.99, 246.46, 67.99, 229.00],
+    [67.99, 229.00, 65.59, 229.00],
+    [65.59, 229.00, 65.59, 127.60],
+    [65.59, 127.60, 60.31, 127.60],
+    [60.31, 127.60, 60.31, 102.87],
+    [60.31, 102.87, 72.97, 102.87],
+    /* north */
+    [72.97,   0.00,  0.00,   0.00]
+  ];
+  var t = A100.tExt;
+  runs.forEach(function(s){
+    var x1 = Math.min(s[0], s[2]), x2 = Math.max(s[0], s[2]);
+    var z1 = Math.min(s[1], s[3]), z2 = Math.max(s[1], s[3]);
+    if (x2 - x1 < 0.01){ x1 -= t/2; x2 += t/2; } else { z1 -= t/2; z2 += t/2; }
+    scene.add(wbox(x1, 0, z1, x2, ENV_H, z2, MAT.ext, true));
+  });
+  /* main entry storefront - a MEASURED break in the poche at U 185'-4 3/4" to
+     194'-4 3/4" drawn as a thin line, so it is modelled as glass, not wall. */
+  scene.add(wbox(-7.38-t/2, 0, 185.40, -7.38+t/2, ENV_H, 194.40, MAT.glass, true));
+  scene.add(wbox(-7.38-t/2, ENV_H-0.28, 185.40, -7.38+t/2, ENV_H, 194.40, MAT.metal, true));
+  /* the exterior MECHANICAL EQUIPMENT pad sits OUTSIDE the envelope in the east
+     notch. It is context, not a room, and carries no room number on A100. */
+  scene.add(wbox(66.51, -0.5, 110.53, 69.74, 0.35, 120.38, MAT.equipDk, true));
+  [[67.2,112.4],[68.9,112.4],[67.2,118.2],[68.9,118.2]].forEach(function(p){
+    scene.add(wcyl(p[0], p[1], 0.75, 0.35, 2.6, MAT.equip));
+  });
+})();
+
+/* =============================================================================
+   ROW WALLS.  A party wall between two keys is ONE wall: each room owns its half
+   of the measured poche band, both halves share one set of numbers, and where a
+   connecting door exists both halves are cut at the SAME A100 V range. That is
+   why no sliver of wall can be left standing inside an opening (lesson V3).
+   ========================================================================== */
+function rowBands(list, startU, endU){
+  /* returns per-entry {lo, hi}: the U band of poche this key owns on each side */
+  var out = {};
+  for (var i = 0; i < list.length; i++){
+    var e = list[i];
+    var prev = i ? list[i-1].u1 : startU;
+    var next = (i < list.length-1) ? list[i+1].u0 : endU;
+    out[e.key] = { lo: e.u0 - (e.u0 - prev)/2, hi: e.u1 + (next - e.u1)/2 };
+  }
+  return out;
+}
+
+/* Cut a wall run into segments around a list of [a,b] openings. */
+function cutRun(a, b, holes){
+  var segs = [], cur = a, i;
+  var hs = (holes || []).slice().sort(function(p,q){ return p[0]-q[0]; });
+  for (i = 0; i < hs.length; i++){
+    if (hs[i][0] > cur + 0.01) segs.push([cur, hs[i][0]]);
+    cur = Math.max(cur, hs[i][1]);
+  }
+  if (b > cur + 0.01) segs.push([cur, b]);
+  return segs;
+}
+
+/* =============================================================================
+   GUEST ROOMS
+   ========================================================================== */
+var KING_ROW = [
+  {key:'104', u0:26.84,  u1:38.84},  {key:'106', u0:39.49,  u1:51.49},
+  {key:'108', u0:52.17,  u1:64.17},  {key:'110', u0:64.83,  u1:76.83},
+  {key:'112', u0:77.50,  u1:89.50},  {key:'114', u0:90.16,  u1:102.16},
+  {key:'116', u0:102.84, u1:114.84}, {key:'118', u0:115.49, u1:132.33}
+];
+var QQ_ROW = [
+  {key:'101', u0:0.54,   u1:13.49},  {key:'103', u0:14.16,  u1:26.16},
+  {key:'105', u0:26.84,  u1:38.84},  {key:'107', u0:39.49,  u1:51.49},
+  {key:'109', u0:52.17,  u1:64.17},  {key:'111', u0:64.83,  u1:76.83},
+  {key:'113', u0:77.50,  u1:89.50},  {key:'115', u0:90.16,  u1:102.16}
+];
+/* the full King-side row for wall banding, including the two BOH keys at the
+   north end and Meeting 018 at the south, so every party wall gets drawn once */
+var KING_BAND = rowBands(
+  [{key:'033',u0:0.54,u1:9.72},{key:'030',u0:10.37,u1:26.16}]
+    .concat(KING_ROW).concat([{key:'018',u0:133.04,u1:165.50}]), 0.00, 166.07);
+var QQ_BAND = rowBands(QQ_ROW, 0.00, 102.87);
+
+function holeFor(a, b){
+  for (var i = 0; i < CONN_OPENINGS.length; i++){
+    var c = CONN_OPENINGS[i];
+    if (c.pair[0] === a || c.pair[1] === a) return c;
+  }
+  return null;
+}
+
+/* ---- KING KEYS ---------------------------------------------------------- */
+function buildKing(rec){
+  var G = rec.g, W = G.w, D = G.d, mir = rec.mirror;
+  var band = KING_BAND[rec.key], RU0 = rec.u[0], RU1 = rec.u[1];
+  function mx(x){ return mir ? W - x : x; }
+  function vx(z){ return A100.kingCorrFace + z; }      /* z runs 0 at corridor to -D */
+  function uz(x){ return RU1 - mx(x); }
+  function kz(v){ return -v; }
+  function bx(x1,y1,z1, x2,y2,z2, mat, ns){
+    var X1 = vx(z1), X2 = vx(z2), Z1 = uz(x1), Z2 = uz(x2);
+    return add(rec, wbox(Math.min(X1,X2), y1, Math.min(Z1,Z2), Math.max(X1,X2), y2, Math.max(Z1,Z2), mat, ns));
+  }
+  function cy(cx, cz, r, y1, y2, mat){ return add(rec, wcyl(vx(cz), uz(cx), r, y1, y2, mat)); }
+  var CL = function(y){ return Math.min(y, CUT_FURN); };
+
+  var BPX = G.bathPartX, BPT = G.bathPartT, BIX = G.bathIntX;
+  var BPZ = G.bathPartZ, BIZ = G.bathIntZ, BZ0 = G.bathZ0 || 0;
+  var ACC = !!G.acc, CONNK = !!G.gr3CL;
+  var BEDZ0 = G.bedCL - 38*KIN, BEDZ1 = G.bedCL + 38*KIN;
+  var LZ0 = BPZ + 0.25, LZ1 = G.sofZ0 - 0.25;
+  var SOF0 = LZ0 + 1.6, SOF1 = Math.min(LZ1 - 1.1, SOF0 + 5.8);
+
+  /* --- floor slab (this is the surface the status paint tints) --- */
+  var fl = bx(0, -0.5, 0, W, 0, kz(D), rec.floorMat, true);
+  rec.floorMesh = fl; rec.tintMats.push(rec.floorMat);
+  /* hard-floor zones: entry leg + bathroom are large-format porcelain, not carpet */
+  bx(BPX, 0.001, -0.02, W, 0.06, kz(BPZ), MAT.tile, true);
+  bx(0.03, 0.001, kz(BZ0)-0.02, BIX, 0.06, kz(BIZ), MAT.tile, true);
+
+  /* --- corridor wall, this room's own, cut at the GR-1 rough opening --- */
+  var D1A = G.d1CL - G.d1RO/2, D1B = G.d1CL + G.d1RO/2;
+  var cw0 = A100.kingCorrFace, cw1 = A100.corrKing;
+  cutRun(0, W, [[D1A, D1B]]).forEach(function(s){
+    var Z1 = uz(s[0]), Z2 = uz(s[1]);
+    add(rec, wbox(cw0, 0, Math.min(Z1,Z2), cw1, CUT, Math.max(Z1,Z2), MAT.wall, true));
+  });
+  if (ACC){
+    /* A552 sets the corridor plane 1'-1 3/4" into the room at the bathroom. The
+       jog is MEASURED and happens exactly on the bath/entry partition line. */
+    bx(0, 0, kz(BZ0)-BPT/2, BPX, CUT, kz(BZ0)+BPT/2, MAT.wall, true);
+    add(rec, wbox(cw0, 0, Math.min(uz(0),uz(BPX)), cw1, CUT, Math.max(uz(0),uz(BPX)), MAT.wall, true));
+  }
+  /* --- exterior window wall, this room's own, with the printed opening --- */
+  var ww0 = A100.extWest, ww1 = A100.kingWinFace;   /* the row owns its own exterior band */
+  cutRun(0, W, [[G.winX0, G.winX1]]).forEach(function(s){
+    var Z1 = uz(s[0]), Z2 = uz(s[1]);
+    add(rec, wbox(ww0, 0, Math.min(Z1,Z2), ww1, CUT, Math.max(Z1,Z2), MAT.wall, true));
+  });
+  (function(){
+    var Z1 = uz(G.winX0), Z2 = uz(G.winX1);
+    add(rec, wbox(ww0, 0, Math.min(Z1,Z2), ww1, 1.73, Math.max(Z1,Z2), MAT.wall, true));   /* stool band */
+    add(rec, wbox(ww0+0.14, 1.73, Math.min(Z1,Z2), ww1-0.14, CUT, Math.max(Z1,Z2), MAT.glass, true));
+  })();
+  /* --- party walls: this room's half of each measured poche band ---
+     Both halves of a connecting pair are cut at the SAME A100 V range. */
+  var conn = CONNK ? holeFor(rec.key) : null;
+  [['lo', band.lo, RU0], ['hi', RU1, band.hi]].forEach(function(w){
+    var z0 = Math.min(w[1], w[2]), z1 = Math.max(w[1], w[2]);
+    if (z1 - z0 < 0.02) return;
+    var holes = [];
+    /* conn.v0 / conn.v1 are ABSOLUTE A100 V coordinates - the hole itself, in the
+       same frame this whole scene is built in. Both halves of the party wall are
+       cut from that one pair of numbers. */
+    if (conn && Math.abs((w[0] === 'lo' ? RU0 : RU1) - conn.wallU) < 1.2)
+      holes.push([conn.v0, conn.v1]);
+    cutRun(A100.kingWinFace, A100.kingCorrFace, holes).forEach(function(sx){
+      add(rec, wbox(sx[0], 0, z0, sx[1], CUT, z1, MAT.wall, true));
+    });
+    if (holes.length)   /* Triun cyan on the sill of the one opening A100 draws here */
+      add(rec, wbox(holes[0][0], 0, z0, holes[0][1], 0.22, z1, MAT.cyanMk, true));
+  });
+
+  /* --- bath partitions (interior, drawn lower than the room-defining walls) - */
+  var PH = 3.6;
+  bx(0, 0, kz(BPZ)-BPT/2, BPX, PH, kz(BPZ)+BPT/2, MAT.part, true);
+  var D2A = G.d2aCL - G.d2aW/2, D2B = G.d2aCL + G.d2aW/2;
+  cutRun(BZ0, BPZ, [[D2A, D2B]]).forEach(function(s){
+    bx(BPX-BPT/2, 0, kz(s[0]), BPX+BPT/2, PH, kz(s[1]), MAT.part, true);
+  });
+
+  /* --- working wall casework.  ORDER is PROVEN (A550 elevations 05 / 09 and
+     A552 elevation 05, window end to corridor end); the MODULE WIDTHS are not
+     dimensioned anywhere and are proportioned between the entry partition, the
+     GR-3 opening and the window. On the connecting key the closet / TV / desk
+     group is placed clear of the GR-3 opening by its own extents - the elevation
+     09 shift of about 4'-3" is UNPROVEN in the spec and no number for it is
+     encoded here or anywhere else in this file. */
+  var WW = {};
+  if (ACC){
+    WW.counter=[2.8,7.05]; WW.desk=[13.2,17.6]; WW.tv=[18.0,21.6]; WW.closet=[22.0,28.4];
+  } else if (CONNK){
+    WW.counter=[2.75,7.0]; WW.desk=[13.0,17.4]; WW.tv=[17.8,21.4]; WW.closet=[24.2,28.5];
+  } else {
+    WW.counter=[2.75,6.95]; WW.desk=[9.3,14.1]; WW.tv=[14.5,18.3]; WW.closet=[23.1,28.5];
+  }
+  var WWX = W - 2.05;
+  (function(){
+    var segs = CONNK
+      ? [[0.35, G.gr3CL - G.gr3RO/2 - 0.15], [G.gr3CL + G.gr3RO/2 + 0.15, D - 0.4]]
+      : [[0.35, D - 0.4]];
+    segs.forEach(function(s){
+      if (s[1] - s[0] < 0.3) return;
+      bx(W-0.42, 0, kz(s[0]), W-0.2, 0.55, kz(s[1]), MAT.woodDk);
+    });
+  })();
+  bx(WWX+0.1, 0, kz(WW.counter[0]), W-0.3, 2.9, kz(WW.counter[1]), MAT.woodDk);
+  bx(WWX, 2.9, kz(WW.counter[0])+0.05, W-0.22, 3.05, kz(WW.counter[1])-0.05, MAT.counter);
+  bx(WWX+0.1, 2.85, kz(WW.desk[0]), W-0.25, 3.0, kz(WW.desk[1]), MAT.wood);
+  bx(W-0.42, 0, kz(WW.desk[0])-0.1, W-0.3, 2.85, kz(WW.desk[1])+0.1, MAT.woodDk);
+  bx(WWX+0.2, 0, kz(WW.tv[0]), W-0.28, 3.5, kz(WW.tv[1]), MAT.wood);
+  bx(WWX+0.16, 3.9, kz(WW.tv[0])+0.35, WWX+0.26, CL(5.9), kz(WW.tv[1])-0.35, MAT.screen);
+  bx(WWX, 0, kz(WW.closet[0]), W-0.25, CL(6.5), kz(WW.closet[0])+0.22, MAT.wood);
+  bx(WWX, 0, kz(WW.closet[1])-0.22, W-0.25, CL(6.5), kz(WW.closet[1]), MAT.wood);
+  bx(WWX+0.25, 3.4, kz(WW.closet[0])+0.2, W-0.3, 3.55, kz(WW.closet[1])-0.2, MAT.counter);
+  bx(WWX+0.1, 0.1, kz(0.55), W-0.35, 3.6, kz(2.55), MAT.appl);          /* refrigerator */
+
+  /* --- bed group.  Bed centreline DERIVED off A550 view 04's device chain on
+     the standard key; on the accessible key A552 carries no equivalent chain, so
+     it is derived from the two proven planes that bound the sleeping zone. */
+  bx(0.2, 0, kz(BEDZ0)+0.08, 6.9, 0.7, kz(BEDZ1)-0.08, MAT.plinth);
+  bx(0.25, 0.68, kz(BEDZ0)+0.02, 6.85, 1.45, kz(BEDZ1)-0.02, MAT.plinth);
+  bx(0.25, 1.43, kz(BEDZ0), 6.82, 2.35, kz(BEDZ1), MAT.matt);
+  bx(0.5, 2.35, kz(BEDZ0)-0.55, 2.45, 2.72, kz(BEDZ1)+0.55, MAT.linen);
+  bx(0.05, 0.75, kz(BEDZ0)-0.35, 0.44, CL(4.45), kz(BEDZ1)+0.35, MAT.head);
+  /* --- divider drapery.  Its soffit is PRINTED on A550/02 and A552/02 and is
+     the only thing on either sheet that fixes where the bed zone ends. Panel
+     width, stack and fullness are not dimensioned - drawn as one plane. */
+  bx(0.05, 0.15, kz((G.sofZ0+G.sofZ1)/2)-0.09, G.sofX1, CL(6.2), kz((G.sofZ0+G.sofZ1)/2)+0.09, MAT.drape, true);
+  /* --- lounge --- */
+  bx(0.2, 0, kz(LZ0), 1.8, 1.95, kz(LZ0+1.4), MAT.wood);
+  bx(0.2, 0.35, kz(SOF0), 3.15, 1.55, kz(SOF1), MAT.uphol);
+  bx(0.2, 1.55, kz(SOF0), 1.0, 3.0, kz(SOF1), MAT.uphol);
+  bx(3.7, 0.3, kz((SOF0+SOF1)/2-0.9), 5.45, 1.35, kz((SOF0+SOF1)/2+0.9), MAT.seatDk);
+  /* --- PTAC under the window (mechanical context, no size printed anywhere) - */
+  bx(G.winX0+0.85, 0.1, kz(D)+0.15, G.winX1-0.85, 1.5, kz(D)+1.05, MAT.equipDk);
+
+  /* --- bathroom.  The RECTANGLE is proven; every fixture inside it is drawn as
+     a background graphic with no dimensions on either A550 or A552, so the
+     arrangement is the room viewer's and is stylized. --- */
+  var BW = BIX, BZa = BZ0, BZb = BIZ;
+  if (!ACC){
+    var SHZ0 = BZb - 2.55, SHZ1 = BZb - 0.08;
+    bx(0.2, 0, kz(SHZ0), BW-0.25, 0.14, kz(SHZ1), MAT.porc);
+    bx(0.2, 0.14, kz(SHZ0)-0.02, BW-0.25, CL(6.0), kz(SHZ0)+0.06, MAT.glass, true);
+    bx(0.16, 0.5, kz(BZa+0.5), 1.9, 2.72, kz(BZa+5.3), MAT.woodDk);
+    bx(0.16, 2.72, kz(BZa+0.42), 2.0, 2.9, kz(BZa+5.38), MAT.counter);
+    bx(BW-1.55, 0, kz(BZa)-0.05, BW-0.55, 2.4, kz(BZa+0.62), MAT.porc);
+    cy(BW-1.05, kz(BZa+1.25), 0.62, 0.5, 1.4, MAT.porc);
+  } else {
+    /* accessible bath: ROLL-IN per Austin ruling D19 of 2026-08-20. A100 and G001
+       still mark this key 'T' for tub and conflicts A11 / B4.4 are formally open;
+       the ruling closed the configuration for construction, not the drawings. */
+    var RSZ0 = BZb - 3.6, RSZ1 = BZb - 0.08;
+    bx(0.2, 0.01, kz(RSZ0), BW-0.25, 0.08, kz(RSZ1), MAT.porc);
+    bx(0.2, 0.08, kz(RSZ0)-0.02, BW-0.25, CL(6.0), kz(RSZ0)+0.06, MAT.glass, true);
+    bx(0.16, 1.85, kz(BZa+0.6), 2.0, 2.72, kz(BZa+4.4), MAT.woodDk);
+    bx(0.16, 2.72, kz(BZa+0.52), 2.1, 2.9, kz(BZa+4.48), MAT.counter);
+    bx(BW-1.72, 0, kz(BZa)-0.05, BW-0.68, 2.45, kz(BZa+0.66), MAT.porc);
+    cy(BW-1.2, kz(BZa+1.32), 0.62, 0.5, 1.45, MAT.porc);
+    /* THE TWO CLEAR FLOOR CIRCLES A552 VIEW 01 DRAWS, mirrored exactly from the
+       room viewer (research/floor1-3d/king-viewer-notes.json).  The bathroom one
+       is the PROVEN 60" turning circle. The main-room one is on the sheet but
+       A552 prints NEITHER its diameter NOR its position, so it is drawn at the
+       same radius, fainter, at a stylized position, and labelled so it asserts
+       no dimension (lesson V5). */
+    [[BW*0.52, kz(BZa + 3.1), 0.55], [W*0.62, kz(G.bedCL - 6.2), 0.25]].forEach(function(c){
+      var g = new THREE.RingGeometry(G.turnR - 0.09, G.turnR, 72);
+      var m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({
+        color:0x02A9DE, transparent:true, opacity:c[2], side:THREE.DoubleSide}));
+      m.rotation.x = -Math.PI/2;
+      m.position.set(vx(c[1]), 0.12, uz(c[0]));
+      add(rec, m, false);
+    });
+    rec.circleLabels = [
+      {txt:'60″ TURNING CIRCLE', x: vx(kz(BZa+3.1)), z: uz(BW*0.52)},
+      {txt:'CLEAR FLOOR SPACE · STYLIZED · A552 PRINTS NO SIZE OR POSITION',
+       x: vx(kz(G.bedCL - 6.2)), z: uz(W*0.62)}
+    ];
+  }
+
+  /* --- the proven door position: the pin for open issues stands here --- */
+  rec.door = { x: A100.corrKing - 0.1, z: uz(G.d1CL) };
+  rec.doorBasis = 'GR-1 rough-opening centreline ' + ftin(G.d1CL) + ' along the corridor wall, '
+                + (ACC ? 'PRINTED 3′-4″ R.O. on A552/01' : 'DERIVED from A550/01 and /06');
+  rec.centre = { x: A100.kingWinFace + (A100.kingCorrFace - A100.kingWinFace)/2, z: (RU0+RU1)/2 };
+}
+
+/* ---- QQ KEYS ------------------------------------------------------------ */
+function buildQQ(rec){
+  var G = rec.g, W = G.w, D = G.d, mir = rec.mirror;
+  var band = QQ_BAND[rec.key], RU0 = rec.u[0], RU1 = rec.u[1];
+  function mx(x){ return mir ? W - x : x; }
+  function vx(z){ return A100.qqCorrFace - z; }        /* z runs 0 at corridor to -D */
+  function uz(x){ return RU0 + mx(x); }
+  function bx(x1,y1,z1, x2,y2,z2, mat, ns){
+    var X1 = vx(z1), X2 = vx(z2), Z1 = uz(x1), Z2 = uz(x2);
+    return add(rec, wbox(Math.min(X1,X2), y1, Math.min(Z1,Z2), Math.max(X1,X2), y2, Math.max(Z1,Z2), mat, ns));
+  }
+  function cy(cx, cz, r, y1, y2, mat){ return add(rec, wcyl(vx(cz), uz(cx), r, y1, y2, mat)); }
+  var CL = function(y){ return Math.min(y, CUT_FURN); };
+  var BATHX = 6.55, BATHZ = -11.5;                     /* as modelled off A555 */
+  /* window: A100 measures solid 6'-8" / opening 6'-0" / solid 6'-8" per 12'-8"
+     bay, which inside the 12'-0" clear reads 3'-0" / 6'-0" / 3'-0" - the same
+     split A550 prints for the King family. Centred in each bay's clear width. */
+  var WX1 = (W - 6)/2, WX2 = WX1 + 6;
+
+  var fl = bx(0, -0.5, 0, W, 0, -D, rec.floorMat, true);
+  rec.floorMesh = fl; rec.tintMats.push(rec.floorMat);
+  bx(0.05, 0.001, -0.05, BATHX, 0.06, BATHZ+0.05, MAT.tile, true);
+
+  /* corridor wall with the entry-door opening */
+  var cw0 = A100.corrQQ, cw1 = A100.qqCorrFace;
+  cutRun(0, W, [[8.6, 11.6]]).forEach(function(s){
+    var Z1 = uz(s[0]), Z2 = uz(s[1]);
+    add(rec, wbox(cw0, 0, Math.min(Z1,Z2), cw1, CUT, Math.max(Z1,Z2), MAT.wall, true));
+  });
+  /* exterior window wall */
+  var ww0 = A100.qqWinFace, ww1 = A100.extEast;
+  cutRun(0, W, [[WX1, WX2]]).forEach(function(s){
+    var Z1 = uz(s[0]), Z2 = uz(s[1]);
+    add(rec, wbox(ww0, 0, Math.min(Z1,Z2), ww1, CUT, Math.max(Z1,Z2), MAT.wall, true));
+  });
+  (function(){
+    var Z1 = uz(WX1), Z2 = uz(WX2);
+    add(rec, wbox(ww0, 0, Math.min(Z1,Z2), ww1, 1.73, Math.max(Z1,Z2), MAT.wall, true));
+    add(rec, wbox(ww0+0.14, 1.73, Math.min(Z1,Z2), ww1-0.14, CUT, Math.max(Z1,Z2), MAT.glass, true));
+  })();
+  /* party walls, same single-datum rule as the King pair */
+  var conn = G.conn ? holeFor(rec.key) : null;
+  [['lo', band.lo, RU0], ['hi', RU1, band.hi]].forEach(function(w){
+    var z0 = Math.min(w[1], w[2]), z1 = Math.max(w[1], w[2]);
+    if (z1 - z0 < 0.02) return;
+    var holes = [];
+    if (conn && Math.abs((w[0] === 'lo' ? RU0 : RU1) - conn.wallU) < 1.2)
+      holes.push([conn.v0, conn.v1]);
+    cutRun(A100.qqCorrFace, A100.qqWinFace, holes).forEach(function(sx){
+      add(rec, wbox(sx[0], 0, z0, sx[1], CUT, z1, MAT.wall, true));
+    });
+    if (holes.length)
+      add(rec, wbox(holes[0][0], 0, z0, holes[0][1], 0.22, z1, MAT.cyanMk, true));
+  });
+  /* bath partitions */
+  var PH = 3.6;
+  bx(BATHX-0.16, 0, 0, BATHX+0.16, PH, -8.7, MAT.part, true);
+  bx(BATHX-0.16, 0, -11.1, BATHX+0.16, PH, BATHZ, MAT.part, true);
+  bx(0, 0, BATHZ-0.16, BATHX, PH, BATHZ+0.16, MAT.part, true);
+  /* bath fixtures - shower pan, toilet, vanity run (A555 draws them undimensioned) */
+  bx(0.45, 0, -0.4, 5.45, 0.14, -2.9, MAT.porc);
+  bx(0.45, 0.14, -2.9, 5.45, CL(6.0), -2.98, MAT.glass, true);
+  bx(0.3, 0.4, -3.9, 0.95, 2.6, -5.3, MAT.porc);
+  cy(1.45, -4.6, 0.62, 0.5, 1.42, MAT.porc);
+  bx(0.15, 0, -5.6, 2.23, 2.72, -11.27, MAT.woodDk);
+  bx(0.1, 2.72, -5.52, 2.31, 2.86, -11.35, MAT.counter);
+  /* two queen beds + the nightstand between them */
+  [-13.6, -21.0].forEach(function(z1){
+    var z2 = z1 - 5.0;
+    bx(0.35, 0, z1-0.1, 6.9, 0.7, z2+0.1, MAT.plinth);
+    bx(0.32, 0.68, z1-0.02, 6.83, 1.45, z2+0.02, MAT.plinth);
+    bx(0.3, 1.43, z1, 6.85, 2.35, z2, MAT.linen);
+    bx(0.55, 2.35, z1-0.5, 2.5, 2.72, z2+0.5, MAT.linen);
+    bx(0.05, 0.75, z1+0.25, 0.4, CL(4.4), z2-0.25, MAT.head);
+  });
+  bx(0.25, 0, -19.0, 1.85, 2.2, -20.6, MAT.wood);
+  /* working wall GR-308: kitchenette, desk, wardrobe - one continuous run */
+  bx(W-0.45, 0, -11.8, W-0.2, CL(6.6), -25.8, MAT.woodDk);
+  bx(W-2.1, 0, -11.8, W-0.4, CL(6.6), -12.05, MAT.wood);
+  bx(W-2.1, 0, -25.55, W-0.4, CL(6.6), -25.8, MAT.wood);
+  bx(W-2.15, 2.45, -18.6, W-0.45, 2.65, -22.35, MAT.counter);
+  bx(W-2.2, 2.9, -14.35, W-0.45, 3.1, -18.35, MAT.counter);
+  bx(W-2.05, 0, -14.35, W-0.5, 2.9, -16.55, MAT.woodDk);
+  bx(W-2.05, 0.05, -12.15, W-0.55, 3.7, -14.25, MAT.appl);
+  bx(W-2.0, 0.1, -16.65, W-0.55, 2.85, -18.25, MAT.appl);
+  bx(W-2.25, 3.9, -18.8, W-2.1, CL(5.9), -22.15, MAT.screen);
+  bx(W-2.0, 3.3, -22.7, W-0.5, 3.45, -25.45, MAT.counter);
+  /* lounge at the window end */
+  bx(0.3, 0.35, -29.1, 3.3, 1.55, -35.7, MAT.uphol);
+  bx(0.3, 1.55, -29.1, 1.05, 3.0, -35.7, MAT.uphol);
+  bx(4.5, 0.3, -31.5, 6.5, 1.35, -33.5, MAT.seatDk);
+  bx(0.35, 0, -27.7, 1.95, 1.95, -28.9, MAT.wood);
+  bx(4.9, 0.1, -D+0.15, 8.3, 1.5, -D+1.05, MAT.equipDk);        /* PTAC */
+
+  rec.door = { x: A100.corrQQ + 0.1, z: uz(10.1) };
+  rec.doorBasis = 'entry-door opening as modelled off A555 in the room viewer '
+                + '(A555 dimensions the QQ family once with alternate strings and does not locate the door)';
+  rec.centre = { x: A100.qqCorrFace + (A100.qqWinFace - A100.qqCorrFace)/2, z: (RU0+RU1)/2 };
+}
+
+/* =============================================================================
+   COMMON AREAS.
+
+   Boundary status is A100's, carried verbatim:
+     MEASURED - read from the sheet's own wall poche at the proven 6.75 pt/ft.
+                Drawn crisp, with walls.
+     SCALED   - the boundary could not be isolated (open plan, or a label drawn
+                outside the room on a leader). Drawn as a light pad with a dashed
+                edge and NO walls, because inventing a wall here would be exactly
+                the confident-wrong detail this plate must never show.
+     ANCHOR   - A100 gives a label position and nothing else. Drawn as a small
+                tile on a post at that label, and nothing else.
+
+   FIT-OUT is a separate question from boundary, and the answer is the same for
+   every common area on this plate: A100 dimensions NONE of it. Casework, tables,
+   equipment and seating below are STYLIZED - they say what kind of room it is and
+   assert no dimension. The guest rooms are the opposite: their interiors are the
+   architect's own, off A550 / A552 / A555.
+   ========================================================================== */
+var WALL_T = A100.tCorr;
+
+function perim(rec, skip){
+  var u0 = rec.u[0], u1 = rec.u[1], v0 = rec.v[0], v1 = rec.v[1], t = WALL_T/2;
+  skip = skip || '';
+  if (skip.indexOf('N') < 0) add(rec, wbox(v0-t, 0, u0-t, v1+t, CUT, u0+t, MAT.wall, true));
+  if (skip.indexOf('S') < 0) add(rec, wbox(v0-t, 0, u1-t, v1+t, CUT, u1+t, MAT.wall, true));
+  if (skip.indexOf('W') < 0) add(rec, wbox(v0-t, 0, u0-t, v0+t, CUT, u1+t, MAT.wall, true));
+  if (skip.indexOf('E') < 0) add(rec, wbox(v1-t, 0, u0-t, v1+t, CUT, u1+t, MAT.wall, true));
+}
+
+/* ---- stylized fit-out kit ------------------------------------------------ */
+function rackRun(rec, v0, v1, u, depth, n, mat){          /* shelving bay */
+  for (var i = 0; i < n; i++){
+    var a = v0 + i*((v1-v0)/n) + 0.15, b = v0 + (i+1)*((v1-v0)/n) - 0.15;
+    add(rec, wbox(a, 0, u, b, 0.35, u+depth, MAT.equipDk, true));
+    add(rec, wbox(a, 1.6, u, b, 1.75, u+depth, mat || MAT.equip, true));
+    add(rec, wbox(a, 3.1, u, b, 3.25, u+depth, mat || MAT.equip, true));
+    add(rec, wbox(a, 0, u, a+0.16, CUT_FURN, u+depth, MAT.equipDk, true));
+    add(rec, wbox(b-0.16, 0, u, b, CUT_FURN, u+depth, MAT.equipDk, true));
+  }
+}
+function counterRun(rec, v0, v1, u, depth, mat){
+  add(rec, wbox(v0, 0, u, v1, 2.85, u+depth, MAT.woodDk, true));
+  add(rec, wbox(v0-0.05, 2.85, u-0.05, v1+0.05, 3.0, u+depth+0.05, mat || MAT.counter, true));
+}
+function tableSet(rec, cv, cu, w, d, chairs){
+  add(rec, wbox(cv-w/2, 2.05, cu-d/2, cv+w/2, 2.35, cu+d/2, MAT.wood, true));
+  add(rec, wbox(cv-w/2+0.35, 0, cu-d/2+0.35, cv-w/2+0.6, 2.05, cu-d/2+0.6, MAT.woodDk, true));
+  add(rec, wbox(cv+w/2-0.6, 0, cu+d/2-0.6, cv+w/2-0.35, 2.05, cu+d/2-0.35, MAT.woodDk, true));
+  (chairs || []).forEach(function(c){
+    add(rec, wbox(c[0]-0.7, 0.15, c[1]-0.7, c[0]+0.7, 1.45, c[1]+0.7, MAT.seatDk, true));
+    add(rec, wbox(c[0]-0.7, 1.45, c[1]+0.42, c[0]+0.7, 2.75, c[1]+0.7, MAT.uphol, true));
+  });
+}
+function fourTop(rec, cv, cu){
+  tableSet(rec, cv, cu, 3.2, 3.2, [[cv-2.1,cu],[cv+2.1,cu]]);
+}
+function machineRow(rec, v0, v1, u, n, h, dep){
+  for (var i = 0; i < n; i++){
+    var a = v0 + i*((v1-v0)/n) + 0.18, b = v0 + (i+1)*((v1-v0)/n) - 0.18;
+    add(rec, wbox(a, 0, u, b, h, u+dep, MAT.appl, true));
+    add(rec, wbox(a+0.18, 1.4, u+dep-0.06, b-0.18, h-0.5, u+dep+0.04, MAT.applDk, true));
+  }
+}
+function seatCluster(rec, cv, cu){
+  add(rec, wbox(cv-2.6, 0.3, cu-1.4, cv+2.6, 1.45, cu+1.4, MAT.uphol, true));
+  add(rec, wbox(cv-2.6, 1.45, cu+0.85, cv+2.6, 2.85, cu+1.4, MAT.uphol, true));
+  add(rec, wbox(cv-4.8, 0.3, cu-1.3, cv-3.2, 1.45, cu+1.3, MAT.seatDk, true));
+  add(rec, wbox(cv+3.2, 0.3, cu-1.3, cv+4.8, 1.45, cu+1.3, MAT.seatDk, true));
+  add(rec, wbox(cv-1.5, 0, cu-3.4, cv+1.5, 1.35, cu-1.9, MAT.wood, true));
+}
+function treads(rec, v0, v1, u0, u1, n){
+  for (var i = 0; i < n; i++){
+    var a = u0 + i*((u1-u0)/n), b = u0 + (i+1)*((u1-u0)/n);
+    add(rec, wbox(v0+0.4, 0, a, (v0+v1)/2 - 0.25, Math.min(0.25 + i*0.62, CUT_FURN), b, MAT.equipDk, true));
+  }
+  add(rec, wbox((v0+v1)/2-0.2, 0, u0, (v0+v1)/2+0.2, CUT_FURN, u1, MAT.equip, true));
+}
+
+var FIT = {
+  elec: function(r, u0,u1,v0,v1){                       /* 033 Electrical */
+    for (var i = 0; i < 5; i++)
+      add(r, wbox(v0+1.2+i*2.4, 1.0, u0+0.35, v0+3.0+i*2.4, CUT_FURN, u0+1.15, MAT.equip, true));
+    add(r, wbox(v1-6.5, 0, u1-2.4, v1-1.2, 3.4, u1-0.6, MAT.equipDk, true));
+  },
+  mech: function(r, u0,u1,v0,v1){                       /* 030 Mech / Plumb - WH / WS / BP */
+    add(r, wcyl(v0+4.5, u0+4.0, 1.6, 0, CUT_FURN, MAT.tank));
+    add(r, wcyl(v0+9.0, u0+4.0, 1.6, 0, CUT_FURN, MAT.tank));
+    add(r, wcyl(v0+4.5, u0+9.5, 1.2, 0, CUT_FURN, MAT.tank));
+    add(r, wcyl(v0+8.2, u0+9.5, 1.2, 0, CUT_FURN, MAT.tank));
+    add(r, wbox(v1-9.0, 0, u0+2.0, v1-1.0, 2.4, u0+5.0, MAT.equip, true));
+    add(r, wbox(v1-8.0, 0, u1-6.0, v1-2.0, 3.2, u1-3.0, MAT.equipDk, true));
+    add(r, wbox(v0+1.0, 0, u1-5.0, v0+3.6, 2.0, u1-2.0, MAT.equip, true));
+  },
+  meeting: function(r, u0,u1,v0,v1){                    /* 018 Meeting Room, ~941 sf */
+    var cv = (v0+v1)/2;
+    tableSet(r, cv, u0+11.0, 5.0, 14.0,
+      [[cv-3.6,u0+6.5],[cv-3.6,u0+11.0],[cv-3.6,u0+15.5],[cv+3.6,u0+6.5],[cv+3.6,u0+11.0],[cv+3.6,u0+15.5]]);
+    fourTop(r, cv-7.0, u1-6.5); fourTop(r, cv+7.0, u1-6.5);
+    add(r, wbox(v0+0.8, 1.4, u0+2.0, v0+1.1, 3.9, u0+9.0, MAT.screen, true));
+  },
+  storeSm: function(r, u0,u1,v0,v1){ rackRun(r, v0+0.6, v1-0.6, u0+0.6, 1.8, 3); },
+  pbx: function(r, u0,u1,v0,v1){
+    add(r, wbox(v0+1.0, 0, u0+0.8, v0+3.6, CUT_FURN, u0+3.0, MAT.equipDk, true));
+    add(r, wbox(v0+4.2, 0, u0+0.8, v0+6.4, CUT_FURN, u0+3.0, MAT.equipDk, true));
+    counterRun(r, v1-6.0, v1-0.8, u1-2.4, 2.0);
+  },
+  hskp: function(r, u0,u1,v0,v1){
+    rackRun(r, v0+0.6, v1-0.6, u0+0.6, 1.8, 5);
+    [0,1,2].forEach(function(i){
+      add(r, wbox(v0+2.0+i*4.0, 0.3, u1-4.0, v0+4.4+i*4.0, 2.9, u1-2.0, MAT.equip, true));
+    });
+  },
+  ice: function(r, u0,u1,v0,v1){
+    add(r, wbox(v0+1.0, 0, u0+1.0, v0+4.2, CUT_FURN, u0+3.4, MAT.appl, true));
+    add(r, wbox(v0+4.8, 0, u0+1.0, v0+7.6, 3.4, u0+3.4, MAT.appl, true));
+    rackRun(r, v0+1.0, v1-1.0, u1-2.6, 1.8, 4);
+  },
+  openStore: function(r, u0,u1,v0,v1){
+    rackRun(r, v0+0.8, v1-0.8, u0+0.8, 2.0, 4);
+    rackRun(r, v0+0.8, v1-0.8, u1-2.8, 2.0, 4);
+  },
+  dryStore: function(r, u0,u1,v0,v1){
+    rackRun(r, v0+0.6, v1-0.6, u0+0.6, 1.8, 3);
+    rackRun(r, v0+0.6, v1-0.6, u1-2.4, 1.8, 3);
+  },
+  foodPrep: function(r, u0,u1,v0,v1){
+    counterRun(r, v0+0.8, v1-0.8, u0+0.8, 2.4);
+    counterRun(r, v0+0.8, v0+7.0, u1-3.2, 2.4);
+    add(r, wbox(v1-5.0, 0, u1-4.0, v1-1.0, CUT_FURN, u1-1.0, MAT.appl, true));
+    add(r, wbox(v0+8.5, 1.2, u1-3.2, v1-6.0, 2.6, u1-1.6, MAT.equip, true));
+  },
+  servery: function(r, u0,u1,v0,v1){
+    counterRun(r, v0+0.9, v0+9.5, u0+1.2, 2.6);        /* servery run, north half */
+    counterRun(r, v0+0.9, v0+6.0, u0+6.0, 2.2);
+    add(r, wbox(v0+11.0, 0, u0+1.2, v0+14.0, 3.6, u0+3.6, MAT.appl, true));
+    fourTop(r, v0+4.0, u1-4.0); fourTop(r, v0+9.5, u1-4.0); fourTop(r, v0+14.0, u1-4.0);
+    fourTop(r, v0+4.0, u1-9.5); fourTop(r, v0+9.5, u1-9.5); fourTop(r, v0+14.0, u1-9.5);
+  },
+  laundry: function(r, u0,u1,v0,v1){
+    machineRow(r, v0+0.8, v1-0.8, u0+0.9, 5, 3.2, 2.6);
+    machineRow(r, v0+0.8, v1-0.8, u1-3.5, 5, 3.2, 2.6);
+    add(r, wbox(v0+3.0, 0, (u0+u1)/2-1.4, v1-3.0, 2.9, (u0+u1)/2+1.4, MAT.equip, true));
+  },
+  dryer: function(r, u0,u1,v0,v1){
+    machineRow(r, v0+0.8, v1-0.8, u0+0.9, 4, 3.4, 2.8);
+    machineRow(r, v0+0.8, v1-0.8, u1-3.7, 4, 3.4, 2.8);
+  },
+  breakroom: function(r, u0,u1,v0,v1){
+    fourTop(r, (v0+v1)/2, u0+4.5); fourTop(r, (v0+v1)/2, u1-4.5);
+    counterRun(r, v0+0.8, v0+7.0, u0+0.8, 2.2);
+    add(r, wbox(v1-3.4, 0, u0+1.0, v1-0.8, CUT_FURN, u0+4.0, MAT.equip, true));
+  },
+  sales: function(r, u0,u1,v0,v1){
+    counterRun(r, v0+1.0, v0+7.5, u0+2.0, 2.4);
+    counterRun(r, v0+1.0, v0+7.5, u1-4.4, 2.4);
+    add(r, wbox(v1-4.0, 0.3, u0+3.0, v1-1.2, 1.45, u0+5.6, MAT.seatDk, true));
+  },
+  fitness: function(r, u0,u1,v0,v1){                    /* 023 Fitness, ~885 sf */
+    add(r, wbox(v0+0.7, 0.02, u0+0.7, v1-0.7, 0.07, u1-0.7, MAT.seatDk, true));   /* rubber floor */
+    for (var i = 0; i < 4; i++){                                                  /* treadmills */
+      var cv = v0 + 4.0 + i*6.2;
+      add(r, wbox(cv-1.5, 0.15, u0+2.0, cv+1.5, 0.75, u0+6.2, MAT.equipDk, true));
+      add(r, wbox(cv-1.2, 0.75, u0+2.2, cv+1.2, 1.05, u0+5.2, MAT.applDk, true));
+      add(r, wbox(cv-1.4, 0.75, u0+5.2, cv+1.4, 3.9, u0+5.9, MAT.equip, true));
+      add(r, wbox(cv-1.0, 3.9, u0+5.3, cv+1.0, 4.2, u0+5.8, MAT.screen, true));
+    }
+    for (i = 0; i < 2; i++){                                                      /* bikes */
+      var bv = v0 + 6.0 + i*5.5;
+      add(r, wbox(bv-1.0, 0.15, u0+9.0, bv+1.0, 0.6, u0+12.0, MAT.equipDk, true));
+      add(r, wbox(bv-0.5, 0.6, u0+9.4, bv+0.5, 2.9, u0+10.2, MAT.equip, true));
+      add(r, wbox(bv-0.9, 2.0, u0+11.0, bv+0.9, 2.4, u0+11.9, MAT.applDk, true));
+    }
+    add(r, wbox(v1-9.0, 0, u0+9.0, v1-1.5, 1.4, u0+11.4, MAT.equipDk, true));     /* dumbbell rack */
+    for (i = 0; i < 6; i++)
+      add(r, wcyl(v1-8.4+i*1.1, u0+10.2, 0.42, 1.4, 1.9, MAT.metal));
+    for (i = 0; i < 3; i++){                                                      /* benches */
+      add(r, wbox(v0+5.0+i*6.0, 0.2, u1-7.5, v0+7.4+i*6.0, 1.5, u1-5.0, MAT.uphol, true));
+      add(r, wbox(v0+5.2+i*6.0, 0, u1-7.2, v0+5.7+i*6.0, 1.5, u1-5.3, MAT.equipDk, true));
+    }
+    add(r, wbox(v1-8.0, 0, u1-6.0, v1-2.0, CUT_FURN, u1-3.2, MAT.equip, true));   /* trainer */
+    add(r, wbox(v0+0.9, 0.6, u1-11.0, v0+1.2, 4.2, u1-1.5, MAT.glass, true));     /* mirror wall */
+    add(r, wbox(v1-4.5, 0, u1-2.8, v1-1.0, 3.6, u1-1.0, MAT.appl, true));         /* water station */
+    add(r, wbox(v1-9.5, 0, u1-2.8, v1-6.0, 3.2, u1-1.2, MAT.wood, true));         /* towel shelf */
+  },
+  elev: function(r, u0,u1,v0,v1){
+    var mid = (v0+v1)/2;
+    add(r, wbox(mid-0.25, 0, u0, mid+0.25, CUT, u1, MAT.wall, true));          /* between cabs */
+    [[v0+0.5, mid-0.5], [mid+0.5, v1-0.5]].forEach(function(c){
+      add(r, wbox(c[0], 0.05, u0+0.5, c[1], 0.15, u1-0.5, MAT.metal, true));
+      add(r, wbox(c[0], 0, u0+0.35, c[1], CUT, u0+0.55, MAT.metal, true));      /* cab doors */
+    });
+  },
+  stair: function(r, u0,u1,v0,v1){ treads(r, v0, v1, u0+0.8, u1-0.8, 9); },
+  mechSm: function(r, u0,u1,v0,v1){
+    add(r, wbox(v0+0.6, 0, u0+0.6, v1-0.6, 3.2, u0+3.4, MAT.equip, true));
+    add(r, wcyl((v0+v1)/2, u1-2.0, 1.0, 0, 3.6, MAT.tank));
+  },
+  elevEq: function(r, u0,u1,v0,v1){
+    add(r, wbox(v0+0.8, 0, u0+0.8, v0+3.2, CUT_FURN, u0+3.2, MAT.equipDk, true));
+    add(r, wbox(v0+4.0, 0, u0+0.8, v0+6.4, CUT_FURN, u0+3.2, MAT.equipDk, true));
+    add(r, wbox(v1-3.0, 0.8, u1-3.0, v1-0.8, 3.4, u1-0.8, MAT.equip, true));
+  },
+  foh: function(r, u0,u1,v0,v1){                         /* the open front of house */
+    /* The largest volume on the floor and the one a guest actually stands in.
+       A100 draws it as ONE open room and dimensions none of the millwork, so
+       every piece below is STYLIZED and placed at the sheet's own label anchors. */
+    function rug(a, b, c, d2){ add(r, wbox(a, 0.02, b, c, 0.07, d2, MAT.seatDk, true)); }
+    function planter(x, z){ add(r, wcyl(x, z, 1.1, 0.05, 2.3, MAT.equipDk));
+                            add(r, wcyl(x, z, 0.9, 2.3, 3.5, MAT.wood)); }
+    /* --- lounge, west half, off the entry --- */
+    rug(-5.0, 189.0, 13.0, 206.0);
+    seatCluster(r, 1.5, 193.5); seatCluster(r, 1.5, 202.5); seatCluster(r, 11.0, 212.5);
+    planter(-5.5, 197.5); planter(-5.5, 208.0); planter(14.0, 190.0);
+    /* feature wall on the west face, the thing you look at from the lounge */
+    add(r, wbox(-6.9, 0, 197.0, -6.3, CUT, 205.0, MAT.woodDk, true));
+    add(r, wbox(-6.3, 1.2, 199.4, -6.0, 3.4, 202.6, MAT.screen, true));
+    /* --- communal table on the spine --- */
+    tableSet(r, 19.0, 200.0, 3.6, 11.0,
+      [[16.6,196.5],[16.6,200.0],[16.6,203.5],[21.4,196.5],[21.4,200.0],[21.4,203.5]]);
+    /* --- luggage bay by the entry --- */
+    add(r, wbox(-6.4, 0, 186.0, -3.6, 3.3, 190.0, MAT.equipDk, true));
+    add(r, wbox(-6.2, 0.9, 186.4, -3.8, 1.05, 189.6, MAT.metal, true));
+    /* --- Market 005, at A100's Market label --- */
+    [0,1,2].forEach(function(i){
+      add(r, wbox(35.4+i*3.4, 0, 190.6+i*0.0, 37.0+i*3.4, 3.9, 199.4, MAT.equipDk, true));
+      add(r, wbox(35.4+i*3.4, 0.9, 190.5, 37.0+i*3.4, 1.05, 199.5, MAT.equip, true));
+      add(r, wbox(35.4+i*3.4, 2.4, 190.5, 37.0+i*3.4, 2.55, 199.5, MAT.equip, true));
+    });
+    [0,1].forEach(function(i){
+      add(r, wbox(41.0, 0, 189.4+i*5.0, 43.9, CUT_FURN, 193.2+i*5.0, MAT.appl, true));
+      add(r, wbox(40.8, 0.6, 189.6+i*5.0, 41.1, 3.9, 193.0+i*5.0, MAT.glass, true));
+    });
+    counterRun(r, 33.0, 39.0, 201.2, 2.4);                 /* market checkout */
+    /* --- Reception 004 desk alcove, at A100's Reception label --- */
+    add(r, wbox(40.8, 0, 207.7, 43.9, 3.5, 215.9, MAT.woodDk, true));
+    add(r, wbox(40.4, 3.5, 207.4, 44.2, 3.7, 216.2, MAT.counter, true));
+    add(r, wbox(38.4, 0, 209.0, 40.4, 2.5, 214.6, MAT.wood, true));
+    add(r, wbox(37.0, 0.3, 210.4, 38.0, 1.5, 211.4, MAT.seatDk, true));
+    add(r, wbox(37.0, 0.3, 212.6, 38.0, 1.5, 213.6, MAT.seatDk, true));
+    add(r, wbox(30.0, 0, 216.6, 40.0, CUT, 217.2, MAT.part, true));   /* back-of-desk screen */
+    /* --- Vestibule 001. A100 draws NO vestibule walls; the two leaves at the
+       measured storefront break stand for it, and its label sits elsewhere. --- */
+    add(r, wbox(-7.0, 0, 187.4, -6.6, CUT, 189.6, MAT.glass, true));
+    add(r, wbox(-7.0, 0, 190.2, -6.6, CUT, 192.4, MAT.glass, true));
+    rug(-6.6, 186.6, -2.0, 193.4);
+  },
+  workStations: function(r, u0,u1,v0,v1){
+    [0,1,2].forEach(function(i){
+      counterRun(r, v0+0.8, v1-0.8, u0+2.0+i*4.6, 2.2);
+    });
+  },
+  restrooms: function(r, u0,u1,v0,v1){
+    /* No walls: the band is SCALED. Fixtures stand for what the rooms are. */
+    for (var i = 0; i < 5; i++){
+      add(r, wbox(v0+1.2, 0.4, u0+2.0+i*2.4, v0+2.4, 2.5, u0+3.6+i*2.4, MAT.porc, true));
+      add(r, wbox(v1-2.4, 0.4, u0+2.0+i*2.4, v1-1.2, 2.5, u0+3.6+i*2.4, MAT.porc, true));
+    }
+    counterRun(r, v0+4.0, v0+11.0, u0+0.9, 2.0);
+  },
+  bohStrip: function(r, u0,u1,v0,v1){
+    machineRow(r, v0+1.0, v0+6.0, u0+1.0, 2, 3.0, 2.4);
+    rackRun(r, v0+1.0, v1-1.0, u1-3.0, 1.8, 4);
+  }
+};
+
+/* =============================================================================
+   THE SPACE TABLE.  Every U/V below is A100's, in feet, at 6.75 pt/ft.
+   ========================================================================== */
+var A100C = 'A100, measured from the sheet’s own wall poche at 6.75 pt/ft';
+var SPACE_DEFS = [
+  /* ---- King-side back of house, north end ---- */
+  {key:'033', no:'033', name:'Electrical', docs:[], kind:'vol', row:'king',
+   u:[0.54,9.72], v:[A100.kingWinFace,A100.kingCorrFace], basis:'MEASURED',
+   cite:'U extent from the King-side dimension-string tick marks; V is the King row clear depth, 29′-0″',
+   note:'A100 does not locate this room’s door; the corridor wall is drawn solid and the marker stands at the centroid.',
+   fit:'elec', fitName:'panelboards + transformer'},
+  {key:'030', no:'030', name:'Mech. / Plumb. Room', docs:['S030'], kind:'vol', row:'king',
+   u:[10.37,26.16], v:[A100.kingWinFace,A100.kingCorrFace], basis:'MEASURED',
+   cite:'U extent from the King-side tick marks; V is the King row clear depth. A100 tags the room WH / WS / BP',
+   fit:'mech', fitName:'water heaters, softener, booster pump'},
+  /* ---- Meeting room ---- */
+  {key:'018', no:'018', name:'Meeting Room', docs:['S018'], kind:'vol', row:'king',
+   u:[133.04,165.50], v:[0.56,29.56], basis:'MEASURED',
+   cite:A100C + ' — 32′-6″ × 29′-0″, about 941 sf',
+   note:'Doors 018A and 018B both open off the guest corridor, at U ≈ 134 and U ≈ 164 (MEASURED). Revision cloud D2 sits on its corridor wall.',
+   doors:[[A100.kingCorrFace,134.0],[A100.kingCorrFace,164.0]],
+   fit:'meeting', fitName:'boardroom table + break-out'},
+  /* ---- QQ-side back of house ---- */
+  {key:'029', no:'029', name:'Meeting Rm. Sto.', docs:[], kind:'vol', corrQ:true,
+   u:[102.87,111.00], v:[35.99,47.94], basis:'MEASURED', cite:A100C + ' — 8′-1″ × 11′-11″',
+   note:'No checklist document carries this room.', fit:'storeSm', fitName:'shelving'},
+  {key:'031', no:'031', name:'PBX', docs:['S031'], kind:'vol', corrQ:true,
+   u:[111.55,119.00], v:[35.99,47.94], basis:'MEASURED', cite:A100C + ' — 7′-5″ × 11′-11″',
+   fit:'pbx', fitName:'equipment racks + bench'},
+  {key:'032', no:'032', name:'Housekeeping', docs:['S032'], kind:'vol',
+   u:[102.87,127.49], v:[48.51,59.74], basis:'MEASURED', cite:A100C + ' — 24′-7″ × 11′-3″',
+   fit:'hskp', fitName:'shelving + carts'},
+  {key:'139', no:'139', name:'Ice Machine', docs:['S139'], kind:'vol', skip:'W',
+   u:[128.17,140.22], v:[35.96,51.78], basis:'MEASURED', cite:A100C + ' for the 12′-0″ band; the split from Open Storage 017 is SCALED',
+   note:'139 and 017 share one measured band (U 128′-2″ to 140′-2 5/8″, V 35′-11 1/2″ to 65′-0 3/8″). The line between them is SCALED, not measured. Its west side is left open because A100 breaks the corridor wall here — 139 and 017 open onto the corridor.',
+   fit:'ice', fitName:'ice machine + storage'},
+  {key:'017', no:'017', name:'Open Storage', docs:['S017'], kind:'vol', skip:'W',
+   u:[128.17,140.22], v:[51.80,65.03], basis:'MEASURED', cite:A100C + ' for the band; the split from Ice Machine 139 is SCALED',
+   note:'Shares the 139 band; the split is SCALED. A100 also returns Laundry 015 starting inside this band — see 015.',
+   fit:'openStore', fitName:'racking'},
+  {key:'008', no:'008', name:'Dry Storage', docs:['S008'], kind:'vol', corrQ:true,
+   u:[140.77,152.95], v:[35.96,43.28], basis:'MEASURED', cite:A100C + ' — 12′-2″ × 7′-4″',
+   fit:'dryStore', fitName:'racking'},
+  {key:'007', no:'007', name:'Food Prep', docs:['S007'], kind:'vol', corrQ:true,
+   u:[153.50,165.50], v:[35.96,51.78], basis:'MEASURED', cite:A100C + ' — 12′-0″ × 15′-10″',
+   fit:'foodPrep', fitName:'prep counters + reach-in'},
+  {key:'009', no:'009 + 006', name:'Servery + Breakfast', docs:['S009','S006'], kind:'vol', corrQ:true,
+   u:[166.07,186.57], v:[35.96,51.78], basis:'MEASURED', cite:A100C + ' — one open room, 20′-6″ × 15′-10″',
+   note:'ONE room on A100: no wall is drawn between Servery 009 and Breakfast 006. Two checklist documents cover it, so it carries two label anchors and one tint over both.',
+   anchors:[{no:'009', doc:'S009', name:'Servery', u:[167.8,174.5]},
+            {no:'006', doc:'S006', name:'Breakfast', u:[176.7,185.3]}],
+   fit:'servery', fitName:'servery run + breakfast seating'},
+  {key:'015', no:'015', name:'Laundry', docs:['S015'], kind:'vol',
+   u:[140.77,177.02], v:[52.35,64.99], basis:'MEASURED', cite:A100C + '; the north end is SCALED',
+   note:'A100’s poche sweep returns 015 starting at U 128′-2″, inside the Ice Machine / Open Storage band, so the two overlap on the sheet read. Drawn from U 140′-9 1/4″ so nothing is modelled twice; the north end is SCALED, not measured.',
+   fit:'laundry', fitName:'washers + folding table'},
+  {key:'016', no:'016', name:'Dryer Room', docs:['S016'], kind:'vol',
+   u:[177.57,195.48], v:[52.35,64.99], basis:'MEASURED', cite:A100C + ' — 17′-11″ × 12′-8″',
+   fit:'dryer', fitName:'dryer banks'},
+  {key:'014', no:'014', name:'Employee Breakroom', docs:['S014'], kind:'vol',
+   u:[196.05,208.63], v:[52.35,64.99], basis:'MEASURED', cite:A100C + ' — 12′-7″ × 12′-8″',
+   fit:'breakroom', fitName:'tables + kitchenette'},
+  /* ---- west side, amenity end ---- */
+  {key:'022', no:'022', name:'Sales', docs:['S022'], kind:'vol',
+   u:[166.07,178.21], v:[-9.20,3.05], basis:'MEASURED', cite:A100C + ' — 14′-11″ × 12′-3″, the west bump-out',
+   note:'A100’s sweep returns 022 starting at U 163′-3 7/8″, which overlaps Meeting Room 018’s south-west corner. Drawn from the south face of 018’s wall so nothing is modelled twice; the north end is SCALED.',
+   fit:'sales', fitName:'two work desks'},
+  {key:'023', no:'023', name:'Fitness Room', docs:['S023'], kind:'vol',
+   u:[221.79,246.39], v:[-6.87,29.18], basis:'MEASURED', cite:A100C + ' — 24′-7″ × 36′-0″, about 885 sf',
+   fit:'fitness', fitName:'cardio, weights, mirror wall'},
+  /* ---- cores ---- */
+  {key:'140', no:'140', name:'Elevators (two cabs)', docs:[], kind:'vol',
+   u:[230.57,237.49], v:[40.13,58.14], basis:'MEASURED', cite:A100C + ' — 6′-11″ × 18′-0″',
+   note:'A100 labels ELEV. 140 only, even though two hoistways are drawn; the second cab number (138) is not on this sheet. Cab doors are drawn on the low-U face because Elev. Lobby 137’s label sits there — A100 does not tag the door side, so that is SCALED. No checklist document.',
+   fit:'elev', fitName:'two cabs'},
+  {key:'141', no:'141', name:'Stair 2', docs:[], kind:'vol',
+   u:[238.21,246.39], v:[40.13,59.05], basis:'MEASURED', cite:A100C + ' — 8′-2″ × 18′-11″',
+   note:'Enclosure MEASURED; treads, risers and landings are not on A100 and are SCALED. No checklist document.',
+   fit:'stair', fitName:'flight, scaled'},
+  {key:'028', no:'028', name:'Elev. Eq.', docs:[], kind:'vol',
+   u:[238.23,246.39], v:[59.78,67.39], basis:'MEASURED', cite:A100C + ' — 8′-2″ × 7′-7″',
+   note:'No checklist document.', fit:'elevEq', fitName:'controllers'},
+  {key:'025', no:'025', name:'Mech.', docs:[], kind:'vol',
+   u:[242.32,246.39], v:[29.75,39.40], basis:'MEASURED', cite:A100C + ' — 4′-1″ × 9′-8″',
+   note:'No checklist document.', fit:'mechSm', fitName:'air handler'},
+  /* ---- corridor + stair 1 ---- */
+  {key:'121', no:'121', name:'Guest Corridor', docs:['S121'], kind:'vol', skip:'NSEW',
+   u:[A100.corrRun[0],A100.corrRun[1]], v:[A100.corrKing,A100.corrQQ], basis:'MEASURED',
+   cite:'5′-4″ clear PRINTED twice on A100, at both the north and the south cross-strings; faces measured at V 30′-1 7/8″ and 35′-5 7/8″',
+   note:'The corridor’s walls belong to the rooms either side and are drawn once, there. A100 breaks the QQ-side wall at U 125′-2″ to 140′-2″, where Ice Machine 139 and Open Storage 017 open onto it.',
+   fit:null},
+  {key:'100', no:'100', name:'Stair 1', docs:[], kind:'pad',
+   u:[3.0,16.5], v:[30.20,35.39], basis:'SCALED',
+   cite:'only the corridor-width footprint was recovered from A100',
+   note:'Stair geometry, riser count and the relationship to Mech./Plumb. 030 need A430 / 01-A430. Nothing here is dimensioned. No checklist document.',
+   fit:'stair', fitName:'flight, scaled'},
+  /* ---- front of house: ONE open volume, four label anchors ---- */
+  {key:'FOH', no:'003 / 004 / 005 / 001', name:'Front of House — one open volume',
+   docs:['S003','S004','S005','S001'], kind:'pad',
+   u:[178.78,221.22], v:[-7.38,44.22], basis:'MEASURED',
+   cite:'envelope ' + A100C + ' — about 2,170 sf gross',
+   note:'Lobby 003, Reception 004, Market 005 and Vestibule 001 are ONE open volume on A100 with NO full-height walls between them. Their individual rooms do not exist as enclosed geometry on the sheet, so this is one volume with four label anchors, not four boxes. The millwork that does define the Market and Reception zones is drawn in light line-work and is not dimensioned. A100’s sweep also returns the 019 / 020 / 021 band overlapping this volume’s north-west corner — see that band.',
+   anchors:[{no:'003', doc:'S003', name:'Lobby', u:[195.79,200.80], v:[22.0,29.72]},
+            {no:'005', doc:'S005', name:'Market', u:[192.35,198.58], v:[38.5,42.37]},
+            {no:'004', doc:'S004', name:'Reception', u:[207.73,215.85], v:[39.0,43.72]},
+            {no:'001', doc:'S001', name:'Vestibule', u:[212.94,220.97], v:[-6.0,-2.37]}],
+   fit:'foh', fitName:'reception desk, market, lobby seating, entry leaves'},
+  /* ---- unresolved bands ---- */
+  {key:'RESTRM', no:'019 / 020 / 021', name:'Womens, Men’s, Engineer — band',
+   docs:['S019','S020','S021'], kind:'pad',
+   u:[169.0,187.0], v:[5.0,23.0], basis:'SCALED',
+   cite:'approximate band from A100; the boundaries could not be isolated',
+   note:'The poche sweep leaks into the lobby, so the walls between these three are either partial height or the sweep missed them. NO walls are drawn. 021 Engineer is an OFFICE, not a restroom, despite sitting in the same wall run. Entered off a cross-corridor at U 165′-10″ to 178′-6″, door tags at U ≈ 169′-8″. Verify on a zoom before anyone renders this crisp.',
+   anchors:[{no:'019', doc:'S019', name:'Womens', u:[179.6,186.3], v:[22.1,23.6]},
+            {no:'020', doc:'S020', name:'Men’s', u:[179.6,186.3], v:[14.6,16.1]},
+            {no:'021', doc:'S021', name:'Engineer', u:[179.6,186.3], v:[8.9,10.3]}],
+   fit:'restrooms', fitName:'fixtures only, no walls'},
+  {key:'010', no:'010', name:'Work Stations', docs:['S010'], kind:'pad',
+   u:[186.0,202.0], v:[44.61,51.78], basis:'SCALED',
+   cite:'V extent measured; U extent approximate — the zone is open to Reception and Market',
+   note:'No enclosing boundary on A100.', fit:'workStations', fitName:'work counters'},
+  {key:'BOH', no:'012 / 013 / 027', name:'Closet, Laundry Discharge, Unisex — strip',
+   docs:['S013','S027'], kind:'pad',
+   u:[200.0,229.0], v:[58.0,65.59], basis:'SCALED',
+   cite:'approximate strip; the true boundaries were NOT isolated',
+   note:'WARNING carried from the layout: the number boxes for 013, 012 and 027 are drawn OUTSIDE the building outline on leaders (013 at V 69′-4″ to 72′-8 5/8″, 012 at V 69′-10 1/2″, 027 at V 73′-9 5/8″). The building’s east face here is V 65′-7 1/8″. Anything that places these rooms at their label coordinates puts them outside the building, so they are NOT placed there. 012 Closet has no checklist document.',
+   anchors:[{no:'013', doc:'S013', name:'Laundry Discharge', u:[203.0,209.0], v:[59.0,61.0]},
+            {no:'012', doc:null,   name:'Closet',            u:[212.0,217.0], v:[59.0,61.0]},
+            {no:'027', doc:'S027', name:'Unisex',            u:[221.0,227.0], v:[59.0,61.0]}],
+   fit:'bohStrip', fitName:'equipment + racking'},
+  /* ---- label anchors only ---- */
+  {key:'024', no:'024', name:'Guest Laundry', docs:['S024'], kind:'anchor',
+   u:[219.24,226.45], v:[35.48,38.84], basis:'ANCHOR',
+   cite:'A100 label box only; boundary not isolated (open to the front of house)',
+   note:'A100 gives a label position and nothing else, so nothing is drawn but the anchor.'},
+  {key:'011', no:'011', name:'Managers Office', docs:['S011'], kind:'anchor',
+   u:[221.35,229.63], v:[42.75,46.12], basis:'ANCHOR',
+   cite:'A100 label box only; boundary not isolated',
+   note:'A100 gives a label position and nothing else, so nothing is drawn but the anchor.'},
+  {key:'137', no:'137', name:'Elev. Lobby', docs:['S137'], kind:'anchor',
+   u:[222.90,227.91], v:[51.79,55.17], basis:'ANCHOR',
+   cite:'A100 label box only; boundary not isolated',
+   note:'A100 gives a label position and nothing else, so nothing is drawn but the anchor.'}
+];
+
+/* Off plan. On the checklist, not on A100 - listed, never drawn. */
+var OFF_PLAN = [
+  {key:'SZONEB', no:'ZONE B', name:'Pool Deck / Patio', docs:['SZONEB'],
+   note:'HARD STOP. The strings POOL and PATIO do not occur anywhere in A100’s text layer, verified programmatically, and nothing on the plan reads as a pool or a pool deck. A100 stops at the building outline. The pool and patio are on ID-1.1 and the civil / site sheets. Nothing is fabricated here.'},
+  {key:'SZONEA', no:'ZONE A', name:'Entry / Porte-Cochere Outdoor Lounge', docs:['SZONEA'],
+   note:'HARD STOP for the canopy. A100 draws the main entry as a break in the west-face poche at U 185′-4 3/4″ to 194′-4 3/4″ — that break IS modelled, as storefront glazing. The porte-cochere structure and the outdoor lounge beyond it are not on this sheet.'}
+];
+
+/* =============================================================================
+   BUILD
+   ========================================================================== */
+function newFloorMat(){ return new THREE.MeshStandardMaterial({color:0x232c34, roughness:0.95}); }
+
+function kingRowShell(rec, doors){
+  var band = KING_BAND[rec.key], u0 = rec.u[0], u1 = rec.u[1];
+  /* exterior band on the west, corridor band on the east, party walls both ends */
+  add(rec, wbox(A100.extWest, 0, u0, A100.kingWinFace, CUT, u1, MAT.wall, true));
+  var holes = (doors || []).map(function(d){ return [d[1]-1.7, d[1]+1.7]; });
+  cutRun(u0, u1, holes).forEach(function(s){
+    add(rec, wbox(A100.kingCorrFace, 0, s[0], A100.corrKing, CUT, s[1], MAT.wall, true));
+  });
+  add(rec, wbox(A100.kingWinFace, 0, band.lo, A100.kingCorrFace, CUT, u0, MAT.wall, true));
+  add(rec, wbox(A100.kingWinFace, 0, u1, A100.kingCorrFace, CUT, band.hi, MAT.wall, true));
+}
+
+function buildCommon(rec){
+  var u0 = rec.u[0], u1 = rec.u[1], v0 = rec.v[0], v1 = rec.v[1];
+  if (rec.kind === 'anchor'){
+    /* label anchor: a small tile on a post at A100's label box, and nothing else */
+    add(rec, wbox(v0, 0.02, u0, v1, 0.22, u1, rec.floorMat, true));
+    rec.tintMats.push(rec.floorMat);
+    add(rec, wcyl((v0+v1)/2, (u0+u1)/2, 0.13, 0.22, 3.2, MAT.post));
+    rec.centre = {x:(v0+v1)/2, z:(u0+u1)/2};
+    return;
+  }
+  var slabBot = (rec.kind === 'pad') ? -0.16 : -0.5;
+  rec.floorMesh = add(rec, wbox(v0, slabBot, u0, v1, (rec.kind === 'pad' ? 0.04 : 0), u1, rec.floorMat, true));
+  rec.tintMats.push(rec.floorMat);
+  if (rec.kind === 'pad'){
+    /* SCALED: a dashed edge, and no walls. */
+    var ln = lineLoopY(v0, u0, v1, u1, 0.08, MAT.padEdge);
+    ln.computeLineDistances(); rec.grp.add(ln);
+  } else if (rec.row === 'king'){
+    kingRowShell(rec, rec.doors);
+  } else {
+    perim(rec, (rec.skip || '') + (rec.corrQ ? 'W' : ''));
+    if (rec.corrQ) add(rec, wbox(A100.corrQQ, 0, u0, A100.qqCorrFace, CUT, u1, MAT.wall, true));
+  }
+  if (rec.fit && FIT[rec.fit]) FIT[rec.fit](rec, u0, u1, v0, v1);
+  rec.centre = {x:(v0+v1)/2, z:(u0+u1)/2};
+  if (rec.doors && rec.doors.length) rec.door = {x:rec.doors[0][0], z:rec.doors[0][1]};
+}
+
+/* guest keys ------------------------------------------------------------- */
+KING_ROW.forEach(function(e){
+  var g = KING_ROOMS[e.key];
+  var rec = reg({key:e.key, no:e.key, name:g.variant, docs:[e.key, e.key+'-MEP'],
+    kind:'room', side:'king', u:[e.u0,e.u1], v:[A100.kingWinFace,A100.kingCorrFace],
+    g:g, mirror:g.mirror, basis:'PRINTED / MEASURED', floorMat:newFloorMat(),
+    cite:g.sheet + ' for the room; A100 for the bay (' + g.bayTxt + ' module, clear ' + ftin(g.w) + ' × ' + ftin(g.d) + ')',
+    note:g.basis, conn:!!g.gr3CL});
+  buildKing(rec);
+});
+QQ_ROW.forEach(function(e){
+  var g = QQ_ROOMS[e.key];
+  var rec = reg({key:e.key, no:e.key, name:g.variant, docs:[e.key, e.key+'-MEP'],
+    kind:'room', side:'qq', u:[e.u0,e.u1], v:[A100.qqCorrFace,A100.qqWinFace],
+    g:g, mirror:g.mirror, basis:'PRINTED / MEASURED', floorMat:newFloorMat(),
+    cite:'A555 for the room; A100 for the bay (' + (e.key === '101' ? '13′-10″' : '12′-8″')
+       + ' module PRINTED, clear ' + ftin(g.w) + ' × ' + ftin(g.d) + ')',
+    note:g.basis, conn:!!g.conn});
+  buildQQ(rec);
+});
+/* common areas ------------------------------------------------------------ */
+SPACE_DEFS.forEach(function(d){
+  var rec = reg({key:d.key, no:d.no, name:d.name, docs:d.docs || [], kind:d.kind,
+    hasAnchors:!!(d.anchors && d.anchors.length),
+    u:d.u, v:d.v, basis:d.basis, cite:d.cite, note:d.note || '', fit:d.fit,
+    fitName:d.fitName || '', row:d.row, corrQ:d.corrQ, skip:d.skip, doors:d.doors,
+    floorMat:newFloorMat(), group:'common'});
+  buildCommon(rec);
+  (d.anchors || []).forEach(function(a){
+    var av0 = a.v ? a.v[0] : (d.v[0] + (d.v[1]-d.v[0])*0.42);
+    var av1 = a.v ? a.v[1] : (d.v[0] + (d.v[1]-d.v[0])*0.42 + 1.5);
+    var ar = reg({key:d.key + ':' + a.no, no:a.no, name:a.name, docs:a.doc ? [a.doc, a.doc+'-M'] : [],
+      kind:'anchor', u:a.u, v:[av0, av1], basis:'ANCHOR', parent:d.key,
+      cite:'A100 label anchor inside ' + d.name + '; the sheet draws no boundary for it',
+      note:(a.doc ? '' : 'No checklist document carries this space. ')
+         + 'Position is A100’s own label box' + (a.v ? '' : '; its V position is taken at the middle of the volume because A100 gives only the label’s U extent')
+         + '.',
+      floorMat:newFloorMat(), group:'common'});
+    buildCommon(ar);
+  });
+});
+/* corridor stub wall: A100 runs the QQ-side corridor wall U 0 to 125'-2", then
+   breaks it to 140'-2" where Ice Machine 139 and Open Storage 017 open on. The
+   guest keys cover U 0 to 102'-10 1/2" and the BOH rooms cover to U 119'-0", so
+   this is the one piece of corridor wall no room owns. */
+scene.add(wbox(A100.corrQQ, 0, 119.00, A100.qqCorrFace, CUT, 125.20, MAT.wall, true));
+
+/* =============================================================================
+   HIGHLIGHT HALOS + COMPLETE OUTLINES (built once, shown on demand)
+   ========================================================================== */
+SPACES.forEach(function(r){
+  var v0 = r.v[0], v1 = r.v[1], u0 = r.u[0], u1 = r.u[1];
+  var h = new THREE.Mesh(new THREE.PlaneGeometry(Math.abs(v1-v0), Math.abs(u1-u0)), MAT.halo);
+  h.rotation.x = -Math.PI/2;
+  h.position.set((v0+v1)/2, 0.14, (u0+u1)/2);
+  h.visible = false; r.halo = h; r.grp.add(h);
+  var ln = lineLoopY(v0, u0, v1, u1, 0.16, doneMat);
+  ln.visible = false; r.doneLine = ln; r.grp.add(ln);
+});
+
+/* =============================================================================
+   LIVE STATUS PAINT
+   The scene is already standing before any of this runs, so a slow or missing
+   data file degrades to an honest banner over a complete model - never a blank.
+   ========================================================================== */
+var RAMP = [[0.00,0x2a333c],[0.35,0x2b4b5b],[0.70,0x176d89],[1.00,0x02A9DE]];
+var NODOC = 0x212930;
+function rampColor(p){
+  p = Math.max(0, Math.min(1, p));
+  for (var i = 1; i < RAMP.length; i++){
+    if (p <= RAMP[i][0] || i === RAMP.length - 1){
+      var a = RAMP[i-1], b = RAMP[i];
+      var t = (b[0] === a[0]) ? 0 : (p - a[0]) / (b[0] - a[0]);
+      return new THREE.Color(a[1]).lerp(new THREE.Color(b[1]), Math.max(0, Math.min(1, t)));
+    }
+  }
+  return new THREE.Color(RAMP[0][1]);
+}
+
+var DATA = null, FLOOR = {total:0, done:0, open:0, docs:0};
+function statsFor(ids){
+  var t = 0, d = 0, o = 0, found = false;
+  (ids || []).forEach(function(id){
+    var doc = DATA && DATA.docs && DATA.docs[id];
+    if (!doc || doc.deleted) return;
+    found = true;
+    var items = doc.items || {}, k;
+    for (k in items){
+      var it = items[k];
+      if (it.deleted) continue;
+      t++; if (it.checked) d++;
+      if (it.issue && !it.issueResolved) o++;
+    }
+    var notes = doc.notes || {};
+    for (k in notes){
+      var n = notes[k];
+      if (!n.deleted && n.flag === 'issue' && !n.resolved) o++;
+    }
+  });
+  return {total:t, done:d, open:o, found:found};
+}
+
+var pinLabels = [];
+function makePin(rec, n){
+  var at = rec.door || rec.centre;
+  var g = new THREE.Group();
+  var head = 0.62 + 0.30 * Math.sqrt(n);
+  head = Math.max(0.62, Math.min(head, 2.1));
+  var stem = new THREE.Mesh(CYL, MAT.pinStem);
+  stem.scale.set(0.13, CUT + 0.35, 0.13);
+  stem.position.set(0, (CUT + 0.35)/2, 0);
+  g.add(stem);
+  var hd = new THREE.Mesh(SPH, MAT.pinHead);
+  hd.scale.set(head, head, head);
+  hd.position.set(0, CUT + 0.35 + head*0.75, 0);
+  g.add(hd);
+  g.position.set(at.x, 0, at.z);
+  g.traverse(function(o){ if (o.isMesh){ o.userData.sk = rec.key; pickables.push(o); } });
+  rec.grp.add(g);
+  rec.pin = g;
+  rec.pinTop = {x:at.x, y:CUT + 0.35 + head*1.9, z:at.z};
+  pinLabels.push({rec:rec, n:n});
+}
+
+function applyPaint(){
+  var rows = {};
+  SPACES.forEach(function(r){
+    var s = statsFor(r.docs);
+    r.stats = s;
+    var pct = s.total ? s.done / s.total : 0;
+    r.pct = pct;
+    var col = s.found ? rampColor(pct) : new THREE.Color(NODOC);
+    r.tintMats.forEach(function(m){ m.color.copy(col); });
+    r.complete = s.found && s.total > 0 && s.done === s.total && s.open === 0;
+    if (r.doneLine) r.doneLine.visible = !!r.complete;
+    /* a volume with label anchors leaves the pins to its anchors, so one open
+       issue is never marked twice in the same place */
+    if (s.open > 0 && !r.pin && !r.hasAnchors) makePin(r, s.open);
+  });
+  /* floor totals come straight from the payload so nothing is double counted
+     where one volume carries several documents. */
+  var t = 0, d = 0, o = 0, nd = 0;
+  var docs = (DATA && DATA.docs) || {};
+  for (var id in docs){
+    var doc = docs[id];
+    if (!doc || doc.deleted) continue;
+    nd++;
+    var items = doc.items || {}, k;
+    for (k in items){
+      var it = items[k];
+      if (it.deleted) continue;
+      t++; if (it.checked) d++;
+      if (it.issue && !it.issueResolved) o++;
+    }
+    var notes = doc.notes || {};
+    for (k in notes){
+      var n = notes[k];
+      if (!n.deleted && n.flag === 'issue' && !n.resolved) o++;
+    }
+  }
+  FLOOR = {total:t, done:d, open:o, docs:nd};
+  document.getElementById('ch-done').innerHTML = d + '<small> / ' + t + ' lines</small>';
+  document.getElementById('ch-bar').style.width = (t ? (100*d/t) : 0).toFixed(1) + '%';
+  document.getElementById('ch-iss').textContent = String(o);
+  buildRows();
+  layoutLabels(true);
+}
+
+function loadData(){
+  var banner = document.getElementById('banner');
+  if (window.__H2SEP_FLOOR_DATA){ DATA = window.__H2SEP_FLOOR_DATA; applyPaint(); return; }
+  if (!window.fetch){
+    banner.hidden = false;
+    banner.textContent = 'STATUS PAINT UNAVAILABLE - this browser has no fetch. Geometry is complete and correct; no live checklist state is shown.';
+    applyPaint(); return;
+  }
+  fetch('data/floor1-staged.json', {cache:'no-store'})
+    .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function(j){ DATA = j; applyPaint(); })
+    .catch(function(e){
+      banner.hidden = false;
+      banner.textContent = 'STATUS PAINT UNAVAILABLE - could not read data/floor1-staged.json (' + e.message
+        + '). The geometry below is complete; every space is drawn unpainted rather than guessed at.';
+      applyPaint();
+    });
+}
+
+/* =============================================================================
+   SIDEBAR ROWS
+   ========================================================================== */
+function pctTxt(r){
+  if (!r.stats || !r.stats.found) return '<span>NO DOC</span>';
+  var s = r.stats;
+  return (r.complete ? '<b>' + s.done + '/' + s.total + '</b>' : s.done + '/' + s.total)
+       + (s.open ? ' <em>&#9873;' + s.open + '</em>' : '');
+}
+function buildRows(){
+  var wing = document.getElementById('g-rooms');
+  var com  = document.getElementById('g-common');
+  var off  = document.getElementById('g-off');
+  wing.innerHTML = ''; com.innerHTML = ''; off.innerHTML = '';
+  var rooms = SPACES.filter(function(r){ return r.kind === 'room'; })
+    .sort(function(a,b){ return a.key.localeCompare(b.key); });
+  rooms.forEach(function(r){ wing.appendChild(rowEl(r, r.name)); });
+  SPACES.filter(function(r){ return r.kind !== 'room'; }).forEach(function(r){
+    com.appendChild(rowEl(r, (r.parent ? '└ ' : '') + r.name));
+  });
+  OFF_PLAN.forEach(function(o){
+    var s = statsFor(o.docs);
+    var b = document.createElement('button');
+    b.className = 'row nodoc';
+    b.innerHTML = '<span class="tag">' + o.no + '</span><span class="nm">' + o.name
+      + '</span><span class="pr">' + (s.found ? s.done + '/' + s.total : 'NO DOC') + '</span>';
+    b.addEventListener('click', function(){ showOffCard(o); });
+    off.appendChild(b);
+  });
+  document.getElementById('m-spaces').textContent =
+    SPACES.length + ' DRAWN · ' + FLOOR.docs + ' DOCS · 2 OFF PLAN';
+}
+function rowEl(r, name){
+  var b = document.createElement('button');
+  b.className = 'row' + ((r.stats && r.stats.found) ? '' : ' nodoc');
+  b.innerHTML = '<span class="tag">' + r.no + '</span><span class="nm">' + name
+    + '</span><span class="pr">' + pctTxt(r) + '</span>';
+  b.addEventListener('mouseenter', function(){ hover(r.key); });
+  b.addEventListener('mouseleave', function(){ hover(null); });
+  b.addEventListener('click', function(){ select(r.key, true); });
+  r.row = b;
+  return b;
+}
+
+/* =============================================================================
+   LABELS
+   ========================================================================== */
+var lblRoot = document.getElementById('labels');
+var LBLS = [];
+function mkLabel(cls, html){
+  var d = document.createElement('div');
+  d.className = 'lbl ' + cls;
+  d.innerHTML = html;
+  lblRoot.appendChild(d);
+  return d;
+}
+SPACES.forEach(function(r){
+  var area = Math.abs((r.u[1]-r.u[0]) * (r.v[1]-r.v[0]));
+  var pri = r.kind === 'room' ? 900 + area
+          : r.kind === 'anchor' ? area
+          : 400 + area;
+  var el = mkLabel(r.kind === 'anchor' ? 'anchor' : (r.kind === 'room' ? 'rm' : ''),
+    '<b>' + r.no + '</b><i>' + r.name.toUpperCase() + '</i>');
+  LBLS.push({rec:r, el:el, pri:pri, y:(r.kind === 'anchor' ? 3.4 : 1.2),
+             nm:el.querySelector('i'), wide:true});
+});
+/* the two clear-floor circles A552 draws in room 118 carry their own labels, so
+   the stylized one can never be read as a dimensioned clearance (lesson V5) */
+var circleLbls = [];
+SPACES.forEach(function(r){
+  (r.circleLabels || []).forEach(function(c){
+    circleLbls.push({at:c, el:mkLabel('anchor', c.txt), rec:r});
+  });
+});
+
+var LABELS_ON = true;
+var _p = new THREE.Vector3();
+function project(x, y, z){
+  _p.set(x, y, z).project(camera);
+  return {x:(_p.x*0.5+0.5)*window.innerWidth, y:(-_p.y*0.5+0.5)*window.innerHeight, z:_p.z};
+}
+function hits(b, list){
+  for (var i = 0; i < list.length; i++){
+    var o = list[i];
+    if (b.x < o.x+o.w && b.x+b.w > o.x && b.y < o.y+o.h && b.y+b.h > o.y) return true;
+  }
+  return false;
+}
+function layoutLabels(force){
+  if (!LABELS_ON){ LBLS.forEach(function(l){ l.el.style.display = 'none'; });
+    circleLbls.forEach(function(l){ l.el.style.display = 'none'; });
+    pinLabels.forEach(function(l){ if (l.el) l.el.style.display = 'none'; }); return; }
+  var placed = [];
+  /* pins first: an open issue outranks a room name */
+  pinLabels.forEach(function(l){
+    if (!l.el) l.el = mkLabel('pin', '&#9873; ' + l.n);
+    var t = l.rec.pinTop;
+    var s = project(t.x, t.y + (l.rec.grp.position.y || 0), t.z);
+    if (s.z > 1 || s.x < sidebarPx() + 8){ l.el.style.display = 'none'; return; }
+    var w = l.el.offsetWidth || 26, h = l.el.offsetHeight || 14;
+    var b = {x:s.x - w/2, y:s.y - h - 3, w:w, h:h};
+    l.el.style.display = '';
+    l.el.style.transform = 'translate(' + b.x.toFixed(1) + 'px,' + b.y.toFixed(1) + 'px)';
+    placed.push(b);
+  });
+  LBLS.slice().sort(function(a,b){ return b.pri - a.pri; }).forEach(function(l){
+    var c = l.rec.centre || {x:(l.rec.v[0]+l.rec.v[1])/2, z:(l.rec.u[0]+l.rec.u[1])/2};
+    var s = project(c.x, l.y + (l.rec.grp.position.y || 0), c.z);
+    if (s.z > 1){ l.el.style.display = 'none'; return; }
+    /* a small volume gets its number only: a name that will not fit is noise */
+    var lift = l.rec.grp.position.y || 0;
+    var pa = project(l.rec.v[0], lift, l.rec.u[0]), pb = project(l.rec.v[1], lift, l.rec.u[1]);
+    var span = Math.max(Math.abs(pa.x-pb.x), Math.abs(pa.y-pb.y));
+    var wide = span > 130;
+    if (l.nm && wide !== l.wide){ l.wide = wide; l.nm.style.display = wide ? '' : 'none'; }
+    var w = l.el.offsetWidth || 70, h = l.el.offsetHeight || 15;
+    var b = {x:s.x - w/2, y:s.y - h/2, w:w, h:h};
+    if (b.x < sidebarPx() + 8 || b.y < 58 || b.x + b.w > window.innerWidth - 8
+        || b.y + b.h > window.innerHeight - 34 || hits(b, placed)){ l.el.style.display = 'none'; return; }
+    l.el.style.display = '';
+    l.el.style.transform = 'translate(' + b.x.toFixed(1) + 'px,' + b.y.toFixed(1) + 'px)';
+    placed.push(b);
+  });
+  circleLbls.forEach(function(l){
+    var s = project(l.at.x, 0.4 + (l.rec.grp.position.y || 0), l.at.z);
+    if (s.z > 1 || s.x < sidebarPx() + 8){ l.el.style.display = 'none'; return; }
+    var w = l.el.offsetWidth || 90, h = l.el.offsetHeight || 14;
+    var b = {x:s.x - w/2, y:s.y - h/2, w:w, h:h};
+    if (hits(b, placed)){ l.el.style.display = 'none'; return; }
+    l.el.style.display = '';
+    l.el.style.transform = 'translate(' + b.x.toFixed(1) + 'px,' + b.y.toFixed(1) + 'px)';
+    placed.push(b);
+  });
+}
+
+/* =============================================================================
+   INFO CARD
+   ========================================================================== */
+var card = document.getElementById('card');
+var cTag = document.getElementById('c-tag'), cName = document.getElementById('c-name');
+var cStats = document.getElementById('c-stats'), cBasis = document.getElementById('c-basis');
+var cDesc = document.getElementById('c-desc'), cNote = document.getElementById('c-note');
+var cOpen = document.getElementById('c-open');
+document.getElementById('c-x').addEventListener('click', function(){ deselect(); });
+
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function areaOf(r){ return Math.abs((r.u[1]-r.u[0]) * (r.v[1]-r.v[0])); }
+
+function basisLine(r){
+  if (r.kind === 'room')
+    return 'ROOM GEOMETRY: THE ARCHITECT’S — ' + (r.side === 'king' ? r.g.sheet : 'A555') +
+           ' · BAY MEASURED ON A100 · INTERIOR ARRANGEMENT AS THE ROOM VIEWER DRAWS IT';
+  if (r.kind === 'anchor')
+    return 'A100 LABEL ANCHOR ONLY — THE SHEET DRAWS NO BOUNDARY FOR THIS SPACE';
+  if (r.basis === 'SCALED')
+    return 'BOUNDARY: SCALED — NOT ISOLATED ON A100 · NO WALLS DRAWN'
+         + (r.fitName ? ' · FIT-OUT STYLIZED (' + r.fitName + ')' : '');
+  return 'BOUNDARY: MEASURED ON A100'
+       + (r.fitName ? ' · FIT-OUT STYLIZED (' + r.fitName + ')' : ' · NO FIT-OUT DRAWN');
+}
+function showCard(r){
+  var s = r.stats || {total:0, done:0, open:0, found:false};
+  cTag.textContent = r.no;
+  cName.textContent = r.name;
+  var pct = s.total ? Math.round(100*s.done/s.total) : 0;
+  var rows = '';
+  rows += '<span>Progress</span><b class="' + (r.complete ? 'ok' : '') + '">'
+        + (s.found ? (s.done + ' / ' + s.total + ' lines · ' + pct + '%') : 'not on the checklist') + '</b>';
+  rows += '<span>Open issues</span><b class="' + (s.open ? 'iss' : '') + '">' + (s.found ? s.open : '—') + '</b>';
+  if (r.kind !== 'anchor')
+    rows += '<span>Extent</span><b>' + ftin(Math.abs(r.v[1]-r.v[0])) + ' × ' + ftin(Math.abs(r.u[1]-r.u[0]))
+          + ' · ' + Math.round(areaOf(r)) + ' sf</b>';
+  rows += '<span>On A100</span><b>U ' + ftin(r.u[0]) + ' to ' + ftin(r.u[1])
+        + ' · V ' + ftin(r.v[0]) + ' to ' + ftin(r.v[1]) + '</b>';
+  if (s.open) rows += '<span>Marker</span><b class="iss">RED PIN · ' + s.open + ' OPEN</b>';
+  cStats.innerHTML = rows;
+  cBasis.textContent = basisLine(r);
+  var d = esc(r.cite || '');
+  if (s.open && r.doorBasis) d += ' The open-issue pin stands at the ' + esc(r.doorBasis) + '.';
+  else if (s.open) d += ' The open-issue pin stands at the space marker: A100’s door position for this space was not extracted.';
+  cDesc.innerHTML = d;
+  var note = r.note || '';
+  if (r.key === '118') note = ROOM118_PROOF + ' ' + note;
+  if (r.conn){
+    var c = null;
+    CONN_OPENINGS.forEach(function(o){ if (o.pair.indexOf(r.key) >= 0) c = o; });
+    if (c) note = 'CONNECTING PAIR ' + c.pair.join(' / ') + ' — ' + c.note + ' ' + note;
+  }
+  cNote.hidden = !note;
+  cNote.textContent = note;
+  var id = r.docs && r.docs[0];
+  cOpen.hidden = !id;
+  if (id){
+    cOpen.textContent = (r.kind === 'room' ? '▸ OPEN ROOM ' + r.no + ' CHECKLIST' : '▸ OPEN ' + r.no + ' CHECKLIST');
+    cOpen.onclick = function(){ openDoc(r); };
+  }
+  card.hidden = false;
+}
+function showOffCard(o){
+  var s = statsFor(o.docs);
+  cTag.textContent = o.no; cName.textContent = o.name + ' — NOT ON A100';
+  cStats.innerHTML = '<span>Progress</span><b>' + (s.found ? s.done + ' / ' + s.total + ' lines' : 'not on the checklist')
+    + '</b><span>Open issues</span><b class="' + (s.open ? 'iss' : '') + '">' + (s.found ? s.open : '—') + '</b>';
+  cBasis.textContent = 'OFF PLAN — LISTED HERE, DELIBERATELY NOT DRAWN';
+  cDesc.textContent = 'This space is live on the floor-1 checklist. A100 does not carry it, so this plate does not model it.';
+  cNote.hidden = false; cNote.textContent = o.note;
+  cOpen.hidden = false;
+  cOpen.textContent = '▸ OPEN ' + o.no + ' CHECKLIST';
+  cOpen.onclick = function(){ openDoc({docs:o.docs, kind:'space'}); };
+  card.hidden = false;
+}
+function hideCard(){ card.hidden = true; }
+
+/* Click through to the crew app. Inside the platform the scene runs in an iframe,
+   so the parent's hash is what has to change; floor3d.html also opens standalone,
+   and there it sits beside index.html in platform/, so the fallback is a sibling
+   URL, not a parent-directory one. */
+function openDoc(r){
+  var id = r.docs && r.docs[0];
+  if (!id) return;
+  var hash = (r.kind === 'room') ? ('#/room/' + r.key) : ('#/space/' + id);
+  try {
+    if (window.parent && window.parent !== window){ window.parent.location.hash = hash; return; }
+  } catch (e){ /* cross-origin parent: fall through to our own navigation */ }
+  location.href = 'index.html' + hash;
+}
+
+/* =============================================================================
+   HOVER / SELECT
+   ========================================================================== */
+var HOVER = null, SEL = null;
+function paintHi(){
+  SPACES.forEach(function(r){
+    var on = (r.key === HOVER || r.key === SEL);
+    if (r.halo) r.halo.visible = on;
+    if (r.row) r.row.classList.toggle('on', r.key === SEL);
+  });
+  LBLS.forEach(function(l){ l.el.classList.toggle('hi', l.rec.key === HOVER || l.rec.key === SEL); });
+}
+function hover(key){
+  if (HOVER === key) return;
+  HOVER = key; paintHi();
+  if (key && !SEL) showCard(BY_KEY[key]);
+  else if (!key && !SEL) hideCard();
+}
+function select(key, focus){
+  SEL = key; HOVER = key; paintHi();
+  var r = BY_KEY[key];
+  if (!r) return;
+  showCard(r);
+  if (focus) focusOn(r);
+}
+function deselect(){ SEL = null; HOVER = null; paintHi(); hideCard(); }
+
+/* =============================================================================
+   CAMERA VIEWS
+   ========================================================================== */
+function sidebarPx(){ return window.innerWidth > 1000 ? 318 : 0; }
+/* Fit by projecting the volume's eight corners and shrinking until they sit
+   inside the part of the canvas the title block does not cover. A bounding
+   sphere would leave a 250 ft building floating in the middle of the frame. */
+function frameBox(u0, u1, v0, v1, dir, pad){
+  pad = pad || 0.92;
+  var yTop = 7.5, n = dir.clone().normalize();
+  var pts = [];
+  [v0,v1].forEach(function(x){ [u0,u1].forEach(function(z){ [0,yTop].forEach(function(y){ pts.push(V3(x,y,z)); }); }); });
+  var ctr = V3((v0+v1)/2, yTop*0.30, (u0+u1)/2);
+  var sbF = sidebarPx() / Math.max(1, window.innerWidth);
+  var right = V3(0,0,0).crossVectors(n.clone().negate(), V3(0,1,0)).normalize();
+  var hfov = 2 * Math.atan(Math.tan(camera.fov * Math.PI/360) * camera.aspect);
+  var keepP = camera.position.clone(), keepQ = camera.quaternion.clone();
+  var d = 320, tgt = ctr.clone(), i, j;
+  for (i = 0; i < 18; i++){
+    tgt = ctr.clone().addScaledVector(right, -d * Math.tan(hfov/2) * sbF);
+    camera.position.copy(tgt).addScaledVector(n, d);
+    camera.lookAt(tgt); camera.updateMatrixWorld(true);
+    var mx = 0;
+    for (j = 0; j < pts.length; j++){
+      var q = pts[j].clone().project(camera);
+      mx = Math.max(mx, Math.abs(q.x - sbF) / Math.max(0.2, 1 - sbF), Math.abs(q.y));
+    }
+    if (!isFinite(mx) || mx <= 0) break;
+    var k = mx / pad;
+    if (Math.abs(k - 1) < 0.004) break;
+    d *= k;
+  }
+  var pos = camera.position.clone();
+  camera.position.copy(keepP); camera.quaternion.copy(keepQ); camera.updateMatrixWorld(true);
+  return {tgt:tgt, pos:pos};
+}
+var DIR_ISO  = V3(-0.80, 0.50, 0.33);
+var DIR_WING = V3(-0.74, 0.54, 0.40);
+var DIR_EXP  = V3(-0.86, 0.46, 0.24);
+var VIEWS = {
+  over:   function(){ return frameBox(-4, 250, -11, 75, DIR_ISO, 0.94); },
+  wing:   function(){ return frameBox(-3, 136, -4, 76, DIR_WING, 0.93); },
+  common: function(){ return frameBox(127, 249, -12, 70, DIR_ISO, 0.92); },
+  exp:    function(){ return frameBox(-4, 250, -11, 75, DIR_EXP, 0.80); }
+};
+var CURV = VIEW0 in VIEWS ? VIEW0 : 'over';
+
+/* EXPLODED lifts EVERY space, not only the guest rooms: one rule, applied across
+   the whole plate, so the fan reads as a section through the building rather
+   than as a special case for the rooms. */
+var VMIN = -9.2, VMAX = 73.0;
+SPACES.forEach(function(r){
+  var cv = (r.v[0] + r.v[1]) / 2;
+  var t = Math.max(0, Math.min(1, (cv - VMIN) / (VMAX - VMIN)));
+  r.lift = 4 + 34 * (1 - t);
+});
+SPACES.forEach(function(r){ if (r.parent && BY_KEY[r.parent]) r.lift = BY_KEY[r.parent].lift + 0.02; });
+
+var tw = null;
+function easeInOut(t){ return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2; }
+function tweenTo(pos, tgt, ms){
+  if (REDUCED || ms === 0){
+    camera.position.copy(pos); controls.target.copy(tgt); controls.update(); return;
+  }
+  tw = {t0:performance.now(), ms:ms || 900,
+        p0:camera.position.clone(), p1:pos.clone(),
+        g0:controls.target.clone(), g1:tgt.clone()};
+}
+var explodeTw = null;
+function setExplode(on){
+  explodeTw = {t0:performance.now(), ms:REDUCED ? 0 : 950, on:on,
+               from:SPACES.map(function(r){ return r.grp.position.y; })};
+  if (REDUCED) SPACES.forEach(function(r){ r.grp.position.y = on ? r.lift : 0; });
+}
+function tick(now){
+  if (tw){
+    var k = Math.min(1, (now - tw.t0) / tw.ms), e = easeInOut(k);
+    camera.position.lerpVectors(tw.p0, tw.p1, e);
+    controls.target.lerpVectors(tw.g0, tw.g1, e);
+    if (k >= 1) tw = null;
+  }
+  if (explodeTw){
+    var k2 = Math.min(1, (now - explodeTw.t0) / Math.max(explodeTw.ms, 1)), e2 = easeInOut(k2);
+    SPACES.forEach(function(r, i){
+      var to = explodeTw.on ? r.lift : 0;
+      r.grp.position.y = explodeTw.from[i] + (to - explodeTw.from[i]) * e2;
+    });
+    if (k2 >= 1) explodeTw = null;
+  }
+}
+function applyView(name, animate){
+  CURV = name;
+  [].forEach.call(document.querySelectorAll('#views button[data-v]'), function(b){
+    b.classList.toggle('on', b.getAttribute('data-v') === name);
+  });
+  setExplode(name === 'exp');
+  var f = (VIEWS[name] || VIEWS.over)();
+  tweenTo(f.pos, f.tgt, animate === false ? 0 : 900);
+}
+function focusOn(r){
+  var pad = r.kind === 'anchor' ? 3.2 : 1.35;
+  var f = frameBox(r.u[0] - 4, r.u[1] + 4, r.v[0] - 4, r.v[1] + 4, DIR_ISO, pad);
+  f.tgt.y = 1.5 + (r.grp.position.y || 0);
+  f.pos.y += (r.grp.position.y || 0);
+  tweenTo(f.pos, f.tgt, 800);
+}
+
+/* =============================================================================
+   PICKING
+   ========================================================================== */
+var ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+function castAt(cx, cy){
+  ndc.x = (cx / window.innerWidth) * 2 - 1;
+  ndc.y = -(cy / window.innerHeight) * 2 + 1;
+  ray.setFromCamera(ndc, camera);
+  var hit = ray.intersectObjects(pickables, false);
+  for (var i = 0; i < hit.length; i++){
+    var sk = hit[i].object.userData.sk;
+    if (sk) return sk;
+  }
+  return null;
+}
+var moved = false, downAt = null;
+renderer.domElement.addEventListener('pointerdown', function(e){ moved = false; downAt = {x:e.clientX, y:e.clientY}; });
+renderer.domElement.addEventListener('pointermove', function(e){
+  if (downAt && (Math.abs(e.clientX-downAt.x) > 4 || Math.abs(e.clientY-downAt.y) > 4)) moved = true;
+  if (e.pointerType === 'touch') return;
+  hover(castAt(e.clientX, e.clientY));
+});
+renderer.domElement.addEventListener('pointerleave', function(){ hover(null); });
+renderer.domElement.addEventListener('pointerup', function(e){
+  if (moved) return;
+  var k = castAt(e.clientX, e.clientY);
+  if (k) select(k, false); else deselect();
+});
+renderer.domElement.addEventListener('dblclick', function(e){
+  var k = castAt(e.clientX, e.clientY);
+  if (k) openDoc(BY_KEY[k]);
+});
+
+/* =============================================================================
+   UI WIRING
+   ========================================================================== */
+[].forEach.call(document.querySelectorAll('#views button[data-v]'), function(b){
+  b.addEventListener('click', function(){ applyView(b.getAttribute('data-v'), true); });
+});
+var lblBtn = document.getElementById('lblBtn');
+lblBtn.addEventListener('click', function(){
+  LABELS_ON = !LABELS_ON;
+  lblBtn.setAttribute('aria-pressed', String(LABELS_ON));
+  lblBtn.classList.toggle('on', LABELS_ON);
+  layoutLabels(true);
+});
+lblBtn.classList.add('on');
+var themeBtn = document.getElementById('themeBtn');
+var LIGHT = false;
+function applyScheme(light){
+  LIGHT = light;
+  document.body.classList.toggle('light', light);
+  themeBtn.innerHTML = light ? '&#9789; DARK' : '&#9788; LIGHT';
+  themeBtn.setAttribute('aria-pressed', String(light));
+  renderer.setClearColor(light ? 0xe9e6dd : 0x0b0f13, 1);
+  scene.fog.color.setHex(light ? 0xe9e6dd : 0x0b0f13);
+  MAT.ground.color.setHex(light ? 0xdad6cb : 0x0d1319);
+  MAT.ext.color.setHex(light ? 0x9aa6b2 : 0x39485a);
+  MAT.wall.color.setHex(light ? 0xb3bec7 : 0x4b5a67);
+  MAT.part.color.setHex(light ? 0xc2ccd3 : 0x55646f);
+  edgeMat.color.setHex(light ? 0x8b9aa8 : 0x35485a);
+  gridMat.color.setHex(light ? 0xc3c9cd : 0x243342);
+  hemi.intensity = light ? 1.15 : 0.9;
+  sun.intensity = light ? 1.0 : 0.85;
+}
+themeBtn.addEventListener('click', function(){ applyScheme(!LIGHT); });
+var burger = document.getElementById('burger');
+burger.addEventListener('click', function(){ document.body.classList.toggle('nav-open'); });
+window.addEventListener('keydown', function(e){ if (e.key === 'Escape') deselect(); });
+
+function onResize(){
+  camera.aspect = window.innerWidth / Math.max(1, window.innerHeight);
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  applyView(CURV, false);
+}
+window.addEventListener('resize', onResize);
+
+/* =============================================================================
+   RUN
+   ========================================================================== */
+applyView(CURV, false);
+loadData();
+
+var frames = 0;
+function loop(now){
+  requestAnimationFrame(loop);
+  tick(now || performance.now());
+  controls.update();
+  layoutLabels();
+  renderer.render(scene, camera);
+  frames++;
+  if (frames === 3) document.body.setAttribute('data-ready', '1');
+}
+requestAnimationFrame(loop);
+
+/* a small surface for the headless UI test and for the platform shell */
+window.__H2SEP_FLOOR = {
+  spaces: SPACES, byKey: BY_KEY, view: function(n){ applyView(n, false); },
+  stats: function(){ return FLOOR; }, select: select, off: OFF_PLAN,
+  count: function(){ return {drawn:SPACES.length, rooms:SPACES.filter(function(r){return r.kind==='room';}).length,
+                             pins:pinLabels.length, off:OFF_PLAN.length}; }
+};
+})();
+</script>
