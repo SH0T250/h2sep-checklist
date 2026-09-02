@@ -1,0 +1,85 @@
+{
+ "kit": "fitness",
+ "compiledBy": "fitness kit agent, 2026-09-02",
+ "space": [
+  {
+   "id": "023",
+   "name": "Fitness Room",
+   "U": [221.79, 246.39],
+   "V": [-6.87, 29.18],
+   "basis": "MEASURED",
+   "note": "A100 wall poche bounding box. The room is notched at its north-west corner: the lobby corridor pocket U 221.8 to 230.6, V 25.7 to 29.2 (entry door at U 226.5 to 229.3 in the V 25.7 wall, PA-311 console in the pocket) is outside the room. The guest laundry wall face at V 29.18 runs U 230.6 to 246.39 with the Spin2Cycle door to Guest Laundry 024 at about U 230.7 to 234.3."
+  }
+ ],
+ "calibration": {
+  "ID-1.7": "Sheet page rotation 270. In the displayed frame the fitness face of the lobby wall is x 1468.3 pt (U 221.79) and the inside of the south exterior wall is x 1800.5 pt (U 246.39): 332.2 pt for 24.60 ft = 13.50 pt/ft. The fitness face of the guest laundry wall is y 1013.6 pt (V 29.18); the west exterior face then lands at y 1500.3, which matches the drawn wall end at 1500.2. U = 221.79 + (x - 1468.3) / 13.5, V = 29.18 - (y - 1013.6) / 13.5.",
+  "A510.3": "Same construction: lobby wall face x 1431.1, south face x 1763.3 (332.2 pt), laundry wall face y 815.6. U = 221.79 + (x - 1431.1) / 13.5, V = 29.18 - (y - 815.6) / 13.5."
+ },
+ "pieces": [
+  {"name": "Treadmill", "tag": "803", "count": 4, "footprintFt": {"w": 8.2, "d": 2.93, "h": null},
+   "placements": [
+    {"u0": 237.74, "u1": 245.92, "v0": 16.84, "v1": 19.77, "basis": "SCALED", "source": "ID-1.7 symbol vector box"},
+    {"u0": 237.74, "u1": 245.92, "v0": 12.75, "v1": 15.69, "basis": "SCALED", "source": "ID-1.7 symbol vector box"},
+    {"u0": 237.74, "u1": 245.92, "v0": 8.67, "v1": 11.60, "basis": "SCALED", "source": "ID-1.7 symbol vector box"},
+    {"u0": 237.74, "u1": 245.92, "v0": 4.58, "v1": 7.52, "basis": "SCALED", "source": "ID-1.7 symbol vector box"}],
+   "form": "Four in a row facing the south windows (+U), motor hood at the window end, 4.08 ft pitch",
+   "dimensionBasis": "SCALED", "dimensionSource": "No cutsheet in the project Drive; footprint is the plan symbol"},
+  {"name": "Fitness trainer elliptical", "tag": "804", "count": 2, "footprintFt": {"w": 7.64, "d": 2.4, "h": null},
+   "placements": [
+    {"u0": 238.04, "u1": 245.68, "v0": -1.38, "v1": 1.01, "basis": "SCALED", "source": "ID-1.7 symbol vector box"},
+    {"u0": 238.04, "u1": 245.68, "v0": -5.44, "v1": -2.57, "basis": "SCALED", "source": "ID-1.7 symbol vector box; the accessible clear floor space dashed beside it is not a piece"}],
+   "dimensionBasis": "SCALED", "dimensionSource": "plan symbol"},
+  {"name": "Recumbent cycle", "tag": "805", "count": 1, "footprintFt": {"w": 5.95, "d": 3.48, "h": null},
+   "placements": [{"u0": 240.25, "u1": 246.20, "v0": 22.08, "v1": 25.57, "basis": "SCALED", "source": "ID-1.7 symbol vector box, width takes in the handlebars; the dashed accessible clear floor space above it at V 25.2 to 28 is not a piece"}],
+   "dimensionBasis": "SCALED", "dimensionSource": "plan symbol"},
+  {"name": "Free weights and rack (three-tier dumbbell rack)", "tag": "806", "count": 1, "footprintFt": {"w": 7.1, "d": 2.52, "h": null},
+   "placements": [{"u0": 222.08, "u1": 224.60, "v0": 5.60, "v1": 12.70, "basis": "SCALED", "source": "ID-1.7 symbol vector box; A510.3 (2023) draws it 1.1 ft deep at U 222.27 to 223.37, V 5.02 to 12.52"}],
+   "dimensionBasis": "SCALED", "dimensionSource": "plan symbol"},
+  {"name": "Weight bench", "tag": "807", "count": 1, "footprintFt": {"w": 4.07, "d": 2.55, "h": null},
+   "placements": [{"u0": 226.71, "u1": 230.78, "v0": 7.85, "v1": 10.40, "basis": "SCALED", "source": "ID-1.7 symbol vector box, flat pad with an upright rack at the +U end"}],
+   "dimensionBasis": "SCALED", "dimensionSource": "plan symbol"},
+  {"name": "Strength piece (drawn on the diagonal; untagged on ID-1.7, taken as A510.3 item 808 strength system)", "tag": "808?", "count": 1, "footprintFt": {"w": 5.0, "d": 2.0, "h": null},
+   "placements": [{"u0": 222.58, "u1": 227.52, "v0": -5.81, "v1": -0.89, "rotDeg": -45, "basis": "SCALED", "source": "ID-1.7 symbol vector box (the box of a 5 by 2 ft frame turned 45 degrees). A510.3 (2023) draws a similar angled piece at U 222.40 to 228.64, V -6.57 to 0.30 and, separately, a two-tower functional trainer at U 239.23 to 246.02, V 7.56 to 11.19 that ID-1.7 no longer shows"}],
+   "dimensionBasis": "SCALED", "dimensionSource": "plan symbol; identity is a judgment call, see notes"},
+  {"name": "Medicine balls and rack", "tag": "809", "count": 1, "footprintFt": {"w": 4.56, "d": 3.41, "h": null},
+   "placements": [{"u0": 231.90, "u1": 236.46, "v0": -6.32, "v1": -2.90, "basis": "SCALED", "source": "ID-1.7 symbol vector box, four balls on a two-post rack against the west exterior wall"}],
+   "dimensionBasis": "SCALED", "dimensionSource": "plan symbol"},
+  {"name": "Untagged 2.3 ft square floor item (rounded square with a circle at each corner)", "tag": null, "count": 1, "footprintFt": {"w": 2.33, "d": 2.34, "h": null},
+   "placements": [{"u0": 232.84, "u1": 235.18, "v0": -1.60, "v1": 0.75, "basis": "SCALED", "source": "ID-1.7 symbol vector box; not named on either sheet (A510.3's 810 exercise ball is drawn as a 2 ft sphere at U 222.0 to 224.8, V 14.2 to 16.1 in the 2023 layout, which ID-1.7 does not show)"}],
+   "dimensionBasis": "SCALED", "dimensionSource": "plan symbol"},
+  {"name": "Towel Station at Fitness", "tag": "PA-310", "count": 1, "footprintFt": {"w": 6.0, "d": 1.5, "h": 5.33},
+   "placements": [{"u0": 221.79, "u1": 223.29, "v0": 19.6, "v1": 25.6, "basis": "SCALED", "source": "ID-1.7 symbol V 19.92 to 25.60 on the lobby wall with the PA-310 tag leader to it; the 6 ft spec width is centered on the symbol and pulled 0.1 ft off the corridor pocket wall at V 25.7. A510.3 (2023) tags the same spot 800 towel hamper"}],
+   "form": "Plastic laminate shelf tower beside a lower counter with two 10 in grommets for the laundry basket; tower and counter split and counter height read off the spec sketch, stylized",
+   "dimensionBasis": "MEASURED", "dimensionSource": "Home2 Dynamic FF&E Specifications Public Areas, page 70 (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_): 72 in W x 18 in D x 64 in H, Elkay Interior Systems / D'Style, finish PL-01"},
+  {"name": "Water and cup dispenser", "tag": "801", "count": 1, "footprintFt": {"w": 1.4, "d": 1.4, "h": null},
+   "placements": [{"u0": 222.0, "u1": 223.4, "v0": 18.0, "v1": 19.4, "basis": "SCALED", "source": "ID-1.7 square symbol on the lobby wall south of the towel station; A510.3 tag 801 leader lands on the same symbol"}],
+   "dimensionBasis": "SCALED", "dimensionSource": "plan symbol"},
+  {"name": "Wall mounted mirror", "tag": "817", "count": 2, "footprintFt": {"w": 3.75, "d": 0.1, "h": null},
+   "placements": [
+    {"u0": 221.79, "u1": 221.89, "v0": 4.86, "v1": 8.61, "basis": "SCALED", "source": "A510.3 vectors: a line 0.36 ft off the lobby wall face, with keyed note 2 (GC to provide plate mirror) and the 817 tag leader to the wall at V 13.3"},
+    {"u0": 221.79, "u1": 221.89, "v0": 8.94, "v1": 12.69, "basis": "SCALED", "source": "A510.3 vectors, second panel"}],
+   "dimensionBasis": "SCALED", "dimensionSource": "Run off A510.3; height and sill not on any plan sheet. ID-3.2 views 4 to 7 (Public Space Interior Elevations, 07/04/2025) show the fitness mirrors, wall graphics and monitor in elevation and would give the sizes; not read this pass"},
+  {"name": "Wall mounted television", "tag": "813", "count": 1, "footprintFt": {"w": 3.16, "d": 0.25, "h": null},
+   "placements": [{"u0": 235.92, "u1": 239.08, "v0": 28.93, "v1": 29.18, "basis": "SCALED", "source": "Both ID-1.7 and A510.3 draw the same 3.16 by 0.25 ft rectangle on the fitness face of the guest laundry wall; A510.3 tag 813 leads to it"}],
+   "dimensionBasis": "SCALED", "dimensionSource": "plan symbol; mounting height above the 4 ft plan cut, drawn at the cap"}
+ ],
+ "notPlaced": [
+  "802 gym wipes dispenser, 814 emergency telephone, 816 towel hook, 819 wall clock, 812 rules sign: small wall-mounted items on A510.3 (leaders to the laundry wall at U 234.5 to 242.5 and the lobby wall), above or too small for the plan cut.",
+  "811 exercise mat: listed on A510.3, no floor symbol found on ID-1.7. The dashed 4 by 3.5 ft rectangle at U 225.4 to 229.4, V 21.8 to 25.3 is the entry door's maneuvering clearance, not a mat.",
+  "810 exercise ball: A510.3 (2023) draws a 2 ft sphere at U 222 to 224.8, V 14.2 to 16.1; ID-1.7 (2025) does not. Not placed.",
+  "821 bottle filling station: A510.3 places it in Elevator Lobby 137 and at the restroom entry, not in Fitness 023. The Drive cutsheet 'BOTTLE FILLER FITNESS.pdf' (1Gq4kara0CeFfoRZlwJFohS0Pj6ur3wna) is an Elkay built-in refrigerated dispenser, 5 1/8 x 18 x 20 1/2 in; no plan shows one in the fitness room, so none is drawn.",
+  "PA-400 and PA-401 roller shades, PA-506, wall graphics (ID-3.2 view 5): window and wall finishes, not massing."
+ ],
+ "notes": [
+  "ID-1.7 (2025) and A510.3 (2023) disagree on the equipment layout. A510.3 has two treadmills and one elliptical at the south-west, a functional trainer and a ball rack on the east side, a bike at the north-east and an exercise ball by the rack. ID-1.7 has four treadmills, two ellipticals and a recumbent bike in one cardio row along the south windows. ID-1.7 is the later FF&E plan and governs the kit.",
+  "The angled strength piece is the one judgment call: its symbol is untagged on ID-1.7 and A510.3's boxed equipment list carries no per-symbol leaders. It is drawn as the 808 strength system and labeled so in the code comment.",
+  "Cardio and strength equipment is owner-furnished per the Home2 fitness guide (A510.3 keyed note 2 refers to it); no vendor cutsheet is in the Drive, so every equipment footprint is SCALED."
+ ],
+ "sources": [
+  {"name": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan, RK Hospitality, 07/04/2025, 3/16 in = 1 ft", "file": "FF&E Locations_sheet8.pdf", "driveFolder": "1c7dWX9SUJO6aSAYRoEB8GtflMGSY5qB6"},
+  {"name": "A510.3 Enlarged Lobby Furniture and Equipment Plan, bid set 04/20/2023 rev 08/09/24, with the furnishing list 300 to 821", "file": "05-H2SEP - Architectural Pages_sheet72.pdf", "driveId": "1w7aMLEtagIRbCXOiM2Vob7J0o-Adv7Np", "notes": "A510.3.md 1kwE_NCdHsaf2dEa5Cn8Xn1W4XWzUz_C_"},
+  {"name": "Home2 Dynamic FF&E Specifications Public Areas (PA-310 Towel Station at Fitness, page 70)", "driveId": "1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_"},
+  {"name": "ID-3.2 Public Space Interior Elevations (fitness views 4 to 7), summary only", "driveId": "19f3KuxjurUmQcpywdfBzz6Jb2Lg-6Pr4"},
+  {"name": "A100 room extents", "file": "research/floor1-3d/a100-layout.json"}
+ ]
+}
