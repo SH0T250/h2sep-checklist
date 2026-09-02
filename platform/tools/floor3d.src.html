@@ -73,6 +73,9 @@
   .sec{padding:8px 16px 2px}
   .sechead{font:600 9.5px/1 var(--mono);letter-spacing:.16em;color:var(--mut);
     text-transform:uppercase;padding-bottom:5px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+  .sw.kit{background:linear-gradient(90deg,#9a7550 0 50%,rgba(154,117,80,.45) 50% 100%)}
+  #c-kit{margin-top:5px;font:600 9.5px/1.5 var(--mono);color:var(--lblink);letter-spacing:.02em}
+  #c-kit[hidden]{display:none}
   .legend{display:grid;gap:5px;font-size:10px;color:var(--lblink);padding-bottom:4px}
   .legend>div{display:grid;grid-template-columns:16px 1fr;align-items:start;gap:8px;
     font-family:var(--mono);letter-spacing:.02em;line-height:1.4}
@@ -224,6 +227,9 @@
         <div><i class="sw done"></i><span>100 PERCENT COMPLETE - teal plate with a cyan rim.</span></div>
         <div><i class="sw none"></i><span>NO CHECKLIST DOC for this space. Untinted, and it says so on the card.</span></div>
         <div><i class="sw scal"></i><span>DASHED RIM = SCALED. Boundary not isolated on A100. Lighter massing, no dimensions.</span></div>
+        <div><i class="sw kit"></i><span>FURNISHED KITS. Common-area pieces placed from the sheets by a kit file, at absolute
+          A100 positions: drawn crisp where MEASURED and lighter where SCALED. The card names the kit's
+          source and counts each kind.</span></div>
         <div><i class="sw pin"></i><span>OPEN ISSUES = a vertical red pin, stem to the 4&prime;-0&Prime; wall cut,
           head and badge scaled by the open-issue count. Guest rooms: the pin stands at the GR-1
           door. Common areas: at the label anchor, because A100 locates no door there.</span></div>
@@ -276,6 +282,7 @@
   <div id="c-bar"><i></i></div>
   <div id="c-nums"></div>
   <div id="c-src"></div>
+  <div id="c-kit" hidden></div>
   <div id="c-note" hidden></div>
   <div id="c-go" hidden>CLICK TO OPEN THE CHECKLIST &rsaquo;</div>
 </div>
@@ -1260,6 +1267,16 @@ QQ_ROWS.forEach(function(r){
   m.castShadow = false;
 })();
 
+</script>
+
+<!-- FURNISHING KITS. platform/tools/floor3d-kits/*.js, inlined here by the build:
+     the registry and its helpers first, then each kit file, which registers
+     itself into KITS. The contract is platform/tools/floor3d-kits/README.md. -->
+<script>
+@@KITS@@
+</script>
+
+<script>
 /* ===========================================================================
    COMMON AREAS
    =========================================================================== */
@@ -1369,7 +1386,7 @@ function paint(data){
     }
     if (sp.rimMat){ sp.rimMat.color.copy(c).lerp(new THREE.Color(0x6e8598), 0.42); }
     if (sp.edge && sp.total && sp.done >= sp.total) sp.edge.material = EDGE_DONE;
-    if (sp.itemList.length) massing(sp);
+    if (sp.itemList.length || kitFor(sp)) massing(sp);
     if (sp.issues > 0) pinFor(sp);
   });
   FLOOR.painted = true;
@@ -1405,6 +1422,26 @@ function massMat(name, scaled){
 }
 function massing(sp){
   if ((sp.kind !== 'common' && sp.kind !== 'boh') || !sp.box) return;
+  /* A furnishing kit that claims this space replaces the generic blocks. Its
+     pieces sit at absolute A100 positions from the sheets it cites, so the
+     card reports the kit's own MEASURED and SCALED counts. A kit that throws
+     is reported on the console, which fails the UI test, and the space falls
+     back to the generic blocks rather than drawing half a kit. */
+  var hit = kitFor(sp);
+  if (hit){
+    try {
+      var kc = kitContext(sp, hit.name);
+      var res = hit.kit.build(kc) || kc.tally();
+      sp.kit = {name:hit.name, basis:hit.kit.basis, source:hit.kit.source,
+                placed:res.placed || 0, measured:res.measured || 0, scaled:res.scaled || 0};
+      sp.massed = sp.kit.placed;
+      return;
+    } catch(e){
+      console.error('floor3d kit ' + hit.name + ' failed on space ' + sp.no + ': ' + (e && e.message || e));
+      sp.kit = null;
+      if (!sp.itemList || !sp.itemList.length){ sp.massed = 0; return; }
+    }
+  }
   var r = sp.box;
   /* The inset is a fraction of the room, not a constant, so a 7 ft by 3 ft
      label box still gets its blocks instead of being inset out of existence. */
@@ -1621,9 +1658,13 @@ function cardFor(sp){
   $('c-nums').innerHTML = sp.total
     ? ('<span><em>DONE</em> ' + sp.done + ' / ' + sp.total + '</span>'
        + '<span class="' + (sp.issues?'iss':'') + '"><em>OPEN ISSUES</em> ' + sp.issues + '</span>'
-       + (sp.massed ? '<span><em>BLOCKS</em> ' + sp.massed + '</span>' : ''))
+       + (sp.massed ? '<span><em>' + (sp.kit ? 'PIECES' : 'BLOCKS') + '</em> ' + sp.massed + '</span>' : ''))
     : '<span><em>NO CHECKLIST DOC IN floor1-staged.json</em></span>';
   $('c-src').textContent = sp.src || '';
+  $('c-kit').hidden = !sp.kit;
+  $('c-kit').textContent = sp.kit
+    ? ('Furnished from ' + sp.kit.source + ': ' + sp.kit.measured + ' measured, ' + sp.kit.scaled + ' scaled')
+    : '';
   var note = sp.note || '';
   if (sp.pinSrc && sp.issues) note = (note ? note + ' ' : '') + 'PIN: ' + sp.pinSrc;
   $('c-note').hidden = !note;
@@ -1870,6 +1911,9 @@ function loadData(){
 function fmt(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
 function finish(data, failure){
   if (data) paint(data);
+  /* Kits are geometry from the sheets, not status, so a kitted space is
+     furnished even when the status paint is unavailable. */
+  if (!data) SPACES.forEach(function(sp){ if (sp.kind !== 'stop' && kitFor(sp)) massing(sp); });
   prepExplode();
   buildLabels();
   northLabel();
@@ -1897,7 +1941,7 @@ function finish(data, failure){
     ready:true, painted:FLOOR.painted, floor:FLOOR, mode:function(){ return mode; },
     spaces:SPACES.map(function(s){
       return {id:s.id, no:s.no, name:s.name, kind:s.kind, basis:s.basis,
-              done:s.done, total:s.total, issues:s.issues, massed:s.massed||0,
+              done:s.done, total:s.total, issues:s.issues, massed:s.massed||0, kit:s.kit||null,
               pin:!!s.pinHead, rects:(s.rects||[]).length, doc:s.doc||null,
               parts:s.group.children.length, lift:s.group.position.y,
               pinAt:s.pin || null, docs:s.docs || (s.doc?[s.doc]:[])};
@@ -1940,7 +1984,7 @@ function finish(data, failure){
     go:function(n){ goTo(n, true); }, open:function(id){ var s=BY_ID[id]; if(s){select(s); cardFor(s);} },
     card:function(){ return {no:$('c-no').textContent, basis:$('c-basis').textContent,
       name:$('c-name').textContent, nums:$('c-nums').textContent,
-      src:$('c-src').textContent, note:$('c-note').textContent, hidden:$('card').hidden}; }
+      src:$('c-src').textContent, kit:$('c-kit').textContent, note:$('c-note').textContent, hidden:$('card').hidden}; }
   };
 }
 function countMeshes(){ var n=0; scene.traverse(function(o){ if(o.isMesh) n++; }); return n; }
