@@ -114,7 +114,21 @@ def build(export_dir, out_path, quiet=False):
     log(quiet, 'built %d materials in %.1f s%s' % (len(mats), time.time() - t,
         (' (missing: %s)' % sorted(missing)) if missing else ''))
 
-    # 5. smooth shading where the exhibit meant it (bevelled boxes carry normals already)
+    # 5a. The exhibit lays box faces exactly flush with the shell planes (the
+    # closed bathroom door leaf sits in the plane of its wall, cabinet backs sit
+    # on the working wall).  A rasteriser resolves that by depth order; in a
+    # path tracer two coincident surfaces shadow each other completely and both
+    # render black.  MEASURED on the bath-vanity frame: the door side of the
+    # bath was 0.000 until either surface was hidden.  Each shell plane moves
+    # 1 mm away from the room along its own normal, so a flush face wins.
+    for o in imported:
+        if not o.name.startswith('shell.') or len(o.data.polygons) > 4:
+            continue
+        n = o.data.polygons[0].normal.copy()
+        if n.length < 0.5:
+            continue
+        o.location -= n.normalized() * 0.001
+    # 5b. smooth shading where the exhibit meant it (bevelled boxes carry normals already)
     for o in imported:
         if o.data.has_custom_normals:
             continue
