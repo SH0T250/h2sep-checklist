@@ -1,5 +1,40 @@
 {
  "view": "working",
  "photo": "20260812_141016.jpg",
- "rounds": []
+ "rounds": [
+  {
+   "round": 1,
+   "renderJpg": "/tmp/claude-0/-home-user-h2sep-checklist/fb47d53f-23f6-5d8f-88e1-343b94d9771e/scratchpad/renders/working/r1.jpg",
+   "critics": [
+    {
+     "pick": "B",
+     "correct": true,
+     "confidence": "instant",
+     "tells": [
+      "B's sink is a bare rectangular cutout in the counter slab showing a wood-grain plane at the bottom instead of a stainless basin with drain, radius corners, and specular rim (A shows a real undermount stainless bowl with brushed reflections).",
+      "B's dishwasher is a featureless brushed-grey slab with no control panel, logo, badge, seam, or door gap; A's has a black control strip, indicator LEDs, brand text, and a real door reveal.",
+      "A generic white cylinder sits on B's counter with no contact shadow or reflection on the glossy quartz; the chair base and shelving units in B also sit on the carpet with no contact occlusion.",
+      "B's task lamp shade is a uniformly glowing white block with no hot spot, no warm halo on the wall, and no gradient across the shade; A's lamp has a warm falloff on the shade and a spill on the wall.",
+      "B's ceiling has a huge disk fixture with a dead-flat matte ceiling, no bloom, no highlight roll-off, and hard identical CG downlights; there is no grain anywhere, no lens softness at edges, carpet pattern is razor sharp to the far wall.",
+      "B's furniture reads as untextured box primitives: the shelving unit by the bed is floating clusters of cubes with no legs, plinth, or hardware; the bed is a generic low-poly mattress with no linens sag or headboard; the red chair has no seat cushion deformation.",
+      "A carries real-world evidence B lacks: stucco wall texture, smudges on the electrical panel, a paint edge where the wall meets the ceiling, subtle vignette and noise in the ceiling, window overexposure with blinds and a PTAC unit visible."
+     ],
+     "biggestGap": "The kitchenette sink in B: it is a rectangular hole in the countertop with a wood-grain plane at the bottom and no basin geometry at all. It needs to become a stainless undermount bowl like A's, with radiused corners, a raised rim/edge under the quartz, a drain and strainer, brushed-metal anisotropic reflections picking up the ceiling light, and a chrome faucet whose base actually meets the counter with a contact shadow. Right now the sink is the single object that announces \"3D model\" from across the room.",
+     "secondaryGaps": [
+      "Dishwasher and cabinet fronts: add the black control strip, brand badge, door gap/reveal, and handle shadows seen in A; the current featureless brushed-grey panel and flush wood doors have no seams or hardware detail.",
+      "Contact shadows and ambient occlusion: the counter cylinder, chair base, shelving units, bed plinth, and wardrobe all float; every object needs a dark occluded band where it meets the carpet or quartz, and the glossy quartz should show a faint reflection of the cylinder and lamp.",
+      "Lighting model: replace the flat uniform disk fixture with a real luminaire (diffuser bloom, hot center, soft ceiling wash), give the desk lamp a warm hot spot and wall spill like A's, and let the window in the far room blow out with light spilling onto the bed and carpet; add exposure vignette, grain in shadows, and slight lens softness toward the frame edges.",
+      "Furniture fidelity: the shelving/cube unit near the bed must be a real casegood with plinth, back panel, laminate edge banding and shadows inside cubbies; the bed needs a headboard, bedding with folds and weight, and the chair needs a cushion crease and real caster geometry.",
+      "Surface wear and seams: A shows stucco wall texture, a paint line at the ceiling, a smudged electrical panel and tile grout; B is uniformly clean plaster with no wall texture, no grout lines, no baseboard shadow, and a carpet pattern that is too crisp and uniformly saturated to the far wall."
+     ],
+     "realismScore": 2.5,
+     "wowed": false,
+     "composite": "/tmp/claude-0/-home-user-h2sep-checklist/fb47d53f-23f6-5d8f-88e1-343b94d9771e/scratchpad/blind/working-r1a.png",
+     "renderPanel": "B"
+    }
+   ],
+   "fix": null,
+   "status": "spotted"
+  }
+ ]
 }
