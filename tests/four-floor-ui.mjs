@@ -48,6 +48,18 @@ const cheads = await p.$$eval('.rlist-floor', r => r.map(x => x.textContent.trim
 t('common areas span floors 1 to 4', /spaces on floors 1 to 4/.test(cbody), cbody.match(/\d+ spaces on [^·]*/)?.[0]);
 t('common areas grouped by floor', cheads.join('|') === 'Floor 1|Floor 2|Floor 3|Floor 4', cheads.join('|'));
 
+await p.goto(B + '#/bim', { waitUntil: 'networkidle' });
+await p.waitForSelector('.mrow');
+const mrows = await p.$$eval('.mrow b', r => r.map(x => x.textContent.trim()));
+t('3D BIM hub lists floor-1 rooms only', mrows.length === 16 && mrows.every(n => n.startsWith('1')), mrows.length + ' rows: ' + mrows.join(','));
+t('3D BIM hub says the upper floors have no models yet', (await p.textContent('body')).includes('Floors 2 to 4 (99 rooms)'));
+await p.goto(B + '#/room/338', { waitUntil: 'networkidle' });
+await p.waitForSelector('.pagehead');
+t('room 338 offers no 3D model button', !(await p.$('a[href="#/bim/338"]')));
+await p.goto(B + '#/room/105', { waitUntil: 'networkidle' });
+await p.waitForSelector('.pagehead');
+t('room 105 still offers its 3D model', !!(await p.$('a[href="#/bim/105"]')));
+
 t('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' ; '));
 await b.close();
 console.log(`\n${pass} passed, ${fail} failed`);
