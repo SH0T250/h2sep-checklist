@@ -185,8 +185,8 @@ await p.goto(B + '#/bulk', { waitUntil: 'networkidle' }); await p.waitForSelecto
 await p.evaluate(() => sessionStorage.setItem('h2sep-p-bulkq', JSON.stringify({ floors: [2], types: [], kind: 'mep', cats: ['Mechanical'], codes: [], action: 'check', text: '' })));
 await p.goto(B + '#/bulk', { waitUntil: 'networkidle' }); await p.reload({ waitUntil: 'networkidle' }); await p.waitForSelector('.taglist label');
 const labels = await p.$$eval('.taglist label', ls => ls.map(l => l.textContent.replace(/\s+/g, ' ').trim()));
-t('one PTAC row covers every PTAC code on the floor', labels.filter(l => /PTAC unit set and sealed/.test(l)).length === 1 && labels.some(l => /PTAC.*\/.*PTAC unit set/.test(l)), labels.filter(l => /PTAC unit/.test(l)).join(' | '));
-const ptacIdx = labels.findIndex(l => /PTAC unit set and sealed/.test(l));
+t('one PTAC row covers every PTAC code on the floor', labels.filter(l => /PTAC installed and working/.test(l)).length === 1 && labels.some(l => /PTAC.*\/.*PTAC installed and working/.test(l)), labels.filter(l => /PTAC unit/.test(l)).join(' | '));   // D49 label
+const ptacIdx = labels.findIndex(l => /PTAC installed and working/.test(l));
 await p.click(`.taglist label:nth-child(${ptacIdx + 1}) input`); await p.waitForSelector('.preview');
 const ptacWant = Number(((await p.textContent('.preview .ph')).match(/(\d+) will change/) || [])[1] || 0);
 await p.click('[data-apply]'); await p.waitForTimeout(400);

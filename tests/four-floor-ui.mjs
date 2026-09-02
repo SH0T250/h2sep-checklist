@@ -68,7 +68,7 @@ await p.waitForSelector('.trades');
 const trows = await p.$$eval('.trades .trow:not(.th)', rs => rs.map(r => ({ name: r.querySelector('.tn').textContent.trim(), pct: r.querySelector('.tp').textContent.trim(), frac: r.querySelector('.tf').textContent.replace(/\s+/g, ' ').trim(), fl: [...r.querySelectorAll('.tfl')].map(x => x.textContent.trim()) })));
 t('the dashboard has a percent complete by trade table', trows.length > 8, String(trows.length));
 t('FF&E leads the table with its families under it', trows[0].name === 'FF&E' && trows.slice(1, 4).every(r => !/^FF&E$/.test(r.name)), trows.slice(0, 4).map(r => r.name).join(','));
-t('every MEP trade is a row', ['Mechanical', 'Electrical', 'Plumbing', 'Fire Protection', 'Low Voltage'].every(n => trows.some(r => r.name === n)));
+t('every MEP trade is a row', ['Mechanical', 'Electrical', 'Plumbing', 'Fire Sprinkler', 'Fire Alarm', 'Low Voltage'].every(n => trows.some(r => r.name === n)), trows.map(r => r.name).join(','));   // D49: Fire Protection became Fire Sprinkler + Fire Alarm on the guest rooms
 t('every row shows a percent, a checked count and four floor cells', trows.every(r => /^\d+%$/.test(r.pct) && /^\d+ \/ \d+$/.test(r.frac) && r.fl.length === 4), JSON.stringify(trows[0]));
 const ffe = trows[0];
 t('the FF&E percent matches its checked count', Math.round(Number(ffe.frac.split(' / ')[0]) / Number(ffe.frac.split(' / ')[1]) * 100) + '%' === ffe.pct, `${ffe.frac} vs ${ffe.pct}`);

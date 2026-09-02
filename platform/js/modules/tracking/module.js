@@ -93,6 +93,7 @@ function hasDetail(it) {
 // Counted off the same checklist lines the crew taps, rooms and common areas
 // alike, so there is no second set of books.
 const MEP_ORDER = ['Mechanical', 'Electrical', 'Plumbing', 'Fire Protection', 'Fire Sprinkler', 'Fire Alarm', 'Low Voltage'];
+const MEP_TRADES = new Set(['Mechanical', 'Electrical', 'Plumbing', 'Fire Alarm', 'Fire Sprinkler', 'Fire Protection', 'Low Voltage', 'Finishes']);
 function tradeStats(store) {
   const floors = new Set();
   const mk = () => ({ total: 0, done: 0, open: 0, byFloor: {} });
@@ -108,7 +109,11 @@ function tradeStats(store) {
     const floor = Number(d.floor) || 0;
     if (floor) floors.add(floor);
     for (const [, it] of store.liveItems(d)) {
-      if (isMep) {
+      /* Ruling D49 ("put the Plumbing items in Plumbing"): a line is counted by
+       * its TRADE, not by the document it sits in. A Plumbing or Low Voltage
+       * line that lives on an FF&E checklist rolls up under that MEP trade, so
+       * the FF&E families stay furniture and the trades stay trades. */
+      if (isMep || MEP_TRADES.has(it.category)) {
         const c = it.category || 'Other';
         if (!mep.has(c)) mep.set(c, mk());
         add(mep.get(c), it, floor);
