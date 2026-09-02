@@ -44,3 +44,14 @@ progress.html
 
 # Snapshot of the crew collection: carries real names and account ids.
 tools/out/backups/crew-floor1-snapshot.json
+
+# Photoreal loop (platform/tools/photoreal): the export is derived from
+# king-studio.html and large, .blend files are binary scratch, and any blind
+# composite or progress page embeds a photograph of the client's unopened
+# hotel. The tools are source; their outputs are not.
+platform/tools/photoreal/export/
+*.blend
+*.blend1
+platform/tools/photoreal/renders/
+platform/tools/photoreal/blind/
+photo-loop.html
