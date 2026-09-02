@@ -20,6 +20,10 @@
   html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);
     font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;}
   :root{
+    /* Panel width. The scene is framed inside the platform at about 1150 px, so
+       the panel narrows there rather than eating a third of the glass. The
+       camera fit reads the same number back out of the stylesheet. */
+    --pw:318px;
     --bg:#0b0f13; --panel:#12181f; --ink:#eef3f7; --mut:#8fa0ad;
     --cyan:#02A9DE; --cyanhi:#3fc6f5; --red:#ff5c5c; --redink:#C00000;
     --amber:#E0A21E;
@@ -52,7 +56,7 @@
   .lbl.pin b{color:#ff8f8f;font-variant-numeric:tabular-nums}
 
   /* ---------- left panel / title block ---------- */
-  #panel{position:fixed;top:0;left:0;bottom:0;width:318px;z-index:10;
+  #panel{position:fixed;top:0;left:0;bottom:0;width:var(--pw);z-index:10;
     background:var(--panelbg);border-right:1px solid var(--line);
     display:flex;flex-direction:column;transition:transform .25s ease}
   .tb{padding:11px 16px 10px;border-bottom:2px solid rgba(2,169,222,.5);
@@ -62,8 +66,8 @@
   .wordmark span{font:600 8px/1 var(--mono);letter-spacing:.18em;color:var(--mut);text-transform:uppercase}
   .eyebrow{font:600 9.5px/1 var(--mono);letter-spacing:.16em;color:var(--cyan);
     text-transform:uppercase;margin-bottom:6px}
-  .tb h1{font-size:19px;line-height:1.15;font-weight:700;letter-spacing:.05em;margin-bottom:8px}
-  .meta{display:grid;grid-template-columns:auto 1fr;gap:2px 12px}
+  .tb h1{font-size:clamp(15px,1.35vw,19px);line-height:1.15;font-weight:700;letter-spacing:.04em;margin-bottom:8px}
+  .meta{display:grid;grid-template-columns:auto 1fr;gap:2px 10px}
   .meta span{font:600 9px/1.65 var(--mono);letter-spacing:.12em;color:var(--mut)}
   .meta b{font:600 9.5px/1.65 var(--mono);color:var(--ink);letter-spacing:.02em;
     font-variant-numeric:tabular-nums}
@@ -101,7 +105,7 @@
   .row .nm{font-size:10.5px;color:var(--lblink);line-height:1.25;overflow:hidden;text-overflow:ellipsis}
   .row .pct{font:600 9.5px var(--mono);color:var(--mut);font-variant-numeric:tabular-nums}
   .row .pct.iss{color:#ff8f8f}
-  .pfoot{padding:8px 16px 11px;border-top:1px solid var(--line);
+  .pfoot{padding:9px 16px 16px;margin-top:6px;border-top:1px solid var(--line);
     font:500 9.5px/1.55 var(--mono);color:var(--mut);letter-spacing:.02em}
 
   /* ---------- burger (narrow) ---------- */
@@ -109,6 +113,7 @@
     background:var(--panel);border:1px solid var(--line);cursor:pointer;display:none;
     flex-direction:column;align-items:center;justify-content:center;gap:4px}
   #burger span{display:block;width:16px;height:2px;background:var(--ink);border-radius:1px}
+  @media (max-width:1320px){ :root{--pw:274px} }
   @media (max-width:960px){
     #panel{transform:translateX(-102%);box-shadow:8px 0 30px rgba(0,0,0,.5)}
     body.nav-open #panel{transform:translateX(0)}
@@ -173,12 +178,21 @@
   #c-go[hidden]{display:none}
 
   /* ---------- caveat strip ---------- */
-  #caveat{position:fixed;bottom:11px;left:50%;transform:translateX(-50%);z-index:9;
+  /* Centred on the glass the viewer can see, not on the window, so the panel
+     never clips the strip in half. */
+  #caveat{position:fixed;bottom:11px;left:calc(50% + var(--pw)/2);transform:translateX(-50%);z-index:9;
     font:600 9px var(--mono);letter-spacing:.12em;color:var(--mut);
     background:var(--chipbg);border:1px solid var(--line);border-radius:3px;
     padding:5px 12px;white-space:nowrap;max-width:calc(100vw - 24px);overflow:hidden;text-overflow:ellipsis}
-  @media (max-width:960px){#caveat{font-size:8px;letter-spacing:.06em}
-    #chip{width:200px;top:52px}#card{width:290px}}
+  @media (max-width:960px){#caveat{font-size:8px;letter-spacing:.06em;left:50%}
+    #card{width:290px;bottom:34px}}
+  @media (max-width:700px){
+    #chip{gap:9px;padding:6px 10px}
+    #chip .k{display:none}
+    #chip .big{font-size:15px}
+    #chip .bar{width:64px}
+    #views button{padding:5px 7px;letter-spacing:.08em}
+  }
 
   /* ---------- error / hard stop ---------- */
   #err{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:40;max-width:min(760px,92vw);
@@ -236,13 +250,13 @@
       <div class="sechead">Not on this sheet</div>
       <div class="rows" id="rows-stop"></div>
     </div>
-  </div>
-  <div class="pfoot" id="pfoot">Walls cut at 4&prime;-0&Prime; AFF - a drafting convention, not a
+    <div class="pfoot" id="pfoot">Walls cut at 4&prime;-0&Prime; AFF - a drafting convention, not a
     sheet dimension. Guest-room interiors are the room viewer's own geometry. Common-area contents
     are STYLIZED blocks, one per checklist line: A100 dimensions no equipment anywhere in the
     amenity block. A100 locates no doors for the amenity rooms either, and only Meeting Room 018's
     two corridor doors approximately. North is cited from the A100 extraction, not re-derived from
     the sheet's north arrow.</div>
+  </div>
 </aside>
 
 <div id="views">
@@ -1376,10 +1390,18 @@
 var WALLCUT = 4.0;
 var MASSCAP = 3.86;
 
-/* Wall thicknesses, MEASURED poche on A100: guestroom demising W5 ~6 7/8",
-   corridor W4 ~6 5/8", exterior ~7". Interior partitions in the amenity block
-   are not called out, so they are SCALED at 5". */
-var T_EXT = 0.58, T_DEM = 0.573, T_COR = 0.552, T_INT = 0.42;
+/* Wall thicknesses. Guestroom demising walls and the corridor walls are NOT
+   drawn to a nominal number here: each one is drawn to fill the measured gap
+   between the two clear faces it separates, which is the poche itself, so a
+   6 7/8" W5 and a 6 5/8" W4 come out at whatever A100 actually measured rather
+   than at a constant. Only two thicknesses are constants:
+     T_EXT  the ~7" exterior run, drawn inboard of the envelope polyline.
+     T_INT  amenity-block partitions, which A100 does not call out at all -
+            SCALED at 5".
+   T_COR is the corridor wall's own measured thickness, used for the two things
+   that need a wall body rather than a gap: the guest entry door jambs, and room
+   118's corridor wall where it jogs into the bathroom. */
+var T_EXT = 0.58, T_COR = 0.552, T_INT = 0.42;
 
 /* ---- the guest wing's two cross-building datums -------------------------
    King side: A100 measures the room face of the corridor wall at V=29.60 and
@@ -1525,7 +1547,8 @@ var COMMON = [
   {no:'009', name:'Servery + Breakfast 006', doc:'S009', doc2:'S006', basis:'M',
    u0:166.07,u1:186.57, v0:35.96,v1:51.78,
    src:'ONE open room on A100, 20\'-6" x 15\'-10". A100 draws NO wall between Servery 009 and Breakfast 006 - the Servery label sits at U 167.8-174.5 and the Breakfast label at U 176.7-185.3.',
-   note:'ONE VOLUME, TWO LABELS. Both checklists are counted into this plate; the boundary between them does not exist on A100.'},
+   note:'ONE VOLUME, TWO LABELS. Both checklists are counted into this plate; the boundary between them does not exist on A100.',
+   anchors:[{no:'009',name:'Servery',u:171.2,v:41.0},{no:'006',name:'Breakfast',u:181.0,v:46.5}]},
   {no:'015', name:'Laundry', doc:'S015', basis:'S', u0:140.22,u1:177.02, v0:52.35,v1:64.99,
    src:'A100 gives Laundry 015 as U 128.17-177.02, which overlaps the Open Storage 017 band. Drawn from U=140.22, where that band ends. The north end is SCALED either way.',
    note:'NORTH END SCALED. A100 does not separate Laundry 015 from the east portion of Open Storage 017.'},
@@ -1661,7 +1684,6 @@ var MAT = {
   ext:      std(0x3a4a58, 0.92),
   wall:     std(0x47586a, 0.94),
   wallSc:   std(0x424b55, 0.96, 0.62),
-  base:     std(0x1d262e, 0.95),
   glass:    new THREE.MeshStandardMaterial({color:0x1d6f8c, roughness:0.16, metalness:0.2,
               transparent:true, opacity:0.42}),
   bathfl:   std(0x55626d, 0.85),
@@ -1689,7 +1711,6 @@ var EDGE     = new THREE.LineBasicMaterial({color:0x4d6275, transparent:true, op
 var EDGE_SC  = new THREE.LineDashedMaterial({color:0x9d927e, dashSize:0.9, gapSize:0.7,
                  transparent:true, opacity:0.85});
 var EDGE_DONE= new THREE.LineBasicMaterial({color:0x3fc6f5, transparent:true, opacity:0.9});
-var EDGE_TOP = new THREE.LineBasicMaterial({color:0x5d7386, transparent:true, opacity:0.55});
 
 var BOX = new THREE.BoxBufferGeometry(1,1,1);
 var CYL = new THREE.CylinderBufferGeometry(1,1,1,20);
@@ -1731,7 +1752,10 @@ function rectLine(u0,v0,u1,v1,y,mat,parent){
    a drawing rather than as a tray of grey blocks. */
 function wbx(u0,v0,u1,v1,h,mat,parent){
   var m = bx(u0,v0,u1,v1,0,h,mat,parent);
-  bx(u0,v0,u1,v1,h-0.075,h+0.005, MAT.cut, parent, true);
+  var c = bx(u0,v0,u1,v1,h-0.075,h+0.005, MAT.cut, parent, true);
+  /* Tagged so a test can ask for the wall network and get walls, not the door
+     jambs and thresholds that also live in the same group. */
+  m.userData.wall = 1; if (c) c.userData.wall = 1;
   return m;
 }
 /* A wall running ALONG the building at cross-position v, from u0 to u1, broken
@@ -1764,14 +1788,17 @@ function cut(a, b, gaps){
    else. These put the gap back on the drawing the way a plan does: a threshold
    band on the floor between the jambs, and a short jamb pair to the cut. */
 function doorU(v, a, b, t, mat, parent){
+  var j = t*0.86;   /* jambs sit inside the wall thickness and overlap its ends,
+                       so no two faces end up coplanar and flickering */
   bx(a, v-t/2, b, v+t/2, 0.02, 0.11, mat, parent, true);
-  bx(a-0.16, v-t/2, a, v+t/2, 0, WALLCUT, mat, parent);
-  bx(b, v-t/2, b+0.16, v+t/2, 0, WALLCUT, mat, parent);
+  bx(a-0.17, v-j/2, a+0.03, v+j/2, 0, WALLCUT, mat, parent);
+  bx(b-0.03, v-j/2, b+0.17, v+j/2, 0, WALLCUT, mat, parent);
 }
 function doorV(u, a, b, t, mat, parent){
+  var j = t*0.86;
   bx(u-t/2, a, u+t/2, b, 0.02, 0.11, mat, parent, true);
-  bx(u-t/2, a-0.16, u+t/2, a, 0, WALLCUT, mat, parent);
-  bx(u-t/2, b, u+t/2, b+0.16, 0, WALLCUT, mat, parent);
+  bx(u-j/2, a-0.17, u+j/2, a+0.03, 0, WALLCUT, mat, parent);
+  bx(u-j/2, b-0.03, u+j/2, b+0.17, 0, WALLCUT, mat, parent);
 }
 
 /* ===========================================================================
@@ -1819,6 +1846,10 @@ function newSpace(o){
   o.rimMat = std(0x2c3945, 0.9);
   var sp = reg(o);
   (o.rects || []).forEach(function(r){ plate(sp, r); });
+  /* The biggest rectangle is the one a label, a pin and any stylized massing
+     hang off, for every space, not just the ones in the COMMON table. */
+  sp.box = (o.rects || []).slice().sort(function(a,b){
+    return (b.u1-b.u0)*(b.v1-b.v0) - (a.u1-a.u0)*(a.v1-a.v0); })[0] || null;
   return sp;
 }
 
@@ -1906,7 +1937,7 @@ var KING_STD = {
   bathPartZ:106.125*KIN, bathIntZ:101.375*KIN,
   winX0:36*KIN, winX1:108*KIN,
   d1CL:94.125*KIN, d1RO:40*KIN, d2aCL:57*KIN, d2aW:38*KIN,
-  sofX1:52*KIN, sofZ0:205.5*KIN, sofZ1:218.5*KIN, bedCL:274.25*KIN,
+  sofZ0:205.5*KIN, bedCL:274.25*KIN,   /* soffit corridor-side edge; bed CL */
   ww:{fridge:[0.55,2.55],counter:[2.75,6.95],mw:[3.0,4.7],dw:[5.0,6.6],
       desk:[9.3,14.1],tv:[14.5,18.3],hooks:[20.1,22.9],closet:[23.1,28.5]}
 };
@@ -1931,12 +1962,12 @@ var KING_CONN = {
    room face, leaving a main-room clear depth of 18'-3 1/2" - the value A552
    view 01 PRINTS and labels CLEAR, measured 219.507 in. */
 var KING_ACC = {
-  w:202*KIN, d:348*KIN, dBath:334.25*KIN, bathZ0:13.75*KIN,
+  w:202*KIN, d:348*KIN, bathZ0:13.75*KIN,
   bathPartX:107.625*KIN, bathPartT:6.75*KIN, bathIntX:100.875*KIN,
-  bathPartZ:128.5*KIN, bathIntZ:121.75*KIN, mainClear:219.5*KIN,
+  bathPartZ:128.5*KIN, bathIntZ:121.75*KIN,
   winX0:94.125*KIN, winX1:166.125*KIN,
   d1CL:143.625*KIN, d1RO:40*KIN, d2aCL:57.75*KIN, d2aW:40*KIN,
-  sofX1:52*KIN, sofZ0:212*KIN, sofZ1:225*KIN, bedCL:(225+348)/2*KIN,
+  sofZ0:212*KIN, bedCL:(225+348)/2*KIN,
   ww:{fridge:[0.55,2.55],counter:[2.8,7.05],mw:[2.95,4.45],dw:[5.25,6.9],
       desk:[13.2,17.6],tv:[18.0,21.6],hooks:null,closet:[22.0,28.4]}
 };
@@ -1968,6 +1999,7 @@ function buildKing(rm, sp){
   var ww = G.ww, WWX = W - 2.05;
   /* bathroom + entry leg hard floor */
   rbx(rm, 0.03, G.bathZ0+0.02, G.bathIntX, G.bathIntZ, 0.001, 0.07, MAT.bathfl, sp);
+  bathKit(rm, sp, 0.03, G.bathIntX, G.bathZ0, G.bathIntZ);
   rbx(rm, G.bathPartX, 0.02, W, G.bathPartZ, 0.001, 0.07, MAT.bathfl, sp);
   /* bath partitions. The GR-2A bath door is the gap in the x = bathPartX run. */
   rbx(rm, 0, G.bathPartZ, G.bathPartX, G.bathPartZ + G.bathPartT, 0, MASSCAP, MAT.wall, sp);
@@ -2015,6 +2047,8 @@ function buildKing(rm, sp){
   pick(rbx(rm, WWX+0.10, ww.counter[0], W-0.30, ww.counter[1], 0, 2.90, MAT.woodDk, sp), sp);
   pick(rbx(rm, WWX, ww.counter[0]+0.05, W-0.22, ww.counter[1]-0.05, 2.90, 3.05, MAT.counter, sp), sp);
   pick(rbx(rm, WWX+0.35, ww.fridge[0], W-0.35, ww.fridge[1], 0.05, 3.00, MAT.appl, sp), sp);
+  pick(rbx(rm, WWX+0.30, ww.dw[0], W-0.40, ww.dw[1], 0.10, 2.85, MAT.appl, sp), sp);
+  pick(rbx(rm, WWX+0.40, ww.mw[0], W-0.45, ww.mw[1], 3.25, MASSCAP, MAT.applDk, sp), sp);
   pick(rbx(rm, WWX+0.10, ww.desk[0], W-0.25, ww.desk[1], 2.85, 3.00, MAT.wood, sp), sp);
   rbx(rm, W-0.42, ww.desk[0]-0.1, W-0.30, ww.desk[1]+0.1, 0, 2.85, MAT.woodDk, sp);
   pick(rbx(rm, WWX+0.20, ww.tv[0], W-0.28, ww.tv[1], 0, 3.50, MAT.wood, sp), sp);
@@ -2059,6 +2093,22 @@ function buildKing(rm, sp){
     sp.acf = {c1:[c1x,c1z], c2:[c2x,c2z]};
   }
 }
+/* Stylized bath fixtures. Bathroom interiors are undimensioned background
+   graphics on A550, A552 and A555 alike - the room viewer says so and neither
+   A530 nor A532 has been read - so nothing here is measured. Three blocks are
+   set against the walls of the MEASURED bath rectangle, in the arrangement the
+   sheets draw: a vanity run, a water closet, and a shower or tub pan at the far
+   end. The middle of the room is deliberately left clear so room 118's turning
+   circle is never covered by a block that has no dimension behind it. */
+function bathKit(rm, sp, x0, x1, z0, z1){
+  var w = x1 - x0, d = z1 - z0;
+  if (w < 3 || d < 4) return;
+  rbx(rm, x0+0.10, z1-Math.min(2.6, d*0.30), x1-0.10, z1-0.10, 0.02, 0.24, MAT.counter, sp);
+  rbx(rm, x0+0.10, z1-Math.min(2.6, d*0.30), x0+0.22, z1-0.10, 0.24, MASSCAP, MAT.glass, sp);
+  rbx(rm, x0+0.12, z0+d*0.30, x0+Math.min(2.0, w*0.42), z0+d*0.30+2.3, 0, 2.75, MAT.woodDk, sp);
+  rbx(rm, x0+0.12, z0+d*0.30, x0+Math.min(2.05, w*0.44), z0+d*0.30+2.3, 2.75, 2.95, MAT.counter, sp);
+  rbx(rm, x1-Math.min(1.85, w*0.36), z0+0.35, x1-0.35, z0+1.95, 0, 1.40, MAT.counter, sp);
+}
 /* Solid ring for the sheet's own 60" circle; an 18-segment dashed ring on a
    2*PI/18 pitch, each arc spanning 55 percent of its pitch, for the one the
    sheet dimensions nowhere. Same construction as platform/room3d.html. */
@@ -2091,6 +2141,7 @@ var QQ = {bathX:6.55, bathZ:11.5, winX0:3.6, winX1:9.6, d1a:8.6, d1b:11.6,
 function buildQQ(rm, sp){
   var W = rm.no === '101' ? WIDE_W : QQ_W, D = QQ_D;
   rbx(rm, 0.05, 0.05, QQ.bathX, QQ.bathZ-0.05, 0.001, 0.07, MAT.bathfl, sp);
+  bathKit(rm, sp, 0.05, QQ.bathX, 0.05, QQ.bathZ-0.05);
   /* bath partitions, with the bath door as the gap in the x = 6.55 run */
   rbx(rm, QQ.bathX, 0, QQ.bathX+T_INT, 8.7, 0, MASSCAP, MAT.wall, sp);
   rbx(rm, QQ.bathX, 11.1, QQ.bathX+T_INT, QQ.bathZ, 0, MASSCAP, MAT.wall, sp);
@@ -2180,10 +2231,10 @@ KING_ROWS.forEach(function(r){
       + (KING_HAND[r.no] ? 'MIRRORED' : 'AS DRAWN')
       + ' - handedness measured off A100\'s GR-1 rough-opening centreline.',
     note:(r.no==='118'
-      ? 'ROOM 118 IS ITS OWN ROOM, NOT A WIDE KING. The corridor wall JOGS 1\'-1 3/4" into the room at the bathroom, the window is ASYMMETRIC in the bay, and the bath is nearly twice the standard width. The bath / main-room partition sits at z = 10\'-8 1/2" from the corridor wall room face, leaving a main-room clear depth of 18\'-3 1/2" - the value A552 view 01 PRINTS and labels CLEAR.'
+      ? GR3_SHEET_READ['118'] + ' The hole itself is cut once, from A100\'s measured datum, in the one wall 116 and 118 share. ROOM 118 IS ITS OWN ROOM, NOT A WIDE KING. The corridor wall JOGS 1\'-1 3/4" into the room at the bathroom, the window is ASYMMETRIC in the bay, and the bath is nearly twice the standard width. The bath / main-room partition sits at z = 10\'-8 1/2" from the corridor wall room face, leaving a main-room clear depth of 18\'-3 1/2" - the value A552 view 01 PRINTS and labels CLEAR.'
       : (r.no==='116'
-        ? 'CONNECTING KEY. Elevation 09 pushes the closet / TV / desk group toward the window when GR-3 goes into the working wall, and the spec marks that shift UNPROVEN. No shift is encoded: the group is set out from the GR-3 opening itself.'
-        : 'FURNITURE AND WORKING-WALL MODULES ARE STYLIZED. Not one piece of furniture on A550 has a locating dimension and not one module on the 29\'-0" working wall is dimensioned.'))});
+        ? 'CONNECTING KEY. Elevation 09 pushes the closet / TV / desk group toward the window when GR-3 goes into the working wall, and the spec marks that shift UNPROVEN. No shift is encoded: the group is set out from the GR-3 opening itself. ' + GR3_SHEET_READ['116'] + ' The hole itself is cut once, from A100\'s measured datum, in the one wall 116 and 118 share.'
+        : 'FURNITURE, WORKING-WALL MODULES AND BATH FIXTURES ARE ALL STYLIZED. Not one piece of furniture on A550 has a locating dimension, not one module on the 29\'-0" working wall is dimensioned, and the bathroom fixtures are undimensioned background graphics. A530 for the standard key, A532 for the accessible one.'))});
   buildKing(rm, sp);
   GUEST.push(sp);
   var a = mapU(rm, G.d1CL - G.d1RO/2), b = mapU(rm, G.d1CL + G.d1RO/2);
@@ -2205,7 +2256,7 @@ QQ_ROWS.forEach(function(r){
     rects:[{u0:r.u0, v0:QV_COR, u1:r.u1, v1:QV_WIN}],
     src:'A100 tick marks give the bay at ' + (r.no==='101' ? '13\'-10" PRINTED' : '12\'-8" PRINTED')
       + ' and ' + (r.u1-r.u0).toFixed(2) + ' ft clear. Depth 36\'-5" CLEAR per A555; A100 measures 36.46 ft across the same faces.',
-    note:'FURNITURE AND WORKING-WALL MODULES ARE STYLIZED, carried over from the room viewer\'s A555 build. A100 dimensions none of them.'});
+    note:'FURNITURE, WORKING-WALL MODULES AND BATH FIXTURES ARE ALL STYLIZED, carried over from the room viewer\'s A555 build. A100 dimensions none of them.'});
   buildQQ(rm, sp);
   GUEST.push(sp);
   var a = mapU(rm, QQ.d1a), b = mapU(rm, QQ.d1b);
@@ -2537,7 +2588,7 @@ function updateLabels(){
     _p.copy(L.pos).add(L.sp.group.position).project(camera);
     if (_p.z >= 1 || Math.abs(_p.x) > 1.1 || Math.abs(_p.y) > 1.1) continue;
     L.x = (_p.x*0.5+0.5)*w; L.y = (-_p.y*0.5+0.5)*h;
-    if (L.x < 326 && w > 960) continue;
+    if (L.x < panelPx() + 10) continue;
     var live = (L.sp === hoverSp || L.sp === selSp);
     var size = screenSize(L.sp.box || L.sp.rects[0], L.sp.group.position.y);
     if (!live && size < L.minPx) continue;
@@ -2663,7 +2714,7 @@ var VIEWS = {
   overview: {u:[-4,251], v:[-13,76], az:0.62, el:0.60, pad:1.02},
   guest:    {u:[-4,136], v:[-4,76],  az:0.88, el:0.52, pad:1.03},
   common:   {u:[99,251], v:[-13,71], az:0.46, el:0.56, pad:1.03},
-  exploded: {u:[-40,286], v:[-42,106], az:0.72, el:0.44, pad:1.00}
+  exploded: {u:[-38,282], v:[-40,104], az:0.72, el:0.44, pad:0.97}
 };
 var mode = 'overview';
 var tween = null;
@@ -2675,14 +2726,32 @@ var camDir = new THREE.Vector3(), camRight = new THREE.Vector3(), UP = new THREE
    the viewer cannot see through, so the pose is also slid left in screen space
    and the fit is solved against the remaining width, not the whole window. */
 var _fitPts = [], camUpV = new THREE.Vector3(), camUpH = new THREE.Vector3();
+/* How much glass the panel is covering right now, read back off the stylesheet
+   so the camera fit and the CSS can never disagree about it. */
+function panelPx(){
+  if (window.innerWidth <= 960) return 0;
+  var v = getComputedStyle(document.documentElement).getPropertyValue('--pw');
+  var n = parseFloat(v);
+  return isFinite(n) && n > 0 ? n : 318;
+}
 function poseFor(name){
   var V = VIEWS[name];
-  var lift = name === 'exploded' ? 40 : WALLCUT;
+  var lift = name === 'exploded' ? 36 : WALLCUT;
   _fitPts.length = 0;
   for (var i=0;i<2;i++) for (var j=0;j<2;j++) for (var k=0;k<2;k++)
     _fitPts.push(new THREE.Vector3(V.v[j], k ? lift : 0, V.u[i]));
   var tgt0 = new THREE.Vector3((V.v[0]+V.v[1])/2, 0, (V.u[0]+V.u[1])/2);
-  camDir.set(Math.sin(V.az)*Math.cos(V.el), Math.sin(V.el), Math.cos(V.az)*Math.cos(V.el));
+  /* The building is 247 feet long and 82 wide. On a wide screen it reads best
+     laid across the diagonal; in a narrow or portrait frame the same azimuth
+     squashes it into a thin strip, so the pose swings toward looking down the
+     length and the long axis runs down the screen instead of across it. */
+  var az = V.az, el = V.el;
+  if (camera.aspect < 1.15){
+    var k = Math.max(0, Math.min(1, (1.15 - camera.aspect) / 0.7));
+    az = V.az * (1 - 0.72*k);
+    el = V.el * (1 - 0.22*k);
+  }
+  camDir.set(Math.sin(az)*Math.cos(el), Math.sin(el), Math.cos(az)*Math.cos(el));
   /* The camera sits at target + camDir and looks back down it, so camDir is its
      local +Z, right is UP x camDir and up is camDir x right. Sliding the pose
      along -right pushes the IMAGE right, clear of the panel. */
@@ -2693,14 +2762,18 @@ function poseFor(name){
      point buried under the building. One over sin(elevation) converts a screen
      shift into the ground distance that produces it. */
   camUpH.set(camUpV.x, 0, camUpV.z).normalize();
-  var upK = 1 / Math.max(0.25, Math.sin(V.el));
+  var upK = 1 / Math.max(0.25, Math.sin(el));
   var vFov = camera.fov * Math.PI/180;
   var hFov = 2*Math.atan(Math.tan(vFov/2) * camera.aspect);
-  var panelFrac = window.innerWidth > 960 ? (318 / window.innerWidth) : 0;
+  var panelFrac = panelPx() / window.innerWidth;
   /* The view bar and the checklist chip own the top right of the glass, so the
      fit reserves that strip instead of letting the north end of the building
-     slide underneath it. */
-  var topRes = Math.min(0.24, 112 / window.innerHeight);
+     slide underneath it. The reserve is measured off the chip itself rather
+     than guessed, because the chip wraps to two or three rows on a narrow
+     screen and a guessed number would be wrong exactly there. */
+  var chip = document.getElementById('chip');
+  var chipBottom = chip ? chip.getBoundingClientRect().bottom : 100;
+  var topRes = Math.min(0.34, Math.max(0.06, (chipBottom + 12) / window.innerHeight));
   var okX = (1 - panelFrac) * 0.94 / V.pad, okY = (1 - topRes) * 0.94 / V.pad;
   var dist = 0.5 * Math.hypot(V.u[1]-V.u[0], V.v[1]-V.v[0]) / Math.sin(vFov/2);
   var probe = new THREE.PerspectiveCamera(camera.fov, camera.aspect, 1, 8000);
@@ -2756,9 +2829,9 @@ function focusOn(sp){
   var tgt = new THREE.Vector3((b.v0+b.v1)/2, sp.group.position.y + 1.5, (b.u0+b.u1)/2);
   camDir.set(Math.sin(0.7)*Math.cos(0.62), Math.sin(0.62), Math.cos(0.7)*Math.cos(0.62));
   camRight.crossVectors(UP, camDir).normalize();
-  if (window.innerWidth > 960){
+  if (panelPx()){
     var hf = 2*Math.atan(Math.tan(vFov/2) * camera.aspect);
-    tgt.addScaledVector(camRight, -(318/window.innerWidth) * dist * Math.tan(hf/2));
+    tgt.addScaledVector(camRight, -(panelPx()/window.innerWidth) * dist * Math.tan(hf/2));
   }
   tween = {t0ms:performance.now(), p0:camera.position.clone(), tg0:controls.target.clone(),
            p1:tgt.clone().addScaledVector(camDir, dist), t1:tgt};
@@ -2857,6 +2930,7 @@ function finish(data, failure){
   northLabel();
   buildPanel();
   if (failure){
+    FLOOR.reason = failure;
     $('chip').classList.add('stale');
     $('k-done').textContent = '-'; $('k-total').textContent = '-';
     $('k-pct').textContent = '-'; $('k-iss').textContent = '-';
@@ -2889,7 +2963,7 @@ function finish(data, failure){
     walls:function(){
       var out = [];
       wallsGrp.children.forEach(function(o){
-        if (!o.isMesh) return;
+        if (!o.isMesh || !o.userData.wall) return;
         out.push({u0:o.position.z - o.scale.z/2, u1:o.position.z + o.scale.z/2,
                   v0:o.position.x - o.scale.x/2, v1:o.position.x + o.scale.x/2,
                   y1:o.position.y + o.scale.y/2});

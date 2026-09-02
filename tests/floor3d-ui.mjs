@@ -289,9 +289,15 @@ t('V1  no 4\'-3" or 51 * KIN shift is encoded',
 t('V1  the connector comment says what the code does',
   /set out from the one PROVEN\s*fixture/.test(src.replace(/\s+/g, ' ').replace(/ /g, ' '))
   || /set out from the one PROVEN fixture/.test(src.replace(/\s+/g, ' ')));
-t('no em dash or en dash in the source', !/[—–]/.test(src));
-t('no em dash or en dash in the generated page', !/[—–]/.test(out));
-t('no em dash or en dash in the module', !/[—–]/.test(mod));
+// Written as escapes, not as the characters themselves, so this file passes its
+// own check as well as the ones it runs on everything else.
+const DASHES = /[\u2014\u2013]/;
+const self = readFileSync(resolve(ROOT, 'tests/floor3d-ui.mjs'), 'utf8');
+t('no em dash or en dash in the source', !DASHES.test(src));
+t('no em dash or en dash in the generated page', !DASHES.test(out));
+t('no em dash or en dash in the module', !DASHES.test(mod));
+t('no em dash or en dash in the build script', !DASHES.test(bld));
+t('no em dash or en dash in this test', !DASHES.test(self));
 t('the generated page says it is generated', /GENERATED FILE - do not hand edit/.test(out));
 t('three.js is inlined, not fetched',
   /Three\.js Authors/.test(out) && !/<script[^>]+src=/.test(out));
