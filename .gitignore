@@ -55,3 +55,10 @@ platform/tools/photoreal/export/
 platform/tools/photoreal/renders/
 platform/tools/photoreal/blind/
 photo-loop.html
+
+# Photoreal render pipeline: the exhibit export and the Blender scene are
+# derived from platform/king-studio.html by platform/tools/photoreal/ and are
+# large. Rebuild them with export.mjs and build.py; never commit them.
+platform/tools/photoreal/export/
+*.blend
+*.blend1
