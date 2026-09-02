@@ -189,6 +189,116 @@ export class Store {
     this._write(docId, { [p + 'issueResolved']: true, 'updatedAt': nowIso() }, `resolved issue on ${label} in ${docId}`);
   }
 
+  // ---- bulk: many lines at once, ONE atomic patch per document ----
+  // Same rules as the crew dashboard's bulk engine: every line left alone is
+  // reported with its reason (a bulk tool that silently drops rows is how you
+  // end up believing you checked forty and actually checked twelve); another
+  // person's initials are field evidence and are never overwritten unless the
+  // user says so; a flagged line or a line with an open issue is never checked
+  // off in bulk, because on paper those lines need a person's eyes.
+  static BULK_SKIP = {
+    ALREADY_CHECKED: 'already checked off',
+    OTHER_INITIALS: 'checked by someone else',
+    NOT_CHECKED: 'not checked',
+    FLAGGED: 'flagged, sources disagree: open the line',
+    OPEN_ISSUE: 'open issue: resolve it first',
+    NO_OPEN_ISSUE: 'no open issue',
+    NO_ISSUE: 'no issue to clear',
+    SAME_ISSUE: 'already flagged with that text',
+  };
+  static BULK_ACTIONS = {
+    check: 'Mark checked', uncheck: 'Mark unchecked', resolve: 'Resolve issues',
+    resolveAndCheck: 'Resolve and check', setIssue: 'Flag an issue', clearIssue: 'Clear issues',
+  };
+
+  // targets: [{ docId, itemId }]. Returns the exact writes and the exact skips.
+  planBulk(targets, action, opts = {}) {
+    const u = this.user;
+    const { text = '', overwriteChecked = false } = opts;
+    const S = Store.BULK_SKIP;
+    const changes = [], skipped = [];
+    const stamp = nowIso();
+    const CHECK_FIELDS = ['checked', 'initials', 'checkedByCo', 'checkedAt', 'checkedAtLocal'];
+    const checkOn = () => ({ checked: true, initials: u.initials, checkedByCo: u.company || '', checkedAt: stamp, checkedAtLocal: stamp });
+    const checkOff = () => ({ checked: false, initials: '', checkedByCo: '', checkedAt: null, checkedAtLocal: null });
+    for (const t of targets) {
+      const doc = this.getDoc(t.docId);
+      const it = doc?.items?.[t.itemId];
+      if (!it || it.deleted) continue;
+      const base = { docId: t.docId, itemId: t.itemId, code: it.code || '', label: it.label || '' };
+      const skip = (why) => skipped.push({ ...base, why });
+      const mine = u && it.initials === u.initials;
+      const openIssue = !!(it.issue && !it.issueResolved);
+      let fields = null;
+      if (action === 'check') {
+        if (it.reliability === 'FLAGGED') { skip(S.FLAGGED); continue; }
+        if (openIssue) { skip(S.OPEN_ISSUE); continue; }
+        if (it.checked) { if (mine || !overwriteChecked) { skip(mine ? S.ALREADY_CHECKED : S.OTHER_INITIALS); continue; } }
+        fields = checkOn();
+      } else if (action === 'uncheck') {
+        if (!it.checked) { skip(S.NOT_CHECKED); continue; }
+        if (!mine && !overwriteChecked) { skip(S.OTHER_INITIALS); continue; }
+        fields = checkOff();
+      } else if (action === 'resolve') {
+        if (!openIssue) { skip(S.NO_OPEN_ISSUE); continue; }
+        fields = { issueResolved: true };
+      } else if (action === 'resolveAndCheck') {
+        if (it.reliability === 'FLAGGED') { skip(S.FLAGGED); continue; }
+        const canCheck = !it.checked || (overwriteChecked && !mine);
+        if (!openIssue && !canCheck) { skip(it.checked ? S.ALREADY_CHECKED : S.NO_OPEN_ISSUE); continue; }
+        fields = {};
+        if (openIssue) fields.issueResolved = true;
+        if (canCheck) Object.assign(fields, checkOn());
+      } else if (action === 'setIssue') {
+        if (it.issue === text && !it.issueResolved) { skip(S.SAME_ISSUE); continue; }
+        fields = { issue: text, issueResolved: false };
+      } else if (action === 'clearIssue') {
+        if (!it.issue) { skip(S.NO_ISSUE); continue; }
+        fields = { issue: '', issueResolved: false };
+      } else {
+        throw new Error('unknown bulk action: ' + action);
+      }
+      const before = {};
+      for (const k of Object.keys(fields)) before[k] = k in it ? it[k] : null;
+      changes.push({ ...base, fields, before });
+    }
+    void CHECK_FIELDS;
+    return { action, text, changes, skipped, docs: [...new Set(changes.map(c => c.docId))] };
+  }
+
+  // Apply a plan: one patch per document, one activity line per document, and
+  // an in-memory undo entry that holds the exact before-state.
+  applyBulk(plan) {
+    if (!this.user) return null;
+    if (!plan.changes.length) return { docs: 0, lines: 0 };
+    const byDoc = new Map();
+    for (const c of plan.changes) {
+      if (!byDoc.has(c.docId)) byDoc.set(c.docId, { patch: {}, inverse: {}, n: 0 });
+      const d = byDoc.get(c.docId);
+      for (const [k, v] of Object.entries(c.fields)) { d.patch[`items.${c.itemId}.${k}`] = v; d.inverse[`items.${c.itemId}.${k}`] = c.before[k]; }
+      d.n++;
+    }
+    const verb = Store.BULK_ACTIONS[plan.action] || plan.action;
+    const entry = { id: 'b' + Date.now().toString(36), label: `${verb}: ${plan.changes.length} line(s) in ${byDoc.size} document(s)`, inverse: [], at: nowIso() };
+    for (const [docId, d] of byDoc) {
+      d.patch.updatedAt = nowIso();
+      this._write(docId, d.patch, `bulk ${verb.toLowerCase()} on ${d.n} line(s) in ${docId}${plan.text ? ` (${plan.text})` : ''}`);
+      entry.inverse.push({ docId, patch: d.inverse, n: d.n });
+    }
+    this.bulkUndo = this.bulkUndo || [];
+    this.bulkUndo.push(entry);
+    return { docs: byDoc.size, lines: plan.changes.length, entry };
+  }
+
+  undoBulk(entry) {
+    const stack = this.bulkUndo || [];
+    const e = entry || stack[stack.length - 1];
+    if (!e) return false;
+    this.bulkUndo = stack.filter(x => x !== e);
+    for (const inv of e.inverse) this._write(inv.docId, { ...inv.patch, updatedAt: nowIso() }, `undid bulk edit on ${inv.n} line(s) in ${inv.docId}`);
+    return true;
+  }
+
   addNote(docId, text, flag) {
     const id = 'n_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
     this._write(docId, {
