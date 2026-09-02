@@ -62,15 +62,53 @@ function renderFloor(ctx) {
       <a class="btn" href="#/bim">${ic('cube')}Room models</a>
     </div>
     <div class="viewer-wrap"></div>
+    <div class="sub" data-floor-basis style="margin-top:8px"></div>
   </div>`);
   const wrap = root.querySelector('.viewer-wrap');
+  const basis = root.querySelector('[data-floor-basis]');
   const frame = floorFrame();
   if (!frame) {
     wrap.replaceWith(el(`<section class="card"><div class="coming">${ic('cube')}<b>FLOOR 1 MODEL IS NOT IN THIS BUNDLE</b>
       <span>This packaged copy did not inline floor3d.html or the checklist state it paints with, so there is nothing to show. Open the hosted platform for the assembled floor, or rebuild the bundle with the floor scene inlined. Showing an empty frame instead would be worse than saying so.</span></div></section>`));
-  } else {
-    wrap.append(frame);
+    basis.remove();
+    return root;
   }
+  wrap.append(frame);
+  // Say where the paint came from. Packaged: the bundler wrote the note when it
+  // inlined the checklist file, so the reader knows the tint is as old as the
+  // build. Hosted: the scene fetches the staged file itself on every open.
+  basis.textContent = window.__H2SEP_FLOOR_SRCDOC
+    ? 'status paint: ' + (window.__H2SEP_FLOOR_DATA
+        ? (window.__H2SEP_FLOOR_DATA_NOTE || 'checklist state inlined when this bundle was built')
+        : 'NOT inlined in this bundle; the frame will say its paint is unavailable')
+    : 'status paint: data/floor1-staged.json, fetched by the scene on each open';
+  // Watchdog. The frame is same-origin in both modes (srcdoc inherits the
+  // parent origin; hosted is a sibling file), so the scene's own ready flag is
+  // readable from here. If it never comes up, a red line says so under the
+  // frame rather than leaving a dark rectangle to be mistaken for loading.
+  const READY_MS = 20000;
+  const started = Date.now();
+  const failed = msg => {
+    if (root.querySelector('[data-floor-fail]')) return;
+    wrap.after(el(`<div class="sub" data-floor-fail style="margin-top:6px;color:var(--issue-ink)">${esc(msg)}</div>`));
+  };
+  const poll = () => {
+    if (!root.isConnected) return;   // the screen was left before the scene came up
+    let st = null;
+    try { st = frame.contentWindow && frame.contentWindow.__FLOOR3D; } catch (e) { st = null; }
+    if (st && st.ready) {
+      if (st.painted === false) failed('The floor scene drew its A100 geometry but reports no status paint'
+        + (st.floor && st.floor.reason ? ': ' + st.floor.reason : '.'));
+      return;
+    }
+    if (Date.now() - started > READY_MS) {
+      failed('FLOOR SCENE DID NOT COME UP. The frame loaded but the scene never reported ready after '
+        + Math.round(READY_MS / 1000) + ' s. It needs WebGL; if this browser has none, that is the reason. Nothing is being shown in the frame above.');
+      return;
+    }
+    setTimeout(poll, 500);
+  };
+  frame.addEventListener('load', poll, { once: true });
   return root;
 }
 
