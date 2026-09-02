@@ -6,6 +6,8 @@ import { ic, el, esc, fmtWhen, toast, sheet, pressable } from '../../core/ui.js'
 const QUICK_PICKS = ['NEED INSTALL', 'NEED PROPER PLACE', 'IN BOX', 'DAMAGED', 'MISSING', 'WRONG ITEM'];
 // Copy that states a count has to be derived, or it goes stale the moment the
 // build grows - which is worse than saying nothing, because it reads as fact.
+import { counts } from '../../core/store.js';
+
 function floorsOf(docs) {
   return [...new Set(docs.map(d => Number(d.floor)).filter(n => n > 0))].sort((a, b) => a - b);
 }
@@ -91,6 +93,7 @@ function hasDetail(it) {
 // Counted off the same checklist lines the crew taps, rooms and common areas
 // alike, so there is no second set of books.
 const MEP_ORDER = ['Mechanical', 'Electrical', 'Plumbing', 'Fire Protection', 'Fire Sprinkler', 'Fire Alarm', 'Low Voltage'];
+const MEP_TRADES = new Set(['Mechanical', 'Electrical', 'Plumbing', 'Fire Alarm', 'Fire Sprinkler', 'Fire Protection', 'Low Voltage', 'Finishes']);
 function tradeStats(store) {
   const floors = new Set();
   const mk = () => ({ total: 0, done: 0, open: 0, byFloor: {} });
@@ -106,7 +109,11 @@ function tradeStats(store) {
     const floor = Number(d.floor) || 0;
     if (floor) floors.add(floor);
     for (const [, it] of store.liveItems(d)) {
-      if (isMep) {
+      /* Ruling D52 ("put the Plumbing items in Plumbing"): a line is counted by
+       * its TRADE, not by the document it sits in. A Plumbing or Low Voltage
+       * line that lives on an FF&E checklist rolls up under that MEP trade, so
+       * the FF&E families stay furniture and the trades stay trades. */
+      if (isMep || MEP_TRADES.has(it.category)) {
         const c = it.category || 'Other';
         if (!mep.has(c)) mep.set(c, mk());
         add(mep.get(c), it, floor);
@@ -168,6 +175,7 @@ function itemStatusStats(store, q) {
     const mep = isCompanion(id) || d.type === 'mep-punch';
     const kind = (space ? 'space-' : '') + (mep ? 'mep' : 'ffe');
     for (const [, it] of store.liveItems(d)) {
+      if (!counts(it)) continue;   // an "if needed" line (D52) joins the board only once someone acts on it
       const key = kind + '|' + codeKey(it);
       if (!rows.has(key)) { const r = { key, kind, tagKey: codeKey(it), category: it.category || 'Other', label: it.label || '', codes: new Set(), total: 0, installed: 0, pending: 0, other: 0, others: new Map() }; for (const k of QUICK_PICKS) r[k] = 0; rows.set(key, r); }
       const r = rows.get(key);
@@ -374,8 +382,9 @@ function renderRoom(ctx, { no }) {
   root.querySelector('[data-bulk]').addEventListener('click', () => { bulkSel = bulkOn(activeId) ? null : { docId: activeId, ids: new Set() }; store._emit(); });
   const groups = groupByCategory(store.liveItems(active));
   for (const [cat, entries] of groups) {
-    const done = entries.filter(([, it]) => it.checked).length;
-    const head = el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">·</span><span>${done} of ${entries.length} checked</span>
+    const counted = entries.filter(([, it]) => counts(it));
+    const done = counted.filter(([, it]) => it.checked).length;
+    const head = el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">·</span><span>${done} of ${counted.length} checked</span>
       <span class="spacer"></span>${ownerChip(store, cat, no)}${bulkOn(activeId) ? `<span class="pickall" role="button" tabindex="0">${pickallLabel(activeId, entries)}</span>` : ''}</div>`);
     wirePickall(head, list, activeId, entries);
     list.append(head);
@@ -786,6 +795,7 @@ function itemRow(ctx, docId, itemId, it) {
         <span class="nm">${esc(shortLabel(it))}</span>
         ${it.qty > 1 ? `<span class="qty">x${it.qty}</span>` : ''}
         ${flagged ? `<span class="chip hold sm">FLAGGED</span>` : ''}
+        ${it.optional ? `<span class="chip sm" title="Counts only once it is checked">IF NEEDED</span>` : ''}
       </span>
       <span class="l2">
         ${openIssue ? `<span class="issue-pill">${ic('flag', 'flag-ic')}${esc(it.issue)}</span>` : it.issue ? `<span class="issue-done" title="Issue resolved">resolved · ${esc(it.issue)}</span>` : ''}
@@ -1048,8 +1058,9 @@ function renderSpace(ctx, { id }) {
   if (bulkSel && bulkSel.docId !== activeId) bulkSel = null;
   root.querySelector('[data-bulk]').addEventListener('click', () => { bulkSel = bulkOn(activeId) ? null : { docId: activeId, ids: new Set() }; store._emit(); });
   for (const [cat, entries] of groupByCategory(store.liveItems(active))) {
-    const done = entries.filter(([, it]) => it.checked).length;
-    const head = el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">\u00b7</span><span>${done} of ${entries.length} checked</span>${bulkOn(activeId) ? `<span class="pickall" role="button" tabindex="0">${pickallLabel(activeId, entries)}</span>` : ''}</div>`);
+    const counted = entries.filter(([, it]) => counts(it));
+    const done = counted.filter(([, it]) => it.checked).length;
+    const head = el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">\u00b7</span><span>${done} of ${counted.length} checked</span>${bulkOn(activeId) ? `<span class="pickall" role="button" tabindex="0">${pickallLabel(activeId, entries)}</span>` : ''}</div>`);
     wirePickall(head, list, activeId, entries);
     list.append(head);
     for (const [iid, it] of entries) list.append(itemRow(ctx, activeId, iid, it));
