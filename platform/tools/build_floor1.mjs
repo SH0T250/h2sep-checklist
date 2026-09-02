@@ -276,7 +276,7 @@ const RULED_LINE_ADDITIONS = [
   {
     ruling: 'D46', doc: 'ffe', key: 'tvmount_a', category: 'Appliance', sort: 14025,
     code: '', qty: 1,
-    label: 'TV mount installed',
+    label: 'TV mount',
     src: 'D46 (AJ 2026-09-02); owner-directed check item',
     note: 'Added by Austin ruling D46: "add TV mount to each room. Doesn\'t matter about the tag, ' +
       'just put it underneath TV." Placed directly under the Television line. No document tag is ' +
