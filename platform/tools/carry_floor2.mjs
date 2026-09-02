@@ -25,6 +25,7 @@
  *   node platform/tools/carry_floor2.mjs --dry-run
  *   node platform/tools/carry_floor2.mjs
  *   node platform/tools/carry_floor2.mjs --rooms 203,204
+ *   node platform/tools/carry_floor2.mjs --floor=3 --dry-run      (floor 3, floor3-staged.json)
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
@@ -44,13 +45,19 @@ const flag = (name, dflt) => {
   return i === -1 ? dflt : argv[i + 1];
 };
 const dry = argv.includes('--dry-run');
-const SEED = resolve(repo, flag('--seed', 'platform/data/floor2-staged.json'));
-const SNAP = resolve(repo, 'tools/out/backups/crew-floor2-snapshot.json');
+const FLOOR = (() => {
+  const a = process.argv.find((x) => x.startsWith('--floor='));
+  const f = a ? a.slice('--floor='.length) : '2';
+  if (!/^[2-4]$/.test(f)) throw new Error('--floor must be 2, 3 or 4');
+  return f;
+})();
+const SEED = resolve(repo, flag('--seed', 'platform/data/floor' + FLOOR + '-staged.json'));
+const SNAP = resolve(repo, 'tools/out/backups/crew-floor' + FLOOR + '-snapshot.json');
 
 /* Every floor-2 guest room in the reference database, unless --rooms narrows
  * it; each room pulls its -MEP doc with it. The staged file's common-area docs
  * (ids starting with 'S') are always included. */
-const FLOOR = '2';
+
 const dbRooms = (() => {
   const d = new DatabaseSync(DB_PATH, { readOnly: true });
   const r = d.prepare('SELECT room_no FROM rooms WHERE floor = ? ORDER BY room_no').all(FLOOR).map((x) => x.room_no);

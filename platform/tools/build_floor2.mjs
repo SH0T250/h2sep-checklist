@@ -265,16 +265,27 @@ const REPO = resolve(HERE, '..', '..');
 const DB_PATH = resolve(REPO, 'data', 'project.sqlite');
 const SLICE_PATH = resolve(REPO, 'platform', 'data', 'slice-f1.json');
 const DONOR_PATH = resolve(REPO, 'platform', 'data', 'floor1-staged.json');
-const OUT_PATH = resolve(REPO, 'platform', 'data', 'floor2-staged.json');
+/* WHICH FLOOR. --floor=3 builds floor 3 into floor3-staged.json with the same
+ * recipe, the same donors and its own workbook profile (FLOOR_PROFILES below).
+ * Default 2, so every floor-2 command line keeps working unchanged. */
+const FLOOR = (() => {
+  const a = process.argv.find((x) => x.startsWith('--floor='));
+  const f = a ? a.slice('--floor='.length) : '2';
+  if (!/^[2-4]$/.test(f)) { process.stderr.write('build_floor2: FATAL: --floor must be 2, 3 or 4\n'); process.exit(1); }
+  return f;
+})();
+const OUT_PATH = resolve(REPO, 'platform', 'data', 'floor' + FLOOR + '-staged.json');
 const REF_PATH = resolve(REPO, 'platform', 'data', 'ref-rooms-staged.json');
-const FLOOR = '2';
+/* The other floors' staged files are protected too: a floor-3 run must never
+ * touch floor2-staged.json. */
+const OTHER_FLOOR_PATHS = ['2', '3', '4'].filter((f) => f !== FLOOR).map((f) => resolve(REPO, 'platform', 'data', 'floor' + f + '-staged.json'));
 const RECIPE_PATH = resolve(HERE, 'build_floor1.mjs');
 
 /* Determinism. Not Date.now(). Override with --stamp=<ISO> for a dated wave. */
 const DEFAULT_STAMP = '2026-09-02T00:00:00.000Z';
 
 /* Files this tool must never write, checked at startup AND after the write. */
-const NEVER_WRITE = [SLICE_PATH, DONOR_PATH, RECIPE_PATH, REF_PATH,
+const NEVER_WRITE = [SLICE_PATH, DONOR_PATH, RECIPE_PATH, REF_PATH, ...OTHER_FLOOR_PATHS,
   resolve(REPO, 'platform', 'data', 'slice-f1.json')];
 
 /* ===========================================================================
@@ -315,8 +326,38 @@ const NEVER_WRITE = [SLICE_PATH, DONOR_PATH, RECIPE_PATH, REF_PATH,
  * as data/project.sqlite transcribes them, with this evidence written onto the
  * line and into room note n_d22 for Austin to close.
  * =========================================================================== */
-const WORKBOOK_F2 = 'FF&E Installation workbook, "2nd Floor FF&E Installation" tab (Drive 1vHg6-8vDVLpoE-x0jwjijOOlXJX4B1Jy)';
-const WORKBOOK_F2_COUNTS = { 'GR-304': 17, 'GR-305': 11, 'GR-308': 2, 'GR-309R': 1, 'GR-315': 1, 'GR-316': 1 };
+/* PER-FLOOR PROFILE: the workbook tab read for this floor, the working-wall
+ * figures it prints, whether those figures MUST reconcile against the floor's
+ * key mix for the build to proceed, and Austin's ask for the floor, verbatim.
+ * Floor 2's tab reconciled with no remainder and carried D22 and D33. Floor 3's
+ * tab prints the SAME six figures as floor 2's while floor 3's key mix differs
+ * (9 plain Queen-Queen, 1 connecting), so it cannot reconcile; it is recorded
+ * as evidence, no correction is applied on it, and the lines say so. */
+const FLOOR_PROFILES = {
+  '2': {
+    tab: '2nd Floor FF&E Installation',
+    counts: { 'GR-304': 17, 'GR-305': 11, 'GR-308': 2, 'GR-309R': 1, 'GR-315': 1, 'GR-316': 1 },
+    mustReconcile: true,
+    ask: 'Austin, 2026-09-02: "I need the 2 floor built out. Just the FF&E & MEP not the 3d bim yet."',
+  },
+  '3': {
+    tab: '3rd Floor FF&E Installation',
+    counts: { 'GR-304': 17, 'GR-305': 11, 'GR-308': 2, 'GR-309R': 1, 'GR-315': 1, 'GR-316': 1 },
+    mustReconcile: false,
+    ask: 'Austin, 2026-09-02: "once completed lets start floor 3 just no 3d BIM yet."',
+  },
+  '4': {
+    tab: '4th Floor FF&E Installation',
+    counts: { 'GR-304': 17, 'GR-305': 11, 'GR-308': 2, 'GR-309R': 1, 'GR-315': 1, 'GR-316': 1 },
+    mustReconcile: false,
+    ask: 'Floor 4: not yet asked for.',
+  },
+};
+const PROFILE = FLOOR_PROFILES[FLOOR];
+const WORKBOOK_F2 = 'FF&E Installation workbook, "' + PROFILE.tab + '" tab (Drive 1vHg6-8vDVLpoE-x0jwjijOOlXJX4B1Jy)';
+const WORKBOOK_F2_COUNTS = PROFILE.counts;
+/* Set by assertTagCorrectionCountsF2() in main(); read by the room notes. */
+let TAB_FACTS = { facts: [], mismatches: [] };
 const TAG_CORRECTIONS_F2 = [
   {
     ruling: 'D22',
@@ -378,10 +419,9 @@ function applyTagCorrectionsF2(roomNo, room, rows) {
   const applied = [];
   for (const c of TAG_CORRECTIONS_F2) {
     if (!c.roomTypes.includes(room.room_type)) continue;
-    if (!c.floors.includes(String(room.floor))) {
-      die('room ' + roomNo + ' is type ' + JSON.stringify(room.room_type) + ' but sits on floor ' + room.floor +
-          ', and correction ' + c.ruling + ' is only evidenced here for floor(s) ' + c.floors.join('/') + '.');
-    }
+    /* A correction reaches the floors it is evidenced on and no other; a room on
+     * another floor keeps its transcribed tag and the room note says why. */
+    if (!c.floors.includes(String(room.floor))) continue;
     const hit = rows.filter((r) => r.tag === c.from);
     if (!hit.length) continue;
     if (hit.length !== 1) die('room ' + roomNo + ': ' + hit.length + ' rows tagged ' + c.from + ', expected ONE working wall per key');
@@ -394,30 +434,40 @@ function applyTagCorrectionsF2(roomNo, room, rows) {
 /* The correction is only evidence while the counts reconcile. Re-proved from the
  * database on every run, never trusted from the comment above. */
 function assertTagCorrectionCountsF2(db) {
-  const n = (sql) => db.prepare(sql).get().n;
-  const plain = n("select count(*) n from rooms where floor = '2' and room_type = 'Queen-Queen'");
-  const wide = n("select count(*) n from rooms where floor = '2' and room_type = 'QQ Wide'");
-  const ext = n("select count(*) n from rooms where floor = '2' and room_type = 'QQ Extended'");
-  const conn = n("select count(*) n from rooms where floor = '2' and room_type in ('QQ Connecting','QQ Wide Connecting')");
-  const acc = n("select count(*) n from rooms where floor = '2' and room_type = 'QQ Acc.'");
-  const ks = n("select count(*) n from rooms where floor = '2' and room_type = 'King Studio'");
-  const k1 = n("select count(*) n from rooms where floor = '2' and room_type = 'King One Bedroom'");
-  const k1a = n("select count(*) n from rooms where floor = '2' and room_type = 'King One Bedroom Acc.'");
-  const facts = [];
-  const want = (tag, got) => {
+  const n = (sql) => db.prepare(sql).get(FLOOR).n;
+  const plain = n("select count(*) n from rooms where floor = ? and room_type = 'Queen-Queen'");
+  const wide = n("select count(*) n from rooms where floor = ? and room_type = 'QQ Wide'");
+  const ext = n("select count(*) n from rooms where floor = ? and room_type = 'QQ Extended'");
+  const conn = n("select count(*) n from rooms where floor = ? and room_type in ('QQ Connecting','QQ Wide Connecting')");
+  const acc = n("select count(*) n from rooms where floor = ? and room_type = 'QQ Acc.'");
+  const ks = n("select count(*) n from rooms where floor = ? and room_type = 'King Studio'");
+  const k1 = n("select count(*) n from rooms where floor = ? and room_type = 'King One Bedroom'");
+  const k1a = n("select count(*) n from rooms where floor = ? and room_type = 'King One Bedroom Acc.'");
+  const facts = [], mismatches = [];
+  const want = (tag, got, how) => {
     if (WORKBOOK_F2_COUNTS[tag] !== got) {
-      die('D22 floor-2 count check failed: the 2nd Floor tab lists ' + tag + ' at ' + WORKBOOK_F2_COUNTS[tag] +
-          ' but the database reconciles it to ' + got + '. The correction is only evidence while those match.');
+      const msg = tag + ': the ' + PROFILE.tab + ' tab lists ' + WORKBOOK_F2_COUNTS[tag] + ', floor ' + FLOOR +
+        '\'s key mix gives ' + got + ' (' + how + ')';
+      if (PROFILE.mustReconcile) {
+        die('working-wall count check failed on floor ' + FLOOR + ': ' + msg + '. The corrections are only evidence while those match.');
+      }
+      mismatches.push(msg);
+      return;
     }
-    facts.push(tag + ' = ' + got);
+    facts.push(tag + ' = ' + got + ' (' + how + ')');
   };
-  want('GR-304', ks); want('GR-305', plain + wide + ext); want('GR-308', conn); want('GR-309R', acc);
-  want('GR-315', k1); want('GR-316', k1a);
-  const stray = n("select count(*) n from room_items where tag = 'GR-305' or tag = 'GR-309'");
+  want('GR-304', ks, ks + ' King Studio');
+  want('GR-305', plain + wide + ext, plain + ' plain Queen-Queen + ' + wide + ' QQ Wide + ' + ext + ' QQ Extended');
+  want('GR-308', conn, conn + ' connecting key(s)');
+  want('GR-309R', acc, acc + ' QQ Acc.');
+  want('GR-315', k1, k1 + ' King One Bedroom');
+  want('GR-316', k1a, k1a + ' King One Bedroom Acc.');
+  const stray = db.prepare("select count(*) n from room_items where tag = 'GR-305' or tag = 'GR-309'").get().n;
   if (stray !== 0) die('D22/D33 assume the database carries no GR-305 or GR-309 row anywhere, but it now has ' + stray + '.');
-  const f2tags = db.prepare("select room_no, tag from room_items where room_no in ('202','217') and tag in ('GR-315','GR-316')").all();
-  if (f2tags.length !== 2) die('expected sqlite to tag 202 GR-315 and 217 GR-316 (matching the 2nd Floor tab); found ' + JSON.stringify(f2tags));
-  return { plain, wide, ext, conn, acc, ks, facts };
+  const k1tags = db.prepare("select r.room_no, i.tag from rooms r join room_items i on i.room_no = r.room_no where r.floor = ? and r.room_type in ('King One Bedroom','King One Bedroom Acc.') and i.tag in ('GR-315','GR-316')").all(FLOOR);
+  if (k1tags.length !== k1 + k1a) die('expected every King One Bedroom key on floor ' + FLOOR + ' to carry GR-315 / GR-316 in sqlite; found ' + JSON.stringify(k1tags));
+  TAB_FACTS = { facts, mismatches };
+  return { plain, wide, ext, conn, acc, ks, facts, mismatches };
 }
 
 /** The D22 line text for a corrected floor-2 room. Replaces the donor's note,
@@ -426,7 +476,7 @@ function d22LineNote(roomNo, corr) {
   const c = corr.spec;
   const history = c.ruling === 'D22'
     ? 'D22 was ruled on floor 1 against the FF&E Installation workbook\'s 1st Floor tab; room ' + roomNo +
-      ' is on floor 2, and the SAME reconciliation holds on the ' + WORKBOOK_F2 + ': '
+      ' is on floor ' + FLOOR + ', and the SAME reconciliation holds on the ' + WORKBOOK_F2 + ': '
     : 'Ruling D22 (2026-08-20) corrected the plain Queen-Queen keys on this evidence and D33 extends it to this key ' +
       'on the ' + WORKBOOK_F2 + ': ';
   return 'Austin ruling ' + c.ruling + ': this room takes ' + c.to + ', not ' + c.from + '. The two are different ' +
@@ -439,13 +489,13 @@ function d22LineNote(roomNo, corr) {
 
 const DONOR_BY_TYPE = {
   'King Studio':           { donor: '104', donorType: 'King Studio',
-    why: 'SAME TYPE as LIVE floor-1 room 104 (King Studio): every tag is shared and the approved package text rides whole; only the sheet numbering is re-judged for floor 2.' },
+    why: 'SAME TYPE as LIVE floor-1 room 104 (King Studio): every tag is shared and the approved package text rides whole; only the sheet numbering is re-judged for this floor.' },
   'King One Bedroom':      { donor: '104', donorType: 'King Studio',
     why: 'closest built type with an approved package: King Studio room 104 - same bed family, same kitchenette, same bath fixtures. Shared tags only; anything else ships from sqlite. Reference mock-up: room 202 (ruling D30).' },
   'King One Bedroom Acc.': { donor: '104', donorType: 'King Studio',
     why: 'closest built type with an approved package: King Studio room 104. The ACCESSIBLE bath package is this room\'s own and is not taken from 104. Reference mock-up: room 217 (ruling D30).' },
   'Queen-Queen':           { donor: '105', donorType: 'Queen-Queen',
-    why: 'SAME TYPE as LIVE floor-1 room 105 (Queen-Queen): every tag is shared and the approved package text rides whole; only the sheet numbering is re-judged for floor 2.' },
+    why: 'SAME TYPE as LIVE floor-1 room 105 (Queen-Queen): every tag is shared and the approved package text rides whole; only the sheet numbering is re-judged for this floor.' },
   'QQ Wide':               { donor: '105', donorType: 'Queen-Queen',
     why: 'room_types says QQ Wide inherits its item rows from Queen-Queen (one A555 plan, alternate dimension strings; override OV-001 makes the difference label-only, display_label "QQ Studio"), so LIVE room 105 is the same package. Quantities are this room\'s own rows.' },
   'QQ Extended':           { donor: '105', donorType: 'Queen-Queen',
@@ -453,7 +503,7 @@ const DONOR_BY_TYPE = {
   'QQ Acc.':               { donor: '105', donorType: 'Queen-Queen',
     why: 'closest built type with an approved package: Queen-Queen room 105 - the only other two-queen type that is built. The ACCESSIBLE bath package is this room\'s own. Reference mock-up: room 238 (ruling D30).' },
   'QQ Connecting':         { donor: '103', donorType: 'QQ Connecting',
-    why: 'SAME TYPE as APPROVED floor-1 room 103 (QQ Connecting, rooms.connecting = 1): every tag is shared, the ".1" connecting plan references are KEPT, and the approved package text rides whole; only the sheet numbering is re-judged for floor 2.' },
+    why: 'SAME TYPE as APPROVED floor-1 room 103 (QQ Connecting, rooms.connecting = 1): every tag is shared, the ".1" connecting plan references are KEPT, and the approved package text rides whole; only the sheet numbering is re-judged for this floor.' },
 };
 /* Filled by loadRoomTable(db) before anything reads it. Keyed by room number,
  * same shape the reference-room table had: type, keys, donor, donorType, sheets, why. */
@@ -469,7 +519,7 @@ function loadRoomTable(db) {
     REP_ROOMS[r.room_no] = {
       type: r.room_type, keys,
       donor: d.donor, donorType: d.donorType,
-      sheets: 'plan A101; room sheet ' + (rt.room_sheet || '?') + '; bath ' + (rt.bath_sheet || '?'),
+      sheets: 'plan A10' + (Number(FLOOR) - 1) + '; room sheet ' + (rt.room_sheet || '?') + '; bath ' + (rt.bath_sheet || '?'),
       why: d.why,
     };
   }
@@ -3348,14 +3398,14 @@ function buildRoomNotes(db, roomNo, room, rows, red, drops, stamp, report) {
   const spec = REP_ROOMS[roomNo];
 
   notes.n_type = noteOf(
-    'FLOOR 2 BUILD, STAGED FOR APPROVAL - NOT LIVE. Room ' + roomNo + ' is room type "' + room.room_type + '" (' +
+    'FLOOR ' + FLOOR + ' BUILD, STAGED FOR APPROVAL - NOT LIVE. Room ' + roomNo + ' is room type "' + room.room_type + '" (' +
     spec.keys.length + ' key(s) of this type building-wide: ' + spec.keys.join(', ') + '). Sheets: ' + spec.sheets + '. ' +
-    'Austin, 2026-09-02: "I need the 2 floor built out. Just the FF&E & MEP not the 3d bim yet." ' +
+    PROFILE.ask + ' ' +
     'Package text for the tags this room shares with a built floor-1 room is carried from room ' + spec.donor + ' (' +
     spec.donorType + ') - ' + spec.why + ' Any tag with no counterpart in room ' + spec.donor +
     ' ships from data/project.sqlite verbatim, with its own reliability. Ruling D24 makes it law that every ' +
     'check-off, initial, timestamp, issue and note the crew app already holds on this room travels with it; ' +
-    'platform/tools/carry_floor2.mjs does that after every build and proves the reconciliation is exact.', stamp);
+    'platform/tools/carry_floor2.mjs --floor=' + FLOOR + ' does that after every build and proves the reconciliation is exact.', stamp);
 
   if (room.note) {
     notes.n_dbroom = noteOf('FROM THE DRAWING RECORD (data/project.sqlite rooms.note for room ' + roomNo +
@@ -3596,11 +3646,15 @@ function d22ScopeNote(db, room, roomNo, rows, corrections) {
   if (!hit.length) return null;
   const r = hit[0];
   const sameType = db.prepare('select count(*) n from rooms where room_type = ?').get(room.room_type).n;
-  const tab = 'The ' + WORKBOOK_F2 + ' lists the working walls as separate purchased parts: GR-304 @ K 17, ' +
-    'GR-305 @ QQ 11 (L 5 + R 6), GR-308 @ QQ Connector 2 (L 1 + R 1), GR-309R @ QQ Accessible 1, GR-315 @ K 1 BDRM ' +
-    'Suite 1, GR-316 @ K Accessible 1 - and every one of those counts reconciles against floor 2\'s own key mix ' +
-    'with no remainder (17 King Studio; 8 plain Queen-Queen + 1 QQ Wide + 2 QQ Extended = 11; 2 QQ Connecting; ' +
-    '1 QQ Acc.; 1 King One Bedroom; 1 King One Bedroom Acc.).';
+  const printed = Object.entries(WORKBOOK_F2_COUNTS).map(([t, c]) => t + ' ' + c).join(', ');
+  const tab = TAB_FACTS.mismatches.length === 0
+    ? 'The ' + WORKBOOK_F2 + ' lists the working walls as separate purchased parts (' + printed + ') and every one of ' +
+      'those counts reconciles against floor ' + FLOOR + '\'s own key mix with no remainder (' + TAB_FACTS.facts.join('; ') + ').'
+    : 'The ' + WORKBOOK_F2 + ' lists the working walls as separate purchased parts (' + printed + '). THOSE FIGURES DO ' +
+      'NOT RECONCILE with floor ' + FLOOR + '\'s own key mix: ' + TAB_FACTS.mismatches.join('; ') + '. Where they do ' +
+      'reconcile: ' + (TAB_FACTS.facts.join('; ') || 'nowhere') + '. The tab prints the same six figures as the 2nd Floor ' +
+      'tab, and ruling D20 already found a copied-down figure on these tabs, so this tab is NOT treated as evidence ' +
+      'for this floor.';
   if (corrections && corrections.length) {
     const c = corrections[0];
     const who = c.ruling === 'D22'
@@ -3614,27 +3668,37 @@ function d22ScopeNote(db, room, roomNo, rows, corrections) {
         'MEDIUM while the hand is open.' };
   }
   if (/Connecting/.test(room.room_type)) {
-    return { flag: 'info', summary: 'GR-308 is the connector wall and stands (2nd Floor tab: 2 = 2)',
+    return { flag: 'info', summary: 'GR-308 is the connector wall and stands',
       text: 'WORKING WALL TAG - GR-308 STANDS. Room ' + roomNo + ' is a QQ Connecting key and GR-308 IS the connector ' +
         'working wall. ' + tab + ' Ruling D22 corrected the PLAIN Queen-Queen keys and does not touch a connecting key.' +
         (r.note ? ' The row\'s own note, verbatim: "' + r.note + '"' : '') };
   }
+  if (TAB_FACTS.mismatches.length) {
+    return { flag: 'issue', summary: 'NO CORRECTION ON FLOOR ' + FLOOR + ' - the ' + PROFILE.tab + ' tab does not reconcile; ' +
+        r.tag + ' carried as transcribed, OPEN for Austin',
+      text: 'WORKING WALL TAG - OPEN FOR AUSTIN. This room carries ' + r.tag + ', exactly as data/project.sqlite transcribes ' +
+        'it' + (r.note ? ' - the row\'s own note, verbatim: "' + r.note + '"' : '') + '. On floor 2, rulings D22 and D33 ' +
+        'retagged every two-queen key against the 2nd Floor tab of the purchase record because that tab reconciled with ' +
+        'floor 2\'s key mix exactly. ' + tab + ' So no tag is changed on this floor: applying a floor-2 ruling on a tab that ' +
+        'does not reconcile would be a guess. Room ' + roomNo + ' is "' + room.room_type + '" (' + sameType + ' key(s) ' +
+        'building-wide). TO CLOSE THIS: Austin confirms the working-wall tag for this key (D22 and D33 name the floor-2 ' +
+        'keys by type and number) and the LEFT / RIGHT hand with RK Design before any casework is released. Until then the ' +
+        'line ships FLAGGED as transcribed.' };
+  }
   const likely = room.room_type === 'QQ Acc.'
     ? 'For this room the tab purchased GR-309R "Working Wall @ QQ Accessible", ONE unit against the ONE QQ Acc. key on ' +
-      'floor 2, and the row\'s own note records that the spec and ID-5.9 also say GR-309 while A556 tags GR-308. Three ' +
-      'documents against one, and the workbook is the purchase record.'
-    : 'For this room type the tab\'s GR-305 count of 11 reconciles ONLY as 8 plain Queen-Queen + 1 QQ Wide + 2 QQ ' +
-      'Extended, which puts room ' + roomNo + ' on GR-305 in the purchase record.';
-  return { flag: 'issue', summary: 'DECLINED D22 - ' + room.room_type + ' is not the type D22 names; ' + r.tag +
-      ' carried as transcribed, 2nd Floor tab evidence recorded, OPEN for Austin',
+      'this floor, and the row\'s own note records that the spec and ID-5.9 also say GR-309 while the accessible plan ' +
+      'tags GR-308. Three documents against one, and the workbook is the purchase record.'
+    : 'For this room type the tab\'s GR-305 count reconciles ONLY with the QQ Wide and QQ Extended keys counted in, ' +
+      'which puts room ' + roomNo + ' on GR-305 in the purchase record.';
+  return { flag: 'issue', summary: 'DECLINED - ' + room.room_type + ' is not a type a ruling names on this floor; ' + r.tag +
+      ' carried as transcribed, tab evidence recorded, OPEN for Austin',
     text: 'WORKING WALL TAG - OPEN FOR AUSTIN. This room carries ' + r.tag + ', exactly as data/project.sqlite transcribes ' +
-      'it' + (r.note ? ' - the row\'s own note, verbatim: "' + r.note + '"' : '') + '. Austin ruling D22 (2026-08-20) corrected ' +
-      'GR-308 to GR-305 on the PLAIN Queen-Queen keys, and this build applies it to the eight plain Queen-Queen keys on ' +
-      'floor 2 because the 2nd Floor tab reconciles exactly. Room ' + roomNo + ' is "' + room.room_type + '" (' + sameType +
-      ' key(s) building-wide), which is NOT the type D22 names, so the tag is NOT changed here: retagging it would be a ' +
-      'new ruling, not the application of an existing one. THE EVIDENCE, so it can be closed with one word: ' + tab + ' ' +
-      likely + ' TO CLOSE THIS: Austin confirms the tag for this type (and the LEFT / RIGHT hand per room) with RK Design ' +
-      'before any casework is released. Until then the line ships FLAGGED as transcribed.' };
+      'it' + (r.note ? ' - the row\'s own note, verbatim: "' + r.note + '"' : '') + '. Room ' + roomNo + ' is "' + room.room_type +
+      '" (' + sameType + ' key(s) building-wide), and no ruling names this key, so the tag is NOT changed here: retagging ' +
+      'it would be a new ruling, not the application of an existing one. THE EVIDENCE, so it can be closed with one word: ' +
+      tab + ' ' + likely + ' TO CLOSE THIS: Austin confirms the tag for this key (and the LEFT / RIGHT hand per room) with ' +
+      'RK Design before any casework is released. Until then the line ships FLAGGED as transcribed.' };
 }
 
 /* ======================================================== the FF&E document */
@@ -4661,11 +4725,13 @@ function assemble(docs, stamp, rooms) {
       generator: 'platform/tools/build_floor2.mjs',
       floor: 2,
       project: 'H2SEP - Home2 Suites by Hilton, Eagle Pass TX (Triun job 24030)',
-      purpose: 'FLOOR 2 GUEST ROOMS AND COMMON AREAS, STAGED FOR AUSTIN\'S APPROVAL. Not live, not deployed. Every '
-        + 'floor-2 key in data/project.sqlite rooms, FF&E and MEP, plus the floor-2 spaces (--spaces path). Austin, '
-        + '2026-09-02: "I need the 2 floor built out. Just the FF&E & MEP not the 3d bim yet."',
-      workbookF2: WORKBOOK_F2 + ' - working walls reconciled against the floor-2 key mix with no remainder: ' +
-        Object.entries(WORKBOOK_F2_COUNTS).map(([t, n]) => t + ' ' + n).join(', '),
+      purpose: 'FLOOR ' + FLOOR + ' GUEST ROOMS AND COMMON AREAS, STAGED FOR AUSTIN\'S APPROVAL. Not live, not deployed. Every '
+        + 'floor-' + FLOOR + ' key in data/project.sqlite rooms, FF&E and MEP, plus the floor-' + FLOOR + ' spaces (--spaces path). '
+        + PROFILE.ask,
+      workbookTab: WORKBOOK_F2 + ' prints ' + Object.entries(WORKBOOK_F2_COUNTS).map(([t, n]) => t + ' ' + n).join(', ') +
+        (TAB_FACTS.mismatches.length
+          ? '. DOES NOT RECONCILE with this floor\'s key mix: ' + TAB_FACTS.mismatches.join('; ') + '. Not used as evidence.'
+          : '. Reconciled against this floor\'s key mix with no remainder: ' + TAB_FACTS.facts.join('; ')),
       builtAt: stamp,
       stampIsConstant: true,
       recipeSource: 'platform/tools/build_floor1.mjs - the reduction recipe is COPIED and proved byte-faithful '
@@ -4720,12 +4786,15 @@ function assemble(docs, stamp, rooms) {
       donorMap: Object.fromEntries(Object.keys(REP_ROOMS).map((r) => [r, REP_ROOMS[r].donor])),
       roomTypes: Object.fromEntries(Object.keys(REP_ROOMS).map((r) => [r, REP_ROOMS[r].type])),
       typeKeys: Object.fromEntries(Object.keys(REP_ROOMS).map((r) => [r, REP_ROOMS[r].keys])),
-      rulingsApplied: ['D12 (scoped)', 'D20 (scoped)', 'D22 (the eight plain Queen-Queen keys, 2nd Floor tab '
-        + 'reconciled 11 = 8 + 1 + 2 and 2 = 2; handedness OPEN, reliability MEDIUM)',
-        'D33 (Austin 2026-09-02: "ok retag 201, 230, 232 to GR-305 and 238 to GR-309"; handedness OPEN, reliability MEDIUM)',
-        'D27', 'D28', 'D29 (scoped to the accessible QQ Acc. keys, so it lands on room 238 only)'],
+      rulingsApplied: ['D12 (scoped)', 'D20 (scoped)',
+        ...(FLOOR === '2' ? ['D22 (the eight plain Queen-Queen keys, 2nd Floor tab reconciled 11 = 8 + 1 + 2 and 2 = 2; '
+          + 'handedness OPEN, reliability MEDIUM)',
+          'D33 (Austin 2026-09-02: "ok retag 201, 230, 232 to GR-305 and 238 to GR-309"; handedness OPEN, reliability MEDIUM)'] : []),
+        'D27', 'D28', 'D29 (scoped to the accessible QQ Acc. keys)'],
       rulingsDeliberatelyNotApplied: [
-        'D19 - scoped to room 118 only; rooms 217 and 238 carry BOTH bathing configurations, FLAGGED',
+        'D19 - scoped to room 118 only; the accessible keys carry BOTH bathing configurations, FLAGGED',
+        ...(FLOOR === '2' ? [] : ['D22 and D33 - they name floor-2 keys and rest on the 2nd Floor tab; this floor\'s tab does not '
+          + 'reconcile, so every two-queen working wall ships as transcribed with the evidence in room note n_d22, OPEN for Austin']),
       ],
       conflictPolicy: 'document conflicts are CARRIED as FLAGGED lines and room notes quoting data/project.sqlite '
         + 'verbatim. Nothing is resolved by this tool. That includes the data/project.sqlite conflicts TABLE, and '
@@ -5612,6 +5681,7 @@ function main(argv) {
     if (a === '--spaces-report') { spacesMode = true; spacesReportOnly = true; continue; }
     if (a === '--verify-determinism') { verifyDet = true; continue; }
     if (a === '--partial') { partial = true; continue; }
+    if (a.startsWith('--floor=')) continue;   /* read at module load; see FLOOR */
     if (a.startsWith('--stamp=')) {
       stamp = a.slice('--stamp='.length);
       if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(stamp)) {
@@ -5769,7 +5839,8 @@ function main(argv) {
         (p.orphaned.length ? '; WORK WITH NO LINE TO LAND ON: ' + p.orphaned.join(', ') : '') + '\n');
     }
   }
-  for (const f of d22counts.facts) process.stdout.write('2nd Floor tab reconciled: ' + f + '\n');
+  for (const f of d22counts.facts) process.stdout.write(PROFILE.tab + ' tab reconciled: ' + f + '\n');
+  for (const f of d22counts.mismatches) process.stdout.write(PROFILE.tab + ' tab DOES NOT RECONCILE: ' + f + '\n');
   if (carried.length) {
     process.stdout.write('--partial: rebuilt ' + rooms.join(', ') + '; carried room(s) ' + carried.join(', ') +
       ' forward from the existing file, unchanged\n');

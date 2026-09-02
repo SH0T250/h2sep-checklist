@@ -18,12 +18,13 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(HERE, '../..');
+const FLOOR = (process.argv.find((a) => a.startsWith('--floor=')) || '--floor=2').slice('--floor='.length);
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const HERE = path.join(ROOT, 'research', 'floor' + FLOOR);
 const rd = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
 const txt = (p) => (fs.existsSync(path.join(HERE, p)) ? fs.readFileSync(path.join(HERE, p), 'utf8') : '');
 
-const F2 = rd('platform/data/floor2-staged.json');
+const F2 = rd('platform/data/floor' + FLOOR + '-staged.json');
 const F1 = rd('platform/data/floor1-staged.json');
 const REF = rd('platform/data/ref-rooms-staged.json');
 const buildLog = txt('build.log'), carryLog = txt('carry.log'), auditLog = txt('audit.log');
@@ -32,14 +33,14 @@ const DB = JSON.parse(execFileSync('python3', ['-c', `
 import sqlite3, json
 c = sqlite3.connect(${JSON.stringify(path.join(ROOT, 'data/project.sqlite'))})
 cur = c.cursor()
-rooms = {r[0]: {"type": r[1], "acc": r[2], "conn": r[3], "label": r[4], "note": r[5]} for r in cur.execute("select room_no, room_type, accessible, connecting, display_label, note from rooms where floor='2'")}
-spaces = {r[0]: {"name": r[1], "note": r[2]} for r in cur.execute("select space_no, name, note from spaces where floor='2'")}
+rooms = {r[0]: {"type": r[1], "acc": r[2], "conn": r[3], "label": r[4], "note": r[5]} for r in cur.execute("select room_no, room_type, accessible, connecting, display_label, note from rooms where floor=?", (${JSON.stringify(FLOOR)},))}
+spaces = {r[0]: {"name": r[1], "note": r[2]} for r in cur.execute("select space_no, name, note from spaces where floor=?", (${JSON.stringify(FLOOR)},))}
 print(json.dumps({"rooms": rooms, "spaces": spaces}))
 `], { encoding: 'utf8' }));
 
 const DONOR = { 'King Studio': '104', 'King One Bedroom': '104', 'King One Bedroom Acc.': '104', 'Queen-Queen': '105',
   'QQ Wide': '105', 'QQ Extended': '105', 'QQ Acc.': '105', 'QQ Connecting': '103' };
-const MOCKUP = { 202: 'King One Bedroom', 217: 'King One Bedroom Acc.', 230: 'QQ Extended', 238: 'QQ Acc.' };
+const MOCKUP = FLOOR === '2' ? { 202: 'King One Bedroom', 217: 'King One Bedroom Acc.', 230: 'QQ Extended', 238: 'QQ Acc.' } : {};
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const live = (d) => Object.entries(d.items || {}).filter(([, v]) => !v.deleted);
 const isSpace = (id) => /^S/.test(id);
@@ -103,7 +104,12 @@ const spaceRows = spaceIds.filter((id) => !id.endsWith('-M')).map((id) => {
 });
 const noPackage = (F2.meta.spacesWithNoPackage || []);
 
-const wwTable = [
+const wwTable = FLOOR !== '2' ? [
+  ['GR-304', 'Working Wall @ King', String(F2.meta.workbookTab || '').includes('GR-304 17') ? '17' : '?', roomRows.filter((x) => x.ww === 'GR-304').length, 'stands, HIGH (reconciles: 17 = 17)', 'the King Studios'],
+  ['GR-308', 'as transcribed on every two-queen key', 'tab: GR-305 11, GR-308 2', roomRows.filter((x) => x.ww === 'GR-308').length, 'OPEN. The ' + FLOOR + (FLOOR === '3' ? 'rd' : 'th') + ' Floor tab prints the same figures as the 2nd and does not reconcile with this floor (9 plain + 1 wide + 2 extended = 12 two-queen walls against 11 printed; 1 connector against 2), so no floor-2 ruling is applied here', roomRows.filter((x) => x.ww === 'GR-308').map((x) => x.r).join(' ')],
+  ['GR-315', 'Working Wall @ K 1 BDRM Suite', '1', roomRows.filter((x) => x.ww === 'GR-315').length, 'stands, HIGH', roomRows.filter((x) => x.ww === 'GR-315').map((x) => x.r).join(' ')],
+  ['GR-316', 'Working Wall @ K Accessible', '1', roomRows.filter((x) => x.ww === 'GR-316').length, 'stands, HIGH', roomRows.filter((x) => x.ww === 'GR-316').map((x) => x.r).join(' ')],
+] : [
   ['GR-304', 'Working Wall @ King', '17', roomRows.filter((x) => x.ww === 'GR-304').length, 'stands, HIGH', 'the 17 King Studios'],
   ['GR-305', 'Working Wall @ QQ', '11 (L 5 + R 6)', roomRows.filter((x) => x.ww === 'GR-305').length, 'D22 on the 8 plain Queen-Queen keys; D33 (Austin, 2026-09-02) on QQ Wide 201 and QQ Extended 230, 232. MEDIUM while the hand is open', '201 203 205 207 209 211 213 228 230 232 234'],
   ['GR-308', 'Working Wall @ QQ Connector', '2 (L 1 + R 1)', roomRows.filter((x) => x.ww === 'GR-308').length, 'stands on the 2 connecting keys', '215 236'],
@@ -112,7 +118,14 @@ const wwTable = [
   ['GR-316', 'Working Wall @ K Accessible', '1', roomRows.filter((x) => x.ww === 'GR-316').length, 'stands, HIGH', '217'],
 ];
 
-const decisions = [
+const decisions = FLOOR !== '2' ? [
+  ['Approve floor ' + FLOOR + ' for rollout', 'Nothing here is live. Approval starts the cutover: backup first, three-way merge, read-back verify, crew collection never written (the floor-1 runbook).'],
+  ['Working walls on the two-queen keys', 'On floor 2 you ruled the working walls against the workbook\'s 2nd Floor tab, which reconciled exactly. The ' + FLOOR + (FLOOR === '3' ? 'rd' : 'th') + ' Floor tab prints the same six figures, and this floor\'s key mix is different (nine plain Queen-Queens and one connector, per the drawings), so the arithmetic does not close: 12 two-queen walls against 11 printed, 1 connector against 2. Every two-queen wall ships GR-308 as transcribed, FLAGGED, with the arithmetic on the line. Say whether D22 and D33 carry up by room type, or whether the drawings (A102: is 315 a connector?) or the tab need correcting first.'],
+  ['GR-305 handedness', 'Still open building-wide. D26 records you are answering this yourself.'],
+  ['Bathing configuration on 317 and 338', 'Both the tub and the roll-in rows are carried and flagged on each; D19 covered room 118 only and was not extended. Do not order a bath package for either key until ruled.'],
+  ['Common-area finish rows', 'Six of the nine floor-' + FLOOR + ' spaces have only paint, drywall, flooring, doors and wall-covering rows, which your approved gate keeps off every checklist, so they get no document. Same question floors 1 and 2 left open.'],
+  ['Stricter flags than floor 1 on the same room types', `${stricter.length} lines that are HIGH on the floor-1 donor are MEDIUM or FLAGGED here, for the same reasons as on floor 2: open conflicts-table entries carried onto the line, and the worst-of-own-rows MEP rule.`],
+] : [
   ['Approve floor 2 for rollout', 'Nothing here is live. Approval starts the cutover: backup first, three-way merge, read-back verify, crew collection never written (the floor-1 runbook).'],
   ['Working walls, ruled', 'D33, 2026-09-02: "ok retag 201, 230, 232 to GR-305 and 238 to GR-309". Applied. The crew\'s check-offs on those four walls came across the retag. Nothing left to decide here except the hand.'],
   ['GR-305 handedness', 'The tab splits floor 2 into 5 LEFT and 6 RIGHT. No document says which room takes which hand. D26 records you are answering this yourself.'],
@@ -121,7 +134,7 @@ const decisions = [
   ['Stricter flags than floor 1 on the same room types', `${stricter.length} lines that are HIGH on the floor-1 donor are MEDIUM or FLAGGED here. Every one comes from an OPEN entry in the conflicts table (B4.5, B4.2, B3.1, A11, B4.4) or the worst-of-own-rows MEP rule, which the mock-ups already follow. Floor 1 was built before that rule. Either close those conflicts or rule that floor 1's HIGH stands, and the lines follow.`],
 ];
 
-const html = `<title>Floor 2 Review Book</title>
+const html = `<title>Floor ${FLOOR} Review Book</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{--paper:#F5F7FA;--ink:#1C2230;--muted:#5B6678;--line:#D3DAE5;--panel:#FFFFFF;--navy:#1B2A41;--steel:#3E6491;--steel-soft:#E4ECF6;--amber:#B8741E;--amber-soft:#FBF1E0;--green:#2C7A57;--green-soft:#E2F2EA;--red:#B23A32;--red-soft:#F9E5E3;--mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--sans:'IBM Plex Sans',system-ui,-apple-system,Segoe UI,sans-serif;--serif:'Source Serif 4',Georgia,'Times New Roman',serif}
@@ -162,11 +175,11 @@ pre{background:var(--panel);border:1px solid var(--line);padding:14px 16px;font-
 a{color:var(--steel)}
 @media (max-width:700px){.audit{columns:1}h1{font-size:34px}.tiles{grid-template-columns:repeat(2,1fr)}}
 </style>
-<div class="band"><span>H2SEP · Home2 Suites Eagle Pass · Triun 24030</span><span><b>Floor 2 · staged · not live</b></span><span>${esc(F2.meta.builtAt || '')}</span></div>
+<div class="band"><span>H2SEP · Home2 Suites Eagle Pass · Triun 24030</span><span><b>Floor ${FLOOR} · staged · not live</b></span><span>${esc(F2.meta.builtAt || '')}</span></div>
 <div class="wrap">
 <p class="eyebrow">Review book</p>
-<h1>Floor 2, built out for approval</h1>
-<p class="lede">Every floor-2 guest room and common area the drawings hold, as FF&amp;E checklists and MEP punches, with the crew's real work carried in from the live app. Austin, 2026-09-02: "I need the 2 floor built out. Just the FF&amp;E &amp; MEP not the 3d bim yet." Nothing here has been written to the live database.</p>
+<h1>Floor ${FLOOR}, built out for approval</h1>
+<p class="lede">Every floor-${FLOOR} guest room and common area the drawings hold, as FF&amp;E checklists and MEP punches, with the crew's real work carried in from the live app. ${esc(FLOOR === '2' ? 'Austin, 2026-09-02: "I need the 2 floor built out. Just the FF&E & MEP not the 3d bim yet."' : 'Austin, 2026-09-02: "once completed lets start floor 3 just no 3d BIM yet."')} Nothing here has been written to the live database.</p>
 
 <div class="tiles">
 <div class="tile"><div class="n">${roomIds.length}</div><div class="l">guest rooms</div></div>
@@ -187,7 +200,7 @@ a{color:var(--steel)}
 <p>Sheet citations were re-judged for floor 2. A first-floor sheet is dropped and quoted as removed, or re-pointed to its second-floor sibling where the database proves the pairing; A100 survives only where the citation is to a table printed on it. The sprinkler line on a room with head rows counts those rows and drops the first-floor head total; a room type with no verified heads ships with no count at all.</p>
 
 <h2>The working walls, reconciled against the purchase record</h2>
-<p>The FF&amp;E Installation workbook's 2nd Floor tab lists the working walls as separate purchased parts. Every count reconciles against the floor's key mix with no remainder. That is the evidence standard ruling D22 used on floor 1. D22 covers the plain Queen-Queen keys; D33 (Austin, 2026-09-02) covers the three other two-queen keys and the accessible key.</p>
+${FLOOR === '2' ? `<p>The FF&amp;E Installation workbook's 2nd Floor tab lists the working walls as separate purchased parts. Every count reconciles against the floor's key mix with no remainder. That is the evidence standard ruling D22 used on floor 1. D22 covers the plain Queen-Queen keys; D33 (Austin, 2026-09-02) covers the three other two-queen keys and the accessible key.</p>` : `<p>${esc(F2.meta.workbookTab || '')}</p>`}
 <div class="scroll"><table>
 <tr><th>tag</th><th>workbook item</th><th class="num">tab count</th><th class="num">rooms here</th><th>treatment</th><th>rooms</th></tr>
 ${wwTable.map((r) => `<tr><td><span class="tag">${esc(r[0])}</span></td><td>${esc(r[1])}</td><td class="num">${esc(r[2])}</td><td class="num">${r[3]}</td><td>${esc(r[4])}</td><td><code>${esc(r[5])}</code></td></tr>`).join('')}
@@ -201,7 +214,7 @@ ${roomRows.map((x) => `<tr><td><b>${x.r}</b></td><td>${esc(x.info.type)}${x.mock
 </table></div>
 
 <h2>Common areas</h2>
-<p>Plan numbering from A101 (ruling D18). A space whose only rows are finishes gets no document under the approved gate, and is listed so nobody thinks it was forgotten.</p>
+<p>Plan numbering from A10${Number(FLOOR) - 1} (ruling D18). A space whose only rows are finishes gets no document under the approved gate, and is listed so nobody thinks it was forgotten.</p>
 <div class="scroll"><table>
 <tr><th>doc</th><th>space</th><th class="num">FF&amp;E lines</th><th class="num">MEP lines</th><th class="num">flags</th></tr>
 ${spaceRows.map((s) => `<tr><td><b>${esc(s.id)}</b></td><td>${esc(s.no)} ${esc(s.name)}</td><td class="num">${s.ffe}</td><td class="num">${s.mep}</td><td class="num">${s.flag}</td></tr>`).join('')}
@@ -221,13 +234,14 @@ ${[...stricterByKey.entries()].sort((a, b) => b[1] - a[1]).map(([k, n]) => `<tr>
 </table></div>
 
 <h2>Verification</h2>
-<p>tests/floor2-audit.mjs, ${esc(auditTotal || `${auditPass} passed, ${auditFail} failed`)}. Every check tries to fail the data; the generator's own selftest re-derives every room from the database and proves the recipe still reproduces the approved floor-1 rooms.</p>
+<p>tests/floor${FLOOR}-audit.mjs, ${esc(auditTotal || `${auditPass} passed, ${auditFail} failed`)}. Every check tries to fail the data; the generator's own selftest re-derives every room from the database and proves the recipe still reproduces the approved floor-1 rooms.</p>
 <div class="audit">${auditLines.map((l) => `<div class="${l.startsWith('PASS') ? 'p' : 'f'}">${esc(l.replace(/^(PASS|FAIL)\s+/, ''))}</div>`).join('')}</div>
 
 <h2>Sources</h2>
-<p>platform/data/floor2-staged.json (the build) · platform/tools/build_floor2.mjs (the generator) · platform/tools/carry_floor2.mjs (the crew carry) · tests/floor2-audit.mjs · data/project.sqlite · FF&amp;E Installation workbook, 2nd Floor tab · rulings D12, D18, D20, D22, D24, D26, D27, D28, D29, D30 in research/construction-os/DECISIONS.md.</p>
-<div class="foot">Generated by research/floor2/build_floor2book.mjs from the staged file. Staged for approval. Not live. Nothing deployed.</div>
+<p>platform/data/floor${FLOOR}-staged.json (the build) · platform/tools/build_floor2.mjs --floor=${FLOOR} (the generator) · platform/tools/carry_floor2.mjs --floor=${FLOOR} (the crew carry) · tests/floor${FLOOR}-audit.mjs · data/project.sqlite · FF&amp;E Installation workbook, ${FLOOR === '2' ? '2nd' : FLOOR === '3' ? '3rd' : '4th'} Floor tab · rulings D12, D18, D20, D22, D24, D26, D27, D28, D29, D30, D32, D33 in research/construction-os/DECISIONS.md.</p>
+<div class="foot">Generated by research/floor2/build_floor2book.mjs --floor=${FLOOR} from the staged file. Staged for approval. Not live. Nothing deployed.</div>
 </div>
 `;
-fs.writeFileSync(path.join(HERE, 'floor2book.html'), html, 'utf8');
-console.log('wrote research/floor2/floor2book.html', html.length, 'bytes;', roomIds.length, 'rooms,', spaceRows.length, 'spaces,', lines.length, 'lines,', stricter.length, 'stricter lines');
+fs.mkdirSync(HERE, { recursive: true });
+fs.writeFileSync(path.join(HERE, 'floor' + FLOOR + 'book.html'), html, 'utf8');
+console.log('wrote research/floor' + FLOOR + '/floor' + FLOOR + 'book.html', html.length, 'bytes;', roomIds.length, 'rooms,', spaceRows.length, 'spaces,', lines.length, 'lines,', stricter.length, 'stricter lines');
