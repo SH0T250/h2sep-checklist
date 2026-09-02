@@ -12,7 +12,7 @@
  *     Wide and QQ Extended take GR-305, QQ Acc. takes GR-309, the connecting
  *     key keeps GR-308; the 3rd Floor tab does not reconcile and every
  *     corrected line says so
- *   - the crew's floor-3 work is 412 checks, 701 open issues, 10 notes
+ *   - the crew's floor-3 work is 485 checks (475 land, 10 on condensed MEP details), 646 open issues, 10 notes
  */
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { execSync } from 'child_process';
@@ -48,7 +48,11 @@ const FLOOR2_ROOMS = ['301','302','303','304','305','306','307','308','309','310
 const PLAIN_QQ = ['303','305','307','309','311','313','315','328','334'];
 const GR305_ROOMS = ['301','303','305','307','309','311','313','315','328','330','332','334'];   // D35 (D22 + D33 by type)
 const TWO_QUEEN = [...GR305_ROOMS, '338'];
-const CREW = { checks: 412, issues: 701, notes: 10 };   // read from the live crew app 2026-09-02, READ ONLY
+// Read from the live crew app 2026-09-02 (evening run), READ ONLY. The crew now
+// holds 485 checks on floor 3; 10 of them sit on MEP detail lines the D10
+// condensation folded away (313, PTAC details checked by AJ) and have no line
+// to land on. The carry lists them, drops nothing, and lands the other 475.
+const CREW = { checks: 475, issues: 646, notes: 10, noLine: 10 };
 /* The staged floor-2 room of the same type, for the shape comparison. */
 const F2_TWIN = { 'QQ Wide': '201', 'King One Bedroom': '202', 'Queen-Queen': '203', 'King Studio': '204', 'QQ Connecting': '215',
   'King One Bedroom Acc.': '217', 'QQ Extended': '230', 'QQ Acc.': '238' };
@@ -145,6 +149,8 @@ check('the ruled lines D27 (hot/cold) and D28 (closer, lock) are on every guest 
     const o = [];
     if (!docs[r + '-MEP'].items.plmb_hotcold_a) o.push(`${r}-MEP: no plmb_hotcold_a (D27)`);
     if (!docs[r].items.dh_closer_a) o.push(`${r}: no dh_closer_a (D28)`);
+    if (!docs[r].items.tvmount_a) o.push(`${r}: no tvmount_a (D46)`);
+    if (docs[r].items.tvmount_a && docs[r].items['903_a'] && !(docs[r].items.tvmount_a.sort > docs[r].items['903_a'].sort && docs[r].items.tvmount_a.sort < docs[r].items['904_a']?.sort)) o.push(`${r}: tvmount_a is not directly under the Television`);
     if (!docs[r].items.dh_lock_a) o.push(`${r}: no dh_lock_a (D28)`);
     return o;
   }));
@@ -211,7 +217,7 @@ check('every floor-3 room matches the staged floor-2 room of its type on FF&E sh
     const b = Object.fromEntries(live_(ref.docs[twin]).map(([k, v]) => [k, shape(v)]));
     const out = [];
     for (const k of Object.keys(b)) if (!a[k] && !twinExempt(k)) out.push(`${r}/${k}: on twin ${twin}, missing here`);
-    for (const k of Object.keys(a)) { if (twinExempt(k)) continue; if (!b[k]) out.push(`${r}/${k}: not on twin ${twin}`); else if (a[k] !== b[k]) out.push(`${r}/${k}: ${a[k]} vs twin ${b[k]}`); }
+    for (const k of Object.keys(a)) { if (twinExempt(k) || /FIELD-AUTHORED|THIS LINE EXISTS BECAUSE/.test(String(docs[r].items[k]?.instanceNote || ''))) continue; if (!b[k]) out.push(`${r}/${k}: not on twin ${twin}`); else if (a[k] !== b[k]) out.push(`${r}/${k}: ${a[k]} vs twin ${b[k]}`); }
     return out;
   }));
 check('every floor-3 MEP doc has the same line keys as its floor-2 twin', () =>

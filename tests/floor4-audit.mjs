@@ -151,6 +151,8 @@ check('the ruled lines D27 (hot/cold) and D28 (closer, lock) are on every guest 
     const o = [];
     if (!docs[r + '-MEP'].items.plmb_hotcold_a) o.push(`${r}-MEP: no plmb_hotcold_a (D27)`);
     if (!docs[r].items.dh_closer_a) o.push(`${r}: no dh_closer_a (D28)`);
+    if (!docs[r].items.tvmount_a) o.push(`${r}: no tvmount_a (D46)`);
+    if (docs[r].items.tvmount_a && docs[r].items['903_a'] && !(docs[r].items.tvmount_a.sort > docs[r].items['903_a'].sort && docs[r].items.tvmount_a.sort < docs[r].items['904_a']?.sort)) o.push(`${r}: tvmount_a is not directly under the Television`);
     if (!docs[r].items.dh_lock_a) o.push(`${r}: no dh_lock_a (D28)`);
     return o;
   }));

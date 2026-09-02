@@ -1,4 +1,4 @@
-(node:10018) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(node:3902) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 seed:     /home/user/h2sep-checklist/platform/data/floor3-staged.json
 rooms:    301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 336, 338  ->  docs 301 301-MEP 302 302-MEP 303 303-MEP 304 304-MEP 305 305-MEP 306 306-MEP 307 307-MEP 308 308-MEP 309 309-MEP 310 310-MEP 311 311-MEP 312 312-MEP 313 313-MEP 314 314-MEP 315 315-MEP 316 316-MEP 317 317-MEP 318 318-MEP 322 322-MEP 323 323-MEP 324 324-MEP 325 325-MEP 326 326-MEP 327 327-MEP 328 328-MEP 329 329-MEP 330 330-MEP 331 331-MEP 332 332-MEP 333 333-MEP 334 334-MEP 336 336-MEP 338 338-MEP S321 S321-M S337 S339
@@ -8,10 +8,10 @@ snapshot: 69 live crew doc(s) -> /home/user/h2sep-checklist/tools/out/backups/cr
   1 staged doc(s) have no crew counterpart, nothing to carry: S321-M
 
 CARRIED
-  301        40 line(s) with state, 1 note(s)
+  301        41 line(s) with state, 1 note(s)
   302        42 line(s) with state, 2 note(s)
   303        39 line(s) with state, 3 note(s)
-  304        40 line(s) with state, 0 note(s)
+  304        41 line(s) with state, 0 note(s)
   305        38 line(s) with state, 0 note(s)
   306        39 line(s) with state, 0 note(s)
   307        40 line(s) with state, 0 note(s)
@@ -20,8 +20,8 @@ CARRIED
   310        41 line(s) with state, 0 note(s)
   311        40 line(s) with state, 0 note(s)
   312        41 line(s) with state, 0 note(s)
-  313        40 line(s) with state, 0 note(s)
-  314        15 line(s) with state, 0 note(s)
+  313        39 line(s) with state, 0 note(s)
+  314        41 line(s) with state, 0 note(s)
   315        40 line(s) with state, 1 note(s)
   316        15 line(s) with state, 0 note(s)
   317         7 line(s) with state, 0 note(s)
@@ -42,20 +42,56 @@ CARRIED
   336        17 line(s) with state, 0 note(s)
   338        11 line(s) with state, 0 note(s)
 
-  965 line(s) with field state, 10 note(s), 9 carried across a ruled retag
-  834 personal name/uid field(s) dropped on the way in
-  1348 line(s) kept the mock-up's package text over the crew build's older text (field state only travels)
+  992 line(s) with field state, 10 note(s), 9 carried across a ruled retag
+  980 personal name/uid field(s) dropped on the way in
+  1349 line(s) kept the mock-up's package text over the crew build's older text (field state only travels)
 
 LINES REBUILT SO THE CREW'S WORK HAS SOMEWHERE TO LAND (ruling D24: nothing is deleted):
+  301/gr321_b  GR-321  [FF&E - Casegoods]  HIGH
+      FIELD-AUTHORED in the crew app (no category, no citation): carried verbatim, category from this room's own row for the tag
+      sort 20030 in the crew app -> 22000 here (its own band, after the D28 Door Hardware lines)
+      carried: checked=false  openIssue=true "IN BOX"
   302/gr905_a  GR-905  [FF&E - Misc]  FLAGGED
       rebuilt from data/project.sqlite room 302's own row(s), not from the crew document
       sort 21000 in the crew app -> 22000 here (its own band, after the D28 Door Hardware lines)
       carried: checked=false  openIssue=true "MISSING"
 
+STATE WITH NO LINE TO LAND ON - carried nowhere, dropped nowhere, listed here:
+  313-MEP/a065cd3d8534  PTAC-2 / PTAC-1  [Mechanical]
+      "PTAC — G.E. AZ65H12DAB packaged terminal A/C, 11,900 BTU/h cool (EER 11.9) / 10,400 BTU/h "
+      checked=true (AJ)  openIssue=false
+  313-MEP/86e3c3a09395  <untagged>  [Mechanical]
+      "PTAC wall sleeve kit (furnished with the unit) — caulked all round, drywall closure at the"
+      checked=true (AJ)  openIssue=false
+  313-MEP/485c4147dfc5  <untagged>  [Mechanical]
+      "PTAC exterior louver / architectural wall grille at the window wall"
+      checked=true (AJ)  openIssue=false
+  313-MEP/766dc7c04c13  <untagged>  [Mechanical]
+      "Interior architectural wall grille at the PTAC, painted to match the INTERIOR wall (M401 K"
+      checked=true (AJ)  openIssue=false
+  313-MEP/67670b92d867  <untagged>  [Mechanical]
+      "PTAC louvered access panel"
+      checked=true (AJ)  openIssue=false
+  313-MEP/d1b9f60d4cd5  <untagged>  [Mechanical]
+      "PTAC fresh-air filter, MERV 13 or MERV 8, with bracket and gasket"
+      checked=true (AJ)  openIssue=false
+  313-MEP/fa825bd92456  <untagged>  [Mechanical]
+      "PTAC fresh-air kit (outside-air path delivering the scheduled OSA 45.0 CFM)"
+      checked=true (AJ)  openIssue=false
+  313-MEP/84d2ebbf4760  <untagged>  [Mechanical]
+      "PTAC low-ambient kit"
+      checked=true (AJ)  openIssue=false
+  313-MEP/f6bf42a588ec  <untagged>  [Mechanical]
+      "PTAC drain kit (furnished with the unit; M501 det.9 calls it out for 1st/2nd/3rd/4th-floor"
+      checked=true (AJ)  openIssue=false
+  313-MEP/07081dd42d97  EAG-50  [Mechanical]
+      "Toilet / bath exhaust air grille, 50 CFM — off-white aluminium grille per the M201 EF-1 re"
+      checked=true (AJ)  openIssue=false
+
 RECONCILIATION  (live lines only; a tombstone is history, not a second check)
-  1 line(s) rebuilt above so the work lands on a line instead of being named and lost
-  checks  crew 412  =  build 412 + 0 with no line   EXACT
-  issues  crew 701  =  build 701 + 0 with no line   EXACT
+  2 line(s) rebuilt above so the work lands on a line instead of being named and lost
+  checks  crew 485  =  build 475 + 10 with no line   EXACT
+  issues  crew 646  =  build 646 + 0 with no line   EXACT
   notes   crew  10  =  build  10 present with text intact   EXACT
 
 FIRESTORE DOC RULES  PASS - doc id <= 8 chars, number == docId, items <= 200, whitelisted keys only, no PII

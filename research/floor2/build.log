@@ -14,74 +14,74 @@ SELFTEST
    src == room_items.primary_sheet re-proved on 120 approved lines. PASS
 
 3. EVERY BUILT ROOM RE-DERIVES FROM THE DATABASE
-   room 201: FF&E 42 line(s), MEP 23 line(s); 74 MEP row(s) = 65 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 202: FF&E 43 line(s), MEP 25 line(s); 77 MEP row(s) = 66 condensed + 2 own line(s) + 9 rough-in + 0 lost - PASS
-   room 203: FF&E 42 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 204: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 205: FF&E 42 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 206: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 207: FF&E 42 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 208: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 209: FF&E 42 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 210: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 211: FF&E 42 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 212: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 213: FF&E 42 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 214: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 215: FF&E 42 line(s), MEP 23 line(s); 74 MEP row(s) = 65 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 216: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 217: FF&E 47 line(s), MEP 37 line(s); 87 MEP row(s) = 64 condensed + 14 own line(s) + 9 rough-in + 0 lost - PASS
-   room 218: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 222: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 223: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 224: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 225: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 226: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 227: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 228: FF&E 42 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 229: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 230: FF&E 42 line(s), MEP 23 line(s); 74 MEP row(s) = 65 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 231: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 232: FF&E 42 line(s), MEP 23 line(s); 74 MEP row(s) = 65 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 233: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 234: FF&E 42 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 236: FF&E 42 line(s), MEP 23 line(s); 74 MEP row(s) = 65 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
-   room 238: FF&E 45 line(s), MEP 33 line(s); 82 MEP row(s) = 63 condensed + 10 own line(s) + 9 rough-in + 0 lost - PASS
+   room 201: FF&E 43 line(s), MEP 23 line(s); 74 MEP row(s) = 65 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 202: FF&E 44 line(s), MEP 25 line(s); 77 MEP row(s) = 66 condensed + 2 own line(s) + 9 rough-in + 0 lost - PASS
+   room 203: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 204: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 205: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 206: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 207: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 208: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 209: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 210: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 211: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 212: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 213: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 214: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 215: FF&E 43 line(s), MEP 23 line(s); 74 MEP row(s) = 65 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 216: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 217: FF&E 48 line(s), MEP 37 line(s); 87 MEP row(s) = 64 condensed + 14 own line(s) + 9 rough-in + 0 lost - PASS
+   room 218: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 222: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 223: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 224: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 225: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 226: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 227: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 228: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 229: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 230: FF&E 43 line(s), MEP 23 line(s); 74 MEP row(s) = 65 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 231: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 232: FF&E 43 line(s), MEP 23 line(s); 74 MEP row(s) = 65 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 233: FF&E 44 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 234: FF&E 43 line(s), MEP 23 line(s); 77 MEP row(s) = 68 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 236: FF&E 43 line(s), MEP 23 line(s); 74 MEP row(s) = 65 condensed + 0 own line(s) + 9 rough-in + 0 lost - PASS
+   room 238: FF&E 46 line(s), MEP 33 line(s); 82 MEP row(s) = 63 condensed + 10 own line(s) + 9 rough-in + 0 lost - PASS
 
 4. FIRESTORE DOC RULES
-   201: id 3/8 chars, 42/200 items, 8 note(s)
-   202: id 3/8 chars, 43/200 items, 7 note(s)
-   203: id 3/8 chars, 42/200 items, 7 note(s)
-   204: id 3/8 chars, 43/200 items, 6 note(s)
-   205: id 3/8 chars, 42/200 items, 7 note(s)
-   206: id 3/8 chars, 43/200 items, 6 note(s)
-   207: id 3/8 chars, 42/200 items, 7 note(s)
-   208: id 3/8 chars, 43/200 items, 6 note(s)
-   209: id 3/8 chars, 42/200 items, 8 note(s)
-   210: id 3/8 chars, 43/200 items, 6 note(s)
-   211: id 3/8 chars, 42/200 items, 7 note(s)
-   212: id 3/8 chars, 43/200 items, 6 note(s)
-   213: id 3/8 chars, 42/200 items, 8 note(s)
-   214: id 3/8 chars, 43/200 items, 6 note(s)
-   215: id 3/8 chars, 42/200 items, 7 note(s)
-   216: id 3/8 chars, 43/200 items, 7 note(s)
-   217: id 3/8 chars, 47/200 items, 8 note(s)
-   218: id 3/8 chars, 43/200 items, 7 note(s)
-   222: id 3/8 chars, 43/200 items, 7 note(s)
-   223: id 3/8 chars, 43/200 items, 6 note(s)
-   224: id 3/8 chars, 43/200 items, 6 note(s)
-   225: id 3/8 chars, 43/200 items, 6 note(s)
-   226: id 3/8 chars, 43/200 items, 6 note(s)
-   227: id 3/8 chars, 43/200 items, 6 note(s)
-   228: id 3/8 chars, 42/200 items, 7 note(s)
-   229: id 3/8 chars, 43/200 items, 6 note(s)
-   230: id 3/8 chars, 42/200 items, 8 note(s)
-   231: id 3/8 chars, 43/200 items, 6 note(s)
-   232: id 3/8 chars, 42/200 items, 8 note(s)
-   233: id 3/8 chars, 43/200 items, 7 note(s)
-   234: id 3/8 chars, 42/200 items, 7 note(s)
-   236: id 3/8 chars, 42/200 items, 6 note(s)
-   238: id 3/8 chars, 45/200 items, 8 note(s)
+   201: id 3/8 chars, 43/200 items, 8 note(s)
+   202: id 3/8 chars, 44/200 items, 7 note(s)
+   203: id 3/8 chars, 43/200 items, 7 note(s)
+   204: id 3/8 chars, 44/200 items, 6 note(s)
+   205: id 3/8 chars, 43/200 items, 7 note(s)
+   206: id 3/8 chars, 44/200 items, 6 note(s)
+   207: id 3/8 chars, 43/200 items, 7 note(s)
+   208: id 3/8 chars, 44/200 items, 6 note(s)
+   209: id 3/8 chars, 43/200 items, 8 note(s)
+   210: id 3/8 chars, 44/200 items, 6 note(s)
+   211: id 3/8 chars, 43/200 items, 7 note(s)
+   212: id 3/8 chars, 44/200 items, 6 note(s)
+   213: id 3/8 chars, 43/200 items, 8 note(s)
+   214: id 3/8 chars, 44/200 items, 6 note(s)
+   215: id 3/8 chars, 43/200 items, 7 note(s)
+   216: id 3/8 chars, 44/200 items, 7 note(s)
+   217: id 3/8 chars, 48/200 items, 8 note(s)
+   218: id 3/8 chars, 44/200 items, 7 note(s)
+   222: id 3/8 chars, 44/200 items, 7 note(s)
+   223: id 3/8 chars, 44/200 items, 6 note(s)
+   224: id 3/8 chars, 44/200 items, 6 note(s)
+   225: id 3/8 chars, 44/200 items, 6 note(s)
+   226: id 3/8 chars, 44/200 items, 6 note(s)
+   227: id 3/8 chars, 44/200 items, 6 note(s)
+   228: id 3/8 chars, 43/200 items, 7 note(s)
+   229: id 3/8 chars, 44/200 items, 6 note(s)
+   230: id 3/8 chars, 43/200 items, 8 note(s)
+   231: id 3/8 chars, 44/200 items, 6 note(s)
+   232: id 3/8 chars, 43/200 items, 8 note(s)
+   233: id 3/8 chars, 44/200 items, 7 note(s)
+   234: id 3/8 chars, 43/200 items, 7 note(s)
+   236: id 3/8 chars, 43/200 items, 6 note(s)
+   238: id 3/8 chars, 46/200 items, 8 note(s)
    201-MEP: id 7/8 chars, 23/200 items, 8 note(s)
    202-MEP: id 7/8 chars, 25/200 items, 7 note(s)
    203-MEP: id 7/8 chars, 23/200 items, 7 note(s)
@@ -120,7 +120,7 @@ SELFTEST
 ====================================================================================================
 SELFTEST PASSED
 
-DETERMINISM: two independent in-process builds are byte-identical (md5 f5abe22d4b297ff9f09a6eac2c726321)
+DETERMINISM: two independent in-process builds are byte-identical (md5 ba19ed1e10ea39913d3d95b075ef4c34)
 
 BUILD REPORT - floor 2, 33 guest room(s), staged for approval
 ====================================================================================================
@@ -139,14 +139,14 @@ sheet numbering: room_items rows naming both sheets on one reference (1 distinct
 ----------------------------------------------------------------------------------------------------
 ROOM 201  QQ Wide  (2 key(s) of this type: 201, 301)
   doc type qq-wide / "QQ Studio"   sheets: plan A101; room sheet A555; bath A530
-  FF&E : 42 lines   [151 raw rows -> 46 gated -> 40 after 6 folds, + 2 ruled FF&E line(s)]
+  FF&E : 43 lines   [151 raw rows -> 46 gated -> 40 after 6 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [74 MEP rows; 9 rough-in left off the punch; 77 deleted history row(s) in 105-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
     40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-305, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     label: GR-305: this room's own sqlite label "Working Wall - printed '@ Queen Queen Studio Suite Connector' in the spec but tagged on the BASE QQ plan" differs from donor "Working Wall @ Queen Queen Studio Suite" - own row carried
@@ -189,7 +189,7 @@ ROOM 201  QQ Wide  (2 key(s) of this type: 201, 301)
   RULINGS
     APPLIED  D12 on GR-322: qty 1 -> 3, and the line note says so - this room tags the nightstand family once (GR-322 only) and carries 2 queen bed(s), which is exactly the case D12 was ruled on
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 201 ("QQ Wide", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
     D22: APPLIED D33 - GR-308 -> GR-305 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
     ruled TAG CORRECTION on 1 line(s): GR-305 (D33, was GR-308) on gr305_a
@@ -208,14 +208,14 @@ ROOM 201  QQ Wide  (2 key(s) of this type: 201, 301)
 ----------------------------------------------------------------------------------------------------
 ROOM 202  King One Bedroom  (3 key(s) of this type: 202, 302, 402)
   doc type king-one-bedroom / "King One Bedroom"   sheets: plan A101; room sheet A553; bath A531
-  FF&E : 43 lines   [167 raw rows -> 47 gated -> 41 after 5 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [167 raw rows -> 47 gated -> 41 after 5 folds, + 3 ruled FF&E line(s)]
   MEP  : 25 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 43 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     35 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-205, GR-302, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     6 tag(s) have NO live counterpart and ship from sqlite VERBATIM: GR-102, GR-315, GR-317, GR-503, HD-01, HD-02 [MEDIUM]
-    8 donor tag(s) not applicable to this type: DH-1, DH-2, GR-204, GR-301, GR-304, GR-402, GR-402.1, HD-03
+    9 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2, GR-204, GR-301, GR-304, GR-402, GR-402.1, HD-03
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     label: GR-302: donor label extends sqlite ("Vanity @ Guest Bath (Left & Right)") - donor text carried
     qty:   HD-12: qty 3 here vs 2 in donor room 104 (sqlite governs; the donor supplies text only)
@@ -264,7 +264,7 @@ ROOM 202  King One Bedroom  (3 key(s) of this type: 202, 302, 402)
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King One Bedroom" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-302, GR-315, GR-317, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 202 ("King One Bedroom", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -283,14 +283,14 @@ ROOM 202  King One Bedroom  (3 key(s) of this type: 202, 302, 402)
 ----------------------------------------------------------------------------------------------------
 ROOM 203  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 203, 205, 207, 209, 211, 213, 228, 234, 303, 305, 307, 309, 311, 313, 315, 328, 334, 405, 407, 409, 411, 413, 415, 428, 434)
   doc type queen-queen / "Queen-Queen"   sheets: plan A101; room sheet A555; bath A530
-  FF&E : 42 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 2 ruled FF&E line(s)]
+  FF&E : 43 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 77 deleted history row(s) in 105-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
     40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-305, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     label: GR-305: this room's own sqlite label "Working Wall - printed '@ Queen Queen Studio Suite Connector' in the spec but tagged on the BASE QQ plan" differs from donor "Working Wall @ Queen Queen Studio Suite" - own row carried
@@ -330,7 +330,7 @@ ROOM 203  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   RULINGS
     APPLIED  D12 on GR-322: qty 1 -> 3, and the line note says so - this room tags the nightstand family once (GR-322 only) and carries 2 queen bed(s), which is exactly the case D12 was ruled on
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 203 ("Queen-Queen", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
     D22: APPLIED D22 - GR-308 -> GR-305 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
     ruled TAG CORRECTION on 1 line(s): GR-305 (D22, was GR-308) on gr305_a
@@ -348,14 +348,14 @@ ROOM 203  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 204  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -398,7 +398,7 @@ ROOM 204  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 204 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -415,14 +415,14 @@ ROOM 204  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 205  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 203, 205, 207, 209, 211, 213, 228, 234, 303, 305, 307, 309, 311, 313, 315, 328, 334, 405, 407, 409, 411, 413, 415, 428, 434)
   doc type queen-queen / "Queen-Queen"   sheets: plan A101; room sheet A555; bath A530
-  FF&E : 42 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 2 ruled FF&E line(s)]
+  FF&E : 43 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 77 deleted history row(s) in 105-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
     40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-305, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     label: GR-305: this room's own sqlite label "Working Wall - printed '@ Queen Queen Studio Suite Connector' in the spec but tagged on the BASE QQ plan" differs from donor "Working Wall @ Queen Queen Studio Suite" - own row carried
@@ -462,7 +462,7 @@ ROOM 205  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   RULINGS
     APPLIED  D12 on GR-322: qty 1 -> 3, and the line note says so - this room tags the nightstand family once (GR-322 only) and carries 2 queen bed(s), which is exactly the case D12 was ruled on
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 205 ("Queen-Queen", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
     D22: APPLIED D22 - GR-308 -> GR-305 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
     ruled TAG CORRECTION on 1 line(s): GR-305 (D22, was GR-308) on gr305_a
@@ -480,14 +480,14 @@ ROOM 205  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 206  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -530,7 +530,7 @@ ROOM 206  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 206 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -547,14 +547,14 @@ ROOM 206  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 207  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 203, 205, 207, 209, 211, 213, 228, 234, 303, 305, 307, 309, 311, 313, 315, 328, 334, 405, 407, 409, 411, 413, 415, 428, 434)
   doc type queen-queen / "Queen-Queen"   sheets: plan A101; room sheet A555; bath A530
-  FF&E : 42 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 2 ruled FF&E line(s)]
+  FF&E : 43 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 77 deleted history row(s) in 105-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
     40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-305, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     label: GR-305: this room's own sqlite label "Working Wall - printed '@ Queen Queen Studio Suite Connector' in the spec but tagged on the BASE QQ plan" differs from donor "Working Wall @ Queen Queen Studio Suite" - own row carried
@@ -594,7 +594,7 @@ ROOM 207  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   RULINGS
     APPLIED  D12 on GR-322: qty 1 -> 3, and the line note says so - this room tags the nightstand family once (GR-322 only) and carries 2 queen bed(s), which is exactly the case D12 was ruled on
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 207 ("Queen-Queen", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
     D22: APPLIED D22 - GR-308 -> GR-305 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
     ruled TAG CORRECTION on 1 line(s): GR-305 (D22, was GR-308) on gr305_a
@@ -612,14 +612,14 @@ ROOM 207  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 208  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -662,7 +662,7 @@ ROOM 208  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 208 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -679,14 +679,14 @@ ROOM 208  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 209  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 203, 205, 207, 209, 211, 213, 228, 234, 303, 305, 307, 309, 311, 313, 315, 328, 334, 405, 407, 409, 411, 413, 415, 428, 434)
   doc type queen-queen / "Queen-Queen"   sheets: plan A101; room sheet A555; bath A530
-  FF&E : 42 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 2 ruled FF&E line(s)]
+  FF&E : 43 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 77 deleted history row(s) in 105-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
     40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-305, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     label: GR-305: this room's own sqlite label "Working Wall - printed '@ Queen Queen Studio Suite Connector' in the spec but tagged on the BASE QQ plan" differs from donor "Working Wall @ Queen Queen Studio Suite" - own row carried
@@ -726,7 +726,7 @@ ROOM 209  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   RULINGS
     APPLIED  D12 on GR-322: qty 1 -> 3, and the line note says so - this room tags the nightstand family once (GR-322 only) and carries 2 queen bed(s), which is exactly the case D12 was ruled on
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 209 ("Queen-Queen", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
     D22: APPLIED D22 - GR-308 -> GR-305 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
     ruled TAG CORRECTION on 1 line(s): GR-305 (D22, was GR-308) on gr305_a
@@ -744,14 +744,14 @@ ROOM 209  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 210  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -794,7 +794,7 @@ ROOM 210  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 210 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -811,14 +811,14 @@ ROOM 210  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 211  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 203, 205, 207, 209, 211, 213, 228, 234, 303, 305, 307, 309, 311, 313, 315, 328, 334, 405, 407, 409, 411, 413, 415, 428, 434)
   doc type queen-queen / "Queen-Queen"   sheets: plan A101; room sheet A555; bath A530
-  FF&E : 42 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 2 ruled FF&E line(s)]
+  FF&E : 43 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 77 deleted history row(s) in 105-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
     40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-305, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     label: GR-305: this room's own sqlite label "Working Wall - printed '@ Queen Queen Studio Suite Connector' in the spec but tagged on the BASE QQ plan" differs from donor "Working Wall @ Queen Queen Studio Suite" - own row carried
@@ -858,7 +858,7 @@ ROOM 211  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   RULINGS
     APPLIED  D12 on GR-322: qty 1 -> 3, and the line note says so - this room tags the nightstand family once (GR-322 only) and carries 2 queen bed(s), which is exactly the case D12 was ruled on
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 211 ("Queen-Queen", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
     D22: APPLIED D22 - GR-308 -> GR-305 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
     ruled TAG CORRECTION on 1 line(s): GR-305 (D22, was GR-308) on gr305_a
@@ -876,14 +876,14 @@ ROOM 211  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 212  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -926,7 +926,7 @@ ROOM 212  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 212 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -943,14 +943,14 @@ ROOM 212  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 213  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 203, 205, 207, 209, 211, 213, 228, 234, 303, 305, 307, 309, 311, 313, 315, 328, 334, 405, 407, 409, 411, 413, 415, 428, 434)
   doc type queen-queen / "Queen-Queen"   sheets: plan A101; room sheet A555; bath A530
-  FF&E : 42 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 2 ruled FF&E line(s)]
+  FF&E : 43 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 77 deleted history row(s) in 105-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
     40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-305, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     label: GR-305: this room's own sqlite label "Working Wall - printed '@ Queen Queen Studio Suite Connector' in the spec but tagged on the BASE QQ plan" differs from donor "Working Wall @ Queen Queen Studio Suite" - own row carried
@@ -990,7 +990,7 @@ ROOM 213  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   RULINGS
     APPLIED  D12 on GR-322: qty 1 -> 3, and the line note says so - this room tags the nightstand family once (GR-322 only) and carries 2 queen bed(s), which is exactly the case D12 was ruled on
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 213 ("Queen-Queen", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
     D22: APPLIED D22 - GR-308 -> GR-305 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
     ruled TAG CORRECTION on 1 line(s): GR-305 (D22, was GR-308) on gr305_a
@@ -1008,14 +1008,14 @@ ROOM 213  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 214  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -1058,7 +1058,7 @@ ROOM 214  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 214 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -1075,14 +1075,14 @@ ROOM 214  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 215  QQ Connecting  (6 key(s) of this type: 103, 215, 236, 336, 403, 436)
   doc type qq-connecting / "QQ Connecting"   sheets: plan A101; room sheet A555; bath A530
-  FF&E : 42 lines   [152 raw rows -> 46 gated -> 40 after 6 folds, + 2 ruled FF&E line(s)]
+  FF&E : 43 lines   [152 raw rows -> 46 gated -> 40 after 6 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [74 MEP rows; 9 rough-in left off the punch; 69 deleted history row(s) in 103-MEP not copied]
   gate : 32 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 103 (QQ Connecting)
     40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-308, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -1121,7 +1121,7 @@ ROOM 215  QQ Connecting  (6 key(s) of this type: 103, 215, 236, 336, 403, 436)
   RULINGS
     APPLIED  D12 on GR-322: qty 1 -> 3, and the line note says so - this room tags the nightstand family once (GR-322 only) and carries 2 queen bed(s), which is exactly the case D12 was ruled on
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 215 ("QQ Connecting", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
     D22: GR-308 is the connector wall and stands - see room note n_d22
 
@@ -1139,14 +1139,14 @@ ROOM 215  QQ Connecting  (6 key(s) of this type: 103, 215, 236, 336, 403, 436)
 ----------------------------------------------------------------------------------------------------
 ROOM 216  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -1189,7 +1189,7 @@ ROOM 216  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 216 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -1206,14 +1206,14 @@ ROOM 216  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 217  King One Bedroom Acc.  (3 key(s) of this type: 217, 317, 417)
   doc type king-one-bedroom-acc / "King One Bedroom Acc."   sheets: plan A101; room sheet A554; bath A533
-  FF&E : 47 lines   [183 raw rows -> 55 gated -> 45 after 8 folds, + 2 ruled FF&E line(s)]
+  FF&E : 48 lines   [183 raw rows -> 55 gated -> 45 after 8 folds, + 3 ruled FF&E line(s)]
   MEP  : 37 lines   [87 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 41 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     27 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-205, GR-301, GR-318, GR-319, GR-320, GR-323, GR-500, GR-501, GR-502, GR-601, HD-08, HD-12, HD-16, HD-22
     18 tag(s) have NO live counterpart and ship from sqlite VERBATIM: <untagged> [FLAGGED], GR-102, GR-303, GR-316, GR-317, GR-324, GR-401, GR-404, GR-503, GR-603.1, GR-603.ADA, HD-02 [MEDIUM], HD-05 [FLAGGED], HD-06 [MEDIUM], HD-09 [MEDIUM], HD-10 [MEDIUM], HD-14 [FLAGGED], HD-5.1 [FLAGGED]
-    16 donor tag(s) not applicable to this type: DH-1, DH-2, GR-204, GR-302, GR-304, GR-321, GR-400, GR-402, GR-402.1, GR-403, GR-601.1, GR-603, HD-03, HD-18, HD-21, kn 11
+    17 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2, GR-204, GR-302, GR-304, GR-321, GR-400, GR-402, GR-402.1, GR-403, GR-601.1, GR-603, HD-03, HD-18, HD-21, kn 11
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     qty:   HD-08: qty 4 here vs 1 in donor room 104 (sqlite governs; the donor supplies text only)
     qty:   903: qty 2 here vs 1 in donor room 104 (sqlite governs; the donor supplies text only)
@@ -1262,7 +1262,7 @@ ROOM 217  King One Bedroom Acc.  (3 key(s) of this type: 217, 317, 417)
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King One Bedroom Acc." is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-303, GR-316, GR-317, GR-318, GR-319, GR-320, GR-323, GR-324, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 217 ("King One Bedroom Acc.", rooms.accessible 1); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -1286,14 +1286,14 @@ ROOM 217  King One Bedroom Acc.  (3 key(s) of this type: 217, 317, 417)
 ----------------------------------------------------------------------------------------------------
 ROOM 218  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -1336,7 +1336,7 @@ ROOM 218  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 218 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -1353,14 +1353,14 @@ ROOM 218  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 222  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -1403,7 +1403,7 @@ ROOM 222  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 222 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -1420,14 +1420,14 @@ ROOM 222  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 223  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -1470,7 +1470,7 @@ ROOM 223  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 223 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -1487,14 +1487,14 @@ ROOM 223  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 224  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -1537,7 +1537,7 @@ ROOM 224  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 224 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -1554,14 +1554,14 @@ ROOM 224  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 225  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -1604,7 +1604,7 @@ ROOM 225  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 225 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -1621,14 +1621,14 @@ ROOM 225  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 226  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -1671,7 +1671,7 @@ ROOM 226  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 226 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -1688,14 +1688,14 @@ ROOM 226  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 227  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -1738,7 +1738,7 @@ ROOM 227  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 227 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -1755,14 +1755,14 @@ ROOM 227  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 228  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 203, 205, 207, 209, 211, 213, 228, 234, 303, 305, 307, 309, 311, 313, 315, 328, 334, 405, 407, 409, 411, 413, 415, 428, 434)
   doc type queen-queen / "Queen-Queen"   sheets: plan A101; room sheet A555; bath A530
-  FF&E : 42 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 2 ruled FF&E line(s)]
+  FF&E : 43 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 77 deleted history row(s) in 105-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
     40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-305, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     label: GR-305: this room's own sqlite label "Working Wall - printed '@ Queen Queen Studio Suite Connector' in the spec but tagged on the BASE QQ plan" differs from donor "Working Wall @ Queen Queen Studio Suite" - own row carried
@@ -1802,7 +1802,7 @@ ROOM 228  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   RULINGS
     APPLIED  D12 on GR-322: qty 1 -> 3, and the line note says so - this room tags the nightstand family once (GR-322 only) and carries 2 queen bed(s), which is exactly the case D12 was ruled on
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 228 ("Queen-Queen", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
     D22: APPLIED D22 - GR-308 -> GR-305 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
     ruled TAG CORRECTION on 1 line(s): GR-305 (D22, was GR-308) on gr305_a
@@ -1820,14 +1820,14 @@ ROOM 228  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 229  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -1870,7 +1870,7 @@ ROOM 229  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 229 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -1887,14 +1887,14 @@ ROOM 229  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 230  QQ Extended  (6 key(s) of this type: 230, 232, 330, 332, 430, 432)
   doc type qq-extended / "QQ Extended"   sheets: plan A101; room sheet A555; bath A530
-  FF&E : 42 lines   [151 raw rows -> 46 gated -> 40 after 6 folds, + 2 ruled FF&E line(s)]
+  FF&E : 43 lines   [151 raw rows -> 46 gated -> 40 after 6 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [74 MEP rows; 9 rough-in left off the punch; 77 deleted history row(s) in 105-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
     40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-305, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     label: GR-305: this room's own sqlite label "Working Wall - printed '@ Queen Queen Studio Suite Connector' in the spec but tagged on the BASE QQ plan" differs from donor "Working Wall @ Queen Queen Studio Suite" - own row carried
@@ -1937,7 +1937,7 @@ ROOM 230  QQ Extended  (6 key(s) of this type: 230, 232, 330, 332, 430, 432)
   RULINGS
     APPLIED  D12 on GR-322: qty 1 -> 3, and the line note says so - this room tags the nightstand family once (GR-322 only) and carries 2 queen bed(s), which is exactly the case D12 was ruled on
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 230 ("QQ Extended", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
     D22: APPLIED D33 - GR-308 -> GR-305 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
     ruled TAG CORRECTION on 1 line(s): GR-305 (D33, was GR-308) on gr305_a
@@ -1956,14 +1956,14 @@ ROOM 230  QQ Extended  (6 key(s) of this type: 230, 232, 330, 332, 430, 432)
 ----------------------------------------------------------------------------------------------------
 ROOM 231  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -2006,7 +2006,7 @@ ROOM 231  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 231 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -2023,14 +2023,14 @@ ROOM 231  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 232  QQ Extended  (6 key(s) of this type: 230, 232, 330, 332, 430, 432)
   doc type qq-extended / "QQ Extended"   sheets: plan A101; room sheet A555; bath A530
-  FF&E : 42 lines   [151 raw rows -> 46 gated -> 40 after 6 folds, + 2 ruled FF&E line(s)]
+  FF&E : 43 lines   [151 raw rows -> 46 gated -> 40 after 6 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [74 MEP rows; 9 rough-in left off the punch; 77 deleted history row(s) in 105-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
     40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-305, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     label: GR-305: this room's own sqlite label "Working Wall - printed '@ Queen Queen Studio Suite Connector' in the spec but tagged on the BASE QQ plan" differs from donor "Working Wall @ Queen Queen Studio Suite" - own row carried
@@ -2073,7 +2073,7 @@ ROOM 232  QQ Extended  (6 key(s) of this type: 230, 232, 330, 332, 430, 432)
   RULINGS
     APPLIED  D12 on GR-322: qty 1 -> 3, and the line note says so - this room tags the nightstand family once (GR-322 only) and carries 2 queen bed(s), which is exactly the case D12 was ruled on
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 232 ("QQ Extended", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
     D22: APPLIED D33 - GR-308 -> GR-305 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
     ruled TAG CORRECTION on 1 line(s): GR-305 (D33, was GR-308) on gr305_a
@@ -2092,14 +2092,14 @@ ROOM 232  QQ Extended  (6 key(s) of this type: 230, 232, 330, 332, 430, 432)
 ----------------------------------------------------------------------------------------------------
 ROOM 233  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 204, 206, 208, 210, 212, 214, 216, 218, 222, 223, 224, 225, 226, 227, 229, 231, 233, 304, 306, 308, 310, 312, 314, 316, 318, 322, 323, 324, 325, 326, 327, 329, 331, 333, 404, 406, 408, 410, 412, 414, 416, 418, 422, 423, 424, 425, 426, 427, 429, 431, 433)
   doc type king-studio / "King Studio"   sheets: plan A101; room sheet A550; bath A530
-  FF&E : 43 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 2 ruled FF&E line(s)]
+  FF&E : 44 lines   [151 raw rows -> 43 gated -> 41 after 2 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 0 deleted history row(s) in 104-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 104 (King Studio)
     41 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-202, GR-203, GR-204, GR-205, GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-601, GR-601.1, GR-603, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -2142,7 +2142,7 @@ ROOM 233  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
   RULINGS
     APPLIED  D20 on GR-202: the ruling RESTATES the fold (sqlite already draws 2) and changes nothing - room type "King Studio" is a King-family key, which is the set D20 was ruled on
     DECLINED D12 on GR-322 - the ruling is about tag GR-322 in FF&E - Casegoods, and what this room draws in that category is GR-301, GR-302, GR-304, GR-318, GR-319, GR-320, GR-321, GR-323, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 233 ("King Studio", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
 
   FLAGS CARRIED (nothing resolved)
@@ -2159,14 +2159,14 @@ ROOM 233  King Studio  (57 key(s) of this type: 104, 106, 108, 110, 112, 114, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 234  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 203, 205, 207, 209, 211, 213, 228, 234, 303, 305, 307, 309, 311, 313, 315, 328, 334, 405, 407, 409, 411, 413, 415, 428, 434)
   doc type queen-queen / "Queen-Queen"   sheets: plan A101; room sheet A555; bath A530
-  FF&E : 42 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 2 ruled FF&E line(s)]
+  FF&E : 43 lines   [154 raw rows -> 46 gated -> 40 after 6 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [77 MEP rows; 9 rough-in left off the punch; 77 deleted history row(s) in 105-MEP not copied]
   gate : 31 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
     40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-305, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     label: GR-305: this room's own sqlite label "Working Wall - printed '@ Queen Queen Studio Suite Connector' in the spec but tagged on the BASE QQ plan" differs from donor "Working Wall @ Queen Queen Studio Suite" - own row carried
@@ -2206,7 +2206,7 @@ ROOM 234  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
   RULINGS
     APPLIED  D12 on GR-322: qty 1 -> 3, and the line note says so - this room tags the nightstand family once (GR-322 only) and carries 2 queen bed(s), which is exactly the case D12 was ruled on
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 234 ("Queen-Queen", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
     D22: APPLIED D22 - GR-308 -> GR-305 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
     ruled TAG CORRECTION on 1 line(s): GR-305 (D22, was GR-308) on gr305_a
@@ -2224,14 +2224,14 @@ ROOM 234  Queen-Queen  (31 key(s) of this type: 105, 107, 109, 111, 113, 115, 20
 ----------------------------------------------------------------------------------------------------
 ROOM 236  QQ Connecting  (6 key(s) of this type: 103, 215, 236, 336, 403, 436)
   doc type qq-connecting / "QQ Connecting"   sheets: plan A101; room sheet A555; bath A530
-  FF&E : 42 lines   [152 raw rows -> 46 gated -> 40 after 6 folds, + 2 ruled FF&E line(s)]
+  FF&E : 43 lines   [152 raw rows -> 46 gated -> 40 after 6 folds, + 3 ruled FF&E line(s)]
   MEP  : 23 lines   [74 MEP rows; 9 rough-in left off the punch; 69 deleted history row(s) in 103-MEP not copied]
   gate : 32 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 103 (QQ Connecting)
     40 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-103, GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, GR-300, GR-302, GR-308, GR-318, GR-321, GR-322, GR-400, GR-402, GR-402.1, GR-403, GR-500, GR-501, GR-502, GR-600, GR-600.1, GR-602, HD-03, HD-08, HD-12, HD-16, HD-18, HD-21, HD-22, kn 11
     0 tag(s) have NO live counterpart and ship from sqlite VERBATIM: none
-    2 donor tag(s) not applicable to this type: DH-1, DH-2
+    3 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     THE DONOR MAY ENRICH, NEVER LAUNDER:
       reliability KEPT from this room's own sqlite row over the donor's on 0 line(s)
@@ -2270,7 +2270,7 @@ ROOM 236  QQ Connecting  (6 key(s) of this type: 103, 215, 236, 336, 403, 436)
   RULINGS
     APPLIED  D12 on GR-322: qty 1 -> 3, and the line note says so - this room tags the nightstand family once (GR-322 only) and carries 2 queen bed(s), which is exactly the case D12 was ruled on
     DECLINED D20 on GR-202 - the ruling is about tag GR-202 in FF&E - Lighting, and what this room draws in that category is GR-200, GR-201, GR-203, GR-204, GR-205, GR-207, GR-208, so the ruling has nothing here to act on
-    APPLIED  ruled lines: dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     DECLINED D29/bsq_a: out of scope for room 236 ("QQ Connecting", rooms.accessible 0); build_floor1.mjs scopes it the same way and this tool copies the predicate
     D22: GR-308 is the connector wall and stands - see room note n_d22
 
@@ -2288,14 +2288,14 @@ ROOM 236  QQ Connecting  (6 key(s) of this type: 103, 215, 236, 336, 403, 436)
 ----------------------------------------------------------------------------------------------------
 ROOM 238  QQ Acc.  (2 key(s) of this type: 238, 338)
   doc type qq-acc / "QQ Acc."   sheets: plan A101; room sheet A556; bath A532 / A532.1
-  FF&E : 45 lines   [160 raw rows -> 46 gated -> 42 after 4 folds, + 3 ruled FF&E line(s)]
+  FF&E : 46 lines   [160 raw rows -> 46 gated -> 42 after 4 folds, + 4 ruled FF&E line(s)]
   MEP  : 33 lines   [82 MEP rows; 9 rough-in left off the punch; 77 deleted history row(s) in 105-MEP not copied]
   gate : 32 row(s) dropped by Austin's approved category gate (Paint / Drywall / Flooring / Doors / Stone-Surround / Wall Covering / FF&E-Misc), same as every approved floor-1 room
 
   DONOR USAGE - LIVE room 105 (Queen-Queen)
     27 shared tag(s) took the donor's curated text: 901, 902, 903, 904, 905, <untagged>, GR-100, GR-101, GR-200, GR-201, GR-203, GR-204, GR-205, GR-208, GR-300, GR-318, GR-322, GR-403, GR-500, GR-501, GR-502, GR-600, HD-08, HD-12, HD-16, HD-18, HD-21
     15 tag(s) have NO live counterpart and ship from sqlite VERBATIM: <untagged> [FLAGGED], GR-202, GR-303, GR-309 [FLAGGED], GR-319, GR-323, GR-401, GR-404 [FLAGGED], GR-602.ADA, HD-02 [FLAGGED], HD-05 [FLAGGED], HD-06 [FLAGGED], HD-10 [FLAGGED], HD-14 [FLAGGED], HD-5.1 [FLAGGED]
-    15 donor tag(s) not applicable to this type: DH-1, DH-2, GR-103, GR-207, GR-302, GR-305, GR-321, GR-400, GR-402, GR-402.1, GR-600.1, GR-602, HD-03, HD-22, kn 11
+    16 donor tag(s) not applicable to this type: <untagged>, DH-1, DH-2, GR-103, GR-207, GR-302, GR-305, GR-321, GR-400, GR-402, GR-402.1, GR-600.1, GR-602, HD-03, HD-22, kn 11
     1 RETIRED donor line(s) skipped - a tombstone is not a source
     label: <untagged>: donor label extends sqlite ("Garbage disposer - Moen MGXP33C") - donor text carried
     qty:   HD-12: qty 1 here vs 2 in donor room 105 (sqlite governs; the donor supplies text only)
@@ -2352,7 +2352,7 @@ ROOM 238  QQ Acc.  (2 key(s) of this type: 238, 338)
   RULINGS
     DECLINED D12 on GR-322 - the drawing already tags the nightstand family separately in this room (GR-319 + GR-322 + GR-323), so the fold already yields 3 nightstands. D12 was ruled for the case where the drawing tags the family ONCE. Forcing qty 3 here would ship 5.
     DECLINED D20 on GR-202 - room type "QQ Acc." is NOT a King-family key. D20 reasons only about the King rooms; this room's own sqlite row explains its single GR-202 and it also carries GR-208 x2. Doubling GR-202 here would invent a sconce.
-    APPLIED  ruled lines: bsq_a (D29), dh_closer_a (D28), dh_lock_a (D28)
+    APPLIED  ruled lines: bsq_a (D29), tvmount_a (D46), dh_closer_a (D28), dh_lock_a (D28)
     the declined ruling is written ONTO the line so the note cannot contradict the number: gr202_a (D20 not applied, qty 1), gr322_a (D12 not applied, qty 1)
     D22: APPLIED D33 - GR-308 -> GR-309 (2nd Floor tab reconciled); handedness OPEN - see room note n_d22
     ruled TAG CORRECTION on 1 line(s): GR-309 (D33, was GR-308) on gr309_a
@@ -2415,9 +2415,9 @@ field state preserved from the previous staged file (a rebuild never zeroes the 
 2nd Floor FF&E Installation tab reconciled: GR-315 = 1 (1 King One Bedroom)
 2nd Floor FF&E Installation tab reconciled: GR-316 = 1 (1 King One Bedroom Acc.)
 wrote platform/data/floor2-staged.json  (70 docs: 201, 201-MEP, 202, 202-MEP, 203, 203-MEP, 204, 204-MEP, 205, 205-MEP, 206, 206-MEP, 207, 207-MEP, 208, 208-MEP, 209, 209-MEP, 210, 210-MEP, 211, 211-MEP, 212, 212-MEP, 213, 213-MEP, 214, 214-MEP, 215, 215-MEP, 216, 216-MEP, 217, 217-MEP, 218, 218-MEP, 222, 222-MEP, 223, 223-MEP, 224, 224-MEP, 225, 225-MEP, 226, 226-MEP, 227, 227-MEP, 228, 228-MEP, 229, 229-MEP, 230, 230-MEP, 231, 231-MEP, 232, 232-MEP, 233, 233-MEP, 234, 234-MEP, 236, 236-MEP, 238, 238-MEP, S221, S221-M, S237, S239)
-  md5 f5abe22d4b297ff9f09a6eac2c726321   5080383 bytes
+  md5 ba19ed1e10ea39913d3d95b075ef4c34   5128662 bytes
 READ ONLY and untouched, verified by size+mtime: floor1-staged.json, slice-f1.json, ref-rooms-staged.json, build_floor1.mjs
 FLOOR 2 STAGED FILE WRITTEN. This tool never touches Firestore; rollout_floor.mjs --floor=2 --apply is the only path live. Nothing pushed. Nothing deployed.
 
-(node:9946) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(node:3840) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
