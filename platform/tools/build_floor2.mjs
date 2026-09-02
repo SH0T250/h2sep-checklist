@@ -3790,8 +3790,8 @@ function d22ScopeNote(db, room, roomNo, rows, corrections) {
   }
   if (/Connecting/.test(room.room_type)) {
     return { flag: 'info', summary: 'GR-308 is the connector wall and stands',
-      text: 'WORKING WALL TAG - GR-308 STANDS. Room ' + roomNo + ' is a QQ Connecting key and GR-308 IS the connector ' +
-        'working wall. ' + tab + ' Ruling D22 corrected the PLAIN Queen-Queen keys and does not touch a connecting key.' +
+      text: 'WORKING WALL TAG - GR-308 STANDS. Room ' + roomNo + ' is a ' + room.room_type + ' key (rooms.connecting = 1) and GR-308 IS the connector ' +
+        'working wall. ' + tab + ' Ruling D22 corrected the PLAIN Queen-Queen keys and does not touch a connecting key' + (FLOOR === '3' ? '; ruling D35 (floor 3) and ' : FLOOR === '4' ? '; ruling D37 (floor 4) and ' : '; ') + 'ruling D33 (floor 2) likewise leave the connecting keys on GR-308.' +
         (r.note ? ' The row\'s own note, verbatim: "' + r.note + '".' : '') };
   }
   if (TAB_FACTS.mismatches.length) {
@@ -4060,7 +4060,8 @@ function buildFFEDoc(db, roomNo, live, convention, stamp, report) {
       const why = (report.qtyOverrides.applied.find((a) => a.tag === line.code) || {}).why || '';
       pkg.instanceNote = 'Austin ruling ' + line.overrideRuling + ': ' + line.overrideBecause + '.' + own +
         ' Applied here because ' + why + '. The line therefore ships qty ' + line.qty + ' on the ruling rather than ' +
-        'on the ' + line.rawRows + ' row(s) the drawing set tags. Confirm all three positions in the field before ordering.';
+        'on the ' + line.rawRows + ' row(s) the drawing set tags. Confirm ' + (line.qty === 2 ? 'both' : 'all ' + line.qty) +
+        ' positions in the field before ordering.';
       overrideNotes.push(line.key + ': qty ' + line.rawRows + ' -> ' + line.qty + ' per ruling ' + line.overrideRuling);
       provText = 'TEXT. The wording above is the RULING, written here from Austin ruling ' + line.overrideRuling +
         ' and this room\'s own row(s) ' + rowIds + '. It replaces whatever package text this tag carries elsewhere, ' +

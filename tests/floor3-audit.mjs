@@ -279,6 +279,8 @@ check(`the crew's ${CREW.notes} notes came across`, () => {
 });
 check('the retagged working wall exists live on every D35 key (the carry reconciles the crew\'s checks exactly)', () =>
   TWO_QUEEN.flatMap((id) => { const tag = id === '338' ? 'GR-309' : 'GR-305'; const w = Object.values(docs[id].items).find((v) => v.code === tag && !v.deleted); return !w ? [`${id}: no live ${tag}`] : []; }));
+check('every note carries non-empty text (a crew note stored as a plain string must arrive whole)', () =>
+  Object.entries(docs).flatMap(([id, d]) => Object.entries(d.notes || {}).filter(([, n]) => typeof n.text !== 'string' || !n.text.trim()).map(([k]) => `${id}/${k}: empty note`)));
 check('no personal names or account ids in the committed seed', () => {
   const raw = readFileSync(SEED, 'utf8'); const out = [];
   for (const f of ['checkedByName', 'checkedByUid', 'createdByUid', 'createdBy']) if (raw.includes(`"${f}"`)) out.push(`field ${f} is present`);

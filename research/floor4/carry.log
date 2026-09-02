@@ -1,3 +1,5 @@
+(node:8117) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
 seed:     /home/user/h2sep-checklist/platform/data/floor4-staged.json
 rooms:    401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 436, 438  ->  docs 401 401-MEP 402 402-MEP 403 403-MEP 404 404-MEP 405 405-MEP 406 406-MEP 407 407-MEP 408 408-MEP 409 409-MEP 410 410-MEP 411 411-MEP 412 412-MEP 413 413-MEP 414 414-MEP 415 415-MEP 416 416-MEP 417 417-MEP 418 418-MEP 422 422-MEP 423 423-MEP 424 424-MEP 425 425-MEP 426 426-MEP 427 427-MEP 428 428-MEP 429 429-MEP 430 430-MEP 431 431-MEP 432 432-MEP 433 433-MEP 434 434-MEP 436 436-MEP 438 438-MEP S421 S421-M S437 S439
 snapshot: 69 live crew doc(s) -> /home/user/h2sep-checklist/tools/out/backups/crew-floor4-snapshot.json
@@ -44,7 +46,14 @@ CARRIED
   6 personal name/uid field(s) dropped on the way in
   1348 line(s) kept the mock-up's package text over the crew build's older text (field state only travels)
 
+LINES REBUILT SO THE CREW'S WORK HAS SOMEWHERE TO LAND (ruling D24: nothing is deleted):
+  402/gr905_a  GR-905  [FF&E - Misc]  FLAGGED
+      rebuilt from data/project.sqlite room 402's own row(s), not from the crew document
+      sort 21000 in the crew app -> 22000 here (its own band, after the D28 Door Hardware lines)
+      carried: checked=false  openIssue=true "MISSING"
+
 RECONCILIATION  (live lines only; a tombstone is history, not a second check)
+  1 line(s) rebuilt above so the work lands on a line instead of being named and lost
   checks  crew   3  =  build   3 + 0 with no line   EXACT
   issues  crew 442  =  build 442 + 0 with no line   EXACT
   notes   crew   1  =  build   1 present with text intact   EXACT

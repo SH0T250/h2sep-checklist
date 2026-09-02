@@ -66,6 +66,7 @@ THE CREW'S WORK
   PASS  every checked line carries initials
   PASS  the crew's 28 notes came across
   PASS  the retagged working wall kept the crew's check on every D22 and D33 key
+  PASS  every note carries non-empty text (a crew note stored as a plain string must arrive whole)
   PASS  no personal names or account ids in the committed seed
   PASS  meta records an exact carry reconciliation
 
@@ -77,4 +78,4 @@ DETERMINISM AND THE GENERATOR
   PASS  the floor-1 seed, the approved slice and the mock-ups were never written to
 
 ======================================================================
-53 passed, 0 failed
+54 passed, 0 failed

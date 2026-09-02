@@ -204,7 +204,7 @@ check('the four mock-up rooms (D30) re-build to the same shape and text, plus th
       if (shape(v) !== shape(b)) out.push(`${id}/${k}: shape differs`);
       /* The mock-ups (D30) were written with em-dash joins in tool prose; the tool now
        * writes hyphens (HANDOVER rule 7). Compare with that one difference normalised. */
-      const norm = (t) => String(t).replace(/ — /g, ' - ').replace(/’/g, "'").replace(/Confirm both positions/g, 'Confirm all three positions')
+      const norm = (t) => String(t).replace(/ — /g, ' - ').replace(/’/g, "'").replace(/Confirm (?:both|all (?:three|\d+)) positions/g, 'Confirm all three positions')
         .replace(/room 217's WC-02 row/g, 'a WC-02 row on an accessible key').replace(/relabelled/g, 'relabeled')
         .replace(/carry_ref_state\.mjs REBUILDS/g, 'carry_floor2.mjs --floor=2 REBUILDS');
       if (norm(v.instanceNote) !== norm(b.instanceNote) && !/THIS LINE EXISTS BECAUSE/.test(String(v.instanceNote))) out.push(`${id}/${k}: note text differs`);
@@ -267,6 +267,8 @@ check(`the crew's ${CREW.notes} notes came across`, () => {
 });
 check('the retagged working wall kept the crew\'s check on every D22 and D33 key', () =>
   [...GR305_ROOMS, '238'].flatMap((id) => { const tag = id === '238' ? 'GR-309' : 'GR-305'; const w = Object.values(docs[id].items).find((v) => v.code === tag && !v.deleted); return !w ? [`${id}: no live ${tag}`] : (!w.checked ? [`${id}: ${tag} not checked, but the crew checked the wall under GR-308`] : []); }));
+check('every note carries non-empty text (a crew note stored as a plain string must arrive whole)', () =>
+  Object.entries(docs).flatMap(([id, d]) => Object.entries(d.notes || {}).filter(([, n]) => typeof n.text !== 'string' || !n.text.trim()).map(([k]) => `${id}/${k}: empty note`)));
 check('no personal names or account ids in the committed seed', () => {
   const raw = readFileSync(SEED, 'utf8'); const out = [];
   for (const f of ['checkedByName', 'checkedByUid', 'createdByUid', 'createdBy']) if (raw.includes(`"${f}"`)) out.push(`field ${f} is present`);

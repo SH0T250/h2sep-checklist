@@ -157,6 +157,9 @@ async function signIn() {
   return j.idToken;
 }
 
+/** A crew note as a map: a plain string becomes { text }, everything else passes through. */
+const noteOf = (raw) => (typeof raw === 'string' ? { text: raw, flag: 'info', resolved: false, createdAt: null, createdBy: '' }
+  : (raw && typeof raw === 'object' ? raw : { text: '' }));
 const hasState = (ci) => !!(ci.checked || (ci.issue && String(ci.issue).trim()) || ci.checkedAt);
 const isOpenIssue = (ci) => !!(ci.issue && String(ci.issue).trim() && !ci.issueResolved);
 
@@ -336,6 +339,12 @@ for (const pid of wanted) {
     for (const f of PII_FIELDS) if (ci[f]) piiDropped++;
 
     const targets = [];
+    /* A line this tool restored on an earlier run is rebuilt fresh every run,
+     * at the same sort, so its text can never go stale (its note once claimed
+     * a check-off the crew never made). */
+    const prior = pdoc.items[key];
+    const priorRestored = prior && /THIS LINE EXISTS BECAUSE THE CREW IS ALREADY WORKING IT|FIELD-AUTHORED LINE/.test(String(prior.instanceNote || ''));
+    if (priorRestored) delete pdoc.items[key];
     if (key in pdoc.items) targets.push(key);
     const remap = [].concat(RULED_REMAP[key] || []).find((t) => t in pdoc.items);
     if (remap) { targets.push(remap); if (state) r++; }
@@ -347,7 +356,7 @@ for (const pid of wanted) {
        * in the reconciliation below, and never silently dropped. */
       if (state) {
         const roomNo = pid.replace(/-MEP$/, '');
-        const nextSort = RESTORED_BAND_BASE + restored.filter((x) => x.doc === pid).length * RESTORED_BAND_STEP;
+        const nextSort = priorRestored ? prior.sort : RESTORED_BAND_BASE + restored.filter((x) => x.doc === pid).length * RESTORED_BAND_STEP;
         const fromDb = (pid.endsWith('-MEP') || isSpaceDoc(pid)) ? null : rebuildFromDb(roomNo, ci, nextSort);
         const rebuilt = fromDb || ((pid.endsWith('-MEP') || isSpaceDoc(pid)) ? null : restoreFieldAuthored(roomNo, ci, nextSort));
         if (rebuilt) {
@@ -392,7 +401,14 @@ for (const pid of wanted) {
   }
 
   /* Notes are field-authored too, and they carry the author's full name. */
-  for (const [nk, note] of Object.entries(crew.notes || {})) {
+  for (const [nk, raw] of Object.entries(crew.notes || {})) {
+    /* The crew app writes most notes as a map, but a rename note (key
+     * "rename-<date>") is a plain STRING. Read as a map it has no text and no
+     * timestamp, and room 438's PM ruling was carried as an empty stub once,
+     * with the reconciliation comparing undefined to undefined. Normalise
+     * first; a note with no text is a hard stop, never a silent blank. */
+    const note = noteOf(raw);
+    if (!note.text) throw new Error(`${pid}/${nk}: crew note has no text (${typeof raw}); refusing to carry an empty note`);
     pdoc.notes = pdoc.notes || {};
     /* A note already present with the SAME text is this tool's own earlier
      * carry, preserved through a rebuild; only a DIFFERENT text under the same
@@ -505,10 +521,13 @@ const noteMisses = [];
 for (const pid of wanted) {
   const snap = snapshot[pid];
   if (!snap) continue;
-  for (const [nk, note] of Object.entries(snap.doc.notes || {})) {
+  for (const [nk, raw] of Object.entries(snap.doc.notes || {})) {
     crewNotes++;
+    const note = noteOf(raw);
     const landed = ((seed.docs[pid].notes || {})[nk]);
-    if (landed && landed.text === note.text && !('createdBy' in landed) && !('createdByUid' in landed)) notesLanded++;
+    /* "Intact" means the crew's text, non-empty, byte for byte - never two undefineds. */
+    if (landed && typeof landed.text === 'string' && landed.text.length > 0 && landed.text === note.text &&
+        !('createdBy' in landed) && !('createdByUid' in landed)) notesLanded++;
     else noteMisses.push(`${pid}/${nk}`);
   }
 }
