@@ -188,6 +188,8 @@ a{color:inherit;text-decoration:none}
 .item-row.flagged{box-shadow:inset 3px 0 0 var(--hold-ink)}
 .issue-pill{display:inline-flex;align-items:center;gap:5px;font:700 10px var(--mono);letter-spacing:.06em;color:var(--issue-ink);background:var(--issue-bg);border:1px solid var(--issue-bd);border-radius:5px;padding:2px 7px}
 .issue-pill.res{color:var(--done-ink);background:var(--done-bg);border-color:var(--done-bd);text-decoration:line-through}
+/* A resolved issue is history: muted text, no flag, no red (D50). */
+.issue-done{font:500 11px var(--mono);color:var(--subtle)}
 .conflict{margin:12px 16px;border:1px solid var(--hold-bd);background:var(--hold-bg);border-radius:9px;padding:12px 14px}
 .conflict .ch{display:flex;align-items:center;gap:8px;font:700 11px var(--mono);letter-spacing:.08em;color:var(--hold-ink)}
 .conflict .pos{display:flex;gap:9px;align-items:baseline;padding:7px 0;border-bottom:1px dashed var(--hold-bd);font-size:13px}

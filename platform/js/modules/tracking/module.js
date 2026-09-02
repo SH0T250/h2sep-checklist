@@ -705,7 +705,7 @@ function itemRow(ctx, docId, itemId, it) {
         ${it.optional ? `<span class="chip sm" title="Counts only once it is checked">IF NEEDED</span>` : ''}
       </span>
       <span class="l2">
-        ${it.issue ? `<span class="issue-pill ${it.issueResolved ? 'res' : ''}">${ic('flag', 'flag-ic')}${esc(it.issue)}</span>` : ''}
+        ${openIssue ? `<span class="issue-pill">${ic('flag', 'flag-ic')}${esc(it.issue)}</span>` : it.issue ? `<span class="issue-done" title="Issue resolved">resolved · ${esc(it.issue)}</span>` : ''}
         ${specRef(it)}
         ${it.checked ? `<span class="meta">${esc(it.initials)}${it.checkedByCo ? ` · <b class="co">${esc(shortCo(it.checkedByCo))}</b>` : ''} · ${it.checkedAt ? fmtWhen(it.checkedAt) : 'from paper'}</span>` : ''}
         ${(it.attachments || []).length ? `<span class="detail-cue clip">${ic('clip')}${(it.attachments).length}</span>` : ''}
@@ -718,7 +718,7 @@ function itemRow(ctx, docId, itemId, it) {
     tap: () => {
       if (bulkOn(docId)) return bulkToggleRow(row, docId, itemId);
       if (!store.user) return identityGate(ctx);
-      if (openIssue || it.issue || flagged) return itemSheet(ctx, docId, itemId);
+      if (openIssue || flagged) return itemSheet(ctx, docId, itemId);   // a resolved issue is history, not a flag (D50)
       store.check(docId, itemId, !it.checked);
       if (!it.checked) toast(`Checked ${it.code || it.label}`, { label: 'Undo', fn: () => store.check(docId, itemId, false) });
     },
@@ -747,6 +747,7 @@ function itemSheet(ctx, docId, itemId) {
     ${it.reliability === 'FLAGGED' && it.instanceNote ? `<div class="conflict"><div class="ch">${ic('flag', 'flag-ic')}FLAGGED · SOURCES DISAGREE</div><div style="font-size:13px;padding:6px 0">${esc(it.instanceNote)}</div><div class="foot">Do not order or close from either position. Only Austin closes conflicts.</div></div>` : ''}
     ${it.reliability !== 'FLAGGED' && it.instanceNote ? `<div class="vnote"><div class="vn-h">Verification notes</div><div>${esc(it.instanceNote)}</div></div>` : ''}
     ${(it.attachments || []).length ? `<div class="attaches">${it.attachments.map(a => `<a class="btn attach" href="${esc(a.url)}" target="_blank" rel="noopener">${ic('clip')}${esc(a.label)}</a>`).join('')}</div>` : ''}
+    ${it.issue && it.issueResolved ? `<div class="vnote" style="margin-bottom:8px"><div class="vn-h">Issue resolved</div><div>"${esc(it.issue)}" was raised on this line and has been resolved. It no longer counts as a flag anywhere. Clear it to erase the record, or pick a new issue below if the problem is back.</div></div>` : ''}
     <div class="field"><label>Issue</label></div>
     <div class="qps">${QUICK_PICKS.map(q => `<button class="qp ${it.issue === q ? 'on' : ''}" data-q="${q}">${q}</button>`).join('')}</div>
     <div class="field"><label>Custom note on the issue</label>
