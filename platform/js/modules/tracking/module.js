@@ -222,8 +222,8 @@ function renderRoom(ctx, { no }) {
   for (const [cat, entries] of groups) {
     const done = entries.filter(([, it]) => it.checked).length;
     const head = el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">·</span><span>${done} of ${entries.length} checked</span>
-      <span class="spacer"></span>${ownerChip(store, cat, no)}${bulkOn(activeId) ? '<span class="pickall" role="button" tabindex="0">select all</span>' : ''}</div>`);
-    head.querySelector('.pickall')?.addEventListener('click', (e) => bulkCatToggle(list, activeId, entries, e.currentTarget));
+      <span class="spacer"></span>${ownerChip(store, cat, no)}${bulkOn(activeId) ? `<span class="pickall" role="button" tabindex="0">${pickallLabel(activeId, entries)}</span>` : ''}</div>`);
+    wirePickall(head, list, activeId, entries);
     list.append(head);
     for (const [id, it] of entries) list.append(itemRow(ctx, activeId, id, it));
   }
@@ -287,6 +287,13 @@ function docLabel(id) {
 }
 
 function bulkOn(docId) { return !!(bulkSel && bulkSel.docId === docId); }
+// The shell re-renders on every store emit; ending select mode from the bottom
+// of a long checklist must not throw the reader back up the page.
+function emitKeepingScroll(store) {
+  const y = window.scrollY;
+  store._emit();
+  requestAnimationFrame(() => window.scrollTo(0, Math.min(y, document.documentElement.scrollHeight)));
+}
 function bulkToggleRow(row, docId, itemId) {
   if (!bulkOn(docId)) return;
   if (bulkSel.ids.has(itemId)) bulkSel.ids.delete(itemId); else bulkSel.ids.add(itemId);
@@ -299,6 +306,16 @@ function bulkRefreshBar() {
   const n = bulkSel.ids.size;
   bar.querySelector('.cnt').innerHTML = `${n} selected<small> of ${bar.dataset.total}</small>`;
   bar.querySelectorAll('[data-act]:not([data-act="cancel"])').forEach(b => { b.disabled = n === 0; });
+}
+function pickallLabel(docId, entries) {
+  return bulkOn(docId) && entries.length && entries.every(([id]) => bulkSel.ids.has(id)) ? 'clear' : 'select all';
+}
+function wirePickall(head, list, docId, entries) {
+  const b = head.querySelector('.pickall');
+  if (!b) return;
+  const go = () => bulkCatToggle(list, docId, entries, b);
+  b.addEventListener('click', go);
+  b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
 }
 function bulkCatToggle(list, docId, entries, headEl) {
   if (!bulkOn(docId)) return;
@@ -331,7 +348,7 @@ function bulkBar(ctx, docId, doc) {
   };
   bar.querySelectorAll('[data-act]').forEach(b => b.addEventListener('click', () => {
     const act = b.dataset.act;
-    if (act === 'cancel') { bulkSel = null; store._emit(); return; }
+    if (act === 'cancel') { bulkSel = null; emitKeepingScroll(store); return; }
     if (act === 'more') {
       const A = store.constructor.BULK_ACTIONS;
       const { close } = sheet(`<div class="sh"><b style="font-size:15px">${bulkSel.ids.size} selected · do what?</b><button class="icon-btn x" data-close aria-label="Close">${ic('x')}</button></div>
@@ -437,7 +454,7 @@ function bulkConfirm(ctx, targets, action, opts = {}, onDone) {
     if (!res) return;
     close();
     onDone && onDone(res);
-    store._emit();
+    emitKeepingScroll(store);
   });
 }
 
@@ -476,10 +493,13 @@ function renderBulk(ctx) {
   }
   const cats = [...new Set([...tags.values()].map(t => t.category))];
   const filterText = String(q.filter || '').trim().toLowerCase();
+  const pickedKeys = new Set(q.codes);
+  // A picked tag is always on screen, whatever the category chips or the
+  // filter say: a bulk tool must never carry an armed pick out of sight.
   const shownTags = [...tags.values()]
-    .filter(t => !q.cats.length || q.cats.includes(t.category))
-    .filter(t => !filterText || `${[...t.codes].join(' ')} ${t.label}`.toLowerCase().includes(filterText))
-    .sort((a, b) => a.category.localeCompare(b.category) || a.label.localeCompare(b.label));
+    .filter(t => pickedKeys.has(t.key) || ((!q.cats.length || q.cats.includes(t.category))
+      && (!filterText || `${[...t.codes].join(' ')} ${t.label}`.toLowerCase().includes(filterText))))
+    .sort((a, b) => (pickedKeys.has(b.key) - pickedKeys.has(a.key)) || a.category.localeCompare(b.category) || a.label.localeCompare(b.label));
   const codesOf = (t) => { const c = [...t.codes]; return c.length ? (c.length > 3 ? `${c.slice(0, 3).join(' / ')} +${c.length - 3}` : c.join(' / ')) : '—'; };
   const typesOnFloors = new Set(rooms.filter(r => !q.floors.length || q.floors.includes(Number(r.floor))).map(r => r.typeLabel || r.type));
   const fam = (t) => /^King/.test(t) ? 'King' : /^(QQ|Queen)/.test(t) ? 'QQ' : '';
@@ -524,7 +544,7 @@ function renderBulk(ctx) {
         <h3>Preview</h3>
         ${lastResult ? `<div class="preview done"><div class="ph">${ic('check')}<b>Done</b> · ${esc(lastResult.label)} · ${fmtWhen(lastResult.at)}</div></div>` : ''}
         ${plan ? bulkPreviewHtml(plan) : '<div class="coming" style="padding:18px"><b>Pick at least one tag</b><span>The preview shows exactly what will change and what is left alone, per room.</span></div>'}
-        <div class="srow" style="margin-top:10px">${lastUndo ? `<button class="btn" data-undo-last title="${esc(lastUndo.label)}">Undo last bulk edit</button>` : ''}<button class="btn primary" data-apply ${plan && plan.changes.length ? '' : 'disabled'}>${ic('check')}${plan && plan.changes.length ? `Apply to ${pl(plan.changes.length, 'line')}` : 'Nothing to apply'}</button></div>
+        <div class="srow" style="margin-top:10px">${lastUndo ? `<button class="btn" data-undo-last title="${esc(lastUndo.label)}">Undo last bulk edit</button>` : ''}<button class="btn primary" data-apply ${plan && plan.changes.length && !(q.action === 'setIssue' && !q.text) ? '' : 'disabled'}>${ic('check')}${q.action === 'setIssue' && !q.text ? 'Pick an issue first' : plan && plan.changes.length ? `Apply to ${pl(plan.changes.length, 'line')}` : 'Nothing to apply'}</button></div>
       </section>
     </div>
   </div>`);
@@ -596,7 +616,6 @@ function itemRow(ctx, docId, itemId, it) {
   const sel = bulkOn(docId);
   const row = el(`<div class="item-row ${flagged ? 'flagged' : ''} ${sel ? 'selectable' : ''} ${sel && bulkSel.ids.has(itemId) ? 'picked' : ''}" role="button" tabindex="0" data-item="${esc(itemId)}"
       aria-label="${esc(it.label)}${it.checked ? ', checked' : ''}">
-    ${sel ? '<span class="pick"></span>' : ''}
     <span class="stamp ${it.checked ? 'checked' : ''}">${it.checked ? esc(it.initials || '✓') : ''}</span>
     <span class="mid">
       <span class="l1">
@@ -865,8 +884,8 @@ function renderSpace(ctx, { id }) {
   root.querySelector('[data-bulk]').addEventListener('click', () => { bulkSel = bulkOn(activeId) ? null : { docId: activeId, ids: new Set() }; store._emit(); });
   for (const [cat, entries] of groupByCategory(store.liveItems(active))) {
     const done = entries.filter(([, it]) => it.checked).length;
-    const head = el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">\u00b7</span><span>${done} of ${entries.length} checked</span>${bulkOn(activeId) ? '<span class="pickall" role="button" tabindex="0">select all</span>' : ''}</div>`);
-    head.querySelector('.pickall')?.addEventListener('click', (e) => bulkCatToggle(list, activeId, entries, e.currentTarget));
+    const head = el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">\u00b7</span><span>${done} of ${entries.length} checked</span>${bulkOn(activeId) ? `<span class="pickall" role="button" tabindex="0">${pickallLabel(activeId, entries)}</span>` : ''}</div>`);
+    wirePickall(head, list, activeId, entries);
     list.append(head);
     for (const [iid, it] of entries) list.append(itemRow(ctx, activeId, iid, it));
   }

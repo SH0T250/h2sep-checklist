@@ -195,6 +195,27 @@ t('the Undo last bulk edit button is offered after a bulk', !!(await p.$('[data-
 await p.click('[data-undo-last]'); await p.waitForTimeout(400);
 t('Undo last bulk edit reverts it and says so', /Undone/.test(await p.textContent('.preview.done')));
 
+console.log('\nQA ATTACKER FINDINGS, FIXED');
+await p.evaluate(() => sessionStorage.setItem('h2sep-p-bulkq', JSON.stringify({ floors: [4], types: [], kind: 'ffe', cats: ['Bath Accessory'], codes: [], action: 'setIssue', text: '' })));
+await p.goto(B + '#/bulk', { waitUntil: 'networkidle' }); await p.reload({ waitUntil: 'networkidle' }); await p.waitForSelector('.taglist label');
+await p.click('.taglist label:nth-child(1) input'); await p.waitForSelector('.preview');
+t('Flag an issue with no text: Apply is disabled and says why', await p.$eval('[data-apply]', b => b.disabled && /Pick an issue first/.test(b.textContent)));
+t('with no text every line is left alone with the reason', /pick an issue or type one first/.test(await p.textContent('.preview')));
+const pickedKey = await p.$eval('.taglist label:nth-child(1) input', i => i.dataset.code);
+await p.click('.bulk-scope [data-cat="Bath Accessory"]'); await p.waitForTimeout(150);
+await p.click('.bulk-scope [data-cat="Appliance"]'); await p.waitForTimeout(150);
+t('a picked tag stays on screen when the category chips would hide it', !!(await p.$(`.taglist input[data-code="${pickedKey}"]:checked`)));
+await p.fill('[data-filter]', 'zzzz'); await p.waitForTimeout(500);
+t('a picked tag stays on screen when the filter would hide it', !!(await p.$(`.taglist input[data-code="${pickedKey}"]:checked`)));
+await p.goto(B + '#/room/403', { waitUntil: 'networkidle' }); await p.waitForSelector('.item-row');
+await p.click('[data-bulk]'); await p.waitForSelector('.item-row.selectable');
+await p.click('.cat-head .pickall'); await p.evaluate(() => window.__store._emit()); await p.waitForTimeout(150);
+t('the category button reads CLEAR after a re-render while its lines are picked', /clear/i.test(await p.textContent('.cat-head .pickall')) && (await p.$$('.item-row.picked')).length > 0);
+await p.focus('.cat-head .pickall'); await p.keyboard.press('Enter'); await p.waitForTimeout(100);
+t('the category button works from the keyboard', (await p.$$('.item-row.picked')).length === 0);
+t('no dead selection boxes in the markup', (await p.$$('.item-row .pick')).length === 0);
+await p.click('.bulkbar [data-act="cancel"]');
+
 t('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' ; '));
 await b.close();
 console.log(`\n${pass} passed, ${fail} failed`);

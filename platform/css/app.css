@@ -363,7 +363,6 @@ a{color:inherit;text-decoration:none}
 /* Selection is a rail on the row edge, not a second checkbox: a cyan check in
    this product means "signed off", and select mode must not borrow it. */
 .item-row.selectable{cursor:pointer;border-left:3px solid transparent}
-.item-row.selectable .pick{display:none}
 .item-row.picked{background:var(--cyan-dim);border-left-color:var(--cyan)}
 .cat-head .pickall{margin-left:auto;padding:0 12px;min-height:36px;display:inline-flex;align-items:center;border:1px solid var(--hair-strong);border-radius:8px;white-space:nowrap;font:600 10.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);cursor:pointer;background:var(--card)}
 .cat-head .pickall:hover{border-color:var(--subtle)}
@@ -377,7 +376,8 @@ a{color:inherit;text-decoration:none}
   .bulkbar .btn{flex:1 1 30%;justify-content:center;padding:10px 8px;font-size:12.5px}
   .bulkbar [data-act="uncheck"],.bulkbar [data-act="resolve"],.bulkbar [data-act="resolveAndCheck"],.bulkbar [data-act="setIssue"]{display:none}
   .bulkbar [data-act="more"]{display:inline-flex}
-  .cat-head .pickall{min-height:44px}
+  .cat-head .pickall{min-height:40px;padding:0 10px}
+  .cat-head:has(.pickall) .owner-chip{display:none}
 }
 .bulk-scope{display:grid;grid-template-columns:minmax(320px,420px) 1fr;gap:12px;align-items:start}
 @media (max-width:760px){.bulk-scope{grid-template-columns:1fr}}
