@@ -128,7 +128,7 @@ def radial_power(gray):
     h, w = p.shape
     cy, cx = h // 2, w // 2
     yy, xx = np.indices(p.shape)
-    # Normalise both axes to cycles per frame width so the radius is isotropic.
+    # Normalize both axes to cycles per frame width so the radius is isotropic.
     r = np.sqrt(((xx - cx)) ** 2 + ((yy - cy) * (w / h)) ** 2)
     rint = r.astype(np.int32)
     total = np.bincount(rint.ravel(), weights=p.ravel())

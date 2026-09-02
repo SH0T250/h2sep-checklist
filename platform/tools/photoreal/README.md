@@ -50,7 +50,7 @@ python3 platform/tools/photoreal/overlay.py --mode blend --render <img> --photo 
 ```
 
 Modes: `blend` (50/50 mix at 1000 px), `edges` (Sobel edges, photo in cyan and
-render in orange on grey, white where they coincide), `wipe` (left half photo,
+render in orange on gray, white where they coincide), `wipe` (left half photo,
 right half render), `diff` (absolute luminance difference, 0.25 is white). If
 `--out` is a directory the file is `overlay-<mode>.jpg`. Prints the output path.
 The render is letterboxed onto the photograph's aspect, never stretched.

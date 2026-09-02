@@ -95,7 +95,7 @@ function needRound() {
   return n;
 }
 
-function normaliseVerdict(v, keyFile) {
+function normalizeVerdict(v, keyFile) {
   const out = {
     pick: v.pick === 'A' || v.pick === 'B' ? v.pick : (v.pick ?? null),
     correct: typeof v.correct === 'boolean' ? v.correct : null,
@@ -132,7 +132,7 @@ const commands = {
     const l = load(view);
     const r = getRound(l, n, true);
     if (args['render-jpg']) r.renderJpg = args['render-jpg'];
-    r.critics.push(normaliseVerdict(v, args.key));
+    r.critics.push(normalizeVerdict(v, args.key));
     save(l);
     console.log(JSON.stringify({ view, round: n, critics: r.critics.length, file: ledgerPath(view) }));
   },

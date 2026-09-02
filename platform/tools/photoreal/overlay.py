@@ -9,7 +9,7 @@ nothing is stretched.
 
 Modes:
   blend  50/50 mix of photo and render. Doubled edges show the misalignment.
-  edges  Sobel edges of both drawn in two colours on mid grey: photo edges in
+  edges  Sobel edges of both drawn in two colors on mid gray: photo edges in
          cyan, render edges in orange. Where they coincide the line goes white.
   wipe   left half photograph, right half render, with a one pixel seam line.
   diff   absolute difference of luminance, scaled so a 0.25 difference is white.
@@ -48,7 +48,7 @@ def luma(arr):
 
 
 def sobel(gray):
-    """Gradient magnitude, normalised to the 99th percentile of the frame."""
+    """Gradient magnitude, normalized to the 99th percentile of the frame."""
     kx = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]], dtype=np.float32)
     ky = kx.T
     p = np.pad(gray, 1, mode='edge')
