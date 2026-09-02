@@ -673,33 +673,47 @@ export function renderRoom(el, number) {
   function tapItem(id) {
     const it = room.items[id];
     if (it.checked) { sheets.checkedItemSheet(room, id, { canWrite: w }); return; }
-    if (it.issue && !it.issueResolved) { sheets.issueItemSheet(room, id, { canWrite: w }); return; }
+    if (it.issue && !it.issueResolved) {
+      // D58: resolving and checking from the issue sheet offers the floor too.
+      sheets.issueItemSheet(room, id, { canWrite: w, onChecked: () => toast('Resolved and checked ' + lineLabel(it), { actions: [floorOffer(it)] }) });
+      return;
+    }
     if (!w) { readOnlyNudge(); return; }
     const scrollAdjacent = Date.now() - lastScrollEnd < 400;
     store.checkItem(room.number, id).catch(e => toast('Could not save: ' + e.message));
     vibrate();
     // D57: every check offers the same check on this line in every room on the
     // floor. Undo stays on the same toast.
-    toast('Checked ' + (it.code || it.label.slice(0, 40)), { actions: [
+    toast('Checked ' + lineLabel(it), { actions: [
       { label: 'Undo', onAction: () => store.uncheckItem(room.number, id) },
-      { label: 'Whole floor ' + room.floor, onAction: () => wholeFloorCheck(room, it) },
+      floorOffer(it),
     ] });
     void scrollAdjacent;
   }
+  const lineLabel = (it) => it.code || String(it.label || '').slice(0, 40);
+  const floorOffer = (it) => ({ label: 'Whole floor ' + room.floor, onAction: () => wholeFloorCheck(room, it) });
   // Check the same line (same tag, or same label when untagged) on every room
   // of this kind on this floor. The crew's bulk engine plans it: a line already
   // checked, checked by someone else, carrying an open issue, or flagged is
   // left alone and counted, and the whole apply has an Undo.
+  // Every kind of document (D58): a guest room walks the floor's guest rooms,
+  // a common area the floor's common areas, and a punch doc the punch docs of
+  // its own kind, so an MEP line never lands on an FF&E list or the reverse.
   async function wholeFloorCheck(fromRoom, it) {
     const w2 = canWrite();
     if (!w2) { readOnlyNudge(); return; }
-    const floorRooms = store.getRooms(fromRoom.floor)
-      .map(r => isMepDoc(fromRoom) ? store.getRoom(mepIdFor(r.number)) : r)
+    const isSpace = isSpaceDoc(fromRoom);   // a common area and its punch doc alike
+    const isMep = isMepDoc(fromRoom);
+    const kind = isSpace ? 'common area' : 'room';
+    const parents = (isSpace ? store.getSpaces(fromRoom.floor) : store.getRooms(fromRoom.floor)).filter(r => !isMepDoc(r));
+    const floorRooms = parents
+      .map(r => isMep ? store.getRoom(mepIdFor(r.number)) : r)
       .filter(r => r && r.number !== fromRoom.number);
     const scope = bulk.emptyScope();
     scope.keys = new Set([bulk.inventoryKey(it)]);
     scope.floors = new Set([String(fromRoom.floor)]);
-    scope.includeSpaces = false;
+    scope.includeGuest = !isSpace;
+    scope.includeSpaces = isSpace;
     scope.state = 'noissue';
     const user = store.getUser();
     const plan = bulk.planAction(floorRooms, scope, 'check', { user, uid: store.getUid ? store.getUid() : '', overwriteChecked: false });
@@ -713,17 +727,17 @@ export function renderRoom(el, number) {
     const skipWhy = {};
     for (const k of plan.skipped) skipWhy[k.why] = (skipWhy[k.why] || 0) + 1;
     const skipText = Object.entries(skipWhy).map(([w, n]) => `${n} ${w}`).join(', ');
-    if (!plan.changes.length) { toast(`Nothing to do on floor ${fromRoom.floor}: ${skipText || 'every other room already has it'}`, { ms: 6000 }); return; }
-    const ok = window.confirm(`Check ${label} on ${plan.counts.changing} more room${plan.counts.changing === 1 ? '' : 's'} on floor ${fromRoom.floor}?` + (plan.skipped.length ? `\n\nLeft alone: ${skipText}.` : ''));
+    if (!plan.changes.length) { toast(`Nothing to do on floor ${fromRoom.floor}: ${skipText || `every other ${kind} already has it`}`, { ms: 6000 }); return; }
+    const ok = window.confirm(`Check ${label} on ${plan.counts.changing} more ${kind}${plan.counts.changing === 1 ? '' : 's'} on floor ${fromRoom.floor}?` + (plan.skipped.length ? `\n\nLeft alone: ${skipText}.` : ''));
     if (!ok) return;
     const ctx = store.getBulkContext();
     try {
       await bulk.executePlan(plan, ctx, () => {});
       if (ctx.mode !== 'demo') bulk.auditBulk(plan, ctx, 'floor-' + Date.now().toString(36)).catch(() => {});
-      toast(`${label} checked on ${plan.counts.changing} room${plan.counts.changing === 1 ? '' : 's'} on floor ${fromRoom.floor}`, { action: 'Undo', onAction: async () => {
+      toast(`${label} checked on ${plan.counts.changing} ${kind}${plan.counts.changing === 1 ? '' : 's'} on floor ${fromRoom.floor}`, { action: 'Undo', onAction: async () => {
         const inverse = bulk.deriveUndoPlan(bulk.invertPlan(plan), store.getAllRooms().concat(floorRooms));
         await bulk.executePlan(inverse, ctx, () => {});
-        toast(`Undone on ${inverse.counts ? inverse.counts.changing : plan.counts.changing} room(s)`);
+        toast(`Undone on ${inverse.counts ? inverse.counts.changing : plan.counts.changing} ${kind}(s)`);
       }, ms: 10000 });
     } catch (e) { toast('Could not save the floor: ' + e.message); }
   }

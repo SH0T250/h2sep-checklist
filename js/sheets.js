@@ -255,7 +255,7 @@ export function checkedItemSheet(room, itemId, { canWrite }) {
 }
 
 // ---- tapped an open-issue item's box ----
-export function issueItemSheet(room, itemId, { canWrite }) {
+export function issueItemSheet(room, itemId, { canWrite, onChecked = null }) {
   const item = room.items[itemId];
   const s = sheet(`
     <div class="issue-note-line">— ${esc(item.issue)}</div>
@@ -271,6 +271,7 @@ export function issueItemSheet(room, itemId, { canWrite }) {
   if (!canWrite) return;
   s.querySelector('[data-act=resolve-check]').addEventListener('click', () => {
     store.resolveIssue(room.number, itemId, { check: true }); vibrate(); s.remove();
+    if (onChecked) onChecked();   // D58: the caller offers the same check floor-wide
   });
   s.querySelector('[data-act=resolve]').addEventListener('click', () => {
     store.resolveIssue(room.number, itemId); s.remove();

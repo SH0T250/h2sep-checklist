@@ -118,9 +118,13 @@ export function getMepFor(roomNumber) {
 // Common-area spaces share the collection with guest rooms and are told apart
 // by their `space-` type slug (see util.isSpaceDoc). Same floor listeners feed
 // both, so subscribing floors 1–4 is enough to see every space.
+// A common area's punch doc ("S221-M", type space-mep-punch) is a space doc by
+// type but not a common area: it stays off this list the same way "105-MEP"
+// stays off getRooms (D58), so the Common areas page and its roll-up never
+// show or count a punch list.
 export function getSpaces(floor = null) {
   return [...state.rooms.values()]
-    .filter(r => !r.deleted && isSpaceDoc(r) && (floor === null || r.floor === Number(floor)))
+    .filter(r => !r.deleted && isSpaceDoc(r) && !isMepDoc(r) && (floor === null || r.floor === Number(floor)))
     .sort((a, b) => (a.floor - b.floor) || roomSort(a.number, b.number));
 }
 export function isRoomPending(number) { return state.pendingRooms.has(String(number)); }
