@@ -114,21 +114,25 @@ function renderFloor(ctx) {
 
 function renderHub(ctx) {
   const { store, modelRooms } = ctx;
-  const sliceRooms = store.guestRooms().map(r => r.number);
+  // Floor 1 only, per Austin 2026-09-02: "Only show 3d bim for 1st floor as
+  // its already completed." Floors 2 to 4 have no models yet and are not listed.
+  const floorOneRooms = store.guestRooms().filter(r => Number(r.floor) === 1).map(r => r.number);
+  const upperRooms = store.guestRooms().filter(r => Number(r.floor) > 1).length;
   const root = el(`<div>
     <div class="pagehead"><h1 class="h1">3D BIM</h1>
-      <span class="sub">per-room geometry from the architect's A555 dimensions · locations stylized, not shop drawings</span></div>
+      <span class="sub">floor 1 · per-room geometry from the architect's dimensions · locations stylized, not shop drawings</span></div>
     <section class="card bimlist">
-      <div class="card-head"><h2>Room models</h2><span class="card-cap">each room renders its own geometry, never a shared shell</span></div>
+      <div class="card-head"><h2>Floor 1 room models</h2><span class="card-cap">each room renders its own geometry, never a shared shell</span></div>
       <div class="rows"></div>
     </section>
-    <section class="card" style="margin-top:14px"><div class="card-head"><h2>Not modeled yet</h2><span class="card-cap">honest hard-stop, per standing ruling</span></div>
-      <div class="coming" style="padding:20px">${ic('cube')}<b>King family, One Bedroom, and QQ Acc have no model</b>
-      <span>A550 gives the King Studio its own 29 ft clear depth and working wall, so it gets its own geometry in the Blender pipeline, never a relabeled QQ shell. Until then those rooms show this stop instead of wrong geometry.</span></div>
+    <section class="card" style="margin-top:14px"><div class="card-head"><h2>Not modeled</h2><span class="card-cap">honest hard-stop, per standing ruling</span></div>
+      <div class="coming" style="padding:20px">${ic('cube')}<b>Floors 2 to 4 have no models</b>
+      <span>Every floor-1 key renders its own geometry from its own sheet. The upper floors have not been modeled; until they are, their rooms show a stop instead of another room's shell.</span></div>
     </section>
+    ${upperRooms ? `<p class="card-cap" style="margin-top:14px">Floors 2 to 4 (${upperRooms} rooms) are live on the checklists and have no 3D models yet; they are not listed here.</p>` : ''}
   </div>`);
   const rows = root.querySelector('.rows');
-  for (const no of sliceRooms) {
+  for (const no of floorOneRooms) {
     const has = ctx.modelRooms.includes(no);
     const doc = store.getDoc(no);
     rows.append(el(`<div class="mrow">

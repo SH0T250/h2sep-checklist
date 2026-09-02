@@ -17,13 +17,14 @@ await p.reload({waitUntil:'networkidle'}); await p.waitForTimeout(400);
 console.log('\nSHELL AND NAV');
 const nav=await p.$$eval('.nav a',n=>n.map(x=>x.textContent.replace(/\s+/g,' ').trim()));
 t('nav renders', nav.length>=8, nav.join(' | '));
-t('Rooms count shows 16', nav.some(x=>/Rooms\s*16/.test(x)), nav.find(x=>x.includes('Rooms')));
-t('Common Areas count shows 31', nav.some(x=>/Common Areas\s*31/.test(x)), nav.find(x=>x.includes('Common')));
+t('Rooms count shows 115 (floors 1 to 4)', nav.some(x=>/Rooms\s*115/.test(x)), nav.find(x=>x.includes('Rooms')));
+t('Common Areas count shows 40 (31 on floor 1, 3 on each floor above)', nav.some(x=>/Common Areas\s*40/.test(x)), nav.find(x=>x.includes('Common')));
 
 console.log('\nROOMS');
 await p.goto(B+'#/rooms',{waitUntil:'networkidle'}); await p.waitForTimeout(300);
 const rows=await p.$$eval('.room-row .rno',n=>n.map(x=>x.textContent.trim()));
-t('all 16 guest rooms listed', rows.length===16, rows.join(','));
+t('all 115 guest rooms listed', rows.length===115, String(rows.length));
+t('all 16 floor-1 rooms among them', ['101','103','104','105','106','107','108','109','110','111','112','113','114','115','116','118'].every(n=>rows.includes(n)), rows.filter(r=>r.startsWith('1')).join(','));
 t('includes the King rooms', ['104','106','108','110','112','114','116','118'].every(r=>rows.includes(r)));
 
 console.log('\nA KING ROOM');
@@ -48,7 +49,7 @@ console.log('\nCOMMON AREAS');
 await p.goto(B+'#/common',{waitUntil:'networkidle'}); await p.waitForTimeout(400);
 t('common areas screen is no longer a stub', !(await p.$('.coming')));
 const sp=await p.$$eval('.room-row .rno',n=>n.map(x=>x.textContent.trim()));
-t('31 spaces listed', sp.length===31, String(sp.length));
+t('40 spaces listed', sp.length===40, String(sp.length));
 t('MEP-only spaces are visible', ['S001','S030','S032'].every(x=>sp.includes(x)), sp.filter(x=>['S001','S030','S032'].includes(x)).join(','));
 await p.goto(B+'#/space/S003',{waitUntil:'networkidle'}); await p.waitForTimeout(400);
 t('a space opens with lines', (await p.$$('.item-row')).length>0);
@@ -81,7 +82,7 @@ t('check writes the complete group', ['checked','initials','checkedByCo','checke
 
 console.log('\nTHE CREW\'S WORK CARRIED IN');
 const totChecked=await p.evaluate(async()=>{
-  const res=await fetch('data/slice-f1.json'); const j=await res.json();
+  const res=await fetch('data/floor1-staged.json'); const j=await res.json();
   let c=0,i=0,n=0;
   for(const d of Object.values(j.docs)){
     for(const v of Object.values(d.items)){ if(v.deleted) continue; if(v.checked)c++; if(v.issue&&!v.issueResolved)i++; }

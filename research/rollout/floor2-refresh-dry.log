@@ -1,0 +1,94 @@
+FLOOR 2  seed /home/user/h2sep-checklist/platform/data/floor2-staged.json
+live collection: 293 docs
+crew collection: 296 docs (read only, never written)
+staged build   : 70 docs
+
+backup: /home/user/h2sep-checklist/tools/out/backups/platform-before-floor2-rollout-2026-09-02T13-16-58-517Z.json (293 docs)
+
+CREATE  0 new doc(s)
+   
+
+UPDATE  70 existing doc(s)
+   201: structure and text refreshed, no field-state change
+   202: structure and text refreshed, no field-state change
+   203: structure and text refreshed, no field-state change
+   204: structure and text refreshed, no field-state change
+   205: structure and text refreshed, no field-state change
+   206: structure and text refreshed, no field-state change
+   207: structure and text refreshed, no field-state change
+   208: structure and text refreshed, no field-state change
+   209: structure and text refreshed, no field-state change
+   210: structure and text refreshed, no field-state change
+   211: structure and text refreshed, no field-state change
+   212: structure and text refreshed, no field-state change
+   213: structure and text refreshed, no field-state change
+   214: structure and text refreshed, no field-state change
+   215: structure and text refreshed, no field-state change
+   216: structure and text refreshed, no field-state change
+   217: structure and text refreshed, no field-state change
+   218: structure and text refreshed, no field-state change
+   222: structure and text refreshed, no field-state change
+   223: structure and text refreshed, no field-state change
+   224: structure and text refreshed, no field-state change
+   225: structure and text refreshed, no field-state change
+   226: structure and text refreshed, no field-state change
+   227: structure and text refreshed, no field-state change
+   228: structure and text refreshed, no field-state change
+   229: structure and text refreshed, no field-state change
+   230: structure and text refreshed, no field-state change
+   231: structure and text refreshed, no field-state change
+   232: structure and text refreshed, no field-state change
+   233: structure and text refreshed, no field-state change
+   234: structure and text refreshed, no field-state change
+   236: structure and text refreshed, no field-state change
+   238: structure and text refreshed, no field-state change
+   201-MEP: structure and text refreshed, no field-state change
+   202-MEP: structure and text refreshed, no field-state change
+   203-MEP: structure and text refreshed, no field-state change
+   204-MEP: structure and text refreshed, no field-state change
+   205-MEP: structure and text refreshed, no field-state change
+   206-MEP: structure and text refreshed, no field-state change
+   207-MEP: structure and text refreshed, no field-state change
+   208-MEP: structure and text refreshed, no field-state change
+   209-MEP: structure and text refreshed, no field-state change
+   210-MEP: structure and text refreshed, no field-state change
+   211-MEP: structure and text refreshed, no field-state change
+   212-MEP: structure and text refreshed, no field-state change
+   213-MEP: structure and text refreshed, no field-state change
+   214-MEP: structure and text refreshed, no field-state change
+   215-MEP: structure and text refreshed, no field-state change
+   216-MEP: structure and text refreshed, no field-state change
+   217-MEP: structure and text refreshed, no field-state change
+   218-MEP: structure and text refreshed, no field-state change
+   222-MEP: structure and text refreshed, no field-state change
+   223-MEP: structure and text refreshed, no field-state change
+   224-MEP: structure and text refreshed, no field-state change
+   225-MEP: structure and text refreshed, no field-state change
+   226-MEP: structure and text refreshed, no field-state change
+   227-MEP: structure and text refreshed, no field-state change
+   228-MEP: structure and text refreshed, no field-state change
+   229-MEP: structure and text refreshed, no field-state change
+   230-MEP: structure and text refreshed, no field-state change
+   231-MEP: structure and text refreshed, no field-state change
+   232-MEP: structure and text refreshed, no field-state change
+   233-MEP: structure and text refreshed, no field-state change
+   234-MEP: structure and text refreshed, no field-state change
+   236-MEP: structure and text refreshed, no field-state change
+   238-MEP: structure and text refreshed, no field-state change
+   S221: structure and text refreshed, no field-state change
+   S221-M: structure and text refreshed, no field-state change
+   S237: structure and text refreshed, no field-state change
+   S239: structure and text refreshed, no field-state change
+
+UNTOUCHED  223 live doc(s) outside this floor's build (left exactly as they are)
+   101, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 118, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 336, 338, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 436, 438, 101-MEP, 103-MEP, 104-MEP, 105-MEP, 106-MEP, 107-MEP, 108-MEP, 109-MEP, 110-MEP, 111-MEP, 112-MEP, 113-MEP, 114-MEP, 115-MEP, 116-MEP, 118-MEP, 301-MEP, 302-MEP, 303-MEP, 304-MEP, 305-MEP, 306-MEP, 307-MEP, 308-MEP, 309-MEP, 310-MEP, 311-MEP, 312-MEP, 313-MEP, 314-MEP, 315-MEP, 316-MEP, 317-MEP, 318-MEP, 322-MEP, 323-MEP, 324-MEP, 325-MEP, 326-MEP, 327-MEP, 328-MEP, 329-MEP, 330-MEP, 331-MEP, 332-MEP, 333-MEP, 334-MEP, 336-MEP, 338-MEP, 401-MEP, 402-MEP, 403-MEP, 404-MEP, 405-MEP, 406-MEP, 407-MEP, 408-MEP, 409-MEP, 410-MEP, 411-MEP, 412-MEP, 413-MEP, 414-MEP, 415-MEP, 416-MEP, 417-MEP, 418-MEP, 422-MEP, 423-MEP, 424-MEP, 425-MEP, 426-MEP, 427-MEP, 428-MEP, 429-MEP, 430-MEP, 431-MEP, 432-MEP, 433-MEP, 434-MEP, 436-MEP, 438-MEP, S001, S003, S003-M, S004, S004-M, S005, S005-M, S006, S007, S007-M, S008, S009, S009-M, S010, S011, S013, S014, S014-M, S015, S015-M, S016, S016-M, S017, S018, S019, S019-M, S020, S020-M, S021, S022, S023, S023-M, S024, S024-M, S027, S027-M, S030, S031, S031-M, S032, S121, S121-M, S137, S137-M, S139, S139-M, S321, S321-M, S337, S339, S421, S421-M, S437, S439, SZONEA, SZONEB, SZONEB-M, _asg, _dir
+
+ZERO-LOSS CHECK, over the docs that already exist live
+  checks  live 579  ->  after rollout 579  OK
+  notes   live 476  ->  after rollout 476  OK
+  open issues  live 696  ->  after rollout 696  (a resolved issue is never reopened: 0 resolution(s) protected)
+
+AFTER ROLLOUT floor 2 would hold 70 docs, 579 check-offs, 696 open issues, 476 notes.
+The platform collection would hold 293 docs.
+
+DRY RUN. Nothing was written. Re-run with --apply to perform the rollout.

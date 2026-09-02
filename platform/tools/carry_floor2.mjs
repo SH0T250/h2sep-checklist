@@ -1,18 +1,13 @@
-/* Carry the crew's real work into the four STAGED REFERENCE-ROOM MOCK-UPS.
+/* Carry the crew's real work into the STAGED FLOOR-2 BUILD.
  *
- * Same discipline as platform/tools/carry_field_state.mjs, which did this for
- * floor 1 under ruling D23, and the same standing directive D24 sets for
- * floors 2-4: "ALL notes, markups, check-offs, initials, timestamps and issues
- * from the old crew app come with them, and NOTHING is deleted."
- *
- * platform/tools/build_ref_rooms.mjs builds these four rooms BORN CLEAN and its
- * header says "there is no crew work to carry". That is false for these keys:
- * the crew has been working rooms 202, 217, 230 and 238 in the live app since
- * August. A mock-up that arrives clean is wrong by definition (D24). This tool
- * is the step that makes it right, and it runs AFTER every build.
+ * Same discipline as platform/tools/carry_field_state.mjs (floor 1, ruling D23)
+ * and platform/tools/carry_ref_state.mjs (the four mock-ups), under the standing
+ * directive D24 sets for floors 2-4: "ALL notes, markups, check-offs, initials,
+ * timestamps and issues from the old crew app come with them, and NOTHING is
+ * deleted." A floor build that arrives clean is wrong by definition.
  *
  * READS  projects/h2sep/rooms - the crew's live collection. READ ONLY, GET only.
- * WRITES platform/data/ref-rooms-staged.json and a gitignored local snapshot.
+ * WRITES platform/data/floor2-staged.json and a gitignored local snapshot.
  * It never writes to Firestore, never deploys, never pushes.
  *
  * What travels:  checked, initials, checkedAt, checkedAtLocal, issue,
@@ -20,14 +15,17 @@
  * What does NOT: checkedByName and checkedByUid. Those are real people's names
  *                and account ids and this seed lives in a PUBLIC repository.
  *                Note authors are reduced to initials ("Austin Jones" -> "AJ").
- *                Initials are what the paper sheet carries and what every
- *                approved room already carries, so initials are the line.
+ *
+ * Every floor-2 guest room (with its -MEP doc) and every floor-2 common-area
+ * doc the crew app holds is read. The common-area docs map by id: the platform
+ * writes space docs as 'S' + space_no (S221) with '-M' for the MEP companion,
+ * the crew app holds them as the bare number (221).
  *
  * Usage:
- *   node platform/tools/carry_ref_state.mjs --dry-run
- *   node platform/tools/carry_ref_state.mjs
- *   node platform/tools/carry_ref_state.mjs --rooms 202,230
- *   node platform/tools/carry_ref_state.mjs --seed platform/data/other.json
+ *   node platform/tools/carry_floor2.mjs --dry-run
+ *   node platform/tools/carry_floor2.mjs
+ *   node platform/tools/carry_floor2.mjs --rooms 203,204
+ *   node platform/tools/carry_floor2.mjs --floor=3 --dry-run      (floor 3, floor3-staged.json)
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
@@ -47,29 +45,40 @@ const flag = (name, dflt) => {
   return i === -1 ? dflt : argv[i + 1];
 };
 const dry = argv.includes('--dry-run');
-const SEED = resolve(repo, flag('--seed', 'platform/data/ref-rooms-staged.json'));
-const SNAP = resolve(repo, 'tools/out/backups/crew-ref-rooms-snapshot.json');
+const FLOOR = (() => {
+  const a = process.argv.find((x) => x.startsWith('--floor='));
+  const f = a ? a.slice('--floor='.length) : '2';
+  if (!/^[2-4]$/.test(f)) throw new Error('--floor must be 2, 3 or 4');
+  return f;
+})();
+const SEED = resolve(repo, flag('--seed', 'platform/data/floor' + FLOOR + '-staged.json'));
+const SNAP = resolve(repo, 'tools/out/backups/crew-floor' + FLOOR + '-snapshot.json');
 
-/* The four types with no approved reference room (D24), one representative
- * room each. --rooms narrows this; each room pulls its -MEP doc with it. */
-const DEFAULT_ROOMS = ['202', '217', '230', '238'];
-const rooms = String(flag('--rooms', DEFAULT_ROOMS.join(','))).split(',').map((s) => s.trim()).filter(Boolean);
+/* Every floor-2 guest room in the reference database, unless --rooms narrows
+ * it; each room pulls its -MEP doc with it. The staged file's common-area docs
+ * (ids starting with 'S') are always included. */
+
+const dbRooms = (() => {
+  const d = new DatabaseSync(DB_PATH, { readOnly: true });
+  const r = d.prepare('SELECT room_no FROM rooms WHERE floor = ? ORDER BY room_no').all(FLOOR).map((x) => x.room_no);
+  d.close();
+  return r;
+})();
+const rooms = String(flag('--rooms', dbRooms.join(','))).split(',').map((s) => s.trim()).filter(Boolean);
 
 const FIELD_STATE = ['checked', 'initials', 'checkedAt', 'checkedAtLocal', 'issue', 'issueResolved'];
 const PII_FIELDS = ['checkedByName', 'checkedByUid'];
 
-/* DELIBERATELY EMPTY, and that is a ruling, not an oversight.
- *
- * carry_field_state.mjs carries gr308_a -> gr305_a because D22 retagged the
- * plain Queen-Queen working wall on FLOOR 1. D22's reconciliation is the
- * workbook's 1st Floor tab: GR-305 at 6 units against floor 1's six plain QQ
- * keys, GR-308 at 2 against its two QQ connecting keys. That arithmetic says
- * nothing about floor 2, and build_ref_rooms.mjs records the naming question as
- * OPEN for rooms 230 and 238, which ship GR-308 exactly as data/project.sqlite
- * transcribes it. Remapping here would silently resolve an open conflict on
- * Austin's behalf. Rooms 230 and 238 hold gr308_a on BOTH sides, so the key
- * matches directly and no remap is needed to carry the work. */
-const RULED_REMAP = {};
+/* Ruling D22 on floor 2 (build_floor2.mjs): the eight plain Queen-Queen keys
+ * are retagged GR-308 -> GR-305 against the workbook's 2nd Floor tab. The crew
+ * checked that wall off under the old tag. It is the same physical run of
+ * casework, so the work travels with it - recorded, never silent. The remap
+ * only fires where the BUILD carries gr305_a and no live gr308_a; on 201, 230,
+ * 232, 238 and the two connecting keys the build keeps gr308_a, the key matches
+ * directly, and nothing is remapped. */
+const RULED_REMAP = { gr308_a: ['gr305_a', 'gr309_a'] };
+/* D33 (2026-09-02) retags 201, 230, 232 to GR-305 and 238 to GR-309; the crew
+ * checked those walls off under GR-308 too, so the same remap carries them. */
 
 /* ================== A LINE THE CREW HOLDS OPEN WORK ON MUST EXIST IN THE BUILD
  *
@@ -148,6 +157,9 @@ async function signIn() {
   return j.idToken;
 }
 
+/** A crew note as a map: a plain string becomes { text }, everything else passes through. */
+const noteOf = (raw) => (typeof raw === 'string' ? { text: raw, flag: 'info', resolved: false, createdAt: null, createdBy: '' }
+  : (raw && typeof raw === 'object' ? raw : { text: '' }));
 const hasState = (ci) => !!(ci.checked || (ci.issue && String(ci.issue).trim()) || ci.checkedAt);
 const isOpenIssue = (ci) => !!(ci.issue && String(ci.issue).trim() && !ci.issueResolved);
 
@@ -196,18 +208,22 @@ function rebuildFromDb(roomNo, crewItem, sortAt) {
     '. Topic, verbatim: "' + c.topic + '". Positions, verbatim: "' + c.positions + '" It names this line\'s tag, ' +
     code + ', and it takes a DIFFERENT position from the row note above - both are live in the reference database ' +
     'and both are shown. Confirm before any takeoff or purchase.').join('');
+  const carriedWhat = [
+    crewItem.checked ? 'check-off (initials and timestamp)' : '',
+    crewItem.issue && String(crewItem.issue).trim() ? (crewItem.issueResolved ? 'resolved issue' : 'open issue') : '',
+  ].filter(Boolean).join(' and ') || 'field state';
   const why = 'THIS LINE EXISTS BECAUSE THE CREW IS ALREADY WORKING IT. Austin\'s approved category gate keeps "' +
     category + '" off both reference documents, so the rebuild produced no line for ' + code + ' and the field work ' +
     'the crew app already holds on it had nowhere to land. Ruling D24 is explicit that NOTHING is deleted, so the ' +
     'line is rebuilt here from data/project.sqlite room ' + roomNo + '\'s own row(s) ' +
     rows.map((r) => r.item_id).join(', ') + ' - its own description, its own citation, its own reliability and its ' +
-    'own note, verbatim - and the crew\'s check-off and issue are carried onto it. Nothing but the field state comes ' +
+    'own note, verbatim - and the crew\'s ' + carriedWhat + ' is carried onto it. Nothing but the field state comes ' +
     'from the crew document. The row is also recorded in room note n_gategaps with the rest of the gated-out rows. ' +
     'It sits in its own band after the D28 Door Hardware lines so it cannot collide with them. Widening the gate ' +
     'itself is Austin\'s call, not this tool\'s. SOURCE. Everything on this line except the check-off and the ' +
     'issue is data/project.sqlite room ' + roomNo + '\'s own row(s) ' + rows.map((r) => r.item_id).join(', ') +
-    ', verbatim, at the database\'s own reliability. The check-off, the initials, the timestamp and the issue are ' +
-    'the crew\'s, carried from the live crew app READ ONLY.';
+    ', verbatim, at the database\'s own reliability. The ' + carriedWhat + ' on this line is the crew\'s, carried from ' +
+    'the live crew app READ ONLY.';
   return {
     code,
     label: first.description,
@@ -229,11 +245,61 @@ function rebuildFromDb(roomNo, crewItem, sortAt) {
   };
 }
 
+/**
+ * A line the crew ADDED THEMSELVES in the app - no category, no citation, a
+ * label in their own words ("Lamp shades are in the room in a box.") - is a
+ * field markup, and ruling D24 says markups travel. It cannot be rebuilt from
+ * the database because it is not a document line; it is carried VERBATIM as its
+ * own line, the category taken from this room's own row for the same tag where
+ * one exists, and it says on its face what it is. Nothing is invented: every
+ * word on the line is the crew's or the database's.
+ */
+function restoreFieldAuthored(roomNo, crewItem, sortAt) {
+  const code = String(crewItem.code || '').trim();
+  const label = String(crewItem.label || '').trim();
+  if (!label) return null;
+  let category = String(crewItem.category || '').trim();
+  let catSource = 'the crew line itself';
+  if (!category && code) {
+    const row = db.prepare('SELECT category FROM room_items WHERE room_no = ? AND tag = ? ORDER BY rowid').get(roomNo, code);
+    if (row) { category = row.category; catSource = 'this room\'s own data/project.sqlite row for tag ' + code; }
+  }
+  if (!category) return null;
+  return {
+    code,
+    label,
+    category,
+    qty: Number.isInteger(crewItem.qty) && crewItem.qty > 0 ? crewItem.qty : 1,
+    src: 'field-authored in the crew app (room ' + roomNo + '); no drawing citation',
+    reliability: ['HIGH', 'MEDIUM', 'FLAGGED'].includes(String(crewItem.reliability).toUpperCase()) ? String(crewItem.reliability).toUpperCase() : 'MEDIUM',
+    instanceNote: 'FIELD-AUTHORED LINE, carried verbatim from the crew app under ruling D24 ("ALL notes, markups, ' +
+      'check-offs ... come with them, and NOTHING is deleted"). This is not a package line and no drawing states it: ' +
+      'the label is the crew\'s own words, the tag ' + (code ? code : '(none)') + ' is the crew\'s, and the category comes from ' +
+      catSource + '. It sits in its own band after the D28 Door Hardware lines so it cannot collide with a built line. ' +
+      'SOURCE. Everything on this line is the crew app\'s, READ ONLY, except the category where noted.',
+    trade: '',
+    derived: 0,
+    sort: sortAt,
+    deleted: false,
+    checked: false,
+    initials: '',
+    checkedAt: null,
+    checkedAtLocal: null,
+    issue: '',
+    issueResolved: false,
+  };
+}
+
 /* ------------------------------------------------------------------- the run */
 
 const seed = JSON.parse(readFileSync(SEED, 'utf8'));
 const wanted = [];
 for (const r of rooms) for (const id of [r, `${r}-MEP`]) if (id in seed.docs) wanted.push(id);
+/* The common-area docs, always. The platform id is 'S' + space_no ('-M' for the
+ * MEP companion); the crew app holds the bare number and no MEP companion. */
+const isSpaceDoc = (id) => /^S/.test(id);
+if (!argv.includes('--rooms')) for (const id of Object.keys(seed.docs)) if (isSpaceDoc(id)) wanted.push(id);
+const crewIdFor = (pid) => (isSpaceDoc(pid) ? pid.slice(1).replace(/-M$/, '') + (pid.endsWith('-M') ? '-MEP' : '') : pid);
 if (!wanted.length) throw new Error(`no staged doc in ${SEED} matches --rooms ${rooms.join(',')}`);
 
 const token = await signIn();
@@ -244,7 +310,7 @@ const H = { authorization: 'Bearer ' + token };
 const snapshot = {};
 const missingCrewDoc = [];
 for (const id of wanted) {
-  const g = await getJson(`${BASE}/${CREW}/${encodeURIComponent(id)}`, H);
+  const g = await getJson(`${BASE}/${CREW}/${encodeURIComponent(crewIdFor(id))}`, H);
   if (!g.fields) { missingCrewDoc.push(id); continue; }
   snapshot[id] = { updateTime: g.updateTime, doc: dec({ mapValue: { fields: g.fields } }) };
 }
@@ -273,9 +339,15 @@ for (const pid of wanted) {
     for (const f of PII_FIELDS) if (ci[f]) piiDropped++;
 
     const targets = [];
+    /* A line this tool restored on an earlier run is rebuilt fresh every run,
+     * at the same sort, so its text can never go stale (its note once claimed
+     * a check-off the crew never made). */
+    const prior = pdoc.items[key];
+    const priorRestored = prior && /THIS LINE EXISTS BECAUSE THE CREW IS ALREADY WORKING IT|FIELD-AUTHORED LINE/.test(String(prior.instanceNote || ''));
+    if (priorRestored) delete pdoc.items[key];
     if (key in pdoc.items) targets.push(key);
-    const remap = RULED_REMAP[key];
-    if (remap && remap in pdoc.items) { targets.push(remap); if (state) r++; }
+    const remap = [].concat(RULED_REMAP[key] || []).find((t) => t in pdoc.items);
+    if (remap) { targets.push(remap); if (state) r++; }
 
     if (!targets.length) {
       /* A line the crew holds work on must EXIST. Rebuild it from this room's
@@ -284,8 +356,9 @@ for (const pid of wanted) {
        * in the reconciliation below, and never silently dropped. */
       if (state) {
         const roomNo = pid.replace(/-MEP$/, '');
-        const nextSort = RESTORED_BAND_BASE + restored.filter((x) => x.doc === pid).length * RESTORED_BAND_STEP;
-        const rebuilt = pid.endsWith('-MEP') ? null : rebuildFromDb(roomNo, ci, nextSort);
+        const nextSort = priorRestored ? prior.sort : RESTORED_BAND_BASE + restored.filter((x) => x.doc === pid).length * RESTORED_BAND_STEP;
+        const fromDb = (pid.endsWith('-MEP') || isSpaceDoc(pid)) ? null : rebuildFromDb(roomNo, ci, nextSort);
+        const rebuilt = fromDb || ((pid.endsWith('-MEP') || isSpaceDoc(pid)) ? null : restoreFieldAuthored(roomNo, ci, nextSort));
         if (rebuilt) {
           if (Object.values(pdoc.items).some((v) => v.sort === rebuilt.sort)) {
             throw new Error(`restoring ${pid}/${key} would collide at sort ${rebuilt.sort}`);
@@ -293,7 +366,7 @@ for (const pid of wanted) {
           pdoc.items[key] = rebuilt;
           restored.push({
             doc: pid, key, code: rebuilt.code, category: rebuilt.category,
-            reliability: rebuilt.reliability, sort: rebuilt.sort, crewSort: ci.sort,
+            reliability: rebuilt.reliability, sort: rebuilt.sort, crewSort: ci.sort, fieldAuthored: !fromDb,
             checked: !!ci.checked, openIssue: isOpenIssue(ci), issue: String(ci.issue || ''),
           });
           targets.push(key);
@@ -328,9 +401,19 @@ for (const pid of wanted) {
   }
 
   /* Notes are field-authored too, and they carry the author's full name. */
-  for (const [nk, note] of Object.entries(crew.notes || {})) {
+  for (const [nk, raw] of Object.entries(crew.notes || {})) {
+    /* The crew app writes most notes as a map, but a rename note (key
+     * "rename-<date>") is a plain STRING. Read as a map it has no text and no
+     * timestamp, and room 438's PM ruling was carried as an empty stub once,
+     * with the reconciliation comparing undefined to undefined. Normalise
+     * first; a note with no text is a hard stop, never a silent blank. */
+    const note = noteOf(raw);
+    if (!note.text) throw new Error(`${pid}/${nk}: crew note has no text (${typeof raw}); refusing to carry an empty note`);
     pdoc.notes = pdoc.notes || {};
-    if (nk in pdoc.notes) noteClashes.push(`${pid}/${nk}`);
+    /* A note already present with the SAME text is this tool's own earlier
+     * carry, preserved through a rebuild; only a DIFFERENT text under the same
+     * key would be a build-authored note about to be overwritten. */
+    if (nk in pdoc.notes && pdoc.notes[nk].text !== note.text) noteClashes.push(`${pid}/${nk}`);
     pdoc.notes[nk] = {
       text: note.text,
       flag: note.flag || 'info',
@@ -359,7 +442,9 @@ if (restored.length) {
   console.log('\nLINES REBUILT SO THE CREW\'S WORK HAS SOMEWHERE TO LAND (ruling D24: nothing is deleted):');
   for (const x of restored) {
     console.log(`  ${x.doc}/${x.key}  ${x.code}  [${x.category}]  ${x.reliability}`);
-    console.log(`      rebuilt from data/project.sqlite room ${x.doc}'s own row(s), not from the crew document`);
+    console.log(x.fieldAuthored
+      ? `      FIELD-AUTHORED in the crew app (no category, no citation): carried verbatim, category from this room's own row for the tag`
+      : `      rebuilt from data/project.sqlite room ${x.doc}'s own row(s), not from the crew document`);
     console.log(`      sort ${x.crewSort} in the crew app -> ${x.sort} here (its own band, after the D28 Door Hardware lines)`);
     console.log(`      carried: checked=${x.checked}  openIssue=${x.openIssue}${x.issue ? ' "' + x.issue + '"' : ''}`);
   }
@@ -405,7 +490,7 @@ for (const pid of wanted) {
   if (!snap) continue;
   for (const [key, ci] of Object.entries(snap.doc.items || {})) {
     if (!hasState(ci)) continue;
-    const t = seed.docs[pid].items[RULED_REMAP[key] && RULED_REMAP[key] in seed.docs[pid].items ? RULED_REMAP[key] : key];
+    const t = seed.docs[pid].items[[].concat(RULED_REMAP[key] || []).find((x) => x in seed.docs[pid].items) || key];
     if (t && t.deleted) landedOnTombstone.push(`${pid}/${key} (${ci.code || '<untagged>'})`);
   }
 }
@@ -436,10 +521,13 @@ const noteMisses = [];
 for (const pid of wanted) {
   const snap = snapshot[pid];
   if (!snap) continue;
-  for (const [nk, note] of Object.entries(snap.doc.notes || {})) {
+  for (const [nk, raw] of Object.entries(snap.doc.notes || {})) {
     crewNotes++;
+    const note = noteOf(raw);
     const landed = ((seed.docs[pid].notes || {})[nk]);
-    if (landed && landed.text === note.text && !('createdBy' in landed) && !('createdByUid' in landed)) notesLanded++;
+    /* "Intact" means the crew's text, non-empty, byte for byte - never two undefineds. */
+    if (landed && typeof landed.text === 'string' && landed.text.length > 0 && landed.text === note.text &&
+        !('createdBy' in landed) && !('createdByUid' in landed)) notesLanded++;
     else noteMisses.push(`${pid}/${nk}`);
   }
 }
@@ -479,7 +567,7 @@ for (const p of problems) console.log('  ' + p);
 let untouched = true;
 const moved = [];
 for (const id of Object.keys(snapshot)) {
-  const g = await getJson(`${BASE}/${CREW}/${encodeURIComponent(id)}?mask.fieldPaths=number`, H);
+  const g = await getJson(`${BASE}/${CREW}/${encodeURIComponent(crewIdFor(id))}?mask.fieldPaths=number`, H);
   if (g.updateTime !== snapshot[id].updateTime) { untouched = false; moved.push(`${id} ${snapshot[id].updateTime} -> ${g.updateTime}`); }
 }
 console.log(`\nCREW COLLECTION  ${untouched ? 'UNTOUCHED' : 'CHANGED - investigate'} - ${Object.keys(snapshot).length} doc(s) re-read, updateTime identical before and after`);
@@ -501,7 +589,7 @@ const canonical = (v) => Array.isArray(v) ? v.map(canonical)
     : v;
 seed.meta = seed.meta || {};
 seed.meta.fieldState =
-  'CARRIED from the live crew app by platform/tools/carry_ref_state.mjs (READ ONLY on projects/h2sep/rooms) under ' +
+  'CARRIED from the live crew app by platform/tools/carry_floor2.mjs (READ ONLY on projects/h2sep/rooms) under ' +
   'ruling D24\'s standing directive. ' + carried + ' line(s) and ' + notesCarried + ' note(s) of real field work. ' +
   'checkedByName and checkedByUid are dropped; note authors are reduced to initials. Reconciliation is exact: ' +
   'crew ' + crewChecks + ' check(s) = ' + seedChecks + ' on live lines + ' + orphanChecks + ' with no line; ' +
@@ -511,7 +599,8 @@ seed.meta.fieldState =
     ? ' ' + restored.length + ' line(s) the category gate left with no home were REBUILT from data/project.sqlite so ' +
       'the crew\'s work lands on a line rather than being named and lost (' +
       restored.map((x) => x.doc + '/' + x.key + ' ' + x.code + ' [' + x.category + '] ' + x.reliability +
-        ', sort ' + x.sort).join('; ') + '); each carries its own row text and says on its face why it exists.'
+        ', sort ' + x.sort + (x.fieldAuthored ? ', FIELD-AUTHORED in the crew app and carried verbatim' : '')).join('; ') +
+      '); each carries its own row text and says on its face why it exists.'
     : '');
 seed.meta.fieldStateCarriedAt = new Date().toISOString();
 writeFileSync(SEED, JSON.stringify(canonical(seed), null, 2) + '\n', 'utf8');

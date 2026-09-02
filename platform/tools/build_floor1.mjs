@@ -241,6 +241,9 @@ const CATEGORY_INDEX = new Map(CATEGORY_ORDER.map((c, i) => [c, i]));
  *           one unit photographed installed on a guestroom frame
  * These are owner-directed CHECK items, so they exist by ruling rather than by
  * a sheet takeoff; the note on each line says exactly that. */
+/* D46 (2026-09-02): "add TV mount to each room. Doesn't matter about the tag, just
+ * put it underneath TV." One Appliance line per guest room, sort 14025, directly
+ * under the Television (903, sort 14020). No tag asserted. */
 /* D29 (2026-08-24): "make sure to add Bed Skirts to the ADA rooms." The King
  * accessible keys already carry GR-603.1 from the drawings; the QQ Acc. rooms
  * (238, 338) have two GR-602.ADA open accessible bases and NO skirt row - the
@@ -269,6 +272,38 @@ const RULED_LINE_ADDITIONS = [
     note: 'Added by Austin ruling D27. Run hot and cold at the lavatory, the shower and the ' +
       'kitchenette sink: both temperatures arrive, hot on the LEFT, and hot gets hot within a ' +
       'reasonable wait. Any fixture that fails gets its own issue on its own line.',
+  },
+  {
+    ruling: 'D46', doc: 'ffe', key: 'tvmount_a', category: 'Appliance', sort: 14025,
+    code: '', qty: 1,
+    label: 'TV mount',
+    src: 'D46 (AJ 2026-09-02); owner-directed check item',
+    note: 'Added by Austin ruling D46: "add TV mount to each room. Doesn\'t matter about the tag, ' +
+      'just put it underneath TV." Placed directly under the Television line. No document tag is ' +
+      'asserted for this item; it exists by the owner\'s instruction. Check the mount is installed ' +
+      'on the working wall where the TV goes, level, and secure to the backing.',
+  },
+  {
+    ruling: 'D48', doc: 'space', key: 'dh_closer_a', category: 'Door Hardware', sort: 21000,
+    code: 'DH-1', qty: 1,
+    label: 'Door closer installed - Rixson R21013 Series 10',
+    src: 'D48 (AJ 2026-09-02) extends D28 to every common area; label on delivered product',
+    note: 'Added by Austin ruling D48: "add door closers and door locks to all the common areas too", ' +
+      'extending D28 from the guest rooms to every common-area checklist. Product identity as ' +
+      'transcribed for D28: RIXSON R21013, Series 10, UL Classified, MISCELLANEOUS FIRE DOOR ' +
+      'ACCESSORIES 2MF0. Check the closer is installed, the door self-closes and latches from any ' +
+      'open position. A space with no door of its own: flag the line rather than check it.',
+  },
+  {
+    ruling: 'D48', doc: 'space', key: 'dh_lock_a', category: 'Door Hardware', sort: 21010,
+    code: 'DH-2', qty: 1,
+    label: 'Door lock installed - 10-336, finish 630',
+    src: 'D48 (AJ 2026-09-02) extends D28 to every common area; box label on delivered product',
+    note: 'Added by Austin ruling D48: "add door closers and door locks to all the common areas too", ' +
+      'extending D28 from the guest rooms to every common-area checklist. Product identity as ' +
+      'transcribed for D28: NORTON RIXSON / ASSA ABLOY 10-336, DOOR, finish 630. Check the lock is ' +
+      'installed and operates: latches, locks and releases. A space with no door of its own: flag ' +
+      'the line rather than check it.',
   },
   {
     ruling: 'D28', doc: 'ffe', key: 'dh_closer_a', category: 'Door Hardware', sort: 21000,
@@ -3056,6 +3091,22 @@ function buildSpaceBandDoc(space, band, red, stamp, dups, report, docIdOverride)
       if (report) report.dupKept.push(line.code + ' emitted once on ' + docId + ' (recorded in spaces ' + dup.spaces.join(', ') + ')');
     }
     items[line.key] = item;
+  }
+
+  /* Owner-ruled lines for every common-area checklist (D48). They ride on the
+   * space's own checklist doc, which is the FF&E doc, or the parent doc of a
+   * space that has only a punch. Idempotent by key; born clean. */
+  if (docId === spaceDocId(space.space_no)) {
+    for (const r of RULED_LINE_ADDITIONS) {
+      if (r.doc !== 'space' || items[r.key]) continue;
+      items[r.key] = {
+        code: r.code, label: r.label, category: r.category, qty: r.qty, sort: r.sort,
+        src: r.src, reliability: 'HIGH', instanceNote: r.note, trade: '', derived: 0,
+        deleted: false, checked: false, initials: '', checkedAt: null, checkedAtLocal: null,
+        issue: '', issueResolved: false,
+      };
+      if (report && report.ruledAdded) report.ruledAdded.push(r.key + ' (' + r.ruling + ') on ' + docId);
+    }
   }
 
   return {

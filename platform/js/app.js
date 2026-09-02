@@ -10,16 +10,19 @@ import { bimModule } from './modules/bim/module.js';
 import { directoryModule } from './modules/directory/module.js';
 import { firebaseConfig } from './config.js';
 
-// Rooms with their own CORRECT geometry in the viewer (D7). The whole QQ family
-// is drawn from A555; the King family keeps the honest hard-stop until its own
-// geometry ships. king-studio.html exists but is a photo exhibit, not the tagged viewer.
-const MODEL_ROOMS = ['101', '103', '105', '107', '109', '111', '113', '115'];
+// Rooms with their own CORRECT geometry in the viewer (D7): every floor-1 key.
+// The QQ family is drawn from A555; the King family from A550 (116 from view
+// 01.1, 118 from A552), verified room by room on 2026-09-02 (D41). Floors 2 to
+// 4 have no models and are not listed, per Austin. king-studio.html exists but
+// is a materials exhibit, not the tagged viewer.
+const MODEL_ROOMS = ['101', '103', '104', '105', '106', '107', '108', '109', '110', '111', '112', '113', '114', '115', '116', '118'];
 
 const store = await loadStore();
 
 // Attach Firebase when configured. The bundled artifact preview cannot reach
 // external hosts (its page blocks them), so it stays in local mode by flag.
 if (firebaseConfig && !window.__H2SEP_NO_BACKEND) {
+  store.expectBackend = true;   // a bulk write refuses to run until the backend is attached and signed in
   import('./core/firebase-backend.js')
     .then(({ FirebaseBackend }) => store.attachBackend(new FirebaseBackend(firebaseConfig)))
     .catch(err => { store.status.message = 'Backend unavailable: ' + (err.message || err); store._emit(); });
@@ -54,13 +57,14 @@ function renderShell(hash, renderScreen) {
   const entries = registry.navEntries();
   const main = entries.filter(n => !n.section);
   const modelSect = entries.filter(n => n.section === 'Model');
-  const mobilePicks = ['#/', '#/rooms', '#/contacts', '#/bim', '#/activity'];
+  // Bulk mark rides on the phone too (Austin, 2026-09-02: "Add bulk edit to the mobile app").
+  const mobilePicks = ['#/', '#/rooms', '#/bulk', '#/contacts', '#/bim', '#/activity'];
 
   app.innerHTML = '';
   app.append(el(`<div class="shell">
     <aside class="side">
       <div class="brand"><img src="${window.__H2SEP_LOGO || 'img/triun-logo.png'}" alt="Triun Construction and Engineering"/></div>
-      <div class="proj"><div class="pcode">H2SEP · FLOOR 1 LIVE</div><div class="pname">Home2 Suites · Eagle Pass</div><div class="conn">${connPill(store.status)}</div></div>
+      <div class="proj"><div class="pcode">H2SEP · FLOORS 1-4 LIVE</div><div class="pname">Home2 Suites · Eagle Pass</div><div class="conn">${connPill(store.status)}</div></div>
       <nav class="nav">
         ${main.map(n => navLink(n, hash)).join('')}
         <div class="sect">Model</div>

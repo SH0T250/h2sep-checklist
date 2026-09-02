@@ -1,0 +1,95 @@
+import { chromium } from '/tmp/claude-0/-home-user-h2sep-checklist/18be7c92-db26-548f-a957-ab5e606c8fa1/scratchpad/node_modules/playwright-core/index.mjs';
+const EXE = '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell';
+const B = 'http://localhost:8343/';
+const b = await chromium.launch({ executablePath: EXE });
+const ctx = await b.newContext({ viewport: { width: 1400, height: 1000 } });
+const p = await ctx.newPage();
+const errs = [];
+p.on('pageerror', e => errs.push('PAGEERROR ' + e.message));
+p.on('console', m => { if (m.type() === 'error') errs.push('CONSOLE ' + m.text()); });
+let pass = 0, fail = 0;
+const t = (name, cond, detail = '') => { if (cond) { pass++; console.log('  PASS  ' + name); } else { fail++; console.log('  FAIL  ' + name + (detail ? '  ' + detail : '')); } };
+
+// Local mode only: the seed files must carry all four floors on their own.
+await p.addInitScript(() => { window.__H2SEP_NO_BACKEND = true; });
+await p.goto(B, { waitUntil: 'networkidle' });
+await p.evaluate(() => { localStorage.setItem('h2sep-platform-user', JSON.stringify({ name: 'Test User', initials: 'TU', company: 'Triun, LLC' })); sessionStorage.setItem('h2sep-id-prompted', '1'); });
+await p.goto(B + '#/', { waitUntil: 'networkidle' });
+await p.waitForSelector('.room-row', { timeout: 20000 });
+const body = await p.textContent('body');
+t('sidebar says FLOORS 1-4 LIVE', body.includes('FLOORS 1-4 LIVE'));
+t('dashboard note says floors 1 to 4', /Floors 1 to 4: 115 guest rooms built/.test(body), body.match(/Floors? [^.]*guest rooms built\./)?.[0]);
+const rows = await p.$$eval('.room-row', r => r.length);
+t('115 guest rooms listed on the dashboard', rows === 115, String(rows));
+const heads = await p.$$eval('.rlist-floor', r => r.map(x => x.textContent.trim()));
+t('four floor headings in order', heads.join('|') === 'Floor 1|Floor 2|Floor 3|Floor 4', heads.join('|'));
+t('% of floors 1 to 4 on the KPI', body.includes('% of floors 1 to 4'));
+
+await p.goto(B + '#/rooms', { waitUntil: 'networkidle' });
+await p.waitForSelector('.room-row');
+const sub = await p.textContent('.pagehead .sub');
+t('rooms page subtitle', /115 guest rooms on floors 1 to 4/.test(sub), sub);
+
+await p.goto(B + '#/room/338', { waitUntil: 'networkidle' });
+await p.waitForSelector('.pagehead');
+const r338 = await p.textContent('body');
+t('room 338 opens (QQ Acc., floor 3)', /ROOM 338|Room 338/.test(r338) && /Floor 3/.test(r338));
+t('room 338 shows GR-309 working wall', r338.includes('GR-309'));
+
+await p.goto(B + '#/room/438?view=mep', { waitUntil: 'networkidle' });
+await p.waitForSelector('.pagehead');
+const r438 = await p.textContent('body');
+t('room 438 MEP view opens on floor 4', /Floor 4/.test(r438));
+
+await p.goto(B + '#/common', { waitUntil: 'networkidle' });
+await p.waitForSelector('.room-row');
+const cbody = await p.textContent('body');
+const cheads = await p.$$eval('.rlist-floor', r => r.map(x => x.textContent.trim()));
+t('common areas span floors 1 to 4', /spaces on floors 1 to 4/.test(cbody), cbody.match(/\d+ spaces on [^·]*/)?.[0]);
+t('common areas grouped by floor', cheads.join('|') === 'Floor 1|Floor 2|Floor 3|Floor 4', cheads.join('|'));
+
+await p.goto(B + '#/bim', { waitUntil: 'networkidle' });
+await p.waitForSelector('.mrow');
+const mrows = await p.$$eval('.mrow b', r => r.map(x => x.textContent.trim()));
+t('3D BIM hub lists floor-1 rooms only', mrows.length === 16 && mrows.every(n => n.startsWith('1')), mrows.length + ' rows: ' + mrows.join(','));
+t('3D BIM hub says the upper floors have no models yet', (await p.textContent('body')).includes('Floors 2 to 4 (99 rooms)'));
+await p.goto(B + '#/room/338', { waitUntil: 'networkidle' });
+await p.waitForSelector('.pagehead');
+t('room 338 offers no 3D model button', !(await p.$('a[href="#/bim/338"]')));
+await p.goto(B + '#/room/105', { waitUntil: 'networkidle' });
+await p.waitForSelector('.pagehead');
+t('room 105 still offers its 3D model', !!(await p.$('a[href="#/bim/105"]')));
+await p.goto(B + '#/room/110', { waitUntil: 'networkidle' });
+await p.waitForSelector('.pagehead');
+t('room 110 (King Studio) offers its 3D model', !!(await p.$('a[href="#/bim/110"]')));
+
+await p.goto(B + '#/', { waitUntil: 'networkidle' });
+await p.waitForSelector('.trades');
+const trows = await p.$$eval('.trades .trow:not(.th)', rs => rs.map(r => ({ name: r.querySelector('.tn').textContent.trim(), pct: r.querySelector('.tp').textContent.trim(), frac: r.querySelector('.tf').textContent.replace(/\s+/g, ' ').trim(), fl: [...r.querySelectorAll('.tfl')].map(x => x.textContent.trim()) })));
+t('the dashboard has a percent complete by trade table', trows.length > 8, String(trows.length));
+t('FF&E leads the table with its families under it', trows[0].name === 'FF&E' && trows.slice(1, 4).every(r => !/^FF&E$/.test(r.name)), trows.slice(0, 4).map(r => r.name).join(','));
+t('every MEP trade is a row', ['Mechanical', 'Electrical', 'Plumbing', 'Fire Protection', 'Low Voltage'].every(n => trows.some(r => r.name === n)));
+t('every row shows a percent, a checked count and four floor cells', trows.every(r => /^\d+%$/.test(r.pct) && /^\d+ \/ \d+$/.test(r.frac) && r.fl.length === 4), JSON.stringify(trows[0]));
+const ffe = trows[0];
+t('the FF&E percent matches its checked count', Math.round(Number(ffe.frac.split(' / ')[0]) / Number(ffe.frac.split(' / ')[1]) * 100) + '%' === ffe.pct, `${ffe.frac} vs ${ffe.pct}`);
+
+await p.goto(B + '#/prints', { waitUntil: 'networkidle' }); await p.waitForSelector('.rlist .room-row');
+t('the Print sheets hub lists every room and common area', (await p.$$('.rlist .room-row')).length === 155, String((await p.$$('.rlist .room-row')).length));
+t('the hub offers a packet per floor and the whole building', (await p.$$('a[href^="#/print-floor/"]')).length === 5);
+await p.goto(B + '#/print/S221', { waitUntil: 'networkidle' }); await p.waitForSelector('.paper');
+t('a common-area space has a print sheet with its MEP punch', /MEP PUNCH/.test(await p.textContent('.paper')) && /Space S221/.test(await p.textContent('.paper')));
+await p.goto(B + '#/print/338', { waitUntil: 'networkidle' }); await p.waitForSelector('.paper');
+const before338 = (await p.$$('.paper .p-box')).length;
+const firstEmpty = await p.evaluate(() => { const d = window.__store.getDoc('338'); const id = Object.entries(d.items).find(([, it]) => !it.deleted && !it.checked && !it.issue && it.reliability !== 'FLAGGED')[0]; window.__store.check('338', id, true); return id; });
+await p.waitForTimeout(300);
+t('an open print sheet redraws when a line is checked', (await p.$$eval('.paper .p-box', b => b.filter(x => x.textContent.trim() === 'TU').length)) === 1 && (await p.$$('.paper .p-box')).length === before338, firstEmpty);
+await p.evaluate((id) => window.__store.check('338', id, false), firstEmpty);
+await p.goto(B + '#/print-floor/2', { waitUntil: 'networkidle' }); await p.waitForSelector('.paper');
+t('the floor 2 packet holds 36 sheets with page breaks', (await p.$$('.paper')).length === 36 && (await p.$$('.p-break')).length >= 35, String((await p.$$('.paper')).length));
+await p.goto(B + '#/space/S221', { waitUntil: 'networkidle' }); await p.waitForSelector('.pagehead');
+t('a common area has a Print sheet button', !!(await p.$('a[href="#/print/S221"]')));
+
+t('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' ; '));
+await b.close();
+console.log(`\n${pass} passed, ${fail} failed`);
+process.exit(fail ? 1 : 0);

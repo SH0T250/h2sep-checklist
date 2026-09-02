@@ -192,7 +192,7 @@ const canon = (v) => {
  * rulings D22 (GR-305), D27 (hot/cold water) and D28 (door hardware). The
  * guarantee is no longer byte-identity; it is that NOTHING was lost and the
  * only additions are exactly the ruled ones. */
-const RULED_NEW_KEYS = new Set(['gr305_a', 'dh_closer_a', 'dh_lock_a', 'plmb_hotcold_a']);
+const RULED_NEW_KEYS = new Set(['gr305_a', 'dh_closer_a', 'dh_lock_a', 'plmb_hotcold_a', 'tvmount_a']);   // tvmount_a: D46
 check('approved rooms differ from the slice ONLY by the ruled changes', () =>
   ['101','103','105','101-MEP','103-MEP','105-MEP'].flatMap((id) => {
     const out = [];

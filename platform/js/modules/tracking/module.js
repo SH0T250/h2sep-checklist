@@ -6,9 +6,31 @@ import { ic, el, esc, fmtWhen, toast, sheet, pressable } from '../../core/ui.js'
 const QUICK_PICKS = ['NEED INSTALL', 'NEED PROPER PLACE', 'IN BOX', 'DAMAGED', 'MISSING', 'WRONG ITEM'];
 // Copy that states a count has to be derived, or it goes stale the moment the
 // build grows - which is worse than saying nothing, because it reads as fact.
+function floorsOf(docs) {
+  return [...new Set(docs.map(d => Number(d.floor)).filter(n => n > 0))].sort((a, b) => a - b);
+}
+// "floor 1" or "floors 1 to 4", from the documents actually loaded, so the
+// copy never claims a floor the data does not hold.
+function floorRange(docs) {
+  const f = floorsOf(docs);
+  if (!f.length) return 'no floor yet';
+  if (f.length === 1) return `floor ${f[0]}`;
+  const contiguous = f[f.length - 1] - f[0] === f.length - 1;
+  return contiguous ? `floors ${f[0]} to ${f[f.length - 1]}` : `floors ${f.join(', ')}`;
+}
 function sliceNote(store) {
-  const n = store ? store.guestRooms().length : 0;
-  return `Floor 1: ${n} guest rooms built. Floors 2 to 4 arrive with the next rollout.`;
+  const rooms = store ? store.guestRooms() : [];
+  const range = floorRange(rooms);
+  return `${range[0].toUpperCase() + range.slice(1)}: ${rooms.length} guest rooms built.`;
+}
+// A room or space list with a heading row wherever the floor changes.
+function appendByFloor(list, entries, floorOf, rowOf) {
+  let last = null;
+  for (const e of entries) {
+    const f = Number(floorOf(e));
+    if (f !== last) { list.append(el(`<div class="rlist-floor">Floor ${esc(f || '?')}</div>`)); last = f; }
+    list.append(rowOf(e));
+  }
 }
 
 // The printer icon opens the live in-app sheet (#/print/<no>), always current.
@@ -64,6 +86,67 @@ function hasDetail(it) {
 
 // ---------- screens ----------
 
+// Percent complete per trade, building-wide, with a per-floor split. FF&E is
+// one trade with its families under it; each MEP category is its own trade.
+// Counted off the same checklist lines the crew taps, rooms and common areas
+// alike, so there is no second set of books.
+const MEP_ORDER = ['Mechanical', 'Electrical', 'Plumbing', 'Fire Protection', 'Fire Sprinkler', 'Fire Alarm', 'Low Voltage'];
+function tradeStats(store) {
+  const floors = new Set();
+  const mk = () => ({ total: 0, done: 0, open: 0, byFloor: {} });
+  const ffe = mk(), fam = new Map(), mep = new Map();
+  const add = (acc, it, floor) => {
+    acc.total++; if (it.checked) acc.done++; if (it.issue && !it.issueResolved) acc.open++;
+    const f = acc.byFloor[floor] || (acc.byFloor[floor] = { total: 0, done: 0 });
+    f.total++; if (it.checked) f.done++;
+  };
+  for (const [id, d] of Object.entries(store.docs)) {
+    if (id.startsWith('_') || d.deleted) continue;
+    const isMep = store.constructor.MEP_SUFFIXES.some(sfx => id.endsWith(sfx)) || d.type === 'mep-punch';
+    const floor = Number(d.floor) || 0;
+    if (floor) floors.add(floor);
+    for (const [, it] of store.liveItems(d)) {
+      if (isMep) {
+        const c = it.category || 'Other';
+        if (!mep.has(c)) mep.set(c, mk());
+        add(mep.get(c), it, floor);
+      } else {
+        add(ffe, it, floor);
+        const c = String(it.category || 'Other').replace(/^FF&E - /, '');
+        if (!fam.has(c)) fam.set(c, mk());
+        add(fam.get(c), it, floor);
+      }
+    }
+  }
+  const order = (a, b) => { const ia = MEP_ORDER.indexOf(a[0]), ib = MEP_ORDER.indexOf(b[0]); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || a[0].localeCompare(b[0]); };
+  return {
+    floors: [...floors].sort((a, b) => a - b),
+    rows: [
+      { name: 'FF&E', ...ffe, head: true },
+      ...[...fam].sort((a, b) => b[1].total - a[1].total).map(([name, v]) => ({ name, ...v, sub: true })),
+      ...[...mep].sort(order).map(([name, v]) => ({ name, ...v, head: true, mep: true })),
+    ],
+  };
+}
+const pct = (d, t) => t ? Math.round(d / t * 100) : 0;
+function tradeTable(store) {
+  const { floors, rows } = tradeStats(store);
+  return `<section class="card" style="margin-bottom:18px">
+    <div class="card-head trades-head"><h2>Percent complete by trade</h2><span class="card-cap">FF&amp;E with its families, then each MEP trade · rooms and common areas · every floor</span><span class="spacer"></span><span class="card-cap">open issues counted per trade</span></div>
+    <div class="trades" style="--nf:${floors.length}">
+      <div class="trow th"><span class="tn">Trade</span><span class="tb"></span><span class="tp">%</span><span class="tf">checked</span><span class="ti">open</span>${floors.map(f => `<span class="tfl">F${f}</span>`).join('')}</div>
+      ${rows.map(r => `<div class="trow ${r.sub ? 'sub' : 'head'} ${r.mep ? 'mep' : ''}">
+        <span class="tn">${esc(r.name)}</span>
+        <span class="tb"><span class="bar ${r.sub ? '' : 'cy'}"><i style="width:${pct(r.done, r.total)}%"></i></span></span>
+        <span class="tp">${pct(r.done, r.total)}%</span>
+        <span class="tf">${r.done}<small> / ${r.total}</small></span>
+        <span class="ti ${r.open ? 'has' : ''}">${r.open ? ic('flag', 'flag-ic') + ' ' + r.open : '0'}</span>
+        ${floors.map(f => { const x = r.byFloor[f]; return `<span class="tfl ${x ? '' : 'na'}">${x ? pct(x.done, x.total) + '%' : '·'}</span>`; }).join('')}
+      </div>`).join('')}
+    </div>
+  </section>`;
+}
+
 function renderDashboard(ctx) {
   const { store } = ctx;
   const rooms = store.guestRooms();
@@ -84,19 +167,20 @@ function renderDashboard(ctx) {
       <span class="spacer"></span>
     </div>
     <div class="kpis">
-      <div class="kpi"><div class="kl">Items checked</div><div class="kv">${done}<small> of ${total}</small></div><div class="kc">${pct}% of floor 1</div></div>
+      <div class="kpi"><div class="kl">Items checked</div><div class="kv">${done}<small> of ${total}</small></div><div class="kc">${pct}% of ${esc(floorRange(rooms))}</div></div>
       <div class="kpi"><div class="kl">Open issues</div><div class="kv">${issues}</div><div class="kc">issue flags plus red room notes</div></div>
       <div class="kpi"><div class="kl">Rooms complete</div><div class="kv">${complete}<small> of ${rows.length}</small></div><div class="kc">every line checked, zero open issues</div></div>
       <div class="kpi"><div class="kl">MEP punch lists</div><div class="kv">${mepCount}</div><div class="kc">separate from FF&amp;E, per room</div></div>
     </div>
+    ${tradeTable(store)}
     <section class="card">
-      <div class="card-head"><h2>Rooms</h2><span class="card-cap">floor 1</span><span class="spacer"></span><span class="card-cap">tap a room to open its checklist</span></div>
+      <div class="card-head"><h2>Rooms</h2><span class="card-cap">${esc(floorRange(rooms))}</span><span class="spacer"></span><span class="card-cap">tap a room to open its checklist</span></div>
       <div class="rlist"></div>
     </section>
   </div>`);
 
   const list = root.querySelector('.rlist');
-  for (const { r, s } of rows) list.append(roomRow(r, s));
+  appendByFloor(list, rows, x => x.r.floor, x => roomRow(x.r, x.s));
   return root;
 }
 
@@ -129,7 +213,7 @@ function renderRooms(ctx) {
   const chips = [['all', 'All'], ['prog', 'In progress'], ['issues', 'Issues'], ['done', 'Done'], ['ns', 'Not started']];
 
   const root = el(`<div>
-    <div class="pagehead"><h1 class="h1">Rooms</h1><span class="sub">${rooms.length} guest rooms on floor 1</span></div>
+    <div class="pagehead"><h1 class="h1">Rooms</h1><span class="sub">${rooms.length} guest rooms on ${esc(floorRange(rooms))}</span></div>
     <div class="filters">${chips.map(([k, l]) => `<button class="fl ${k === filter ? 'on' : ''}" data-f="${k}">${l} <b>${buckets[k].length}</b></button>`).join('')}</div>
     <section class="card"><div class="rlist"></div></section>
   </div>`);
@@ -138,8 +222,8 @@ function renderRooms(ctx) {
   }));
   const list = root.querySelector('.rlist');
   const shown = buckets[filter] || stats;
-  if (!shown.length) list.append(el(`<div class="coming"><b>No rooms match</b><span>Nothing on floor 1 matches that filter right now.</span></div>`));
-  for (const { r, s } of shown) list.append(roomRow(r, s));
+  if (!shown.length) list.append(el(`<div class="coming"><b>No rooms match</b><span>Nothing on ${esc(floorRange(rooms))} matches that filter right now.</span></div>`));
+  appendByFloor(list, shown, x => x.r.floor, x => roomRow(x.r, x.s));
   return root;
 }
 
@@ -178,8 +262,9 @@ function renderRoom(ctx, { no }) {
         <span class="card-cap">${s.done} of ${s.total} checked</span>
         <span class="spacer"></span>
         <span class="bar cy" style="width:130px"><i style="width:${s.total ? s.done / s.total * 100 : 0}%"></i></span>
+        <button class="btn ${bulkOn(view === 'mep' ? store.mepDocId(no) : no) ? 'primary' : ''}" data-bulk style="margin-left:10px;padding:5px 10px;font-size:12px">${ic('check')}${bulkOn(view === 'mep' ? store.mepDocId(no) : no) ? 'Done selecting' : 'Select lines'}</button>
       </div>
-      <div class="how" style="padding:8px 16px;color:var(--subtle);font-size:11.5px">Tap a line to stamp your initials, like the paper sheet. Press and hold for the issue sheet.</div>
+      <div class="how" style="padding:8px 16px;color:var(--subtle);font-size:11.5px">${bulkOn(view === 'mep' ? store.mepDocId(no) : no) ? 'Select mode: tap lines or a whole category, then choose an action below. Press and hold still opens a line.' : 'Tap a line to stamp your initials, like the paper sheet. Press and hold for the issue sheet.'}</div>
       <div class="ilist"></div>
     </section>
   </div>`);
@@ -193,13 +278,18 @@ function renderRoom(ctx, { no }) {
   const list = root.querySelector('.ilist');
   // Never concatenate the suffix here: a space MEP doc is '-M', not '-MEP'.
   const activeId = view === 'mep' ? store.mepDocId(no) : no;
+  if (bulkSel && bulkSel.docId !== activeId) bulkSel = null;   // a selection belongs to one document
+  root.querySelector('[data-bulk]').addEventListener('click', () => { bulkSel = bulkOn(activeId) ? null : { docId: activeId, ids: new Set() }; store._emit(); });
   const groups = groupByCategory(store.liveItems(active));
   for (const [cat, entries] of groups) {
     const done = entries.filter(([, it]) => it.checked).length;
-    list.append(el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">·</span><span>${done} of ${entries.length} checked</span>
-      <span class="spacer"></span>${ownerChip(store, cat, no)}</div>`));
+    const head = el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">·</span><span>${done} of ${entries.length} checked</span>
+      <span class="spacer"></span>${ownerChip(store, cat, no)}${bulkOn(activeId) ? `<span class="pickall" role="button" tabindex="0">${pickallLabel(activeId, entries)}</span>` : ''}</div>`);
+    wirePickall(head, list, activeId, entries);
+    list.append(head);
     for (const [id, it] of entries) list.append(itemRow(ctx, activeId, id, it));
   }
+  if (bulkOn(activeId)) { root.append(bulkBar(ctx, activeId, active)); queueMicrotask(bulkRefreshBar); }
   return root;
 }
 
@@ -239,11 +329,363 @@ function noteCount(doc) {
   return Object.values(doc.notes || {}).filter(n => !n.deleted).length;
 }
 
+
+// ---------- bulk marking ----------
+// Two entry points, one engine (store.planBulk / store.applyBulk):
+//   1. Select mode on a room or space checklist: pick lines, pick a whole
+//      category, then Mark checked / unchecked / Resolve / Flag in one patch.
+//   2. The Bulk mark screen (#/bulk): one tag across many rooms.
+// Every apply is previewed with the exact count and every line left alone is
+// listed with its reason. Another person's initials are never restamped
+// unless the user turns that on. Every apply has an Undo.
+let bulkSel = null;               // { docId, ids: Set<itemId> } while select mode is on
+const BULK_Q_KEY = 'h2sep-p-bulkq';
+const pl = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
+// A document key shown to a PM: "Room 204 · MEP", "S221 · MEP", never a raw id.
+function docLabel(id) {
+  const m = String(id).match(/^(.*?)(-MEP|-M)?$/);
+  const base = m[1], mep = !!m[2];
+  return `${/^S/.test(base) ? base : 'Room ' + base}${mep ? ' · MEP' : ''}`;
+}
+
+function bulkOn(docId) { return !!(bulkSel && bulkSel.docId === docId); }
+// The shell re-renders on every store emit; ending select mode from the bottom
+// of a long checklist must not throw the reader back up the page.
+function emitKeepingScroll(store) {
+  const y = window.scrollY;
+  store._emit();
+  requestAnimationFrame(() => window.scrollTo(0, Math.min(y, document.documentElement.scrollHeight)));
+}
+function bulkToggleRow(row, docId, itemId) {
+  if (!bulkOn(docId)) return;
+  if (bulkSel.ids.has(itemId)) bulkSel.ids.delete(itemId); else bulkSel.ids.add(itemId);
+  row.classList.toggle('picked', bulkSel.ids.has(itemId));
+  bulkRefreshBar();
+}
+function bulkRefreshBar() {
+  const bar = document.querySelector('.bulkbar');
+  if (!bar || !bulkSel) return;
+  const n = bulkSel.ids.size;
+  bar.querySelector('.cnt').innerHTML = `${n} selected<small> of ${bar.dataset.total}</small>`;
+  bar.querySelectorAll('[data-act]:not([data-act="cancel"])').forEach(b => { b.disabled = n === 0; });
+}
+function pickallLabel(docId, entries) {
+  return bulkOn(docId) && entries.length && entries.every(([id]) => bulkSel.ids.has(id)) ? 'clear' : 'select all';
+}
+function wirePickall(head, list, docId, entries) {
+  const b = head.querySelector('.pickall');
+  if (!b) return;
+  const go = () => bulkCatToggle(list, docId, entries, b);
+  b.addEventListener('click', go);
+  b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+}
+function bulkCatToggle(list, docId, entries, headEl) {
+  if (!bulkOn(docId)) return;
+  const ids = entries.map(([id]) => id);
+  const allOn = ids.every(id => bulkSel.ids.has(id));
+  for (const id of ids) { if (allOn) bulkSel.ids.delete(id); else bulkSel.ids.add(id); }
+  list.querySelectorAll('.item-row[data-item]').forEach(r => r.classList.toggle('picked', bulkSel.ids.has(r.dataset.item)));
+  if (headEl) headEl.textContent = allOn ? 'select all' : 'clear';
+  bulkRefreshBar();
+}
+function bulkBar(ctx, docId, doc) {
+  const { store } = ctx;
+  const total = store.liveItems(doc).length;
+  const bar = el(`<div class="bulkbar" data-total="${total}">
+    <span class="cnt">0 selected<small> of ${total}</small></span>
+    <span class="spacer"></span>
+    <button class="btn primary" data-act="check" disabled>${ic('check')}Mark checked</button>
+    <button class="btn" data-act="uncheck" disabled>Mark unchecked</button>
+    <button class="btn" data-act="resolve" disabled>Resolve issues</button>
+    <button class="btn" data-act="resolveAndCheck" disabled>Resolve and check</button>
+    <button class="btn" data-act="flag:MISSING" disabled>${ic('flag', 'flag-ic')}Missing</button>
+    <button class="btn" data-act="flag:IN BOX" disabled>${ic('flag', 'flag-ic')}In box</button>
+    <button class="btn" data-act="setIssue" disabled>${ic('flag', 'flag-ic')}Other issue</button>
+    <button class="btn" data-act="more" disabled>More…</button>
+    <button class="btn" data-act="cancel">Cancel</button>
+  </div>`);
+  const run = (act) => {
+    const targets = [...bulkSel.ids].map(itemId => ({ docId, itemId }));
+    if (!targets.length) return;
+    const go = (text) => bulkConfirm(ctx, targets, act.startsWith('flag:') ? 'setIssue' : act, { text, scopeLabel: docLabel(docId) }, () => { bulkSel = null; });
+    if (act.startsWith('flag:')) go(act.slice(5));          // one-tap MISSING / IN BOX, straight to the preview
+    else if (act === 'setIssue') issueTextSheet(ctx, go);
+    else go('');
+  };
+  bar.querySelectorAll('[data-act]').forEach(b => b.addEventListener('click', () => {
+    const act = b.dataset.act;
+    if (act === 'cancel') { bulkSel = null; emitKeepingScroll(store); return; }
+    if (act === 'more') {
+      const A = store.constructor.BULK_ACTIONS;
+      const { close } = sheet(`<div class="sh"><b style="font-size:15px">${bulkSel.ids.size} selected · do what?</b><button class="icon-btn x" data-close aria-label="Close">${ic('x')}</button></div>
+        <div style="display:grid;gap:8px">${[['flag:MISSING', 'Flag MISSING'], ['flag:IN BOX', 'Flag IN BOX'], ...Object.entries(A).filter(([k]) => k !== 'clearIssue').map(([k, l]) => [k, k === 'setIssue' ? 'Flag another issue' : l])].map(([k, l]) => `<button class="btn" data-more="${k}" style="justify-content:center;padding:12px">${l}</button>`).join('')}</div>`);
+      document.querySelectorAll('.sheet [data-more]').forEach(x => x.addEventListener('click', () => { close(); run(x.dataset.more); }));
+      return;
+    }
+    run(act);
+  }));
+  return bar;
+}
+
+// Ask for the issue text once, with the paper vocabulary, then continue.
+function issueTextSheet(ctx, next) {
+  const { close } = sheet(`
+    <div class="sh"><b style="font-size:15px">Flag an issue on the selected lines</b><button class="icon-btn x" data-close aria-label="Close">${ic('x')}</button></div>
+    <div class="qps">${QUICK_PICKS.map(q => `<button class="qp" data-q="${q}">${q}</button>`).join('')}</div>
+    <div class="field"><label>Or a custom note</label><input data-custom placeholder="Type what is wrong"/></div>
+    <div class="srow"><button class="btn primary" data-next>Continue</button></div>`);
+  const sh = document.querySelector('.sheet');
+  let picked = '';
+  sh.querySelectorAll('.qp').forEach(b => b.addEventListener('click', () => {
+    picked = picked === b.dataset.q ? '' : b.dataset.q;
+    sh.querySelectorAll('.qp').forEach(x => x.classList.toggle('on', x.dataset.q === picked));
+  }));
+  sh.querySelector('[data-next]').addEventListener('click', () => {
+    const text = sh.querySelector('[data-custom]').value.trim() || picked;
+    if (!text) { toast('Pick an issue or type one'); return; }
+    close(); next(text);
+  });
+}
+
+// One place that applies a plan, reports a refusal, watches the cloud acks,
+// and offers Undo. Undo re-reads every line first and reports what it kept.
+function bulkApplyAndToast(store, plan, verb) {
+  const res = store.applyBulk(plan);
+  if (!res) return null;
+  if (res.error) { toast(res.error); return null; }
+  toast(`${verb}: ${pl(res.lines, 'line')} in ${pl(res.docs, 'document')}`, { label: 'Undo', fn: () => {
+    const r = store.undoBulk(res.entry);
+    if (!r) { toast('Nothing to undo'); return; }
+    toast(`Undone: ${pl(r.reverted, 'line')} reverted${r.skipped.length ? `, ${r.skipped.length} left alone (changed since, or gone)` : ''}`);
+    r.done.then(({ failed, total }) => { if (failed) toast(`${failed} of ${total} documents did not save the undo`, { label: 'OK', fn: () => {} }); });
+  } });
+  res.done.then(({ failed, total }) => { if (failed) toast(`${failed} of ${total} documents did not save. Check the connection and try again.`, { label: 'OK', fn: () => {} }); });
+  return res;
+}
+// The plan shown was computed at preview time. Re-plan at Apply; if the
+// checklist moved underneath (another device, a line flagged since), show the
+// new numbers instead of writing the stale ones.
+function replanOrWarn(store, targets, action, opts, previewed) {
+  const fresh = store.planBulk(targets, action, opts);
+  if (fresh.changes.length !== previewed.changes.length || fresh.skipped.length !== previewed.skipped.length) {
+    toast('The checklist changed since the preview. Look again, then Apply.');
+    return null;
+  }
+  return fresh;
+}
+
+// The confirm sheet: exact count, exact skips with reasons, the restamp
+// switch (off by default), Apply, and an Undo on the toast afterwards.
+function bulkConfirm(ctx, targets, action, opts = {}, onDone) {
+  const { store } = ctx;
+  if (!store.user) return identityGate(ctx);
+  let overwrite = false;
+  const verb = store.constructor.BULK_ACTIONS[action] || action;
+  const { close } = sheet(`
+    <div class="sh"><b style="font-size:15px">${esc(verb)}${opts.text ? ` · ${esc(opts.text)}` : ''}${opts.scopeLabel ? ` · ${esc(opts.scopeLabel)}` : ''}</b><button class="icon-btn x" data-close aria-label="Close">${ic('x')}</button></div>
+    <div data-body></div>
+    ${['check', 'uncheck', 'resolveAndCheck'].includes(action) ? `<label style="display:flex;gap:8px;align-items:center;font-size:12.5px;margin-top:10px"><input type="checkbox" data-overwrite/> Also restamp lines checked by someone else (their initials are field evidence; off unless you mean it)</label>` : ''}
+    <div class="srow"><button class="btn" data-close>Cancel</button><button class="btn primary" data-apply>Apply</button></div>`);
+  const sh = document.querySelector('.sheet');
+  let plan = null;
+  const render = () => {
+    plan = store.planBulk(targets, action, { text: opts.text || '', overwriteChecked: overwrite });
+    const byDoc = new Map();
+    for (const c of plan.changes) byDoc.set(c.docId, (byDoc.get(c.docId) || 0) + 1);
+    const byWhy = new Map();
+    for (const k of plan.skipped) { if (!byWhy.has(k.why)) byWhy.set(k.why, []); byWhy.get(k.why).push(k); }
+    const single = byDoc.size <= 1;
+    const rows = single
+      ? plan.changes.slice(0, 40).map(c => `<div class="prow"><span class="tag">${esc(shortCode(c) || '')}</span><span>${esc(c.label.length > 60 ? c.label.slice(0, 59) + '…' : c.label)}</span>${c.replaces ? `<span class="why">replaces "${esc(c.replaces)}"</span>` : ''}</div>`).join('')
+        + (plan.changes.length > 40 ? `<div class="prow"><span class="why">and ${plan.changes.length - 40} more</span></div>` : '')
+      : [...byDoc].slice(0, 60).map(([d, n]) => `<div class="prow"><span class="mono">${esc(docLabel(d))}</span><span>${pl(n, 'line')}</span></div>`).join('')
+        + (byDoc.size > 60 ? `<div class="prow"><span class="why">and ${byDoc.size - 60} more documents</span></div>` : '');
+    sh.querySelector('[data-body]').innerHTML = `
+      <div class="preview">
+        <div class="ph"><b>${plan.changes.length}</b> will change${byDoc.size > 1 ? ` in <b>${byDoc.size}</b> rooms` : ''} · <span class="n">${plan.skipped.length}</span> left alone${plan.replaced ? ` · <b style="color:var(--issue-ink)">${plan.replaced}</b> will have their issue text replaced` : ''}</div>
+        ${rows}
+        ${plan.skipped.length ? `<div class="skipsum"><b>Left alone (${plan.skipped.length})</b>${[...byWhy].map(([why, ks]) => `<div><b>${ks.length}</b> · ${esc(why)}${single ? `: ${esc(ks.slice(0, 8).map(k => shortCode(k) || k.itemId).join(', '))}${ks.length > 8 ? ', …' : ''}` : ''}</div>`).join('')}</div>` : '<div class="skipsum">Nothing left alone.</div>'}
+      </div>`;
+    const ap = sh.querySelector('[data-apply]');
+    ap.disabled = plan.changes.length === 0;
+    ap.textContent = plan.changes.length ? `Apply to ${pl(plan.changes.length, 'line')}` : 'Nothing to apply';
+  };
+  render();
+  sh.querySelector('[data-overwrite]')?.addEventListener('change', e => { overwrite = e.target.checked; render(); });
+  sh.querySelector('[data-apply]').addEventListener('click', () => {
+    if (!plan || !plan.changes.length) return;
+    const fresh = replanOrWarn(store, targets, action, { text: opts.text || '', overwriteChecked: overwrite }, plan);
+    if (!fresh) { render(); return; }
+    const res = bulkApplyAndToast(store, fresh, verb);
+    if (!res) return;
+    close();
+    onDone && onDone(res);
+    emitKeepingScroll(store);
+  });
+}
+
+// ---------- Bulk mark screen: one tag across many rooms ----------
+function bulkQ() {
+  try { const q = JSON.parse(sessionStorage.getItem(BULK_Q_KEY)); if (q) return { floors: [], types: [], kind: 'ffe', cats: [], codes: [], action: 'check', text: '', ...q }; } catch { /* fresh */ }
+  return { floors: [], types: [], kind: 'ffe', cats: [], codes: [], action: 'check', text: '' };
+}
+function setBulkQ(q) { sessionStorage.setItem(BULK_Q_KEY, JSON.stringify(q)); }
+// One job, one row: keyed on category and label, so PTAC / PTAC-1 / an
+// untagged "PTAC unit set and sealed" line on different floors collapse into
+// a single row that names every code it covers.
+const codeKey = (it) => `${it.category || 'Other'}|${String(it.label || '').trim().toLowerCase()}`;
+
+function renderBulk(ctx) {
+  const { store } = ctx;
+  const q = bulkQ();
+  const rooms = store.guestRooms();
+  const spaces = store.spaces();
+  const floors = floorsOf(rooms);
+  const types = [...new Set(rooms.map(r => r.typeLabel || r.type))].sort();
+  const parents = (q.kind.startsWith('space') ? spaces : rooms)
+    .filter(r => !q.floors.length || q.floors.includes(Number(r.floor)))
+    .filter(r => q.kind.startsWith('space') || !q.types.length || q.types.includes(r.typeLabel || r.type));
+  const mep = q.kind.endsWith('mep');
+  // Address documents by their STORE KEY, never by a field inside the payload.
+  const keyOf = new Map(Object.entries(store.docs).map(([k, v]) => [v, k]));
+  const docs = parents.map(r => mep ? store.mepDoc(r.number) : r).filter(Boolean).filter(d => keyOf.has(d));
+  // Distinct lines across the scope, counted.
+  const tags = new Map();
+  for (const d of docs) for (const [, it] of store.liveItems(d)) {
+    const k = codeKey(it);
+    if (!tags.has(k)) tags.set(k, { key: k, category: it.category || 'Other', codes: new Set(), label: it.label || '', n: 0, unchecked: 0, open: 0 });
+    const t = tags.get(k); t.n++; if (!it.checked) t.unchecked++; if (it.issue && !it.issueResolved) t.open++;
+    for (const c of String(it.code || '').split('/').map(x => x.trim()).filter(Boolean)) t.codes.add(c);
+  }
+  const cats = [...new Set([...tags.values()].map(t => t.category))];
+  const filterText = String(q.filter || '').trim().toLowerCase();
+  const pickedKeys = new Set(q.codes);
+  // A picked tag is always on screen, whatever the category chips or the
+  // filter say: a bulk tool must never carry an armed pick out of sight.
+  const shownTags = [...tags.values()]
+    .filter(t => pickedKeys.has(t.key) || ((!q.cats.length || q.cats.includes(t.category))
+      && (!filterText || `${[...t.codes].join(' ')} ${t.label}`.toLowerCase().includes(filterText))))
+    .sort((a, b) => (pickedKeys.has(b.key) - pickedKeys.has(a.key)) || a.category.localeCompare(b.category) || a.label.localeCompare(b.label));
+  const codesOf = (t) => { const c = [...t.codes]; return c.length ? (c.length > 3 ? `${c.slice(0, 3).join(' / ')} +${c.length - 3}` : c.join(' / ')) : '—'; };
+  const typesOnFloors = new Set(rooms.filter(r => !q.floors.length || q.floors.includes(Number(r.floor))).map(r => r.typeLabel || r.type));
+  const fam = (t) => /^King/.test(t) ? 'King' : /^(QQ|Queen)/.test(t) ? 'QQ' : '';
+  const lastResult = q.lastResult || null;
+  const picked = new Set(q.codes);
+  const targets = [];
+  if (picked.size) for (const d of docs) for (const [id, it] of store.liveItems(d)) if (picked.has(codeKey(it))) targets.push({ docId: keyOf.get(d), itemId: id });
+  const planOpts = { text: q.text, overwriteChecked: !!q.overwrite };
+  const plan = picked.size ? store.planBulk(targets, q.action, planOpts) : null;
+  const A = store.constructor.BULK_ACTIONS;
+  const D = store.constructor.BULK_DESTRUCTIVE;
+  const lastUndo = store.loadUndo().slice(-1)[0];
+
+  const root = el(`<div>
+    <div class="pagehead"><h1 class="h1">Bulk mark</h1><span class="sub">one tag across many rooms · previewed, then one write per room · every apply has Undo</span></div>
+    <div class="bulk-scope">
+      <section class="card">
+        <h3>Where</h3>
+        <div class="chips" style="margin-bottom:8px">
+          ${[['ffe', 'Rooms · FF&E'], ['mep', 'Rooms · MEP punch'], ['space-ffe', 'Common areas · FF&E'], ['space-mep', 'Common areas · MEP']].map(([k, l]) => `<button class="fl ${q.kind === k ? 'on' : ''}" data-kind="${k}">${l}</button>`).join('')}
+        </div>
+        <div class="chips" style="margin-bottom:8px">${floors.map(f => `<button class="fl ${q.floors.includes(f) ? 'on' : ''}" data-floor="${f}">Floor ${f}</button>`).join('')}</div>
+        ${q.kind.startsWith('space') ? '' : `<div class="chips" style="margin-bottom:6px"><button class="fl" data-family="King">All King</button><button class="fl" data-family="QQ">All QQ</button><button class="fl" data-family="">Every type</button></div>
+        <div class="chips">${types.map(tp => `<button class="fl ${q.types.includes(tp) ? 'on' : ''} ${typesOnFloors.has(tp) ? '' : 'dim'}" data-type="${esc(tp)}" title="${typesOnFloors.has(tp) ? '' : 'no rooms of this type on the picked floors'}">${esc(tp)}</button>`).join('')}</div>`}
+        <div style="margin-top:10px;font-size:12.5px;color:var(--muted)"><b>${docs.length}</b> ${q.kind.startsWith('space') ? 'spaces' : 'rooms'} in scope${!q.floors.length && !q.types.length ? ' (every floor, every type; narrow it with the chips)' : ''}</div>
+      </section>
+      <section class="card">
+        <h3>Which lines</h3>
+        <div class="chips" style="margin-bottom:8px">${cats.map(c => `<button class="fl ${q.cats.includes(c) ? 'on' : ''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div>
+        <input class="tagfilter" data-filter placeholder="Find a tag or a line (PTAC, grille, headboard)" value="${esc(q.filter || '')}"/>
+        <div class="taglist">${shownTags.length ? shownTags.map(tg => `<label><input type="checkbox" data-code="${esc(tg.key)}" ${picked.has(tg.key) ? 'checked' : ''}/><span class="tag" title="${esc([...tg.codes].join(', '))}">${esc(codesOf(tg))}</span><span>${esc(tg.label.length > 48 ? tg.label.slice(0, 47) + '…' : tg.label)}</span><span class="tcount">${tg.unchecked} open of ${tg.n}${tg.open ? ` · ${pl(tg.open, 'issue')}` : ''}</span></label>`).join('') : '<div class="coming" style="padding:18px"><b>No lines match</b></div>'}</div>
+        <div style="margin-top:8px;font-size:12px;color:var(--subtle)">${pl(picked.size, 'tag')} picked · ${pl(targets.length, 'line')} in scope</div>
+      </section>
+      <section class="card">
+        <h3>Do what</h3>
+        <div class="chips">${Object.entries(A).flatMap(([k, l]) => {
+          const chip = (key, label, on, preset) => `<button class="fl ${on ? 'on' : ''}" data-action="${key}" ${preset ? `data-preset="${preset}"` : ''} title="${D.includes(k) ? 'Changes or removes what is on the line' : ''}">${label}${D.includes(k) ? ' <span style="color:var(--issue-ink)">·</span>' : ''}</button>`;
+          // One-tap flags sit ahead of the general "Flag an issue" (Austin, 2026-09-02: "add missing and in box to this area").
+          if (k === 'setIssue') return [chip(k, 'Missing', q.action === k && q.text === 'MISSING', 'MISSING'), chip(k, 'In box', q.action === k && q.text === 'IN BOX', 'IN BOX'), chip(k, l, q.action === k && !['MISSING', 'IN BOX'].includes(q.text), '')];
+          return [chip(k, l, q.action === k, '')];
+        }).join('')}</div>
+        <div style="margin-top:6px;font-size:11.5px;color:var(--subtle)">A red dot marks an action that changes or removes what is already on a line.</div>
+        ${q.action === 'setIssue' ? `<div class="qps" style="margin-top:8px">${QUICK_PICKS.map(x => `<button class="qp ${q.text === x ? 'on' : ''}" data-q="${x}">${x}</button>`).join('')}</div><div class="field"><label>Or a custom note</label><input data-custom value="${QUICK_PICKS.includes(q.text) ? '' : esc(q.text)}" placeholder="Type what is wrong"/></div>` : ''}
+        ${['check', 'uncheck', 'resolveAndCheck'].includes(q.action) ? `<label style="display:flex;gap:8px;align-items:center;font-size:12.5px;margin-top:10px"><input type="checkbox" data-overwrite ${q.overwrite ? 'checked' : ''}/> Also restamp lines checked by someone else</label>` : ''}
+      </section>
+      <section class="card">
+        <h3>Preview</h3>
+        ${lastResult ? `<div class="preview done"><div class="ph">${ic('check')}<b>Done</b> · ${esc(lastResult.label)} · ${fmtWhen(lastResult.at)}</div></div>` : ''}
+        ${plan ? bulkPreviewHtml(plan) : '<div class="coming" style="padding:18px"><b>Pick at least one tag</b><span>The preview shows exactly what will change and what is left alone, per room.</span></div>'}
+        <div class="srow" style="margin-top:10px">${lastUndo ? `<button class="btn" data-undo-last title="${esc(lastUndo.label)}">Undo last bulk edit</button>` : ''}<button class="btn primary" data-apply ${plan && plan.changes.length && !(q.action === 'setIssue' && !q.text) ? '' : 'disabled'}>${ic('check')}${q.action === 'setIssue' && !q.text ? 'Pick an issue first' : plan && plan.changes.length ? `Apply to ${pl(plan.changes.length, 'line')}` : 'Nothing to apply'}</button></div>
+      </section>
+    </div>
+  </div>`);
+  const save = (patch) => { setBulkQ({ ...q, ...patch }); location.hash = '#/bulk'; dispatchEvent(new HashChangeEvent('hashchange')); };
+  const toggleIn = (arr, v) => arr.includes(v) ? arr.filter(x => x !== v) : [...arr, v];
+  root.querySelectorAll('[data-kind]').forEach(b => b.addEventListener('click', () => save({ kind: b.dataset.kind, cats: [], codes: [] })));
+  root.querySelectorAll('[data-floor]').forEach(b => b.addEventListener('click', () => save({ floors: toggleIn(q.floors, Number(b.dataset.floor)) })));
+  root.querySelectorAll('[data-type]').forEach(b => b.addEventListener('click', () => save({ types: toggleIn(q.types, b.dataset.type) })));
+  root.querySelectorAll('[data-family]').forEach(b => b.addEventListener('click', () => save({ types: b.dataset.family ? types.filter(tp => fam(tp) === b.dataset.family) : [] })));
+  root.querySelector('[data-filter]')?.addEventListener('input', e => { const v = e.target.value; clearTimeout(root._ft); root._ft = setTimeout(() => save({ filter: v }), 250); });
+  root.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', () => save({ cats: toggleIn(q.cats, b.dataset.cat) })));
+  root.querySelectorAll('[data-code]').forEach(b => b.addEventListener('change', () => save({ codes: toggleIn(q.codes, b.dataset.code) })));
+  root.querySelectorAll('[data-action]').forEach(b => b.addEventListener('click', () => save({ action: b.dataset.action, text: b.dataset.preset || (b.dataset.action === 'setIssue' && ['MISSING', 'IN BOX'].includes(q.text) ? '' : q.text) })));
+  root.querySelectorAll('.qp').forEach(b => b.addEventListener('click', () => save({ text: q.text === b.dataset.q ? '' : b.dataset.q })));
+  root.querySelector('[data-custom]')?.addEventListener('change', e => save({ text: e.target.value.trim() }));
+  root.querySelector('[data-overwrite]')?.addEventListener('change', e => save({ overwrite: e.target.checked }));
+  root.querySelector('[data-apply]').addEventListener('click', () => {
+    if (!plan || !plan.changes.length) return;
+    if (!store.user) return identityGate(ctx);
+    if (q.action === 'setIssue' && !q.text) { toast('Pick an issue or type one'); return; }
+    const fresh = replanOrWarn(store, targets, q.action, planOpts, plan);
+    if (!fresh) { store._emit(); return; }
+    const res = bulkApplyAndToast(store, fresh, A[q.action]);
+    if (res) save({ lastResult: { label: res.entry.label, at: res.entry.at } });
+  });
+  root.querySelector('[data-undo-last]')?.addEventListener('click', () => {
+    const r = store.undoBulk(lastUndo);
+    if (!r) { toast('Nothing to undo'); return; }
+    toast(`Undone: ${pl(r.reverted, 'line')} reverted${r.skipped.length ? `, ${r.skipped.length} left alone (changed since, or gone)` : ''}`);
+    save({ lastResult: { label: `Undone: ${lastUndo.label}`, at: new Date().toISOString() } });
+  });
+  return root;
+}
+
+function bulkPreviewHtml(plan) {
+  const byDoc = new Map();
+  for (const c of plan.changes) byDoc.set(c.docId, (byDoc.get(c.docId) || 0) + 1);
+  const skipByDoc = new Map();
+  for (const k of plan.skipped) { if (!skipByDoc.has(k.docId)) skipByDoc.set(k.docId, new Map()); const m = skipByDoc.get(k.docId); m.set(k.why, (m.get(k.why) || 0) + 1); }
+  const byWhy = new Map();
+  for (const k of plan.skipped) byWhy.set(k.why, (byWhy.get(k.why) || 0) + 1);
+  // Only the exceptions are worth a row: a document with something left alone,
+  // or with a count that differs from the common case. The rest collapse.
+  const counts = [...byDoc.values()];
+  const mode = counts.length ? counts.sort((a, b) => counts.filter(v => v === a).length - counts.filter(v => v === b).length).pop() : 0;
+  const ids = [...new Set([...byDoc.keys(), ...skipByDoc.keys()])].sort();
+  // Rooms that read exactly alike collapse into one row once there are more
+  // than four of them; the exceptions keep their own row.
+  const sig = (d) => `${byDoc.get(d) || 0}|${skipByDoc.has(d) ? [...skipByDoc.get(d)].map(([w, n]) => `${n} ${w}`).join(' · ') : ''}`;
+  const groups = new Map();
+  for (const d of ids) { const g = sig(d); if (!groups.has(g)) groups.set(g, []); groups.get(g).push(d); }
+  const shown = ids.filter(d => groups.get(sig(d)).length <= 4 && (skipByDoc.has(d) || (byDoc.get(d) || 0) !== mode));
+  const collapsed = [...groups].filter(([, ds]) => ds.length > 4 && ds.some(d => skipByDoc.has(d) || (byDoc.get(d) || 0) !== mode));
+  const hidden = ids.length - shown.length - collapsed.reduce((n, [, ds]) => n + ds.length, 0);
+  return `<div class="preview">
+    <div class="ph"><b>${plan.changes.length}</b> will change in <b>${byDoc.size}</b> ${byDoc.size === 1 ? 'room' : 'rooms'} · <span class="n">${plan.skipped.length}</span> left alone${plan.replaced ? ` · <b style="color:var(--issue-ink)">${plan.replaced}</b> will have their issue text replaced` : ''}</div>
+    ${shown.slice(0, 60).map(d => `<div class="prow"><span class="mono">${esc(docLabel(d))}</span><span>${byDoc.get(d) ? `${pl(byDoc.get(d), 'line')} change` : 'no change'}</span><span class="why">${skipByDoc.has(d) ? [...skipByDoc.get(d)].map(([w, n]) => `${n} ${esc(w)}`).join(' · ') : ''}</span></div>`).join('')}
+    ${shown.length > 60 ? `<div class="prow"><span class="why">and ${shown.length - 60} more exceptions</span></div>` : ''}
+    ${collapsed.map(([g, ds]) => { const [n, why] = g.split('|'); return `<div class="prow"><span class="mono">${pl(ds.length, 'room')}</span><span>${Number(n) ? `${pl(Number(n), 'line')} change each` : 'no change'}</span><span class="why">${esc(why)}</span></div>`; }).join('')}
+    ${hidden ? `<div class="prow"><span class="why">${hidden === ids.length ? `${pl(hidden, 'room')}, ${mode === 1 ? '1 line each' : mode + ' lines each'}` : `and ${pl(hidden, 'more room')} · ${mode === 1 ? '1 line each' : mode + ' lines each'}`}</span></div>` : ''}
+    ${plan.skipped.length ? `<div class="skipsum"><b>Left alone (${plan.skipped.length})</b>${[...byWhy].map(([w, n]) => `<div><b>${n}</b> · ${esc(w)}</div>`).join('')}</div>` : '<div class="skipsum">Nothing left alone.</div>'}
+  </div>`;
+}
+
 function itemRow(ctx, docId, itemId, it) {
   const { store } = ctx;
   const flagged = it.reliability === 'FLAGGED';
   const openIssue = it.issue && !it.issueResolved;
-  const row = el(`<div class="item-row ${flagged ? 'flagged' : ''}" role="button" tabindex="0"
+  const sel = bulkOn(docId);
+  const row = el(`<div class="item-row ${flagged ? 'flagged' : ''} ${sel ? 'selectable' : ''} ${sel && bulkSel.ids.has(itemId) ? 'picked' : ''}" role="button" tabindex="0" data-item="${esc(itemId)}"
       aria-label="${esc(it.label)}${it.checked ? ', checked' : ''}">
     <span class="stamp ${it.checked ? 'checked' : ''}">${it.checked ? esc(it.initials || '✓') : ''}</span>
     <span class="mid">
@@ -265,6 +707,7 @@ function itemRow(ctx, docId, itemId, it) {
 
   pressable(row, {
     tap: () => {
+      if (bulkOn(docId)) return bulkToggleRow(row, docId, itemId);
       if (!store.user) return identityGate(ctx);
       if (openIssue || it.issue || flagged) return itemSheet(ctx, docId, itemId);
       store.check(docId, itemId, !it.checked);
@@ -415,7 +858,7 @@ export function identityGate(ctx) {
   });
 }
 
-// ---------- common areas (floor 1 spaces) ----------
+// ---------- common areas (the spaces on every built floor) ----------
 
 function spaceRow(ctx, sp) {
   const { store } = ctx;
@@ -441,7 +884,7 @@ function renderCommon(ctx) {
   const { store } = ctx;
   const spaces = store.spaces();
   if (!spaces.length) {
-    return comingSoon('Common Areas', 'The floor-1 spaces arrive with the data rollout.')();
+    return comingSoon('Common Areas', 'The common-area spaces arrive with the data rollout.')();
   }
   let total = 0, done = 0, issues = 0;
   for (const sp of spaces) {
@@ -453,16 +896,17 @@ function renderCommon(ctx) {
   }
   const root = el(`<div>
     <div class="pagehead"><h1 class="h1">Common Areas</h1>
-      <span class="sub">${spaces.length} floor-1 spaces \u00b7 plan numbering from the architectural set</span></div>
+      <span class="sub">${spaces.length} spaces on ${esc(floorRange(spaces))} \u00b7 plan numbering from the architectural set</span></div>
     <div class="kpis">
       <div class="kpi"><div class="kl">Lines checked</div><div class="kv">${done}<small> of ${total}</small></div><div class="kc">FF&amp;E and MEP punch together</div></div>
       <div class="kpi"><div class="kl">Open issues</div><div class="kv">${issues}</div><div class="kc">flags and red space notes</div></div>
-      <div class="kpi"><div class="kl">Spaces</div><div class="kv">${spaces.length}</div><div class="kc">every floor-1 space with a package</div></div>
+      <div class="kpi"><div class="kl">Spaces</div><div class="kv">${spaces.length}</div><div class="kc">every space with a package</div></div>
     </div>
     <section class="card"><div class="rlist"></div></section>
   </div>`);
   const list = root.querySelector('.rlist');
-  for (const sp of spaces) list.append(spaceRow(ctx, sp));
+  const byFloor = [...spaces].sort((a, b) => (Number(a.floor) - Number(b.floor)) || String(a.typeLabel || a.number).localeCompare(String(b.typeLabel || b.number)));
+  appendByFloor(list, byFloor, sp => sp.floor, sp => spaceRow(ctx, sp));
   return root;
 }
 
@@ -470,7 +914,7 @@ function renderSpace(ctx, { id }) {
   const { store } = ctx;
   const doc = store.getDoc(id);
   if (!doc) return el(`<div class="coming">${ic('layers')}<b>${esc(id)} is not in this build</b>
-    <span>Only floor-1 spaces with a package are built.</span></div>`);
+    <span>Only spaces with a package are built.</span></div>`);
   const mep = store.mepDoc(id);
   const view = new URLSearchParams((location.hash.split('?')[1] || '')).get('view') === 'mep' && mep ? 'mep' : 'ffe';
   const active = view === 'mep' ? mep : doc;
@@ -484,6 +928,7 @@ function renderSpace(ctx, { id }) {
       <div class="sub">Space ${esc(doc.number)} \u00b7 Floor ${esc(doc.floor)}</div></div>
       <span class="spacer"></span>
       <div class="hdr-actions">
+        <a class="btn" href="#/print/${esc(id)}">${ic('printer')}Print sheet</a>
         <button class="btn" data-note>${ic('note')}Space notes${noteCount(doc) ? ` \u00b7 ${noteCount(doc)}` : ''}</button>
       </div>
     </div>
@@ -494,8 +939,9 @@ function renderSpace(ctx, { id }) {
     <section class="card">
       <div class="card-head"><h2>${view === 'mep' ? 'MEP punch' : 'Checklist'}</h2>
         <span class="card-cap">${s.done} of ${s.total} checked</span><span class="spacer"></span>
-        <span class="bar cy" style="width:130px"><i style="width:${s.total ? s.done / s.total * 100 : 0}%"></i></span></div>
-      <div class="how" style="padding:8px 16px;color:var(--subtle);font-size:11.5px">Tap a line to stamp your initials. Press and hold for the issue sheet.</div>
+        <span class="bar cy" style="width:130px"><i style="width:${s.total ? s.done / s.total * 100 : 0}%"></i></span>
+        <button class="btn ${bulkOn(activeId) ? 'primary' : ''}" data-bulk style="margin-left:10px;padding:5px 10px;font-size:12px">${ic('check')}${bulkOn(activeId) ? 'Done selecting' : 'Select lines'}</button></div>
+      <div class="how" style="padding:8px 16px;color:var(--subtle);font-size:11.5px">${bulkOn(activeId) ? 'Select mode: tap lines or a whole category, then choose an action below.' : 'Tap a line to stamp your initials. Press and hold for the issue sheet.'}</div>
       <div class="ilist"></div>
     </section>
   </div>`);
@@ -506,11 +952,16 @@ function renderSpace(ctx, { id }) {
   root.querySelector('[data-note]').addEventListener('click', () => notesSheet(ctx, id));
 
   const list = root.querySelector('.ilist');
+  if (bulkSel && bulkSel.docId !== activeId) bulkSel = null;
+  root.querySelector('[data-bulk]').addEventListener('click', () => { bulkSel = bulkOn(activeId) ? null : { docId: activeId, ids: new Set() }; store._emit(); });
   for (const [cat, entries] of groupByCategory(store.liveItems(active))) {
     const done = entries.filter(([, it]) => it.checked).length;
-    list.append(el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">\u00b7</span><span>${done} of ${entries.length} checked</span></div>`));
+    const head = el(`<div class="cat-head">${esc(cat)}<span style="letter-spacing:0">\u00b7</span><span>${done} of ${entries.length} checked</span>${bulkOn(activeId) ? `<span class="pickall" role="button" tabindex="0">${pickallLabel(activeId, entries)}</span>` : ''}</div>`);
+    wirePickall(head, list, activeId, entries);
+    list.append(head);
     for (const [iid, it] of entries) list.append(itemRow(ctx, activeId, iid, it));
   }
+  if (bulkOn(activeId)) { root.append(bulkBar(ctx, activeId, active)); queueMicrotask(bulkRefreshBar); }
   return root;
 }
 
@@ -532,14 +983,17 @@ function renderActivity(ctx) {
 
 // ---------- print sheet (live data, paper-styled, like the first build) ----------
 
-function renderPrint(ctx, { no }) {
-  const { store } = ctx;
+// One paper sheet for one document (a room or a common-area space), FF&E then
+// MEP, generated from the live store at the moment it is drawn. The router
+// re-renders on every store change, so an open sheet updates as lines are
+// checked off; the GENERATED stamp is the moment of the last redraw.
+function paperHtml(store, no) {
   const doc = store.getDoc(no);
-  if (!doc) return el(`<div class="coming"><b>Room ${esc(no)} is not in this build</b></div>`);
+  if (!doc) return `<div class="paper"><div class="coming"><b>${esc(no)} is not in this build</b></div></div>`;
   const mep = store.mepDoc(no);
   const now = new Date();
   const stamp = `${now.toLocaleDateString('en-US')} · ${fmtWhen(now.toISOString())}`;
-
+  const isSpace = String(doc.type || '').startsWith('space-');
   function section(title, d) {
     const groups = groupByCategory(store.liveItems(d));
     let html = '';
@@ -557,40 +1011,113 @@ function renderPrint(ctx, { no }) {
     }
     return `<div class="p-sect"><div class="p-sect-h">${esc(title)}</div>${html}</div>`;
   }
-
-  const notes = Object.values(doc.notes || {}).filter(n => !n.deleted && !n.resolved);
-  // Legend of everyone whose initials appear on this sheet, and their company.
+  const notes = Object.values(doc.notes || {}).filter(n => !n.deleted && !n.resolved && n.by);   // crew and office notes; build-authored notes stay in the app
   const signers = [...new Set([doc, mep].filter(Boolean).flatMap(d =>
     store.liveItems(d).filter(([, it]) => it.checked && it.initials)
-      .map(([, it]) => it.initials + (it.checkedByCo ? ' \u2014 ' + shortCo(it.checkedByCo) : ''))))].sort();
-  const root = el(`<div class="paper-wrap">
-    <div class="pagehead noprint">
-      <button class="icon-btn" data-back aria-label="Back">${ic('back')}</button>
-      <div><h1 class="h1">Room ${esc(no)} print sheet</h1>
-        <div class="sub">generated from live data, current as of right now</div></div>
-      <span class="spacer"></span>
-      <button class="btn primary" data-print>${ic('printer')}Print or save PDF</button>
-    </div>
-    <div class="paper">
+      .map(([, it]) => it.initials + (it.checkedByCo ? ' — ' + shortCo(it.checkedByCo) : ''))))].sort();
+  const a = store.roomStats(doc), b = mep ? store.roomStats(mep) : { total: 0, done: 0, openIssues: 0 };
+  return `<div class="paper" data-paper="${esc(no)}">
       <div class="p-head">
         <img src="${window.__H2SEP_LOGO || 'img/triun-logo.png'}" alt="Triun"/>
-        <div class="p-title"><b>ROOM ${esc(no)}</b><span>${esc(doc.typeLabel || doc.type)} · Floor ${esc(doc.floor)}</span></div>
+        <div class="p-title"><b>${isSpace ? esc(doc.typeLabel || doc.type) : 'ROOM ' + esc(no)}</b><span>${isSpace ? 'Space ' + esc(doc.number) : esc(doc.typeLabel || doc.type)} · Floor ${esc(doc.floor)} · ${a.done + b.done} of ${a.total + b.total} checked · ${a.openIssues + b.openIssues} open</span></div>
         <div class="p-tb">
           <div><span>PROJECT</span><b>H2SEP</b></div>
           <div><span>JOB</span><b>TRIUN 24030</b></div>
           <div><span>GENERATED</span><b>${esc(stamp)}</b></div>
         </div>
       </div>
-      ${notes.length ? `<div class="p-notes"><b>ROOM NOTES:</b> ${notes.map(n => esc(n.text)).join(' · ')}</div>` : ''}
-      ${section('FF&E CHECKLIST', doc)}
-      ${mep ? `<div class="p-break"></div>${section('MEP PUNCH', mep)}
+      ${notes.length ? `<div class="p-notes"><b>${isSpace ? 'SPACE' : 'ROOM'} NOTES:</b> ${notes.map(n => esc(n.text)).join(' · ')}</div>` : ''}
+      ${store.liveItems(doc).length ? section('FF&E CHECKLIST', doc) : ''}
+      ${mep ? `${store.liveItems(doc).length ? '<div class="p-break"></div>' : ''}${section('MEP PUNCH', mep)}
         <div class="p-sign"><span>Punch walked by: ____________________</span><span>Date: ____________</span></div>` : ''}
       ${signers.length ? `<div class="p-signers"><b>SIGNED BY:</b> ${signers.map(x => `${esc(x)}`).join(' &nbsp;·&nbsp; ')}</div>` : ''}
       <div class="p-foot">Initials in the box mean checked, like the paper sheet. Generated from live data · Triun Construction &amp; Engineering</div>
+    </div>`;
+}
+
+function renderPrint(ctx, { no }) {
+  const { store } = ctx;
+  const doc = store.getDoc(no);
+  const isSpace = !!doc && String(doc.type || '').startsWith('space-');
+  const root = el(`<div class="paper-wrap">
+    <div class="pagehead noprint">
+      <button class="icon-btn" data-back aria-label="Back">${ic('back')}</button>
+      <div><h1 class="h1">${isSpace ? esc(doc.typeLabel || no) : 'Room ' + esc(no)} print sheet</h1>
+        <div class="sub">generated from live data · this page redraws as lines are checked off · print or save it whenever you need a copy</div></div>
+      <span class="spacer"></span>
+      <a class="btn" href="#/prints">${ic('printer')}All sheets</a>
+      <button class="btn primary" data-print>${ic('printer')}Print or save PDF</button>
     </div>
+    ${paperHtml(store, no)}
   </div>`);
-  root.querySelector('[data-back]').addEventListener('click', () => { location.hash = `#/room/${no}`; });
+  root.querySelector('[data-back]').addEventListener('click', () => { location.hash = isSpace ? `#/space/${no}` : `#/room/${no}`; });
   root.querySelector('[data-print]').addEventListener('click', () => window.print());
+  return root;
+}
+
+// A packet: every sheet on a floor (rooms first, then common areas), or the
+// whole building, one print job with a page break between sheets.
+function renderPrintPacket(ctx, { f }) {
+  const { store } = ctx;
+  const floor = f === 'all' ? null : Number(f);
+  const rooms = store.guestRooms().filter(r => floor === null || Number(r.floor) === floor);
+  const spaces = store.spaces().filter(sp => floor === null || Number(sp.floor) === floor)
+    .sort((a, b) => (Number(a.floor) - Number(b.floor)) || String(a.typeLabel || a.number).localeCompare(String(b.typeLabel || b.number)));
+  const ids = [...rooms.map(r => r.number), ...spaces.map(sp => sp.number)];
+  const root = el(`<div class="paper-wrap">
+    <div class="pagehead noprint">
+      <button class="icon-btn" data-back aria-label="Back">${ic('back')}</button>
+      <div><h1 class="h1">${floor === null ? 'Whole building' : 'Floor ' + floor} packet</h1>
+        <div class="sub">${pl(rooms.length, 'room')} and ${pl(spaces.length, 'common area')} · ${pl(ids.length, 'sheet')} · generated from live data at print time</div></div>
+      <span class="spacer"></span>
+      <button class="btn primary" data-print>${ic('printer')}Print or save PDF</button>
+    </div>
+    ${ids.map((id, i) => `${i ? '<div class="p-break"></div>' : ''}${paperHtml(store, id)}`).join('')}
+  </div>`);
+  root.querySelector('[data-back]').addEventListener('click', () => { location.hash = '#/prints'; });
+  root.querySelector('[data-print]').addEventListener('click', () => window.print());
+  return root;
+}
+
+// The hub: every sheet in the building, by floor, plus the packets.
+function renderPrintHub(ctx) {
+  const { store } = ctx;
+  const rooms = store.guestRooms(), spaces = store.spaces();
+  const floors = floorsOf([...rooms, ...spaces]);
+  const root = el(`<div>
+    <div class="pagehead"><h1 class="h1">Print sheets</h1>
+      <span class="sub">one sheet per room and per common area, FF&amp;E then MEP punch, drawn from live data whenever it is opened or printed</span></div>
+    <div class="kpis" style="margin-bottom:14px">
+      <div class="kpi"><div class="kl">Room sheets</div><div class="kv">${rooms.length}</div><div class="kc">every guest room, ${esc(floorRange(rooms))}</div></div>
+      <div class="kpi"><div class="kl">Common area sheets</div><div class="kv">${spaces.length}</div><div class="kc">every space with a package</div></div>
+      <div class="kpi"><div class="kl">Always current</div><div class="kv">live</div><div class="kc">a sheet is generated at the moment you open or print it</div></div>
+    </div>
+    <section class="card" style="margin-bottom:14px">
+      <div class="card-head"><h2>Packets</h2><span class="card-cap">one print job, a page break between sheets</span></div>
+      <div class="chips" style="padding:10px 16px 14px">
+        ${floors.map(fl => `<a class="btn" href="#/print-floor/${fl}">${ic('printer')}Floor ${fl} packet</a>`).join('')}
+        <a class="btn" href="#/print-floor/all">${ic('printer')}Whole building</a>
+      </div>
+    </section>
+    <section class="card"><div class="card-head"><h2>Sheets</h2><span class="card-cap">tap a row to open its sheet</span></div><div class="rlist"></div></section>
+  </div>`);
+  const list = root.querySelector('.rlist');
+  const row = (d, isSpace) => {
+    const mep = store.mepDoc(d.number);
+    const a = store.roomStats(d), b = mep ? store.roomStats(mep) : { total: 0, done: 0, openIssues: 0 };
+    const r = el(`<div class="room-row" role="link" tabindex="0" aria-label="Open the print sheet for ${esc(d.number)}">
+      <span class="rno mono" style="width:64px">${esc(d.number)}</span>
+      <span class="rtype">${esc(d.typeLabel || d.type)}${isSpace ? '' : ''}</span>
+      <span class="riss ${a.openIssues + b.openIssues ? '' : 'none'}">${a.openIssues + b.openIssues ? ic('flag', 'flag-ic') + ' ' + (a.openIssues + b.openIssues) + ' open' : '0 open'}</span>
+      <span class="rfrac">${a.done + b.done}/${a.total + b.total}</span>
+      ${ic('printer', 'chev')}
+    </div>`);
+    pressable(r, { tap: () => { location.hash = `#/print/${d.number}`; } });
+    return r;
+  };
+  const entries = [...rooms.map(d => ({ d, sp: false })), ...spaces.map(d => ({ d, sp: true }))]
+    .sort((x, y) => (Number(x.d.floor) - Number(y.d.floor)) || (x.sp - y.sp) || String(x.d.number).localeCompare(String(y.d.number)));
+  appendByFloor(list, entries, x => x.d.floor, x => row(x.d, x.sp));
   return root;
 }
 
@@ -604,6 +1131,8 @@ export function trackingModule(store) {
         get count() { return store ? String(store.guestRooms().length) : ''; } },
       { path: '#/common', label: 'Common Areas', icon: 'layers', order: 30,
         get count() { return store ? String(store.spaces().length) : ''; } },
+      { path: '#/bulk', label: 'Bulk mark', icon: 'check', order: 35 },
+      { path: '#/prints', label: 'Print sheets', icon: 'printer', order: 36 },
       { path: '#/categories', label: 'Categories', icon: 'tagi', order: 40 },
       { path: '#/files', label: 'Files', icon: 'file', order: 70 },
       { path: '#/activity', label: 'Activity', icon: 'pulse', order: 80 },
@@ -613,9 +1142,12 @@ export function trackingModule(store) {
       { match: /^#\/rooms$/, render: renderRooms },
       { match: /^#\/room\/(?<no>[^?]+)/, render: renderRoom },
       { match: /^#\/print\/(?<no>[^?]+)/, render: renderPrint },
+      { match: /^#\/print-floor\/(?<f>\d+|all)$/, render: renderPrintPacket },
+      { match: /^#\/prints$/, render: renderPrintHub },
       { match: /^#\/activity$/, render: renderActivity },
       { match: /^#\/common$/, render: renderCommon },
       { match: /^#\/space\/(?<id>[^?]+)/, render: renderSpace },
+      { match: /^#\/bulk$/, render: renderBulk },
       { match: /^#\/categories$/, render: comingSoon('Categories', 'The 21 real categories plus the custom category creator.') },
       { match: /^#\/files$/, render: comingSoon('Files', 'Plans, submittals, and exports with spec jump links.') },
     ],
