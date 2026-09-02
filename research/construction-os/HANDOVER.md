@@ -46,9 +46,12 @@ platform/                     the new platform, no build step, plain ES modules
 tests/           floor1-audit.mjs     41 data checks
                  floor1-ui.mjs        26 checks driving a real browser
 research/construction-os/
-                 DECISIONS.md         D1 to D23. Austin's rulings. Each one is law until he changes it.
+                 DECISIONS.md         D1 to D31. Austin's rulings. Each one is law until he changes it.
+                 HANDOFF-2026-09-02.md   the dated session handoff: current state, next steps
                  CUTOVER-FLOOR1.md    the rollout runbook
                  NEEDS-CLARIFICATION.md   what is still open
+research/king-studio/geometry-spec.json   King-family geometry, every field cited, all 8 rooms proven
+research/floor1-3d/               A100 layout measurements and the 3D rebuild workflow
 data/project.sqlite               the reference database mined from the drawings
 ```
 
@@ -117,14 +120,17 @@ floor after the migration. There is a regression check for it. Do not remove it.
 
 ## Where the work stands
 
-- Floor 1 is built and staged: 16 guest rooms, 31 common areas, 81 documents, the crew's 382
-  check-offs and 289 open issues carried in. Not live. Waiting on Austin.
+Current as of the dated handoff; read `HANDOFF-2026-09-02.md` for the full state and the next steps.
+
+- Floor 1 is LIVE (D24): 16 guest rooms, 31 common areas, the crew's 382 check-offs and 288 open
+  issues carried in exactly, crew collection untouched. D26 to D29 rulings patched live after.
 - Contacts and sub assignments are live, and the Google Sheet syncs itself hourly.
-- The 3D King Studio scene is under an adversarial critic loop and is not there yet. Round 1 was
-  identified as a render in 7 views out of 7. `research/king-studio/critic-log.md` has the record and
-  the rubric.
-- Floors 2 to 4 are not built. Several of their room types have no approved reference room, so
-  building them needs a reference approved first, not a guess.
+- The four unapproved room types have full mockups delivered and waiting on Austin (D30).
+- The floor-1 3D scene was built and judged once, then destroyed by a container restart before it
+  was committed (D31). The King geometry spec, the A100 layout measurements, and the judgement
+  survived and are committed; the rebuild workflow is authored and ready to run.
+- Floors 2 to 4 are not built. They are gated on the mockup approval, and D24 makes it law that
+  every note, markup and check-off from the crew app comes with them.
 
 ## Open questions that need a person
 
