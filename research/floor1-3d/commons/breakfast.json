@@ -1,0 +1,772 @@
+{
+ "kit": "breakfast",
+ "compiledBy": "commons research agent",
+ "frame": "A100 frame from research/floor1-3d/a100-layout.json: U feet along the building from the north face, V feet across from the west face. On ID-1.7, A513 and A514 the plans read with U increasing to the right and V increasing upward, verified against the room labels and the Laundry/Dryer rooms above the band.",
+ "space": [
+  {
+   "id": "006",
+   "name": "Breakfast",
+   "U": [
+    166.07,
+    186.57
+   ],
+   "V": [
+    35.96,
+    51.78
+   ],
+   "basis": "MEASURED",
+   "note": "One open room with Servery 009 (A100 poche, 20'-6\" x 15'-10\"). The guest side is the west (low V) part: breakfast bar on the V 35.96 wall, guest aisle V about 38.6 to 45.1."
+  },
+  {
+   "id": "009",
+   "name": "Servery",
+   "U": [
+    166.07,
+    186.57
+   ],
+   "V": [
+    45.05,
+    51.78
+   ],
+   "basis": "SCALED",
+   "note": "Same room. The servery counter band (V 45.05-48.20) and the 3.6 ft service aisle behind it to the east wall, scaled from A514; the aisle connects to Food Prep 007 through the door at the low-U end."
+  },
+  {
+   "id": "007",
+   "name": "Food Prep",
+   "U": [
+    153.5,
+    165.5
+   ],
+   "V": [
+    35.96,
+    51.78
+   ],
+   "basis": "MEASURED",
+   "note": "A100 poche 12'-0\" x 15'-10\". Two doors on the U 165.5 wall into the servery aisle and the breakfast room; the walk-in (Dry Storage 008) door opens into it on the U 153.5 wall at about V 46.4."
+  }
+ ],
+ "pieces": [
+  {
+   "name": "Large servery counter (M6), guest side and service side, with overhead hutch",
+   "tag": "PA-802 (PA-802.1)",
+   "count": 1,
+   "footprintFt": {
+    "w": 20.52,
+    "d": 3.0,
+    "h": 8.17
+   },
+   "placements": [
+    {
+     "u": 176.32,
+     "v": 46.62,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "U extents: counter is 246 1/4 in (PA-802.1) and the RK note says it is sandwiched between the two room walls, so it spans the A100 walls U 166.07-186.57 (MEASURED). V: counter band scaled from A514 Breakfast & Servery Equipment Plan, printed 1/2 in = 1 ft, split PNG sheet79; pixel position mapped onto the A100 room walls (U 166.07-186.57, V 35.96-51.78) at y 330-510 (V 48.2 to 45.1); service aisle behind it toward the east wall"
+    }
+   ],
+   "form": "Long straight counter: 2 in white quartz top (Daltile One Quartz Simply White, ST-01), light wood-grain laminate base (Wilsonart 7970K-18 Linearity) with drawer and door bays, black nylon glides. Base 36 in high, 36 in deep. Above it a 36 in tall, 18 in deep upper cabinet run from 64 in to 98 in AFF with acrylic custom light-box faces and F and B graphics; the long axis runs along U.",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "PA-802.1 title block 245 in W x 36 in D x 98 in H; front view 6255 mm (246 1/4 in); section base 914 mm (36 in) high, upper 457 mm (18 in) deep, 711 mm (28 in) open between base and upper; FF&E spec PA-802 page 143 says Large Servery 245 W x 36 D x 98 H",
+   "tiers": [
+    {
+     "name": "base",
+     "w": 20.52,
+     "d": 3.0,
+     "h": 3.0,
+     "zFt": 0
+    },
+    {
+     "name": "upper hutch",
+     "w": 20.52,
+     "d": 1.5,
+     "h": 3.0,
+     "zFt": 5.33,
+     "note": "side of the counter it sits on is not readable in the sections; placed on the service (high V) edge, SCALED"
+    }
+   ]
+  },
+  {
+   "name": "Small servery / breakfast bar (M7) with yogurt machine hutch at one end",
+   "tag": "PA-802 (PA-802.2)",
+   "count": 1,
+   "footprintFt": {
+    "w": 8.0,
+    "d": 2.58,
+    "h": 2.83
+   },
+   "placements": [
+    {
+     "u": 176.31,
+     "v": 37.27,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "Against the west wall V 35.96 (MEASURED, A100). U extents scaled from A514 Breakfast & Servery Equipment Plan, printed 1/2 in = 1 ft, split PNG sheet79; pixel position mapped onto the A100 room walls (U 166.07-186.57, V 35.96-51.78) x 563-1020 (U 172.3-180.3, 8.0 ft, matches the printed 96 in); centered between the two doors on that wall; the hutch bay (27 7/8 in) is at the low-U end where A514 puts refrigerator 31"
+    }
+   ],
+   "form": "8 ft straight base cabinet, white quartz top (ST-01), light wood laminate fronts (Wilsonart 7970K-18), a 26 3/8 in wide refrigerator opening at the low-U end, a 12 in round food-warmer cutout in the top 49 in from the high-U end, three 2 1/8 in cord grommets; a 27 7/8 in wide x 26 in deep hutch rises to 62 3/4 in at the low-U end.",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "PA-802.2 title block 96 in W x 31 in D x 62 3/4 in H; front view 2438 mm; sections 914 mm counter height (36 in incl. top), hutch 1594 mm (62 3/4 in), hutch 708 x 660 mm; FF&E spec PA-802 page 143: Small servery 96 W x 31 D x 34 H, 63 in to top of yogurt machine hutch",
+   "tiers": [
+    {
+     "name": "base",
+     "w": 8.0,
+     "d": 2.58,
+     "h": 2.83,
+     "zFt": 0
+    },
+    {
+     "name": "hutch",
+     "w": 2.32,
+     "d": 2.17,
+     "h": 2.4,
+     "zFt": 2.83,
+     "note": "at the low-U end, on the counter"
+    }
+   ]
+  },
+  {
+   "name": "Dish recovery / bussing counter (M5)",
+   "tag": "M5 (A901.1)",
+   "count": 1,
+   "footprintFt": {
+    "w": 4.5,
+    "d": 2.0,
+    "h": 2.83
+   },
+   "placements": [],
+   "form": "Small laminate base cabinet with 2 cm quartz top and backsplash, two round trash drops (6 in and 8 in) with brushed stainless inserts by others.",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "A901.1 Dish Recovery plan and section text: 4'-6\", 2'-0\", 2'-10\"; local DB row for 006 (A901.1 governs)",
+   "note": "No placement: neither ID-1.7 nor A514 draws this counter inside 006/009, and A901.1 does not name a room. The DB row puts T-01.1 tile behind it at 006. Left unplaced; see gaps."
+  },
+  {
+   "name": "Batter mix starter kit (operator furnished)",
+   "tag": "23",
+   "count": 1,
+   "footprintFt": {
+    "w": 0.7,
+    "d": 0.7,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 167.99,
+     "v": 46.62,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A514 Breakfast & Servery Equipment Plan, printed 1/2 in = 1 ft, split PNG sheet79; pixel position mapped onto the A100 room walls (U 166.07-186.57, V 35.96-51.78), round symbol at x 315"
+    }
+   ],
+   "form": "Small round countertop unit, stainless.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A514 symbol ~40 px at 1/2 in scale (0.7 ft); no cut sheet reached (Clevenger package over the download limit)"
+  },
+  {
+   "name": "Waffle maker Wells BWB-1SE (operator furnished)",
+   "tag": "24",
+   "count": 1,
+   "footprintFt": {
+    "w": 0.8,
+    "d": 1.2,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 169.09,
+     "v": 46.62,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A514 Breakfast & Servery Equipment Plan, printed 1/2 in = 1 ft, split PNG sheet79; pixel position mapped onto the A100 room walls (U 166.07-186.57, V 35.96-51.78), symbol at x 355-400, y 390-460"
+    }
+   ],
+   "form": "Boxy countertop waffle baker with a round plate and a front handle, stainless.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A514 symbol 45 x 70 px at 1/2 in scale"
+  },
+  {
+   "name": "Waffle maker Wells BWB-1SE (future, operator furnished)",
+   "tag": "25",
+   "count": 1,
+   "footprintFt": {
+    "w": 0.8,
+    "d": 1.2,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 170.29,
+     "v": 46.62,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A514 Breakfast & Servery Equipment Plan, printed 1/2 in = 1 ft, split PNG sheet79; pixel position mapped onto the A100 room walls (U 166.07-186.57, V 35.96-51.78), symbol at x 425-470"
+    }
+   ],
+   "form": "Same as item 24, marked FUTURE on A514.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A514 symbol 45 x 70 px at 1/2 in scale"
+  },
+  {
+   "name": "Warming kettle Vollrath 72017",
+   "tag": "29",
+   "count": 1,
+   "footprintFt": {
+    "w": 1.05,
+    "d": 1.05,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 172.91,
+     "v": 46.62,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A514 Breakfast & Servery Equipment Plan, printed 1/2 in = 1 ft, split PNG sheet79; pixel position mapped onto the A100 room walls (U 166.07-186.57, V 35.96-51.78), round symbol at x 567-627"
+    }
+   ],
+   "form": "Round countertop soup kettle with a lid, stainless.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A514 symbol ~60 px diameter at 1/2 in scale"
+  },
+  {
+   "name": "Display showcase Equipex WD780B-2/1",
+   "tag": "27",
+   "count": 1,
+   "footprintFt": {
+    "w": 2.6,
+    "d": 1.75,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 176.71,
+     "v": 46.71,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A514 Breakfast & Servery Equipment Plan, printed 1/2 in = 1 ft, split PNG sheet79; pixel position mapped onto the A100 room walls (U 166.07-186.57, V 35.96-51.78), symbol at x 740-890, y 365-465"
+    }
+   ],
+   "form": "Countertop glass display case, rectangular with a rounded front, on the counter center.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A514 symbol 150 x 100 px at 1/2 in scale"
+  },
+  {
+   "name": "Conveyor toaster APW Wyott ECO 4000-350L-Hilton",
+   "tag": "26",
+   "count": 1,
+   "footprintFt": {
+    "w": 1.3,
+    "d": 2.1,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 180.85,
+     "v": 46.62,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A514 Breakfast & Servery Equipment Plan, printed 1/2 in = 1 ft, split PNG sheet79; pixel position mapped onto the A100 room walls (U 166.07-186.57, V 35.96-51.78), symbol at x 1015-1090, y 360-480"
+    }
+   ],
+   "form": "Tall narrow stainless conveyor toaster, long axis across the counter.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A514 symbol 75 x 120 px at 1/2 in scale"
+  },
+  {
+   "name": "Juice dispenser Bunn-O-Matic JDF-4 (by vendor)",
+   "tag": "28",
+   "count": 1,
+   "footprintFt": {
+    "w": 1.3,
+    "d": 2.3,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 184.51,
+     "v": 46.62,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A514 Breakfast & Servery Equipment Plan, printed 1/2 in = 1 ft, split PNG sheet79; pixel position mapped onto the A100 room walls (U 166.07-186.57, V 35.96-51.78), symbol at x 1225-1300, y 355-485"
+    }
+   ],
+   "form": "Upright rectangular juice dispenser with a rounded front, on the counter near the high-U end; A902 calls for ventilation slots in the millwork under it.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A514 symbol 75 x 130 px at 1/2 in scale"
+  },
+  {
+   "name": "Undercounter display refrigerator True TUC-27G-ADA-HC (in the breakfast bar)",
+   "tag": "31",
+   "count": 1,
+   "footprintFt": {
+    "w": 2.2,
+    "d": 2.43,
+    "h": 2.58
+   },
+   "placements": [
+    {
+     "u": 173.42,
+     "v": 37.18,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "Low-U end bay of the breakfast bar; bay position scaled from A514 Breakfast & Servery Equipment Plan, printed 1/2 in = 1 ft, split PNG sheet79; pixel position mapped onto the A100 room walls (U 166.07-186.57, V 35.96-51.78) (tag 31 at x 565-640) and the PA-802.2 front view (refrigerator bay is the end bay)"
+    }
+   ],
+   "form": "Glass-door undercounter refrigerator set into the breakfast bar end bay, panel front per A902.",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "PA-802.2 RK note: empty dimensions of refrigerator space 26 3/8 in W x 29 1/8 in D x 31 in H (opening, not the unit)"
+  },
+  {
+   "name": "Yogurt machine / food warmer cutout in the breakfast bar top",
+   "tag": "39 (undefined on A514)",
+   "count": 1,
+   "footprintFt": {
+    "w": 1.0,
+    "d": 1.0,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 176.21,
+     "v": 37.25,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "PA-802.2 plan G-G: 12 in round cutout 1245 mm (49 in) from the counter's left end; the left end of the front view is the high-U end (the refrigerator bay is at the low-U end per A514), so U = 180.29 - 4.08; V is the bar center"
+    }
+   ],
+   "form": "Round drop-in warmer or yogurt dispenser sitting in a 12 in cutout in the quartz top.",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "PA-802.2 G-G: 305 mm (12 in) diameter cutout, 1245 mm (49 in) from the end; A902 breakfast bar plan note YOGHURT MACHINE, SEE FOOD SERVICE DRAWINGS; A514 tag 39 has no schedule row"
+  },
+  {
+   "name": "Cereal dispenser Server Products 88920 (triple)",
+   "tag": "30",
+   "count": 1,
+   "footprintFt": {
+    "w": 1.4,
+    "d": 0.8,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 178.28,
+     "v": 37.24,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A514 Breakfast & Servery Equipment Plan, printed 1/2 in = 1 ft, split PNG sheet79; pixel position mapped onto the A100 room walls (U 166.07-186.57, V 35.96-51.78), three-tube symbol at x 865-945, y 935-980"
+    }
+   ],
+   "form": "Three clear cereal tubes on a low stainless stand, on the bar top.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A514 symbol 80 x 45 px at 1/2 in scale"
+  },
+  {
+   "name": "Undercounter dishmachine, high temp (submittal model H50-ST; A513 schedules Champion UH-100B)",
+   "tag": "05",
+   "count": 1,
+   "footprintFt": {
+    "w": 2.05,
+    "d": 2.08,
+    "h": 2.71
+   },
+   "placements": [
+    {
+     "u": 154.53,
+     "v": 37.0,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78), box at x 22-175, y 1075-1225 in the north-west corner (U 153.5-155.6, V 36.0-38.1)"
+    }
+   ],
+   "form": "Stainless box undercounter dishwasher with a front door, sitting on the floor in the corner under the dishtable.",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Dishmachine.pdf (Submittals, Drive 1fe1N-d6QIZD_2aQHwOu2SVMVK5p0LhED) page 10 technical specifications: Model H50-ST, W x D 24.61 x 25 in, H 32.48 in"
+  },
+  {
+   "name": "Dishtable rack shelf Advance Tabco DT-6R-11",
+   "tag": "06",
+   "count": 1,
+   "footprintFt": {
+    "w": 2.1,
+    "d": 2.1,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 154.53,
+     "v": 37.0,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "Wall-mounted above dishmachine 05, A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78) (label 06 arrow to the same corner box)"
+    }
+   ],
+   "form": "Stainless wire rack shelf on the wall above the dishmachine.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A513 arrow only; no cut sheet reached"
+  },
+  {
+   "name": "Dish / pot washing sinks, custom fabricated, with pre-rinse faucet T and S B-2278-A12-EI (item 09)",
+   "tag": "08",
+   "count": 1,
+   "footprintFt": {
+    "w": 2.14,
+    "d": 7.3,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 154.57,
+     "v": 41.83,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78), fixture at x 22-175, y 550-1075 along the north wall (U 153.5-155.6, V 45.4-38.1)"
+    }
+   ],
+   "form": "Long stainless sink table against the north wall (the Dry Storage side): a round scrap area at the high-V end, then sink bowls; a tall pre-rinse faucet (item 09) rises from it; utensil rack 12 and three wall shelves 07 hang above.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A513 symbol 153 x 525 px at 1/2 in scale; A513 lists it as CUSTOM FABRICATED with no size"
+  },
+  {
+   "name": "Utensil rack with shelf Advance Tabco PS-12-60",
+   "tag": "12",
+   "count": 1,
+   "footprintFt": {
+    "w": null,
+    "d": null,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 154.57,
+     "v": 41.19,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "Wall-mounted above sink 08, A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78) (label 12 arrow at y 858)"
+    }
+   ],
+   "form": "Stainless wall rack with a shelf over the pot sink.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "No size on A513; cut sheet not reached"
+  },
+  {
+   "name": "Wall shelves, high mount, Metro 1WD24K3 / 2WD24K3 / 2436NK3",
+   "tag": "07",
+   "count": 3,
+   "footprintFt": {
+    "w": null,
+    "d": null,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 154.57,
+     "v": 40.12,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "Wall-mounted above sink 08, A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78) (label 07 arrow at y 935); one placement for the group"
+    }
+   ],
+   "form": "Three wire wall shelves over the pot sink run.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "No size on A513; cut sheet not reached"
+  },
+  {
+   "name": "Worktable with sink, custom fabricated",
+   "tag": "13",
+   "count": 1,
+   "footprintFt": {
+    "w": 6.23,
+    "d": 2.1,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 156.66,
+     "v": 50.67,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78), counter run x 25-470, y 100-250 along the east wall (U 153.5-159.8, V 51.7-49.6)"
+    }
+   ],
+   "form": "Stainless worktable with a sink bowl at the low-U end, against the east wall (Laundry side); coffee maker 14 and microwave 22 sit on or under it; wall shelves 15 and 17 above.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A513 symbol 445 x 150 px at 1/2 in scale; A513 lists CUSTOM FABRICATED"
+  },
+  {
+   "name": "Coffee maker Fetco CBS-2152XTS (operator furnished)",
+   "tag": "14",
+   "count": 1,
+   "footprintFt": {
+    "w": 1.82,
+    "d": 1.53,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 156.9,
+     "v": 50.53,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78), symbol x 200-330, y 130-240 on worktable 13"
+    }
+   ],
+   "form": "Twin-head stainless coffee brewer on the worktable.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A513 symbol 130 x 110 px at 1/2 in scale"
+  },
+  {
+   "name": "Microwave oven Amana HDC12A2 on shelf BMS2024 (below)",
+   "tag": "22",
+   "count": 1,
+   "footprintFt": {
+    "w": 1.82,
+    "d": 1.67,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 158.72,
+     "v": 50.74,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78), symbol x 330-460, y 110-230 at the high-U end of the worktable run"
+    }
+   ],
+   "form": "Commercial microwave on a wall shelf at the end of the worktable.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A513 symbol 130 x 120 px at 1/2 in scale"
+  },
+  {
+   "name": "Wall shelf, high mount, Metro 1WD24K3 / 2436NK3",
+   "tag": "15",
+   "count": 1,
+   "footprintFt": {
+    "w": null,
+    "d": null,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 156.66,
+     "v": 51.5,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "Above worktable 13 on the east wall, A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78) (label 15)"
+    }
+   ],
+   "form": "Wire wall shelf over the worktable.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "No size on A513"
+  },
+  {
+   "name": "Wall shelf, custom fabricated",
+   "tag": "17",
+   "count": 2,
+   "footprintFt": {
+    "w": null,
+    "d": null,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 156.66,
+     "v": 51.5,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "Above worktable 13 on the east wall, A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78) (label 17); one placement for the pair"
+    }
+   ],
+   "form": "Two stainless wall shelves over the worktable.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "No size on A513"
+  },
+  {
+   "name": "Hand sink with soap and towel dispenser Advance Tabco 7-PS-87",
+   "tag": "03",
+   "count": 1,
+   "footprintFt": {
+    "w": 1.35,
+    "d": 1.2,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 160.56,
+     "v": 51.12,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78), symbol x 478-575, y 100-185 on the east wall"
+    }
+   ],
+   "form": "Small wall-hung stainless hand sink with a splash back.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A513 symbol 97 x 85 px at 1/2 in scale"
+  },
+  {
+   "name": "Mobile work table, custom fabricated",
+   "tag": "04",
+   "count": 1,
+   "footprintFt": {
+    "w": 2.03,
+    "d": 4.88,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 159.38,
+     "v": 43.59,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78), dashed island x 370-515, y 510-860 in the room center; long axis along V"
+    }
+   ],
+   "form": "Stainless island table on casters in the middle of the room, long axis across the building.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A513 symbol 145 x 350 px at 1/2 in scale (about 24 x 60 in)"
+  },
+  {
+   "name": "Worktop refrigerator True TWT-67-HC",
+   "tag": "18",
+   "count": 1,
+   "footprintFt": {
+    "w": 5.66,
+    "d": 2.79,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 162.6,
+     "v": 37.48,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78), dashed box x 470-875, y 1025-1225 against the west wall (U 159.8-165.4, V 38.8-36.0); marked (R)"
+    }
+   ],
+   "form": "Low stainless worktop refrigerator against the west (corridor side) wall; the two convection ovens sit on its top.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A513 symbol 405 x 200 px at 1/2 in scale (5.66 ft wide, consistent with the 67 in model); height not in any reached source"
+  },
+  {
+   "name": "Convection oven, ventless (submittal Moffat Turbofan E27M3 on SK2731U stand; A513 schedules E33D5H2)",
+   "tag": "16",
+   "count": 1,
+   "footprintFt": {
+    "w": 2.59,
+    "d": 2.5,
+    "h": 1.99
+   },
+   "placements": [
+    {
+     "u": 161.89,
+     "v": 37.62,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78), box x 545-700, y 1030-1200, on top of worktop refrigerator 18"
+    }
+   ],
+   "form": "Boxy stainless convection oven with a glass drop-down door, on the worktop refrigerator.",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Convection Oven.pdf (Submittals, Drive 1rWAiFh2CcBe9kFX8evH8YDTw3iC8gkST) page 2 external dimensions: width 31 1/8 in, height 23 7/8 in including 3 in feet, depth 30 in"
+  },
+  {
+   "name": "Convection oven, ventless, OPTIONAL",
+   "tag": "20",
+   "count": 1,
+   "footprintFt": {
+    "w": 2.59,
+    "d": 2.5,
+    "h": 1.99
+   },
+   "placements": [
+    {
+     "u": 164.13,
+     "v": 37.62,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78), box x 705-860, y 1030-1200, beside oven 16 on refrigerator 18; marked OPTIONAL"
+    }
+   ],
+   "form": "Same as item 16; optional second unit.",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Same Convection Oven.pdf; A513 note OPTIONAL"
+  },
+  {
+   "name": "Storage shelving Metro Metromax Q",
+   "tag": "19",
+   "count": 1,
+   "footprintFt": {
+    "w": 1.82,
+    "d": 3.07,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 164.59,
+     "v": 46.78,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78), dashed unit x 750-880, y 345-565 against the south wall next to the door to the servery"
+    }
+   ],
+   "form": "Open wire shelving unit on posts against the wall by the servery door.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A513 symbol 130 x 220 px at 1/2 in scale; A513 schedules 4 in the walk-in group but only one is drawn inside 007",
+   "note": "A513 item 19 qty 4 in the walk-in schedule (plus 2 in Dry Storage 008); only this one unit is drawn inside 007."
+  },
+  {
+   "name": "Eye wash station Haws 7360BT-7460BT",
+   "tag": "10",
+   "count": 1,
+   "footprintFt": {
+    "w": 0.9,
+    "d": 0.9,
+    "h": null
+   },
+   "placements": [
+    {
+     "u": 164.8,
+     "v": 44.43,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "A513 Food Prep & Dry Storage Plan, printed 1/2 in = 1 ft, split PNG sheet77; pixel position mapped onto the A100 room walls (U 153.50-165.50, V 35.96-51.78), round symbol at x 830, y 625 on the south wall between the two doors"
+    }
+   ],
+   "form": "Small wall-mounted eye wash bowl.",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "A513 symbol ~65 px at 1/2 in scale"
+  }
+ ],
+ "sources": [
+  "research/floor1-3d/a100-layout.json (A100 frame and room extents)",
+  "ID-1.7 Enlarged Lobby Furniture and Equipment Plan, 3/16 in = 1 ft: FF&E Locations_sheet8.png (Drive 1f9MlwkXgfwjyJisFHJYd5hF_cpYNBw7W) and its text layer FF&E Locations_sheet8.json (Drive 1XIF0XhElZwriDV6qbA5Rr1AXRwJjBOG7); drawings_split/FFE-Locations manifest.json (Drive 1yNe-Uv_9hDszJtAOMRblADWjtsbWLUt7)",
+  "A514 Enlarged Breakfast and Servery, 1/2 in = 1 ft: 05-H2SEP - Architectural Pages_sheet79.png (Drive 1ybUWyKj0VZaJR-A9hE5Ty0sNNKiMvp10) and text layer A514.txt (Drive 1wo4k3sRExhOCXmojBIeX8HtCsWQWFcDp)",
+  "A513 Enlarged Food Prep and Dry Storage, 1/2 in = 1 ft: 05-H2SEP - Architectural Pages_sheet77.png (Drive 1hf3_plN9IpgEAb8smkCT7Ag-8BNLr_A8) and text layer A513.txt (Drive 1Gh9wST9bG7G0Wuo593pDuKOmMLYokgqr); architectural split manifest.json (Drive 1gztmqLZisxNDCooLnwOtxAB1_Vtw0ieC)",
+  "A902 Millwork - Breakfast Serving Counter text layer A902.txt (Drive 1Le6uYgdQbE_iJJc24Fnz5Kzqx4YZD-t0)",
+  "A901.1 Millwork - Media Wall, Coffee Bar and Bussing Station text layer A901.1.txt (Drive 1DrhaLpYjSitXE7hQ1icxT-X8ANKsSCS_)",
+  "PA-802.1_Breakfast Large Servery.pdf, RK Hospitality shop drawing, 6 pages (Drive 19ip3WifJOHMGJeNdje-ZY3FuDgNxOtcc)",
+  "PA-802.2_Breakfast Small Servery.pdf, RK Hospitality shop drawing, 2 pages (Drive 1UCFoZxK981v5NDp_r_QUDdhuO2LJ1m2w)",
+  "Home2-Dynamic FF&E Specifications Public Areas.pdf pages 6, 8, 32, 68-69, 139-150 (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_)",
+  "Dishmachine.pdf, Submittals, page 10 technical specifications (Drive 1fe1N-d6QIZD_2aQHwOu2SVMVK5p0LhED)",
+  "Convection Oven.pdf, Submittals, Moffat E27M3 data sheet page 2 (Drive 1rWAiFh2CcBe9kFX8evH8YDTw3iC8gkST)",
+  "2 Door Reach-in Merchandiser.pdf, Submittals, model DSM-41R 47 1/4 x 31 7/8 x 80 3/8 in (Drive 13wuiqz7-XqQZ-6P4ijhOUi4NgLcRXVsR); Single Glass Merchandiser.pdf, Coldline D12-B 27.2 x 26.2 x 83.7 in (Drive 1u-rrvb_S8JPhktAG1erXSqWdUP7sZFDP): read, but the items (A514 35 and 36) are not drawn inside 006/009/007",
+  "Local: research/enrich-reports/food-beverage.md; tools/out/spaces/space-006.json, space-007.json, space-009.json (DB item rows citing A513/A514/A902/A901.1)"
+ ],
+ "scaledCalls": [
+  "All plan positions are SCALED: read as pixel positions on the 1/2 in = 1 ft A513/A514 split PNGs (2576 px wide sheet, 35.8 px per ft) and mapped linearly onto the A100 room wall extents, which are MEASURED. Room widths read back within 0.2 ft of the A100 values on both sheets.",
+  "Servery counter V band 45.05-48.20 scaled from A514; its U extent is taken as wall to wall because PA-802.1 (246 1/4 in) equals the room length and the RK note says it is sandwiched between two walls.",
+  "Upper hutch of the large servery put on the service (high V) edge of the base: the sections show an 18 in deep upper on one side of the 36 in base but do not say which side.",
+  "Breakfast bar hutch and refrigerator bay put at the low-U end: A514 tags refrigerator 31 at the low-U end and the PA-802.2 front view shows the refrigerator bay under the hutch at one end; the 49 in food-warmer cutout is then measured from the high-U end.",
+  "Counter-top appliance footprints (items 23-30) scaled from the A514 symbols because the Clevenger cut-sheet package (17 MB) is over the Drive download limit; heights left null rather than guessed.",
+  "Food prep fixture footprints (03, 04, 08, 13, 14, 18, 19, 22, 10) scaled from the A513 symbols; heights null.",
+  "Wall-mounted shelves (06, 07, 12, 15, 17) given the placement of the fixture they hang over; no sizes."
+ ],
+ "gaps": [
+  "No dining tables or chairs are drawn inside Breakfast 006 on ID-1.7 or A514: the room holds only the servery counter and the breakfast bar. Guest dining (PA-300/301/302 tables, PA-101/102/106 chairs, PA-100 banquette, PA-800 perch table with PA-107 stools) sits in Lobby 003 and belongs to the lobby kit. The DB rows PA-309 and PA-110 (6) at 006 are the Employee Breakroom 014 table and chairs (ID-1.7 tags them at U about 187-190 in 014).",
+  "Clevenger Associates food service cut sheets (Drive 1sB5dT7US2uvLB4-LpSRgKpzHZ28nNZfE, 17 MB) could not be downloaded (over the 10 MB tool limit), so no measured sizes for the waffle makers, toaster, showcase, juice dispenser, kettle, cereal dispenser, coffee maker, microwave, hand sink, worktop refrigerator, work table or shelving.",
+  "A514 tag 34 on the breakfast bar (leader to the bay just right of the refrigerator, about U 173.9) and tag 39 (the round item in the 12 in cutout) have no schedule row; 39 is taken as the A902 yogurt machine. 34 is not placed.",
+  "Dish recovery / bussing counter M5 (A901.1, 4'-6\" x 2'-0\" x 2'-10\") is not drawn on ID-1.7 or A514 inside the room; dimensions recorded, no placement. PA-804 Trash and Recycling is tagged on ID-1.7 outside the room in the corridor by the restrooms (lobby kit).",
+  "Speed rack 21 (Cres Cor 207-UA-13A) and the walk-in items 02, 11, 32, 33 are on A513 but not inside the 007 crop or not in this kit (walk-in is in Dry Storage 008). Reach-in display freezer 35 and refrigerator 36 (A514 electrical schedule only; submittals DSM-41R and D12-B) and the two Vivreau water dispensers 37 are not drawn in 006/009/007 (Market 005 and the PA-803 hydration station are the likely homes).",
+  "Heights for the worktop refrigerator, sinks, work table and counter-top appliances are not in any reached source and are left null.",
+  "Model variance on record: A513 schedules dishmachine Champion UH-100B and oven Moffat E33D5H2; the approved submittals are H50-ST and Moffat E27M3 on an SK2731U stand. Dimensions here follow the submittals."
+ ]
+}
