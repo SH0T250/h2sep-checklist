@@ -1,0 +1,57 @@
+seed:     /home/user/h2sep-checklist/platform/data/floor2-staged.json
+rooms:    201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 236, 238  ->  docs 201 201-MEP 202 202-MEP 203 203-MEP 204 204-MEP 205 205-MEP 206 206-MEP 207 207-MEP 208 208-MEP 209 209-MEP 210 210-MEP 211 211-MEP 212 212-MEP 213 213-MEP 214 214-MEP 215 215-MEP 216 216-MEP 217 217-MEP 218 218-MEP 222 222-MEP 223 223-MEP 224 224-MEP 225 225-MEP 226 226-MEP 227 227-MEP 228 228-MEP 229 229-MEP 230 230-MEP 231 231-MEP 232 232-MEP 233 233-MEP 234 234-MEP 236 236-MEP 238 238-MEP S221 S221-M S237 S239
+snapshot: 69 live crew doc(s) -> /home/user/h2sep-checklist/tools/out/backups/crew-floor2-snapshot.json
+(gitignored: it carries crew names and account ids)
+
+  1 staged doc(s) have no crew counterpart, nothing to carry: S221-M
+
+CARRIED
+  201        41 line(s) with state, 1 note(s)
+  202        42 line(s) with state, 2 note(s)
+  203        40 line(s) with state, 0 note(s)
+  204        41 line(s) with state, 1 note(s)
+  205        40 line(s) with state, 0 note(s)
+  206        41 line(s) with state, 0 note(s)
+  207        40 line(s) with state, 0 note(s)
+  208        41 line(s) with state, 0 note(s)
+  209        38 line(s) with state, 1 note(s)
+  210        41 line(s) with state, 0 note(s)
+  211        40 line(s) with state, 0 note(s)
+  212        41 line(s) with state, 0 note(s)
+  213        39 line(s) with state, 5 note(s)
+  214        41 line(s) with state, 0 note(s)
+  215        15 line(s) with state, 0 note(s)
+  216        13 line(s) with state, 0 note(s)
+  217         7 line(s) with state, 0 note(s)
+  218        41 line(s) with state, 4 note(s)
+  222        41 line(s) with state, 1 note(s)
+  223        41 line(s) with state, 0 note(s)
+  224        40 line(s) with state, 4 note(s)
+  225        41 line(s) with state, 0 note(s)
+  226        41 line(s) with state, 0 note(s)
+  227        41 line(s) with state, 1 note(s)
+  228        40 line(s) with state, 2 note(s)
+  229        41 line(s) with state, 1 note(s)
+  230        40 line(s) with state, 1 note(s)
+  231        41 line(s) with state, 1 note(s)
+  232        40 line(s) with state, 0 note(s)
+  233        41 line(s) with state, 2 note(s)
+  234        40 line(s) with state, 0 note(s)
+  236        40 line(s) with state, 1 note(s)
+  238        36 line(s) with state, 0 note(s)
+
+  1246 line(s) with field state, 28 note(s), 8 carried across a ruled retag
+  1186 personal name/uid field(s) dropped on the way in
+  1349 line(s) kept the mock-up's package text over the crew build's older text (field state only travels)
+
+RECONCILIATION  (live lines only; a tombstone is history, not a second check)
+  checks  crew 579  =  build 579 + 0 with no line   EXACT
+  issues  crew 696  =  build 696 + 0 with no line   EXACT
+  notes   crew  28  =  build  28 present with text intact   EXACT
+
+FIRESTORE DOC RULES  PASS - doc id <= 8 chars, number == docId, items <= 200, whitelisted keys only, no PII
+
+CREW COLLECTION  UNTOUCHED - 69 doc(s) re-read, updateTime identical before and after
+
+wrote /home/user/h2sep-checklist/platform/data/floor2-staged.json
+Firestore not touched. The crew collection was read, never written. Nothing pushed, nothing deployed.
