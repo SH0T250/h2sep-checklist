@@ -74,7 +74,7 @@ async function loadRoom() {
   const auth = authm.getAuth(app);
   // Rules require auth for reads — sign in BEFORE touching the doc.
   if (!auth.currentUser) await authm.signInAnonymously(auth);
-  const snap = await fs.getDoc(fs.doc(db, 'projects', PROJECT_ID, 'rooms', ROOM));
+  const snap = await fs.getDoc(fs.doc(db, 'projects', PROJECT_ID, 'platform_rooms', ROOM));
   if (!snap.exists()) throw new Error('Room ' + ROOM + ' not found');
   return snap.data();
 }

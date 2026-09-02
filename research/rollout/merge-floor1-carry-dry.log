@@ -1,0 +1,55 @@
+snapshot: 61 live crew docs -> /home/user/h2sep-checklist/tools/out/backups/crew-floor1-snapshot.json
+(gitignored: it carries crew names and account ids)
+
+CARRIED
+  101        40 line(s) with state, 1 note(s)
+  103        34 line(s) with state, 0 note(s)
+  104        41 line(s) with state, 0 note(s)
+  105        40 line(s) with state, 0 note(s)
+  106        41 line(s) with state, 0 note(s)
+  107        40 line(s) with state, 0 note(s)
+  108        41 line(s) with state, 0 note(s)
+  109        40 line(s) with state, 1 note(s)
+  110        41 line(s) with state, 0 note(s)
+  111        40 line(s) with state, 0 note(s)
+  112        41 line(s) with state, 0 note(s)
+  113        40 line(s) with state, 0 note(s)
+  114        41 line(s) with state, 0 note(s)
+  115        40 line(s) with state, 1 note(s)
+  116        41 line(s) with state, 0 note(s)
+  118        36 line(s) with state, 2 note(s)
+  S008        0 line(s) with state, 2 note(s)
+  S019        1 line(s) with state, 0 note(s)
+  S020        1 line(s) with state, 0 note(s)
+  S027        1 line(s) with state, 0 note(s)
+  S139        1 line(s) with state, 0 note(s)
+
+  641 lines with field state, 7 notes, 6 carried across the D22 retag
+  973 personal name/uid field(s) dropped on the way in
+
+  20 staged doc(s) have no crew counterpart (new work, nothing to carry)
+
+NOT CARRIED - these need a decision, they are not silently dropped:
+  S007/pt07_a (PT-07) has field state and no line in the build
+  S007/x_4aa35c9dde (untagged) has field state and no line in the build
+  S007/t13_a (T-13) has field state and no line in the build
+  S007/x_5aa0aa72ef (untagged) has field state and no line in the build
+  S007/x_3bc41e72b0 (untagged) has field state and no line in the build
+  S007/x_4194428374 (untagged) has field state and no line in the build
+  S008/t13_a (T-13) has field state and no line in the build
+  S018/wc10_a (WC-10) has field state and no line in the build
+  S018/pt07_a (PT-07) has field state and no line in the build
+  S018/x_b3f4933bcf (untagged) has field state and no line in the build
+  S018/x_a550b728f8 (untagged) has field state and no line in the build
+  S018/cpt10_a (CPT-10) has field state and no line in the build
+  S018/cpt13_a (CPT-13) has field state and no line in the build
+  S139/t01_a (T-01) has field state and no line in the build
+  S139/x_473d4f985f (untagged) has field state and no line in the build
+  S139/pt07_a (PT-07) has field state and no line in the build
+
+RECONCILIATION  (live lines only; a tombstone is history, not a second check)
+  1 retired line(s) keep their original check as a record
+  checks  crew 490  ->  build 478  LOST WORK
+  issues  crew 176  ->  build 172  LOST WORK
+
+dry run: seed not written

@@ -1,0 +1,111 @@
+(node:4411) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+seed:     /home/user/h2sep-checklist/platform/data/floor3-staged.json
+rooms:    301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 336, 338  ->  docs 301 301-MEP 302 302-MEP 303 303-MEP 304 304-MEP 305 305-MEP 306 306-MEP 307 307-MEP 308 308-MEP 309 309-MEP 310 310-MEP 311 311-MEP 312 312-MEP 313 313-MEP 314 314-MEP 315 315-MEP 316 316-MEP 317 317-MEP 318 318-MEP 322 322-MEP 323 323-MEP 324 324-MEP 325 325-MEP 326 326-MEP 327 327-MEP 328 328-MEP 329 329-MEP 330 330-MEP 331 331-MEP 332 332-MEP 333 333-MEP 334 334-MEP 336 336-MEP 338 338-MEP S321 S321-M S337 S339
+snapshot: 69 live crew doc(s) -> /home/user/h2sep-checklist/tools/out/backups/crew-floor3-snapshot.json
+(gitignored: it carries crew names and account ids)
+
+  1 staged doc(s) have no crew counterpart, nothing to carry: S321-M
+
+CARRIED
+  301        41 line(s) with state, 1 note(s)
+  302        42 line(s) with state, 2 note(s)
+  303        39 line(s) with state, 3 note(s)
+  304        41 line(s) with state, 0 note(s)
+  305        38 line(s) with state, 0 note(s)
+  306        39 line(s) with state, 0 note(s)
+  307        40 line(s) with state, 0 note(s)
+  308        40 line(s) with state, 1 note(s)
+  309        40 line(s) with state, 2 note(s)
+  310        41 line(s) with state, 0 note(s)
+  311        40 line(s) with state, 0 note(s)
+  312        41 line(s) with state, 0 note(s)
+  313        39 line(s) with state, 0 note(s)
+  313-MEP    10 line(s) with state, 0 note(s)
+  314        41 line(s) with state, 0 note(s)
+  315        40 line(s) with state, 1 note(s)
+  316        15 line(s) with state, 0 note(s)
+  317         7 line(s) with state, 0 note(s)
+  318        41 line(s) with state, 0 note(s)
+  322        38 line(s) with state, 0 note(s)
+  323        41 line(s) with state, 0 note(s)
+  324        41 line(s) with state, 0 note(s)
+  325        15 line(s) with state, 0 note(s)
+  326        24 line(s) with state, 0 note(s)
+  327        15 line(s) with state, 0 note(s)
+  328        17 line(s) with state, 0 note(s)
+  329        15 line(s) with state, 0 note(s)
+  330        17 line(s) with state, 0 note(s)
+  331        15 line(s) with state, 0 note(s)
+  332        17 line(s) with state, 0 note(s)
+  333        15 line(s) with state, 0 note(s)
+  334        29 line(s) with state, 0 note(s)
+  336        17 line(s) with state, 0 note(s)
+  338        11 line(s) with state, 0 note(s)
+
+  1002 line(s) with field state, 10 note(s), 9 carried across a ruled retag
+  980 personal name/uid field(s) dropped on the way in
+  1359 line(s) kept the mock-up's package text over the crew build's older text (field state only travels)
+
+LINES REBUILT SO THE CREW'S WORK HAS SOMEWHERE TO LAND (ruling D24: nothing is deleted):
+  301/gr321_b  GR-321  [FF&E - Casegoods]  HIGH
+      FIELD-AUTHORED in the crew app (no category, no citation): carried verbatim, category from this room's own row for the tag
+      sort 20030 in the crew app -> 22000 here (its own band, after the D28 Door Hardware lines)
+      carried: checked=false  openIssue=true "IN BOX"
+  302/gr905_a  GR-905  [FF&E - Misc]  FLAGGED
+      rebuilt from data/project.sqlite room 302's own row(s), not from the crew document
+      sort 21000 in the crew app -> 22000 here (its own band, after the D28 Door Hardware lines)
+      carried: checked=false  openIssue=true "MISSING"
+  313-MEP/a065cd3d8534  PTAC-2 / PTAC-1  [Mechanical]  HIGH
+      FIELD-AUTHORED in the crew app (no category, no citation): carried verbatim, category from this room's own row for the tag
+      sort 1010 in the crew app -> 22000 here (its own band, after the D28 Door Hardware lines)
+      carried: checked=true  openIssue=false
+  313-MEP/86e3c3a09395    [Mechanical]  HIGH
+      FIELD-AUTHORED in the crew app (no category, no citation): carried verbatim, category from this room's own row for the tag
+      sort 1020 in the crew app -> 22010 here (its own band, after the D28 Door Hardware lines)
+      carried: checked=true  openIssue=false
+  313-MEP/485c4147dfc5    [Mechanical]  FLAGGED
+      FIELD-AUTHORED in the crew app (no category, no citation): carried verbatim, category from this room's own row for the tag
+      sort 1030 in the crew app -> 22020 here (its own band, after the D28 Door Hardware lines)
+      carried: checked=true  openIssue=false
+  313-MEP/766dc7c04c13    [Mechanical]  FLAGGED
+      FIELD-AUTHORED in the crew app (no category, no citation): carried verbatim, category from this room's own row for the tag
+      sort 1040 in the crew app -> 22030 here (its own band, after the D28 Door Hardware lines)
+      carried: checked=true  openIssue=false
+  313-MEP/67670b92d867    [Mechanical]  FLAGGED
+      FIELD-AUTHORED in the crew app (no category, no citation): carried verbatim, category from this room's own row for the tag
+      sort 1050 in the crew app -> 22040 here (its own band, after the D28 Door Hardware lines)
+      carried: checked=true  openIssue=false
+  313-MEP/d1b9f60d4cd5    [Mechanical]  HIGH
+      FIELD-AUTHORED in the crew app (no category, no citation): carried verbatim, category from this room's own row for the tag
+      sort 1060 in the crew app -> 22050 here (its own band, after the D28 Door Hardware lines)
+      carried: checked=true  openIssue=false
+  313-MEP/fa825bd92456    [Mechanical]  MEDIUM
+      FIELD-AUTHORED in the crew app (no category, no citation): carried verbatim, category from this room's own row for the tag
+      sort 1070 in the crew app -> 22060 here (its own band, after the D28 Door Hardware lines)
+      carried: checked=true  openIssue=false
+  313-MEP/84d2ebbf4760    [Mechanical]  MEDIUM
+      FIELD-AUTHORED in the crew app (no category, no citation): carried verbatim, category from this room's own row for the tag
+      sort 1080 in the crew app -> 22070 here (its own band, after the D28 Door Hardware lines)
+      carried: checked=true  openIssue=false
+  313-MEP/f6bf42a588ec    [Mechanical]  HIGH
+      FIELD-AUTHORED in the crew app (no category, no citation): carried verbatim, category from this room's own row for the tag
+      sort 1090 in the crew app -> 22080 here (its own band, after the D28 Door Hardware lines)
+      carried: checked=true  openIssue=false
+  313-MEP/07081dd42d97  EAG-50  [Mechanical]  MEDIUM
+      FIELD-AUTHORED in the crew app (no category, no citation): carried verbatim, category from this room's own row for the tag
+      sort 1120 in the crew app -> 22090 here (its own band, after the D28 Door Hardware lines)
+      carried: checked=true  openIssue=false
+
+RECONCILIATION  (live lines only; a tombstone is history, not a second check)
+  12 line(s) rebuilt above so the work lands on a line instead of being named and lost
+  checks  crew 485  =  build 485 + 0 with no line   EXACT
+  issues  crew 646  =  build 646 + 0 with no line   EXACT
+  notes   crew  10  =  build  10 present with text intact   EXACT
+
+FIRESTORE DOC RULES  PASS - doc id <= 8 chars, number == docId, items <= 200, whitelisted keys only, no PII
+
+CREW COLLECTION  UNTOUCHED - 69 doc(s) re-read, updateTime identical before and after
+
+wrote /home/user/h2sep-checklist/platform/data/floor3-staged.json
+Firestore not touched. The crew collection was read, never written. Nothing pushed, nothing deployed.

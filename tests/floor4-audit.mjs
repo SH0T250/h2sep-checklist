@@ -52,7 +52,7 @@ const FLOOR2_ROOMS = ['401','402','403','404','405','406','407','408','409','410
 const PLAIN_QQ = ['405','407','409','411','413','415','428','434'];
 const TWO_QUEEN = [...PLAIN_QQ, '430', '432'];              // GR-305 by D37
 const CONNECTING = ['401', '403', '436'];
-const CREW = { checks: 3, issues: 442, notes: 1 };   // read from the live crew app 2026-09-02, READ ONLY
+const CREW = { checks: 25, issues: 456, notes: 1 };   // read from the live crew app 2026-09-02 (evening), READ ONLY; D54 lands every line
 /* The staged floor-2 room of the same type, for the shape comparison; the two
  * types floor 2 lacks are compared against their LIVE floor-1 room instead. */
 const F2_TWIN = { 'King One Bedroom': '202', 'Queen-Queen': '203', 'King Studio': '204', 'QQ Connecting': '215',
@@ -342,7 +342,10 @@ check('the spaces path is reproducible and leaves the rooms alone', () => {
     const before = JSON.parse(keep);
     execSync('node platform/tools/build_floor2.mjs --floor=4 --spaces >/dev/null 2>&1');
     const after = JSON.parse(readFileSync(SEED, 'utf8')); const out = [];
-    for (const id of Object.keys(before.docs)) if (JSON.stringify(before.docs[id]) !== JSON.stringify(after.docs[id])) out.push(`${id} changed on a --spaces run`);
+    // A field-authored line the carry restored on a space is not the generator's to reproduce (D54).
+    // Structure only: the --spaces path is followed by the carry, which owns field state on spaces (D54).
+    const strip = (d) => { if (!d) return d; const c = JSON.parse(JSON.stringify(d)); for (const [k, v] of Object.entries(c.items || {})) { if (/FIELD-AUTHORED|THIS LINE EXISTS BECAUSE/.test(String(v.instanceNote || ''))) { delete c.items[k]; continue; } for (const f of ['checked', 'initials', 'checkedAt', 'checkedAtLocal', 'checkedByCo', 'issue', 'issueResolved']) delete v[f]; } delete c.updatedAt; return c; };
+    for (const id of Object.keys(before.docs)) if (JSON.stringify(strip(before.docs[id])) !== JSON.stringify(strip(after.docs[id]))) out.push(`${id} changed on a --spaces run`);
     return out;
   } finally { writeFileSync(SEED, keep); }
 });

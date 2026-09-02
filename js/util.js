@@ -92,15 +92,19 @@ export function isSpaceDoc(r) {
 // offline cache and the security rules already work there; the type slug is
 // what keeps them apart, exactly as it does for common-area spaces.
 export function isMepDoc(r) {
-  return String((r && r.type) || '') === 'mep-punch';
+  const t = String((r && r.type) || '');
+  return t === 'mep-punch' || t === 'space-mep-punch';   // D54: a common area's punch doc too
 }
 // "105-MEP" -> "105". Returns null for anything that is not an MEP doc id, so
 // callers can use it as both a test and a conversion.
 export function mepParent(number) {
-  const m = /^(\d+)-MEP$/.exec(String(number || ''));
-  return m ? m[1] : null;
+  // "S221-M" -> "S221" as well: a common area's punch doc uses the short suffix
+  // because the platform's rules cap a document id at 8 characters (D54).
+  const m = /^(\d+)-MEP$|^(S[A-Za-z0-9]+)-M$/.exec(String(number || ''));
+  return m ? (m[1] || m[2]) : null;
 }
-export function mepIdFor(roomNumber) { return String(roomNumber) + '-MEP'; }
+// "105" -> "105-MEP"; "S221" -> "S221-M" (the platform's short suffix for spaces).
+export function mepIdFor(roomNumber) { const n = String(roomNumber); return /^S/.test(n) ? n + '-M' : n + '-MEP'; }
 
 // The five punch groups, in the order a walker moves through a room: the box
 // on the wall first, then what is wired, then what is piped, then life safety,

@@ -52,7 +52,7 @@ const TWO_QUEEN = [...GR305_ROOMS, '338'];
 // holds 485 checks on floor 3; 10 of them sit on MEP detail lines the D10
 // condensation folded away (313, PTAC details checked by AJ) and have no line
 // to land on. The carry lists them, drops nothing, and lands the other 475.
-const CREW = { checks: 475, issues: 646, notes: 10, noLine: 10 };
+const CREW = { checks: 485, issues: 646, notes: 10, noLine: 0 };   // D54: every crew line lands (--land-all)
 /* The staged floor-2 room of the same type, for the shape comparison. */
 const F2_TWIN = { 'QQ Wide': '201', 'King One Bedroom': '202', 'Queen-Queen': '203', 'King Studio': '204', 'QQ Connecting': '215',
   'King One Bedroom Acc.': '217', 'QQ Extended': '230', 'QQ Acc.': '238' };
@@ -220,13 +220,14 @@ check('every floor-3 room matches the staged floor-2 room of its type on FF&E sh
     for (const k of Object.keys(a)) { if (twinExempt(k) || /FIELD-AUTHORED|THIS LINE EXISTS BECAUSE/.test(String(docs[r].items[k]?.instanceNote || ''))) continue; if (!b[k]) out.push(`${r}/${k}: not on twin ${twin}`); else if (a[k] !== b[k]) out.push(`${r}/${k}: ${a[k]} vs twin ${b[k]}`); }
     return out;
   }));
-check('every floor-3 MEP doc has the same line keys as its floor-2 twin', () =>
+const fieldAuthored = (d, k) => /FIELD-AUTHORED|THIS LINE EXISTS BECAUSE/.test(String(d?.items?.[k]?.instanceNote || ''));
+check('every floor-3 MEP doc has the same line keys as its floor-2 twin (crew-only lines aside)', () =>
   FLOOR2_ROOMS.flatMap((r) => {
     const twin = F2_TWIN[Object.keys(F2_TWIN).find((t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') === docs[r].type)];
     const a = new Set(live_(docs[r + '-MEP']).map(([k]) => k)); const b = new Set(live_(ref.docs[twin + '-MEP']).map(([k]) => k));
     const out = [];
     for (const k of b) if (!a.has(k)) out.push(`${r}-MEP/${k}: on twin, missing here`);
-    for (const k of a) if (!b.has(k)) out.push(`${r}-MEP/${k}: not on twin ${twin}-MEP`);
+    for (const k of a) if (!b.has(k) && !fieldAuthored(docs[r + '-MEP'], k)) out.push(`${r}-MEP/${k}: not on twin ${twin}-MEP`);
     return out;
   }));
 check('floor-3 lines cite floor-3 sheets where the twin cites floor-2 ones (A102 not A101, A122 not A121)', () =>
@@ -251,7 +252,7 @@ check('a same-type room has the same MEP line keys as its donor (no stray own li
     const a = new Set(live_(docs[r + '-MEP']).map(([k]) => k)); const b = new Set(live_(live.docs[d + '-MEP']).map(([k]) => k));
     const out = [];
     for (const k of b) if (!a.has(k)) out.push(`${r}-MEP/${k}: on donor, missing here`);
-    for (const k of a) if (!b.has(k)) out.push(`${r}-MEP/${k}: not on donor ${d}-MEP`);
+    for (const k of a) if (!b.has(k) && !fieldAuthored(docs[r + '-MEP'], k)) out.push(`${r}-MEP/${k}: not on donor ${d}-MEP`);
     return out;
   }));
 check('the sprinkler line on a room with head rows counts those rows (3), with no wrong-count sentence', () =>

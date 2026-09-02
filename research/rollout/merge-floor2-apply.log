@@ -1,0 +1,360 @@
+FLOOR 2  seed /home/user/h2sep-checklist/platform/data/floor2-staged.json
+live collection: 293 docs
+crew collection: 296 docs (read only, never written)
+staged build   : 70 docs
+
+backup: /home/user/h2sep-checklist/tools/out/backups/platform-before-floor2-rollout-2026-09-02T20-08-52-307Z.json (293 docs)
+
+CREATE  0 new doc(s)
+   
+
+UPDATE  70 existing doc(s)
+   201: 0 field change(s), 5 kept from live
+   202: 0 field change(s), 5 kept from live
+   203: 0 field change(s), 5 kept from live
+   204: 0 field change(s), 8 kept from live
+   205: 0 field change(s), 6 kept from live
+   206: 0 field change(s), 7 kept from live
+   207: 0 field change(s), 6 kept from live
+   208: 0 field change(s), 6 kept from live
+   209: 0 field change(s), 7 kept from live
+   210: 0 field change(s), 6 kept from live
+   211: 0 field change(s), 6 kept from live
+   212: 0 field change(s), 6 kept from live
+   213: 0 field change(s), 7 kept from live
+   214: 0 field change(s), 6 kept from live
+   215: 0 field change(s), 23 kept from live
+   216: 0 field change(s), 27 kept from live
+   217: 0 field change(s), 23 kept from live
+   218: 0 field change(s), 6 kept from live
+   222: 0 field change(s), 6 kept from live
+   223: 0 field change(s), 6 kept from live
+   224: 0 field change(s), 7 kept from live
+   225: 0 field change(s), 6 kept from live
+   226: 0 field change(s), 6 kept from live
+   227: 0 field change(s), 7 kept from live
+   228: 0 field change(s), 7 kept from live
+   229: 0 field change(s), 7 kept from live
+   230: 0 field change(s), 7 kept from live
+   231: 0 field change(s), 6 kept from live
+   232: 0 field change(s), 6 kept from live
+   233: 0 field change(s), 7 kept from live
+   234: 0 field change(s), 6 kept from live
+   236: 0 field change(s), 7 kept from live
+   238: 0 field change(s), 6 kept from live
+   201-MEP: structure and text refreshed, no field-state change
+   202-MEP: structure and text refreshed, no field-state change
+   203-MEP: structure and text refreshed, no field-state change
+   204-MEP: structure and text refreshed, no field-state change
+   205-MEP: structure and text refreshed, no field-state change
+   206-MEP: structure and text refreshed, no field-state change
+   207-MEP: structure and text refreshed, no field-state change
+   208-MEP: structure and text refreshed, no field-state change
+   209-MEP: structure and text refreshed, no field-state change
+   210-MEP: structure and text refreshed, no field-state change
+   211-MEP: structure and text refreshed, no field-state change
+   212-MEP: structure and text refreshed, no field-state change
+   213-MEP: structure and text refreshed, no field-state change
+   214-MEP: structure and text refreshed, no field-state change
+   215-MEP: structure and text refreshed, no field-state change
+   216-MEP: structure and text refreshed, no field-state change
+   217-MEP: structure and text refreshed, no field-state change
+   218-MEP: structure and text refreshed, no field-state change
+   222-MEP: structure and text refreshed, no field-state change
+   223-MEP: structure and text refreshed, no field-state change
+   224-MEP: structure and text refreshed, no field-state change
+   225-MEP: structure and text refreshed, no field-state change
+   226-MEP: structure and text refreshed, no field-state change
+   227-MEP: structure and text refreshed, no field-state change
+   228-MEP: structure and text refreshed, no field-state change
+   229-MEP: structure and text refreshed, no field-state change
+   230-MEP: structure and text refreshed, no field-state change
+   231-MEP: structure and text refreshed, no field-state change
+   232-MEP: structure and text refreshed, no field-state change
+   233-MEP: structure and text refreshed, no field-state change
+   234-MEP: structure and text refreshed, no field-state change
+   236-MEP: structure and text refreshed, no field-state change
+   238-MEP: structure and text refreshed, no field-state change
+   S221: structure and text refreshed, no field-state change
+   S221-M: structure and text refreshed, no field-state change
+   S237: structure and text refreshed, no field-state change
+   S239: structure and text refreshed, no field-state change
+
+UNTOUCHED  223 live doc(s) outside this floor's build (left exactly as they are)
+   101, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 118, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 336, 338, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 436, 438, 101-MEP, 103-MEP, 104-MEP, 105-MEP, 106-MEP, 107-MEP, 108-MEP, 109-MEP, 110-MEP, 111-MEP, 112-MEP, 113-MEP, 114-MEP, 115-MEP, 116-MEP, 118-MEP, 301-MEP, 302-MEP, 303-MEP, 304-MEP, 305-MEP, 306-MEP, 307-MEP, 308-MEP, 309-MEP, 310-MEP, 311-MEP, 312-MEP, 313-MEP, 314-MEP, 315-MEP, 316-MEP, 317-MEP, 318-MEP, 322-MEP, 323-MEP, 324-MEP, 325-MEP, 326-MEP, 327-MEP, 328-MEP, 329-MEP, 330-MEP, 331-MEP, 332-MEP, 333-MEP, 334-MEP, 336-MEP, 338-MEP, 401-MEP, 402-MEP, 403-MEP, 404-MEP, 405-MEP, 406-MEP, 407-MEP, 408-MEP, 409-MEP, 410-MEP, 411-MEP, 412-MEP, 413-MEP, 414-MEP, 415-MEP, 416-MEP, 417-MEP, 418-MEP, 422-MEP, 423-MEP, 424-MEP, 425-MEP, 426-MEP, 427-MEP, 428-MEP, 429-MEP, 430-MEP, 431-MEP, 432-MEP, 433-MEP, 434-MEP, 436-MEP, 438-MEP, S001, S003, S003-M, S004, S004-M, S005, S005-M, S006, S007, S007-M, S008, S009, S009-M, S010, S011, S013, S014, S014-M, S015, S015-M, S016, S016-M, S017, S018, S019, S019-M, S020, S020-M, S021, S022, S023, S023-M, S024, S024-M, S027, S027-M, S030, S031, S031-M, S032, S121, S121-M, S137, S137-M, S139, S139-M, S321, S321-M, S337, S339, S421, S421-M, S437, S439, SZONEA, SZONEB, SZONEB-M, _asg, _dir
+
+CONFLICTS RESOLVED IN FAVOR OF THE LIVE APP  (262) - a rollout never undoes someone's work
+   201/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   201/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   201/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   201/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   201/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   202/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   202/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   202/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   202/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   202/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   203/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   203/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   203/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   203/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   203/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   204/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   204/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   204/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   204/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   204/gr6011_a (GR-601.1): checked in the live app, not in the build - LIVE KEPT
+   204/gr601_a (GR-601): checked in the live app, not in the build - LIVE KEPT
+   204/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   204/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   205/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   205/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   205/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   205/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   205/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   205/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   206/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   206/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   206/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   206/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   206/gr6011_a (GR-601.1): checked in the live app, not in the build - LIVE KEPT
+   206/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   206/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   207/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   207/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   207/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   207/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   207/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   207/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   208/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   208/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   208/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   208/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   208/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   208/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   209/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   209/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   209/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   209/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   209/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   209/hd21_a (HD-21): checked in the live app, not in the build - LIVE KEPT
+   209/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   210/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   210/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   210/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   210/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   210/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   210/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   211/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   211/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   211/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   211/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   211/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   211/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   212/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   212/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   212/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   212/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   212/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   212/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   213/902_a (902): checked in the live app, not in the build - LIVE KEPT
+   213/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   213/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   213/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   213/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   213/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   213/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   214/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   214/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   214/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   214/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   214/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   214/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   215/901_a (901): checked in the live app, not in the build - LIVE KEPT
+   215/902_a (902): checked in the live app, not in the build - LIVE KEPT
+   215/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   215/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   215/gr100_a (GR-100): checked in the live app, not in the build - LIVE KEPT
+   215/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   215/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   215/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   215/gr201_a (GR-201): checked in the live app, not in the build - LIVE KEPT
+   215/gr203_a (GR-203): checked in the live app, not in the build - LIVE KEPT
+   215/gr204_a (GR-204): checked in the live app, not in the build - LIVE KEPT
+   215/gr205_a (GR-205): checked in the live app, not in the build - LIVE KEPT
+   215/gr302_a (GR-302): checked in the live app, not in the build - LIVE KEPT
+   215/gr400_a (GR-400): checked in the live app, not in the build - LIVE KEPT
+   215/gr500_a (GR-500): checked in the live app, not in the build - LIVE KEPT
+   215/gr501_a (GR-501): checked in the live app, not in the build - LIVE KEPT
+   215/gr502_a (GR-502): checked in the live app, not in the build - LIVE KEPT
+   215/gr6001_a (GR-600.1): checked in the live app, not in the build - LIVE KEPT
+   215/gr600_a (GR-600): checked in the live app, not in the build - LIVE KEPT
+   215/gr602_a (GR-602): checked in the live app, not in the build - LIVE KEPT
+   215/hd21_a (HD-21): checked in the live app, not in the build - LIVE KEPT
+   215/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   215/u_ce20ab6281 (untagged): checked in the live app, not in the build - LIVE KEPT
+   216/901_a (901): checked in the live app, not in the build - LIVE KEPT
+   216/902_a (902): checked in the live app, not in the build - LIVE KEPT
+   216/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   216/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   216/gr100_a (GR-100): checked in the live app, not in the build - LIVE KEPT
+   216/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   216/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   216/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   216/gr201_a (GR-201): checked in the live app, not in the build - LIVE KEPT
+   216/gr203_a (GR-203): checked in the live app, not in the build - LIVE KEPT
+   216/gr204_a (GR-204): checked in the live app, not in the build - LIVE KEPT
+   216/gr205_a (GR-205): checked in the live app, not in the build - LIVE KEPT
+   216/gr301_a (GR-301): checked in the live app, not in the build - LIVE KEPT
+   216/gr302_a (GR-302): checked in the live app, not in the build - LIVE KEPT
+   216/gr304_a (GR-304): checked in the live app, not in the build - LIVE KEPT
+   216/gr319_a (GR-319): checked in the live app, not in the build - LIVE KEPT
+   216/gr320_a (GR-320): checked in the live app, not in the build - LIVE KEPT
+   216/gr400_a (GR-400): checked in the live app, not in the build - LIVE KEPT
+   216/gr500_a (GR-500): checked in the live app, not in the build - LIVE KEPT
+   216/gr501_a (GR-501): checked in the live app, not in the build - LIVE KEPT
+   216/gr502_a (GR-502): checked in the live app, not in the build - LIVE KEPT
+   216/gr6011_a (GR-601.1): checked in the live app, not in the build - LIVE KEPT
+   216/gr601_a (GR-601): checked in the live app, not in the build - LIVE KEPT
+   216/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   216/hd21_a (HD-21): checked in the live app, not in the build - LIVE KEPT
+   216/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   216/u_ce20ab6281 (untagged): checked in the live app, not in the build - LIVE KEPT
+   217/901_a (901): checked in the live app, not in the build - LIVE KEPT
+   217/902_a (902): checked in the live app, not in the build - LIVE KEPT
+   217/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   217/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   217/gr100_a (GR-100): checked in the live app, not in the build - LIVE KEPT
+   217/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   217/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   217/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   217/gr201_a (GR-201): checked in the live app, not in the build - LIVE KEPT
+   217/gr203_a (GR-203): checked in the live app, not in the build - LIVE KEPT
+   217/gr205_a (GR-205): checked in the live app, not in the build - LIVE KEPT
+   217/gr301_a (GR-301): checked in the live app, not in the build - LIVE KEPT
+   217/gr303_a (GR-303): checked in the live app, not in the build - LIVE KEPT
+   217/gr316_a (GR-316): checked in the live app, not in the build - LIVE KEPT
+   217/gr319_a (GR-319): checked in the live app, not in the build - LIVE KEPT
+   217/gr320_a (GR-320): checked in the live app, not in the build - LIVE KEPT
+   217/gr324_a (GR-324): checked in the live app, not in the build - LIVE KEPT
+   217/gr500_a (GR-500): checked in the live app, not in the build - LIVE KEPT
+   217/gr501_a (GR-501): checked in the live app, not in the build - LIVE KEPT
+   217/gr502_a (GR-502): checked in the live app, not in the build - LIVE KEPT
+   217/gr601_a (GR-601): checked in the live app, not in the build - LIVE KEPT
+   217/gr603ada_a (GR-603.ADA): checked in the live app, not in the build - LIVE KEPT
+   217/u_ce20ab6281 (untagged): checked in the live app, not in the build - LIVE KEPT
+   218/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   218/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   218/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   218/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   218/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   218/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   222/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   222/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   222/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   222/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   222/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   222/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   223/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   223/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   223/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   223/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   223/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   223/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   224/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   224/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   224/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   224/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   224/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   224/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   224/u_ce20ab6281 (untagged): checked in the live app, not in the build - LIVE KEPT
+   225/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   225/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   225/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   225/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   225/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   225/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   226/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   226/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   226/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   226/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   226/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   226/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   227/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   227/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   227/gr100_a (GR-100): checked in the live app, not in the build - LIVE KEPT
+   227/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   227/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   227/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   227/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   228/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   228/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   228/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   228/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   228/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   228/gr204_a (GR-204): checked in the live app, not in the build - LIVE KEPT
+   228/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   229/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   229/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   229/gr100_a (GR-100): checked in the live app, not in the build - LIVE KEPT
+   229/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   229/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   229/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   229/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   230/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   230/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   230/gr100_a (GR-100): checked in the live app, not in the build - LIVE KEPT
+   230/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   230/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   230/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   230/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   231/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   231/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   231/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   231/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   231/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   231/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   232/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   232/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   232/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   232/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   232/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   232/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   233/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   233/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   233/gr100_a (GR-100): checked in the live app, not in the build - LIVE KEPT
+   233/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   233/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   233/gr603_a (GR-603): checked in the live app, not in the build - LIVE KEPT
+   233/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   234/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   234/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   234/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   234/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   234/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   234/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   236/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   236/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   236/gr100_a (GR-100): checked in the live app, not in the build - LIVE KEPT
+   236/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   236/gr103_a (GR-103): checked in the live app, not in the build - LIVE KEPT
+   236/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   236/kn11_a (kn 11): checked in the live app, not in the build - LIVE KEPT
+   238/dh_closer_a (DH-1): checked in the live app, not in the build - LIVE KEPT
+   238/dh_lock_a (DH-2): checked in the live app, not in the build - LIVE KEPT
+   238/gr101_a (GR-101): checked in the live app, not in the build - LIVE KEPT
+   238/gr200_a (GR-200): checked in the live app, not in the build - LIVE KEPT
+   238/hd21_a (HD-21): checked in the live app, not in the build - LIVE KEPT
+   238/u_ce20ab6281 (untagged): checked in the live app, not in the build - LIVE KEPT
+
+ZERO-LOSS CHECK, over the docs that already exist live
+  checks  live 841  ->  after rollout 841  OK
+  notes   live 476  ->  after rollout 476  OK
+  open issues  live 570  ->  after rollout 570  (a resolved issue is never reopened: 0 resolution(s) protected)
+
+AFTER ROLLOUT floor 2 would hold 70 docs, 841 check-offs, 570 open issues, 476 notes.
+The platform collection would hold 293 docs.
+
+crew collection: 296 docs re-read, every updateTime identical before and after - UNTOUCHED
+
+DONE, every floor-2 document verified in the cloud, every other document unmoved

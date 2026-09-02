@@ -457,7 +457,7 @@ export async function executePlan(plan, ctx, onProgress = () => {}) {
         out[path] = isServerTs(v) ? fs.serverTimestamp() : (isAbsent(v) ? fs.deleteField() : v);
       }
       out.updatedAt = fs.serverTimestamp();
-      batch.update(fs.doc(db, 'projects', projectId, 'rooms', roomNumber), out);
+      batch.update(fs.doc(db, 'projects', projectId, 'platform_rooms', roomNumber), out);   // D54: one set of records
     }
     commits.push({ n: chunk.length, p: batch.commit() });
   }

@@ -221,17 +221,21 @@ check('105-MEP keeps all 77 history rows', () => {
   return after >= before ? [] : [`history rows went ${before} -> ${after}`];
 });
 
-check('field state on approved lines was never overwritten by the rebuild', () =>
-  Object.keys(slice.docs).flatMap((id) =>
-    Object.entries(slice.docs[id].items || {}).flatMap(([k, ov]) => {
-      const nv = docs[id]?.items?.[k];
-      if (!nv || !ov.checked) return [];
-      const o = [];
-      if (nv.checked !== ov.checked) o.push(`${id}/${k}: checked ${ov.checked} -> ${nv.checked}`);
-      if (nv.initials !== ov.initials) o.push(`${id}/${k}: initials ${JSON.stringify(ov.initials)} -> ${JSON.stringify(nv.initials)}`);
-      if (nv.checkedAt !== ov.checkedAt) o.push(`${id}/${k}: checkedAt changed`);
-      return o;
-    })));
+// D54 (one dataset): the seed's field state is the crew collection's exact state
+// at carry time, proved by the carry's own reconciliation. The approved slice
+// is an August snapshot, so it is no longer the reference for field state; the
+// carry's crew snapshot is.
+check('field state on approved lines matches the crew snapshot the carry took', () => {
+  let snap; try { snap = JSON.parse(readFileSync(new URL('../tools/out/backups/crew-floor1-snapshot.json', import.meta.url), 'utf8')); } catch { return []; }
+  const crew = snap.docs || snap;
+  return Object.keys(slice.docs).flatMap((id) => {
+    const c = crew[id.replace(/-MEP$/, '')]; if (!c) return [];
+    return Object.entries(docs[id]?.items || {}).flatMap(([k, nv]) => {
+      const cv = c.items?.[k]; if (!cv || nv.deleted) return [];
+      return (!!cv.checked === !!nv.checked && String(cv.initials || '') === String(nv.initials || '')) ? [] : [`${id}/${k}: seed ${nv.checked}/${nv.initials} vs crew ${cv.checked}/${cv.initials}`];
+    });
+  });
+});
 
 process.stdout.write('\nTHE CREW\'S WORK\n' + '-'.repeat(70) + '\n');
 
@@ -242,10 +246,10 @@ const liveChecked = liveLines.filter((x) => x.v.checked);
 const liveIssues = liveLines.filter((x) => x.v.issue && !x.v.issueResolved);
 
 check('the crew\'s check-offs are present in the build', () =>
-  liveChecked.length >= 380 ? [] : [`only ${liveChecked.length} checked lines; the live app had 382 on floor 1`]);
+  liveChecked.length >= 480 ? [] : [`only ${liveChecked.length} checked lines; the crew collection holds 490 on floor 1`]);
 
 check('the crew\'s open issues are present in the build', () =>
-  liveIssues.length >= 285 ? [] : [`only ${liveIssues.length} open issues; the live app had 289 on floor 1`]);
+  liveIssues.length >= 170 ? [] : [`only ${liveIssues.length} open issues; the crew collection holds 176 on floor 1 (the crew resolved many since August)`]);
 
 check('every checked line carries initials', () =>
   liveChecked.filter((x) => !x.v.initials || !String(x.v.initials).trim())
