@@ -1,0 +1,82 @@
+
+STRUCTURE AND FIRESTORE RULES
+----------------------------------------------------------------------
+  PASS  every doc uses only rule-whitelisted top-level keys
+  PASS  number === docId on every doc
+  PASS  doc id is a string of 8 chars or fewer
+  PASS  floor is 4 on every doc
+  PASS  items is a map of 200 or fewer
+  PASS  notes is a map when present
+  PASS  type and typeLabel within rule length limits
+
+COVERAGE
+----------------------------------------------------------------------
+  PASS  all 33 floor-4 guest rooms present
+  PASS  every guest room has an MEP companion
+  PASS  no doc that is not a floor-4 room or a floor-4 space
+  PASS  the three floor-4 spaces with gated lines are present (S421, S421-M, S437, S439)
+  PASS  no MEP doc is an orphan (parent exists)
+  PASS  no doc is empty of live lines
+  PASS  room type slug and label match the database display label
+
+LINE-LEVEL INVARIANTS
+----------------------------------------------------------------------
+  PASS  item keys match ^[a-z0-9_]{1,40}$
+  PASS  every live line has a non-empty label
+  PASS  every live line has a citation (src)
+  PASS  every built guest-room line carries a SOURCE sentence (space lines carry the database text verbatim, as on floor 1)
+  PASS  reliability is one of HIGH / MEDIUM / LOW / FLAGGED
+  PASS  qty is a positive integer when present
+  PASS  category is present on every live line
+  PASS  sort is a number on every line and unique within a doc
+  PASS  check-off groups are complete, never half-written
+  PASS  a duplicate tag in one doc is always a declared conflict or a field-authored crew line
+  PASS  no line says it was born clean while carrying a check
+  PASS  no floor-1 head total or first-floor sheet is CITED on a floor-4 line (quoted as removed is fine)
+  PASS  A100 (the FIRST floor plan) is cited only where the line says it is a printed table
+  PASS  the ruled lines D27 (hot/cold) and D28 (closer, lock) are on every guest room
+  PASS  D29 bed skirt (bsq_a) on no floor-4 room (there is no QQ Acc. key on floor 4)
+  PASS  438 (King Studio Acc.) is its own room: GR-307 wall, GR-502 mirror, no GR-320 or GR-208, both bathing configurations open
+
+THE WORKING WALL ON FLOOR 4: NO CORRECTION, OPEN
+----------------------------------------------------------------------
+  PASS  GR-308 on every two-queen key and the three connecting keys as transcribed (13 rooms); GR-305 and GR-309 on none
+  PASS  GR-304 on the 17 King Studios, GR-307 on 438, GR-315 on 402, GR-316 on 417
+  PASS  no room carries two working-wall tags live
+  PASS  every two-queen key says in n_d22 that the 4th Floor tab does not reconcile and the tag is open, and ships FLAGGED
+  PASS  the three connecting keys say GR-308 stands
+  PASS  no build-authored note from an earlier run survives a rebuild (only crew notes travel)
+  PASS  no line or note on floor 4 quotes a floor-2 or floor-3 room number as this room
+
+FLOOR-4 ROOMS AGAINST THEIR STAGED FLOOR-2 (OR LIVE FLOOR-1) TWINS
+----------------------------------------------------------------------
+  PASS  every floor-4 room matches its twin on FF&E shape (working wall and crew-only lines aside; 438 has no twin and is checked on its own)
+  PASS  every floor-4 MEP doc has the same line keys as its twin (438 aside)
+  PASS  floor-4 lines cite floor-4 sheets (A103, A123), never A101, A102, A121 or A122 outside a quoted explanation
+
+SAME-TYPE ROOMS AGAINST THEIR FLOOR-1 DONORS
+----------------------------------------------------------------------
+  PASS  a same-type room has the same live FF&E keys, tags, counts and sorts as its donor (working wall aside)
+  PASS  a same-type room has the same MEP line keys as its donor (no stray own line for a placed row)
+  PASS  the sprinkler line on a room with head rows counts those rows (3), with no wrong-count sentence
+  PASS  the PTAC line on a King Studio carries the mark and the unit row, not a duplicate line
+
+THE CREW'S WORK
+----------------------------------------------------------------------
+  PASS  the crew's 3 check-offs are all present in the build
+  PASS  the crew's 442 open issues are all present in the build
+  PASS  every checked line carries initials
+  PASS  the crew's 1 notes came across
+  PASS  the working wall exists live on every two-queen key (the carry reconciles the crew's checks exactly)
+  PASS  no personal names or account ids in the committed seed
+  PASS  meta records an exact carry reconciliation
+
+DETERMINISM AND THE GENERATOR
+----------------------------------------------------------------------
+  PASS  a rebuild preserves the crew's work and the space docs
+  PASS  generator selftest passes
+  PASS  the spaces path is reproducible and leaves the rooms alone
+  PASS  the floor-1 seed, the approved slice, the mock-ups and the floor-2 and floor-3 seeds were never written to by a floor-4 run
+
+======================================================================
+55 passed, 0 failed

@@ -351,7 +351,7 @@ const FLOOR_PROFILES = {
     tab: '4th Floor FF&E Installation',
     counts: { 'GR-304': 17, 'GR-305': 11, 'GR-308': 2, 'GR-309R': 1, 'GR-315': 1, 'GR-316': 1 },
     mustReconcile: false,
-    ask: 'Floor 4: not yet asked for.',
+    ask: 'Austin, 2026-09-02: "once completed lets start floor 4 just no 3d BIM yet."',
   },
 };
 const PROFILE = FLOOR_PROFILES[FLOOR];
@@ -546,6 +546,12 @@ const DONOR_BY_TYPE = {
     why: 'closest built type with an approved package: Queen-Queen room 105 - the only other two-queen type that is built. The ACCESSIBLE bath package is this room\'s own. Reference mock-up: room 238 (ruling D30).' },
   'QQ Connecting':         { donor: '103', donorType: 'QQ Connecting',
     why: 'SAME TYPE as APPROVED floor-1 room 103 (QQ Connecting, rooms.connecting = 1): every tag is shared, the ".1" connecting plan references are KEPT, and the approved package text rides whole; only the sheet numbering is re-judged for this floor.' },
+  /* Floor 4 adds the two types floors 2 and 3 do not have; both have a LIVE
+   * floor-1 room of the SAME type. */
+  'QQ Wide Connecting':    { donor: '101', donorType: 'QQ Wide Connecting',
+    why: 'SAME TYPE as APPROVED floor-1 room 101 (QQ Wide Connecting, rooms.connecting = 1; display_label "QQ Studio Connector" per OV-001): every tag is shared, the ".1" connecting plan references are KEPT, and the approved package text rides whole; only the sheet numbering is re-judged for this floor.' },
+  'King Studio Acc.':      { donor: '104', donorType: 'King Studio',
+    why: 'closest built type with an approved package: King Studio room 104 - same bed family, same kitchenette, same working-wall family. Shared tags only; the ACCESSIBLE bath package is this room\'s own and ships from sqlite. LIVE room 118 (King Studio Acc. Mod., A552) is deliberately NOT the donor: it was built under ruling D19, which put room 118 on the roll-in shower and reaches no other key, so its closed bathing lines and its D19-shaped numbering must not travel. This room carries BOTH bathing configurations, FLAGGED, exactly as the accessible mock-ups 217 and 238 do.' },
 };
 /* Filled by loadRoomTable(db) before anything reads it. Keyed by room number,
  * same shape the reference-room table had: type, keys, donor, donorType, sheets, why. */
@@ -833,7 +839,24 @@ const FP_COUNT_SENTENCE = 'head count varies by room, so verify every head you c
  * A555, A556), so no resolution entry is needed. The A551/A552 split that room
  * 118 and room 438 argue about does not reach any room in this set - recorded
  * so the reader knows it was checked, not forgotten. */
-const ROOM_SHEET_RESOLUTION = {};
+/* room_types.room_sheet is ambiguous for exactly one type, King Studio Acc.:
+ * "A551 / A552". build_floor1.mjs resolved room 118 to A552 on the rows that
+ * exist only there; the same database facts resolve room 438 to A551: 438
+ * carries GR-502 (primary_sheet A551) and carries NEITHER GR-320 NOR GR-208,
+ * the two rows whose own note reads "present on A552 (118), absent on A551
+ * (438)". room_types adds, verbatim: "ASSUMPTION ~90%: 118 = Acc. Mod.
+ * (A552/ID-5.3), 438 = Acc. (A551/ID-5.2)". */
+const ROOM_SHEET_RESOLUTION = {
+  438: {
+    sheet: 'A551',
+    otherSheet: 'A552',
+    otherRoom: '118',
+    onlyHere: ['GR-502'],
+    onlyThere: ['GR-320', 'GR-208'],
+    why: "room 438 carries GR-502 on A551 and neither GR-320 nor GR-208, the two rows data/project.sqlite marks " +
+      "'present on A552 (118), absent on A551 (438)'. A551 is titled 'Enl. Guest Room Plans & Elevs - King Studio Acc.'",
+  },
+};
 
 /* The donor index must ignore retired lines. See the header. */
 const DONOR_INDEX_SKIPS_DELETED = true;
