@@ -6,7 +6,8 @@
         [--no-post] [--force-build]
 
 Quality:
-  preview   600x450, 48 samples, adaptive, denoised.  About a minute.
+  preview   400x300, 32 samples, adaptive, denoised.  Sized for a quick look while a
+            dozen agents share four cores; judge quality is the picture that counts.
   judge     1200x900, 160 samples, adaptive threshold 0.02, OpenImageDenoise,
             light tree.  Must finish under 15 minutes on the 4 core box.
 
@@ -44,7 +45,7 @@ EXPORT = os.path.join(HERE, 'export')
 BLEND = os.path.join(EXPORT, 'king-studio.blend')
 
 QUALITY = {
-    'preview': dict(w=600, h=450, samples=48, threshold=0.05, denoise=True),
+    'preview': dict(w=400, h=300, samples=32, threshold=0.08, denoise=True),
     'judge': dict(w=1200, h=900, samples=160, threshold=0.02, denoise=True),
 }
 
