@@ -98,6 +98,14 @@ await p.click('[data-act=resolve-check]'); await p.waitForSelector('#toast.show'
 const tbi = await toastButtons();
 t('Resolve & check offers Whole floor 1', tbi.includes('Whole floor 1'), tbi.join('|'));
 
+console.log('\nCHECKED LINE SHEET (D61)');
+await open('#/room/101');
+const doneId = await p.evaluate(() => { const r = document.querySelector('.item-row.checked'); return r ? r.dataset.item : null; });
+await p.click(`[data-box="${doneId}"]`); await p.waitForSelector('[data-act=floor]');
+t('tapping a checked line offers Check this on the whole floor 1', /Check this on the whole floor 1/.test(await p.textContent('[data-act=floor]')));
+await p.click('[data-act=floor]'); await p.waitForSelector('#toast.show');
+t('the sheet button runs the floor pass (already done everywhere, so it reports that)', /floor 1/.test(await p.textContent('#toast')), await p.textContent('#toast'));
+
 console.log('\nFLAG THE WHOLE FLOOR FROM THE ISSUE SHEET (D59)');
 await open('#/room/101');
 const flagId = await cleanBox();

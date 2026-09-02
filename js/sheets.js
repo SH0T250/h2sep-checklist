@@ -228,7 +228,7 @@ export function issueSheet(room, itemId) {
 }
 
 // ---- tapped a checked item ----
-export function checkedItemSheet(room, itemId, { canWrite }) {
+export function checkedItemSheet(room, itemId, { canWrite, onWholeFloor = null }) {
   const item = room.items[itemId];
   const me = store.getUser();
   const mine = me && item.initials === me.initials;
@@ -244,11 +244,15 @@ export function checkedItemSheet(room, itemId, { canWrite }) {
     ${provLine(item)}
     ${refsSection(room, item, itemId)}
     ${canWrite ? `
+      ${onWholeFloor && room.floor != null ? `<button class="btn primary full" data-act="floor">Check this on the whole floor ${esc(String(room.floor))}</button>` : ''}
       <button class="btn ghost full" data-act="uncheck">Un-check</button>
       <button class="btn ghost full" data-act="flag">Flag issue…</button>` : ''}
   `, { title: itemTitle(item) });
   wireRefs(s, room, item, itemId);
   if (!canWrite) return;
+  // D61: the whole-floor option lives here permanently, not only on the toast.
+  const fl = s.querySelector('[data-act=floor]');
+  if (fl) fl.addEventListener('click', () => { s.remove(); onWholeFloor(); });
   s.querySelector('[data-act=uncheck]').addEventListener('click', async () => {
     s.remove();
     if (!mine) {

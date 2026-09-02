@@ -894,6 +894,7 @@ function itemSheet(ctx, docId, itemId) {
       <div style="font-size:13px">${it.checked ? `<b>Checked</b> · ${esc(it.initials)}${it.checkedByCo ? ' · ' + esc(it.checkedByCo) : ''}${it.checkedAt ? ' · ' + fmtWhen(it.checkedAt) : ' · from paper'}` : '<b>Not checked off</b> · tap the box to stamp your initials'}</div>
       <span class="spacer"></span>${specRef(it)}
     </div>
+    ${it.checked && floorScope ? `<button class="btn" data-floor-check style="margin-bottom:8px">Check this on the whole floor ${esc(String(doc.floor))}</button>` : ''}
     ${it.reliability === 'FLAGGED' && it.instanceNote ? `<div class="conflict"><div class="ch">${ic('flag', 'flag-ic')}FLAGGED · SOURCES DISAGREE</div><div style="font-size:13px;padding:6px 0">${esc(it.instanceNote)}</div><div class="foot">Do not order or close from either position. Only Austin closes conflicts.</div></div>` : ''}
     ${it.reliability !== 'FLAGGED' && it.instanceNote ? `<div class="vnote"><div class="vn-h">Verification notes</div><div>${esc(it.instanceNote)}</div></div>` : ''}
     ${(it.attachments || []).length ? `<div class="attaches">${it.attachments.map(a => `<a class="btn attach" href="${esc(a.url)}" target="_blank" rel="noopener">${ic('clip')}${esc(a.label)}</a>`).join('')}</div>` : ''}
@@ -927,6 +928,7 @@ function itemSheet(ctx, docId, itemId) {
     close();
     if (floorToo) wholeFloorApply(ctx, docId, itemId, 'setIssue', issue);   // D59
   });
+  sheetEl.querySelector('[data-floor-check]')?.addEventListener('click', () => { close(); wholeFloorApply(ctx, docId, itemId, 'check'); });   // D61
   sheetEl.querySelector('[data-resolve]')?.addEventListener('click', () => { store.resolveIssue(docId, itemId); close(); });
   sheetEl.querySelector('[data-clear]')?.addEventListener('click', () => { store.setIssue(docId, itemId, ''); close(); });
 }

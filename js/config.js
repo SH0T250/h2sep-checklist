@@ -17,7 +17,7 @@ export const firebaseConfig = {
 export const PROJECT_ID = 'h2sep';
 // Must match sw.js VERSION ('h2sep-v' + this) — the service worker verifies
 // the pair at install time and refuses mismatched (mid-deploy) builds.
-export const APP_VERSION = '1.19.7';
+export const APP_VERSION = '1.19.8';
 
 // Rooms that offer the 3D exhibit. Geometry is per-room off A555 (width,
 // depth, handedness and whether there is a GR-3 connecting door), so a room

@@ -672,7 +672,7 @@ export function renderRoom(el, number) {
   // ---- item interactions ----
   function tapItem(id) {
     const it = room.items[id];
-    if (it.checked) { sheets.checkedItemSheet(room, id, { canWrite: w }); return; }
+    if (it.checked) { sheets.checkedItemSheet(room, id, { canWrite: w, onWholeFloor: () => wholeFloorCheck(room, it) }); return; }
     if (it.issue && !it.issueResolved) {
       // D58: resolving and checking from the issue sheet offers the floor too.
       sheets.issueItemSheet(room, id, { canWrite: w, onChecked: () => toast('Resolved and checked ' + lineLabel(it), { actions: [floorOffer(it)] }) });
@@ -687,7 +687,7 @@ export function renderRoom(el, number) {
     toast('Checked ' + lineLabel(it), { actions: [
       { label: 'Undo', onAction: () => store.uncheckItem(room.number, id) },
       floorOffer(it),
-    ] });
+    ], ms: 12000 });
     void scrollAdjacent;
   }
   const lineLabel = (it) => it.code || String(it.label || '').slice(0, 40);

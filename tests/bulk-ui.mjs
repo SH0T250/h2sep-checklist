@@ -311,6 +311,20 @@ t('the sheet closed and the flagged line is checked', !(await p.$('.sheet')) && 
 await p.click('.toast button:first-child'); await p.waitForTimeout(300);
 t('Undo from the sheet toast unchecks it', await p.evaluate((id) => !window.__store.getDoc('405').items[id].checked, flId));
 
+console.log('\nCHECKED LINE SHEET OFFERS THE FLOOR (D61)');
+await p.goto(B + '#/room/405', { waitUntil: 'networkidle' }); await p.waitForSelector('.item-row');
+const dId = await cleanRow();
+await p.evaluate((id) => window.__store.check('405', id, true), dId); await p.waitForTimeout(200);
+await p.evaluate((id) => { const r = document.querySelector(`.item-row[data-item="${id}"]`); r.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0, clientX: 5, clientY: 5 })); }, dId);
+await p.waitForTimeout(700);
+await p.evaluate((id) => { const r = document.querySelector(`.item-row[data-item="${id}"]`); r.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, button: 0, clientX: 5, clientY: 5 })); }, dId);
+await p.waitForSelector('.sheet [data-save]');
+t('a checked line sheet carries Check this on the whole floor 4', /Check this on the whole floor 4/.test((await p.textContent('.sheet [data-floor-check]').catch(() => '')) || ''));
+await p.click('.sheet [data-floor-check]'); await p.waitForSelector('.sheet .preview');
+t('it opens the floor preview for the other rooms', /other room/.test(await p.textContent('.sheet .sh')));
+await p.click('.sheet [data-close]'); await p.waitForTimeout(200);
+await p.evaluate((id) => window.__store.check('405', id, false), dId);
+
 console.log('\nFLAG THE WHOLE FLOOR FROM THE LINE SHEET (D59)');
 await p.goto(B + '#/room/405', { waitUntil: 'networkidle' }); await p.waitForSelector('.item-row');
 const isId = await cleanRow();
