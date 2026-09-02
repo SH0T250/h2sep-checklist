@@ -1,0 +1,1201 @@
+{
+ "kit": "lobby",
+ "compiledBy": "commons research agent",
+ "space": [
+  {
+   "id": "003",
+   "name": "Lobby",
+   "U": [
+    178.78,
+    221.22
+   ],
+   "V": [
+    -7.38,
+    44.22
+   ],
+   "basis": "SCALED",
+   "note": "A100 front-of-house open volume envelope; Lobby, Market, Reception and Vestibule share it. Lobby label anchor U 195.8-200.8 V 28.3-29.7"
+  },
+  {
+   "id": "005",
+   "name": "Market",
+   "U": [
+    186.6,
+    204.0
+   ],
+   "V": [
+    33.0,
+    44.4
+   ],
+   "basis": "SCALED",
+   "note": "market pieces sit U 186.9-197.2 V 35.0-44.4 on ID-1.7; A100 label anchor U 192.4-198.6 V 40.9-42.4"
+  },
+  {
+   "id": "004",
+   "name": "Reception",
+   "U": [
+    204.0,
+    221.22
+   ],
+   "V": [
+    35.5,
+    44.22
+   ],
+   "basis": "SCALED",
+   "note": "desk alcove; A100 label anchor U 207.7-215.9 V 42.2-43.7; back wall to Work Stations 010 at about V 44.4"
+  },
+  {
+   "id": "001",
+   "name": "Vestibule",
+   "U": [
+    210.0,
+    222.0
+   ],
+   "V": [
+    -7.38,
+    3.0
+   ],
+   "basis": "SCALED",
+   "note": "A100 label anchor U 212.9-221.0 V -3.8 to -2.4; no FF&E inside it except PA-400 roller shades"
+  }
+ ],
+ "pieces": [
+  {
+   "name": "Reception desk (L shaped, 138 in main run facing the lobby, 24 in deep counters, 90 in return on the north end, 47 in return on the south end)",
+   "tag": "PA-801",
+   "count": 1,
+   "footprintFt": {
+    "w": 11.5,
+    "d": 7.5,
+    "h": 3.5
+   },
+   "placements": [
+    {
+     "u": 211.25,
+     "v": 37.2,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7: front face of the desk drawn at V 36.2 from U 205.5 to 217.0 with the R14 corner at the south end; center given is the main run (138 x 24) center. Legs run east (+V) behind it."
+    }
+   ],
+   "form": "Rectangular L counter: front and ends clad in vertical wood slat veneer (Wilsonart High Line 7970K-18 gray oak look), 42 in quartz transaction top (Daltile One Quartz Simply White ST-01) with a 36 in work surface behind, main run 138 in along U, north return 90 in deep, south return 47 in deep, all 24 in wide",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "PA-801 Reception Desk shop drawing p22-p26 (Drive 1BnLY7XQz5Lum-0rT34_QevrGgFfEjBf4), printed 138 W x 90 D x 42 H, counters 24 in, returns 90 in and 47 in, work top 36 in, R14 in corner. Stamped APPROVED 2025/04/01."
+  },
+  {
+   "name": "Market retail table, large (racetrack top)",
+   "tag": "PA-314",
+   "count": 1,
+   "footprintFt": {
+    "w": 4.33,
+    "d": 2.0,
+    "h": 3.0
+   },
+   "placements": [
+    {
+     "u": 194.0,
+     "v": 37.5,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    }
+   ],
+   "form": "Racetrack oval quartz top on a laminate plinth base, 52 x 24 in, 36 in high",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-314 Retail Table - Large: 52 W x 24 D x 36 H"
+  },
+  {
+   "name": "Market retail table, small round (mobile, two lower shelves)",
+   "tag": "PA-315",
+   "count": 1,
+   "footprintFt": {
+    "w": 2.83,
+    "d": 2.83,
+    "h": 2.58
+   },
+   "placements": [
+    {
+     "u": 191.0,
+     "v": 36.5,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    }
+   ],
+   "form": "Round 34 in dia quartz top on a laminate cylinder base with two shelves, 31 in high",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-315 Retail Table - Small: 34 in dia x 31 H"
+  },
+  {
+   "name": "Market retail display shelving (wall unit, four bays)",
+   "tag": "PA-316",
+   "count": 1,
+   "footprintFt": {
+    "w": 8.42,
+    "d": 1.17,
+    "h": 6.0
+   },
+   "placements": [
+    {
+     "u": 193.0,
+     "v": 43.8,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7: wall unit drawn U 188.8 to 197.2, V 43.2 to 44.4 against the market back wall; length and depth scaled from the drawing, height not on any sheet read (72 in assumed for massing)"
+    }
+   ],
+   "form": "Wall-mounted retail shelving run, four equal bays, light wood laminate uprights with open shelves, back against the market north wall",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Length 8.4 ft and depth 1.2 ft scaled from ID-1.7 vectors; height not found (gap)"
+  },
+  {
+   "name": "Reach-in merchandiser cooler, 2 glass doors (market)",
+   "tag": "",
+   "count": 1,
+   "footprintFt": {
+    "w": 3.94,
+    "d": 2.66,
+    "h": 6.7
+   },
+   "placements": [
+    {
+     "u": 188.2,
+     "v": 37.9,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7: 54 x 30 in rectangle drawn U 186.9 to 189.6, V 35.6 to 40.1 with its back on the market west wall, doors facing +U; the drawn symbol is 54 in wide, the submitted unit is 47.25 in"
+    }
+   ],
+   "form": "Tall black-framed glass double-door upright cooler, 47 in wide, 32 in deep, 80 in high, lit interior",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "2 Door Reach-in Merchandiser.pdf submittal, Dukers DSM-41R: 47 1/4 x 31 7/8 x 80 3/8 in (Drive 13wuiqz7-XqQZ-6P4ijhOUi4NgLcRXVsR)"
+  },
+  {
+   "name": "Single glass door merchandiser freezer (market)",
+   "tag": "",
+   "count": 1,
+   "footprintFt": {
+    "w": 2.27,
+    "d": 2.18,
+    "h": 6.98
+   },
+   "placements": [
+    {
+     "u": 188.3,
+     "v": 41.4,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7: 27 in wide rectangle drawn U 187.1 to 189.8, V 40.2 to 42.5 beside the 2-door cooler, door facing +U"
+    }
+   ],
+   "form": "Tall black single glass swing-door upright freezer on casters, 27 x 26 in, 84 in high",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Single Glass Merchandiser.pdf submittal, Coldline D12-B: 27.2 W x 26.2 D x 83.7 H (Drive 1u-rrvb_S8JPhktAG1erXSqWdUP7sZFDP)"
+  },
+  {
+   "name": "Coffee and hydration station (millwork counter on the lobby west wall)",
+   "tag": "PA-803",
+   "count": 1,
+   "footprintFt": {
+    "w": 19.5,
+    "d": 2.0,
+    "h": 2.83
+   },
+   "placements": [
+    {
+     "u": 179.75,
+     "v": 9.55,
+     "rotDeg": 90,
+     "basis": "MEASURED",
+     "source": "ID-1.7 vector: counter rectangle U 178.8 to 180.7 (22.9 in deep) by V -0.2 to 19.3 (234.0 in long) with its back on the lobby west wall face U 178.8"
+    }
+   ],
+   "form": "Long base cabinet run with a white quartz top (Daltile One Quartz Simply White), gray oak laminate doors and drawers, water dispenser cutout and a printer cutout, 34 in high",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "PA-803 Coffee and Hydration Station shop drawing p35-p36 (Drive 1HZ3A9kI74xyyiBt6_Iuf3Y_VTIQ_yJa_): p36 title 234 W x 24 D x 34 H (p35 reads 220 3/4 W); the ID-1.7 vector agrees with 234 in"
+  },
+  {
+   "name": "Perch table (window counter, 8 stools)",
+   "tag": "PA-800",
+   "count": 1,
+   "footprintFt": {
+    "w": 16.42,
+    "d": 1.75,
+    "h": 2.83
+   },
+   "placements": [
+    {
+     "u": 203.4,
+     "v": -6.05,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7: long rectangle drawn U 195.2 to 211.6, V -6.9 to -5.2 along the west storefront wall, stools on the +V side; 197 in fits the drawn 16.4 ft"
+    }
+   ],
+   "form": "Long narrow counter, gray oak laminate top on square-tube legs in sparkle silver powder coat, black metal support tube, power grommets, 34 in high, fixed to the wall",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "PA-800 Perch Table shop drawing p21 (Drive 1zqme1S1N1hYuwCgCbAcBpgU9GqvJcVfS): 197 W x 21 D x 34 H, four 46 3/4 in bays"
+  },
+  {
+   "name": "Counter stool at perch table",
+   "tag": "PA-107",
+   "count": 8,
+   "footprintFt": {
+    "w": 1.58,
+    "d": 1.67,
+    "h": 3.08
+   },
+   "placements": [
+    {
+     "u": 196.4,
+     "v": -4.2,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 198.4,
+     "v": -4.2,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 200.4,
+     "v": -4.2,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 202.4,
+     "v": -4.2,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 204.4,
+     "v": -4.2,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 206.4,
+     "v": -4.2,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 208.4,
+     "v": -4.2,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 210.4,
+     "v": -4.2,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    }
+   ],
+   "form": "Wood-framed counter stool, tight upholstered seat and back in tangerine fabric, 24 in seat height",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-107 Counter Stool: 19 W x 20 D x 37 H, seat 24 in; count 8 printed on ID-1.7 tag PA-107 (8)"
+  },
+  {
+   "name": "Communal work table with center power trough (not tagged on ID-1.7)",
+   "tag": "",
+   "count": 1,
+   "footprintFt": {
+    "w": 16.17,
+    "d": 1.58,
+    "h": 2.5
+   },
+   "placements": [
+    {
+     "u": 198.7,
+     "v": 15.1,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7: racetrack outline U 190.6 to 206.8, V 14.3 to 15.9 between the two rows of 2-top tables, four grommet circles along the center; PA-200 pendant tag lands on its west end"
+    }
+   ],
+   "form": "Long narrow racetrack table top in gray oak laminate with a recessed power and accessory trough down the center, 30 in high assumed",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Length 16.2 ft and width 1.6 ft scaled from ID-1.7; no FF&E tag or spec card found, height assumed (gap)"
+  },
+  {
+   "name": "Rectangular 4-top dining table",
+   "tag": "PA-302",
+   "count": 4,
+   "footprintFt": {
+    "w": 4.0,
+    "d": 2.0,
+    "h": 2.5
+   },
+   "placements": [
+    {
+     "u": 198.0,
+     "v": 29.3,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 210.4,
+     "v": 23.45,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 192.8,
+     "v": 1.9,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 210.4,
+     "v": 10.8,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    }
+   ],
+   "form": "Rectangular laminate top 48 x 24 in (gray oak PL-02), black powder-coated metal base, 30 in high; all four are drawn with the long axis along V",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-302 Rectangular 4 Top: 48 W x 24 D x 30 H; ID-1.7 draws the 2 x 4 ft top and four tags"
+  },
+  {
+   "name": "Dining chair at 4-top tables",
+   "tag": "PA-106",
+   "count": 24,
+   "footprintFt": {
+    "w": 1.93,
+    "d": 2.03,
+    "h": 2.64
+   },
+   "placements": [
+    {
+     "u": 196.3,
+     "v": 28.3,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 196.3,
+     "v": 30.3,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 199.7,
+     "v": 28.3,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 199.7,
+     "v": 30.3,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 208.7,
+     "v": 22.5,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 208.7,
+     "v": 24.5,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 212.1,
+     "v": 22.5,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 212.1,
+     "v": 24.5,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 191.1,
+     "v": 0.9,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 191.1,
+     "v": 2.9,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 194.5,
+     "v": 0.9,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 194.5,
+     "v": 2.9,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 208.7,
+     "v": 9.7,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 208.7,
+     "v": 11.9,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 212.1,
+     "v": 9.7,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 212.1,
+     "v": 11.9,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 190.2,
+     "v": 28.3,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 194.4,
+     "v": 28.3,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 202.1,
+     "v": 28.3,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 206.3,
+     "v": 28.3,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 208.7,
+     "v": 19.0,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 212.1,
+     "v": 19.0,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 204.2,
+     "v": 2.5,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 207.5,
+     "v": 2.5,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    }
+   ],
+   "form": "Wood dining chair with upholstered seat and back (Matador red-brown weave), light wood frame",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-106 Supplier B: 23.2 W x 24.4 D x 31.7 H; ID-1.7 tags 8 + 6 + 4 + 6 = 24. Sixteen sit at the four PA-302 tables, eight at the 2-tops in the A row and column groups as drawn"
+  },
+  {
+   "name": "Square 2-top dining table (X base)",
+   "tag": "PA-300",
+   "count": 12,
+   "footprintFt": {
+    "w": 2.0,
+    "d": 2.0,
+    "h": 2.42
+   },
+   "placements": [
+    {
+     "u": 192.2,
+     "v": 28.3,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 204.1,
+     "v": 28.3,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 192.6,
+     "v": 24.5,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 198.0,
+     "v": 24.5,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 203.9,
+     "v": 24.5,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 210.4,
+     "v": 19.0,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 192.4,
+     "v": 6.7,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 198.3,
+     "v": 6.7,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 204.4,
+     "v": 6.6,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 192.2,
+     "v": 12.3,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 196.0,
+     "v": 12.3,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 198.8,
+     "v": 12.3,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    }
+   ],
+   "form": "Square laminate top 24 x 24 in on a black X-shaped metal base, 29 in high",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-300 Square 2 Top: 24 x 24 x 29 H; ID-1.7 tags PA-300 (5), PA-300, PA-300 (3), PA-300 (3) = 12"
+  },
+  {
+   "name": "Dining chair at 2-top square tables",
+   "tag": "PA-101",
+   "count": 12,
+   "footprintFt": {
+    "w": 1.81,
+    "d": 1.81,
+    "h": 2.71
+   },
+   "placements": [
+    {
+     "u": 191.2,
+     "v": 24.5,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 194.0,
+     "v": 24.5,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 196.6,
+     "v": 24.5,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 199.4,
+     "v": 24.5,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 202.5,
+     "v": 24.5,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 205.3,
+     "v": 24.5,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 191.0,
+     "v": 6.7,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 193.8,
+     "v": 6.7,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 196.9,
+     "v": 6.7,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 199.7,
+     "v": 6.7,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 203.0,
+     "v": 6.7,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 205.8,
+     "v": 6.7,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    }
+   ],
+   "form": "Wood-framed dining chair with tight upholstered seat in cadet blue vinyl",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-101 Supplier B: 21.7 W x 21.7 D x 32.5 H; ID-1.7 tags PA-101 (6) twice"
+  },
+  {
+   "name": "Round 2-top dining table (pedestal)",
+   "tag": "PA-301",
+   "count": 4,
+   "footprintFt": {
+    "w": 2.29,
+    "d": 2.29,
+    "h": 2.42
+   },
+   "placements": [
+    {
+     "u": 193.09,
+     "v": 17.73,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 vector circle, 30 in as drawn"
+    },
+    {
+     "u": 197.11,
+     "v": 17.73,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 vector circle, 30 in as drawn"
+    },
+    {
+     "u": 204.88,
+     "v": 16.99,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 vector circle, 33 in as drawn"
+    },
+    {
+     "u": 205.07,
+     "v": 12.66,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 vector circle, 33 in as drawn"
+    }
+   ],
+   "form": "Round 27.5 in laminate top on a black pedestal base, 29 in high",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-301 Round 2 Top: 27 1/2 in dia x 29 H; ID-1.7 tag PA-301 (4)"
+  },
+  {
+   "name": "Dining chair at banquette",
+   "tag": "PA-102",
+   "count": 8,
+   "footprintFt": {
+    "w": 1.58,
+    "d": 1.83,
+    "h": 2.75
+   },
+   "placements": [
+    {
+     "u": 193.1,
+     "v": 19.6,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 197.1,
+     "v": 19.6,
+     "rotDeg": 180,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 193.1,
+     "v": 15.9,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 197.1,
+     "v": 15.9,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 206.6,
+     "v": 18.0,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 206.6,
+     "v": 16.0,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 206.6,
+     "v": 13.7,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 206.6,
+     "v": 11.6,
+     "rotDeg": 270,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    }
+   ],
+   "form": "Wood dining chair, tight upholstered seat and back in amethyst fabric, 19 in seat height",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-102: 19 W x 22 D x 33 H; ID-1.7 tag PA-102 (8), drawn at the four PA-301 round tables"
+  },
+  {
+   "name": "Central banquette (double sided, required vendor)",
+   "tag": "PA-100",
+   "count": 1,
+   "footprintFt": {
+    "w": 16.5,
+    "d": 4.33,
+    "h": 3.67
+   },
+   "placements": [
+    {
+     "u": 204.2,
+     "v": 15.3,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7: PA-100 leader lands at U 204.9 V 15.3 on the spine between the two PA-307 tables (west) and the two PA-301 round tables (east); drawn spine is narrower than the 52 in spec, length taken along V"
+    }
+   ],
+   "form": "Long two-sided upholstered banquette bench, laminate top deck and base (PL-01 elm), pixel-pattern fabric back 44 in high, 18 in seat",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-100 Central Banquette: 198 W x 52 D x 44 H, seat 18 in"
+  },
+  {
+   "name": "ADA accessible 2-top rectangular table (T base)",
+   "tag": "PA-307",
+   "count": 2,
+   "footprintFt": {
+    "w": 3.0,
+    "d": 2.5,
+    "h": 2.42
+   },
+   "placements": [
+    {
+     "u": 202.15,
+     "v": 19.15,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 202.1,
+     "v": 12.3,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    }
+   ],
+   "form": "Rectangular laminate top on a T-shaped black metal base, knee clearance under, 29 in high assumed",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Top 3.0 x 2.5 ft scaled from the ID-1.7 rectangles U 200.6 to 203.7; spec card PA-307 Accessible 2 Top Rectangular Table with T base found but its printed W x D x H did not come through the text layer (gap)"
+  },
+  {
+   "name": "Highback lounge chair",
+   "tag": "PA-104",
+   "count": 4,
+   "footprintFt": {
+    "w": 2.54,
+    "d": 2.46,
+    "h": 3.83
+   },
+   "placements": [
+    {
+     "u": 187.0,
+     "v": 12.8,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 187.0,
+     "v": 11.1,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 187.0,
+     "v": 6.6,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 187.0,
+     "v": 5.0,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    }
+   ],
+   "form": "Wing-shaped highback lounge chair, geranium red fabric, light wood base, 46 in high, backs to the west wall facing +U",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-104 Highback Lounge Chair: 30 1/2 W x 29 1/2 D x 46 H; ID-1.7 tag PA-104 (4)"
+  },
+  {
+   "name": "Tea height round table at highback chairs",
+   "tag": "PA-303",
+   "count": 2,
+   "footprintFt": {
+    "w": 2.0,
+    "d": 2.0,
+    "h": 2.25
+   },
+   "placements": [
+    {
+     "u": 187.1,
+     "v": 9.0,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 187.1,
+     "v": 19.3,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "second table not clearly drawn; placed at the open arc north of the PA-304 tables (low confidence)"
+    }
+   ],
+   "form": "Round 24 in black laminate top on a black pedestal, 27 in high",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-303 Tea Height Round Table: 24 in dia x 27 H; ID-1.7 tag PA-303 (2)"
+  },
+  {
+   "name": "Laptop table (C-shaped pull-up)",
+   "tag": "PA-304",
+   "count": 2,
+   "footprintFt": {
+    "w": 1.67,
+    "d": 1.25,
+    "h": 2.08
+   },
+   "placements": [
+    {
+     "u": 189.3,
+     "v": 16.6,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 189.3,
+     "v": 14.2,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    }
+   ],
+   "form": "Small kidney-shaped elm laminate top on a black cantilever C base, 25 in high",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-304 Laptop Table: 20 W x 15 D x 25 H; ID-1.7 tag PA-304 (2)"
+  },
+  {
+   "name": "Lounge chair with handle (at the market edge)",
+   "tag": "PA-103",
+   "count": 3,
+   "footprintFt": {
+    "w": 2.67,
+    "d": 2.67,
+    "h": 3.08
+   },
+   "placements": [
+    {
+     "u": 188.0,
+     "v": 24.9,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 188.0,
+     "v": 23.2,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 188.0,
+     "v": 21.4,
+     "rotDeg": 0,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    }
+   ],
+   "form": "Barrel lounge chair with a wood carry handle on the back, custom multi-color fabric, light wood base",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-103 Lounge Chair: 32 W x 32 D x 37 H, seat 18 in; ID-1.7 tag PA-103 (3)"
+  },
+  {
+   "name": "Focus booth (high back wraparound booth)",
+   "tag": "PA-105",
+   "count": 2,
+   "footprintFt": {
+    "w": 6.67,
+    "d": 3.08,
+    "h": 4.5
+   },
+   "placements": [
+    {
+     "u": 180.3,
+     "v": 28.4,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 180.4,
+     "v": -2.7,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 lines at V -5.1 and -0.3 between U 179.2 and 181.8 read as the booth outline; drawn 58 in long versus the 80 in spec"
+    }
+   ],
+   "form": "Fully upholstered high-back U-shaped booth, 54 in tall surround in marine blue with a leisure-tone seat, open side facing +U",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-105 Focus Booth: 80 W x 37 D x 54 H; two PA-105 tags on ID-1.7"
+  },
+  {
+   "name": "Dining table at booth",
+   "tag": "PA-306",
+   "count": 2,
+   "footprintFt": {
+    "w": 3.5,
+    "d": 3.0,
+    "h": 2.5
+   },
+   "placements": [
+    {
+     "u": 181.6,
+     "v": 27.3,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    },
+    {
+     "u": 181.6,
+     "v": -2.9,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7 Enlarged Lobby Furniture and Equipment Plan (RKH 07/04/2025), 3/16 in = 1 ft, symbol read on a 0.5 ft U/V grid after calibrating the sheet to A100 (south face U 246.46, east face V 65.59, 13.5 pt/ft; Fitness 023 walls check within 0.1 ft)"
+    }
+   ],
+   "form": "Rectangular laminate top on a pedestal base inside each focus booth, 30 in high assumed",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-306 Dining Table at Booth: 42 W x 36 D (height not captured; 30 in assumed); ID-1.7 two PA-306 tags"
+  },
+  {
+   "name": "Food delivery pick-up console",
+   "tag": "PA-311",
+   "count": 1,
+   "footprintFt": {
+    "w": 4.0,
+    "d": 1.67,
+    "h": 3.5
+   },
+   "placements": [
+    {
+     "u": 222.85,
+     "v": 30.9,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7: 48 x 20 in rectangle against the corridor wall at U 222.0 to 223.7, V 28.9 to 32.9, tag PA-311 leader at U 222.8 V 29.4"
+    }
+   ],
+   "form": "Tall console with a shelf and slatted side panels, 2 cm quartz top, 42 in high",
+   "dimensionBasis": "MEASURED",
+   "dimensionSource": "Home2-Dynamic FF&E Specifications Public Areas.pdf (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_) PA-311 Food Delivery Pick-Up Console: 48 W x 20 D x 42 H"
+  },
+  {
+   "name": "Guest engagement wall artwork (feature wall)",
+   "tag": "PA-505",
+   "count": 1,
+   "footprintFt": {
+    "w": 8.75,
+    "d": 0.17,
+    "h": 7.25
+   },
+   "placements": [
+    {
+     "u": 221.2,
+     "v": 16.7,
+     "rotDeg": 90,
+     "basis": "SCALED",
+     "source": "ID-1.7: dashed 87 x 105 in rectangle U 213.9 to 221.2, V 12.3 to 21.1 with the PA-505 leader landing on the fitness room wall face at U 221.2; treated as wall art on that wall"
+    }
+   ],
+   "form": "Large framed graphic panel on the lobby face of the fitness room wall, about 8.8 ft wide by 7.3 ft tall",
+   "dimensionBasis": "SCALED",
+   "dimensionSource": "Extent scaled from the ID-1.7 dashed rectangle; spec card PA-505 Guest Engagement Wall Artwork gives no size in the text layer (gap)"
+  }
+ ],
+ "sheetToFrame": {
+  "sheet": "ID-1.7 (FF&E Locations_sheet8.pdf, Drive 1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---)",
+  "rotation": "page /Rotate 270; coordinates below are in the displayed 2592 x 1728 pt frame",
+  "U": "246.46 + (x - 1801.9) / 13.5",
+  "V": "65.59 - (y - 522.7) / 13.5",
+  "check": "Fitness 023 interior faces land at U 221.70/246.39 and V -6.82/29.27 versus A100 221.79/246.39 and -6.87/29.18"
+ },
+ "sources": [
+  "A100 frame: /home/user/h2sep-checklist/research/floor1-3d/a100-layout.json (commonAreas text)",
+  "ID-1.7 Enlarged Lobby Furniture and Equipment Plan, drawings_split/FFE-Locations/FF&E Locations_sheet8.pdf (Drive 1cNcJ2IhwVZOGPCI3c--ANLHuDB2Ag---), sheet8.json text layer (1XIF0XhElZwriDV6qbA5Rr1AXRwJjBOG7), ID-1.7.txt (1vDpwWHZrn5yBOGMsNh1Grw3Mp8ns4dR-)",
+  "PA-801_Reception Desk.pdf shop drawing, 5 pages (Drive 1BnLY7XQz5Lum-0rT34_QevrGgFfEjBf4)",
+  "PA-800_Perch Table.pdf shop drawing (Drive 1zqme1S1N1hYuwCgCbAcBpgU9GqvJcVfS)",
+  "PA-803_Coffee & Hydration Station.pdf shop drawing, 2 pages (Drive 1HZ3A9kI74xyyiBt6_Iuf3Y_VTIQ_yJa_)",
+  "Home2-Dynamic FF&E Specifications Public Areas.pdf, text layer (Drive 1vC3HV7dT-WoVHspJaZg3RvuONwmKlQi_)",
+  "2 Door Reach-in Merchandiser.pdf, Dukers DSM-41R (Drive 13wuiqz7-XqQZ-6P4ijhOUi4NgLcRXVsR)",
+  "Single Glass Merchandiser.pdf, Coldline D12-B (Drive 1u-rrvb_S8JPhktAG1erXSqWdUP7sZFDP)",
+  "Local: research/enrich-reports/lobby-core.md and research/construction-os/public-area-lamp-takeoff.md (tag counts, PA-200 pendant note)"
+ ],
+ "scaledCalls": [
+  "All placements are SCALED from ID-1.7 (3/16 in = 1 ft) after fitting the sheet to the A100 frame with the south and east exterior faces and checking the Fitness 023 walls (within 0.1 ft). Symbol centers were read on a 0.5 ft grid; expect about 0.5 ft error.",
+  "Reception desk: ID-1.7 draws a symmetric U counter 11.5 ft long by 4.2 ft deep; the approved shop drawing is 138 x 90 with 90 in and 47 in returns. The shop drawing governs the footprint, the plan governs the front face line (V 36.2) and length (U 205.5 to 217.0).",
+  "Focus booth 2 (south): drawn outline 58 in long against the 80 in spec; placed on the drawn center.",
+  "PA-303 second tea table: not clearly drawn; placed at V 19.3 by the open arc, low confidence.",
+  "PA-100 central banquette: leader lands on the spine at U 204.9 V 15.3; the drawn spine is narrower than 52 in; length set along V from the spec.",
+  "PA-316 shelving depth and length scaled from the plan; height assumed 72 in for massing.",
+  "Communal work table: untagged on ID-1.7; footprint scaled from the racetrack outline; 30 in height assumed.",
+  "Coolers: the plan symbol is 54 x 30 in for the 2-door unit; the submitted Dukers unit is 47.25 x 31.9 in, placed on the symbol center with its back on the wall.",
+  "PA-307 top size scaled from the plan (36 x 30 in); the spec card dims did not come through the text layer.",
+  "PA-106 / PA-101 / PA-102 chair positions are the drawn chair symbols at each table, offset 1.7 ft from the table centers along the table's short axis.",
+  "Market space box and Reception box are my own splits of the A100 open volume around the label anchors and the drawn pieces."
+ ],
+ "gaps": [
+  "No back counter behind the reception desk is drawn on ID-1.7; the wall at V 44.4 separates Reception 004 from Work Stations 010 (BOH desks not included).",
+  "No lobby fireplace, feature wall element, planters or breakfast host stand is tagged or drawn on ID-1.7; PA-505 wall artwork is the only feature wall item.",
+  "PA-316 Retail Display System height and PA-505 artwork size are not in the spec text layer.",
+  "PA-307 ADA table printed dimensions and PA-306 booth table height did not come through the spec text layer.",
+  "TV lounge items (PA-108, PA-113, PA-305, PA-308) carry no tags on ID-1.7 in the lobby; not placed.",
+  "Reception ceiling baffle ACB-001 and pendants (PA-201, PA-205) are lighting/ceiling scope, left to the lighting kit.",
+  "RK Hospitality FF&E Guest Rooms, Public Area Locations Floor Plans.pdf (16 MB) and FF&E Installation.xlsx were not opened; the per-sheet split of the same set (sheet8) was used instead."
+ ]
+}
