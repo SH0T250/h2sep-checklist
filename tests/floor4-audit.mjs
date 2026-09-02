@@ -8,10 +8,10 @@
  *   - there is no approved slice and no mock-up on floor 3; the STAGED floor-2
  *     room of the same type is the reference, and a floor-3 room must match it
  *     on shape except for the floor-2 working-wall retags (D22, D33)
- *   - NO working-wall correction applies on floor 4 yet: the 4th Floor tab
- *     does not reconcile with the floor-4 key mix and no ruling names floor 4,
- *     so every two-queen key carries GR-308 as transcribed with the arithmetic
- *     in note n_d22, OPEN for Austin
+ *   - ruling D37 carries D22, D33 and D35 up by room type: plain Queen-Queen
+ *     and QQ Extended take GR-305; the three connecting keys keep GR-308; 438
+ *     keeps GR-307; the 4th Floor tab does not reconcile and every corrected
+ *     line says so
  *   - floor 4 has two types no other upper floor has: QQ Wide Connecting (401,
  *     twin is LIVE floor-1 room 101) and King Studio Acc. (438, whose bath is
  *     its own and whose numbering donor is King Studio 104)
@@ -49,7 +49,7 @@ const live_ = (d) => Object.entries(d.items || {}).filter(([, v]) => !v.deleted)
 const FLOOR2_ROOMS = ['401','402','403','404','405','406','407','408','409','410','411','412','413','414','415','416','417','418',
   '422','423','424','425','426','427','428','429','430','431','432','433','434','436','438'];   // floor 4 (name kept for the shared checks)
 const PLAIN_QQ = ['405','407','409','411','413','415','428','434'];
-const TWO_QUEEN = [...PLAIN_QQ, '430', '432'];              // GR-308 as transcribed, OPEN (no ruling names floor 4)
+const TWO_QUEEN = [...PLAIN_QQ, '430', '432'];              // GR-305 by D37
 const CONNECTING = ['401', '403', '436'];
 const CREW = { checks: 3, issues: 442, notes: 1 };   // read from the live crew app 2026-09-02, READ ONLY
 /* The staged floor-2 room of the same type, for the shape comparison; the two
@@ -164,12 +164,12 @@ check('438 (King Studio Acc.) is its own room: GR-307 wall, GR-502 mirror, no GR
   return o;
 });
 
-process.stdout.write('\nTHE WORKING WALL ON FLOOR 4: NO CORRECTION, OPEN\n' + '-'.repeat(70) + '\n');
+process.stdout.write('\nRULING D37 ON FLOOR 4: D22, D33 AND D35 CARRIED UP BY ROOM TYPE\n' + '-'.repeat(70) + '\n');
 const tagRooms = (tag) => Object.entries(docs).filter(([id]) => isRoom(id)).filter(([, d]) => live_(d).some(([, v]) => v.code === tag)).map(([id]) => id).sort();
-check('GR-308 on every two-queen key and the three connecting keys as transcribed (13 rooms); GR-305 and GR-309 on none', () => {
+check('GR-305 on the 8 plain Queen-Queen keys plus 430 and 432 (D37); GR-308 on the three connecting keys only; GR-309 on none', () => {
   const o = [];
-  if (JSON.stringify(tagRooms('GR-308')) !== JSON.stringify([...TWO_QUEEN, ...CONNECTING].sort())) o.push(`GR-308 on ${JSON.stringify(tagRooms('GR-308'))}`);
-  if (tagRooms('GR-305').length) o.push(`GR-305 on ${tagRooms('GR-305')}`);
+  if (JSON.stringify(tagRooms('GR-305')) !== JSON.stringify(TWO_QUEEN.slice().sort())) o.push(`GR-305 on ${JSON.stringify(tagRooms('GR-305'))}`);
+  if (JSON.stringify(tagRooms('GR-308')) !== JSON.stringify(CONNECTING)) o.push(`GR-308 on ${JSON.stringify(tagRooms('GR-308'))}`);
   if (tagRooms('GR-309').length) o.push(`GR-309 on ${tagRooms('GR-309')}`);
   return o;
 });
@@ -183,22 +183,29 @@ check('GR-304 on the 17 King Studios, GR-307 on 438, GR-315 on 402, GR-316 on 41
 });
 check('no room carries two working-wall tags live', () =>
   Object.entries(docs).filter(([id]) => isRoom(id)).filter(([, d]) => live_(d).filter(([, v]) => /^GR-3(04|05|07|08|09|15|16)$/.test(v.code || '')).length !== 1).map(([id]) => `${id}: not exactly one working wall`));
-check('every two-queen key says in n_d22 that the 4th Floor tab does not reconcile and the tag is open, and ships FLAGGED', () =>
+check('the corrected line cites D37 with Austin\'s words, the 10-against-11 arithmetic and the open hand, at MEDIUM, and keeps B4.5', () =>
   TWO_QUEEN.flatMap((id) => {
-    const o = []; const n = (docs[id].notes || {}).n_d22;
-    if (!n) return [`${id}: no n_d22 note`];
-    if (!/DO NOT RECONCILE|DOES NOT RECONCILE/i.test(n.text)) o.push(`${id}: n_d22 does not say the tab fails to reconcile`);
-    if (!/10 \(8 plain Queen-Queen \+ 0 QQ Wide \+ 2 QQ Extended\)/.test(n.text)) o.push(`${id}: n_d22 does not carry the 10-vs-11 arithmetic`);
-    if (!/OPEN FOR AUSTIN/.test(n.text)) o.push(`${id}: n_d22 does not say it is open`);
-    const [, v] = live_(docs[id]).find(([, x]) => x.code === 'GR-308');
-    if (v.reliability !== 'FLAGGED') o.push(`${id}: GR-308 is ${v.reliability}`);
-    if (/Austin ruling D22: this room takes|Austin ruling D33|Austin ruling D35/.test(String(v.instanceNote))) o.push(`${id}: a floor-2 or floor-3 ruling note landed on a floor-4 line`);
+    const [, v] = live_(docs[id]).find(([, x]) => x.code === 'GR-305'); const o = []; const t = String(v.instanceNote);
+    if (!/Austin ruling D37/.test(t)) o.push(`${id}: note does not cite D37`);
+    if (!/carry D22, D33 and D35 up by room type on floor 4/.test(t)) o.push(`${id}: note does not quote the ruling`);
+    if (!/10 against 11, 3 against 2, 0 against 1/.test(t)) o.push(`${id}: note does not carry the arithmetic`);
+    if (!/hand/i.test(t)) o.push(`${id}: note does not raise handedness`);
+    if (/six units against six|eleven units against floor 2|floor 3 per the drawings/.test(t)) o.push(`${id}: note carries another floor's figures as this room's`);
+    if (v.reliability !== 'MEDIUM') o.push(`${id}: reliability ${v.reliability}`);
+    if (!/B4\.5/.test(t)) o.push(`${id}: open conflict B4.5 dropped from the line`);
     return o;
   }));
-check('the three connecting keys say GR-308 stands', () =>
-  CONNECTING.flatMap((id) => { const n = (docs[id].notes || {}).n_d22; return n && /GR-308 STANDS/.test(n.text) ? [] : [`${id}: n_d22 missing or does not say GR-308 stands`]; }));
+check('every two-queen key records D37 in n_d22 and the three connecting keys say GR-308 stands', () =>
+  [...TWO_QUEEN, ...CONNECTING].flatMap((id) => {
+    const n = (docs[id].notes || {}).n_d22; if (!n) return [`${id}: no n_d22 note`];
+    if (CONNECTING.includes(id)) return /GR-308 STANDS/.test(n.text) ? [] : [`${id}: n_d22 does not say GR-308 stands`];
+    const o = [];
+    if (!/RULING D37 APPLIED/.test(n.text)) o.push(`${id}: n_d22 does not say D37 applied`);
+    if (!/DO NOT RECONCILE|DOES NOT RECONCILE/i.test(n.text)) o.push(`${id}: n_d22 hides that the 4th Floor tab does not reconcile`);
+    return o;
+  }));
 check('no build-authored note from an earlier run survives a rebuild (only crew notes travel)', () =>
-  Object.entries(docs).flatMap(([id, d]) => Object.entries(d.notes || {}).filter(([, n]) => !n.by && /RULING D35 APPLIED|RULING D33 APPLIED/.test(n.text)).map(([k]) => `${id}/${k}: stale note`)));
+  Object.entries(docs).flatMap(([id, d]) => Object.entries(d.notes || {}).filter(([, n]) => !n.by && /NO CORRECTION ON FLOOR 4|RULING D35 APPLIED|RULING D33 APPLIED/.test(n.text)).map(([k]) => `${id}/${k}: stale note`)));
 check('no line or note on floor 4 quotes a floor-2 or floor-3 room number as this room', () =>
   Object.entries(docs).flatMap(([id, d]) => Object.entries(d.notes || {}).filter(([k, n]) => k === 'n_type' && /Room [23]\d\d /.test(n.text)).map(([k]) => `${id}/${k}`)));
 
@@ -294,8 +301,8 @@ check(`the crew's ${CREW.notes} notes came across`, () => {
   const n = Object.values(docs).reduce((a2, d) => a2 + Object.keys(d.notes || {}).filter((k) => !BUILT.test(k)).length, 0);
   return n === CREW.notes ? [] : [`${n} crew-authored notes in the build; the live app has ${CREW.notes}`];
 });
-check('the working wall exists live on every two-queen key (the carry reconciles the crew\'s checks exactly)', () =>
-  TWO_QUEEN.flatMap((id) => { const w = Object.values(docs[id].items).find((v) => v.code === 'GR-308' && !v.deleted); return !w ? [`${id}: no live GR-308`] : []; }));
+check('the retagged working wall exists live on every D37 key (the carry reconciles the crew\'s checks exactly)', () =>
+  TWO_QUEEN.flatMap((id) => { const w = Object.values(docs[id].items).find((v) => v.code === 'GR-305' && !v.deleted); return !w ? [`${id}: no live GR-305`] : []; }));
 check('no personal names or account ids in the committed seed', () => {
   const raw = readFileSync(SEED, 'utf8'); const out = [];
   for (const f of ['checkedByName', 'checkedByUid', 'createdByUid', 'createdBy']) if (raw.includes(`"${f}"`)) out.push(`field ${f} is present`);

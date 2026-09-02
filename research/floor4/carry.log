@@ -44,14 +44,7 @@ CARRIED
   6 personal name/uid field(s) dropped on the way in
   1348 line(s) kept the mock-up's package text over the crew build's older text (field state only travels)
 
-LINES REBUILT SO THE CREW'S WORK HAS SOMEWHERE TO LAND (ruling D24: nothing is deleted):
-  402/gr905_a  GR-905  [FF&E - Misc]  FLAGGED
-      rebuilt from data/project.sqlite room 402's own row(s), not from the crew document
-      sort 21000 in the crew app -> 22000 here (its own band, after the D28 Door Hardware lines)
-      carried: checked=false  openIssue=true "MISSING"
-
 RECONCILIATION  (live lines only; a tombstone is history, not a second check)
-  1 line(s) rebuilt above so the work lands on a line instead of being named and lost
   checks  crew   3  =  build   3 + 0 with no line   EXACT
   issues  crew 442  =  build 442 + 0 with no line   EXACT
   notes   crew   1  =  build   1 present with text intact   EXACT

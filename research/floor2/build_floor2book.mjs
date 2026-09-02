@@ -55,7 +55,10 @@ const rel = { HIGH: 0, MEDIUM: 0, FLAGGED: 0 };
 for (const l of lines) rel[l.v.reliability] = (rel[l.v.reliability] || 0) + 1;
 const checks = lines.filter((l) => l.v.checked).length;
 const issues = lines.filter((l) => l.v.issue && String(l.v.issue).trim() && !l.v.issueResolved).length;
-const crewNotes = Object.values(docs).reduce((n, d) => n + Object.values(d.notes || {}).filter((x) => x.by).length, 0);
+/* A crew note carries the app's own generated key; a build-authored note has a fixed name. */
+const BUILT_NOTE = /^n_(type|dbroom|config|gategaps|gaps|conflicts|d22|rulings|typearea|ptac2|sheet|conndoor|doorlock|dup_)/;
+const isCrewNote = (k) => !BUILT_NOTE.test(k);
+const crewNotes = Object.values(docs).reduce((n, d) => n + Object.keys(d.notes || {}).filter(isCrewNote).length, 0);
 const carriedLines = lines.filter((l) => /FIELD-AUTHORED LINE|THIS LINE EXISTS BECAUSE THE CREW/.test(String(l.v.instanceNote))).length;
 
 /* Same-type rooms: lines that are HIGH on the floor-1 donor and not HIGH here. */
@@ -90,7 +93,7 @@ const roomRows = roomIds.map((r) => {
   const flag = (arr) => arr.filter(([, v]) => v.reliability !== 'HIGH').length;
   const ch = [...fl, ...ml].filter(([, v]) => v.checked).length;
   const op = [...fl, ...ml].filter(([, v]) => v.issue && String(v.issue).trim() && !v.issueResolved).length;
-  const nn = Object.values(ffe.notes || {}).filter((x) => x.by).length;
+  const nn = Object.keys(ffe.notes || {}).filter(isCrewNote).length;
   const ww = fl.map(([, v]) => v.code).find((c) => /^GR-3(04|05|08|09|15|16)$/.test(c || '')) || '';
   const d22 = (ffe.notes || {}).n_d22;
   const d22state = !d22 ? '' : /APPLIED/.test(d22.text) ? 'applied' : /STANDS/.test(d22.text) ? 'stands' : 'open';
@@ -111,6 +114,13 @@ const wwTable = FLOOR === '3' ? [
   ['GR-309', 'Working Wall @ QQ Accessible (printed GR-309R)', '1', roomRows.filter((x) => x.ww === 'GR-309').length, 'D35; the spec and ID-5.9 also name GR-309. MEDIUM while the hand is open', roomRows.filter((x) => x.ww === 'GR-309').map((x) => x.r).join(' ')],
   ['GR-315', 'Working Wall @ K 1 BDRM Suite', '1', roomRows.filter((x) => x.ww === 'GR-315').length, 'stands, HIGH', roomRows.filter((x) => x.ww === 'GR-315').map((x) => x.r).join(' ')],
   ['GR-316', 'Working Wall @ K Accessible', '1', roomRows.filter((x) => x.ww === 'GR-316').length, 'stands, HIGH', roomRows.filter((x) => x.ww === 'GR-316').map((x) => x.r).join(' ')],
+] : FLOOR === '4' ? [
+  ['GR-304', 'Working Wall @ King', '17', roomRows.filter((x) => x.ww === 'GR-304').length, 'stands, HIGH (reconciles: 17 = 17)', 'the King Studios'],
+  ['GR-305', 'Working Wall @ QQ', '11 printed (L 5 + R 6) against 10 keys', roomRows.filter((x) => x.ww === 'GR-305').length, 'D37 (Austin, 2026-09-02): D22, D33 and D35 carried up by room type. MEDIUM while the hand is open', roomRows.filter((x) => x.ww === 'GR-305').map((x) => x.r).join(' ')],
+  ['GR-308', 'Working Wall @ QQ Connector', '2 printed against 3 keys', roomRows.filter((x) => x.ww === 'GR-308').length, 'stands on the three connecting keys', roomRows.filter((x) => x.ww === 'GR-308').map((x) => x.r).join(' ')],
+  ['GR-307', 'Working Wall @ K Accessible R', 'blank on the tab', roomRows.filter((x) => x.ww === 'GR-307').length, 'stands, HIGH, per the PM ruling recorded in the rooms table', roomRows.filter((x) => x.ww === 'GR-307').map((x) => x.r).join(' ')],
+  ['GR-315', 'Working Wall @ K 1 BDRM Suite', '1', roomRows.filter((x) => x.ww === 'GR-315').length, 'stands, HIGH', roomRows.filter((x) => x.ww === 'GR-315').map((x) => x.r).join(' ')],
+  ['GR-316', 'Working Wall @ K Accessible', '1', roomRows.filter((x) => x.ww === 'GR-316').length, 'stands, HIGH', roomRows.filter((x) => x.ww === 'GR-316').map((x) => x.r).join(' ')],
 ] : FLOOR !== '2' ? [
   ['GR-304', 'Working Wall @ King', String(F2.meta.workbookTab || '').includes('GR-304 17') ? '17' : '?', roomRows.filter((x) => x.ww === 'GR-304').length, 'stands, HIGH (reconciles: 17 = 17)', 'the King Studios'],
   ['GR-308', 'as transcribed on every two-queen key', 'tab: GR-305 11, GR-308 2', roomRows.filter((x) => x.ww === 'GR-308').length, 'OPEN. The ' + FLOOR + 'th Floor tab prints the same figures as the 2nd and does not reconcile with this floor, so no floor-2 ruling is applied here', roomRows.filter((x) => x.ww === 'GR-308').map((x) => x.r).join(' ')],
@@ -129,6 +139,8 @@ const decisions = FLOOR !== '2' ? [
   ['Approve floor ' + FLOOR + ' for rollout', 'Nothing here is live. Approval starts the cutover: backup first, three-way merge, read-back verify, crew collection never written (the floor-1 runbook).'],
   ...(FLOOR === '3'
     ? [['Working walls, ruled', 'D35, 2026-09-02: "carry D22 and D33 up by room type on floor 3". Applied: the nine plain Queen-Queens, 301, 330 and 332 take GR-305; 338 takes GR-309; 336 keeps GR-308. The 3rd Floor tab still prints 11 GR-305 walls against these 12 keys and 2 connectors against 1, so the purchase record is one wall short and the hand per room is unknown; every line says so.']]
+    : FLOOR === '4'
+    ? [['Working walls, ruled', 'D37, 2026-09-02: "carry D22, D33 and D35 up by room type on floor 4". Applied: the eight plain Queen-Queens, 430 and 432 take GR-305; 401, 403 and 436 keep GR-308; 438 keeps GR-307. The 4th Floor tab prints 11 GR-305 walls against these 10 keys, 2 connectors against 3 and one accessible QQ wall where floor 4 has no such key, so the purchase record does not match this floor and the hand per room is unknown; every line says so.']]
     : [['Working walls on the two-queen keys', 'The ' + FLOOR + 'th Floor tab prints the same six figures as the 2nd and this floor\'s key mix differs, so the arithmetic does not close. Every two-queen wall ships GR-308 as transcribed, FLAGGED, with the arithmetic on the line. Say whether the floor-2 and floor-3 rulings carry up by room type.']]),
   ['GR-305 handedness', 'Still open building-wide. D26 records you are answering this yourself.'],
   ['Bathing configuration on ' + roomRows.filter((x) => x.bath).map((x) => x.r).join(' and '), 'Both the tub and the roll-in rows are carried and flagged on each; D19 covered room 118 only and was not extended. Do not order a bath package for either key until ruled.'],
@@ -188,7 +200,7 @@ a{color:var(--steel)}
 <div class="wrap">
 <p class="eyebrow">Review book</p>
 <h1>Floor ${FLOOR}, built out for approval</h1>
-<p class="lede">Every floor-${FLOOR} guest room and common area the drawings hold, as FF&amp;E checklists and MEP punches, with the crew's real work carried in from the live app. ${esc(FLOOR === '2' ? 'Austin, 2026-09-02: "I need the 2 floor built out. Just the FF&E & MEP not the 3d bim yet."' : 'Austin, 2026-09-02: "once completed lets start floor 3 just no 3d BIM yet."')} Nothing here has been written to the live database.</p>
+<p class="lede">Every floor-${FLOOR} guest room and common area the drawings hold, as FF&amp;E checklists and MEP punches, with the crew's real work carried in from the live app. ${esc(FLOOR === '2' ? 'Austin, 2026-09-02: "I need the 2 floor built out. Just the FF&E & MEP not the 3d bim yet."' : FLOOR === '3' ? 'Austin, 2026-09-02: "once completed lets start floor 3 just no 3d BIM yet."' : 'Austin, 2026-09-02: "once completed lets start floor 4 just no 3d BIM yet."')} Nothing here has been written to the live database.</p>
 
 <div class="tiles">
 <div class="tile"><div class="n">${roomIds.length}</div><div class="l">guest rooms</div></div>

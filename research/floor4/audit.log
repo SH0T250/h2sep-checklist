@@ -38,13 +38,13 @@ LINE-LEVEL INVARIANTS
   PASS  D29 bed skirt (bsq_a) on no floor-4 room (there is no QQ Acc. key on floor 4)
   PASS  438 (King Studio Acc.) is its own room: GR-307 wall, GR-502 mirror, no GR-320 or GR-208, both bathing configurations open
 
-THE WORKING WALL ON FLOOR 4: NO CORRECTION, OPEN
+RULING D37 ON FLOOR 4: D22, D33 AND D35 CARRIED UP BY ROOM TYPE
 ----------------------------------------------------------------------
-  PASS  GR-308 on every two-queen key and the three connecting keys as transcribed (13 rooms); GR-305 and GR-309 on none
+  PASS  GR-305 on the 8 plain Queen-Queen keys plus 430 and 432 (D37); GR-308 on the three connecting keys only; GR-309 on none
   PASS  GR-304 on the 17 King Studios, GR-307 on 438, GR-315 on 402, GR-316 on 417
   PASS  no room carries two working-wall tags live
-  PASS  every two-queen key says in n_d22 that the 4th Floor tab does not reconcile and the tag is open, and ships FLAGGED
-  PASS  the three connecting keys say GR-308 stands
+  PASS  the corrected line cites D37 with Austin's words, the 10-against-11 arithmetic and the open hand, at MEDIUM, and keeps B4.5
+  PASS  every two-queen key records D37 in n_d22 and the three connecting keys say GR-308 stands
   PASS  no build-authored note from an earlier run survives a rebuild (only crew notes travel)
   PASS  no line or note on floor 4 quotes a floor-2 or floor-3 room number as this room
 
@@ -67,7 +67,7 @@ THE CREW'S WORK
   PASS  the crew's 442 open issues are all present in the build
   PASS  every checked line carries initials
   PASS  the crew's 1 notes came across
-  PASS  the working wall exists live on every two-queen key (the carry reconciles the crew's checks exactly)
+  PASS  the retagged working wall exists live on every D37 key (the carry reconciles the crew's checks exactly)
   PASS  no personal names or account ids in the committed seed
   PASS  meta records an exact carry reconciliation
 
