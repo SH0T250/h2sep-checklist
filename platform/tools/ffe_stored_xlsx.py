@@ -79,7 +79,7 @@ def table(ws, cols, rows, start, flagcol=None):
         for j, (_, key) in enumerate(cols, 1):
             cell = ws.cell(row=start + 1 + i, column=j, value=r.get(key) if isinstance(r, dict) else r[j - 1])
             cell.font = BODY
-            cell.alignment = WRAP if key in ('flag', 'label', 'writtenAs', 'positions') else TOP
+            cell.alignment = WRAP if key in ('flag', 'label', 'writtenAs', 'positions', 'resolution') else TOP
             cell.border = BOX
             if flagcol and r.get('flag'):
                 cell.fill = FLAGF
@@ -100,7 +100,8 @@ kpis(ws, [('Lines', len(items)), ('Pieces', sum(i['qty'] for i in items)),
 cols = [('ID', 'id'), ('Floor', 'floor'), ('Location', 'location'), ('Item code', 'fullCode'),
         ('Base code', 'code'), ('Position', 'positionCode'), ('Catalog description', 'label'),
         ('Category', 'category'), ('ADA', 'adaTxt'), ('Qty', 'qty'), ('As written on the sheet', 'writtenAs'),
-        ('Tally / mark', 'qtyMarks'), ('Source pg', 'sourcePage'), ('Flag', 'flag')]
+        ('Tally / mark', 'qtyMarks'), ('Source pg', 'sourcePage'), ('Flag', 'flag'),
+        ('Confirmed by Austin', 'resolution')]
 rows = [dict(r, adaTxt='ADA' if r['ada'] else '') for r in items]
 table(ws, cols, rows, 7, flagcol=True)
 
@@ -188,7 +189,15 @@ ws.cell(row=start - 1, column=1, value='STRUCK-THROUGH LINES - NOT COUNTED').fon
 table(ws, [('Floor', 'floor'), ('Location', 'location'), ('As written', 'writtenAs'),
            ('Why excluded', 'reason'), ('Source pg', 'sourcePage')], doc['struckThroughEntries'], start)
 
-start2 = start + len(doc['struckThroughEntries']) + 4
+start1 = start + len(doc['struckThroughEntries']) + 4
+ws.cell(row=start1 - 1, column=1, value='CONFIRMED BY AUSTIN - CLOSED, NO ACTION').font = BOLD
+res = [{'id': i['id'], 'floor': i['floor'], 'location': i['location'], 'written': i['writtenAs'],
+        'code': i['fullCode'], 'qty': i['qty'], 'resolution': i['resolution']}
+       for i in items if i['resolution']]
+table(ws, [('ID', 'id'), ('Floor', 'floor'), ('Location', 'location'), ('As written', 'written'),
+           ('Code used', 'code'), ('Qty', 'qty'), ('Ruling', 'resolution')], res, start1)
+
+start2 = start1 + len(res) + 4
 ws.cell(row=start2 - 1, column=1, value='HOW THE PHOTOS MAP TO THE SHEETS').font = BOLD
 table(ws, [('Photo', 'k'), ('What it is', 'v')],
       [{'k': k, 'v': v} for k, v in meta['sheetMap'].items()], start2)

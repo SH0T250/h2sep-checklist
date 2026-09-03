@@ -41,7 +41,8 @@
    "ada": false,
    "qty": 43,
    "qtyMarks": "43",
-   "flag": "QTY UNCERTAIN: written \"4|3\" - could be 43, or a 4 corrected to 3. Confirm."
+   "flag": "",
+   "resolution": "Austin confirmed 2026-09-03: 43 TV mounts is correct."
   },
   {
    "id": "S002",
@@ -58,7 +59,8 @@
    "ada": false,
    "qty": 30,
    "qtyMarks": "30 pc",
-   "flag": "Tally group struck out and replaced with \"30 pc\"."
+   "flag": "Tally group struck out and replaced with \"30 pc\".",
+   "resolution": ""
   },
   {
    "id": "S003",
@@ -75,7 +77,8 @@
    "ada": false,
    "qty": 12,
    "qtyMarks": "12 pc",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S004",
@@ -92,7 +95,8 @@
    "ada": false,
    "qty": 6,
    "qtyMarks": "6",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S005",
@@ -109,7 +113,8 @@
    "ada": false,
    "qty": 5,
    "qtyMarks": "5",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S006",
@@ -126,7 +131,8 @@
    "ada": false,
    "qty": 2,
    "qtyMarks": "||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S007",
@@ -143,7 +149,8 @@
    "ada": false,
    "qty": 2,
    "qtyMarks": "||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S008",
@@ -160,7 +167,8 @@
    "ada": false,
    "qty": 10,
    "qtyMarks": "10",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S009",
@@ -177,7 +185,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "\"one\"",
-   "flag": "Written \"one floor lamp\"; mapped to GR-205 Floor Lamp."
+   "flag": "Written \"one floor lamp\"; mapped to GR-205 Floor Lamp.",
+   "resolution": ""
   },
   {
    "id": "S010",
@@ -194,7 +203,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S011",
@@ -211,7 +221,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S012",
@@ -228,7 +239,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S013",
@@ -245,7 +257,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S014",
@@ -262,7 +275,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S015",
@@ -279,7 +293,8 @@
    "ada": true,
    "qty": 2,
    "qtyMarks": "\"Two\"",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S016",
@@ -296,7 +311,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": "A struck-out mark precedes \"Dining\"; the entry itself stands."
+   "flag": "A struck-out mark precedes \"Dining\"; the entry itself stands.",
+   "resolution": ""
   },
   {
    "id": "S017",
@@ -313,7 +329,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S018",
@@ -330,7 +347,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S019",
@@ -347,7 +365,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S020",
@@ -364,7 +383,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S021",
@@ -381,7 +401,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S022",
@@ -398,7 +419,8 @@
    "ada": false,
    "qty": 2,
    "qtyMarks": "||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S023",
@@ -415,7 +437,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S024",
@@ -432,7 +455,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S025",
@@ -449,7 +473,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S026",
@@ -466,7 +491,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S027",
@@ -483,7 +509,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S028",
@@ -500,7 +527,8 @@
    "ada": true,
    "qty": 2,
    "qtyMarks": "||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S029",
@@ -517,7 +545,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S030",
@@ -534,7 +563,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S031",
@@ -551,7 +581,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": "A struck-out \"319\" precedes the entry."
+   "flag": "A struck-out \"319\" precedes the entry.",
+   "resolution": ""
   },
   {
    "id": "S032",
@@ -568,7 +599,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S033",
@@ -585,7 +617,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S034",
@@ -602,7 +635,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S035",
@@ -619,7 +653,8 @@
    "ada": false,
    "qty": 3,
    "qtyMarks": "|||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S036",
@@ -636,7 +671,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S037",
@@ -653,7 +689,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S038",
@@ -670,7 +707,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S039",
@@ -687,7 +725,8 @@
    "ada": false,
    "qty": 4,
    "qtyMarks": "4 boxes",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S040",
@@ -704,7 +743,8 @@
    "ada": false,
    "qty": 2,
    "qtyMarks": "||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S041",
@@ -721,7 +761,8 @@
    "ada": false,
    "qty": 2,
    "qtyMarks": "||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S042",
@@ -738,7 +779,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S043",
@@ -755,7 +797,8 @@
    "ada": false,
    "qty": 2,
    "qtyMarks": "||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S044",
@@ -772,7 +815,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S045",
@@ -789,7 +833,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S046",
@@ -806,7 +851,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S047",
@@ -823,7 +869,8 @@
    "ada": false,
    "qty": 4,
    "qtyMarks": "||||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S048",
@@ -840,7 +887,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S049",
@@ -857,7 +905,8 @@
    "ada": false,
    "qty": 4,
    "qtyMarks": "||||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S050",
@@ -874,7 +923,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S051",
@@ -891,7 +941,8 @@
    "ada": false,
    "qty": 2,
    "qtyMarks": "||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S052",
@@ -908,24 +959,26 @@
    "ada": false,
    "qty": 4,
    "qtyMarks": "||||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S053",
    "floor": 3,
    "location": "Floor storage",
    "sourcePage": 3,
-   "code": "GR-325",
+   "code": "GR-320",
    "positionCode": "",
-   "fullCode": "GR-325",
+   "fullCode": "GR-320",
    "writtenAs": "GR-325",
-   "label": "",
-   "category": "",
+   "label": "Decorative Shelves above Desk",
+   "category": "FF&E - Casegoods",
    "isWorkingWall": false,
    "ada": false,
    "qty": 3,
    "qtyMarks": "|||",
-   "flag": "GR-325 IS NOT IN THE PROJECT FF&E CATALOG (catalog ends at GR-324). Confirm intended code."
+   "flag": "",
+   "resolution": "Written GR-325 on the sheet. Austin confirmed 2026-09-03 the item is GR-320."
   },
   {
    "id": "S054",
@@ -942,7 +995,8 @@
    "ada": false,
    "qty": 3,
    "qtyMarks": "|||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S055",
@@ -959,7 +1013,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S056",
@@ -976,7 +1031,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S057",
@@ -993,7 +1049,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S058",
@@ -1010,7 +1067,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": "A struck-out \"316\" precedes the entry."
+   "flag": "A struck-out \"316\" precedes the entry.",
+   "resolution": ""
   },
   {
    "id": "S059",
@@ -1027,7 +1085,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S060",
@@ -1044,7 +1103,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": "GR-303 is the ACCESSIBLE VANITY, not a working wall."
+   "flag": "GR-303 is the ACCESSIBLE VANITY, not a working wall.",
+   "resolution": ""
   },
   {
    "id": "S061",
@@ -1061,7 +1121,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S062",
@@ -1078,7 +1139,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S063",
@@ -1095,7 +1157,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S064",
@@ -1112,7 +1175,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S065",
@@ -1129,7 +1193,8 @@
    "ada": false,
    "qty": 2,
    "qtyMarks": "||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S066",
@@ -1146,7 +1211,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S067",
@@ -1163,7 +1229,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S068",
@@ -1180,7 +1247,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S069",
@@ -1197,7 +1265,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S070",
@@ -1214,7 +1283,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S071",
@@ -1231,7 +1301,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S072",
@@ -1248,7 +1319,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S073",
@@ -1265,7 +1337,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S074",
@@ -1282,7 +1355,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S075",
@@ -1299,7 +1373,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S076",
@@ -1316,7 +1391,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S077",
@@ -1333,7 +1409,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S078",
@@ -1350,7 +1427,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S079",
@@ -1367,7 +1445,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S080",
@@ -1384,7 +1463,8 @@
    "ada": false,
    "qty": 3,
    "qtyMarks": "|||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S081",
@@ -1401,7 +1481,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S082",
@@ -1418,7 +1499,8 @@
    "ada": false,
    "qty": 3,
    "qtyMarks": "|||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S083",
@@ -1435,7 +1517,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S084",
@@ -1452,7 +1535,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S085",
@@ -1469,7 +1553,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S086",
@@ -1486,24 +1571,26 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S087",
    "floor": 4,
    "location": "Hall",
    "sourcePage": 1,
-   "code": "GR-325",
+   "code": "GR-320",
    "positionCode": "",
-   "fullCode": "GR-325",
+   "fullCode": "GR-320",
    "writtenAs": "GR-325 decorative shelf",
-   "label": "",
-   "category": "",
+   "label": "Decorative Shelves above Desk",
+   "category": "FF&E - Casegoods",
    "isWorkingWall": false,
    "ada": false,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": "GR-325 NOT IN CATALOG. Also a full-width divider line crosses this entry - confirm it is not struck out."
+   "flag": "A full-width divider line crosses this entry. Confirm it is a section divider and not a strike-out.",
+   "resolution": "Written GR-325 on the sheet. Austin confirmed 2026-09-03 the item is GR-320."
   },
   {
    "id": "S088",
@@ -1520,7 +1607,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": "A heavily scribbled-out line sits directly below; contents illegible."
+   "flag": "A heavily scribbled-out line sits directly below; contents illegible.",
+   "resolution": ""
   },
   {
    "id": "S089",
@@ -1537,7 +1625,8 @@
    "ada": false,
    "qty": 3,
    "qtyMarks": "|||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S090",
@@ -1554,7 +1643,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": "Written as a separate second line with no tally. Confirm whether this is 1 more sofa or a repeat of the line above."
+   "flag": "Written as a separate second line with no tally. Confirm whether this is 1 more sofa or a repeat of the line above.",
+   "resolution": ""
   },
   {
    "id": "S091",
@@ -1571,7 +1661,8 @@
    "ada": false,
    "qty": 2,
    "qtyMarks": "||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S092",
@@ -1588,7 +1679,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S093",
@@ -1605,7 +1697,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S094",
@@ -1622,7 +1715,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S095",
@@ -1639,7 +1733,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": "\"Ada\" written above the line."
+   "flag": "\"Ada\" written above the line.",
+   "resolution": ""
   },
   {
    "id": "S096",
@@ -1656,7 +1751,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S097",
@@ -1673,7 +1769,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S098",
@@ -1690,7 +1787,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": "Written \"OPn Rolling Chair\"; mapped to GR-103 Ergonomic Task Chair."
+   "flag": "Written \"OPn Rolling Chair\"; mapped to GR-103 Ergonomic Task Chair.",
+   "resolution": ""
   },
   {
    "id": "S099",
@@ -1707,7 +1805,8 @@
    "ada": false,
    "qty": 3,
    "qtyMarks": "|||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S100",
@@ -1724,7 +1823,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": "Written \"OPn Box- GR-304-Red\"; position suffix unclear."
+   "flag": "Written \"OPn Box- GR-304-Red\"; position suffix unclear.",
+   "resolution": ""
   },
   {
    "id": "S101",
@@ -1741,7 +1841,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S102",
@@ -1758,7 +1859,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S103",
@@ -1775,7 +1877,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S104",
@@ -1792,7 +1895,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S105",
@@ -1809,7 +1913,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": "See also the GR-304-R-6 line below - confirm these are two separate boxes, not one listed twice."
+   "flag": "See also the GR-304-R-6 line below - confirm these are two separate boxes, not one listed twice.",
+   "resolution": ""
   },
   {
    "id": "S106",
@@ -1826,7 +1931,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S107",
@@ -1843,7 +1949,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": "Possible duplicate of the open-box GR-304-R-6 line above."
+   "flag": "Possible duplicate of the open-box GR-304-R-6 line above.",
+   "resolution": ""
   },
   {
    "id": "S108",
@@ -1860,7 +1967,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S109",
@@ -1877,7 +1985,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S110",
@@ -1894,7 +2003,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S111",
@@ -1911,7 +2021,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": "Written \"GR-3d Panel\"."
+   "flag": "Written \"GR-3d Panel\".",
+   "resolution": ""
   },
   {
    "id": "S112",
@@ -1928,7 +2039,8 @@
    "ada": false,
    "qty": 2,
    "qtyMarks": "2",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S113",
@@ -1945,7 +2057,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S114",
@@ -1962,7 +2075,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S115",
@@ -1979,7 +2093,8 @@
    "ada": false,
    "qty": 2,
    "qtyMarks": "||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S116",
@@ -1996,7 +2111,8 @@
    "ada": true,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S117",
@@ -2013,7 +2129,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S118",
@@ -2030,24 +2147,26 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S119",
    "floor": 4,
    "location": "Continuation sheet",
    "sourcePage": 2,
-   "code": "GR-325",
+   "code": "GR-320",
    "positionCode": "",
-   "fullCode": "GR-325",
+   "fullCode": "GR-320",
    "writtenAs": "GR-325 decorative shelf",
-   "label": "",
-   "category": "",
+   "label": "Decorative Shelves above Desk",
+   "category": "FF&E - Casegoods",
    "isWorkingWall": false,
    "ada": false,
    "qty": 4,
    "qtyMarks": "||||",
-   "flag": "GR-325 NOT IN CATALOG. A struck-out group of 5 tallies precedes the 4 that count."
+   "flag": "",
+   "resolution": "Written GR-325 on the sheet. Austin confirmed 2026-09-03 the item is GR-320. A struck-out group of 5 tallies precedes the 4 that count."
   },
   {
    "id": "S120",
@@ -2064,7 +2183,8 @@
    "ada": false,
    "qty": 3,
    "qtyMarks": "|||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S121",
@@ -2081,7 +2201,8 @@
    "ada": false,
    "qty": 2,
    "qtyMarks": "||",
-   "flag": "GR-308-L-2 also appears once on the 4th floor Hall list. Confirm these are different boxes."
+   "flag": "GR-308-L-2 also appears once on the 4th floor Hall list. Confirm these are different boxes.",
+   "resolution": ""
   },
   {
    "id": "S122",
@@ -2098,7 +2219,8 @@
    "ada": false,
    "qty": 3,
    "qtyMarks": "|||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S123",
@@ -2115,7 +2237,8 @@
    "ada": false,
    "qty": 2,
    "qtyMarks": "||",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   },
   {
    "id": "S124",
@@ -2132,7 +2255,8 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": ""
+   "flag": "",
+   "resolution": ""
   }
  ],
  "struckThroughEntries": [
