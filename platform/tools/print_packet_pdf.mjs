@@ -63,8 +63,13 @@ if (process.env.FFE_ONLY) {
       const open = sheet.querySelectorAll('.p-issue').length;
       const sub = sheet.querySelector('.p-title span');
       if (sub) {
-        const head = sub.textContent.split(' · ').slice(0, 2).join(' · ');   // room type · floor
-        sub.textContent = `${head} · FF&E only · ${done} of ${rows.length} checked · ${open} open`;
+        const parts = sub.textContent.split(' · ');
+        const type = parts[0], floor = parts[1] || '';   // room type, then "Floor N"
+        // The room type is what a walker reads off the sheet next to the room
+        // number, so it gets its own size instead of riding in the small line.
+        sub.innerHTML = `<b class="p-type"></b><span class="p-subrest"></span>`;
+        sub.querySelector('.p-type').textContent = type;
+        sub.querySelector('.p-subrest').textContent = `${floor} · FF&E only · ${done} of ${rows.length} checked · ${open} open`;
       }
     }
   });
@@ -86,8 +91,11 @@ if (process.env.COMPACT) {
     .paper { font-size: ${big ? 11 : 10}px !important; }
     .p-head { padding-bottom: 7px; margin-bottom: 7px; border-bottom-width: 1.5px; }
     .p-head img { height: ${big ? 30 : 26}px; }
-    .p-title b { font-size: ${big ? 17 : 15}px; }
+    .p-title > b { font-size: ${big ? 27 : 15}px; line-height: 1.1; }
     .p-title span { font-size: ${big ? 10 : 9}px; }
+    .p-type { font-size: ${big ? 16 : 9}px; color: #10181D; font-weight: 700; }
+    .p-type { display: ${big ? 'block' : 'inline'}; }
+    .p-subrest { font-size: ${big ? 11 : 9}px; }
     .p-tb { font-size: ${big ? 9 : 8.5}px; }
     .p-sect { column-count: 2; column-gap: 20px; }
     .p-sect-h { column-span: all; }
