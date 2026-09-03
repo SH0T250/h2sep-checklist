@@ -111,6 +111,42 @@ if (process.env.COMPACT) {
 // the print removes it; the sheet itself was already white.
 await p.addStyleTag({ content: 'html{color-scheme:light !important}html,body,.main,.paper-wrap,.paper{background:#FFFFFF !important}' });
   await p.emulateMedia({ media: 'print' });
+if (process.env.FFE_ONLY) {
+  // Auto-fit: a room with an unusually long list (the one-bedrooms) would take
+  // a second page for a handful of lines. Any sheet taller than a page steps
+  // down one size band and is measured again, so every room prints on one page
+  // and only the rooms that need it are tightened.
+  await p.addStyleTag({ content: `
+    .paper.fit-a { font-size: 10.3px !important; }
+    .paper.fit-a .p-row { padding: 1.45px 0; }
+    .paper.fit-a .p-title > b { font-size: 24px; }
+    .paper.fit-a .p-type { font-size: 15px; }
+    .paper.fit-b { font-size: 9.6px !important; }
+    .paper.fit-b .p-row { padding: 1.1px 0; }
+    .paper.fit-b .p-box { width: 17px; height: 17px; }
+    .paper.fit-b .p-title > b { font-size: 22px; }
+    .paper.fit-b .p-type { font-size: 14px; }
+  ` });
+  // Measure at the printable width, not the browser viewport: a sheet laid out
+  // 1100px wide is shorter than the same sheet on a 7.8in page and the fit
+  // would be read wrong.
+  await p.setViewportSize({ width: 749, height: 1000 });
+  await p.waitForTimeout(300);
+  // The PDF lays a sheet out slightly taller than the same sheet measured in
+  // the page, so the trigger sits below the true page height: a sheet within
+  // 40px of the limit is shrunk rather than risked.
+  const PAGE = 944;   // Letter minus the print margins (984px), less that margin of error
+  for (const cls of ['fit-a', 'fit-b']) {
+    const over = await p.evaluate(({ c, limit }) => {
+      let n = 0;
+      for (const s of document.querySelectorAll('.paper')) {
+        if (s.getBoundingClientRect().height > limit) { s.classList.remove('fit-a', 'fit-b'); s.classList.add(c); n++; }
+      }
+      return n;
+    }, { c: cls, limit: PAGE });
+    if (!over) break;
+  }
+}
 await p.pdf({ path: OUT, format: 'Letter', printBackground: true, margin: { top: '0.4in', bottom: '0.45in', left: '0.4in', right: '0.4in' } });
 await b.close();
 console.log('written', OUT);
