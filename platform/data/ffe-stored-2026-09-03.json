@@ -42,6 +42,7 @@
    "qty": 43,
    "qtyMarks": "43",
    "flag": "",
+   "flagType": "",
    "resolution": "Austin confirmed 2026-09-03: 43 TV mounts is correct."
   },
   {
@@ -60,6 +61,7 @@
    "qty": 30,
    "qtyMarks": "30 pc",
    "flag": "Tally group struck out and replaced with \"30 pc\".",
+   "flagType": "note",
    "resolution": ""
   },
   {
@@ -78,6 +80,7 @@
    "qty": 12,
    "qtyMarks": "12 pc",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -96,6 +99,7 @@
    "qty": 6,
    "qtyMarks": "6",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -114,6 +118,7 @@
    "qty": 5,
    "qtyMarks": "5",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -132,6 +137,7 @@
    "qty": 2,
    "qtyMarks": "||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -150,6 +156,7 @@
    "qty": 2,
    "qtyMarks": "||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -168,6 +175,7 @@
    "qty": 10,
    "qtyMarks": "10",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -186,6 +194,7 @@
    "qty": 1,
    "qtyMarks": "\"one\"",
    "flag": "Written \"one floor lamp\"; mapped to GR-205 Floor Lamp.",
+   "flagType": "note",
    "resolution": ""
   },
   {
@@ -204,6 +213,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -222,6 +232,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -240,6 +251,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -258,6 +270,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -276,6 +289,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -294,6 +308,7 @@
    "qty": 2,
    "qtyMarks": "\"Two\"",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -312,6 +327,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "A struck-out mark precedes \"Dining\"; the entry itself stands.",
+   "flagType": "note",
    "resolution": ""
   },
   {
@@ -330,6 +346,7 @@
    "qty": 1,
    "qtyMarks": "|",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -348,6 +365,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -366,6 +384,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -384,6 +403,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -402,6 +422,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -420,6 +441,7 @@
    "qty": 2,
    "qtyMarks": "||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -438,6 +460,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -456,6 +479,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -474,6 +498,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -492,6 +517,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -510,6 +536,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -528,6 +555,7 @@
    "qty": 2,
    "qtyMarks": "||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -546,6 +574,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -564,6 +593,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -582,6 +612,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "A struck-out \"319\" precedes the entry.",
+   "flagType": "note",
    "resolution": ""
   },
   {
@@ -600,6 +631,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -618,6 +650,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -636,6 +669,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -654,6 +688,7 @@
    "qty": 3,
    "qtyMarks": "|||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -672,6 +707,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -690,6 +726,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -708,6 +745,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -726,6 +764,7 @@
    "qty": 4,
    "qtyMarks": "4 boxes",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -744,6 +783,7 @@
    "qty": 2,
    "qtyMarks": "||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -762,6 +802,7 @@
    "qty": 2,
    "qtyMarks": "||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -780,6 +821,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -798,6 +840,7 @@
    "qty": 2,
    "qtyMarks": "||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -816,6 +859,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -834,6 +878,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -852,6 +897,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -870,6 +916,7 @@
    "qty": 4,
    "qtyMarks": "||||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -888,6 +935,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -906,6 +954,7 @@
    "qty": 4,
    "qtyMarks": "||||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -924,6 +973,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -942,6 +992,7 @@
    "qty": 2,
    "qtyMarks": "||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -960,6 +1011,7 @@
    "qty": 4,
    "qtyMarks": "||||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -978,6 +1030,7 @@
    "qty": 3,
    "qtyMarks": "|||",
    "flag": "",
+   "flagType": "",
    "resolution": "Written GR-325 on the sheet. Austin confirmed 2026-09-03 the item is GR-320."
   },
   {
@@ -996,6 +1049,7 @@
    "qty": 3,
    "qtyMarks": "|||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1014,6 +1068,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1032,6 +1087,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1050,6 +1106,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1068,6 +1125,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "A struck-out \"316\" precedes the entry.",
+   "flagType": "note",
    "resolution": ""
   },
   {
@@ -1086,6 +1144,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1104,6 +1163,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "GR-303 is the ACCESSIBLE VANITY, not a working wall.",
+   "flagType": "note",
    "resolution": ""
   },
   {
@@ -1122,6 +1182,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1140,6 +1201,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1158,6 +1220,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1176,6 +1239,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1194,6 +1258,7 @@
    "qty": 2,
    "qtyMarks": "||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1212,6 +1277,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1230,6 +1296,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1248,6 +1315,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1266,6 +1334,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1284,6 +1353,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1302,6 +1372,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1320,6 +1391,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1338,6 +1410,7 @@
    "qty": 1,
    "qtyMarks": "|",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1356,6 +1429,7 @@
    "qty": 1,
    "qtyMarks": "|",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1374,6 +1448,7 @@
    "qty": 1,
    "qtyMarks": "|",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1392,6 +1467,7 @@
    "qty": 1,
    "qtyMarks": "|",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1410,6 +1486,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1428,6 +1505,7 @@
    "qty": 1,
    "qtyMarks": "|",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1446,6 +1524,7 @@
    "qty": 1,
    "qtyMarks": "|",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1464,6 +1543,7 @@
    "qty": 3,
    "qtyMarks": "|||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1482,6 +1562,7 @@
    "qty": 1,
    "qtyMarks": "|",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1500,6 +1581,7 @@
    "qty": 3,
    "qtyMarks": "|||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1518,6 +1600,7 @@
    "qty": 1,
    "qtyMarks": "|",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1536,6 +1619,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1554,6 +1638,7 @@
    "qty": 1,
    "qtyMarks": "|",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1572,6 +1657,7 @@
    "qty": 1,
    "qtyMarks": "|",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1589,8 +1675,9 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "|",
-   "flag": "A full-width divider line crosses this entry. Confirm it is a section divider and not a strike-out.",
-   "resolution": "Written GR-325 on the sheet. Austin confirmed 2026-09-03 the item is GR-320."
+   "flag": "",
+   "flagType": "",
+   "resolution": "Written GR-325 on the sheet. Austin confirmed 2026-09-03 the item is GR-320. Austin confirmed 2026-09-03 the line through it is a section divider, not a strike-out, so it counts."
   },
   {
    "id": "S088",
@@ -1608,6 +1695,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "A heavily scribbled-out line sits directly below; contents illegible.",
+   "flagType": "note",
    "resolution": ""
   },
   {
@@ -1626,6 +1714,7 @@
    "qty": 3,
    "qtyMarks": "|||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1643,8 +1732,9 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": "Written as a separate second line with no tally. Confirm whether this is 1 more sofa or a repeat of the line above.",
-   "resolution": ""
+   "flag": "",
+   "flagType": "",
+   "resolution": "Austin confirmed 2026-09-03: a separate box, not a repeat of the line above. GR-101 sofa stays at 4 on this floor."
   },
   {
    "id": "S091",
@@ -1662,6 +1752,7 @@
    "qty": 2,
    "qtyMarks": "||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1680,6 +1771,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1698,6 +1790,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1716,6 +1809,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1734,6 +1828,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "\"Ada\" written above the line.",
+   "flagType": "note",
    "resolution": ""
   },
   {
@@ -1752,6 +1847,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1770,6 +1866,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1788,6 +1885,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "Written \"OPn Rolling Chair\"; mapped to GR-103 Ergonomic Task Chair.",
+   "flagType": "note",
    "resolution": ""
   },
   {
@@ -1806,6 +1904,7 @@
    "qty": 3,
    "qtyMarks": "|||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1824,6 +1923,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "Written \"OPn Box- GR-304-Red\"; position suffix unclear.",
+   "flagType": "question",
    "resolution": ""
   },
   {
@@ -1842,6 +1942,7 @@
    "qty": 1,
    "qtyMarks": "|",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1860,6 +1961,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1878,6 +1980,7 @@
    "qty": 1,
    "qtyMarks": "|",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1896,6 +1999,7 @@
    "qty": 1,
    "qtyMarks": "|",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1913,8 +2017,9 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": "See also the GR-304-R-6 line below - confirm these are two separate boxes, not one listed twice.",
-   "resolution": ""
+   "flag": "",
+   "flagType": "",
+   "resolution": "Austin confirmed 2026-09-03: separate box from the plain GR-304-R-6 line below. Both count."
   },
   {
    "id": "S106",
@@ -1932,6 +2037,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1949,8 +2055,9 @@
    "ada": false,
    "qty": 1,
    "qtyMarks": "none",
-   "flag": "Possible duplicate of the open-box GR-304-R-6 line above.",
-   "resolution": ""
+   "flag": "",
+   "flagType": "",
+   "resolution": "Austin confirmed 2026-09-03: separate box from the open-box GR-304-R-6 line above. Both count."
   },
   {
    "id": "S108",
@@ -1968,6 +2075,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -1986,6 +2094,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -2004,6 +2113,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -2022,6 +2132,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "Written \"GR-3d Panel\".",
+   "flagType": "question",
    "resolution": ""
   },
   {
@@ -2040,6 +2151,7 @@
    "qty": 2,
    "qtyMarks": "2",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -2058,6 +2170,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -2076,6 +2189,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -2094,6 +2208,7 @@
    "qty": 2,
    "qtyMarks": "||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -2112,6 +2227,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -2130,6 +2246,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -2148,6 +2265,7 @@
    "qty": 1,
    "qtyMarks": "none",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -2166,6 +2284,7 @@
    "qty": 4,
    "qtyMarks": "||||",
    "flag": "",
+   "flagType": "",
    "resolution": "Written GR-325 on the sheet. Austin confirmed 2026-09-03 the item is GR-320. A struck-out group of 5 tallies precedes the 4 that count."
   },
   {
@@ -2184,6 +2303,7 @@
    "qty": 3,
    "qtyMarks": "|||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -2201,8 +2321,9 @@
    "ada": false,
    "qty": 2,
    "qtyMarks": "||",
-   "flag": "GR-308-L-2 also appears once on the 4th floor Hall list. Confirm these are different boxes.",
-   "resolution": ""
+   "flag": "",
+   "flagType": "",
+   "resolution": "Austin confirmed 2026-09-03: GR-308-L-2 is 3 across the 4th floor, the Hall line plus these two."
   },
   {
    "id": "S122",
@@ -2220,6 +2341,7 @@
    "qty": 3,
    "qtyMarks": "|||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -2238,6 +2360,7 @@
    "qty": 2,
    "qtyMarks": "||",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   },
   {
@@ -2256,6 +2379,7 @@
    "qty": 1,
    "qtyMarks": "|",
    "flag": "",
+   "flagType": "",
    "resolution": ""
   }
  ],

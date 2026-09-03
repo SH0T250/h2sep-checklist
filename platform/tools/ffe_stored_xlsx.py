@@ -93,10 +93,10 @@ def table(ws, cols, rows, start, flagcol=None):
 ws = wb.create_sheet('Line by line')
 head(ws, 'EXTRA FF&E IN STORAGE - LINE BY LINE',
      f"{meta['project']}. Walked and written by {meta['capturedBy']} on {meta['capturedOn']}; transcribed from {meta['source']}. "
-     f"{meta['tallyConvention']} Highlighted rows carry a flag that needs Austin's confirmation before this feeds the crew app.", 11)
+     f"{meta['tallyConvention']} Highlighted rows carry a flag; the Flags tab splits those into open questions and notes that need no action.", 11)
 kpis(ws, [('Lines', len(items)), ('Pieces', sum(i['qty'] for i in items)),
           ('Working walls', sum(i['qty'] for i in items if i['isWorkingWall'])),
-          ('Flagged', sum(1 for i in items if i['flag']))], 4, 11)
+          ('Open questions', sum(1 for i in items if i['flagType'] == 'question'))], 4, 11)
 cols = [('ID', 'id'), ('Floor', 'floor'), ('Location', 'location'), ('Item code', 'fullCode'),
         ('Base code', 'code'), ('Position', 'positionCode'), ('Catalog description', 'label'),
         ('Category', 'category'), ('ADA', 'adaTxt'), ('Qty', 'qty'), ('As written on the sheet', 'writtenAs'),
@@ -176,15 +176,29 @@ table(ws, [('Floor', 'floor'), ('Lines', 'lines'), ('Pieces', 'qty'), ('Working 
 
 # ---- Tab 5: flags and source notes
 ws = wb.create_sheet('Flags and notes')
-rows = [{'id': i['id'], 'floor': i['floor'], 'location': i['location'], 'written': i['writtenAs'],
-         'qty': i['qty'], 'flag': i['flag'], 'pg': i['sourcePage']} for i in items if i['flag']]
-head(ws, 'FLAGS - CONFIRM BEFORE THIS FEEDS THE CREW APP',
-     'Every line where the handwriting, the code, or the tally is open to more than one reading. '
-     'Nothing here was guessed silently.', 7)
-table(ws, [('ID', 'id'), ('Floor', 'floor'), ('Location', 'location'), ('As written', 'written'),
-           ('Qty used', 'qty'), ('What needs confirming', 'flag'), ('Source pg', 'pg')], rows, 5)
+def flagrows(kind):
+    return [{'id': i['id'], 'floor': i['floor'], 'location': i['location'], 'written': i['writtenAs'],
+             'qty': i['qty'], 'flag': i['flag'], 'pg': i['sourcePage']}
+            for i in items if i['flagType'] == kind]
 
-start = 5 + len(rows) + 3
+
+FCOLS = [('ID', 'id'), ('Floor', 'floor'), ('Location', 'location'), ('As written', 'written'),
+         ('Qty used', 'qty'), ('Detail', 'flag'), ('Source pg', 'pg')]
+qrows, nrows = flagrows('question'), flagrows('note')
+head(ws, 'OPEN QUESTIONS, TRANSCRIPTION NOTES AND CLOSED RULINGS',
+     'Open questions still need a decision from Austin. Transcription notes record how a line was read and need no action, '
+     'so the crew app should carry them but not surface them. Nothing on this sheet was guessed silently.', 7)
+kpis(ws, [('Open questions', len(qrows)), ('Notes', len(nrows)),
+          ('Closed rulings', sum(1 for i in items if i['resolution']))], 4, 7)
+
+ws.cell(row=7, column=1, value='OPEN QUESTIONS - NEED A DECISION').font = BOLD
+table(ws, FCOLS, qrows, 8)
+
+start = 8 + len(qrows) + 3
+ws.cell(row=start - 1, column=1, value='TRANSCRIPTION NOTES - NO ACTION').font = BOLD
+table(ws, FCOLS, nrows, start)
+
+start = start + len(nrows) + 3
 ws.cell(row=start - 1, column=1, value='STRUCK-THROUGH LINES - NOT COUNTED').font = BOLD
 table(ws, [('Floor', 'floor'), ('Location', 'location'), ('As written', 'writtenAs'),
            ('Why excluded', 'reason'), ('Source pg', 'sourcePage')], doc['struckThroughEntries'], start)
