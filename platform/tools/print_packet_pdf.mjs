@@ -47,6 +47,28 @@ const kept = await p.evaluate(({ from, to }) => {
 console.log('sheets kept:', kept.length);
 console.log('rooms:', kept.join(' '));
 console.log('page errors:', errs.slice(0, 3));
+// FFE_ONLY: the FF&E checklist alone, no MEP punch (Austin, 2026-09-03).
+// The header's counts are recomputed from the lines that remain, so the sheet
+// never claims progress for a punch list it no longer prints.
+if (process.env.FFE_ONLY) {
+  await p.evaluate(() => {
+    for (const sheet of document.querySelectorAll('.paper')) {
+      for (const sect of sheet.querySelectorAll('.p-sect')) {
+        const h = (sect.querySelector('.p-sect-h') || {}).textContent || '';
+        if (/MEP/i.test(h)) sect.remove();
+      }
+      sheet.querySelectorAll('.p-break, .p-sign').forEach(x => x.remove());
+      const rows = [...sheet.querySelectorAll('.p-row')];
+      const done = rows.filter(r => ((r.querySelector('.p-box') || {}).textContent || '').trim()).length;
+      const open = sheet.querySelectorAll('.p-issue').length;
+      const sub = sheet.querySelector('.p-title span');
+      if (sub) {
+        const head = sub.textContent.split(' · ').slice(0, 2).join(' · ');   // room type · floor
+        sub.textContent = `${head} · FF&E only · ${done} of ${rows.length} checked · ${open} open`;
+      }
+    }
+  });
+}
 if (process.env.COMPACT) {
   // Compact packet: two columns per section, tighter rows, and the MEP punch
   // follows the FF&E list instead of starting its own page. Same lines, same
@@ -57,19 +79,22 @@ if (process.env.COMPACT) {
       if (inner) inner.remove();
     }
   });
+  // With the punch list gone a room's FF&E fits one page, so the type can be
+  // bigger than the all-in-one packet allowed.
+  const big = !!process.env.FFE_ONLY;
   await p.addStyleTag({ content: `
-    .paper { font-size: 10px !important; }
-    .p-head { padding-bottom: 6px; margin-bottom: 6px; border-bottom-width: 1.5px; }
-    .p-head img { height: 26px; }
-    .p-title b { font-size: 15px; }
-    .p-title span { font-size: 9px; }
-    .p-tb { font-size: 8.5px; }
-    .p-sect { column-count: 2; column-gap: 18px; }
+    .paper { font-size: ${big ? 11 : 10}px !important; }
+    .p-head { padding-bottom: 7px; margin-bottom: 7px; border-bottom-width: 1.5px; }
+    .p-head img { height: ${big ? 30 : 26}px; }
+    .p-title b { font-size: ${big ? 17 : 15}px; }
+    .p-title span { font-size: ${big ? 10 : 9}px; }
+    .p-tb { font-size: ${big ? 9 : 8.5}px; }
+    .p-sect { column-count: 2; column-gap: 20px; }
     .p-sect-h { column-span: all; }
-    .p-cat { padding: 5px 0 2px; break-after: avoid; }
-    .p-row { padding: 1.6px 0; gap: 6px; }
-    .p-box { width: 17px; height: 17px; border-width: 1.3px; border-radius: 3px; font-size: 8px; }
-    .p-notes, .p-foot, .p-signers { font-size: 8.5px; }
+    .p-cat { padding: ${big ? 5 : 5}px 0 2px; break-after: avoid; }
+    .p-row { padding: ${big ? 2.1 : 1.6}px 0; gap: ${big ? 8 : 6}px; }
+    .p-box { width: ${big ? 19 : 17}px; height: ${big ? 19 : 17}px; border-width: 1.4px; border-radius: 3px; font-size: ${big ? 9 : 8}px; }
+    .p-notes, .p-foot, .p-signers { font-size: ${big ? 9.5 : 8.5}px; }
   ` });
 }
   await p.emulateMedia({ media: 'print' });
