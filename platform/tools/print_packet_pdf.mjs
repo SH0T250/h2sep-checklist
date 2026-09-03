@@ -97,6 +97,11 @@ if (process.env.COMPACT) {
     .p-notes, .p-foot, .p-signers { font-size: ${big ? 9.5 : 8.5}px; }
   ` });
 }
+// The app runs on a dark color-scheme. Chromium paints the page canvas from
+// the scheme, not from any element, so printBackground put a black frame
+// around every white sheet. Switching the document to the light scheme for
+// the print removes it; the sheet itself was already white.
+await p.addStyleTag({ content: 'html{color-scheme:light !important}html,body,.main,.paper-wrap,.paper{background:#FFFFFF !important}' });
   await p.emulateMedia({ media: 'print' });
 await p.pdf({ path: OUT, format: 'Letter', printBackground: true, margin: { top: '0.4in', bottom: '0.45in', left: '0.4in', right: '0.4in' } });
 await b.close();
