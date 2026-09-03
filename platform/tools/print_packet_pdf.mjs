@@ -100,7 +100,7 @@ if (process.env.COMPACT) {
     .p-sect { column-count: 2; column-gap: 20px; }
     .p-sect-h { column-span: all; }
     .p-cat { padding: ${big ? 5 : 5}px 0 2px; break-after: avoid; }
-    .p-row { padding: ${big ? 2.1 : 1.6}px 0; gap: ${big ? 8 : 6}px; }
+    .p-row { padding: ${big ? 1.85 : 1.6}px 0; gap: ${big ? 8 : 6}px; }
     .p-box { width: ${big ? 19 : 17}px; height: ${big ? 19 : 17}px; border-width: 1.4px; border-radius: 3px; font-size: ${big ? 9 : 8}px; }
     .p-notes, .p-foot, .p-signers { font-size: ${big ? 9.5 : 8.5}px; }
   ` });
