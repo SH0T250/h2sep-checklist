@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>H2SEP Signage Compliance Report</title>
+<style>
+  /* Page geometry is set per-render in tools/pdf/render.js: the cover prints
+     full-bleed at zero margin, the body prints with margins that make room for
+     the running header and footer. */
+  :root{
+    --navy:#14304f; --slate:#2c5f8a; --ink:#1c2429; --mute:#5d6b76;
+    --rule:#d3dae0; --band:#eef2f6;
+    --warn-bg:#fdf6e3; --warn-br:#c8912b; --warn-ink:#6d4c07;
+    --ok-br:#2f7a4d; --bad:#9b2226;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+  body{
+    margin:0; color:var(--ink);
+    font:9.6pt/1.5 "Liberation Sans","Noto Color Emoji",Arial,sans-serif;
+  }
+
+  /* ------------------------------------------------------------- cover */
+  .cover{
+    height:279.4mm; page-break-after:always; position:relative;
+    display:flex; flex-direction:column; color:#fff;
+    background:linear-gradient(160deg,#0d2238 0%,#14304f 45%,#215074 100%);
+  }
+  .cover-top{padding:26mm 22mm 0}
+  .eyebrow{
+    font-size:8.5pt; letter-spacing:.24em; text-transform:uppercase;
+    color:#8fb6d6; font-weight:700;
+  }
+  .cover h1{
+    font-size:33pt; line-height:1.1; margin:7mm 0 0; font-weight:700;
+    letter-spacing:-.015em; max-width:150mm;
+  }
+  .cover .lede{
+    margin:6mm 0 0; font-size:11.5pt; line-height:1.55; color:#cfe0ee;
+    max-width:140mm; font-weight:400;
+  }
+  .rule-accent{width:34mm;height:3px;background:#5b9bd0;margin:9mm 0 0}
+  .cover-fill{flex:1; display:flex; align-items:center; padding:0 22mm}
+  .cover-scope{
+    border-left:2.5px solid #5b9bd0; padding:1mm 0 1mm 7mm; max-width:150mm;
+  }
+  .cover-scope .scope-h{
+    font-size:7.4pt; letter-spacing:.2em; text-transform:uppercase;
+    color:#8fb6d6; font-weight:700; margin-bottom:4mm;
+  }
+  .cover-scope ul{margin:0; padding:0; list-style:none}
+  .cover-scope li{
+    font-size:9.4pt; line-height:1.5; color:#cfe0ee; margin-bottom:2.4mm;
+    padding-left:4.5mm; position:relative;
+  }
+  .cover-scope li::before{
+    content:"\2014"; position:absolute; left:0; color:#5b9bd0;
+  }
+  .cover-scope li b{color:#fff; font-weight:700}
+  .cover-scope .scope-f{
+    margin-top:5mm; font-size:8pt; color:#8fb6d6; letter-spacing:.04em;
+  }
+  .cover-meta{
+    background:rgba(0,0,0,.24); padding:9mm 22mm; display:grid;
+    grid-template-columns:repeat(3,1fr); gap:7mm 9mm; font-size:8.6pt;
+  }
+  .cover-meta dt{
+    color:#8fb6d6; letter-spacing:.13em; text-transform:uppercase;
+    font-size:7.2pt; font-weight:700; margin-bottom:1.6mm;
+  }
+  .cover-meta dd{margin:0; font-size:10pt; font-weight:600; line-height:1.35}
+  .cover-foot{
+    padding:6mm 22mm 9mm; font-size:8.2pt; color:#9dbdd8;
+    display:flex; justify-content:space-between; align-items:flex-end; gap:10mm;
+  }
+  .cover-foot strong{color:#dce9f3; display:block; font-size:9.4pt}
+
+  /* --------------------------------------------------------- contents */
+  .toc{page-break-after:always}
+  .toc h2{
+    font-size:16pt; color:var(--navy); margin:0 0 2mm;
+    border-bottom:2.5px solid var(--navy); padding-bottom:3mm;
+  }
+  .toc .toc-note{color:var(--mute); font-size:8.6pt; margin:0 0 7mm}
+  .toc ol{list-style:none; margin:0; padding:0; counter-reset:toc}
+  .toc li{margin:0 0 1.5mm}
+  .toc a{
+    display:flex; align-items:baseline; gap:2mm; text-decoration:none;
+    color:var(--ink); font-size:10.2pt; padding:2.2mm 0;
+    border-bottom:1px solid #edf1f4;
+  }
+  .toc .toc-t{font-weight:600}
+  .toc .toc-dots{flex:1; border-bottom:1.4px dotted #b9c4cd; transform:translateY(-2px)}
+  .toc .toc-p{font-variant-numeric:tabular-nums; color:var(--slate); font-weight:700}
+  .toc-appendix a{color:var(--mute)}
+
+  /* --------------------------------------------------------- chapters */
+  section.chapter{page-break-before:always}
+  .chapter-head{border-bottom:2.5px solid var(--navy); margin:0 0 6mm; padding-bottom:3.5mm}
+  .chapter-num{
+    display:block; font-size:7.6pt; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--slate); font-weight:700; margin-bottom:2mm;
+  }
+  .chapter-head h1{font-size:19pt; color:var(--navy); margin:0; line-height:1.2; letter-spacing:-.01em}
+  .chapter-src{font-size:7.8pt; color:var(--mute); margin-top:2.5mm; font-family:"Liberation Mono",monospace}
+
+  h2{
+    font-size:12.4pt; color:var(--navy); margin:8mm 0 2.5mm;
+    padding-bottom:1.5mm; border-bottom:1px solid var(--rule);
+    break-after:avoid; line-height:1.3;
+  }
+  h3{font-size:10.4pt; color:var(--slate); margin:6mm 0 2mm; break-after:avoid; line-height:1.35}
+  h4{font-size:9.6pt; color:var(--ink); margin:4.5mm 0 1.5mm; break-after:avoid}
+  p{margin:0 0 2.6mm; orphans:3; widows:3}
+  strong{font-weight:700; color:#0f1c26}
+  em{font-style:italic}
+  a{color:var(--slate); text-decoration:none; border-bottom:.5px solid #b4cbdd}
+  sup.cite{
+    font-size:6.4pt; font-weight:700; color:var(--slate);
+    vertical-align:super; line-height:0; padding-left:.4mm;
+    border:0; text-decoration:none;
+  }
+  code{
+    font-family:"Liberation Mono",monospace; font-size:8.4pt;
+    background:var(--band); padding:.3mm 1.1mm; border-radius:2px; color:#123;
+  }
+  hr{border:0; border-top:1px solid var(--rule); margin:6mm 0}
+
+  ul,ol{margin:0 0 3mm; padding-left:5.5mm}
+  li{margin:0 0 1.4mm; orphans:2; widows:2}
+
+  /* ----------------------------------------------------------- tables */
+  table{
+    width:100%; border-collapse:collapse; margin:3mm 0 5mm;
+    font-size:7.9pt; line-height:1.4; break-inside:auto;
+  }
+  thead{display:table-header-group}
+  th{
+    background:var(--navy); color:#fff; font-weight:700; text-align:left;
+    padding:2mm 2.2mm; font-size:7.5pt; letter-spacing:.02em;
+    border:1px solid var(--navy); vertical-align:bottom;
+  }
+  td{
+    padding:1.9mm 2.2mm; border:1px solid var(--rule);
+    vertical-align:top; word-wrap:break-word; overflow-wrap:anywhere;
+  }
+  tbody tr{break-inside:avoid}
+  tbody tr:nth-child(even){background:#f7f9fb}
+  td code{font-size:7.4pt}
+  td sup.cite{font-size:6pt}
+
+  /* --------------------------------------------------------- callouts */
+  blockquote{
+    margin:3.5mm 0; padding:3mm 4mm; background:var(--warn-bg);
+    border-left:3.5px solid var(--warn-br); border-radius:0 3px 3px 0;
+    break-inside:avoid; color:var(--warn-ink); font-size:9.2pt;
+  }
+  blockquote p{margin:0 0 2mm} blockquote p:last-child{margin:0}
+  blockquote strong{color:#4a3405}
+  blockquote table{margin:2mm 0 0; font-size:7.5pt}
+  blockquote th{background:var(--warn-br); border-color:var(--warn-br)}
+
+  /* ------------------------------------------------------- references */
+  ol.refs{list-style:none; padding:0; margin:0; font-size:8.2pt}
+  ol.refs li{
+    display:flex; gap:2.5mm; padding:1.7mm 0;
+    border-bottom:1px solid #eef1f4; break-inside:avoid;
+  }
+  ol.refs .refbody{flex:1; min-width:0}
+  ol.refs .reftitle{font-weight:600; color:var(--ink); font-size:8.3pt; margin-bottom:.5mm}
+  ol.refs .refnum{
+    flex:0 0 9mm; text-align:right; font-weight:700; color:var(--slate);
+    font-variant-numeric:tabular-nums;
+  }
+  ol.refs a{
+    word-break:break-all; border:0; color:var(--ink);
+    font-family:"Liberation Mono",monospace; font-size:7.6pt; line-height:1.45;
+  }
+</style></head><body>
+
+<div class="cover">
+  <div class="cover-top">
+    <div class="eyebrow">Code Compliance Research &middot; H2SEP</div>
+    <h1>Required Signage Report</h1>
+    <div class="rule-accent"></div>
+    <p class="lede">Every sign this property is required to carry &mdash; fire marshal,
+      accessibility, pool, municipal and Texas statutory &mdash; with the code section
+      behind each one, and what the permit set currently gets wrong.</p>
+  </div>
+  <div class="cover-fill">
+    <div class="cover-scope">
+      <div class="scope-h">What this report covers</div>
+      <ul>
+        <li><b>Fire marshal</b> &mdash; egress marking, stair ID, FDC and riser, barrier stenciling, hazmat</li>
+        <li><b>Accessibility</b> &mdash; 2010 ADA and 2012 Texas Accessibility Standards, with the TDLR inspection path</li>
+        <li><b>Pool and spa</b> &mdash; 25 TAC Ch. 265 Subch. L, verbatim sign text and depth-marker tile specs</li>
+        <li><b>City of Eagle Pass</b> &mdash; sign ordinance, adopted codes, fire lane spec, permits</li>
+        <li><b>Texas statutory notices</b> &mdash; trafficking, innkeeper, food, labor, elevator and boiler</li>
+        <li><b>Brand and project record</b> &mdash; Hilton scope, vendors, and the TDLR filing</li>
+      </ul>
+      <div class="scope-f">9 sections &middot; 147 cited sources &middot; every requirement traced to a code section</div>
+    </div>
+  </div>
+  <dl class="cover-meta">
+    <div><dt>Project</dt><dd>Home2 Suites by Hilton</dd></div>
+    <div><dt>Location</dt><dd>3386 E. Main Street<br>Eagle Pass, TX 78852</dd></div>
+    <div><dt>County</dt><dd>Maverick</dd></div>
+    <div><dt>Keys</dt><dd>115</dd></div>
+    <div><dt>TDLR project</dt><dd>TABS2024001033</dd></div>
+    <div><dt>Report date</dt><dd>20 August 2026</dd></div>
+  </dl>
+  <div class="cover-foot">
+    <div><strong>Triun Construction &amp; Engineering</strong>
+      Prepared as construction-phase compliance research.</div>
+    <div style="text-align:right"><strong>Verify before fabrication</strong>
+      Research document &mdash; not a sealed submittal.</div>
+  </div>
+</div>
+
+<div class="toc">
+  <h2>Contents</h2>
+  <p class="toc-note">Superscript numbers throughout the report are citations; every
+    source resolves in the References appendix.</p>
+  <ol><!--TOC--></ol>
+</div>
+
+<!--BODY-->
+</body></html>
