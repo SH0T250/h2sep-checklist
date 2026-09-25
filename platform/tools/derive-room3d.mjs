@@ -14,6 +14,7 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { patchRoomRenderer } from '../../tools/room3d-renderer-build.mjs';
 
 const platformRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const repoRoot = resolve(platformRoot, '..');
@@ -40,5 +41,5 @@ h = h.trimEnd() + '\n<script>/* platform-embed: hide crew-app back bar when fram
   + '(function(){function hide(){try{if(window.self!==window.top){var b=document.getElementById("backbar");if(b)b.style.display="none";}}catch(e){}}\n'
   + 'if(document.readyState==="loading")addEventListener("DOMContentLoaded",hide);else hide();})();\n</scr' + 'ipt>\n';
 
-writeFileSync(resolve(platformRoot, 'room3d.html'), h);
+writeFileSync(resolve(platformRoot, 'room3d.html'), patchRoomRenderer(h));
 console.log('wrote platform/room3d.html', h.length, 'bytes');

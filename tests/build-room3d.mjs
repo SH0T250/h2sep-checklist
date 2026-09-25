@@ -7,6 +7,7 @@
 //
 //   node tests/build-room3d.mjs <src preview101/room101-3d.html> <out room-3d.html>
 import { readFileSync, writeFileSync } from 'node:fs';
+import { patchRoomRenderer } from '../tools/room3d-renderer-build.mjs';
 
 const [src, out] = process.argv.slice(2);
 if (!src || !out) { console.error('usage: build-room3d.mjs <src> <out>'); process.exit(1); }
@@ -730,5 +731,5 @@ sub(`window.__h2sep3d = {`,
 
 window.__h2sep3d = {`, 'room-aware links + labels');
 
-writeFileSync(out, s);
+writeFileSync(out, patchRoomRenderer(s));
 console.log(`built ${out} (${(s.length / 1024).toFixed(0)} KB)`);
